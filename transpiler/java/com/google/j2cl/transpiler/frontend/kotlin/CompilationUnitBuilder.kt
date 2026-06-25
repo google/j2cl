@@ -89,7 +89,6 @@ import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.extensionReceiverOrNull
-import com.google.j2cl.transpiler.frontend.kotlin.ir.fileInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getArguments
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getNameSourcePosition
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getSourcePosition
@@ -108,6 +107,7 @@ import org.jetbrains.kotlin.backend.common.descriptors.synthesizedName
 import org.jetbrains.kotlin.backend.common.ir.isBytecodeGenerationSuppressed
 import org.jetbrains.kotlin.backend.jvm.MultifileFacadeFileEntry
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.IrFileEntry
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrAnonymousInitializer
 import org.jetbrains.kotlin.ir.declarations.IrClass
@@ -193,43 +193,43 @@ import org.jetbrains.kotlin.progress.ProgressIndicatorAndCompilationCanceledStat
 internal class CompilationUnitBuilder(
   private val environment: KotlinEnvironment,
   private val intrinsicMethods: IntrinsicMethods,
+  private val fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
 ) : AbstractCompilationUnitBuilder() {
   private val variableBySymbol: MutableMap<IrValueSymbol, Variable> = mutableMapOf()
-  private lateinit var currentIrFile: IrFile
+  private val irFileEntryStack: MutableList<IrFileEntry> = mutableListOf()
   private val labelsInScope: MutableMap<String, ArrayDeque<Label>> = mutableMapOf()
 
-  fun convert(
-    irModuleFragment: IrModuleFragment,
-    fileInfoByAbsoluteSourcePath: Map<String, FileInfo>,
-  ): List<CompilationUnit> {
-    return buildList {
-      for (irFile in irModuleFragment.files) {
-        // Associate each IrFile with its corresponding FileInfo.
-        irFile.fileInfo = fileInfoByAbsoluteSourcePath[irFile.fileEntry.name]
-        if (!irFile.isBytecodeGenerationSuppressed) {
-          add(convertFile(irFile))
-        }
-      }
-    }
+  fun convert(irModuleFragment: IrModuleFragment): List<CompilationUnit> =
+    irModuleFragment.files.filterNot(IrFile::isBytecodeGenerationSuppressed).map(::convertFile)
+
+  private inline fun <R> withIrFileEntry(irFileEntry: IrFileEntry, block: () -> R): R {
+    irFileEntryStack.add(irFileEntry)
+    val result = block()
+    irFileEntryStack.removeLast()
+    return result
   }
 
   private fun convertFile(irFile: IrFile): CompilationUnit {
-    currentIrFile = irFile
     val compilationUnit =
       if (irFile.fileEntry is MultifileFacadeFileEntry) {
         CompilationUnit.createSynthetic(irFile.packageFqName.asString())
       } else {
-        CompilationUnit.createForFile(irFile.fileInfo!!, irFile.packageFqName.asString())
+        CompilationUnit.createForFile(
+          fileInfoByAbsoluteSourcePath[irFile.fileEntry.name]!!,
+          irFile.packageFqName.asString(),
+        )
       }
 
     require(irFile.declarations.all { it is IrClass }) {
       "IrFile nodes should only contain IrClass members"
     }
 
-    irFile.declarations
-      .filterIsInstance<IrClass>()
-      .map(::convertClass)
-      .forEach(compilationUnit::addType)
+    withIrFileEntry(irFile.fileEntry) {
+      irFile.declarations
+        .filterIsInstance<IrClass>()
+        .map(::convertClass)
+        .forEach(compilationUnit::addType)
+    }
 
     return compilationUnit
   }
@@ -1503,11 +1503,17 @@ internal class CompilationUnitBuilder(
     return variable
   }
 
-  private fun getNameSourcePosition(irElement: IrElement, name: String? = null): SourcePosition =
-    irElement.getNameSourcePosition(currentIrFile, name)
+  private fun getNameSourcePosition(irElement: IrElement, name: String? = null): SourcePosition {
+    val fileEntry = irFileEntryStack.last()
+    val fileInfo = fileInfoByAbsoluteSourcePath[fileEntry.name]
+    return irElement.getNameSourcePosition(fileEntry, fileInfo, name)
+  }
 
-  private fun getSourcePosition(irElement: IrElement): SourcePosition =
-    irElement.getSourcePosition(currentIrFile)
+  private fun getSourcePosition(irElement: IrElement): SourcePosition {
+    val fileEntry = irFileEntryStack.last()
+    val fileInfo = fileInfoByAbsoluteSourcePath[fileEntry.name]
+    return irElement.getSourcePosition(fileEntry, fileInfo)
+  }
 
   private val IrCall.isBinaryOperation: Boolean
     get() = intrinsicMethods.isBinaryOperation(this)

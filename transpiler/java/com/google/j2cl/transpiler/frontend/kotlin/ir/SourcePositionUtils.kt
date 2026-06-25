@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.common.FilePosition
 import com.google.j2cl.common.SourcePosition
+import com.google.j2cl.common.SourceUtils
 import com.intellij.lang.LighterASTNode
 import org.jetbrains.kotlin.KtNodeTypes.BACKING_FIELD
 import org.jetbrains.kotlin.KtNodeTypes.CLASS
@@ -38,19 +39,23 @@ import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirEnumEntry
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.IrFileEntry
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
-import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrMetadataSourceOwner
 import org.jetbrains.kotlin.ir.expressions.IrReturn
 import org.jetbrains.kotlin.lexer.KtTokens.COMPANION_KEYWORD
 import org.jetbrains.kotlin.lexer.KtTokens.CONSTRUCTOR_KEYWORD
 import org.jetbrains.kotlin.lexer.KtTokens.OBJECT_KEYWORD
 
-fun IrElement.getSourcePosition(irFile: IrFile): SourcePosition =
-  sourcePositionNoneIfMultifileFacadeFile(irFile) ?: getSourcePositionFromIr(irFile)
+fun IrElement.getSourcePosition(
+  fileEntry: IrFileEntry,
+  fileInfo: SourceUtils.FileInfo?,
+): SourcePosition =
+  sourcePositionNoneIfMultifileFacadeFile(fileEntry) ?: getSourcePositionFromIr(fileEntry, fileInfo)
 
 private fun IrElement.getSourcePositionFromIr(
-  irFile: IrFile,
+  fileEntry: IrFileEntry,
+  fileInfo: SourceUtils.FileInfo?,
   name: String? = null,
 ): SourcePosition {
   if (isTemporaryVariable) {
@@ -61,10 +66,10 @@ private fun IrElement.getSourcePositionFromIr(
   // The source position of an IrReturn without `return` keyword is incorrect. Take the source
   // position of the returned expression.
   if (this is IrReturn && startOffset == endOffset) {
-    return value.getSourcePositionFromIr(irFile, name)
+    return value.getSourcePositionFromIr(fileEntry, fileInfo, name)
   }
 
-  return irFile.getSourcePosition(startOffset, endOffset, name)
+  return fileEntry.getSourcePosition(startOffset, endOffset, fileInfo, name)
 }
 
 /**
@@ -72,16 +77,23 @@ private fun IrElement.getSourcePositionFromIr(
  * changed or removed in the generated JavaScript output, the original name can be preserved by
  * providing it in the `originalSymbolName` parameter.
  */
-fun IrElement.getNameSourcePosition(irFile: IrFile, originalSymbolName: String?) =
-  sourcePositionNoneIfMultifileFacadeFile(irFile)
+fun IrElement.getNameSourcePosition(
+  fileEntry: IrFileEntry,
+  fileInfo: SourceUtils.FileInfo?,
+  originalSymbolName: String?,
+) =
+  sourcePositionNoneIfMultifileFacadeFile(fileEntry)
     ?:
     // Try to find an accurate position if source information is available
-    getNameSourcePositionFromSource(irFile, originalSymbolName)
+    getNameSourcePositionFromSource(fileEntry, fileInfo, originalSymbolName)
     // otherwise return the position from the IR node.
-    ?: getSourcePositionFromIr(irFile, originalSymbolName)
+    ?: getSourcePositionFromIr(fileEntry, fileInfo, originalSymbolName)
 
-private fun IrElement.getNameSourcePositionFromSource(irFile: IrFile, name: String?) =
-  getNameSourceElementForSourceMap()?.getSourcePosition(irFile, name)
+private fun IrElement.getNameSourcePositionFromSource(
+  fileEntry: IrFileEntry,
+  fileInfo: SourceUtils.FileInfo?,
+  name: String?,
+) = getNameSourceElementForSourceMap()?.getSourcePosition(fileEntry, fileInfo, name)
 
 private fun IrElement.getNameSourceElementForSourceMap(): LighterASTNode? {
   val sourceElement = getSourceElement() ?: return null
@@ -133,12 +145,16 @@ private fun IrEnumEntry.getSourceElement(): KtSourceElement? {
 private val IrElement.firElement: FirDeclaration?
   get() = ((this as? IrMetadataSourceOwner)?.metadata as? FirMetadataSource)?.fir
 
-private fun LighterASTNode.getSourcePosition(irFile: IrFile, name: String?): SourcePosition =
-  irFile.getSourcePosition(this.startOffset, this.endOffset, name)
+private fun LighterASTNode.getSourcePosition(
+  fileEntry: IrFileEntry,
+  fileInfo: SourceUtils.FileInfo?,
+  name: String?,
+): SourcePosition = fileEntry.getSourcePosition(this.startOffset, this.endOffset, fileInfo, name)
 
-private fun IrFile.getSourcePosition(
+private fun IrFileEntry.getSourcePosition(
   startOffset: Int,
   endOffset: Int,
+  fileInfo: SourceUtils.FileInfo?,
   name: String?,
 ): SourcePosition {
   // The node is not part of the original code source.
@@ -147,7 +163,7 @@ private fun IrFile.getSourcePosition(
   }
 
   val fileInfo = fileInfo ?: return SourcePosition.NONE
-  val sourceRange = fileEntry.getSourceRangeInfo(startOffset, endOffset)
+  val sourceRange = getSourceRangeInfo(startOffset, endOffset)
 
   return SourcePosition.builder()
     .setFileInfo(fileInfo)
@@ -170,5 +186,5 @@ private fun IrFile.getSourcePosition(
 }
 
 // TODO(b/324630289):add support for multifilefacade file.
-private fun sourcePositionNoneIfMultifileFacadeFile(irFile: IrFile): SourcePosition? =
-  if (irFile.fileEntry is MultifileFacadeFileEntry) SourcePosition.NONE else null
+private fun sourcePositionNoneIfMultifileFacadeFile(fileEntry: IrFileEntry): SourcePosition? =
+  if (fileEntry is MultifileFacadeFileEntry) SourcePosition.NONE else null

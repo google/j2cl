@@ -178,8 +178,9 @@ class KlibsKotlinParser(private val problems: Problems) {
             supportedAnnotationFilter,
           ),
           IntrinsicMethods(pluginContext),
+          fileInfoByAbsoluteSourcePath,
         )
-        .convert(moduleFragment, fileInfoByAbsoluteSourcePath)
+        .convert(moduleFragment)
     problems.abortIfCancelled()
 
     return compilationUnits

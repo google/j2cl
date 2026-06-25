@@ -232,8 +232,9 @@ class KotlinParser(private val problems: Problems) {
                   supportedAnnotationFilter,
                 ),
                 IntrinsicMethods(pluginContext),
+                fileInfoByAbsoluteSourcePath,
               )
-              .convert(moduleFragment, fileInfoByAbsoluteSourcePath)
+              .convert(moduleFragment)
         }
       }
 
