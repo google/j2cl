@@ -248,7 +248,7 @@ internal fun MethodObjCNames.escapeObjCMethod(isConstructor: Boolean): MethodObj
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/CAdapterGenerator.kt"
-private val objCKeywords =
+val objCKeywords =
   setOf(
     // Actual C keywords.
     "auto",

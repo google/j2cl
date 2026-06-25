@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.common.lowerCamelCased
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 
@@ -38,6 +39,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
  * @property nameSources underlying name sources
  */
 internal class ObjCNameSources(val nameSources: NameSources) {
+
+  // TODO(b/525357348): Remove this
+  private val forbiddenSwiftEnumNames =
+    setOf("alloc", "description", "initialize", "load", "release", "version") + objCKeywords
 
   private val environment: Environment
     get() = nameSources.environment
@@ -137,13 +142,17 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
       isHiddenFromObjC(field.descriptor) -> hiddenFromObjCAnnotationSource(field.descriptor)
       field.descriptor.isEnumConstant -> {
+        val name = field.descriptor.name!!
+        val swiftName = name.lowerCamelCased
         Source.newLineSeparated(
-          objCEnumEntryNameAnnotationSource(
-            name = "_${field.descriptor.name!!}",
-            swiftName = field.descriptor.name!!.lowerCamelCased,
-          ),
+          objCEnumEntryNameAnnotationSource(name = "_$name", swiftName = swiftName),
           Source.emptyUnless(needsObjCNameAnnotation(field.descriptor)) {
-            objCNameAnnotationSource(field.descriptor.objCName)
+            // TODO(b/525357348): Investigate
+            if (swiftName in forbiddenSwiftEnumNames) {
+              objCNameAnnotationSource(field.descriptor.objCName)
+            } else {
+              objCNameAnnotationSource(field.descriptor.objCName, swiftName)
+            }
           },
         )
       }
