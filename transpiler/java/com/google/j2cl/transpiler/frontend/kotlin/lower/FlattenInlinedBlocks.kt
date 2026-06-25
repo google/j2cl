@@ -17,11 +17,14 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.IrFileEntry
+import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrBlock
 import org.jetbrains.kotlin.ir.expressions.IrInlinedFunctionBlock
 import org.jetbrains.kotlin.ir.expressions.IrStatementContainer
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
+import org.jetbrains.kotlin.ir.irAttribute
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
@@ -44,12 +47,23 @@ internal class FlattenInlinedBlocks : FileLoweringPass, IrVisitorVoid() {
 
     for (statement in originalStatements) {
       if (statement.shouldFlatten()) {
-        element.statements.addAll((statement as IrStatementContainer).statements)
+        element.statements += (statement as IrStatementContainer).flatten()
       } else {
-        element.statements.add(statement)
+        element.statements += statement
       }
     }
   }
+}
+
+var IrStatement.inlinedFunctionFileEntry: IrFileEntry? by irAttribute(copyByDefault = true)
+
+private fun IrStatementContainer.flatten(): List<IrStatement> {
+  if (this is IrInlinedFunctionBlock) {
+    for (statement in statements) {
+      statement.inlinedFunctionFileEntry = inlinedFunctionFileEntry
+    }
+  }
+  return statements
 }
 
 private fun IrElement.shouldFlatten(): Boolean = this is IrBlock && isFromInlining()

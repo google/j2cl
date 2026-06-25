@@ -103,6 +103,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.lower.IrForLoop
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitch
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitchBreak
 import com.google.j2cl.transpiler.frontend.kotlin.lower.IrSwitchCase
+import com.google.j2cl.transpiler.frontend.kotlin.lower.inlinedFunctionFileEntry
 import org.jetbrains.kotlin.backend.common.descriptors.synthesizedName
 import org.jetbrains.kotlin.backend.common.ir.isBytecodeGenerationSuppressed
 import org.jetbrains.kotlin.backend.jvm.MultifileFacadeFileEntry
@@ -202,7 +203,8 @@ internal class CompilationUnitBuilder(
   fun convert(irModuleFragment: IrModuleFragment): List<CompilationUnit> =
     irModuleFragment.files.filterNot(IrFile::isBytecodeGenerationSuppressed).map(::convertFile)
 
-  private inline fun <R> withIrFileEntry(irFileEntry: IrFileEntry, block: () -> R): R {
+  private inline fun <R> withIrFileEntry(irFileEntry: IrFileEntry?, block: () -> R): R {
+    if (irFileEntry == null) return block()
     irFileEntryStack.add(irFileEntry)
     val result = block()
     irFileEntryStack.removeLast()
@@ -394,24 +396,28 @@ internal class CompilationUnitBuilder(
     statements.map(::convertStatement)
 
   private fun convertStatement(irStatement: IrStatement): Statement =
-    when (irStatement) {
-      is IrInstanceInitializerCall ->
-        throw IllegalStateException("IrInstanceInitializerCall statements should have been lowered")
-      is IrClass -> convertLocalClass(irStatement)
-      is IrFunction -> convertLocalFunction(irStatement)
-      is IrContainerExpression -> convertContainer(irStatement)
-      is IrVariable -> convertVariableStatement(irStatement)
-      is IrWhen -> convertWhenStatement(irStatement)
-      is IrLoop -> convertLoop(irStatement)
-      is IrReturn -> convertReturnStatement(irStatement)
-      is IrTry -> convertTryStatement(irStatement)
-      is IrThrow -> convertThrowStatement(irStatement)
-      is IrBreak -> convertBreakStatement(irStatement)
-      is IrContinue -> convertContinueStatement(irStatement)
-      is IrSwitch -> convertSwitchCase(irStatement)
-      is IrSwitchBreak -> convertSwitchBreakStatement(irStatement)
-      is IrExpression -> convertExpressionStatement(irStatement)
-      else -> throw IllegalStateException("Unhandled IrStatement:\n${irStatement.dump()}")
+    withIrFileEntry(irStatement.inlinedFunctionFileEntry) {
+      when (irStatement) {
+        is IrInstanceInitializerCall ->
+          throw IllegalStateException(
+            "IrInstanceInitializerCall statements should have been lowered"
+          )
+        is IrClass -> convertLocalClass(irStatement)
+        is IrFunction -> convertLocalFunction(irStatement)
+        is IrContainerExpression -> convertContainer(irStatement)
+        is IrVariable -> convertVariableStatement(irStatement)
+        is IrWhen -> convertWhenStatement(irStatement)
+        is IrLoop -> convertLoop(irStatement)
+        is IrReturn -> convertReturnStatement(irStatement)
+        is IrTry -> convertTryStatement(irStatement)
+        is IrThrow -> convertThrowStatement(irStatement)
+        is IrBreak -> convertBreakStatement(irStatement)
+        is IrContinue -> convertContinueStatement(irStatement)
+        is IrSwitch -> convertSwitchCase(irStatement)
+        is IrSwitchBreak -> convertSwitchBreakStatement(irStatement)
+        is IrExpression -> convertExpressionStatement(irStatement)
+        else -> throw IllegalStateException("Unhandled IrStatement:\n${irStatement.dump()}")
+      }
     }
 
   private fun convertLocalClass(irClass: IrClass): Statement =
