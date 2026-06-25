@@ -1,0 +1,110 @@
+/*
+ * Copyright 2026 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.google.j2cl.transpiler.passes;
+
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.PackageDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeLiteral;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.Set;
+
+/**
+ * Rewrites Java class literals to Kotlin KClass property calls (javaObjectType/javaPrimitiveType)
+ * unless they are in annotations or explicitly assigned to KClass.
+ */
+public class RewriteTypeLiteralsJ2kt extends NormalizationPass {
+
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    Set<TypeLiteral> skippedTypeLiterals = Collections.newSetFromMap(new IdentityHashMap<>());
+
+    // Pass 1: Identify TypeLiterals in KClass conversion contexts. Ideally we would make all
+    // conversions via ConversionContextVisitor, but some context where we require a conversion is
+    // not an existing conversion context. Instead, we will just mark ones that doesn't need to be
+    // converted.
+    compilationUnit.accept(
+        new ConversionContextVisitor(
+            new ConversionContextVisitor.ContextRewriter() {
+              @Override
+              protected Expression rewriteTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression expression) {
+                if (expression instanceof TypeLiteral typeLiteral
+                    && isKotlinReflectKClass(inferredTypeDescriptor)) {
+                  skippedTypeLiterals.add(typeLiteral);
+                }
+                return expression;
+              }
+            }));
+
+    // Pass 2: Rewrite all other TypeLiterals, skipping those marked in Pass 1.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteTypeLiteral(TypeLiteral typeLiteral) {
+            if (skippedTypeLiterals.contains(typeLiteral)) {
+              return typeLiteral;
+            }
+
+            TypeDescriptor referencedType = typeLiteral.getReferencedTypeDescriptor();
+            if (referencedType.isPrimitive()) {
+              // int.class -> Int::class.javaPrimitiveType!!
+              return FieldAccess.builderFrom(
+                      getJavaTypeFieldDescriptor(
+                          typeLiteral.getTypeDescriptor(), "javaPrimitiveType"))
+                  .setQualifier(typeLiteral)
+                  .build()
+                  .postfixNotNullAssertion();
+            } else {
+              // String.class -> String::class.javaObjectType
+              return FieldAccess.builderFrom(
+                      getJavaTypeFieldDescriptor(typeLiteral.getTypeDescriptor(), "javaObjectType"))
+                  .setQualifier(typeLiteral)
+                  .build();
+            }
+          }
+        });
+  }
+
+  private static boolean isKotlinReflectKClass(TypeDescriptor typeDescriptor) {
+    return typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
+        && declaredTypeDescriptor.getQualifiedSourceName().equals("kotlin.reflect.KClass");
+  }
+
+  private static FieldDescriptor getJavaTypeFieldDescriptor(TypeDescriptor type, String fieldName) {
+    return FieldDescriptor.builder()
+        .setEnclosingTypeDescriptor(
+            TypeDeclaration.builder()
+                .setPackage(PackageDeclaration.builder().setName("kotlin.reflect").build())
+                .setClassComponents("KClass")
+                .setKind(TypeDeclaration.Kind.CLASS)
+                .build()
+                .toDescriptor())
+        .setTypeDescriptor(type)
+        .setName(fieldName)
+        .build();
+  }
+}

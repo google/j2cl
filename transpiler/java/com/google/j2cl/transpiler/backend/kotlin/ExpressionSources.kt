@@ -317,10 +317,18 @@ internal data class ExpressionSources(
     expressionSource(expressionWithComment.expression)
 
   private fun fieldAccessSource(fieldAccess: FieldAccess): Source =
-    dotSeparated(
-      qualifierSource(fieldAccess),
-      identifierSource(environment.ktMangledName(fieldAccess.target)),
-    )
+    dotSeparated(qualifierSource(fieldAccess), fieldNameSource(fieldAccess))
+
+  private fun fieldNameSource(expression: FieldAccess): Source {
+    val fieldDescriptor = expression.target
+    if (
+      fieldDescriptor.enclosingTypeDescriptor.qualifiedSourceName == "kotlin.reflect.KClass" &&
+        (fieldDescriptor.name == "javaObjectType" || fieldDescriptor.name == "javaPrimitiveType")
+    ) {
+      return nameSources.extensionMemberQualifiedNameSource("kotlin.jvm.${fieldDescriptor.name}")
+    }
+    return identifierSource(environment.ktMangledName(fieldDescriptor))
+  }
 
   private fun functionExpressionSource(functionExpression: FunctionExpression): Source =
     functionExpressionLambdaSource(functionExpression)

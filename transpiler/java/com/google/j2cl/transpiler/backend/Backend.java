@@ -204,6 +204,7 @@ import com.google.j2cl.transpiler.passes.RewriteAnnotationTypesJ2kt;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
+import com.google.j2cl.transpiler.passes.RewriteTypeLiteralsJ2kt;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringComparison;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
@@ -716,6 +717,7 @@ public enum Backend {
           InsertNotNullAssertionToPolyNullMethodCalls::new,
           InsertNotNullAssertionsOnNullabilityMismatch::new,
           InsertCastsForTypeLiteralsJ2kt::new,
+          RewriteTypeLiteralsJ2kt::new,
           InsertCastsOnNullabilityMismatch::new,
           InsertCastForLowerBounds::new,
           InsertRawTypeCasts::new,

@@ -26,9 +26,7 @@ import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.NULL_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.nonNull
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 
 internal data class LiteralSources(val nameSources: NameSources) {
   fun literalSource(literal: Literal): Source =
@@ -47,14 +45,7 @@ internal data class LiteralSources(val nameSources: NameSources) {
     literal(stringLiteral.value)
 
   private fun typeLiteralSource(typeLiteral: TypeLiteral): Source =
-    dotSeparated(
-      classLiteral(nameSources.qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
-      if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-        nonNull(nameSources.extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
-      } else {
-        nameSources.extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
-      },
-    )
+    classLiteral(nameSources.qualifiedNameSource(typeLiteral.referencedTypeDescriptor))
 
   private fun numberLiteralSource(numberLiteral: NumberLiteral): Source =
     when (numberLiteral.typeDescriptor.toUnboxedType()) {

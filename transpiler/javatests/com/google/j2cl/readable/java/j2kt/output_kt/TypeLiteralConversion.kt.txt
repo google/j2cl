@@ -109,12 +109,16 @@ open class TypeLiteralConversion {
  companion object {
   @JvmStatic
   fun testGetSimpleInstance(): Simple {
-   return TypeLiteralConversion.getInstance<Simple>(Simple::class.javaObjectType)
+   return TypeLiteralConversion.getInstance<Simple>(
+    Simple::class.javaObjectType,
+   )
   }
   
   @JvmStatic
   fun testGetIntegerInstance(): Int {
-   return TypeLiteralConversion.getInstance<Int>(Int::class.javaObjectType)
+   return TypeLiteralConversion.getInstance<Int>(
+    Int::class.javaObjectType,
+   )
   }
   
   @JvmStatic
@@ -133,7 +137,9 @@ open class TypeLiteralConversion {
   
   @JvmStatic
   fun testGetSimpleEnumInstance(): SimpleEnum {
-   return TypeLiteralConversion.getInstance<SimpleEnum>(SimpleEnum::class.javaObjectType)
+   return TypeLiteralConversion.getInstance<SimpleEnum>(
+    SimpleEnum::class.javaObjectType,
+   )
   }
   
   @JvmStatic
@@ -145,7 +151,9 @@ open class TypeLiteralConversion {
   
   @JvmStatic
   fun testGetRecursiveSpecializedInstance(): RecursiveSpecialized {
-   return TypeLiteralConversion.getInstance<RecursiveSpecialized>(RecursiveSpecialized::class.javaObjectType)
+   return TypeLiteralConversion.getInstance<RecursiveSpecialized>(
+    RecursiveSpecialized::class.javaObjectType,
+   )
   }
   
   @JvmStatic
