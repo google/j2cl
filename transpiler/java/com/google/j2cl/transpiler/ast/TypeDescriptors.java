@@ -155,7 +155,7 @@ public class TypeDescriptors {
 
   @Nullable public DeclaredTypeDescriptor javaemulInternalConstructor;
   @Nullable public DeclaredTypeDescriptor javaemulInternalPlatform;
-  public DeclaredTypeDescriptor javaemulInternalExceptions;
+  @Nullable public DeclaredTypeDescriptor javaemulInternalExceptions;
 
   @Nullable
   @QualifiedBinaryName("javaemul.internal.Ref")

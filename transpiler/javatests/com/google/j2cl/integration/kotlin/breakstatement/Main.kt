@@ -21,6 +21,7 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 fun main(vararg unused: String) {
   testUnlabeledBreaks()
   testLabeledLoop()
+  testTryWithResources()
   testBreakInDoWhileLoop()
 }
 
@@ -76,6 +77,19 @@ private fun testLabeledLoop() {
     }
     break
   }
+}
+
+private fun testTryWithResources() {
+  var count: Int = 0
+  for (i in 0..100) {
+    (AutoCloseable {}).use {
+      if (i >= 50) {
+        break
+      }
+      count++
+    }
+  }
+  assertEquals(50, count)
 }
 
 /**

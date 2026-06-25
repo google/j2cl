@@ -700,7 +700,7 @@ internal data class ExpressionSources(
       }
     }
 
-  private fun leftSubExpressionSource(precedence: Precedence, operand: Expression) =
+  internal fun leftSubExpressionSource(precedence: Precedence, operand: Expression) =
     expressionInParensSource(operand, precedence.requiresParensOnLeft(operand.ktPrecedence))
 
   private fun rightSubExpressionSource(precedence: Precedence, operand: Expression) =

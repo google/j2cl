@@ -680,7 +680,6 @@ public enum Backend {
           NormalizeSynchronizedConstructs::new,
           PropagateNullabilityInOverrides::new,
           NormalizeInterfaces::new,
-          NormalizeTryWithResources::new,
           NormalizeForEachIterable::new,
           // Must run after NormalizeForEachIterable and benefits from running
           // after MakeVariablesFinal.

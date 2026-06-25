@@ -72,6 +72,21 @@ public class TryCatch {
     }
   }
 
+  public void testTryWithResourceAndFinally() throws Exception {
+    try (ClosableThing thing = new ClosableThing()) {
+      throw new Exception();
+    } finally {
+      // expected empty body.
+    }
+  }
+
+  public void testTryWithResourceNoCatch() throws Exception {
+    try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+      throw new Exception();
+    }
+  }
+
   public void testTryWithResourceJava9() {
     ClosableThing thing = new ClosableThing();
     ClosableThing thing2 = new ClosableThing();

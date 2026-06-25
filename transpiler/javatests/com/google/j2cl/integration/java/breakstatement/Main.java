@@ -22,6 +22,7 @@ public class Main {
   public static void main(String... args) {
     testUnlabeledBreaks();
     testLabeledLoop();
+    testTryWithResources();
   }
 
   private static void testUnlabeledBreaks() {
@@ -75,5 +76,20 @@ public class Main {
       }
       break;
     }
+  }
+
+  private static void testTryWithResources() {
+    int count = 0;
+    for (int i = 0; i < 100; i++) {
+      try (AutoCloseable autoCloseable = () -> {}) {
+        if (i >= 50) {
+          break;
+        }
+        count++;
+      } catch (Exception e) {
+        // Do nothing.
+      }
+    }
+    assertTrue(count == 50);
   }
 }

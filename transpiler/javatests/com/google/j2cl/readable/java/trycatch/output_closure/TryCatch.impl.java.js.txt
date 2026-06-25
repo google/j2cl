@@ -112,6 +112,55 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
+ m_testTryWithResourceAndFinally__void() {
+  try {
+   let /** Throwable */ $primaryExc = null;
+   let /** ClosableThing */ thing = null;
+   try {
+    thing = ClosableThing.$create__();
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
+   } catch (__$jsexc) {
+    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
+    {
+     let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
+     $primaryExc = $exceptionFromTry;
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($exceptionFromTry);
+    }
+   } finally {
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable(thing, $primaryExc);
+    if (!$Equality.$same($primaryExc, null)) {
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($primaryExc);
+    }
+   }
+  } finally {}
+ }
+ /** @nodts */
+ m_testTryWithResourceNoCatch__void() {
+  {
+   let /** Throwable */ $primaryExc = null;
+   let /** ClosableThing */ thing = null;
+   let /** ClosableThing */ thing2 = null;
+   try {
+    thing = ClosableThing.$create__();
+    thing2 = ClosableThing.$create__();
+    throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(Exception.$create__());
+   } catch (__$jsexc) {
+    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
+    {
+     let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
+     $primaryExc = $exceptionFromTry;
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($exceptionFromTry);
+    }
+   } finally {
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable(thing2, $primaryExc);
+    $primaryExc = Exceptions.m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable(thing, $primaryExc);
+    if (!$Equality.$same($primaryExc, null)) {
+     throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject($primaryExc);
+    }
+   }
+  }
+ }
+ /** @nodts */
  m_testTryWithResourceJava9__void() {
   let thing = ClosableThing.$create__();
   let thing2 = ClosableThing.$create__();

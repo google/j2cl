@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.CatchClause
 import com.google.j2cl.transpiler.ast.ContinueStatement
 import com.google.j2cl.transpiler.ast.DoWhileStatement
 import com.google.j2cl.transpiler.ast.Expression
+import com.google.j2cl.transpiler.ast.Expression.Precedence
 import com.google.j2cl.transpiler.ast.ExpressionStatement
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement
 import com.google.j2cl.transpiler.ast.ForEachStatement
@@ -39,8 +40,10 @@ import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.WhileStatement
 import com.google.j2cl.transpiler.ast.YieldStatement
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ARROW_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AT_OPERATOR
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.BREAK_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CATCH_KEYWORD
@@ -62,6 +65,7 @@ import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.infix
@@ -231,14 +235,55 @@ internal data class StatementSources(
     spaceSeparated(THROW_KEYWORD, expressionSource(throwStatement.expression))
 
   private fun tryStatementSource(tryStatement: TryStatement): Source =
+    tryStatementBodySource(tryStatement).let { bodySource ->
+      if (tryStatement.catchClauses.isEmpty() && tryStatement.finallyBlock == null) {
+        bodySource
+      } else {
+        spaceSeparated(
+          TRY_KEYWORD,
+          block(bodySource),
+          spaceSeparated(tryStatement.catchClauses.map(::catchClauseSource)),
+          tryStatement.finallyBlock
+            ?.let { spaceSeparated(FINALLY_KEYWORD, statementSource(it)) }
+            .orEmpty(),
+        )
+      }
+    }
+
+  private fun tryStatementBodySource(tryStatement: TryStatement): Source =
+    tryStatement.resourceDeclarations.foldRight(statementsSource(tryStatement.body.statements)) {
+      declaration,
+      outerSource ->
+      declaration.fragments.foldRight(outerSource, ::resourceUseSource)
+    }
+
+  private fun resourceUseSource(fragment: VariableDeclarationFragment, bodySource: Source): Source =
     spaceSeparated(
-      TRY_KEYWORD,
-      statementSource(tryStatement.body),
-      spaceSeparated(tryStatement.catchClauses.map(::catchClauseSource)),
-      tryStatement.finallyBlock
-        ?.let { spaceSeparated(FINALLY_KEYWORD, statementSource(it)) }
-        .orEmpty(),
+      dotSeparated(
+        resourceUseQualifierSource(fragment),
+        nameSources.extensionMemberQualifiedNameSource("kotlin.use"),
+      ),
+      block(resourceUseParamSource(fragment.variable), bodySource),
     )
+
+  private fun resourceUseQualifierSource(fragment: VariableDeclarationFragment): Source =
+    fragment.initializer?.let {
+      expressionSources.leftSubExpressionSource(Precedence.MEMBER_ACCESS, it)
+    } ?: nameSources.variableNameSource(fragment.variable)
+
+  private fun resourceUseParamSource(variable: Variable): Source =
+    Source.emptyUnless(resourceUseVariableIsNamed(variable)) {
+      spaceSeparated(
+        colonSeparated(
+          nameSources.variableNameSource(variable),
+          nameSources.typeDescriptorSource(variable.typeDescriptor),
+        ),
+        ARROW_OPERATOR,
+      )
+    }
+
+  private fun resourceUseVariableIsNamed(variable: Variable): Boolean =
+    !variable.name.startsWith("\$resource") && variable.name != "_"
 
   private fun catchClauseSource(catchClause: CatchClause): Source =
     spaceSeparated(

@@ -22,7 +22,6 @@ import javaemul.lang.*
 import java.lang.AutoCloseable
 import java.util.Arrays
 import java.util.function.Function
-import javaemul.internal.Exceptions
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -33,10 +32,10 @@ import kotlin.Number
 import kotlin.RuntimeException
 import kotlin.String
 import kotlin.Suppress
-import kotlin.Throwable
 import kotlin.arrayOf
 import kotlin.collections.List
 import kotlin.run
+import kotlin.use
 
 open class UnnamedVariables {
  internal open fun testSwitchPatterns_pp_unnamedvariables() {
@@ -208,17 +207,7 @@ open class UnnamedVariables {
  internal open fun testTryCatch_pp_unnamedvariables() {
   val closable: AutoCloseable? = null
   try {
-   var ___primaryExc: Throwable? = null
-   var `_`: AutoCloseable? = null
-   try {
-    `_` = closable
-   } catch (___exceptionFromTry: Throwable) {
-    ___primaryExc = ___exceptionFromTry
-    throw ___exceptionFromTry
-   } finally {
-    ___primaryExc = Exceptions.safeClose(`_`, ___primaryExc)
-    if (___primaryExc != null) throw ___primaryExc!!
-   }
+   closable.use {}
   } catch (__1: RuntimeException) {} catch (__2: Exception) {} catch (__2: Error) {}
  }
  
