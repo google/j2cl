@@ -17,6 +17,11 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import java.lang.Boolean.getBoolean
+
+/** Whether to emit actual visibility, except for those in [EXCLUDED_VISIBILITY_PACKAGES]. */
+val emitActualVisibility: Boolean =
+  getBoolean("com.google.j2cl.transpiler.backend.kotlin.emitActualVisibility")
 
 /** Set containing packages for which J2KT should translate actual visibility. */
 private val ACTUAL_VISIBILITY_PACKAGES: Set<String> =
@@ -50,7 +55,8 @@ private val TypeDeclaration.useActualKtVisibilityForPackage: Boolean
   get() = packageName.let { packageName ->
     packageName in ACTUAL_VISIBILITY_PACKAGES ||
       packageName.plus(".").let { packageNamePlusDot ->
-        ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageNamePlusDot.startsWith(it) } &&
+        (emitActualVisibility ||
+          ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageNamePlusDot.startsWith(it) }) &&
           packageName !in EXCLUDED_VISIBILITY_PACKAGES
       }
   }
