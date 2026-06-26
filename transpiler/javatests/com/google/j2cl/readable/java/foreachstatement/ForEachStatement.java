@@ -15,6 +15,7 @@
  */
 package foreachstatement;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import java.util.Iterator;
 import jsinterop.annotations.JsNonNull;
 import org.jspecify.annotations.Nullable;
@@ -133,5 +134,4 @@ public class ForEachStatement {
     for (String s : i) {}
   }
 
-  public @interface J2ktIncompatible {}
 }

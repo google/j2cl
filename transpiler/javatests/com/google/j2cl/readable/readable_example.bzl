@@ -81,7 +81,9 @@ def readable_example(
         name = "readable",
         srcs = srcs,
         javacopts = JAVAC_FLAGS + javacopts,
-        deps = deps,
+        deps = deps + [
+            "//transpiler/javatests/com/google/j2cl/readable/java/common",
+        ],
         plugins = plugins,
         generate_build_test = False,
         tags = j2cl_library_tags + ["manual"],

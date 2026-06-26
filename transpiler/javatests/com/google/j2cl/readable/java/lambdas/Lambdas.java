@@ -15,6 +15,7 @@
  */
 package lambdas;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -383,6 +384,5 @@ public class Lambdas {
 
   private static <T> void acceptsSupplier(Supplier<T> supplier) {}
 
-  @interface J2ktIncompatible {}
 }
 

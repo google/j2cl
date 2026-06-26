@@ -15,6 +15,7 @@
  */
 package bridgemethods;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import jsinterop.annotations.JsType;
 
 interface SomeInterface<T, S> {

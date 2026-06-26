@@ -15,6 +15,8 @@
  */
 package innerclassinitorder;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
+
 /** Smoke test for inner classes, copied from GWT. */
 public class InnerClassInitOrder {
   public int number = 0;
