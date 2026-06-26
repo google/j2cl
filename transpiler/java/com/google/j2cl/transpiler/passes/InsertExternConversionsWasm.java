@@ -23,13 +23,9 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Invocation;
-import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.RuntimeMethods;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
 
 /**
  * Inserts conversions from {@code java.lang.String} arguments to Wasm strings when calling native
@@ -48,7 +44,10 @@ public class InsertExternConversionsWasm extends NormalizationPass {
               method
                   .getParameters()
                   .forEach(
-                      p -> p.setTypeDescriptor(replaceTypeWithExternalType(p.getTypeDescriptor())));
+                      p ->
+                          p.setTypeDescriptor(
+                              WasmExportBridgesUtils.getExternalType(
+                                  p.getTypeDescriptor(), /* isExport= */ false)));
               method = method.toBuilder().setMethodDescriptor(newDescriptor).build();
             }
             return method;
@@ -70,13 +69,16 @@ public class InsertExternConversionsWasm extends NormalizationPass {
         invocation.toBuilder()
             .setArguments(
                 Streams.zip(
-                        methodDescriptor.getParameterTypeDescriptors().stream(),
                         invocation.getArguments().stream(),
-                        InsertExternConversionsWasm::convertArgumentIfNeeded)
+                        methodDescriptor.getParameterTypeDescriptors().stream(),
+                        (expression, typeDescriptor) ->
+                            WasmExportBridgesUtils.convertToExternal(
+                                expression, typeDescriptor, /* isExport= */ false))
                     .collect(toImmutableList()))
             .setTarget(createExportedMethodDescriptor(methodDescriptor))
             .build();
-    return convertReturnIfNeeded(newInvocation, methodDescriptor.getReturnTypeDescriptor());
+    return WasmExportBridgesUtils.convertToInternal(
+        newInvocation, methodDescriptor.getReturnTypeDescriptor(), /* isExport= */ false);
   }
 
   private static MethodDescriptor createExportedMethodDescriptor(MethodDescriptor descriptor) {
@@ -87,53 +89,19 @@ public class InsertExternConversionsWasm extends NormalizationPass {
         builder ->
             builder
                 .setReturnTypeDescriptor(
-                    replaceTypeWithExternalType(builder.getReturnTypeDescriptor()))
-                .updateParameterTypeDescriptors(
-                    builder.getParameterTypeDescriptors().stream()
-                        .map(InsertExternConversionsWasm::replaceTypeWithExternalType)
+                    WasmExportBridgesUtils.getExternalType(
+                        builder.getReturnTypeDescriptor(), /* isExport= */ false))
+                .setParameterDescriptors(
+                    descriptor.getParameterDescriptors().stream()
+                        .map(
+                            pd ->
+                                pd.toBuilder()
+                                    .setTypeDescriptor(
+                                        WasmExportBridgesUtils.getExternalType(
+                                            pd.getTypeDescriptor(), /* isExport= */ false))
+                                    .setVarargs(false)
+                                    .build())
                         .collect(toImmutableList())));
-  }
-
-  private static TypeDescriptor replaceTypeWithExternalType(TypeDescriptor typeDescriptor) {
-    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
-    }
-    if (typeDescriptor.isNative() || typeDescriptor.isPrimitive()) {
-      return typeDescriptor;
-    }
-    return TypeDescriptors.get().javaemulInternalWasmExtern.toNullable(typeDescriptor.isNullable());
-  }
-
-  private static Expression convertArgumentIfNeeded(
-      TypeDescriptor targetArgumentTypeDescriptor, Expression argument) {
-    if (TypeDescriptors.isJavaLangString(targetArgumentTypeDescriptor)) {
-      return RuntimeMethods.createJsStringFromStringMethodCall(argument);
-    }
-    if (targetArgumentTypeDescriptor.isNative() || targetArgumentTypeDescriptor.isPrimitive()) {
-      return argument;
-    }
-    return RuntimeMethods.createWasmExternalizeMethodCall(argument);
-  }
-
-  private static Expression convertReturnIfNeeded(
-      Expression invocationExpression, TypeDescriptor targetReturnTypeDescriptor) {
-    if (TypeDescriptors.isJavaLangString(targetReturnTypeDescriptor)) {
-      return RuntimeMethods.createStringFromJsStringMethodCall(invocationExpression);
-    }
-    if (targetReturnTypeDescriptor.isJsFunctionInterface()) {
-      MethodDescriptor adaptMethodDescriptor =
-          LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptMethod(
-              LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
-                  targetReturnTypeDescriptor));
-      return MethodCall.builderFrom(adaptMethodDescriptor)
-          .setArguments(invocationExpression)
-          .build();
-    }
-    if (targetReturnTypeDescriptor.isNative() || targetReturnTypeDescriptor.isPrimitive()) {
-      return invocationExpression;
-    }
-    return RuntimeMethods.createWasmInternalizeMethodCall(
-        invocationExpression, targetReturnTypeDescriptor);
   }
 
   private static boolean isJavaScriptMethod(MethodDescriptor descriptor) {
