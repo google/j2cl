@@ -45,6 +45,10 @@ public class HeaderKlibCompiler() {
   internal fun compile() {
     check(sources.none { it.endsWith(".java") }) { "Java input files are not supported." }
 
+    // The bytecode in kotlin-compiler.jar is patched to early exit ConvertToIr.runPlatformCheckers
+    // disabling platform checks when this system property is set.
+    System.setProperty("com.google.kotlin.headerCompile", "true")
+
     val arguments =
       K2JKlibCompilerArguments().apply {
         parseCommandLineArguments(kotlincOptions, this)
