@@ -30,7 +30,7 @@ class LateInitTest {
   this.uninitialized = "I have been initialized"
  }
  
- fun behaviorBeingTested_expectedResult() {
+ fun lateInitField_isInitializedInSetup() {
   Assert.assertEquals(
    this.uninitialized,
    "I have been initialized",

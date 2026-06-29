@@ -35,7 +35,7 @@ public final class LateInitTest {
   }
 
   @Test
-  public void behaviorBeingTested_expectedResult() {
+  public void lateInitField_isInitializedInSetup() {
     assertEquals(uninitialized, "I have been initialized");
   }
 }
