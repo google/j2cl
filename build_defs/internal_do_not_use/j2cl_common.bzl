@@ -5,6 +5,7 @@ load("@rules_java//java:defs.bzl", "java_common")
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":klib_common.bzl", "klib_common")
+load(":profiling.bzl", "add_profiling_support")
 load(":provider.bzl", "J2clInfo")
 
 def _get_jsinfo_provider(j2cl_info):
@@ -275,14 +276,6 @@ def get_jdk_system(java_toolchain, javac_opts):
     # TODO(b/197211878): Switch to a public API when available.
     return java_toolchain._bootclasspath_info._system_inputs.to_list() if not jdk_system_already_set else []
 
-def _add_profiling_support(ctx, mnemonic, outputs, args):
-    if ctx.attr._profiling_filter[BuildSettingInfo].value in str(ctx.label):
-        profile_output = ctx.actions.declare_file(ctx.label.name + "_" + mnemonic + ".profile")
-        outputs.append(profile_output)
-        args.add("-profileOutput", profile_output)
-        print("Profiling %s %s" % (ctx.label, mnemonic))  # buildifier: disable=print
-        print("pprof --flame %s" % profile_output.path)  # buildifier: disable=print
-
 def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotations):
     # Paths are matched by Kythe to identify generated J2CL sources.
     output_file = ctx.actions.declare_file(name + "_j2cl_stripped-src.jar")
@@ -292,7 +285,7 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
-    _add_profiling_support(ctx, mnemonic, outputs, args)
+    add_profiling_support(ctx, mnemonic, outputs, args)
     args.add("-d", output_file)
     args.add_all(strip_annotations, format_each = "-annotation=%s")
     args.add_all(java_srcs)
@@ -408,7 +401,7 @@ def _j2cl_transpile(
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
-    _add_profiling_support(ctx, mnemonic, outputs, args)
+    add_profiling_support(ctx, mnemonic, outputs, args)
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add_all("-system", jdk_system, expand_directories = False)
     args.add_all(tokenized_javac_opts, format_each = "-javacOptions=%s")

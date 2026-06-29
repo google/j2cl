@@ -13,9 +13,12 @@
  */
 package com.google.j2cl.transpiler.frontend.kotlin.klib
 
+import com.google.graal.support.GraalInitGoogle
+import com.google.graal.support.GraalPprof
 import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompiler
 import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompilerArguments
 import java.io.File
+import java.nio.file.Path
 import kotlin.system.exitProcess
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
@@ -41,6 +44,9 @@ public class HeaderKlibCompiler() {
 
   @Option(name = "-kotlincOptions", usage = "Flags passed to the Kotlin compiler.", required = true)
   var kotlincOptions: MutableList<String> = ArrayList()
+
+  @Option(name = "-profileOutput", usage = "Path to write the profile to.", hidden = true)
+  var profileOutput: String? = null
 
   internal fun compile() {
     check(sources.none { it.endsWith(".java") }) { "Java input files are not supported." }
@@ -84,13 +90,19 @@ public class HeaderKlibCompiler() {
         override fun hasErrors() = hasErrors
       }
 
-    val exitCode = K2JKlibCompiler().doExecutePhased(arguments, Services.EMPTY, messageCollector)
+    val profilePath = profileOutput?.let { Path.of(it) }
+
+    val exitCode =
+      GraalPprof.profileInto(profilePath) {
+        K2JKlibCompiler().doExecutePhased(arguments, Services.EMPTY, messageCollector)
+      }
 
     exitProcess(exitCode.code)
   }
 }
 
 fun main(args: Array<String>) {
+  GraalInitGoogle.initialize("HeaderKlibCompiler", arrayOf(), false)
   HeaderKlibCompiler().apply { CmdLineParser(this).parseArgument(expandFlagFile(args)) }.compile()
 }
 
