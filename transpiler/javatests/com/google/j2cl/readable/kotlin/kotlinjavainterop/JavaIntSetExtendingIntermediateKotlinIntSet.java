@@ -18,7 +18,8 @@ package kotlinjavainterop;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class JavaIntSetExtendingIntermediateKotlinIntSet extends IntermediateKotlinIntSet {
+public class JavaIntSetExtendingIntermediateKotlinIntSet
+    extends OuterKotlinClass.IntermediateKotlinIntSet {
 
   @Override
   public boolean add(Integer element) {

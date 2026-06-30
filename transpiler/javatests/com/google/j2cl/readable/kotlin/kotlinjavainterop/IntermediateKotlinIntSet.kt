@@ -15,55 +15,57 @@
  */
 package kotlinjavainterop
 
-open class IntermediateKotlinIntSet : JavaIntSet() {
-  override fun add(element: Int?): Boolean {
-    return super.add(element)
-  }
+open class OuterKotlinClass {
+  open class IntermediateKotlinIntSet : JavaIntSet() {
+    override fun add(element: Int?): Boolean {
+      return super.add(element)
+    }
 
-  override fun addAll(elements: Collection<Int>): Boolean {
-    return super.addAll(elements)
-  }
+    override fun addAll(elements: Collection<Int>): Boolean {
+      return super.addAll(elements)
+    }
 
-  override fun clear() {
-    super.clear()
-  }
+    override fun clear() {
+      super.clear()
+    }
 
-  override fun iterator(): MutableIterator<Int> {
-    return super.iterator()
-  }
+    override fun iterator(): MutableIterator<Int> {
+      return super.iterator()
+    }
 
-  override fun remove(o: Int?): Boolean {
-    return super.remove(o)
-  }
+    override fun remove(o: Int?): Boolean {
+      return super.remove(o)
+    }
 
-  override fun removeAll(elements: Collection<Int>): Boolean {
-    return super.removeAll(elements)
-  }
+    override fun removeAll(elements: Collection<Int>): Boolean {
+      return super.removeAll(elements)
+    }
 
-  override fun retainAll(elements: Collection<Int>): Boolean {
-    return super.retainAll(elements)
-  }
+    override fun retainAll(elements: Collection<Int>): Boolean {
+      return super.retainAll(elements)
+    }
 
-  override fun contains(o: Int?): Boolean {
-    return super.contains(o)
-  }
+    override fun contains(o: Int?): Boolean {
+      return super.contains(o)
+    }
 
-  override fun containsAll(elements: Collection<Int>): Boolean {
-    return super.containsAll(elements)
-  }
+    override fun containsAll(elements: Collection<Int>): Boolean {
+      return super.containsAll(elements)
+    }
 
-  override fun isEmpty(): Boolean {
-    return super.isEmpty()
-  }
+    override fun isEmpty(): Boolean {
+      return super.isEmpty()
+    }
 
-  override fun toArray(): Array<Any> {
-    return super.toArray()
-  }
+    override fun toArray(): Array<Any> {
+      return super.toArray()
+    }
 
-  override fun <T : Any?> toArray(a: Array<out T & Any>?): Array<T & Any> {
-    return super.toArray(a)
-  }
+    override fun <T : Any?> toArray(a: Array<out T & Any>?): Array<T & Any> {
+      return super.toArray(a)
+    }
 
-  override val size: Int
-    get() = super.size
+    override val size: Int
+      get() = super.size
+  }
 }
