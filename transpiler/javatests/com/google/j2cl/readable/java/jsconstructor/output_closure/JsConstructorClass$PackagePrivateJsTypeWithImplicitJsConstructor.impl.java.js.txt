@@ -1,0 +1,40 @@
+goog.module('jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class PackagePrivateJsTypeWithImplicitJsConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!PackagePrivateJsTypeWithImplicitJsConstructor} */
+ static $create__() {
+  PackagePrivateJsTypeWithImplicitJsConstructor.$clinit();
+  let $instance = new PackagePrivateJsTypeWithImplicitJsConstructor();
+  $instance.$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  PackagePrivateJsTypeWithImplicitJsConstructor.$clinit = () =>{};
+  PackagePrivateJsTypeWithImplicitJsConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PackagePrivateJsTypeWithImplicitJsConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PackagePrivateJsTypeWithImplicitJsConstructor, 'jsconstructor.JsConstructorClass$PackagePrivateJsTypeWithImplicitJsConstructor');
+
+exports = PackagePrivateJsTypeWithImplicitJsConstructor;
+
+//# sourceMappingURL=JsConstructorClass$PackagePrivateJsTypeWithImplicitJsConstructor.js.map

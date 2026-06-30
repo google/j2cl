@@ -176,9 +176,9 @@ open class JsConstructorClass {
   )
  }
  
- open inner class JsConstructorClassWithExplicitConstructor @JsConstructor constructor(i: Int)
+ internal open inner class JsConstructorClassWithExplicitConstructor @JsConstructor constructor(i: Int)
  
- open inner class JsConstructorSubclass @JsConstructor constructor(): JsConstructorClass.JsConstructorClassWithExplicitConstructor(1) {
+ internal open inner class JsConstructorSubclass @JsConstructor constructor(): JsConstructorClass.JsConstructorClassWithExplicitConstructor(1) {
   init {
    var i: Int = 0
    SWITCH@ do {
@@ -204,5 +204,10 @@ open class JsConstructorClass {
     } while (false)
    } while (false)
   }
+ }
+ 
+ @JsType
+ internal open class PackagePrivateJsTypeWithImplicitJsConstructor {
+  internal open inner class SubclassWithImplicitPrivateConstructor constructor(): PackagePrivateJsTypeWithImplicitJsConstructor()
  }
 }

@@ -224,4 +224,14 @@ public class JsConstructorClass {
       }
     }
   }
+
+  @JsType
+  static class PackagePrivateJsTypeWithImplicitJsConstructor {
+    // implicit package-private constructor, which is not implicitly a JsConstructor.
+
+    class SubclassWithImplicitPrivateConstructor
+        extends PackagePrivateJsTypeWithImplicitJsConstructor {
+      private SubclassWithImplicitPrivateConstructor() {}
+    }
+  }
 }

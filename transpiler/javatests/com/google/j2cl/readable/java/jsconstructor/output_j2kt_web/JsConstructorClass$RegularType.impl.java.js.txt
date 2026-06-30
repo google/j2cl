@@ -1,0 +1,40 @@
+goog.module('jsconstructor.JsConstructorClass.RegularType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class RegularType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RegularType} */
+ static $create__java_lang_Object(/** * */ b) {
+  RegularType.$clinit();
+  let $instance = new RegularType();
+  $instance.$ctor__jsconstructor_JsConstructorClass_RegularType__java_lang_Object__void(b);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_RegularType__java_lang_Object__void(/** * */ b) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RegularType.$clinit = () =>{};
+  RegularType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RegularType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RegularType, 'jsconstructor.JsConstructorClass$RegularType');
+
+exports = RegularType;
+
+//# sourceMappingURL=JsConstructorClass$RegularType.js.map

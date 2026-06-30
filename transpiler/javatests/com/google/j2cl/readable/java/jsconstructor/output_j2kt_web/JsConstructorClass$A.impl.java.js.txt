@@ -1,0 +1,60 @@
+goog.module('jsconstructor.JsConstructorClass.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class A extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_fA__jsconstructor_JsConstructorClass_A = 0;
+ }
+ //Factory method corresponding to constructor 'A(int)'.
+ /** @nodts @return {!A} */
+ static $create__int(/** number */ x) {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__jsconstructor_JsConstructorClass_A__int__void(x);
+  return $instance;
+ }
+ //Initialization from constructor 'A(int)'.
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_A__int__void(/** number */ x) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fA__jsconstructor_JsConstructorClass_A = 1;
+  this.f_fA__jsconstructor_JsConstructorClass_A = x;
+ }
+ //Factory method corresponding to constructor 'A()'.
+ /** @nodts @return {!A} */
+ static $create__() {
+  A.$clinit();
+  let $instance = new A();
+  $instance.$ctor__jsconstructor_JsConstructorClass_A__void();
+  return $instance;
+ }
+ //Initialization from constructor 'A()'.
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_A__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_fA__jsconstructor_JsConstructorClass_A = 1;
+ }
+ /** @nodts */
+ static $clinit() {
+  A.$clinit = () =>{};
+  A.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof A;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(A, 'jsconstructor.JsConstructorClass$A');
+
+exports = A;
+
+//# sourceMappingURL=JsConstructorClass$A.js.map

@@ -1,0 +1,42 @@
+goog.module('jsconstructor.JsConstructorClass.Varargs$impl');
+
+const A = goog.require('jsconstructor.JsConstructorClass.A$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+class Varargs extends A {
+ 
+ constructor(.../** ...number */ args) {
+  Varargs.$clinit();
+  $Arrays.$stampType(args, $int);
+  super();
+  this.$ctor__jsconstructor_JsConstructorClass_Varargs__arrayOf_int__void(args);
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_Varargs__arrayOf_int__void(/** !Array<number> */ args) {
+  this.$ctor__jsconstructor_JsConstructorClass_A__int__void(args[1]);
+ }
+ /** @nodts */
+ static $clinit() {
+  Varargs.$clinit = () =>{};
+  Varargs.$loadModules();
+  A.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Varargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(Varargs, 'jsconstructor.JsConstructorClass$Varargs');
+
+exports = Varargs;
+
+//# sourceMappingURL=JsConstructorClass$Varargs.js.map

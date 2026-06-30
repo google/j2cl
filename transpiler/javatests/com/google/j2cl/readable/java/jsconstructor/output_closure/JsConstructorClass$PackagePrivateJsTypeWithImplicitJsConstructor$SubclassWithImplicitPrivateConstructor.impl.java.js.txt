@@ -1,0 +1,42 @@
+goog.module('jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor$impl');
+
+const PackagePrivateJsTypeWithImplicitJsConstructor = goog.require('jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SubclassWithImplicitPrivateConstructor extends PackagePrivateJsTypeWithImplicitJsConstructor {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!PackagePrivateJsTypeWithImplicitJsConstructor} @nodts*/
+  this.$outer_this__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor_SubclassWithImplicitPrivateConstructor;
+ }
+ /** @nodts @return {!SubclassWithImplicitPrivateConstructor} */
+ static $create__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor(/** !PackagePrivateJsTypeWithImplicitJsConstructor */ $outer_this) {
+  let $instance = new SubclassWithImplicitPrivateConstructor();
+  $instance.$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor_SubclassWithImplicitPrivateConstructor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor_SubclassWithImplicitPrivateConstructor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void(/** !PackagePrivateJsTypeWithImplicitJsConstructor */ $outer_this) {
+  this.$outer_this__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor_SubclassWithImplicitPrivateConstructor = $outer_this;
+  this.$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SubclassWithImplicitPrivateConstructor.$clinit = () =>{};
+  SubclassWithImplicitPrivateConstructor.$loadModules();
+  PackagePrivateJsTypeWithImplicitJsConstructor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubclassWithImplicitPrivateConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubclassWithImplicitPrivateConstructor, 'jsconstructor.JsConstructorClass$PackagePrivateJsTypeWithImplicitJsConstructor$SubclassWithImplicitPrivateConstructor');
+
+exports = SubclassWithImplicitPrivateConstructor;
+
+//# sourceMappingURL=JsConstructorClass$PackagePrivateJsTypeWithImplicitJsConstructor$SubclassWithImplicitPrivateConstructor.js.map

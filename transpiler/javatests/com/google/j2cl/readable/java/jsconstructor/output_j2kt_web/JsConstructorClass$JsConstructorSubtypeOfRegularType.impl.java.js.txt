@@ -1,0 +1,52 @@
+goog.module('jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType$impl');
+
+const RegularType = goog.require('jsconstructor.JsConstructorClass.RegularType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+class JsConstructorSubtypeOfRegularType extends RegularType {
+ //JsConstructor 'JsConstructorSubtypeOfRegularType(Object)'.
+ 
+ constructor(/** * */ object) {
+  JsConstructorSubtypeOfRegularType.$clinit();
+  super();
+  this.$ctor__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__java_lang_Object__void(object);
+ }
+ //Initialization from constructor 'JsConstructorSubtypeOfRegularType(Object)'.
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__java_lang_Object__void(/** * */ object) {
+  this.$ctor__jsconstructor_JsConstructorClass_RegularType__java_lang_Object__void(object);
+ }
+ //Factory method corresponding to constructor 'JsConstructorSubtypeOfRegularType()'.
+ /** @nodts @return {!JsConstructorSubtypeOfRegularType} */
+ static $create__() {
+  JsConstructorSubtypeOfRegularType.$clinit();
+  let $instance = new JsConstructorSubtypeOfRegularType(j_l_Object.$create__());
+  $instance.$ctor__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__void();
+  return $instance;
+ }
+ //Initialization from constructor 'JsConstructorSubtypeOfRegularType()'.
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType__void() {}
+ /** @nodts */
+ static $clinit() {
+  JsConstructorSubtypeOfRegularType.$clinit = () =>{};
+  JsConstructorSubtypeOfRegularType.$loadModules();
+  RegularType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsConstructorSubtypeOfRegularType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Object = goog.module.get('java.lang.Object$impl');
+ }
+}
+$Util.$setClassMetadata(JsConstructorSubtypeOfRegularType, 'jsconstructor.JsConstructorClass$JsConstructorSubtypeOfRegularType');
+
+exports = JsConstructorSubtypeOfRegularType;
+
+//# sourceMappingURL=JsConstructorClass$JsConstructorSubtypeOfRegularType.js.map

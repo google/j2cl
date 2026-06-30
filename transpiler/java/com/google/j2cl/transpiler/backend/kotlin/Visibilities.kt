@@ -26,6 +26,7 @@ val emitActualVisibility: Boolean =
 /** Set containing packages for which J2KT should translate actual visibility. */
 private val ACTUAL_VISIBILITY_PACKAGES: Set<String> =
   setOf(
+    "jsconstructor",
     "j2kt",
     "j2ktiosinterop",
     "j2ktjvminterop",
