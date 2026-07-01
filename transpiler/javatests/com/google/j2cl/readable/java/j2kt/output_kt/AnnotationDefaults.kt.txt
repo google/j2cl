@@ -116,7 +116,7 @@ open class AnnotationDefaults {
   val classes: Array<KClass<*>>,
  )
  
- internal open class AnnotatedClass
+ internal open class AnnotatedClass internal constructor()
  
  internal annotation class Nested (
   val value: Int = 1,
