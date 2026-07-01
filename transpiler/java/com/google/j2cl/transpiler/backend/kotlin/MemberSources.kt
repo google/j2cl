@@ -204,6 +204,9 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
               memberDescriptorSources.methodReturnTypeSource(methodDescriptor)
             },
           ),
+          Source.emptyUnless(method.defaultValue != null) {
+            initializer(expressionSources.expressionSource(method.defaultValue!!))
+          },
           nameSources.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors),
         ),
       )

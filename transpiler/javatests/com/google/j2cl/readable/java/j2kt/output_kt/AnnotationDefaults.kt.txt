@@ -1,0 +1,128 @@
+// Generated from "j2kt/AnnotationDefaults.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.BooleanArray
+import kotlin.Byte
+import kotlin.Char
+import kotlin.Double
+import kotlin.Float
+import kotlin.Int
+import kotlin.IntArray
+import kotlin.Long
+import kotlin.Short
+import kotlin.String
+import kotlin.Suppress
+import kotlin.booleanArrayOf
+import kotlin.intArrayOf
+import kotlin.jvm.JvmStatic
+import kotlin.reflect.KClass
+
+open class AnnotationDefaults {
+ companion object {
+  @JvmStatic
+  internal fun testDefaults_primitives_pp_j2kt(bar: Bar) {
+   val booleanValue: Boolean = bar.booleanValue
+   val byteValue: Byte = bar.byteValue
+   val charValue: Char = bar.charValue
+   val shortValue: Short = bar.shortValue
+   val intValue: Int = bar.intValue
+   val longValue: Long = bar.longValue
+   val floatValue: Float = bar.floatValue
+   val doubleValue: Double = bar.doubleValue
+   val negativeValue: Int = bar.negativeValue
+   val calcValue: Int = bar.calcValue
+  }
+  
+  @JvmStatic
+  internal fun testDefaults_objects_pp_j2kt(bar: Bar) {
+   val stringValue: String = bar.stringValue
+   val escapedStringValue: String = bar.escapedStringValue
+   val enumValue: SomeEnum = bar.enumValue
+  }
+  
+  @JvmStatic
+  internal fun testDefaults_arrays_pp_j2kt(bar: Bar) {
+   val intArray: IntArray = bar.intArray
+   val booleanArray: BooleanArray = bar.booleanArray
+   val emptyArray: IntArray = bar.emptyArray
+   val shorthandArray: IntArray = bar.shorthandArray
+  }
+  
+  @JvmStatic
+  internal fun testDefaults_classes_pp_j2kt(withTypeLiteral: WithTypeLiteral) {}
+  
+  @JvmStatic
+  internal fun testDefaults_positional_pp_j2kt(positional: Positional) {
+   val positionalValue: String = positional.value
+   val positionalCount: Int = positional.count
+  }
+  
+  @JvmStatic
+  internal fun testDefaults_nested_pp_j2kt(withNested: WithNested) {}
+ }
+ 
+ internal enum class SomeEnum {
+  ZERO,
+  ONE;
+ }
+ 
+ internal annotation class Bar (
+  val booleanValue: Boolean = true,
+  val byteValue: Byte = 1,
+  val charValue: Char = 'a',
+  val shortValue: Short = 2,
+  val intValue: Int = 42,
+  val longValue: Long = 3L,
+  val floatValue: Float = 3.14f,
+  val doubleValue: Double = 3.14159,
+  val negativeValue: Int = -1,
+  val calcValue: Int = 10 + 20 * 2,
+  val stringValue: String = "default",
+  val escapedStringValue: String = "hello\nworld",
+  val enumValue: SomeEnum = SomeEnum.ZERO,
+  val intArray: IntArray = intArrayOf(1, 2, 3),
+  val booleanArray: BooleanArray = booleanArrayOf(true, false),
+  val emptyArray: IntArray = intArrayOf(),
+  val shorthandArray: IntArray = intArrayOf(42),
+ )
+ 
+ internal annotation class Positional (
+  val value: String = "positional",
+  val count: Int = 1,
+ )
+ 
+ internal annotation class WithTypeLiteral (
+  val clazz: KClass<*>,
+  val classes: Array<KClass<*>>,
+ )
+ 
+ internal open class AnnotatedClass
+ 
+ internal annotation class Nested (
+  val value: Int = 1,
+ )
+ 
+ internal annotation class WithNested (
+  val nested: Nested,
+ )
+}

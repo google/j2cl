@@ -64,9 +64,9 @@ open class Main {
  }
  
  annotation class Foo (
-  val booleanValue: Boolean,
-  val intValue: Int,
-  val stringValue: String,
+  val booleanValue: Boolean = Foo.BOOLEAN_CONSTANT,
+  val intValue: Int = Foo.INT_CONSTANT,
+  val stringValue: String = Foo.STRING_CONSTANT,
   val classValue: KClass<*>,
   val stringClassValue: KClass<String>,
   val wildcardClassValue: KClass<out KClass<*>>,

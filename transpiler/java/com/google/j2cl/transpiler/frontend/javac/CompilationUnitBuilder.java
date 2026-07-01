@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangClass;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static java.util.stream.Collectors.toCollection;
 
@@ -308,8 +309,27 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     if (methodDeclaration.getBody() != null) {
       builder.setBody(convertBlock(methodDeclaration.getBody()));
     }
+    // TODO(b/465873786): Support nested annotation and type literal default values.
+    if (methodDeclaration.getDefaultValue() != null
+        && isSupportedAnnotationDefaultValue((JCExpression) methodDeclaration.getDefaultValue())) {
+      builder.setDefaultValue(
+          convertExpression((JCExpression) methodDeclaration.getDefaultValue()));
+    }
 
     return builder.build();
+  }
+
+  private boolean isSupportedAnnotationDefaultValue(JCExpression expression) {
+    if (expression.getKind() == Kind.ANNOTATION) {
+      return false;
+    }
+    if (isJavaLangClass(environment.createTypeDescriptor(expression.type, inNullMarkedScope()))) {
+      return false;
+    }
+    if (expression instanceof JCNewArray newArray && newArray.getInitializers() != null) {
+      return newArray.getInitializers().stream().allMatch(this::isSupportedAnnotationDefaultValue);
+    }
+    return true;
   }
 
   private Block convertBlock(JCBlock block) {

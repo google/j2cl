@@ -17,10 +17,13 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
 
@@ -36,6 +39,31 @@ public class NormalizeArrayCreationsJ2kt extends NormalizationPass {
             Expression initializer = newArray.getInitializer();
             checkState(initializer == null || initializer instanceof ArrayLiteral);
             return initializer != null ? initializer : newArray;
+          }
+
+          @Override
+          public Node rewriteMethod(Method method) {
+            Expression defaultValue = method.getDefaultValue();
+            boolean isArray = method.getDescriptor().getReturnTypeDescriptor().isArray();
+            if (defaultValue != null && isArray) {
+              // Normalize single-element scalar shorthand defaults (e.g. default 42 -> default
+              // {42}) and align ArrayLiteral type descriptors with the non-nullable method return
+              // type.
+              boolean isSingleElementShorthand = !(defaultValue instanceof ArrayLiteral);
+              ArrayTypeDescriptor arrayType =
+                  (ArrayTypeDescriptor) method.getDescriptor().getReturnTypeDescriptor();
+              return method.toBuilder()
+                  .setDefaultValue(
+                      ArrayLiteral.builder()
+                          .setTypeDescriptor(arrayType)
+                          .setValueExpressions(
+                              isSingleElementShorthand
+                                  ? ImmutableList.of(defaultValue)
+                                  : ((ArrayLiteral) defaultValue).getValueExpressions())
+                          .build())
+                  .build();
+            }
+            return method;
           }
         });
   }

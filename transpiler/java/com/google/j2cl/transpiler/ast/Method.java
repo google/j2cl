@@ -38,6 +38,7 @@ public class Method extends Member implements MethodLike {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
+  @Nullable @Visitable Expression defaultValue;
   private final String jsDocDescription;
   @Nullable private Boolean isForcedJavaOverride;
 
@@ -48,6 +49,7 @@ public class Method extends Member implements MethodLike {
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
+      @Nullable Expression defaultValue,
       String jsDocDescription,
       @Nullable Boolean isForcedJavaOverride,
       boolean hasSuppressNothingToOverrideAnnotation) {
@@ -56,6 +58,7 @@ public class Method extends Member implements MethodLike {
     this.parameters.addAll(checkNotNull(parameters));
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
+    this.defaultValue = defaultValue;
     this.isForcedJavaOverride = isForcedJavaOverride;
     this.hasSuppressNothingToOverrideAnnotation = hasSuppressNothingToOverrideAnnotation;
   }
@@ -77,6 +80,11 @@ public class Method extends Member implements MethodLike {
 
   public void setBody(Block body) {
     this.body = checkNotNull(body);
+  }
+
+  @Nullable
+  public Expression getDefaultValue() {
+    return defaultValue;
   }
 
   @Override
@@ -179,6 +187,7 @@ public class Method extends Member implements MethodLike {
         .setStatements(Lists.newArrayList(this.getBody().getStatements()))
         .setJsDocDescription(this.getJsDocDescription())
         .setBodySourcePosition(this.getBody().getSourcePosition())
+        .setDefaultValue(this.getDefaultValue())
         .setSourcePosition(this.getSourcePosition())
         .setForcedJavaOverride(this.isForcedJavaOverride())
         .setSuppressNothingToOverrideAnnotation(this.hasSuppressNothingToOverrideAnnotation());
@@ -198,11 +207,18 @@ public class Method extends Member implements MethodLike {
     private MethodDescriptor methodDescriptor;
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
+    @Nullable private Expression defaultValue;
     private String jsDocDescription;
     private SourcePosition bodySourcePosition;
     private SourcePosition sourcePosition;
     @Nullable private Boolean isForcedJavaOverride;
     private boolean hasSuppressNothingToOverrideAnnotation;
+
+    @CanIgnoreReturnValue
+    public Builder setDefaultValue(@Nullable Expression defaultValue) {
+      this.defaultValue = defaultValue;
+      return this;
+    }
 
     @CanIgnoreReturnValue
     public Builder addParameters(int index, Variable... parameters) {
@@ -315,12 +331,17 @@ public class Method extends Member implements MethodLike {
               .build();
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       checkState(methodDescriptor.isDeclaration());
+      if (defaultValue != null) {
+        checkState(methodDescriptor.getEnclosingTypeDescriptor().isAnnotation());
+        checkState(!TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor()));
+      }
 
       return new Method(
           sourcePosition,
           methodDescriptor,
           parameters,
           body,
+          defaultValue,
           jsDocDescription,
           isForcedJavaOverride,
           hasSuppressNothingToOverrideAnnotation);
