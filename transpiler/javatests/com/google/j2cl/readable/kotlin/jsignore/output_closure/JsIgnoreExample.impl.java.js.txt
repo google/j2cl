@@ -7,9 +7,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @final
  */
 class JsIgnoreExample extends j_l_Object {
- 
+ /** @protected @nodts */
  constructor() {
-  JsIgnoreExample.$clinit();
   super();
   /**@type {number} @nodts*/
   this.f_exportedField__jsignore_JsIgnoreExample_ = 0;
@@ -25,7 +24,13 @@ class JsIgnoreExample extends j_l_Object {
   this.f_getterOnlyExposedProperty__jsignore_JsIgnoreExample_ = 0;
   /**@type {number} @nodts*/
   this.f_setterOnlyExposedProperty__jsignore_JsIgnoreExample_ = 0;
-  this.$ctor__jsignore_JsIgnoreExample__void();
+ }
+ /** @nodts @return {!JsIgnoreExample} */
+ static $create__() {
+  JsIgnoreExample.$clinit();
+  let $instance = new JsIgnoreExample();
+  $instance.$ctor__jsignore_JsIgnoreExample__void();
+  return $instance;
  }
  /** @nodts */
  $ctor__jsignore_JsIgnoreExample__void() {

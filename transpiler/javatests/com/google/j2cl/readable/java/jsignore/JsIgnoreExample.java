@@ -20,6 +20,8 @@ import jsinterop.annotations.JsType;
 
 @JsType
 public class JsIgnoreExample {
+  @JsIgnore
+  public JsIgnoreExample() {}
 
   public static void exportedFunction() {}
 
@@ -28,8 +30,7 @@ public class JsIgnoreExample {
 
   public static int exportedField = 10;
 
-  @JsIgnore
-  public static int notExportedField = 20;
+  @JsIgnore public static int notExportedField = 20;
 
   public static final Object CONSTNAME = new Object();
 }

@@ -4,11 +4,16 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class JsIgnoreExample extends j_l_Object {
- 
+ /** @protected @nodts */
  constructor() {
-  JsIgnoreExample.$clinit();
   super();
-  this.$ctor__jsignore_JsIgnoreExample__void();
+ }
+ /** @nodts @return {!JsIgnoreExample} */
+ static $create__() {
+  JsIgnoreExample.$clinit();
+  let $instance = new JsIgnoreExample();
+  $instance.$ctor__jsignore_JsIgnoreExample__void();
+  return $instance;
  }
  /** @nodts */
  $ctor__jsignore_JsIgnoreExample__void() {

@@ -19,7 +19,7 @@ import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsType
 
 @JsType
-class JsIgnoreExample {
+class JsIgnoreExample @JsIgnore constructor() {
   var exportedField: Int = 10
   @JsIgnore var notExportedField: Int = 20
   val CONSTNAME: Any = Object()
