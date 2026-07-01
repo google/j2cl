@@ -15,20 +15,12 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
-import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeVariable
-import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.narrowDown
 import com.google.j2cl.transpiler.backend.kotlin.ast.widenUp
-import com.google.j2cl.transpiler.backend.kotlin.ast.withNarrowestScopeOrNull
 import com.google.j2cl.transpiler.backend.kotlin.ast.withWidestScopeOrNull
 
 internal val MemberDescriptor.isEnumConstructor: Boolean
@@ -101,9 +93,20 @@ private fun MemberDescriptor.narrowDownVisibility(baseVisibility: KtVisibility):
   }
   // TODO(b/206898384): The next line alone describes the behaviour; the lines above just skip
   // trivial cases for performance reasons.
-  return baseVisibility
-    .narrowDown(computeReferencedKtVisibilities)
-    .widenUp(widestOverriddenVisibility)
+  val narrowedVisibility: KtVisibility =
+    baseVisibility.narrowDown(computeReferencedKtVisibilities).widenUp(widestOverriddenVisibility)
+
+  // If the narrowed visibility is narrower than the enclosing type declaration, use it.
+  // Otherwise, use the base visibility.
+  return if (
+    narrowedVisibility.hasNarrowerScopeThan(
+      enclosingTypeDescriptor.typeDeclaration.inferredKtVisibility
+    )
+  ) {
+    narrowedVisibility
+  } else {
+    baseVisibility
+  }
 }
 
 val MemberDescriptor.computeReferencedKtVisibilities: List<KtVisibility>
@@ -126,22 +129,4 @@ val MemberDescriptor.computeWidestOverriddenVisibility: KtVisibility?
       javaOverriddenMethodDescriptors.map { it.ktVisibility }.withWidestScopeOrNull()
     } else {
       null
-    }
-
-private val TypeDescriptor.inferredKtVisibility: KtVisibility?
-  get() =
-    when (this) {
-      is ArrayTypeDescriptor -> componentTypeDescriptor.inferredKtVisibility
-      is DeclaredTypeDescriptor ->
-        (listOf(typeDeclaration.ktVisibility) +
-            typeArgumentDescriptors.map { it.inferredKtVisibility })
-          .filterNotNull()
-          .withNarrowestScopeOrNull()
-      // TODO(b/206898384): For now we are interested primarily in narrowing down "regular" types,
-      // so we skip these exceptional cases in signatures here, which can in some cases cause
-      // infinite recursion. We may want to reconsider some of them as we go ahead.
-      is IntersectionTypeDescriptor,
-      is PrimitiveTypeDescriptor,
-      is TypeVariable,
-      is UnionTypeDescriptor -> null
     }

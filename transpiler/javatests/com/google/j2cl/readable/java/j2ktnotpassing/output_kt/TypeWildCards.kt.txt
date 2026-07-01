@@ -32,7 +32,7 @@ internal open class TypeWildCards {
  internal open class WithDependentBounds {
   companion object {
    @JvmStatic
-   internal fun testSetField(holder: Holder<*, *>) {
+   fun testSetField(holder: Holder<*, *>) {
     (holder as Holder<Event, Collection<*>>).observer_pp_j2ktnotpassing = Observer { e: Collection<out Event> ->
     }
    }

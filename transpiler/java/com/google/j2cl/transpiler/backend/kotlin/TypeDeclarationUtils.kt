@@ -18,6 +18,8 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.narrowDown
+import com.google.j2cl.transpiler.backend.kotlin.common.runIfNotNull
 
 // TODO(b/216796920): Remove when the bug is fixed.
 internal val TypeDeclaration.directlyDeclaredTypeParameterDescriptors: List<TypeVariable>
@@ -76,6 +78,12 @@ internal val TypeDeclaration.ktVisibility: KtVisibility
       hasInjectAnnotatedMethod -> KtVisibility.PUBLIC
       !useActualKtVisibility -> KtVisibility.PUBLIC
       else -> KtVisibility.from(visibility)
+    }
+
+internal val TypeDeclaration.inferredKtVisibility: KtVisibility
+  get() =
+    ktVisibility.runIfNotNull(enclosingTypeDeclaration) {
+      ktVisibility.narrowDown(it.inferredKtVisibility)
     }
 
 internal val TypeDeclaration.declaredKtVisibility: KtVisibility?

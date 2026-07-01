@@ -27,6 +27,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
+import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.withNarrowestScopeOrNull
 import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import kotlin.streams.asSequence
 
@@ -213,3 +215,21 @@ internal val TypeDescriptor.isCollection: Boolean
 
 private val collectionTypeDescriptors: Set<TypeDescriptor>
   get() = setOf(getTypeDescriptor("java.util.Collection"), getTypeDescriptor("java.util.Map"))
+
+internal val TypeDescriptor.inferredKtVisibility: KtVisibility?
+  get() =
+    when (this) {
+      is ArrayTypeDescriptor -> componentTypeDescriptor.inferredKtVisibility
+      is DeclaredTypeDescriptor ->
+        (listOf(typeDeclaration.inferredKtVisibility) +
+            typeArgumentDescriptors.map { it.inferredKtVisibility })
+          .filterNotNull()
+          .withNarrowestScopeOrNull()
+      // TODO(b/206898384): For now we are interested primarily in narrowing down "regular" types,
+      // so we skip these exceptional cases in signatures here, which can in some cases cause
+      // infinite recursion. We may want to reconsider some of them as we go ahead.
+      is IntersectionTypeDescriptor,
+      is PrimitiveTypeDescriptor,
+      is TypeVariable,
+      is UnionTypeDescriptor -> null
+    }
