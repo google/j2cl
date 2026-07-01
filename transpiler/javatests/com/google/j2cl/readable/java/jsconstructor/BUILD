@@ -10,11 +10,7 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/529376111): Uncomment when implicit constructors in non-public classes are translated
-    # as explicit in Kotlin.
-    # TODO(b/529841303): Uncomment when public constructors in internal classes are not translated
-    # as internal but public.
-    # generate_kt_web_readables = True,
+    generate_kt_web_readables = True,
     generate_wasm_externs = True,
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

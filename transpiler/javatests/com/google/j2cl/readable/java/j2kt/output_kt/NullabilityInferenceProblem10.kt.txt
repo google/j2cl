@@ -29,7 +29,7 @@ open class NullabilityInferenceProblem10 {
   fun get(): V
  }
  
- internal open class InNullMarked {
+ internal open class InNullMarked internal constructor() {
   companion object {
    @JvmStatic
    internal fun observeNullable_pp_j2kt(foo: Foo?): Future<Void?> {

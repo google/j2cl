@@ -27,7 +27,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 @WasAutoValue
-internal abstract class AutoValueWithExtensions {
+internal abstract class AutoValueWithExtensions internal constructor() {
  abstract fun getStringField(): String
  
  abstract fun getIntField(): Int

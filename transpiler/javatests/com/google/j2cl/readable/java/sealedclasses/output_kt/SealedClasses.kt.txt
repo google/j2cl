@@ -39,7 +39,7 @@ open class SealedClasses {
   
   abstract fun changeName(updatedName: String?)
   
-  class Dolphin: Mammal() {
+  class Dolphin public constructor(): Mammal() {
    override fun changeName(updatedName: String?) {}
   }
  }

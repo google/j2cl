@@ -53,10 +53,10 @@ open class LateInit<T: Any> {
   return this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  }
  
- private open inner class Inner {
+ private open inner class Inner private constructor() {
   private lateinit var unmarkedInnerField: String
   
-  private open inner class InnerInner {
+  private open inner class InnerInner private constructor() {
    private lateinit var unmarkedInnerInnerField: String
   }
  }

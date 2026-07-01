@@ -24,12 +24,12 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-internal open class TypeWildCards {
+internal open class TypeWildCards internal constructor() {
  internal open fun testContainer_pp_j2ktnotpassing() {
   val c: TypeWildCards.SomeContainer<out TypeWildCards.Content<*>>? = null
  }
  
- internal open class WithDependentBounds {
+ internal open class WithDependentBounds internal constructor() {
   companion object {
    @JvmStatic
    fun testSetField(holder: Holder<*, *>) {
@@ -46,7 +46,7 @@ internal open class TypeWildCards {
    fun on(events: C)
   }
   
-  internal open class Holder<E: Event, C: Collection<E>> {
+  internal open class Holder<E: Event, C: Collection<E>> internal constructor() {
    @JvmField
    internal var observer_pp_j2ktnotpassing: Observer<E, C>? = null
    
@@ -59,11 +59,11 @@ internal open class TypeWildCards {
   }
  }
  
- internal open inner class View<P: TypeWildCards.Presenter<*>>
+ internal open inner class View<P: TypeWildCards.Presenter<*>> internal constructor()
  
- internal open inner class Presenter<V: TypeWildCards.View<*>>
+ internal open inner class Presenter<V: TypeWildCards.View<*>> internal constructor()
  
- internal open inner class Content<T: Any>
+ internal open inner class Content<T: Any> internal constructor()
  
- internal open inner class SomeContainer<T: TypeWildCards.Content<T>>
+ internal open inner class SomeContainer<T: TypeWildCards.Content<T>> internal constructor()
 }

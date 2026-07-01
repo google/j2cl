@@ -1,0 +1,33 @@
+goog.module('jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor$impl');
+
+const PublicJsTypeWithPublicConstructor = goog.require('jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class PackagePrivateJsTypeWithPublicConstructor extends PublicJsTypeWithPublicConstructor {
+ 
+ constructor() {
+  PackagePrivateJsTypeWithPublicConstructor.$clinit();
+  super();
+  this.$ctor__jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor_PackagePrivateJsTypeWithPublicConstructor__void();
+ }
+ /** @nodts */
+ $ctor__jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor_PackagePrivateJsTypeWithPublicConstructor__void() {}
+ /** @nodts */
+ static $clinit() {
+  PackagePrivateJsTypeWithPublicConstructor.$clinit = () =>{};
+  PackagePrivateJsTypeWithPublicConstructor.$loadModules();
+  PublicJsTypeWithPublicConstructor.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PackagePrivateJsTypeWithPublicConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PackagePrivateJsTypeWithPublicConstructor, 'jsconstructor.JsConstructorClass$PublicJsTypeWithPublicConstructor$PackagePrivateJsTypeWithPublicConstructor');
+
+exports = PackagePrivateJsTypeWithPublicConstructor;
+
+//# sourceMappingURL=JsConstructorClass$PublicJsTypeWithPublicConstructor$PackagePrivateJsTypeWithPublicConstructor.js.map

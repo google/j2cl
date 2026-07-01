@@ -24,7 +24,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 
 open class DefinitelyNotNull {
- internal open class Ordering<T> {
+ internal open class Ordering<T> internal constructor() {
   internal open fun <S: T> reverse_pp_j2ktnotpassing(): Ordering<S> {
    throw RuntimeException()
   }

@@ -130,11 +130,15 @@ internal data class Environment(
   /** Returns Kotlin type visibility. */
   fun ktVisibility(typeDeclaration: TypeDeclaration): KtVisibility = typeDeclaration.ktVisibility
 
+  /**
+   * Returns whether the given type needs an explicit primary constructor.
+   *
+   * In Java, implicit constructors have visibility of the enclosing type, but in Kotlin, they have
+   * public visibility. Therefore, when the enclosing type has a non-public visibility, the
+   * visibility of the constructor needs to be explicitly set in the source code.
+   */
   internal fun needExplicitPrimaryConstructor(type: Type): Boolean =
-    type.isClass &&
-      !type.hasConstructors &&
-      ktVisibility(type.declaration)
-        .hasWiderScopeThan(ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor))
+    type.isClass && !type.hasConstructors && !type.declaration.visibility.isPublic
 
   /**
    * Inferred visibility, which does not require explicit visibility modifier in the source code.

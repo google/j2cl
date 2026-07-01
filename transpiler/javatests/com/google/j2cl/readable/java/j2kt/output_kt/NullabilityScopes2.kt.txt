@@ -29,8 +29,8 @@ import kotlin.Suppress
 import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 
-internal open class NullabilityScopes2 {
- internal open class NullMarkedScope {
+internal open class NullabilityScopes2 internal constructor() {
+ internal open class NullMarkedScope internal constructor() {
   companion object {
    @JvmStatic
    fun <E> toList(): Collector<E, *, List<E>> {
@@ -43,7 +43,7 @@ internal open class NullabilityScopes2 {
   }
  }
  
- internal open class NonNullMarkedScope<T: Recursive<T>> {
+ internal open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
   open fun flatten(recursive: Recursive<T>?): List<Any?>? {
    return recursive!!.toList().stream().map<List<Any?>?>(
     Function { arg0: Recursive<T>? ->

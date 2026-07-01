@@ -23,7 +23,7 @@ import kotlin.Any
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
-internal open class UnsatisfiedTypeBounds {
+internal open class UnsatisfiedTypeBounds internal constructor() {
  companion object {
   @JvmStatic
   internal fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: Helper<T>, foo: Foo<out T>): T {
@@ -45,11 +45,11 @@ internal open class UnsatisfiedTypeBounds {
  
  internal interface Command
  
- internal open class FooCommand: Foo<FooCommand>, Command {
+ internal open class FooCommand internal constructor(): Foo<FooCommand>, Command {
   override fun get(): FooCommand {
    return this
   }
  }
  
- internal class Helper<T: Any>
+ internal class Helper<T: Any> internal constructor()
 }

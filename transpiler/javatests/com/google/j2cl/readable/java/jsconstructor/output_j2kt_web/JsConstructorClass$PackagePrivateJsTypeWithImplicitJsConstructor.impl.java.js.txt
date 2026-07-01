@@ -4,11 +4,16 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class PackagePrivateJsTypeWithImplicitJsConstructor extends j_l_Object {
- 
+ /** @protected @nodts */
  constructor() {
-  PackagePrivateJsTypeWithImplicitJsConstructor.$clinit();
   super();
-  this.$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void();
+ }
+ /** @nodts @return {!PackagePrivateJsTypeWithImplicitJsConstructor} */
+ static $create__() {
+  PackagePrivateJsTypeWithImplicitJsConstructor.$clinit();
+  let $instance = new PackagePrivateJsTypeWithImplicitJsConstructor();
+  $instance.$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void();
+  return $instance;
  }
  /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void() {

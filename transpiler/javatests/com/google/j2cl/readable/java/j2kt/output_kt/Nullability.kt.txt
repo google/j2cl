@@ -43,7 +43,7 @@ open class Nullability {
   }
  }
  
- internal open class NullMarkedClass {
+ internal open class NullMarkedClass internal constructor() {
   internal open fun test_pp_j2kt(s: String) {
    val c: Consumer<*> = Consumer { ss: String? ->
    }
@@ -69,7 +69,7 @@ open class Nullability {
    }
   }
   
-  internal open inner class Holder<T: Any> {
+  internal open inner class Holder<T: Any> internal constructor() {
    internal open fun acceptNullableConsumer_pp_j2kt(consumer: Consumer<T?>) {}
   }
  }

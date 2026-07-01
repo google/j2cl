@@ -27,7 +27,7 @@ import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.jvm.JvmStatic
 
-internal open class VarargOverloads {
+internal open class VarargOverloads internal constructor() {
  internal open class NewInstanceOverload {
   internal constructor(foo: Int, vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
@@ -90,7 +90,7 @@ internal open class VarargOverloads {
   }
  }
  
- internal open class MethodCallOverload {
+ internal open class MethodCallOverload internal constructor() {
   internal open fun method_pp_j2kt(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -106,12 +106,12 @@ internal open class VarargOverloads {
   }
  }
  
- internal open class MethodCallOverloadInSubtype {
+ internal open class MethodCallOverloadInSubtype internal constructor() {
   internal open fun method_pp_j2kt(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
   
-  internal open class Subtype: MethodCallOverloadInSubtype() {
+  internal open class Subtype internal constructor(): MethodCallOverloadInSubtype() {
    internal open fun method_pp_j2kt(vararg strings: String) {
     val strings_1: Array<String> = strings as Array<String>
    }
@@ -124,7 +124,7 @@ internal open class VarargOverloads {
   }
  }
  
- internal open class MethodCallVarargAndArrayArgs {
+ internal open class MethodCallVarargAndArrayArgs internal constructor() {
   internal open fun method_pp_j2kt(vararg objects: Any) {
    val objects_1: Array<Any> = objects as Array<Any>
   }
@@ -136,7 +136,7 @@ internal open class VarargOverloads {
   }
  }
  
- internal open class StaticMethodOverloadSubtypeCallTarget {
+ internal open class StaticMethodOverloadSubtypeCallTarget internal constructor() {
   internal open fun test_pp_j2kt() {
    StaticMethodOverloadSubtypeCallTarget.method_pp_j2kt()
    StaticMethodOverloadSubtypeCallTarget.generalizedInSubtype_pp_j2kt()
@@ -157,7 +157,7 @@ internal open class VarargOverloads {
    }
   }
   
-  internal open class Subtype: StaticMethodOverloadSubtypeCallTarget() {
+  internal open class Subtype internal constructor(): StaticMethodOverloadSubtypeCallTarget() {
    companion object {
     @JvmStatic
     internal fun generalizedInSubtype_pp_j2kt(vararg objects: Any) {

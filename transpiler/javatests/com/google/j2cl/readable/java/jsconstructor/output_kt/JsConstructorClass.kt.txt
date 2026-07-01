@@ -207,7 +207,7 @@ open class JsConstructorClass {
  }
  
  @JsType
- internal open class PackagePrivateJsTypeWithImplicitJsConstructor {
+ internal open class PackagePrivateJsTypeWithImplicitJsConstructor internal constructor() {
   internal open inner class SubclassWithImplicitPrivateConstructor constructor(): PackagePrivateJsTypeWithImplicitJsConstructor()
  }
  

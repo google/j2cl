@@ -43,7 +43,7 @@ open class SmartCasts {
  }
  
  internal open fun testThisReferenceInInitializer_pp_j2kt() {
-  open class Local<T: Local<T>> {
+  open class Local<T: Local<T>> internal constructor() {
    @JvmField
    internal var fieldInitializedInInitializer_pp_j2kt: Any
    

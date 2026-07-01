@@ -31,7 +31,7 @@ class VisibilityModifiers {
   }
  }
  
- internal open class PackagePrivate {
+ internal open class PackagePrivate internal constructor() {
   open fun publicMethod() {}
   
   internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
@@ -40,7 +40,7 @@ class VisibilityModifiers {
   
   private fun privateMethod() {}
   
-  internal open class Public
+  internal open class Public internal constructor()
  }
  
  class Parameterized {

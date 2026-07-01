@@ -44,7 +44,7 @@ class VisibilityModifiers {
   }
  }
  
- internal open class PackagePrivate {
+ internal open class PackagePrivate internal constructor() {
   open fun publicMethod() {}
   
   internal open fun packagePrivateMethod_pp_j2kt() {}
@@ -55,10 +55,10 @@ class VisibilityModifiers {
   
   open fun publicWithPackagePrivateParameter(param: PackagePrivate) {}
   
-  internal open class Public
+  internal open class Public internal constructor()
  }
  
- protected open class Protected {
+ protected open class Protected protected constructor() {
   open fun publicMethod() {}
   
   internal open fun packagePrivateMethod_pp_j2kt() {}
@@ -68,7 +68,7 @@ class VisibilityModifiers {
   private fun privateMethod() {}
  }
  
- private open class Private {
+ private open class Private private constructor() {
   open fun publicMethod() {}
   
   internal open fun packagePrivateMethod_pp_j2kt() {}
@@ -94,7 +94,7 @@ class VisibilityModifiers {
  
  open class PublicExtendsPackagePrivateWithJ2ktPublic: PackagePrivateWithJ2ktPublic()
  
- internal abstract class PackagePrivateCollection: MutableCollectionJvm<PackagePrivate> {
+ internal abstract class PackagePrivateCollection internal constructor(): MutableCollectionJvm<PackagePrivate> {
   abstract override fun contains(o: PackagePrivate): Boolean
  }
  
@@ -103,9 +103,9 @@ class VisibilityModifiers {
  }
  
  @WasAutoValue
- internal abstract class Value {
+ internal abstract class Value internal constructor() {
   @javaemul.lang.annotations.WasAutoValue.Builder
-  internal abstract class Builder {
+  internal abstract class Builder internal constructor() {
    internal abstract fun build_pp_j2kt(): Value
   }
  }
@@ -118,9 +118,9 @@ class VisibilityModifiers {
  
  class EnumConverter: AutoEnumConverter_EnumConverter()
  
- internal abstract class NotAutoConverter_Converter
+ internal abstract class NotAutoConverter_Converter internal constructor()
  
- internal abstract class NotAutoEnumConverter_EnumConverter
+ internal abstract class NotAutoEnumConverter_EnumConverter internal constructor()
  
  open class VisibilityWarningsSuppressed {
   class NonFinal {
@@ -158,7 +158,7 @@ class VisibilityModifiers {
     open inner class Public
    }
    
-   open class Protected {
+   open class Protected public constructor() {
     open fun publicMethod() {}
     
     internal open fun packagePrivateMethod_pp_j2kt() {}
@@ -256,7 +256,7 @@ class VisibilityModifiers {
     inner class Public
    }
    
-   class Protected {
+   class Protected public constructor() {
     fun publicMethod() {}
     
     internal fun packagePrivateMethod_pp_j2kt() {}
