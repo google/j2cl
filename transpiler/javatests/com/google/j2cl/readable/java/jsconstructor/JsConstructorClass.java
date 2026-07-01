@@ -225,6 +225,7 @@ public class JsConstructorClass {
     }
   }
 
+  // Repro for b/529376111
   @JsType
   static class PackagePrivateJsTypeWithImplicitJsConstructor {
     // implicit package-private constructor, which is not implicitly a JsConstructor.
@@ -232,6 +233,18 @@ public class JsConstructorClass {
     class SubclassWithImplicitPrivateConstructor
         extends PackagePrivateJsTypeWithImplicitJsConstructor {
       private SubclassWithImplicitPrivateConstructor() {}
+    }
+  }
+
+  // Repro for b/529841303
+  @JsType
+  public static class PublicJsTypeWithPublicConstructor {
+    public PublicJsTypeWithPublicConstructor() {}
+
+    @JsType
+    static class PackagePrivateJsTypeWithPublicConstructor
+        extends PublicJsTypeWithPublicConstructor {
+      public PackagePrivateJsTypeWithPublicConstructor() {}
     }
   }
 }

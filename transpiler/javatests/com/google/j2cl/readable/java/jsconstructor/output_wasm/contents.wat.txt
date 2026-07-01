@@ -120,6 +120,18 @@
 (global $$class@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $jsconstructor.JsConstructorClass.vtable (ref (exact $jsconstructor.JsConstructorClass.vtable))
  (struct.new $jsconstructor.JsConstructorClass.vtable
   (ref.null extern)
@@ -295,6 +307,24 @@
  (struct.new $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.vtable
   (ref.null extern)
   (ref.func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor.vtable (ref (exact $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor.vtable))
+ (struct.new $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor.vtable
+  (global.get $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.vtable (ref (exact $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.vtable))
+ (struct.new $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.vtable
+  (global.get $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -838,16 +868,16 @@
 ;;; PackagePrivateJsTypeWithImplicitJsConstructor PackagePrivateJsTypeWithImplicitJsConstructor.$create()
 (func $$create__@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor
  (result (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
  (local $$instance (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (local.set $$instance (struct.new_desc $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor (global.get $itable.empty) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (return (local.get $$instance))
  )
 )
@@ -855,27 +885,27 @@
 ;;; void PackagePrivateJsTypeWithImplicitJsConstructor.$ctor()
 (func $$ctor__void_$p_jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor
  (param $this (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void PackagePrivateJsTypeWithImplicitJsConstructor.$clinit()
 (func $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (if (global.get $$class-initialized@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (global.set $$class-initialized@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:229:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:230:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -906,6 +936,100 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor)
+
+;;; PublicJsTypeWithPublicConstructor PublicJsTypeWithPublicConstructor.$create()
+(func $$create__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ (result (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (return (call $$create_$private__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor ))
+ )
+)
+
+;;; PublicJsTypeWithPublicConstructor PublicJsTypeWithPublicConstructor.$create_$private()
+(func $$create_$private__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ (result (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+ (local $$instance (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (local.set $$instance (struct.new_desc $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (global.get $itable.empty) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (call $$ctor__void_$p_jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PublicJsTypeWithPublicConstructor.$ctor()
+(func $$ctor__void_$p_jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ (param $this (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:47
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; PublicJsTypeWithPublicConstructor PublicJsTypeWithPublicConstructor.<init>()
+(func $js_export_<init>__jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ (result (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:242:11
+  (return (call $$create_$private__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor ))
+ )
+)
+
+;;; void PublicJsTypeWithPublicConstructor.$clinit()
+(func $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:241:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:241:22
+  (if (global.get $$class-initialized@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:241:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:241:22
+  (global.set $$class-initialized@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:241:22
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> PublicJsTypeWithPublicConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor)))
+   (then
+    (return (global.get $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+   )
+  )
+  (global.set $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsconstructo...|__java_lang_String_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ )
+)
+
+;;; Class<?> PublicJsTypeWithPublicConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor))
+ (local.set $this (ref.cast (ref $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor)
 
 ;;; B B.$create(int arg0)
 (func $$create__int@jsconstructor.JsConstructorClass.B
@@ -1724,14 +1848,14 @@
 (func $$create__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor
  (param $$outer_this (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor))
  (result (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:234:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:235:14
  (local $$instance (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:234:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:235:14
   (local.set $$instance (struct.new_desc $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor (global.get $itable.empty) (i32.const 0) (ref.null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor) (global.get $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:234:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:235:14
   (call $$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void_$p_jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor_SubclassWithImplicitPrivateConstructor@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:234:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:235:14
   (return (local.get $$instance))
  )
 )
@@ -1740,29 +1864,29 @@
 (func $$ctor__jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor__void_$p_jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor_SubclassWithImplicitPrivateConstructor@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor
  (param $this (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor))
  (param $$outer_this (ref null $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:234:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:235:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:232:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:233:10
   (struct.set $jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor $$outer_this@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:234:55
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:235:55
   (call $$ctor__void_$p_jsconstructor_JsConstructorClass_PackagePrivateJsTypeWithImplicitJsConstructor@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SubclassWithImplicitPrivateConstructor.$clinit()
 (func $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:232:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:233:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:232:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:233:10
   (if (global.get $$class-initialized@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:232:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:233:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:232:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:233:10
   (global.set $$class-initialized@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:232:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:233:10
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor )
  )
 )
@@ -1793,6 +1917,100 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PackagePrivateJsTypeWithImplicitJsConstructor.SubclassWithImplicitPrivateConstructor)
+
+;;; PackagePrivateJsTypeWithPublicConstructor PackagePrivateJsTypeWithPublicConstructor.$create()
+(func $$create__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ (result (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (return (call $$create_$private__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor ))
+ )
+)
+
+;;; PackagePrivateJsTypeWithPublicConstructor PackagePrivateJsTypeWithPublicConstructor.$create_$private()
+(func $$create_$private__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ (result (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+ (local $$instance (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (local.set $$instance (struct.new_desc $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor (global.get $itable.empty) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (call $$ctor__void_$p_jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor_PackagePrivateJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PackagePrivateJsTypeWithPublicConstructor.$ctor()
+(func $$ctor__void_$p_jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor_PackagePrivateJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ (param $this (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:57
+  (call $$ctor__void_$p_jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; PackagePrivateJsTypeWithPublicConstructor PackagePrivateJsTypeWithPublicConstructor.<init>()
+(func $js_export_<init>__jsconstructor_JsConstructorClass_PublicJsTypeWithPublicConstructor_PackagePrivateJsTypeWithPublicConstructor@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ (result (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:247:13
+  (return (call $$create_$private__@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor ))
+ )
+)
+
+;;; void PackagePrivateJsTypeWithPublicConstructor.$clinit()
+(func $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:245:17
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:245:17
+  (if (global.get $$class-initialized@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:245:17
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:245:17
+  (global.set $$class-initialized@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:245:17
+  (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor )
+ )
+)
+
+;;; Class<T> PackagePrivateJsTypeWithPublicConstructor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor)))
+   (then
+    (return (global.get $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+   )
+  )
+  (global.set $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsconstructo...|__java_lang_String_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor )))
+  (return (global.get $$class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ )
+)
+
+;;; Class<?> PackagePrivateJsTypeWithPublicConstructor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor))
+ (local.set $this (ref.cast (ref $jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsconstructor.JsConstructorClass.PublicJsTypeWithPublicConstructor.PackagePrivateJsTypeWithPublicConstructor)
 
 ;;; C C.$create(int arg0)
 (func $$create__int@jsconstructor.JsConstructorClass.C

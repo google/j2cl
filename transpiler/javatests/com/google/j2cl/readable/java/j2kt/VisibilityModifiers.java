@@ -33,8 +33,7 @@ public final class VisibilityModifiers {
 
     public void publicWithPackagePrivateParameter(PackagePrivate param) {}
 
-    // TODO(b/206898384): Re-enable once J2KT narrows visibility from referenced types.
-    // public void publicWithTransitivePackagePrivateParameter(PackagePrivate.Public param) {}
+    public void publicWithTransitivePackagePrivateParameter(PackagePrivate.Public param) {}
 
     public PackagePrivate publicReturnsPackagePrivate() {
       throw new UnsupportedOperationException();
@@ -54,6 +53,8 @@ public final class VisibilityModifiers {
     protected void protectedMethod() {}
 
     private void privateMethod() {}
+
+    public void publicWithPackagePrivateParameter(PackagePrivate param) {}
 
     static class Public {}
   }
