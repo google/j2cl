@@ -151,6 +151,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Option(name = "-objCNamePrefix", hidden = true)
   String objCNamePrefix = "J2kt";
 
+  @Option(
+      name = "-kotlinNativeFrameworkHeaderPath",
+      metaVar = "<string>",
+      usage = "Specifies the Kotlin/Native framework header to include in J2ObjC compat headers.",
+      hidden = true)
+  String kotlinNativeFrameworkHeaderPath = null;
+
   private J2clCommandLineRunner() {
     super("j2cl");
   }
@@ -216,6 +223,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setFriendKlibs(ImmutableList.of())
         .setEnableKlibs(false)
         .setObjCNamePrefix("J2kt")
+        .setKotlinNativeFrameworkHeaderPath(kotlinNativeFrameworkHeaderPath)
         .build(problems);
   }
 

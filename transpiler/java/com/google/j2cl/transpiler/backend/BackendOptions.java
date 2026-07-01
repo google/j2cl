@@ -54,4 +54,7 @@ public interface BackendOptions {
   boolean isNullMarkedSupported();
 
   String getObjCNamePrefix();
+
+  @Nullable
+  String getKotlinNativeFrameworkHeaderPath();
 }

@@ -183,6 +183,13 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-objCNamePrefix", hidden = true)
   String objCNamePrefix = "J2kt";
 
+  @Option(
+      name = "-kotlinNativeFrameworkHeaderPath",
+      metaVar = "<string>",
+      usage = "Specifies the Kotlin/Native framework header to include in J2ObjC compat headers.",
+      hidden = true)
+  String kotlinNativeFrameworkHeaderPath = null;
+
   @Override
   protected void run() {
     problems.abortIfCancelled();
@@ -243,6 +250,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setDependencyKlibs(dependencyKlibs)
         .setFriendKlibs(friendKlibs)
         .setObjCNamePrefix(objCNamePrefix)
+        .setKotlinNativeFrameworkHeaderPath(kotlinNativeFrameworkHeaderPath)
         .build(problems);
   }
 

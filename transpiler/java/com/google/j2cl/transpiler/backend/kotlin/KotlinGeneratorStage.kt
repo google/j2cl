@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.backend.common.SourceMapGenerator
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import java.lang.Boolean.getBoolean
+import java.nio.file.Path
 import java.util.Collections
 
 private val isJ2ObjCInteropEnabled: Boolean =
@@ -50,6 +51,8 @@ class KotlinGeneratorStage(
   private val problems: Problems,
   private val objCNamePrefix: String,
   private val shouldGenerateReadableSourceMaps: Boolean,
+  private val kotlinNativeFrameworkHeaderPath: String? = null,
+  private val sourceGenPath: Path,
 ) {
 
   /** Generate outputs for a library. */
@@ -94,10 +97,26 @@ class KotlinGeneratorStage(
 
   /** Generate ObjC outputs for a compilation unit. */
   private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
-    val source = J2ObjCCompatSources(objCNamePrefix).source(compilationUnit)
+    val source =
+      J2ObjCCompatSources(objCNamePrefix, checkNotNull(kotlinNativeFrameworkHeaderPath))
+        .source(compilationUnit)
     if (source.isNotEmpty()) {
-      val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
-      output.write(path, source.buildString())
+      val fqnPath = compilationUnit.packageRelativePath.replace(".java", ".h")
+      output.write(fqnPath, source.buildString())
+
+      if (!fqnPath.contains('/')) {
+        return
+      }
+
+      val sourceGenPrefix = sourceGenPath.fileName.toString() + "/"
+      val originalPathHeader =
+        compilationUnit.fileInfo
+          .originalPath()
+          .substringAfter(sourceGenPrefix)
+          .replace(".java", ".h")
+      if (originalPathHeader != fqnPath) {
+        output.write(originalPathHeader, "#import \"$fqnPath\"\n")
+      }
     }
   }
 

@@ -625,7 +625,9 @@ public enum Backend {
               options.getOutput(),
               problems,
               /* objCNamePrefix= */ options.getObjCNamePrefix(),
-              /* shouldGenerateReadableSourceMaps= */ options.getEmitReadableSourceMap())
+              /* shouldGenerateReadableSourceMaps= */ options.getEmitReadableSourceMap(),
+              /* kotlinNativeFrameworkHeaderPath= */ options.getKotlinNativeFrameworkHeaderPath(),
+              /* sourceGenPath= */ options.getSourceGenPath())
           .generateOutputs(library);
     }
 

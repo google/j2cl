@@ -57,6 +57,10 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
   public abstract ImmutableList<String> getStrippedAnnotationNames();
 
   @Override
+  @Nullable
+  public abstract String getKotlinNativeFrameworkHeaderPath();
+
+  @Override
   public Predicate<String> getSupportedAnnotationFilter() {
     return getBackend()::isSupportedAnnotation;
   }
@@ -126,6 +130,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     public abstract Builder setStrippedAnnotationNames(List<String> annotations);
 
     public abstract Builder setObjCNamePrefix(String objCNamePrefix);
+
+    public abstract Builder setKotlinNativeFrameworkHeaderPath(@Nullable String header);
 
     abstract ImmutableList<FileInfo> getSources();
 
