@@ -1,3 +1,4 @@
+load("@protobuf//bazel:proto_library.bzl", "proto_library")
 load("//third_party/java/j2cl_proto:j2cl_proto_library.bzl", "j2cl_proto_library")
 load(
     "//tools/javatests/com/google/j2cl/tools/rta:rta_test.bzl",
