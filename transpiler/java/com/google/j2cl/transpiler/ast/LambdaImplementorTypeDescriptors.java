@@ -40,7 +40,7 @@ public final class LambdaImplementorTypeDescriptors {
       int uniqueId,
       boolean capturesEnclosingInstance,
       List<TypeVariable> typeParameters,
-      boolean extendsAbstractAdaptor) {
+      boolean extendsCommonAdaptor) {
 
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
     // those types be declared type descriptors.
@@ -51,7 +51,7 @@ public final class LambdaImplementorTypeDescriptors {
             : Stream.of((DeclaredTypeDescriptor) typeDescriptor);
 
     ImmutableList<DeclaredTypeDescriptor> interfaceTypeDescriptors =
-        extendsAbstractAdaptor
+        extendsCommonAdaptor
             ? interfaceDescriptorsStream.collect(toImmutableList())
             : interfaceDescriptorsStream
                 .map(LambdaImplementorTypeDescriptors::sanitizeDescriptor)
@@ -64,7 +64,7 @@ public final class LambdaImplementorTypeDescriptors {
             uniqueId,
             capturesEnclosingInstance,
             typeParameters,
-            extendsAbstractAdaptor);
+            extendsCommonAdaptor);
 
     return implementorTypeDeclaration.toDescriptor(typeParameters);
   }
@@ -114,7 +114,7 @@ public final class LambdaImplementorTypeDescriptors {
       int uniqueId,
       boolean capturesEnclosingInstance,
       List<TypeVariable> typeParameters,
-      boolean extendsAbstractAdaptor) {
+      boolean extendsCommonAdaptor) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
     ImmutableList<String> classComponents =
@@ -124,7 +124,7 @@ public final class LambdaImplementorTypeDescriptors {
     return TypeDeclaration.builder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setSuperTypeDescriptorFactory(
-            () -> getImplementorSupertype(interfaceTypeDescriptors, extendsAbstractAdaptor))
+            () -> getImplementorSupertype(interfaceTypeDescriptors, extendsCommonAdaptor))
         .setClassComponents(classComponents)
         .setDeclaredMethodDescriptorsFactory(
             implementorTypeDeclaration ->
@@ -140,9 +140,8 @@ public final class LambdaImplementorTypeDescriptors {
   }
 
   private static DeclaredTypeDescriptor getImplementorSupertype(
-      List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
-      boolean extendsCommonAdaptorSupertype) {
-    if (!extendsCommonAdaptorSupertype) {
+      List<DeclaredTypeDescriptor> interfaceTypeDescriptors, boolean extendsCommonAdaptor) {
+    if (!extendsCommonAdaptor) {
       return TypeDescriptors.get().javaLangObject;
     }
     // It is ok to choose any of its functional interfaces to create a supertype.

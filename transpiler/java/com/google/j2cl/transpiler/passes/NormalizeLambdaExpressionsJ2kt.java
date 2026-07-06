@@ -25,7 +25,7 @@ public class NormalizeLambdaExpressionsJ2kt
     extends ImplementLambdaExpressionsViaImplementorClasses {
 
   public NormalizeLambdaExpressionsJ2kt() {
-    super(/* extendAbstractAdaptorClass= */ false);
+    super(/* extendsCommonAdaptor= */ false);
   }
 
   @Override

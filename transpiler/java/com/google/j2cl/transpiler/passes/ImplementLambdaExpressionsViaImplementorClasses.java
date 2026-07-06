@@ -50,15 +50,14 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
   private int lambdaCounterPerCompilationUnit = 1;
 
-  private final boolean extendAbstractLambdaAdaptorClass;
+  private final boolean extendsCommonAdaptor;
 
   public ImplementLambdaExpressionsViaImplementorClasses() {
     this(true);
   }
 
-  protected ImplementLambdaExpressionsViaImplementorClasses(
-      boolean extendAbstractLambdaAdaptorClass) {
-    this.extendAbstractLambdaAdaptorClass = extendAbstractLambdaAdaptorClass;
+  protected ImplementLambdaExpressionsViaImplementorClasses(boolean extendsCommonAdaptor) {
+    this.extendsCommonAdaptor = extendsCommonAdaptor;
   }
 
   protected boolean shouldRewrite(FunctionExpression functionExpression) {
@@ -94,7 +93,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
                     lambdaCounterPerCompilationUnit++,
                     capturesEnclosingInstance,
                     enclosingTypeVariables,
-                    extendAbstractLambdaAdaptorClass);
+                    extendsCommonAdaptor);
 
             // new A$$LambdaImplementor(...)
             return NewInstance.builder()
