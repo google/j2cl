@@ -53,13 +53,20 @@ private val EXCLUDED_VISIBILITY_PACKAGES: Set<String> =
 
   )
 
+/** List containing package prefixes for which J2KT should not translate actual visibility. */
+// Keep this list small as lookup time is linear.
+private val EXCLUDE_VISIBILITY_PACKAGE_PREFIXES: List<String> =
+  listOf(
+  )
+
 private val TypeDeclaration.useActualKtVisibilityForPackage: Boolean
   get() = packageName.let { packageName ->
     packageName in ACTUAL_VISIBILITY_PACKAGES ||
       packageName.plus(".").let { packageNamePlusDot ->
         (emitActualVisibility ||
           ACTUAL_VISIBILITY_PACKAGE_PREFIXES.any { packageNamePlusDot.startsWith(it) }) &&
-          packageName !in EXCLUDED_VISIBILITY_PACKAGES
+          packageName !in EXCLUDED_VISIBILITY_PACKAGES &&
+          EXCLUDE_VISIBILITY_PACKAGE_PREFIXES.none { packageNamePlusDot.startsWith(it) }
       }
   }
 
