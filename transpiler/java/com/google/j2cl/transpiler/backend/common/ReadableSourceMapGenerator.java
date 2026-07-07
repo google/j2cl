@@ -54,8 +54,7 @@ public final class ReadableSourceMapGenerator {
       SourcePosition outputSourcePosition = checkNotNull(entry.getKey());
       List<String> sourceLines = sourceLinesByFileName.get(sourcePosition.getFileName());
       if (sourceLines == null) {
-        // ReadableSourceMapGenerator doesn't work over multiple files so inlining is not
-        // handled.
+        // ReadableSourceMapGenerator doesn't work cross-library.
         continue;
       }
 
@@ -96,6 +95,15 @@ public final class ReadableSourceMapGenerator {
     String fragment = lines.get(startLine);
     int endColumn = sourcePosition.getEndFilePosition().getColumn();
     int startColumn = sourcePosition.getStartFilePosition().getColumn();
+
+    // If there's a trailing newline then you could, in theory, refer to that final line in a source
+    // position. However, lines doesn't include an empty string for that trailing newline, so we
+    // need to adjust the endColumn to be -1 on the last line.
+    if (endLine == lines.size() && endColumn == 0) {
+      endLine--;
+      endColumn = -1;
+    }
+
     if (endLine != startLine || endColumn == -1) {
       StringBuilder content =
           new StringBuilder(trimTrailingWhitespace(fragment.substring(startColumn)));
@@ -110,9 +118,11 @@ public final class ReadableSourceMapGenerator {
           content.append("\n").append(trimTrailingWhitespace(lines.get(line)));
         }
       }
-      content
-          .append("\n")
-          .append(trimTrailingWhitespace(lines.get(endLine).substring(0, endColumn)));
+      fragment = lines.get(endLine);
+      if (endColumn == -1) {
+        endColumn = fragment.length();
+      }
+      content.append("\n").append(trimTrailingWhitespace(fragment.substring(0, endColumn)));
       return "[" + content + "]";
     }
 

@@ -1,0 +1,189 @@
+[/*
+ * Copyright 2026 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package sourcemap
+
+inline fun inlineExpression(a: Int, b: Int): Int {
+  val sum = a + b
+  return sum
+}
+
+inline fun inlineWithLambda(a: Int, block: (Int) -> Int): Int {
+  val v = a + 1
+  return block(v)
+}] => [InlineFunctionsKt]
+[/*
+ * Copyright 2026 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package sourcemap
+
+inline fun inlineExpression(a: Int, b: Int): Int {
+  val sum = a + b
+  return sum
+}
+
+inline fun inlineWithLambda(a: Int, block: (Int) -> Int): Int {
+  val v = a + 1
+  return block(v)
+}] => [constructor]
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [super();] "sourcemap.InlineFunctionsKt.<synthetic: ctor_js>"
+[/*
+ * Copyright 2026 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package sourcemap
+
+inline fun inlineExpression(a: Int, b: Int): Int {
+  val sum = a + b
+  return sum
+}
+
+inline fun inlineWithLambda(a: Int, block: (Int) -> Int): Int {
+  val v = a + 1
+  return block(v)
+}] => [$create__]
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [InlineFunctionsKt.$clinit();] "sourcemap.InlineFunctionsKt.<synthetic: ctor_create>"
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [let $instance = new InlineFunctionsKt();] "sourcemap.InlineFunctionsKt.<synthetic: ctor_create>"
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [$instance.$ctor__sourcemap_InlineFunctionsKt__void();] "sourcemap.InlineFunctionsKt.<synthetic: ctor_create>"
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [return $instance;] "sourcemap.InlineFunctionsKt.<synthetic: ctor_create>"
+[/*
+ * Copyright 2026 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package sourcemap
+
+inline fun inlineExpression(a: Int, b: Int): Int {
+  val sum = a + b
+  return sum
+}
+
+inline fun inlineWithLambda(a: Int, block: (Int) -> Int): Int {
+  val v = a + 1
+  return block(v)
+}] => [$ctor__sourcemap_InlineFunctionsKt__void]
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [this.$ctor__java_lang_Object__void();] "sourcemap.InlineFunctionsKt.<init>"
+[inlineExpression] => [m_inlineExpression__int__int__int]
+[a: Int] => [a] "a"
+[b: Int] => [b] "b"
+[inlineExpression] => [InlineFunctionsKt.$clinit();] "sourcemap.InlineFunctionsKt.inlineExpression"
+[val sum = a + b] => [let sum = a + b | 0;] "sourcemap.InlineFunctionsKt.inlineExpression"
+[val sum = a + b] => [sum] "sum"
+[return sum] => [return sum;] "sourcemap.InlineFunctionsKt.inlineExpression"
+[inlineWithLambda] => [m_inlineWithLambda__int__kotlin_jvm_functions_Function1__int]
+[a: Int] => [a] "a"
+[block: (Int) -> Int] => [block] "block"
+[inlineWithLambda] => [InlineFunctionsKt.$clinit();] "sourcemap.InlineFunctionsKt.inlineWithLambda"
+[val v = a + 1] => [let v = a + 1 | 0;] "sourcemap.InlineFunctionsKt.inlineWithLambda"
+[val v = a + 1] => [v] "v"
+[return block(v)] => [return (/**@type {!Integer}*/ ($Casts.$to(block.m_invoke__java_lang_Object__java_lang_Object(Integer.valueOf(v)), Integer))).intValue();] "sourcemap.InlineFunctionsKt.inlineWithLambda"
+[/*
+ * Copyright 2026 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package sourcemap
+
+inline fun inlineExpression(a: Int, b: Int): Int {
+  val sum = a + b
+  return sum
+}
+
+inline fun inlineWithLambda(a: Int, block: (Int) -> Int): Int {
+  val v = a + 1
+  return block(v)
+}] => [$clinit]
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [InlineFunctionsKt.$clinit = () =>{};] "sourcemap.InlineFunctionsKt.<clinit>"
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [InlineFunctionsKt.$loadModules();] "sourcemap.InlineFunctionsKt.<clinit>"
+[/*
+ * Copyright 2026 Google Inc.
+...
+  return block(v)
+}] => [j_l_Object.$clinit();] "sourcemap.InlineFunctionsKt.<clinit>"

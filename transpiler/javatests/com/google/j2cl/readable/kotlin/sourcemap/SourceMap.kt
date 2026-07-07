@@ -171,4 +171,14 @@ abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Compar
     B("BAR"),
     C("BUZZ"),
   }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
 }

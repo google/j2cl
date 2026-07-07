@@ -165,6 +165,26 @@
 [o] => [return o;] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
 [testTypeLiteral] => [m_testTypeLiteral__java_lang_Class_$p_sourcemap_SourceMap]
 [return String::class.java] => [return Class.$get(j_l_String);] "sourcemap.SourceMap.testTypeLiteral"
+[testInline] => [m_testInline__int_$p_sourcemap_SourceMap]
+[nnotations.JsCo] => [let sum = 1 + 2 | 0;] "sourcemap.SourceMap.testInline"
+[nnotations.JsCo] => [sum] "sum"
+[val a = inlineExpression(1, 2)] => [let a = sum;] "sourcemap.SourceMap.testInline"
+[val a = inlineExpression(1, 2)] => [a] "a"
+[st coverage f] => [let v = 10 + 1 | 0;] "sourcemap.SourceMap.testInline"
+[st coverage f] => [v] "v"
+[val multiplied = x * a] => [let multiplied = Math.imul(v, a);] "sourcemap.SourceMap.testInline"
+[val multiplied = x * a] => [multiplied] "multiplied"
+[val b =
+      inlineWithLambda(10) { x ->
+...
+        multiplied + 1
+      }] => [let b = multiplied + 1 | 0;] "sourcemap.SourceMap.testInline"
+[val b =
+      inlineWithLambda(10) { x ->
+...
+        multiplied + 1
+      }] => [b] "b"
+[return b] => [return b;] "sourcemap.SourceMap.testInline"
 [SourceMap] => [m_reversed__java_util_Comparator]
 [SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));] "sourcemap.SourceMap.reversed"
 [SourceMap] => [m_thenComparing__java_util_Comparator__java_util_Comparator]
