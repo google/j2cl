@@ -356,7 +356,7 @@ public enum Backend {
           NormalizeFieldInitialization::new,
           ImplementInstanceInitialization::new,
           NormalizeConstructors::new,
-          NormalizeCasts::new,
+          () -> new NormalizeCasts(/* booleanAndDoubleAndLongBoxed= */ false),
           NormalizeInstanceOfs::new,
           NormalizeEquality::new,
           NormalizeStaticNativeMemberReferences::new,

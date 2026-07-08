@@ -45,6 +45,11 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 
 /** Replaces cast expression with corresponding cast method call. */
 public class NormalizeCasts extends NormalizationPass {
+  private final boolean booleanAndDoubleAndLongBoxed;
+
+  public NormalizeCasts(boolean booleanAndDoubleAndLongBoxed) {
+    this.booleanAndDoubleAndLongBoxed = booleanAndDoubleAndLongBoxed;
+  }
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -75,7 +80,7 @@ public class NormalizeCasts extends NormalizationPass {
         });
   }
 
-  private static boolean canRemoveCast(TypeDescriptor castTypeDescriptor, Expression expression) {
+  private boolean canRemoveCast(TypeDescriptor castTypeDescriptor, Expression expression) {
     return castTypeDescriptor.isNoopCast() || isRedundantCast(castTypeDescriptor, expression);
   }
 
@@ -99,7 +104,7 @@ public class NormalizeCasts extends NormalizationPass {
    *    ((C) (A &amp; B &amp; C) expr).methodOfC();
    *  </code></pre>
    */
-  private static boolean isRedundantCast(TypeDescriptor typeDescriptor, Expression expression) {
+  private boolean isRedundantCast(TypeDescriptor typeDescriptor, Expression expression) {
     if (isAssignableTo(typeDescriptor, expression)) {
       return true;
     }
@@ -112,12 +117,26 @@ public class NormalizeCasts extends NormalizationPass {
     return isAssignableTo(typeDescriptor, expression);
   }
 
-  private static boolean isAssignableTo(TypeDescriptor castTypeDescriptor, Expression expression) {
-    return expression instanceof NullLiteral
-        || expression
-            .getDeclaredTypeDescriptor()
-            .toRawTypeDescriptor()
-            .isAssignableTo(castTypeDescriptor);
+  /**
+   * Returns true if the cast is from a primitive type (boolean, double, or long) to its boxed
+   * equivalent type, but boxing is disabled for these types, making the cast a no-op.
+   */
+  private boolean isUnnecessaryCast(
+      TypeDescriptor castTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
+    return !booleanAndDoubleAndLongBoxed
+        && TypeDescriptors.isPrimitiveBooleanOrDoubleOrLong(expressionTypeDescriptor)
+        && TypeDescriptors.isBoxedType(castTypeDescriptor)
+        && castTypeDescriptor.toUnboxedType().equals(expressionTypeDescriptor);
+  }
+
+  private boolean isAssignableTo(TypeDescriptor castTypeDescriptor, Expression expression) {
+    if (expression instanceof NullLiteral) {
+      return true;
+    }
+    TypeDescriptor expressionTypeDescriptor =
+        expression.getDeclaredTypeDescriptor().toRawTypeDescriptor();
+    return expressionTypeDescriptor.isAssignableTo(castTypeDescriptor)
+        || isUnnecessaryCast(castTypeDescriptor, expressionTypeDescriptor);
   }
 
   private static Expression skipPassThroughExpressions(Expression expression) {
@@ -174,8 +193,7 @@ public class NormalizeCasts extends NormalizationPass {
         .build();
   }
 
-  private static Expression implementRuntimeCheck(
-      TypeDescriptor toTypeDescriptor, Expression expression) {
+  private Expression implementRuntimeCheck(TypeDescriptor toTypeDescriptor, Expression expression) {
     checkArgument(
         !toTypeDescriptor.isPrimitive(),
         "Narrowing and Widening conversions should have removed all primitive casts.");
@@ -200,7 +218,7 @@ public class NormalizeCasts extends NormalizationPass {
     return createRuntimeCheckForDeclaredType((DeclaredTypeDescriptor) toTypeDescriptor, expression);
   }
 
-  private static Expression implementRuntimeCheckForIntersection(
+  private Expression implementRuntimeCheckForIntersection(
       IntersectionTypeDescriptor intersectionTypeDescriptor, Expression expression) {
     // Emit the casts so that the first type in the intersection corresponds to the
     // innermost cast.
