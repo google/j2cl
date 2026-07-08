@@ -318,16 +318,16 @@ open class Main {
   }
  }
  
- fun interface Supplier<T> {
+ internal fun interface Supplier<T> {
   fun get(): T
  }
  
- fun interface Consumer<T> {
+ internal fun interface Consumer<T> {
   fun accept(t: T)
  }
  
  @JsEnum
- enum class ComparableJsEnum {
+ internal enum class ComparableJsEnum {
   ZERO,
   ONE,
   TWO;
@@ -338,7 +338,7 @@ open class Main {
  }
  
  @JsEnum(hasCustomValue = true)
- enum class IntJsEnum {
+ internal enum class IntJsEnum {
   MINUSONE(-1),
   TWENTY(
    2 * 10,
@@ -357,7 +357,7 @@ open class Main {
  }
  
  @JsEnum(hasCustomValue = true)
- enum class StringJsEnum {
+ internal enum class StringJsEnum {
   ONE("ONE"),
   THREE("THREE");
   
@@ -373,7 +373,7 @@ open class Main {
  }
  
  @JsEnum(hasCustomValue = true)
- enum class NonNullableStringJsEnum {
+ internal enum class NonNullableStringJsEnum {
   ONE("ONE"),
   THREE("THREE");
   
@@ -389,22 +389,22 @@ open class Main {
  }
  
  @JsEnum(name = "NonNullableStringJsEnum", namespace = "jsenum.Main", isNative = true)
- enum class NativeStringEnum {
+ internal enum class NativeStringEnum {
   ONE,
   THREE;
  }
  
  @JsFunction
- fun interface JsFunctionSuppiler<T> {
+ internal fun interface JsFunctionSuppiler<T> {
   fun get(): T
  }
  
  @JsFunction
- fun interface SpecializedJsFunction<T> {
+ internal fun interface SpecializedJsFunction<T> {
   fun get(value: T): T
  }
  
- open class TemplatedField<T> {
+ private open class TemplatedField<T> {
   @JvmField
   internal var value_pp_jsenum: T
   
@@ -417,12 +417,12 @@ open class Main {
   }
  }
  
- open class Foo<T> {
+ internal open class Foo<T> {
   internal constructor(c: Optional<IntJsEnum>?)
  }
  
  @JsEnum
- enum class JsEnumWithRenamedProperties {
+ internal enum class JsEnumWithRenamedProperties {
   @JsProperty(name = "NAUGHT")
   ZERO,
   ONE,
@@ -433,7 +433,7 @@ open class Main {
   }
  }
  
- open class SupplierConsumerImpl<T> internal constructor(): Supplier<T>, Consumer<T> {
+ internal open class SupplierConsumerImpl<T> internal constructor(): Supplier<T>, Consumer<T> {
   override fun accept(t: T) {}
   
   override fun get(): T {
@@ -441,7 +441,7 @@ open class Main {
   }
  }
  
- interface ComparableJsEnumSupplierConsumer: Supplier<ComparableJsEnum?>, Consumer<ComparableJsEnum?> {
+ internal interface ComparableJsEnumSupplierConsumer: Supplier<ComparableJsEnum?>, Consumer<ComparableJsEnum?> {
   @JsMethod
   override fun get(): ComparableJsEnum?
   
@@ -449,10 +449,10 @@ open class Main {
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class ComparableJsEnumSupplierConsumerImpl internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer
+ internal open class ComparableJsEnumSupplierConsumerImpl internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer {
+ internal open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer {
   override fun accept(t: ComparableJsEnum?) {}
   
   override fun get(): ComparableJsEnum? {
@@ -465,18 +465,18 @@ open class Main {
   A;
  }
  
- open class BaseVarargs<T> {
+ private open class BaseVarargs<T> {
   internal constructor(vararg args: T) {
    val args_1: Array<T>? = args as Array<T>?
   }
  }
  
- open class SubtypeVarargs: BaseVarargs<SomeJsEnum?> {
+ private open class SubtypeVarargs: BaseVarargs<SomeJsEnum?> {
   internal constructor(): super(
    SomeJsEnum.A,
    SomeJsEnum.A,
   )
  }
  
- open class SubtypeImplicitVarargs private constructor(): BaseVarargs<SomeJsEnum?>()
+ private open class SubtypeImplicitVarargs private constructor(): BaseVarargs<SomeJsEnum?>()
 }

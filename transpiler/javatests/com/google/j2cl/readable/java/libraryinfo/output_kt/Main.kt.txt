@@ -82,38 +82,38 @@ open class Main {
  }
  
  @JsType
- interface JsTypeInterface {
+ internal interface JsTypeInterface {
   fun foo()
   
   fun bar()
  }
  
- fun interface FunctionnalInterface {
+ internal fun interface FunctionnalInterface {
   fun foo()
  }
  
- fun interface JsAccessibleFunctionnalInterface {
+ internal fun interface JsAccessibleFunctionnalInterface {
   @JsMethod
   fun accessibleFunctionalInterfaceMethod()
  }
  
  @JsFunction
- fun interface Function {
+ internal fun interface Function {
   fun apply(s: String?)
  }
  
- class FunctionImpl internal constructor(): Function {
+ private class FunctionImpl internal constructor(): Function {
   override fun apply(s: String?) {}
  }
  
  @JsEnum
- enum class MyJsEnum {
+ internal enum class MyJsEnum {
   A,
   B,
   C;
  }
  
- enum class MyEnum {
+ internal enum class MyEnum {
   FOO,
   BAR;
  }

@@ -26,7 +26,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-open class Foo internal constructor() {
+internal open class Foo internal constructor() {
  companion object {
   private var f: Int = 0
   
@@ -56,7 +56,7 @@ open class Foo internal constructor() {
  }
 }
 
-open class Bar internal constructor() {
+internal open class Bar internal constructor() {
  private var f: Int = 0
  
  @JsProperty
@@ -83,7 +83,7 @@ open class Bar internal constructor() {
  }
 }
 
-open class ReadOnlyJsProperty internal constructor() {
+internal open class ReadOnlyJsProperty internal constructor() {
  @JvmField
  val a: Int = 1
  
@@ -103,7 +103,7 @@ open class ReadOnlyJsProperty internal constructor() {
  }
 }
 
-interface InterfaceWithDefaultJsProperties {
+internal interface InterfaceWithDefaultJsProperties {
  @JsProperty
  fun getM(): Int {
   return 3
@@ -113,7 +113,7 @@ interface InterfaceWithDefaultJsProperties {
  fun setM(value: Int) {}
 }
 
-open class ImplementsInterfaceWithDefaultJsProperties internal constructor(): InterfaceWithDefaultJsProperties
+internal open class ImplementsInterfaceWithDefaultJsProperties internal constructor(): InterfaceWithDefaultJsProperties
 
 open class Main {
  open fun testNativeJsProperty() {

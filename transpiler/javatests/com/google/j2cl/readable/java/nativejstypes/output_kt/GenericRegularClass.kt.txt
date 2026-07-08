@@ -29,7 +29,7 @@ open class GenericRegularClass<T: Foo?> {
  var field: T? = null
  
  @JsType(name = "Bar.Inner", namespace = "nativejstypes", isNative = true)
- fun interface NativeInterface<T: Foo?> {
+ private fun interface NativeInterface<T: Foo?> {
   fun apply(t: T): T
  }
 }

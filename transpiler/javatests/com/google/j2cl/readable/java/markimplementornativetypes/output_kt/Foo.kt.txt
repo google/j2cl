@@ -23,10 +23,10 @@ import jsinterop.annotations.JsType
 import kotlin.Suppress
 
 @JsType(namespace = "test.foo", isNative = true)
-interface MyNativeInterface
+internal interface MyNativeInterface
 
-interface RegularInterface
+internal interface RegularInterface
 
-interface SubNativeInterface: MyNativeInterface, RegularInterface
+internal interface SubNativeInterface: MyNativeInterface, RegularInterface
 
 open class Foo: MyNativeInterface, RegularInterface

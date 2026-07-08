@@ -21,11 +21,11 @@ package overridingmethods
 import javaemul.lang.*
 import kotlin.Suppress
 
-fun interface SomeInterface {
+internal fun interface SomeInterface {
  fun interfaceMethod()
 }
 
-open class Parent internal constructor() {
+internal open class Parent internal constructor() {
  open fun nonFinal() {}
  
  open fun finalInChild() {}
@@ -33,7 +33,7 @@ open class Parent internal constructor() {
  fun finalInParent() {}
 }
 
-open class Child internal constructor(): Parent(), SomeInterface {
+internal open class Child internal constructor(): Parent(), SomeInterface {
  override fun nonFinal() {}
  
  final override fun finalInChild() {}
@@ -41,7 +41,7 @@ open class Child internal constructor(): Parent(), SomeInterface {
  override fun interfaceMethod() {}
 }
 
-class FinalChild internal constructor(): Parent(), SomeInterface {
+internal class FinalChild internal constructor(): Parent(), SomeInterface {
  override fun nonFinal() {}
  
  override fun finalInChild() {}

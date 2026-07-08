@@ -28,7 +28,7 @@ import kotlin.Number
 import kotlin.Short
 import kotlin.Suppress
 
-open class SubNumber internal constructor(): Number() {
+internal open class SubNumber internal constructor(): Number() {
  override fun toInt(): Int {
   return 0
  }
@@ -54,7 +54,7 @@ open class SubNumber internal constructor(): Number() {
  }
 }
 
-open class OtherSubNumber internal constructor(): Number() {
+internal open class OtherSubNumber internal constructor(): Number() {
  override fun toInt(): Int {
   return 0
  }
@@ -80,7 +80,7 @@ open class OtherSubNumber internal constructor(): Number() {
  }
 }
 
-open class FooCallsSuperObjectMethod internal constructor() {
+internal open class FooCallsSuperObjectMethod internal constructor() {
  override fun hashCode(): Int {
   return super.hashCode()
  }

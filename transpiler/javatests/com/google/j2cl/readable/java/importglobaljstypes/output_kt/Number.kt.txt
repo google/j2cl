@@ -61,7 +61,7 @@ open class Number {
  }
  
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
- interface NativeArray<T> {
+ private interface NativeArray<T> {
   @JsProperty
   fun getLength(): Int
   

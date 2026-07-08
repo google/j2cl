@@ -316,7 +316,7 @@ open class RecordClass {
   }
  }
  
- class EmptyRecord internal constructor() {
+ internal class EmptyRecord internal constructor() {
   override fun equals(arg0: Any?): Boolean {
    if (!(arg0 is EmptyRecord && run {
     val ___other: EmptyRecord? = arg0 as EmptyRecord?
@@ -341,7 +341,7 @@ open class RecordClass {
   }
  }
  
- class SimpleRecord {
+ internal class SimpleRecord {
   private val value: Int
   
   internal constructor(value: Int) {
@@ -377,7 +377,7 @@ open class RecordClass {
   }
  }
  
- class StringRecord {
+ internal class StringRecord {
   private val value: String?
   
   internal constructor(value: String?) {
@@ -413,7 +413,7 @@ open class RecordClass {
   }
  }
  
- class ArrayRecord {
+ internal class ArrayRecord {
   private val value: IntArray?
   
   internal constructor(value: IntArray?) {
@@ -449,7 +449,7 @@ open class RecordClass {
   }
  }
  
- class ObjectRecord {
+ internal class ObjectRecord {
   private val value: Any?
   
   internal constructor(value: Any?) {
@@ -485,7 +485,7 @@ open class RecordClass {
   }
  }
  
- class RecordWithConstructor {
+ internal class RecordWithConstructor {
   private val a: Int
   
   private val b: Int
@@ -528,7 +528,7 @@ open class RecordClass {
   }
  }
  
- class RecordWithCompactConstructor {
+ internal class RecordWithCompactConstructor {
   private val a: Int
   
   private val b: Int
@@ -575,7 +575,7 @@ open class RecordClass {
   }
  }
  
- class RecordWithDeferringConstructor {
+ internal class RecordWithDeferringConstructor {
   private val value: Int
   
   constructor(): this(123)
@@ -673,12 +673,12 @@ open class RecordClass {
   }
  }
  
- fun interface I {
+ internal fun interface I {
   fun a(): String?
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- class RecordImplementingInterface: I {
+ internal class RecordImplementingInterface: I {
   private val a: String?
   
   internal constructor(a: String?) {
@@ -714,7 +714,7 @@ open class RecordClass {
   }
  }
  
- class StaticFieldRecord {
+ internal class StaticFieldRecord {
   private val nonstaticField: Int
   
   constructor(initializeWithStaticField: Boolean): this(
@@ -759,14 +759,14 @@ open class RecordClass {
   }
  }
  
- interface PropertyAccessors<T> {
+ internal interface PropertyAccessors<T> {
   fun parametric(): T
   
   fun nonParametric(): String?
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- class RecordSpecializingInterface: PropertyAccessors<String?> {
+ internal class RecordSpecializingInterface: PropertyAccessors<String?> {
   private val parametric: String?
   
   private val nonParametric: String?
@@ -960,7 +960,7 @@ open class RecordClass {
   }
  }
  
- interface I2 {
+ internal interface I2 {
   @JsProperty(name = "customVal")
   fun value(): Int
   
@@ -1041,7 +1041,7 @@ open class RecordClass {
  }
  
  @JsType
- class JsInteropRecordWithHiddenCanonical {
+ internal class JsInteropRecordWithHiddenCanonical {
   private val value: Int
   
   internal constructor(value: Int) {
@@ -1081,7 +1081,7 @@ open class RecordClass {
   }
  }
  
- class VarargsRecord {
+ internal class VarargsRecord {
   private val values: Array<String?>?
   
   internal constructor(vararg values: String?) {
@@ -1118,7 +1118,7 @@ open class RecordClass {
   }
  }
  
- class VarargsRecordWithCustomAccessor {
+ internal class VarargsRecordWithCustomAccessor {
   private val value: Array<String?>?
   
   fun value(): Array<String?>? {

@@ -46,7 +46,7 @@ open class Bar {
  }
  
  @JsType(isNative = true)
- open class Inner {
+ internal open class Inner {
   constructor(n: Int)
   
   external open fun square(): Int
@@ -59,7 +59,7 @@ open class Bar {
 }
 
 @JsType(name = "Bar.Inner", isNative = true)
-open class BarInnerWithDotInName {
+internal open class BarInnerWithDotInName {
  constructor(n: Int)
  
  external open fun square(): Int
@@ -71,7 +71,7 @@ open class BarInnerWithDotInName {
 }
 
 @JsType(name = "Bar.Inner", namespace = "nativejstypes", isNative = true)
-open class BarInnerWithDotInNameAndHasNamespace {
+internal open class BarInnerWithDotInNameAndHasNamespace {
  constructor(n: Int)
  
  external open fun square(): Int

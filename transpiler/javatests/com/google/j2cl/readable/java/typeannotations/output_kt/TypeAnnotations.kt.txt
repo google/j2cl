@@ -26,11 +26,11 @@ import kotlin.collections.List
 import kotlin.jvm.JvmStatic
 import typeannotations.ParametricType
 
-abstract class AbstractType internal constructor(): ParametricType<AbstractType?>
+internal abstract class AbstractType internal constructor(): ParametricType<AbstractType?>
 
-abstract class AbstractTypeNonNull internal constructor(): ParametricType<AbstractType>
+internal abstract class AbstractTypeNonNull internal constructor(): ParametricType<AbstractType>
 
-open class Parent internal constructor() {
+internal open class Parent internal constructor() {
  open fun m(s: String, c: Parent?): Parent? {
   return c
  }
@@ -41,10 +41,10 @@ open class Parent internal constructor() {
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
-open class ChildWithNullableParent internal constructor(): Parent(), ParametricType<Parent?>
+internal open class ChildWithNullableParent internal constructor(): Parent(), ParametricType<Parent?>
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
-open class ChildWithNonNullableParent internal constructor(): Parent(), ParametricType<Parent>
+internal open class ChildWithNonNullableParent internal constructor(): Parent(), ParametricType<Parent>
 
 open class TypeAnnotations {
  companion object {

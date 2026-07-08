@@ -186,17 +186,17 @@ open class Main {
  companion object {
   @JvmStatic
   @JsMethod
-  fun createNativeFunction(): JsFunctionInterface? {
+  internal fun createNativeFunction(): JsFunctionInterface? {
    return null
   }
   
   @JvmStatic
-  fun callFn(fn: JsFunctionInterface?, a: Int): Int {
+  internal fun callFn(fn: JsFunctionInterface?, a: Int): Int {
    return fn!!.foo(a)
   }
   
   @JvmStatic
-  fun acceptsJsFunction(f: Function<String?, String?>?) {}
+  internal fun acceptsJsFunction(f: Function<String?, String?>?) {}
   
   @JvmStatic
   @JsProperty
@@ -209,17 +209,17 @@ open class Main {
   }
   
   @JvmStatic
-  fun callInterfaceRaw(f: JsBiFunction<Any?, Number?>?, o: Any?, n: Number?): Any? {
+  internal fun callInterfaceRaw(f: JsBiFunction<Any?, Number?>?, o: Any?, n: Number?): Any? {
    return f!!.apply(o, n)
   }
   
   @JvmStatic
-  fun callInterfaceParameterized(f: JsBiFunction<String?, Int?>?, s: String?): String? {
+  internal fun callInterfaceParameterized(f: JsBiFunction<String?, Int?>?, s: String?): String? {
    return f!!.apply(s, 1)
   }
   
   @JvmStatic
-  fun <U, V: Number?> callInterfaceUnparameterized(f: JsBiFunction<U, V>?, u: U, v: V): U {
+  internal fun <U, V: Number?> callInterfaceUnparameterized(f: JsBiFunction<U, V>?, u: U, v: V): U {
    return f!!.apply(u, v)
   }
   
@@ -271,7 +271,7 @@ open class Main {
   
   @JvmStatic
   @JsMethod
-  fun callOnFunction(f: JsBiFunction<Double?, Double?>?): Double {
+  internal fun callOnFunction(f: JsBiFunction<Double?, Double?>?): Double {
    return 0.0
   }
   
@@ -294,12 +294,12 @@ open class Main {
  }
  
  @JsFunction
- fun interface Function<T, U> {
+ internal fun interface Function<T, U> {
   fun apply(u: U): T
  }
  
  @JsFunction
- fun interface JsFunctionInterface {
+ internal fun interface JsFunctionInterface {
   fun foo(a: Int): Int
   
   @JsOverlay
@@ -322,7 +322,7 @@ open class Main {
   }
  }
  
- class JsFunctionImplementation: JsFunctionInterface {
+ private class JsFunctionImplementation: JsFunctionInterface {
   @JvmField
   var field: Int = 0
   
@@ -351,7 +351,7 @@ open class Main {
   }
  }
  
- open class TestCaptureOuterParametricClass<T> internal constructor() {
+ internal open class TestCaptureOuterParametricClass<T> internal constructor() {
   open fun test() {
    val f: Function<Any?, Any?> = Function { `object`: Any? ->
     return@Function ArrayList<T>()
@@ -360,64 +360,64 @@ open class Main {
  }
  
  @JsFunction
- fun interface JsFunctionVarargs {
+ internal fun interface JsFunctionVarargs {
   fun m(i: Int, vararg numbers: Int): Int
  }
  
  @JsFunction
- fun interface ForEachCallBack<T> {
+ internal fun interface ForEachCallBack<T> {
   fun onInvoke(p0: T, p1: Int, p2: Array<T>?): Any?
  }
  
  @JsFunction
- fun interface ElementalJsFunction {
+ internal fun interface ElementalJsFunction {
   fun call(vararg args: Any?): Any?
  }
  
  @JsFunction
- fun interface JsFunctionVarargsGenerics<T> {
+ internal fun interface JsFunctionVarargsGenerics<T> {
   fun m(i: Int, vararg numbers: T): Int
  }
  
  @JsFunction
- fun interface SimpleJsFunction {
+ internal fun interface SimpleJsFunction {
   fun m()
  }
  
  @JsFunction
- fun interface JsFunctionOptional {
+ internal fun interface JsFunctionOptional {
   fun m(i: Int, @JsOptional number: Double?): Int
  }
  
- class JsFunctionOptionalImpl internal constructor(): JsFunctionOptional {
+ internal class JsFunctionOptionalImpl internal constructor(): JsFunctionOptional {
   override fun m(i: Int, @JsOptional number: Double?): Int {
    return (i.toDouble() + number!!.toDouble()).toInt()
   }
  }
  
  @JsFunction
- fun interface ParametricJsFunction<E> {
+ internal fun interface ParametricJsFunction<E> {
   fun call(event: E)
  }
  
- interface ApiWithMethodReturningParametricJsFunction {
+ internal interface ApiWithMethodReturningParametricJsFunction {
   fun <T> anApi(): ParametricJsFunction<T>?
  }
  
- open class Implementor internal constructor(): ApiWithMethodReturningParametricJsFunction {
+ internal open class Implementor internal constructor(): ApiWithMethodReturningParametricJsFunction {
   @JsMethod
   override fun <T> anApi(): ParametricJsFunction<T>? {
    return null as ParametricJsFunction<T>?
   }
  }
  
- class ParamtericImplementation<T> internal constructor(): ParametricJsFunction<T> {
+ internal class ParamtericImplementation<T> internal constructor(): ParametricJsFunction<T> {
   override fun call(t: T) {
    val o: Any? = t as T
   }
  }
  
- open class ClassWithJsFunctionProperty internal constructor() {
+ private open class ClassWithJsFunctionProperty internal constructor() {
   @JvmField
   internal var function_pp_jsfunction: ParametricJsFunction<String?>? = null
   
@@ -428,7 +428,7 @@ open class Main {
  }
  
  @JsFunction
- fun interface JsBiFunction<T, S: Number?> {
+ internal fun interface JsBiFunction<T, S: Number?> {
   fun apply(t: T, s: S): T
  }
  
@@ -445,7 +445,7 @@ open class Main {
  }
  
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
- open class TestJsFunctionInJsOverlayCapturingOuter internal constructor() {
+ internal open class TestJsFunctionInJsOverlayCapturingOuter internal constructor() {
   @JsOverlay
   internal fun test_pp_jsfunction() {
    this.sort_pp_jsfunction(
@@ -459,11 +459,11 @@ open class Main {
   internal fun sort_pp_jsfunction(func: JsFunctionInterface?) {}
  }
  
- class RecursiveParametricJsFunctionImplementation<T: ParametricJsFunction<T>?> private constructor(): ParametricJsFunction<T> {
+ private class RecursiveParametricJsFunctionImplementation<T: ParametricJsFunction<T>?> private constructor(): ParametricJsFunction<T> {
   override fun call(t: T) {}
  }
  
- class RecursiveJsFunctionImplementation private constructor(): ParametricJsFunction<RecursiveJsFunctionImplementation?> {
+ private class RecursiveJsFunctionImplementation private constructor(): ParametricJsFunction<RecursiveJsFunctionImplementation?> {
   override fun call(t: RecursiveJsFunctionImplementation?) {}
  }
 }

@@ -30,19 +30,19 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
-open class Immediate internal constructor(): Transitive() {
+internal open class Immediate internal constructor(): Transitive() {
  @JsOverlay
  internal fun doImmediateInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
-open class NonNativeUpper: Immediate {
+internal open class NonNativeUpper: Immediate {
  @JsConstructor
  constructor()
  
  internal open fun doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport() {}
 }
 
-open class NonNativeLower: NonNativeUpper {
+internal open class NonNativeLower: NonNativeUpper {
  @JsConstructor
  constructor()
  
@@ -50,7 +50,7 @@ open class NonNativeLower: NonNativeUpper {
 }
 
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
-open class Transitive internal constructor() {
+internal open class Transitive internal constructor() {
  @JsProperty(name = "constructor")
  internal external fun getJsProperty_pp_transitivejsoverlayimport(): Any?
  

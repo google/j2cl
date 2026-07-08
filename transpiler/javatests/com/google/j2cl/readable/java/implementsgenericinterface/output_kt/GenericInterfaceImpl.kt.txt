@@ -22,10 +22,10 @@ import javaemul.lang.*
 import kotlin.Number
 import kotlin.Suppress
 
-interface GenericInterface<T>
+internal interface GenericInterface<T>
 
-interface GenericSubInterface<T>: GenericInterface<T>
+internal interface GenericSubInterface<T>: GenericInterface<T>
 
-open class GenericInterfaceGenericImpl<T> internal constructor(): GenericInterface<T>
+internal open class GenericInterfaceGenericImpl<T> internal constructor(): GenericInterface<T>
 
 open class GenericInterfaceImpl: GenericInterface<Number?>

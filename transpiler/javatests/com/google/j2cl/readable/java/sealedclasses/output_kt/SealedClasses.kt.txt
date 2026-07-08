@@ -39,7 +39,7 @@ open class SealedClasses {
   
   abstract fun changeName(updatedName: String?)
   
-  class Dolphin public constructor(): Mammal() {
+  protected class Dolphin protected constructor(): Mammal() {
    override fun changeName(updatedName: String?) {}
   }
  }
@@ -48,11 +48,11 @@ open class SealedClasses {
   override fun changeName(updatedName: String?) {}
  }
  
- class Cat internal constructor(): Mammal() {
+ internal class Cat internal constructor(): Mammal() {
   override fun changeName(updatedName: String?) {}
  }
  
- class Whale private constructor(): Mammal() {
+ private class Whale private constructor(): Mammal() {
   override fun changeName(updatedName: String?) {}
  }
  
@@ -61,7 +61,7 @@ open class SealedClasses {
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- enum class EnumImplementsSealedInterface: Animal {
+ internal enum class EnumImplementsSealedInterface: Animal {
   V1,
   V2;
  }

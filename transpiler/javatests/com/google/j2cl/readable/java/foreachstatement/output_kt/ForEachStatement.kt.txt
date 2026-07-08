@@ -120,40 +120,40 @@ open class ForEachStatement {
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
+ internal open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
   override fun iterator(): MutableIterator<Number?> {
    return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
+ internal open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
   override fun iterator(): MutableIterator<Int?> {
    return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
+ internal open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
   override fun iterator(): MutableIterator<Int> {
    return null!!.asMutableIterator()
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
+ internal open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
   override fun iterator(): MutableIterator<Any?> {
    return null!!.asMutableIterator()
   }
  }
  
- abstract class IterableReturningTypeVariable<U, T: Iterator<Int?>> internal constructor(): MutableIterableJvm<Int?>
+ internal abstract class IterableReturningTypeVariable<U, T: Iterator<Int?>> internal constructor(): MutableIterableJvm<Int?>
  
- fun interface StringIterable: MutableIterableJvm<String?> {
+ internal fun interface StringIterable: MutableIterableJvm<String?> {
   override fun iterator(): StringIterator
  }
  
- interface StringIterator: MutableIteratorJvm<String?> {
+ internal interface StringIterator: MutableIteratorJvm<String?> {
   override fun remove() {
    throw UnsupportedOperationException()
   }

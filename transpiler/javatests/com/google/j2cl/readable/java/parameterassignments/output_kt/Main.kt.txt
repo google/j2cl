@@ -74,15 +74,15 @@ open class Main {
   os_1!![0] = os_1!![1]
  }
  
- fun interface Fn {
+ internal fun interface Fn {
   fun test(nonFinal: Int, implicitFinal: Int): Int
  }
  
- fun interface FnPrimitiveVarargs {
+ internal fun interface FnPrimitiveVarargs {
   fun test(i: Int, vararg `is`: Int)
  }
  
- fun interface FnObjectVarargs {
+ internal fun interface FnObjectVarargs {
   fun test(o: Any?, vararg os: Any?)
  }
  

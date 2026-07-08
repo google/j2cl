@@ -24,18 +24,18 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
-interface Entry<K>
+internal interface Entry<K>
 
-abstract class Map<K> internal constructor() {
+internal abstract class Map<K> internal constructor() {
  abstract fun getCeilingEntry(key: K): Entry<K>?
 }
 
-open class TreeMap<K> internal constructor(): Map<K>() {
+internal open class TreeMap<K> internal constructor(): Map<K>() {
  override fun getCeilingEntry(key: K): InnerEntry<K>? {
   return InnerEntry<K>()
  }
  
- open class InnerEntry<K> internal constructor(): Entry<K>
+ internal open class InnerEntry<K> internal constructor(): Entry<K>
 }
 
 open class CharSet {

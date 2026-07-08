@@ -37,7 +37,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
 import kotlin.run
 
-abstract class SourceMap<T: Number?>: Comparator<T> {
+internal abstract class SourceMap<T: Number?>: Comparator<T> {
  private var uninitializedInstanceField: Int = 0
  
  init {
@@ -173,7 +173,7 @@ abstract class SourceMap<T: Number?>: Comparator<T> {
   }
  }
  
- enum class Enum1 {
+ internal enum class Enum1 {
   VALUE1,
   VALUE2,
   VALUE3(1);

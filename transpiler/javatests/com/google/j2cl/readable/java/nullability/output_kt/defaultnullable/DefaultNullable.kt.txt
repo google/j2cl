@@ -279,19 +279,19 @@ open class DefaultNullable {
   internal fun accept_pp_nullability_defaultnullable(s: String?) {}
  }
  
- interface NullableBound<T: NullableBound<T>?>
+ internal interface NullableBound<T: NullableBound<T>?>
  
- interface NonNullableBound<T: NonNullableBound<T>>
+ internal interface NonNullableBound<T: NonNullableBound<T>>
  
- interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
+ internal interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
  
- interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
+ internal interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
  
- interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
+ internal interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
  
- interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
+ internal interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
  
- open class ParameterizedDefaultNullability<N> {
+ internal open class ParameterizedDefaultNullability<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnullable: N? = null
   
@@ -325,7 +325,7 @@ open class DefaultNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
  
- open class ParameterizedNullable<N> {
+ internal open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnullable: N? = null
   
@@ -359,7 +359,7 @@ open class DefaultNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
  
- open class ParameterizedNonNullable<N: Any> {
+ internal open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnullable: N? = null
   
@@ -393,19 +393,19 @@ open class DefaultNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
  
- fun interface Consumer<T> {
+ internal fun interface Consumer<T> {
   fun accept(t: T)
  }
  
- fun interface NullMarkedSupplier<T> {
+ internal fun interface NullMarkedSupplier<T> {
   fun get(): T
  }
  
- fun interface NullMarkedConsumer<T> {
+ internal fun interface NullMarkedConsumer<T> {
   fun accept(t: T)
  }
  
- fun interface NullMarkedIntFunction<T> {
+ internal fun interface NullMarkedIntFunction<T> {
   fun accept(i: Int): T
  }
 }

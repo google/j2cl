@@ -55,7 +55,7 @@ open class Varargs {
   this.args = args_1
  }
  
- open fun testLambda(functionalInterface: FunctionalInterface?) {}
+ internal open fun testLambda(functionalInterface: FunctionalInterface?) {}
  
  open fun testOverloaded(o: Any?) {}
  
@@ -141,11 +141,11 @@ open class Varargs {
   }
  }
  
- fun interface FunctionalInterface {
+ internal fun interface FunctionalInterface {
   fun apply(vararg strings: String?)
  }
 }
 
-open class Child: Varargs {
+internal open class Child: Varargs {
  constructor(): super(1)
 }

@@ -26,50 +26,50 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-fun interface Function<I, O> {
+internal fun interface Function<I, O> {
  fun apply(i: I): O
 }
 
-interface List<I>
+internal interface List<I>
 
-open class GenericType<T> internal constructor() {
+internal open class GenericType<T> internal constructor() {
  internal open fun get_pp_typewildcards(): T {
   return null as T
  }
 }
 
-open class Bar internal constructor()
+internal open class Bar internal constructor()
 
-open class RecursiveType<T: RecursiveType<T>?> {
+internal open class RecursiveType<T: RecursiveType<T>?> {
  constructor(wildcardParameter: RecursiveType<*>?)
 }
 
-interface DeepRecursiveType<T: GenericType<in T>?>
+internal interface DeepRecursiveType<T: GenericType<in T>?>
 
-open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
+internal open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
  constructor(wildcardParameter: RecursiveType<*>?): super(wildcardParameter)
 }
 
 open class TypeWildCards {
- open fun unbounded(g: GenericType<*>?): Any? {
+ internal open fun unbounded(g: GenericType<*>?): Any? {
   return g!!.get_pp_typewildcards()
  }
  
- open fun upperBound(g: GenericType<out Bar?>?): Bar? {
+ internal open fun upperBound(g: GenericType<out Bar?>?): Bar? {
   return g!!.get_pp_typewildcards()
  }
  
- open fun lowerBound(g: GenericType<in Bar?>?): Any? {
+ internal open fun lowerBound(g: GenericType<in Bar?>?): Any? {
   return g!!.get_pp_typewildcards()
  }
  
- open fun unboundedRecursive(g: RecursiveType<*>?) {}
+ internal open fun unboundedRecursive(g: RecursiveType<*>?) {}
  
- open fun upperBoundRecursive(g: GenericType<out RecursiveType<*>?>?) {}
+ internal open fun upperBoundRecursive(g: GenericType<out RecursiveType<*>?>?) {}
  
- open fun lowerBoundRecursive(g: GenericType<in RecursiveType<*>?>?) {}
+ internal open fun lowerBoundRecursive(g: GenericType<in RecursiveType<*>?>?) {}
  
- open fun deepRecursiveType(t: DeepRecursiveType<*>?) {}
+ internal open fun deepRecursiveType(t: DeepRecursiveType<*>?) {}
  
  open fun test() {
   this.unbounded(
@@ -129,7 +129,7 @@ open class TypeWildCards {
   private fun takesRecursiveGeneric(foo: GenericType<TypeWildCards.Foo?>?) {}
   
   @JvmStatic
-  fun <C> testInferredIntersectionWithTypeVariable(ri: RecursiveInterface<out C, C>?): C {
+  internal fun <C> testInferredIntersectionWithTypeVariable(ri: RecursiveInterface<out C, C>?): C {
    return ri!!.m()
   }
   
@@ -152,15 +152,15 @@ open class TypeWildCards {
   )
  }
  
- fun interface X {
+ private fun interface X {
   fun m()
  }
  
- fun interface Y {
+ private fun interface Y {
   fun n()
  }
  
- open class A private constructor(): X {
+ private open class A private constructor(): X {
   @JvmField
   internal var f_pp_typewildcards: Int = 0
   
@@ -182,11 +182,11 @@ open class TypeWildCards {
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract inner class SubOtherElement: TypeWildCards.OtherElement(), HasKey
  
- open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>()
+ internal open inner class Foo internal constructor(): GenericType<TypeWildCards.Foo?>()
  
- fun interface RecursiveInterface<T: RecursiveInterface<T, C>?, C> {
+ internal fun interface RecursiveInterface<T: RecursiveInterface<T, C>?, C> {
   fun m(): T
  }
  
- open class MultipleGenerics<A, B, C> internal constructor()
+ internal open class MultipleGenerics<A, B, C> internal constructor()
 }

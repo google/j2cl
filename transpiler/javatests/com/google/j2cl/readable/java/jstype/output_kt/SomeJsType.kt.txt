@@ -19,7 +19,6 @@
 package jstype
 
 import javaemul.lang.*
-import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import kotlin.Any
@@ -38,8 +37,7 @@ open class SomeJsType<T> {
  internal var packageField_pp_jstype: Int = 0
  
  @JvmField
- @JsIgnore
- var protectedField: Int = 0
+ protected var protectedField: Int = 0
  
  open fun publicMethod() {}
  
@@ -47,8 +45,7 @@ open class SomeJsType<T> {
  
  internal open fun packageMethod_pp_jstype() {}
  
- @JsIgnore
- open fun protectedMethod() {}
+ protected open fun protectedMethod() {}
  
  open fun useFieldsAndMethods() {
   val value: Int = this.publicField + this.privateField + this.packageField_pp_jstype + this.protectedField
@@ -65,8 +62,8 @@ open class SomeJsType<T> {
  }
  
  @JsType(name = "*", namespace = JsPackage.GLOBAL, isNative = true)
- interface Star
+ internal interface Star
  
  @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
- interface Wildcard
+ internal interface Wildcard
 }

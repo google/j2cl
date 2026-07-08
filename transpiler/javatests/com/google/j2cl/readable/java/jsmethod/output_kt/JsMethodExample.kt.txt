@@ -33,14 +33,14 @@ open class JsMethodExample {
   external fun <T: ArrayList<String?>?> testMethod(): T
  }
  
- abstract class Base<T> internal constructor() {
+ internal abstract class Base<T> internal constructor() {
   @JsMethod(name = "m")
   internal open fun m_pp_jsmethod(t: T) {}
   
   internal open fun o_pp_jsmethod(s: String?) {}
  }
  
- fun interface I {
+ internal fun interface I {
   @JsMethod(name = "mString")
   fun m(s: String?)
   
@@ -52,7 +52,7 @@ open class JsMethodExample {
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class Sub internal constructor(): Base<String?>(), I {
+ internal open class Sub internal constructor(): Base<String?>(), I {
   override fun m(s: String?) {}
   
   @JsMethod(name = "o")
@@ -64,7 +64,7 @@ open class JsMethodExample {
  }
  
  @JsType
- open class SubJsType internal constructor(): Base<String?>() {
+ internal open class SubJsType internal constructor(): Base<String?>() {
   public open fun m(s: String?) {}
   
   override fun m_pp_jsmethod(arg0: String?) {
@@ -78,7 +78,7 @@ open class JsMethodExample {
  }
  
  @JsType
- open class SubGenericsJsType<T> internal constructor(): Base<T>() {
+ internal open class SubGenericsJsType<T> internal constructor(): Base<T>() {
   public open fun m(s: T) {}
   
   override fun m_pp_jsmethod(arg0: T) {
@@ -87,7 +87,7 @@ open class JsMethodExample {
  }
  
  @JsType
- open class SubJsTypeWithRenamedJsMethod internal constructor(): Base<String?>() {
+ internal open class SubJsTypeWithRenamedJsMethod internal constructor(): Base<String?>() {
   @JsMethod(name = "renamedM")
   public open fun m(s: String?) {}
   
@@ -96,13 +96,13 @@ open class JsMethodExample {
   }
  }
  
- interface InterfaceWithMethod {
+ internal interface InterfaceWithMethod {
   fun m()
   
   fun n()
  }
  
- fun interface InterfaceExposingJsMethods: InterfaceWithMethod {
+ internal fun interface InterfaceExposingJsMethods: InterfaceWithMethod {
   @JsMethod
   override fun m() {}
   
@@ -110,19 +110,19 @@ open class JsMethodExample {
   override fun n()
  }
  
- open class SuperClassWithFinalMethod internal constructor() {
+ internal open class SuperClassWithFinalMethod internal constructor() {
   fun n() {}
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open class ExposesOverrideableJsMethod internal constructor(): SuperClassWithFinalMethod(), InterfaceExposingJsMethods
+ internal open class ExposesOverrideableJsMethod internal constructor(): SuperClassWithFinalMethod(), InterfaceExposingJsMethods
  
- abstract class AbstractTypeExposingJsMethod internal constructor() {
+ internal abstract class AbstractTypeExposingJsMethod internal constructor() {
   @JsMethod
   abstract fun abstractJsMethod(s: String?)
  }
  
- open class AbstractTypeImpl internal constructor(): AbstractTypeExposingJsMethod() {
+ internal open class AbstractTypeImpl internal constructor(): AbstractTypeExposingJsMethod() {
   override fun abstractJsMethod(s: String?) {}
  }
 }

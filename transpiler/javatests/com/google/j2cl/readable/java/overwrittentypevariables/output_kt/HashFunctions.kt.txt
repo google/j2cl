@@ -24,16 +24,16 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
-fun interface MyFunction<F, T> {
+internal fun interface MyFunction<F, T> {
  fun apply(input: F): T
 }
 
-fun interface HashFunction<T>: MyFunction<T, String?>
+internal fun interface HashFunction<T>: MyFunction<T, String?>
 
 open class HashFunctions {
  companion object {
   @JvmStatic
-  fun <T> hashFunction(): HashFunction<T>? {
+  internal fun <T> hashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
     override fun apply(input: T): String? {
      return ""
@@ -42,7 +42,7 @@ open class HashFunctions {
   }
   
   @JvmStatic
-  fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
+  internal fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
     override fun apply(input: T): String? {
      return "" + input!!.ordinal

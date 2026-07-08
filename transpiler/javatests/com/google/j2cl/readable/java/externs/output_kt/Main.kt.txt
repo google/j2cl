@@ -35,7 +35,7 @@ import kotlin.jvm.JvmStatic
 
 open class Main {
  @JvmField
- var aFoo: FooOverlay? = null
+ internal var aFoo: FooOverlay? = null
  
  @JvmField
  internal var innerExtern_pp_externs: InnerExtern? = null
@@ -65,14 +65,14 @@ open class Main {
   }
  }
  
- open class FooImpl internal constructor() {
+ internal open class FooImpl internal constructor() {
   @JvmField
   @JsProperty(name = "foo")
   internal var foo_pp_externs: String? = null
  }
  
  @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
- fun interface FooOverlay {
+ internal fun interface FooOverlay {
   @JsProperty
   fun getFoo(): String?
  }

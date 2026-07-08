@@ -35,11 +35,11 @@ import kotlin.collections.Map
 import kotlin.collections.Map.Entry
 import kotlin.collections.Set
 
-interface FnWithoutVariance<I, O>
+internal interface FnWithoutVariance<I, O>
 
-interface FnWithVariance<in I, out O>
+internal interface FnWithVariance<in I, out O>
 
-class BoundsWithVariance internal constructor() {
+internal class BoundsWithVariance internal constructor() {
  internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithoutVariance<in I, out O>) {}
  
  internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithVariance<I, O>) {}

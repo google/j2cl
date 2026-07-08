@@ -131,7 +131,7 @@ open class Main {
  }
  
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
- open class NativeJsTypeWithOverlayConstant internal constructor() {
+ internal open class NativeJsTypeWithOverlayConstant internal constructor() {
   companion object {
    @JsOverlay
    const val COMPILE_TIME_CONSTANT: Int = 10
@@ -142,13 +142,13 @@ open class Main {
  }
  
  @JsFunction
- fun interface Intf {
+ private fun interface Intf {
   fun run()
  }
 }
 
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
-interface ParameterizedNativeInterface<T> {
+internal interface ParameterizedNativeInterface<T> {
  @JsOverlay
  fun <T_1, S> shadowsTypeVariable(param1: T_1, param2: S) {}
  

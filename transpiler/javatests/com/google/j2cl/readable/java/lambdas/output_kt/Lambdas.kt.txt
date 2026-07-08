@@ -44,7 +44,7 @@ open class Lambdas {
  @JvmField
  var field: Int = 100
  
- open fun call(intf: FunctionalInterface?, n: Int): Int {
+ internal open fun call(intf: FunctionalInterface?, n: Int): Int {
   return this.field + intf!!.m(n)
  }
  
@@ -143,11 +143,11 @@ open class Lambdas {
   }
  }
  
- open fun <T> callWithTypeVariable(intf: GenericFunctionalInterface<T>?, e: T): T {
+ internal open fun <T> callWithTypeVariable(intf: GenericFunctionalInterface<T>?, e: T): T {
   return intf!!.m(e)
  }
  
- open fun callParameterized(intf: GenericFunctionalInterface<Error?>?, e: Error?): Error? {
+ internal open fun callParameterized(intf: GenericFunctionalInterface<Error?>?, e: Error?): Error? {
   return intf!!.m(e)
  }
  
@@ -230,7 +230,7 @@ open class Lambdas {
   }
   
   @JvmStatic
-  fun <T: Enum<T>> callTypeVariableWithBounds(intf: GenericFunctionalInterface<Enum<T>?>?, e: Enum<T>?): Enum<T>? {
+  internal fun <T: Enum<T>> callTypeVariableWithBounds(intf: GenericFunctionalInterface<Enum<T>?>?, e: Enum<T>?): Enum<T>? {
    return intf!!.m(e)
   }
   
@@ -297,19 +297,19 @@ open class Lambdas {
   private fun <T> acceptsSupplier(supplier: Supplier<T>?) {}
  }
  
- fun interface FunctionalInterface {
+ internal fun interface FunctionalInterface {
   fun m(i: Int): Int
  }
  
- fun interface Functional<T> {
+ internal fun interface Functional<T> {
   fun wrap(f: Functional<T>?): Functional<T>?
  }
  
- fun interface GenericFunctionalInterface<T> {
+ internal fun interface GenericFunctionalInterface<T> {
   fun m(i: T): T
  }
  
- fun interface BiFunction<T, U, R> {
+ internal fun interface BiFunction<T, U, R> {
   fun apply(t: T, u: U): R
   
   fun <V> andThen(after: Function<in R, out V>?): BiFunction<T, U, V>? {
@@ -321,7 +321,7 @@ open class Lambdas {
   }
  }
  
- fun interface Function<T, R> {
+ internal fun interface Function<T, R> {
   fun apply(t: T): R
   
   companion object {
@@ -334,23 +334,23 @@ open class Lambdas {
   }
  }
  
- open class Wrapper<T> private constructor() {
+ private open class Wrapper<T> private constructor() {
   @JvmField
   internal var wrapped_pp_lambdas: T = null as T
  }
  
- fun interface FunctionalInterfaceWithMethodReturningVoid {
+ internal fun interface FunctionalInterfaceWithMethodReturningVoid {
   fun run()
  }
  
- open class Parent internal constructor() {
+ private open class Parent internal constructor() {
   @JvmField
   var fieldInParent: Int = 0
   
   open fun funInParent() {}
  }
  
- open class LambdaInSubClass private constructor(): Parent() {
+ private open class LambdaInSubClass private constructor(): Parent() {
   open fun testLambdaInSubclass() {
    val l: FunctionalInterface = FunctionalInterface { i: Int ->
     this.funInParent()
@@ -379,40 +379,40 @@ open class Lambdas {
   fun then(f1: GenericJsFunction<Void?, T>?, f2: GenericJsFunction<Void?, Throwable?>?)
  }
  
- class IdentityFunction internal constructor(): GenericJsFunction<Any?, Any?> {
+ private class IdentityFunction internal constructor(): GenericJsFunction<Any?, Any?> {
   override fun apply(o: Any?): Any? {
    return o
   }
  }
  
- interface Equals<T> {
+ internal interface Equals<T> {
   fun get(): T {
    return null as T
   }
  }
  
- fun interface JsSupplier<T: Number?>: Equals<T> {
+ internal fun interface JsSupplier<T: Number?>: Equals<T> {
   @JsMethod
   override fun get(): T
  }
  
- interface JustADefaultT<T> {
+ internal interface JustADefaultT<T> {
   fun method(t: T) {}
  }
  
- interface JustADefaultS<S> {
+ internal interface JustADefaultS<S> {
   fun method(t: S) {}
  }
  
- interface MarkerWithDefaultMethod {
+ internal interface MarkerWithDefaultMethod {
   fun defaultMethod() {}
  }
  
- fun interface Runnable {
+ internal fun interface Runnable {
   fun run()
  }
  
- open inner class Outer internal constructor() {
+ internal open inner class Outer internal constructor() {
   internal open fun m_pp_lambdas() {}
   
   internal open fun n_pp_lambdas() {
@@ -422,11 +422,11 @@ open class Lambdas {
   }
  }
  
- open inner class Super internal constructor() {
+ internal open inner class Super internal constructor() {
   internal open fun m_pp_lambdas() {}
  }
  
- open inner class Sub internal constructor(): Lambdas.Super() {
+ internal open inner class Sub internal constructor(): Lambdas.Super() {
   internal open fun n_pp_lambdas() {
    val r: Runnable = object : Runnable {
     override fun run() {
@@ -436,7 +436,7 @@ open class Lambdas {
   }
  }
  
- open inner class SubWithLambda internal constructor(): Lambdas.Super() {
+ internal open inner class SubWithLambda internal constructor(): Lambdas.Super() {
   internal open fun n_pp_lambdas() {
    val r: Runnable = Runnable {
     super<Super>.m_pp_lambdas()
@@ -444,13 +444,13 @@ open class Lambdas {
   }
  }
  
- interface EmptyInterface
+ internal interface EmptyInterface
  
- fun interface EmptyInterfaceProvider {
+ internal fun interface EmptyInterfaceProvider {
   fun provide(): EmptyInterface?
  }
  
- open class ProviderHolder internal constructor() {
+ internal open class ProviderHolder internal constructor() {
   companion object {
    @JvmField
    val emptyInterface: EmptyInterface? = object : EmptyInterface {}

@@ -25,7 +25,7 @@ import kotlin.String
 import kotlin.Suppress
 
 class NullabilityPropagation {
- interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
+ internal interface NullabilityToPropagate<ExtendsNullable, ExtendsNonNull: Any> {
   fun nullableString1(s: String?): String?
   
   fun nullableString2(s: String?): String?
@@ -57,12 +57,12 @@ class NullabilityPropagation {
   fun jsOptionalParameter(@JsOptional s: String?): String
  }
  
- fun interface Interface {
+ internal fun interface Interface {
   fun nonNullStringDoubleOverride(s: String): String
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open inner class Subtype internal constructor(): NullabilityToPropagate<String?, String>, Interface {
+ internal open inner class Subtype internal constructor(): NullabilityToPropagate<String?, String>, Interface {
   override fun nullableString1(s: String?): String? {
    return s
   }
@@ -124,7 +124,7 @@ class NullabilityPropagation {
   }
  }
  
- open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
+ internal open inner class SubSubType internal constructor(): NullabilityPropagation.Subtype() {
   override fun nonNullStringTransitive(s: String): String {
    return s
   }

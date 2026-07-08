@@ -23,25 +23,25 @@ import kotlin.AssertionError
 import kotlin.Error
 import kotlin.Suppress
 
-open class Superclass<T: Error?> internal constructor() {
+internal open class Superclass<T: Error?> internal constructor() {
  open fun m1(t: T) {}
 }
 
-open class Subclass internal constructor(): Superclass<AssertionError?>() {
+internal open class Subclass internal constructor(): Superclass<AssertionError?>() {
  override fun m1(a: AssertionError?) {}
 }
 
-open class AnotherSubclass internal constructor(): Superclass<AssertionError?>()
+internal open class AnotherSubclass internal constructor(): Superclass<AssertionError?>()
 
-fun interface Callable<V> {
+internal fun interface Callable<V> {
  fun call(v: V)
 }
 
-open class Task<T> internal constructor(): Callable<T> {
+internal open class Task<T> internal constructor(): Callable<T> {
  override fun call(t: T) {}
 }
 
-open class AnotherTask<T: AssertionError?> internal constructor(): Callable<Superclass<T>?> {
+internal open class AnotherTask<T: AssertionError?> internal constructor(): Callable<Superclass<T>?> {
  override fun call(t: Superclass<T>?) {}
 }
 

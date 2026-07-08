@@ -232,7 +232,7 @@ open class SwitchPatterns {
   internal fun fail_pp_switchpatterns() {}
  }
  
- interface Sealed {
+ internal interface Sealed {
   fun testSwitchOnThis() {
    var ___selector: Sealed? = null
    val i: Int = run {
@@ -264,14 +264,14 @@ open class SwitchPatterns {
   class B: Sealed
  }
  
- enum class Color {
+ internal enum class Color {
   RED,
   BLUE,
   GREEN;
  }
  
  @JsEnum
- enum class Digit {
+ internal enum class Digit {
   ZERO,
   ONE,
   TWO,

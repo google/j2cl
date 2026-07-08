@@ -33,7 +33,7 @@ enum class Enum1 {
  V2;
 }
 
-enum class Enum2 {
+internal enum class Enum2 {
  VALUE1(2),
  VALUE2(
   Enum1.V1 as Enum<*>?,
@@ -79,7 +79,7 @@ enum class Enum2 {
  }
 }
 
-enum class Enum3 {
+internal enum class Enum3 {
  VALUE1(
   Function { v: Int? ->
    return@Function 1 + v!!.toInt()

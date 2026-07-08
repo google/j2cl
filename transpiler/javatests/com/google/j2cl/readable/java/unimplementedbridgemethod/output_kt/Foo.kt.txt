@@ -24,7 +24,7 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
-fun interface I<T> {
+internal fun interface I<T> {
  fun foo(t: T): Int
  
  companion object {
@@ -35,8 +35,8 @@ fun interface I<T> {
  }
 }
 
-fun interface J: I<String?>
+internal fun interface J: I<String?>
 
-abstract class Bar internal constructor(): J
+internal abstract class Bar internal constructor(): J
 
 abstract class Foo: I<String?>

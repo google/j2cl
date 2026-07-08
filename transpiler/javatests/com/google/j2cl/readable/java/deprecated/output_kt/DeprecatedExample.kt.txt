@@ -46,22 +46,22 @@ open class DeprecatedExample {
  }
  
  @JsType
- fun interface DeprecatedInterface {
+ internal fun interface DeprecatedInterface {
   fun doAThing(anInt: Int)
  }
  
  @JsFunction
- fun interface DeprecatedJsFunction {
+ internal fun interface DeprecatedJsFunction {
   fun doAThing(aThing: Any?)
  }
  
  @JsType
- enum class DeprecatedEnum {
+ internal enum class DeprecatedEnum {
   A_VALUE;
  }
  
  @JsEnum
- enum class DeprecatedJsEnum {
+ internal enum class DeprecatedJsEnum {
   A_VALUE;
  }
 }

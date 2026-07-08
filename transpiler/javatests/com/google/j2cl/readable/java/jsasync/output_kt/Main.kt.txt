@@ -124,16 +124,16 @@ open class Main {
   }
  }
  
- fun interface BaseInterface {
+ internal fun interface BaseInterface {
   fun asyncCall(): IThenable<Int?>?
  }
  
- fun interface AsyncInterface: BaseInterface {
+ internal fun interface AsyncInterface: BaseInterface {
   @JsAsync
   override fun asyncCall(): IThenable<Int?>?
  }
  
- interface InterfaceWithAsyncDefaultMethod {
+ internal interface InterfaceWithAsyncDefaultMethod {
   @JsAsync
   fun asyncCall(): IThenable<Int?>? {
    return Promise.resolve<Int?>(
@@ -145,18 +145,18 @@ open class Main {
  }
  
  @JsFunction
- fun interface JsFunctionInterface {
+ internal fun interface JsFunctionInterface {
   fun doSomething(): IThenable<Int?>?
  }
  
  @JsFunction
- fun interface AsyncJsFunctionInterface {
+ internal fun interface AsyncJsFunctionInterface {
   @JsAsync
   fun doSomething(): IThenable<Int?>?
  }
  
  @JsType(namespace = JsPackage.GLOBAL, isNative = true)
- open class Promise<T> private constructor(): IThenable<T> {
+ private open class Promise<T> private constructor(): IThenable<T> {
   companion object {
    @JvmStatic
    external fun <T> resolve(value: T): Promise<T>?

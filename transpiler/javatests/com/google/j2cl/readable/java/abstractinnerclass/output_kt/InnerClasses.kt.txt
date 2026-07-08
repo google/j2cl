@@ -22,17 +22,17 @@ import javaemul.lang.*
 import kotlin.Suppress
 
 open class InnerClasses {
- fun interface A {
+ internal fun interface A {
   fun foo()
  }
  
- abstract class B internal constructor(): A {
+ internal abstract class B internal constructor(): A {
   internal open fun bar_pp_abstractinnerclass() {
    this.foo()
   }
  }
  
- abstract inner class C internal constructor(): A {
+ internal abstract inner class C internal constructor(): A {
   internal open fun bar_pp_abstractinnerclass() {
    this.foo()
   }

@@ -43,7 +43,7 @@ open class NonreferencedMethods {
  }
  
  @JsType(name = "NativeNonreferencedMethods", namespace = "nativejstypes", isNative = true)
- open class NativeMembersOnPrivateClass {
+ private open class NativeMembersOnPrivateClass {
   constructor(x: Int)
   
   external open fun getInstance2(): Int

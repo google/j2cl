@@ -71,10 +71,10 @@ open class Main {
   return null
  }
  
- open fun m4(f: MyFunction) {}
+ internal open fun m4(f: MyFunction) {}
  
  @JsFunction
- fun interface MyFunction {
+ internal fun interface MyFunction {
   fun x(a: String): String
  }
  
@@ -96,13 +96,13 @@ open class Main {
   }
  }
  
- interface NonNullableTemplatedReturn<T> {
+ internal interface NonNullableTemplatedReturn<T> {
   fun get(): T & Any
   
   fun getArray(): Array<T & Any>?
  }
  
- interface NonNullableTemplate<T: Any> {
+ internal interface NonNullableTemplate<T: Any> {
   fun get(): T
   
   fun getArray(): Array<T>?

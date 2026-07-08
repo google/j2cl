@@ -82,7 +82,7 @@ open class Nullability {
   return null
  }
  
- open fun m4(f: MyFunction) {}
+ internal open fun m4(f: MyFunction) {}
  
  internal open fun testNonNullOnType_pp_nullability(unannotated: NonNullInterface?, annotatedNonNull: NonNullInterface, annotatedNullable: NonNullInterface?) {}
  
@@ -177,7 +177,7 @@ open class Nullability {
   }
  }
  
- open class Foo<T> internal constructor() {
+ internal open class Foo<T> internal constructor() {
   internal open fun bar_pp_nullability(t: T) {}
   
   internal open fun baz_pp_nullability(): T? {
@@ -190,7 +190,7 @@ open class Nullability {
  }
  
  @JsFunction
- fun interface MyFunction {
+ internal fun interface MyFunction {
   fun x(a: String): String
  }
  
@@ -208,7 +208,7 @@ open class Nullability {
   }
  }
  
- fun interface NullableTemplatedReturn<T> {
+ internal fun interface NullableTemplatedReturn<T> {
   fun foo(): T?
  }
  
@@ -218,7 +218,7 @@ open class Nullability {
   }
  }
  
- open class ParameterizedDefaultNullability<N> internal constructor() {
+ internal open class ParameterizedDefaultNullability<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
   }
@@ -232,7 +232,7 @@ open class Nullability {
   }
  }
  
- open class ParameterizedNullable<N> internal constructor() {
+ internal open class ParameterizedNullable<N> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
   }
@@ -246,7 +246,7 @@ open class Nullability {
   }
  }
  
- open class ParameterizedNonNullable<N: Any> internal constructor() {
+ internal open class ParameterizedNonNullable<N: Any> internal constructor() {
   internal open fun getNullable_pp_nullability(): N? {
    return null
   }
@@ -260,23 +260,23 @@ open class Nullability {
   }
  }
  
- open class NonNullableInsideNullable<T> internal constructor() {
+ internal open class NonNullableInsideNullable<T> internal constructor() {
   internal open fun nonNullableTest_pp_nullability(nonNullable: ParameterizedNonNullable<T & Any>?) {}
  }
  
- open class Recursive<T> internal constructor() where T: Recursive<T>, T: Marker?
+ internal open class Recursive<T> internal constructor() where T: Recursive<T>, T: Marker?
  
- open class RecursiveNullable<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
+ internal open class RecursiveNullable<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
  
- open class RecursiveChild internal constructor(): Recursive<RecursiveChild>(), Marker
+ internal open class RecursiveChild internal constructor(): Recursive<RecursiveChild>(), Marker
  
- open class RecursiveNullableChild internal constructor(): RecursiveNullable<RecursiveNullableChild?>(), Marker
+ internal open class RecursiveNullableChild internal constructor(): RecursiveNullable<RecursiveNullableChild?>(), Marker
  
- open class RecursiveParam<T> internal constructor() where T: Recursive<T>, T: Marker?
+ internal open class RecursiveParam<T> internal constructor() where T: Recursive<T>, T: Marker?
  
- open class RecursiveNullableParam<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
+ internal open class RecursiveNullableParam<T> internal constructor() where T: RecursiveNullable<T>?, T: Marker?
  
- open class WithNullableParameterInConstructor {
+ internal open class WithNullableParameterInConstructor {
   internal constructor(s: String?)
   
   companion object {
@@ -287,7 +287,7 @@ open class Nullability {
   }
  }
  
- interface NonNullInterface
+ internal interface NonNullInterface
 }
 
-interface Marker
+internal interface Marker

@@ -167,17 +167,17 @@ open class TryCatch {
   private val closableThing: ClosableThing? = ClosableThing()
  }
  
- open class ClosableThing internal constructor(): AutoCloseable {
+ internal open class ClosableThing internal constructor(): AutoCloseable {
   override fun close() {}
  }
  
- interface GenericInterface<T> {
+ internal interface GenericInterface<T> {
   fun f(t: T) {}
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open inner class Exception1 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
+ internal open inner class Exception1 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open inner class Exception2 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
+ internal open inner class Exception2 internal constructor(): java.lang.RuntimeException(), GenericInterface<String?>
 }

@@ -91,11 +91,11 @@ open class JsFunctionOptimization {
  }
  
  @JsFunction
- fun interface F {
+ internal fun interface F {
   fun m(s: String?): String?
  }
  
- open inner class Holder<T> {
+ internal open inner class Holder<T> {
   internal constructor(value: T)
   
   internal constructor(i: Int, vararg value: T) {

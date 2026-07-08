@@ -28,13 +28,13 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-abstract class SomeClass {
+internal abstract class SomeClass {
  abstract fun foo(): String?
  
  internal constructor(i: Int)
 }
 
-abstract class SomeClassWithStaticMembers {
+internal abstract class SomeClassWithStaticMembers {
  abstract fun foo(): String?
  
  internal constructor(i: Int)
@@ -96,7 +96,7 @@ open class AnonymousClass {
  }
 }
 
-interface SomeInterface {
+internal interface SomeInterface {
  companion object {
   @JvmField
   val implicitlyStatic: SomeClass? = object : SomeClass(1) {
@@ -125,7 +125,7 @@ interface SomeInterface {
  }
 }
 
-open class JsConstructorClass {
+internal open class JsConstructorClass {
  @JsConstructor
  internal constructor(o: Any?)
  
@@ -139,7 +139,7 @@ open class JsConstructorClass {
  }
 }
 
-open class JsConstructorSubclass: JsConstructorClass {
+internal open class JsConstructorSubclass: JsConstructorClass {
  @JsConstructor
  internal constructor(): super(
   if (JsConstructorClass.trueVar_pp_anonymousclass) object : Any() {} else null,

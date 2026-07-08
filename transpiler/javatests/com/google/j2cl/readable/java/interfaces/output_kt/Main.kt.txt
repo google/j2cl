@@ -49,7 +49,7 @@ open class Main {
   (si2 as Main.AbstractImplementor?)!!.interfaceMethod()
  }
  
- fun interface Interface<T> {
+ internal fun interface Interface<T> {
   fun interfaceMethod()
   
   fun defaultMethod(t: T) {
@@ -68,25 +68,25 @@ open class Main {
   }
  }
  
- fun interface SubInterface: Interface<String?> {
+ internal fun interface SubInterface: Interface<String?> {
   override fun defaultMethod(s: String?) {
    super<Interface>.defaultMethod(s)
   }
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- open inner class Implementor internal constructor(): SubInterface, Interface<String?> {
+ internal open inner class Implementor internal constructor(): SubInterface, Interface<String?> {
   override fun interfaceMethod() {}
  }
  
- abstract inner class AbstractImplementor internal constructor(): SubInterface
+ internal abstract inner class AbstractImplementor internal constructor(): SubInterface
  
- open inner class SubImplementor internal constructor(): Main.AbstractImplementor() {
+ internal open inner class SubImplementor internal constructor(): Main.AbstractImplementor() {
   final override fun interfaceMethod() {}
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- enum class EnumImplementor: SubInterface {
+ internal enum class EnumImplementor: SubInterface {
   ONE;
   
   override fun interfaceMethod() {}

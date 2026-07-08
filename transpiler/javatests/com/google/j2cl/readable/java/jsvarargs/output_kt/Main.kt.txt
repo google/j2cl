@@ -247,11 +247,11 @@ open class Main {
  }
  
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
- open class NativeObject {
+ internal open class NativeObject {
   constructor(vararg pars: Any?)
  }
  
- open class SubVarargsConstructorClass: NativeObject {
+ internal open class SubVarargsConstructorClass: NativeObject {
   @JsConstructor
   constructor(i: Int, vararg args: Any?): super(
    *(args as Array<Any?>?)!!,
@@ -261,7 +261,7 @@ open class Main {
  }
  
  @JsFunction
- fun interface Function {
+ internal fun interface Function {
   fun f1(i: Int, vararg args: Any?): Any?
  }
  
@@ -278,14 +278,14 @@ open class Main {
   }
  }
  
- class AFunction internal constructor(): Function {
+ internal class AFunction internal constructor(): Function {
   override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![i]
   }
  }
  
- open class SubMain: Main {
+ internal open class SubMain: Main {
   constructor(): super(10)
   
   override fun f3(m: Int, vararg numbers: Int): Int {
@@ -309,7 +309,7 @@ open class Main {
  }
  
  @JsFunction
- fun interface GenericFunction<T> {
+ internal fun interface GenericFunction<T> {
   fun m(i: T, vararg args: T): Any?
  }
 }

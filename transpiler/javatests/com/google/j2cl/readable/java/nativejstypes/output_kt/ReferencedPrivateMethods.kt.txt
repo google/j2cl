@@ -27,7 +27,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
-open class ReferencedPrivateMethods internal constructor() {
+internal open class ReferencedPrivateMethods internal constructor() {
  open class Inner {
   open fun getInstance(): Int {
    val t: NativeReferencedPrivateMethods = NativeReferencedPrivateMethods()
@@ -36,7 +36,7 @@ open class ReferencedPrivateMethods internal constructor() {
  }
  
  @JsType(namespace = "nativejstypes", isNative = true)
- open class NativeReferencedPrivateMethods internal constructor() {
+ private open class NativeReferencedPrivateMethods internal constructor() {
   @JvmField
   @JsProperty(name = "x")
   internal var x_private_2: Int = 0

@@ -52,10 +52,10 @@ open class Main {
  @JsConstructor
  constructor(@JsOptional a: String?)
  
- open fun testFunction(f: Function?) {}
+ internal open fun testFunction(f: Function?) {}
  
  @JsMethod
- open fun testOptionalFunction(@JsOptional f: Function?) {}
+ internal open fun testOptionalFunction(@JsOptional f: Function?) {}
  
  companion object {
   @JvmStatic
@@ -70,11 +70,11 @@ open class Main {
  }
  
  @JsFunction
- fun interface Function {
+ internal fun interface Function {
   fun f1(@JsOptional s: String?, vararg args: Any?): Any?
  }
  
- class AFunction internal constructor(): Function {
+ internal class AFunction internal constructor(): Function {
   override fun f1(@JsOptional i: String?, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![0]
@@ -82,14 +82,14 @@ open class Main {
  }
  
  @JsType
- interface I<T> {
+ internal interface I<T> {
   fun m(t: T, @JsOptional o: Any?)
   
   fun n(t: T, @JsOptional o: Any?, vararg rest: Any?)
  }
  
  @JsType
- open class TemplatedSubtype<T: String?> internal constructor(): I<T> {
+ internal open class TemplatedSubtype<T: String?> internal constructor(): I<T> {
   override fun m(t: T, @JsOptional o: Any?) {}
   
   override fun n(t: T, @JsOptional o: Any?, vararg rest: Any?) {
@@ -98,7 +98,7 @@ open class Main {
  }
  
  @JsType
- open inner class SpecializedSubtype constructor(@JsOptional a: Any?): I<String?> {
+ internal open inner class SpecializedSubtype constructor(@JsOptional a: Any?): I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
   
   override fun n(s: String?, @JsOptional o: Any?, vararg rest: Any?) {
@@ -106,7 +106,7 @@ open class Main {
   }
  }
  
- open class NonJsTypeSubtype internal constructor(): I<String?> {
+ internal open class NonJsTypeSubtype internal constructor(): I<String?> {
   override fun m(t: String?, @JsOptional o: Any?) {}
   
   override fun n(s: String?, @JsOptional o: Any?, vararg rest: Any?) {

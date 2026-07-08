@@ -22,7 +22,7 @@ import javaemul.lang.*
 import kotlin.Int
 import kotlin.Suppress
 
-fun interface MyInterface {
+internal fun interface MyInterface {
  fun `fun`(a: Int): Int
 }
 
@@ -33,7 +33,7 @@ open class MixedNestings {
   A().a()
  }
  
- open inner class A internal constructor() {
+ internal open inner class A internal constructor() {
   open fun aa() {}
   
   open fun a() {

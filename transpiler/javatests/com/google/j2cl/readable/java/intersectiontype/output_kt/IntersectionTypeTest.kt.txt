@@ -27,17 +27,17 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 import kotlin.let
 
-fun interface Getable<T> {
+internal fun interface Getable<T> {
  fun get(): T
 }
 
-fun interface Setable {
+internal fun interface Setable {
  fun set(i: Int)
 }
 
-interface Serial
+internal interface Serial
 
-fun interface Cmp {
+internal fun interface Cmp {
  fun cmp(): Int
  
  fun defaultM(): Int {
@@ -45,11 +45,11 @@ fun interface Cmp {
  }
 }
 
-fun interface Cmp2<T> {
+internal fun interface Cmp2<T> {
  fun cmp(a: Int): Int
 }
 
-open class CmpImpl internal constructor(): Cmp {
+internal open class CmpImpl internal constructor(): Cmp {
  override fun cmp(): Int {
   return 1
  }
@@ -84,7 +84,7 @@ open class IntersectionTypeTest<U> {
   }
   
   @JvmStatic
-  fun <T> cast(o: Any?): Getable<T>? {
+  internal fun <T> cast(o: Any?): Getable<T>? {
    if (o == null) {
     return o.let { it as Setable?; it as Getable<T>?; it }
    }
@@ -92,24 +92,24 @@ open class IntersectionTypeTest<U> {
   }
   
   @JvmStatic
-  fun <T> cast1(s: Any?): Getable<Comparable<String>?>? {
+  internal fun <T> cast1(s: Any?): Getable<Comparable<String>?>? {
    return s.let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
   
   @JvmStatic
-  fun <T> cast2(s: Any?): Getable<Comparable<T & Any>?>? {
+  internal fun <T> cast2(s: Any?): Getable<Comparable<T & Any>?>? {
    return s.let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
   
   @JvmStatic
-  fun method(): Cmp? {
+  internal fun method(): Cmp? {
    return (Cmp {
     return@Cmp 1
    }).let { it as Cmp; it as Serial; it }
   }
   
   @JvmStatic
-  fun method2(): Cmp2<Any?>? {
+  internal fun method2(): Cmp2<Any?>? {
    return Cmp2 { a: Int ->
     return@Cmp2 1
    } as Cmp2<Any?>?
@@ -162,21 +162,21 @@ open class IntersectionTypeTest<U> {
   }
  }
  
- open inner class MapEntry internal constructor() {
+ internal open inner class MapEntry internal constructor() {
   open fun <T> method(o: Any?): Getable<T>? {
    return o.let { it as Getable<T>?; it as Setable?; it }
   }
  }
  
- open class A private constructor()
+ private open class A private constructor()
  
- interface EmptyA
+ private interface EmptyA
  
- interface EmptyB
+ private interface EmptyB
  
- open class SomeConcreteType private constructor()
+ private open class SomeConcreteType private constructor()
  
- open class GenericType<T> internal constructor() {
+ internal open class GenericType<T> internal constructor() {
   internal open fun doSomething_pp_intersectiontype(t: T) {}
  }
 }

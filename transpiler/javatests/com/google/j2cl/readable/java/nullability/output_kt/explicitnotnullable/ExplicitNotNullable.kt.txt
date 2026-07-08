@@ -375,19 +375,19 @@ open class ExplicitNotNullable {
   }
  }
  
- interface NullableBound<T: NullableBound<T>?>
+ internal interface NullableBound<T: NullableBound<T>?>
  
- interface NonNullableBound<T: NonNullableBound<T>>
+ internal interface NonNullableBound<T: NonNullableBound<T>>
  
- interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
+ internal interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
  
- interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
+ internal interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
  
- interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
+ internal interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
  
- interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
+ internal interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
  
- open class ParameterizedDefaultNullability<N: Any> {
+ internal open class ParameterizedDefaultNullability<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_explicitnotnullable: N? = null
   
@@ -421,7 +421,7 @@ open class ExplicitNotNullable {
   internal open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
  
- open class ParameterizedNullable<N> {
+ internal open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_explicitnotnullable: N? = null
   
@@ -455,7 +455,7 @@ open class ExplicitNotNullable {
   internal open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
  
- open class ParameterizedNonNullable<N: Any> {
+ internal open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_explicitnotnullable: N? = null
   
@@ -489,41 +489,41 @@ open class ExplicitNotNullable {
   internal open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
  
- fun interface Consumer<T> {
+ internal fun interface Consumer<T> {
   fun accept(t: T)
  }
  
- fun interface Supplier<T> {
+ internal fun interface Supplier<T> {
   fun get(): T
  }
  
- fun interface IntFunction<T> {
+ internal fun interface IntFunction<T> {
   fun accept(i: Int): T
  }
  
- fun interface Function<I, O> {
+ internal fun interface Function<I, O> {
   fun apply(i: I): O
  }
  
- open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
+ internal open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
   internal open fun getThis_pp_nullability_explicitnotnullable(): DependentTypeParameters<E, T> {
    return this
   }
  }
 }
 
-open class DefaultNullable internal constructor() {
+internal open class DefaultNullable internal constructor() {
  companion object {
   @JvmStatic
   internal fun nullableAccept_pp_nullability_explicitnotnullable(s: String?) {}
  }
 }
 
-open class OuterClass<E: Any> internal constructor() {
+internal open class OuterClass<E: Any> internal constructor() {
  init {
   object : InnerClass<E>() {}
   object : InnerClass<String>() {}
  }
  
- open inner class InnerClass<E: Any> internal constructor()
+ internal open inner class InnerClass<E: Any> internal constructor()
 }

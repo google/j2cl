@@ -23,7 +23,7 @@ import jsinterop.annotations.JsType
 import kotlin.Int
 import kotlin.Suppress
 
-fun interface OtherInterface {
+internal fun interface OtherInterface {
  fun f(a: Int): Int
 }
 
@@ -44,14 +44,14 @@ open class MyJsType: OtherInterface {
  }
 }
 
-interface MyInterface {
+internal interface MyInterface {
  fun foo(a: Int): Int
  
  fun bar(a: Int): Int
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
-open class SubJsType internal constructor(): MyJsType(), MyInterface {
+internal open class SubJsType internal constructor(): MyJsType(), MyInterface {
  override fun bar(a: Int): Int {
   return a + 2
  }

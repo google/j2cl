@@ -63,7 +63,7 @@ open class Main {
   }
  }
  
- annotation class Foo (
+ internal annotation class Foo (
   val booleanValue: Boolean = Foo.BOOLEAN_CONSTANT,
   val intValue: Int = Foo.INT_CONSTANT,
   val stringValue: String = Foo.STRING_CONSTANT,
@@ -88,14 +88,14 @@ open class Main {
   }
  }
  
- enum class SomeEnum {
+ internal enum class SomeEnum {
   ZERO,
   ONE;
  }
  
- annotation class Zoo
+ internal annotation class Zoo
  
- abstract inner class ClassImplementingAnnotation internal constructor(): Annotation
+ internal abstract inner class ClassImplementingAnnotation internal constructor(): Annotation
  
- interface InterfaceExtendingAnnotation: Annotation
+ internal interface InterfaceExtendingAnnotation: Annotation
 }

@@ -316,13 +316,13 @@ open class DefaultNotNullable {
   }
  }
  
- interface ParameterizedInterface<T: Any> {
+ internal interface ParameterizedInterface<T: Any> {
   fun add(t: T): T
   
   fun nullableAdd(t: T?): T?
  }
  
- open inner class ImplementsParameterizedInterface internal constructor(): ParameterizedInterface<String> {
+ internal open inner class ImplementsParameterizedInterface internal constructor(): ParameterizedInterface<String> {
   override fun add(s: String): String {
    return "Hey"
   }
@@ -332,19 +332,19 @@ open class DefaultNotNullable {
   }
  }
  
- interface NullableBound<T: NullableBound<T>?>
+ internal interface NullableBound<T: NullableBound<T>?>
  
- interface NonNullableBound<T: NonNullableBound<T>>
+ internal interface NonNullableBound<T: NonNullableBound<T>>
  
- interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
+ internal interface NullableBoundWithNonNullArgument: NullableBound<NullableBoundWithNonNullArgument>
  
- interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
+ internal interface NullableBoundWithNullableArgument: NullableBound<NullableBoundWithNullableArgument?>
  
- interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
+ internal interface NonNullBoundWithNonNullArgument: NonNullableBound<NonNullBoundWithNonNullArgument>
  
- interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
+ internal interface NonNullBoundWithNullableArgument: NonNullableBound<NonNullBoundWithNullableArgument>
  
- open class ParameterizedDefaultNullability<N: Any> {
+ internal open class ParameterizedDefaultNullability<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
   
@@ -381,7 +381,7 @@ open class DefaultNotNullable {
   internal open fun jsOptional_pp_nullability_defaultnotnullable(a: String, @JsOptional optional: N?) {}
  }
  
- open class ParameterizedNullable<N> {
+ internal open class ParameterizedNullable<N> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
   
@@ -415,7 +415,7 @@ open class DefaultNotNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
  }
  
- open class ParameterizedNonNullable<N: Any> {
+ internal open class ParameterizedNonNullable<N: Any> {
   @JvmField
   internal var nullable_pp_nullability_defaultnotnullable: N? = null
   
@@ -449,7 +449,7 @@ open class DefaultNotNullable {
   internal open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}
  }
  
- fun interface Consumer<T> {
+ internal fun interface Consumer<T> {
   fun accept(t: T)
  }
 }

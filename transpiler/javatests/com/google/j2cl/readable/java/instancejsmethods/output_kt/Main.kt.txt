@@ -24,11 +24,11 @@ import kotlin.Int
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
-fun interface MyInterface {
+internal fun interface MyInterface {
  fun intfFoo(): Int
 }
 
-open class SuperParent internal constructor() {
+internal open class SuperParent internal constructor() {
  open fun `fun`(a: Int, b: Int): Int {
   return a + b + 111
  }
@@ -38,7 +38,7 @@ open class SuperParent internal constructor() {
  }
 }
 
-open class Parent internal constructor(): SuperParent() {
+internal open class Parent internal constructor(): SuperParent() {
  @JsMethod(name = "sum")
  override fun `fun`(a: Int, b: Int): Int {
   return a + b
@@ -55,7 +55,7 @@ open class Parent internal constructor(): SuperParent() {
  }
 }
 
-open class Child internal constructor(): Parent(), MyInterface {
+internal open class Child internal constructor(): Parent(), MyInterface {
  override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }

@@ -25,7 +25,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 
 @JsType(name = "toplevel", namespace = "", isNative = true)
-open class TopLevel {
+internal open class TopLevel {
  private constructor()
  
  companion object {
@@ -34,14 +34,14 @@ open class TopLevel {
  }
  
  @JsType(isNative = true)
- open class Nested internal constructor() {
+ internal open class Nested internal constructor() {
   @JvmField
   var x: Int = 0
  }
 }
 
 @JsType(name = "toplevel.Nested", namespace = "", isNative = true)
-open class TopLevelNestedReference internal constructor() {
+internal open class TopLevelNestedReference internal constructor() {
  @JvmField
  var x: Int = 0
 }

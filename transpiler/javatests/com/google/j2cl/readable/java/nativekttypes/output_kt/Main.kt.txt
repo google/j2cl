@@ -166,7 +166,7 @@ open class Main {
  }
 }
 
-open class Subclass<V>: KTopLevel<V>, KInterface<V> {
+internal open class Subclass<V>: KTopLevel<V>, KInterface<V> {
  internal constructor(v: V): super(v)
  
  override fun renamedMethod(): Int {
@@ -232,7 +232,7 @@ open class Subclass<V>: KTopLevel<V>, KInterface<V> {
   }
 }
 
-open class Subsubclass<V>: Subclass<V> {
+internal open class Subsubclass<V>: Subclass<V> {
  internal constructor(v: V): super(v)
  
  override fun renamedMethod(): Int {
@@ -298,7 +298,7 @@ open class Subsubclass<V>: Subclass<V> {
   }
 }
 
-open class BridgeSubclass internal constructor(): KBridge() {
+internal open class BridgeSubclass internal constructor(): KBridge() {
  override fun method() {
   super<KBridge>.method()
  }
