@@ -484,7 +484,7 @@ DEFAULT_J2CL_JAVAC_OPTS = [
     "-XDinjectLogSites=false",
     # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
     "-XDstringConcat=inline",
-    # Explicitly limit to Java 21 inputs as that is the max currently supported.
+    # TODO(b/475672976): Upgrade to Java 25.
     "-source 21",
     "-target 21",
 ]

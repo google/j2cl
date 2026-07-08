@@ -16,10 +16,5 @@ integration_library(
 
 integration_test(
     srcs = ["Main.java"],
-    javacopts = [
-        # TODO(b/475672976: Remove copybara stripping once open source is running Java 25.
-        "-source 21",
-        "-target 21",
-    ],
     deps = [":record-in-other-library"],
 )

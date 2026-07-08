@@ -10,8 +10,4 @@ package(
 
 integration_test(
     srcs = glob(["*.java"]),
-    javacopts = [
-        "-source 17",
-        "-target 17",
-    ],
 )
