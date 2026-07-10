@@ -41,6 +41,7 @@ EMIT_RELAXED_VISIBILITY_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/java/subnativejstype",
     "//transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault",
     "//transpiler/javatests/com/google/j2cl/readable/java/supermethodcall",
+    "//third_party/java_src/xplat/kmpbench/java",
     # go/keep-sorted end
 ])
 
