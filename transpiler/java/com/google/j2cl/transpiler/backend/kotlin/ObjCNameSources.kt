@@ -96,13 +96,6 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       else -> Source.EMPTY
     }
 
-  fun objCEnumAnnotationSource(name: String, swiftName: String? = null): Source =
-    annotation(
-      nameSources.topLevelQualifiedNameSource("javaemul.lang.ObjCEnum"),
-      literal(name),
-      swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
-    )
-
   fun objCNameAnnotationSource(
     name: String,
     swiftName: String? = null,
@@ -116,18 +109,6 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       swiftName?.let { parameterSource("swiftName", literal(it)) }.orEmpty(),
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
-
-  // We prepend the ObjC prefix to the enum type to avoid collisions with J2Objc.
-  // We use a typedef to remove these again in the J2ObjC compatibility layer.
-  fun objCEnumAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    when {
-      !isJ2ObjCInteropEnabled -> Source.EMPTY
-      typeDeclaration.isEnumWithNonEmptyValues ->
-        objCEnumAnnotationSource(
-          "${typeDeclaration.objCName(prefix = nameSources.objCNamePrefix)}_Enum"
-        )
-      else -> Source.EMPTY
-    }
 
   fun objCAnnotationSource(method: Method): Source =
     when {

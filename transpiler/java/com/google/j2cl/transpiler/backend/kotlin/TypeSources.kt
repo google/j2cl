@@ -71,7 +71,6 @@ internal data class TypeSources(val nameSources: NameSources) {
         nativeTypeSource(type)
       } else {
         newLineSeparated(
-          objCNameSources.objCEnumAnnotationSource(typeDeclaration),
           objCNameSources.objectiveCAnnotationSource(typeDeclaration),
           objCNameSources.swiftNameAnnotationSource(typeDeclaration),
           objCNameSources.hiddenFromObjCAnnotationSource(typeDeclaration),
