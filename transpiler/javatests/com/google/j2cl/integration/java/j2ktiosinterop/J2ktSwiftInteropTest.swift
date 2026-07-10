@@ -64,9 +64,9 @@ final class J2ktSwiftInteropTest: XCTestCase {
 
     var i: Int32
 
-    i = obj.finalIntField_
-    i = obj.intField_
-    obj.intField_ = i
+    i = obj.finalIntField
+    i = obj.intField
+    obj.intField = i
 
     // Unsupported because of b/441110909.
     // i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD_

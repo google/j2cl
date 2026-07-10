@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -64,3 +65,6 @@ internal val TypeDeclaration.swiftName: String?
       else -> null
     }
   }
+
+internal val FieldDescriptor.swiftName: String?
+  get() = name?.objCName?.escapeJ2ObjCKeyword

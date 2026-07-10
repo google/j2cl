@@ -138,7 +138,7 @@ internal class ObjCNameSources(val nameSources: NameSources) {
         )
       }
       needsObjCNameAnnotation(field.descriptor) ->
-        objCNameAnnotationSource(field.descriptor.objCName)
+        objCNameAnnotationSource(field.descriptor.objCName, field.descriptor.swiftName)
       else -> Source.EMPTY
     }
 
