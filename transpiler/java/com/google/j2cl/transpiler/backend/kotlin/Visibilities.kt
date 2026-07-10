@@ -35,6 +35,7 @@ private val EXCLUDED_VISIBILITY_PACKAGES: Set<String> =
     "innerclassinheritance",
     "innerclassinitorder",
     "instanceinnerclass",
+    "j2kt.relaxedvisibility",
     "jsbridgebackward",
     "jsbridgemultipleaccidental",
     "jsbridgemultipleexposing",

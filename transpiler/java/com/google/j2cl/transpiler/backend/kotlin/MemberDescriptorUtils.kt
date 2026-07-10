@@ -130,3 +130,15 @@ val MemberDescriptor.computeWidestOverriddenVisibility: KtVisibility?
     } else {
       null
     }
+
+val MethodDescriptor.overridesProtected: Boolean
+  get() =
+    javaOverriddenMethodDescriptors.any { it.visibility.isProtected } &&
+      javaOverriddenMethodDescriptors.none { it.visibility.isPublic }
+
+// Emit explicit visibility for public overrides of protected methods, since we don't know whether
+// the overriden method was translated as protected or public - it depends whether the dependent
+// target was compiled with actual or relaxed visibilities.
+// See: `MemberDescriptor.isProtectedTranslatedAsPublic`
+val MemberDescriptor.needsExplicitVisibilityModifier: Boolean
+  get() = this is MethodDescriptor && visibility.isPublic && overridesProtected

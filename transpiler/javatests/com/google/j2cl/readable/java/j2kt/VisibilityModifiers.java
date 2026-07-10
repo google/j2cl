@@ -17,6 +17,7 @@ package j2kt;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.J2ktPublic;
+import j2kt.relaxedvisibility.RelaxedVisibilityModifiers;
 import java.util.Collection;
 import org.jspecify.annotations.NullMarked;
 
@@ -121,6 +122,16 @@ public final class VisibilityModifiers {
       extends VisibilityWarningsSuppressed.NonFinal.Public {
     @Override
     protected void protectedMethod() {}
+  }
+
+  public static class PublicWithRelaxedVisibilityOverride
+      extends RelaxedVisibilityModifiers.Public {
+    @Override
+    public void protectedWithPublicOverride() {}
+
+    public static void callProtectedWithPublicOverride(PublicWithRelaxedVisibilityOverride x) {
+      x.protectedWithPublicOverride();
+    }
   }
 
   @AutoValue

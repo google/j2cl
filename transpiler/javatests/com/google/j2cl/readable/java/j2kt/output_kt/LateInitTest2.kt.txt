@@ -26,7 +26,7 @@ import kotlin.Suppress
 class LateInitTest2: TestCase() {
  private lateinit var uninitialized: String
  
- override fun setUp() {
+ public override fun setUp() {
   this.uninitialized = "I have been initialized"
  }
  

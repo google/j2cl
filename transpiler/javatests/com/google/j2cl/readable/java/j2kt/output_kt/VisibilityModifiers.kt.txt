@@ -24,6 +24,7 @@ import javaemul.lang.MutableCollectionJvm
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
 
 class VisibilityModifiers {
  open class Public {
@@ -100,6 +101,17 @@ class VisibilityModifiers {
  
  open class ProtectedOverrideOfVisibilityWarningsSuppressed: j2kt.VisibilityModifiers.VisibilityWarningsSuppressed.NonFinal.Public() {
   override fun protectedMethod() {}
+ }
+ 
+ open class PublicWithRelaxedVisibilityOverride: j2kt.relaxedvisibility.RelaxedVisibilityModifiers.Public() {
+  public override fun protectedWithPublicOverride() {}
+  
+  companion object {
+   @JvmStatic
+   fun callProtectedWithPublicOverride(x: PublicWithRelaxedVisibilityOverride) {
+    x.protectedWithPublicOverride()
+   }
+  }
  }
  
  @WasAutoValue

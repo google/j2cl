@@ -94,7 +94,10 @@ internal data class MemberDescriptorSources(val nameSources: NameSources) {
   fun visibilityModifierSource(memberDescriptor: MemberDescriptor): Source =
     environment
       .ktVisibility(memberDescriptor)
-      .takeUnless { it == environment.inferredKtVisibility(memberDescriptor) }
+      .takeUnless {
+        it == environment.inferredKtVisibility(memberDescriptor) &&
+          !memberDescriptor.needsExplicitVisibilityModifier
+      }
       ?.source
       .orEmpty()
 
