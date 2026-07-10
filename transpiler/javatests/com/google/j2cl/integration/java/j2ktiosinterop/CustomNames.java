@@ -17,14 +17,6 @@ package j2ktiosinterop;
 
 import com.google.j2objc.annotations.ObjectiveCName;
 import com.google.j2objc.annotations.SwiftName;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Retention(RetentionPolicy.CLASS)
-@Target(ElementType.METHOD)
-@interface J2ktIncompatible {}
 
 @ObjectiveCName("Custom")
 public final class CustomNames {

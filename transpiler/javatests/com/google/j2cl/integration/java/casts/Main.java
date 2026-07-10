@@ -24,6 +24,7 @@ import static com.google.j2cl.integration.testing.TestUtils.isJ2KtJvm;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
+import com.google.j2cl.integration.testing.J2ktIncompatible;
 import java.io.Serializable;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
@@ -524,8 +525,6 @@ public class Main {
       T unused = (T) o;
     }
   }
-
-  @interface J2ktIncompatible {}
 
   private static void testCasts_typeVariableWithNativeBound(Object... unused) {
     if (!isJ2Kt()) {

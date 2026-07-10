@@ -21,6 +21,8 @@ import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
+import com.google.j2cl.integration.testing.J2ktIncompatible;
+
 /** Test captures. */
 public class Main {
   public static void main(String... args) {

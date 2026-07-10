@@ -15,6 +15,7 @@
  */
 package gwtincompatible;
 
+import com.google.j2cl.integration.testing.J2ktIncompatible;
 import java.text.SimpleDateFormat; // Non-emulated jre class.
 
 public class Main {

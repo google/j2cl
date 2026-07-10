@@ -18,6 +18,8 @@ package innerclassinitorder;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 
+import com.google.j2cl.integration.testing.J2ktIncompatible;
+
 /** Smoke test for inner classes, copied from GWT. */
 public class Main extends J2ktFallback {
   public int number = 0;

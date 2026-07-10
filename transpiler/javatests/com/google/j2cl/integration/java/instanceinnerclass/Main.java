@@ -18,17 +18,7 @@ package instanceinnerclass;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Retention(RetentionPolicy.CLASS)
-@Target({
-  ElementType.METHOD,
-  ElementType.TYPE,
-})
-@interface J2ktIncompatible {}
+import com.google.j2cl.integration.testing.J2ktIncompatible;
 
 /**
  * Test instance inner class.

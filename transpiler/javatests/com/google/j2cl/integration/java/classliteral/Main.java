@@ -26,20 +26,13 @@ import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.google.j2cl.integration.testing.J2ktIncompatible;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 import org.jspecify.annotations.Nullable;
-
-@Retention(RetentionPolicy.CLASS)
-@Target(ElementType.METHOD)
-@interface J2ktIncompatible {}
 
 public class Main {
   public static void main(String... args) {
