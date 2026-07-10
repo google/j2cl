@@ -17,36 +17,15 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import java.lang.Boolean.getBoolean
+
+/** Whether to emit relaxed visibility to workaround Kotlin/Java visibility rule differences. */
+val emitRelaxedVisibility: Boolean =
+  getBoolean("com.google.j2cl.transpiler.backend.kotlin.emitRelaxedVisibility")
 
 /** Set containing packages for which J2KT should not translate actual visibility. */
 private val EXCLUDED_VISIBILITY_PACKAGES: Set<String> =
   setOf(
-    // Packages from excluded readable/integration tests.
-    // TODO(b/206898384): Implement j2kt_emit_relaxed_visibility flag to avoid this list.
-    "accidentaloverride",
-    "autovalue",
-    "backwardbridgemethod",
-    "bridgemethods",
-    "cast",
-    "cyclicclinits",
-    "genericanddefaultmethods",
-    "genericmethod",
-    "gwtincompatible",
-    "innerclassinheritance",
-    "innerclassinitorder",
-    "instanceinnerclass",
-    "j2kt.relaxedvisibility",
-    "jsbridgebackward",
-    "jsbridgemultipleaccidental",
-    "jsbridgemultipleexposing",
-    "multipleroottypes",
-    "multipletopclasses",
-    "qualifiedsupercall",
-    "staticfieldimport.staticimports",
-    "subclassgenericclass",
-    "subnativejstype",
-    "supercallnondefault",
-    "supermethodcall",
   )
 
 /** List containing package prefixes for which J2KT should not translate actual visibility. */
@@ -55,18 +34,18 @@ private val EXCLUDE_VISIBILITY_PACKAGE_PREFIXES: List<String> =
   listOf(
   )
 
-private val TypeDeclaration.useActualKtVisibilityForPackage: Boolean
-  get() =
-    packageName !in EXCLUDED_VISIBILITY_PACKAGES &&
-      packageName.plus(".").let { packageNamePlusDot ->
-        EXCLUDE_VISIBILITY_PACKAGE_PREFIXES.none { packageNamePlusDot.startsWith(it) }
-      }
+private fun useActualKtVisibilityForPackage(packageName: String): Boolean =
+  packageName !in EXCLUDED_VISIBILITY_PACKAGES &&
+    packageName.plus(".").let { packageNamePlusDot ->
+      EXCLUDE_VISIBILITY_PACKAGE_PREFIXES.none { packageNamePlusDot.startsWith(it) }
+    }
 
 /** Returns whether J2KT should translate actual visibility for the given type declaration. */
 // TODO(b/206898384): Remove this once the bug is fixed.
 internal val TypeDeclaration.useActualKtVisibility: Boolean
   get() =
-    useActualKtVisibilityForPackage &&
+    !emitRelaxedVisibility &&
+      useActualKtVisibilityForPackage(packageName) &&
       (!isAutoConverter || hasAutoValueOrBuilderSuperType) &&
       !isVisibilityWarningSuppressed
 
