@@ -1,0 +1,46 @@
+goog.module('jsasync.Main.JsTypeClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+class JsTypeClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JsTypeClass} */
+ static $create__() {
+  JsTypeClass.$clinit();
+  let $instance = new JsTypeClass();
+  $instance.$ctor__jsasync_Main_JsTypeClass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsasync_Main_JsTypeClass__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @return {IThenable<Integer>} */
+ async asyncMethod() {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsTypeClass.$clinit = () =>{};
+  JsTypeClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsTypeClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsTypeClass, 'jsasync.Main$JsTypeClass');
+
+exports = JsTypeClass;
+
+//# sourceMappingURL=Main$JsTypeClass.js.map

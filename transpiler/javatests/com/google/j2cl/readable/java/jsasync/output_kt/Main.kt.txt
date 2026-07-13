@@ -124,6 +124,14 @@ open class Main {
   }
  }
  
+ @JsType
+ internal open class JsTypeClass internal constructor() {
+  @JsAsync
+  open fun asyncMethod(): IThenable<Int?>? {
+   return null
+  }
+ }
+ 
  internal fun interface BaseInterface {
   fun asyncCall(): IThenable<Int?>?
  }

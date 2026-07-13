@@ -55,6 +55,14 @@ public class Main {
     return null;
   }
 
+  @JsType
+  static class JsTypeClass {
+    @JsAsync
+    public IThenable<Integer> asyncMethod() {
+      return null;
+    }
+  }
+
   @SuppressWarnings("unused")
   void testAsyncLambdas() {
     AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));

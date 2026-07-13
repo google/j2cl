@@ -46,6 +46,11 @@ class Main {
     fun staticAsyncMethod(): IThenable<Unit> = Promise.resolve(await(Promise.resolve(Unit)))
   }
 
+  @JsType
+  class JsTypeClass {
+    @JsAsync fun asyncMethod(): IThenable<Int>? = null
+  }
+
   @SuppressWarnings("unused")
   fun testAsyncLambdas() {
     val i = AsyncInterface { Promise.resolve(await(Promise.resolve(5))) }
