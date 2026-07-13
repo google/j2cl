@@ -40,6 +40,9 @@ public final class Main {
 
     SomeJsType someJsType = newSomeJsType(123);
     assertTrue(someJsType.field == 123);
+
+    SomeJsType.CapturesOuter capturesOuter = newCapturesOuter(someJsType);
+    assertTrue(callGetOuter(capturesOuter) == someJsType);
   }
 
   private static void testMethod() {
@@ -47,6 +50,8 @@ public final class Main {
     assertTrue(callGetNumber(someJsType) == 11);
     assertTrue(callGetString(someJsType).equals("str"));
     assertTrue(callPackagePrivateMethod(someJsType).equals("pp"));
+    assertTrue(callReturnSelf(someJsType) == someJsType);
+    assertTrue(callTakesSelf(someJsType, someJsType));
   }
 
   private static void testProperty() {
@@ -137,6 +142,23 @@ public final class Main {
     @JsMethod
     String packagePrivateMethod() {
       return "pp";
+    }
+
+    public SomeJsType returnSelf() {
+      return this;
+    }
+
+    public boolean takesSelf(SomeJsType self) {
+      return self == this;
+    }
+
+    @JsType
+    public class CapturesOuter {
+      public CapturesOuter() {}
+
+      public SomeJsType getOuter() {
+        return SomeJsType.this;
+      }
     }
   }
 
@@ -310,6 +332,18 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native String callPackagePrivateMethod(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native SomeJsType callReturnSelf(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native boolean callTakesSelf(SomeJsType someJsType, SomeJsType arg);
+
+  @JsMethod(namespace = "nativehelper")
+  static native SomeJsType.CapturesOuter newCapturesOuter(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native SomeJsType callGetOuter(SomeJsType.CapturesOuter capturesOuter);
 
   @JsMethod(namespace = "nativehelper")
   static native int callAbstractMethod(AbstractJsType someJsType);

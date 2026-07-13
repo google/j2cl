@@ -244,7 +244,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
                     0, builder.getEnclosingTypeDescriptor().getTypeArgumentDescriptors())
                 .setSynthetic(true)
                 .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
-                .setOriginalJsInfo(JsInfo.NONE)
+                .setOriginalJsInfo(constructor.getJsInfo())
                 .setVisibility(constructor.getVisibility()));
   }
 

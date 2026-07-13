@@ -125,12 +125,9 @@ public class WasmExportBridgesUtils {
           returnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
       return ReturnStatement.builder()
           .setExpression(
-              convertToExternal(
-                  NewInstance.builderFrom(methodDescriptor.getDeclarationDescriptor())
-                      .setArguments(AstUtils.maybePackageVarargs(methodDescriptor, arguments))
-                      .build(),
-                  returnTypeDescriptor,
-                  /* isExport= */ true))
+              NewInstance.builderFrom(methodDescriptor.getDeclarationDescriptor())
+                  .setArguments(AstUtils.maybePackageVarargs(methodDescriptor, arguments))
+                  .build())
           .setSourcePosition(sourcePosition)
           .build();
     }
@@ -163,10 +160,22 @@ public class WasmExportBridgesUtils {
         descriptor.toBuilder()
             .setOrigin(origin)
             .setReturnTypeDescriptor(
-                getExternalType(descriptor.getReturnTypeDescriptor(), /* isExport= */ true))
-            .updateParameterTypeDescriptors(
-                descriptor.getParameterTypeDescriptors().stream()
-                    .map(parameterType -> getExternalType(parameterType, /* isExport= */ true))
+                descriptor.isConstructor()
+                    ? descriptor.getReturnTypeDescriptor()
+                    : getExternalType(
+                        descriptor.getReturnTypeDescriptor(),
+                        /* isExport= */ origin.isWasmJsExport()))
+            .setParameterDescriptors(
+                descriptor.getParameterDescriptors().stream()
+                    .map(
+                        pd ->
+                            pd.toBuilder()
+                                .setTypeDescriptor(
+                                    getExternalType(
+                                        pd.getTypeDescriptor(),
+                                        /* isExport= */ origin.isWasmJsExport()))
+                                .setVarargs(false)
+                                .build())
                     .collect(toImmutableList()))
             .makeDeclaration()
             .setAbstract(false)
@@ -206,15 +215,12 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(javaTypeDescriptor.isNullable());
     }
-    if (javaTypeDescriptor.isNative() || javaTypeDescriptor.isPrimitive()) {
-      return javaTypeDescriptor;
+    if (needsExternConversion(javaTypeDescriptor, isExport)) {
+      return TypeDescriptors.get()
+          .javaemulInternalWasmExtern
+          .toNullable(javaTypeDescriptor.isNullable());
     }
-    if (isExport) {
-      return javaTypeDescriptor;
-    }
-    return TypeDescriptors.get()
-        .javaemulInternalWasmExtern
-        .toNullable(javaTypeDescriptor.isNullable());
+    return javaTypeDescriptor;
   }
 
   /** Converts the given expression to a JS type which can be passed to JS. */
@@ -223,13 +229,10 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return RuntimeMethods.createJsStringFromStringMethodCall(expression);
     }
-    if (javaTypeDescriptor.isNative() || javaTypeDescriptor.isPrimitive()) {
-      return expression;
+    if (needsExternConversion(javaTypeDescriptor, isExport)) {
+      return RuntimeMethods.createWasmExternalizeMethodCall(expression);
     }
-    if (isExport) {
-      return expression;
-    }
-    return RuntimeMethods.createWasmExternalizeMethodCall(expression);
+    return expression;
   }
 
   /** Converts the given expression that was received from JS to a Wasm Java type. */
@@ -245,13 +248,17 @@ public class WasmExportBridgesUtils {
                   javaTypeDescriptor));
       return MethodCall.builderFrom(adaptMethodDescriptor).setArguments(expression).build();
     }
-    if (javaTypeDescriptor.isNative() || javaTypeDescriptor.isPrimitive()) {
-      return expression;
+    if (needsExternConversion(javaTypeDescriptor, isExport)) {
+      return RuntimeMethods.createWasmInternalizeMethodCall(expression, javaTypeDescriptor);
     }
-    if (isExport) {
-      return expression;
-    }
-    return RuntimeMethods.createWasmInternalizeMethodCall(expression, javaTypeDescriptor);
+    return expression;
+  }
+
+  private static boolean needsExternConversion(TypeDescriptor typeDescriptor, boolean isExport) {
+    return !typeDescriptor.isNative()
+        && !typeDescriptor.isPrimitive()
+        // For methods exported by configureAll, we can avoid conversions for exported types.
+        && !(isExport && AstUtils.isWasmJsExportedType(typeDescriptor));
   }
 
   private WasmExportBridgesUtils() {}

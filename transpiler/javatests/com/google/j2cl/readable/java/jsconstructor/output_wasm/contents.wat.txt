@@ -806,9 +806,9 @@
  )
 )
 
-;;; JsConstructorClassWithExplicitConstructor JsConstructorClassWithExplicitConstructor.<init>(JsConstructorClass arg0, int arg1)
-(func $js_export_<init>__jsconstructor_JsConstructorClass__int__jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
- (param $arg0 (ref null $jsconstructor.JsConstructorClass))
+;;; JsConstructorClassWithExplicitConstructor JsConstructorClassWithExplicitConstructor.<init>(WasmExtern arg0, int arg1)
+(func $js_export_<init>__javaemul_internal_WasmExtern__int__jsconstructor_JsConstructorClass_JsConstructorClassWithExplicitConstructor@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor
+ (param $arg0 (ref null extern))
  (param $arg1 i32)
  (result (ref null $jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
@@ -816,7 +816,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
-  (return (call $$create_$private__jsconstructor_JsConstructorClass__int@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (local.get $arg0)(local.get $arg1)))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass__int@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (ref.cast (ref null $jsconstructor.JsConstructorClass) (extern.internalize (local.get $arg0)))(local.get $arg1)))
  )
 )
 
@@ -1341,16 +1341,16 @@
  )
 )
 
-;;; I I.<init>(Outer arg0)
-(func $js_export_<init>__jsconstructor_JsConstructorClass_Outer__jsconstructor_JsConstructorClass_Outer_I@jsconstructor.JsConstructorClass.Outer.I
- (param $arg0 (ref null $jsconstructor.JsConstructorClass.Outer))
+;;; I I.<init>(WasmExtern arg0)
+(func $js_export_<init>__javaemul_internal_WasmExtern__jsconstructor_JsConstructorClass_Outer_I@jsconstructor.JsConstructorClass.Outer.I
+ (param $arg0 (ref null extern))
  (result (ref null $jsconstructor.JsConstructorClass.Outer.I))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:156:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:156:13
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.Outer.I )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:156:13
-  (return (call $$create_$private__jsconstructor_JsConstructorClass_Outer@jsconstructor.JsConstructorClass.Outer.I (local.get $arg0)))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass_Outer@jsconstructor.JsConstructorClass.Outer.I (ref.cast (ref null $jsconstructor.JsConstructorClass.Outer) (extern.internalize (local.get $arg0)))))
  )
 )
 
@@ -1439,16 +1439,16 @@
  )
 )
 
-;;; Varargs Varargs.<init>(int... arg0)
-(func $js_export_<init>__arrayOf_int__jsconstructor_JsConstructorClass_Varargs@jsconstructor.JsConstructorClass.Varargs
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfInt))
+;;; Varargs Varargs.<init>(WasmExtern arg0)
+(func $js_export_<init>__javaemul_internal_WasmExtern__jsconstructor_JsConstructorClass_Varargs@jsconstructor.JsConstructorClass.Varargs
+ (param $arg0 (ref null extern))
  (result (ref null $jsconstructor.JsConstructorClass.Varargs))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:162:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:162:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.Varargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:162:11
-  (return (call $$create_$private__arrayOf_int@jsconstructor.JsConstructorClass.Varargs (local.get $arg0)))
+  (return (call $$create_$private__arrayOf_int@jsconstructor.JsConstructorClass.Varargs (ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (extern.internalize (local.get $arg0)))))
  )
 )
 
@@ -1542,17 +1542,17 @@
  )
 )
 
-;;; InstanceVarargs InstanceVarargs.<init>(JsConstructorClass arg0, int... arg1)
-(func $js_export_<init>__jsconstructor_JsConstructorClass__arrayOf_int__jsconstructor_JsConstructorClass_InstanceVarargs@jsconstructor.JsConstructorClass.InstanceVarargs
- (param $arg0 (ref null $jsconstructor.JsConstructorClass))
- (param $arg1 (ref null $javaemul.internal.WasmArray.OfInt))
+;;; InstanceVarargs InstanceVarargs.<init>(WasmExtern arg0, WasmExtern arg1)
+(func $js_export_<init>__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__jsconstructor_JsConstructorClass_InstanceVarargs@jsconstructor.JsConstructorClass.InstanceVarargs
+ (param $arg0 (ref null extern))
+ (param $arg1 (ref null extern))
  (result (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:186:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:186:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.InstanceVarargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:186:11
-  (return (call $$create_$private__jsconstructor_JsConstructorClass__arrayOf_int@jsconstructor.JsConstructorClass.InstanceVarargs (local.get $arg0)(local.get $arg1)))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass__arrayOf_int@jsconstructor.JsConstructorClass.InstanceVarargs (ref.cast (ref null $jsconstructor.JsConstructorClass) (extern.internalize (local.get $arg0)))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (extern.internalize (local.get $arg1)))))
  )
 )
 
@@ -1668,16 +1668,16 @@
  )
 )
 
-;;; JsConstructorSubtypeOfRegularType JsConstructorSubtypeOfRegularType.<init>(Object arg0)
-(func $js_export_<init>__java_lang_Object__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
- (param $arg0 (ref null $java.lang.Object))
+;;; JsConstructorSubtypeOfRegularType JsConstructorSubtypeOfRegularType.<init>(WasmExtern arg0)
+(func $js_export_<init>__javaemul_internal_WasmExtern__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
+ (param $arg0 (ref null extern))
  (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:197:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:197:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:197:11
-  (return (call $$create_$private__java_lang_Object@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (local.get $arg0)))
+  (return (call $$create_$private__java_lang_Object@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.cast (ref null $java.lang.Object) (extern.internalize (local.get $arg0)))))
  )
 )
 
@@ -1786,16 +1786,16 @@
  )
 )
 
-;;; JsConstructorSubclass JsConstructorSubclass.<init>(JsConstructorClass arg0)
-(func $js_export_<init>__jsconstructor_JsConstructorClass__jsconstructor_JsConstructorClass_JsConstructorSubclass@jsconstructor.JsConstructorClass.JsConstructorSubclass
- (param $arg0 (ref null $jsconstructor.JsConstructorClass))
+;;; JsConstructorSubclass JsConstructorSubclass.<init>(WasmExtern arg0)
+(func $js_export_<init>__javaemul_internal_WasmExtern__jsconstructor_JsConstructorClass_JsConstructorSubclass@jsconstructor.JsConstructorClass.JsConstructorSubclass
+ (param $arg0 (ref null extern))
  (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubclass))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
-  (return (call $$create_$private__jsconstructor_JsConstructorClass@jsconstructor.JsConstructorClass.JsConstructorSubclass (local.get $arg0)))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass@jsconstructor.JsConstructorClass.JsConstructorSubclass (ref.cast (ref null $jsconstructor.JsConstructorClass) (extern.internalize (local.get $arg0)))))
  )
 )
 
@@ -2394,17 +2394,17 @@
  )
 )
 
-;;; SubVarargs SubVarargs.<init>(Object arg0, int... arg1)
-(func $js_export_<init>__java_lang_Object__arrayOf_int__jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $javaemul.internal.WasmArray.OfInt))
+;;; SubVarargs SubVarargs.<init>(WasmExtern arg0, WasmExtern arg1)
+(func $js_export_<init>__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs
+ (param $arg0 (ref null extern))
+ (param $arg1 (ref null extern))
  (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:169:11
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:169:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:169:11
-  (return (call $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (local.get $arg0)(local.get $arg1)))
+  (return (call $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (ref.cast (ref null $java.lang.Object) (extern.internalize (local.get $arg0)))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (extern.internalize (local.get $arg1)))))
  )
 )
 

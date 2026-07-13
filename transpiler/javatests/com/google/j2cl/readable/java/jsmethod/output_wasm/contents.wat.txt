@@ -422,20 +422,20 @@
 )
 (elem declare func $m_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
 
-;;; void Base.m(T arg0)
-(func $js_export_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
- (type $function.js_export_m__java_lang_Object__void_$pp_jsmethod)
+;;; void Base.m(WasmExtern arg0)
+(func $js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
+ (type $function.js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $arg0 (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
  (local $this (ref null $jsmethod.JsMethodExample.Base))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Base) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
-  (call_ref $function.m_m__java_lang_Object__void_$pp_jsmethod (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $jsmethod.JsMethodExample.Base.vtable $m_m__java_lang_Object__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Base(local.get $this))))
+  (call_ref $function.m_m__java_lang_Object__void_$pp_jsmethod (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (extern.internalize (local.get $arg0)))(struct.get $jsmethod.JsMethodExample.Base.vtable $m_m__java_lang_Object__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Base(local.get $this))))
  )
 )
-(elem declare func $js_export_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
+(elem declare func $js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
 
 ;;; void Base.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.Base

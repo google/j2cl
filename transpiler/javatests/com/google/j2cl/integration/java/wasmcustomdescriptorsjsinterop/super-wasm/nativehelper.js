@@ -17,6 +17,7 @@ goog.module('nativehelper');
 
 const AbstractJsType = goog.require('wasmcustomdescriptorsjsinterop.AbstractJsType');
 const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');
+const CapturesOuter = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType.CapturesOuter');
 const JsInterface = goog.require('wasmcustomdescriptorsjsinterop.JsInterface');
 const JsInterfaceAccidentalDefaultMethodImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalDefaultMethodImpl');
 const JsInterfaceAccidentalImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalImpl');
@@ -159,6 +160,43 @@ function callPackagePrivateMethod(someJsType) {
 }
 
 /**
+ * @param {!SomeJsType} someJsType
+ * @return {?SomeJsType}
+ * @public
+ */
+function callReturnSelf(someJsType) {
+  return someJsType.returnSelf();
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @param {!SomeJsType} arg
+ * @return {boolean}
+ * @public
+ */
+function callTakesSelf(someJsType, arg) {
+  return someJsType.takesSelf(arg);
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {!CapturesOuter}
+ * @public
+ */
+function newCapturesOuter(someJsType) {
+  return new CapturesOuter(someJsType);
+}
+
+/**
+ * @param {!CapturesOuter} capturesOuter
+ * @return {?SomeJsType}
+ * @public
+ */
+function callGetOuter(capturesOuter) {
+  return capturesOuter.getOuter();
+}
+
+/**
  * @param {!AbstractJsType} someJsType
  * @return {number}
  * @public
@@ -244,6 +282,10 @@ exports = {
   getReadWriteProperty,
   setReadWriteProperty,
   callPackagePrivateMethod,
+  callReturnSelf,
+  callTakesSelf,
+  newCapturesOuter,
+  callGetOuter,
   callAbstractMethod,
   callInterfaceMethod,
   callInterfaceGetNumber,
