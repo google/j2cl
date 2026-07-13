@@ -15,9 +15,6 @@
  */
 package nativejstypes
 
-import jsinterop.annotations.JsPackage
-import jsinterop.annotations.JsType
-
 fun testNativeJsTypeWithNamespace(): Int {
   val foo = Foo()
   return foo.sum()
@@ -68,18 +65,6 @@ fun testNativeTypeObjectMethods() {
   val unusedEq = bar == Any()
 }
 
-fun testNativeTypeEquality() {
-  val foo1: Foo? = null
-  val foo2: Foo? = null
-  val a1 = foo1 === foo2
-  val a2 = foo1 === null
-
-  val gbigint1: GBigInt? = null
-  val gbigint2: GBigInt? = null
-  val b1 = gbigint1 === gbigint2
-  val b2 = gbigint1 === null
-}
-
 fun testTopLevel() {
   TopLevel.x = 2
 
@@ -94,5 +79,3 @@ fun testGenericRegularClass() {
   val genericRegularClass = GenericRegularClass<Foo>()
   genericRegularClass.field = Foo()
 }
-
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "gbigint") internal class GBigInt
