@@ -22,6 +22,7 @@ j2cl_library(
 
 """
 
+load("@rules_java//java:defs.bzl", "java_import")
 load(":j2cl_java_library.bzl", "j2cl_java_import")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_import.bzl", "j2kt_jvm_import", "j2kt_native_import")
@@ -38,6 +39,15 @@ def j2cl_import(
     Args:
       jar: Jar file to appropriately rename.
     """
+
+    if jar.endswith(".jar"):
+        java_import_name = name + "_java_import"
+        java_import(
+            name = java_import_name,
+            jars = [jar],
+            visibility = ["//visibility:private"],
+        )
+        jar = ":" + java_import_name
 
     j2cl_java_import(
         name = name,
