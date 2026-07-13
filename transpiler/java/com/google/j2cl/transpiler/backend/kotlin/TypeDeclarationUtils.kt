@@ -76,6 +76,9 @@ internal val TypeDeclaration.ktVisibility: KtVisibility
       // TODO(b/483489173): Remove when visibility problem in Dagger-generated Factory classes is
       // solved differently.
       hasInjectAnnotatedMethod -> KtVisibility.PUBLIC
+      // TODO(b/483489173): A workaround for @Dagger and @ComponentRegistryCompatible.
+      hasDaggerComponentAnnotation && hasDaggerComponentRegistryCompatibleAnnotation ->
+        KtVisibility.PUBLIC
       !useActualKtVisibility -> KtVisibility.PUBLIC
       else -> KtVisibility.from(visibility)
     }

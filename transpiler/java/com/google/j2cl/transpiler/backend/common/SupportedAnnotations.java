@@ -41,9 +41,11 @@ public class SupportedAnnotations {
   public static final ImmutableSet<String> J2KT_ANNOTATIONS =
       ImmutableSet.<String>builder()
           .addAll(COMMON_ANNOTATIONS)
+          .add("com.google.apps.xplat.dagger.asynccomponent.ComponentRegistryCompatible")
           .add("com.google.apps.xplat.testing.parameterized.RunParameterized")
           .add("com.google.errorprone.annotations.CanIgnoreReturnValue")
           .add("com.google.errorprone.annotations.ResultIgnorabilityUnspecified")
+          .add("dagger.Component")
           .add("dagger.Inject")
           .add("javax.inject.Inject")
           .add("org.junit.runner.RunWith")

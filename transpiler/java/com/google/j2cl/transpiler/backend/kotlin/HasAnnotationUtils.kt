@@ -20,5 +20,11 @@ import com.google.j2cl.transpiler.ast.HasAnnotations
 internal val HasAnnotations.hasInjectAnnotation: Boolean
   get() = hasAnnotation("dagger.Inject") || hasAnnotation("javax.inject.Inject")
 
+internal val HasAnnotations.hasDaggerComponentAnnotation: Boolean
+  get() = hasAnnotation("dagger.Component")
+
+internal val HasAnnotations.hasDaggerComponentRegistryCompatibleAnnotation: Boolean
+  get() = hasAnnotation("com.google.apps.xplat.dagger.asynccomponent.ComponentRegistryCompatible")
+
 internal val HasAnnotations.isVisibilityWarningSuppressed: Boolean
   get() = isWarningSuppressed("j2kt:visibility")
