@@ -80,7 +80,10 @@ class KotlinGeneratorStage(
 
     output.write(sourcePath, source)
 
-    output.write(sourceMapPath, SourceMapGenerator.generateSourceMaps(sourceMapPath, mappings))
+    output.write(
+      sourceMapPath,
+      SourceMapGenerator.generateSourceMaps(compilationUnit.fileInfo, sourceMapPath, mappings),
+    )
 
     if (shouldGenerateReadableSourceMaps) {
       output.write(

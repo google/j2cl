@@ -161,7 +161,8 @@ public class OutputGeneratorStage {
                   inputSourceByteOffsetConverter,
                   Utf8ByteOffsetConverter.create(javaScriptImplementationSource));
         } else {
-          String sourceMap = renderSourceMap(type, jsImplGenerator.getSourceMappings());
+          String sourceMap =
+              renderSourceMap(compilationUnit, type, jsImplGenerator.getSourceMappings());
 
           if (sourceMap != null) {
             javaScriptImplementationSource +=
@@ -283,9 +284,18 @@ public class OutputGeneratorStage {
 
   @Nullable
   private String renderSourceMap(
-      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+      CompilationUnit compilationUnit,
+      Type type,
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+    // Don't emit source maps for synthetic units. Synthetic CUs don't have a source file associated
+    // with them so the call to get their FileInfo would fail below.
+    if (compilationUnit.isSynthetic()) {
+      return null;
+    }
+
     try {
       return SourceMapGenerator.generateSourceMaps(
+          compilationUnit.getFileInfo(),
           type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX,
           javaSourcePositionByOutputSourcePosition);
     } catch (IOException e) {
