@@ -57,6 +57,16 @@
  (param $value i32)
 )
 
+;;; int MyNativeType.staticField2()
+(func $f_staticField2__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.customStaticField") 
+ (result i32)
+)
+
+;;; void MyNativeType.staticField2(int value)
+(func $f_staticField2__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.customStaticField") 
+ (param $value i32)
+)
+
 ;;; int MyNativeType.publicField()
 (func $f_publicField__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.publicField") 
  (param $this (ref null extern))
@@ -65,6 +75,18 @@
 
 ;;; void MyNativeType.publicField(int value)
 (func $f_publicField__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.publicField") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int MyNativeType.publicField2()
+(func $f_publicField2__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.customPublicField") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void MyNativeType.publicField2(int value)
+(func $f_publicField2__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.customPublicField") 
  (param $this (ref null extern))
  (param $value i32)
 )

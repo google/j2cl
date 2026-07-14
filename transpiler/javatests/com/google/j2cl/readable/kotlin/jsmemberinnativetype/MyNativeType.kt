@@ -25,12 +25,16 @@ class MyNativeType {
   companion object {
     @JvmField var staticField: Int = definedExternally
 
+    @JvmField @JsProperty(name = "customStaticField") var staticField2: Int = definedExternally
+
     @JvmStatic @JsProperty external fun getStaticField(): Int
 
     @JvmStatic @JsProperty external fun setStaticField(value: Int)
   }
 
   @JvmField var publicField: Int = definedExternally
+
+  @JvmField @JsProperty(name = "customPublicField") var publicField2: Int = definedExternally
 
   private var privateField: Int = definedExternally
 
@@ -52,7 +56,14 @@ class MyNativeType {
 
   @JsOverlay
   fun useFieldsAndMethods() {
-    val jsProperties = publicField + privateField + packageField + protectedField + staticField
+    val jsProperties =
+      publicField +
+        publicField2 +
+        privateField +
+        packageField +
+        protectedField +
+        staticField +
+        staticField2
 
     val jsPropertyMethods = getPublicField() + getStaticField()
     setPublicField(1)

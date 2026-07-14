@@ -156,10 +156,10 @@ interface InterfaceWithDefaultJsProperties {
 class ImplementsInterfaceWithDefaultJsProperties : InterfaceWithDefaultJsProperties
 
 class ClassWithJvmField {
-  @JvmField var f = 1
+  @JvmField @JsProperty(name = "custom_f") var f = 1
 
   companion object {
-    @JvmField var x = 1
+    @JvmField @JsProperty(name = "custom_x") var x = 1
   }
 }
 

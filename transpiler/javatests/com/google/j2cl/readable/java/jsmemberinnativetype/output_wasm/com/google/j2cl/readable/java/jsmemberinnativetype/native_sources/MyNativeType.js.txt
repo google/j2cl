@@ -16,6 +16,7 @@ goog.module('test.foo.MyNativeType');
 class MyNativeType {
   constructor() {
     this.publicField = 0;
+    this.customPublicField = 0;
     this.privateField = 0;
     this.packageField = 0;
     this.protectedField = 0;
@@ -46,5 +47,10 @@ class MyNativeType {
  * @public {number}
  */
 MyNativeType.staticField = 0;
+
+/**
+ * @public {number}
+ */
+MyNativeType.customStaticField = 0;
 
 exports = MyNativeType;

@@ -23,6 +23,9 @@ import jsinterop.annotations.JsType;
 public class MyNativeType {
   static int staticField;
 
+  @JsProperty(name = "customStaticField")
+  static int staticField2;
+
   @JsProperty
   public static native int getStaticField();
 
@@ -30,6 +33,10 @@ public class MyNativeType {
   public static native void setStaticField(int value);
 
   public int publicField;
+
+  @JsProperty(name = "customPublicField")
+  public int publicField2;
+
   private int privateField;
   int packageField;
   protected int protectedField;
@@ -50,7 +57,14 @@ public class MyNativeType {
 
   @JsOverlay
   public final void useFieldsAndMethods() {
-    int jsProperties = publicField + privateField + packageField + protectedField + staticField;
+    int jsProperties =
+        publicField
+            + publicField2
+            + privateField
+            + packageField
+            + protectedField
+            + staticField
+            + staticField2;
 
     int jsPropertyMethods = getPublicField() + getStaticField();
     setPublicField(1);
