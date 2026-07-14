@@ -44,13 +44,6 @@ internal class ObjCNameSources(val nameSources: NameSources) {
   private val forbiddenSwiftEnumNames =
     setOf("alloc", "description", "initialize", "load", "release", "version") + objCKeywords
 
-  private val hiddenFromObjCAnnotations =
-    setOf(
-      "com.google.j2kt.annotations.HiddenFromObjC",
-      // TODO(b/527953195): Remove when Dagger KSP is available.
-      "dagger.internal.DaggerGenerated",
-    )
-
   private val environment: Environment
     get() = nameSources.environment
 
@@ -186,7 +179,7 @@ internal class ObjCNameSources(val nameSources: NameSources) {
     }
 
   private fun TypeDeclaration.isHiddenFromObjC(): Boolean =
-    hiddenFromObjCAnnotations.any { hasAnnotation(it) } ||
+    hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ||
       annotations.any {
         it.typeDescriptor.qualifiedSourceName == "com.google.j2kt.annotations.HidesFromObjC"
       }
