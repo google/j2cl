@@ -586,24 +586,25 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Compute the KtInfo of the function by traversing its overriding chain. */
   @Override
   @Memoized
-  public KtInfo getKtInfo() {
+  public J2ktInfo getJ2ktInfo() {
     if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getKtInfo();
+      return getManglingDescriptor().getJ2ktInfo();
     }
 
-    KtInfo ktInfo = getDeclarationDescriptor().getOriginalKtInfo();
+    J2ktInfo j2ktInfo = getDeclarationDescriptor().getOriginalJ2ktInfo();
 
     for (MethodDescriptor overriddenMethodDescriptor : getJavaOverriddenMethodDescriptors()) {
-      KtInfo overriddenKtInfo =
-          overriddenMethodDescriptor.getDeclarationDescriptor().getOriginalKtInfo();
-      ktInfo =
-          KtInfo.builder()
-              .setProperty(ktInfo.isProperty() || overriddenKtInfo.isProperty())
-              .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : ktInfo.getName())
+      J2ktInfo overriddenJ2ktInfo =
+          overriddenMethodDescriptor.getDeclarationDescriptor().getOriginalJ2ktInfo();
+      j2ktInfo =
+          J2ktInfo.builder()
+              .setProperty(j2ktInfo.isProperty() || overriddenJ2ktInfo.isProperty())
+              .setName(
+                  j2ktInfo.getName() == null ? overriddenJ2ktInfo.getName() : j2ktInfo.getName())
               .build();
     }
 
-    return ktInfo;
+    return j2ktInfo;
   }
 
   @Override
@@ -1295,7 +1296,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Override
   public boolean isKtProperty() {
-    return getKtInfo().isProperty()
+    return getJ2ktInfo().isProperty()
         || getEnclosingTypeDescriptor().isAnnotation()
         || isJ2ObjCPropertyGetter();
   }
@@ -1653,11 +1654,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract JsInfo getOriginalJsInfo();
 
-    abstract Builder setOriginalKtInfoInternal(KtInfo ktInfo);
+    abstract Builder setOriginalJ2ktInfoInternal(J2ktInfo j2ktInfo);
 
     @CanIgnoreReturnValue
-    public Builder setOriginalKtInfo(KtInfo ktInfo) {
-      return setOriginalKtInfoInternal(ktInfo);
+    public Builder setOriginalJ2ktInfo(J2ktInfo j2ktInfo) {
+      return setOriginalJ2ktInfoInternal(j2ktInfo);
     }
 
     public abstract Builder setAnnotations(List<Annotation> annotations);

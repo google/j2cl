@@ -20,7 +20,7 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.KtInfo;
+import com.google.j2cl.transpiler.ast.J2ktInfo;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -99,7 +99,7 @@ public class OverrideKotlinAdditionalAbstractMethods extends NormalizationPass {
     MethodDescriptor methodDescriptor =
         intValueMethodDescriptor.toBuilder()
             .setName(methodName)
-            .setOriginalKtInfo(KtInfo.builder().setName(ktName).build())
+            .setOriginalJ2ktInfo(J2ktInfo.builder().setName(ktName).build())
             .setReturnTypeDescriptor(returnType)
             .setEnclosingTypeDescriptor(type.getTypeDescriptor())
             .setAbstract(false)

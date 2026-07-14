@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 /** Kotlin variance. */
-public enum KtVariance {
+public enum J2ktVariance {
   IN,
   OUT
 }

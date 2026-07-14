@@ -21,10 +21,10 @@ import java.util.List;
 
 /** J2KT AST utilities. */
 public class J2ktAstUtils {
-  /** Construct KtInfo from the given annotations. */
-  public static KtInfo getKtInfo(List<Annotation> annotations) {
+  /** Construct J2ktInfo from the given annotations. */
+  public static J2ktInfo getJ2ktInfo(List<Annotation> annotations) {
     if (annotations.isEmpty()) {
-      return KtInfo.NONE;
+      return J2ktInfo.NONE;
     }
 
     String name = null;
@@ -42,7 +42,7 @@ public class J2ktAstUtils {
       }
     }
 
-    return KtInfo.builder()
+    return J2ktInfo.builder()
         .setProperty(isProperty)
         .setName(name)
         .setDisabled(isDisabled)

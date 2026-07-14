@@ -68,7 +68,7 @@ internal data class MemberDescriptorSources(val nameSources: NameSources) {
       .orEmpty()
 
   fun nativeThrowsAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    methodDescriptor.ktInfo
+    methodDescriptor.j2ktInfo
       .takeIf { it.isThrows && SHOULD_INCLUDE_NATIVE_THROWS }
       ?.let {
         KotlinSource.annotation(

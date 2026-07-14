@@ -55,25 +55,25 @@ public abstract class MemberDescriptor
   public abstract JsInfo getJsInfo();
 
   @Nullable
-  abstract KtInfo getOriginalKtInfoInternal();
+  abstract J2ktInfo getOriginalJ2ktInfoInternal();
 
-  /** Return KtInfo from the member's annotation. */
-  public KtInfo getOriginalKtInfo() {
-    KtInfo info = getOriginalKtInfoInternal();
-    return info != null ? info : J2ktAstUtils.getKtInfo(getAnnotations());
+  /** Return J2ktInfo from the member's annotation. */
+  public J2ktInfo getOriginalJ2ktInfo() {
+    J2ktInfo info = getOriginalJ2ktInfoInternal();
+    return info != null ? info : J2ktAstUtils.getJ2ktInfo(getAnnotations());
   }
 
-  abstract KtInfo getKtInfo();
+  abstract J2ktInfo getJ2ktInfo();
 
   public abstract boolean isKtProperty();
 
   @Nullable
   public String getExplicitKtName() {
-    return getKtInfo().getName();
+    return getJ2ktInfo().getName();
   }
 
   public boolean isKtDisabled() {
-    return getKtInfo().isDisabled();
+    return getJ2ktInfo().isDisabled();
   }
 
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();

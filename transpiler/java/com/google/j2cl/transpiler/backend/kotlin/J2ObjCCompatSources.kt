@@ -411,7 +411,7 @@ internal class J2ObjCCompatSources(
       methodDescriptor.parameterTypeDescriptors.all(::shouldInclude) &&
       (((methodDescriptor.isStatic || methodDescriptor.isConstructor) &&
         methodDescriptor.isObjectiveCKmpMethod) || canInferObjCName(methodDescriptor)) &&
-      !methodDescriptor.ktInfo.isThrows
+      !methodDescriptor.j2ktInfo.isThrows
 
   private val MethodDescriptor.isObjectiveCKmpMethod: Boolean
     get() = hasAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")

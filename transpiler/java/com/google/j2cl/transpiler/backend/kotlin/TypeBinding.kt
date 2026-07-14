@@ -98,7 +98,7 @@ private val TypeBinding.updatedWithParameterVariance: TypeBinding
   get() =
     copy(
       typeArgumentDescriptor =
-        typeArgumentDescriptor.applyVariance(typeParameterDescriptor.ktVariance)
+        typeArgumentDescriptor.applyVariance(typeParameterDescriptor.j2ktVariance)
     )
 
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.

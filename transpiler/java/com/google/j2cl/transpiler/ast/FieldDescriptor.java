@@ -177,8 +177,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return getDeclarationJsInfo();
   }
 
-  public KtInfo getKtInfo() {
-    return getOriginalKtInfo();
+  @Override
+  public J2ktInfo getJ2ktInfo() {
+    return getOriginalJ2ktInfo();
   }
 
   @Override
@@ -301,11 +302,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
-    abstract Builder setOriginalKtInfoInternal(KtInfo ktInfo);
+    abstract Builder setOriginalJ2ktInfoInternal(J2ktInfo j2ktInfo);
 
     @CanIgnoreReturnValue
-    public Builder setOriginalKtInfo(KtInfo ktInfo) {
-      return setOriginalKtInfoInternal(ktInfo);
+    public Builder setOriginalJ2ktInfo(J2ktInfo j2ktInfo) {
+      return setOriginalJ2ktInfoInternal(j2ktInfo);
     }
 
     public abstract Builder setAnnotations(List<Annotation> annotations);

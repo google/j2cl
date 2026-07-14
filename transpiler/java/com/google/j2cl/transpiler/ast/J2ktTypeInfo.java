@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 
 /** Kotlin type information. */
 @AutoValue
-public abstract class KtTypeInfo {
+public abstract class J2ktTypeInfo {
   @Nullable
   public abstract String getQualifiedName();
 
@@ -36,7 +36,7 @@ public abstract class KtTypeInfo {
   public abstract Builder toBuilder();
 
   public static Builder builder() {
-    return new AutoValue_KtTypeInfo.Builder();
+    return new AutoValue_J2ktTypeInfo.Builder();
   }
 
   /** The builder. */
@@ -50,6 +50,6 @@ public abstract class KtTypeInfo {
 
     public abstract Builder setCompanionQualifiedName(@Nullable String companionQualifiedName);
 
-    public abstract KtTypeInfo build();
+    public abstract J2ktTypeInfo build();
   }
 }

@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
-import com.google.j2cl.transpiler.ast.KtVariance
+import com.google.j2cl.transpiler.ast.J2ktVariance
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation.NOT_NULLABLE
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -93,11 +93,11 @@ internal val TypeDescriptor.isDenotableNonWildcard: Boolean
       else -> isDenotable
     }
 
-internal val TypeVariable.ktVariance: KtVariance?
+internal val TypeVariable.j2ktVariance: J2ktVariance?
   get() =
     when {
-      hasAnnotation("javaemul.internal.annotations.KtIn") -> KtVariance.IN
-      hasAnnotation("javaemul.internal.annotations.KtOut") -> KtVariance.OUT
+      hasAnnotation("javaemul.internal.annotations.KtIn") -> J2ktVariance.IN
+      hasAnnotation("javaemul.internal.annotations.KtOut") -> J2ktVariance.OUT
       else -> null
     }
 
@@ -162,15 +162,15 @@ internal val nullableAnyTypeDescriptor: TypeDescriptor
 private val anyTypeDescriptor: TypeDescriptor
   get() = nullableAnyTypeDescriptor.toNonNullable()
 
-internal fun TypeDescriptor.applyVariance(variance: KtVariance?) =
+internal fun TypeDescriptor.applyVariance(variance: J2ktVariance?) =
   if (this is TypeVariable) variableApplyVariance(variance) else this
 
-private fun TypeVariable.variableApplyVariance(variance: KtVariance?) =
+private fun TypeVariable.variableApplyVariance(variance: J2ktVariance?) =
   if (!isWildcardOrCapture) this
   else
     when (variance) {
-      KtVariance.IN -> lowerBoundTypeDescriptor ?: this
-      KtVariance.OUT -> upperBoundTypeDescriptor.takeIf { !it.isImplicitUpperBound } ?: this
+      J2ktVariance.IN -> lowerBoundTypeDescriptor ?: this
+      J2ktVariance.OUT -> upperBoundTypeDescriptor.takeIf { !it.isImplicitUpperBound } ?: this
       else -> this
     }
 

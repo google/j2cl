@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.KtInfo;
+import com.google.j2cl.transpiler.ast.J2ktInfo;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 
@@ -36,11 +36,11 @@ public class AnnotateProtobufMethodsAsKtProperties extends NormalizationPass {
               return methodDescriptor;
             }
 
-            KtInfo rewrittenKtInfo =
-                methodDescriptor.getOriginalKtInfo().toBuilder().setProperty(true).build();
+            J2ktInfo rewrittenJ2ktInfo =
+                methodDescriptor.getOriginalJ2ktInfo().toBuilder().setProperty(true).build();
 
             return methodDescriptor.transform(
-                builder -> builder.setOriginalKtInfo(rewrittenKtInfo));
+                builder -> builder.setOriginalJ2ktInfo(rewrittenJ2ktInfo));
           }
         });
   }
