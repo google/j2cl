@@ -17,7 +17,6 @@ package com.google.j2cl.jre.java.util;
 
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,6 @@ public class ArrayListTest extends ListTestBase {
     assertFalse(i.hasPrevious());
   }
 
-  @J2ktIncompatible // See b/317043391
   public void testRemoveRange() {
     ArrayListWithRemoveRange l = new ArrayListWithRemoveRange();
     for (int i = 0; i < 10; i++) {

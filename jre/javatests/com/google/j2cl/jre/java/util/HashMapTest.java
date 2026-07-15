@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -159,7 +158,6 @@ public class HashMapTest extends TestMap {
   /*
    * Test method for 'java.util.HashMap.clone()'
    */
-  @J2ktIncompatible // b/317230935
   public void testClone() {
     HashMap<String, String> srcMap = new HashMap<String, String>();
     checkEmptyHashMapAssumptions(srcMap);
@@ -330,7 +328,6 @@ public class HashMapTest extends TestMap {
   /*
    * Test method for 'java.util.AbstractMap.equals(Object)'
    */
-  @J2ktIncompatible // b/317230935
   public void testEquals() {
     HashMap<String, String> hashMap = new HashMap<String, String>();
     checkEmptyHashMapAssumptions(hashMap);
@@ -345,7 +342,6 @@ public class HashMapTest extends TestMap {
   }
 
   @SuppressWarnings("unchecked")
-  @J2ktIncompatible // b/317230935
   private HashMap<String, String> cloneMap(HashMap<String, String> hashMap) {
     return (HashMap<String, String>) hashMap.clone();
   }

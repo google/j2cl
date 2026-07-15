@@ -17,7 +17,6 @@ package com.google.j2cl.jre.java.util;
 
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,7 +31,6 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class ListTest extends TestList {
 
-  @J2ktIncompatible // not emulated
   public void testOf() {
     assertIsImmutableListOf(List.of());
     assertIsImmutableListOf(List.of("a"), "a");
@@ -105,7 +103,6 @@ public class ListTest extends TestList {
         () -> List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", null));
   }
 
-  @J2ktIncompatible // not emulated
   public void testCopyOf() {
     assertIsImmutableListOf(List.copyOf(List.of("a", "b")), "a", "b");
     assertIsImmutableListOf(List.copyOf(Arrays.asList("a", "b")), "a", "b");

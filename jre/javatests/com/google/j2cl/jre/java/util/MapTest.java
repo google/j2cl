@@ -17,7 +17,6 @@ package com.google.j2cl.jre.java.util;
 
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +28,6 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class MapTest extends TestMap {
 
-  @J2ktIncompatible // not emulated
   public void testOf() {
     assertIsImmutableMapOf(Map.of());
     assertIsImmutableMapOf(Map.of("a", 1), "a");
@@ -142,7 +140,6 @@ public class MapTest extends TestMap {
                 "a", 1, "b", 2, "c", 3, "d", 4, "e", 5, "f", 6, "g", 7, "h", 8, "i", 9, "a", 10));
   }
 
-  @J2ktIncompatible // not emulated
   public void testCopyOf() {
     assertIsImmutableMapOf(Map.copyOf(Map.of("a", 1)), "a");
 
@@ -160,13 +157,15 @@ public class MapTest extends TestMap {
     assertEquals(1, (int) copy.get("a"));
 
     // ensure that null values result in a NPE
-    HashMap<String, Integer> mapWithNullKey = new HashMap<>();
+    HashMap<@Nullable String, Integer> mapWithNullKey = new HashMap<>();
     mapWithNullKey.put(null, 1);
-    assertThrows(NullPointerException.class, () -> Map.copyOf(mapWithNullKey));
+    assertThrows(
+        NullPointerException.class, () -> Map.copyOf((HashMap<String, Integer>) mapWithNullKey));
 
-    HashMap<String, Integer> mapWithNullValue = new HashMap<>();
+    HashMap<String, @Nullable Integer> mapWithNullValue = new HashMap<>();
     mapWithNullValue.put("key", null);
-    assertThrows(NullPointerException.class, () -> Map.copyOf(mapWithNullValue));
+    assertThrows(
+        NullPointerException.class, () -> Map.copyOf((HashMap<String, Integer>) mapWithNullValue));
   }
 
   private static void assertIsImmutableMapOf(Map<String, Integer> map, String... contents) {
@@ -200,7 +199,6 @@ public class MapTest extends TestMap {
   }
 
   @SuppressWarnings("DuplicateMapKeys")
-  @J2ktIncompatible // not emulated
   public void testOfEntries() {
     Map<String, Integer> map = Map.ofEntries(Map.entry("a", 1), Map.entry("b", 2));
 
