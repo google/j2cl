@@ -3419,7 +3419,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         "public interface Super {}");
   }
 
-  public void testNativeJsTypeInterfaceDefaultMethodsFails() {
+  public void testNativeJsTypeInterfaceNonAbstractMethodsFails() {
     assertWithInlineMessages(
         "test.Buggy",
         """
@@ -3434,6 +3434,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         @JsType(isNative=true) public interface Buggy extends Interface {
           default void someMethod() {}
         > Error: Native JsType method 'void Buggy.someMethod()' should be native, abstract or JsOverlay.
+          private void somePrivateMethod() {}
+        > Error: Native JsType method 'void Buggy.somePrivateMethod()' should be native, abstract or JsOverlay.
+          static void someStaticMethod() {}
+        > Error: Native JsType method 'void Buggy.someStaticMethod()' should be native, abstract or JsOverlay.
           void someOtherMethod();
         > Error: Method 'void Buggy.someOtherMethod()' cannot override a JsOverlay method 'void Interface.someOtherMethod()'.
         }
@@ -3662,6 +3666,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public interface Buggy {
               @JsOverlay Object obj = new Object();
               @JsOverlay default void someOverlayMethod() {};
+              @JsOverlay private void somePrivateOverlayMethod() {};
+              @JsOverlay static void someStaticOverlayMethod() {};
             }
             """)
         .assertNoWarnings();
