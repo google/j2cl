@@ -108,9 +108,6 @@ public class InsertExternConversionsWasm extends NormalizationPass {
     if (isAnnotatedWithWasm(descriptor)) {
       return false;
     }
-    return descriptor.isNative()
-        // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
-        // native constructors, or exposing isNativeConstructor from MethodDescriptor.
-        || (descriptor.isConstructor() && descriptor.getEnclosingTypeDescriptor().isNative());
+    return descriptor.isNative();
   }
 }

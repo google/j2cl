@@ -60,7 +60,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewInstance(NewInstance constructorInvocation) {
-            if (constructorInvocation.getTarget().getEnclosingTypeDescriptor().isNative()) {
+            if (constructorInvocation.getTarget().isNative()) {
               return constructorInvocation;
             }
             return MethodCall.builderFrom(

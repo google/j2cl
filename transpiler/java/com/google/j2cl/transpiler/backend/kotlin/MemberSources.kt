@@ -217,7 +217,9 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
       visibilityModifierSource(method),
       Source.emptyIf(method.descriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
         spaceSeparated(
-          Source.emptyUnless(method.descriptor.isNative) { KotlinSource.EXTERNAL_KEYWORD },
+          Source.emptyUnless(method.descriptor.isNative && !method.descriptor.isConstructor) {
+            KotlinSource.EXTERNAL_KEYWORD
+          },
           method.inheritanceModifierSource,
         )
       },

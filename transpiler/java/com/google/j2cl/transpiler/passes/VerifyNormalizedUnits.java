@@ -98,8 +98,11 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitMethod(Method method) {
             checkMember(method);
-            // All native methods should be empty.
-            checkState(!method.isNative() || method.getBody().getStatements().isEmpty());
+            // All native methods (except constructors) should be empty.
+            checkState(
+                !method.isNative()
+                    || method.isConstructor()
+                    || method.getBody().getStatements().isEmpty());
             // Concrete types shouldn't have abstract methods
             checkState(
                 !method.isAbstract()
@@ -141,14 +144,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void checkMember(Member member) {
             verifyMemberUniqueness(member);
             if (verifyForWasm && !enableCustomDescriptorsJsInterop) {
-              boolean isNative =
-                  member.isNative()
-                      // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative
-                      // return true for native constructors, or exposing isNativeConstructor from
-                      // MethodDescriptor.
-                      || (member.isConstructor()
-                          && member.getDescriptor().getEnclosingTypeDescriptor().isNative());
-              checkState(isNative || !member.getDescriptor().isJsMember());
+              checkState(member.isNative() || !member.getDescriptor().isJsMember());
             }
           }
 
@@ -379,7 +375,6 @@ public class VerifyNormalizedUnits extends NormalizationPass {
   private void verifyStaticMemberQualifiers(MemberReference memberReference) {
     if (verifyForWasm) {
       checkState(!memberReference.getTarget().isStatic() || memberReference.getQualifier() == null);
-
     } else {
       checkState(
           !memberReference.getTarget().isStatic()

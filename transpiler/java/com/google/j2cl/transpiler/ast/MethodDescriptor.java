@@ -1816,7 +1816,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           isNative()
               || (!getOriginalJsInfo().isJsOverlay()
                   && getEnclosingTypeDescriptor().isNative()
-                  && isAbstract());
+                  && (isAbstract() || isConstructor()));
       setNative(isNative);
 
       if (ignoreNonNativeJsInfo.get()

@@ -425,7 +425,7 @@ final class ExpressionTranspiler {
       public boolean enterNewInstance(NewInstance newInstance) {
         // For native JS constructors, we have to call the imported method to get a new instance of
         // the JS type.
-        if (isNativeConstructor(newInstance.getTarget())) {
+        if (newInstance.getTarget().isNative()) {
           renderNonPolymorphicMethodCall(newInstance);
           return false;
         }
@@ -698,12 +698,6 @@ final class ExpressionTranspiler {
     // its rhs, the AST is transformed so that the resulting value is never used and the assignment
     // can be safely considered not to produce a value.
     return isPrimitiveVoid(expression.getTypeDescriptor()) || expression.isSimpleAssignment();
-  }
-
-  // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
-  // native constructors, or exposing isNativeConstructor from MethodDescriptor.
-  private static boolean isNativeConstructor(MethodDescriptor method) {
-    return method.getEnclosingTypeDescriptor().isNative() && method.isConstructor();
   }
 
   private static boolean isWasmCall(Expression expression) {

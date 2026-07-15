@@ -77,12 +77,6 @@ public class RemoveNonreferencedNativeMethods extends NormalizationPass {
 
   /** Returns {@code true} if the specified method is effectively private and native. */
   private static boolean isPrivateNativeMethod(MethodDescriptor methodDescriptor) {
-    boolean isEffectivelyNative =
-        methodDescriptor.isNative()
-            // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return
-            // true for native constructors, or exposing isNativeConstructor from MethodDescriptor.
-            || (methodDescriptor.getEnclosingTypeDescriptor().isNative()
-                && methodDescriptor.isConstructor());
     boolean isEffectivelyPrivate =
         // Exclude polymorphic methods because they may be used even if not directly referenced; for
         // example, through interfaces.
@@ -93,6 +87,6 @@ public class RemoveNonreferencedNativeMethods extends NormalizationPass {
                     .getTypeDeclaration()
                     .getVisibility()
                     .isPrivate());
-    return isEffectivelyNative && isEffectivelyPrivate;
+    return methodDescriptor.isNative() && isEffectivelyPrivate;
   }
 }

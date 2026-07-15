@@ -1416,12 +1416,9 @@ public final class AstUtils {
         return false;
       }
 
-      // Exclude native js constructors and constructors of abstract types.
-      // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true
-      // for native constructors, or exposing isNativeConstructor from MethodDescriptor.
+      // Exclude constructors of abstract types.
       if (methodDescriptor.isConstructor()
-          && (methodDescriptor.getEnclosingTypeDescriptor().isNative()
-              || methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract())) {
+          && methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract()) {
         return false;
       }
 

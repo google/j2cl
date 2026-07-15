@@ -73,9 +73,7 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
           @Override
           public Node rewriteMethod(Method method) {
             // skip methods implemented in Javascript
-            if (method.getDescriptor().isNative()
-                || (method.getDescriptor().isJsConstructor()
-                    && method.getDescriptor().getEnclosingTypeDescriptor().isNative())) {
+            if (method.getDescriptor().isNative()) {
               return method;
             }
 

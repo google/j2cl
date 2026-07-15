@@ -337,7 +337,7 @@ public final class JsImportsGenerator {
   }
 
   private static boolean shouldGenerateImport(MethodDescriptor methodDescriptor) {
-    if (!isNativeMethod(methodDescriptor)) {
+    if (!methodDescriptor.isNative()) {
       return false;
     }
     // If the method maps to a WASM instruction, that takes precedence.
@@ -345,15 +345,6 @@ public final class JsImportsGenerator {
       return false;
     }
     return true;
-  }
-
-  private static boolean isNativeMethod(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.isNative()
-        // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return
-        // true for native constructors, or exposing isNativeConstructor from
-        // MethodDescriptor.
-        || (methodDescriptor.getEnclosingTypeDescriptor().isNative()
-            && methodDescriptor.isConstructor());
   }
 
   private final Imports imports;

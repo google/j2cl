@@ -291,7 +291,6 @@ public class WasmConstructsGenerator {
         .forEach(this::renderMethod);
   }
 
-
   public void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     if ((methodDescriptor.isAbstract() && !methodDescriptor.isNative())
@@ -301,11 +300,7 @@ public class WasmConstructsGenerator {
       return;
     }
 
-    // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
-    // native constructors, or exposing isNativeConstructor from MethodDescriptor.
-    boolean isNativeConstructor =
-        methodDescriptor.getEnclosingTypeDescriptor().isNative()
-            && methodDescriptor.isConstructor();
+    boolean isNativeConstructor = methodDescriptor.isConstructor() && methodDescriptor.isNative();
     JsMethodImport jsMethodImport = environment.getJsMethodImport(methodDescriptor);
     builder.newLine();
     builder.newLine();
