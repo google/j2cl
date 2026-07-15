@@ -149,6 +149,29 @@ public class RecordClass {
     }
   }
 
+  @JsType
+  public static record JsInteropRecordWithOverriddenAccessors(
+      @JsProperty(name = "customVal") int value, String text, @JsIgnore String ignored) {
+
+    public JsInteropRecordWithOverriddenAccessors(int value, String text, String ignored) {
+      this.value = value;
+      this.text = text;
+      this.ignored = ignored;
+    }
+
+    public int value() {
+      return value + 1;
+    }
+
+    public String text() {
+      return text + "!";
+    }
+
+    public String ignored() {
+      return ignored + "!";
+    }
+  }
+
   interface I2 {
     // Matches record component name so accepted as override.
     @JsProperty(name = "customVal")

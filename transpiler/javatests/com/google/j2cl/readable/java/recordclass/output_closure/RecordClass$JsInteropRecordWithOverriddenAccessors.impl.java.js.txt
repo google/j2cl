@@ -1,0 +1,64 @@
+goog.module('recordclass.RecordClass.JsInteropRecordWithOverriddenAccessors$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+/**
+ * @final
+ */
+class JsInteropRecordWithOverriddenAccessors extends Record {
+ 
+ constructor(/** number */ value, /** ?string */ text, /** ?string */ ignored) {
+  JsInteropRecordWithOverriddenAccessors.$clinit();
+  super();
+  /**@type {number} @nodts*/
+  this.f_value__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_ = 0;
+  /**@type {?string} @nodts*/
+  this.f_text__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_;
+  /**@type {?string} @nodts*/
+  this.f_ignored__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_;
+  this.$ctor__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors__int__java_lang_String__java_lang_String__void(value, text, ignored);
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors__int__java_lang_String__java_lang_String__void(/** number */ value, /** ?string */ text, /** ?string */ ignored) {
+  this.$ctor__java_lang_Record__void();
+  this.f_value__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_ = value;
+  this.f_text__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_ = text;
+  this.f_ignored__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_ = ignored;
+  $J2CL_PRESERVE$(this.f_value__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_, this.f_text__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_, this.f_ignored__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_);
+ }
+ /** @return {number} */
+ get customVal() {
+  return this.f_value__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_ + 1 | 0;
+ }
+ /** @return {?string} */
+ get text() {
+  return j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_text__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_) + '!';
+ }
+ /** @nodts @return {?string} */
+ m_ignored__java_lang_String() {
+  return j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_ignored__recordclass_RecordClass_JsInteropRecordWithOverriddenAccessors_) + '!';
+ }
+ /** @nodts */
+ static $clinit() {
+  JsInteropRecordWithOverriddenAccessors.$clinit = () =>{};
+  JsInteropRecordWithOverriddenAccessors.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInteropRecordWithOverriddenAccessors;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(JsInteropRecordWithOverriddenAccessors, 'recordclass.RecordClass$JsInteropRecordWithOverriddenAccessors');
+
+exports = JsInteropRecordWithOverriddenAccessors;
+
+//# sourceMappingURL=RecordClass$JsInteropRecordWithOverriddenAccessors.js.map

@@ -960,6 +960,63 @@ open class RecordClass {
   }
  }
  
+ @JsType
+ class JsInteropRecordWithOverriddenAccessors {
+  private val value: Int
+  
+  private val text: String?
+  
+  private val ignored: String?
+  
+  constructor(value: Int, text: String?, ignored: String?) {
+   this.value = value
+   this.text = text
+   this.ignored = ignored
+  }
+  
+  @JsProperty(name = "customVal")
+  fun value(): Int {
+   return this.value + 1
+  }
+  
+  @JsProperty
+  fun text(): String? {
+   return "" + this.text + "!"
+  }
+  
+  @JsIgnore
+  fun ignored(): String? {
+   return "" + this.ignored + "!"
+  }
+  
+  @JsIgnore
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: JsInteropRecordWithOverriddenAccessors? = null
+   if (!(arg0 is JsInteropRecordWithOverriddenAccessors && run {
+    ___other = arg0 as JsInteropRecordWithOverriddenAccessors?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.value, this.text, this.ignored),
+    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored),
+   )
+  }
+  
+  @JsIgnore
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.value, this.text, this.ignored),
+   )
+  }
+  
+  @JsIgnore
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.value, this.text, this.ignored),
+   )
+  }
+ }
+ 
  internal interface I2 {
   @JsProperty(name = "customVal")
   fun value(): Int
