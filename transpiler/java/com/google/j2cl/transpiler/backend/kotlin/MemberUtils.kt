@@ -43,7 +43,7 @@ private val Method.needsFinalModifier: Boolean
 
 internal val Method.includedStatements: List<Statement>
   get() {
-    if (!descriptor.isKtDisabled) {
+    if (!descriptor.j2ktInfo.isDisabled) {
       return body.statements.filter { !AstUtils.isConstructorInvocationStatement(it) }
     }
 

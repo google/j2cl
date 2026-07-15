@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 
 internal val MemberDescriptor.ktName: String
-  get() = explicitKtName ?: name!!.letIf(isMethod && isKtProperty) { computePropertyName(it) }
+  get() = j2ktInfo.name ?: name!!.letIf(isMethod && isKtProperty) { computePropertyName(it) }
 
 /** Map entry from simple name to qualified name. */
 internal val TypeDeclaration.nameMapEntry: Pair<String, String>

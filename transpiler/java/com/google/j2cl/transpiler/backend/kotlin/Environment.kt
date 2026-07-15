@@ -161,7 +161,7 @@ internal data class Environment(
 
   /** Kotlin mangled name for this member descriptor. */
   fun ktMangledName(memberDescriptor: MemberDescriptor): String =
-    memberDescriptor.explicitKtName
+    memberDescriptor.j2ktInfo.name
       ?: when {
         isJsEnumCustomValueField(memberDescriptor) -> memberDescriptor.name!!
         memberDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtNative ->

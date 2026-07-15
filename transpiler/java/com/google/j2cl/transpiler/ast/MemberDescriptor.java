@@ -63,18 +63,10 @@ public abstract class MemberDescriptor
     return info != null ? info : J2ktAstUtils.getJ2ktInfo(getAnnotations());
   }
 
-  abstract J2ktInfo getJ2ktInfo();
+  public abstract J2ktInfo getJ2ktInfo();
 
   public abstract boolean isKtProperty();
 
-  @Nullable
-  public String getExplicitKtName() {
-    return getJ2ktInfo().getName();
-  }
-
-  public boolean isKtDisabled() {
-    return getJ2ktInfo().isDisabled();
-  }
 
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
