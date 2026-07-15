@@ -549,7 +549,7 @@ public class WasmConstructsGenerator {
         // Ordered by greatest hierarchy depth to ensure that leaf interfaces are emitted first.
         // Subinterface vtables implement the superinterface vtable, making the superinterface
         // vtable redundant and can just reference the previously generated vtable.
-        .sorted(Comparator.comparing(TypeDeclaration::getTypeHierarchyDepth).reversed())
+        .sorted(Comparator.comparingInt(TypeDeclaration::getTypeHierarchyDepth).reversed())
         .forEach(
             i -> {
               if (!emittedInterfaces.add(i)) {
@@ -575,7 +575,6 @@ public class WasmConstructsGenerator {
               initializeSuperInterfaceVtables(
                   wasmTypeLayout, interfaceTypeLayout, emittedInterfaces);
             });
-
   }
 
   private void initializeInterfaceVtable(
@@ -741,7 +740,7 @@ public class WasmConstructsGenerator {
     library
         .streamTypes()
         // Emit the types supertypes first.
-        .sorted(Comparator.comparing(t -> t.getDeclaration().getTypeHierarchyDepth()))
+        .sorted(Comparator.comparingInt(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(emitter);
   }
 }
