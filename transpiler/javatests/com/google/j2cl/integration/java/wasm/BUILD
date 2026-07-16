@@ -6,7 +6,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # Provide a custom j2wasm_library so no .js files passed to target.

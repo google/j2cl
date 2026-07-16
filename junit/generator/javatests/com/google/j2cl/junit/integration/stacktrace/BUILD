@@ -5,7 +5,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # Note that tests are manually sharded to avoid hitting 50 hard shard limit.

@@ -5,7 +5,7 @@ package(
     default_visibility = [
         "//benchmarking/java/com/google/j2cl/benchmarks/octane:__pkg__",
     ],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 benchmark_library(

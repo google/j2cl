@@ -9,7 +9,7 @@ load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 JS_ONLY_SRCS = glob([

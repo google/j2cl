@@ -11,7 +11,7 @@ package(
     ],
     # Tests in this directory are not tests that are meant to be run directly.
     # They serve as integration tests for J2clTestRunner.
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 ASYNC_TEST_DEPS = [

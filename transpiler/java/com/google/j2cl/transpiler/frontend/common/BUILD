@@ -10,7 +10,7 @@ package(
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
         "//transpiler/javatests/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 java_library(

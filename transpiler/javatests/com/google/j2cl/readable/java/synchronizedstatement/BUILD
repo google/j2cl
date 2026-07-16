@@ -6,7 +6,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # J2ktMonitor is part of the J2KT JRE so we don't need to include it.

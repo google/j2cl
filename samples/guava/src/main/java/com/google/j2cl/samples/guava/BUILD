@@ -2,7 +2,7 @@ load("@j2cl//build_defs:rules.bzl", "j2cl_application", "j2cl_library")
 
 package(
     default_applicable_licenses = ["@j2cl//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 j2cl_library(

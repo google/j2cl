@@ -12,7 +12,7 @@ load(":package_sources.bzl", "package_sources")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 JRE_JAVAC_OPTS = [

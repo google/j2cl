@@ -5,7 +5,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # TODO(b/317166154): Port this test to Kotlin when AutoValue is supported.

@@ -6,7 +6,7 @@ package(
         "//tools:__subpackages__",
         "//transpiler:__subpackages__",
     ],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 java_library(

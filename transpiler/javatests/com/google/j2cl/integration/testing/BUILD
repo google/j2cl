@@ -8,7 +8,7 @@ load("@rules_java//java:defs.bzl", "java_library")
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//transpiler/javatests/com/google/j2cl/integration:__subpackages__"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 j2wasm_library(

@@ -3,7 +3,7 @@ load("@rules_java//java:defs.bzl", "java_plugin")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 java_plugin(

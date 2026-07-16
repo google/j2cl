@@ -2,7 +2,7 @@ load("//:benchmarking/java/com/google/j2cl/benchmarking/benchmarks.bzl", "benchm
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 benchmark(

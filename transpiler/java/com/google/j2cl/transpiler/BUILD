@@ -3,7 +3,7 @@ load("//transpiler/java/com/google/j2cl/common/bazel:compiler_java_binary.bzl", 
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 java_library(

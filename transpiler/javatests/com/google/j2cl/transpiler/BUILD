@@ -16,7 +16,7 @@ load(":jre_test_bundle.bzl", "jre_test_bundle")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 jre_test_bundle(

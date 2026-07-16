@@ -3,7 +3,7 @@ load("@rules_closure//closure:defs.bzl", "closure_js_library")
 
 package(
     default_applicable_licenses = ["@j2cl//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 closure_js_library(

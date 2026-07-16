@@ -7,7 +7,7 @@ package(
     default_visibility = [
         "//transpiler:__subpackages__",
     ],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 proto_library(

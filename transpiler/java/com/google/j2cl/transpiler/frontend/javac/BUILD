@@ -13,7 +13,7 @@ package(
     ],
 )
 
-licenses(["notice"])
+licenses(["reciprocal"])
 
 java_library(
     name = "javac",

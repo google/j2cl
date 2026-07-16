@@ -11,7 +11,7 @@ package(
         "//:__pkg__",
         "//junit/generator:__subpackages__",
     ],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 java_library(

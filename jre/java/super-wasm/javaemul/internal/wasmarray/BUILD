@@ -3,7 +3,7 @@ load(":generate_wasm_array.bzl", "generate_wasm_array", "generate_wasm_array_sub
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//jre/java:__pkg__"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # To view the generated file, use:

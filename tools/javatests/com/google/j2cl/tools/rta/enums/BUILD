@@ -3,7 +3,7 @@ load("//tools/javatests/com/google/j2cl/tools/rta:rta_test.bzl", "rta_test")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 j2cl_library(

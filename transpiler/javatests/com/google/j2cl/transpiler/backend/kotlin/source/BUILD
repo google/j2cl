@@ -3,7 +3,7 @@ load("//testing/build_defs:junit_test_suites.bzl", "junit_test_suites")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 kt_jvm_library(

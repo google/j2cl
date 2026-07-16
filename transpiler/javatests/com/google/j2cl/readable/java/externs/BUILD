@@ -7,7 +7,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # Exclude native sources from j2kt_jvm_library ad j2kt_native_library.

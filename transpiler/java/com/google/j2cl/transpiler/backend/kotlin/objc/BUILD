@@ -6,7 +6,7 @@ package(
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin:__subpackages__",
         "//transpiler/javatests/com/google/j2cl/transpiler/backend/kotlin:__subpackages__",
     ],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 kt_jvm_library(

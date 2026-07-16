@@ -18,7 +18,7 @@ load("@rules_closure//closure:defs.bzl", "closure_js_library")
 package(
     default_applicable_licenses = ["@j2cl//:j2cl_license"],
     default_visibility = ["//visibility:public"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # This is the bazel target that compiles our J2WASM library.

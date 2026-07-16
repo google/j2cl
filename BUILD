@@ -9,7 +9,7 @@ load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
 package(
     default_applicable_licenses = [":j2cl_license"],
     default_visibility = ["//visibility:public"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 license(

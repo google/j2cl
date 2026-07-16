@@ -6,7 +6,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # Use a separate library to ensure that string literal identity is preserved even across

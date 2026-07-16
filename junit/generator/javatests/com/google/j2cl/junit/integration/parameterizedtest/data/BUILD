@@ -6,7 +6,7 @@ load(
 package(
     default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest:__pkg__"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 j2cl_test_integration_test_data(

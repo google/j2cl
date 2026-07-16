@@ -8,7 +8,7 @@ load(
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 # The source files that we want to test. Other files are part of the test fixture.

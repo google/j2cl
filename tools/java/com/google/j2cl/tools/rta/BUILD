@@ -8,7 +8,7 @@ load("//transpiler/java/com/google/j2cl/common/bazel:jvm_flags.bzl", "JVM_FLAGS"
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    licenses = ["notice"],
+    licenses = ["reciprocal"],
 )
 
 proto_library(
