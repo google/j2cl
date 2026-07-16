@@ -9,8 +9,10 @@ visibility(["//build_defs/internal_do_not_use/..."])
 # - protected methods and overrides will be made public
 EMIT_RELAXED_VISIBILITY_ALLOWLIST = allowlists.of_packages([
     # go/keep-sorted start
+    "//third_party/java_src/dagger/...",
     "//jre/java",
     "//jre/javatests",
+    "//junit/...",
     "//samples/box2d/src/main/java",
     "//transpiler/javatests/com/google/j2cl/integration/java/allsimplebridges",
     "//transpiler/javatests/com/google/j2cl/integration/java/autovalue",
@@ -41,6 +43,8 @@ EMIT_RELAXED_VISIBILITY_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/java/subnativejstype",
     "//transpiler/javatests/com/google/j2cl/readable/java/supercallnondefault",
     "//transpiler/javatests/com/google/j2cl/readable/java/supermethodcall",
+    "//third_party/java_src/owasp_html_sanitizer",
+    "//third_party/java_src/xplat/j2kt_mockito",
     "//third_party/java_src/xplat/kmpbench/java",
     # go/keep-sorted end
 ])

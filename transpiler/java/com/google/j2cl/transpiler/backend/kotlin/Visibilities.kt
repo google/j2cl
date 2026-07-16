@@ -23,29 +23,11 @@ import java.lang.Boolean.getBoolean
 val emitRelaxedVisibility: Boolean =
   getBoolean("com.google.j2cl.transpiler.backend.kotlin.emitRelaxedVisibility")
 
-/** Set containing packages for which J2KT should not translate actual visibility. */
-private val EXCLUDED_VISIBILITY_PACKAGES: Set<String> =
-  setOf(
-  )
-
-/** List containing package prefixes for which J2KT should not translate actual visibility. */
-// Keep this list small as lookup time is linear.
-private val EXCLUDE_VISIBILITY_PACKAGE_PREFIXES: List<String> =
-  listOf(
-  )
-
-private fun useActualKtVisibilityForPackage(packageName: String): Boolean =
-  packageName !in EXCLUDED_VISIBILITY_PACKAGES &&
-    packageName.plus(".").let { packageNamePlusDot ->
-      EXCLUDE_VISIBILITY_PACKAGE_PREFIXES.none { packageNamePlusDot.startsWith(it) }
-    }
-
 /** Returns whether J2KT should translate actual visibility for the given type declaration. */
 // TODO(b/206898384): Remove this once the bug is fixed.
 internal val TypeDeclaration.useActualKtVisibility: Boolean
   get() =
     !emitRelaxedVisibility &&
-      useActualKtVisibilityForPackage(packageName) &&
       (!isAutoConverter || hasAutoValueOrBuilderSuperType) &&
       !isVisibilityWarningSuppressed
 
