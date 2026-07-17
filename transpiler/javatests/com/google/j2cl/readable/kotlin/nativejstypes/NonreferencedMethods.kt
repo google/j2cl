@@ -41,7 +41,7 @@ class NonreferencedMethods {
     external fun getInstance2(): Int
 
     companion object {
-      var s: Int = definedExternally
+      @JvmField var s: Int = definedExternally
 
       @JvmStatic external fun getStatic(): Int
     }

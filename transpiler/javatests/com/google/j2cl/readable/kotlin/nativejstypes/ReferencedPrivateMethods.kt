@@ -35,8 +35,9 @@ class ReferencedPrivateMethods {
 
     private external fun getInstance(): Int
 
+    @Suppress("INAPPLICABLE_JVM_FIELD")
     companion object {
-      private var s: Int = definedExternally
+      @JvmField private var s: Int = definedExternally
 
       @JvmStatic private external fun getStatic(): Int
 
