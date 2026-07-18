@@ -17,18 +17,14 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PackageDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
-import java.util.Collections;
-import java.util.IdentityHashMap;
-import java.util.Set;
 
 /**
  * Rewrites Java class literals to Kotlin KClass property calls (javaObjectType/javaPrimitiveType)
@@ -38,37 +34,18 @@ public class RewriteTypeLiteralsJ2kt extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    Set<TypeLiteral> skippedTypeLiterals = Collections.newSetFromMap(new IdentityHashMap<>());
 
-    // Pass 1: Identify TypeLiterals in KClass conversion contexts. Ideally we would make all
-    // conversions via ConversionContextVisitor, but some context where we require a conversion is
-    // not an existing conversion context. Instead, we will just mark ones that doesn't need to be
-    // converted.
-    compilationUnit.accept(
-        new ConversionContextVisitor(
-            new ConversionContextVisitor.ContextRewriter() {
-              @Override
-              protected Expression rewriteTypeConversionContext(
-                  TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
-                  Expression expression) {
-                if (expression instanceof TypeLiteral typeLiteral
-                    && isKotlinReflectKClass(inferredTypeDescriptor)) {
-                  skippedTypeLiterals.add(typeLiteral);
-                }
-                return expression;
-              }
-            }));
-
-    // Pass 2: Rewrite all other TypeLiterals, skipping those marked in Pass 1.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Node rewriteTypeLiteral(TypeLiteral typeLiteral) {
-            if (skippedTypeLiterals.contains(typeLiteral)) {
-              return typeLiteral;
-            }
+          public boolean shouldProcessMethod(Method method) {
+            // Do not rewrite type literals inside annotation default values.
+            // These need to be kotlin.reflect.KClass instances and not java.lang.Class.
+            return method.getDefaultValue() == null;
+          }
 
+          @Override
+          public Node rewriteTypeLiteral(TypeLiteral typeLiteral) {
             TypeDescriptor referencedType = typeLiteral.getReferencedTypeDescriptor();
             if (referencedType.isPrimitive()) {
               // int.class -> Int::class.javaPrimitiveType!!
@@ -87,11 +64,6 @@ public class RewriteTypeLiteralsJ2kt extends NormalizationPass {
             }
           }
         });
-  }
-
-  private static boolean isKotlinReflectKClass(TypeDescriptor typeDescriptor) {
-    return typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor
-        && declaredTypeDescriptor.getQualifiedSourceName().equals("kotlin.reflect.KClass");
   }
 
   private static FieldDescriptor getJavaTypeFieldDescriptor(TypeDescriptor type, String fieldName) {

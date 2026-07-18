@@ -32,7 +32,9 @@ import kotlin.Long
 import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
+import kotlin.arrayOf
 import kotlin.booleanArrayOf
+import kotlin.collections.List
 import kotlin.intArrayOf
 import kotlin.jvm.JvmStatic
 import kotlin.reflect.KClass
@@ -112,8 +114,11 @@ open class AnnotationDefaults {
  )
  
  internal annotation class WithTypeLiteral (
-  val clazz: KClass<*>,
-  val classes: Array<KClass<*>>,
+  val clazz: KClass<*> = String::class,
+  val classes: Array<KClass<*>> = arrayOf<KClass<*>>(Int::class, Double::class),
+  val shorthandClassArray: Array<KClass<*>> = arrayOf<KClass<*>>(Long::class),
+  val genericClass: KClass<*> = List::class,
+  val arrayClass: KClass<*> = Array::class,
  )
  
  internal open class AnnotatedClass internal constructor()

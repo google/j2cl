@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -42,6 +43,12 @@ public class InsertCastsForTypeLiteralsJ2kt extends AbstractJ2ktNormalizationPas
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
+          @Override
+          public boolean shouldProcessMethod(Method method) {
+            // Do not insert casts inside annotation default values.
+            return method.getDefaultValue() == null;
+          }
+
           @Override
           public Node rewriteTypeLiteral(TypeLiteral typeLiteral) {
             TypeDescriptor referencedTypeDescriptor = typeLiteral.getReferencedTypeDescriptor();

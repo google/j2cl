@@ -97,11 +97,16 @@ public class AnnotationDefaults {
     int[] shorthandArray = bar.shorthandArray();
   }
 
-  // TODO(b/465873786): Support type literal default values.
   @interface WithTypeLiteral {
     Class<?> clazz() default String.class;
 
     Class<?>[] classes() default {Integer.class, Double.class};
+
+    Class<?>[] shorthandClassArray() default Long.class;
+
+    Class<?> genericClass() default java.util.List.class;
+
+    Class<?> arrayClass() default String[].class;
   }
 
   // TODO(b/377373351): Convert values from kotlin.reflect.KClass to java.lang.Class
@@ -110,6 +115,9 @@ public class AnnotationDefaults {
   static void testDefaults_classes(WithTypeLiteral withTypeLiteral) {
     Class<?> clazz = withTypeLiteral.clazz();
     Class<?>[] classes = withTypeLiteral.classes();
+    Class<?>[] shorthandClassArray = withTypeLiteral.shorthandClassArray();
+    Class<?> genericClass = withTypeLiteral.genericClass();
+    Class<?> arrayClass = withTypeLiteral.arrayClass();
   }
 
   /** Tests accessing positional default values of annotation features. */
