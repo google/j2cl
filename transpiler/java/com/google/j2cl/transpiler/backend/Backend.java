@@ -748,6 +748,9 @@ public enum Backend {
           PreventSmartCasts::new,
           RemoveUnreachableCode::new,
 
+          // Enrich source mapping information for better stack deobfuscation.
+          FilloutMissingSourceMapInformation::new,
+
           // Verification
           VerifySingleAstReference::new,
           VerifyReferenceScoping::allowExpressionScopes);

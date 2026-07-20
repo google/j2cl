@@ -5,73 +5,61 @@
     uninitializedInstanceField = 1000;
   }] => [{
   this.uninitializedInstanceField = 1000
- }]
-[uninitializedInstanceField = 1000;] => [this.uninitializedInstanceField = 1000]
+ }] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField = 1000;] => [this.uninitializedInstanceField = 1000] "sourcemap.SourceMap.<init>"
 [uninitializedInstanceField2] => [private var uninitializedInstanceField2: String? = null]
 [uninitializedInstanceField2] => [uninitializedInstanceField2]
 [{
     if (uninitializedInstanceField == 1000) {
-      uninitializedInstanceField2 = "Hello!";
-    } else if (uninitializedInstanceField == 2000) {
-      uninitializedInstanceField2 = "World!";
-    } else {
-      uninitializedInstanceField2 = "Universe!";
+...
     }
   }] => [{
   if (this.uninitializedInstanceField == 1000) {
-   this.uninitializedInstanceField2 = "Hello!"
-  } else if (this.uninitializedInstanceField == 2000) {
-   this.uninitializedInstanceField2 = "World!"
-  } else {
-   this.uninitializedInstanceField2 = "Universe!"
+...
   }
- }]
+ }] "sourcemap.SourceMap.<init>"
 [if (uninitializedInstanceField == 1000) {
       uninitializedInstanceField2 = "Hello!";
-    } else if (uninitializedInstanceField == 2000) {
-      uninitializedInstanceField2 = "World!";
-    } else {
+...
       uninitializedInstanceField2 = "Universe!";
     }] => [if (this.uninitializedInstanceField == 1000) {
    this.uninitializedInstanceField2 = "Hello!"
-  } else if (this.uninitializedInstanceField == 2000) {
-   this.uninitializedInstanceField2 = "World!"
-  } else {
+...
    this.uninitializedInstanceField2 = "Universe!"
-  }]
+  }] "sourcemap.SourceMap.<init>"
 [{
       uninitializedInstanceField2 = "Hello!";
     }] => [{
    this.uninitializedInstanceField2 = "Hello!"
-  }]
-[uninitializedInstanceField2 = "Hello!";] => [this.uninitializedInstanceField2 = "Hello!"]
+  }] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField2 = "Hello!";] => [this.uninitializedInstanceField2 = "Hello!"] "sourcemap.SourceMap.<init>"
 [if (uninitializedInstanceField == 2000) {
       uninitializedInstanceField2 = "World!";
-    } else {
+...
       uninitializedInstanceField2 = "Universe!";
     }] => [if (this.uninitializedInstanceField == 2000) {
    this.uninitializedInstanceField2 = "World!"
-  } else {
+...
    this.uninitializedInstanceField2 = "Universe!"
-  }]
+  }] "sourcemap.SourceMap.<init>"
 [{
       uninitializedInstanceField2 = "World!";
     }] => [{
    this.uninitializedInstanceField2 = "World!"
-  }]
-[uninitializedInstanceField2 = "World!";] => [this.uninitializedInstanceField2 = "World!"]
+  }] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField2 = "World!";] => [this.uninitializedInstanceField2 = "World!"] "sourcemap.SourceMap.<init>"
 [{
       uninitializedInstanceField2 = "Universe!";
     }] => [{
    this.uninitializedInstanceField2 = "Universe!"
-  }]
-[uninitializedInstanceField2 = "Universe!";] => [this.uninitializedInstanceField2 = "Universe!"]
+  }] "sourcemap.SourceMap.<init>"
+[uninitializedInstanceField2 = "Universe!";] => [this.uninitializedInstanceField2 = "Universe!"] "sourcemap.SourceMap.<init>"
 [SourceMap] => [constructor]
 [i] => [i] "i"
 [SourceMap] => [constructor]
 [uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
 [uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
-[this(2);] => [this(2)]
+[this(2);] => [this(2)] "sourcemap.SourceMap.<init>"
 [initializedInstanceField] => [private var initializedInstanceField: Int = 2]
 [initializedInstanceField] => [initializedInstanceField]
 [testStatements] => [testStatements]
@@ -79,256 +67,169 @@
 [b] => [b] "b"
 [times] => [times] "times"
 [number] => [number] "number"
-[int value = 0;] => [var value: Int = 0]
+[int value = 0;] => [var value: Int = 0] "sourcemap.SourceMap.testStatements"
 [value] => [value] "value"
 [for (int i = 0; i < times; i++) {
       value++;
-    }] => [var i: Int = 0]
+    }] => [var i: Int = 0] "sourcemap.SourceMap.testStatements"
 [i] => [i] "i"
 [for (int i = 0; i < times; i++) {
       value++;
     }] => [while (i < times) {
    value = value + 1
    i = i + 1
-  }]
+  }] "sourcemap.SourceMap.testStatements"
 [for (int i = 0; i < times; i++) {
       value++;
     }] => [{
    value = value + 1
    i = i + 1
-  }]
-[value++;] => [value = value + 1]
+  }] "sourcemap.SourceMap.testStatements"
+[value++;] => [value = value + 1] "sourcemap.SourceMap.testStatements"
 [for (int i = 0; i < times; i++) {
       value++;
-    }] => [i = i + 1]
+    }] => [i = i + 1] "sourcemap.SourceMap.testStatements"
 [if (number % 2 == 0) {
       value += 1;
-    } else {
+...
       value += 2;
     }] => [if (number % 2 == 0) {
    value = value + 1
-  } else {
+...
    value = value + 2
-  }]
+  }] "sourcemap.SourceMap.testStatements"
 [{
       value += 1;
     }] => [{
    value = value + 1
-  }]
-[value += 1;] => [value = value + 1]
+  }] "sourcemap.SourceMap.testStatements"
+[value += 1;] => [value = value + 1] "sourcemap.SourceMap.testStatements"
 [{
       value += 2;
     }] => [{
    value = value + 2
-  }]
-[value += 2;] => [value = value + 2]
-[int b2 = b;] => [var b2: Int = b]
+  }] "sourcemap.SourceMap.testStatements"
+[value += 2;] => [value = value + 2] "sourcemap.SourceMap.testStatements"
+[int b2 = b;] => [var b2: Int = b] "sourcemap.SourceMap.testStatements"
 [b2] => [b2] "b2"
 [while (b2 > 0 && b2 < 100) {
       b2 -= 10;
     }] => [while (b2 > 0 && b2 < 100) {
    b2 = b2 - 10
-  }]
+  }] "sourcemap.SourceMap.testStatements"
 [{
       b2 -= 10;
     }] => [{
    b2 = b2 - 10
-  }]
-[b2 -= 10;] => [b2 = b2 - 10]
-[value += a + b2;] => [value = value + (a + b2)]
+  }] "sourcemap.SourceMap.testStatements"
+[b2 -= 10;] => [b2 = b2 - 10] "sourcemap.SourceMap.testStatements"
+[value += a + b2;] => [value = value + (a + b2)] "sourcemap.SourceMap.testStatements"
 [for (int i = 0; i <= 2; i++) {
       switch (number) {
-        case 1:
-          value += 5;
-          break;
-        case 2:
-          value += 2;
-          break outerLoop;
-        case 3:
-          break outerLoop;
+...
       }
-      if (i == 1) {
-        break;
-      }
-    }] => [var i_1: Int = 0]
+    }] => [var i_1: Int = 0] "sourcemap.SourceMap.testStatements"
 [i] => [i_1] "i"
 [for (int i = 0; i <= 2; i++) {
       switch (number) {
-        case 1:
-          value += 5;
-          break;
-        case 2:
-          value += 2;
-          break outerLoop;
-        case 3:
-          break outerLoop;
-      }
-      if (i == 1) {
-        break;
+...
       }
     }] => [while (i_1 <= 2) {
    when (number) {
-    1 -> {
-     value = value + 5
-    }
-    2 -> {
-     value = value + 2
-     break
-    }
-    3 -> {
-     break
-    }
-    else -> {}
-   }
-   if (i_1 == 1) {
-    break
-   }
+...
    i_1 = i_1 + 1
-  }]
+  }] "sourcemap.SourceMap.testStatements"
 [for (int i = 0; i <= 2; i++) {
       switch (number) {
-        case 1:
-          value += 5;
-          break;
-        case 2:
-          value += 2;
-          break outerLoop;
-        case 3:
-          break outerLoop;
-      }
-      if (i == 1) {
-        break;
+...
       }
     }] => [{
    when (number) {
-    1 -> {
-     value = value + 5
-    }
-    2 -> {
-     value = value + 2
-     break
-    }
-    3 -> {
-     break
-    }
-    else -> {}
-   }
-   if (i_1 == 1) {
-    break
-   }
+...
    i_1 = i_1 + 1
-  }]
+  }] "sourcemap.SourceMap.testStatements"
 [switch (number) {
         case 1:
-          value += 5;
-          break;
-        case 2:
-          value += 2;
-          break outerLoop;
-        case 3:
+...
           break outerLoop;
       }] => [when (number) {
     1 -> {
-     value = value + 5
-    }
-    2 -> {
-     value = value + 2
-     break
-    }
-    3 -> {
-     break
-    }
+...
     else -> {}
-   }]
-[value += 5;] => [value = value + 5]
-[value += 2;] => [value = value + 2]
-[break outerLoop;] => [break]
-[break outerLoop;] => [break]
+   }] "sourcemap.SourceMap.testStatements"
+[value += 5;] => [value = value + 5] "sourcemap.SourceMap.testStatements"
+[value += 2;] => [value = value + 2] "sourcemap.SourceMap.testStatements"
+[break outerLoop;] => [break] "sourcemap.SourceMap.testStatements"
+[break outerLoop;] => [break] "sourcemap.SourceMap.testStatements"
 [if (i == 1) {
         break;
       }] => [if (i_1 == 1) {
     break
-   }]
+   }] "sourcemap.SourceMap.testStatements"
 [{
         break;
       }] => [{
     break
-   }]
-[break;] => [break]
+   }] "sourcemap.SourceMap.testStatements"
+[break;] => [break] "sourcemap.SourceMap.testStatements"
 [for (int i = 0; i <= 2; i++) {
       switch (number) {
-        case 1:
-          value += 5;
-          break;
-        case 2:
-          value += 2;
-          break outerLoop;
-        case 3:
-          break outerLoop;
+...
       }
-      if (i == 1) {
-        break;
-      }
-    }] => [i_1 = i_1 + 1]
-[return value;] => [return value]
+    }] => [i_1 = i_1 + 1] "sourcemap.SourceMap.testStatements"
+[return value;] => [return value] "sourcemap.SourceMap.testStatements"
 [testLambdaAndMethodReference] => [testLambdaAndMethodReference]
 [n] => [n] "n"
 [Function<Integer, Integer> f = i -> i + 1;] => [val f: Function<Int?, Int?> = Function { i: Int? ->
    return@Function i!!.toInt() + 1
-  }]
+  }] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f] => [f] "f"
 [i] => [i] "i"
-[i + 1] => [return@Function i!!.toInt() + 1]
+[i + 1] => [return@Function i!!.toInt() + 1] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [Supplier<Integer> f2 = new ArrayList()::size;] => [val f2: Supplier<Int?> = run {
    val ______q: ArrayList<Any?> = ArrayList<Any?>()
-   Supplier {
-    return@Supplier (______q as ArrayList<Any?>).size
+...
    }
-  }]
+  }] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f2] => [f2] "f2"
-[new ArrayList()::size] => [return@Supplier (______q as ArrayList<Any?>).size]
+[new ArrayList()::size] => [return@Supplier (______q as ArrayList<Any?>).size] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [Supplier<Integer> f3 = this::simpleMethod;] => [val f3: Supplier<Int?> = Supplier {
    return@Supplier this.simpleMethod()
-  }]
+  }] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f3] => [f3] "f3"
-[this::simpleMethod] => [return@Supplier this.simpleMethod()]
+[this::simpleMethod] => [return@Supplier this.simpleMethod()] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [simpleMethod] => [simpleMethod]
-[return 1;] => [return 1]
+[return 1;] => [return 1] "sourcemap.SourceMap.simpleMethod"
 [testLocalClass] => [testLocalClass]
-[class LocalClass {}] => [open class LocalClass internal constructor()]
+[class LocalClass {}] => [open class LocalClass internal constructor()] "sourcemap.SourceMap.testLocalClass"
 [LocalClass] => [LocalClass]
-[new LocalClass();] => [LocalClass()]
+[new LocalClass();] => [LocalClass()] "sourcemap.SourceMap.testLocalClass"
 [testSwitchExpression] => [testSwitchExpression]
-[int v = 1;] => [val v: Int = 1]
+[int v = 1;] => [val v: Int = 1] "sourcemap.SourceMap.testSwitchExpression"
 [v] => [v] "v"
 [int r =
         switch (v) {
-          case 1, 2 -> 10;
+...
           default -> 20;
         };] => [val r: Int = run {
    when (v) {
-    1, 2 -> {
-     return@run 10
-    }
-    else -> {
-     return@run 20
-    }
+...
    }
-  }]
+  }] "sourcemap.SourceMap.testSwitchExpression"
 [r] => [r] "r"
-[10] => [return@run 10]
-[20] => [return@run 20]
+[10] => [return@run 10] "sourcemap.SourceMap.testSwitchExpression"
+[20] => [return@run 20] "sourcemap.SourceMap.testSwitchExpression"
 [testInstanceOf] => [testInstanceOf]
 [o] => [o] "o"
-[return o instanceof String;] => [return o is String]
+[return o instanceof String;] => [return o is String] "sourcemap.SourceMap.testInstanceOf"
 [testFunctionExpression] => [testFunctionExpression]
 [return (Object o) -> o;] => [return Function { o: Any? ->
    return@Function o
-  }]
+  }] "sourcemap.SourceMap.testFunctionExpression"
 [o] => [o] "o"
-[o] => [return@Function o]
+[o] => [return@Function o] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
 [testTypeLiteral] => [testTypeLiteral]
-[return String.class;] => [return String::class.javaObjectType]
+[return String.class;] => [return String::class.javaObjectType] "sourcemap.SourceMap.testTypeLiteral"
 [uninitializedStaticField] => [@JvmField
   internal var uninitializedStaticField_pp_sourcemap: Double = 0.0]
 [uninitializedStaticField] => [uninitializedStaticField_pp_sourcemap]
@@ -336,31 +237,31 @@
     uninitializedStaticField = 10.0;
   }] => [{
    SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
-  }]
-[uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField_pp_sourcemap = 10.0]
+  }] "sourcemap.SourceMap.<clinit>"
+[uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField_pp_sourcemap = 10.0] "sourcemap.SourceMap.<clinit>"
 [initializedStaticField] => [@JvmField
   internal var initializedStaticField_pp_sourcemap: String? = "Hello"]
 [initializedStaticField] => [initializedStaticField_pp_sourcemap]
 [static {
     if (uninitializedStaticField == 10.0) {
-      initializedStaticField = "World";
+...
     }
   }] => [{
    if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
-    SourceMap.initializedStaticField_pp_sourcemap = "World"
+...
    }
-  }]
+  }] "sourcemap.SourceMap.<clinit>"
 [if (uninitializedStaticField == 10.0) {
       initializedStaticField = "World";
     }] => [if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
     SourceMap.initializedStaticField_pp_sourcemap = "World"
-   }]
+   }] "sourcemap.SourceMap.<clinit>"
 [{
       initializedStaticField = "World";
     }] => [{
     SourceMap.initializedStaticField_pp_sourcemap = "World"
-   }]
-[initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"]
+   }] "sourcemap.SourceMap.<clinit>"
+[initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"] "sourcemap.SourceMap.<clinit>"
 [Enum1] => [Enum1]
 [VALUE1] => [VALUE1]
 [VALUE2] => [VALUE2]
@@ -373,14 +274,14 @@
 [i] => [i] "i"
 [super(i);] => [super(
    i!!.toInt(),
-  )]
+  )] "sourcemap.SourceMap$SuperCalls.<init>"
 [InnerClass] => [InnerClass]
 [i] => [i] "i"
 [field] => [@JvmField
   val field: Int]
 [field] => [field]
 [InnerClass] => [init]
-[this.field = i;] => [this.field = i]
+[this.field = i;] => [this.field = i] "sourcemap.SourceMap$InnerClass.<init>"
 [FooJsEnum] => [FooJsEnum]
 [A] => [A]
 [B] => [B]
@@ -394,4 +295,4 @@
 [value] => [value]
 [StringJsEnum] => [constructor]
 [value] => [value] "value"
-[this.value = value;] => [this.value = value]
+[this.value = value;] => [this.value = value] "sourcemap.SourceMap$StringJsEnum.<init>"
