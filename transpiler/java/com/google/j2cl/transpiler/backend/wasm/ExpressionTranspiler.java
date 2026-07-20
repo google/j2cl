@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
@@ -312,6 +313,20 @@ final class ExpressionTranspiler {
         } else {
           renderPolymorphicMethodCall(methodCall);
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterMethodReference(MethodReference methodReference) {
+        // User-written method references are not present in the tree. If we encounter a
+        // MethodReference, it is a Wasm funcref.
+        // Wasm funcrefs never have a qualifier. They are always stateless function references.
+        checkState(methodReference.getQualifier() == null);
+        sourceBuilder.append(
+            String.format(
+                "(ref.func %s) ",
+                environment.getMethodImplementationName(
+                    methodReference.getReferencedMethodDescriptor())));
         return false;
       }
 

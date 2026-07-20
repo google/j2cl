@@ -186,6 +186,14 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           @Override
           public void exitMethodReference(MethodReference methodReference) {
+            if (verifyForWasm) {
+              // Method references are used in Wasm to pass funcrefs to the JS interop runtime.
+              checkState(
+                  methodReference
+                      .getTypeDescriptor()
+                      .equals(TypeDescriptors.get().javaemulInternalWasmFuncref));
+              return;
+            }
             // Method references are desugared to lambda expressions.
             throw new IllegalStateException();
           }
