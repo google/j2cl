@@ -26,6 +26,7 @@ public class SupportedAnnotations {
           "java.lang.Deprecated",
           "java.lang.FunctionalInterface",
           "java.lang.SuppressWarnings",
+          "jsinterop.annotations.JsIgnore",
           "com.google.auto.value.AutoValue",
           "com.google.auto.value.AutoValue.Builder",
           "javaemul.internal.annotations.DoNotAutobox",

@@ -844,6 +844,7 @@ open class RecordClass {
   
   private val text: String?
   
+  @JsIgnore
   private val ignored: String?
   
   private val isFoo: Boolean
@@ -875,7 +876,6 @@ open class RecordClass {
    return this.isFoo
   }
   
-  @JsIgnore
   override fun equals(arg0: Any?): Boolean {
    var ___other: JsInteropRecord? = null
    if (!(arg0 is JsInteropRecord && run {
@@ -888,14 +888,12 @@ open class RecordClass {
    )
   }
   
-  @JsIgnore
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value, this.text, this.ignored, this.isFoo),
    )
   }
   
-  @JsIgnore
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(this.value, this.text, this.ignored, this.isFoo),
@@ -909,6 +907,7 @@ open class RecordClass {
   
   private val text: String?
   
+  @JsIgnore
   private val ignored: String?
   
   constructor(value: Int, text: String?, ignored: String?) {
@@ -927,12 +926,10 @@ open class RecordClass {
    return this.text
   }
   
-  @JsIgnore
   fun ignored(): String? {
    return this.ignored
   }
   
-  @JsIgnore
   override fun equals(arg0: Any?): Boolean {
    var ___other: JsInteropRecordWithExplicitMembers? = null
    if (!(arg0 is JsInteropRecordWithExplicitMembers && run {
@@ -945,14 +942,12 @@ open class RecordClass {
    )
   }
   
-  @JsIgnore
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value, this.text, this.ignored),
    )
   }
   
-  @JsIgnore
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(this.value, this.text, this.ignored),
@@ -966,6 +961,7 @@ open class RecordClass {
   
   private val text: String?
   
+  @JsIgnore
   private val ignored: String?
   
   constructor(value: Int, text: String?, ignored: String?) {
@@ -984,12 +980,10 @@ open class RecordClass {
    return "" + this.text + "!"
   }
   
-  @JsIgnore
   fun ignored(): String? {
    return "" + this.ignored + "!"
   }
   
-  @JsIgnore
   override fun equals(arg0: Any?): Boolean {
    var ___other: JsInteropRecordWithOverriddenAccessors? = null
    if (!(arg0 is JsInteropRecordWithOverriddenAccessors && run {
@@ -1002,14 +996,12 @@ open class RecordClass {
    )
   }
   
-  @JsIgnore
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value, this.text, this.ignored),
    )
   }
   
-  @JsIgnore
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(this.value, this.text, this.ignored),
@@ -1038,8 +1030,10 @@ open class RecordClass {
   
   private val text: String?
   
+  @JsIgnore
   private val ignored: String?
   
+  @JsIgnore
   private val ignored2: String?
   
   constructor(value: Int, text: String?, ignored: String?, ignored2: String?) {
@@ -1069,7 +1063,6 @@ open class RecordClass {
    return this.ignored2
   }
   
-  @JsIgnore
   override fun equals(arg0: Any?): Boolean {
    var ___other: JsInteropRecordImplementingInterface? = null
    if (!(arg0 is JsInteropRecordImplementingInterface && run {
@@ -1082,14 +1075,12 @@ open class RecordClass {
    )
   }
   
-  @JsIgnore
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
    )
   }
   
-  @JsIgnore
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
@@ -1110,7 +1101,6 @@ open class RecordClass {
    return this.value
   }
   
-  @JsIgnore
   override fun equals(arg0: Any?): Boolean {
    var ___other: JsInteropRecordWithHiddenCanonical? = null
    if (!(arg0 is JsInteropRecordWithHiddenCanonical && run {
@@ -1123,14 +1113,12 @@ open class RecordClass {
    )
   }
   
-  @JsIgnore
   override fun hashCode(): Int {
    return Arrays.hashCode(
     arrayOf<Any?>(this.value),
    )
   }
   
-  @JsIgnore
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
     arrayOf<Any?>(this.value),

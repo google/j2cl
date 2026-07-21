@@ -20,6 +20,7 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValueJsType
+import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Boolean
@@ -49,6 +50,7 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
   return this.getWithJsMethod
  }
  
+ @JsIgnore
  override fun ignored(): Int {
   return this.ignored
  }

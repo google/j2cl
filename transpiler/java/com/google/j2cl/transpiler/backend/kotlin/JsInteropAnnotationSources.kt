@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.AnnotationSources.Companion.annotationTargetSource
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
@@ -78,7 +79,10 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
     }
 
   private fun jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
-    emptyUnless(memberDescriptor.hasJsIgnoreAnnotation) {
+    emptyUnless(
+      memberDescriptor.hasJsIgnoreAnnotation ||
+        memberDescriptor.needsJsIgnoreAnnotationForVisibilityMismatch
+    ) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsIgnore"))
     }
 
@@ -183,14 +187,17 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
     )
 
   private val MemberDescriptor.hasJsIgnoreAnnotation
+    get() = hasAnnotation("jsinterop.annotations.JsIgnore")
+
+  private val MemberDescriptor.needsJsIgnoreAnnotationForVisibilityMismatch
     get() =
-      // We need to reverse-engineer here because JsInfo does not carry over the information
-      // about JsIgnore annotation.
-      // TODO(b/266614719): Rely on annotation presence instead when JsInterop annotations are
-      // part  of the J2CL ast.
+      // If we're using relaxed visibility semantics we may need to add JsIgnore annotation if a
+      // member was promoted to be public but the original member was _not_ a JsMember.
+      // TODO(b/b/206898384): we can remove this when we always bring over original visibilities.
       enclosingTypeDescriptor.isJsType &&
         !enclosingTypeDescriptor.isNative &&
         environment.ktVisibility(this).isPublic &&
+        visibility != Visibility.PUBLIC &&
         declarationJsInfo.jsMemberType == JsMemberType.NONE
 
   companion object {

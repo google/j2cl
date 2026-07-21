@@ -29,6 +29,9 @@ import kotlin.jvm.JvmStatic
 
 @JsType
 open class JsIgnoreExample {
+ @JsIgnore
+ constructor()
+ 
  companion object {
   @JvmStatic
   fun exportedFunction() {}
