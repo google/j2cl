@@ -82,9 +82,6 @@ private fun IrFunction.getJsMethodAnnotation(): IrConstructorCall? =
 private fun IrFunction.getJsPropertyAnnotation(): IrConstructorCall? =
   getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
 
-private fun IrProperty.getJsPropertyAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
-
 private fun IrField.getJsPropertyAnnotation(): IrConstructorCall? =
   getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
 
@@ -170,9 +167,6 @@ val IrClass.isJsEnum: Boolean
 val IrDeclaration.isJsIgnore: Boolean
   get() = getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null || isSynthetic
 
-val IrProperty.isJsProperty: Boolean
-  get() = getJsPropertyAnnotation() != null
-
 val IrFunction.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null
 
@@ -202,7 +196,6 @@ private fun IrDeclaration.getJsMemberAnnotation(): IrConstructorCall? =
   when (this) {
     is IrConstructor -> getJsConstructorAnnotation()
     is IrFunction -> getJsMethodAnnotation() ?: getJsPropertyAnnotation()
-    is IrProperty -> getJsPropertyAnnotation()
     is IrField -> getJsPropertyAnnotation()
     is IrEnumEntry -> getJsPropertyAnnotation()
     else -> null
