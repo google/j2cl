@@ -17,6 +17,9 @@ package java.lang;
 
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /** Wraps a primitive <code>double</code> as an object. */
 public final class Double extends Number implements Comparable<Double> {
@@ -181,4 +184,23 @@ public final class Double extends Number implements Comparable<Double> {
   static boolean $isInstance(Object instance) {
     return "number".equals(JsUtils.typeOf(instance));
   }
+
+  @JsType(isNative = true, name = "number", namespace = JsPackage.GLOBAL)
+  private interface NativeNumber {}
+
+  static NativeNumber toJs(Double value) {
+    return value == null ? null : toJsPrimitive(value.doubleValue());
+  }
+
+  static Double fromJs(NativeNumber value) {
+    return value == null ? null : valueOf(toDoublePrimitive(value));
+  }
+
+  // Use an identity function in js and take advantage of the implicit conversion triggered by
+  // the types declared in the imports.
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Number")
+  private static native NativeNumber toJsPrimitive(double value);
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Number")
+  private static native double toDoublePrimitive(NativeNumber value);
 }

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-goog.module('test');
+goog.module('test.utils');
 
 /**
  * @param {?string} a
@@ -28,6 +28,20 @@ function appendInJs(a, b) {
   return a + b;
 }
 
+/**
+ * @param {?number} a
+ * @param {?number} b
+ * @return {?number}
+ * @public
+ */
+function sumDoublesInJs(a, b) {
+  if (a == null || b == null) {
+    return null;
+  }
+  return a + b;
+}
+
 exports = {
   appendInJs,
+  sumDoublesInJs,
 };

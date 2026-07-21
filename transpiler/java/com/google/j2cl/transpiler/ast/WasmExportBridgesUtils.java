@@ -215,7 +215,13 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(javaTypeDescriptor.isNullable());
     }
-    if (needsExternConversion(javaTypeDescriptor, isExport)) {
+    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)) {
+      // Use externref since it can be both null and number.
+      return TypeDescriptors.get()
+          .javaemulInternalWasmExtern
+          .toNullable(javaTypeDescriptor.isNullable());
+    }
+    if (needsExternalizeInternalize(javaTypeDescriptor, isExport)) {
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
           .toNullable(javaTypeDescriptor.isNullable());
@@ -229,7 +235,10 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return RuntimeMethods.createJsStringFromStringMethodCall(expression);
     }
-    if (needsExternConversion(javaTypeDescriptor, isExport)) {
+    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)) {
+      return RuntimeMethods.createJsNumberFromDoubleMethodCall(expression);
+    }
+    if (needsExternalizeInternalize(javaTypeDescriptor, isExport)) {
       return RuntimeMethods.createWasmExternalizeMethodCall(expression);
     }
     return expression;
@@ -241,6 +250,9 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return RuntimeMethods.createStringFromJsStringMethodCall(expression);
     }
+    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)) {
+      return RuntimeMethods.createDoubleFromJsNumberMethodCall(expression);
+    }
     if (javaTypeDescriptor.isJsFunctionInterface()) {
       MethodDescriptor adaptMethodDescriptor =
           LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptMethod(
@@ -248,13 +260,14 @@ public class WasmExportBridgesUtils {
                   javaTypeDescriptor));
       return MethodCall.builderFrom(adaptMethodDescriptor).setArguments(expression).build();
     }
-    if (needsExternConversion(javaTypeDescriptor, isExport)) {
+    if (needsExternalizeInternalize(javaTypeDescriptor, isExport)) {
       return RuntimeMethods.createWasmInternalizeMethodCall(expression, javaTypeDescriptor);
     }
     return expression;
   }
 
-  private static boolean needsExternConversion(TypeDescriptor typeDescriptor, boolean isExport) {
+  private static boolean needsExternalizeInternalize(
+      TypeDescriptor typeDescriptor, boolean isExport) {
     return !typeDescriptor.isNative()
         && !typeDescriptor.isPrimitive()
         // For methods exported by configureAll, we can avoid conversions for exported types.

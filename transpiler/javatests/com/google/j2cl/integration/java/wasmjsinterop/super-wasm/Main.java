@@ -28,6 +28,7 @@ import jsinterop.annotations.JsType;
 public final class Main {
   public static void main(String... args) throws Exception {
     testJsString();
+    testJsNumber();
     testGlobalJsType();
     testNonglobalJsType();
     testJsFunction();
@@ -42,6 +43,16 @@ public final class Main {
     String foo = "String with special ";
     String bar = "chars like $'%$\"^";
     assertEquals(foo + bar, appendInJs(foo, bar));
+  }
+
+  public static void testJsNumber() {
+    assertEquals(null, sumDoublesInJs(null, null));
+    assertEquals(null, sumDoublesInJs(1.5, null));
+    assertEquals(null, sumDoublesInJs(null, 2.5));
+
+    Double d1 = 3.25;
+    Double d2 = 6.75;
+    assertEquals(10.0, sumDoublesInJs(d1, d2));
   }
 
   private static void testGlobalJsType() {
@@ -90,8 +101,11 @@ public final class Main {
     public static native int mult(int a, int b);
   }
 
-  @JsMethod(namespace = "test")
+  @JsMethod(namespace = "test.utils")
   private static native String appendInJs(String a, String b);
+
+  @JsMethod(namespace = "test.utils")
+  private static native Double sumDoublesInJs(Double a, Double b);
 
   // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
   // @JsMethod(namespace = "test.functions", name = "getFunction")

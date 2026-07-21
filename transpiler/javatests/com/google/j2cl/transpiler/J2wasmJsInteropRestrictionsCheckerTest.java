@@ -29,9 +29,10 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         class MyNative {
           int primitiveField;
           String stringField;
+          Double doubleField;
           MyNative nativeField;
-          MyNative(int a, String b, MyNative c) {}
-          native MyNative test(int a, String b, MyNative c);
+          MyNative(int a, String b, Double d, MyNative c) {}
+          native MyNative test(int a, String b, Double d, MyNative c);
         }
         class MyNonNative {
           @JsMethod
@@ -80,8 +81,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Return type of 'C Buggy.getField()' cannot be of type 'C'.
           @JsProperty native void setField(C c);
         > Error: Parameter 'c' in 'void Buggy.setField(C c)' cannot be of type 'C'.
-          native void testBoxed(Double d);
-        > Error: Parameter 'd' in 'void Buggy.testBoxed(Double d)' cannot be of type 'Double'.
         }
         class C {}
         """);
