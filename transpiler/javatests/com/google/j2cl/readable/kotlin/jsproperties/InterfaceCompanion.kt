@@ -43,7 +43,8 @@ interface InterfaceWithCompanion {
     const val b = 2
     var c = 3
     @JsProperty val d = 4
-    val e
+    @JsProperty const val e = 5
+    val f
       get() = 5
   }
 }
