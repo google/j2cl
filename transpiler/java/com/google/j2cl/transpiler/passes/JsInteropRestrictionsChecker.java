@@ -1863,6 +1863,7 @@ public class JsInteropRestrictionsChecker {
     return typeDescriptor.isPrimitive()
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangDouble(typeDescriptor)
+        || TypeDescriptors.isJavaLangBoolean(typeDescriptor)
         || typeDescriptor.isNative()
         || (checkWasmCustomDescriptorsJsInterop && AstUtils.isWasmJsExportedType(typeDescriptor));
   }

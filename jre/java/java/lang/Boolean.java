@@ -18,6 +18,9 @@ package java.lang;
 import java.io.Serializable;
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /** Wraps native <code>boolean</code> as an object. */
 public final class Boolean implements Comparable<Boolean>, Serializable {
@@ -110,4 +113,21 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   static boolean $isInstance(Object instance) {
     return "boolean".equals(JsUtils.typeOf(instance));
   }
+
+  @JsType(isNative = true, name = "boolean", namespace = JsPackage.GLOBAL)
+  private interface NativeBoolean {}
+
+  static NativeBoolean toJs(Boolean value) {
+    return value == null ? null : toJsPrimitive(value.booleanValue());
+  }
+
+  static Boolean fromJs(NativeBoolean value) {
+    return value == null ? null : valueOf(toBooleanPrimitive(value));
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Boolean")
+  private static native NativeBoolean toJsPrimitive(boolean value);
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Boolean")
+  private static native boolean toBooleanPrimitive(NativeBoolean value);
 }

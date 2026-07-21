@@ -215,8 +215,9 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(javaTypeDescriptor.isNullable());
     }
-    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)) {
-      // Use externref since it can be both null and number.
+    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)
+        || TypeDescriptors.isJavaLangBoolean(javaTypeDescriptor)) {
+      // Use externref since it can be a primitive value or null.
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
           .toNullable(javaTypeDescriptor.isNullable());
@@ -231,14 +232,16 @@ public class WasmExportBridgesUtils {
 
   /** Converts the given expression to a JS type which can be passed to JS. */
   public static Expression convertToExternal(
-      Expression expression, TypeDescriptor javaTypeDescriptor, boolean isExport) {
-    if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
+      Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
+    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return RuntimeMethods.createJsStringFromStringMethodCall(expression);
     }
-    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)) {
-      return RuntimeMethods.createJsNumberFromDoubleMethodCall(expression);
+    if (TypeDescriptors.isJavaLangDouble(typeDescriptor)
+        || TypeDescriptors.isJavaLangBoolean(typeDescriptor)) {
+      return RuntimeMethods.createToJsMethodCall(
+          (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
-    if (needsExternalizeInternalize(javaTypeDescriptor, isExport)) {
+    if (needsExternalizeInternalize(typeDescriptor, isExport)) {
       return RuntimeMethods.createWasmExternalizeMethodCall(expression);
     }
     return expression;
@@ -246,22 +249,24 @@ public class WasmExportBridgesUtils {
 
   /** Converts the given expression that was received from JS to a Wasm Java type. */
   public static Expression convertToInternal(
-      Expression expression, TypeDescriptor javaTypeDescriptor, boolean isExport) {
-    if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
+      Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
+    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return RuntimeMethods.createStringFromJsStringMethodCall(expression);
     }
-    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)) {
-      return RuntimeMethods.createDoubleFromJsNumberMethodCall(expression);
+    if (TypeDescriptors.isJavaLangDouble(typeDescriptor)
+        || TypeDescriptors.isJavaLangBoolean(typeDescriptor)) {
+      return RuntimeMethods.createFromJsMethodCall(
+          (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
-    if (javaTypeDescriptor.isJsFunctionInterface()) {
+    if (typeDescriptor.isJsFunctionInterface()) {
       MethodDescriptor adaptMethodDescriptor =
           LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptMethod(
               LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
-                  javaTypeDescriptor));
+                  typeDescriptor));
       return MethodCall.builderFrom(adaptMethodDescriptor).setArguments(expression).build();
     }
-    if (needsExternalizeInternalize(javaTypeDescriptor, isExport)) {
-      return RuntimeMethods.createWasmInternalizeMethodCall(expression, javaTypeDescriptor);
+    if (needsExternalizeInternalize(typeDescriptor, isExport)) {
+      return RuntimeMethods.createWasmInternalizeMethodCall(expression, typeDescriptor);
     }
     return expression;
   }

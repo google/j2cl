@@ -29,6 +29,7 @@ public final class Main {
   public static void main(String... args) throws Exception {
     testJsString();
     testJsNumber();
+    testJsBoolean();
     testGlobalJsType();
     testNonglobalJsType();
     testJsFunction();
@@ -53,6 +54,17 @@ public final class Main {
     Double d1 = 3.25;
     Double d2 = 6.75;
     assertEquals(10.0, sumDoublesInJs(d1, d2));
+  }
+
+  public static void testJsBoolean() {
+    assertEquals(null, andBooleansInJs(null, null));
+    assertEquals(null, andBooleansInJs(true, null));
+    assertEquals(null, andBooleansInJs(null, false));
+
+    Boolean b1 = true;
+    Boolean b2 = false;
+    assertEquals(false, andBooleansInJs(b1, b2));
+    assertEquals(true, andBooleansInJs(true, true));
   }
 
   private static void testGlobalJsType() {
@@ -106,6 +118,9 @@ public final class Main {
 
   @JsMethod(namespace = "test.utils")
   private static native Double sumDoublesInJs(Double a, Double b);
+
+  @JsMethod(namespace = "test.utils")
+  private static native Boolean andBooleansInJs(Boolean a, Boolean b);
 
   // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
   // @JsMethod(namespace = "test.functions", name = "getFunction")

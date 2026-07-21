@@ -41,7 +41,21 @@ function sumDoublesInJs(a, b) {
   return a + b;
 }
 
+/**
+ * @param {?boolean} a
+ * @param {?boolean} b
+ * @return {?boolean}
+ * @public
+ */
+function andBooleansInJs(a, b) {
+  if (a == null || b == null) {
+    return null;
+  }
+  return a && b;
+}
+
 exports = {
+  andBooleansInJs,
   appendInJs,
   sumDoublesInJs,
 };

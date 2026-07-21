@@ -253,16 +253,16 @@ public final class RuntimeMethods {
         .getMethodDescriptor("toJsString", TypeDescriptors.get().javaLangString);
   }
 
-  public static MethodCall createDoubleFromJsNumberMethodCall(Expression expression) {
-    MethodDescriptor doubleCreator =
-        TypeDescriptors.get().javaLangDouble.getMethodDescriptorByName("fromJs");
-    return MethodCall.builderFrom(doubleCreator).setArguments(expression).build();
+  public static MethodCall createFromJsMethodCall(
+      DeclaredTypeDescriptor typeDescriptor, Expression expression) {
+    MethodDescriptor toJs = typeDescriptor.getMethodDescriptorByName("fromJs");
+    return MethodCall.builderFrom(toJs).setArguments(expression).build();
   }
 
-  public static MethodCall createJsNumberFromDoubleMethodCall(Expression expression) {
-    MethodDescriptor doubleToJs =
-        TypeDescriptors.get().javaLangDouble.getMethodDescriptorByName("toJs");
-    return MethodCall.builderFrom(doubleToJs).setArguments(expression).build();
+  public static MethodCall createToJsMethodCall(
+      DeclaredTypeDescriptor typeDescriptor, Expression expression) {
+    MethodDescriptor toJs = typeDescriptor.getMethodDescriptorByName("toJs");
+    return MethodCall.builderFrom(toJs).setArguments(expression).build();
   }
 
   /** Create a call to an Class method. */
