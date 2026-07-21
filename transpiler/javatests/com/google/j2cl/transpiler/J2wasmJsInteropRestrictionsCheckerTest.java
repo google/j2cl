@@ -31,9 +31,10 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           String stringField;
           Double doubleField;
           Boolean booleanField;
+          Long longField;
           MyNative nativeField;
-          MyNative(int a, String b, Double d, Boolean bool, MyNative c) {}
-          native MyNative test(int a, String b, Double d, Boolean bool, MyNative c);
+          MyNative(int a, String b, Double d, Boolean bool, Long l, MyNative c) {}
+          native MyNative test(int a, String b, Double d, Boolean bool, Long l, MyNative c);
         }
         class MyNonNative {
           @JsMethod

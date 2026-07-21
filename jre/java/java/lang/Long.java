@@ -17,6 +17,8 @@ package java.lang;
 
 import javaemul.internal.LongUtils;
 import javaemul.internal.annotations.HasNoSideEffects;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 /** Wraps a primitive <code>long</code> as an object. */
 public final class Long extends Number implements Comparable<Long> {
@@ -263,5 +265,30 @@ public final class Long extends Number implements Comparable<Long> {
 
   public static boolean $isInstance(Object instance) {
     return LongUtils.isNativeLong(instance);
+  }
+
+  @JsType(isNative = true, name = "Long", namespace = "goog.math")
+  private static class NativeLong {
+    native int getLowBits();
+
+    native int getHighBits();
+
+    @JsMethod(namespace = "goog.math.Long", name = "fromBits")
+    static native NativeLong createfromBits(int lowBits, int highBits);
+  }
+
+  static NativeLong toJs(Long value) {
+    if (value == null) {
+      return null;
+    }
+    long l = value.longValue();
+    return NativeLong.createfromBits((int) l, LongUtils.getHighBits(l));
+  }
+
+  static Long fromJs(NativeLong value) {
+    if (value == null) {
+      return null;
+    }
+    return valueOf(LongUtils.fromBits(value.getLowBits(), value.getHighBits()));
   }
 }

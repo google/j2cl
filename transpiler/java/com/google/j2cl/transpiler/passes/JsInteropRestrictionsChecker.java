@@ -1862,8 +1862,7 @@ public class JsInteropRestrictionsChecker {
   private boolean canCrossWasmJavaScriptBoundary(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
         || TypeDescriptors.isJavaLangString(typeDescriptor)
-        || TypeDescriptors.isJavaLangDouble(typeDescriptor)
-        || TypeDescriptors.isJavaLangBoolean(typeDescriptor)
+        || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || typeDescriptor.isNative()
         || (checkWasmCustomDescriptorsJsInterop && AstUtils.isWasmJsExportedType(typeDescriptor));
   }

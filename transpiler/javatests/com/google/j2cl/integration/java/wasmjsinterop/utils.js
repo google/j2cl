@@ -15,6 +15,8 @@
  */
 goog.module('test.utils');
 
+const Long = goog.require('goog.math.Long');
+
 /**
  * @param {?string} a
  * @param {?string} b
@@ -54,8 +56,22 @@ function andBooleansInJs(a, b) {
   return a && b;
 }
 
+/**
+ * @param {?Long} a
+ * @param {?Long} b
+ * @return {?Long}
+ * @public
+ */
+function sumLongsInJs(a, b) {
+  if (a == null || b == null) {
+    return null;
+  }
+  return a.add(b);
+}
+
 exports = {
   andBooleansInJs,
   appendInJs,
   sumDoublesInJs,
+  sumLongsInJs,
 };

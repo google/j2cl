@@ -1,5 +1,6 @@
 const foo_Bar = goog.require('foo.Bar');
 const foo_Baz = goog.require('foo.Baz');
+const goog_math_Long = goog.require('goog.math.Long');
 const j2wasm_ArrayUtils = goog.require('j2wasm.ArrayUtils');
 const j2wasm_CharUtils = goog.require('j2wasm.CharUtils');
 const j2wasm_ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
@@ -100,6 +101,9 @@ function getImports() {
    'get foo.Bar.field': () => foo_Bar.field,
    'get top': () => top,
    'get window.top': () => window.top,
+   'goog.math.Long.fromBits': goog_math_Long.fromBits,
+   'goog.math.Long.getHighBits': (/** !goog_math_Long */ $instance, ) => $instance.getHighBits(),
+   'goog.math.Long.getLowBits': (/** !goog_math_Long */ $instance, ) => $instance.getLowBits(),
    'isFinite': isFinite,
    'j2wasm.ArrayUtils.getArrayAt': j2wasm_ArrayUtils.getArrayAt,
    'j2wasm.ArrayUtils.getArrayLength': j2wasm_ArrayUtils.getArrayLength,

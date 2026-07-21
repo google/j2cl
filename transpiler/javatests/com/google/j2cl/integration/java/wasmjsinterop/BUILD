@@ -16,6 +16,7 @@ j2wasm_library(
         "*.js",
     ]),
     deps = [
+        "//third_party:closure_math_long",
         "//third_party:jsinterop-annotations-j2wasm",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
     ],

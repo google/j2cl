@@ -112,6 +112,7 @@ j2wasm_library(
     visibility = ["//:__pkg__"],
     deps = [
         ":javaemul_internal_annotations-j2wasm",
+        "//third_party:closure_math_long",
         "//third_party:jsinterop-annotations-j2wasm",
     ],
 )

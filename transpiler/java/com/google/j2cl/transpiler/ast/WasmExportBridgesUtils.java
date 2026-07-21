@@ -215,8 +215,7 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(javaTypeDescriptor.isNullable());
     }
-    if (TypeDescriptors.isJavaLangDouble(javaTypeDescriptor)
-        || TypeDescriptors.isJavaLangBoolean(javaTypeDescriptor)) {
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(javaTypeDescriptor)) {
       // Use externref since it can be a primitive value or null.
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
@@ -236,8 +235,7 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return RuntimeMethods.createJsStringFromStringMethodCall(expression);
     }
-    if (TypeDescriptors.isJavaLangDouble(typeDescriptor)
-        || TypeDescriptors.isJavaLangBoolean(typeDescriptor)) {
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
@@ -253,8 +251,7 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return RuntimeMethods.createStringFromJsStringMethodCall(expression);
     }
-    if (TypeDescriptors.isJavaLangDouble(typeDescriptor)
-        || TypeDescriptors.isJavaLangBoolean(typeDescriptor)) {
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)) {
       return RuntimeMethods.createFromJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }

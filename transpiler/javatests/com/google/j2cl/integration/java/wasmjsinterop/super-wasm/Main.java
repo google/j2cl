@@ -30,6 +30,7 @@ public final class Main {
     testJsString();
     testJsNumber();
     testJsBoolean();
+    testJsLong();
     testGlobalJsType();
     testNonglobalJsType();
     testJsFunction();
@@ -65,6 +66,16 @@ public final class Main {
     Boolean b2 = false;
     assertEquals(false, andBooleansInJs(b1, b2));
     assertEquals(true, andBooleansInJs(true, true));
+  }
+
+  public static void testJsLong() {
+    assertEquals(null, sumLongsInJs(null, null));
+    assertEquals(null, sumLongsInJs(100L, null));
+    assertEquals(null, sumLongsInJs(null, 200L));
+
+    Long l1 = 12121212121212L;
+    Long l2 = 21212121212121L;
+    assertEquals(33333333333333L, sumLongsInJs(l1, l2));
   }
 
   private static void testGlobalJsType() {
@@ -121,6 +132,9 @@ public final class Main {
 
   @JsMethod(namespace = "test.utils")
   private static native Boolean andBooleansInJs(Boolean a, Boolean b);
+
+  @JsMethod(namespace = "test.utils")
+  private static native Long sumLongsInJs(Long a, Long b);
 
   // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
   // @JsMethod(namespace = "test.functions", name = "getFunction")
