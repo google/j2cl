@@ -17,13 +17,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.HasAnnotations
 
-private val hiddenFromObjCAnnotations =
-  setOf(
-    "com.google.j2kt.annotations.HiddenFromObjC",
-    // TODO(b/527953195): Remove when Dagger KSP is available.
-    "dagger.internal.DaggerGenerated",
-  )
-
 internal val HasAnnotations.hasInjectAnnotation: Boolean
   get() = hasAnnotation("dagger.Inject") || hasAnnotation("javax.inject.Inject")
 
@@ -35,9 +28,3 @@ internal val HasAnnotations.hasDaggerComponentRegistryCompatibleAnnotation: Bool
 
 internal val HasAnnotations.isVisibilityWarningSuppressed: Boolean
   get() = isWarningSuppressed("j2kt:visibility")
-
-internal val HasAnnotations.isAnnotatedToHideFromObjC: Boolean
-  get() = annotations.any {
-    hiddenFromObjCAnnotations.contains(it.typeDescriptor.qualifiedSourceName) ||
-      it.typeDescriptor.typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HidesFromObjC")
-  }
