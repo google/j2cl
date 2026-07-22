@@ -390,7 +390,7 @@ internal class J2ObjCCompatSources(
   }
 
   private fun shouldInclude(methodDescriptor: MethodDescriptor): Boolean =
-    !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
+    !methodDescriptor.isAnnotatedToHideFromObjC &&
       methodDescriptor.visibility.isPublic &&
       when {
         // Static methods are always included.
@@ -552,7 +552,7 @@ internal class J2ObjCCompatSources(
       methodDescriptor.parameterTypeDescriptors.all { !it.isProtobuf }
 
   private fun shouldInclude(fieldDescriptor: FieldDescriptor): Boolean =
-    !fieldDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
+    !fieldDescriptor.isAnnotatedToHideFromObjC &&
       fieldDescriptor.visibility.isPublic &&
       (fieldDescriptor.isStatic || fieldDescriptor.enclosingTypeDescriptor.isInterface) &&
       shouldInclude(fieldDescriptor.typeDescriptor)
@@ -573,7 +573,7 @@ internal class J2ObjCCompatSources(
     shouldIncludeDescriptor(typeDeclaration) &&
       !typeDeclaration.isProtobuf &&
       !typeDeclaration.isAnnotation &&
-      !typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC")
+      !typeDeclaration.isAnnotatedToHideFromObjC
 
   private fun shouldIncludeDescriptor(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.visibility.isPublic &&
