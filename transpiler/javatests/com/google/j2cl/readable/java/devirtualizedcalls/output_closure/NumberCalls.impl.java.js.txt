@@ -3,6 +3,7 @@ goog.module('devirtualizedcalls.NumberCalls$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $synthetic_goog_math_Long = goog.forwardDeclare('goog.math.Long');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -11,7 +12,6 @@ let Float = goog.forwardDeclare('java.lang.Float$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 class NumberCalls extends j_l_Object {
@@ -102,14 +102,14 @@ class NumberCalls extends j_l_Object {
   ff.m_intValue__int();
   ff.m_longValue__long();
   ff.m_shortValue__short();
-  let l = Long.$create__long($Long.fromInt(1));
+  let l = Long.$create__long($synthetic_goog_math_Long.fromInt(1));
   $Numbers.m_byteValue__java_lang_Number__byte(l);
   $Numbers.m_doubleValue__java_lang_Number__double(l);
   $Numbers.m_floatValue__java_lang_Number__float(l);
   $Numbers.m_intValue__java_lang_Number__int(l);
   $Numbers.m_longValue__java_lang_Number__long(l);
   $Numbers.m_shortValue__java_lang_Number__short(l);
-  let ll = Long.$create__long($Long.fromInt(1));
+  let ll = Long.$create__long($synthetic_goog_math_Long.fromInt(1));
   Long.m_byteValue__java_lang_Long__byte(ll);
   Long.m_doubleValue__java_lang_Long__double(ll);
   Long.m_floatValue__java_lang_Long__float(ll);
@@ -134,6 +134,7 @@ class NumberCalls extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $synthetic_goog_math_Long = goog.module.get('goog.math.Long');
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Byte = goog.module.get('java.lang.Byte$impl');
   Character = goog.module.get('java.lang.Character$impl');
@@ -142,7 +143,6 @@ class NumberCalls extends j_l_Object {
   Integer = goog.module.get('java.lang.Integer$impl');
   Long = goog.module.get('java.lang.Long$impl');
   Short = goog.module.get('java.lang.Short$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
  }
 }

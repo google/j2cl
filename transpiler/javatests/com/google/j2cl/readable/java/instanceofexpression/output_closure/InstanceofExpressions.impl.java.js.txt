@@ -3,6 +3,7 @@ goog.module('instanceofexpression.InstanceofExpressions$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $synthetic_goog_math_Long = goog.forwardDeclare('goog.math.Long');
 let $1 = goog.forwardDeclare('instanceofexpression.InstanceofExpressions.$1$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
@@ -24,7 +25,6 @@ let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
 let $short = goog.forwardDeclare('javaemul.internal.primitives.$short$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
@@ -112,14 +112,14 @@ class InstanceofExpressions extends j_l_Object {
  }
  /** @nodts */
  m_testPatternMatch__void_$p_instanceofexpression_InstanceofExpressions() {
-  let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number|!$Long) */ n;
+  let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number|!$synthetic_goog_math_Long) */ n;
   if (!(exp = j_l_Object.$create__(), j_l_String.$isInstance(exp) && (s = (/**@type {string}*/ ($Casts.$to(exp, j_l_String))), true)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
    return;
   }
   if ((exp_1 = j_l_Object.$create__(), Integer.$isInstance(exp_1) && (i = (/**@type {!Integer}*/ ($Casts.$to(exp_1, Integer))), i.intValue() == 2))) {
    let l = i.intValue();
   }
-  if (!(exp_2 = j_l_Object.$create__(), Number.$isInstance(exp_2) && (n = (/**@type {!(Number|number|!$Long)}*/ ($Casts.$to(exp_2, Number))), true))) {
+  if (!(exp_2 = j_l_Object.$create__(), Number.$isInstance(exp_2) && (n = (/**@type {!(Number|number|!$synthetic_goog_math_Long)}*/ ($Casts.$to(exp_2, Number))), true))) {
    let j = j_l_String.m_length__java_lang_String__int(s);
   } else {
    let k = $Numbers.m_byteValue__java_lang_Number__byte(n);

@@ -4,15 +4,15 @@ const A = goog.require('bridgemethods.A$impl');
 const I = goog.require('bridgemethods.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
- * @extends {A<(Number|number|!$Long), ?string>}
+ * @extends {A<(Number|number|!Long), ?string>}
  * @implements {I<Integer, ?string>}
  */
 class B extends A {

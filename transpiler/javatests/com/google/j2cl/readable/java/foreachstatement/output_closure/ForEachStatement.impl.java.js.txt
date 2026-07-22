@@ -9,6 +9,7 @@ let Exception3 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exceptio
 let Exception4 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception4$impl');
 let IterableReturningTypeVariable = goog.forwardDeclare('foreachstatement.ForEachStatement.IterableReturningTypeVariable$impl');
 let StringIterable = goog.forwardDeclare('foreachstatement.ForEachStatement.StringIterable$impl');
+let Long = goog.forwardDeclare('goog.math.Long');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -19,7 +20,6 @@ let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -62,8 +62,8 @@ class ForEachStatement extends j_l_Object {
    let __$exc = Exceptions.m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable(__$jsexc);
    if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {
     let e = /**@type {(Exception1|Exception2)}*/ (__$exc);
-    for (let $iterator = (/**@type {Iterable<(Number|number|!$Long)>}*/ ($Casts.$to(e, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
-     let o = /**@type {(Number|number|!$Long)}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Number));
+    for (let $iterator = (/**@type {Iterable<(Number|number|!Long)>}*/ ($Casts.$to(e, /**@type {Function}*/ (Iterable)))).m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+     let o = /**@type {(Number|number|!Long)}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Number));
     }
    } else if (Exception3.$isInstance(__$exc) || Exception4.$isInstance(__$exc)) {
     let e_1 = /**@type {(Exception3|Exception4)}*/ (__$exc);

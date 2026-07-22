@@ -3,10 +3,10 @@ goog.module('autoboxing.AutoBoxing.$2Local$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
+let j_l_Long = goog.forwardDeclare('java.lang.Long$impl');
 let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 /**
  * @template T, T_1
@@ -27,10 +27,10 @@ class $2Local extends j_l_Object {
  $ctor__autoboxing_AutoBoxing_2Local__void() {
   this.$ctor__java_lang_Object__void();
  }
- /** @nodts @return {!$Long} */
+ /** @nodts @return {!Long} */
  m_toLong__java_lang_Long__long_$pp_autoboxing(/** T */ l) {
-  Asserts.$assert__boolean__void(Long.m_equals__java_lang_Long__java_lang_Object__boolean(/**@type {!$Long}*/ (l), $Long.fromInt(11)));
-  return Long.m_longValue__java_lang_Long__long(/**@type {!$Long}*/ (l));
+  Asserts.$assert__boolean__void(j_l_Long.m_equals__java_lang_Long__java_lang_Object__boolean(/**@type {!Long}*/ (l), Long.fromInt(11)));
+  return j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (l));
  }
  /** @nodts */
  static $clinit() {
@@ -45,9 +45,9 @@ class $2Local extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Long = goog.module.get('java.lang.Long$impl');
+  Long = goog.module.get('goog.math.Long');
+  j_l_Long = goog.module.get('java.lang.Long$impl');
   Asserts = goog.module.get('javaemul.internal.Asserts$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
  }
 }
 $Util.$setClassMetadata($2Local, 'autoboxing.AutoBoxing$2Local');

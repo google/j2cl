@@ -3,7 +3,7 @@ goog.module('cast.CastPrimitives.LongValueHolder$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let Long = goog.forwardDeclare('goog.math.Long');
 
 class LongValueHolder extends j_l_Object {
  /** @protected @nodts */
@@ -11,14 +11,14 @@ class LongValueHolder extends j_l_Object {
   super();
  }
  /** @nodts @return {!LongValueHolder} */
- static $create__long(/** !$Long */ value) {
+ static $create__long(/** !Long */ value) {
   LongValueHolder.$clinit();
   let $instance = new LongValueHolder();
   $instance.$ctor__cast_CastPrimitives_LongValueHolder__long__void(value);
   return $instance;
  }
  /** @nodts */
- $ctor__cast_CastPrimitives_LongValueHolder__long__void(/** !$Long */ value) {
+ $ctor__cast_CastPrimitives_LongValueHolder__long__void(/** !Long */ value) {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts */

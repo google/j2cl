@@ -3,7 +3,7 @@ goog.module('devirtualizedsupermethodcall.OtherSubNumber$impl');
 const Number = goog.require('java.lang.Number$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let Long = goog.forwardDeclare('goog.math.Long');
 
 class OtherSubNumber extends Number {
  /** @protected @nodts */
@@ -25,9 +25,9 @@ class OtherSubNumber extends Number {
  m_intValue__int() {
   return 0;
  }
- /** @override @nodts @return {!$Long} */
+ /** @override @nodts @return {!Long} */
  m_longValue__long() {
-  return $Long.fromInt(0);
+  return Long.fromInt(0);
  }
  /** @override @nodts @return {number} */
  m_floatValue__float() {
@@ -58,7 +58,7 @@ class OtherSubNumber extends Number {
  
  /** @nodts */
  static $loadModules() {
-  $Long = goog.module.get('nativebootstrap.Long$impl');
+  Long = goog.module.get('goog.math.Long');
  }
 }
 $Util.$setClassMetadata(OtherSubNumber, 'devirtualizedsupermethodcall.OtherSubNumber');

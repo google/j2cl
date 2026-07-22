@@ -3,6 +3,7 @@ goog.module('nullability.Nullability$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Float = goog.forwardDeclare('java.lang.Float$impl');
@@ -12,7 +13,6 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let MyFunction = goog.forwardDeclare('nullability.MyFunction$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
@@ -93,8 +93,8 @@ class Nullability extends j_l_Object {
   let /** Float */ j = null;
   let k = 0;
   let /** Integer */ l = null;
-  let m = $Long.fromInt(0);
-  let /** $Long */ n = null;
+  let m = Long.fromInt(0);
+  let /** Long */ n = null;
   let o = 0;
   let /** Short */ p = null;
   let /** Unit */ q = null;
@@ -112,9 +112,9 @@ class Nullability extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Long = goog.module.get('goog.math.Long');
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
  }
 }

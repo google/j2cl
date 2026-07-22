@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('cast.Casts.Foo$impl');
 let Holder = goog.forwardDeclare('cast.Holder$impl');
+let $synthetic_goog_math_Long = goog.forwardDeclare('goog.math.Long');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -18,7 +19,6 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -57,9 +57,9 @@ class Casts extends j_l_Object {
   let d = /**@type {?number}*/ ($Casts.$to(o, Double));
   let f = /**@type {Float}*/ ($Casts.$to(o, Float));
   let i = /**@type {Integer}*/ ($Casts.$to(o, Integer));
-  let l = /**@type {$Long}*/ ($Casts.$to(o, Long));
+  let l = /**@type {$synthetic_goog_math_Long}*/ ($Casts.$to(o, Long));
   let s = /**@type {Short}*/ ($Casts.$to(o, Short));
-  let n = /**@type {(Number|number|!$Long)}*/ ($Casts.$to(o, Number));
+  let n = /**@type {(Number|number|!$synthetic_goog_math_Long)}*/ ($Casts.$to(o, Number));
   let c = /**@type {Character}*/ ($Casts.$to(o, Character));
   let bool = /**@type {?boolean}*/ ($Casts.$to(o, Boolean));
  }

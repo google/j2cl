@@ -1,7 +1,7 @@
 goog.module('simplelongs.SimpleLongs$impl');
 
+const Long = goog.require('goog.math.Long');
 const j_l_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
@@ -10,8 +10,8 @@ class SimpleLongs extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {!$Long} @nodts*/
-  this.f_foo__simplelongs_SimpleLongs = $Long.fromInt(0);
+  /**@type {!Long} @nodts*/
+  this.f_foo__simplelongs_SimpleLongs = Long.fromInt(0);
   /**@type {number} @nodts*/
   this.f_sideEffect__simplelongs_SimpleLongs_ = 0;
  }
@@ -27,9 +27,9 @@ class SimpleLongs extends j_l_Object {
   this.$ctor__java_lang_Object__void();
   this.$init__void_$p_simplelongs_SimpleLongs();
  }
- /** @nodts @return {!$Long} */
+ /** @nodts @return {!Long} */
  m_getBar__long() {
-  return $Long.fromInt(0);
+  return Long.fromInt(0);
  }
  /** @nodts @return {SimpleLongs} */
  m_getWithSideEffect__simplelongs_SimpleLongs() {
@@ -38,28 +38,28 @@ class SimpleLongs extends j_l_Object {
  }
  /** @nodts */
  m_main__void() {
-  let a = $Long.fromInt(0);
-  a = $Long.fromInt(-100000);
-  a = $Long.fromInt(100000);
-  let b = $Long.fromInt(-2147483648);
-  b = $Long.fromBits(-2147483648, 0) /* 2147483648 */;
-  b = $Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
-  b = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
+  let a = Long.fromInt(0);
+  a = Long.fromInt(-100000);
+  a = Long.fromInt(100000);
+  let b = Long.fromInt(-2147483648);
+  b = Long.fromBits(-2147483648, 0) /* 2147483648 */;
+  b = Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
+  b = Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
   let c = $LongUtils.plus(a, b);
   c = $LongUtils.divide(a, b);
-  let e = a = $LongUtils.plus(a, $Long.fromInt(1));
-  e = this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1));
-  let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value_1, /** SimpleLongs */ $qualifier_1, /** !$Long */ $value_2;
-  e = ($qualifier = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $qualifier.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)));
-  let f = ($value = a, a = $LongUtils.plus(a, $Long.fromInt(1)), $value);
-  f = ($value_1 = this.f_foo__simplelongs_SimpleLongs, this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_1);
-  f = (($qualifier_1 = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $value_2 = $qualifier_1.f_foo__simplelongs_SimpleLongs), $qualifier_1.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier_1.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_2);
+  let e = a = $LongUtils.plus(a, Long.fromInt(1));
+  e = this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, Long.fromInt(1));
+  let /** SimpleLongs */ $qualifier, /** !Long */ $value, /** !Long */ $value_1, /** SimpleLongs */ $qualifier_1, /** !Long */ $value_2;
+  e = ($qualifier = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $qualifier.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier.f_foo__simplelongs_SimpleLongs, Long.fromInt(1)));
+  let f = ($value = a, a = $LongUtils.plus(a, Long.fromInt(1)), $value);
+  f = ($value_1 = this.f_foo__simplelongs_SimpleLongs, this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, Long.fromInt(1)), $value_1);
+  f = (($qualifier_1 = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $value_2 = $qualifier_1.f_foo__simplelongs_SimpleLongs), $qualifier_1.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier_1.f_foo__simplelongs_SimpleLongs, Long.fromInt(1)), $value_2);
   let g = this.f_foo__simplelongs_SimpleLongs;
   g = this.m_getBar__long();
  }
  /** @private @nodts */
  $init__void_$p_simplelongs_SimpleLongs() {
-  this.f_foo__simplelongs_SimpleLongs = $Long.fromInt(0);
+  this.f_foo__simplelongs_SimpleLongs = Long.fromInt(0);
  }
  /** @nodts */
  static $clinit() {

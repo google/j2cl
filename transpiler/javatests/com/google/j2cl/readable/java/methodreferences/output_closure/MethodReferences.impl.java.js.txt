@@ -3,6 +3,7 @@ goog.module('methodreferences.MethodReferences$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -22,7 +23,6 @@ let MethodReferences_Function = goog.forwardDeclare('methodreferences.MethodRefe
 let ObjectCapturingOuter = goog.forwardDeclare('methodreferences.MethodReferences.ObjectCapturingOuter$impl');
 let Predicate = goog.forwardDeclare('methodreferences.MethodReferences.Predicate$impl');
 let Producer = goog.forwardDeclare('methodreferences.MethodReferences.Producer$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -64,7 +64,7 @@ class MethodReferences extends j_l_Object {
   return null;
  }
  /** @nodts @return {boolean} */
- m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(/** !(Number|number|!$Long) */ n) {
+ m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(/** !(Number|number|!Long) */ n) {
   return false;
  }
  /** @nodts @template U, V */
@@ -85,13 +85,13 @@ class MethodReferences extends j_l_Object {
   let parameterizedFactory = Producer.$adapt(/**  @return {string}*/ (() =>{
    return /**@type {string}*/ ($Casts.$to(parameterizedInstance.m_t__java_lang_Object_$pp_methodreferences(), j_l_String));
   }));
-  let biFunction = BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0, /** !(Number|number|!$Long) */ arg1) =>{
+  let biFunction = BiFunction.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0, /** !(Number|number|!Long) */ arg1) =>{
    let arg0_1 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0, MethodReferences));
-   let arg1_1 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1, Number));
+   let arg1_1 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(arg1, Number));
    return arg0_1.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg1_1);
   }));
-  let functionWithParameters = MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_2) =>{
-   let arg0_3 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_2, Number));
+  let functionWithParameters = MethodReferences_Function.$adapt(/**  @return {boolean}*/ ((/** !(Number|number|!Long) */ arg0_2) =>{
+   let arg0_3 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(arg0_2, Number));
    return this.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg0_3);
   }));
   let objectPredicate = Predicate.$adapt(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_4) =>{
@@ -131,9 +131,9 @@ class MethodReferences extends j_l_Object {
    let arg0_18 = /**@type {!Integer}*/ ($Casts.$to(arg0_17, Integer));
    return /**@type {!Array<number>}*/ ($Arrays.$create([arg0_18.intValue()], $int));
   }));
-  let longArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<!$Long>}*/ ((/** !Integer */ arg0_19) =>{
+  let longArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<!Long>}*/ ((/** !Integer */ arg0_19) =>{
    let arg0_20 = /**@type {!Integer}*/ ($Casts.$to(arg0_19, Integer));
-   return /**@type {!Array<!$Long>}*/ ($Arrays.$create([arg0_20.intValue()], $long));
+   return /**@type {!Array<!Long>}*/ ($Arrays.$create([arg0_20.intValue()], $long));
   }));
   let floatArrayFactory = MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ arg0_21) =>{
    let arg0_22 = /**@type {!Integer}*/ ($Casts.$to(arg0_21, Integer));
@@ -182,13 +182,13 @@ class MethodReferences extends j_l_Object {
   let jsSuperToStringProducer = /**  @return {string}*/ (() =>{
    return j_l_Object.prototype.toString.call(this);
   });
-  let jsbiFunction = /**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_37, /** !(Number|number|!$Long) */ arg1_2) =>{
+  let jsbiFunction = /**  @return {boolean}*/ ((/** !MethodReferences<T> */ arg0_37, /** !(Number|number|!Long) */ arg1_2) =>{
    let arg0_38 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(arg0_37, MethodReferences));
-   let arg1_3 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg1_2, Number));
+   let arg1_3 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(arg1_2, Number));
    return arg0_38.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg1_3);
   });
-  let jsFunctionWithParameters = /**  @return {boolean}*/ ((/** !(Number|number|!$Long) */ arg0_39) =>{
-   let arg0_40 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(arg0_39, Number));
+  let jsFunctionWithParameters = /**  @return {boolean}*/ ((/** !(Number|number|!Long) */ arg0_39) =>{
+   let arg0_40 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(arg0_39, Number));
    return this.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg0_40);
   });
   objectFactory = (/**@type {!Producer<!*>}*/ (Producer.$adapt(/**  @return {*}*/ (() =>{

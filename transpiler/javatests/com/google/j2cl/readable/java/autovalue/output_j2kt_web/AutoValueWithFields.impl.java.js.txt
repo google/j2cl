@@ -1,10 +1,10 @@
 goog.module('autovalue.AutoValueWithFields$impl');
 
 const Parent = goog.require('autovalue.Parent$impl');
+const Long = goog.require('goog.math.Long');
 const reflect = goog.require('goog.reflect');
 const Serializable = goog.require('java.io.Serializable$impl');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
@@ -53,10 +53,10 @@ class AutoValueWithFields extends Parent {
  static $loadModules() {}
 }
 ValueType.mixin(AutoValueWithFields, ValueType, 7, reflect.objectProperty('f_userField2_pp_autovalue__autovalue_AutoValueWithFields', AutoValueWithFields), reflect.objectProperty('f_userField1_pp_autovalue__autovalue_Parent', AutoValueWithFields), reflect.objectProperty('f_monitor__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields), reflect.objectProperty('f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields), reflect.objectProperty('f_getMemoizedNative___Memoized__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields));
-/**@const {!$Long} @nodts*/
-AutoValueWithFields.f_serialVersionUID__autovalue_AutoValueWithFields_ = $Long.fromInt(42);
-/**@const {!$Long} @nodts*/
-AutoValueWithFields.f_staticField__autovalue_AutoValueWithFields_ = $Long.fromInt(42);
+/**@const {!Long} @nodts*/
+AutoValueWithFields.f_serialVersionUID__autovalue_AutoValueWithFields_ = Long.fromInt(42);
+/**@const {!Long} @nodts*/
+AutoValueWithFields.f_staticField__autovalue_AutoValueWithFields_ = Long.fromInt(42);
 Serializable.$markImplementor(AutoValueWithFields);
 $Util.$setClassMetadata(AutoValueWithFields, 'autovalue.AutoValueWithFields');
 

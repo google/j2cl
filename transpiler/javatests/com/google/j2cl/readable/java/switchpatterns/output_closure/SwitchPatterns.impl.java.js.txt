@@ -3,6 +3,7 @@ goog.module('switchpatterns.SwitchPatterns$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -11,7 +12,6 @@ let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $1R = goog.forwardDeclare('switchpatterns.SwitchPatterns.$1R$impl');
 let Color = goog.forwardDeclare('switchpatterns.SwitchPatterns.Color$impl');
 let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
@@ -64,12 +64,12 @@ class SwitchPatterns extends j_l_Object {
   {
    let $selector_1 = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(i);
    let /** number */ $caseIndex_1;
-   let /** Integer */ j, /** (Number|number|!$Long) */ n;
+   let /** Integer */ j, /** (Number|number|!Long) */ n;
    if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(23)) || Objects.m_equals__java_lang_Object__java_lang_Object__boolean($selector_1, Integer.valueOf(32))) {
     $caseIndex_1 = 0;
    } else if (Integer.$isInstance($selector_1) && (j = (/**@type {!Integer}*/ ($Casts.$to($selector_1, Integer))), j.intValue() > 2)) {
     $caseIndex_1 = 1;
-   } else if (Number.$isInstance($selector_1) && (n = (/**@type {!(Number|number|!$Long)}*/ ($Casts.$to($selector_1, Number))), true)) {
+   } else if (Number.$isInstance($selector_1) && (n = (/**@type {!(Number|number|!Long)}*/ ($Casts.$to($selector_1, Number))), true)) {
     $caseIndex_1 = 2;
    } else {
     $caseIndex_1 = 3;

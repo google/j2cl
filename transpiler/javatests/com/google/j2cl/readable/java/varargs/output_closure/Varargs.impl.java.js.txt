@@ -3,14 +3,14 @@ goog.module('varargs.Varargs$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
+let j_l_Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let FunctionalInterface = goog.forwardDeclare('varargs.Varargs.FunctionalInterface$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
@@ -78,9 +78,9 @@ class Varargs extends j_l_Object {
  /** @nodts */
  m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void(/** ?string */ o, /** Array<*> */ rest) {}
  /** @nodts */
- m_testOverloaded__long__void(/** !$Long */ l) {}
+ m_testOverloaded__long__void(/** !Long */ l) {}
  /** @nodts */
- m_testOverloaded__long__arrayOf_long__void(/** !$Long */ l, /** Array<!$Long> */ rest) {}
+ m_testOverloaded__long__arrayOf_long__void(/** !Long */ l, /** Array<!Long> */ rest) {}
  /** @nodts */
  m_main__void() {
   let v = Varargs.$create__();
@@ -99,11 +99,11 @@ class Varargs extends j_l_Object {
   v.m_testOverloaded__java_lang_Object__void('foo');
   v.m_testOverloaded__java_lang_String__arrayOf_java_lang_Object__void('foo', ['bar']);
   v.m_testOverloaded__java_lang_Object__void('foo');
-  v.m_testOverloaded__long__void($Long.fromInt(1));
-  v.m_testOverloaded__java_lang_Object__void(Long.m_valueOf__long__java_lang_Long($Long.fromInt(1)));
-  v.m_testOverloaded__long__void($Long.fromInt(1));
-  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $long)));
-  v.m_testOverloaded__long__arrayOf_long__void($Long.fromInt(1), /**@type {!Array<!$Long>}*/ ($Arrays.$stampType([$Long.fromInt(2), $Long.fromInt(3)], $long)));
+  v.m_testOverloaded__long__void(Long.fromInt(1));
+  v.m_testOverloaded__java_lang_Object__void(j_l_Long.m_valueOf__long__java_lang_Long(Long.fromInt(1)));
+  v.m_testOverloaded__long__void(Long.fromInt(1));
+  v.m_testOverloaded__long__arrayOf_long__void(Long.fromInt(1), /**@type {!Array<!Long>}*/ ($Arrays.$stampType([Long.fromInt(2), Long.fromInt(3)], $long)));
+  v.m_testOverloaded__long__arrayOf_long__void(Long.fromInt(1), /**@type {!Array<!Long>}*/ ($Arrays.$stampType([Long.fromInt(2), Long.fromInt(3)], $long)));
  }
  /** @nodts */
  static $clinit() {
@@ -118,12 +118,12 @@ class Varargs extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Long = goog.module.get('java.lang.Long$impl');
+  Long = goog.module.get('goog.math.Long');
+  j_l_Long = goog.module.get('java.lang.Long$impl');
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   $long = goog.module.get('javaemul.internal.primitives.$long$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
   FunctionalInterface = goog.module.get('varargs.Varargs.FunctionalInterface$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
  }

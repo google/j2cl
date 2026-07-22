@@ -3,10 +3,10 @@ goog.module('strings.Strings$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $synthetic_goog_math_Long = goog.forwardDeclare('goog.math.Long');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let StringHolder = goog.forwardDeclare('strings.Strings.StringHolder$impl');
 
 /**
@@ -52,8 +52,8 @@ class Strings extends j_l_Object {
   let c2 = 111 /* 'o' */;
   let tmp = c1;
   s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(Integer.valueOf(tmp + c2 | 0).toString()) + 'o';
-  s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + (j_l_String.m_valueOf__java_lang_Object__java_lang_String(Long.m_toString__java_lang_Long__java_lang_String($Long.fromInt(1))) + '');
-  s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + $Long.fromInt(1);
+  s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + (j_l_String.m_valueOf__java_lang_Object__java_lang_String(Long.m_toString__java_lang_Long__java_lang_String($synthetic_goog_math_Long.fromInt(1))) + '');
+  s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + $synthetic_goog_math_Long.fromInt(1);
   s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + j_l_String.m_valueOf__char__java_lang_String(67 /* 'C' */);
   s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + 1;
   s4 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s4) + 1;
@@ -87,10 +87,10 @@ class Strings extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  $synthetic_goog_math_Long = goog.module.get('goog.math.Long');
   Integer = goog.module.get('java.lang.Integer$impl');
   Long = goog.module.get('java.lang.Long$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
   StringHolder = goog.module.get('strings.Strings.StringHolder$impl');
  }
 }

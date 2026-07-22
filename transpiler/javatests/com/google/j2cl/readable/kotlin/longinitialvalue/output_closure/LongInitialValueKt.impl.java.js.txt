@@ -1,7 +1,7 @@
 goog.module('longinitialvalue.LongInitialValueKt$impl');
 
+const Long = goog.require('goog.math.Long');
 const j_l_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
@@ -23,13 +23,13 @@ class LongInitialValueKt extends j_l_Object {
  $ctor__longinitialvalue_LongInitialValueKt__void() {
   this.$ctor__java_lang_Object__void();
  }
- /** @nodts @return {!$Long} */
+ /** @nodts @return {!Long} */
  static m_getLONG_VALUE__long() {
   LongInitialValueKt.$clinit();
   return LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_;
  }
  /** @nodts */
- static m_setLONG_VALUE__long__void(/** !$Long */ set__) {
+ static m_setLONG_VALUE__long__void(/** !Long */ set__) {
   LongInitialValueKt.$clinit();
   LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_ = set__;
  }
@@ -47,8 +47,8 @@ class LongInitialValueKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {}
 }
-/**@type {!$Long} @nodts*/
-LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_ = $Long.fromInt(0);
+/**@type {!Long} @nodts*/
+LongInitialValueKt.f_LONG_VALUE__longinitialvalue_LongInitialValueKt_ = Long.fromInt(0);
 $Util.$setClassMetadata(LongInitialValueKt, 'longinitialvalue.LongInitialValueKt');
 
 exports = LongInitialValueKt;

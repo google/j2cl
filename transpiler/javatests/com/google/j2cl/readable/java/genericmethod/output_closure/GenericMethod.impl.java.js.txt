@@ -10,12 +10,12 @@ let Container = goog.forwardDeclare('genericmethod.GenericMethod.Container$impl'
 let Content = goog.forwardDeclare('genericmethod.GenericMethod.Content$impl');
 let SuperContainer = goog.forwardDeclare('genericmethod.GenericMethod.SuperContainer$impl');
 let Supplier = goog.forwardDeclare('genericmethod.GenericMethod.Supplier$impl');
+let Long = goog.forwardDeclare('goog.math.Long');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -67,7 +67,7 @@ class GenericMethod extends j_l_Object {
  }
  /** @nodts */
  m_test__void() {
-  let g = /**@type {!GenericMethod<(Number|number|!$Long)>}*/ (GenericMethod.$create__());
+  let g = /**@type {!GenericMethod<(Number|number|!Long)>}*/ (GenericMethod.$create__());
   g.m_foo__java_lang_Object__java_lang_Object__void(g, g);
   g.m_foo__java_lang_Object__java_lang_Object__void(Error.$create__(), Exception.$create__());
   g.m_fun__java_lang_Object__void(j_l_Object.$create__());
@@ -136,7 +136,7 @@ class GenericMethod extends j_l_Object {
  /** @nodts */
  static m_testMethodCallsWithCaptureTypeArguments__void() {
   GenericMethod.$clinit();
-  GenericMethod.m_methodWithBoundTypeVariable__java_lang_Number__void($Long.fromInt(0));
+  GenericMethod.m_methodWithBoundTypeVariable__java_lang_Number__void(Long.fromInt(0));
  }
  /** @nodts */
  static $clinit() {
@@ -156,11 +156,11 @@ class GenericMethod extends j_l_Object {
   Container = goog.module.get('genericmethod.GenericMethod.Container$impl');
   Content = goog.module.get('genericmethod.GenericMethod.Content$impl');
   SuperContainer = goog.module.get('genericmethod.GenericMethod.SuperContainer$impl');
+  Long = goog.module.get('goog.math.Long');
   Error = goog.module.get('java.lang.Error$impl');
   Exception = goog.module.get('java.lang.Exception$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

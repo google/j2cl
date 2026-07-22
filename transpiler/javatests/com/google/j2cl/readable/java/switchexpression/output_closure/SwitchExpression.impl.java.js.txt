@@ -3,12 +3,12 @@ goog.module('switchexpression.SwitchExpression$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let Enum = goog.forwardDeclare('switchexpression.SwitchExpression.Enum$impl');
 
 class SwitchExpression extends j_l_Object {
@@ -33,7 +33,7 @@ class SwitchExpression extends j_l_Object {
   let i = (() =>{
    switch (3) {
     case 1:
-     return $Long.fromInt(5);
+     return Long.fromInt(5);
     case 3:case 4:
      throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
     default:
@@ -51,7 +51,7 @@ class SwitchExpression extends j_l_Object {
   let i = (() =>{
    switch (3) {
     case 1:
-     return $Long.fromInt(5);
+     return Long.fromInt(5);
     case 3:case 4:
      throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
     default:
@@ -60,7 +60,7 @@ class SwitchExpression extends j_l_Object {
       let j = Short.m_valueOf__short__java_lang_Short(Primitives.m_narrowIntToShort__int__int(($value = a, a = a + 1 | 0, $value)));
       while (j.m_shortValue__short() < 3) {
        if (j.m_shortValue__short() == 2) {
-        return $Long.fromInt(2);
+        return Long.fromInt(2);
        }
       }
       return Primitives.m_widenShortToLong__int__long(j.m_shortValue__short());
@@ -77,14 +77,14 @@ class SwitchExpression extends j_l_Object {
      return (() =>{
       switch (5) {
        case 1:
-        return $Long.fromInt(10);
+        return Long.fromInt(10);
        default:
         return (() =>{
          switch (6) {
           case 1:
            throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
           default:
-           return $Long.fromInt(5);
+           return Long.fromInt(5);
          }
         })();
       }
@@ -99,9 +99,9 @@ class SwitchExpression extends j_l_Object {
   let i = (() =>{
    switch (Enum.f_A__switchexpression_SwitchExpression_Enum.ordinal()) {
     case Enum.$ordinal_A__switchexpression_SwitchExpression_Enum:
-     return $Long.fromInt(0);
+     return Long.fromInt(0);
     case Enum.$ordinal_B__switchexpression_SwitchExpression_Enum:
-     return $Long.fromInt(1);
+     return Long.fromInt(1);
     default:
      InternalPreconditions.m_checkExhaustive__void();
    }
@@ -115,9 +115,9 @@ class SwitchExpression extends j_l_Object {
     default:
      o = 1;
     case 2:
-     return $Long.fromInt(1);
+     return Long.fromInt(1);
     case 1:
-     return $Long.fromInt(2);
+     return Long.fromInt(2);
    }
   })();
  }
@@ -134,12 +134,12 @@ class SwitchExpression extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Long = goog.module.get('goog.math.Long');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Short = goog.module.get('java.lang.Short$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
-  $Long = goog.module.get('nativebootstrap.Long$impl');
   Enum = goog.module.get('switchexpression.SwitchExpression.Enum$impl');
  }
 }

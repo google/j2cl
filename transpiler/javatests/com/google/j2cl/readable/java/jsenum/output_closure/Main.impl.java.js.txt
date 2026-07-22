@@ -3,6 +3,7 @@ goog.module('jsenum.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
@@ -25,7 +26,6 @@ let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.StringJsEnum.$Overl
 let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
 let TemplatedField = goog.forwardDeclare('jsenum.Main.TemplatedField$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -55,7 +55,7 @@ class Main extends j_l_Object {
     break;
    default:
   }
-  let /** (Comparable|boolean|number|string|!$Long) */ comparable = /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(comparableJsEnum, $Overlay));
+  let /** (Comparable|boolean|number|string|!Long) */ comparable = /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(comparableJsEnum, $Overlay));
   comparableJsEnum = (/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(comparable, $Overlay)));
   let intJsEnum = IntJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_IntJsEnum__int(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : /**@type {?IntJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, IntJsEnum_$Overlay));
   switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(intJsEnum, null)), intJsEnum)) {

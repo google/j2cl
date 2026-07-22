@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let IntTransformer = goog.forwardDeclare('functiontype.IntTransformer$impl');
+let Long = goog.forwardDeclare('goog.math.Long');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -11,7 +12,6 @@ let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let Function2 = goog.forwardDeclare('kotlin.jvm.functions.Function2$impl');
 let Function3 = goog.forwardDeclare('kotlin.jvm.functions.Function3$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -60,8 +60,8 @@ class FunctionTypeKt extends j_l_Object {
   FunctionTypeKt.$clinit();
   return /**@type {string}*/ ($Casts.$to(f.m_invoke__java_lang_Object__java_lang_Object__java_lang_Object__java_lang_Object('foo', Integer.valueOf(1), Integer.valueOf(2)), j_l_String));
  }
- /** @nodts @return {!(Number|number|!$Long)} */
- static m_foo__java_lang_Number__java_lang_Number(/** !(Number|number|!$Long) */ i) {
+ /** @nodts @return {!(Number|number|!Long)} */
+ static m_foo__java_lang_Number__java_lang_Number(/** !(Number|number|!Long) */ i) {
   FunctionTypeKt.$clinit();
   return i;
  }
@@ -81,8 +81,8 @@ class FunctionTypeKt extends j_l_Object {
    let p2_1 = /**@type {!Integer}*/ ($Casts.$to(p2, Integer));
    return Integer.valueOf(p1_1.intValue() + p2_1.intValue() | 0);
   }));
-  FunctionTypeKt.f_fooRef__functiontype_FunctionTypeKt_ = Function1.$adapt(/**  @return {!(Number|number|!$Long)}*/ ((/** !(Number|number|!$Long) */ p0) =>{
-   let p0_1 = /**@type {!(Number|number|!$Long)}*/ ($Casts.$to(p0, Number));
+  FunctionTypeKt.f_fooRef__functiontype_FunctionTypeKt_ = Function1.$adapt(/**  @return {!(Number|number|!Long)}*/ ((/** !(Number|number|!Long) */ p0) =>{
+   let p0_1 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(p0, Number));
    return FunctionTypeKt.m_foo__java_lang_Number__java_lang_Number(p0_1);
   }));
  }

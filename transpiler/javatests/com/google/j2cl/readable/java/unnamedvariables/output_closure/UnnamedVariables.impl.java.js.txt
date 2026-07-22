@@ -3,6 +3,7 @@ goog.module('unnamedvariables.UnnamedVariables$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
 let AutoCloseable = goog.forwardDeclare('java.lang.AutoCloseable$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
@@ -15,7 +16,6 @@ let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$imp
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $1R = goog.forwardDeclare('unnamedvariables.UnnamedVariables.$1R$impl');
 let $2R = goog.forwardDeclare('unnamedvariables.UnnamedVariables.$2R$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -42,12 +42,12 @@ class UnnamedVariables extends j_l_Object {
   {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(r);
    let /** number */ $caseIndex;
-   let /** ?string */ _, /** $1R */ pattern$1R, /** * */ exp, /** ?string */ __1, /** ?string */ __2, /** $1R */ pattern$1R_1, /** * */ exp_1, /** (Number|number|!$Long) */ __3, /** ?string */ __4, /** $1R */ pattern$1R_2, /** * */ __5, /** ?string */ __6;
+   let /** ?string */ _, /** $1R */ pattern$1R, /** * */ exp, /** ?string */ __1, /** ?string */ __2, /** $1R */ pattern$1R_1, /** * */ exp_1, /** (Number|number|!Long) */ __3, /** ?string */ __4, /** $1R */ pattern$1R_2, /** * */ __5, /** ?string */ __6;
    if (j_l_String.$isInstance($selector) && (_ = (/**@type {string}*/ ($Casts.$to($selector, j_l_String))), true)) {
     $caseIndex = 0;
    } else if ($1R.$isInstance($selector) && (pattern$1R = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), exp = pattern$1R.m_o__java_lang_Object(), j_l_String.$isInstance(exp) && (__1 = (/**@type {string}*/ ($Casts.$to(exp, j_l_String))), __2 = pattern$1R.m_s__java_lang_String(), true))) {
     $caseIndex = 1;
-   } else if ($1R.$isInstance($selector) && (pattern$1R_1 = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), exp_1 = pattern$1R_1.m_o__java_lang_Object(), Number.$isInstance(exp_1) && (__3 = (/**@type {!(Number|number|!$Long)}*/ ($Casts.$to(exp_1, Number))), __4 = pattern$1R_1.m_s__java_lang_String(), true))) {
+   } else if ($1R.$isInstance($selector) && (pattern$1R_1 = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), exp_1 = pattern$1R_1.m_o__java_lang_Object(), Number.$isInstance(exp_1) && (__3 = (/**@type {!(Number|number|!Long)}*/ ($Casts.$to(exp_1, Number))), __4 = pattern$1R_1.m_s__java_lang_String(), true))) {
     $caseIndex = 2;
    } else if ($1R.$isInstance($selector) && (pattern$1R_2 = (/**@type {!$1R}*/ ($Casts.$to($selector, $1R))), __5 = pattern$1R_2.m_o__java_lang_Object(), __6 = pattern$1R_2.m_s__java_lang_String(), true)) {
     $caseIndex = 3;
@@ -71,10 +71,10 @@ class UnnamedVariables extends j_l_Object {
  /** @nodts */
  m_testInstanceOfPatterns__void_$pp_unnamedvariables() {
   let /** * */ r = null;
-  let /** ?string */ _, /** $2R */ pattern$2R, /** * */ exp, /** ?string */ __1, /** ?string */ __2, /** $2R */ pattern$2R_1, /** * */ exp_1, /** (Number|number|!$Long) */ __3, /** ?string */ __4, /** $2R */ pattern$2R_2, /** * */ __5, /** ?string */ __6;
+  let /** ?string */ _, /** $2R */ pattern$2R, /** * */ exp, /** ?string */ __1, /** ?string */ __2, /** $2R */ pattern$2R_1, /** * */ exp_1, /** (Number|number|!Long) */ __3, /** ?string */ __4, /** $2R */ pattern$2R_2, /** * */ __5, /** ?string */ __6;
   let __7 = j_l_String.$isInstance(r) && (_ = (/**@type {string}*/ ($Casts.$to(r, j_l_String))), true);
   let __8 = $2R.$isInstance(r) && (pattern$2R = (/**@type {!$2R}*/ ($Casts.$to(r, $2R))), exp = pattern$2R.m_o__java_lang_Object(), j_l_String.$isInstance(exp) && (__1 = (/**@type {string}*/ ($Casts.$to(exp, j_l_String))), __2 = pattern$2R.m_s__java_lang_String(), true));
-  let __9 = $2R.$isInstance(r) && (pattern$2R_1 = (/**@type {!$2R}*/ ($Casts.$to(r, $2R))), exp_1 = pattern$2R_1.m_o__java_lang_Object(), Number.$isInstance(exp_1) && (__3 = (/**@type {!(Number|number|!$Long)}*/ ($Casts.$to(exp_1, Number))), __4 = pattern$2R_1.m_s__java_lang_String(), true));
+  let __9 = $2R.$isInstance(r) && (pattern$2R_1 = (/**@type {!$2R}*/ ($Casts.$to(r, $2R))), exp_1 = pattern$2R_1.m_o__java_lang_Object(), Number.$isInstance(exp_1) && (__3 = (/**@type {!(Number|number|!Long)}*/ ($Casts.$to(exp_1, Number))), __4 = pattern$2R_1.m_s__java_lang_String(), true));
   let __10 = $2R.$isInstance(r) && (pattern$2R_2 = (/**@type {!$2R}*/ ($Casts.$to(r, $2R))), __5 = pattern$2R_2.m_o__java_lang_Object(), __6 = pattern$2R_2.m_s__java_lang_String(), true);
  }
  /** @nodts */

@@ -1,7 +1,7 @@
 goog.module('compiletimeconstant.CompileTimeConstant$impl');
 
+const Long = goog.require('goog.math.Long');
 const j_l_Object = goog.require('java.lang.Object$impl');
-const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -25,8 +25,8 @@ class CompileTimeConstant extends j_l_Object {
   this.f_E2__compiletimeconstant_CompileTimeConstant = 'Do\"ve';
   /**@const {string} @nodts*/
   this.f_F2__compiletimeconstant_CompileTimeConstant = 'Tur\"tleDo\"ve';
-  /**@const {!$Long} @nodts*/
-  this.f_G2__compiletimeconstant_CompileTimeConstant = $Long.fromInt(10000);
+  /**@const {!Long} @nodts*/
+  this.f_G2__compiletimeconstant_CompileTimeConstant = Long.fromInt(10000);
   /**@const {number} @nodts*/
   this.f_H2__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
   /**@const {boolean} @nodts*/
@@ -54,7 +54,7 @@ class CompileTimeConstant extends j_l_Object {
   let minByte = -128;
   let minShort = -32768;
   let minInt = -2147483648;
-  let minLong = $Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
+  let minLong = Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
   let intUnaryMinusOverflow = - -2147483648 | 0;
   let intPlusOverflow = 2147483647 + 1 | 0;
   let intMinusOverflow = -2147483648 - 1 | 0;
@@ -115,8 +115,8 @@ CompileTimeConstant.f_M__compiletimeconstant_CompileTimeConstant = 'ThisIsALongS
 CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlsoButLonger';
 /**@const {string} @nodts*/
 CompileTimeConstant.f_O__compiletimeconstant_CompileTimeConstant = '1 is 1';
-/**@const {!$Long} @nodts*/
-CompileTimeConstant.f_G__compiletimeconstant_CompileTimeConstant = $Long.fromInt(10000);
+/**@const {!Long} @nodts*/
+CompileTimeConstant.f_G__compiletimeconstant_CompileTimeConstant = Long.fromInt(10000);
 /**@const {number} @nodts*/
 CompileTimeConstant.f_H__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
 /**@const {boolean} @nodts*/
@@ -131,8 +131,8 @@ CompileTimeConstant.f_MIN_BYTE__compiletimeconstant_CompileTimeConstant = -128;
 CompileTimeConstant.f_MIN_SHORT__compiletimeconstant_CompileTimeConstant = -32768;
 /**@const {number} @nodts*/
 CompileTimeConstant.f_MIN_INT__compiletimeconstant_CompileTimeConstant = -2147483648;
-/**@const {!$Long} @nodts*/
-CompileTimeConstant.f_MIN_LONG__compiletimeconstant_CompileTimeConstant = $Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
+/**@const {!Long} @nodts*/
+CompileTimeConstant.f_MIN_LONG__compiletimeconstant_CompileTimeConstant = Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
 /**@const {number} @nodts*/
 CompileTimeConstant.f_MIN_BYTE_WITH_CAST__compiletimeconstant_CompileTimeConstant = -128;
 /**@const {number} @nodts*/

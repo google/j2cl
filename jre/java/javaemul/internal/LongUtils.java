@@ -152,7 +152,7 @@ public class LongUtils {
     return instance instanceof NativeLong;
   }
 
-  @JsType(isNative = true, name = "Long", namespace = "nativebootstrap")
+  @JsType(isNative = true, name = "Long", namespace = "goog.math")
   static class NativeLong {
     public static native long fromBits(int lowBits, int highBits);
 
