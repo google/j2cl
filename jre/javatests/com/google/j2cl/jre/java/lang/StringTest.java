@@ -19,7 +19,6 @@ import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -164,7 +163,6 @@ public class StringTest extends TestCase {
     assertThrows(NullPointerException.class, () -> hideFromCompiler("").concat(returnNull()));
   }
 
-  @J2ktIncompatible
   public void testStringBufferConstructor() {
     StringBuffer buf = new StringBuffer();
     buf.append('c');

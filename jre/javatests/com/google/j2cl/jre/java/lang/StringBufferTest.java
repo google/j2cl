@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Locale;
 import junit.framework.TestCase;
 
@@ -96,7 +95,6 @@ public class StringBufferTest extends TestCase {
   }
 
   /** Check that capacity methods are present, even though they do nothing. */
-  @J2ktIncompatible // ensureCapacity(), capacity() and trimToSize() unsupported
   public void testCapacity() {
     StringBuffer buf = new StringBuffer();
     buf.ensureCapacity(100);
@@ -129,7 +127,6 @@ public class StringBufferTest extends TestCase {
   }
 
   /** Tests toCharArray. */
-  @J2ktIncompatible // getChars() unsupported
   public void testGetChars() {
     StringBuffer x = new StringBuffer("ABCDEFGHIJ");
     char[] a1 = "abcdefghij".toCharArray();
@@ -210,7 +207,6 @@ public class StringBufferTest extends TestCase {
   }
 
   /** This method tests <code>lastIndexOf</code>. */
-  @J2ktIncompatible // lastIndexOf() unsupported
   public void testLastIndexOf() {
     StringBuffer x = new StringBuffer("abcdeabcdef");
     assertEquals(9, x.lastIndexOf("e"));
@@ -305,7 +301,6 @@ public class StringBufferTest extends TestCase {
   }
 
   /** This method tests <code>setLength</code>. */
-  @J2ktIncompatible // setLength() unsupported
   public void testSetLength() {
     StringBuffer x = new StringBuffer("abcdefghi");
     x.setLength(20);
@@ -329,7 +324,6 @@ public class StringBufferTest extends TestCase {
    * A smoke test that StringBuilder's methods are available and basically work. The implementation
    * is currently shared with StringBuffer, so all the tricky test cases are not repeated.
    */
-  @J2ktIncompatible // getChars() unsupported
   public void testStringBuilder() {
     StringBuilder bld = new StringBuilder();
     bld = new StringBuilder(100);
@@ -523,7 +517,6 @@ public class StringBufferTest extends TestCase {
   }
 
   /** This method tests <code>substring</code>. */
-  @J2ktIncompatible // substring() unsupported
   public void testSubstring() {
     StringBuffer haystack = new StringBuffer("abcdefghi");
     assertEquals("cd", haystack.substring(2, 4));
