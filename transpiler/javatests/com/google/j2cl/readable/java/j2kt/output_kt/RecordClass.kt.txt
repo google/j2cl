@@ -19,6 +19,7 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.IllegalArgumentException
 import java.util.Arrays
 import kotlin.Any
 import kotlin.Boolean
@@ -31,6 +32,52 @@ import kotlin.jvm.JvmStatic
 import kotlin.run
 
 class RecordClass {
+ class RecordWithCompactConstructorWithoutParameterAssignment {
+  private val a: Int
+  
+  private val b: Int
+  
+  constructor(a: Int, b: Int) {
+   if (a > b) {
+    throw IllegalArgumentException()
+   }
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithCompactConstructorWithoutParameterAssignment? = null
+   if (!(arg0 is RecordWithCompactConstructorWithoutParameterAssignment && run {
+    ___other = arg0 as RecordWithCompactConstructorWithoutParameterAssignment?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+ 
  class RecordWithEmptyCopyMethod {
   private val a: Int
   
@@ -258,6 +305,57 @@ class RecordClass {
    var ___other: RecordWithComponentMethods? = null
    if (!(arg0 is RecordWithComponentMethods && run {
     ___other = arg0 as RecordWithComponentMethods?
+    true
+   })) return false
+   return Arrays.equals(
+    arrayOf<Any?>(this.a, this.b),
+    arrayOf<Any?>(___other!!.a, ___other!!.b),
+   )
+  }
+  
+  override fun hashCode(): Int {
+   return Arrays.hashCode(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+  
+  override fun toString(): String {
+   return this.getClass().getName() + Arrays.toString(
+    arrayOf<Any?>(this.a, this.b),
+   )
+  }
+ }
+ 
+ class RecordWithUnrelatedComponentMethods {
+  private val a: Int
+  
+  private val b: Int
+  
+  fun component1(i: Int): Int {
+   return i
+  }
+  
+  fun component3(): Int {
+   return 3
+  }
+  
+  constructor(a: Int, b: Int) {
+   this.a = a
+   this.b = b
+  }
+  
+  fun a(): Int {
+   return this.a
+  }
+  
+  fun b(): Int {
+   return this.b
+  }
+  
+  override fun equals(arg0: Any?): Boolean {
+   var ___other: RecordWithUnrelatedComponentMethods? = null
+   if (!(arg0 is RecordWithUnrelatedComponentMethods && run {
+    ___other = arg0 as RecordWithUnrelatedComponentMethods?
     true
    })) return false
    return Arrays.equals(

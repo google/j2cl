@@ -16,6 +16,15 @@
 package j2kt;
 
 public final class RecordClass {
+
+  public record RecordWithCompactConstructorWithoutParameterAssignment(int a, int b) {
+    public RecordWithCompactConstructorWithoutParameterAssignment {
+      if (a > b) {
+        throw new IllegalArgumentException();
+      }
+    }
+  }
+
   public record RecordWithEmptyCopyMethod(int a, int b) {
     public RecordWithEmptyCopyMethod copy() {
       return new RecordWithEmptyCopyMethod(a, b);
@@ -47,6 +56,16 @@ public final class RecordClass {
 
     public int component2() {
       return b;
+    }
+  }
+
+  public record RecordWithUnrelatedComponentMethods(int a, int b) {
+    public int component1(int i) {
+      return i;
+    }
+
+    public int component3() {
+      return 3;
     }
   }
 
