@@ -421,138 +421,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main)
 
-;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create()
-(func $$create__@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (result (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (local $$instance (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (local.set $$instance (struct.new $jsnonnull.Main.MyFunction.$JsFunctionAdaptor (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.vtable) (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$ctor__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (return (local.get $$instance))
- )
-)
-
-;;; void $JsFunctionAdaptor.$ctor()
-(func $$ctor__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (param $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
-(func $$create__javaemul_internal_WasmExtern@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (param $jsFuncref (ref null extern))
- (result (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (local $$instance (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (local.set $$instance (struct.new $jsnonnull.Main.MyFunction.$JsFunctionAdaptor (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.vtable) (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$ctor__javaemul_internal_WasmExtern__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (return (local.get $$instance))
- )
-)
-
-;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
-(func $$ctor__javaemul_internal_WasmExtern__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (param $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- (param $jsFuncref (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (struct.set $jsnonnull.Main.MyFunction.$JsFunctionAdaptor $jsFuncref@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (local.get $this) (local.get $jsFuncref))
- )
-)
-
-;;; $JsFunctionAdaptor $JsFunctionAdaptor.$adapt(WasmExtern jsFuncref)
-(func $$adapt__javaemul_internal_WasmExtern__jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (param $jsFuncref (ref null extern))
- (result (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (return (ref.null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- )
-)
-
-;;; String $JsFunctionAdaptor.x(String arg0)
-(func $m_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (type $function.m_x__java_lang_String__java_lang_String)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
- (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (local $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- (local.set $this (ref.cast (ref $jsnonnull.Main.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (return (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (struct.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor $jsFuncref@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (local.get $this))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))))
- )
-)
-(elem declare func $m_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
-
-;;; void $JsFunctionAdaptor.$clinit()
-(func $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (if (global.get $$class-initialized@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (global.set $$class-initialized@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$clinit__void_<once>_@java.lang.Object )
- )
-)
-
-;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)))
-   (then
-    (return (global.get $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
-   )
-  )
-  (global.set $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- )
-)
-
-;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
- (local.set $this (ref.cast (ref $jsnonnull.Main.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
-
 ;;; StringComparator StringComparator.$create()
 (func $$create__@jsnonnull.Main.StringComparator
  (result (ref null $jsnonnull.Main.StringComparator))
@@ -992,6 +860,138 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.NullableStringComparator)
+
+;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
+(func $$create__javaemul_internal_WasmExtern@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (local $$instance (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (local.set $$instance (struct.new $jsnonnull.Main.MyFunction.$JsFunctionAdaptor (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.vtable) (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern) (ref.null func)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
+(func $$ctor__javaemul_internal_WasmExtern__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (param $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ (param $jsFuncref (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$ctor__javaemul_internal_WasmExtern__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(local.get $jsFuncref))
+ )
+)
+
+;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create(WasmFuncref wasmFuncref)
+(func $$create__javaemul_internal_WasmFuncref@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (param $wasmFuncref (ref null func))
+ (result (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (local $$instance (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (local.set $$instance (struct.new $jsnonnull.Main.MyFunction.$JsFunctionAdaptor (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.vtable) (global.get $jsnonnull.Main.MyFunction.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern) (ref.null func)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $wasmFuncref))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $JsFunctionAdaptor.$ctor(WasmFuncref wasmFuncref)
+(func $$ctor__javaemul_internal_WasmFuncref__void_$p_jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (param $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ (param $wasmFuncref (ref null func))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(local.get $wasmFuncref))
+ )
+)
+
+;;; $JsFunctionAdaptor $JsFunctionAdaptor.$adapt(WasmExtern jsFuncref)
+(func $$adapt__javaemul_internal_WasmExtern__jsnonnull_Main_MyFunction_$JsFunctionAdaptor@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (param $jsFuncref (ref null extern))
+ (result (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (return (ref.null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ )
+)
+
+;;; String $JsFunctionAdaptor.x(String arg0)
+(func $m_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (type $function.m_x__java_lang_String__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (local $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $jsnonnull.Main.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (return (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))))
+ )
+)
+(elem declare func $m_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
+
+;;; void $JsFunctionAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (if (global.get $$class-initialized@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (global.set $$class-initialized@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (call $$clinit__void_<once>_@javaemul.internal.JsFunctionAdaptor )
+ )
+)
+
+;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)))
+   (then
+    (return (global.get $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+   )
+  )
+  (global.set $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsnonnull.Ma...|__java_lang_String_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@javaemul.internal.JsFunctionAdaptor )))
+  (return (global.get $$class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ )
+)
+
+;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
+ (local.set $this (ref.cast (ref $jsnonnull.Main.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
 
 ;;; NonNullableStringSubNullableComparator NonNullableStringSubNullableComparator.$create()
 (func $$create__@jsnonnull.Main.NonNullableStringSubNullableComparator

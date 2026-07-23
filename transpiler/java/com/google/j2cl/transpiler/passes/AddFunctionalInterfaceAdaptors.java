@@ -19,7 +19,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
@@ -37,9 +36,16 @@ import java.util.List;
 /**
  * Creates adapter classes for functional interfaces.
  *
- * <p>For {@code JsFunction} interfaces, it creates concrete adapter classes to facilitate passing
- * JsFunctions between Wasm and JavaScript. The generated adapter class holds a JavaScript function
- * reference (an {@code externref}), and allows it to be called in Wasm.
+ * <p>In general, the pass creates abstract classes that implement the functional interface to be
+ * shared superclasses of all lambda implementors.
+ *
+ * <p>For {@code JsFunction} interfaces, the adapter class facilitates passing JsFunctions between
+ * Wasm and JavaScript.
+ *
+ * <p>This adapter class is shared by both JS- and Wasm-originating JsFunction instances. For JS-
+ * originating JsFunction instances, the generated adapter class holds a JavaScript function
+ * reference (an {@code externref}), and allows it to be called in Wasm. For Wasm-originating
+ * JsFunction instances, the adapter class holds a Wasm function reference (a {@code funcref}).
  *
  * <p>Given:
  *
@@ -52,24 +58,27 @@ import java.util.List;
  *
  * <p>Generates:
  *
- * <pre>{@code
- * class F.JsFunctionAdaptor {
- *   WasmExtern jsFuncref;
+ * <p>TODO(b/537884836): Update the example after cleaning up the type heirarchy. Since this
+ * intermediate type is never instantiated, it makes sense to remove it from the tree.
  *
+ * <pre>{@code
+ * class F.JsFunctionAdaptor extends javaemul.internal.JsFunctionAdaptor {
  *   JsFunctionAdaptor(WasmExtern jsFuncref) {
- *     this.jsFuncref = jsFuncref;
+ *     super(jsFuncref);
  *   }
  *
- *   JsFunctionAdaptor() {}
+ *   JsFunctionAdaptor(WasmFuncref wasmFuncref) {
+ *     super(wasmFuncref);
+ *   }
  *
  *   R method(String param) {
- *     return call(jsFuncref, param);
+ *     return invoke(jsFuncref, param);
  *   }
+ *
+ *   @JsMethod(...)
+ *   native R invoke(WasmExtern jsFuncref, String param);
  * }
  * }</pre>
- *
- * <p>For other functional interfaces, it creates abstract classes that implement the functional
- * interfaces to be shared superclasses of all lambda implementors.
  */
 public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
   @Override
@@ -93,9 +102,8 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
                 new Type(type.getSourcePosition(), adaptorTypeDescriptor.getTypeDeclaration());
 
             if (typeDeclaration.isJsFunctionInterface()) {
-              addDefaultConstructor(adaptorType);
-              addJsFuncrefField(adaptorType);
               addJsFuncrefConstructor(adaptorType);
+              addWasmFuncrefConstructor(adaptorType);
               addJsFunctionAdaptMethod(adaptorType);
               addJsFunctionInvokeMethod(adaptorType);
               addJsFunctionForwardingMethod(adaptorType);
@@ -105,34 +113,6 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
           }
         });
     compilationUnit.addTypes(functionalInterfaceAdaptors);
-  }
-
-  /**
-   * Adds a default constructor to the JsFunction adaptor class to be used by subclasses:
-   * Wasm-originating JS functions and lambda implementors.
-   */
-  private static void addDefaultConstructor(Type adaptorType) {
-    DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
-
-    // Generates:
-    // JsFunctionAdaptor() {}
-    adaptorType.addMember(
-        Method.builder()
-            .setMethodDescriptor(
-                LambdaAdaptorTypeDescriptors.getLambdaAdaptorDefaultConstructor(
-                    adaptorTypeDescriptor))
-            .setSourcePosition(adaptorType.getSourcePosition())
-            .build());
-  }
-
-  /** Adds a field to the JsFunction adaptor class to store the JavaScript function reference. */
-  private static void addJsFuncrefField(Type adaptorType) {
-    adaptorType.addMember(
-        Field.builderFrom(
-                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField(
-                    adaptorType.getTypeDescriptor()))
-            .setSourcePosition(adaptorType.getSourcePosition())
-            .build());
   }
 
   /**
@@ -150,23 +130,67 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
             .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmExtern)
             .build();
 
+    MethodDescriptor superConstructorDescriptor =
+        TypeDescriptors.get()
+            .javaemulInternalJsFunctionAdaptor
+            .getMethodDescriptor(
+                MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
+                TypeDescriptors.get().javaemulInternalWasmExtern);
+
     // Generates:
     // JsFunctionAdaptor(WasmExtern jsFuncref) {
-    //   this.jsFuncref = jsFuncref;
+    //   super(jsFuncref);
     // }
     adaptorType.addMember(
         Method.builder()
             .setMethodDescriptor(
-                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorConstructor(
+                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefConstructor(
                     adaptorTypeDescriptor))
             .setParameters(wasmExternParameter)
             .addStatements(
-                FieldAccess.builderFrom(
-                        LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField(
-                            adaptorTypeDescriptor))
-                    .setDefaultInstanceQualifier()
+                MethodCall.builderFrom(superConstructorDescriptor)
+                    .setArguments(wasmExternParameter.createReference())
                     .build()
-                    .infixAssign(wasmExternParameter.createReference())
+                    .makeStatement(sourcePosition))
+            .setSourcePosition(sourcePosition)
+            .build());
+  }
+
+  /**
+   * Adds a constructor to the JsFunction adaptor class that initializes a Wasm function reference.
+   */
+  private static void addWasmFuncrefConstructor(Type adaptorType) {
+    DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
+    SourcePosition sourcePosition = adaptorType.getSourcePosition();
+    Variable wasmFuncrefParameter =
+        Variable.builder()
+            .setFinal(true)
+            .setParameter(true)
+            .setName("wasmFuncref")
+            .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
+            .build();
+
+    MethodDescriptor superConstructorDescriptor =
+        TypeDescriptors.get()
+            .javaemulInternalJsFunctionAdaptor
+            .getMethodDescriptor(
+                MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
+                TypeDescriptors.get().javaemulInternalWasmFuncref);
+
+    // Generates:
+    // JsFunctionAdaptor(WasmFuncref wasmFuncref) {
+    //   super(wasmFuncref);
+    // }
+    adaptorType.addMember(
+        Method.builder()
+            .setMethodDescriptor(
+                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorWasmFuncrefConstructor(
+                    adaptorTypeDescriptor))
+            .setParameters(wasmFuncrefParameter)
+            .addStatements(
+                MethodCall.builderFrom(superConstructorDescriptor)
+                    .setArguments(wasmFuncrefParameter.createReference())
+                    .build()
                     .makeStatement(sourcePosition))
             .setSourcePosition(sourcePosition)
             .build());
@@ -241,8 +265,7 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
     List<Expression> invokeArguments = new ArrayList<>();
     invokeArguments.add(
         FieldAccess.builderFrom(
-                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField(
-                    adaptorTypeDescriptor))
+                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField())
             .setQualifier(new ThisReference(adaptorTypeDescriptor))
             .build());
     forwardedVariables.forEach(param -> invokeArguments.add(param.createReference()));

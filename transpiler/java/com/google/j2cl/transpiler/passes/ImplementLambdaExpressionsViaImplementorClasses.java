@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -169,7 +171,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
    *   }
    * </code>
    */
-  private static Type createNewLambdaImplementorType(
+  private Type createNewLambdaImplementorType(
       FunctionExpression functionExpression, DeclaredTypeDescriptor implementorTypeDescriptor) {
     //   interface Consumer<T> {
     //      void accept(T t);
@@ -190,6 +192,22 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     Type lambdaImplementorType =
         new Type(sourcePosition, implementorTypeDescriptor.getTypeDeclaration());
 
+    if (this.extendsCommonAdaptor
+        && functionExpression.getTypeDescriptor().isJsFunctionInterface()) {
+      DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
+          (DeclaredTypeDescriptor) functionExpression.getTypeDescriptor();
+
+      // For JsFunction interfaces, synthesize a call to the super constructor taking a funcref
+      // pointing to the lambda method.
+      //
+      // LambdaImplementor() {
+      //    super(lambdaMethodReference);
+      // }
+      lambdaImplementorType.addMember(
+          createJsFunctionConstructor(
+              sourcePosition, functionalInterfaceTypeDescriptor, implementorTypeDescriptor));
+    }
+
     // public t method(t1 p1, t2 p2, .....) {
     //   ... code from function expression....;
     // }
@@ -197,6 +215,40 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         createLambdaMethod(sourcePosition, functionExpression, implementorTypeDescriptor));
 
     return lambdaImplementorType;
+  }
+
+  private static Method createJsFunctionConstructor(
+      SourcePosition sourcePosition,
+      DeclaredTypeDescriptor functionalInterfaceTypeDescriptor,
+      DeclaredTypeDescriptor implementorTypeDescriptor) {
+    MethodDescriptor constructorDescriptor =
+        AstUtils.createImplicitConstructorDescriptor(implementorTypeDescriptor);
+    MethodDescriptor superConstructorDescriptor =
+        implementorTypeDescriptor
+            .getSuperTypeDescriptor()
+            .getMethodDescriptor(
+                MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
+                TypeDescriptors.get().javaemulInternalWasmFuncref);
+
+    return Method.builder()
+        .setMethodDescriptor(constructorDescriptor)
+        .addStatements(
+            MethodCall.builderFrom(superConstructorDescriptor)
+                .setArguments(
+                    // Construct a method reference to the lambda method which is special-handled in
+                    // the backend to generate a function pointer.
+                    MethodReference.builder()
+                        .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
+                        .setReferencedMethodDescriptor(
+                            getLambdaMethodDescriptor(implementorTypeDescriptor))
+                        .setInterfaceMethodDescriptor(
+                            functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor())
+                        .setSourcePosition(sourcePosition)
+                        .build())
+                .build()
+                .makeStatement(sourcePosition))
+        .setSourcePosition(sourcePosition)
+        .build();
   }
 
   /**

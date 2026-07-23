@@ -173,6 +173,10 @@ public class TypeDescriptors {
   @QualifiedBinaryName("javaemul.internal.WasmFuncref")
   public DeclaredTypeDescriptor javaemulInternalWasmFuncref;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.JsFunctionAdaptor")
+  public DeclaredTypeDescriptor javaemulInternalJsFunctionAdaptor;
+
   public ArrayTypeDescriptor javaLangObjectArray;
 
   // Common browser native types.
