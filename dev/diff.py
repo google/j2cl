@@ -60,7 +60,9 @@ class TargetInfo:
     return target_info
 
   def is_wasm(self):
-    return self.blaze_target.endswith(".wasm")
+    return self.blaze_target.endswith(".wasm") or self.blaze_target.endswith(
+        ".wasm.jsinterop"
+    )
 
 
 def _create_target_info(target):
