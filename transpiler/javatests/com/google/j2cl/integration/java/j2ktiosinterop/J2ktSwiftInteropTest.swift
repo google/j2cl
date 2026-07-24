@@ -149,9 +149,18 @@ final class J2ktSwiftInteropTest: XCTestCase {
     let _ = J2ktiosinteropEnumNames_get_ONE()
     let _ = J2ktiosinteropEnumNames_get_TWO()
 
+    // Might not be available in J2Objc, see J2ObjCSwiftInteropTest
+    let _ = J2ktiosinteropEnumNames.one
+    let _ = J2ktiosinteropEnumNames.two
+
     // Not exposed in Swift
     // let _ = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_ONE)
     // let _ = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_TWO)
+
+    // ..._Enum / .nsEnum type
+
+    let _ = J2ktiosinteropEnumNames_Enum.one
+    let _ = J2ktiosinteropEnumNames_Enum.two
 
     // let _ = J2ktiosinteropEnumNames_Enum_ONE
     // let _ = J2ktiosinteropEnumNames_Enum_TWO

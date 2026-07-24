@@ -139,9 +139,20 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     let _ = J2ktiosinteropEnumNames_get_ONE()
     let _ = J2ktiosinteropEnumNames_get_TWO()
 
+    // Gemini: If J2ObjC is built with the optional --class-properties or --swift-friendly flags,
+    // it would generate class properties like J2ktiosinteropEnumNames.one, but those flags are not
+    // enabled in this target's configuration
+    // let _ = J2ktiosinteropEnumNames.one
+    // let _ = J2ktiosinteropEnumNames.two
+
     // Not exposed in Swift
     // let _ = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_ONE)
     // let _ = J2ktiosinteropEnumNames_fromOrdinal(J2ktiosinteropEnumNames_Enum_TWO)
+
+    // ..._Enum / .nsEnum type
+
+    let _ = J2ktiosinteropEnumNames_Enum.one
+    let _ = J2ktiosinteropEnumNames_Enum.two
 
     // let _ = J2ktiosinteropEnumNames_Enum_ONE
     // let _ = J2ktiosinteropEnumNames_Enum_TWO
