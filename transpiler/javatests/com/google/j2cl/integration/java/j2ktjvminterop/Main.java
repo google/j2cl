@@ -39,11 +39,11 @@ public class Main {
   private static void testRecordConvertedToDataClass() {
     RecordConvertedToDataClass record = new RecordConvertedToDataClass(123, "a");
     if (!TestUtils.isJ2Kt()) {
-      assertTrue(record instanceof Record);
+      assertTrue(((Object) record) instanceof Record);
     } else {
       // TODO(b/445545563): Should be true for non-native once Java records are translated to
       // Kotlin data classes with @JvmRecord annotation.
-      assertFalse(record instanceof Record);
+      assertFalse(((Object) record) instanceof Record);
     }
 
     assertEquals(123, record.a());
@@ -53,10 +53,10 @@ public class Main {
   private static void testRecordNotConvertedToDataClass() {
     RecordNotConvertedToDataClass record = new RecordNotConvertedToDataClass(123, "a");
     if (!TestUtils.isJ2Kt()) {
-      assertTrue(record instanceof Record);
+      assertTrue(((Object) record) instanceof Record);
     } else {
       // Records which are not converted to data classes are not instances of Record.
-      assertFalse(record instanceof Record);
+      assertFalse(((Object) record) instanceof Record);
     }
 
     assertEquals(123, record.a());
