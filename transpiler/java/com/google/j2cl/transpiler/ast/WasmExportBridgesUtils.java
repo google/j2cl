@@ -210,23 +210,22 @@ public class WasmExportBridgesUtils {
   }
 
   /** Returns the corresponding JS type for the given Wasm Java type. */
-  public static TypeDescriptor getExternalType(
-      TypeDescriptor javaTypeDescriptor, boolean isExport) {
-    if (TypeDescriptors.isJavaLangString(javaTypeDescriptor)) {
-      return TypeDescriptors.getNativeStringType().toNullable(javaTypeDescriptor.isNullable());
+  public static TypeDescriptor getExternalType(TypeDescriptor typeDescriptor, boolean isExport) {
+    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
+      return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
-    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(javaTypeDescriptor)) {
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)) {
       // Use externref since it can be a primitive value or null.
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
-          .toNullable(javaTypeDescriptor.isNullable());
+          .toNullable(typeDescriptor.isNullable());
     }
-    if (needsExternalizeInternalize(javaTypeDescriptor, isExport)) {
+    if (needsExternalizeInternalize(typeDescriptor, isExport)) {
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
-          .toNullable(javaTypeDescriptor.isNullable());
+          .toNullable(typeDescriptor.isNullable());
     }
-    return javaTypeDescriptor;
+    return typeDescriptor;
   }
 
   /** Converts the given expression to a JS type which can be passed to JS. */

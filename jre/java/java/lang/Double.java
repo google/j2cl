@@ -196,8 +196,6 @@ public final class Double extends Number implements Comparable<Double> {
     return value == null ? null : valueOf(toDoublePrimitive(value));
   }
 
-  // Use an identity function in js and take advantage of the implicit conversion triggered by
-  // the types declared in the imports.
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number")
   private static native NativeNumber toJsPrimitive(double value);
 

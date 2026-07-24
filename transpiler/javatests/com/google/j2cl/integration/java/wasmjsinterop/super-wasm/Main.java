@@ -36,7 +36,7 @@ public final class Main {
     testJsFunction();
   }
 
-  public static void testJsString() {
+  private static void testJsString() {
     assertEquals(null, appendInJs(null, null));
 
     String empty = "";
@@ -47,7 +47,7 @@ public final class Main {
     assertEquals(foo + bar, appendInJs(foo, bar));
   }
 
-  public static void testJsNumber() {
+  private static void testJsNumber() {
     assertEquals(null, sumDoublesInJs(null, null));
     assertEquals(null, sumDoublesInJs(1.5, null));
     assertEquals(null, sumDoublesInJs(null, 2.5));
@@ -57,7 +57,7 @@ public final class Main {
     assertEquals(10.0, sumDoublesInJs(d1, d2));
   }
 
-  public static void testJsBoolean() {
+  private static void testJsBoolean() {
     assertEquals(null, andBooleansInJs(null, null));
     assertEquals(null, andBooleansInJs(true, null));
     assertEquals(null, andBooleansInJs(null, false));
@@ -68,7 +68,7 @@ public final class Main {
     assertEquals(true, andBooleansInJs(true, true));
   }
 
-  public static void testJsLong() {
+  private static void testJsLong() {
     assertEquals(null, sumLongsInJs(null, null));
     assertEquals(null, sumLongsInJs(100L, null));
     assertEquals(null, sumLongsInJs(null, 200L));
