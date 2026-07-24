@@ -18,7 +18,6 @@ package com.google.j2cl.jre.java.util;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import static org.junit.Assert.assertThrows;
 
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.Comparator;
 import java.util.Objects;
 import junit.framework.TestCase;
@@ -110,7 +109,6 @@ public class ObjectsTest extends TestCase {
   }
 
   @SuppressWarnings("DangerousLiteralNull") // Intentionally misusing Optional to test bug parity.
-  @J2ktIncompatible // Not emulated
   public void testRequireNonNull() {
     Integer one = 1;
     Integer anotherOne = 1;
@@ -129,7 +127,6 @@ public class ObjectsTest extends TestCase {
     assertThrows(NullPointerException.class, () -> Objects.requireNonNullElseGet(null, () -> null));
   }
 
-  @J2ktIncompatible // Not emulated
   public void testRequireNonNull_nullSupplier() {
     if (isWasm()) {
       // TODO(b/183769034): Re-enable when NPE on dereference is supported

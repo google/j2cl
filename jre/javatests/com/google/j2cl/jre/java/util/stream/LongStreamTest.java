@@ -19,7 +19,6 @@ package com.google.j2cl.jre.java.util.stream;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -458,7 +457,6 @@ public class LongStreamTest extends EmulTestBase {
     assertEquals(new Long[] {1L, 2L, 3L, 4L, 5L}, vals.toArray(new Long[vals.size()]));
   }
 
-  @J2ktIncompatible // Not emulated.
   public void testTakeWhile() {
     assertEquals(
         new long[] {1, 2}, LongStream.of(1, 2, 3, 4, 5, 1).takeWhile(i -> i < 3).toArray());
@@ -477,7 +475,6 @@ public class LongStreamTest extends EmulTestBase {
         LongStream.iterate(0, i -> i + 1).takeWhile(i -> true).limit(5).toArray());
   }
 
-  @J2ktIncompatible // Not emulated.
   public void testDropWhile() {
     assertEquals(
         new long[] {3, 4, 5}, LongStream.of(1, 2, 3, 4, 5).dropWhile(i -> i < 3).toArray());

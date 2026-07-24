@@ -193,7 +193,6 @@ public class OptionalDoubleTest extends EmulTestBase {
     assertEquals(Double.hashCode(REFERENCE), present.hashCode());
   }
 
-  @J2ktIncompatible // Not emulated
   public void testStream() {
     assertEquals(0, OptionalDouble.empty().stream().count());
     assertEquals(1, OptionalDouble.of(10.0).stream().count());

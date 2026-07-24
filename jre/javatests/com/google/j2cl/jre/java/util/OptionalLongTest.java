@@ -193,7 +193,6 @@ public class OptionalLongTest extends EmulTestBase {
     assertEquals(Long.hashCode(REFERENCE), present.hashCode());
   }
 
-  @J2ktIncompatible // Not emulated
   public void testStream() {
     assertEquals(0, OptionalLong.empty().stream().count());
     assertEquals(1, OptionalLong.of(10).stream().count());

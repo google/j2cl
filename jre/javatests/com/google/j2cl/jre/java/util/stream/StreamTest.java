@@ -20,7 +20,6 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -634,7 +633,6 @@ public class StreamTest extends EmulTestBase {
     assertEquals(new String[] {"abc"}, Stream.ofNullable("abc").toArray());
   }
 
-  @J2ktIncompatible // Not emulated.
   public void testTakeWhile() {
     assertEquals(new Integer[] {1, 2}, Stream.of(1, 2, 3, 4, 5).takeWhile(i -> i < 3).toArray());
     assertEquals(0, Stream.of(1, 2, 3, 4, 5, 1).takeWhile(i -> i > 2).count());
@@ -652,7 +650,6 @@ public class StreamTest extends EmulTestBase {
         Stream.iterate(0, i -> i + 1).takeWhile(i -> true).limit(5).toArray());
   }
 
-  @J2ktIncompatible // Not emulated.
   public void testDropWhile() {
     assertEquals(new Integer[] {3, 4, 5}, Stream.of(1, 2, 3, 4, 5).dropWhile(i -> i < 3).toArray());
     assertEquals(

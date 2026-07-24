@@ -19,7 +19,6 @@ package com.google.j2cl.jre.java.util.stream;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
@@ -460,7 +459,6 @@ public class IntStreamTest extends EmulTestBase {
     assertEquals(new Integer[] {1, 2, 3, 4, 5}, vals.toArray(new Integer[vals.size()]));
   }
 
-  @J2ktIncompatible // Not emulated.
   public void testTakeWhile() {
     assertEquals(new int[] {1, 2}, IntStream.of(1, 2, 3, 4, 5, 1).takeWhile(i -> i < 3).toArray());
     assertEquals(0, IntStream.of(1, 2, 3, 4, 5).takeWhile(i -> i > 2).count());
@@ -478,7 +476,6 @@ public class IntStreamTest extends EmulTestBase {
         IntStream.iterate(0, i -> i + 1).takeWhile(i -> true).limit(5).toArray());
   }
 
-  @J2ktIncompatible // Not emulated.
   public void testDropWhile() {
     assertEquals(new int[] {3, 4, 5}, IntStream.of(1, 2, 3, 4, 5).dropWhile(i -> i < 3).toArray());
     assertEquals(

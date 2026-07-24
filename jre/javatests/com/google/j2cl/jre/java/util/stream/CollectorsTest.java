@@ -45,7 +45,6 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 import static org.junit.Assert.assertThrows;
 
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.J2ktIncompatible;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -547,7 +546,6 @@ public class CollectorsTest extends EmulTestBase {
     assertSingleItemCollectedAs(Collections.singleton("a"), c, "a");
   }
 
-  @J2ktIncompatible // Not emulated in J2KT
   public void testToUnmodifiableList() {
     applyItems(List.of("a", "b"), toUnmodifiableList(), "a", "b");
     assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
@@ -556,7 +554,6 @@ public class CollectorsTest extends EmulTestBase {
         () -> Stream.of("a").map(ignore -> null).collect(toUnmodifiableList()));
   }
 
-  @J2ktIncompatible // Not emulated in J2KT
   public void testToUnmodifiableMap() {
     // verify simple cases copy all values and results are unmodifiable
     applyItems(
@@ -586,8 +583,7 @@ public class CollectorsTest extends EmulTestBase {
         () -> Stream.of("a").collect(toUnmodifiableMap(Function.identity(), obj -> null)));
   }
 
-  @J2ktIncompatible // Not emulated in J2KT
-  public void testToUnmodifiableSet() { // Not emulated in J2KT
+  public void testToUnmodifiableSet() {
     applyItems(Set.of("a", "b"), toUnmodifiableSet(), "a", "b");
     assertUnmodifiableCollection(applyItemsWithSplitting(toUnmodifiableList(), "a", "b"), "a", "z");
     // verify nulls fail
