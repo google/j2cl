@@ -816,7 +816,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:208:4
-  (return (call $$create_$private__jsconstructor_JsConstructorClass__int@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (ref.cast (ref null $jsconstructor.JsConstructorClass) (extern.internalize (local.get $arg0)))(local.get $arg1)))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass__int@jsconstructor.JsConstructorClass.JsConstructorClassWithExplicitConstructor (ref.cast (ref null $jsconstructor.JsConstructorClass) (any.convert_extern (local.get $arg0)))(local.get $arg1)))
  )
 )
 
@@ -1350,7 +1350,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:156:13
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.Outer.I )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:156:13
-  (return (call $$create_$private__jsconstructor_JsConstructorClass_Outer@jsconstructor.JsConstructorClass.Outer.I (ref.cast (ref null $jsconstructor.JsConstructorClass.Outer) (extern.internalize (local.get $arg0)))))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass_Outer@jsconstructor.JsConstructorClass.Outer.I (ref.cast (ref null $jsconstructor.JsConstructorClass.Outer) (any.convert_extern (local.get $arg0)))))
  )
 )
 
@@ -1448,7 +1448,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:162:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.Varargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:162:11
-  (return (call $$create_$private__arrayOf_int@jsconstructor.JsConstructorClass.Varargs (ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (extern.internalize (local.get $arg0)))))
+  (return (call $$create_$private__arrayOf_int@jsconstructor.JsConstructorClass.Varargs (ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (any.convert_extern (local.get $arg0)))))
  )
 )
 
@@ -1552,7 +1552,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:186:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.InstanceVarargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:186:11
-  (return (call $$create_$private__jsconstructor_JsConstructorClass__arrayOf_int@jsconstructor.JsConstructorClass.InstanceVarargs (ref.cast (ref null $jsconstructor.JsConstructorClass) (extern.internalize (local.get $arg0)))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (extern.internalize (local.get $arg1)))))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass__arrayOf_int@jsconstructor.JsConstructorClass.InstanceVarargs (ref.cast (ref null $jsconstructor.JsConstructorClass) (any.convert_extern (local.get $arg0)))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (any.convert_extern (local.get $arg1)))))
  )
 )
 
@@ -1677,7 +1677,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:197:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:197:11
-  (return (call $$create_$private__java_lang_Object@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.cast (ref null $java.lang.Object) (extern.internalize (local.get $arg0)))))
+  (return (call $$create_$private__java_lang_Object@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $arg0)))))
  )
 )
 
@@ -1795,7 +1795,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.JsConstructorSubclass )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:213:4
-  (return (call $$create_$private__jsconstructor_JsConstructorClass@jsconstructor.JsConstructorClass.JsConstructorSubclass (ref.cast (ref null $jsconstructor.JsConstructorClass) (extern.internalize (local.get $arg0)))))
+  (return (call $$create_$private__jsconstructor_JsConstructorClass@jsconstructor.JsConstructorClass.JsConstructorSubclass (ref.cast (ref null $jsconstructor.JsConstructorClass) (any.convert_extern (local.get $arg0)))))
  )
 )
 
@@ -2404,7 +2404,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:169:11
   (call $$clinit__void_<once>_@jsconstructor.JsConstructorClass.SubVarargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsconstructor/readable-j2wasm.js/jsconstructor/JsConstructorClass.java:169:11
-  (return (call $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (ref.cast (ref null $java.lang.Object) (extern.internalize (local.get $arg0)))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (extern.internalize (local.get $arg1)))))
+  (return (call $$create_$private__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $arg0)))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (any.convert_extern (local.get $arg1)))))
  )
 )
 

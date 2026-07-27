@@ -421,7 +421,7 @@
     (call_ref $function.m_doAThing__java_lang_Object__void (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_doAThing__java_lang_Object__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
-    (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.externalize (local.get $arg0)))
+    (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0)))
    )
   )
  )

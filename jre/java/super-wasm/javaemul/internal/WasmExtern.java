@@ -28,10 +28,10 @@ public class WasmExtern {
   @JsMethod(namespace = "j2wasm.EqualityUtils")
   public static native boolean isSame(WasmExtern left, WasmExtern right);
 
-  @Wasm("extern.internalize")
+  @Wasm("any.convert_extern")
   public static native <T> T internalize(WasmExtern t);
 
-  @Wasm("extern.externalize")
+  @Wasm("extern.convert_any")
   public static native WasmExtern externalize(Object t);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Array")
