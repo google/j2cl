@@ -1473,5 +1473,25 @@ public final class AstUtils {
     type.getPrimaryConstructor().getBody().getStatements().add(preserveCall);
   }
 
+  /** Returns true if the given method contains any enclosing type field assignments. */
+  public static boolean containsEnclosingTypeFieldAssignment(Method method) {
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        method.getDescriptor().getEnclosingTypeDescriptor();
+    boolean[] isCompactConstructor = {true};
+    method.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitBinaryExpression(BinaryExpression binaryExpression) {
+            if (binaryExpression.isSimpleOrCompoundAssignment()
+                && binaryExpression.getLeftOperand() instanceof FieldAccess fieldAccess
+                && fieldAccess.getTarget().isInstanceMember()
+                && fieldAccess.getTarget().isMemberOf(enclosingTypeDescriptor)) {
+              isCompactConstructor[0] = false;
+            }
+          }
+        });
+    return isCompactConstructor[0];
+  }
+
   private AstUtils() {}
 }

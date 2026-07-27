@@ -1,0 +1,67 @@
+goog.module('recordclass.RecordClass.$1RecordOuter$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1RecordInner = goog.forwardDeclare('recordclass.RecordClass.$1RecordInner$impl');
+
+/**
+ * @final
+ */
+class $1RecordOuter extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {*} @nodts*/
+  this.f_o__recordclass_RecordClass_1RecordOuter_;
+  /**@type {?string} @nodts*/
+  this.f_s__recordclass_RecordClass_1RecordOuter_;
+  /**@type {$1RecordInner} @nodts*/
+  this.f_n__recordclass_RecordClass_1RecordOuter_;
+ }
+ /** @nodts @return {!$1RecordOuter} */
+ static $create__java_lang_Object__java_lang_String__recordclass_RecordClass_1RecordInner(/** * */ o, /** ?string */ s, /** $1RecordInner */ n) {
+  $1RecordOuter.$clinit();
+  let $instance = new $1RecordOuter();
+  $instance.$ctor__recordclass_RecordClass_1RecordOuter__java_lang_Object__java_lang_String__recordclass_RecordClass_1RecordInner__void(o, s, n);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_1RecordOuter__java_lang_Object__java_lang_String__recordclass_RecordClass_1RecordInner__void(/** * */ o, /** ?string */ s, /** $1RecordInner */ n) {
+  this.$ctor__java_lang_Record__void();
+  this.f_o__recordclass_RecordClass_1RecordOuter_ = o;
+  this.f_s__recordclass_RecordClass_1RecordOuter_ = s;
+  this.f_n__recordclass_RecordClass_1RecordOuter_ = n;
+  $J2CL_PRESERVE$(this.f_o__recordclass_RecordClass_1RecordOuter_, this.f_s__recordclass_RecordClass_1RecordOuter_, this.f_n__recordclass_RecordClass_1RecordOuter_);
+ }
+ /** @nodts @return {*} */
+ m_o__java_lang_Object() {
+  return this.f_o__recordclass_RecordClass_1RecordOuter_;
+ }
+ /** @nodts @return {?string} */
+ m_s__java_lang_String() {
+  return this.f_s__recordclass_RecordClass_1RecordOuter_;
+ }
+ /** @nodts @return {$1RecordInner} */
+ m_n__recordclass_RecordClass_1RecordInner() {
+  return this.f_n__recordclass_RecordClass_1RecordOuter_;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1RecordOuter.$clinit = () =>{};
+  $1RecordOuter.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1RecordOuter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1RecordOuter, 'recordclass.RecordClass$1RecordOuter');
+
+exports = $1RecordOuter;
+
+//# sourceMappingURL=RecordClass$1RecordOuter.js.map

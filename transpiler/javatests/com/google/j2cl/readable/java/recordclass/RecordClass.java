@@ -15,6 +15,7 @@
  */
 package recordclass;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -28,7 +29,10 @@ public class RecordClass {
 
     ArrayRecord ar = new ArrayRecord(new int[] {1, 2});
     int arValueResult = ar.value()[0];
+  }
 
+  @J2ktIncompatible
+  public static void testRecordWithConstructor() {
     RecordWithConstructor rwc = new RecordWithConstructor(1, 2);
     rwc.a();
     rwc.b();
@@ -44,6 +48,7 @@ public class RecordClass {
 
   static record ObjectRecord(Object value) {}
 
+  @J2ktIncompatible
   static record RecordWithConstructor(int a, int b) {
     public RecordWithConstructor(int a, int b) {
       this.a = a + 1;
@@ -51,10 +56,19 @@ public class RecordClass {
     }
   }
 
+  @J2ktIncompatible
   static record RecordWithCompactConstructor(int a, int b) {
     public RecordWithCompactConstructor {
       if (a < 0) {
         a = 0;
+      }
+    }
+  }
+
+  static record RecordWithCompactConstructorWithoutParameterAssignment(int a, int b) {
+    public RecordWithCompactConstructorWithoutParameterAssignment {
+      if (a > b) {
+        throw new IllegalArgumentException();
       }
     }
   }
@@ -82,6 +96,7 @@ public class RecordClass {
     }
   }
 
+  @J2ktIncompatible
   public static record RecordWithOverriddenAccessor(String value) {
     @SuppressWarnings("MissingOverride") // TODO(b/449764809) Allow @Override
     public String value() {
@@ -93,6 +108,7 @@ public class RecordClass {
     String a();
   }
 
+  @J2ktIncompatible
   static record RecordImplementingInterface(String a) implements I {}
 
   static record StaticFieldRecord(int nonstaticField) {
@@ -109,13 +125,14 @@ public class RecordClass {
     String nonParametric();
   }
 
+  @J2ktIncompatible
   record RecordSpecializingInterface(String parametric, String nonParametric)
       implements PropertyAccessors<String> {}
 
   // Repro for b/498931729
-  public record PublicRecordWithPublicFactory() {
-    public PublicRecordWithPublicFactory factory() {
-      return new PublicRecordWithPublicFactory();
+  public record PublicRecordWithPublicFactory(int i) {
+    public PublicRecordWithPublicFactory factory(int i) {
+      return new PublicRecordWithPublicFactory(i);
     }
   }
 
@@ -126,6 +143,7 @@ public class RecordClass {
       @JsIgnore String ignored,
       boolean isFoo) {}
 
+  @J2ktIncompatible
   @JsType
   public static record JsInteropRecordWithExplicitMembers(
       @JsProperty(name = "customVal") int value, String text, @JsIgnore String ignored) {
@@ -149,6 +167,7 @@ public class RecordClass {
     }
   }
 
+  @J2ktIncompatible
   @JsType
   public static record JsInteropRecordWithOverriddenAccessors(
       @JsProperty(name = "customVal") int value, String text, @JsIgnore String ignored) {
@@ -190,6 +209,7 @@ public class RecordClass {
     String ignored2();
   }
 
+  @J2ktIncompatible
   @JsType
   public static record JsInteropRecordImplementingInterface(
       @JsProperty(name = "customVal") int value,
@@ -198,6 +218,7 @@ public class RecordClass {
       @JsIgnore String ignored2)
       implements I2 {}
 
+  @J2ktIncompatible
   @JsType
   static record JsInteropRecordWithHiddenCanonical(int value) {
     JsInteropRecordWithHiddenCanonical(int value) {
@@ -205,36 +226,27 @@ public class RecordClass {
     }
   }
 
+  @J2ktIncompatible
   private static void testLocalRecordClass() {
     record LocalRecord(int value) {}
     LocalRecord lr = new LocalRecord(1);
   }
 
   private static void testRecordPatterns() {
-    record R2(int i, Object o) {
-      // The accessors are declared in a different order to test that the pattern matching is not
-      // affected by the order of the accessor methods.
-      public Object o() {
-        return o;
-      }
+    record RecordInner(int i, Object o) {}
+    record RecordOuter(Object o, String s, RecordInner n) {}
 
-      public int i() {
-        return i;
-      }
-    }
-    record R1(Object o, String s, R2 n) {}
-
-    R1 r = new R1(new R2(1, "a"), "b", new R2(3, "c"));
+    RecordOuter r = new RecordOuter(new RecordInner(1, "a"), "b", new RecordInner(3, "c"));
     boolean b =
-        r instanceof R1(R2(var i1, String s1), Object s2, R2 n)
+        r instanceof RecordOuter(RecordInner(var i1, String s1), Object s2, RecordInner n)
             && i1 == 1
             && s1.equals("a")
             && s2.equals("b")
             && n.i() == 3
             && n.o().equals("c");
 
-    Object o = new R1(new R2(1, "a"), "b", new R2(3, "c"));
-    boolean b1 = o instanceof R1(R2(var i1, String s1), Object s2, R2 n);
+    Object o = new RecordOuter(new RecordInner(1, "a"), "b", new RecordInner(3, "c"));
+    boolean b1 = o instanceof RecordOuter(RecordInner(var i1, String s1), Object s2, RecordInner n);
 
     record RecursiveRecord(RecursiveRecord r) {}
     o = new RecursiveRecord(null);
@@ -245,8 +257,27 @@ public class RecordClass {
     boolean b2 = genericRecord instanceof GenericRecord<String>(String s);
   }
 
+  @J2ktIncompatible
+  private static void testRecordPatternsDifferentAccessorOrder() {
+    record RecordDifferentAccessorOrder(int i, Object o) {
+      // The accessors are declared in a different order to test that the pattern matching is not
+      // affected by the order of the accessor methods.
+      public Object o() {
+        return o;
+      }
+
+      public int i() {
+        return i;
+      }
+    }
+    RecordDifferentAccessorOrder r = new RecordDifferentAccessorOrder(1, "a");
+    boolean b = r instanceof RecordDifferentAccessorOrder(var i, Object o);
+  }
+
+  @J2ktIncompatible
   record VarargsRecord(String... values) {}
 
+  @J2ktIncompatible
   record VarargsRecordWithCustomAccessor(String... value) {
     public String[] value() {
       return value;

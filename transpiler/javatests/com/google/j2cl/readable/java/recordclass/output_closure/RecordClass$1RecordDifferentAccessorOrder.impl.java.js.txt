@@ -1,0 +1,58 @@
+goog.module('recordclass.RecordClass.$1RecordDifferentAccessorOrder$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $1RecordDifferentAccessorOrder extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_i__recordclass_RecordClass_1RecordDifferentAccessorOrder_ = 0;
+  /**@type {*} @nodts*/
+  this.f_o__recordclass_RecordClass_1RecordDifferentAccessorOrder_;
+ }
+ /** @nodts @return {*} */
+ m_o__java_lang_Object() {
+  return this.f_o__recordclass_RecordClass_1RecordDifferentAccessorOrder_;
+ }
+ /** @nodts @return {number} */
+ m_i__int() {
+  return this.f_i__recordclass_RecordClass_1RecordDifferentAccessorOrder_;
+ }
+ /** @nodts @return {!$1RecordDifferentAccessorOrder} */
+ static $create__int__java_lang_Object(/** number */ i, /** * */ o) {
+  $1RecordDifferentAccessorOrder.$clinit();
+  let $instance = new $1RecordDifferentAccessorOrder();
+  $instance.$ctor__recordclass_RecordClass_1RecordDifferentAccessorOrder__int__java_lang_Object__void(i, o);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_1RecordDifferentAccessorOrder__int__java_lang_Object__void(/** number */ i, /** * */ o) {
+  this.$ctor__java_lang_Record__void();
+  this.f_i__recordclass_RecordClass_1RecordDifferentAccessorOrder_ = i;
+  this.f_o__recordclass_RecordClass_1RecordDifferentAccessorOrder_ = o;
+  $J2CL_PRESERVE$(this.f_i__recordclass_RecordClass_1RecordDifferentAccessorOrder_, this.f_o__recordclass_RecordClass_1RecordDifferentAccessorOrder_);
+ }
+ /** @nodts */
+ static $clinit() {
+  $1RecordDifferentAccessorOrder.$clinit = () =>{};
+  $1RecordDifferentAccessorOrder.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1RecordDifferentAccessorOrder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1RecordDifferentAccessorOrder, 'recordclass.RecordClass$1RecordDifferentAccessorOrder');
+
+exports = $1RecordDifferentAccessorOrder;
+
+//# sourceMappingURL=RecordClass$1RecordDifferentAccessorOrder.js.map

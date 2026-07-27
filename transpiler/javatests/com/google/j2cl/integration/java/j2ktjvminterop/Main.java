@@ -26,7 +26,6 @@ public class Main {
   public static void main(String... args) {
     testProtectedInParentPublicInChild();
     testRecordConvertedToDataClass();
-    testRecordNotConvertedToDataClass();
   }
 
   private static void testProtectedInParentPublicInChild() {
@@ -43,19 +42,6 @@ public class Main {
     } else {
       // TODO(b/445545563): Should be true for non-native once Java records are translated to
       // Kotlin data classes with @JvmRecord annotation.
-      assertFalse(((Object) record) instanceof Record);
-    }
-
-    assertEquals(123, record.a());
-    assertEquals("a", record.b());
-  }
-
-  private static void testRecordNotConvertedToDataClass() {
-    RecordNotConvertedToDataClass record = new RecordNotConvertedToDataClass(123, "a");
-    if (!TestUtils.isJ2Kt()) {
-      assertTrue(((Object) record) instanceof Record);
-    } else {
-      // Records which are not converted to data classes are not instances of Record.
       assertFalse(((Object) record) instanceof Record);
     }
 

@@ -542,6 +542,20 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   }
 
   /**
+   * Returns the canonical constructor of this record type, or throws if the type is not a record.
+   */
+  @Memoized
+  public MethodDescriptor getRecordCanonicalConstructorDescriptor() {
+    checkState(getTypeDeclaration().isJavaRecord());
+    return checkNotNull(
+        getMethodDescriptor(
+            MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
+            getRecordComponentFieldDescriptors().stream()
+                .map(FieldDescriptor::getTypeDescriptor)
+                .toArray(TypeDescriptor[]::new)));
+  }
+
+  /**
    * The list of component field descriptors declared in the record type returned in the order the
    * components are declared.
    */

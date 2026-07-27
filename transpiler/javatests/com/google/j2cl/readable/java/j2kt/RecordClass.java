@@ -15,8 +15,11 @@
  */
 package j2kt;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
+
 public final class RecordClass {
 
+  @J2ktIncompatible
   public record RecordWithCompactConstructorWithoutParameterAssignment(int a, int b) {
     public RecordWithCompactConstructorWithoutParameterAssignment {
       if (a > b) {
@@ -25,18 +28,21 @@ public final class RecordClass {
     }
   }
 
+  @J2ktIncompatible
   public record RecordWithEmptyCopyMethod(int a, int b) {
     public RecordWithEmptyCopyMethod copy() {
       return new RecordWithEmptyCopyMethod(a, b);
     }
   }
 
+  @J2ktIncompatible
   public record RecordWithPartialCopyMethod(int a, int b) {
     public RecordWithPartialCopyMethod copy(int a) {
       return new RecordWithPartialCopyMethod(a, b);
     }
   }
 
+  @J2ktIncompatible
   public record RecordWithFullCopyMethod(int a, int b) {
     public RecordWithFullCopyMethod copy(int a, int b) {
       return new RecordWithFullCopyMethod(a, b);
@@ -49,6 +55,7 @@ public final class RecordClass {
     }
   }
 
+  @J2ktIncompatible
   public record RecordWithComponentMethods(int a, int b) {
     public int component1() {
       return a;

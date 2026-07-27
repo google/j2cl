@@ -10,22 +10,29 @@ class PublicRecordWithPublicFactory extends Record {
  /** @protected @nodts */
  constructor() {
   super();
+  /**@type {number} @nodts*/
+  this.f_i__recordclass_RecordClass_PublicRecordWithPublicFactory_ = 0;
  }
  /** @nodts @return {PublicRecordWithPublicFactory} */
- m_factory__recordclass_RecordClass_PublicRecordWithPublicFactory() {
-  return PublicRecordWithPublicFactory.$create__();
+ m_factory__int__recordclass_RecordClass_PublicRecordWithPublicFactory(/** number */ i) {
+  return PublicRecordWithPublicFactory.$create__int(i);
  }
  /** @nodts @return {!PublicRecordWithPublicFactory} */
- static $create__() {
+ static $create__int(/** number */ i) {
   PublicRecordWithPublicFactory.$clinit();
   let $instance = new PublicRecordWithPublicFactory();
-  $instance.$ctor__recordclass_RecordClass_PublicRecordWithPublicFactory__void();
+  $instance.$ctor__recordclass_RecordClass_PublicRecordWithPublicFactory__int__void(i);
   return $instance;
  }
  /** @nodts */
- $ctor__recordclass_RecordClass_PublicRecordWithPublicFactory__void() {
+ $ctor__recordclass_RecordClass_PublicRecordWithPublicFactory__int__void(/** number */ i) {
   this.$ctor__java_lang_Record__void();
-  $J2CL_PRESERVE$();
+  this.f_i__recordclass_RecordClass_PublicRecordWithPublicFactory_ = i;
+  $J2CL_PRESERVE$(this.f_i__recordclass_RecordClass_PublicRecordWithPublicFactory_);
+ }
+ /** @nodts @return {number} */
+ m_i__int() {
+  return this.f_i__recordclass_RecordClass_PublicRecordWithPublicFactory_;
  }
  /** @nodts */
  static $clinit() {

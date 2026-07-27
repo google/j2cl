@@ -1,0 +1,67 @@
+goog.module('recordclass.RecordClass.RecordWithCompactConstructorWithoutParameterAssignment$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let IllegalArgumentException = goog.forwardDeclare('java.lang.IllegalArgumentException$impl');
+let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
+
+/**
+ * @final
+ */
+class RecordWithCompactConstructorWithoutParameterAssignment extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_ = 0;
+  /**@type {number} @nodts*/
+  this.f_b__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_ = 0;
+ }
+ /** @nodts @return {!RecordWithCompactConstructorWithoutParameterAssignment} */
+ static $create__int__int(/** number */ a, /** number */ b) {
+  RecordWithCompactConstructorWithoutParameterAssignment.$clinit();
+  let $instance = new RecordWithCompactConstructorWithoutParameterAssignment();
+  $instance.$ctor__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment__int__int__void(a, b);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment__int__int__void(/** number */ a, /** number */ b) {
+  this.$ctor__java_lang_Record__void();
+  if (a > b) {
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(IllegalArgumentException.$create__());
+  }
+  this.f_a__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_ = a;
+  this.f_b__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_ = b;
+  $J2CL_PRESERVE$(this.f_a__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_, this.f_b__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_);
+ }
+ /** @nodts @return {number} */
+ m_a__int() {
+  return this.f_a__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_;
+ }
+ /** @nodts @return {number} */
+ m_b__int() {
+  return this.f_b__recordclass_RecordClass_RecordWithCompactConstructorWithoutParameterAssignment_;
+ }
+ /** @nodts */
+ static $clinit() {
+  RecordWithCompactConstructorWithoutParameterAssignment.$clinit = () =>{};
+  RecordWithCompactConstructorWithoutParameterAssignment.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecordWithCompactConstructorWithoutParameterAssignment;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  IllegalArgumentException = goog.module.get('java.lang.IllegalArgumentException$impl');
+  Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(RecordWithCompactConstructorWithoutParameterAssignment, 'recordclass.RecordClass$RecordWithCompactConstructorWithoutParameterAssignment');
+
+exports = RecordWithCompactConstructorWithoutParameterAssignment;
+
+//# sourceMappingURL=RecordClass$RecordWithCompactConstructorWithoutParameterAssignment.js.map

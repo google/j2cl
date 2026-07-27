@@ -30,6 +30,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Severity;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -54,6 +55,72 @@ public final class J2ktRestrictionsChecker {
       getBoolean("com.google.j2cl.transpiler.backend.kotlin.enableVisibilityErrors");
 
   private J2ktRestrictionsChecker() {}
+
+  public static void checkNonDesugared(Library library, Problems problems) {
+    library.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            problems.abortIfCancelled();
+            checkRecordDataClass(type);
+          }
+
+          private void checkRecordDataClass(Type type) {
+            if (type.getDeclaration().isJavaRecord()) {
+              if (type.getTypeDescriptor().getRecordCanonicalConstructorDescriptor().isVarargs()) {
+                problems.error(
+                    type.getSourcePosition(),
+                    "Record class '%s' with varargs canonical constructor cannot be translated to a"
+                        + " Kotlin data class.",
+                    type.getDeclaration().getReadableDescription());
+              }
+
+              Method canonicalConstructor = type.getRecordCanonicalConstructor();
+              if (canonicalConstructor != null) {
+                if (!AstUtils.containsEnclosingTypeFieldAssignment(canonicalConstructor)) {
+                  problems.error(
+                      type.getSourcePosition(),
+                      "Record class '%s' with non-compact canonical constructor cannot be"
+                          + " translated to a Kotlin data class.",
+                      type.getDeclaration().getReadableDescription());
+                }
+
+                // TODO(b/538441202): Consider removing this restriction.
+                if (!canonicalConstructor.getParameters().stream().allMatch(it -> it.isFinal())) {
+                  problems.error(
+                      type.getSourcePosition(),
+                      "Record class '%s' with compact canonical constructor containing not"
+                          + " effectively final parameters cannot be translated to a Kotlin data"
+                          + " class.",
+                      type.getDeclaration().getReadableDescription());
+                }
+              }
+
+              if (type.getMethods().stream()
+                  .anyMatch(it -> it.getDescriptor().isRecordComponentAccessor())) {
+                problems.error(
+                    type.getSourcePosition(),
+                    "Record class '%s' with explicit accessors cannot be translated to a Kotlin"
+                        + " data class.",
+                    type.getDeclaration().getReadableDescription());
+              }
+
+              if (!type.getDeclaration().getRecordComponentAccessorDescriptors().stream()
+                  .allMatch(
+                      accessor ->
+                          accessor.getJavaOverriddenMethodDescriptors().stream()
+                              .allMatch(it -> it.isKtProperty()))) {
+                // TODO(b/445545563): Convert to error when ready to enforce.
+                problems.warning(
+                    type.getSourcePosition(),
+                    "Record class '%s' with accessors overriding methods which are not translated"
+                        + " to Kotlin properties cannot be translated to a Kotlin data class.",
+                    type.getDeclaration().getReadableDescription());
+              }
+            }
+          }
+        });
+  }
 
   public static void check(Library library, Problems problems) {
     library.accept(

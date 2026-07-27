@@ -226,29 +226,4 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
     XCTAssertEqual(record, record2)
     XCTAssertEqual(record.hash, record2.hash)
   }
-
-  func testNonDataClassRecord() {
-    let record = J2ktiosinteropNonDataClassRecord(int: 123, with: "foo")
-    XCTAssertTrue(record is JavaLangRecord)
-    XCTAssertEqual(record.a(), 124)
-    XCTAssertEqual(record.b(), "foo")
-    XCTAssertTrue(record.description.contains("NonDataClassRecord"))
-    XCTAssertTrue(record.description.contains("1"))
-    XCTAssertTrue(record.description.contains("foo"))
-
-    let record2 = J2ktiosinteropNonDataClassRecord(int: 123, with: "foo")
-    XCTAssertEqual(record, record2)
-    XCTAssertEqual(record.hash, record2.hash)
-  }
-
-  func testRecordImplementingAccessors() {
-    let record: J2ktiosinteropRecordImplementingAccessors =
-      J2ktiosinteropRecordImplementingAccessors(int: 123, with: "foo")
-    XCTAssertEqual(record.i(), 124)
-    XCTAssertEqual(record.s(), "foo")
-
-    let accessors: J2ktiosinteropRecordAccessors = record
-    XCTAssertEqual(accessors.i(), 124)
-    XCTAssertEqual(accessors.s(), "foo")
-  }
 }

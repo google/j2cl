@@ -658,6 +658,12 @@ public enum Backend {
     }
 
     @Override
+    public void checkRestrictionsNonDesugared(
+        BackendOptions options, Library library, Problems problems) {
+      J2ktRestrictionsChecker.checkNonDesugared(library, problems);
+    }
+
+    @Override
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
       return ImmutableList.of(
           // Pre-verifications
@@ -769,10 +775,14 @@ public enum Backend {
     }
   };
 
+  // TODO(micapolos): Remove when it's no longer used.
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
       BackendOptions options);
+
+  public void checkRestrictionsNonDesugared(
+      BackendOptions options, Library library, Problems problems) {}
 
   public void checkRestrictions(BackendOptions options, Library library, Problems problems) {}
 

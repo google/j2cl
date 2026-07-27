@@ -14,7 +14,6 @@
 #import "j2ktiosinterop/InterfaceDefaultMethodOverrideImpl.h"
 #import "j2ktiosinterop/NativeCustomName.h"
 #import "j2ktiosinterop/NativeDefaultName.h"
-#import "j2ktiosinterop/NonDataClassRecord.h"
 #import "j2ktiosinterop/Nullability.h"
 #import "j2ktiosinterop/ObjectiveCNameOverrides.h"
 #import "j2ktiosinterop/OnlyExplicitDefaultConstructor.h"
@@ -27,8 +26,6 @@
 #import "j2ktiosinterop/PropertyClassOverride.h"
 #import "j2ktiosinterop/PropertyMethod.h"
 #import "j2ktiosinterop/PropertyMethodOverride.h"
-#import "j2ktiosinterop/RecordAccessors.h"
-#import "j2ktiosinterop/RecordImplementingAccessors.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
@@ -614,35 +611,6 @@
       create_J2ktiosinteropDataClassRecord_initWithInt_withNSString_(123, @"foo");
   XCTAssertEqualObjects(record, record2);
   XCTAssertEqual(record.hash, record2.hash);
-}
-
-- (void)testNonDataClassRecord {
-  J2ktiosinteropNonDataClassRecord *record =
-      create_J2ktiosinteropNonDataClassRecord_initWithInt_withNSString_(123, @"foo");
-  // TODO(b/501069312): Uncomment when fixed.
-  // XCTAssertTrue([record isKindOfClass:[JavaLangRecord class]]);
-  XCTAssertEqual([record a], 124);
-  XCTAssertEqualObjects([record b], @"foo");
-  // TODO(b/501052309): Uncomment once fixed.
-  // XCTAssertTrue([record.description containsString:@"NonDataClassRecord"]);
-  XCTAssertTrue([record.description containsString:@"123"]);
-  XCTAssertTrue([record.description containsString:@"foo"]);
-
-  J2ktiosinteropNonDataClassRecord *record2 =
-      create_J2ktiosinteropNonDataClassRecord_initWithInt_withNSString_(123, @"foo");
-  XCTAssertEqualObjects(record, record2);
-  XCTAssertEqual(record.hash, record2.hash);
-}
-
-- (void)testRecordImplementingAccessors {
-  J2ktiosinteropRecordImplementingAccessors *record =
-      create_J2ktiosinteropRecordImplementingAccessors_initWithInt_withNSString_(123, @"foo");
-  XCTAssertEqual([record i], 124);
-  XCTAssertEqualObjects([record s], @"foo");
-
-  id<J2ktiosinteropRecordAccessors> accessors = record;
-  XCTAssertEqual([accessors i], 124);
-  XCTAssertEqualObjects([accessors s], @"foo");
 }
 
 @end

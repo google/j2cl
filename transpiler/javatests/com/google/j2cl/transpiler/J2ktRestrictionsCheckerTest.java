@@ -400,14 +400,81 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testRecordSucceeds() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        record EmptyRecord() {}
+        record RecordWithValidatingConstructor(int i) {
+          RecordWithValidatingConstructor {
+            assert i > 0;
+          }
+        }
+        """);
+  }
+
   public void testRecordNativeJsTypeFails() {
     assertWithInlineMessages(
         "test.Main",
         """
         import jsinterop.annotations.*;
         @JsType(isNative = true)
-        record NativeBuggy() {}
+        record NativeBuggy(int i) {}
         > Error: Record class 'NativeBuggy' cannot be a native JsType.
+        """);
+  }
+
+  public void testRecordWithNonCompactCanonicalConstructorFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        record RecordWithConstructor(int i) {
+        > Error: Record class 'RecordWithConstructor' with non-compact canonical constructor cannot be translated to a Kotlin data class.
+          public RecordWithConstructor(int i) {
+            this.i = i + 1;
+          }
+        }
+        """);
+  }
+
+  public void testRecordWithCanonicalConstructorWithParameterAssignmentFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        record RecordWithConstructor(int i) {
+        > Error: Record class 'RecordWithConstructor' with compact canonical constructor containing not effectively final parameters cannot be translated to a Kotlin data class.
+          RecordWithConstructor {
+            i++;
+          }
+        }
+        """);
+  }
+
+  public void testRecordWithExplicitAccessorFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        record RecordWithCustomAccessor(int i) {
+        > Error: Record class 'RecordWithCustomAccessor' with explicit accessors cannot be translated to a Kotlin data class.
+          public int i() {
+            return i;
+          }
+        }
+        """);
+  }
+
+  public void testRecordOverridingNonPropertyAccessorsWarns() {
+    assertWithInlineMessages(
+        "test.Accessors",
+        """
+        interface Accessors {
+          int i();
+        }
+        """,
+        "test.Main",
+        """
+        record RecordOverridingNonPropertyAccessor(int i) implements Accessors {}
+        > Warning: Record class 'RecordOverridingNonPropertyAccessor' with accessors overriding methods which are not translated to Kotlin properties cannot be translated to a Kotlin data class.
         """);
   }
 

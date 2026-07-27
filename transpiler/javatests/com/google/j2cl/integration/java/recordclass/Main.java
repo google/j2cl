@@ -27,6 +27,7 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
+import com.google.j2cl.integration.testing.J2ktIncompatible;
 import com.google.j2cl.integration.testing.TestUtils;
 import java.util.Arrays;
 
@@ -38,7 +39,8 @@ public class Main {
     testHashCode();
     testToString();
     testConstructor();
-    testOverriddenMethods();
+    testOverriddenObjectMethods();
+    testOverriddenAccessors();
     testGeneric();
     testImplementingInterface();
     testStaticFields();
@@ -97,26 +99,6 @@ public class Main {
     assertTrue(ar2.equals(ar3));
     assertTrue(ar3.equals(ar2));
 
-    // Varargs are the same as arrays.
-    VarargsRecord vr0 = new VarargsRecord(1, 2);
-    VarargsRecord vr1 = new VarargsRecord(1, 2);
-    assertFalse(vr0.equals(vr1));
-    assertFalse(vr1.equals(vr0));
-
-    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
-    // so reference equality when passing the same array to varargs does not hold in J2KT.
-    if (!isJ2Kt()) {
-      VarargsRecord vr2 = new VarargsRecord(arrayValue);
-      VarargsRecord vr3 = new VarargsRecord(arrayValue);
-      assertTrue(vr2.equals(vr3));
-      assertTrue(vr3.equals(vr2));
-    }
-
-    // But value equality is the same as arrays.
-    VarargsRecord vr4 = new VarargsRecord(new int[] {1, 2});
-    VarargsRecord vr5 = new VarargsRecord(new int[] {1, 2});
-    assertTrue(Arrays.equals(vr4.value(), vr5.value()));
-
     // Object values call `equals()` (reference equality unless the type overrides it).
     ObjectRecord objr0 = new ObjectRecord(new Object());
     ObjectRecord objr1 = new ObjectRecord(new Object());
@@ -136,7 +118,34 @@ public class Main {
     EmptyRecord er1 = new EmptyRecord();
     assertTrue(er0.equals(er1));
     assertTrue(er1.equals(er0));
+
+    testEquals_j2ktIncompatible();
   }
+
+  @J2ktIncompatible
+  private static void testEquals_j2ktIncompatible() {
+    int[] arrayValue = new int[] {1, 2};
+
+    // Varargs are the same as arrays.
+    VarargsRecord vr0 = new VarargsRecord(1, 2);
+    VarargsRecord vr1 = new VarargsRecord(1, 2);
+    assertFalse(vr0.equals(vr1));
+    assertFalse(vr1.equals(vr0));
+
+    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
+    // so reference equality when passing the same array to varargs does not hold in J2KT.
+    VarargsRecord vr2 = new VarargsRecord(arrayValue);
+    VarargsRecord vr3 = new VarargsRecord(arrayValue);
+    assertTrue(vr2.equals(vr3));
+    assertTrue(vr3.equals(vr2));
+
+    // But value equality is the same as arrays.
+    VarargsRecord vr4 = new VarargsRecord(new int[] {1, 2});
+    VarargsRecord vr5 = new VarargsRecord(new int[] {1, 2});
+    assertTrue(Arrays.equals(vr4.value(), vr5.value()));
+  }
+
+  private static void testEquals_j2ktIncompatible(Object... unused) {}
 
   private static void testHashCode() {
     SimpleRecord r0 = new SimpleRecord(1);
@@ -148,18 +157,25 @@ public class Main {
     ArrayRecord ar1 = new ArrayRecord(arrayValue);
     assertEquals(ar0.hashCode(), ar1.hashCode());
 
-    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
-    // so reference equality when passing the same array to varargs does not hold in J2KT.
-    if (!isJ2Kt()) {
-      VarargsRecord vr0 = new VarargsRecord(arrayValue);
-      VarargsRecord vr1 = new VarargsRecord(arrayValue);
-      assertEquals(vr0.hashCode(), vr1.hashCode());
-    }
-
     EmptyRecord er0 = new EmptyRecord();
     EmptyRecord er1 = new EmptyRecord();
     assertEquals(er0.hashCode(), er1.hashCode());
+
+    testHashCode_j2ktIncompatible();
   }
+
+  @J2ktIncompatible
+  private static void testHashCode_j2ktIncompatible() {
+    int[] arrayValue = new int[] {1, 2};
+
+    // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
+    // so reference equality when passing the same array to varargs does not hold in J2KT.
+    VarargsRecord vr0 = new VarargsRecord(arrayValue);
+    VarargsRecord vr1 = new VarargsRecord(arrayValue);
+    assertEquals(vr0.hashCode(), vr1.hashCode());
+  }
+
+  private static void testHashCode_j2ktIncompatible(Object... unused) {}
 
   @SuppressWarnings("ArrayToString")
   private static void testToString() {
@@ -175,13 +191,20 @@ public class Main {
     ArrayRecord ar0 = new ArrayRecord(arrayValue);
     assertTrue(ar0.toString().contains(arrayValue.toString()));
 
+    testToString_j2ktIncompatible();
+  }
+
+  @J2ktIncompatible
+  private static void testToString_j2ktIncompatible() {
+    int[] arrayValue = new int[] {1, 2};
+
     // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
     // so reference equality when passing the same array to varargs does not hold in J2KT.
-    if (!isJ2Kt()) {
-      VarargsRecord vr0 = new VarargsRecord(arrayValue);
-      assertTrue(vr0.toString().contains(arrayValue.toString()));
-    }
+    VarargsRecord vr0 = new VarargsRecord(arrayValue);
+    assertTrue(vr0.toString().contains(arrayValue.toString()));
   }
+
+  private static void testToString_j2ktIncompatible(Object... unused) {}
 
   static record SimpleRecord(int value) {}
 
@@ -193,12 +216,14 @@ public class Main {
   static record ArrayRecord(int[] value) {}
 
   @SuppressWarnings("ArrayRecordComponent")
+  @J2ktIncompatible
   static record VarargsRecord(int... value) {}
 
   static record ObjectRecord(Object value) {}
 
   static record EmptyRecord() {}
 
+  @J2ktIncompatible
   private static void testConstructor() {
     RecordWithConstructor r0 = new RecordWithConstructor(1, 1);
     assertEquals(2, r0.a());
@@ -241,6 +266,9 @@ public class Main {
     assertEquals(1, r10.value());
   }
 
+  private static void testConstructor(Object... unused) {}
+
+  @J2ktIncompatible
   static record RecordWithConstructor(int a, int b) {
     public RecordWithConstructor(int a, int b) {
       this.a = a + 1;
@@ -248,6 +276,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   static record RecordWithCompactConstructor(int a, int b) {
     public RecordWithCompactConstructor {
       if (a < 0) {
@@ -257,12 +286,14 @@ public class Main {
   }
 
   // Non-canonical constructors are required to defer to the canonical constructor.
+  @J2ktIncompatible
   static record RecordDelegatingToImplicitConstructor(int value) {
     public RecordDelegatingToImplicitConstructor() {
       this(123);
     }
   }
 
+  @J2ktIncompatible
   static record RecordDelegatingToExplicitConstructor(int value) {
     public RecordDelegatingToExplicitConstructor(int value) {
       this.value = value;
@@ -273,6 +304,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   static record RecordDelegatingToCompactConstructor(int value) {
     public RecordDelegatingToCompactConstructor {}
 
@@ -281,6 +313,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   static record RecordWithConstructorWithDeepAssignment(int value) {
     public RecordWithConstructorWithDeepAssignment(int value) {
       if (value < 0) {
@@ -291,6 +324,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   static record RecordWithConstructorWithSelfConstructorCall(int value) {
     // Test that this is still processed as a compact constructor despite calling the record
     // constructor.
@@ -303,6 +337,7 @@ public class Main {
   }
 
   @SuppressWarnings({"NonFinalStaticField", "StaticAssignmentInConstructor"})
+  @J2ktIncompatible
   static record RecordWithConstructorWithStaticFieldAssignment(int value) {
     public static int lastValue = 0;
 
@@ -316,6 +351,7 @@ public class Main {
     int x;
   }
 
+  @J2ktIncompatible
   static record RecordWithConstructorWithUnrelatedAssignment(int value) {
     // Test that this is still processed as a compact constructor despite calling some other
     // constructor and assigning a field.
@@ -324,7 +360,7 @@ public class Main {
     }
   }
 
-  private static void testOverriddenMethods() {
+  private static void testOverriddenObjectMethods() {
     RecordWithOverriddenEquals r0 = new RecordWithOverriddenEquals("a", "b");
     assertEquals(r0, new RecordWithOverriddenEquals("a", "bnot"));
     assertNotEquals(r0, new RecordWithOverriddenEquals("anot", "b"));
@@ -334,10 +370,15 @@ public class Main {
 
     RecordWithOverriddenToString r3 = new RecordWithOverriddenToString("a");
     assertEquals("foo", r3.toString());
+  }
 
+  @J2ktIncompatible
+  private static void testOverriddenAccessors() {
     RecordWithOverriddenAccessor r4 = new RecordWithOverriddenAccessor("a");
     assertEquals("foo_instead", r4.a());
   }
+
+  private static void testOverriddenAccessors(Object... unused) {}
 
   static record RecordWithOverriddenEquals(String a, String b) {
     @Override
@@ -361,6 +402,7 @@ public class Main {
     }
   }
 
+  @J2ktIncompatible
   static record RecordWithOverriddenAccessor(String a) {
     @Override
     public String a() {
@@ -388,6 +430,7 @@ public class Main {
   static record GenericRecord<T>(T a) {}
 
   @SuppressWarnings("BadInstanceof") // Specifically testing instanceof this case.
+  @J2ktIncompatible
   private static void testImplementingInterface() {
     RecordImplementingInterface r = new RecordImplementingInterface("a");
 
@@ -402,6 +445,8 @@ public class Main {
     assertEquals("a", iwp.a());
   }
 
+  private static void testImplementingInterface(Object... unused) {}
+
   interface InterfaceWithMethod {
     String foo();
   }
@@ -410,6 +455,7 @@ public class Main {
     String a();
   }
 
+  @J2ktIncompatible
   static record RecordImplementingInterface(String a)
       implements InterfaceWithMethod, InterfaceWithProperty {
     @Override
@@ -447,18 +493,30 @@ public class Main {
     String nonParametric();
   }
 
+  @J2ktIncompatible
   record RecordSpecializingInterface(String parametric, String nonParametric)
       implements PropertyAccessors<String> {}
 
+  @J2ktIncompatible
   private static void testAccessorBridges() {
     PropertyAccessors<String> propertyAccessors = new RecordSpecializingInterface("abc", "def");
     assertEquals("abc", propertyAccessors.parametric());
     assertEquals("def", propertyAccessors.nonParametric());
   }
 
+  private static void testAccessorBridges(Object... unused) {}
+
+  record PatternsInnerRecord(Integer i, Object o) {}
+
+  record PatternsOuterRecord(Object o, String s, PatternsInnerRecord n) {}
+
   private static void testRecordPatterns() {
     // TODO(b/466212492): Remove the stripping once the bug is fixed.
   }
+
+  record UnconditionalPatternsRecord(String s, int i, String[] sArray) {}
+
+  record RecursiveRecord(RecursiveRecord r) {}
 
   private static void testUnconditionalPatterns() {
     // TODO(b/466212492): Remove the stripping once the bug is fixed.
@@ -466,49 +524,89 @@ public class Main {
 
   private static String sideEffectAccumulator;
 
+  @J2ktIncompatible
+  record EvaluationOrderRecord(Object a, Object b, Object c) {
+    @Override
+    public Object a() {
+      sideEffectAccumulator += "a";
+      return a;
+    }
+
+    @Override
+    public Object b() {
+      sideEffectAccumulator += "b";
+      return b;
+    }
+
+    @Override
+    public Object c() {
+      sideEffectAccumulator += "c";
+      return c;
+    }
+  }
+
+  @J2ktIncompatible
   private static void testRecordPatternEvaluationOrder() {
     // TODO(b/466212492): Remove the stripping once the bug is fixed.
   }
 
+  private static void testRecordPatternEvaluationOrder(Object... unused) {}
+
   private static class AccessorException extends RuntimeException {}
 
+  @J2ktIncompatible
+  record ExceptionInPatternRecord(Object a) {
+      @Override
+      public Object a() {
+        throw new AccessorException();
+      }
+    }
+
+  @J2ktIncompatible
   private static void testExceptionInPattern() {
     // TODO(b/466212492): Remove the stripping once the bug is fixed.
   }
 
-  private static void testCompactConstructorWithComponentReferences() {
+  private static void testExceptionInPattern(Object... unused) {}
 
-    record R(String s) {
-      R {
-        // Make sure that references to component fields that are not assignments do not prevent
-        // the synthesis of the the implicit component initialization. If that were to happen the
-        // test case above would fail.
-        Runnable r =
-            () -> {
-              var unused = R.this.s;
-            };
+  @J2ktIncompatible
+  record CompactConstructorWithComponentReferencesRecord(String s) {
+    CompactConstructorWithComponentReferencesRecord {
+      // Make sure that references to component fields that are not assignments do not prevent
+      // the synthesis of the the implicit component initialization. If that were to happen the
+      // test case above would fail.
+      Runnable r =
+          () -> {
+            var unused = CompactConstructorWithComponentReferencesRecord.this.s;
+          };
         class Class {
           void m() {
-            var unused = R.this.s;
+          var unused = CompactConstructorWithComponentReferencesRecord.this.s;
           }
         }
-        var unused =
-            new Object() {
-              void m() {
-                var unused2 = R.this.s;
-              }
-            };
+      var unused =
+          new Object() {
+            void m() {
+              var unused2 = CompactConstructorWithComponentReferencesRecord.this.s;
+            }
+          };
       }
     }
 
-    R r = new R("Hello");
+  @J2ktIncompatible
+  private static void testCompactConstructorWithComponentReferences() {
+    CompactConstructorWithComponentReferencesRecord r =
+        new CompactConstructorWithComponentReferencesRecord("Hello");
     // Ensure that the component field was initialized.
     assertEquals("Hello", r.s);
   }
 
+  private static void testCompactConstructorWithComponentReferences(Object... unused) {}
+
+  record ParametericRecord<T>(T value) {}
+
   @SuppressWarnings("unchecked") // This test case tests pattern matching with unsafe casts.
   private static void testParametricRecord() {
-    record ParametericRecord<T>(T value) {}
     var stringRecord = new ParametericRecord<String>(null);
     // Because the type of genericRecord is ParametricRecord<String>, the unparameterized
     // ParametericRecord below is considered ParametricRecord<String> and the instanceof succeeds.

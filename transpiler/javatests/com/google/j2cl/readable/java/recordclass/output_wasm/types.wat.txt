@@ -142,6 +142,21 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
+(type $recordclass.RecordClass.RecordWithCompactConstructorWithoutParameterAssignment (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.RecordWithCompactConstructorWithoutParameterAssignment.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $a@recordclass.RecordClass.RecordWithCompactConstructorWithoutParameterAssignment (mut i32))
+ (field $b@recordclass.RecordClass.RecordWithCompactConstructorWithoutParameterAssignment (mut i32))
+ ))
+)
+(type $recordclass.RecordClass.RecordWithCompactConstructorWithoutParameterAssignment.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
 (type $recordclass.RecordClass.RecordWithDeferringConstructor (sub $java.lang.Record (struct
  (field $vtable (ref $recordclass.RecordClass.RecordWithDeferringConstructor.vtable))
  (field $itable (ref $itable))
@@ -234,6 +249,7 @@
  (field $vtable (ref $recordclass.RecordClass.PublicRecordWithPublicFactory.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $i@recordclass.RecordClass.PublicRecordWithPublicFactory (mut i32))
  ))
 )
 (type $recordclass.RecordClass.PublicRecordWithPublicFactory.vtable (sub $java.lang.Record.vtable (struct
@@ -369,31 +385,31 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $recordclass.RecordClass.1R2 (sub $java.lang.Record (struct
- (field $vtable (ref $recordclass.RecordClass.1R2.vtable))
+(type $recordclass.RecordClass.1RecordInner (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.1RecordInner.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $i@recordclass.RecordClass.1R2 (mut i32))
- (field $o@recordclass.RecordClass.1R2 (mut (ref null $java.lang.Object)))
+ (field $i@recordclass.RecordClass.1RecordInner (mut i32))
+ (field $o@recordclass.RecordClass.1RecordInner (mut (ref null $java.lang.Object)))
  ))
 )
-(type $recordclass.RecordClass.1R2.vtable (sub $java.lang.Record.vtable (struct
+(type $recordclass.RecordClass.1RecordInner.vtable (sub $java.lang.Record.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  ))
 )
-(type $recordclass.RecordClass.1R1 (sub $java.lang.Record (struct
- (field $vtable (ref $recordclass.RecordClass.1R1.vtable))
+(type $recordclass.RecordClass.1RecordOuter (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.1RecordOuter.vtable))
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $n@recordclass.RecordClass.1R1 (mut (ref null $recordclass.RecordClass.1R2)))
- (field $o@recordclass.RecordClass.1R1 (mut (ref null $java.lang.Object)))
- (field $s@recordclass.RecordClass.1R1 (mut (ref null $java.lang.String)))
+ (field $n@recordclass.RecordClass.1RecordOuter (mut (ref null $recordclass.RecordClass.1RecordInner)))
+ (field $o@recordclass.RecordClass.1RecordOuter (mut (ref null $java.lang.Object)))
+ (field $s@recordclass.RecordClass.1RecordOuter (mut (ref null $java.lang.String)))
  ))
 )
-(type $recordclass.RecordClass.1R1.vtable (sub $java.lang.Record.vtable (struct
+(type $recordclass.RecordClass.1RecordOuter.vtable (sub $java.lang.Record.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -422,6 +438,21 @@
  ))
 )
 (type $recordclass.RecordClass.1GenericRecord.vtable (sub $java.lang.Record.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $recordclass.RecordClass.1RecordDifferentAccessorOrder (sub $java.lang.Record (struct
+ (field $vtable (ref $recordclass.RecordClass.1RecordDifferentAccessorOrder.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $i@recordclass.RecordClass.1RecordDifferentAccessorOrder (mut i32))
+ (field $o@recordclass.RecordClass.1RecordDifferentAccessorOrder (mut (ref null $java.lang.Object)))
+ ))
+)
+(type $recordclass.RecordClass.1RecordDifferentAccessorOrder.vtable (sub $java.lang.Record.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))

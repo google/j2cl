@@ -19,13 +19,13 @@
 package recordclass
 
 import javaemul.lang.*
+import java.lang.IllegalArgumentException
 import java.util.Arrays
 import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 import kotlin.Any
-import kotlin.Array
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.IntArray
@@ -45,76 +45,33 @@ open class RecordClass {
    intArrayOf(1, 2),
   )
   val arValueResult: Int = ar.value()!![0]
-  val rwc: RecordWithConstructor = RecordWithConstructor(1, 2)
-  rwc.a()
-  rwc.b()
  }
  
  companion object {
   @JvmStatic
-  private fun testLocalRecordClass() {
-   class LocalRecord {
-    private val value: Int
-    
-    internal constructor(value: Int) {
-     this.value = value
-    }
-    
-    fun value(): Int {
-     return this.value
-    }
-    
-    override fun equals(arg0: Any?): Boolean {
-     var ___other: LocalRecord? = null
-     if (!(arg0 is LocalRecord && run {
-      ___other = arg0 as LocalRecord?
-      true
-     })) return false
-     return Arrays.equals(
-      arrayOf<Any?>(this.value),
-      arrayOf<Any?>(___other!!.value),
-     )
-    }
-    
-    override fun hashCode(): Int {
-     return Arrays.hashCode(
-      arrayOf<Any?>(this.value),
-     )
-    }
-    
-    override fun toString(): String {
-     return this.getClass().getName() + Arrays.toString(
-      arrayOf<Any?>(this.value),
-     )
-    }
-   }
-   val lr: LocalRecord = LocalRecord(1)
-  }
-  
-  @JvmStatic
   private fun testRecordPatterns() {
-   class R2 {
+   class RecordInner {
     private val i: Int
     
     private val o: Any?
-    
-    fun o(): Any? {
-     return this.o
-    }
-    
-    fun i(): Int {
-     return this.i
-    }
     
     internal constructor(i: Int, o: Any?) {
      this.i = i
      this.o = o
     }
     
+    fun i(): Int {
+     return this.i
+    }
+    
+    fun o(): Any? {
+     return this.o
+    }
+    
     override fun equals(arg0: Any?): Boolean {
-     var ___other: R2? = null
-     if (!(arg0 is R2 && run {
-      ___other = arg0 as R2?
+     var ___other: RecordInner? = null
+     if (!(arg0 is RecordInner && run {
+      ___other = arg0 as RecordInner?
       true
      })) return false
      return Arrays.equals(
@@ -135,14 +92,14 @@ open class RecordClass {
      )
     }
    }
-   class R1 {
+   class RecordOuter {
     private val o: Any?
     
     private val s: String?
     
-    private val n: R2?
+    private val n: RecordInner?
     
-    internal constructor(o: Any?, s: String?, n: R2?) {
+    internal constructor(o: Any?, s: String?, n: RecordInner?) {
      this.o = o
      this.s = s
      this.n = n
@@ -156,14 +113,14 @@ open class RecordClass {
      return this.s
     }
     
-    fun n(): R2? {
+    fun n(): RecordInner? {
      return this.n
     }
     
     override fun equals(arg0: Any?): Boolean {
-     var ___other: R1? = null
-     if (!(arg0 is R1 && run {
-      ___other = arg0 as R1?
+     var ___other: RecordOuter? = null
+     if (!(arg0 is RecordOuter && run {
+      ___other = arg0 as RecordOuter?
       true
      })) return false
      return Arrays.equals(
@@ -184,45 +141,45 @@ open class RecordClass {
      )
     }
    }
-   val r: R1 = R1(
-    R2(1, "a"),
+   val r: RecordOuter = RecordOuter(
+    RecordInner(1, "a"),
     "b",
-    R2(3, "c"),
+    RecordInner(3, "c"),
    )
    var s1: String? = null
    var s2: Any? = null
-   var n: R2? = null
-   val b: Boolean = r is R1 && run {
-    val pattern___1R1: R1 = r as R1
-    val exp: Any? = pattern___1R1.o()
-    exp is R2 && run {
-     val pattern___1R2: R2? = exp as R2?
-     val i1: Int = pattern___1R2!!.i()
-     val exp_1: Any? = pattern___1R2!!.o()
+   var n: RecordInner? = null
+   val b: Boolean = r is RecordOuter && run {
+    val pattern___1RecordOuter: RecordOuter = r as RecordOuter
+    val exp: Any? = pattern___1RecordOuter.o()
+    exp is RecordInner && run {
+     val pattern___1RecordInner: RecordInner? = exp as RecordInner?
+     val i1: Int = pattern___1RecordInner!!.i()
+     val exp_1: Any? = pattern___1RecordInner!!.o()
      exp_1 is String && run {
       s1 = exp_1 as String?
-      s2 = pattern___1R1.s()
-      n = pattern___1R1.n()
+      s2 = pattern___1RecordOuter.s()
+      n = pattern___1RecordOuter.n()
       i1 == 1
      }
     }
    } && s1!!.equals("a") && s2!!.equals("b") && n!!.i() == 3 && n!!.o()!!.equals("c")
-   var o: Any = R1(
-    R2(1, "a"),
+   var o: Any = RecordOuter(
+    RecordInner(1, "a"),
     "b",
-    R2(3, "c"),
+    RecordInner(3, "c"),
    )
-   var b1: Boolean = o is R1 && run {
-    val pattern___1R1_1: R1 = o as R1
-    val exp_2: Any? = pattern___1R1_1.o()
-    exp_2 is R2 && run {
-     val pattern___1R2_1: R2? = exp_2 as R2?
-     val i1_1: Int = pattern___1R2_1!!.i()
-     val exp_3: Any? = pattern___1R2_1!!.o()
+   var b1: Boolean = o is RecordOuter && run {
+    val pattern___1RecordOuter_1: RecordOuter = o as RecordOuter
+    val exp_2: Any? = pattern___1RecordOuter_1.o()
+    exp_2 is RecordInner && run {
+     val pattern___1RecordInner_1: RecordInner? = exp_2 as RecordInner?
+     val i1_1: Int = pattern___1RecordInner_1!!.i()
+     val exp_3: Any? = pattern___1RecordInner_1!!.o()
      exp_3 is String && run {
       val s1_1: String? = exp_3 as String?
-      val s2_1: Any? = pattern___1R1_1.s()
-      val n_1: R2? = pattern___1R1_1.n()
+      val s2_1: Any? = pattern___1RecordOuter_1.s()
+      val n_1: RecordInner? = pattern___1RecordOuter_1.n()
       true
      }
     }
@@ -485,60 +442,16 @@ open class RecordClass {
   }
  }
  
- internal class RecordWithConstructor {
+ internal class RecordWithCompactConstructorWithoutParameterAssignment {
   private val a: Int
   
   private val b: Int
   
   constructor(a: Int, b: Int) {
-   this.a = a + 1
-   this.b = b - 1
-  }
-  
-  fun a(): Int {
-   return this.a
-  }
-  
-  fun b(): Int {
-   return this.b
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: RecordWithConstructor? = null
-   if (!(arg0 is RecordWithConstructor && run {
-    ___other = arg0 as RecordWithConstructor?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.a, this.b),
-    arrayOf<Any?>(___other!!.a, ___other!!.b),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.a, this.b),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.a, this.b),
-   )
-  }
- }
- 
- internal class RecordWithCompactConstructor {
-  private val a: Int
-  
-  private val b: Int
-  
-  constructor(a: Int, b: Int) {
-   var a_1: Int = a
-   if (a_1 < 0) {
-    a_1 = 0
+   if (a > b) {
+    throw IllegalArgumentException()
    }
-   this.a = a_1
+   this.a = a
    this.b = b
   }
   
@@ -551,9 +464,9 @@ open class RecordClass {
   }
   
   override fun equals(arg0: Any?): Boolean {
-   var ___other: RecordWithCompactConstructor? = null
-   if (!(arg0 is RecordWithCompactConstructor && run {
-    ___other = arg0 as RecordWithCompactConstructor?
+   var ___other: RecordWithCompactConstructorWithoutParameterAssignment? = null
+   if (!(arg0 is RecordWithCompactConstructorWithoutParameterAssignment && run {
+    ___other = arg0 as RecordWithCompactConstructorWithoutParameterAssignment?
     true
    })) return false
    return Arrays.equals(
@@ -637,81 +550,8 @@ open class RecordClass {
   }
  }
  
- class RecordWithOverriddenAccessor {
-  private val value: String?
-  
-  fun value(): String? {
-   return "foo"
-  }
-  
-  constructor(value: String?) {
-   this.value = value
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: RecordWithOverriddenAccessor? = null
-   if (!(arg0 is RecordWithOverriddenAccessor && run {
-    ___other = arg0 as RecordWithOverriddenAccessor?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.value),
-    arrayOf<Any?>(___other!!.value),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.value),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.value),
-   )
-  }
- }
- 
  internal fun interface I {
   fun a(): String?
- }
- 
- @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- internal class RecordImplementingInterface: I {
-  private val a: String?
-  
-  internal constructor(a: String?) {
-   this.a = a
-  }
-  
-  override fun a(): String? {
-   return this.a
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: RecordImplementingInterface? = null
-   if (!(arg0 is RecordImplementingInterface && run {
-    ___other = arg0 as RecordImplementingInterface?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.a),
-    arrayOf<Any?>(___other!!.a),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.a),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.a),
-   )
-  }
  }
  
  internal class StaticFieldRecord {
@@ -765,75 +605,42 @@ open class RecordClass {
   fun nonParametric(): String?
  }
  
- @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- internal class RecordSpecializingInterface: PropertyAccessors<String?> {
-  private val parametric: String?
-  
-  private val nonParametric: String?
-  
-  internal constructor(parametric: String?, nonParametric: String?) {
-   this.parametric = parametric
-   this.nonParametric = nonParametric
-  }
-  
-  override fun parametric(): String? {
-   return this.parametric
-  }
-  
-  override fun nonParametric(): String? {
-   return this.nonParametric
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: RecordSpecializingInterface? = null
-   if (!(arg0 is RecordSpecializingInterface && run {
-    ___other = arg0 as RecordSpecializingInterface?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.parametric, this.nonParametric),
-    arrayOf<Any?>(___other!!.parametric, ___other!!.nonParametric),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.parametric, this.nonParametric),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.parametric, this.nonParametric),
-   )
-  }
- }
- 
  class PublicRecordWithPublicFactory {
-  fun factory(): PublicRecordWithPublicFactory? {
-   return PublicRecordWithPublicFactory()
+  private val i: Int
+  
+  fun factory(i: Int): PublicRecordWithPublicFactory? {
+   return PublicRecordWithPublicFactory(i)
+  }
+  
+  constructor(i: Int) {
+   this.i = i
+  }
+  
+  fun i(): Int {
+   return this.i
   }
   
   override fun equals(arg0: Any?): Boolean {
+   var ___other: PublicRecordWithPublicFactory? = null
    if (!(arg0 is PublicRecordWithPublicFactory && run {
-    val ___other: PublicRecordWithPublicFactory? = arg0 as PublicRecordWithPublicFactory?
+    ___other = arg0 as PublicRecordWithPublicFactory?
     true
    })) return false
    return Arrays.equals(
-    arrayOf<Any?>(),
-    arrayOf<Any?>(),
+    arrayOf<Any?>(this.i),
+    arrayOf<Any?>(___other!!.i),
    )
   }
   
   override fun hashCode(): Int {
    return Arrays.hashCode(
-    arrayOf<Any?>(),
+    arrayOf<Any?>(this.i),
    )
   }
   
   override fun toString(): String {
    return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(),
+    arrayOf<Any?>(this.i),
    )
   }
  }
@@ -901,114 +708,6 @@ open class RecordClass {
   }
  }
  
- @JsType
- class JsInteropRecordWithExplicitMembers {
-  private val value: Int
-  
-  private val text: String?
-  
-  @JsIgnore
-  private val ignored: String?
-  
-  constructor(value: Int, text: String?, ignored: String?) {
-   this.value = value
-   this.text = text
-   this.ignored = ignored
-  }
-  
-  @JsProperty(name = "customVal")
-  fun value(): Int {
-   return this.value
-  }
-  
-  @JsProperty
-  fun text(): String? {
-   return this.text
-  }
-  
-  fun ignored(): String? {
-   return this.ignored
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: JsInteropRecordWithExplicitMembers? = null
-   if (!(arg0 is JsInteropRecordWithExplicitMembers && run {
-    ___other = arg0 as JsInteropRecordWithExplicitMembers?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.value, this.text, this.ignored),
-    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.value, this.text, this.ignored),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.value, this.text, this.ignored),
-   )
-  }
- }
- 
- @JsType
- class JsInteropRecordWithOverriddenAccessors {
-  private val value: Int
-  
-  private val text: String?
-  
-  @JsIgnore
-  private val ignored: String?
-  
-  constructor(value: Int, text: String?, ignored: String?) {
-   this.value = value
-   this.text = text
-   this.ignored = ignored
-  }
-  
-  @JsProperty(name = "customVal")
-  fun value(): Int {
-   return this.value + 1
-  }
-  
-  @JsProperty
-  fun text(): String? {
-   return "" + this.text + "!"
-  }
-  
-  fun ignored(): String? {
-   return "" + this.ignored + "!"
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: JsInteropRecordWithOverriddenAccessors? = null
-   if (!(arg0 is JsInteropRecordWithOverriddenAccessors && run {
-    ___other = arg0 as JsInteropRecordWithOverriddenAccessors?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.value, this.text, this.ignored),
-    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.value, this.text, this.ignored),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.value, this.text, this.ignored),
-   )
-  }
- }
- 
  internal interface I2 {
   @JsProperty(name = "customVal")
   fun value(): Int
@@ -1021,182 +720,5 @@ open class RecordClass {
   
   @JsMethod
   fun ignored2(): String?
- }
- 
- @JsType
- @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
- class JsInteropRecordImplementingInterface: I2 {
-  private val value: Int
-  
-  private val text: String?
-  
-  @JsIgnore
-  private val ignored: String?
-  
-  @JsIgnore
-  private val ignored2: String?
-  
-  constructor(value: Int, text: String?, ignored: String?, ignored2: String?) {
-   this.value = value
-   this.text = text
-   this.ignored = ignored
-   this.ignored2 = ignored2
-  }
-  
-  @JsProperty(name = "customVal")
-  override fun value(): Int {
-   return this.value
-  }
-  
-  @JsProperty
-  override fun text(): String? {
-   return this.text
-  }
-  
-  @JsIgnore
-  override fun ignored(): String? {
-   return this.ignored
-  }
-  
-  @JsIgnore
-  override fun ignored2(): String? {
-   return this.ignored2
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: JsInteropRecordImplementingInterface? = null
-   if (!(arg0 is JsInteropRecordImplementingInterface && run {
-    ___other = arg0 as JsInteropRecordImplementingInterface?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
-    arrayOf<Any?>(___other!!.value, ___other!!.text, ___other!!.ignored, ___other!!.ignored2),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.value, this.text, this.ignored, this.ignored2),
-   )
-  }
- }
- 
- @JsType
- internal class JsInteropRecordWithHiddenCanonical {
-  private val value: Int
-  
-  internal constructor(value: Int) {
-   this.value = value
-  }
-  
-  @JsProperty
-  fun value(): Int {
-   return this.value
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: JsInteropRecordWithHiddenCanonical? = null
-   if (!(arg0 is JsInteropRecordWithHiddenCanonical && run {
-    ___other = arg0 as JsInteropRecordWithHiddenCanonical?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.value),
-    arrayOf<Any?>(___other!!.value),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.value),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.value),
-   )
-  }
- }
- 
- internal class VarargsRecord {
-  private val values: Array<String?>?
-  
-  internal constructor(vararg values: String?) {
-   val values_1: Array<String?>? = values as Array<String?>?
-   this.values = values_1
-  }
-  
-  fun values(): Array<String?>? {
-   return this.values
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: VarargsRecord? = null
-   if (!(arg0 is VarargsRecord && run {
-    ___other = arg0 as VarargsRecord?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.values),
-    arrayOf<Any?>(___other!!.values),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.values),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.values),
-   )
-  }
- }
- 
- internal class VarargsRecordWithCustomAccessor {
-  private val value: Array<String?>?
-  
-  fun value(): Array<String?>? {
-   return this.value
-  }
-  
-  internal constructor(vararg value: String?) {
-   val value_1: Array<String?>? = value as Array<String?>?
-   this.value = value_1
-  }
-  
-  override fun equals(arg0: Any?): Boolean {
-   var ___other: VarargsRecordWithCustomAccessor? = null
-   if (!(arg0 is VarargsRecordWithCustomAccessor && run {
-    ___other = arg0 as VarargsRecordWithCustomAccessor?
-    true
-   })) return false
-   return Arrays.equals(
-    arrayOf<Any?>(this.value),
-    arrayOf<Any?>(___other!!.value),
-   )
-  }
-  
-  override fun hashCode(): Int {
-   return Arrays.hashCode(
-    arrayOf<Any?>(this.value),
-   )
-  }
-  
-  override fun toString(): String {
-   return this.getClass().getName() + Arrays.toString(
-    arrayOf<Any?>(this.value),
-   )
-  }
  }
 }

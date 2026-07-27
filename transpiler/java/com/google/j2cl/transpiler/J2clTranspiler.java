@@ -71,8 +71,9 @@ class J2clTranspiler {
 
       problems.abortIfHasErrors();
       if (!library.isEmpty()) {
+        checkLibrary(library, /* isDesugared= */ false);
         desugarLibrary(library);
-        checkLibrary(library);
+        checkLibrary(library, /* isDesugared= */ true);
         normalizeLibrary(library);
       }
       options.getBackend().generateOutputs(options, library, problems);
@@ -83,9 +84,13 @@ class J2clTranspiler {
     runPasses(library, options.getBackend().getDesugaringPassFactories());
   }
 
-  private void checkLibrary(Library library) {
+  private void checkLibrary(Library library, boolean isDesugared) {
     // Check backend-specific restrictions.
-    options.getBackend().checkRestrictions(options, library, problems);
+    if (isDesugared) {
+      options.getBackend().checkRestrictions(options, library, problems);
+    } else {
+      options.getBackend().checkRestrictionsNonDesugared(options, library, problems);
+    }
 
     problems.abortIfHasErrors();
   }

@@ -322,6 +322,20 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return superDelegatingConstructors.size() != 1 ? null : superDelegatingConstructors.getFirst();
   }
 
+  /**
+   * Returns the canonical constructor for this record type, or null if it does not have one. Throws
+   * if the type is not a record.
+   */
+  @Nullable
+  public Method getRecordCanonicalConstructor() {
+    MethodDescriptor canonicalConstructorDescriptor =
+        getTypeDescriptor().getRecordCanonicalConstructorDescriptor();
+    return getConstructors().stream()
+        .filter(m -> m.getDescriptor().isSameSignature(canonicalConstructorDescriptor))
+        .findFirst()
+        .orElse(null);
+  }
+
   @Override
   public String getSimpleJsName() {
     return typeDeclaration.getSimpleJsName();
