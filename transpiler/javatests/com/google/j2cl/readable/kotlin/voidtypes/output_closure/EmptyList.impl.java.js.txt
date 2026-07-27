@@ -8,7 +8,7 @@ let j_l_Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Collection = goog.forwardDeclare('java.util.Collection$impl');
 let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let ListIterator = goog.forwardDeclare('java.util.ListIterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
@@ -68,7 +68,7 @@ class EmptyList extends j_l_Object {
  m_lastIndexOf__kotlin_jvm_internal_NothingStub__int(/** ? */ element) {
   return -1;
  }
- /** @override @nodts @return {!Iterator<?>} */
+ /** @override @nodts @return {!j_u_Iterator<?>} */
  m_iterator__java_util_Iterator() {
   return NothingIterator.f_INSTANCE__voidtypes_NothingIterator;
  }
@@ -172,6 +172,11 @@ class EmptyList extends j_l_Object {
    return -1;
   }
   return this.m_lastIndexOf__kotlin_jvm_internal_NothingStub__int(/**@type {?}*/ (element));
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<?>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<?>}*/ (j_l_Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */

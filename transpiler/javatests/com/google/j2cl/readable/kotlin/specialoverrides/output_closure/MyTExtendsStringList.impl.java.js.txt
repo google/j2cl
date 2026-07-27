@@ -8,7 +8,7 @@ let j_l_Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Collection = goog.forwardDeclare('java.util.Collection$impl');
 let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let ListIterator = goog.forwardDeclare('java.util.ListIterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
@@ -79,6 +79,11 @@ class MyTExtendsStringList extends j_l_Object {
   return this.m_getSize__int();
  }
  //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<T>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<T>}*/ (j_l_Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
+ }
+ //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
  m_forEach__java_util_function_Consumer__void(/** Consumer<?> */ arg0) {
   j_l_Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer__void(this, arg0);
@@ -144,7 +149,7 @@ class MyTExtendsStringList extends j_l_Object {
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyTExtendsStringList;
  }
- /** @abstract @override @nodts @suppress{visibility} @return {!Iterator<?>} */
+ /** @abstract @override @nodts @suppress{visibility} @return {!j_u_Iterator<?>} */
  m_iterator__java_util_Iterator() {}
  /** @abstract @override @suppress{visibility} @return {boolean} */
  add(/** T */ arg0) {}

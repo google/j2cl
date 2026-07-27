@@ -21,8 +21,9 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
-import javaemul.internal.JsIterableHelper;
 import javaemul.internal.JsIterableHelper.JsIterable;
+import javaemul.internal.JsIterableHelper.JsIterableBase;
+import javaemul.internal.JsIterableHelper.JsIterator;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 
@@ -33,7 +34,7 @@ import jsinterop.annotations.JsNonNull;
  *
  * @param <T> type of returned iterator
  */
-public interface Iterable<T> {
+public interface Iterable<T> extends JsIterableBase<T> {
   Iterator<T> iterator();
 
   default void forEach(Consumer<? super T> action) {
@@ -45,5 +46,10 @@ public interface Iterable<T> {
 
   default Spliterator<T> spliterator() {
     return Spliterators.spliteratorUnknownSize(iterator(), 0);
+  }
+
+  @Override
+  default JsIterator<T> _private_jsIterator__() {
+    return this.iterator();
   }
 }

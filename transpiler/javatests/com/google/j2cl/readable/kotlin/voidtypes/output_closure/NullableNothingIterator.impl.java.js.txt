@@ -1,17 +1,18 @@
 goog.module('voidtypes.NullableNothingIterator$impl');
 
 const j_l_Object = goog.require('java.lang.Object$impl');
-const Iterator = goog.require('java.util.Iterator$impl');
+const j_u_Iterator = goog.require('java.util.Iterator$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
+let JsIterableBase = goog.forwardDeclare('javaemul.internal.JsIterableHelper.JsIterableBase$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 
 /**
  * @final
- * @implements {Iterator<?>}
+ * @implements {j_u_Iterator<?>}
  */
 class NullableNothingIterator extends j_l_Object {
  /** @protected @nodts */
@@ -43,7 +44,12 @@ class NullableNothingIterator extends j_l_Object {
  //Default method forwarding stub.
  /** @override @suppress{visibility} @return {IIterableResult<?>} */
  next() {
-  return /**@type {IIterableResult<?>}*/ (Iterator.m__private_jsNext____$default__java_util_Iterator__javaemul_internal_JsIterableHelper_IIterableResult(this));
+  return /**@type {IIterableResult<?>}*/ (j_u_Iterator.m__private_jsNext____$default__java_util_Iterator__javaemul_internal_JsIterableHelper_IIterableResult(this));
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<?>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<?>}*/ (JsIterableBase.m__private_jsIterator____$default__javaemul_internal_JsIterableHelper_JsIterableBase__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} @return {?} */
@@ -53,7 +59,7 @@ class NullableNothingIterator extends j_l_Object {
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
  m_forEachRemaining__java_util_function_Consumer__void(/** !Consumer<?> */ arg0) {
-  Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
+  j_u_Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
  }
  /** @nodts @return {!NullableNothingIterator} */
  static get f_INSTANCE__voidtypes_NullableNothingIterator() {
@@ -64,7 +70,7 @@ class NullableNothingIterator extends j_l_Object {
   NullableNothingIterator.$clinit = () =>{};
   NullableNothingIterator.$loadModules();
   j_l_Object.$clinit();
-  Iterator.$clinit();
+  j_u_Iterator.$clinit();
   NullableNothingIterator.$static_INSTANCE__voidtypes_NullableNothingIterator = NullableNothingIterator.$create__();
  }
  /** @nodts @return {boolean} */
@@ -76,12 +82,13 @@ class NullableNothingIterator extends j_l_Object {
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
+  JsIterableBase = goog.module.get('javaemul.internal.JsIterableHelper.JsIterableBase$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
  }
 }
 /**@private {!NullableNothingIterator} @nodts*/
 NullableNothingIterator.$static_INSTANCE__voidtypes_NullableNothingIterator;
-Iterator.$markImplementor(NullableNothingIterator);
+j_u_Iterator.$markImplementor(NullableNothingIterator);
 $Util.$setClassMetadata(NullableNothingIterator, 'voidtypes.NullableNothingIterator');
 
 exports = NullableNothingIterator;

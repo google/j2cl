@@ -5,7 +5,7 @@ const j_l_Iterable = goog.require('java.lang.Iterable$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
@@ -29,9 +29,14 @@ class Exception3 extends Exception {
  $ctor__foreachstatement_ForEachStatement_Exception3__void() {
   this.$ctor__java_lang_Exception__void();
  }
- /** @override @nodts @return {Iterator<!Integer>} */
+ /** @override @nodts @return {j_u_Iterator<!Integer>} */
  m_iterator__java_util_Iterator() {
   return null;
+ }
+ //Default method forwarding stub.
+ /** @override @return {Iterator<!Integer>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<!Integer>}*/ (j_l_Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts */

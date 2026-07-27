@@ -23,6 +23,28 @@ import jsinterop.annotations.JsType;
 /** A helper class to create JavaScript iterable objects. */
 public final class JsIterableHelper {
 
+  /**
+   * JavaScript Iterators are Iterable themselves (IterableIterator).
+   *
+   * <p>In general JS expects all Iterators to themselves be iterable, see:
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterator_protocol:~:text=Such%20object%20is,not%20iterators.)
+   *
+   * <p>For java.util.Iterator to follow this contract it needs to provide a default
+   * "_private_jsIterator__" similar to java.lang.Iterable. Although it wouldn't make sense for Java
+   * code to implement both interfaces, if it ever does, it creates an ambiguity in default method
+   * resolution and would fail javac compilation.
+   *
+   * <p>This class is provided to be extended from both and defines the default behavior for
+   * java.util.Iterator to avoid such ambiguity.
+   */
+  public interface JsIterableBase<T> extends JsIterable<T> {
+    // Default IterableIterator behavior. Used by java.util.Iterator. Note that the case is
+    // not correct for java.lang.Iterable but it overrides the method anyway.
+    default JsIterator<T> _private_jsIterator__() {
+      return (JsIterator<T>) this;
+    }
+  }
+
   /** Abstraction for JavaScript Iterable. */
   @JsType(isNative = true, name = "Iterable", namespace = JsPackage.GLOBAL)
   public interface JsIterable<T> {
@@ -43,6 +65,9 @@ public final class JsIterableHelper {
 
   @JsMethod
   public static native <T> IIterableResult<T> makeResult(T value, boolean done);
+
+  @JsMethod
+  public static native <T> JsIterator<T> asJsIterator(T[] array);
 
   public static <T> JsIterable<T> asJsIterable(Iterable<T> iterable) {
     return new JsIterableAdapter<T>(iterable);

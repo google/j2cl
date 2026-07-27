@@ -19,6 +19,7 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.util.function.Consumer;
 import javaemul.internal.JsIterableHelper;
+import javaemul.internal.JsIterableHelper.JsIterableBase;
 import javaemul.internal.JsIterableHelper.JsIterator;
 
 /**
@@ -27,7 +28,7 @@ import javaemul.internal.JsIterableHelper.JsIterator;
  *
  * @param <T> element type
  */
-public interface Iterator<T> extends JsIterator<T> {
+public interface Iterator<T> extends JsIterator<T>, JsIterableBase<T> {
 
   boolean hasNext();
 

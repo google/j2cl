@@ -7,7 +7,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let j_l_Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let Collection = goog.forwardDeclare('java.util.Collection$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
@@ -52,7 +52,7 @@ class SetImpl extends j_l_Object {
  isEmpty() {
   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
- /** @override @nodts @return {!Iterator<?>} */
+ /** @override @nodts @return {!j_u_Iterator<?>} */
  m_iterator__java_util_Iterator() {
   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__java_lang_String('not implemented'));
  }
@@ -87,6 +87,11 @@ class SetImpl extends j_l_Object {
  /** @final @override @return {number} */
  size() {
   return this.m_getSize__int();
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<T>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<T>}*/ (j_l_Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */

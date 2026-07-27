@@ -5,7 +5,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
@@ -36,6 +36,11 @@ class IterableReturningTypeVariable extends j_l_Object {
  /** @override @nodts @return {T} */
  m_iterator__java_util_Iterator() {
   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(NotImplementedError.$create__java_lang_String__kotlin_jvm_internal_DefaultConstructorMarker(/**@type {string}*/ (undefined), /**@type {DefaultConstructorMarker}*/ (undefined)));
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<Integer>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<Integer>}*/ (j_l_Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */

@@ -5,9 +5,10 @@ const ListIterator = goog.require('java.util.ListIterator$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
+let JsIterableBase = goog.forwardDeclare('javaemul.internal.JsIterableHelper.JsIterableBase$impl');
 let NothingStub = goog.forwardDeclare('kotlin.Nothing$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -70,7 +71,12 @@ class NothingIterator extends j_l_Object {
  //Default method forwarding stub.
  /** @override @suppress{visibility} @return {IIterableResult<?>} */
  next() {
-  return /**@type {IIterableResult<?>}*/ (Iterator.m__private_jsNext____$default__java_util_Iterator__javaemul_internal_JsIterableHelper_IIterableResult(this));
+  return /**@type {IIterableResult<?>}*/ (j_u_Iterator.m__private_jsNext____$default__java_util_Iterator__javaemul_internal_JsIterableHelper_IIterableResult(this));
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<?>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<?>}*/ (JsIterableBase.m__private_jsIterator____$default__javaemul_internal_JsIterableHelper_JsIterableBase__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} @return {?} */
@@ -80,7 +86,7 @@ class NothingIterator extends j_l_Object {
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
  m_forEachRemaining__java_util_function_Consumer__void(/** !Consumer<?> */ arg0) {
-  Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
+  j_u_Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, arg0);
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} */
@@ -106,7 +112,7 @@ class NothingIterator extends j_l_Object {
   NothingIterator.$clinit = () =>{};
   NothingIterator.$loadModules();
   j_l_Object.$clinit();
-  Iterator.$clinit();
+  j_u_Iterator.$clinit();
   NothingIterator.$static_INSTANCE__voidtypes_NothingIterator = NothingIterator.$create__();
  }
  /** @nodts @return {boolean} */
@@ -117,8 +123,9 @@ class NothingIterator extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
-  Iterator = goog.module.get('java.util.Iterator$impl');
+  j_u_Iterator = goog.module.get('java.util.Iterator$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
+  JsIterableBase = goog.module.get('javaemul.internal.JsIterableHelper.JsIterableBase$impl');
   NothingStub = goog.module.get('kotlin.Nothing$impl');
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

@@ -5,7 +5,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('anonymousclass.AnonymousClassKt.$2.$1$impl');
-let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
@@ -30,9 +30,14 @@ class $2 extends j_l_Object {
  $ctor__anonymousclass_AnonymousClassKt_2__void() {
   this.$ctor__java_lang_Object__void();
  }
- /** @override @nodts @return {!Iterator<?>} */
+ /** @override @nodts @return {!j_u_Iterator<?>} */
  m_iterator__java_util_Iterator() {
   return /**@type {!$1<S>}*/ ($1.$create__anonymousclass_AnonymousClassKt_2(this));
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {Iterator<S>} */
+ [Symbol.iterator]() {
+  return /**@type {Iterator<S>}*/ (j_l_Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
