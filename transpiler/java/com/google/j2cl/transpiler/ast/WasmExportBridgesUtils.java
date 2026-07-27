@@ -239,7 +239,7 @@ public class WasmExportBridgesUtils {
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
     if (needsExternalizeInternalize(typeDescriptor, isExport)) {
-      return RuntimeMethods.createWasmExternalizeMethodCall(expression);
+      return RuntimeMethods.createWasmConvertToExternMethodCall(expression);
     }
     return expression;
   }
@@ -262,7 +262,7 @@ public class WasmExportBridgesUtils {
       return MethodCall.builderFrom(adaptMethodDescriptor).setArguments(expression).build();
     }
     if (needsExternalizeInternalize(typeDescriptor, isExport)) {
-      return RuntimeMethods.createWasmInternalizeMethodCall(expression, typeDescriptor);
+      return RuntimeMethods.createWasmConvertToAnyMethodCall(expression, typeDescriptor);
     }
     return expression;
   }

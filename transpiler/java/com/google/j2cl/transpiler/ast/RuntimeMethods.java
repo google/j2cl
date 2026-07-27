@@ -472,16 +472,18 @@ public final class RuntimeMethods {
         .build();
   }
 
-  /** Creates a method call to WasmExtern.externalize(). */
-  public static Expression createWasmExternalizeMethodCall(Expression argument) {
+  /** Creates a method call to WasmExtern.convertToExtern(). */
+  public static Expression createWasmConvertToExternMethodCall(Expression argument) {
     checkArgument(!argument.getTypeDescriptor().isPrimitive());
     MethodDescriptor methodDescriptor =
-        TypeDescriptors.get().javaemulInternalWasmExtern.getMethodDescriptorByName("externalize");
+        TypeDescriptors.get()
+            .javaemulInternalWasmExtern
+            .getMethodDescriptorByName("convertToExtern");
     return MethodCall.builderFrom(methodDescriptor).setArguments(argument).build();
   }
 
-  /** Creates a method call to WasmExtern.internalize(). */
-  public static Expression createWasmInternalizeMethodCall(
+  /** Creates a method call to WasmExtern.convertToAny(). */
+  public static Expression createWasmConvertToAnyMethodCall(
       Expression argument, TypeDescriptor typeDescriptor) {
     checkArgument(
         argument
@@ -490,10 +492,10 @@ public final class RuntimeMethods {
     MethodDescriptor methodDescriptor =
         TypeDescriptors.get()
             .javaemulInternalWasmExtern
-            .getMethodDescriptorByName("internalize")
+            .getMethodDescriptorByName("convertToAny")
             .specializeTypeVariables(unused -> typeDescriptor);
-    // Cast the result of internalize to the expected type to make it independent of the pass that
-    // adds the erasure cast.
+    // Cast the result of `any.convert_extern` to the expected type to make it independent of the
+    // pass that adds the erasure cast.
     return CastExpression.builder()
         .setExpression(MethodCall.builderFrom(methodDescriptor).setArguments(argument).build())
         .setCastTypeDescriptor(typeDescriptor)

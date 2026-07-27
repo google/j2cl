@@ -29,10 +29,10 @@ public class WasmExtern {
   public static native boolean isSame(WasmExtern left, WasmExtern right);
 
   @Wasm("any.convert_extern")
-  public static native <T> T internalize(WasmExtern t);
+  public static native <T> T convertToAny(WasmExtern t);
 
   @Wasm("extern.convert_any")
-  public static native WasmExtern externalize(Object t);
+  public static native WasmExtern convertToExtern(Object t);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Array")
   public static native WasmExtern createArray(int length);

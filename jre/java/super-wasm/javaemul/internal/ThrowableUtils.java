@@ -31,12 +31,12 @@ public final class ThrowableUtils {
 
   /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
   public static Throwable getJavaThrowable(JsObject e) {
-    return WasmExtern.internalize(getJavaThrowableImpl(e));
+    return WasmExtern.convertToAny(getJavaThrowableImpl(e));
   }
 
   /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
   public static void setJavaThrowable(JsObject e, Throwable javaThrowable) {
-    setJavaThrowableImpl(e, WasmExtern.externalize(javaThrowable));
+    setJavaThrowableImpl(e, WasmExtern.convertToExtern(javaThrowable));
   }
 
   @JsMethod(name = "setJavaThrowable", namespace = "j2wasm.ExceptionUtils")
