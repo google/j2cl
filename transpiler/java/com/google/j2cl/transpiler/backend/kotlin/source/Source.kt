@@ -142,6 +142,8 @@ private constructor(
 
     fun inNewLine(source: Source) = NEW_LINE + source
 
+    fun afterSpace(source: Source) = SPACE + source
+
     fun inOptionalParentheses(source: Source) = source.ifNotEmpty { inParentheses(it) }
 
     fun inParentheses(source: Source) = join(LEFT_PARENTHESIS, source, RIGHT_PARENTHESIS)

@@ -29,10 +29,12 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.afterSpace
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLinesWithCommas
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inOptionalParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
@@ -83,7 +85,7 @@ internal data class TypeSources(val nameSources: NameSources) {
             classModifiersSource(typeDeclaration),
             kindModifiersSource(typeDeclaration),
             colonSeparated(
-              spaceSeparated(typeDeclarationSource(type), ktPrimaryConstructorSource(type)),
+              join(typeDeclarationSource(type), ktPrimaryConstructorSource(type)),
               superTypesSource(type),
             ),
             nameSources.whereClauseSource(typeDeclaration.directlyDeclaredTypeParameterDescriptors),
@@ -118,22 +120,36 @@ internal data class TypeSources(val nameSources: NameSources) {
           )
         }
       ktPrimaryConstructor != null ->
-        memberSources(type).run {
-          spaceSeparated(
-            annotationsSource(ktPrimaryConstructor),
-            join(KotlinSource.CONSTRUCTOR_KEYWORD, methodParametersSource(ktPrimaryConstructor)),
+        memberSources(type).let { memberSources ->
+          join(
+            annotationsAndModifiersSource(
+              memberSources.annotationsSource(ktPrimaryConstructor),
+              KotlinSource.CONSTRUCTOR_KEYWORD,
+            ),
+            memberSources.methodParametersSource(ktPrimaryConstructor),
           )
         }
       environment.needExplicitPrimaryConstructor(type) ->
         // Implicit constructors needs to follow the visiblity transpilation rules for members that
         // are different than the visibility transpilation rules for the class.
-        spaceSeparated(
-          environment.ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor).source,
-          join(KotlinSource.CONSTRUCTOR_KEYWORD, inParentheses(Source.EMPTY)),
+        join(
+          Source.SPACE,
+          spaceSeparated(
+            environment.ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor).source,
+            KotlinSource.CONSTRUCTOR_KEYWORD,
+          ),
+          inParentheses(Source.EMPTY),
         )
       else -> Source.EMPTY
     }
   }
+
+  private fun annotationsAndModifiersSource(annotations: Source, modifiers: Source): Source =
+    if (annotations.isEmpty()) {
+      afterSpace(modifiers)
+    } else {
+      inNewLine(newLineSeparated(annotations, modifiers))
+    }
 
   private fun typeDeclarationSource(type: Type): Source =
     join(

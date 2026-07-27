@@ -124,7 +124,9 @@ open class JsConstructorClass {
  }
  
  open class Outer {
-  open inner class I @JsConstructor constructor(): G()
+  open inner class I
+  @JsConstructor
+  constructor(): G()
  }
  
  open class Varargs: A {
@@ -159,7 +161,9 @@ open class JsConstructorClass {
   }
  }
  
- open inner class InstanceVarargs @JsConstructor constructor(vararg args: Int): A(
+ open inner class InstanceVarargs
+ @JsConstructor
+ constructor(vararg args: Int): A(
   args!![1],
  )
  
@@ -176,9 +180,13 @@ open class JsConstructorClass {
   )
  }
  
- internal open inner class JsConstructorClassWithExplicitConstructor @JsConstructor constructor(i: Int)
+ internal open inner class JsConstructorClassWithExplicitConstructor
+ @JsConstructor
+ constructor(i: Int)
  
- internal open inner class JsConstructorSubclass @JsConstructor constructor(): JsConstructorClass.JsConstructorClassWithExplicitConstructor(1) {
+ internal open inner class JsConstructorSubclass
+ @JsConstructor
+ constructor(): JsConstructorClass.JsConstructorClassWithExplicitConstructor(1) {
   init {
    var i: Int = 0
    SWITCH@ do {

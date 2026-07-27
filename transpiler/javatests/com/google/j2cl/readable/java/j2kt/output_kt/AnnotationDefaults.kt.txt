@@ -88,7 +88,7 @@ open class AnnotationDefaults {
   ONE;
  }
  
- internal annotation class Bar (
+ internal annotation class Bar(
   val booleanValue: Boolean = true,
   val byteValue: Byte = 1,
   val charValue: Char = 'a',
@@ -108,12 +108,12 @@ open class AnnotationDefaults {
   val shorthandArray: IntArray = intArrayOf(42),
  )
  
- internal annotation class Positional (
+ internal annotation class Positional(
   val value: String = "positional",
   val count: Int = 1,
  )
  
- internal annotation class WithTypeLiteral (
+ internal annotation class WithTypeLiteral(
   val clazz: KClass<*> = String::class,
   val classes: Array<KClass<*>> = arrayOf<KClass<*>>(Int::class, Double::class),
   val shorthandClassArray: Array<KClass<*>> = arrayOf<KClass<*>>(Long::class),
@@ -123,11 +123,11 @@ open class AnnotationDefaults {
  
  internal open class AnnotatedClass internal constructor()
  
- internal annotation class Nested (
+ internal annotation class Nested(
   val value: Int = 1,
  )
  
- internal annotation class WithNested (
+ internal annotation class WithNested(
   val nested: Nested,
  )
 }
