@@ -56,7 +56,8 @@ public class Problems {
         "Unexpected @%s annotation found. "
             + "Please run this library through the incompatible annotated code stripper tool.",
         1),
-    INVALID_JAVA_FRONTEND("%s is not a valid Java frontend.", 1);
+    INVALID_JAVA_FRONTEND("%s is not a valid Java frontend.", 1),
+    INVALID_SOURCE_MAP("Invalid source map: %s.", 1);
 
     // used for customized message.
     private final String message;
