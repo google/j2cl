@@ -240,7 +240,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
                     MethodReference.builder()
                         .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
                         .setReferencedMethodDescriptor(
-                            getLambdaMethodDescriptor(implementorTypeDescriptor))
+                            getWasmFunctionPointerTarget(implementorTypeDescriptor))
                         .setInterfaceMethodDescriptor(
                             functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor())
                         .setSourcePosition(sourcePosition)
@@ -249,6 +249,26 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
                 .makeStatement(sourcePosition))
         .setSourcePosition(sourcePosition)
         .build();
+  }
+
+  /**
+   * Retrieves the method descriptor to be used as the target for the Wasm function pointer.
+   *
+   * <p>When a lambda implements a generic JsFunction interface (e.g. {@code MyJsFunction<T>}), the
+   * generated calling logic only knows the unspecialized signature of the method and performs a
+   * cast to that unspecialized function type. In this case, the generalizing bridge method is used
+   * as the target.
+   */
+  private static MethodDescriptor getWasmFunctionPointerTarget(
+      DeclaredTypeDescriptor implementorTypeDescriptor) {
+    MethodDescriptor lambdaMethodDescriptor = getLambdaMethodDescriptor(implementorTypeDescriptor);
+    for (MethodDescriptor methodDescriptor : implementorTypeDescriptor.getPolymorphicMethods()) {
+      if (methodDescriptor.isGeneralizingBridge()
+          && methodDescriptor.getBridgeTarget().equals(lambdaMethodDescriptor)) {
+        return methodDescriptor;
+      }
+    }
+    return lambdaMethodDescriptor;
   }
 
   /**

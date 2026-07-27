@@ -3775,6 +3775,28 @@
  )
 )
 
+;;; R $JsFunctionAdaptor.apply(JsFunctionAdaptor $instance, T arg0)
+(func $m_apply__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+  (call $$clinit__void_<once>_@lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+    (return (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_apply__java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+   )(else
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+    (return (ref.cast (ref null $java.lang.Object) (extern.internalize (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.externalize (local.get $arg0))))))
+   )
+  )
+ )
+)
+
 ;;; R $JsFunctionAdaptor.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor
  (type $function.m_apply__java_lang_Object__java_lang_Object)
@@ -3785,9 +3807,8 @@
  (local $this (ref null $lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-  (return (ref.cast (ref null $java.lang.Object) (extern.internalize (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))(extern.externalize (local.get $arg0))))))
  )
+ (unreachable)
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction.$JsFunctionAdaptor)
 

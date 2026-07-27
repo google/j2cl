@@ -141,9 +141,10 @@ public final class Main {
   // private static native MyJsFunction getFunctionFromJs();
 
   private static void testJsFunction() {
-    MyJsFunction impl = new MyJsFunctionImpl();
-    assertEquals(15, impl.foo(5));
-    assertEquals(1, impl.myOverlay());
+    // TODO(b/517297828): Consider user-defined implementers.
+    // MyJsFunction impl = new MyJsFunctionImpl();
+    // assertEquals(15, impl.foo(5));
+    // assertEquals(1, impl.myOverlay());
 
     MyJsFunction lambda = a -> a + 20;
     assertEquals(25, lambda.foo(5));

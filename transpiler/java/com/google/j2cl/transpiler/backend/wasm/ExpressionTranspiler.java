@@ -64,6 +64,7 @@ import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
+import com.google.j2cl.transpiler.ast.WasmFuncrefCall;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.List;
 
@@ -498,6 +499,28 @@ final class ExpressionTranspiler {
                   environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor())));
         }
         sourceBuilder.append(")");
+        return false;
+      }
+
+      @Override
+      public boolean enterWasmFuncrefCall(WasmFuncrefCall wasmFuncrefCall) {
+        String functionTypeName =
+            environment.getFunctionTypeName(
+                wasmFuncrefCall.getFunctionalInterface().getSingleAbstractMethodDescriptor());
+        sourceBuilder.append(format("(call_ref %s ", functionTypeName));
+
+        sourceBuilder.append("(ref.as_non_null ");
+        render(wasmFuncrefCall.getInstance());
+        sourceBuilder.append(")");
+
+        for (Expression arg : wasmFuncrefCall.getArguments()) {
+          sourceBuilder.append(" ");
+          render(arg);
+        }
+
+        sourceBuilder.append(format(" (ref.cast (ref %s) ", functionTypeName));
+        render(wasmFuncrefCall.getFuncref());
+        sourceBuilder.append("))");
         return false;
       }
 

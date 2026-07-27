@@ -595,7 +595,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:84:4
   (local.set $jsFunction (call $$create__@libraryinfo.Main.$LambdaImplementor$1 ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:85:4
-  (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $jsFunction))(call $$getString_|foo|__java_lang_String_<once>_@libraryinfo.Main.$StringLiterals )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (ref $libraryinfo.Main.Function.vtable) (call $get.itable.$libraryinfo.Main.Function (local.get $jsFunction)))))
+  (call $m_apply__javaemul_internal_JsFunctionAdaptor__java_lang_String__void@libraryinfo.Main.Function.$JsFunctionAdaptor (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $jsFunction))(call $$getString_|foo|__java_lang_String_<once>_@libraryinfo.Main.$StringLiterals ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:87:4
   (drop (call $$create__@libraryinfo.Main.MyJsType ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:89:4
@@ -1204,6 +1204,27 @@
  )
 )
 
+;;; void $JsFunctionAdaptor.apply(JsFunctionAdaptor $instance, String arg0)
+(func $m_apply__javaemul_internal_JsFunctionAdaptor__java_lang_String__void@libraryinfo.Main.Function.$JsFunctionAdaptor
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $arg0 (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+  (call $$clinit__void_<once>_@libraryinfo.Main.Function.$JsFunctionAdaptor )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+    (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_apply__java_lang_String__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   )(else
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
+    (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__void@libraryinfo.Main.Function.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))
+   )
+  )
+ )
+)
+
 ;;; void $JsFunctionAdaptor.apply(String arg0)
 (func $m_apply__java_lang_String__void@libraryinfo.Main.Function.$JsFunctionAdaptor
  (type $function.m_apply__java_lang_String__void)
@@ -1213,8 +1234,6 @@
  (local $this (ref null $libraryinfo.Main.Function.$JsFunctionAdaptor))
  (local.set $this (ref.cast (ref $libraryinfo.Main.Function.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
-  (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__void@libraryinfo.Main.Function.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))
  )
 )
 (elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.Function.$JsFunctionAdaptor)
