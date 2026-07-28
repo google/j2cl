@@ -492,10 +492,6 @@ public class TypeDescriptors {
     return false;
   }
 
-  public static boolean isWasmFuncref(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isSameBaseType(get().javaemulInternalWasmFuncref);
-  }
-
   public static TypeDescriptor getEnumBoxType(TypeDescriptor typeDescriptor) {
     checkState(AstUtils.isNonNativeJsEnum(typeDescriptor));
     TypeDescriptor boxType =

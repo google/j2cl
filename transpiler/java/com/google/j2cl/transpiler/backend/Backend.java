@@ -60,7 +60,6 @@ import com.google.j2cl.transpiler.passes.ImplementFloatingPointRemainderOperatio
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
-import com.google.j2cl.transpiler.passes.ImplementJsFunctionInvocationsViaFunctionPointerCall;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
 import com.google.j2cl.transpiler.passes.ImplementNativeJsTypeArrayOperationsWasm;
@@ -563,7 +562,6 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           ImplementFinallyViaControlFlow::new,
-          ImplementJsFunctionInvocationsViaFunctionPointerCall::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,

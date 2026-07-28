@@ -932,28 +932,6 @@
  )
 )
 
-;;; String $JsFunctionAdaptor.x(JsFunctionAdaptor $instance, String arg0)
-(func $m_x__javaemul_internal_JsFunctionAdaptor__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
- (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
- (param $arg0 (ref null $java.lang.String))
- (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-    (return (call_ref $function.m_x__java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_x__java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
-   )(else
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-    (return (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))))
-   )
-  )
- )
-)
-
 ;;; String $JsFunctionAdaptor.x(String arg0)
 (func $m_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor
  (type $function.m_x__java_lang_String__java_lang_String)
@@ -964,8 +942,9 @@
  (local $this (ref null $jsnonnull.Main.MyFunction.$JsFunctionAdaptor))
  (local.set $this (ref.cast (ref $jsnonnull.Main.MyFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
+  (return (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsnonnull.Main.MyFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))))
  )
- (unreachable)
 )
 (elem declare func $m_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction.$JsFunctionAdaptor)
 

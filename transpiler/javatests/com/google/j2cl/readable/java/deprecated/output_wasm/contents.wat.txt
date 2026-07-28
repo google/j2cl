@@ -406,27 +406,6 @@
  )
 )
 
-;;; void $JsFunctionAdaptor.doAThing(JsFunctionAdaptor $instance, Object arg0)
-(func $m_doAThing__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor
- (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
- (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
-  (call $$clinit__void_<once>_@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
-  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
-    (call_ref $function.m_doAThing__java_lang_Object__void (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_doAThing__java_lang_Object__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
-   )(else
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
-    (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0)))
-   )
-  )
- )
-)
-
 ;;; void $JsFunctionAdaptor.doAThing(Object arg0)
 (func $m_doAThing__java_lang_Object__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor
  (type $function.m_doAThing__java_lang_Object__void)
@@ -436,6 +415,8 @@
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor))
  (local.set $this (ref.cast (ref $deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/deprecated/readable-j2wasm.js/deprecated/DeprecatedExample.java:48:12
+  (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))(extern.convert_any (local.get $arg0)))
  )
 )
 (elem declare func $m_doAThing__java_lang_Object__void@deprecated.DeprecatedExample.DeprecatedJsFunction.$JsFunctionAdaptor)

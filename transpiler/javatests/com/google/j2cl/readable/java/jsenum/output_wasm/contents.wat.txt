@@ -2103,27 +2103,6 @@
  )
 )
 
-;;; T $JsFunctionAdaptor.get(JsFunctionAdaptor $instance)
-(func $m_get__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
- (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
-  (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
-  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
-    (return (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.m_get__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
-   )(else
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
-    (return (ref.cast (ref null $java.lang.Object) (any.convert_extern (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))))
-   )
-  )
- )
-)
-
 ;;; T $JsFunctionAdaptor.get()
 (func $m_get__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor
  (type $function.m_get__java_lang_Object)
@@ -2133,8 +2112,9 @@
  (local $this (ref null $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor))
  (local.set $this (ref.cast (ref $jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:190:12
+  (return (ref.cast (ref null $java.lang.Object) (any.convert_extern (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))))))
  )
- (unreachable)
 )
 (elem declare func $m_get__java_lang_Object@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor)
 
@@ -2254,28 +2234,6 @@
  )
 )
 
-;;; T $JsFunctionAdaptor.get(JsFunctionAdaptor $instance, T arg0)
-(func $m_get__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
- (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
-  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
-  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
-    (return (call_ref $function.m_get__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_get__java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
-   )(else
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
-    (return (ref.cast (ref null $java.lang.Object) (any.convert_extern (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0))))))
-   )
-  )
- )
-)
-
 ;;; T $JsFunctionAdaptor.get(T arg0)
 (func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor
  (type $function.m_get__java_lang_Object__java_lang_Object)
@@ -2286,8 +2244,9 @@
  (local $this (ref null $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor))
  (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor) (local.get $this.untyped)))
  (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:195:12
+  (return (ref.cast (ref null $java.lang.Object) (any.convert_extern (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this))(extern.convert_any (local.get $arg0))))))
  )
- (unreachable)
 )
 (elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor)
 
@@ -3897,7 +3856,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:144:30
-  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$3) )
+  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsenum_Main_JsFunctionSuppiler_$JsFunctionAdaptor@jsenum.Main.JsFunctionSuppiler.$JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$3) )
  )
 )
 
@@ -3989,7 +3948,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:146:43
-  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6) )
+  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsenum_Main_SpecializedJsFunction_$JsFunctionAdaptor@jsenum.Main.SpecializedJsFunction.$JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6) )
  )
 )
 
