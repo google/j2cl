@@ -446,6 +446,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Specific list of passes: The order and count of these flags does
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
+            # The pass that merges itables into vtables needs to be run only once as the first pass.
+            "--merge-j2cl-itables",
             "-O3",
             "--cfp-reftest",
             "--optimize-j2cl",
@@ -514,6 +516,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
             # Mark all types as 'final' that we can, to help VMs at runtime.
             "--type-finalizing",
+            # Improve size by reordering types. Must be the last type optimization.
+            "--reorder-types",
         ],
         transpiler_args = transpiler_args,
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
