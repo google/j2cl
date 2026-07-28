@@ -114,6 +114,7 @@ public class ObjectsTest extends TestCase {
     Integer anotherOne = 1;
     assertEquals(one, Objects.requireNonNull(anotherOne, "message"));
     assertEquals(one, Objects.requireNonNullElse(1, 2));
+    assertEquals(one, Objects.requireNonNullElse(1, null));
     assertEquals(one, Objects.requireNonNullElseGet(1, () -> 2));
     assertEquals(one, Objects.requireNonNullElse(null, 1));
     assertEquals(one, Objects.requireNonNullElseGet(null, () -> 1));
