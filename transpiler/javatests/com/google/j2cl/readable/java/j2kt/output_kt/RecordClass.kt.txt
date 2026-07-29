@@ -135,12 +135,19 @@ class RecordClass {
  class FieldAccessTest {
   companion object {
    @JvmStatic
-   fun test(r: SimpleRecord?) {
-    val a: Int = r!!.a_private_3
+   fun testPublicRecord(publicRecord: PublicRecord?) {
+    val fieldValue: Int = publicRecord!!.a_private_3
+    val accessorValue: Int = publicRecord!!.a()
+   }
+   
+   @JvmStatic
+   private fun testPrivateRecord(privateRecord: PrivateRecord?) {
+    val fieldValue: Int = privateRecord!!.a_private_3
+    val accessorValue: Int = privateRecord!!.a()
    }
   }
   
-  class SimpleRecord {
+  class PublicRecord {
    @JvmField
    internal val a_private_3: Int
    
@@ -153,9 +160,46 @@ class RecordClass {
    }
    
    override fun equals(arg0: Any?): Boolean {
-    var ___other: SimpleRecord? = null
-    if (!(arg0 is SimpleRecord && run {
-     ___other = arg0 as SimpleRecord?
+    var ___other: PublicRecord? = null
+    if (!(arg0 is PublicRecord && run {
+     ___other = arg0 as PublicRecord?
+     true
+    })) return false
+    return Arrays.equals(
+     arrayOf<Any?>(this.a_private_3),
+     arrayOf<Any?>(___other!!.a_private_3),
+    )
+   }
+   
+   override fun hashCode(): Int {
+    return Arrays.hashCode(
+     arrayOf<Any?>(this.a_private_3),
+    )
+   }
+   
+   override fun toString(): String {
+    return this.getClass().getName() + Arrays.toString(
+     arrayOf<Any?>(this.a_private_3),
+    )
+   }
+  }
+  
+  private class PrivateRecord {
+   @JvmField
+   internal val a_private_3: Int
+   
+   private constructor(a: Int) {
+    this.a_private_3 = a
+   }
+   
+   fun a(): Int {
+    return this.a_private_3
+   }
+   
+   override fun equals(arg0: Any?): Boolean {
+    var ___other: PrivateRecord? = null
+    if (!(arg0 is PrivateRecord && run {
+     ___other = arg0 as PrivateRecord?
      true
     })) return false
     return Arrays.equals(

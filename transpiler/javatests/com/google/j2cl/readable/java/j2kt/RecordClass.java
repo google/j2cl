@@ -77,11 +77,18 @@ public final class RecordClass {
   }
 
   public static final class FieldAccessTest {
-    public record SimpleRecord(int a) {}
+    public record PublicRecord(int a) {}
 
-    public static void test(SimpleRecord r) {
-      // Field needs to be translated as `internal` to be accessible outside of the class.
-      int a = r.a;
+    public static void testPublicRecord(PublicRecord publicRecord) {
+      int fieldValue = publicRecord.a;
+      int accessorValue = publicRecord.a();
+    }
+
+    private record PrivateRecord(int a) {}
+
+    private static void testPrivateRecord(PrivateRecord privateRecord) {
+      int fieldValue = privateRecord.a;
+      int accessorValue = privateRecord.a();
     }
   }
 }
