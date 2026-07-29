@@ -114,16 +114,16 @@ public class Main {
     assertFalse(objr4.equals(new ObjectRecord(new SimpleRecord(235))));
     assertFalse(objr4.equals(new ObjectRecord(new OtherRecord(234))));
 
-    EmptyRecord er0 = new EmptyRecord();
-    EmptyRecord er1 = new EmptyRecord();
-    assertTrue(er0.equals(er1));
-    assertTrue(er1.equals(er0));
-
     testEquals_j2ktIncompatible();
   }
 
   @J2ktIncompatible
   private static void testEquals_j2ktIncompatible() {
+    EmptyRecord er0 = new EmptyRecord();
+    EmptyRecord er1 = new EmptyRecord();
+    assertTrue(er0.equals(er1));
+    assertTrue(er1.equals(er0));
+
     int[] arrayValue = new int[] {1, 2};
 
     // Varargs are the same as arrays.
@@ -157,15 +157,15 @@ public class Main {
     ArrayRecord ar1 = new ArrayRecord(arrayValue);
     assertEquals(ar0.hashCode(), ar1.hashCode());
 
-    EmptyRecord er0 = new EmptyRecord();
-    EmptyRecord er1 = new EmptyRecord();
-    assertEquals(er0.hashCode(), er1.hashCode());
-
     testHashCode_j2ktIncompatible();
   }
 
   @J2ktIncompatible
   private static void testHashCode_j2ktIncompatible() {
+    EmptyRecord er0 = new EmptyRecord();
+    EmptyRecord er1 = new EmptyRecord();
+    assertEquals(er0.hashCode(), er1.hashCode());
+
     int[] arrayValue = new int[] {1, 2};
 
     // J2KT accepts the semantic difference that Kotlin varargs create a copy of the array,
@@ -221,6 +221,7 @@ public class Main {
 
   static record ObjectRecord(Object value) {}
 
+  @J2ktIncompatible
   static record EmptyRecord() {}
 
   @J2ktIncompatible

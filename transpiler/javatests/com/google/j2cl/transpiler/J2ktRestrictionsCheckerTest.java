@@ -404,12 +404,20 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.Main",
         """
-        record EmptyRecord() {}
         record RecordWithValidatingConstructor(int i) {
           RecordWithValidatingConstructor {
             assert i > 0;
           }
         }
+        """);
+  }
+
+  public void testEmptyRecordFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        record EmptyRecord() {}
+        > Error: Record class 'EmptyRecord' without any components cannot be translated to a Kotlin data class. Consider making it an enum or regular singleton class.
         """);
   }
 

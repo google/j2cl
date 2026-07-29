@@ -38,6 +38,7 @@ public class RecordClass {
     rwc.b();
   }
 
+  @J2ktIncompatible
   static record EmptyRecord() {}
 
   static record SimpleRecord(int value) {}

@@ -67,6 +67,15 @@ public final class J2ktRestrictionsChecker {
 
           private void checkRecordDataClass(Type type) {
             if (type.getDeclaration().isJavaRecord()) {
+              if (type.getFields().stream()
+                  .noneMatch(it -> it.getDescriptor().isRecordComponentField())) {
+                problems.error(
+                    type.getSourcePosition(),
+                    "Record class '%s' without any components cannot be translated to a Kotlin"
+                        + " data class. Consider making it an enum or regular singleton class.",
+                    type.getDeclaration().getReadableDescription());
+              }
+
               if (type.getTypeDescriptor().getRecordCanonicalConstructorDescriptor().isVarargs()) {
                 problems.error(
                     type.getSourcePosition(),
