@@ -154,10 +154,10 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     return newLineSeparated(
         Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
         memberDescriptorSources.volatileAnnotationSource(fieldDescriptor),
-        objCNameSources.objCAnnotationSource(field),
-        jsInteropAnnotationSources.jsInteropAnnotationsSource(field),
+        objCNameSources.objCAnnotationSource(fieldDescriptor),
+        jsInteropAnnotationSources.jsInteropAnnotationsSource(fieldDescriptor),
         spaceSeparated(
-          memberDescriptorSources.visibilityModifierSource(field.descriptor),
+          memberDescriptorSources.visibilityModifierSource(fieldDescriptor),
           Source.emptyUnless(isConst) { CONST_KEYWORD },
           Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
           if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
@@ -259,8 +259,8 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         method.descriptor,
         isProperty = method.descriptor.isKtProperty,
       ),
-      objCNameSources.objCAnnotationSource(method),
-      jsInteropAnnotationSources.jsInteropAnnotationsSource(method),
+      objCNameSources.objCAnnotationSource(method.descriptor),
+      jsInteropAnnotationSources.jsInteropAnnotationsSource(method.descriptor),
       memberDescriptorSources.jvmThrowsAnnotationSource(method.descriptor),
       memberDescriptorSources.nativeThrowsAnnotationSource(method.descriptor),
       suppressNothingToOverrideSource(method),
@@ -340,8 +340,8 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
       .let { it as NewInstance }
       .let { newInstance ->
         newLineSeparated(
-          objCNameSources.objCAnnotationSource(field),
-          jsInteropAnnotationSources.jsInteropAnnotationsSource(field),
+          objCNameSources.objCAnnotationSource(field.descriptor),
+          jsInteropAnnotationSources.jsInteropAnnotationsSource(field.descriptor),
           spaceSeparated(
             join(
               field.descriptor.enumValueDeclarationNameSource.withMapping(field.sourcePosition),

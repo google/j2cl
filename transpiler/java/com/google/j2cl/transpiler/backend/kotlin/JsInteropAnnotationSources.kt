@@ -15,12 +15,10 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.JsMemberType
 import com.google.j2cl.transpiler.ast.JsUtils
-import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.MemberDescriptor
-import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -53,29 +51,32 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       .ifEmpty { jsTypeAnnotationSource(typeDeclaration) }
       .ifEmpty { jsEnumAnnotationSource(typeDeclaration) }
 
-  fun jsInteropAnnotationsSource(field: Field): Source =
-    jsPropertyAnnotationSource(field)
-      .ifEmpty { jsIgnoreAnnotationSource(field.descriptor) }
-      .ifEmpty { jsOverlayAnnotationSource(field.descriptor) }
+  fun jsInteropAnnotationsSource(fieldDescriptor: FieldDescriptor): Source =
+    jsPropertyAnnotationSource(fieldDescriptor)
+      .ifEmpty { jsIgnoreAnnotationSource(fieldDescriptor) }
+      .ifEmpty { jsOverlayAnnotationSource(fieldDescriptor) }
 
-  fun jsInteropAnnotationsSource(method: Method): Source =
-    newLineSeparated(jsAsyncAnnotationSource(method), jsMemberAnnotationSource(method))
+  fun jsInteropAnnotationsSource(methodDescriptor: MethodDescriptor): Source =
+    newLineSeparated(
+      jsAsyncAnnotationSource(methodDescriptor),
+      jsMemberAnnotationSource(methodDescriptor),
+    )
 
   fun jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
     emptyUnless(parameterDescriptor.isJsOptional) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
     }
 
-  private fun jsMemberAnnotationSource(method: Method): Source =
-    jsPropertyAnnotationSource(method)
-      .ifEmpty { jsMethodAnnotationSource(method) }
-      .ifEmpty { jsConstructorAnnotationSource(method.descriptor) }
-      .ifEmpty { jsIgnoreAnnotationSource(method.descriptor) }
-      .ifEmpty { jsOverlayAnnotationSource(method.descriptor) }
+  private fun jsMemberAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+    jsPropertyAnnotationSource(methodDescriptor)
+      .ifEmpty { jsMethodAnnotationSource(methodDescriptor) }
+      .ifEmpty { jsConstructorAnnotationSource(methodDescriptor) }
+      .ifEmpty { jsIgnoreAnnotationSource(methodDescriptor) }
+      .ifEmpty { jsOverlayAnnotationSource(methodDescriptor) }
 
-  private fun jsPropertyAnnotationSource(member: Member): Source =
-    emptyUnless(member.descriptor.isJsProperty) {
-      jsInteropAnnotationSource(member, "jsinterop.annotations.JsProperty")
+  private fun jsPropertyAnnotationSource(memberDescriptor: MemberDescriptor): Source =
+    emptyUnless(memberDescriptor.isJsProperty) {
+      jsInteropAnnotationSource(memberDescriptor, "jsinterop.annotations.JsProperty")
     }
 
   private fun jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
@@ -96,13 +97,13 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
     }
 
-  private fun jsMethodAnnotationSource(method: Method): Source =
-    emptyUnless(method.descriptor.isJsMethod) {
-      jsInteropAnnotationSource(method, "jsinterop.annotations.JsMethod")
+  private fun jsMethodAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+    emptyUnless(methodDescriptor.isJsMethod) {
+      jsInteropAnnotationSource(methodDescriptor, "jsinterop.annotations.JsMethod")
     }
 
-  private fun jsAsyncAnnotationSource(method: Method): Source =
-    emptyUnless(method.descriptor.isJsAsync) {
+  private fun jsAsyncAnnotationSource(methodDescriptor: MethodDescriptor): Source =
+    emptyUnless(methodDescriptor.isJsAsync) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
     }
 
@@ -110,30 +111,33 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
    * Include the `annotationQualifiedName` annotation if the member had an annotation in the source
    * or if it requires one to restore its jsname.
    */
-  private fun jsInteropAnnotationSource(member: Member, annotationQualifiedName: String): Source =
-    emptyUnless(hasJsInteropAnnotation(member)) {
+  private fun jsInteropAnnotationSource(
+    memberDescriptor: MemberDescriptor,
+    annotationQualifiedName: String,
+  ): Source =
+    emptyUnless(hasJsInteropAnnotation(memberDescriptor)) {
       annotation(
         annotationName(
-          annotationTargetSource(member.descriptor),
+          annotationTargetSource(memberDescriptor),
           nameSources.topLevelQualifiedNameSource(annotationQualifiedName),
         ),
-        nameParameterSource(jsAnnotationNameParameterValue(member)),
-        namespaceParameterSource(member.descriptor.declarationJsInfo.jsNamespace),
+        nameParameterSource(jsAnnotationNameParameterValue(memberDescriptor)),
+        namespaceParameterSource(memberDescriptor.declarationJsInfo.jsNamespace),
       )
     }
 
-  private fun hasJsInteropAnnotation(member: Member): Boolean =
-    member.descriptor.declarationJsInfo.hasJsMemberAnnotation ||
+  private fun hasJsInteropAnnotation(memberDescriptor: MemberDescriptor): Boolean =
+    memberDescriptor.declarationJsInfo.hasJsMemberAnnotation ||
       // If the name is mangled but it overrides a member (which means that one was already
       // mangled) then the annotation is already emitted in the overridden member.
-      (environment.isKtNameMangled(member.descriptor) &&
-        (member !is Method || !member.isJavaOverride))
+      (environment.isKtNameMangled(memberDescriptor) &&
+        (memberDescriptor !is MethodDescriptor || !memberDescriptor.isJavaOverride))
 
-  private fun jsAnnotationNameParameterValue(member: Member): String? =
-    member.descriptor.declarationJsInfo.jsName
+  private fun jsAnnotationNameParameterValue(memberDescriptor: MemberDescriptor): String? =
+    memberDescriptor.declarationJsInfo.jsName
       // if there is no name specified in the original annotation but the name is mangled in
       // Kotlin, use the simpleJsName otherwise do not emit any name.
-      ?: member.simpleJsName.takeIf { environment.isKtNameMangled(member.descriptor) }
+      ?: memberDescriptor.simpleJsName.takeIf { environment.isKtNameMangled(memberDescriptor) }
 
   private fun jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     emptyUnless(typeDeclaration.isJsFunctionInterface) {

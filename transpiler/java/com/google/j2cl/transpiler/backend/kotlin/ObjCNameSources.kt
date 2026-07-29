@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
@@ -110,35 +109,35 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
 
-  fun objCAnnotationSource(method: Method): Source =
+  fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      method.descriptor.isConstructor -> Source.EMPTY
-      isHiddenFromObjC(method.descriptor) -> hiddenFromObjCAnnotationSource(method.descriptor)
+      methodDescriptor.isConstructor -> Source.EMPTY
+      isHiddenFromObjC(methodDescriptor) -> hiddenFromObjCAnnotationSource(methodDescriptor)
       else -> Source.EMPTY
     }
 
-  fun objCAnnotationSource(field: Field): Source =
+  fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      isHiddenFromObjC(field.descriptor) -> hiddenFromObjCAnnotationSource(field.descriptor)
-      field.descriptor.isEnumConstant -> {
-        val name = field.descriptor.name!!
+      isHiddenFromObjC(fieldDescriptor) -> hiddenFromObjCAnnotationSource(fieldDescriptor)
+      fieldDescriptor.isEnumConstant -> {
+        val name = fieldDescriptor.name!!
         val swiftName = name.lowerCamelCased
         Source.newLineSeparated(
           objCEnumEntryNameAnnotationSource(name = "_$name", swiftName = swiftName),
-          Source.emptyUnless(needsObjCNameAnnotation(field.descriptor)) {
+          Source.emptyUnless(needsObjCNameAnnotation(fieldDescriptor)) {
             // TODO(b/525357348): Investigate
             if (swiftName in forbiddenSwiftEnumNames) {
-              objCNameAnnotationSource(field.descriptor.objCName)
+              objCNameAnnotationSource(fieldDescriptor.objCName)
             } else {
-              objCNameAnnotationSource(field.descriptor.objCName, swiftName)
+              objCNameAnnotationSource(fieldDescriptor.objCName, swiftName)
             }
           },
         )
       }
-      needsObjCNameAnnotation(field.descriptor) ->
-        objCNameAnnotationSource(field.descriptor.objCName, field.descriptor.swiftName)
+      needsObjCNameAnnotation(fieldDescriptor) ->
+        objCNameAnnotationSource(fieldDescriptor.objCName, fieldDescriptor.swiftName)
       else -> Source.EMPTY
     }
 
