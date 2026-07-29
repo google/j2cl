@@ -238,7 +238,7 @@ internal class KotlinEnvironment(
           if (t.isJavaRecord) {
             // TODO(b/503338755): Make sure we have good coverage for potential edge cases.
             ImmutableList.copyOf(
-              t.declaredFieldDescriptors.map { f ->
+              t.toDescriptor().recordComponentFieldDescriptors.map { f ->
                 t.declaredMethodDescriptors.first {
                   it.name == f.name &&
                     it.parameterDescriptors.isEmpty() &&

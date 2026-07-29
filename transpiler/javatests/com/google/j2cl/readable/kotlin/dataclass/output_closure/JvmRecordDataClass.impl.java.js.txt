@@ -61,11 +61,16 @@ class JvmRecordDataClass extends Record {
  m_getF__int() {
   return this.m_f__int();
  }
+ /** @nodts @return {number} */
+ static get f_staticField__dataclass_JvmRecordDataClass() {
+  return (JvmRecordDataClass.$clinit(), JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass);
+ }
  /** @nodts */
  static $clinit() {
   JvmRecordDataClass.$clinit = () =>{};
   JvmRecordDataClass.$loadModules();
   Record.$clinit();
+  JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass = 1;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -75,6 +80,8 @@ class JvmRecordDataClass extends Record {
  /** @nodts */
  static $loadModules() {}
 }
+/**@private {number} @nodts*/
+JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass = 0;
 DataClassInterface.$markImplementor(JvmRecordDataClass);
 $Util.$setClassMetadata(JvmRecordDataClass, 'dataclass.JvmRecordDataClass');
 

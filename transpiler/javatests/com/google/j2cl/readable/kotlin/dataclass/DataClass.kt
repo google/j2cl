@@ -58,7 +58,11 @@ interface DataClassInterface {
 }
 
 @kotlin.jvm.JvmRecord
-data class JvmRecordDataClass(override val f: Int, val z: String) : DataClassInterface
+data class JvmRecordDataClass(override val f: Int, val z: String) : DataClassInterface {
+  companion object {
+    @kotlin.jvm.JvmField val staticField = 1
+  }
+}
 
 @kotlin.jvm.JvmRecord
 data class JvmRecordDataClassOverridingEquals(val s: String) {
