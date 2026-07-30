@@ -82,6 +82,24 @@ JavaScript natively supports booleans and J2CL automatically unboxes Booleans.
 So there is a one-to-one mapping between Java Boolean/boolean and the native
 JavaScript boolean type.
 
+### Iterables
+
+All `java.lang.Iterable` types implicitly implement the
+[JS iteration protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+Therefore all collection types (`List`, `Set`, `Map`) can be iterated over in
+JS:
+
+```javascript
+const /** !List<Foo> */ foos = someJavaClass.getFooList();
+
+for (const foo of foos) { ... }
+const arr = Array.from(foos);
+const bars = Array.from(foos, foo => foo.getBar());
+const spread = [...foos];
+const [first, second, third] = foos;
+const fooSet = new Set(foos);
+```
+
 ### Null vs Undefined
 
 From J2CL's perspective `null` and `undefined` are the same type. If you check
