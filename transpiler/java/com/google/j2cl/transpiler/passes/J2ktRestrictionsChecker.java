@@ -119,8 +119,7 @@ public final class J2ktRestrictionsChecker {
                       accessor ->
                           accessor.getJavaOverriddenMethodDescriptors().stream()
                               .allMatch(it -> it.isKtProperty()))) {
-                // TODO(b/445545563): Convert to error when ready to enforce.
-                problems.warning(
+                problems.error(
                     type.getSourcePosition(),
                     "Record class '%s' with accessors overriding methods which are not translated"
                         + " to Kotlin properties cannot be translated to a Kotlin data class.",

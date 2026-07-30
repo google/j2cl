@@ -471,7 +471,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testRecordOverridingNonPropertyAccessorsWarns() {
+  public void testRecordOverridingNonPropertyAccessorsFails() {
     assertWithInlineMessages(
         "test.Accessors",
         """
@@ -482,7 +482,7 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         "test.Main",
         """
         record RecordOverridingNonPropertyAccessor(int i) implements Accessors {}
-        > Warning: Record class 'RecordOverridingNonPropertyAccessor' with accessors overriding methods which are not translated to Kotlin properties cannot be translated to a Kotlin data class.
+        > Error: Record class 'RecordOverridingNonPropertyAccessor' with accessors overriding methods which are not translated to Kotlin properties cannot be translated to a Kotlin data class.
         """);
   }
 
