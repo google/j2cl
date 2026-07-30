@@ -15,12 +15,15 @@
  */
 package wasmcustomdescriptorsjsinterop;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -33,6 +36,7 @@ public final class Main {
     testInheritedMethod();
     testInterfaceMethod();
     testJsSubtyping();
+    testJsFunction();
   }
 
   private static void testConstructor() {
@@ -287,6 +291,37 @@ public final class Main {
     } catch (Exception expected) {
     }
   }
+
+  private static void testJsFunction() {
+    assertEquals(2, MyJsFunction.staticOverlay());
+
+    MyJsFunction lambda = a -> a + 20;
+    assertEquals(25, lambda.foo(5));
+    assertEquals(1, lambda.myOverlay());
+
+    // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
+    // MyJsFunction jsFunction = getFunctionFromJs();
+    // assertEquals(42, jsFunction.foo(10));
+  }
+
+  @JsFunction
+  interface MyJsFunction {
+    int foo(int a);
+
+    @JsOverlay
+    default int myOverlay() {
+      return 1;
+    }
+
+    @JsOverlay
+    static int staticOverlay() {
+      return 2;
+    }
+  }
+
+  // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
+  // @JsMethod(namespace = "test.functions", name = "getFunction")
+  // private static native MyJsFunction getFunctionFromJs();
 
   @JsMethod(namespace = "nativehelper")
   static native BaseJsType newBaseJsType();

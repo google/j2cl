@@ -17,7 +17,6 @@ package wasmjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
-import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -26,6 +25,7 @@ import jsinterop.annotations.JsType;
 
 /** Tests J2WASM jsinterop features. */
 public final class Main {
+  // TODO(b/479895505): Add JsFunction tests once the functionality is enabled.
   public static void main(String... args) throws Exception {
     testJsString();
     testJsNumber();
@@ -34,7 +34,6 @@ public final class Main {
     testGlobalJsType();
     testNonglobalJsType();
     testJsTypeInterface();
-    testJsFunction();
   }
 
   private static void testJsString() {
@@ -172,39 +171,4 @@ public final class Main {
 
   @JsMethod(namespace = "test.utils")
   private static native Long sumLongsInJs(Long a, Long b);
-
-  // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
-  // @JsMethod(namespace = "test.functions", name = "getFunction")
-  // private static native MyJsFunction getFunctionFromJs();
-
-  private static void testJsFunction() {
-    MyJsFunction impl = new MyJsFunctionImpl();
-    assertEquals(15, impl.foo(5));
-    assertEquals(1, impl.myOverlay());
-
-    MyJsFunction lambda = a -> a + 20;
-    assertEquals(25, lambda.foo(5));
-    assertEquals(1, lambda.myOverlay());
-
-    // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
-    // MyJsFunction jsFunction = getFunctionFromJs();
-    // assertEquals(42, jsFunction.foo(10));
-  }
-
-  @JsFunction
-  interface MyJsFunction {
-    int foo(int a);
-
-    @JsOverlay
-    default int myOverlay() {
-      return 1;
-    }
-  }
-
-  static final class MyJsFunctionImpl implements MyJsFunction {
-    @Override
-    public int foo(int a) {
-      return a + 10;
-    }
-  }
 }
