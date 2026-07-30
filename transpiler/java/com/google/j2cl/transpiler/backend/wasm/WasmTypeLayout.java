@@ -189,6 +189,12 @@ abstract class WasmTypeLayout {
       // redeclares them).
       return false;
     }
+    if (methodDescriptor.isJsOverlay()) {
+      // Exclude overlay methods. Overlay methods are generally excluded already because they are
+      // final or non-polymorphic. This exclusion only applies to overlay default methods in
+      // interfaces (JsFunction interfaces).
+      return false;
+    }
     return !(methodDescriptor.getEnclosingTypeDescriptor().isFinal() || methodDescriptor.isFinal())
         // If a method overrides a parent method, it should overwrite the vtable entry.
         || (getWasmSupertypeLayout() != null

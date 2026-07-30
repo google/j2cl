@@ -33,6 +33,7 @@ public final class Main {
     testJsLong();
     testGlobalJsType();
     testNonglobalJsType();
+    testJsTypeInterface();
     testJsFunction();
   }
 
@@ -99,6 +100,14 @@ public final class Main {
     Foo f = new Foo();
     assertEquals(3, f.sum(1, 2));
     assertEquals(6, Foo.mult(2, 3));
+    assertEquals(19, f.myOverlay(3, 4));
+  }
+
+  private static void testJsTypeInterface() {
+    FooInterface foo = createFooInterface();
+    assertEquals(3, foo.sum(1, 2));
+    assertEquals(4, foo.sumPlusOneOverlay(1, 2));
+    assertEquals(5, FooInterface.sumPlusTwoStaticOverlay(1, 2));
   }
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
@@ -122,7 +131,35 @@ public final class Main {
     public native int sum(int a, int b);
 
     public static native int mult(int a, int b);
+
+    @JsOverlay
+    private int myOverlay(int a, int b) {
+      return privateOverlay(a, b);
+    }
+
+    @JsOverlay
+    private int privateOverlay(int a, int b) {
+      return mult(a, b) + sum(a, b);
+    }
   }
+
+  @JsType(isNative = true, name = "Foo", namespace = "test")
+  public interface FooInterface {
+    int sum(int a, int b);
+
+    @JsOverlay
+    default int sumPlusOneOverlay(int a, int b) {
+      return a + b + 1;
+    }
+
+    @JsOverlay
+    static int sumPlusTwoStaticOverlay(int a, int b) {
+      return a + b + 2;
+    }
+  }
+
+  @JsMethod(namespace = "test.Foo", name = "create")
+  static native FooInterface createFooInterface();
 
   @JsMethod(namespace = "test.utils")
   private static native String appendInJs(String a, String b);

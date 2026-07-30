@@ -35,6 +35,14 @@ class Foo {
   static mult(a, b) {
     return a * b;
   }
+
+  /**
+   * @return {!Foo}
+   * @public
+   */
+  static create() {
+    return new Foo();
+  }
 }
 
 exports = Foo;
