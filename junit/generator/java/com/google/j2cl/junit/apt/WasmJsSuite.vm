@@ -16,6 +16,9 @@ j2clTestSuite({
 
     const absolutePath = "REPLACEMENT_BUILD_PATH_PLACEHOLDER";
 
+    // TODO(b/540913413): Remove once Safari used for testing fixes the handling
+    // of compileOptions flag in streaming APIs.
+    maybePatchInstantiateStreamingForSafari();
     instance = await j2wasm.instantiateStreaming(absolutePath);
     instance.exports["setUpPageIn${testClass.simpleName()}"]();
   },
@@ -42,3 +45,15 @@ j2clTestSuite({
 
 });
 
+function maybePatchInstantiateStreamingForSafari() {
+  // Check is not fully accurate, but it's good enough for tests for now.
+  if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
+    WebAssembly.instantiateStreaming = async (responsePromise, importObject, compileOptions) => {
+      const response = await responsePromise;
+      const bufferSource = await response.arrayBuffer();
+      const module = await WebAssembly.compile(bufferSource, compileOptions);
+      const instance = await WebAssembly.instantiate(module, importObject);
+      return { module, instance };
+    };
+  }
+};
