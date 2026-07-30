@@ -54,6 +54,15 @@ function callGetNumber(someJsType) {
 
 /**
  * @param {!SomeJsType} someJsType
+ * @return {number}
+ * @public
+ */
+function callGetNumberViaStaticMethod(someJsType) {
+  return SomeJsType.staticMethod(someJsType);
+}
+
+/**
+ * @param {!SomeJsType} someJsType
  * @return {string}
  * @public
  */
@@ -266,10 +275,37 @@ function createJsSubtype() {
   return new class extends SomeJsType {}(123);
 }
 
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+function callEntryPointAdd(a, b) {
+  return globalThis['wasmExports']['entryPointAdd'](a, b);
+}
+
+/**
+ * @return {number}
+ */
+function callEntryPointWithJsType() {
+  const instance = new SomeJsType(123);
+  return globalThis['wasmExports']['entryPointWithJsType'](instance);
+}
+
+/**
+ * @return {number}
+ */
+function callJsMethodEntryPointWithJsType() {
+  const instance = new SomeJsType(123);
+  return globalThis['wasmExports']['staticMethod'](instance);
+}
+
+
 exports = {
   newBaseJsType,
   newSomeJsType,
   callGetNumber,
+  callGetNumberViaStaticMethod,
   callGetString,
   getField,
   setField,
@@ -294,4 +330,8 @@ exports = {
   callAccidentalMethod,
   callAccidentalDefaultMethod,
   createJsSubtype,
+  callEntryPointAdd,
+  callEntryPointWithJsType,
+  callJsMethodEntryPointWithJsType,
 };
+

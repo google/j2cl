@@ -187,7 +187,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         case SYNTHETIC_PROPERTY_SETTER, SYNTHETIC_PROPERTY_GETTER -> FieldOrigin.SOURCE.getPrefix();
 
-        case SYNTHETIC_WASM_ENTRY_POINT -> "export_";
+        case SYNTHETIC_WASM_ENTRY_POINT -> "entry_point_";
 
         case SYNTHETIC_WASM_JS_METHOD_EXPORT, SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> "js_export_";
 
@@ -231,8 +231,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     /** True if the method is a bridge generated for access from JavaScript. */
     public boolean isWasmJsExport() {
-      return isWasmEntryPoint()
-          || isWasmJsMethodExport()
+      return isWasmJsMethodExport()
           || isWasmJsGetterExport()
           || isWasmJsSetterExport()
           || isWasmJsConstructorExport();

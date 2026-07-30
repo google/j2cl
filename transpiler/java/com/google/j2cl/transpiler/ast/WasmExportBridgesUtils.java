@@ -44,7 +44,7 @@ public class WasmExportBridgesUtils {
                 methodDescriptor.getParameterTypeDescriptors().stream(),
                 (parameter, typeDescriptor) ->
                     convertToInternal(
-                        parameter.createReference(), typeDescriptor, /* isExport= */ true))
+                        parameter.createReference(), typeDescriptor, origin.isWasmJsExport()))
             .collect(toImmutableList());
 
     TypeDescriptor returnType = methodDescriptor.getReturnTypeDescriptor();
@@ -53,7 +53,8 @@ public class WasmExportBridgesUtils {
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(
-            createBridgeTargetInvocation(methodDescriptor, sourcePosition, arguments, returnType))
+            createBridgeTargetInvocation(
+                methodDescriptor, sourcePosition, arguments, returnType, origin))
         .setJsDocDescription(
             origin.isWasmEntryPoint() ? "Wasm entry point forwarding method." : null)
         .setSourcePosition(sourcePosition)
@@ -79,7 +80,7 @@ public class WasmExportBridgesUtils {
                             .setDefaultInstanceQualifier()
                             .build(),
                         fieldDescriptor.getTypeDescriptor(),
-                        /* isExport= */ true))
+                        bridgeMethodDescriptor.getOrigin().isWasmJsExport()))
                 .setSourcePosition(sourcePosition)
                 .build())
         .setSourcePosition(sourcePosition)
@@ -109,7 +110,7 @@ public class WasmExportBridgesUtils {
                     convertToInternal(
                         valueParameter.createReference(),
                         fieldDescriptor.getTypeDescriptor(),
-                        /* isExport= */ true))
+                        bridgeMethodDescriptor.getOrigin().isWasmJsExport()))
                 .makeStatement(sourcePosition))
         .setSourcePosition(sourcePosition)
         .build();
@@ -119,7 +120,8 @@ public class WasmExportBridgesUtils {
       MethodDescriptor methodDescriptor,
       SourcePosition sourcePosition,
       List<Expression> arguments,
-      TypeDescriptor returnTypeDescriptor) {
+      TypeDescriptor returnTypeDescriptor,
+      MethodDescriptor.MethodOrigin origin) {
     if (methodDescriptor.isConstructor()) {
       checkState(
           returnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
@@ -148,7 +150,7 @@ public class WasmExportBridgesUtils {
       return returnStatement.toBuilder()
           .setExpression(
               convertToExternal(
-                  returnStatement.getExpression(), returnTypeDescriptor, /* isExport= */ true))
+                  returnStatement.getExpression(), returnTypeDescriptor, origin.isWasmJsExport()))
           .build();
     }
     return forwardingStatement;
@@ -163,8 +165,7 @@ public class WasmExportBridgesUtils {
                 descriptor.isConstructor()
                     ? descriptor.getReturnTypeDescriptor()
                     : getExternalType(
-                        descriptor.getReturnTypeDescriptor(),
-                        /* isExport= */ origin.isWasmJsExport()))
+                        descriptor.getReturnTypeDescriptor(), origin.isWasmJsExport()))
             .setParameterDescriptors(
                 descriptor.getParameterDescriptors().stream()
                     .map(
@@ -172,8 +173,7 @@ public class WasmExportBridgesUtils {
                             pd.toBuilder()
                                 .setTypeDescriptor(
                                     getExternalType(
-                                        pd.getTypeDescriptor(),
-                                        /* isExport= */ origin.isWasmJsExport()))
+                                        pd.getTypeDescriptor(), origin.isWasmJsExport()))
                                 .setVarargs(false)
                                 .build())
                     .collect(toImmutableList()))
@@ -194,18 +194,20 @@ public class WasmExportBridgesUtils {
   }
 
   private static MethodDescriptor createGetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
+    var origin = MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT;
     return AstUtils.getGetterMethodDescriptor(fieldDescriptor).toBuilder()
-        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT)
+        .setOrigin(origin)
         .setReturnTypeDescriptor(
-            getExternalType(fieldDescriptor.getTypeDescriptor(), /* isExport= */ true))
+            getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();
   }
 
   private static MethodDescriptor createSetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
+    var origin = MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT;
     return AstUtils.getSetterMethodDescriptor(fieldDescriptor).toBuilder()
-        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT)
+        .setOrigin(origin)
         .setParameterTypeDescriptors(
-            getExternalType(fieldDescriptor.getTypeDescriptor(), /* isExport= */ true))
+            getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();
   }
 

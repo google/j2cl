@@ -37,6 +37,7 @@ public final class Main {
     testInterfaceMethod();
     testJsSubtyping();
     testJsFunction();
+    testEntryPoint();
   }
 
   private static void testConstructor() {
@@ -56,6 +57,7 @@ public final class Main {
     assertTrue(callPackagePrivateMethod(someJsType).equals("pp"));
     assertTrue(callReturnSelf(someJsType) == someJsType);
     assertTrue(callTakesSelf(someJsType, someJsType));
+    assertTrue(callGetNumberViaStaticMethod(someJsType) == 11);
   }
 
   private static void testProperty() {
@@ -154,6 +156,10 @@ public final class Main {
 
     public boolean takesSelf(SomeJsType self) {
       return self == this;
+    }
+
+    public static int staticMethod(SomeJsType self) {
+      return self.getNumber();
     }
 
     @JsType
@@ -323,6 +329,20 @@ public final class Main {
   // @JsMethod(namespace = "test.functions", name = "getFunction")
   // private static native MyJsFunction getFunctionFromJs();
 
+  private static void testEntryPoint() {
+    assertTrue(callEntryPointAdd(5, 10) == 15);
+    assertTrue(callEntryPointWithJsType() == 11);
+    assertTrue(callJsMethodEntryPointWithJsType() == 11);
+  }
+
+  public static int entryPointAdd(int a, int b) {
+    return a + b;
+  }
+
+  public static int entryPointWithJsType(SomeJsType o) {
+    return o.getNumber();
+  }
+
   @JsMethod(namespace = "nativehelper")
   static native BaseJsType newBaseJsType();
 
@@ -331,6 +351,9 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native int callGetNumber(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callGetNumberViaStaticMethod(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
   static native String callGetString(SomeJsType someJsType);
@@ -403,4 +426,13 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native SomeJsType createJsSubtype();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callEntryPointAdd(int a, int b);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callEntryPointWithJsType();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callJsMethodEntryPointWithJsType();
 }

@@ -32,4 +32,8 @@ integration_test(
     enable_kt = False,
     enable_wasm = False,
     enable_wasm_custom_descriptors_jsinterop = True,
+    wasm_entry_points = [
+        "wasmcustomdescriptorsjsinterop.Main#entry.*",
+        "wasmcustomdescriptorsjsinterop.Main.SomeJsType#staticMethod",
+    ],
 )
