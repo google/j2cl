@@ -6,10 +6,10 @@
 (global $$class@jsoverlay.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@jsoverlay.Main.Intf.$JsFunctionAdaptor (mut i32)
+(global $$class-initialized@jsoverlay.Main.Intf.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
-(global $$class@jsoverlay.Main.Intf.$JsFunctionAdaptor (mut (ref null $java.lang.Class))
+(global $$class@jsoverlay.Main.Intf.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (mut i32)
@@ -70,23 +70,9 @@
   (ref.func $m_test__void@jsoverlay.Main)
  )
 )
-(global $jsoverlay.Main.Intf.$JsFunctionAdaptor.vtable (ref $jsoverlay.Main.Intf.$JsFunctionAdaptor.vtable)
- (struct.new $jsoverlay.Main.Intf.$JsFunctionAdaptor.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$JsFunctionAdaptor)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_run__void@jsoverlay.Main.Intf.$JsFunctionAdaptor)
- )
-)
-(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.Intf.$JsFunctionAdaptor (ref $jsoverlay.Main.Intf.vtable)
- (struct.new $jsoverlay.Main.Intf.vtable
-  (ref.func $m_run__void@jsoverlay.Main.Intf.$JsFunctionAdaptor)
- )
-)
 (global $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable)
  (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$JsFunctionAdaptor)
+  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$LambdaAdaptor)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -612,6 +598,61 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main)
 
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_jsoverlay_Main_Intf_$LambdaAdaptor@jsoverlay.Main.Intf.$LambdaAdaptor
+ (param $this (ref null $jsoverlay.Main.Intf.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+  (if (global.get $$class-initialized@jsoverlay.Main.Intf.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+  (global.set $$class-initialized@jsoverlay.Main.Intf.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsoverlay.Main.Intf.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@jsoverlay.Main.Intf.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@jsoverlay.Main.Intf.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsoverlay.Main.Intf.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsoverlay.Main.Intf.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $jsoverlay.Main.Intf.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$LambdaAdaptor)
+
 ;;; NativeJsTypeInterfaceWithOverlayImpl NativeJsTypeInterfaceWithOverlayImpl.$create()
 (func $$create__@jsoverlay.NativeJsTypeInterfaceWithOverlayImpl
  (result (ref null $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl))
@@ -684,136 +725,6 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsoverlay.NativeJsTypeInterfaceWithOverlayImpl)
 
-;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create(WasmExtern jsFuncref)
-(func $$create__javaemul_internal_WasmExtern@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (param $jsFuncref (ref null extern))
- (result (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (local $$instance (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$clinit__void_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (local.set $$instance (struct.new $jsoverlay.Main.Intf.$JsFunctionAdaptor (global.get $jsoverlay.Main.Intf.$JsFunctionAdaptor.vtable) (global.get $jsoverlay.Main.Intf.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern) (ref.null func)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$ctor__javaemul_internal_WasmExtern__void_$p_jsoverlay_Main_Intf_$JsFunctionAdaptor@jsoverlay.Main.Intf.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $jsFuncref))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (return (local.get $$instance))
- )
-)
-
-;;; void $JsFunctionAdaptor.$ctor(WasmExtern jsFuncref)
-(func $$ctor__javaemul_internal_WasmExtern__void_$p_jsoverlay_Main_Intf_$JsFunctionAdaptor@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (param $this (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- (param $jsFuncref (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$ctor__javaemul_internal_WasmExtern__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(local.get $jsFuncref))
- )
-)
-
-;;; $JsFunctionAdaptor $JsFunctionAdaptor.$create(WasmFuncref wasmFuncref)
-(func $$create__javaemul_internal_WasmFuncref@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (param $wasmFuncref (ref null func))
- (result (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (local $$instance (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$clinit__void_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (local.set $$instance (struct.new $jsoverlay.Main.Intf.$JsFunctionAdaptor (global.get $jsoverlay.Main.Intf.$JsFunctionAdaptor.vtable) (global.get $jsoverlay.Main.Intf.$JsFunctionAdaptor.itable) (i32.const 0) (ref.null extern) (ref.null func)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsoverlay_Main_Intf_$JsFunctionAdaptor@jsoverlay.Main.Intf.$JsFunctionAdaptor (ref.as_non_null (local.get $$instance))(local.get $wasmFuncref))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (return (local.get $$instance))
- )
-)
-
-;;; void $JsFunctionAdaptor.$ctor(WasmFuncref wasmFuncref)
-(func $$ctor__javaemul_internal_WasmFuncref__void_$p_jsoverlay_Main_Intf_$JsFunctionAdaptor@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (param $this (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- (param $wasmFuncref (ref null func))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(local.get $wasmFuncref))
- )
-)
-
-;;; $JsFunctionAdaptor $JsFunctionAdaptor.$adapt(WasmExtern jsFuncref)
-(func $$adapt__javaemul_internal_WasmExtern__jsoverlay_Main_Intf_$JsFunctionAdaptor@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (param $jsFuncref (ref null extern))
- (result (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$clinit__void_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (return (ref.null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- )
-)
-
-;;; void $JsFunctionAdaptor.run()
-(func $m_run__void@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (type $function.m_run__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (local $this (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- (local.set $this (ref.cast (ref $jsoverlay.Main.Intf.$JsFunctionAdaptor) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$invoke__javaemul_internal_WasmExtern__void@jsoverlay.Main.Intf.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $this)))
- )
-)
-(elem declare func $m_run__void@jsoverlay.Main.Intf.$JsFunctionAdaptor)
-
-;;; void $JsFunctionAdaptor.$clinit()
-(func $$clinit__void_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (if (global.get $$class-initialized@jsoverlay.Main.Intf.$JsFunctionAdaptor)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (global.set $$class-initialized@jsoverlay.Main.Intf.$JsFunctionAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:100:20
-  (call $$clinit__void_<once>_@javaemul.internal.JsFunctionAdaptor )
- )
-)
-
-;;; Class<T> $JsFunctionAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsoverlay.Main.Intf.$JsFunctionAdaptor)))
-   (then
-    (return (global.get $$class@jsoverlay.Main.Intf.$JsFunctionAdaptor))
-   )
-  )
-  (global.set $$class@jsoverlay.Main.Intf.$JsFunctionAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@javaemul.internal.JsFunctionAdaptor )))
-  (return (global.get $$class@jsoverlay.Main.Intf.$JsFunctionAdaptor))
- )
-)
-
-;;; Class<?> $JsFunctionAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$JsFunctionAdaptor
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsoverlay.Main.Intf.$JsFunctionAdaptor))
- (local.set $this (ref.cast (ref $jsoverlay.Main.Intf.$JsFunctionAdaptor) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.Intf.$JsFunctionAdaptor)
-
 ;;; <anonymous> implements Intf <anonymous> implements Intf.$create()
 (func $$create__@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
  (result (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
@@ -823,7 +734,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
   (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
-  (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable) (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.itable) (i32.const 0) (ref.null extern) (ref.null func)))
+  (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable) (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.itable) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
   (call $$ctor__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_$LambdaImplementor$1@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
@@ -837,7 +748,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
-  (call $$ctor__javaemul_internal_WasmFuncref__void_$p_jsoverlay_Main_Intf_$JsFunctionAdaptor@jsoverlay.Main.Intf.$JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1) )
+  (call $$ctor__void_$p_jsoverlay_Main_Intf_$LambdaAdaptor@jsoverlay.Main.Intf.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -867,7 +778,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
   (global.set $$class-initialized@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsoverlay/readable-j2wasm.js/jsoverlay/Main.java:82:20
-  (call $$clinit__void_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor )
+  (call $$clinit__void_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor )
  )
 )
 
@@ -880,7 +791,7 @@
     (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
    )
   )
-  (global.set $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$JsFunctionAdaptor )))
+  (global.set $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsoverlay.Ma...|__java_lang_String_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.Intf.$LambdaAdaptor )))
   (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
  )
 )
