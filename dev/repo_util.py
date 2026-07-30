@@ -55,6 +55,7 @@ def _add_web_benchs(benchmarks, platform_key, bench_pattern, bench_name, js_vm):
   else:
     benchmarks[f"{platform_key}_v8"] = bench_pattern % (bench_name, "v8")
     benchmarks[f"{platform_key}_sm"] = bench_pattern % (bench_name, "sm")
+    benchmarks[f"{platform_key}_jsc"] = bench_pattern % (bench_name, "jsc")
 
 
 def build_original_and_modified(original_targets, modified_targets):

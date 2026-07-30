@@ -106,7 +106,7 @@ def add_arguments(parser):
   parser.add_argument(
       "--js_vm",
       default="",
-      choices=["v8", "sm"],
+      choices=["v8", "sm", "jsc"],
       help="JS VM to run the benchmarks on.",
   )
   parser.add_argument(
