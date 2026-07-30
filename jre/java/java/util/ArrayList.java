@@ -22,6 +22,7 @@ import static javaemul.internal.InternalPreconditions.checkPositionIndexes;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.JsIterableHelper;
 import javaemul.internal.JsIterableHelper.JsIterator;
+import jsinterop.annotations.JsNonNull;
 
 /**
  * Resizeable array implementation of the List interface. See <a
@@ -132,7 +133,7 @@ public class ArrayList<E> extends ArrayListBase<E> {
   }
 
   @Override
-  public JsIterator<E> _private_jsIterator__() {
+  public @JsNonNull JsIterator<E> _private_jsIterator__() {
     // Overridden to provide an optimized version if we exactly know ArrayList type since subclasses
     // can change the iterator behavior.
     if (this.getClass() == ArrayList.class) {

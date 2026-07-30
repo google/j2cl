@@ -49,7 +49,7 @@ public interface Iterable<T> extends JsIterableBase<T> {
   }
 
   @Override
-  default JsIterator<T> _private_jsIterator__() {
+  default @JsNonNull JsIterator<T> _private_jsIterator__() {
     return this.iterator();
   }
 }

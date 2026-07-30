@@ -17,6 +17,7 @@ package javaemul.internal;
 
 import java.util.Iterator;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -40,7 +41,7 @@ public final class JsIterableHelper {
   public interface JsIterableBase<T> extends JsIterable<T> {
     // Default IterableIterator behavior. Used by java.util.Iterator. Note that the case is
     // not correct for java.lang.Iterable but it overrides the method anyway.
-    default JsIterator<T> _private_jsIterator__() {
+    default @JsNonNull JsIterator<T> _private_jsIterator__() {
       return (JsIterator<T>) this;
     }
   }
