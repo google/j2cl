@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.narrowDown
 import com.google.j2cl.transpiler.backend.kotlin.ast.widenUp
@@ -142,3 +143,10 @@ val MethodDescriptor.overridesProtected: Boolean
 // See: `MemberDescriptor.isProtectedTranslatedAsPublic`
 val MemberDescriptor.needsExplicitVisibilityModifier: Boolean
   get() = this is MethodDescriptor && visibility.isPublic && overridesProtected
+
+val MethodDescriptor.isEnumValueOf: Boolean
+  get() =
+    enclosingTypeDescriptor.isEnum &&
+      name == "valueOf" &&
+      parameterTypeDescriptors.size == 1 &&
+      parameterTypeDescriptors[0] == TypeDescriptors.get().javaLangString.toNonNullable()

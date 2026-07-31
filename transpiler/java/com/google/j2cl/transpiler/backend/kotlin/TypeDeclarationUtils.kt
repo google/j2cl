@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.ast.Visibility as KtVisibility
@@ -142,3 +143,6 @@ internal val TypeDeclaration.hasInjectAnnotatedMethod: Boolean
 
 internal val TypeDeclaration.hasJ2ktPublicAnnotation: Boolean
   get() = hasAnnotation("com.google.common.annotations.J2ktPublic")
+
+internal val TypeDeclaration.enumFieldDescriptors: List<FieldDescriptor>
+  get() = declaredFieldDescriptors.filter { it.isEnumConstant }

@@ -16,16 +16,12 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
-import com.google.j2cl.transpiler.ast.AstUtils.createImplicitConstructorDescriptor
 import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
-import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Literal
-import com.google.j2cl.transpiler.ast.Member
-import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -41,7 +37,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
-import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
@@ -54,7 +49,6 @@ import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent
-import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.combine
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.dependent
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
@@ -109,7 +103,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLine
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.spaceSeparated
 
-// TODO(b/442834826): Refactor to use type model instead of AST nodes.
 internal class J2ObjCCompatSources(
   private val objCNamePrefix: String,
   private val kotlinNativeFrameworkHeaderPath: String? = null,
@@ -194,25 +187,28 @@ internal class J2ObjCCompatSources(
       type.toCompanionObjectOrNull()?.let { add(aliasDeclarationDependentSource(it.declaration)) }
     }
 
-    if (type.isEnum && type.enumFields.isNotEmpty()) {
-      add(nsEnumTypedefDependentSource(type))
-      addAll(type.enumFields.map(::nsEnumEntryDefineDependentSource))
+    if (type.declaration.isEnum) {
+      val fieldDescriptors = type.declaration.enumFieldDescriptors
+      if (fieldDescriptors.isNotEmpty()) {
+        add(nsEnumTypedefDependentSource(type))
+
+        for (fieldDescriptor in fieldDescriptors) {
+          add(nsEnumEntryDefineDependentSource(fieldDescriptor))
+        }
+      }
     }
 
-    addAll(type.fields.map(::fieldConstantDefineDependentSource))
+    for (fieldDescriptor in type.declaration.declaredFieldDescriptors) {
+      add(fieldConstantDefineDependentSource(fieldDescriptor))
+    }
 
-    addAll(type.members.flatMap(::functionDependentSources))
+    for (fieldDescriptor in type.declaration.declaredFieldDescriptors) {
+      add(fieldGetFunctionDependentSource(fieldDescriptor))
+      add(fieldSetFunctionDependentSource(fieldDescriptor))
+    }
 
-    // Include implicit constructor
-    if (!type.isInterface && type.constructors.isEmpty()) {
-      addAll(
-        functionDependentSources(
-          Method.builder()
-            .setMethodDescriptor(createImplicitConstructorDescriptor(type.typeDescriptor))
-            .setSourcePosition(type.sourcePosition)
-            .build()
-        )
-      )
+    for (methodDescriptor in type.declaration.declaredMethodDescriptors) {
+      addAll(methodFunctionDependentSources(methodDescriptor))
     }
   }
 
@@ -241,19 +237,19 @@ internal class J2ObjCCompatSources(
       typedef("${objCNamePrefix}${enumName}", dependentSource(enumName))
     }
 
-  private fun nsEnumEntryDefineDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.let { fieldDescriptor ->
-      objCEnumName(fieldDescriptor.enclosingTypeDescriptor.typeDeclaration).let { enumName ->
-        fieldDescriptor.objCName.fieldNameAsEnumEntryName.let { entryName ->
-          dependent(
-            macroDefine(
-              spaceSeparated(
-                source("${enumName}_${entryName}"),
-                source("${objCNamePrefix}${enumName}_${entryName}"),
-              )
+  private fun nsEnumEntryDefineDependentSource(
+    fieldDescriptor: FieldDescriptor
+  ): Dependent<Source> =
+    objCEnumName(fieldDescriptor.enclosingTypeDescriptor.typeDeclaration).let { enumName ->
+      fieldDescriptor.objCName.fieldNameAsEnumEntryName.let { entryName ->
+        dependent(
+          macroDefine(
+            spaceSeparated(
+              source("${enumName}_${entryName}"),
+              source("${objCNamePrefix}${enumName}_${entryName}"),
             )
           )
-        }
+        )
       }
     }
 
@@ -283,8 +279,8 @@ internal class J2ObjCCompatSources(
   private fun getPropertyObjCName(fieldDescriptor: FieldDescriptor): String =
     fieldDescriptor.objCName
 
-  private fun fieldGetFunctionDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.takeIf(::shouldInclude)?.let(::getFunctionDependentSource)
+  private fun fieldGetFunctionDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source> =
+    fieldDescriptor.takeIf(::shouldInclude)?.let(::getFunctionDependentSource)
       ?: dependent(Source.EMPTY)
 
   private fun getFunctionDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source> =
@@ -312,8 +308,8 @@ internal class J2ObjCCompatSources(
   private fun setPropertyObjCName(fieldDescriptor: FieldDescriptor): String =
     fieldDescriptor.objCName.escapeObjCKeyword
 
-  private fun fieldSetFunctionDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.takeIf { !it.isFinal && shouldInclude(it) }?.let(::setFunctionDependentSource)
+  private fun fieldSetFunctionDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source> =
+    fieldDescriptor.takeIf { !it.isFinal && shouldInclude(it) }?.let(::setFunctionDependentSource)
       ?: dependent(Source.EMPTY)
 
   private fun setFunctionDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source> =
@@ -346,8 +342,10 @@ internal class J2ObjCCompatSources(
   private val setFunctionParameterName: String
     get() = "value"
 
-  private fun fieldConstantDefineDependentSource(field: Field): Dependent<Source> =
-    field.descriptor.takeIf(::shouldInclude)?.let(::constantDefineDependentSource)
+  private fun fieldConstantDefineDependentSource(
+    fieldDescriptor: FieldDescriptor
+  ): Dependent<Source> =
+    fieldDescriptor.takeIf(::shouldInclude)?.let(::constantDefineDependentSource)
       ?: dependent(Source.EMPTY)
 
   private fun constantDefineDependentSource(fieldDescriptor: FieldDescriptor): Dependent<Source>? =
@@ -360,31 +358,31 @@ internal class J2ObjCCompatSources(
       "_" +
       fieldDescriptor.name!!
 
-  private fun functionDependentSources(member: Member): List<Dependent<Source>> =
-    when (member) {
-      is Method -> methodFunctionDependentSources(member)
-      is Field ->
-        listOf(fieldGetFunctionDependentSource(member), fieldSetFunctionDependentSource(member))
-      else -> emptyList()
-    }
-
-  private fun methodFunctionDependentSources(method: Method): List<Dependent<Source>> = buildList {
-    method
-      .takeIf { shouldInclude(it.descriptor) }
-      ?.let { it.descriptor.toObjCNames() }
-      ?.let { selector -> addAll(functionDependentSources(method, selector)) }
-    method
-      .takeIf {
-        it.descriptor.isObjectiveCKmpMethod &&
-          (it.descriptor.isStatic || it.descriptor.isConstructor)
-      }
-      ?.let { it.descriptor.objectiveCKmpMethodSelector() }
+  private fun methodFunctionDependentSources(
+    methodDescriptor: MethodDescriptor
+  ): List<Dependent<Source>> = buildList {
+    // TODO(b/540807751): Unify KMP and non-KMP method sources.
+    methodDescriptor
+      .takeIf { shouldInclude(it) }
+      ?.let { it.toObjCNames() }
+      ?.let { selector -> addAll(functionDependentSources(methodDescriptor, selector)) }
+    methodDescriptor
+      .takeIf { it.isObjectiveCKmpMethod && (it.isStatic || it.isConstructor) }
+      ?.let { it.objectiveCKmpMethodSelector() }
       ?.let { selector ->
-        if (method.isConstructor) {
-          add(objectiveCKmpMethodFunctionDependentSource(method, selector, prefix = "create_"))
-          add(objectiveCKmpMethodFunctionDependentSource(method, selector, prefix = "new_"))
+        if (methodDescriptor.isConstructor) {
+          add(
+            objectiveCKmpMethodFunctionDependentSource(
+              methodDescriptor,
+              selector,
+              prefix = "create_",
+            )
+          )
+          add(
+            objectiveCKmpMethodFunctionDependentSource(methodDescriptor, selector, prefix = "new_")
+          )
         } else {
-          add(objectiveCKmpMethodFunctionDependentSource(method, selector))
+          add(objectiveCKmpMethodFunctionDependentSource(methodDescriptor, selector))
         }
       }
   }
@@ -393,6 +391,8 @@ internal class J2ObjCCompatSources(
     !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
       methodDescriptor.visibility.isPublic &&
       when {
+        // Enum valueOf(String) methods are not supported.
+        methodDescriptor.isEnumValueOf -> false
         // Static methods are always included.
         methodDescriptor.isStatic -> true
         // Constructors are included except for specific cases.
@@ -483,29 +483,26 @@ internal class J2ObjCCompatSources(
       .orIfNull { baseSource.toPointer() }
 
   private fun objectiveCKmpMethodFunctionDependentSource(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     selector: String,
     prefix: String = "",
   ): Dependent<Source> =
     functionDeclaration(
       modifiers = listOf(nsInline),
-      returnType = method.descriptor.returnTypeDescriptor.objCKmpDependentSource(),
-      name = objectiveCKmpMethodFunctionName(method.descriptor, selector, prefix),
+      returnType = methodDescriptor.returnTypeDescriptor.objCKmpDependentSource(),
+      name = objectiveCKmpMethodFunctionName(methodDescriptor, selector, prefix),
       parameters =
-        method.parameters.mapIndexed { index, variable ->
-          variableKmpDependentSource(
-            variable.name,
-            method.descriptor.parameterTypeDescriptors[index],
-          )
+        methodDescriptor.parameterTypeDescriptors.mapIndexed { index, typeDescriptor ->
+          variableKmpDependentSource(index, typeDescriptor)
         },
-      statements = objectiveCKmpMethodStatementDependentSources(method, selector),
+      statements = objectiveCKmpMethodStatementDependentSources(methodDescriptor, selector),
     )
 
   private fun variableKmpDependentSource(
-    name: String,
+    index: Int,
     typeDescriptor: TypeDescriptor,
   ): Dependent<Source> =
-    spaceSeparated(typeDescriptor.objCKmpDependentSource(), dependentSource(name.objCVariableName))
+    spaceSeparated(typeDescriptor.objCKmpDependentSource(), dependentSource(parameterName(index)))
 
   private fun objectiveCKmpMethodFunctionName(
     methodDescriptor: MethodDescriptor,
@@ -519,17 +516,20 @@ internal class J2ObjCCompatSources(
       .plus(selector.replace(":", "_"))
 
   private fun objectiveCKmpMethodStatementDependentSources(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     selector: String,
   ): List<Dependent<Source>> =
-    lastStatementDependentSources(method, objectiveCKmpMethodCallDependentSource(method, selector))
+    lastStatementDependentSources(
+      methodDescriptor,
+      objectiveCKmpMethodCallDependentSource(methodDescriptor, selector),
+    )
 
   private fun lastStatementDependentSources(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     expression: Dependent<Source>,
   ): List<Dependent<Source>> =
     listOf(
-      if (isPrimitiveVoid(method.descriptor.returnTypeDescriptor)) {
+      if (isPrimitiveVoid(methodDescriptor.returnTypeDescriptor)) {
         expressionStatement(expression)
       } else {
         returnStatement(expression)
@@ -537,13 +537,16 @@ internal class J2ObjCCompatSources(
     )
 
   private fun objectiveCKmpMethodCallDependentSource(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     selector: String,
   ): Dependent<Source> =
     methodCall(
-      target = methodCallTargetDependentSource(method),
+      target = methodCallTargetDependentSource(methodDescriptor),
       name = selector,
-      arguments = method.parameters.map(::nameDependentSource),
+      arguments =
+        0.until(methodDescriptor.parameterTypeDescriptors.size).map { index ->
+          dependentSource(parameterName(index))
+        },
     )
 
   private fun canInferObjCName(methodDescriptor: MethodDescriptor): Boolean =
@@ -587,33 +590,36 @@ internal class J2ObjCCompatSources(
       mappedObjCNameDependentSource(typeDeclaration) != null
 
   private fun functionDependentSources(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     objCNames: MethodObjCNames,
   ): List<Dependent<Source>> =
-    if (method.isConstructor) {
+    if (methodDescriptor.isConstructor) {
       listOf(
-        functionDependentSource(method, objCNames, prefix = "create_"),
-        functionDependentSource(method, objCNames, prefix = "new_"),
+        functionDependentSource(methodDescriptor, objCNames, prefix = "create_"),
+        functionDependentSource(methodDescriptor, objCNames, prefix = "new_"),
       )
     } else {
-      listOf(functionDependentSource(method, objCNames))
+      listOf(functionDependentSource(methodDescriptor, objCNames))
     }
 
   private fun functionDependentSource(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     objCNames: MethodObjCNames,
     prefix: String = "",
   ): Dependent<Source> =
     functionDeclaration(
       modifiers = listOf(nsInline),
-      returnType = objCDependentSource(method.descriptor.returnTypeDescriptor),
-      name = functionName(method.descriptor, objCNames, prefix),
+      returnType = objCDependentSource(methodDescriptor.returnTypeDescriptor),
+      name = functionName(methodDescriptor, objCNames, prefix),
       parameters =
-        method.parameters.mapIndexed { index, variable ->
-          variableDependentSource(variable.name, method.descriptor.parameterTypeDescriptors[index])
+        methodDescriptor.parameterTypeDescriptors.mapIndexed { index, typeDescriptor ->
+          parameterDependentSource(index, typeDescriptor)
         },
       statements =
-        statementDependentSources(method, objCNames.escapeObjCMethod(method.isConstructor)),
+        statementDependentSources(
+          methodDescriptor,
+          objCNames.escapeObjCMethod(methodDescriptor.isConstructor),
+        ),
     )
 
   private fun functionName(
@@ -656,27 +662,35 @@ internal class J2ObjCCompatSources(
       .joinToString("")
 
   private fun statementDependentSources(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     objCNames: MethodObjCNames,
   ): List<Dependent<Source>> =
-    lastStatementDependentSources(method, methodCallDependentSource(method, objCNames))
+    lastStatementDependentSources(
+      methodDescriptor,
+      methodCallDependentSource(methodDescriptor, objCNames),
+    )
 
   private fun methodCallDependentSource(
-    method: Method,
+    methodDescriptor: MethodDescriptor,
     objCNames: MethodObjCNames,
   ): Dependent<Source> =
     methodCall(
-      target = methodCallTargetDependentSource(method),
+      target = methodCallTargetDependentSource(methodDescriptor),
       name = objCSelector(objCNames),
-      arguments = method.parameters.map(::nameDependentSource),
+      arguments =
+        0.until(methodDescriptor.parameterTypeDescriptors.size).map { index ->
+          dependentSource(parameterName(index))
+        },
     )
 
-  private fun methodCallTargetDependentSource(method: Method): Dependent<Source> =
-    if (method.isConstructor) {
-      allocDependentSource(method.descriptor.enclosingTypeDescriptor.typeDeclaration)
+  private fun methodCallTargetDependentSource(
+    methodDescriptor: MethodDescriptor
+  ): Dependent<Source> =
+    if (methodDescriptor.isConstructor) {
+      allocDependentSource(methodDescriptor.enclosingTypeDescriptor.typeDeclaration)
     } else {
       sharedDependentSource(
-        method.descriptor.enclosingTypeDescriptor.typeDeclaration.companionDeclaration
+        methodDescriptor.enclosingTypeDescriptor.typeDeclaration.companionDeclaration
       )
     }
 
@@ -687,18 +701,16 @@ internal class J2ObjCCompatSources(
         .joinToString("")
     )
 
-  private fun variableDependentSource(
-    name: String,
+  private fun parameterDependentSource(
+    index: Int,
     typeDescriptor: TypeDescriptor,
   ): Dependent<Source> =
-    combine(objCDependentSource(typeDescriptor), dependentSource(name.objCVariableName)) {
-      typeSource,
-      nameSource ->
-      spaceSeparated(typeSource, nameSource)
-    }
+    spaceSeparated(objCDependentSource(typeDescriptor), dependentSource(parameterName(index)))
 
-  private fun nameDependentSource(variable: Variable): Dependent<Source> =
-    dependentSource(variable.name.objCVariableName)
+  private fun parameterName(index: Int): String = "arg$index"
+
+  private fun parameterAccessDependentSource(index: Int): Dependent<Source> =
+    dependentSource(parameterName(index))
 
   private fun objCNameDependentSource(
     companionDeclaration: CompanionDeclaration
@@ -836,11 +848,7 @@ internal class J2ObjCCompatSources(
   private fun interfaceObjCDependentSource(
     declaredTypeDescriptor: DeclaredTypeDescriptor
   ): Dependent<Source> =
-    combine(id, objCNameDependentSource(declaredTypeDescriptor.typeDeclaration)) {
-      idSource,
-      typeSource ->
-      join(idSource, inAngleBrackets(typeSource))
-    }
+    join(id, inAngleBrackets(objCNameDependentSource(declaredTypeDescriptor.typeDeclaration)))
 
   private val booleanTypeDependentSource: Dependent<Source>
     get() = dependentNsObjCRuntimeSource("BOOL")
