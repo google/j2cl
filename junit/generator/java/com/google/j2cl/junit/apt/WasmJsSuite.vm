@@ -48,6 +48,8 @@ j2clTestSuite({
 function maybePatchInstantiateStreamingForSafari() {
   // Check is not fully accurate, but it's good enough for tests for now.
   if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
+    const safariVersion = navigator.userAgent.match(/Version\/(\d+(\.\d+)?)/)[1];
+    console.log("Patching instantiateStreaming for Safari " + safariVersion);
     WebAssembly.instantiateStreaming = async (responsePromise, importObject, compileOptions) => {
       const response = await responsePromise;
       const bufferSource = await response.arrayBuffer();
