@@ -557,8 +557,10 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           // Must happen after RewriteAssignmentExpressions
           NormalizeNativePropertyAccesses::new,
-          // NormalizeNativePropertyAccesses creates method calls whose qualifiers might need to be
-          // extracted. After extracting qualifiers, we must again normalize multi-expressions.
+          InsertExternConversionsWasm::new,
+          // NormalizeNativePropertyAccesses and InsertExternConversionsWasm creates method calls
+          // whose qualifiers might need to be extracted. After extracting qualifiers,
+          // we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           ImplementFinallyViaControlFlow::new,
@@ -566,7 +568,6 @@ public enum Backend {
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
           InsertExceptionConversions::new,
-          InsertExternConversionsWasm::new,
           RemoveCustomIsInstanceMethods::new,
           RemoveNonreferencedNativeMethods::new,
           RemoveNoopStatements::new,

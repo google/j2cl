@@ -30,11 +30,12 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           int primitiveField;
           String stringField;
           Double doubleField;
+          Object objectField;
           Boolean booleanField;
           Long longField;
           MyNative nativeField;
-          MyNative(int a, String b, Double d, Boolean bool, Long l, MyNative c) {}
-          native MyNative test(int a, String b, Double d, Boolean bool, Long l, MyNative c);
+          MyNative(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c) {}
+          native MyNative test(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c);
         }
         class MyNonNative {
           @JsMethod
@@ -69,8 +70,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Native JsType field 'Buggy.anotherField' cannot be of type 'C'.
           Buggy(C arg) {}
         > Error: Parameter 'arg' in 'Buggy(C arg)' cannot be of type 'C'.
-          native void test(Object c);
-        > Error: Parameter 'c' in 'void Buggy.test(Object c)' cannot be of type 'Object'.
           native <T> void test2(T c);
         > Error: Parameter 'c' in 'void Buggy.test2(T c)' cannot be of type 'T'.
           native void test3(C c);
@@ -94,9 +93,6 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """
         import jsinterop.annotations.*;
         class Main {
-          @JsMethod
-          static native void test(Object c);
-        > Error: Parameter 'c' in 'void Main.test(Object c)' cannot be of type 'Object'.
           @JsMethod
           static native <T> void test2(T c);
         > Error: Parameter 'c' in 'void Main.test2(T c)' cannot be of type 'T'.
@@ -137,7 +133,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testNativeTypeStringConcatenationFails() {
+  public void testNativeTypeStringConcatenationSucceeds() {
     assertWithInlineMessages(
         "test.Main",
         """
@@ -147,15 +143,13 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         class Main {
           void test(Native n) {
             String s1 = "" + n;
-        > Error: Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)
             s1 += n;
-        > Error: Native JsType 'Native' cannot be assigned to 'Object'. (b/262009761)
           }
         }
         """);
   }
 
-  public void testNativeJsTypeInvalidAssignmentsFails() {
+  public void testNativeJsTypeAssignmentsSucceeds() {
     assertWithInlineMessages(
         "test.Main",
         """
@@ -167,25 +161,16 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         class Main {
           void test() {
             Object obj = new Buggy();
-        > Error: Native JsType 'Buggy' cannot be assigned to 'Object'. (b/262009761)
             obj = new Buggy[1];
-        > Error: Native JsType 'Buggy[]' cannot be assigned to 'Object'. (b/262009761)
             passArgument(new AlsoBuggy());
-        > Error: Native JsType 'AlsoBuggy' cannot be assigned to 'Object'. (b/262009761)
             passArgument(new AlsoBuggy[1]);
-        > Error: Native JsType 'AlsoBuggy[]' cannot be assigned to 'Object'. (b/262009761)
             Object obj2 = (Object) new Buggy();
-        > Error: Native JsType 'Buggy' cannot be cast to 'Object'. (b/262009761)
             Buggy b = (Buggy) new Object();
-        > Error: 'Object' cannot be cast to Native JsType 'Buggy'. (b/262009761)
             Buggy[] bArr = (Buggy[]) new Object();
-        > Error: 'Object' cannot be cast to Native JsType 'Buggy[]'. (b/262009761)
             new Buggy().equals(null);
-        > Error: Cannot access member of 'Object' with Native JsType 'Buggy'. (b/262009761)
             new Buggy[1].equals(null);
-        > Error: Cannot access member of 'Object' with Native JsType 'Buggy[]'. (b/262009761)
           }
-          void passArgument(Object arg) {}
+          void passArgument(Object obj) {}
         }
         """);
   }
@@ -234,21 +219,23 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         @JsType(isNative = true)
         interface BuggyInterface {}
 
-        // TODO(b/466508694): Decide if we can allow these or give a better error message if not.
-        record R(BuggyInterface b) {}
-        > Error: Native JsType 'BuggyInterface' cannot be assigned to 'Object'. (b/262009761)
+        record R1(Buggy b) {}
+        record R2(BuggyInterface b) {}
         class Main {
           public Main() {
             switch (new Object()) {
-             case BuggyInterface b -> {}
-        > Error: Cannot pattern match against native JsType interface 'BuggyInterface'.
-             case R(BuggyInterface b) -> {}
-        > Error: Cannot pattern match against native JsType interface 'BuggyInterface'.
-             case R(Object o) -> {}
              case Buggy b -> {}
         > Error: Cannot pattern match against native JsType 'Buggy'.
              case Buggy[] b -> {}
         > Error: Cannot pattern match against native JsType 'Buggy[]'.
+             case BuggyInterface b -> {}
+        > Error: Cannot pattern match against native JsType interface 'BuggyInterface'.
+             case R1(Buggy b) -> {}
+        > Error: Cannot pattern match against native JsType 'Buggy'.
+             case R2(BuggyInterface b) -> {}
+        > Error: Cannot pattern match against native JsType interface 'BuggyInterface'.
+             case R1(Object o) -> {}
+             case R2(Object o) -> {}
              default -> {}
             }
           }

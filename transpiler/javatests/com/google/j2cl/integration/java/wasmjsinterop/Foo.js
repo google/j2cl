@@ -16,6 +16,24 @@
 goog.module('test.Foo');
 
 class Foo {
+
+  /**
+   * @param {number} value
+   * @public
+   */
+  constructor(value) {
+    /** @type {number} */
+    this.value = value;
+  }
+
+  /**
+   * @return {*}
+   * @public
+   */
+  getValue() {
+    return this.value;
+  }
+
   /**
    * @param {number} a
    * @param {number} b
@@ -24,6 +42,14 @@ class Foo {
    */
   sum(a, b) {
     return a + b;
+  }
+
+  /**
+   * @return {string}
+   * @public
+   */
+  toString() {
+    return "Foo(" + this.value + ")";
   }
 
   /**
@@ -41,7 +67,7 @@ class Foo {
    * @public
    */
   static create() {
-    return new Foo();
+    return new Foo(55);
   }
 }
 

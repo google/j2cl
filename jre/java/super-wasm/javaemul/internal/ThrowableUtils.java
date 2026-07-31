@@ -29,21 +29,14 @@ public final class ThrowableUtils {
     String toString();
   }
 
-  /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
-  public static Throwable getJavaThrowable(JsObject e) {
-    return WasmExtern.convertToAny(getJavaThrowableImpl(e));
-  }
-
-  /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
-  public static void setJavaThrowable(JsObject e, Throwable javaThrowable) {
-    setJavaThrowableImpl(e, WasmExtern.convertToExtern(javaThrowable));
-  }
-
+  @SuppressWarnings("unusable-by-js")
   @JsMethod(name = "setJavaThrowable", namespace = "j2wasm.ExceptionUtils")
-  private static native void setJavaThrowableImpl(JsObject error, WasmExtern javaThrowable);
+  public static native void setJavaThrowable(JsObject error, Throwable javaThrowable);
 
+  /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
+  @SuppressWarnings("unusable-by-js")
   @JsMethod(name = "getJavaThrowable", namespace = "j2wasm.ExceptionUtils")
-  private static native WasmExtern getJavaThrowableImpl(JsObject error);
+  public static native Throwable getJavaThrowable(JsObject error);
 
   @JsMethod(namespace = "j2wasm.ExceptionUtils")
   public static native boolean isError(JsObject error);

@@ -15,8 +15,6 @@
  */
 package nativejstypes;
 
-import javaemul.internal.annotations.Wasm;
-
 public class Main {
   public static int testNativeJsTypeWithNamespace() {
     Foo foo = new Foo();
@@ -62,7 +60,6 @@ public class Main {
     o1 = Bar[][].class;
   }
 
-  @Wasm("nop") // Not supported in WASM.
   public static void testNativeTypeObjectMethods() {
     Bar bar = new Bar(6, 7);
     String unusedStr = bar.toString();

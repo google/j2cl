@@ -115,7 +115,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   }
 
   @JsType(isNative = true, name = "boolean", namespace = JsPackage.GLOBAL)
-  private interface NativeBoolean {}
+  interface NativeBoolean {}
 
   static NativeBoolean toJs(Boolean value) {
     return value == null ? null : toJsPrimitive(value.booleanValue());

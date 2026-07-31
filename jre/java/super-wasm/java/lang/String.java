@@ -36,6 +36,7 @@ import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.StringUtil;
+import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -819,6 +820,10 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return new String(nativeFromCharCodeArray(x, 0, length));
   }
 
+  static String fromJs(WasmExtern extern) {
+    return String.fromJsString(toNativeString(extern));
+  }
+
   static String fromSafeJsString(NativeString o) {
     return new String(o);
   }
@@ -912,4 +917,8 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   @Wasm("string.concat")
   private static native NativeString nativeConcat(NativeString a, NativeString b);
+
+  // TODO(b/541222170): See if we can have a `string.convert_extern` instruction in binaryen.
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "String")
+  private static native NativeString toNativeString(WasmExtern x);
 }

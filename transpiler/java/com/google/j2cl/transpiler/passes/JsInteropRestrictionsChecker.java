@@ -395,13 +395,18 @@ public class JsInteropRestrictionsChecker {
 
     checkTypeAssignments(
         type,
-        JsInteropRestrictionsChecker::isDisallowedNativeJsTypeAssignment,
+        JsInteropRestrictionsChecker::isDisallowedAllowedNativeJsTypeConversion,
         /* errorMessageSuffix= */ " (b/262009761)");
   }
 
-  private static boolean isDisallowedNativeJsTypeAssignment(
+  private static boolean isDisallowedAllowedNativeJsTypeConversion(
       TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
-    return toTypeDescriptor.isNative() != fromTypeDescriptor.isNative();
+
+    var isAllowedNativeJdTypeConversion =
+        TypeDescriptors.isJavaLangObject(toTypeDescriptor)
+            || TypeDescriptors.isJavaLangObject(fromTypeDescriptor)
+            || toTypeDescriptor.isNative() == fromTypeDescriptor.isNative();
+    return !isAllowedNativeJdTypeConversion;
   }
 
   private void checkJsFunctionLambdas(Type type) {
@@ -1848,7 +1853,9 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkWasmNativeMethodSignature(Method method) {
-    if (AstUtils.isAnnotatedWithWasm(method.getDescriptor())) {
+    if (AstUtils.isAnnotatedWithWasm(method.getDescriptor())
+        // TODO(b/540393685): Native methods and exported methods should be handled similarly.
+        || isUnusableByJsSuppressed(method.getDescriptor())) {
       return;
     }
 
@@ -1861,6 +1868,7 @@ public class JsInteropRestrictionsChecker {
    */
   private boolean canCrossWasmJavaScriptBoundary(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
+        || TypeDescriptors.isJavaLangObject(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || typeDescriptor.isNative()

@@ -6,6 +6,7 @@ const j2wasm_ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const j2wasm_DoubleUtils = goog.require('j2wasm.DoubleUtils');
 const j2wasm_EqualityUtils = goog.require('j2wasm.EqualityUtils');
 const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
+const j2wasm_JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
 const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
 const nativejstypes_Bar = goog.require('nativejstypes.Bar');
 const nativejstypes_NativeNonreferencedMethods = goog.require('nativejstypes.NativeNonreferencedMethods');
@@ -91,6 +92,7 @@ function getImports() {
    'RegExp.exec$1': (/** !RegExp */ $instance, /** string */ value, ) => $instance.exec(value, ),
    'RegExp.test$1': (/** !RegExp */ $instance, /** string */ value, ) => $instance.test(value, ),
    'RegExpResult.at$1': (/** !RegExpResult */ $instance, /** number */ index, ) => $instance.at(index, ),
+   'String': String,
    'atob': atob,
    'btoa': btoa,
    'com.acme.MyFoo.constructor': () => new com_acme_MyFoo(),
@@ -126,6 +128,7 @@ function getImports() {
    'j2wasm.ExceptionUtils.getJavaThrowable': j2wasm_ExceptionUtils.getJavaThrowable,
    'j2wasm.ExceptionUtils.isError': j2wasm_ExceptionUtils.isError,
    'j2wasm.ExceptionUtils.setJavaThrowable': j2wasm_ExceptionUtils.setJavaThrowable,
+   'j2wasm.JsInteropRuntime.typeOf': j2wasm_JsInteropRuntime.typeOf,
    'j2wasm.StringUtils.compareToIgnoreCase': j2wasm_StringUtils.compareToIgnoreCase,
    'j2wasm.StringUtils.equalsIgnoreCase': j2wasm_StringUtils.equalsIgnoreCase,
    'j2wasm.StringUtils.generateClassName': j2wasm_StringUtils.generateClassName,

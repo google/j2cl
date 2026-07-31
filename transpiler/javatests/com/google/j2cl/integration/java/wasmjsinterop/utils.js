@@ -15,6 +15,7 @@
  */
 goog.module('test.utils');
 
+const Foo = goog.require('test.Foo');
 const Long = goog.require('goog.math.Long');
 
 /**
@@ -44,6 +45,15 @@ function sumDoublesInJs(a, b) {
 }
 
 /**
+ * @param {*} o
+ * @return {*}
+ * @public
+ */
+function identityInJs(o) {
+  return o;
+}
+
+/**
  * @param {?boolean} a
  * @param {?boolean} b
  * @return {?boolean}
@@ -69,9 +79,73 @@ function sumLongsInJs(a, b) {
   return a.add(b);
 }
 
+/**
+ * @return {*}
+ * @public
+ */
+function getJsNull() {
+  return null;
+}
+
+/**
+ * @return {*}
+ * @public
+ */
+function getJsUndefined() {
+  return undefined;
+}
+
+/**
+ * @return {*}
+ * @public
+ */
+function getJsTrue() {
+  return true;
+}
+
+/**
+ * @return {*}
+ * @public
+ */
+function getJsFalse() {
+  return false;
+}
+
+/**
+ * @return {*}
+ * @public
+ */
+function getJsOnePointFive() {
+  return 1.5;
+}
+
+/**
+ * @return {*}
+ * @public
+ */
+function getJsHello() {
+  return "hello";
+}
+
+/**
+ * @return {*}
+ * @public
+ */
+function getJsFoo() {
+  return new Foo(5);
+}
+
 exports = {
   andBooleansInJs,
   appendInJs,
+  identityInJs,
   sumDoublesInJs,
   sumLongsInJs,
+  getJsNull,
+  getJsUndefined,
+  getJsTrue,
+  getJsFalse,
+  getJsOnePointFive,
+  getJsHello,
+  getJsFoo,
 };

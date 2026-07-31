@@ -216,13 +216,14 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
-    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)) {
-      // Use externref since it can be a primitive value or null.
-      return TypeDescriptors.get()
-          .javaemulInternalWasmExtern
-          .toNullable(typeDescriptor.isNullable());
-    }
-    if (needsExternalizeInternalize(typeDescriptor, isExport)) {
+
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+        || TypeDescriptors.isJavaLangObject(typeDescriptor)
+        || needsBoundaryExternConversion(typeDescriptor, isExport)) {
+      // Use externref since it can either be:
+      //   - a Js primitive valus that can also be null,
+      //   - an (opaque) wasm object that will cross the boundary
+      //   - a type that is explicitly allowed to cross the boundary (e.g a JsType)
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
           .toNullable(typeDescriptor.isNullable());
@@ -236,11 +237,12 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return RuntimeMethods.createJsStringFromStringMethodCall(expression);
     }
-    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)) {
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+        || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
-    if (needsExternalizeInternalize(typeDescriptor, isExport)) {
+    if (needsBoundaryExternConversion(typeDescriptor, isExport)) {
       return RuntimeMethods.createWasmConvertToExternMethodCall(expression);
     }
     return expression;
@@ -252,7 +254,8 @@ public class WasmExportBridgesUtils {
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return RuntimeMethods.createStringFromJsStringMethodCall(expression);
     }
-    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)) {
+    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+        || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
       return RuntimeMethods.createFromJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
@@ -263,13 +266,13 @@ public class WasmExportBridgesUtils {
                   typeDescriptor));
       return MethodCall.builderFrom(adaptMethodDescriptor).setArguments(expression).build();
     }
-    if (needsExternalizeInternalize(typeDescriptor, isExport)) {
+    if (needsBoundaryExternConversion(typeDescriptor, isExport)) {
       return RuntimeMethods.createWasmConvertToAnyMethodCall(expression, typeDescriptor);
     }
     return expression;
   }
 
-  private static boolean needsExternalizeInternalize(
+  private static boolean needsBoundaryExternConversion(
       TypeDescriptor typeDescriptor, boolean isExport) {
     return !typeDescriptor.isNative()
         && !typeDescriptor.isPrimitive()

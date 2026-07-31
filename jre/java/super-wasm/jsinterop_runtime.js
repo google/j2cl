@@ -14,6 +14,8 @@
 
 goog.module('j2wasm.JsInteropRuntime');
 
+const Long = goog.require('goog.math.Long');
+
 /**
  * @param {string} id
  * @return {!Function}
@@ -96,9 +98,34 @@ function adaptJsFunction(fn, createAdapter) {
   return fn.adapter;
 }
 
+/**
+ * @param {*} x
+ * @return {number}
+ */
+function typeOf(x) {
+  if (x == null) {
+    return 0;
+  }
+
+  switch (typeof x) {
+    case 'string':
+      return 1;
+    case 'boolean':
+      return 2;
+    case 'number':
+      return 3;
+    default:
+      if (x instanceof Long) {
+        return 4;
+      }
+      return 5;
+  }
+}
+
 exports = {
   adaptJsFunction,
   bindJsFunction,
   constructorProxy,
   invokeJsFunction,
+  typeOf,
 };

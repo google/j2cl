@@ -186,7 +186,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   @JsType(isNative = true, name = "number", namespace = JsPackage.GLOBAL)
-  private interface NativeNumber {}
+  interface NativeNumber {}
 
   static NativeNumber toJs(Double value) {
     return value == null ? null : toJsPrimitive(value.doubleValue());
