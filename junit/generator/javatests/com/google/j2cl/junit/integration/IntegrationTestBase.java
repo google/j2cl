@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -37,17 +38,19 @@ import org.junit.runners.Parameterized.Parameters;
 public abstract class IntegrationTestBase {
 
   public enum TestMode {
-    JAVA(""),
-    J2CL_UNCOMPILED("-j2cl"),
-    J2CL_COMPILED("-j2cl_compiled"),
-    J2KT("-j2kt-jvm"),
-    J2WASM_UNOPTIMIZED("-j2wasm"),
-    J2WASM_OPTIMIZED("-j2wasm_optimized");
+    JAVA("", "JAVA"),
+    J2CL_UNCOMPILED("-j2cl", "CLOSURE"),
+    J2CL_COMPILED("-j2cl_compiled", "CLOSURE"),
+    J2KT("-j2kt-jvm", "J2KT"),
+    J2WASM_UNOPTIMIZED("-j2wasm", "WASM"),
+    J2WASM_OPTIMIZED("-j2wasm_optimized", "WASM");
 
     public final String postfix;
+    public final String platform;
 
-    private TestMode(String postfix) {
+    private TestMode(String postfix, String platform) {
       this.postfix = postfix;
+      this.platform = platform;
     }
 
     public boolean isJ2cl() {
@@ -73,13 +76,12 @@ public abstract class IntegrationTestBase {
 
   @Parameters(name = "{0}")
   public static Iterable<Object[]> data() {
-    return Arrays.asList(
-        new TestMode[] {TestMode.JAVA},
-        new TestMode[] {TestMode.J2KT},
-        new TestMode[] {TestMode.J2CL_UNCOMPILED},
-        new TestMode[] {TestMode.J2CL_COMPILED},
-        new TestMode[] {TestMode.J2WASM_UNOPTIMIZED},
-        new TestMode[] {TestMode.J2WASM_OPTIMIZED});
+    String platformsProperty = System.getProperty("j2cl.integration.test.platforms");
+    List<String> platforms = Splitter.on(',').splitToList(platformsProperty);
+    return Arrays.stream(TestMode.values())
+        .filter(mode -> platforms.contains(mode.platform))
+        .map(v -> new Object[] {v})
+        .collect(Collectors.toList());
   }
 
   @Parameter public TestMode testMode;

@@ -49,6 +49,7 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
         srcs = [name + ".java"],
         data = test_data_all + extra_data,
         shard_count = shard_count,
+        jvm_flags = ["-Dj2cl.integration.test.platforms=" + ",".join(platforms + ["JAVA"])],
         deps = deps + [
             "//java/com/google/common/base",
             "//third_party/java/junit",

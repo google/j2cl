@@ -15,13 +15,10 @@
  */
 package com.google.j2cl.junit.integration.parameterizedtest;
 
-import static org.junit.Assume.assumeFalse;
-
 import com.google.j2cl.junit.integration.IntegrationTestBase;
 import com.google.j2cl.junit.integration.TestResult;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -29,17 +26,6 @@ import org.junit.runners.Parameterized;
 /** Integration test for j2cl JUnit4 parameterized test support. */
 @RunWith(Parameterized.class)
 public class J2clParameterizedIntegrationTest1 extends IntegrationTestBase {
-
-  @Before
-  public void assumeNonJ2wasm() {
-    // TODO(b/233963223): J2wasm does not support parameterized test yet.
-    assumeFalse(testMode.isJ2wasm());
-  }
-
-  @Before
-  public void assumeNonJ2kt() {
-    assumeFalse(testMode.isJ2kt());
-  }
 
   @Test
   public void testSimpleParameterizedTest() throws Exception {

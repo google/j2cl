@@ -15,10 +15,7 @@
  */
 package com.google.j2cl.junit.integration.stacktrace;
 
-import static org.junit.Assume.assumeTrue;
-
 import com.google.j2cl.junit.integration.IntegrationTestBase;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -26,11 +23,6 @@ import org.junit.runners.Parameterized;
 /** Integration test for stack trace deobfuscation */
 @RunWith(Parameterized.class)
 public class WasmStacktraceIntegrationTest extends IntegrationTestBase {
-
-  @Before
-  public void assumeJ2wasm() {
-    assumeTrue(testMode.isJ2wasm() || testMode.isJvm());
-  }
 
   @Test
   public void testSimpleThrowingMethod() throws Exception {

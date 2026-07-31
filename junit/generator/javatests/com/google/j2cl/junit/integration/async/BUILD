@@ -11,6 +11,7 @@ package(
 # For debugging purposes it can be helpful to have the test log results of
 # the integration tests to stdout. This can be done with:
 # blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/async:J2clAsyncTest
+# TODO(b/223396796): J2wasm does not support async test.
 j2cl_test_integration_test(
     name = "J2clAsyncTest",
     test_data = [

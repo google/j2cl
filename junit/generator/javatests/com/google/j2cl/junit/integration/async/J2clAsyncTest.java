@@ -22,7 +22,6 @@ import com.google.j2cl.junit.async.AsyncTestRunner.ErrorMessage;
 import com.google.j2cl.junit.integration.IntegrationTestBase;
 import com.google.j2cl.junit.integration.TestResult;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -38,16 +37,7 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class J2clAsyncTest extends IntegrationTestBase {
 
-  @Before
-  public void assumeNonJ2wasm() {
-    // TODO(b/223396796): J2wasm does not support async test.
-    assumeFalse(testMode.isJ2wasm());
-  }
 
-  @Before
-  public void assumeNonJ2kt() {
-    assumeFalse(testMode.isJ2kt());
-  }
 
   @Test
   public void testAfterWithFailingAsyncTest() throws Exception {

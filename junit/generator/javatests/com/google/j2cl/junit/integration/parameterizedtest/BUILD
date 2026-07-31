@@ -11,6 +11,7 @@ package(
 # For debugging purposes it can be helpful to have the test log results of
 # the integration tests to stdout. This can be done with:
 # blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/junit4:JUnit4IntegrationTest
+# TODO(b/233963223): J2wasm does not support parameterized test yet.
 j2cl_test_integration_test(
     name = "J2clParameterizedIntegrationTest1",
     test_data = [
@@ -25,6 +26,7 @@ j2cl_test_integration_test(
     ],
 )
 
+# TODO(b/233963223): J2wasm does not support parameterized test yet.
 j2cl_test_integration_test(
     name = "J2clParameterizedIntegrationTest2",
     test_data = [

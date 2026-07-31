@@ -15,12 +15,9 @@
  */
 package com.google.j2cl.junit.integration.junit4;
 
-import static org.junit.Assume.assumeFalse;
-
 import com.google.j2cl.junit.integration.IntegrationTestBase;
 import com.google.j2cl.junit.integration.TestResult;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -31,11 +28,6 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
 
   private interface TestSequencer {
     String[] forTest(String name);
-  }
-
-  @Before
-  public void assumeNonWeb() {
-    assumeFalse(testMode.isWeb());
   }
 
   @Test
