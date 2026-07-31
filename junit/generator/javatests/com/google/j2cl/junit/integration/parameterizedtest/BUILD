@@ -21,7 +21,6 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleArrayParameterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterProvidedByArrayTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterInitializedByConstructor",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterOfArrayTypeTest",
     ],
 )
