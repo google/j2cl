@@ -13,6 +13,9 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -20,16 +23,18 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
-import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.WasmFuncrefCall;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +77,15 @@ import java.util.List;
  *   }
  *
  *   R method(String param) {
- *     return invoke(jsFuncref, param);
+ *     // TODO(b/537884836): Empty, will be removed.
+ *   }
+ *
+ *   static R method(javamul.internal.JsFunctionAdaptor adaptor, String param) {
+ *     if (adaptor.wasmFuncref != null) {
+ *       return adaptor.wasmFuncref(adaptor, param);
+ *     } else {
+ *       return invoke(adaptor.jsFuncref, param);
+ *     }
  *   }
  *
  *   @JsMethod(...)
@@ -106,6 +119,7 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
               addWasmFuncrefConstructor(adaptorType);
               addJsFunctionAdaptMethod(adaptorType);
               addJsFunctionInvokeMethod(adaptorType);
+              addJsFunctionStaticForwardingMethod(adaptorType);
               addJsFunctionForwardingMethod(adaptorType);
             }
 
@@ -253,7 +267,82 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
             .build());
   }
 
-  /** Adds a method to the JsFunction adaptor class to forward to the JavaScript function. */
+  private static void addJsFunctionStaticForwardingMethod(Type adaptorType) {
+    DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
+    SourcePosition sourcePosition = adaptorType.getSourcePosition();
+    MethodDescriptor staticForwardingMethodDescriptor =
+        LambdaAdaptorTypeDescriptors.getWasmJsFunctionStaticForwardingMethod(adaptorTypeDescriptor);
+
+    Variable jsFunctionInstance =
+        Variable.builder()
+            .setName("$instance")
+            .setTypeDescriptor(
+                TypeDescriptors.get().javaemulInternalJsFunctionAdaptor.toNonNullable())
+            .setParameter(true)
+            .setFinal(true)
+            .build();
+
+    List<Variable> forwardedVariables =
+        AstUtils.createParameterVariables(
+            staticForwardingMethodDescriptor
+                .getParameterTypeDescriptors()
+                .subList(1, staticForwardingMethodDescriptor.getParameterTypeDescriptors().size()));
+
+    List<Variable> parameters = new ArrayList<>();
+    parameters.add(jsFunctionInstance);
+    parameters.addAll(forwardedVariables);
+
+    TypeDescriptor returnTypeDescriptor =
+        staticForwardingMethodDescriptor.getReturnTypeDescriptor();
+    IfStatement ifStatement =
+        IfStatement.builder()
+            .setSourcePosition(sourcePosition)
+            .setConditionExpression(
+                FieldAccess.builder()
+                    .setQualifier(jsFunctionInstance.createReference())
+                    .setTarget(
+                        LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorWasmFuncrefField())
+                    .build()
+                    .infixNotEqualsNull())
+            .setThenStatement(
+                AstUtils.createReturnOrExpressionStatement(
+                    sourcePosition,
+                    createWasmFuncrefCall(
+                        adaptorTypeDescriptor,
+                        jsFunctionInstance.createReference(),
+                        forwardedVariables),
+                    returnTypeDescriptor))
+            .setElseStatement(
+                AstUtils.createReturnOrExpressionStatement(
+                    sourcePosition,
+                    createJsFuncrefCall(
+                        adaptorTypeDescriptor,
+                        jsFunctionInstance.createReference(),
+                        forwardedVariables),
+                    returnTypeDescriptor))
+            .build();
+
+    // static R run(JsFunctionAdaptor adaptor, A a, B b, ...) {
+    //   if (adaptor.wasmFuncref != null) {
+    //     return adaptor.wasmFuncref(adaptor, a, b, ...);
+    //   } else {
+    //     return invoke(adaptor.jsFuncref, a, b, ...);
+    //   }
+    // }
+    adaptorType.addMember(
+        Method.builder()
+            .setMethodDescriptor(staticForwardingMethodDescriptor)
+            .setParameters(parameters)
+            .addStatements(ifStatement)
+            .setSourcePosition(sourcePosition)
+            .build());
+  }
+
+  /**
+   * Adds a method to the JsFunction adaptor class to satisfy the interface implementation.
+   *
+   * <p>TODO(b/537884836): Revisit and remove.
+   */
   private static void addJsFunctionForwardingMethod(Type adaptorType) {
     DeclaredTypeDescriptor adaptorTypeDescriptor = adaptorType.getTypeDescriptor();
     SourcePosition sourcePosition = adaptorType.getSourcePosition();
@@ -262,32 +351,50 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
     List<Variable> forwardedVariables =
         AstUtils.createParameterVariables(forwardingMethodDescriptor.getParameterTypeDescriptors());
 
-    List<Expression> invokeArguments = new ArrayList<>();
-    invokeArguments.add(
-        FieldAccess.builderFrom(
-                LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField())
-            .setQualifier(new ThisReference(adaptorTypeDescriptor))
-            .build());
-    forwardedVariables.forEach(param -> invokeArguments.add(param.createReference()));
-
     // R method(A a, B b, ...) {
-    //   // Call the JavaScript function using an imported helper.
-    //   return invoke(this.jsFuncref, a, b, ...);
     // }
     adaptorType.addMember(
         Method.builder()
             .setMethodDescriptor(forwardingMethodDescriptor)
             .setParameters(forwardedVariables)
-            .addStatements(
-                AstUtils.createReturnOrExpressionStatement(
-                    sourcePosition,
-                    MethodCall.builderFrom(
-                            LambdaAdaptorTypeDescriptors.getWasmJsFunctionInvokeMethod(
-                                adaptorTypeDescriptor))
-                        .setArguments(invokeArguments)
-                        .build(),
-                    forwardingMethodDescriptor.getReturnTypeDescriptor()))
             .setSourcePosition(sourcePosition)
             .build());
+  }
+
+  private static WasmFuncrefCall createWasmFuncrefCall(
+      DeclaredTypeDescriptor adaptorTypeDescriptor,
+      Expression jsFunctionInstance,
+      List<Variable> forwardedVariables) {
+    ImmutableList<Expression> arguments =
+        forwardedVariables.stream().map(Variable::createReference).collect(toImmutableList());
+
+    return WasmFuncrefCall.builder()
+        .setInstance(jsFunctionInstance.clone())
+        .setFunctionalInterface(adaptorTypeDescriptor.getFunctionalInterface())
+        .setFuncref(
+            FieldAccess.builder()
+                .setQualifier(jsFunctionInstance)
+                .setTarget(LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorWasmFuncrefField())
+                .build())
+        .setArguments(arguments)
+        .build();
+  }
+
+  private static MethodCall createJsFuncrefCall(
+      DeclaredTypeDescriptor adaptorTypeDescriptor,
+      Expression jsFunctionInstance,
+      List<Variable> forwardedVariables) {
+    List<Expression> jsFuncrefArguments = new ArrayList<>();
+    jsFuncrefArguments.add(
+        FieldAccess.builder()
+            .setQualifier(jsFunctionInstance)
+            .setTarget(LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorJsFuncrefField())
+            .build());
+    forwardedVariables.forEach(param -> jsFuncrefArguments.add(param.createReference()));
+
+    return MethodCall.builderFrom(
+            LambdaAdaptorTypeDescriptors.getWasmJsFunctionInvokeMethod(adaptorTypeDescriptor))
+        .setArguments(jsFuncrefArguments)
+        .build();
   }
 }

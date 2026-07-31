@@ -83,6 +83,7 @@ import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
+import com.google.j2cl.transpiler.ast.WasmFuncrefCall;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -567,7 +568,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         // references
         || expression instanceof ThisOrSuperReference
         || expression instanceof VariableReference
-        || expression instanceof ArrayCreationReference) {
+        || expression instanceof ArrayCreationReference
+        || expression instanceof WasmFuncrefCall) {
       // These expressions do not need rewriting.
       return expression;
     }

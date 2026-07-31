@@ -305,9 +305,25 @@ public final class Main {
     assertEquals(25, lambda.foo(5));
     assertEquals(1, lambda.myOverlay());
 
+    MyJsFunction staticRef = Main::staticFooImpl;
+    assertEquals(16, staticRef.foo(5));
+    assertEquals(1, staticRef.myOverlay());
+
+    MyJsFunction instanceRef = new Main()::instanceFooImpl;
+    assertEquals(17, instanceRef.foo(5));
+    assertEquals(1, instanceRef.myOverlay());
+
     // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
     // MyJsFunction jsFunction = getFunctionFromJs();
     // assertEquals(42, jsFunction.foo(10));
+  }
+
+  static int staticFooImpl(int a) {
+    return a + 11;
+  }
+
+  int instanceFooImpl(int a) {
+    return a + 12;
   }
 
   @JsFunction

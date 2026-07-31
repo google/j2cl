@@ -144,6 +144,7 @@ public final class LambdaAdaptorTypeDescriptors {
         getWasmJsFunctionAdaptorWasmFuncrefConstructor(adaptorTypeDescriptor),
         getWasmJsFunctionAdaptMethod(adaptorTypeDescriptor),
         getWasmJsFunctionInvokeMethod(adaptorTypeDescriptor),
+        getWasmJsFunctionStaticForwardingMethod(adaptorTypeDescriptor),
         getAdaptorForwardingMethod(adaptorTypeDescriptor));
   }
 
@@ -309,6 +310,26 @@ public final class LambdaAdaptorTypeDescriptors {
                 .addAll(functionalInterfaceMethodDescriptor.getParameterTypeDescriptors())
                 .build())
         .setReturnTypeDescriptor(functionalInterfaceMethodDescriptor.getReturnTypeDescriptor())
+        .build();
+  }
+
+  /** Returns the MethodDescriptor for the static forwarding method in the LambdaAdaptor class. */
+  public static MethodDescriptor getWasmJsFunctionStaticForwardingMethod(
+      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+    MethodDescriptor forwardingMethod = getAdaptorForwardingMethod(adaptorTypeDescriptor);
+    return MethodDescriptor.builder()
+        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
+        .setName(forwardingMethod.getName())
+        .setStatic(true)
+        // TODO(b/527200669): Handle parameterization by carrying over the same parameterization as
+        // the original functional interface.
+        .setDeclarationDescriptor(null)
+        .setParameterTypeDescriptors(
+            ImmutableList.<TypeDescriptor>builder()
+                .add(TypeDescriptors.get().javaemulInternalJsFunctionAdaptor.toNonNullable())
+                .addAll(forwardingMethod.getParameterTypeDescriptors())
+                .build())
+        .setReturnTypeDescriptor(forwardingMethod.getReturnTypeDescriptor())
         .build();
   }
 
