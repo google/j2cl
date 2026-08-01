@@ -20,15 +20,12 @@ package switchpatterns
 
 import javaemul.lang.*
 import java.lang.AssertionError
-import java.util.Arrays
 import jsinterop.annotations.JsEnum
 import kotlin.Any
-import kotlin.Boolean
 import kotlin.Int
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
-import kotlin.arrayOf
 import kotlin.jvm.JvmStatic
 import kotlin.run
 import switchpatterns.SwitchPatterns.Sealed.A
@@ -73,61 +70,23 @@ open class SwitchPatterns {
  }
  
  internal open fun testRecordPatterns_pp_switchpatterns() {
-  class R {
-   private val o: Any?
-   
-   private val s: String?
-   
-   internal constructor(o: Any?, s: String?) {
-    this.o = o
-    this.s = s
-   }
-   
-   fun o(): Any? {
-    return this.o
-   }
-   
-   fun s(): String? {
-    return this.s
-   }
-   
-   override fun equals(arg0: Any?): Boolean {
-    var ___other: R? = null
-    if (!(arg0 is R && run {
-     ___other = arg0 as R?
-     true
-    })) return false
-    return Arrays.equals(
-     arrayOf<Any?>(this.o, this.s),
-     arrayOf<Any?>(___other!!.o, ___other!!.s),
-    )
-   }
-   
-   override fun hashCode(): Int {
-    return Arrays.hashCode(
-     arrayOf<Any?>(this.o, this.s),
-    )
-   }
-   
-   override fun toString(): String {
-    return this.getClass().getName() + Arrays.toString(
-     arrayOf<Any?>(this.o, this.s),
-    )
-   }
-  }
+  data class R(
+   val o: Any?,
+   val s: String?,
+  )
   val r: Any? = null
   var s2: String? = null
   when (r!!) {
    is R if run {
     val pattern___1R: R = r as R
-    val exp: Any? = pattern___1R.o()
+    val exp: Any? = pattern___1R.o
     exp is R && run {
      val pattern___1R_1: R = exp as R
-     val exp_1: Any? = pattern___1R_1.o()
+     val exp_1: Any? = pattern___1R_1.o
      exp_1 is String && run {
       val s1: String = exp_1 as String
-      s2 = pattern___1R_1.s()
-      val s3: String? = pattern___1R.s()
+      s2 = pattern___1R_1.s
+      val s3: String? = pattern___1R.s
       s1.equals("Hello")
      }
     }
@@ -136,8 +95,8 @@ open class SwitchPatterns {
    }
    is R if run {
     val pattern___1R_2: R = r as R
-    val c1: Any? = pattern___1R_2.o()
-    val c2: String? = pattern___1R_2.s()
+    val c1: Any? = pattern___1R_2.o
+    val c2: String? = pattern___1R_2.s
     true
    } -> {}
    else -> {}

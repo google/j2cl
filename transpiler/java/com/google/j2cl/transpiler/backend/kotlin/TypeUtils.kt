@@ -55,12 +55,16 @@ internal val Type.ktMembers: List<KtMember>
       .filter { !it.descriptor.enclosingTypeDescriptor.isAnnotation }
       .filter { !declaration.isAnonymous || !it.isConstructor }
       .filter { it !is Method || it != ktPrimaryConstructor || it.includedStatements.isNotEmpty() }
+      .filter { !declaration.isJavaRecord || it !is Field || !it.descriptor.isRecordComponentField }
       .runIfNotNull(ktPrimaryConstructor) { moveAfterFields(it) }
       .map { KtMember.WithJavaMember(it) }
       .plus(toCompanionObjectOrNull()?.let { KtMember.WithCompanionObject(it) })
       .plus(types.map { KtMember.WithType(it) })
       .filterNotNull()
       .toList()
+
+internal val Type.javaRecordKtMembers: List<KtMember>
+  get() = javaRecordFields.map { KtMember.WithJavaMember(it) }.toList()
 
 private fun Sequence<Member>.moveAfterFields(member: Member): Sequence<Member> =
   toMutableList()
@@ -125,3 +129,9 @@ private fun Type.overridesFromMultipleIndependentPaths(
     }
     .drop(1)
     .any()
+
+internal val Type.javaRecordFields: List<Field>
+  get() = fields.filter { field -> field.descriptor.isRecordComponentField }
+
+internal val Type.isEmptyRecord: Boolean
+  get() = declaration.isJavaRecord && javaRecordFields.isEmpty()

@@ -146,3 +146,6 @@ internal val TypeDeclaration.hasJ2ktPublicAnnotation: Boolean
 
 internal val TypeDeclaration.enumFieldDescriptors: List<FieldDescriptor>
   get() = declaredFieldDescriptors.filter { it.isEnumConstant }
+
+internal val TypeDeclaration.isJvmRecord: Boolean
+  get() = isJavaRecord && !isLocal

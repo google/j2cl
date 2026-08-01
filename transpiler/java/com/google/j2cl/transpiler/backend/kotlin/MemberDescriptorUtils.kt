@@ -150,3 +150,24 @@ val MethodDescriptor.isEnumValueOf: Boolean
       name == "valueOf" &&
       parameterTypeDescriptors.size == 1 &&
       parameterTypeDescriptors[0] == TypeDescriptors.get().javaLangString.toNonNullable()
+
+/** Returns the field descriptor of the record component that this method is the accessor of. */
+internal val MethodDescriptor.recordComponentField: FieldDescriptor
+  get() = enclosingTypeDescriptor.recordComponentFieldDescriptors.single { it.name == name }
+
+/** Returns the method descriptor of the component accessor that this field is the accessor of. */
+internal val FieldDescriptor.recordComponentAccessor: MethodDescriptor
+  get() = enclosingTypeDescriptor.recordComponentAccessors.single { it.name == name }
+
+internal val MemberDescriptor.isRecordComponentField: Boolean
+  get() = this is FieldDescriptor && isRecordComponentField
+
+/**
+ * Member descriptor which is actually being translated.
+ *
+ * If a field is a record component, then the actual member descriptor is the accessor method. Both
+ * the declaration and the reference to the field are translated as references to the accessor
+ * method, with this field becoming the backing field of the accessor.
+ */
+internal val MemberDescriptor.actualMemberDescriptor: MemberDescriptor
+  get() = if (this is FieldDescriptor && isRecordComponentField) recordComponentAccessor else this

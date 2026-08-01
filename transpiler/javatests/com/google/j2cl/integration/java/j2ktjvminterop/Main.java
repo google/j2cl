@@ -16,10 +16,7 @@
 package j2ktjvminterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-
-import com.google.j2cl.integration.testing.TestUtils;
 
 @SuppressWarnings("BadInstanceof") // Needed for Asserts.assertTrue import.
 public class Main {
@@ -37,14 +34,7 @@ public class Main {
 
   private static void testRecordConvertedToDataClass() {
     RecordConvertedToDataClass record = new RecordConvertedToDataClass(123, "a");
-    if (!TestUtils.isJ2Kt()) {
-      assertTrue(((Object) record) instanceof Record);
-    } else {
-      // TODO(b/445545563): Should be true for non-native once Java records are translated to
-      // Kotlin data classes with @JvmRecord annotation.
-      assertFalse(((Object) record) instanceof Record);
-    }
-
+    assertTrue(record instanceof Record);
     assertEquals(123, record.a());
     assertEquals("a", record.b());
   }

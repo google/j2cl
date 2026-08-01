@@ -193,13 +193,12 @@ private fun CompilationUnit.buildForcedKtInternalDeclarationMemberDescriptorSet(
 
       override fun exitMemberReference(memberReference: MemberReference) {
         // Add declared member if it's referenced outside its enclosing type.
-        val memberDescriptor = memberReference.target.declarationDescriptor
+        val memberDescriptor = memberReference.target.actualMemberDescriptor.declarationDescriptor
         val currentTypeDeclaration = currentType.declaration
-        if (memberDescriptor.visibility.isPrivate) {
-          val enclosingTypeDeclaration = memberDescriptor.enclosingTypeDescriptor.typeDeclaration
-          if (!currentTypeDeclaration.equalsOrEnclosedIn(enclosingTypeDeclaration)) {
-            add(memberDescriptor)
-          }
+        if (!memberDescriptor.visibility.isPrivate) return
+        val enclosingTypeDeclaration = memberDescriptor.enclosingTypeDescriptor.typeDeclaration
+        if (!currentTypeDeclaration.equalsOrEnclosedIn(enclosingTypeDeclaration)) {
+          add(memberDescriptor)
         }
       }
     }

@@ -1297,7 +1297,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public boolean isKtProperty() {
     return getJ2ktInfo().isProperty()
         || getEnclosingTypeDescriptor().isAnnotation()
-        || isJ2ObjCPropertyGetter();
+        || isJ2ObjCPropertyGetter()
+        || isRecordComponentAccessor();
   }
 
   @Override

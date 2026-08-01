@@ -25,6 +25,8 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtJvm;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import com.google.j2cl.integration.testing.J2ktIncompatible;
@@ -185,11 +187,16 @@ public class Main {
     StringRecord sr0 = new StringRecord("foo");
     assertTrue(sr0.toString().contains("foo"));
 
-    // toString with an array component returns the result of toString on the array, not necessarily
-    // the array elements.
     int[] arrayValue = new int[] {1, 2};
     ArrayRecord ar0 = new ArrayRecord(arrayValue);
-    assertTrue(ar0.toString().contains(arrayValue.toString()));
+    if (isJ2KtJvm() || isJ2KtNative()) {
+      // On J2KT, records are translated as data classes where toString() includes array elements.
+      assertTrue(ar0.toString().contains(Arrays.toString(arrayValue)));
+    } else {
+      // toString with an array component returns the result of toString on the array, not
+      // necessarily the array elements. This is intended behaviour on JVM and J2CL.
+      assertTrue(ar0.toString().contains(arrayValue.toString()));
+    }
 
     testToString_j2ktIncompatible();
   }

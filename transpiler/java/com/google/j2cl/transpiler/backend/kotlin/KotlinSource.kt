@@ -69,6 +69,7 @@ internal object KotlinSource {
   val CONTINUE_KEYWORD = source("continue")
   val CONST_KEYWORD = source("const")
   val CONSTRUCTOR_KEYWORD = source("constructor")
+  val DATA_KEYWORD = source("data")
   val DO_KEYWORD = source("do")
   val ELSE_KEYWORD = source("else")
   val ENUM_KEYWORD = source("enum")

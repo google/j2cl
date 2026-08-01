@@ -109,6 +109,13 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       exact?.let { parameterSource("exact", literal(it)) }.orEmpty(),
     )
 
+  fun objCAnnotationSource(memberDescriptor: MemberDescriptor): Source =
+    when (memberDescriptor) {
+      is MethodDescriptor -> objCAnnotationSource(memberDescriptor)
+      is FieldDescriptor -> objCAnnotationSource(memberDescriptor)
+      else -> Source.EMPTY
+    }
+
   fun objCAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY

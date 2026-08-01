@@ -51,6 +51,13 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       .ifEmpty { jsTypeAnnotationSource(typeDeclaration) }
       .ifEmpty { jsEnumAnnotationSource(typeDeclaration) }
 
+  fun jsInteropAnnotationsSource(memberDescriptor: MemberDescriptor): Source =
+    when (memberDescriptor) {
+      is FieldDescriptor -> jsInteropAnnotationsSource(memberDescriptor)
+      is MethodDescriptor -> jsInteropAnnotationsSource(memberDescriptor)
+      else -> Source.EMPTY
+    }
+
   fun jsInteropAnnotationsSource(fieldDescriptor: FieldDescriptor): Source =
     jsPropertyAnnotationSource(fieldDescriptor)
       .ifEmpty { jsIgnoreAnnotationSource(fieldDescriptor) }

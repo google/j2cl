@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSe
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLine
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLinesPlusCommas
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inNewLinesWithCommas
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inOptionalParentheses
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.inParentheses
@@ -78,6 +79,7 @@ internal data class TypeSources(val nameSources: NameSources) {
           objCNameSources.hiddenFromObjCAnnotationSource(typeDeclaration),
           jsInteropAnnotationSources.jsInteropAnnotationsSource(typeDeclaration),
           autoValueAnnotationsSource(typeDeclaration),
+          jvmRecordAnnotationSource(typeDeclaration),
           suppressIncompatibleObjCNameOverrideSource(type),
           spaceSeparated(
             visibilityModifierSource(typeDeclaration),
@@ -119,6 +121,14 @@ internal data class TypeSources(val nameSources: NameSources) {
             )
           )
         }
+      type.declaration.isJavaRecord ->
+        inParentheses(
+          memberSources(type).let { memberSources ->
+            indentedMultiLine(
+              inNewLinesPlusCommas(type.javaRecordKtMembers.map { memberSources.source(it) })
+            )
+          }
+        )
       ktPrimaryConstructor != null ->
         memberSources(type).let { memberSources ->
           join(
@@ -208,6 +218,11 @@ internal data class TypeSources(val nameSources: NameSources) {
       )
     }
 
+  private fun jvmRecordAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+    Source.emptyUnless(typeDeclaration.isJvmRecord) {
+      annotation(nameSources.topLevelQualifiedNameSource("kotlin.jvm.JvmRecord"))
+    }
+
   /**
    * Returns source with:
    * ```
@@ -256,7 +271,8 @@ internal data class TypeSources(val nameSources: NameSources) {
 
     fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
       when (typeDeclaration.kind!!) {
-        TypeDeclaration.Kind.CLASS -> KotlinSource.CLASS_KEYWORD
+        TypeDeclaration.Kind.CLASS ->
+          spaceSeparated(dataModifierSource(typeDeclaration), KotlinSource.CLASS_KEYWORD)
         TypeDeclaration.Kind.INTERFACE ->
           if (typeDeclaration.isAnnotation) {
             spaceSeparated(KotlinSource.ANNOTATION_KEYWORD, KotlinSource.CLASS_KEYWORD)
@@ -269,5 +285,8 @@ internal data class TypeSources(val nameSources: NameSources) {
 
     fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
       Source.emptyUnless(typeDeclaration.isKtFunctionalInterface) { KotlinSource.FUN_KEYWORD }
+
+    fun dataModifierSource(typeDeclaration: TypeDeclaration): Source =
+      Source.emptyUnless(typeDeclaration.isJavaRecord) { KotlinSource.DATA_KEYWORD }
   }
 }

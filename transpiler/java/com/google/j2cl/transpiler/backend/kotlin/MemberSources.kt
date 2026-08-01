@@ -23,7 +23,9 @@ import com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithDoNotAutobox
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -140,8 +142,8 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
 
   private fun fieldSource(field: Field): Source {
     val fieldDescriptor = field.descriptor
-    val isFinal = fieldDescriptor.isFinal
     val typeDescriptor = fieldDescriptor.typeDescriptor
+    val isFinal = fieldDescriptor.isFinal
     val isConst =
       field.isCompileTimeConstant && field.isStatic && !enclosingType.hasMixedInterfaceFields
     val isJvmField =
@@ -150,16 +152,20 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         !field.isKtLateInit &&
         !environment.ktVisibility(fieldDescriptor).isPrivate
     val initializer = field.initializer
+    val actualMemberDescriptor: MemberDescriptor = fieldDescriptor.actualMemberDescriptor
+    val isOverride =
+      actualMemberDescriptor is MethodDescriptor && actualMemberDescriptor.isJavaOverride
 
     return newLineSeparated(
         Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
         memberDescriptorSources.volatileAnnotationSource(fieldDescriptor),
-        objCNameSources.objCAnnotationSource(fieldDescriptor),
-        jsInteropAnnotationSources.jsInteropAnnotationsSource(fieldDescriptor),
+        objCNameSources.objCAnnotationSource(actualMemberDescriptor),
+        jsInteropAnnotationSources.jsInteropAnnotationsSource(actualMemberDescriptor),
         spaceSeparated(
-          memberDescriptorSources.visibilityModifierSource(fieldDescriptor),
+          memberDescriptorSources.visibilityModifierSource(actualMemberDescriptor),
           Source.emptyUnless(isConst) { CONST_KEYWORD },
           Source.emptyUnless(field.isKtLateInit) { LATEINIT_KEYWORD },
+          Source.emptyUnless(isOverride) { KotlinSource.OVERRIDE_KEYWORD },
           if (isFinal) VAL_KEYWORD else VAR_KEYWORD,
           colonSeparated(fieldNameSource(field), nameSources.typeDescriptorSource(typeDescriptor)),
           initializer(
@@ -187,29 +193,32 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     spaceSeparated(INIT_KEYWORD, statementSources.statementSource(initializerBlock.body))
 
   private fun methodHeaderSource(method: Method): Source =
-    if (isKtPrimaryConstructor(method)) {
-      INIT_KEYWORD.withMapping(method.sourcePosition)
-    } else {
-      val methodDescriptor = method.descriptor
-      newLineSeparated(
-        Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
-        annotationsSource(method),
-        spaceSeparated(
-          methodModifiersSource(method),
-          colonSeparated(
-            join(methodKindAndNameSource(method), methodParametersSource(method)),
-            if (methodDescriptor.isConstructor) {
-              constructorInvocationSource(method)
-            } else {
-              memberDescriptorSources.methodReturnTypeSource(methodDescriptor)
+    when {
+      isKtPrimaryConstructor(method) -> INIT_KEYWORD.withMapping(method.sourcePosition)
+      enclosingType.isJavaRecord && method == enclosingType.recordCanonicalConstructor ->
+        INIT_KEYWORD.withMapping(method.sourcePosition)
+      else -> {
+        val methodDescriptor = method.descriptor
+        newLineSeparated(
+          Source.emptyUnless(methodDescriptor.isStatic) { jvmStaticAnnotationSource() },
+          annotationsSource(method),
+          spaceSeparated(
+            methodModifiersSource(method),
+            colonSeparated(
+              join(methodKindAndNameSource(method), methodParametersSource(method)),
+              if (methodDescriptor.isConstructor) {
+                constructorInvocationSource(method)
+              } else {
+                memberDescriptorSources.methodReturnTypeSource(methodDescriptor)
+              },
+            ),
+            Source.emptyUnless(method.defaultValue != null) {
+              initializer(expressionSources.expressionSource(method.defaultValue!!))
             },
+            nameSources.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors),
           ),
-          Source.emptyUnless(method.defaultValue != null) {
-            initializer(expressionSources.expressionSource(method.defaultValue!!))
-          },
-          nameSources.whereClauseSource(methodDescriptor.typeParameterTypeDescriptors),
-        ),
-      )
+        )
+      }
     }
 
   private fun methodModifiersSource(method: Method): Source =

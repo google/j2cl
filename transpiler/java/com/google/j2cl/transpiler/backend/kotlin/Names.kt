@@ -76,7 +76,14 @@ internal val MemberDescriptor.ktPrivateNameSuffix: String
 
 /** Whether this field descriptor has property with conflicting name in Kotlin. */
 private val FieldDescriptor.hasConflictingKtProperty: Boolean
-  get() = enclosingTypeDescriptor.polymorphicMethods.any { it.isKtProperty && it.ktName == ktName }
+  get() =
+    when {
+      // Exclude record component fields as they implicitly "conflict" with their accessor methods.
+      isRecordComponentField -> false
+      // For any other field, look for property with the same name in the enclosing type.
+      else ->
+        enclosingTypeDescriptor.polymorphicMethods.any { it.isKtProperty && it.ktName == ktName }
+    }
 
 /** A suffix for private members in this type declaration. */
 internal val TypeDeclaration.privateMemberSuffix: String

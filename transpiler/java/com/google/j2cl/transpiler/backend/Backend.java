@@ -639,8 +639,6 @@ public enum Backend {
       return ImmutableList.of(
           FixAnonymousClassInstantiations::new,
           RemoveReturnValuesFromVoidMethods::new,
-          // ImplementRecordClasses needs to run before DesugarInstanceOfPatterns.
-          ImplementRecordClasses::new,
           // Desugar instanceof patterns needs to run before any pass that uses
           // ConversionContextVisitor, like NormalizeNullLiterals below.
           DesugarInstanceOfPatterns::new,
@@ -656,12 +654,6 @@ public enum Backend {
     @Override
     public void checkRestrictions(BackendOptions options, Library library, Problems problems) {
       J2ktRestrictionsChecker.check(library, problems);
-    }
-
-    @Override
-    public void checkRestrictionsNonDesugared(
-        BackendOptions options, Library library, Problems problems) {
-      J2ktRestrictionsChecker.checkNonDesugared(library, problems);
     }
 
     @Override
@@ -776,14 +768,10 @@ public enum Backend {
     }
   };
 
-  // TODO(micapolos): Remove when it's no longer used.
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
       BackendOptions options);
-
-  public void checkRestrictionsNonDesugared(
-      BackendOptions options, Library library, Problems problems) {}
 
   public void checkRestrictions(BackendOptions options, Library library, Problems problems) {}
 
