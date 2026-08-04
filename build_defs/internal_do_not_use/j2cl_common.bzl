@@ -15,6 +15,7 @@ def _compile(
         ctx,
         srcs = [],
         kt_common_srcs = [],
+        j2kt_source_map_srcs = [],
         deps = [],
         exports = [],
         plugins = [],
@@ -32,6 +33,7 @@ def _compile(
     java_toolchain = get_java_toolchain(ctx)
     jvm_srcs, js_srcs = split_srcs(srcs)
     has_srcs_to_transpile = (jvm_srcs or kt_common_srcs)
+    enable_sourcemap_composition = bool(j2kt_source_map_srcs)
 
     kt_srcs = []
     has_kotlin_srcs = kt_srcs or kt_common_srcs
@@ -136,6 +138,15 @@ def _compile(
 
         output_js = ctx.actions.declare_directory("%s%s.js" % (name, output_js_suffix))
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
+
+        # When source map composition is needed, transpile to a temporary
+        # directory and compose into output_js. Otherwise transpile directly to
+        # output_js so the directory name matches what consumers expect.
+        if enable_sourcemap_composition:
+            transpile_output = ctx.actions.declare_directory("%s%s.raw" % (name, output_js_suffix))
+        else:
+            transpile_output = output_js
+
         _j2cl_transpile(
             ctx,
             jvm_srcs,
@@ -143,7 +154,7 @@ def _compile(
             jvm_deps,
             get_jdk_system(java_toolchain, javac_opts),
             js_srcs,
-            output_js,
+            transpile_output,
             output_library_info,
             backend,
             internal_transpiler_flags,
@@ -155,6 +166,22 @@ def _compile(
             klib_friends,
         )
         library_info = [output_library_info]
+
+        if enable_sourcemap_composition:
+            # TODO(b/537888831): Filter for target files should be configurable from the build rule.
+            args = ctx.actions.args()
+            args.add("-d", output_js.path)
+            args.add_all(j2kt_source_map_srcs, before_each = "-intermediate", expand_directories = False)
+            args.add("-target", transpile_output.path)
+            ctx.actions.run(
+                progress_message = "Composing J2KT/J2CL source maps for %s" % ctx.label,
+                inputs = depset([transpile_output] + j2kt_source_map_srcs),
+                outputs = [output_js],
+                executable = ctx.executable._source_map_composer,
+                arguments = [args],
+                mnemonic = "J2clSourceMapCompose",
+                execution_requirements = {"supports-multiplex-workers": "1"},
+            )
     else:
         output_js = None
         library_info = []
@@ -538,6 +565,11 @@ J2CL_TOOLCHAIN_ATTRS = {
         executable = True,
         cfg = "exec",
         default = Label("@bazel_tools//tools/zip:zipper"),
+    ),
+    "_source_map_composer": attr.label(
+        default = Label("//tools/java/com/google/j2cl/tools/sourcemapcomposer:SourceMapComposer_worker"),
+        cfg = "exec",
+        executable = True,
     ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)

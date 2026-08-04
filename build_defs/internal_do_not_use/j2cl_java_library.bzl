@@ -51,10 +51,12 @@ def _impl_j2cl_library(ctx):
         # generated package-info.java files.
         srcs = js_srcs + [f for f in jvm_srcs if f.basename == "package-info.java"]
         kt_common_srcs = j2kt_provider._private_.transpile_kt_out
+        j2kt_source_map_srcs = j2kt_provider._private_.transpile_j2kt_map_srcs_out
     else:
         j2kt_provider = None
         srcs = ctx.files.srcs
         kt_common_srcs = ctx.files.kt_common_srcs
+        j2kt_source_map_srcs = []
 
     kotlincopts = []
 
@@ -62,6 +64,7 @@ def _impl_j2cl_library(ctx):
         ctx,
         srcs = srcs,
         kt_common_srcs = kt_common_srcs,
+        j2kt_source_map_srcs = j2kt_source_map_srcs,
         deps = _j2cl_or_js_providers_of(ctx.attr.deps),
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),
         plugins = [p[JavaPluginInfo] for p in ctx.attr.plugins],

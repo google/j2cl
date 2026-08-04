@@ -80,6 +80,11 @@ class KotlinGeneratorStage(
 
     output.write(sourcePath, source)
 
+    if (!compilationUnit.isSynthetic) {
+      // Copy Java sources to output so that sourcemaps can reference them for debugging.
+      output.copyFile(compilationUnit.fileInfo.sourcePath(), packageRelativePath)
+    }
+
     output.write(
       sourceMapPath,
       SourceMapGenerator.generateSourceMaps(compilationUnit.fileInfo, sourceMapPath, mappings),
