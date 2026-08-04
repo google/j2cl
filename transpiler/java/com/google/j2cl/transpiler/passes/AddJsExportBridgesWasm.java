@@ -47,6 +47,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
     library
         .streamTypes()
         .filter(not(Type::isInterface))
+        .filter(type -> AstUtils.hasWasmJsPrototype(type.getDeclaration()))
         .forEach(
             type -> {
               // Generate bridges for declared methods.
