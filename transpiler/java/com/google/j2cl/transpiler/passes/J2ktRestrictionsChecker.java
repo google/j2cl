@@ -88,7 +88,6 @@ public final class J2ktRestrictionsChecker {
             checkSuperTypeVisibilities(type);
             checkInterfaceTypeVisibilities(type);
             checkSynchronizedMethods(type);
-            checkJsTypeOnRecord(type);
             checkRecordDataClass(type);
           }
 
@@ -311,27 +310,6 @@ public final class J2ktRestrictionsChecker {
                 type.getReadableDescription(),
                 TypeDescriptors.get().javaemulLangJ2ktMonitor.getReadableDescription(),
                 TypeDescriptors.get().javaLangObject.getReadableDescription());
-          }
-
-          private void checkJsTypeOnRecord(Type type) {
-            TypeDeclaration typeDeclaration = type.getDeclaration();
-            if (typeDeclaration.isJavaRecord() && typeDeclaration.isNative()) {
-              problems.error(
-                  type.getSourcePosition(),
-                  "Record class '%s' cannot be a native JsType.",
-                  type.getDeclaration().getReadableDescription());
-            }
-            // For now allow JsType on records only for tests.
-            // TODO(b/470146353): Allow JsType on records when all Xplat infra is ready to rollout.
-            if (typeDeclaration.isJavaRecord()
-                && typeDeclaration.isJsType()
-                && !type.getSourcePosition().getFileInfo().sourcePath().contains("/test/")
-                && !type.getSourcePosition().getFileInfo().sourcePath().contains("/javatests/")) {
-              problems.error(
-                  type.getSourcePosition(),
-                  "Record class '%s' cannot be a JsType. (b/470146353)",
-                  typeDeclaration.getReadableDescription());
-            }
           }
 
           private void checkSynchronizedStatement(SynchronizedStatement synchronizedStatement) {

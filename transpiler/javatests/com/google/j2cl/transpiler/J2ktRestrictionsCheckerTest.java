@@ -421,17 +421,6 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testRecordNativeJsTypeFails() {
-    assertWithInlineMessages(
-        "test.Main",
-        """
-        import jsinterop.annotations.*;
-        @JsType(isNative = true)
-        record NativeBuggy(int i) {}
-        > Error: Record class 'NativeBuggy' cannot be a native JsType.
-        """);
-  }
-
   public void testRecordWithNonCompactCanonicalConstructorFails() {
     assertWithInlineMessages(
         "test.Main",

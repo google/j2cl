@@ -1170,16 +1170,6 @@ public class JsInteropRestrictionsChecker {
           type.getDeclaration().getReadableDescription());
       return false;
     }
-    // For now allow JsType on records only for J2CL tests.
-    // TODO(b/470146353): Allow JsType on records when all Xplat infra is ready to rollout.
-    if (typeDeclaration.isJavaRecord()
-        && !type.getSourcePosition().getFileInfo().sourcePath().contains("/test/")
-        && !type.getSourcePosition().getFileInfo().sourcePath().contains("/javatests/")) {
-      problems.error(
-          type.getSourcePosition(),
-          "Record class '%s' cannot be a JsType. (b/470146353)",
-          typeDeclaration.getReadableDescription());
-    }
 
     if (typeDeclaration.isNative()) {
       if (!checkNativeJsType(type)) {
