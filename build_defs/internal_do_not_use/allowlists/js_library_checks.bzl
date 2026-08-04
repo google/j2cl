@@ -12,8 +12,6 @@ OFF = allowlists.of_packages([
     # TODO(b/280942747): With raw types it is possible to trigger type errors in jscompiler; these
     # tests expose these problems.
     "//transpiler/javatests/com/google/j2cl/integration/java/morebridgemethods",
-    # We are testing calling hidden constructor fails at runtime.
-    "//transpiler/javatests/com/google/j2cl/integration/java/staticinitfailfast",
     # TODO(b/277822633): Remove after IObject as parameter is correctly mapped.
     "@jsinterop_generator//javatests/jsinterop/generator/externs/iobjectiarraylike",
 ])

@@ -24,5 +24,4 @@ integration_test(
     # test only.
     enable_rta = False,
     enable_wasm = False,
-    suppress = ["JSC_BAD_PROTECTED_PROPERTY_ACCESS"],
 )
