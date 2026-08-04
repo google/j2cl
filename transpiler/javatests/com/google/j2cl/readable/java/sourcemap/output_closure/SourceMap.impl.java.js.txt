@@ -17,6 +17,8 @@ let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$
 let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
 let ToLongFunction = goog.forwardDeclare('java.util.function.ToLongFunction$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
+let $1 = goog.forwardDeclare('sourcemap.SourceMap.$1$impl');
+let $1Local = goog.forwardDeclare('sourcemap.SourceMap.$1Local$impl');
 let $1LocalClass = goog.forwardDeclare('sourcemap.SourceMap.$1LocalClass$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -80,6 +82,15 @@ class SourceMap extends j_l_Object {
    }
   }
   return value;
+ }
+ /** @nodts @return {number} */
+ m_testAnonymousClass__int__int_$p_sourcemap_SourceMap(/** number */ outer) {
+  let f = /**@type {!$1<T>}*/ ($1.$create__sourcemap_SourceMap__int(this, outer));
+  return (/**@type {Integer}*/ ($Casts.$to(f.m_apply__java_lang_Object__java_lang_Object(Integer.valueOf(10)), Integer))).intValue();
+ }
+ /** @nodts @return {number} */
+ m_testLocalClass__int__int_$p_sourcemap_SourceMap(/** number */ outer) {
+  return (/**@type {!$1Local<T>}*/ ($1Local.$create__sourcemap_SourceMap__int(this, outer))).m_member1__int__int(5);
  }
  /** @nodts */
  m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap(/** number */ n) {
@@ -220,6 +231,8 @@ class SourceMap extends j_l_Object {
   j_u_function_Function = goog.module.get('java.util.function.Function$impl');
   Supplier = goog.module.get('java.util.function.Supplier$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
+  $1 = goog.module.get('sourcemap.SourceMap.$1$impl');
+  $1Local = goog.module.get('sourcemap.SourceMap.$1Local$impl');
   $1LocalClass = goog.module.get('sourcemap.SourceMap.$1LocalClass$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

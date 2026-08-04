@@ -106,6 +106,44 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
     return value;
   }
 
+  private int testAnonymousClass(int outer) {
+    Function<Integer, Integer> f =
+        new Function<Integer, Integer>() {
+          @Override
+          public Integer apply(Integer i) {
+            return helper1(i) + helper2(i);
+          }
+
+          private int helper1(int x) {
+            return x * 2 + outer;
+          }
+
+          private int helper2(int x) {
+            return x + 1;
+          }
+        };
+    return f.apply(10);
+  }
+
+  private int testLocalClass(int outer) {
+    class Local {
+      public int member1(int a) {
+        return member2(a) * 2 + new Inner().member3(a);
+      }
+
+      private int member2(int b) {
+        return b + outer;
+      }
+
+      class Inner {
+        public int member3(int c) {
+          return c + 1;
+        }
+      }
+    }
+    return new Local().member1(5);
+  }
+
   private void testLambdaAndMethodReference(int n) {
     Function<Integer, Integer> f = i -> i + 1;
     Supplier<Integer> f2 = new ArrayList()::size;

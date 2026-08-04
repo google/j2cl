@@ -103,6 +103,46 @@ internal abstract class SourceMap<T: Number?>: Comparator<T> {
   return value
  }
  
+ private fun testAnonymousClass(outer: Int): Int {
+  val f: Function<Int?, Int?> = object : Function<Int?, Int?> {
+   override fun apply(i: Int?): Int? {
+    return helper1(
+     i!!.toInt(),
+    ) + helper2(
+     i!!.toInt(),
+    )
+   }
+   
+   private fun helper1(x: Int): Int {
+    return x * 2 + outer
+   }
+   
+   private fun helper2(x: Int): Int {
+    return x + 1
+   }
+  }
+  return f.apply(10)!!.toInt()
+ }
+ 
+ private fun testLocalClass(outer: Int): Int {
+  open class Local internal constructor() {
+   open fun member1(a: Int): Int {
+    return this.member2(a) * 2 + Inner().member3(a)
+   }
+   
+   private fun member2(b: Int): Int {
+    return b + outer
+   }
+   
+   internal open inner class Inner internal constructor() {
+    open fun member3(c: Int): Int {
+     return c + 1
+    }
+   }
+  }
+  return Local().member1(5)
+ }
+ 
  private fun testLambdaAndMethodReference(n: Int) {
   val f: Function<Int?, Int?> = Function { i: Int? ->
    return@Function i!!.toInt() + 1

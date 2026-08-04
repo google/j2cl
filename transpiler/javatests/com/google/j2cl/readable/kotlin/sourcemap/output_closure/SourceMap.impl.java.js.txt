@@ -20,6 +20,8 @@ let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let MutableKProperty0Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty0Impl$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $1 = goog.forwardDeclare('sourcemap.SourceMap.$1$impl');
+let $1Local = goog.forwardDeclare('sourcemap.SourceMap.$1Local$impl');
 let $1LocalClass = goog.forwardDeclare('sourcemap.SourceMap.$1LocalClass$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -101,6 +103,15 @@ class SourceMap extends j_l_Object {
    }
   }
   return value;
+ }
+ /** @final @nodts @return {number} */
+ m_testAnonymousClass__int__int_$p_sourcemap_SourceMap(/** number */ outer) {
+  let f = /**@type {!$1<T>}*/ ($1.$create__sourcemap_SourceMap__int(this, outer));
+  return f.m_apply__int__int(10);
+ }
+ /** @final @nodts @return {number} */
+ m_testLocalClass__int__int_$p_sourcemap_SourceMap(/** number */ outer) {
+  return (/**@type {!$1Local<T>}*/ ($1Local.$create__sourcemap_SourceMap__int(this, outer))).m_member1__int__int(5);
  }
  /** @final @nodts */
  m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap(/** number */ n) {
@@ -240,6 +251,8 @@ class SourceMap extends j_l_Object {
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
   MutableKProperty0Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty0Impl$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $1 = goog.module.get('sourcemap.SourceMap.$1$impl');
+  $1Local = goog.module.get('sourcemap.SourceMap.$1Local$impl');
   $1LocalClass = goog.module.get('sourcemap.SourceMap.$1LocalClass$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

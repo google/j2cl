@@ -1,0 +1,90 @@
+goog.module('sourcemap.SourceMap.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const j_u_function_Function = goog.require('java.util.function.Function$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('goog.math.Long');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let SourceMap = goog.forwardDeclare('sourcemap.SourceMap$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {j_u_function_Function<!Integer, !Integer>}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!SourceMap<T>} @nodts*/
+  this.$outer_this__sourcemap_SourceMap_1;
+  /**@type {number} @nodts*/
+  this.$captured_outer__sourcemap_SourceMap_1 = 0;
+ }
+ /** @nodts @template T @return {!$1<T>} */
+ static $create__sourcemap_SourceMap__int(/** !SourceMap<T> */ $outer_this, /** number */ $captured_outer) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__sourcemap_SourceMap_1__sourcemap_SourceMap__int__void($outer_this, $captured_outer);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_1__sourcemap_SourceMap__int__void(/** !SourceMap<T> */ $outer_this, /** number */ $captured_outer) {
+  this.$outer_this__sourcemap_SourceMap_1 = $outer_this;
+  this.$captured_outer__sourcemap_SourceMap_1 = $captured_outer;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_apply__int__int(/** number */ i) {
+  return this.m_helper1__int__int_$p_sourcemap_SourceMap_1(i) + this.m_helper2__int__int_$p_sourcemap_SourceMap_1(i) | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_helper1__int__int_$p_sourcemap_SourceMap_1(/** number */ x) {
+  return Math.imul(x, 2) + this.$captured_outer__sourcemap_SourceMap_1 | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_helper2__int__int_$p_sourcemap_SourceMap_1(/** number */ x) {
+  return x + 1 | 0;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Integer} */
+ m_apply__java_lang_Object__java_lang_Object(/** !Integer */ arg0) {
+  return Integer.valueOf(this.m_apply__int__int((/**@type {!Integer}*/ ($Casts.$to(arg0, Integer))).intValue()));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @template V @return {j_u_function_Function<!Integer, V>} */
+ m_andThen__java_util_function_Function__java_util_function_Function(/** j_u_function_Function<?, ?> */ arg0) {
+  return /**@type {j_u_function_Function<!Integer, V>}*/ (j_u_function_Function.m_andThen__$default__java_util_function_Function__java_util_function_Function__java_util_function_Function(this, arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @template V @return {j_u_function_Function<V, !Integer>} */
+ m_compose__java_util_function_Function__java_util_function_Function(/** j_u_function_Function<?, ?> */ arg0) {
+  return /**@type {j_u_function_Function<V, !Integer>}*/ (j_u_function_Function.m_compose__$default__java_util_function_Function__java_util_function_Function__java_util_function_Function(this, arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+  j_u_function_Function.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+j_u_function_Function.$markImplementor($1);
+$Util.$setClassMetadata($1, 'sourcemap.SourceMap$1');
+
+exports = $1;
+
+//# sourceMappingURL=SourceMap$1.js.map

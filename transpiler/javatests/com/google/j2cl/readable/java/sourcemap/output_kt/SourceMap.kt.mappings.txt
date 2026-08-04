@@ -178,6 +178,55 @@
       }
     }] => [i_1 = i_1 + 1] "sourcemap.SourceMap.testStatements"
 [return value;] => [return value] "sourcemap.SourceMap.testStatements"
+[testAnonymousClass] => [testAnonymousClass]
+[outer] => [outer] "outer"
+[Function<Integer, Integer> f =
+        new Function<Integer, Integer>() {
+...
+          }
+        };] => [val f: Function<Int?, Int?> = object : Function<Int?, Int?> {
+   override fun apply(i: Int?): Int? {
+...
+   }
+  }] "sourcemap.SourceMap.testAnonymousClass"
+[f] => [f] "f"
+[apply] => [apply]
+[i] => [i] "i"
+[return helper1(i) + helper2(i);] => [return helper1(
+     i!!.toInt(),
+...
+     i!!.toInt(),
+    )] "sourcemap.SourceMap.testAnonymousClass"
+[helper1] => [helper1]
+[x] => [x] "x"
+[return x * 2 + outer;] => [return x * 2 + outer] "sourcemap.SourceMap.testAnonymousClass"
+[helper2] => [helper2]
+[x] => [x] "x"
+[return x + 1;] => [return x + 1] "sourcemap.SourceMap.testAnonymousClass"
+[return f.apply(10);] => [return f.apply(10)!!.toInt()] "sourcemap.SourceMap.testAnonymousClass"
+[testLocalClass] => [testLocalClass]
+[outer] => [outer] "outer"
+[class Local {
+      public int member1(int a) {
+...
+      }
+    }] => [open class Local internal constructor() {
+   open fun member1(a: Int): Int {
+...
+   }
+  }] "sourcemap.SourceMap.testLocalClass"
+[Local] => [Local]
+[member1] => [member1]
+[a] => [a] "a"
+[return member2(a) * 2 + new Inner().member3(a);] => [return this.member2(a) * 2 + Inner().member3(a)] "sourcemap.SourceMap.testLocalClass"
+[member2] => [member2]
+[b] => [b] "b"
+[return b + outer;] => [return b + outer] "sourcemap.SourceMap.testLocalClass"
+[Inner] => [Inner]
+[member3] => [member3]
+[c] => [c] "c"
+[return c + 1;] => [return c + 1] "sourcemap.SourceMap.testLocalClass"
+[return new Local().member1(5);] => [return Local().member1(5)] "sourcemap.SourceMap.testLocalClass"
 [testLambdaAndMethodReference] => [testLambdaAndMethodReference]
 [n] => [n] "n"
 [Function<Integer, Integer> f = i -> i + 1;] => [val f: Function<Int?, Int?> = Function { i: Int? ->

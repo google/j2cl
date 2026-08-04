@@ -1,0 +1,65 @@
+goog.module('sourcemap.SourceMap.$1Local$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('goog.math.Long');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let SourceMap = goog.forwardDeclare('sourcemap.SourceMap$impl');
+let $1Inner = goog.forwardDeclare('sourcemap.SourceMap.$1Local.$1Inner$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class $1Local extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!SourceMap<T>} @nodts*/
+  this.$outer_this__sourcemap_SourceMap_1Local;
+  /**@type {number} @nodts*/
+  this.$captured_outer__sourcemap_SourceMap_1Local = 0;
+ }
+ /** @nodts @template T @return {!$1Local<T>} */
+ static $create__sourcemap_SourceMap__int(/** !SourceMap<T> */ $outer_this, /** number */ $captured_outer) {
+  $1Local.$clinit();
+  let $instance = new $1Local();
+  $instance.$ctor__sourcemap_SourceMap_1Local__sourcemap_SourceMap__int__void($outer_this, $captured_outer);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_1Local__sourcemap_SourceMap__int__void(/** !SourceMap<T> */ $outer_this, /** number */ $captured_outer) {
+  this.$outer_this__sourcemap_SourceMap_1Local = $outer_this;
+  this.$captured_outer__sourcemap_SourceMap_1Local = $captured_outer;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_member1__int__int(/** number */ a) {
+  return Math.imul(this.m_member2__int__int_$p_sourcemap_SourceMap_1Local(a), 2) + (/**@type {!$1Inner<T>}*/ ($1Inner.$create__sourcemap_SourceMap_1Local(this))).m_member3__int__int(a) | 0;
+ }
+ /** @final @nodts @return {number} */
+ m_member2__int__int_$p_sourcemap_SourceMap_1Local(/** number */ b) {
+  return b + this.$captured_outer__sourcemap_SourceMap_1Local | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Local.$clinit = () =>{};
+  $1Local.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Local;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1Inner = goog.module.get('sourcemap.SourceMap.$1Local.$1Inner$impl');
+ }
+}
+$Util.$setClassMetadata($1Local, 'sourcemap.SourceMap$1Local');
+
+exports = $1Local;
+
+//# sourceMappingURL=SourceMap$1Local.js.map

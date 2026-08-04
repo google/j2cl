@@ -103,6 +103,43 @@ abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Compar
     return value
   }
 
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
   private fun testLambdaAndMethodReference(n: Int) {
     val f = { i: Int -> i + 1 }
     val f2 = ArrayList<Any>()::size
