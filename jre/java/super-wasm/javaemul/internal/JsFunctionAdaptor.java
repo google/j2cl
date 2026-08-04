@@ -43,6 +43,22 @@ public class JsFunctionAdaptor {
     return adaptor.jsFuncref;
   }
 
+  /** Converts a JavaScript function reference to an adaptor callable in Wasm. */
+  public static JsFunctionAdaptor fromJs(WasmExtern jsFuncref) {
+    JsFunctionAdaptor adaptor = (JsFunctionAdaptor) WasmExtern.convertToAny(getAdaptor(jsFuncref));
+    if (adaptor == null) {
+      adaptor = new JsFunctionAdaptor(jsFuncref);
+      setAdaptor(jsFuncref, WasmExtern.convertToExtern(adaptor));
+    }
+    return adaptor;
+  }
+
   @JsMethod(namespace = "j2wasm.JsInteropRuntime", name = "bindJsFunction")
   private static native WasmExtern bindJsFunction(WasmFuncref wasmFuncref, WasmExtern adaptor);
+
+  @JsMethod(namespace = "j2wasm.JsInteropRuntime", name = "getAdaptor")
+  private static native WasmExtern getAdaptor(WasmExtern funcref);
+
+  @JsMethod(namespace = "j2wasm.JsInteropRuntime", name = "setAdaptor")
+  private static native void setAdaptor(WasmExtern funcref, WasmExtern adaptor);
 }

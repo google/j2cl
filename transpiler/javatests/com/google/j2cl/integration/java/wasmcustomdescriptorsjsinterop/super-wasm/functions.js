@@ -24,6 +24,22 @@ function getFunction() {
 }
 
 /**
+ * @return {?}
+ * @public
+ */
+function getFunctionAsObject() {
+  return (a) => a + 32;
+}
+
+/**
+ * @return {function(?): ?}
+ * @public
+ */
+function getFunctionWithObject() {
+  return (a) => a;
+}
+
+/**
  * @param {function(number): number} fn
  * @param {number} a
  * @return {number}
@@ -53,4 +69,42 @@ function callFunctionWithObject(fn, a) {
   return fn(a);
 }
 
-exports = {getFunction, callFunction, callFunctionAsObject, callFunctionWithObject};
+/**
+ * @param {function(number): number} fn
+ * @return {function(number): number}
+ * @public
+ */
+function passThrough(fn) {
+  return fn;
+}
+
+/**
+ * @param {?} fn
+ * @return {?}
+ * @public
+ */
+function passThroughAsObject(fn) {
+  return fn;
+}
+
+/**
+ * @param {function(number): number} fn1
+ * @param {function(number): number} fn2
+ * @return {boolean}
+ * @public
+ */
+function isSame(fn1, fn2) {
+  return fn1 === fn2;
+}
+
+exports = {
+  getFunction,
+  getFunctionAsObject,
+  getFunctionWithObject,
+  callFunction,
+  callFunctionAsObject,
+  callFunctionWithObject,
+  passThrough,
+  passThroughAsObject,
+  isSame
+};

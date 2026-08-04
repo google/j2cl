@@ -72,6 +72,7 @@ public class Object {
       case 2 -> Boolean.fromJs((Boolean.NativeBoolean) extern);
       case 3 -> Double.fromJs((Double.NativeNumber) extern);
       case 4 -> Long.fromJs((Long.NativeLong) extern);
+      case 5 -> JsFunctionAdaptor.fromJs(extern);
       default -> {
         WasmAny any = WasmExtern.convertToAny(extern);
         if (any instanceof Object) {

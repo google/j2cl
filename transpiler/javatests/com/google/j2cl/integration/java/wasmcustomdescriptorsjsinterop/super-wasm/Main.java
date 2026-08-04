@@ -37,6 +37,8 @@ public final class Main {
     testInterfaceMethod();
     testJsSubtyping();
     testJsFunction();
+    testJsFunctionIdentity();
+    testJsFunctionCrossCasting();
     testEntryPoint();
   }
 
@@ -329,9 +331,47 @@ public final class Main {
     assertEquals(someJsType, callFunctionWithObjectInJs(objectLambda, someJsType));
     assertTrue(callFunctionWithObjectInJs(objectLambda, someJsType) == someJsType);
 
-    // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
-    // MyJsFunction jsFunction = getFunctionFromJs();
-    // assertEquals(42, jsFunction.foo(10));
+    MyJsFunction jsFunction = getFunctionFromJs();
+    assertEquals(42, jsFunction.foo(10));
+
+    MyJsFunction jsFunctionAsObject = (MyJsFunction) getFunctionAsObjectFromJs();
+    assertEquals(42, jsFunctionAsObject.foo(10));
+    assertEquals(37, callFunctionInJs(jsFunctionAsObject, 5));
+
+    MyJsFunctionWithObject jsFunctionWithObject = getFunctionWithObjectFromJs();
+    Object obj2 = new Object();
+    assertTrue(jsFunctionWithObject.foo(obj2) == obj2);
+    assertEquals("hello", jsFunctionWithObject.foo("hello"));
+    SomeJsType someJsType2 = new SomeJsType(123);
+    assertTrue(jsFunctionWithObject.foo(someJsType2) == someJsType2);
+  }
+
+  private static void testJsFunctionIdentity() {
+    MyJsFunction fromJs = getFunctionFromJs();
+    MyJsFunction fromJs2 = passThroughFromJs(fromJs);
+    assertTrue(fromJs == fromJs2);
+    assertTrue(isSameInJs(fromJs, fromJs2));
+
+    MyJsFunction fromJsAsObject = (MyJsFunction) getFunctionAsObjectFromJs();
+    MyJsFunction fromJsAsObject2 = (MyJsFunction) passThroughAsObjectFromJs(fromJsAsObject);
+    assertTrue(fromJsAsObject == fromJsAsObject2);
+    assertTrue(isSameInJs(fromJsAsObject, fromJsAsObject2));
+
+    MyJsFunction fromWasm = a -> a + 20;
+    MyJsFunction fromWasm2 = passThroughFromJs(fromWasm);
+    assertTrue(fromWasm == fromWasm2);
+    assertTrue(isSameInJs(fromWasm, fromWasm2));
+  }
+
+  private static void testJsFunctionCrossCasting() {
+    MyJsFunction fromJs = getFunctionFromJs();
+    MyJsFunction2 crossCastedFromJs = crossCastFromJs(fromJs);
+    assertEquals(42, crossCastedFromJs.bar(10));
+
+    // TODO(b/532280780): Explore this case.
+    // MyJsFunction fromWasm = a -> a + 20;
+    // MyJsFunction2 crossCastedFromWasm = crossCastFromJs(fromWasm);
+    // assertEquals(30, crossCastedFromWasm.bar(10));
   }
 
   static int staticFooImpl(int a) {
@@ -362,6 +402,20 @@ public final class Main {
     Object foo(Object o);
   }
 
+  @JsFunction
+  interface MyJsFunction2 {
+    int bar(int a);
+  }
+
+  @JsMethod(namespace = "functions", name = "getFunction")
+  private static native MyJsFunction getFunctionFromJs();
+
+  @JsMethod(namespace = "functions", name = "getFunctionAsObject")
+  private static native Object getFunctionAsObjectFromJs();
+
+  @JsMethod(namespace = "functions", name = "getFunctionWithObject")
+  private static native MyJsFunctionWithObject getFunctionWithObjectFromJs();
+
   @JsMethod(namespace = "functions", name = "callFunction")
   private static native int callFunctionInJs(MyJsFunction function, int a);
 
@@ -372,9 +426,17 @@ public final class Main {
   private static native Object callFunctionWithObjectInJs(
       MyJsFunctionWithObject function, Object a);
 
-  // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
-  // @JsMethod(namespace = "functions", name = "getFunction")
-  // private static native MyJsFunction getFunctionFromJs();
+  @JsMethod(namespace = "functions", name = "passThrough")
+  private static native MyJsFunction passThroughFromJs(MyJsFunction function);
+
+  @JsMethod(namespace = "functions", name = "passThroughAsObject")
+  private static native Object passThroughAsObjectFromJs(Object function);
+
+  @JsMethod(namespace = "functions", name = "isSame")
+  private static native boolean isSameInJs(MyJsFunction function1, MyJsFunction function2);
+
+  @JsMethod(namespace = "functions", name = "passThrough")
+  private static native MyJsFunction2 crossCastFromJs(MyJsFunction function);
 
   private static void testEntryPoint() {
     assertTrue(callEntryPointAdd(5, 10) == 15);

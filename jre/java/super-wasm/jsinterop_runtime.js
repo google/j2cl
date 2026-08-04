@@ -83,22 +83,28 @@ function bindJsFunction(fn, adapter) {
   // context, so we pass `null` as the `thisArg` and bind `adapter` as its
   // first argument.
   const f = fn.bind(null, adapter);
-  f.adapter = adapter;
+  f['__j2wasm$adaptor'] = adapter;
   return f;
 }
 
 /**
- * To be called by Wasm when receiving a function from JS.
+ * Gets the JsFunction adaptor for the given function.
  *
  * @param {function(...?): ?} fn
- * @param {function(function(...?): ?): !Object} createAdapter
- * @return {!Object}
+ * @return {*}
  */
-function adaptJsFunction(fn, createAdapter) {
-  if (!fn.adapter) {
-    fn.adapter = createAdapter(fn);
-  }
-  return fn.adapter;
+function getAdaptor(fn) {
+  return fn['__j2wasm$adaptor'] || null;
+}
+
+/**
+ * Sets the JsFunction adaptor for the given function.
+ *
+ * @param {function(...?): ?} fn
+ * @param {*} adapter
+ */
+function setAdaptor(fn, adapter) {
+  fn['__j2wasm$adaptor'] = adapter;
 }
 
 /**
@@ -117,17 +123,20 @@ function typeOf(x) {
       return 2;
     case 'number':
       return 3;
+    case 'function':
+      return 5;
     default:
       if (x instanceof Long) {
         return 4;
       }
-      return 5;
+      return 6;
   }
 }
 
 exports = {
-  adaptJsFunction,
   bindJsFunction,
+  getAdaptor,
+  setAdaptor,
   constructorProxy,
   invokeJsFunction,
   typeOf,

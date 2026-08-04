@@ -266,11 +266,8 @@ public class WasmExportBridgesUtils {
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
     if (typeDescriptor.isJsFunctionInterface()) {
-      MethodDescriptor adaptMethodDescriptor =
-          LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptMethod(
-              LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
-                  typeDescriptor));
-      return MethodCall.builderFrom(adaptMethodDescriptor).setArguments(expression).build();
+      return RuntimeMethods.createFromJsMethodCall(
+          TypeDescriptors.get().javaemulInternalJsFunctionAdaptor, expression);
     }
     if (needsBoundaryExternConversion(typeDescriptor, isExport)) {
       return RuntimeMethods.createWasmConvertToAnyMethodCall(expression, typeDescriptor);
