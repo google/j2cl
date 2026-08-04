@@ -142,6 +142,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT,
     SYNTHETIC_WASM_JS_GETTER_EXPORT,
     SYNTHETIC_WASM_JS_SETTER_EXPORT,
+    SYNTHETIC_WASM_JS_FUNCTION_EXPORT,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
@@ -189,7 +190,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         case SYNTHETIC_WASM_ENTRY_POINT -> "entry_point_";
 
-        case SYNTHETIC_WASM_JS_METHOD_EXPORT, SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> "js_export_";
+        case SYNTHETIC_WASM_JS_METHOD_EXPORT,
+            SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT,
+            SYNTHETIC_WASM_JS_FUNCTION_EXPORT ->
+            "js_export_";
 
         case SYNTHETIC_WASM_JS_GETTER_EXPORT -> "js_export_get_";
 
@@ -234,7 +238,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return isWasmJsMethodExport()
           || isWasmJsGetterExport()
           || isWasmJsSetterExport()
-          || isWasmJsConstructorExport();
+          || isWasmJsConstructorExport()
+          || isWasmJsFunctionExport();
     }
 
     public boolean isWasmEntryPoint() {
@@ -255,6 +260,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public boolean isWasmJsSetterExport() {
       return this == SYNTHETIC_WASM_JS_SETTER_EXPORT;
+    }
+
+    public boolean isWasmJsFunctionExport() {
+      return this == SYNTHETIC_WASM_JS_FUNCTION_EXPORT;
     }
   }
 
@@ -621,6 +630,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public JsInfo getJsInfo() {
     if (getManglingDescriptor() != this) {
       return getManglingDescriptor().getJsInfo();
+    }
+
+    // TODO(b/541381846): Revisit how to propagate JsInfo for exported methods in Wasm.
+    if (getOrigin().isWasmJsExport() && getBridgeOrigin() != null) {
+      return getBridgeOrigin().getJsInfo();
     }
 
     checkState(isDeclaration());

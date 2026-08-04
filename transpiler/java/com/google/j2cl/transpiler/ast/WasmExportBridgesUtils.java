@@ -160,7 +160,8 @@ public class WasmExportBridgesUtils {
       MethodDescriptor descriptor, MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor.Builder builder =
         descriptor.toBuilder()
-            .setOrigin(origin)
+            .makeBridge(
+                origin, /* originDescriptor= */ descriptor, /* targetDescriptor= */ descriptor)
             .setReturnTypeDescriptor(
                 descriptor.isConstructor()
                     ? descriptor.getReturnTypeDescriptor()
@@ -176,16 +177,7 @@ public class WasmExportBridgesUtils {
                                         pd.getTypeDescriptor(), origin.isWasmJsExport()))
                                 .setVarargs(false)
                                 .build())
-                    .collect(toImmutableList()))
-            .makeDeclaration()
-            .setAbstract(false)
-            // Copy over the JsInfo from the descriptor. This allows the bridge to retain the JsInfo
-            // if, for example, it is inherited; we otherwise lose the inherited JsInfo because we
-            // lose override information. It also preserves the CONSTRUCTOR member type if the
-            // original member is a constructor.
-            // TODO(b/493656775): Consider calling `makeBridge` here instead and getting JsInfo from
-            // the mangling descriptor/bridge origin.
-            .setOriginalJsInfo(descriptor.getJsInfo());
+                    .collect(toImmutableList()));
     if (descriptor.isConstructor()) {
       // Change constructors to static factory methods.
       builder.setStatic(true).setConstructor(false);
