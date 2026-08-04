@@ -183,27 +183,37 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
             .setName("wasmFuncref")
             .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
             .build();
+    Variable wasmExportBridgeFuncrefParameter =
+        Variable.builder()
+            .setFinal(true)
+            .setParameter(true)
+            .setName("wasmExportBridgeFuncref")
+            .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
+            .build();
 
     MethodDescriptor superConstructorDescriptor =
         TypeDescriptors.get()
             .javaemulInternalJsFunctionAdaptor
             .getMethodDescriptor(
                 MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
+                TypeDescriptors.get().javaemulInternalWasmFuncref,
                 TypeDescriptors.get().javaemulInternalWasmFuncref);
 
     // Generates:
-    // JsFunctionAdaptor(WasmFuncref wasmFuncref) {
-    //   super(wasmFuncref);
+    // JsFunctionAdaptor(WasmFuncref wasmFuncref, WasmFuncref wasmExportBridgeFuncref) {
+    //   super(wasmFuncref, wasmExportBridgeFuncref);
     // }
     adaptorType.addMember(
         Method.builder()
             .setMethodDescriptor(
                 LambdaAdaptorTypeDescriptors.getWasmJsFunctionAdaptorWasmFuncrefConstructor(
                     adaptorTypeDescriptor))
-            .setParameters(wasmFuncrefParameter)
+            .setParameters(wasmFuncrefParameter, wasmExportBridgeFuncrefParameter)
             .addStatements(
                 MethodCall.builderFrom(superConstructorDescriptor)
-                    .setArguments(wasmFuncrefParameter.createReference())
+                    .setArguments(
+                        wasmFuncrefParameter.createReference(),
+                        wasmExportBridgeFuncrefParameter.createReference())
                     .build()
                     .makeStatement(sourcePosition))
             .setSourcePosition(sourcePosition)

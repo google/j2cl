@@ -79,7 +79,10 @@ function invokeJsFunction(fn, ...args) {
  * @return {function(...?): ?}
  */
 function bindJsFunction(fn, adapter) {
-  const f = fn.bind(adapter);
+  // `fn` is always an exported Wasm function and does not have a `this`
+  // context, so we pass `null` as the `thisArg` and bind `adapter` as its
+  // first argument.
+  const f = fn.bind(null, adapter);
   f.adapter = adapter;
   return f;
 }

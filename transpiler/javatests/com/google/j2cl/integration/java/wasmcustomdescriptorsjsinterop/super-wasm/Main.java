@@ -304,14 +304,30 @@ public final class Main {
     MyJsFunction lambda = a -> a + 20;
     assertEquals(25, lambda.foo(5));
     assertEquals(1, lambda.myOverlay());
+    assertEquals(25, callFunctionInJs(lambda, 5));
+    assertEquals(25, callFunctionAsObjectInJs(lambda, 5));
 
     MyJsFunction staticRef = Main::staticFooImpl;
     assertEquals(16, staticRef.foo(5));
     assertEquals(1, staticRef.myOverlay());
+    assertEquals(16, callFunctionInJs(staticRef, 5));
+    assertEquals(16, callFunctionAsObjectInJs(staticRef, 5));
 
     MyJsFunction instanceRef = new Main()::instanceFooImpl;
     assertEquals(17, instanceRef.foo(5));
     assertEquals(1, instanceRef.myOverlay());
+    assertEquals(17, callFunctionInJs(instanceRef, 5));
+    assertEquals(17, callFunctionAsObjectInJs(instanceRef, 5));
+
+    MyJsFunctionWithObject objectLambda = o -> o;
+    assertEquals(null, objectLambda.foo(null));
+    Object obj = new Object();
+    assertEquals(obj, objectLambda.foo(obj));
+    assertTrue(callFunctionWithObjectInJs(objectLambda, obj) == obj);
+    assertEquals("hello", callFunctionWithObjectInJs(objectLambda, "hello"));
+    SomeJsType someJsType = new SomeJsType(123);
+    assertEquals(someJsType, callFunctionWithObjectInJs(objectLambda, someJsType));
+    assertTrue(callFunctionWithObjectInJs(objectLambda, someJsType) == someJsType);
 
     // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
     // MyJsFunction jsFunction = getFunctionFromJs();
@@ -341,8 +357,23 @@ public final class Main {
     }
   }
 
+  @JsFunction
+  interface MyJsFunctionWithObject {
+    Object foo(Object o);
+  }
+
+  @JsMethod(namespace = "functions", name = "callFunction")
+  private static native int callFunctionInJs(MyJsFunction function, int a);
+
+  @JsMethod(namespace = "functions", name = "callFunctionAsObject")
+  private static native int callFunctionAsObjectInJs(Object function, int a);
+
+  @JsMethod(namespace = "functions", name = "callFunctionWithObject")
+  private static native Object callFunctionWithObjectInJs(
+      MyJsFunctionWithObject function, Object a);
+
   // TODO(b/516900958): Enable the test when a JsFunction can be imported from JS.
-  // @JsMethod(namespace = "test.functions", name = "getFunction")
+  // @JsMethod(namespace = "functions", name = "getFunction")
   // private static native MyJsFunction getFunctionFromJs();
 
   private static void testEntryPoint() {

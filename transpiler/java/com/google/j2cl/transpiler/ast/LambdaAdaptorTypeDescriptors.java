@@ -255,7 +255,9 @@ public final class LambdaAdaptorTypeDescriptors {
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         .setConstructor(true)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
-        .setParameterTypeDescriptors(TypeDescriptors.get().javaemulInternalWasmFuncref)
+        .setParameterTypeDescriptors(
+            TypeDescriptors.get().javaemulInternalWasmFuncref,
+            TypeDescriptors.get().javaemulInternalWasmFuncref)
         .build();
   }
 

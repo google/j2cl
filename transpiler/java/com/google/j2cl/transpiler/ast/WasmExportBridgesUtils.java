@@ -211,6 +211,7 @@ public class WasmExportBridgesUtils {
 
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)
+        || typeDescriptor.isJsFunctionInterface()
         || needsBoundaryExternConversion(typeDescriptor, isExport)) {
       // Use externref since it can either be:
       //   - a Js primitive valus that can also be null,
@@ -233,6 +234,19 @@ public class WasmExportBridgesUtils {
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
+    }
+    if (typeDescriptor.isJsFunctionInterface()) {
+      MethodDescriptor toJsMethodDescriptor =
+          TypeDescriptors.get()
+              .javaemulInternalJsFunctionAdaptor
+              .getMethodDescriptor("toJs", TypeDescriptors.get().javaemulInternalJsFunctionAdaptor);
+      return MethodCall.builderFrom(toJsMethodDescriptor)
+          .setArguments(
+              CastExpression.builder()
+                  .setExpression(expression)
+                  .setCastTypeDescriptor(TypeDescriptors.get().javaemulInternalJsFunctionAdaptor)
+                  .build())
+          .build();
     }
     if (needsBoundaryExternConversion(typeDescriptor, isExport)) {
       return RuntimeMethods.createWasmConvertToExternMethodCall(expression);
@@ -268,6 +282,7 @@ public class WasmExportBridgesUtils {
       TypeDescriptor typeDescriptor, boolean isExport) {
     return !typeDescriptor.isNative()
         && !typeDescriptor.isPrimitive()
+        && !TypeDescriptors.isWasmFuncref(typeDescriptor)
         // For methods exported by configureAll, we can avoid conversions for exported types.
         && !(isExport && AstUtils.isWasmJsExportedType(typeDescriptor));
   }

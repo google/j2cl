@@ -14,6 +14,7 @@
 package java.lang;
 
 import javaemul.internal.HashCodes;
+import javaemul.internal.JsFunctionAdaptor;
 import javaemul.internal.JsObject;
 import javaemul.internal.WasmAny;
 import javaemul.internal.WasmExtern;
@@ -55,6 +56,7 @@ public class Object {
       case Double d -> (WasmExtern) Double.toJs(d);
       case Boolean b -> (WasmExtern) Boolean.toJs(b);
       case Long l -> (WasmExtern) Long.toJs(l);
+      case JsFunctionAdaptor f -> JsFunctionAdaptor.toJs(f);
       case JsObject o -> o.getExtern();
       default -> WasmExtern.convertToExtern(obj);
     };

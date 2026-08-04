@@ -1862,7 +1862,13 @@ public class JsInteropRestrictionsChecker {
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || typeDescriptor.isNative()
-        || (checkWasmCustomDescriptorsJsInterop && AstUtils.isWasmJsExportedType(typeDescriptor));
+        // TODO(b/479895505): Remove this *comment* once JsFunction is enabled in general.
+        // Have to allow funcrefs through even though not enabled, because it is part of the JRE.
+        // This is safe because users cannot use it.
+        || TypeDescriptors.isWasmFuncref(typeDescriptor)
+        || (checkWasmCustomDescriptorsJsInterop
+            && (typeDescriptor.isJsFunctionInterface()
+                || AstUtils.isWasmJsExportedType(typeDescriptor)));
   }
 
   private void checkMethodSignature(

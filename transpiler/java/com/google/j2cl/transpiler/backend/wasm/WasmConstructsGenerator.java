@@ -305,6 +305,10 @@ public class WasmConstructsGenerator {
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
+    if (methodDescriptor.getOrigin().isWasmJsFunctionExport()) {
+      builder.newLine();
+      builder.append("(@binaryen.js.called)");
+    }
     builder.newLine();
     builder.append("(func " + environment.getMethodImplementationName(methodDescriptor));
 
