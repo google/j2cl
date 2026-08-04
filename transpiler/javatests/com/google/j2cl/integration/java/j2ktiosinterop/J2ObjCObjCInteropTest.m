@@ -554,7 +554,9 @@
       create_J2ktiosinteropDataClassRecord_initWithInt_withNSString_(123, @"foo");
   XCTAssertTrue([record isKindOfClass:[JavaLangRecord class]]);
   XCTAssertEqual([record a], 123);
+  XCTAssertEqual(record.a, 123);
   XCTAssertEqualObjects([record b], @"foo");
+  XCTAssertEqualObjects(record.b, @"foo");
   XCTAssertTrue([record.description containsString:@"DataClassRecord"]);
   XCTAssertTrue([record.description containsString:@"123"]);
   XCTAssertTrue([record.description containsString:@"foo"]);

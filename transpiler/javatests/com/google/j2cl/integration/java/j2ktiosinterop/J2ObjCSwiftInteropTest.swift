@@ -216,8 +216,8 @@ final class J2ObjCSwiftInteropTest: XCTestCase {
   func testDataClassRecord() {
     let record = J2ktiosinteropDataClassRecord(int: 123, with: "foo")
     XCTAssertTrue(record is JavaLangRecord)
-    XCTAssertEqual(record.a(), 123)
-    XCTAssertEqual(record.b(), "foo")
+    XCTAssertEqual(record.a, 123)
+    XCTAssertEqual(record.b, "foo")
     XCTAssertTrue(record.description.contains("DataClassRecord"))
     XCTAssertTrue(record.description.contains("1"))
     XCTAssertTrue(record.description.contains("foo"))
