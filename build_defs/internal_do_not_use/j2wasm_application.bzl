@@ -494,6 +494,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Only allow partial inlining since they only executed once.
             "--no-full-inline=*_<once>_*",
             "--partial-inlining-ifs=4",
+            # Specific list of passes:
             "--intrinsic-lowering",
             "--gufa",
             "--unsubtyping",
