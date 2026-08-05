@@ -196,13 +196,13 @@
      i!!.toInt(),
 ...
      i!!.toInt(),
-    )] "sourcemap.SourceMap.testAnonymousClass"
+    )] "sourcemap.SourceMap$1.apply"
 [helper1] => [helper1]
 [x] => [x] "x"
-[return x * 2 + outer;] => [return x * 2 + outer] "sourcemap.SourceMap.testAnonymousClass"
+[return x * 2 + outer;] => [return x * 2 + outer] "sourcemap.SourceMap$1.helper1"
 [helper2] => [helper2]
 [x] => [x] "x"
-[return x + 1;] => [return x + 1] "sourcemap.SourceMap.testAnonymousClass"
+[return x + 1;] => [return x + 1] "sourcemap.SourceMap$1.helper2"
 [return f.apply(10);] => [return f.apply(10)!!.toInt()] "sourcemap.SourceMap.testAnonymousClass"
 [testLocalClass] => [testLocalClass]
 [outer] => [outer] "outer"
@@ -218,14 +218,14 @@
 [Local] => [Local]
 [member1] => [member1]
 [a] => [a] "a"
-[return member2(a) * 2 + new Inner().member3(a);] => [return this.member2(a) * 2 + Inner().member3(a)] "sourcemap.SourceMap.testLocalClass"
+[return member2(a) * 2 + new Inner().member3(a);] => [return this.member2(a) * 2 + Inner().member3(a)] "sourcemap.SourceMap$1Local.member1"
 [member2] => [member2]
 [b] => [b] "b"
-[return b + outer;] => [return b + outer] "sourcemap.SourceMap.testLocalClass"
+[return b + outer;] => [return b + outer] "sourcemap.SourceMap$1Local.member2"
 [Inner] => [Inner]
 [member3] => [member3]
 [c] => [c] "c"
-[return c + 1;] => [return c + 1] "sourcemap.SourceMap.testLocalClass"
+[return c + 1;] => [return c + 1] "sourcemap.SourceMap$1Local$Inner.member3"
 [return new Local().member1(5);] => [return Local().member1(5)] "sourcemap.SourceMap.testLocalClass"
 [testLambdaAndMethodReference] => [testLambdaAndMethodReference]
 [n] => [n] "n"

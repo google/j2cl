@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.Type;
 
 /**
  * Adds method qualified names to source positions for sourcemaps and fills out missing information
@@ -48,7 +49,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
                         memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
                         memberDescriptor.getBinaryName());
 
-            tagStatements(functionExpression.getBody(), qualifiedBinaryName);
+            tagStatements(functionExpression, qualifiedBinaryName);
             return true;
           }
 
@@ -69,8 +70,20 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public boolean enterFunctionExpression(FunctionExpression functionExpression) {
-            // Do not recurse into FunctionExpressions.
-            return false;
+            // Do not recurse into nested lambdas.
+            return functionExpression == node;
+          }
+
+          @Override
+          public boolean enterMember(Member member) {
+            // Do not recurse into nested members (e.g. methods of anonymous/local classes).
+            return member == node;
+          }
+
+          @Override
+          public boolean enterType(Type type) {
+            // Do not recurse into nested types (e.g. anonymous/local classes).
+            return type == node;
           }
 
           @Override
