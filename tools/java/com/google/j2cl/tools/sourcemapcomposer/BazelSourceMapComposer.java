@@ -31,6 +31,11 @@ import org.kohsuke.args4j.Option;
 /** */
 final class BazelSourceMapComposer extends BazelWorker {
   @Option(
+      name = "-excludeTargetExtension",
+      usage = "Target source file extensions to exclude from the output.")
+  List<String> excludeTargetExtensions = new ArrayList<>();
+
+  @Option(
       name = "-intermediate",
       required = true,
       metaVar = "<file|directory>",
@@ -61,15 +66,17 @@ final class BazelSourceMapComposer extends BazelWorker {
       intermediate.sources.stream().forEach(f -> output.copyFile(f.sourcePath(), f.originalPath()));
 
       target.sources.stream()
-          // TODO(b/537888831): Filter for target files should be configurable from the build rule.
-          // Filter out Kotlin source files as they are no longer referenced by the output source
-          // maps.
-          .filter(f -> !f.originalPath().endsWith(".kt"))
+          .filter(f -> shouldCopySource(f, excludeTargetExtensions))
           .forEach(f -> output.copyFile(f.sourcePath(), f.originalPath()));
 
       SourceMapComposer.composeSourceMaps(
           intermediate.sourceMaps, target.sourceMaps, output, problems);
     }
+  }
+
+  private static boolean shouldCopySource(FileInfo fileInfo, List<String> excludedExtensions) {
+    String path = fileInfo.originalPath();
+    return excludedExtensions.stream().noneMatch(path::endsWith);
   }
 
   /** Helper to extract and partition sources into sourcemaps (.map) and non-sourcemap files. */
