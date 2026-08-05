@@ -141,11 +141,18 @@ public class GenericMethod<T> {
     default <T extends Subject<V>> void publishSubject(T subject) {
       subject.publish();
     }
+
+    // ensure that the order of the intersection types of the dispatch receiver is not important.
+    default <T extends OtherSubject<V> & Subject<V>> void publishIntersectedSubject(T subject) {
+      subject.publish();
+    }
   }
 
   interface BaseSubject<V> {}
 
   interface Subject<V> extends Publisher<V>, BaseSubject<V> {}
+
+  interface OtherSubject<V> extends BaseSubject<V> {}
 
   interface Consumer<V> {
     void accept(V v);

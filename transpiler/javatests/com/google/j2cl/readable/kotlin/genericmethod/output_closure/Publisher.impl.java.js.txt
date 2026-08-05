@@ -2,7 +2,9 @@ goog.module('genericmethod.Publisher$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let OtherSubject = goog.forwardDeclare('genericmethod.OtherSubject$impl');
 let Subject = goog.forwardDeclare('genericmethod.Subject$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @interface
@@ -13,9 +15,17 @@ class Publisher {
  m_publish__genericmethod_Publisher() {}
  /** @abstract @nodts @template T */
  m_publishSubject__genericmethod_Subject__void(/** T */ subject) {}
+ /** @abstract @nodts @template T */
+ m_publishIntersectedSubject__genericmethod_OtherSubject__void(/** T */ subject) {}
  /** @nodts @template V, T */
  static m_publishSubject__$default__genericmethod_Publisher__genericmethod_Subject__void(/** !Publisher<V> */ $thisArg, /** T */ subject) {
   Publisher.$clinit();
+  (/**@type {!Publisher<V>}*/ (subject)).m_publish__genericmethod_Publisher();
+ }
+ /** @nodts @template V, T */
+ static m_publishIntersectedSubject__$default__genericmethod_Publisher__genericmethod_OtherSubject__void(/** !Publisher<V> */ $thisArg, /** T */ subject) {
+  Publisher.$clinit();
+  (/**@type {!Publisher<V>}*/ ($Casts.$to(subject, /**@type {Function}*/ (Publisher)))).m_publish__genericmethod_Publisher();
  }
  /** @nodts */
  static $clinit() {
@@ -32,7 +42,9 @@ class Publisher {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 Publisher.$markImplementor(/**@type {Function}*/ (Publisher));
 $Util.$setClassMetadataForInterface(/**@type {Function}*/ (Publisher), 'genericmethod.Publisher');

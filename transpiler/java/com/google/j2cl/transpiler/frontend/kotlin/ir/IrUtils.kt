@@ -267,9 +267,18 @@ fun IrMemberAccessExpression<*>.getTypeSubstitutionMap(
   val superQualifierSymbol = (this as? IrCall)?.superQualifierSymbol
 
   val receiverType =
-    if (superQualifierSymbol != null) superQualifierSymbol.defaultType as? IrSimpleType
-    else getRealDispatcherReceiverForTypeSubstitution(irFunction)
-  val dispatchReceiverTypeArguments = receiverType?.arguments ?: emptyList()
+    superQualifierSymbol?.defaultType ?: getRealDispatcherReceiverForTypeSubstitution(irFunction)
+
+  // Modified: if the receiver if a type parameter, ensure we get the type arguments of all the
+  // super types.
+  val dispatchReceiverTypeArguments =
+    when {
+      receiverType == null -> emptyList()
+      receiverType.isTypeParameter() ->
+        receiverType.superTypes().filterIsInstance<IrSimpleType>().flatMap { it.arguments }
+      else -> receiverType.arguments
+    }
+  // End of modifications
 
   if (typeParameters.isEmpty() && dispatchReceiverTypeArguments.isEmpty()) {
     return emptyMap()

@@ -1,5 +1,6 @@
 
 (type $genericmethod.GenericMethod.Publisher.vtable (sub (struct
+ (field $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void (ref $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void))
  (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
  (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
  ))
@@ -48,6 +49,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void (ref $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void))
  (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
  (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
  ))
@@ -123,8 +125,12 @@
  ))
 )
 (type $genericmethod.GenericMethod.Subject.vtable (sub $genericmethod.GenericMethod.Publisher.vtable (struct
+ (field $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void (ref $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void))
  (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
  (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
+ ))
+)
+(type $genericmethod.GenericMethod.OtherSubject.vtable (sub $genericmethod.GenericMethod.BaseSubject.vtable (struct
  ))
 )
 (type $genericmethod.GenericMethod.Subject.$LambdaAdaptor (sub $java.lang.Object (struct
@@ -138,6 +144,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void (ref $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void))
  (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
  (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
  ))

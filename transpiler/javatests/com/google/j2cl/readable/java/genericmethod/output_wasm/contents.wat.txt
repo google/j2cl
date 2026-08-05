@@ -71,6 +71,12 @@
 (global $$class@genericmethod.GenericMethod.Subject (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@genericmethod.GenericMethod.OtherSubject (mut i32)
+ (i32.const 0)
+)
+(global $$class@genericmethod.GenericMethod.OtherSubject (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@genericmethod.GenericMethod.Consumer (mut i32)
  (i32.const 0)
 )
@@ -185,6 +191,23 @@
 )
 (elem declare func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher)
 
+;;; void Publisher.publishIntersectedSubject(T subject)
+(func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher
+ (param $this (ref null $java.lang.Object))
+ (param $subject (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:146:58
+ (local $$qualifier (ref null $java.lang.Object))
+ (block
+  (block
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:147:6
+   (local.set $$qualifier (local.get $subject))
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:147:6
+   (drop (call_ref $function.m_publish__genericmethod_GenericMethod_Publisher (ref.as_non_null (local.get $$qualifier))(struct.get $genericmethod.GenericMethod.Publisher.vtable $m_publish__genericmethod_GenericMethod_Publisher (ref.cast (ref $genericmethod.GenericMethod.Publisher.vtable) (call $get.itable.$genericmethod.GenericMethod.Publisher (local.get $$qualifier))))))
+  )
+ )
+)
+(elem declare func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher)
+
 ;;; void Publisher.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Publisher
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
@@ -217,16 +240,16 @@
 
 ;;; void BaseSubject.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.BaseSubject
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:146:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:146:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.BaseSubject)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:146:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:146:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:151:12
   (global.set $$class-initialized@genericmethod.GenericMethod.BaseSubject (i32.const 1))
  )
 )
@@ -247,16 +270,16 @@
 
 ;;; void Consumer.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Consumer
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.Consumer)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
   (global.set $$class-initialized@genericmethod.GenericMethod.Consumer (i32.const 1))
  )
 )
@@ -277,16 +300,16 @@
 
 ;;; void Supplier.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Supplier
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.Supplier)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
   (global.set $$class-initialized@genericmethod.GenericMethod.Supplier (i32.const 1))
  )
 )
@@ -668,11 +691,11 @@
 (func $m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object__void@genericmethod.GenericMethod
  (param $consumer (ref null $java.lang.Object))
  (param $v (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:158:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:165:18
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:158:18
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:165:18
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:159:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:166:4
   (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $consumer))(local.get $v)(struct.get $genericmethod.GenericMethod.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast (ref $genericmethod.GenericMethod.Consumer.vtable) (call $get.itable.$genericmethod.GenericMethod.Consumer (local.get $consumer)))))
  )
 )
@@ -681,11 +704,11 @@
 (func $m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier__java_lang_Object@genericmethod.GenericMethod
  (param $supplier (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:162:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:169:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:162:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:169:15
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:163:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:170:4
   (return (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $supplier))(struct.get $genericmethod.GenericMethod.Supplier.vtable $m_get__java_lang_Object (ref.cast (ref $genericmethod.GenericMethod.Supplier.vtable) (call $get.itable.$genericmethod.GenericMethod.Supplier (local.get $supplier))))))
  )
 )
@@ -693,11 +716,11 @@
 ;;; void GenericMethod.methodWithBoundTypeVariable(T arg0)
 (func $m_methodWithBoundTypeVariable__java_lang_Number__void@genericmethod.GenericMethod
  (param $arg0 (ref null $java.lang.Number))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:166:33
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:166:33
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:166:33
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
   (call $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod (local.get $arg0))
  )
 )
@@ -705,18 +728,18 @@
 ;;; void GenericMethod.methodWithBoundTypeVariable_$private(T unusedForInference)
 (func $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod
  (param $unusedForInference (ref null $java.lang.Number))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:166:33
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
  (block
  )
 )
 
 ;;; void GenericMethod.testMethodCallsWithCaptureTypeArguments()
 (func $m_testMethodCallsWithCaptureTypeArguments__void@genericmethod.GenericMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:168:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:175:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:168:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:175:14
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:169:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:176:4
   (call $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 0)))
  )
 )
@@ -791,6 +814,21 @@
 )
 (elem declare func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor)
 
+;;; void $LambdaAdaptor.publishIntersectedSubject(T arg0)
+(func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor
+ (type $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+ (local $this (ref null $genericmethod.GenericMethod.Publisher.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Publisher.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
+  (call $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor)
+
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Publisher.$LambdaAdaptor
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
@@ -841,27 +879,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_genericmethod_GenericMethod_Consumer_$LambdaAdaptor@genericmethod.GenericMethod.Consumer.$LambdaAdaptor
  (param $this (ref null $genericmethod.GenericMethod.Consumer.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Consumer.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.Consumer.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
   (global.set $$class-initialized@genericmethod.GenericMethod.Consumer.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:150:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:157:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -896,27 +934,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_genericmethod_GenericMethod_Supplier_$LambdaAdaptor@genericmethod.GenericMethod.Supplier.$LambdaAdaptor
  (param $this (ref null $genericmethod.GenericMethod.Supplier.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Supplier.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.Supplier.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
   (global.set $$class-initialized@genericmethod.GenericMethod.Supplier.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:154:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:161:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1211,18 +1249,18 @@
 
 ;;; void Subject.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Subject
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.Subject)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (global.set $$class-initialized@genericmethod.GenericMethod.Subject (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.Publisher )
  )
 )
@@ -1241,12 +1279,42 @@
  )
 )
 
+;;; void OtherSubject.$clinit()
+(func $$clinit__void_<once>_@genericmethod.GenericMethod.OtherSubject
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:155:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:155:12
+  (if (global.get $$class-initialized@genericmethod.GenericMethod.OtherSubject)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:155:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:155:12
+  (global.set $$class-initialized@genericmethod.GenericMethod.OtherSubject (i32.const 1))
+ )
+)
+
+;;; Class<T> OtherSubject.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@genericmethod.GenericMethod.OtherSubject
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@genericmethod.GenericMethod.OtherSubject)))
+   (then
+    (return (global.get $$class@genericmethod.GenericMethod.OtherSubject))
+   )
+  )
+  (global.set $$class@genericmethod.GenericMethod.OtherSubject (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|genericmetho...|__java_lang_String_<once>_@genericmethod.GenericMethod.OtherSubject.$StringLiterals )))
+  (return (global.get $$class@genericmethod.GenericMethod.OtherSubject))
+ )
+)
+
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_genericmethod_GenericMethod_Subject_$LambdaAdaptor@genericmethod.GenericMethod.Subject.$LambdaAdaptor
  (param $this (ref null $genericmethod.GenericMethod.Subject.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1256,32 +1324,47 @@
  (type $function.m_publishSubject__genericmethod_GenericMethod_Subject__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
  (local $this (ref null $genericmethod.GenericMethod.Subject.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Subject.$LambdaAdaptor) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (call $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
 (elem declare func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor)
 
+;;; void $LambdaAdaptor.publishIntersectedSubject(T arg0)
+(func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor
+ (type $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
+ (local $this (ref null $genericmethod.GenericMethod.Subject.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Subject.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
+  (call $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
+ )
+)
+(elem declare func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor)
+
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@genericmethod.GenericMethod.Subject.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (if (global.get $$class-initialized@genericmethod.GenericMethod.Subject.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (global.set $$class-initialized@genericmethod.GenericMethod.Subject.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:148:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
   (call $$clinit__void_<once>_@genericmethod.GenericMethod.Publisher )
  )
 )

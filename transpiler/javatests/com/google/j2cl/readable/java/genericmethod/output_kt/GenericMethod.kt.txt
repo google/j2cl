@@ -188,11 +188,17 @@ open class GenericMethod<T> {
   fun <T_1: Subject<V>?> publishSubject(subject: T_1) {
    subject!!.publish()
   }
+  
+  fun <T_1> publishIntersectedSubject(subject: T_1) where T_1: OtherSubject<V>?, T_1: Subject<V>? {
+   subject!!.publish()
+  }
  }
  
  interface BaseSubject<V>
  
  fun interface Subject<V>: Publisher<V>, BaseSubject<V>
+ 
+ interface OtherSubject<V>: BaseSubject<V>
  
  fun interface Consumer<V> {
   fun accept(v: V)

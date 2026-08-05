@@ -1,0 +1,35 @@
+goog.module('genericmethod.OtherSubject$impl');
+
+const BaseSubject = goog.require('genericmethod.BaseSubject$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template V
+ * @extends {BaseSubject<V>}
+ */
+class OtherSubject {
+ /** @nodts */
+ static $clinit() {
+  OtherSubject.$clinit = () =>{};
+  OtherSubject.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  BaseSubject.$markImplementor(ctor);
+  ctor.prototype.$implements__genericmethod_OtherSubject = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_OtherSubject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+OtherSubject.$markImplementor(/**@type {Function}*/ (OtherSubject));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (OtherSubject), 'genericmethod.OtherSubject');
+
+exports = OtherSubject;
+
+//# sourceMappingURL=OtherSubject.js.map

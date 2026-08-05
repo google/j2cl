@@ -131,11 +131,17 @@ interface Publisher<V> {
   // distinct type (BaseSubject).
   // See: b/542601508
   fun <T : Subject<V>> publishSubject(subject: T) {
-    // TODO(b/542601508): uncomment when the kotlin frontend no longer crashes.
-    // subject.publish()
+    subject.publish()
+  }
+
+  // ensure that the order of the intersection types of the dispatch receiver is not important.
+  fun <T> publishIntersectedSubject(subject: T) where T : OtherSubject<V>, T : Subject<V> {
+    subject.publish()
   }
 }
 
 interface BaseSubject<V>
 
 interface Subject<V> : Publisher<V>, BaseSubject<V>
+
+interface OtherSubject<V> : BaseSubject<V>
