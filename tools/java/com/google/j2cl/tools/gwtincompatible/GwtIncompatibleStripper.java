@@ -63,13 +63,11 @@ public final class GwtIncompatibleStripper {
 
   static void strip(
       Stream<Path> files, Output output, Problems problems, List<String> annotationNames) {
-    try (output) {
-      List<FileInfo> allPaths =
-          SourceUtils.getAllSources(files, output.createTempDirectory("_source_jars"), problems)
-              .filter(f -> f.targetPath().endsWith(".java"))
-              .collect(toImmutableList());
-      preprocessFiles(allPaths, output, problems, annotationNames);
-    }
+    List<FileInfo> allPaths =
+        SourceUtils.getAllSources(files, output.createTempDirectory("_source_jars"), problems)
+            .filter(f -> f.targetPath().endsWith(".java"))
+            .collect(toImmutableList());
+    preprocessFiles(allPaths, output, problems, annotationNames);
   }
 
   /** Preprocess all provided files and put them to provided output path. */

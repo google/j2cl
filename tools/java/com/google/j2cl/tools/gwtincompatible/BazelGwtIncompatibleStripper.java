@@ -46,8 +46,9 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
     if (annotations.isEmpty()) {
       annotations.add("GwtIncompatible");
     }
-    var output = OutputUtils.initOutputForBazel(outputPath, problems);
-    GwtIncompatibleStripper.strip(files.stream(), output, problems, annotations);
+    try (var output = OutputUtils.initOutputForBazel(outputPath, problems)) {
+      GwtIncompatibleStripper.strip(files.stream(), output, problems, annotations);
+    }
   }
 
   public static void main(String[] workerArgs) throws Exception {

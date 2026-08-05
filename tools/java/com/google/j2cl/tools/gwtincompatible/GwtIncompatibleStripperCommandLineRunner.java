@@ -57,8 +57,9 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
       annotations.add("GwtIncompatible");
     }
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
-    var output = OutputUtils.initOutput(outputPath, tempDir, problems);
-    GwtIncompatibleStripper.strip(files.stream(), output, problems, annotations);
+    try (var output = OutputUtils.initOutput(outputPath, tempDir, problems)) {
+      GwtIncompatibleStripper.strip(files.stream(), output, problems, annotations);
+    }
   }
 
   public static int run(Collection<String> args, PrintStream stdErr) {
