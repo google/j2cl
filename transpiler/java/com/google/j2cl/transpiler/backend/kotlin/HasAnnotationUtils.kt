@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.HasAnnotations
 
 internal val HasAnnotations.hasInjectAnnotation: Boolean
@@ -28,3 +29,6 @@ internal val HasAnnotations.hasDaggerComponentRegistryCompatibleAnnotation: Bool
 
 internal val HasAnnotations.isVisibilityWarningSuppressed: Boolean
   get() = isWarningSuppressed("j2kt:visibility")
+
+internal val HasAnnotations.objectiveCKmpMethodAnnotation: Annotation?
+  get() = getAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")

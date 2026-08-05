@@ -212,7 +212,7 @@ public final class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   @Nullable
   public DeclaredTypeDescriptor findSupertype(TypeDeclaration supertypeDeclaration) {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   /** A unique string for a give type. Used for interning. */

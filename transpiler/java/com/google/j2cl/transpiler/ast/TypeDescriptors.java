@@ -85,6 +85,9 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaUtilArrays;
   public DeclaredTypeDescriptor javaUtilObjects;
+  public DeclaredTypeDescriptor javaUtilList;
+  public DeclaredTypeDescriptor javaUtilSet;
+  public DeclaredTypeDescriptor javaUtilMap;
 
   public DeclaredTypeDescriptor javaIoSerializable;
 
