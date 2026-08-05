@@ -1,0 +1,57 @@
+goog.module('genericmethod.GenericMethod.Publisher.$LambdaAdaptor$impl');
+
+const Publisher = goog.require('genericmethod.GenericMethod.Publisher$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Subject = goog.forwardDeclare('genericmethod.GenericMethod.Subject$impl');
+
+/**
+ * @template V
+ * @implements {Publisher<V>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():Publisher<V> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():Publisher<V>} @nodts*/
+  this.f_fn__genericmethod_GenericMethod_Publisher_$LambdaAdaptor;
+  this.$ctor__genericmethod_GenericMethod_Publisher_$LambdaAdaptor__genericmethod_GenericMethod_Publisher_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__genericmethod_GenericMethod_Publisher_$LambdaAdaptor__genericmethod_GenericMethod_Publisher_$JsFunction__void(/** ?function():Publisher<V> */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__genericmethod_GenericMethod_Publisher_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {Publisher<V>} */
+ m_publish__genericmethod_GenericMethod_Publisher() {
+  let /** ?function():Publisher<V> */ $function;
+  return ($function = this.f_fn__genericmethod_GenericMethod_Publisher_$LambdaAdaptor, $function());
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @template T */
+ m_publishSubject__genericmethod_GenericMethod_Subject__void(/** T */ arg0) {
+  Publisher.m_publishSubject__$default__genericmethod_GenericMethod_Publisher__genericmethod_GenericMethod_Subject__void(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  Publisher.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Publisher.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'genericmethod.GenericMethod$Publisher$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=GenericMethod$Publisher$$LambdaAdaptor.js.map

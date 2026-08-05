@@ -1,0 +1,39 @@
+goog.module('genericmethod.Subject$impl');
+
+const BaseSubject = goog.require('genericmethod.BaseSubject$impl');
+const Publisher = goog.require('genericmethod.Publisher$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template V
+ * @extends {Publisher<V>}
+ * @extends {BaseSubject<V>}
+ */
+class Subject {
+ /** @nodts */
+ static $clinit() {
+  Subject.$clinit = () =>{};
+  Subject.$loadModules();
+  Publisher.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Publisher.$markImplementor(ctor);
+  BaseSubject.$markImplementor(ctor);
+  ctor.prototype.$implements__genericmethod_Subject = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_Subject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Subject.$markImplementor(/**@type {Function}*/ (Subject));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Subject), 'genericmethod.Subject');
+
+exports = Subject;
+
+//# sourceMappingURL=Subject.js.map

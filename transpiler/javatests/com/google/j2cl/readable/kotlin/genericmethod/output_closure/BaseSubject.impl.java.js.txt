@@ -1,0 +1,32 @@
+goog.module('genericmethod.BaseSubject$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template V
+ */
+class BaseSubject {
+ /** @nodts */
+ static $clinit() {
+  BaseSubject.$clinit = () =>{};
+  BaseSubject.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__genericmethod_BaseSubject = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_BaseSubject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+BaseSubject.$markImplementor(/**@type {Function}*/ (BaseSubject));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (BaseSubject), 'genericmethod.BaseSubject');
+
+exports = BaseSubject;
+
+//# sourceMappingURL=BaseSubject.js.map

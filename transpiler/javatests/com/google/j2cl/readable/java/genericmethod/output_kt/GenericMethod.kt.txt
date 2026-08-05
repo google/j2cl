@@ -182,6 +182,18 @@ open class GenericMethod<T> {
   }
  }
  
+ fun interface Publisher<V> {
+  fun publish(): Publisher<V>?
+  
+  fun <T_1: Subject<V>?> publishSubject(subject: T_1) {
+   subject!!.publish()
+  }
+ }
+ 
+ interface BaseSubject<V>
+ 
+ fun interface Subject<V>: Publisher<V>, BaseSubject<V>
+ 
  fun interface Consumer<V> {
   fun accept(v: V)
  }

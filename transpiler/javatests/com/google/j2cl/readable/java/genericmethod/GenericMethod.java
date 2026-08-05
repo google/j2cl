@@ -132,6 +132,21 @@ public class GenericMethod<T> {
     acceptsContent(deepContent);
   }
 
+  interface Publisher<V> {
+    Publisher<V> publish();
+
+    // invokes a method on a subtype which reuses the same captured type parameter to implement a
+    // distinct type (BaseSubject).
+    // See: b/542601508
+    default <T extends Subject<V>> void publishSubject(T subject) {
+      subject.publish();
+    }
+  }
+
+  interface BaseSubject<V> {}
+
+  interface Subject<V> extends Publisher<V>, BaseSubject<V> {}
+
   interface Consumer<V> {
     void accept(V v);
   }

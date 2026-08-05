@@ -1,4 +1,12 @@
 
+(type $genericmethod.GenericMethod.Publisher.vtable (sub (struct
+ (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
+ (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
+ ))
+)
+(type $genericmethod.GenericMethod.BaseSubject.vtable (sub (struct
+ ))
+)
 (type $genericmethod.GenericMethod.Consumer.vtable (sub (struct
  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
  ))
@@ -27,6 +35,21 @@
  (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
  (field $m_test__void (ref $function.m_test__void))
  (field $m_unchecked__java_lang_Object (ref $function.m_unchecked__java_lang_Object))
+ ))
+)
+(type $genericmethod.GenericMethod.Publisher.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $genericmethod.GenericMethod.Publisher.$LambdaAdaptor.vtable))
+ (field $itable (ref $genericmethod.GenericMethod.Publisher.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $genericmethod.GenericMethod.Publisher.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
+ (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
  ))
 )
 (type $genericmethod.GenericMethod.Consumer.$LambdaAdaptor (sub $java.lang.Object (struct
@@ -97,6 +120,26 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getProp__java_lang_String_$pp_genericmethod (ref $function.m_getProp__java_lang_String_$pp_genericmethod))
+ ))
+)
+(type $genericmethod.GenericMethod.Subject.vtable (sub $genericmethod.GenericMethod.Publisher.vtable (struct
+ (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
+ (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
+ ))
+)
+(type $genericmethod.GenericMethod.Subject.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $genericmethod.GenericMethod.Subject.$LambdaAdaptor.vtable))
+ (field $itable (ref $genericmethod.GenericMethod.Subject.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $genericmethod.GenericMethod.Subject.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_publishSubject__genericmethod_GenericMethod_Subject__void (ref $function.m_publishSubject__genericmethod_GenericMethod_Subject__void))
+ (field $m_publish__genericmethod_GenericMethod_Publisher (ref $function.m_publish__genericmethod_GenericMethod_Publisher))
  ))
 )
 (type $genericmethod.GenericMethod.1 (sub $genericmethod.GenericMethod (struct

@@ -1,0 +1,51 @@
+goog.module('genericmethod.GenericMethod.Publisher$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Publisher.$LambdaAdaptor$impl');
+let Subject = goog.forwardDeclare('genericmethod.GenericMethod.Subject$impl');
+
+/**
+ * @interface
+ * @template V
+ */
+class Publisher {
+ /** @abstract @nodts @return {Publisher<V>} */
+ m_publish__genericmethod_GenericMethod_Publisher() {}
+ /** @abstract @nodts @template T */
+ m_publishSubject__genericmethod_GenericMethod_Subject__void(/** T */ subject) {}
+ /** @nodts @template V @return {!Publisher<V>} */
+ static $adapt(/** ?function():Publisher<V> */ fn) {
+  Publisher.$clinit();
+  return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts @template V, T */
+ static m_publishSubject__$default__genericmethod_GenericMethod_Publisher__genericmethod_GenericMethod_Subject__void(/** !Publisher<V> */ $thisArg, /** T */ subject) {
+  Publisher.$clinit();
+  (/**@type {!Publisher<V>}*/ (subject)).m_publish__genericmethod_GenericMethod_Publisher();
+ }
+ /** @nodts */
+ static $clinit() {
+  Publisher.$clinit = () =>{};
+  Publisher.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__genericmethod_GenericMethod_Publisher = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_GenericMethod_Publisher;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('genericmethod.GenericMethod.Publisher.$LambdaAdaptor$impl');
+ }
+}
+Publisher.$markImplementor(/**@type {Function}*/ (Publisher));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Publisher), 'genericmethod.GenericMethod$Publisher');
+
+exports = Publisher;
+
+//# sourceMappingURL=GenericMethod$Publisher.js.map

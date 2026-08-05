@@ -1,0 +1,48 @@
+goog.module('genericmethod.GenericMethod.Subject$impl');
+
+const BaseSubject = goog.require('genericmethod.GenericMethod.BaseSubject$impl');
+const Publisher = goog.require('genericmethod.GenericMethod.Publisher$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Subject.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template V
+ * @extends {Publisher<V>}
+ * @extends {BaseSubject<V>}
+ */
+class Subject {
+ /** @nodts @template V @return {!Subject<V>} */
+ static $adapt(/** ?function():Publisher<V> */ fn) {
+  Subject.$clinit();
+  return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  Subject.$clinit = () =>{};
+  Subject.$loadModules();
+  Publisher.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Publisher.$markImplementor(ctor);
+  BaseSubject.$markImplementor(ctor);
+  ctor.prototype.$implements__genericmethod_GenericMethod_Subject = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_GenericMethod_Subject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('genericmethod.GenericMethod.Subject.$LambdaAdaptor$impl');
+ }
+}
+Subject.$markImplementor(/**@type {Function}*/ (Subject));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Subject), 'genericmethod.GenericMethod$Subject');
+
+exports = Subject;
+
+//# sourceMappingURL=GenericMethod$Subject.js.map

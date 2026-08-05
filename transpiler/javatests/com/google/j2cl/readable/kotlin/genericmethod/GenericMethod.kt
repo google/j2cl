@@ -123,3 +123,19 @@ fun <CT : Container<C>, C : Content> testErasureCast_typeVariable() {
   acceptsString(deepContent.prop)
   acceptsContent(deepContent)
 }
+
+interface Publisher<V> {
+  fun publish(): Publisher<V>
+
+  // invokes a method on a subtype which reuses the same captured type parameter to implement a
+  // distinct type (BaseSubject).
+  // See: b/542601508
+  fun <T : Subject<V>> publishSubject(subject: T) {
+    // TODO(b/542601508): uncomment when the kotlin frontend no longer crashes.
+    // subject.publish()
+  }
+}
+
+interface BaseSubject<V>
+
+interface Subject<V> : Publisher<V>, BaseSubject<V>
