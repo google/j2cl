@@ -967,6 +967,20 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       suffix += "_$s_";
     }
 
+    return buildMangledName(computeManglingSignature() + suffix);
+  }
+
+  @SuppressWarnings("ReferenceEquality")
+  @Memoized
+  public String getManglingSignature() {
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getManglingSignature();
+    }
+
+    return computeManglingSignature();
+  }
+
+  private String computeManglingSignature() {
     Stream<TypeDescriptor> signatureDescriptors = getParameterTypeDescriptors().stream();
     if (!isConstructor() && getOrigin() != MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
       // Constructors and constructor related factories always return the enclosing class type and
@@ -976,13 +990,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           Stream.concat(signatureDescriptors, Stream.of(getReturnTypeDescriptor()));
     }
 
-    String signature =
-        signatureDescriptors
-            .map(TypeDescriptor::toRawTypeDescriptor)
-            .map(TypeDescriptor::getMangledName)
-            .collect(joining("__"));
-
-    return buildMangledName(signature + suffix);
+    return signatureDescriptors
+        .map(TypeDescriptor::toRawTypeDescriptor)
+        .map(TypeDescriptor::getMangledName)
+        .collect(joining("__"));
   }
 
   /**

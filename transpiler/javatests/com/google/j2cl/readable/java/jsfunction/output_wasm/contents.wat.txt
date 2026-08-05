@@ -1791,7 +1791,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.1.1.2
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -2098,7 +2098,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.4
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -2190,7 +2190,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.5
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -3302,7 +3302,7 @@
 
 ;;; int JsFunctionImplementation.foo(int a)
 (func $m_foo__int__int@jsfunction.Main.JsFunctionImplementation
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -3477,7 +3477,7 @@
 
 ;;; int JsFunctionOptionalImpl.m(int i, Double number)
 (func $m_m__int__java_lang_Double__int@jsfunction.Main.JsFunctionOptionalImpl
- (type $function.m_m__int__java_lang_Double__int)
+ (type $function.int__java_lang_Double__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (param $number (ref null $java.lang.Double))
@@ -3668,7 +3668,7 @@
 
 ;;; void ParamtericImplementation.call(T t)
 (func $m_call__java_lang_Object__void@jsfunction.Main.ParamtericImplementation
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:259:16
@@ -3875,7 +3875,7 @@
 
 ;;; Double DoubleDoubleJsBiFunction.apply(T arg0, S arg1)
 (func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.DoubleDoubleJsBiFunction
- (type $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object)
+ (type $function.java_lang_Object__java_lang_Number__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
@@ -3981,7 +3981,7 @@
 
 ;;; T TIntegerJsBiFunction.apply(T arg0, S arg1)
 (func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.TIntegerJsBiFunction
- (type $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object)
+ (type $function.java_lang_Object__java_lang_Number__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
@@ -4081,7 +4081,7 @@
 
 ;;; void RecursiveParametricJsFunctionImplementation.call(E arg0)
 (func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:388:29
@@ -4179,7 +4179,7 @@
 
 ;;; void RecursiveJsFunctionImplementation.call(E arg0)
 (func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveJsFunctionImplementation
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:394:29
@@ -4323,7 +4323,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:23:12
-    (return (call_ref $function.m_m__java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_m__java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:23:12
     (return (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invoke__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsfunction.JsFunctionOptimization.F.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $arg0)))))
@@ -4334,7 +4334,7 @@
 
 ;;; String $JsFunctionAdaptor.m(String arg0)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.F.$JsFunctionAdaptor
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -4478,7 +4478,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:30:12
-    (return (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_apply__java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:30:12
     (return (ref.cast (ref null $java.lang.Object) (any.convert_extern (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.Function.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0))))))
@@ -4489,7 +4489,7 @@
 
 ;;; T $JsFunctionAdaptor.apply(U arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@jsfunction.Main.Function.$JsFunctionAdaptor
- (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (type $function.java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -4633,7 +4633,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:35:12
-    (return (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_foo__int__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.int__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.int__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:35:12
     (return (call $$invoke__javaemul_internal_WasmExtern__int__int@jsfunction.Main.JsFunctionInterface.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(local.get $arg0)))
@@ -4644,7 +4644,7 @@
 
 ;;; int $JsFunctionAdaptor.foo(int arg0)
 (func $m_foo__int__int@jsfunction.Main.JsFunctionInterface.$JsFunctionAdaptor
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (result i32)
@@ -4789,7 +4789,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:147:12
-    (return (call_ref $function.m_m__int__arrayOf_int__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.m_m__int__arrayOf_int__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.int__arrayOf_int__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.int__arrayOf_int__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:147:12
     (return (call $$invoke__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionVarargs.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(local.get $arg0)(extern.convert_any (local.get $arg1))))
@@ -4800,7 +4800,7 @@
 
 ;;; int $JsFunctionAdaptor.m(int arg0, int... arg1)
 (func $m_m__int__arrayOf_int__int@jsfunction.Main.JsFunctionVarargs.$JsFunctionAdaptor
- (type $function.m_m__int__arrayOf_int__int)
+ (type $function.int__arrayOf_int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 (ref null $javaemul.internal.WasmArray.OfInt))
@@ -4947,7 +4947,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:177:12
-    (return (call_ref $function.m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (local.get $arg2) (ref.cast (ref $function.m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (local.get $arg2) (ref.cast (ref $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:177:12
     (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.ForEachCallBack.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0))(local.get $arg1)(extern.convert_any (local.get $arg2)))))
@@ -4958,7 +4958,7 @@
 
 ;;; Object $JsFunctionAdaptor.onInvoke(T arg0, int arg1, T[] arg2)
 (func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ForEachCallBack.$JsFunctionAdaptor
- (type $function.m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object)
+ (type $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 i32)
@@ -5104,7 +5104,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:182:12
-    (return (call_ref $function.m_call__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_call__arrayOf_java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.arrayOf_java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:182:12
     (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.ElementalJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0)))))
@@ -5115,7 +5115,7 @@
 
 ;;; Object $JsFunctionAdaptor.call(Object... arg0)
 (func $m_call__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ElementalJsFunction.$JsFunctionAdaptor
- (type $function.m_call__arrayOf_java_lang_Object__java_lang_Object)
+ (type $function.arrayOf_java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
@@ -5260,7 +5260,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:191:12
-    (return (call_ref $function.m_m__int__arrayOf_java_lang_Object__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.m_m__int__arrayOf_java_lang_Object__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.int__arrayOf_java_lang_Object__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.int__arrayOf_java_lang_Object__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:191:12
     (return (call $$invoke__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionVarargsGenerics.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(local.get $arg0)(extern.convert_any (local.get $arg1))))
@@ -5271,7 +5271,7 @@
 
 ;;; int $JsFunctionAdaptor.m(int arg0, T... arg1)
 (func $m_m__int__arrayOf_java_lang_Object__int@jsfunction.Main.JsFunctionVarargsGenerics.$JsFunctionAdaptor
- (type $function.m_m__int__arrayOf_java_lang_Object__int)
+ (type $function.int__arrayOf_java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 (ref null $javaemul.internal.WasmArray.OfObject))
@@ -5414,7 +5414,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:207:12
-    (call_ref $function.m_m__void (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.m_m__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+    (call_ref $function.void (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:207:12
     (call $$invoke__javaemul_internal_WasmExtern__void@jsfunction.Main.SimpleJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))
@@ -5425,7 +5425,7 @@
 
 ;;; void $JsFunctionAdaptor.m()
 (func $m_m__void@jsfunction.Main.SimpleJsFunction.$JsFunctionAdaptor
- (type $function.m_m__void)
+ (type $function.void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:207:12
  (local $this (ref null $jsfunction.Main.SimpleJsFunction.$JsFunctionAdaptor))
@@ -5567,7 +5567,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:221:12
-    (return (call_ref $function.m_m__int__java_lang_Double__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.m_m__int__java_lang_Double__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.int__java_lang_Double__int (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.int__java_lang_Double__int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:221:12
     (return (call $$invoke__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionOptional.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(local.get $arg0)(call $m_toJs__java_lang_Double__java_lang_Double_NativeNumber@java.lang.Double (local.get $arg1))))
@@ -5578,7 +5578,7 @@
 
 ;;; int $JsFunctionAdaptor.m(int arg0, Double arg1)
 (func $m_m__int__java_lang_Double__int@jsfunction.Main.JsFunctionOptional.$JsFunctionAdaptor
- (type $function.m_m__int__java_lang_Double__int)
+ (type $function.int__java_lang_Double__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 (ref null $java.lang.Double))
@@ -5722,7 +5722,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:237:12
-    (call_ref $function.m_call__java_lang_Object__void (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.m_call__java_lang_Object__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+    (call_ref $function.java_lang_Object__void (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.java_lang_Object__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:237:12
     (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__void@jsfunction.Main.ParametricJsFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0)))
@@ -5733,7 +5733,7 @@
 
 ;;; void $JsFunctionAdaptor.call(E arg0)
 (func $m_call__java_lang_Object__void@jsfunction.Main.ParametricJsFunction.$JsFunctionAdaptor
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:237:12
@@ -5876,7 +5876,7 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:298:12
-    (return (call_ref $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.java_lang_Object__java_lang_Number__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (local.get $arg1) (ref.cast (ref $function.java_lang_Object__java_lang_Number__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:298:12
     (return (ref.cast (ref null $java.lang.Object) (any.convert_extern (call $$invoke__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.JsBiFunction.$JsFunctionAdaptor (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(extern.convert_any (local.get $arg0))(extern.convert_any (local.get $arg1))))))
@@ -5887,7 +5887,7 @@
 
 ;;; T $JsFunctionAdaptor.apply(T arg0, S arg1)
 (func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction.$JsFunctionAdaptor
- (type $function.m_apply__java_lang_Object__java_lang_Number__java_lang_Object)
+ (type $function.java_lang_Object__java_lang_Number__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
@@ -6006,7 +6006,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$1
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -6112,7 +6112,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.1.1.$LambdaImplementor$2
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -6219,7 +6219,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.$LambdaImplementor$3
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -6313,7 +6313,7 @@
 
 ;;; String <anonymous> implements F.m(String s)
 (func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.$LambdaImplementor$4
- (type $function.m_m__java_lang_String__java_lang_String)
+ (type $function.java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -6411,7 +6411,7 @@
 
 ;;; int <anonymous> implements JsFunctionInterface.foo(int number)
 (func $m_foo__int__int@jsfunction.Main.$LambdaImplementor$1
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $number i32)
  (result i32)
@@ -6509,7 +6509,7 @@
 
 ;;; int <anonymous> implements JsFunctionInterface.foo(int a)
 (func $m_foo__int__int@jsfunction.Main.$LambdaImplementor$2
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -6607,7 +6607,7 @@
 
 ;;; int <anonymous> implements JsFunctionInterface.foo(int a)
 (func $m_foo__int__int@jsfunction.Main.$LambdaImplementor$3
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -6707,7 +6707,7 @@
 
 ;;; int <anonymous> implements JsFunctionInterface.foo(int a)
 (func $m_foo__int__int@jsfunction.Main.$LambdaImplementor$4
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -6804,7 +6804,7 @@
 
 ;;; int <anonymous> implements JsFunctionVarargs.m(int i, int... numbers)
 (func $m_m__int__arrayOf_int__int@jsfunction.Main.$LambdaImplementor$5
- (type $function.m_m__int__arrayOf_int__int)
+ (type $function.int__arrayOf_int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
@@ -6926,7 +6926,7 @@
 
 ;;; int <anonymous> implements JsFunctionVarargs.m(int i, int... numbers)
 (func $m_m__int__arrayOf_int__int@jsfunction.Main.$LambdaImplementor$6
- (type $function.m_m__int__arrayOf_int__int)
+ (type $function.int__arrayOf_int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
@@ -7067,7 +7067,7 @@
 
 ;;; Object <anonymous> implements ForEachCallBack<ElementalJsFunction>.onInvoke(T arg0, int arg1, T[] arg2)
 (func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$7
- (type $function.m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object)
+ (type $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 i32)
@@ -7164,7 +7164,7 @@
 
 ;;; int <anonymous> implements JsFunctionOptional.m(int i, Double n)
 (func $m_m__int__java_lang_Double__int@jsfunction.Main.$LambdaImplementor$8
- (type $function.m_m__int__java_lang_Double__int)
+ (type $function.int__java_lang_Double__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
  (param $n (ref null $java.lang.Double))
@@ -7259,7 +7259,7 @@
 
 ;;; void <anonymous> implements ParametricJsFunction<Object>.call(Object event)
 (func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$9
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $event (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:241:52
@@ -7363,7 +7363,7 @@
 
 ;;; void <anonymous> implements ParametricJsFunction<String>.call(E arg0)
 (func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$10
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
@@ -7474,7 +7474,7 @@
 
 ;;; void <anonymous> implements ParametricJsFunction<String>.call(E arg0)
 (func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$11
- (type $function.m_call__java_lang_Object__void)
+ (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
@@ -7567,7 +7567,7 @@
 
 ;;; Object <anonymous> implements Function<Object, Object>.apply(Object object)
 (func $m_apply__java_lang_Object__java_lang_Object@jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$12
- (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (type $function.java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (param $object (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -7665,7 +7665,7 @@
 
 ;;; int <anonymous> implements JsFunctionInterface.foo(int a)
 (func $m_foo__int__int@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$13
- (type $function.m_foo__int__int)
+ (type $function.int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)

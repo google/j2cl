@@ -368,10 +368,9 @@ public final class Main {
     MyJsFunction2 crossCastedFromJs = crossCastFromJs(fromJs);
     assertEquals(42, crossCastedFromJs.bar(10));
 
-    // TODO(b/532280780): Explore this case.
-    // MyJsFunction fromWasm = a -> a + 20;
-    // MyJsFunction2 crossCastedFromWasm = crossCastFromJs(fromWasm);
-    // assertEquals(30, crossCastedFromWasm.bar(10));
+    MyJsFunction fromWasm = a -> a + 20;
+    MyJsFunction2 crossCastedFromWasm = crossCastFromJs(fromWasm);
+    assertEquals(30, crossCastedFromWasm.bar(10));
   }
 
   static int staticFooImpl(int a) {

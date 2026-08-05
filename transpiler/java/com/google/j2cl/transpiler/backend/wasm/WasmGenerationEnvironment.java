@@ -305,7 +305,11 @@ public class WasmGenerationEnvironment {
   }
 
   private String generateFunctionTypeName(String prefix, MethodDescriptor methodDescriptor) {
-    return prefix + "." + methodDescriptor.getMangledName();
+    String typeName =
+        methodDescriptor.isJsFunction()
+            ? methodDescriptor.getManglingSignature()
+            : methodDescriptor.getMangledName();
+    return prefix + "." + typeName;
   }
 
   /** Returns the methods that need intrinsic declaration indexed by the name of the import. */
