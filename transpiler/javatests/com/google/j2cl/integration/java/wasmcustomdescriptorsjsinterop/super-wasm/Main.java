@@ -295,8 +295,9 @@ public final class Main {
   private static void testJsSubtyping() {
     try {
       createJsSubtype();
-      fail("JS shuold throw when constructing a subtype");
-    } catch (Exception expected) {
+      fail("JS should throw when constructing a subtype");
+    } catch (JsException expected) {
+      assertTrue(expected.getMessage().contains("cannot be subtyped"));
     }
   }
 
