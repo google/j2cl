@@ -23,6 +23,12 @@
 (global $$class@nativejstypes.Bar.Inner.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@nativejstypes.Bar.Abstract.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.Bar.Abstract.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@nativejstypes.Empty.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -143,6 +149,11 @@
 (global $nativejstypes.Bar.Inner.$Overlay.vtable (ref $nativejstypes.Bar.Inner.$Overlay.vtable)
  (struct.new $nativejstypes.Bar.Inner.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay)
+ )
+)
+(global $nativejstypes.Bar.Abstract.$Overlay.vtable (ref $nativejstypes.Bar.Abstract.$Overlay.vtable)
+ (struct.new $nativejstypes.Bar.Abstract.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Abstract.$Overlay)
  )
 )
 (global $nativejstypes.Empty.$Overlay.vtable (ref $nativejstypes.Empty.$Overlay.vtable)
@@ -288,16 +299,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.BarInnerWithDotInName.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:47:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:52:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:47:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:52:6
   (if (global.get $$class-initialized@nativejstypes.BarInnerWithDotInName.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:47:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:52:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:47:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:52:6
   (global.set $$class-initialized@nativejstypes.BarInnerWithDotInName.$Overlay (i32.const 1))
  )
 )
@@ -331,16 +342,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:56:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:61:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:61:6
   (if (global.get $$class-initialized@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:56:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:61:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:56:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:61:6
   (global.set $$class-initialized@nativejstypes.BarInnerWithDotInNameAndHasNamespace.$Overlay (i32.const 1))
  )
 )
@@ -414,6 +425,49 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Inner.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.Bar.Abstract.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:45:24
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:45:24
+  (if (global.get $$class-initialized@nativejstypes.Bar.Abstract.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:45:24
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Bar.java:45:24
+  (global.set $$class-initialized@nativejstypes.Bar.Abstract.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Bar.Abstract.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.Bar.Abstract.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.Bar.Abstract.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.Bar.Abstract.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.Bar.Abstract.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.Bar.Abstract.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Abstract.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.Bar.Abstract.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.Bar.Abstract.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.Bar.Abstract.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Bar.Abstract.$Overlay)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.Empty.$Overlay

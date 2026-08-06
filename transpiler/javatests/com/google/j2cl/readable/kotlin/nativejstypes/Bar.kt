@@ -42,6 +42,11 @@ class Bar(x: Int, y: Int) {
       @JvmStatic external fun getInnerStatic(): Int
     }
   }
+
+  @JsType(isNative = true)
+  abstract class Abstract {
+    abstract fun square(n: Int): Int
+  }
 }
 
 /** Native inner JsType. */

@@ -56,6 +56,11 @@ open class Bar {
    external fun getInnerStatic(): Int
   }
  }
+ 
+ @JsType(isNative = true)
+ internal abstract class Abstract internal constructor() {
+  abstract fun square(n: Int): Int
+ }
 }
 
 @JsType(name = "Bar.Inner", isNative = true)

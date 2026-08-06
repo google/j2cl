@@ -40,6 +40,11 @@ public class Bar {
 
     public static native int getInnerStatic();
   }
+
+  @JsType(isNative = true)
+  abstract static class Abstract {
+    public abstract int square(int n);
+  }
 }
 
 /** Native inner JsType. */

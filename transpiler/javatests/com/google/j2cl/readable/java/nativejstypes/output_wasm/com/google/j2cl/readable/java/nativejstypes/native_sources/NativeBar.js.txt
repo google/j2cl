@@ -47,4 +47,13 @@ Bar.Inner = class {
   static getInnerStatic() { return 2; }
 };
 
+/** @abstract */
+Bar.Abstract = class {
+  /**
+   * @abstract
+   * @param {number} n
+   */
+  square(n) {}
+};
+
 exports = Bar;
