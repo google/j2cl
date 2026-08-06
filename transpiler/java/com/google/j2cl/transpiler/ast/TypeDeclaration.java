@@ -558,11 +558,18 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * Returns the depth of this type in the type hierarchy tree, including classes and interfaces.
+   * Returns the depth of this type in the type hierarchy tree.
+   *
+   * <p>Using the invariant that the hierarchy depth of a class is greater than that of all its
+   * supertypes, we can build a partial order that guarantees that all supertypes precede their
+   * subtypes.
    */
   @Memoized
   public int getTypeHierarchyDepth() {
-    return 1
+    // JsFunction implementations are emitted with an extra superclass in the hierarchy in the Wasm
+    // backend. That superclass is not reflected in the type model, so the depth is adjusted here to
+    // preserve the ordering invariant.
+    return (isJsFunctionImplementation() ? 2 : 1)
         + Stream.concat(Stream.of(getSuperTypeDescriptor()), getInterfaceTypeDescriptors().stream())
             .filter(Predicates.notNull())
             .mapToInt(i -> i.getTypeDeclaration().getTypeHierarchyDepth())
