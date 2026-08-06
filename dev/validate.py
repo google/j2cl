@@ -138,6 +138,18 @@ class GenValidationTest(ValidationTest):
     _assert_output("Error while running command")
     _assert_output("blaze query filter")
 
+  def test_gen_non_empty_disabled_readables(self):
+    original_build = self._backup[BUILD_FILE]
+    broken_build = original_build.replace(
+        "readable_example(",
+        "readable_example(\n    generate_js_readables = False,",
+    )
+    with open(BUILD_FILE, "w") as f:
+      f.write(broken_build)
+
+    _j2_expecting_failure("gen java/emptyclass")
+    _assert_output("Left-over files for disabled readable")
+
   def test_gen_missing_file_in_srcs(self):
     original_build = self._backup[BUILD_FILE]
     _assert_in('glob(["*.java"])', original_build)

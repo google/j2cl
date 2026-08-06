@@ -102,6 +102,8 @@ def readable_example(
         native.alias(name = "readable_closure.js", actual = ":readable.js")
 
         _js_readable_targets("readable_closure", "output_closure", defs)
+    else:
+        _empty_readable_targets("output_closure")
 
     if generate_wasm_readables:
         _wasm_readable_targets(
@@ -109,6 +111,8 @@ def readable_example(
             entry_points = wasm_entry_points,
             generate_imports = generate_wasm_imports,
         )
+    else:
+        _empty_readable_targets("output_wasm")
 
     if generate_kt_readables:
         _readable_diff_test(
@@ -152,6 +156,8 @@ def readable_example(
                 minimum_os_version = "15.0",
                 tags = ["manual", "j2kt", "ios"],
             )
+    else:
+        _empty_readable_targets("output_kt")
 
     if generate_kt_web_readables:
         _j2kt_web_enabled_j2cl_library(
@@ -166,6 +172,12 @@ def readable_example(
         )
 
         _js_readable_targets("readable_j2kt_web", "output_j2kt_web", defs)
+    else:
+        _empty_readable_targets("output_j2kt_web")
+
+def _empty_readable_targets(dir_out):
+    if native.glob(["%s/**" % dir_out]):
+        fail("Left-over files for disabled readable")
 
 def _js_readable_targets(readable_target, dir_out, defs):
     _extract_json_warnings(
