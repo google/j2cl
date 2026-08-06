@@ -155,6 +155,19 @@ interface InterfaceWithDefaultJsProperties {
 
 class ImplementsInterfaceWithDefaultJsProperties : InterfaceWithDefaultJsProperties
 
+interface InterfaceWithStaticJsProperties {
+  companion object {
+    @JsProperty const val a = 1
+
+    @JsProperty
+    fun getB(): Int {
+      return a + 2
+    }
+
+    @JsProperty fun setB(x: Int) {}
+  }
+}
+
 class ClassWithJvmField {
   @JvmField @JsProperty(name = "custom_f") var f = 1
 
@@ -186,6 +199,10 @@ class Main {
     setA(10)
     getB()
     setB(10)
+
+    var r = InterfaceWithStaticJsProperties.a
+    InterfaceWithStaticJsProperties.getB()
+    InterfaceWithStaticJsProperties.setB(10)
   }
 
   fun testInstanceJsProperty() {

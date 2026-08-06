@@ -7,6 +7,7 @@ let Bar = goog.forwardDeclare('jsproperties.Bar$impl');
 let ClassWithJvmField = goog.forwardDeclare('jsproperties.ClassWithJvmField$impl');
 let FooWithNativeProperty = goog.forwardDeclare('jsproperties.FooWithNativeProperty$impl');
 let HasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.HasFieldAndGetterSetterFuns$impl');
+let InterfaceWithStaticJsProperties = goog.forwardDeclare('jsproperties.InterfaceWithStaticJsProperties$impl');
 let JavaFoo = goog.forwardDeclare('jsproperties.JavaFoo$impl');
 let MainKt = goog.forwardDeclare('jsproperties.MainKt$impl');
 let OtherHasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
@@ -43,6 +44,9 @@ class Main extends j_l_Object {
   MainKt.a = 10;
   MainKt.abc;
   MainKt.abc = 10;
+  let r = 1;
+  InterfaceWithStaticJsProperties.m_getB__int();
+  InterfaceWithStaticJsProperties.m_setB__int__void(10);
  }
  /** @final @nodts */
  m_testInstanceJsProperty__void() {
@@ -89,6 +93,7 @@ class Main extends j_l_Object {
   ClassWithJvmField = goog.module.get('jsproperties.ClassWithJvmField$impl');
   FooWithNativeProperty = goog.module.get('jsproperties.FooWithNativeProperty$impl');
   HasFieldAndGetterSetterFuns = goog.module.get('jsproperties.HasFieldAndGetterSetterFuns$impl');
+  InterfaceWithStaticJsProperties = goog.module.get('jsproperties.InterfaceWithStaticJsProperties$impl');
   JavaFoo = goog.module.get('jsproperties.JavaFoo$impl');
   MainKt = goog.module.get('jsproperties.MainKt$impl');
   OtherHasFieldAndGetterSetterFuns = goog.module.get('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');

@@ -1,0 +1,42 @@
+goog.module('jsproperties.InterfaceWithStaticJsProperties$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithStaticJsProperties {
+ /** @return {number} */
+ static get b() {
+  InterfaceWithStaticJsProperties.$clinit();
+  return InterfaceWithStaticJsProperties.A + 2 | 0;
+ }
+ 
+ static set b(/** number */ x) {
+  InterfaceWithStaticJsProperties.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithStaticJsProperties.$clinit = () =>{};
+  InterfaceWithStaticJsProperties.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsproperties_InterfaceWithStaticJsProperties = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsproperties_InterfaceWithStaticJsProperties;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@const {number}*/
+InterfaceWithStaticJsProperties.A = 1;
+InterfaceWithStaticJsProperties.$markImplementor(/**@type {Function}*/ (InterfaceWithStaticJsProperties));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceWithStaticJsProperties), 'jsproperties.InterfaceWithStaticJsProperties');
+
+exports = InterfaceWithStaticJsProperties;
+
+//# sourceMappingURL=InterfaceWithStaticJsProperties.js.map

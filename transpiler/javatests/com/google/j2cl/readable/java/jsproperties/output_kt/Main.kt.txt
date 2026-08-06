@@ -115,6 +115,23 @@ internal interface InterfaceWithDefaultJsProperties {
 
 internal open class ImplementsInterfaceWithDefaultJsProperties internal constructor(): InterfaceWithDefaultJsProperties
 
+internal interface InterfaceWithStaticJsProperties {
+ companion object {
+  @JsProperty
+  const val A: Int = 1
+  
+  @JvmStatic
+  @JsProperty
+  fun getB(): Int {
+   return InterfaceWithStaticJsProperties.A + 2
+  }
+  
+  @JvmStatic
+  @JsProperty
+  fun setB(x: Int) {}
+ }
+}
+
 open class Main {
  open fun testNativeJsProperty() {
   FooWithNativeProperty().getA()
@@ -126,6 +143,9 @@ open class Main {
   Foo.setA(10)
   Foo.getB()
   Foo.setB(10)
+  val r: Int = InterfaceWithStaticJsProperties.A
+  InterfaceWithStaticJsProperties.getB()
+  InterfaceWithStaticJsProperties.setB(10)
  }
  
  open fun testInstanceJsProperty() {

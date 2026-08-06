@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Bar = goog.forwardDeclare('jsproperties.Bar$impl');
 let Foo = goog.forwardDeclare('jsproperties.Foo$impl');
 let FooWithNativeProperty = goog.forwardDeclare('jsproperties.FooWithNativeProperty$impl');
+let InterfaceWithStaticJsProperties = goog.forwardDeclare('jsproperties.InterfaceWithStaticJsProperties$impl');
 let ReadOnlyJsProperty = goog.forwardDeclare('jsproperties.ReadOnlyJsProperty$impl');
 
 class Main extends j_l_Object {
@@ -35,6 +36,9 @@ class Main extends j_l_Object {
   Foo.a = 10;
   Foo.abc;
   Foo.abc = 10;
+  let r = InterfaceWithStaticJsProperties.A;
+  InterfaceWithStaticJsProperties.b;
+  InterfaceWithStaticJsProperties.b = 10;
  }
  /** @nodts */
  m_testInstanceJsProperty__void() {
@@ -69,6 +73,7 @@ class Main extends j_l_Object {
   Bar = goog.module.get('jsproperties.Bar$impl');
   Foo = goog.module.get('jsproperties.Foo$impl');
   FooWithNativeProperty = goog.module.get('jsproperties.FooWithNativeProperty$impl');
+  InterfaceWithStaticJsProperties = goog.module.get('jsproperties.InterfaceWithStaticJsProperties$impl');
   ReadOnlyJsProperty = goog.module.get('jsproperties.ReadOnlyJsProperty$impl');
  }
 }

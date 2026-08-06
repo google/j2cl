@@ -98,6 +98,18 @@ interface InterfaceWithDefaultJsProperties {
 
 class ImplementsInterfaceWithDefaultJsProperties implements InterfaceWithDefaultJsProperties {}
 
+interface InterfaceWithStaticJsProperties {
+  @JsProperty int A = 1;
+
+  @JsProperty
+  static int getB() {
+    return A + 2;
+  }
+
+  @JsProperty
+  static void setB(int x) {}
+}
+
 public class Main {
   public void testNativeJsProperty() {
     new FooWithNativeProperty().getA();
@@ -109,6 +121,10 @@ public class Main {
     Foo.setA(10);
     Foo.getB();
     Foo.setB(10);
+
+    int r = InterfaceWithStaticJsProperties.A;
+    InterfaceWithStaticJsProperties.getB();
+    InterfaceWithStaticJsProperties.setB(10);
   }
 
   public void testInstanceJsProperty() {
