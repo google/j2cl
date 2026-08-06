@@ -166,6 +166,8 @@ internal data class Environment(
         isJsEnumCustomValueField(memberDescriptor) -> memberDescriptor.name!!
         memberDescriptor.enclosingTypeDescriptor.typeDeclaration.isKtNative ->
           memberDescriptor.ktName
+        memberDescriptor is MethodDescriptor && memberDescriptor.isConstructor ->
+          memberDescriptor.name!!
         else -> memberDescriptor.ktName + ktNameSuffix(memberDescriptor)
       }
 

@@ -59,31 +59,21 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
     }
 
   fun jsInteropAnnotationsSource(fieldDescriptor: FieldDescriptor): Source =
-    jsPropertyAnnotationSource(fieldDescriptor)
+    jsMemberAnnotationSource(fieldDescriptor)
       .ifEmpty { jsIgnoreAnnotationSource(fieldDescriptor) }
       .ifEmpty { jsOverlayAnnotationSource(fieldDescriptor) }
 
   fun jsInteropAnnotationsSource(methodDescriptor: MethodDescriptor): Source =
     newLineSeparated(
       jsAsyncAnnotationSource(methodDescriptor),
-      jsMemberAnnotationSource(methodDescriptor),
+      jsMemberAnnotationSource(methodDescriptor)
+        .ifEmpty { jsIgnoreAnnotationSource(methodDescriptor) }
+        .ifEmpty { jsOverlayAnnotationSource(methodDescriptor) },
     )
 
   fun jsInteropAnnotationsSource(parameterDescriptor: ParameterDescriptor): Source =
     emptyUnless(parameterDescriptor.isJsOptional) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsOptional"))
-    }
-
-  private fun jsMemberAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    jsPropertyAnnotationSource(methodDescriptor)
-      .ifEmpty { jsMethodAnnotationSource(methodDescriptor) }
-      .ifEmpty { jsConstructorAnnotationSource(methodDescriptor) }
-      .ifEmpty { jsIgnoreAnnotationSource(methodDescriptor) }
-      .ifEmpty { jsOverlayAnnotationSource(methodDescriptor) }
-
-  private fun jsPropertyAnnotationSource(memberDescriptor: MemberDescriptor): Source =
-    emptyUnless(memberDescriptor.isJsProperty) {
-      jsInteropAnnotationSource(memberDescriptor, "jsinterop.annotations.JsProperty")
     }
 
   private fun jsIgnoreAnnotationSource(memberDescriptor: MemberDescriptor): Source =
@@ -99,16 +89,6 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsOverlay"))
     }
 
-  private fun jsConstructorAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    emptyUnless(methodDescriptor.hasJsConstructorAnnotation) {
-      annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsConstructor"))
-    }
-
-  private fun jsMethodAnnotationSource(methodDescriptor: MethodDescriptor): Source =
-    emptyUnless(methodDescriptor.isJsMethod) {
-      jsInteropAnnotationSource(methodDescriptor, "jsinterop.annotations.JsMethod")
-    }
-
   private fun jsAsyncAnnotationSource(methodDescriptor: MethodDescriptor): Source =
     emptyUnless(methodDescriptor.isJsAsync) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsAsync"))
@@ -118,26 +98,36 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
    * Include the `annotationQualifiedName` annotation if the member had an annotation in the source
    * or if it requires one to restore its jsname.
    */
-  private fun jsInteropAnnotationSource(
-    memberDescriptor: MemberDescriptor,
-    annotationQualifiedName: String,
-  ): Source =
+  private fun jsMemberAnnotationSource(memberDescriptor: MemberDescriptor): Source =
     emptyUnless(hasJsInteropAnnotation(memberDescriptor)) {
       annotation(
         annotationName(
           annotationTargetSource(memberDescriptor),
-          nameSources.topLevelQualifiedNameSource(annotationQualifiedName),
+          nameSources.topLevelQualifiedNameSource(
+            memberDescriptor.declarationJsInfo.jsMemberType.annotationName()
+          ),
         ),
         nameParameterSource(jsAnnotationNameParameterValue(memberDescriptor)),
         namespaceParameterSource(memberDescriptor.declarationJsInfo.jsNamespace),
       )
     }
 
+  private fun JsMemberType.annotationName(): String =
+    when (this) {
+      JsMemberType.CONSTRUCTOR -> "jsinterop.annotations.JsConstructor"
+      JsMemberType.METHOD -> "jsinterop.annotations.JsMethod"
+      JsMemberType.PROPERTY,
+      JsMemberType.GETTER,
+      JsMemberType.SETTER -> "jsinterop.annotations.JsProperty"
+      else -> throw IllegalStateException("Unexpected JsMemberType: ${this}")
+    }
+
   private fun hasJsInteropAnnotation(memberDescriptor: MemberDescriptor): Boolean =
     memberDescriptor.declarationJsInfo.hasJsMemberAnnotation ||
       // If the name is mangled but it overrides a member (which means that one was already
       // mangled) then the annotation is already emitted in the overridden member.
-      (environment.isKtNameMangled(memberDescriptor) &&
+      (memberDescriptor.isJsMember &&
+        environment.isKtNameMangled(memberDescriptor) &&
         (memberDescriptor !is MethodDescriptor || !memberDescriptor.isJavaOverride))
 
   private fun jsAnnotationNameParameterValue(memberDescriptor: MemberDescriptor): String? =
@@ -228,8 +218,5 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       value: Boolean,
       defaultValue: Boolean,
     ): Source = emptyIf(value == defaultValue) { assignment(source(name), literal(value)) }
-
-    private val MethodDescriptor.hasJsConstructorAnnotation
-      get() = declarationJsInfo.hasJsMemberAnnotation && isJsConstructor
   }
 }

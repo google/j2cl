@@ -73,6 +73,7 @@ open class Main {
  }
  
  open class B: A<String?>() {
+  @JsMethod
   override fun `fun`(s: String?): String? {
    return s
   }
@@ -163,6 +164,7 @@ open class Main {
  }
  
  internal open inner class Parent<T: Main.Parent<*>?> internal constructor(): Main.GrandParent<T>() {
+  @JsMethod
   override fun jsMethod(t: T) {}
   
   override fun method(t: T) {}
@@ -171,6 +173,7 @@ open class Main {
  internal open inner class ChildWithoutOverrides internal constructor(): Main.Parent<Main.ChildWithoutOverrides?>()
  
  internal open inner class ChildWithOverrides<T: Main.ChildWithOverrides<T>?> internal constructor(): Main.Parent<T>() {
+  @JsMethod
   override fun jsMethod(t: T) {}
   
   override fun method(t: T) {}
