@@ -1,10 +1,5 @@
 #import <XCTest/XCTest.h>
 #import <math.h>
-// TODO(b/543364803): Document why this is disabled or remove the #if
-#if !J2KT
-#import "transpiler/javatests/com/google/j2cl/integration/java/j2ktiosinterop/j2ktiosinterop-j2objc_public.h/j2ktiosinterop/Nullability.h"
-#endif
-
 #import "j2ktiosinterop/CollectionTypes.h"
 #import "j2ktiosinterop/CompileTimeConstantInitialization.h"
 #import "j2ktiosinterop/CompileTimeConstants.h"
@@ -112,8 +107,9 @@
   i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_;
   J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i;
 #else
-  // TODO(b/543364803): This should work in both cases.
+  // TODO(b/543364803): How does this work at all without a reference to obj?
   i = J2ktiosinteropDefaultNames_get_finalIntField();
+  // Note the arrow syntax vs. dots above.
   i = obj->intField_;
   obj->intField_ = i;
 #endif
@@ -135,14 +131,10 @@
   J2ktiosinteropDefaultNames_staticGenericStringMethodWithNSString_(nil);
   J2ktiosinteropDefaultNames_staticGenericStringAndComparableStringMethodWithNSString_(nil);
 
-#if J2KT
-  // TODO(b/543364803): This should be fixed by now.
-  // J2ktiosinteropDefaultNames_staticGenericLongMethodWithJavaLangLong_(nil);
-  // J2ktiosinteropDefaultNames_staticGenericLongAndComparableLongMethodWithJavaLangLong_(nil);
-#else
   J2ktiosinteropDefaultNames_staticGenericLongMethodWithJavaLangLong_(nil);
   J2ktiosinteropDefaultNames_staticGenericLongAndComparableLongMethodWithJavaLangLong_(nil);
 
+#if !J2KT
   // For methods that throw, J2ObjC generates variants with and without `error:` parameter
   [obj throwsMethod];
   [obj throwsMethodWithNSString:@""];
@@ -273,11 +265,12 @@
 
 - (void)testEnumNames {
   J2ktiosinteropEnumNames *e;
-#if J2KT
+
+  // Recommended
   e = J2ktiosinteropEnumNames.ONE;
   e = J2ktiosinteropEnumNames.TWO;
-#endif
 
+  // Supported for compatibility
   e = J2ktiosinteropEnumNames_get_ONE();
   e = J2ktiosinteropEnumNames_get_TWO();
 
