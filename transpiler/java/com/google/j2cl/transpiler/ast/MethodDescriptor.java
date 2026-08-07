@@ -233,13 +233,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return this == SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED;
     }
 
-    /** True if the method is a bridge generated for access from JavaScript. */
+    /**
+     * True if the method is a bridge generated, as part of a JS prototype for an exported type, for
+     * access from JavaScript.
+     */
     public boolean isWasmJsExport() {
       return isWasmJsMethodExport()
           || isWasmJsGetterExport()
           || isWasmJsSetterExport()
-          || isWasmJsConstructorExport()
-          || isWasmJsFunctionExport();
+          || isWasmJsConstructorExport();
     }
 
     public boolean isWasmEntryPoint() {
