@@ -213,6 +213,11 @@ public final class Main {
     JsInterfaceDefaultMethod jsInterfaceDefaultMethod = new JsInterfaceDefaultMethodImpl();
     assertTrue(callInterfaceDefaultMethod(jsInterfaceDefaultMethod) == 9876);
 
+    assertTrue(callInterfaceStaticMethod() == 123);
+    setInterfaceStaticProperty(789);
+    assertTrue(callInterfaceStaticProperty() == 789);
+    assertTrue(callInterfaceStaticField() == 999);
+
     JsInterfaceAccidentalImpl jsInterfaceAccidentalImpl = new JsInterfaceAccidentalImpl();
     assertTrue(callAccidentalMethod(jsInterfaceAccidentalImpl) == 2);
     assertTrue(callInterfaceMethod(jsInterfaceAccidentalImpl) == 2);
@@ -275,6 +280,27 @@ public final class Main {
   static class JsInterfaceDefaultMethodImpl implements JsInterfaceDefaultMethod {
     @JsConstructor
     public JsInterfaceDefaultMethodImpl() {}
+  }
+
+  private static int jsInterfaceStaticProperty = 456;
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  interface JsInterfaceStaticMethod {
+    static int staticMethod() {
+      return 123;
+    }
+
+    @JsProperty
+    static int getStaticProperty() {
+      return jsInterfaceStaticProperty;
+    }
+
+    @JsProperty
+    static void setStaticProperty(int value) {
+      jsInterfaceStaticProperty = value;
+    }
+
+    @JsProperty static int STATIC_FIELD = 999;
   }
 
   static class NonJsBase {
@@ -526,6 +552,18 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native int callInterfaceDefaultMethod(JsInterfaceDefaultMethod jsInterface);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceStaticMethod();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceStaticProperty();
+
+  @JsMethod(namespace = "nativehelper")
+  static native void setInterfaceStaticProperty(int value);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callInterfaceStaticField();
 
   @JsMethod(namespace = "nativehelper")
   static native int callAccidentalMethod(JsInterfaceAccidentalImpl impl);

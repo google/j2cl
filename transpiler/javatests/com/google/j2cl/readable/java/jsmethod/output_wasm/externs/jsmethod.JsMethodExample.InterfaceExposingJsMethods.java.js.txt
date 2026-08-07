@@ -1,6 +1,8 @@
 goog.module('jsmethod.JsMethodExample.InterfaceExposingJsMethods');
 
-/** @typedef {$j2wasm$externs_jsmethod_JsMethodExample_InterfaceExposingJsMethods} */
-let InterfaceExposingJsMethods;
+const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+
+/** @const {typeof $j2wasm$externs_jsmethod_JsMethodExample_InterfaceExposingJsMethods} */
+const InterfaceExposingJsMethods = constructorProxy('jsmethod.JsMethodExample.InterfaceExposingJsMethods');
 
 exports = InterfaceExposingJsMethods;

@@ -24,6 +24,7 @@ const JsInterfaceAccidentalImpl = goog.require('wasmcustomdescriptorsjsinterop.M
 const JsInterfaceDefaultMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceDefaultMethod');
 const JsInterfaceGetNumber = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceGetNumber');
 const JsInterfaceRenamedMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceRenamedMethod');
+const JsInterfaceStaticMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceStaticMethod');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
 
 /**
@@ -251,6 +252,39 @@ function callInterfaceDefaultMethod(i) {
 }
 
 /**
+ * @return {number}
+ * @public
+ */
+function callInterfaceStaticMethod() {
+  return JsInterfaceStaticMethod.staticMethod();
+}
+
+/**
+ * @return {number}
+ * @public
+ */
+function callInterfaceStaticProperty() {
+  return JsInterfaceStaticMethod.staticProperty;
+}
+
+/**
+ * @param {number} value
+ * @return {void}
+ * @public
+ */
+function setInterfaceStaticProperty(value) {
+  JsInterfaceStaticMethod.staticProperty = value;
+}
+
+/**
+ * @return {number}
+ * @public
+ */
+function callInterfaceStaticField() {
+  return JsInterfaceStaticMethod.STATIC_FIELD;
+}
+
+/**
  * @param {!JsInterfaceAccidentalImpl} impl
  * @return {number}
  * @public
@@ -327,6 +361,10 @@ exports = {
   callInterfaceGetNumber,
   callInterfaceRenamedMethod,
   callInterfaceDefaultMethod,
+  callInterfaceStaticMethod,
+  callInterfaceStaticProperty,
+  setInterfaceStaticProperty,
+  callInterfaceStaticField,
   callAccidentalMethod,
   callAccidentalDefaultMethod,
   createJsSubtype,

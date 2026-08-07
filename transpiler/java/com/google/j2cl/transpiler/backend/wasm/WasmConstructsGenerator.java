@@ -624,7 +624,7 @@ public class WasmConstructsGenerator {
 
     builder.indent();
     if (environment.isCustomDescriptorsJsInteropEnabled() && !implementedType.isInterface()) {
-      // The first field of the vtable for JsTypes is the JS prototype.
+      // For classes, the first field of the vtable for JsTypes is the JS prototype.
       var jsPrototypeType = findSuperTypeWithWasmJsExportsIncludingSelf(implementedType);
       builder.newLine();
       if (jsPrototypeType != null) {

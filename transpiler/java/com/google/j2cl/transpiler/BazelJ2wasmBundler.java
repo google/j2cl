@@ -620,6 +620,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
         }
         typesByName.put(interfaceName, interfaceType);
         interfaces.add(interfaceType);
+        processJsInfo(interfaceInfo, interfaceType, /* isInterface= */ true);
       }
 
       for (TypeInfo typeInfo : summary.getTypesList()) {
@@ -636,35 +637,40 @@ final class BazelJ2wasmBundler extends BazelWorker {
           var interfaceType = typesByName.get(interfaceName);
           type.implementedInterfaces.add(interfaceType);
         }
+        processJsInfo(typeInfo, type, /* isInterface= */ false);
+      }
+    }
 
-        if (typeInfo.hasJsInfo()) {
-          // Separate out constructors and static and instance members which are handled separately.
-          JsMemberInfo jsConstructor = null;
-          ImmutableList.Builder<JsMemberInfo> staticJsMembers = ImmutableList.builder();
-          ImmutableList.Builder<JsMemberInfo> instanceJsMembers = ImmutableList.builder();
-          for (JsMemberInfo member : typeInfo.getJsInfo().getJsMembersList()) {
-            if (member.getKind() == JsMemberInfo.Kind.CONSTRUCTOR) {
-              jsConstructor = member;
-            } else if (member.getIsStatic()) {
-              staticJsMembers.add(member);
-            } else {
-              instanceJsMembers.add(member);
-            }
-          }
+    private void processJsInfo(TypeInfo typeInfo, Type type, boolean isInterface) {
+      if (!typeInfo.hasJsInfo()) {
+        return;
+      }
 
-          var exportedType =
-              new TypeGraph.JsTypeInfo(
-                  typeInfo.getJsInfo().getQualifiedJsName(),
-                  /* index= */ jsTypes.size(),
-                  type.getExportedSupertype(),
-                  jsConstructor,
-                  /* staticJsMembers= */ staticJsMembers.build(),
-                  /* instanceJsMembers= */ instanceJsMembers.build());
-
-          jsTypes.add(exportedType);
-          type.exportedType = exportedType;
+      // Separate out constructors and static and instance members which are handled separately.
+      JsMemberInfo jsConstructor = null;
+      ImmutableList.Builder<JsMemberInfo> staticJsMembers = ImmutableList.builder();
+      ImmutableList.Builder<JsMemberInfo> instanceJsMembers = ImmutableList.builder();
+      for (JsMemberInfo member : typeInfo.getJsInfo().getJsMembersList()) {
+        if (member.getKind() == JsMemberInfo.Kind.CONSTRUCTOR) {
+          jsConstructor = member;
+        } else if (member.getIsStatic()) {
+          staticJsMembers.add(member);
+        } else {
+          instanceJsMembers.add(member);
         }
       }
+
+      var exportedType =
+          new TypeGraph.JsTypeInfo(
+              typeInfo.getJsInfo().getQualifiedJsName(),
+              /* index= */ jsTypes.size(),
+              isInterface ? null : type.getExportedSupertype(),
+              jsConstructor,
+              /* staticJsMembers= */ staticJsMembers.build(),
+              /* instanceJsMembers= */ instanceJsMembers.build());
+
+      jsTypes.add(exportedType);
+      type.exportedType = exportedType;
     }
 
     List<TypeGraph.Type> getClasses() {

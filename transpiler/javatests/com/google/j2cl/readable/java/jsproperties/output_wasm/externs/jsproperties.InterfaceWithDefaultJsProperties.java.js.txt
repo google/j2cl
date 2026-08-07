@@ -1,6 +1,8 @@
 goog.module('jsproperties.InterfaceWithDefaultJsProperties');
 
-/** @typedef {$j2wasm$externs_jsproperties_InterfaceWithDefaultJsProperties} */
-let InterfaceWithDefaultJsProperties;
+const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+
+/** @const {typeof $j2wasm$externs_jsproperties_InterfaceWithDefaultJsProperties} */
+const InterfaceWithDefaultJsProperties = constructorProxy('jsproperties.InterfaceWithDefaultJsProperties');
 
 exports = InterfaceWithDefaultJsProperties;

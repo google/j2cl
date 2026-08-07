@@ -306,13 +306,14 @@ final class JsExternsGenerator {
 
     String externName = closureEnvironment.aliasForType(type.getDeclaration());
     String simpleJsName = type.getDeclaration().getSimpleJsName();
-    if (type.isInterface()) {
+    if (type.isInterface() && !AstUtils.hasWasmJsPrototype(type.getDeclaration())) {
       generateTypeAlias(sb, simpleJsName, externName);
     } else {
       generateConstructorProxy(
           sb, externName, simpleJsName, type.getDeclaration().getQualifiedJsName());
     }
 
+    sb.appendln("");
     sb.appendln(String.format("exports = %s;", simpleJsName));
 
     // Output to externs/my.package.MyClass.java.js
@@ -327,12 +328,10 @@ final class JsExternsGenerator {
     sb.appendln("");
     sb.appendln(String.format("/** @const {typeof %s} */", externName));
     sb.appendln(String.format("const %s = constructorProxy('%s');", simpleJsName, qualifiedJsName));
-    sb.appendln("");
   }
 
   private static void generateTypeAlias(SourceBuilder sb, String simpleJsName, String externName) {
     sb.appendln(String.format("/** @typedef {%s} */", externName));
     sb.appendln(String.format("let %s;", simpleJsName));
-    sb.appendln("");
   }
 }

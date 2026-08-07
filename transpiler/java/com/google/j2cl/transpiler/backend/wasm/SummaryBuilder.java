@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
 import static com.google.j2cl.transpiler.ast.AstUtils.hasWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
@@ -91,7 +90,7 @@ public final class SummaryBuilder {
   private void summaryTypeHierarchy(Library library) {
     library
         .streamTypes()
-        .sorted(Comparator.comparing(t -> t.getDeclaration().getTypeHierarchyDepth()))
+        .sorted(Comparator.comparingInt(t -> t.getDeclaration().getTypeHierarchyDepth()))
         .forEach(this::addType);
   }
 
@@ -114,14 +113,14 @@ public final class SummaryBuilder {
       typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDeclaration.toDescriptor()));
     }
 
+    if (environment.isCustomDescriptorsJsInteropEnabled()
+        && hasWasmJsPrototype(type.getDeclaration())) {
+      typeHierarchyInfoBuilder.setJsInfo(getJsInfo(type));
+    }
+
     if (type.isInterface()) {
       summary.addInterfaces(typeHierarchyInfoBuilder.build());
     } else {
-      if (environment.isCustomDescriptorsJsInteropEnabled()
-          && hasWasmJsPrototype(type.getDeclaration())) {
-        typeHierarchyInfoBuilder.setJsInfo(getJsInfo(type));
-      }
-
       type.getDeclaration().getAllSuperInterfaces().stream()
           .filter(not(TypeDeclaration::isNative))
           .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t.toDescriptor())));
@@ -137,7 +136,6 @@ public final class SummaryBuilder {
   }
 
   private JsInfo getJsInfo(Type type) {
-    checkArgument(!type.isInterface());
     TypeDeclaration typeDeclaration = type.getDeclaration();
     JsInfo.Builder jsInfoBuilder =
         JsInfo.newBuilder().setQualifiedJsName(typeDeclaration.getQualifiedJsName());

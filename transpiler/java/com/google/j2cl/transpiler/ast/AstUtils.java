@@ -1341,7 +1341,9 @@ public final class AstUtils {
    * <p>A new prototype is populated if the type adds exported members.
    */
   public static boolean hasWasmJsPrototype(TypeDeclaration typeDeclaration) {
-    return !typeDeclaration.isInterface() && declaresWasmJsExports(typeDeclaration);
+    // TODO(b/543878914) Remove declaresWasmJsExports when the solution is finalized and combine
+    // with hasWasmJsPrototype.
+    return declaresWasmJsExports(typeDeclaration);
   }
 
   /** Returns true if the given type introduces any exported members in Wasm. */
