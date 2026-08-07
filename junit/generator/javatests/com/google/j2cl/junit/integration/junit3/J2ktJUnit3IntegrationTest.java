@@ -121,7 +121,7 @@ public class J2ktJUnit3IntegrationTest extends IntegrationTestBase {
 
   @Test
   public void testThrowsInConstructor() throws Exception {
-    if (!testMode.isJ2kt()) {
+    if (!testMode.isJ2ktOnly()) {
       // Junit3 generates a non-standard error in this case that is hard to assert. Like:
       // 1) warning(junit.framework.TestSuite$1)
       return;

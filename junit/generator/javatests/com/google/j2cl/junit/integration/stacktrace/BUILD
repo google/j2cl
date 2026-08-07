@@ -15,20 +15,20 @@ j2cl_test_integration_test(
     extra_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
     ],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:AnonymousClassesStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:CustomExceptionStacktraceTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:DuplicateFileNameStacktraceTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ExceptionWithCauseStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:FillInStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:JsExceptionNonJsConstructorStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:JsExceptionStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:LambdaStacktraceTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:RecursiveStacktraceTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:SimpleThrowingStacktraceTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInBridgeMethod",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInClassInitializer",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInConstructorTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInInstanceInitializer",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsConstructorTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:NativeStacktraceTest",
     ],
 )
 
@@ -37,13 +37,31 @@ j2cl_test_integration_test(
     extra_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
     ],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     test_data = [
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:DuplicateFileNameStacktraceTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ExceptionWithCauseStacktraceTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:NativeStacktraceTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:RecursiveStacktraceTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:SimpleThrowingStacktraceTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInBridgeMethod",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInClassInitializer",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInConstructorTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInInstanceInitializer",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsConstructorTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsFunction",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsProperty",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInNativeJs",
+    ],
+)
+
+# Restricted to CLOSURE: J2KT currently lacks support for Java record classes with explicit accessors.
+j2cl_test_integration_test(
+    name = "ClosureStacktraceIntegrationTest",
+    extra_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
+    ],
+    test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInSwitchPattern",
     ],
 )

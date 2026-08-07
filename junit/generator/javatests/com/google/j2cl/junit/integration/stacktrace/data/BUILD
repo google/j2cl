@@ -14,6 +14,10 @@ package(
 j2cl_test_integration_test_data(
     name = "DuplicateFileNameStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         ":duplicate_names",
@@ -23,6 +27,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "KotlinDuplicateFileNameStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         ":duplicate_names",
@@ -40,6 +48,10 @@ java_and_j2cl_library(
 j2cl_test_integration_test_data(
     name = "AnonymousClassesStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -52,6 +64,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "CustomExceptionStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -64,6 +80,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "JsExceptionStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -82,6 +102,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "JsExceptionNonJsConstructorStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -100,6 +124,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "LambdaStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -115,6 +143,7 @@ j2cl_test_integration_test_data(
     platforms = [
         "CLOSURE",
         "WASM",
+        "J2KT_WEB",
     ],
     deps = [":base"],
 )
@@ -131,6 +160,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "FillInStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -143,6 +176,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "RecursiveStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -155,6 +192,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInInstanceInitializer",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -167,6 +208,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInBridgeMethod",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -179,6 +224,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInClassInitializer",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -191,6 +240,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInConstructorTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -209,6 +262,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInJsConstructorTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -228,6 +285,10 @@ j2cl_test_integration_test_data(
     name = "ThrowsInNativeJs",
     extra_defs = ["--inline_functions=false"],
     native_srcs = ["ThrowsInNativeJs.native.js"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -247,6 +308,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInJsFunction",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -265,6 +330,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ThrowsInJsProperty",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -283,6 +352,10 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ExceptionWithCauseStacktraceTest",
     extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [":base"],
 )
 
@@ -309,6 +382,10 @@ j2cl_test_integration_test_data(
     name = "NativeStacktraceTest",
     extra_defs = ["--inline_functions=false"],
     native_deps = [":stacktrace"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
     deps = [
         ":base",
         "//third_party:jsinterop-annotations",
@@ -331,6 +408,7 @@ filegroup(
         "*.stacktrace.txt",
         "*.stacktrace_j2cl.txt",
         "*.stacktrace_j2cl_compiled.txt",
+        "*.stacktrace_j2kt_web.txt",
         "*.stacktrace_j2wasm.txt",
         "*.stacktrace_j2wasm_optimized.txt",
     ]),

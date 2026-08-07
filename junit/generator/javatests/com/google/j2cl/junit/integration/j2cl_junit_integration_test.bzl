@@ -3,6 +3,10 @@
 load("@rules_java//java:defs.bzl", "java_library", "java_test")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2kt_native_test", "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
+load(
+    "//build_defs/internal_do_not_use:j2kt_web_transition.bzl",
+    "j2kt_web_enabled_test",
+)
 load("@rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 
 def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps = [], extra_data = [], platforms = ["CLOSURE"], tags = []):
@@ -32,6 +36,12 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
         test_data_all += [d + "-j2kt-jvm" for d in test_data]
         tags = tags + [
             "j2kt",
+        ]
+
+    if "J2KT_WEB" in platforms:
+        test_data_all += [d + "-j2kt-web" for d in test_data]
+        tags = tags + [
+            "j2kt-web",
         ]
 
     if "WASM" in platforms:
@@ -171,6 +181,22 @@ def j2cl_test_integration_test_data(
             runtime_deps = [":%s-lib-j2cl" % name],
             enable_rta = enable_rta,
             extra_defs = extra_defs,
+        )
+    if "J2KT_WEB" in platforms:
+        j2cl_test(
+            name = "%s-j2kt-web-underlying" % name,
+            jvm_flags = JVM_FLAGS,
+            tags = tags,
+            test_class = test_class,
+            runtime_deps = [":%s-lib-j2cl" % name],
+            enable_rta = enable_rta,
+            extra_defs = extra_defs,
+        )
+
+        j2kt_web_enabled_test(
+            name = "%s-j2kt-web" % name,
+            test = ":%s-j2kt-web-underlying" % name,
+            tags = tags,
         )
     if "J2KT" in platforms:
         j2kt_jvm_test(

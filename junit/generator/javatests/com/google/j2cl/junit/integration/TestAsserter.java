@@ -77,7 +77,7 @@ public class TestAsserter {
       // Since total number of tests cannot be asserted; ensure number of succeeds/skips is correct.
       assertThat(consoleLogs.stream().filter(x -> x.contains(": PASSED"))).hasSize(succeeds);
       assertThat(consoleLogs.stream().filter(x -> x.contains(": SKIPPED"))).hasSize(skips);
-    } else if (testMode.isJ2kt()) {
+    } else if (testMode.isJ2ktOnly()) {
       // J2KT JVM tests run with JUnit 4 which counts errors as failures, the log will shows
       // "Failures" instead of "Errors".
       fails += errors;
@@ -188,7 +188,7 @@ public class TestAsserter {
     String method = getTestMethodName(testEntry.getKey());
     if (testMode.isWeb()) {
       assertLogsContains("%s : FAILED", method);
-    } else if (testMode.isJ2kt()) {
+    } else if (testMode.isJ2ktOnly()) {
       assertLogsContains(getJ2ktJunitTestFailureMsg(method));
     } else {
       assertLogsContains(getJunitTestFailureMsg(method));

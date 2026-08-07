@@ -42,6 +42,7 @@ public abstract class IntegrationTestBase {
     J2CL_UNCOMPILED("-j2cl", "CLOSURE"),
     J2CL_COMPILED("-j2cl_compiled", "CLOSURE"),
     J2KT("-j2kt-jvm", "J2KT"),
+    J2KT_WEB("-j2kt-web", "J2KT_WEB"),
     J2WASM_UNOPTIMIZED("-j2wasm", "WASM"),
     J2WASM_OPTIMIZED("-j2wasm_optimized", "WASM");
 
@@ -65,12 +66,16 @@ public abstract class IntegrationTestBase {
       return this == JAVA;
     }
 
-    public boolean isJ2kt() {
+    public boolean isJ2ktOnly() {
       return this == J2KT;
     }
 
+    public boolean isJ2ktWeb() {
+      return this == J2KT_WEB;
+    }
+
     public boolean isWeb() {
-      return isJ2cl() || isJ2wasm();
+      return isJ2cl() || isJ2wasm() || isJ2ktWeb();
     }
   }
 
@@ -95,7 +100,7 @@ public abstract class IntegrationTestBase {
   }
 
   protected void runStacktraceTest(String testName) throws Exception {
-    if (testMode.isJ2kt()) {
+    if (testMode.isJ2ktOnly()) {
       return;
     }
 
@@ -143,10 +148,16 @@ public abstract class IntegrationTestBase {
         if (testMode.isJ2cl() && compiledFile.exists()) {
           return compiledFile;
         }
-        // fall through
+      // fall through
+      case J2KT_WEB:
+        File j2ktWebFile = getTestDataFile(testName + ".stacktrace_j2kt_web.txt");
+        if (testMode.isJ2ktWeb() && j2ktWebFile.exists()) {
+          return j2ktWebFile;
+        }
+      // fall through
       case J2CL_UNCOMPILED:
         File uncompiledFile = getTestDataFile(testName + ".stacktrace_j2cl.txt");
-        if (testMode.isJ2cl() && uncompiledFile.exists()) {
+        if ((testMode.isJ2cl() || testMode.isJ2ktWeb()) && uncompiledFile.exists()) {
           return uncompiledFile;
         }
         // fall through
@@ -161,7 +172,7 @@ public abstract class IntegrationTestBase {
         if (testMode.isJ2wasm() && unoptimizedFile.exists()) {
           return unoptimizedFile;
         }
-        // fall through
+      // fall through
       default:
         return getTestDataFile(testName + ".stacktrace.txt");
     }

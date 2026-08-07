@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.junit.integration.stacktrace;
 
+import static org.junit.Assume.assumeTrue;
+
 import com.google.j2cl.junit.integration.IntegrationTestBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,8 +27,8 @@ import org.junit.runners.Parameterized;
 public class StacktraceIntegration1Test extends IntegrationTestBase {
 
   @Test
-  public void testSimpleThrowingMethod() throws Exception {
-    runStacktraceTest("SimpleThrowingStacktraceTest");
+  public void testAnonymousClasses() throws Exception {
+    runStacktraceTest("AnonymousClassesStacktraceTest");
   }
 
   @Test
@@ -35,13 +37,13 @@ public class StacktraceIntegration1Test extends IntegrationTestBase {
   }
 
   @Test
-  public void testJsException() throws Exception {
-    runStacktraceTest("JsExceptionStacktraceTest");
+  public void testDuplicateFileName() throws Exception {
+    runStacktraceTest("DuplicateFileNameStacktraceTest");
   }
 
   @Test
-  public void testJsExceptionNonJsConstructor() throws Exception {
-    runStacktraceTest("JsExceptionNonJsConstructorStacktraceTest");
+  public void testExceptionWithCause() throws Exception {
+    runStacktraceTest("ExceptionWithCauseStacktraceTest");
   }
 
   @Test
@@ -50,8 +52,13 @@ public class StacktraceIntegration1Test extends IntegrationTestBase {
   }
 
   @Test
-  public void testRecursive() throws Exception {
-    runStacktraceTest("RecursiveStacktraceTest");
+  public void testJsExceptionNonJsConstructor() throws Exception {
+    runStacktraceTest("JsExceptionNonJsConstructorStacktraceTest");
+  }
+
+  @Test
+  public void testJsException() throws Exception {
+    runStacktraceTest("JsExceptionStacktraceTest");
   }
 
   @Test
@@ -60,32 +67,11 @@ public class StacktraceIntegration1Test extends IntegrationTestBase {
   }
 
   @Test
-  public void testAnonymousClasses() throws Exception {
-    runStacktraceTest("AnonymousClassesStacktraceTest");
-  }
+  public void testNative() throws Exception {
+    // test contains native js code and can't be run in pure Java or Wasm,
+    // this condition overlaps init but it is acceptable
+    assumeTrue(testMode.isJ2cl());
 
-  @Test
-  public void testThrowsInConstructor() throws Exception {
-    runStacktraceTest("ThrowsInConstructorTest");
-  }
-
-  @Test
-  public void testThrowsInJsConstructor() throws Exception {
-    runStacktraceTest("ThrowsInJsConstructorTest");
-  }
-
-  @Test
-  public void testThrowsInInstanceInitializer() throws Exception {
-    runStacktraceTest("ThrowsInInstanceInitializer");
-  }
-
-  @Test
-  public void testThrowsInClassInitializer() throws Exception {
-    runStacktraceTest("ThrowsInClassInitializer");
-  }
-
-  @Test
-  public void testThrowsInBridgeMethod() throws Exception {
-    runStacktraceTest("ThrowsInBridgeMethod");
+    runStacktraceTest("NativeStacktraceTest");
   }
 }

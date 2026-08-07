@@ -214,7 +214,7 @@ class StacktraceAsserter {
 
       boolean skipLine = false;
 
-      if (testMode.isJ2cl()) {
+      if (testMode.isJ2cl() || testMode.isJ2ktWeb()) {
         if (frameStart < 0 && line.startsWith("at ")) {
           frameStart = i;
         }

@@ -22,6 +22,7 @@ J2KT_WEB_ENABLED = allowlists.of_packages([
 # J2KT_WEB_DISABLED.
 J2KT_WEB_EXPERIMENT_ENABLED = allowlists.of_packages([
     "//samples/box2d/src/main/java/...",
+    "//junit/generator/javatests/com/google/j2cl/junit/integration/...",
     "//transpiler/javatests/com/google/j2cl/integration/java/...",
     "//transpiler/javatests/com/google/j2cl/readable/java/...",
 ], exclude = [J2KT_WEB_DISABLED])

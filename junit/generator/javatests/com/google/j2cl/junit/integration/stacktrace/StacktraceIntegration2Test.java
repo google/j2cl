@@ -27,20 +27,38 @@ import org.junit.runners.Parameterized;
 public class StacktraceIntegration2Test extends IntegrationTestBase {
 
   @Test
-  public void testNative() throws Exception {
-    // test contains native js code and can't be run in pure Java or Wasm,
-    // this condition overlaps init but it is acceptable
-    assumeTrue(testMode.isJ2cl());
-
-    runStacktraceTest("NativeStacktraceTest");
+  public void testRecursive() throws Exception {
+    runStacktraceTest("RecursiveStacktraceTest");
   }
 
   @Test
-  public void testThrowsInNativeJs() throws Exception {
-    // uses native methods which won't work in Java or Wasm
-    assumeTrue(testMode.isJ2cl());
+  public void testSimpleThrowingMethod() throws Exception {
+    runStacktraceTest("SimpleThrowingStacktraceTest");
+  }
 
-    runStacktraceTest("ThrowsInNativeJs");
+  @Test
+  public void testThrowsInBridgeMethod() throws Exception {
+    runStacktraceTest("ThrowsInBridgeMethod");
+  }
+
+  @Test
+  public void testThrowsInClassInitializer() throws Exception {
+    runStacktraceTest("ThrowsInClassInitializer");
+  }
+
+  @Test
+  public void testThrowsInConstructor() throws Exception {
+    runStacktraceTest("ThrowsInConstructorTest");
+  }
+
+  @Test
+  public void testThrowsInInstanceInitializer() throws Exception {
+    runStacktraceTest("ThrowsInInstanceInitializer");
+  }
+
+  @Test
+  public void testThrowsInJsConstructor() throws Exception {
+    runStacktraceTest("ThrowsInJsConstructorTest");
   }
 
   @Test
@@ -54,17 +72,10 @@ public class StacktraceIntegration2Test extends IntegrationTestBase {
   }
 
   @Test
-  public void testThrowsInSwitchPattern() throws Exception {
-    runStacktraceTest("ThrowsInSwitchPattern");
-  }
+  public void testThrowsInNativeJs() throws Exception {
+    // uses native methods which won't work in Java or Wasm
+    assumeTrue(testMode.isJ2cl());
 
-  @Test
-  public void testExceptionWithCause() throws Exception {
-    runStacktraceTest("ExceptionWithCauseStacktraceTest");
-  }
-
-  @Test
-  public void testDuplicateFileName() throws Exception {
-    runStacktraceTest("DuplicateFileNameStacktraceTest");
+    runStacktraceTest("ThrowsInNativeJs");
   }
 }
