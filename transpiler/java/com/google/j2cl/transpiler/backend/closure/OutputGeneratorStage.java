@@ -134,6 +134,26 @@ public class OutputGeneratorStage {
             new JavaScriptHeaderGenerator(problems, type, imports);
         String javaScriptHeaderSource = jsHeaderGenerator.renderOutput();
 
+        String sourceMap =
+            renderSourceMap(compilationUnit, type, jsImplGenerator.getSourceMappings());
+
+        if (sourceMap != null) {
+          javaScriptImplementationSource +=
+              String.format(
+                  "%n//# sourceMappingURL=%s\n",
+                  type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
+          output.write(typeRelativePath + SOURCE_MAP_SUFFIX, sourceMap);
+        }
+        if (shouldGenerateReadableSourceMaps && !compilationUnit.isSynthetic()) {
+          outputReadableSourceMap(
+              compilationUnit,
+              type,
+              javaScriptImplementationSource,
+              jsImplGenerator.getSourceMappings(),
+              matchingNativeFile);
+        }
+
+        // Kythe expects this metadata payload to be the last line of the file, so must be the last.
         if (generateKytheIndexingMetadata) {
           // Inline metadata so that Kythe can create edges between these files and the Java source
           // file.
@@ -160,26 +180,6 @@ public class OutputGeneratorStage {
                   jsImplGenerator.getSourceMappings(),
                   inputSourceByteOffsetConverter,
                   Utf8ByteOffsetConverter.create(javaScriptImplementationSource));
-        } else {
-          String sourceMap =
-              renderSourceMap(compilationUnit, type, jsImplGenerator.getSourceMappings());
-
-          if (sourceMap != null) {
-            javaScriptImplementationSource +=
-                String.format(
-                    "%n//# sourceMappingURL=%s\n",
-                    type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
-            output.write(typeRelativePath + SOURCE_MAP_SUFFIX, sourceMap);
-          }
-        }
-
-        if (shouldGenerateReadableSourceMaps && !compilationUnit.isSynthetic()) {
-          outputReadableSourceMap(
-              compilationUnit,
-              type,
-              javaScriptImplementationSource,
-              jsImplGenerator.getSourceMappings(),
-              matchingNativeFile);
         }
 
         String implRelativePath = typeRelativePath + jsImplGenerator.getSuffix();

@@ -139,20 +139,9 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     abstract Backend getBackend();
 
-    abstract boolean getEmitReadableSourceMap();
-
-    abstract boolean getGenerateKytheIndexingMetadata();
-
     abstract J2clTranspilerOptions autoBuild();
 
     public J2clTranspilerOptions build(Problems problems) {
-      boolean readableSourceMaps = getEmitReadableSourceMap();
-      boolean generateKytheIndexingMetadata = getGenerateKytheIndexingMetadata();
-      if (readableSourceMaps && generateKytheIndexingMetadata) {
-        problems.warning(
-            "Readable source maps are not available when generating Kythe indexing metadata.");
-        setEmitReadableSourceMap(false);
-      }
 
       ImmutableList<FileInfo> allSources = getSources();
       ImmutableList<FileInfo> allJavaSources =
@@ -189,8 +178,6 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
       }
       problems.abortIfHasErrors();
 
-      checkState(
-          !options.getEmitReadableSourceMap() || !options.getGenerateKytheIndexingMetadata());
       checkState(!options.getEmitReadableLibraryInfo() || options.getLibraryInfoOutput() != null);
       return options;
     }
