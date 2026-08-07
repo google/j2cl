@@ -103,7 +103,6 @@
   i = obj.intField_;
   obj.intField_ = i;
 
-  i = J2ktiosinteropDefaultNamesCompanion.shared.STATIC_FINAL_INT_FIELD;
   i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_;
   J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i;
 #else
@@ -114,15 +113,15 @@
   obj->intField_ = i;
 #endif
 
+  i = J2ktiosinteropDefaultNames.companion.STATIC_FINAL_INT_FIELD;
+
   i = J2ktiosinteropDefaultNames_get_STATIC_FINAL_INT_FIELD();
   i = J2ktiosinteropDefaultNames_get_staticIntField();
   J2ktiosinteropDefaultNames_set_staticIntField(i);
 
-#if J2KT
-  [J2ktiosinteropDefaultNamesCompanion.shared staticMethod];
-  [J2ktiosinteropDefaultNamesCompanion.shared staticIntMethodWithInt:1];
-  [J2ktiosinteropDefaultNamesCompanion.shared staticIntStringMethodWithInt:1 withNSString:@""];
-#endif
+  [J2ktiosinteropDefaultNames.companion staticMethod];
+  [J2ktiosinteropDefaultNames.companion staticIntMethodWithInt:1];
+  [J2ktiosinteropDefaultNames.companion staticIntStringMethodWithInt:1 withNSString:@""];
 
   J2ktiosinteropDefaultNames_staticMethod();
   J2ktiosinteropDefaultNames_staticIntMethodWithInt_(1);
@@ -243,14 +242,12 @@
   [obj customObjectiveCSwiftStringMethodWithString:@""];
   [obj swiftStringMethodWithNSString:@""];
 
-#if J2KT
-  [CustomCompanion.shared customStaticMethod];
-  [CustomCompanion.shared customStaticIntMethodWithIndex:1];
-  [CustomCompanion.shared customStaticIntStringMethodWithIndex:1 name:@""];
+  [Custom.companion customStaticMethod];
+  [Custom.companion customStaticIntMethodWithIndex:1];
+  [Custom.companion customStaticIntStringMethodWithIndex:1 name:@""];
 
-  [CustomCompanion.shared customStaticLongMethodWithLong:1];
-  [CustomCompanion.shared customStaticLongStringMethodWithLong:1 withNSString:@""];
-#endif
+  [Custom.companion customStaticLongMethodWithLong:1];
+  [Custom.companion customStaticLongStringMethodWithLong:1 withNSString:@""];
 
   Custom_customStaticMethod();
   Custom_customStaticIntMethodWithIndex_(1);
@@ -321,20 +318,21 @@
 
   [obj nativeInstanceMethod];
 
-#if J2KT
-  [J2ktiosinteropNativeDefaultNameCompanion.shared nativeStaticMethod];
-  [J2ktiosinteropNativeDefaultNameCompanion.shared
+  [J2ktiosinteropNativeDefaultName.companion nativeStaticMethod];
+  [J2ktiosinteropNativeDefaultName.companion
       nativeParameterWithJ2ktiosinteropNativeDefaultName:obj];
-  [J2ktiosinteropNativeDefaultNameCompanion.shared nativeReturnType];
-#else
-  [J2ktiosinteropNativeDefaultName nativeStaticMethod];
-  [J2ktiosinteropNativeDefaultName nativeParameterWithJ2ktiosinteropNativeDefaultName:obj];
-  [J2ktiosinteropNativeDefaultName nativeReturnType];
-#endif
+  [J2ktiosinteropNativeDefaultName.companion nativeReturnType];
 
   J2ktiosinteropNativeDefaultName_nativeStaticMethod();
   J2ktiosinteropNativeDefaultName_nativeParameterWithJ2ktiosinteropNativeDefaultName_(obj);
   J2ktiosinteropNativeDefaultName_nativeReturnType();
+
+#if !J2KT
+  // Not planned for J2kt
+  [J2ktiosinteropNativeDefaultName nativeStaticMethod];
+  [J2ktiosinteropNativeDefaultName nativeParameterWithJ2ktiosinteropNativeDefaultName:obj];
+  [J2ktiosinteropNativeDefaultName nativeReturnType];
+#endif
 }
 
 - (void)testNativeCustomName {
@@ -344,11 +342,12 @@
 
   [obj nativeInstanceMethod];
 
-#if J2KT
-  [CustomNativeClassCompanion.shared nativeStaticMethod];
-  [CustomNativeClassCompanion.shared nativeParameterWithCustomNativeClass:obj];
-  [CustomNativeClassCompanion.shared nativeReturnType];
-#else
+  [CustomNativeClass.companion nativeStaticMethod];
+  [CustomNativeClass.companion nativeParameterWithCustomNativeClass:obj];
+  [CustomNativeClass.companion nativeReturnType];
+
+#if !J2KT
+  // Not planned for J2kt
   [CustomNativeClass nativeStaticMethod];
   [CustomNativeClass nativeParameterWithCustomNativeClass:obj];
   [CustomNativeClass nativeReturnType];

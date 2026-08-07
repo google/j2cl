@@ -15,10 +15,12 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.GenerateObjCCompanion;
 import com.google.j2objc.annotations.ObjectiveCName;
 import com.google.j2objc.annotations.SwiftName;
 
 @ObjectiveCName("Custom")
+@GenerateObjCCompanion
 public final class CustomNames {
   @ObjectiveCName("initWithIndex:")
   public CustomNames(int i) {}

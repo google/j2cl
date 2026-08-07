@@ -15,9 +15,11 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.GenerateObjCCompanion;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
+@GenerateObjCCompanion
 public final class NativeDefaultName {
   public int nativeInstanceMethod() {
     return 1;

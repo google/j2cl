@@ -16,8 +16,10 @@
 package j2ktiosinterop;
 
 import com.google.j2kt.annotations.Throws;
+import com.google.j2objc.annotations.GenerateObjCCompanion;
 import org.jspecify.annotations.Nullable;
 
+@GenerateObjCCompanion
 public final class DefaultNames {
   public DefaultNames() {}
 

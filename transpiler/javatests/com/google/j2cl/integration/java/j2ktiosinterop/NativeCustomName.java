@@ -15,9 +15,11 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.GenerateObjCCompanion;
 import com.google.j2objc.annotations.ObjectiveCName;
 import org.jspecify.annotations.NullMarked;
 
+@GenerateObjCCompanion
 @ObjectiveCName("CustomNativeClass")
 @NullMarked
 public final class NativeCustomName {
