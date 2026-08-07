@@ -29,7 +29,7 @@ public final class NativeDefaultName {
     return 2;
   }
 
-  public static void nativeParameter(NativeDefaultName ktNative) {}
+  public static void nativeParameter(NativeDefaultName obj) {}
 
   public static NativeDefaultName nativeReturnType() {
     return new NativeDefaultName();

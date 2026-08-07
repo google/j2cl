@@ -17,10 +17,12 @@
  */
 package j2ktiosinterop;
 
+import com.google.j2objc.annotations.GenerateObjCCompanion;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
+@GenerateObjCCompanion
 public final class Nullability {
 
   public static void acceptNullable(@Nullable Object v) {}
