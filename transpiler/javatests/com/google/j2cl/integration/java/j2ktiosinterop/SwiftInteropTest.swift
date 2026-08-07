@@ -67,6 +67,8 @@ final class SwiftInteropTest: XCTestCase {
     obj.overloadedMethod(with: 1 as Double)
     obj.overloadedMethod(with: "")
 
+    J2ktiosinteropDefaultNames.companion.staticMethod()
+
     // Fields are not exposed in Swift
     #if J2KT
       var i: Int32
@@ -79,7 +81,6 @@ final class SwiftInteropTest: XCTestCase {
       // i = J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_
       // J2ktiosinteropDefaultNamesCompanion.shared.staticIntField_ = i
 
-      // J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
       // J2ktiosinteropDefaultNamesCompanion.shared.staticIntMethod(with: 1)
       // J2ktiosinteropDefaultNamesCompanion.shared.staticIntStringMethod(with: 1, with: "")
 
@@ -132,12 +133,10 @@ final class SwiftInteropTest: XCTestCase {
     obj = Custom(index: 1, name: "")
 
     obj = Custom()
+    obj.customMethod()
     #if J2KT
       obj = Custom(long: 1)
       obj = Custom(long: 1, with: "")
-
-      // TODO(b/543364803): This one should be always available
-      obj.customMethod()
       obj.customIntMethod(WithInt: 1)
       obj.customIndexMethod(WithIndex: 1)
       obj.customCountMethod(WithCount: 1)
@@ -146,9 +145,8 @@ final class SwiftInteropTest: XCTestCase {
       // TODO(b/516712739): We should lowercase the With when we split the selector in the plugin
       obj.customIntStringMethod(WithIndex: 1, name: "")
     #else
-      // Not exposed on Swift; probably because of --no-wrapper-methods
-      //obj = Custom(long: 1)
-      //obj = Custom(long: 1, withNSString: "")
+      obj = Custom(index: 1)
+      obj = Custom(index: 1, name: "")
 
       obj.customIntMethod(with: 1)
       obj.customIndexMethod(with: 1)
@@ -169,8 +167,9 @@ final class SwiftInteropTest: XCTestCase {
 
     obj.lowercase("")
 
+    Custom.companion.customStaticMethod()
+    Custom_staticlowercase_("")
     #if J2KT
-      Custom.Companion.shared.customStaticMethod()
       Custom.Companion.shared.customStaticIntMethod(WithIndex: 1)
       Custom.Companion.shared.customStaticIntStringMethod(WithIndex: 1, name: "")
 
@@ -184,10 +183,6 @@ final class SwiftInteropTest: XCTestCase {
       Custom_customStaticIntStringMethodWithIndex_name_(1, "")
       Custom_customStaticLongMethod(1)
       Custom_customStaticLongStringMethod(2, "")
-
-      obj.lowercase("")
-      // TODO(b/543364803): This should be working in J2kt
-      Custom_staticlowercase_("")
     #endif
   }
 
