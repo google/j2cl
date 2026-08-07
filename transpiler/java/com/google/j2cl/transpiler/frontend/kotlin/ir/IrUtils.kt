@@ -198,7 +198,12 @@ private val IrDeclarationContainer.gettersAndSetters: List<IrFunction>
       .toList()
 
 val IrField?.isJvmField: Boolean
-  get() = this != null && hasAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME)
+  get() =
+    this != null &&
+      (hasAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME) ||
+        // const are implicitly behave as @JvmField and Kotlin doesn't allow explicitly setting
+        // @JvmField annotation.
+        correspondingPropertySymbol?.owner?.isConst == true)
 
 val IrClass.enumEntries: List<IrEnumEntry>
   get() = declarations.filterIsInstance<IrEnumEntry>()

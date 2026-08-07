@@ -112,16 +112,11 @@ private fun IrDeclaration.getJsInteropAnnotation(name: FqName): IrConstructorCal
  * However, there are situations where the backing field should honor the `@JsProperty` annotation:
  * 1. Properties annotated with `@JvmField` as Java-usages will be using the field member.
  * 2. Fields that we see originating from Java
- * 3. The backing field of the companion object const properties
- * 4. Private properties with no explicit accessors. Kotlin will not generate code for these
+ * 3. Private properties with no explicit accessors. Kotlin will not generate code for these
  *    accessors and instead use the backing field directly.
  */
 private val IrField.canBeJsProperty: Boolean
-  get() =
-    isJvmField ||
-      isFromJava() ||
-      isCompanionConstantBackingField ||
-      correspondingPropertySymbol?.owner?.hasAccessors == false
+  get() = isJvmField || isFromJava() || correspondingPropertySymbol?.owner?.hasAccessors == false
 
 fun IrClass.getJsEnumInfo(): JsEnumInfo? {
   val annotation = getJsEnumAnnotation() ?: return null
@@ -264,9 +259,6 @@ private val IrDeclaration.isMemberOfJsFunction: Boolean
 
 private val IrField.isStaticBackingFieldOfJsFunction: Boolean
   get() = isCompanionPropertyBackingField && isMemberOfJsFunction
-
-private val IrField.isCompanionConstantBackingField: Boolean
-  get() = isCompanionPropertyBackingField && correspondingPropertySymbol?.owner?.isConst == true
 
 private val IrDeclaration.isCompanionPropertyBackingField: Boolean
   get() = origin == JvmLoweredDeclarationOrigin.COMPANION_PROPERTY_BACKING_FIELD
