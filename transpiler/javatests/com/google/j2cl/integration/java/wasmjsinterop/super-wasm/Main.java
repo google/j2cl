@@ -150,9 +150,22 @@ public final class Main {
     Foo f = (Foo) otherO;
     assertEquals(5, f.getValue());
 
+    o = getJsFooArray();
+    Foo[] fooArr = (Foo[]) o;
+    assertEquals(2, fooArr.length);
+    assertEquals(5, fooArr[0].getValue());
+    assertEquals(6, fooArr[1].getValue());
+
+    o = getJsFooArrayAsNative();
+    NativeJsObject[] nativeArr = (NativeJsObject[]) o;
+    assertEquals(2, nativeArr.length);
+
+    fooArr = (Foo[]) nativeArr;
+    assertEquals(5, fooArr[0].getValue());
+    assertEquals(6, fooArr[1].getValue());
+
     // TODO(b/540448377): Enable when wrapper identity is preserved.
     // assertSame(getJsFoo(), getJsFoo());
-
   }
 
   private static void testObjectMethods() {
@@ -303,6 +316,9 @@ public final class Main {
   @JsMethod(namespace = "test.utils")
   private static native Object getJsFoo();
 
+  @JsMethod(namespace = "test.utils")
+  private static native Object getJsFooArray();
+
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
   interface NativeJsObject {}
 
@@ -326,4 +342,7 @@ public final class Main {
 
   @JsMethod(namespace = "test.utils", name = "getJsFoo")
   private static native NativeJsObject getJsFooAsNative();
+
+  @JsMethod(namespace = "test.utils", name = "getJsFooArray")
+  private static native NativeJsObject getJsFooArrayAsNative();
 }

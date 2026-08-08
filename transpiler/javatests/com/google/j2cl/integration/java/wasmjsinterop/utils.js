@@ -135,6 +135,14 @@ function getJsFoo() {
   return new Foo(5);
 }
 
+/**
+ * @return {*}
+ * @public
+ */
+function getJsFooArray() {
+  return [new Foo(5), new Foo(6)];
+}
+
 exports = {
   andBooleansInJs,
   appendInJs,
@@ -148,4 +156,5 @@ exports = {
   getJsOnePointFive,
   getJsHello,
   getJsFoo,
+  getJsFooArray,
 };
