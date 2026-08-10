@@ -325,12 +325,19 @@
    i!!.toInt(),
   )] "sourcemap.SourceMap$SuperCalls.<init>"
 [InnerClass] => [InnerClass]
-[i] => [i] "i"
 [field] => [@JvmField
-  val field: Int]
+  val field: String?]
 [field] => [field]
-[InnerClass] => [init]
-[this.field = i;] => [this.field = i] "sourcemap.SourceMap$InnerClass.<init>"
+[InnerClass] => [constructor]
+[field = "0";] => [this.field = "0"] "sourcemap.SourceMap$InnerClass.<init>"
+[InnerClass] => [constructor]
+[i] => [i] "i"
+[this(Integer.toString(i));] => [this(
+   Integer.toString(i),
+  )] "sourcemap.SourceMap$InnerClass.<init>"
+[InnerClass] => [constructor]
+[i] => [i] "i"
+[field = i;] => [this.field = i] "sourcemap.SourceMap$InnerClass.<init>"
 [FooJsEnum] => [FooJsEnum]
 [A] => [A]
 [B] => [B]

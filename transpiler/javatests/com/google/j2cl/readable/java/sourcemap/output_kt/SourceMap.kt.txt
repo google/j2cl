@@ -20,6 +20,7 @@ package sourcemap
 
 import javaemul.lang.*
 import java.lang.Class
+import java.lang.Integer
 import java.util.ArrayList
 import java.util.Comparator
 import java.util.function.Function
@@ -230,11 +231,19 @@ internal abstract class SourceMap<T: Number?>: Comparator<T> {
   )
  }
  
- inner class InnerClass constructor(i: Int) {
+ inner class InnerClass {
   @JvmField
-  val field: Int
+  val field: String?
   
-  init {
+  constructor() {
+   this.field = "0"
+  }
+  
+  constructor(i: Int): this(
+   Integer.toString(i),
+  )
+  
+  constructor(i: String?) {
    this.field = i
   }
  }

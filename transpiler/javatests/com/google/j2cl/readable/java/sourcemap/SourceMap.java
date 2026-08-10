@@ -198,10 +198,18 @@ abstract class SourceMap<T extends Number> implements Comparator<T> {
   }
 
   public final class InnerClass {
-    public final int field;
+    public final String field;
+
+    public InnerClass() {
+      field = "0";
+    }
 
     public InnerClass(int i) {
-      this.field = i;
+      this(Integer.toString(i));
+    }
+
+    public InnerClass(String i) {
+      field = i;
     }
   }
 

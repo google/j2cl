@@ -187,10 +187,16 @@ abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Compar
     @JsConstructor constructor(i: Int) : super(i)
   }
 
-  inner class InnerClass constructor(i: Int) {
-    val field: Int
+  inner class InnerClass {
+    val field: String
 
-    init {
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
       field = i
     }
   }

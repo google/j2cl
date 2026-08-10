@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('goog.math.Long');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let SourceMap = goog.forwardDeclare('sourcemap.SourceMap$impl');
 
@@ -17,9 +18,29 @@ class InnerClass extends j_l_Object {
   super();
   /**@type {!SourceMap<T>} @nodts*/
   this.$outer_this__sourcemap_SourceMap_InnerClass;
-  /**@type {number} @nodts*/
-  this.f_field__sourcemap_SourceMap_InnerClass_ = 0;
+  /**@type {string} @nodts*/
+  this.f_field__sourcemap_SourceMap_InnerClass_;
  }
+ /** @final @nodts @return {string} */
+ m_getField__java_lang_String() {
+  return this.f_field__sourcemap_SourceMap_InnerClass_;
+ }
+ //Factory method corresponding to constructor 'InnerClass(SourceMap)'.
+ /** @nodts @template T @return {!InnerClass<T>} */
+ static $create__sourcemap_SourceMap(/** !SourceMap<T> */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__void($outer_this);
+  return $instance;
+ }
+ //Initialization from constructor 'InnerClass(SourceMap)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__void(/** !SourceMap<T> */ $outer_this) {
+  this.$outer_this__sourcemap_SourceMap_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+  this.f_field__sourcemap_SourceMap_InnerClass_ = '0';
+ }
+ //Factory method corresponding to constructor 'InnerClass(SourceMap, int)'.
  /** @nodts @template T @return {!InnerClass<T>} */
  static $create__sourcemap_SourceMap__int(/** !SourceMap<T> */ $outer_this, /** number */ i) {
   InnerClass.$clinit();
@@ -27,15 +48,25 @@ class InnerClass extends j_l_Object {
   $instance.$ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__int__void($outer_this, i);
   return $instance;
  }
+ //Initialization from constructor 'InnerClass(SourceMap, int)'.
  /** @nodts */
  $ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__int__void(/** !SourceMap<T> */ $outer_this, /** number */ i) {
+  this.$ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__java_lang_String__void($outer_this, Integer.valueOf(i).toString());
+ }
+ //Factory method corresponding to constructor 'InnerClass(SourceMap, String)'.
+ /** @nodts @template T @return {!InnerClass<T>} */
+ static $create__sourcemap_SourceMap__java_lang_String(/** !SourceMap<T> */ $outer_this, /** string */ i) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__java_lang_String__void($outer_this, i);
+  return $instance;
+ }
+ //Initialization from constructor 'InnerClass(SourceMap, String)'.
+ /** @nodts */
+ $ctor__sourcemap_SourceMap_InnerClass__sourcemap_SourceMap__java_lang_String__void(/** !SourceMap<T> */ $outer_this, /** string */ i) {
   this.$outer_this__sourcemap_SourceMap_InnerClass = $outer_this;
   this.$ctor__java_lang_Object__void();
   this.f_field__sourcemap_SourceMap_InnerClass_ = i;
- }
- /** @final @nodts @return {number} */
- m_getField__int() {
-  return this.f_field__sourcemap_SourceMap_InnerClass_;
  }
  /** @nodts */
  static $clinit() {
@@ -49,7 +80,9 @@ class InnerClass extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+ }
 }
 $Util.$setClassMetadata(InnerClass, 'sourcemap.SourceMap$InnerClass');
 
