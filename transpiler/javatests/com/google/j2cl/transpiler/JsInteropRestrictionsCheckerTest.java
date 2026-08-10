@@ -4769,6 +4769,33 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " https://errorprone.info/bugpattern/ExtendsAutoValue)");
   }
 
+  public void testInterfacePrivateInstanceMethodJsMemberFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        interface Buggy {
+          @JsMethod
+          private void foo() {}
+        > Error: Interface private member 'void Buggy.foo()' cannot be JsMethod nor JsProperty nor JsConstructor.
+          @JsProperty
+          private int getBar() { return 0; }
+        > Error: Interface private member 'int Buggy.getBar()' cannot be JsMethod nor JsProperty nor JsConstructor.
+        }
+        """);
+  }
+
+  public void testInterfacePrivateInstanceMethodSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            """
+            interface Buggy {
+              private void foo() {}
+            }
+            """)
+        .assertNoWarnings();
+  }
+
   private void assertWithInlineMessages(String... compilationUnitsAndSources) {
     newTesterWithDefaults().assertWithInlineMessages(compilationUnitsAndSources);
   }

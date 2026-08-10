@@ -35,8 +35,6 @@ object JsMethodTest {
     testLambdaImplementingJsMethod()
     testLambdaRequiringJsMethodBridge()
     testJsOptionalJsVarargsLambda()
-    // TODO(b/140309909): Either implement the feature and uncomment the test or ban it.
-    // testPrivateJsMethodInInterface();
   }
 
   class MyObject {
@@ -132,19 +130,5 @@ object JsMethodTest {
     @Suppress("UNCHECKED_CAST")
     val rawF = f as FunctionalInterfaceWithJsVarargsAndJsOptionalJsMethod<Number?>
     assertEquals(6, rawF.sum(1.0, *arrayOf<Number?>(2.0, 3.0)))
-  }
-
-  internal interface InterfaceWithPrivateJsMethod {
-    @JsMethod private fun method(): String = "Private JsMethod"
-  }
-
-  @JsType(isNative = true, namespace = GLOBAL, name = "?")
-  internal interface NativeInterface {
-    fun method(): String
-  }
-
-  private fun testPrivateJsMethodInInterface() {
-    val o = (object : InterfaceWithPrivateJsMethod {} as Any) as NativeInterface
-    assertEquals("Private JsMethod", o.method())
   }
 }

@@ -1236,13 +1236,17 @@ public class JsInteropRestrictionsChecker {
       if (!checkJsPropertyAccessor(method)) {
         return;
       }
-      if (method.getDescriptor().isRecordComponentAccessor()) {
+      var methodDescriptor = method.getDescriptor();
+      if (methodDescriptor.isRecordComponentAccessor()) {
         checkRecordComponentAccessor(method);
       }
-      if (method.getDescriptor().isCustomIsInstanceMethod()) {
+      if (methodDescriptor.getEnclosingTypeDescriptor().isInterface()) {
+        checkInterfaceMethod(method);
+      }
+      if (methodDescriptor.isCustomIsInstanceMethod()) {
         checkCustomIsInstanceMethod(method);
       }
-      if (method.getDescriptor().isSuspendFunction()) {
+      if (methodDescriptor.isSuspendFunction()) {
         checkSuspendFunction(method);
       }
     }
@@ -1299,6 +1303,15 @@ public class JsInteropRestrictionsChecker {
           method.getSourcePosition(),
           "[unusable-by-js] Native '%s' is exposed to JavaScript without @JsMethod.",
           method.getReadableDescription());
+    }
+  }
+
+  private void checkInterfaceMethod(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    if (!methodDescriptor.getEnclosingTypeDescriptor().isNative()
+        && methodDescriptor.getVisibility().isPrivate()
+        && methodDescriptor.isInstanceMember()) {
+      checkNotJsMember(method, "Interface private");
     }
   }
 
