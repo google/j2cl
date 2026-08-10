@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.passes.AddFunctionalInterfaceAdaptors;
 import com.google.j2cl.transpiler.passes.AddInterfaceConstructorCasts;
 import com.google.j2cl.transpiler.passes.AddJavaLangObjectForwardingMethods;
 import com.google.j2cl.transpiler.passes.AddJsExportBridgesWasm;
+import com.google.j2cl.transpiler.passes.AddJsFunctionCommonAdaptorSuperType;
 import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddSealedClassMarker;
 import com.google.j2cl.transpiler.passes.AddSwitchExpressionsExhaustivenessCheck;
@@ -483,6 +484,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           ImplementLambdaExpressionsViaImplementorClasses::new,
+          AddJsFunctionCommonAdaptorSuperType::new,
           AddFunctionalInterfaceAdaptors::new,
 
           // Default constructors and explicit super calls should be synthesized first.

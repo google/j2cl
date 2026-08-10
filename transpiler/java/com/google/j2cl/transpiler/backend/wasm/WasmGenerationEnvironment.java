@@ -40,6 +40,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -433,7 +434,7 @@ public class WasmGenerationEnvironment {
               // Force creation of layouts for all superinterfaces.
               typeDeclaration.getAllSuperInterfaces().forEach(this::getOrCreateWasmTypeLayout);
               WasmTypeLayout superWasmLayout =
-                  getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(typeDeclaration));
+                  getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(t));
               var previous =
                   wasmTypeLayoutByTypeDeclaration.put(
                       typeDeclaration, WasmTypeLayout.createFromType(t, superWasmLayout));
@@ -458,7 +459,7 @@ public class WasmGenerationEnvironment {
       // accomplished by calling recursively "getOrCreateWasmTypeLayout" rather than assuming it
       // was already created and would be returned by "getWasmTypeLayout'.
       WasmTypeLayout superTypeLayout =
-          getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(typeDeclaration));
+          getOrCreateWasmTypeLayout(selectTypeLayoutSuperTypeDeclaration(typeDeclaration));
       WasmTypeLayout typeLayout =
           WasmTypeLayout.createFromTypeDeclaration(typeDeclaration, superTypeLayout);
       // If the supertype layout was not created by the type it is requested here,
@@ -472,7 +473,20 @@ public class WasmGenerationEnvironment {
 
   /** Gets a supertype declaration for the specified type to be used in generating the Wasm type. */
   @Nullable
-  static TypeDeclaration getTypeLayoutSuperTypeDeclaration(TypeDeclaration typeDeclaration) {
+  static TypeDeclaration getTypeLayoutSuperTypeDeclaration(Type type) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    if (type.getSuperTypeDescriptor() != null
+        && !type.getSuperTypeDescriptor().equals(typeDeclaration.getSuperTypeDescriptor())) {
+      // In general we use the supertype from the type declaration. However, passes can explicitly
+      // change the supertype via Type.
+      return type.getSuperTypeDescriptor().getTypeDeclaration();
+    }
+    return selectTypeLayoutSuperTypeDeclaration(typeDeclaration);
+  }
+
+  @Nullable
+  private static TypeDeclaration selectTypeLayoutSuperTypeDeclaration(
+      TypeDeclaration typeDeclaration) {
     if (typeDeclaration.isInterface()) {
       // For interfaces, choose a suitable "superinterface". Java interfaces can inherit multiple
       // parent interfaces, which cannot be fully expressed in Wasm.

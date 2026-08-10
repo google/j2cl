@@ -1437,6 +1437,21 @@ public final class AstUtils {
     return true;
   }
 
+  /** Creates an expression that evaluates to a Wasm funcref reference. */
+  public static Expression createWasmFuncrefExpression(
+      SourcePosition sourcePosition,
+      MethodDescriptor referencedMethodDescriptor,
+      MethodDescriptor interfaceMethodDescriptor) {
+    // MethodReferences are special-handled in the backend to generate the funcref pointer. They are
+    // otherwise removed by a desugaring pass.
+    return MethodReference.builder()
+        .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
+        .setReferencedMethodDescriptor(referencedMethodDescriptor)
+        .setInterfaceMethodDescriptor(interfaceMethodDescriptor)
+        .setSourcePosition(sourcePosition)
+        .build();
+  }
+
   public static boolean isKotlinUnitInstanceAccess(Expression expression) {
     if (expression instanceof FieldAccess fieldAccess) {
       var field = fieldAccess.getTarget();

@@ -371,6 +371,37 @@ public final class Main {
     assertEquals("hello", jsFunctionWithObject.foo("hello"));
     SomeJsType someJsType2 = new SomeJsType(123);
     assertTrue(jsFunctionWithObject.foo(someJsType2) == someJsType2);
+
+    MyJsFunction concreteInstance = new MyJsFunctionImpl();
+    assertEquals(105, concreteInstance.foo(5));
+    assertEquals(105, callFunctionInJs(concreteInstance, 5));
+
+    MyJsFunction anonymousInstance =
+        new MyJsFunction() {
+          @Override
+          public int foo(int a) {
+            return a + 200;
+          }
+        };
+    assertEquals(205, anonymousInstance.foo(5));
+    assertEquals(205, callFunctionInJs(anonymousInstance, 5));
+
+    MyJsFunction constructorInstance = new MyJsFunctionWithConstructorImpl(1000);
+    assertEquals(1005, constructorInstance.foo(5));
+    assertEquals(1005, callFunctionInJs(constructorInstance, 5));
+
+    MyJsFunction constructorInstanceOtherConstructor = new MyJsFunctionWithConstructorImpl();
+    assertEquals(6, constructorInstanceOtherConstructor.foo(5));
+    assertEquals(6, callFunctionInJs(constructorInstanceOtherConstructor, 5));
+
+    MyJsFunction innerJsFunction =
+        new MyJsFunctionWithConstructorImpl(1000).new InnerJsFunctionImpl();
+    assertEquals(1006, innerJsFunction.foo(5));
+    assertEquals(1006, callFunctionInJs(innerJsFunction, 5));
+
+    MyJsFunction withSuperConstructorInstance = new MyJsFunctionWithSuperConstructorImpl();
+    assertEquals(105, withSuperConstructorInstance.foo(5));
+    assertEquals(105, callFunctionInJs(withSuperConstructorInstance, 5));
   }
 
   private static void testJsFunctionIdentity() {
@@ -406,6 +437,48 @@ public final class Main {
 
   int instanceFooImpl(int a) {
     return a + 12;
+  }
+
+  static final class MyJsFunctionImpl implements MyJsFunction {
+    @Override
+    public int foo(int a) {
+      return a + 100;
+    }
+  }
+
+  static final class MyJsFunctionWithConstructorImpl implements MyJsFunction {
+    private final int value;
+
+    public MyJsFunctionWithConstructorImpl() {
+      this(1);
+    }
+
+    public MyJsFunctionWithConstructorImpl(int value) {
+      this.value = value;
+    }
+
+    @Override
+    public int foo(int a) {
+      return a + value;
+    }
+
+    public final class InnerJsFunctionImpl implements MyJsFunction {
+      @Override
+      public int foo(int a) {
+        return a + MyJsFunctionWithConstructorImpl.this.value + 1;
+      }
+    }
+  }
+
+  static final class MyJsFunctionWithSuperConstructorImpl implements MyJsFunction {
+    public MyJsFunctionWithSuperConstructorImpl() {
+      super();
+    }
+
+    @Override
+    public int foo(int a) {
+      return a + 100;
+    }
   }
 
   @JsFunction

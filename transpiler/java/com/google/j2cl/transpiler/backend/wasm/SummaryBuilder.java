@@ -108,7 +108,7 @@ public final class SummaryBuilder {
         TypeInfo.newBuilder().setTypeId(typeId).setAbstract(type.getDeclaration().isAbstract());
 
     TypeDeclaration superTypeDeclaration =
-        WasmGenerationEnvironment.getTypeLayoutSuperTypeDeclaration(type.getDeclaration());
+        WasmGenerationEnvironment.getTypeLayoutSuperTypeDeclaration(type);
     if (superTypeDeclaration != null && !superTypeDeclaration.isNative()) {
       typeHierarchyInfoBuilder.setExtendsType(getTypeId(superTypeDeclaration.toDescriptor()));
     }

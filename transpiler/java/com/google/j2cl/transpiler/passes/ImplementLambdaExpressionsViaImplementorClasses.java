@@ -13,11 +13,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
-
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -31,20 +27,16 @@ import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,28 +190,6 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     Type lambdaImplementorType =
         new Type(sourcePosition, implementorTypeDescriptor.getTypeDeclaration());
 
-    if (this.extendsCommonAdaptor
-        && functionExpression.getTypeDescriptor().isJsFunctionInterface()) {
-      DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-          (DeclaredTypeDescriptor) functionExpression.getTypeDescriptor();
-      Method exportBridgeMethod =
-          createExportBridgeMethod(sourcePosition, implementorTypeDescriptor);
-      lambdaImplementorType.addMember(exportBridgeMethod);
-
-      // For JsFunction interfaces, synthesize a call to the super constructor taking a funcref
-      // pointing to the lambda method.
-      //
-      // LambdaImplementor() {
-      //    super(lambdaMethodReference, exportBridgeMethodReference);
-      // }
-      lambdaImplementorType.addMember(
-          createJsFunctionConstructorWithExport(
-              sourcePosition,
-              functionalInterfaceTypeDescriptor,
-              implementorTypeDescriptor,
-              exportBridgeMethod.getDescriptor()));
-    }
-
     // public t method(t1 p1, t2 p2, .....) {
     //   ... code from function expression....;
     // }
@@ -227,143 +197,6 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         createLambdaMethod(sourcePosition, functionExpression, implementorTypeDescriptor));
 
     return lambdaImplementorType;
-  }
-
-  private static Method createJsFunctionConstructorWithExport(
-      SourcePosition sourcePosition,
-      DeclaredTypeDescriptor functionalInterfaceTypeDescriptor,
-      DeclaredTypeDescriptor implementorTypeDescriptor,
-      MethodDescriptor exportBridgeDescriptor) {
-    MethodDescriptor constructorDescriptor =
-        AstUtils.createImplicitConstructorDescriptor(implementorTypeDescriptor);
-    MethodDescriptor superConstructorDescriptor =
-        implementorTypeDescriptor
-            .getSuperTypeDescriptor()
-            .getMethodDescriptor(
-                MethodDescriptor.CONSTRUCTOR_METHOD_NAME,
-                TypeDescriptors.get().javaemulInternalWasmFuncref,
-                TypeDescriptors.get().javaemulInternalWasmFuncref);
-
-    return Method.builder()
-        .setMethodDescriptor(constructorDescriptor)
-        .addStatements(
-            MethodCall.builderFrom(superConstructorDescriptor)
-                .setArguments(
-                    // Construct a method reference to the lambda method which is special-handled in
-                    // the backend to generate a function pointer.
-                    MethodReference.builder()
-                        .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
-                        .setReferencedMethodDescriptor(
-                            getWasmFunctionPointerTarget(implementorTypeDescriptor))
-                        .setInterfaceMethodDescriptor(
-                            functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor())
-                        .setSourcePosition(sourcePosition)
-                        .build(),
-                    MethodReference.builder()
-                        .setTypeDescriptor(TypeDescriptors.get().javaemulInternalWasmFuncref)
-                        .setReferencedMethodDescriptor(exportBridgeDescriptor)
-                        .setInterfaceMethodDescriptor(
-                            functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor())
-                        .setSourcePosition(sourcePosition)
-                        .build())
-                .build()
-                .makeStatement(sourcePosition))
-        .setSourcePosition(sourcePosition)
-        .build();
-  }
-
-  /**
-   * Creates a static export bridge for JsFunction implementations which defers to the lambda
-   * method.
-   */
-  private static Method createExportBridgeMethod(
-      SourcePosition sourcePosition, DeclaredTypeDescriptor implementorTypeDescriptor) {
-    MethodDescriptor lambdaMethodDescriptor = getLambdaMethodDescriptor(implementorTypeDescriptor);
-
-    ImmutableList<TypeDescriptor> parameterTypes =
-        ImmutableList.<TypeDescriptor>builder()
-            // First parameter is the JsFunctionAdaptor instance (an externref for exporting).
-            .add(TypeDescriptors.get().javaemulInternalWasmExtern)
-            .addAll(
-                lambdaMethodDescriptor.getParameterTypeDescriptors().stream()
-                    .map(t -> WasmExportBridgesUtils.getExternalType(t, /* isExport= */ false))
-                    .iterator())
-            .build();
-
-    TypeDescriptor returnType =
-        WasmExportBridgesUtils.getExternalType(
-            lambdaMethodDescriptor.getReturnTypeDescriptor(), /* isExport= */ false);
-
-    MethodDescriptor exportBridgeDescriptor =
-        MethodDescriptor.builder()
-            .setEnclosingTypeDescriptor(implementorTypeDescriptor)
-            .setName(lambdaMethodDescriptor.getName() + "$export")
-            .setStatic(true)
-            .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_FUNCTION_EXPORT)
-            .setParameterTypeDescriptors(parameterTypes)
-            .setReturnTypeDescriptor(returnType)
-            .build();
-
-    List<Variable> parameters = AstUtils.createParameterVariables(parameterTypes);
-
-    // static R m(WasmExtern adaptor, A a, B b, ...) {
-    //   return toJs(fromJs(adaptor).m(fromJs(a), fromJs(b), ...));
-    // }
-    Statement forwardingStatement =
-        AstUtils.createForwardingStatement(
-            sourcePosition,
-            /* qualifier= */ WasmExportBridgesUtils.convertToInternal(
-                parameters.get(0).createReference(),
-                implementorTypeDescriptor,
-                /* isExport= */ false),
-            lambdaMethodDescriptor,
-            /* isStaticDispatch= */ false,
-            /* arguments= */ Streams.zip(
-                    parameters.stream().skip(1),
-                    lambdaMethodDescriptor.getParameterTypeDescriptors().stream(),
-                    (parameter, typeDescriptor) ->
-                        WasmExportBridgesUtils.convertToInternal(
-                            parameter.createReference(), typeDescriptor, /* isExport= */ false))
-                .collect(toImmutableList()),
-            returnType);
-
-    if (forwardingStatement instanceof ReturnStatement returnStatement) {
-      forwardingStatement =
-          returnStatement.toBuilder()
-              .setExpression(
-                  WasmExportBridgesUtils.convertToExternal(
-                      returnStatement.getExpression(),
-                      lambdaMethodDescriptor.getReturnTypeDescriptor(),
-                      /* isExport= */ false))
-              .build();
-    }
-
-    return Method.builder()
-        .setMethodDescriptor(exportBridgeDescriptor)
-        .setParameters(parameters)
-        .addStatements(forwardingStatement)
-        .setSourcePosition(sourcePosition)
-        .build();
-  }
-
-  /**
-   * Retrieves the method descriptor to be used as the target for the Wasm function pointer.
-   *
-   * <p>When a lambda implements a generic JsFunction interface (e.g. {@code MyJsFunction<T>}), the
-   * generated calling logic only knows the unspecialized signature of the method and performs a
-   * cast to that unspecialized function type. In this case, the generalizing bridge method is used
-   * as the target.
-   */
-  private static MethodDescriptor getWasmFunctionPointerTarget(
-      DeclaredTypeDescriptor implementorTypeDescriptor) {
-    MethodDescriptor lambdaMethodDescriptor = getLambdaMethodDescriptor(implementorTypeDescriptor);
-    for (MethodDescriptor methodDescriptor : implementorTypeDescriptor.getPolymorphicMethods()) {
-      if (methodDescriptor.isGeneralizingBridge()
-          && methodDescriptor.getBridgeTarget().equals(lambdaMethodDescriptor)) {
-        return methodDescriptor;
-      }
-    }
-    return lambdaMethodDescriptor;
   }
 
   /**
