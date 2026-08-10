@@ -239,8 +239,8 @@
   [obj customCustomNamesMethodWithCustom:nil];
   [obj customDefaultNamesMethodWithJ2ktiosinteropDefaultNames:nil];
 
-  [obj customObjectiveCSwiftStringMethodWithString:@""];
   [obj swiftStringMethodWithNSString:@""];
+  [obj customObjectiveCStringMethodWithString:@""];
 
   [Custom.companion customStaticMethod];
   [Custom.companion customStaticIntMethodWithIndex:1];

@@ -73,7 +73,7 @@ final class SwiftInteropTest: XCTestCase {
     try! DefaultNames.companion.staticThrowsMethod(s: "")
 
     #if J2KT
-       var i: Int32
+      var i: Int32
 
       i = obj.finalIntField
       i = obj.intField
@@ -110,38 +110,46 @@ final class SwiftInteropTest: XCTestCase {
   }
 
   func testCustomNames() {
-    var obj: CustomNames
+    var obj: CustomSwift
 
-    obj = CustomNames(i: 1 as Int32)
-    obj = CustomNames(i: 1 as Int32, s: "")
+    obj = CustomSwift(index: 1)
+    obj = CustomSwift(index: 1, name: "")
 
-    obj = CustomNames()
-    obj.method()
+    obj = CustomSwift()
+    obj.customMethod()
 
-    obj.intMethod(i: 1)
-    obj.indexMethod(i: 1)
-    obj.countMethod(i: 1)
-    obj.stringMethod(s: "")
-    obj.nameMethod(s: "")
-    obj.intStringMethod(i: 1, s: "")
+    #if J2KT
+      obj = CustomSwift(long: 1)
+      obj = CustomSwift(long: 1, with: "")
+    #else
+      obj = CustomSwift().init2(long: 1)
+      obj = CustomSwift().init3(long: 1, with: "")
+    #endif
 
-    obj.longMethod(i: 1)
-    obj.longStringMethod(i: 1, s: "")
+    obj.customIntMethod(withInt: 1)
+    obj.customIndexMethod(withIndex: 1)
+    obj.customCountMethod(withCount: 1)
+    obj.customStringMethod(withString: "")
+    obj.customNameMethod(withName: "")
+    obj.customIntStringMethod(withIndex: 1, name: "")
 
-    obj.customNamesMethod(c: nil)
-    obj.defaultNamesMethod(c: nil)
+    obj.customLongMethod(withLong: 1)
+    obj.customLongStringMethod(withLong: 1, with: "")
 
-    obj.customObjectiveCSwiftStringMethod(with: "")
+    obj.customCustomNamesMethod(with: nil)
+    obj.customDefaultNamesMethod(with: nil)
+
     obj.customSwiftStringMethod(with: "")
+    obj.objectiveCStringMethod(s: "")
 
-    obj.lowercase(t: "")
+    obj.lowercase("")
 
-    CustomNames.companion.staticMethod()
-    CustomNames.companion.staticIntMethod(i: 1)
-    CustomNames.companion.staticIntStringMethod(i: 1, s: "")
-    CustomNames.companion.staticLongMethod(i: 1)
-    CustomNames.companion.staticLongStringMethod(i: 1, s: "")
-    CustomNames.companion.staticlowercase(s: "")
+    CustomSwift.companion.customStaticMethod()
+    CustomSwift.companion.customStaticIntMethod(withIndex: 1)
+    CustomSwift.companion.customStaticIntStringMethod(withIndex: 1, name: "")
+    CustomSwift.companion.customStaticLongMethod(withLong: 1)
+    CustomSwift.companion.customStaticLongStringMethod(withLong: 1, with: "")
+    CustomSwift.companion.staticlowercase("")
   }
 
   func testEnumNames() {
