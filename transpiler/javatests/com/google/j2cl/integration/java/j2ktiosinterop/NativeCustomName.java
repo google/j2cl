@@ -17,10 +17,12 @@ package j2ktiosinterop;
 
 import com.google.j2objc.annotations.GenerateObjCCompanion;
 import com.google.j2objc.annotations.ObjectiveCName;
+import com.google.j2objc.annotations.SwiftName;
 import org.jspecify.annotations.NullMarked;
 
 @GenerateObjCCompanion
 @ObjectiveCName("CustomNativeClass")
+@SwiftName("CustomNativeSwift")
 @NullMarked
 public final class NativeCustomName {
   public int nativeInstanceMethod() {

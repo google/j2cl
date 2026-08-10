@@ -16,10 +16,12 @@
 package j2ktiosinterop;
 
 import com.google.j2objc.annotations.ObjectiveCName;
+import com.google.j2objc.annotations.SwiftName;
 import javaemul.internal.annotations.KtNative;
 import org.jspecify.annotations.NullMarked;
 
 @ObjectiveCName("CustomNativeClass")
+@SwiftName("CustomNativeSwift")
 @KtNative
 @NullMarked
 public final class NativeCustomName {

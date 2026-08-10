@@ -193,20 +193,11 @@ final class SwiftInteropTest: XCTestCase {
   }
 
   func testNativeCustomName() {
-    #if J2KT
-      // TODO(b/543364803): Clean up as b/441110909 is fixed.
-      // let obj = CustomNativeClass()
-      // let _ = obj.nativeInstanceMethod()
-      // let _ = CustomNativeClass.Companion.shared.nativeStaticMethod()
-      // CustomNativeClass.Companion.shared.nativeParameter(with: obj)
-      // CustomNativeClass.Companion.shared.nativeReturnType()
-    #else
-      let obj = NativeCustomName()
-      let _ = obj.nativeInstanceMethod()
-      let _ = NativeCustomName.companion.nativeStaticMethod()
-      NativeCustomName.companion.nativeParameter(obj: obj)
-      let _ = NativeCustomName.companion.nativeReturnType()
-    #endif
+    let obj = CustomNativeSwift()
+    let _ = obj.nativeInstanceMethod()
+    let _ = CustomNativeSwift.companion.nativeStaticMethod()
+    let _ = CustomNativeSwift.companion.nativeReturnType()
+    CustomNativeSwift.companion.nativeParameter(obj: obj)
   }
 
   func testPlatform() {

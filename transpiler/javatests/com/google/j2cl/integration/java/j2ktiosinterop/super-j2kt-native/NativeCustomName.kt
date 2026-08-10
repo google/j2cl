@@ -15,10 +15,11 @@
  */
 package j2ktiosinterop
 
-import kotlin.experimental.ExperimentalObjCName
+import com.google.j2objc.annotations.ObjectiveCName
+import com.google.j2objc.annotations.SwiftName
 
-@OptIn(ExperimentalObjCName::class)
-@ObjCName("J2ktCustomNativeClass", exact = true)
+@ObjectiveCName("CustomNativeClass")
+@SwiftName("CustomNativeSwift")
 class NativeCustomName {
   fun nativeInstanceMethod(): Int = 0
 
