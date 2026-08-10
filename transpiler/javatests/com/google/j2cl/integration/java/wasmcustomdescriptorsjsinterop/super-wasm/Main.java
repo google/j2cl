@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsOverlay;
@@ -55,6 +56,7 @@ public final class Main {
   private static void testMethod() {
     SomeJsType someJsType = new SomeJsType(123);
     assertTrue(callGetNumber(someJsType) == 11);
+    assertTrue(someJsType.getNumber(456) == 456);
     assertTrue(callGetString(someJsType).equals("str"));
     assertTrue(callPackagePrivateMethod(someJsType).equals("pp"));
     assertTrue(callReturnSelf(someJsType) == someJsType);
@@ -114,6 +116,11 @@ public final class Main {
 
     public SomeJsType(int field) {
       this.field = field;
+    }
+
+    @JsIgnore
+    public int getNumber(int arg) {
+      return arg;
     }
 
     public int getNumber() {
