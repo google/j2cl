@@ -340,6 +340,12 @@ public final class JsImportsGenerator {
     if (!methodDescriptor.isNative()) {
       return false;
     }
+
+    if (methodDescriptor.isConstructor()
+        && methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract()) {
+      return false;
+    }
+
     // If the method maps to a WASM instruction, that takes precedence.
     if (getWasmInfo(methodDescriptor) != null) {
       return false;
