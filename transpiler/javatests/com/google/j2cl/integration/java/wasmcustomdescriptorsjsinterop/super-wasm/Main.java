@@ -16,6 +16,7 @@
 package wasmcustomdescriptorsjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
@@ -40,6 +41,7 @@ public final class Main {
     testJsFunction();
     testJsFunctionIdentity();
     testJsFunctionCrossCasting();
+    testParameterizedJsFunction();
     testEntryPoint();
   }
 
@@ -511,6 +513,29 @@ public final class Main {
   @JsFunction
   interface MyJsFunction2 {
     int bar(int a);
+  }
+
+  private static void testParameterizedJsFunction() {
+    ApplyFunction<String> stringJsFunction = s -> s.toLowerCase();
+    assertEquals("hello", stringJsFunction.apply("HELLO"));
+    assertEquals("hello", callGeneric(stringJsFunction, "HELLO"));
+
+    ApplyFunction<Integer> intJsFunction = i -> i + 1;
+    assertEquals(2, intJsFunction.apply(1));
+    assertEquals(2, callGeneric(intJsFunction, 1));
+
+    ApplyFunction<Object> objectJsFunction = (ApplyFunction) stringJsFunction;
+    assertThrowsClassCastException(() -> objectJsFunction.apply(new Object()));
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static Object callGeneric(ApplyFunction af, Object o) {
+    return af.apply(o);
+  }
+
+  @JsFunction
+  interface ApplyFunction<T> {
+    T apply(T a);
   }
 
   @JsMethod(namespace = "functions", name = "getFunction")
