@@ -821,7 +821,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   static String fromJs(WasmExtern extern) {
-    return String.fromJsString(toNativeString(extern));
+    return String.fromJsString((NativeString) extern);
   }
 
   static String fromSafeJsString(NativeString o) {
@@ -917,8 +917,4 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   @Wasm("string.concat")
   private static native NativeString nativeConcat(NativeString a, NativeString b);
-
-  // TODO(b/541222170): See if we can have a `string.convert_extern` instruction in binaryen.
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "String")
-  private static native NativeString toNativeString(WasmExtern x);
 }
