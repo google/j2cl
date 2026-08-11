@@ -14,12 +14,11 @@ OFF = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/integration/java/morebridgemethods",
     # TODO(b/277822633): Remove after IObject as parameter is correctly mapped.
     "@jsinterop_generator//javatests/jsinterop/generator/externs/iobjectiarraylike",
-])
-
-LOOSE = allowlists.of_packages([
     # We don't want to block the readable tests from running even if they have errors.
     "//transpiler/javatests/com/google/j2cl/readable/...",
 ])
+
+LOOSE = allowlists.of_packages([])
 
 EXTRA_CONFORMANCE_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/readable/...",
