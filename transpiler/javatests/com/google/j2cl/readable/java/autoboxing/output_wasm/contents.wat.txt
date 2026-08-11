@@ -472,7 +472,7 @@
     (block $LOOP.CONTINUE
      (block
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:108:4
-      (local.set $number (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index)))
+      (local.set $number (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index))))
       (block
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:109:6
        (local.set $sum (f64.add (local.get $sum) (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (ref.cast (ref null $java.lang.Double) (local.get $number))))))
@@ -514,7 +514,7 @@
     (block $LOOP.CONTINUE
      (block
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:117:4
-      (local.set $number (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index)))
+      (local.set $number (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index))))
       (block
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:118:6
        (local.set $sum (f64.add (local.get $sum) (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (ref.cast (ref null $java.lang.Double) (local.get $number))))))

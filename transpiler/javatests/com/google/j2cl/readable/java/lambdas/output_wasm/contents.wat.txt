@@ -2201,7 +2201,7 @@
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:255:4
-  (return (global.get $identityFunction@lambdas.Lambdas))
+  (return (ref.cast (ref null $java.lang.Object) (global.get $identityFunction@lambdas.Lambdas)))
  )
 )
 
@@ -2213,11 +2213,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:298:28
   (call $$clinit__void_<once>_@lambdas.Lambdas )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:4
-  (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$25 ))
+  (local.set $o (ref.cast (ref null $java.lang.Object) (call $$create__@lambdas.Lambdas.$LambdaImplementor$25 )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:4
-  (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$26 ))
+  (local.set $o (ref.cast (ref null $java.lang.Object) (call $$create__@lambdas.Lambdas.$LambdaImplementor$26 )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:308:4
-  (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$27 ))
+  (local.set $o (ref.cast (ref null $java.lang.Object) (call $$create__@lambdas.Lambdas.$LambdaImplementor$27 )))
  )
 )
 
@@ -2231,7 +2231,7 @@
  (local.set $this (ref.cast (ref $lambdas.Lambdas) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:317:4
-  (local.set $o (call $$create__@lambdas.Lambdas.$LambdaImplementor$28 ))
+  (local.set $o (ref.cast (ref null $java.lang.Object) (call $$create__@lambdas.Lambdas.$LambdaImplementor$28 )))
  )
 )
 (elem declare func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas)

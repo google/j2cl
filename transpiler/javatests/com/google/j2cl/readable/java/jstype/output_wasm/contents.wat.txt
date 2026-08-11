@@ -211,7 +211,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:54:4
   (local.set $star (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:55:4
-  (return (local.get $star))
+  (return (ref.cast (ref null extern) (local.get $star)))
  )
 )
 

@@ -200,7 +200,7 @@
  (block
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:147:6
-   (local.set $$qualifier (local.get $subject))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $subject)))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:147:6
    (drop (call_ref $function.m_publish__genericmethod_GenericMethod_Publisher (ref.as_non_null (local.get $$qualifier))(struct.get $genericmethod.GenericMethod.Publisher.vtable $m_publish__genericmethod_GenericMethod_Publisher (ref.cast (ref $genericmethod.GenericMethod.Publisher.vtable) (call $get.itable.$genericmethod.GenericMethod.Publisher (local.get $$qualifier))))))
   )

@@ -4200,19 +4200,19 @@
  (local.set $this (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:312:4
-  (local.set $listOfString (ref.null $java.lang.Object))
+  (local.set $listOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:313:4
-  (local.set $nullableListOfString (ref.null $java.lang.Object))
+  (local.set $nullableListOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:314:4
-  (local.set $listOfNullableString (ref.null $java.lang.Object))
+  (local.set $listOfNullableString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:315:4
-  (local.set $nullableListOfNullableString (ref.null $java.lang.Object))
+  (local.set $nullableListOfNullableString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:317:4
-  (local.set $nonNullListOfString (ref.null $java.lang.Object))
+  (local.set $nonNullListOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:318:4
-  (local.set $listOfNonNullString (ref.null $java.lang.Object))
+  (local.set $listOfNonNullString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:319:4
-  (local.set $nonNullListOfNonNullString (ref.null $java.lang.Object))
+  (local.set $nonNullListOfNonNullString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
  )
 )
 (elem declare func $m_casts__void@nullability.defaultnotnullable.DefaultNotNullable)
@@ -4501,11 +4501,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:397:14
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.DefaultNotNullable )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:398:4
-  (local.set $stringConsumer (ref.null $java.lang.Object))
+  (local.set $stringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:399:4
-  (local.set $nullableStringConsumer (ref.null $java.lang.Object))
+  (local.set $nullableStringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:400:4
-  (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
+  (local.set $nonNullStringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:402:4
   (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
    (then (i32.const 0))
@@ -4528,7 +4528,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:407:4
   (local.set $b (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:408:4
-  (local.set $c (if (result (ref null $java.lang.Object)) (local.get $b) (then (ref.null $java.lang.Object)) (else (ref.null $java.lang.Object))))
+  (local.set $c (if (result (ref null $java.lang.Object)) (local.get $b) (then (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object))) (else (ref.null $java.lang.Object))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:411:4
   (local.set $s (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $$getString_|1|__java_lang_String_<once>_@nullability.defaultnotnullable.DefaultNotNullable.$StringLiterals )(call $$getString_|2|__java_lang_String_<once>_@nullability.defaultnotnullable.DefaultNotNullable.$StringLiterals ))))
  )
@@ -6001,19 +6001,19 @@
  (local.set $this (ref.cast (ref $nullability.defaultnullable.DefaultNullable) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:285:4
-  (local.set $listOfString (ref.null $java.lang.Object))
+  (local.set $listOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:286:4
-  (local.set $nullableListOfString (ref.null $java.lang.Object))
+  (local.set $nullableListOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:287:4
-  (local.set $listOfNullableString (ref.null $java.lang.Object))
+  (local.set $listOfNullableString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:288:4
-  (local.set $nullableListOfNullableString (ref.null $java.lang.Object))
+  (local.set $nullableListOfNullableString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:290:4
-  (local.set $nonNullListOfString (ref.null $java.lang.Object))
+  (local.set $nonNullListOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:291:4
-  (local.set $listOfNonNullString (ref.null $java.lang.Object))
+  (local.set $listOfNonNullString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:292:4
-  (local.set $nonNullListOfNonNullString (ref.null $java.lang.Object))
+  (local.set $nonNullListOfNonNullString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
  )
 )
 (elem declare func $m_casts__void@nullability.defaultnullable.DefaultNullable)
@@ -6199,11 +6199,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:335:14
   (call $$clinit__void_<once>_@nullability.defaultnullable.DefaultNullable )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:336:4
-  (local.set $stringConsumer (ref.null $java.lang.Object))
+  (local.set $stringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:337:4
-  (local.set $nullableStringConsumer (ref.null $java.lang.Object))
+  (local.set $nullableStringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:338:4
-  (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
+  (local.set $nonNullStringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:340:4
   (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
    (then (i32.const 0))
@@ -7522,19 +7522,19 @@
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:305:4
-  (local.set $listOfString (ref.null $java.lang.Object))
+  (local.set $listOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:306:4
-  (local.set $nullableListOfString (ref.null $java.lang.Object))
+  (local.set $nullableListOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:307:4
-  (local.set $listOfNullableString (ref.null $java.lang.Object))
+  (local.set $listOfNullableString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:308:4
-  (local.set $nullableListOfNullableString (ref.null $java.lang.Object))
+  (local.set $nullableListOfNullableString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:310:4
-  (local.set $nonNullListOfString (ref.null $java.lang.Object))
+  (local.set $nonNullListOfString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:311:4
-  (local.set $listOfNonNullString (ref.null $java.lang.Object))
+  (local.set $listOfNonNullString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:312:4
-  (local.set $nonNullListOfNonNullString (ref.null $java.lang.Object))
+  (local.set $nonNullListOfNonNullString (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
  )
 )
 (elem declare func $m_casts__void@nullability.explicitnotnullable.ExplicitNotNullable)
@@ -7820,11 +7820,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:411:14
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:412:4
-  (local.set $stringConsumer (ref.null $java.lang.Object))
+  (local.set $stringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:413:4
-  (local.set $nullableStringConsumer (ref.null $java.lang.Object))
+  (local.set $nullableStringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:415:4
-  (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
+  (local.set $nonNullStringConsumer (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:417:4
   (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
    (then (i32.const 0))

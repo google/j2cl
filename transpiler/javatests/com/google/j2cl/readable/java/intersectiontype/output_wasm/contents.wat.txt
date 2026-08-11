@@ -577,7 +577,7 @@
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:50:4
-   (local.set $$qualifier (local.get $object))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $object)))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:50:4
    (call_ref $function.m_set__int__void (ref.as_non_null (local.get $$qualifier))(i32.const 1)(struct.get $intersectiontype.Setable.vtable $m_set__int__void (ref.cast (ref $intersectiontype.Setable.vtable) (call $get.itable.$intersectiontype.Setable (local.get $$qualifier)))))
   )
@@ -599,12 +599,12 @@
    (then
     (block
      ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:64:6
-     (return (local.get $o))
+     (return (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (local.get $o))))
     )
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:66:4
-  (return (local.get $o))
+  (return (ref.cast (ref null $java.lang.Object) (local.get $o)))
  )
 )
 
@@ -617,7 +617,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:69:48
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:70:4
-  (return (local.get $s))
+  (return (ref.cast (ref null $java.lang.Object) (local.get $s)))
  )
 )
 
@@ -630,7 +630,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:73:43
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:74:4
-  (return (local.get $s))
+  (return (ref.cast (ref null $java.lang.Object) (local.get $s)))
  )
 )
 
@@ -658,7 +658,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:81:20
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:82:4
-  (return (call $$create__@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 ))
+  (return (ref.cast (ref null $java.lang.Object) (call $$create__@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 )))
  )
 )
 
@@ -670,7 +670,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:86:21
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:87:4
-  (return (call $$create__@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 ))
+  (return (ref.cast (ref null $java.lang.Object) (call $$create__@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 )))
  )
 )
 
@@ -687,9 +687,9 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:97:4
   (local.set $e (ref.cast (ref null $intersectiontype.IntersectionTypeTest.A) (local.get $o)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:98:4
-  (local.set $g (ref.cast (ref null $intersectiontype.IntersectionTypeTest.A) (local.get $o)))
+  (local.set $g (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $intersectiontype.IntersectionTypeTest.A) (local.get $o))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:99:4
-  (local.set $s (ref.cast (ref null $intersectiontype.IntersectionTypeTest.A) (local.get $o)))
+  (local.set $s (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $intersectiontype.IntersectionTypeTest.A) (local.get $o))))
  )
 )
 
@@ -767,7 +767,7 @@
  (block
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:124:4
-   (local.set $$qualifier (local.get $o))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (local.get $o))))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:124:4
    (drop (call_ref $function.m_defaultM__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_defaultM__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.$intersectiontype.Cmp (local.get $$qualifier))))))
   )
@@ -790,13 +790,13 @@
  (block
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:131:4
-   (local.set $$qualifier (local.get $t))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $t)))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:131:4
    (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.$intersectiontype.Cmp (local.get $$qualifier))))))
   )
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:132:4
-   (local.set $$qualifier_1 (ref.cast (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType) (ref.null $java.lang.Object)))
+   (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType) (ref.null $java.lang.Object))))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:132:4
    (drop (call_ref $function.m_cmp__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.$intersectiontype.Cmp (local.get $$qualifier_1))))))
   )
@@ -813,7 +813,7 @@
   (call_ref $function.m_doSomething__java_lang_Object__void_$pp_intersectiontype (ref.as_non_null (local.get $t))(call $$getString_||__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$StringLiterals )(struct.get $intersectiontype.IntersectionTypeTest.GenericType.vtable $m_doSomething__java_lang_Object__void_$pp_intersectiontype (struct.get $intersectiontype.IntersectionTypeTest.GenericType $vtable(local.get $t))))
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:142:4
-   (local.set $$qualifier (local.get $t))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $t)))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:142:4
    (drop (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Getable.vtable $m_get__java_lang_Object (ref.cast (ref $intersectiontype.Getable.vtable) (call $get.itable.$intersectiontype.Getable (local.get $$qualifier))))))
   )
@@ -832,7 +832,7 @@
   (call_ref $function.m_doSomething__java_lang_Object__void_$pp_intersectiontype (ref.as_non_null (local.get $t))(call $$getString_||__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$StringLiterals )(struct.get $intersectiontype.IntersectionTypeTest.GenericType.vtable $m_doSomething__java_lang_Object__void_$pp_intersectiontype (struct.get $intersectiontype.IntersectionTypeTest.GenericType $vtable(local.get $t))))
   (block
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:148:4
-   (local.set $$qualifier (local.get $t))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $t)))
    ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:148:4
    (drop (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Getable.vtable $m_get__java_lang_Object (ref.cast (ref $intersectiontype.Getable.vtable) (call $get.itable.$intersectiontype.Getable (local.get $$qualifier))))))
   )
@@ -1163,7 +1163,7 @@
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.MapEntry) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/intersectiontype/readable-j2wasm.js/intersectiontype/IntersectionTypeTest.java:56:6
-  (return (local.get $o))
+  (return (ref.cast (ref null $java.lang.Object) (local.get $o)))
  )
 )
 (elem declare func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry)

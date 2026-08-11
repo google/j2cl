@@ -326,7 +326,7 @@
  (local.set $this (ref.cast (ref $parameterassignments.Main) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:34:4
-  (local.set $oa (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (local.get $o)(array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $oa)) (i32.const 0)))))
+  (local.set $oa (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (local.get $o)(ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $oa)) (i32.const 0))))))
  )
 )
 (elem declare func $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments@parameterassignments.Main)
@@ -762,7 +762,7 @@
  (local.set $this (ref.cast (ref $parameterassignments.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/parameterassignments/readable-j2wasm.js/parameterassignments/Main.java:66:8
-  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $os)) (i32.const 0) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $os)) (i32.const 1)))
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $os)) (i32.const 0) (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $os)) (i32.const 1))))
  )
 )
 (elem declare func $m_test__java_lang_Object__arrayOf_java_lang_Object__void@parameterassignments.Main.$LambdaImplementor$3)

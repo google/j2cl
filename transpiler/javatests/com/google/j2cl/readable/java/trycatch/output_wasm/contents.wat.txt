@@ -1149,7 +1149,7 @@
        (local.set $e (ref.cast (ref null $java.lang.RuntimeException) (local.get $__$exc)))
        (block
         ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:154:6
-        (local.set $$qualifier (local.get $e))
+        (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $e)))
         ;;@ transpiler/javatests/com/google/j2cl/readable/java/trycatch/readable-j2wasm.js/trycatch/TryCatch.java:154:6
         (call_ref $function.m_f__java_lang_Object__void (ref.as_non_null (local.get $$qualifier))(call $$getString_||__java_lang_String_<once>_@trycatch.TryCatch.$StringLiterals )(struct.get $trycatch.TryCatch.GenericInterface.vtable $m_f__java_lang_Object__void (ref.cast (ref $trycatch.TryCatch.GenericInterface.vtable) (call $get.itable.$trycatch.TryCatch.GenericInterface (local.get $$qualifier)))))
        )

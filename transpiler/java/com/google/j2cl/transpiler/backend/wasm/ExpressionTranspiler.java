@@ -196,26 +196,6 @@ final class ExpressionTranspiler {
         TypeDescriptor castTypeDescriptor =
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
 
-        // TODO(b/515144544): Revisit this check for Wasm intrinsic calls when we have more robust
-        // handling of types on the boundary.
-        if (!isWasmCall(castExpression.getExpression())) {
-          if (TypeDescriptors.isJavaLangObject(castTypeDescriptor)) {
-            // Avoid unnecessary casts to j.l.Object. This also helps avoiding a Wasm cast whem
-            // going from native arrays to WasmOpaque objects (and vice versa) which would otherwise
-            // fail.
-            render(castExpression.getExpression());
-            return false;
-          }
-
-          if (castTypeDescriptor.isInterface()) {
-            // TODO(b/183769034): At the moment the actual cast check is performed at interface
-            // method call. Depending on whether Wasm NPEs become catchable there might need to be
-            // instrumentation code here.
-            render(castExpression.getExpression());
-            return false;
-          }
-        }
-
         // TODO(b/184675805): implement array cast expressions beyond this nominal
         // implementation.
         sourceBuilder.append(
@@ -736,11 +716,6 @@ final class ExpressionTranspiler {
     // its rhs, the AST is transformed so that the resulting value is never used and the assignment
     // can be safely considered not to produce a value.
     return isPrimitiveVoid(expression.getTypeDescriptor()) || expression.isSimpleAssignment();
-  }
-
-  private static boolean isWasmCall(Expression expression) {
-    return expression instanceof Invocation invocation
-        && getWasmInfo(invocation.getTarget()) != null;
   }
 
   private ExpressionTranspiler() {}

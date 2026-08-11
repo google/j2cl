@@ -304,7 +304,7 @@
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/multipleabstractparents/readable-j2wasm.js/multipleabstractparents/MultipleAbstractParents.java:69:4
     (call $$assert__boolean__void@javaemul.internal.Asserts (call $m_equals__java_lang_Object__boolean@java.lang.String (ref.as_non_null (block (result (ref null $java.lang.String))
-     (local.set $$qualifier_2 (call $$create__@multipleabstractparents.MultipleAbstractParents.StringList ))
+     (local.set $$qualifier_2 (ref.cast (ref null $java.lang.Object) (call $$create__@multipleabstractparents.MultipleAbstractParents.StringList )))
      (call_ref $function.m_getFoo__java_lang_String__java_lang_String (ref.as_non_null (local.get $$qualifier_2))(ref.null $java.lang.String)(struct.get $multipleabstractparents.MultipleAbstractParents.IStringList.vtable $m_getFoo__java_lang_String__java_lang_String (ref.cast (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable) (call $get.itable.$multipleabstractparents.MultipleAbstractParents.IStringList (local.get $$qualifier_2)))))
     ))(call $$getString_|AbstractColl...|__java_lang_String_<once>_@multipleabstractparents.MultipleAbstractParents.$StringLiterals )))
    )

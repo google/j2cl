@@ -2227,7 +2227,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:134:4
   (local.set $list (call $$create__@java.util.ArrayList ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:135:4
-  (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $list))))))
+  (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $list)))))))
  )
 )
 (elem declare func $m_testJsFunctionErasureCasts__void@jsfunction.Main)
@@ -2704,9 +2704,9 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:361:4
   (local.set $parameterizedTIntegerJsBiFunction (ref.cast (ref null $jsfunction.Main.TIntegerJsBiFunction) (local.get $o)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:363:4
-  (local.set $anotherRawJsBiFunction (local.get $o))
+  (local.set $anotherRawJsBiFunction (ref.cast (ref null $java.lang.Object) (local.get $o)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:364:4
-  (local.set $anotherParameterizedJsBiFunction (local.get $o))
+  (local.set $anotherParameterizedJsBiFunction (ref.cast (ref null $java.lang.Object) (local.get $o)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:366:4
   (local.set $doubleDoubleJsBiFunction (ref.cast (ref null $jsfunction.Main.DoubleDoubleJsBiFunction) (local.get $o)))
  )
@@ -3060,7 +3060,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.Implementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:253:6
-  (return (ref.null $java.lang.Object))
+  (return (ref.cast (ref null $java.lang.Object) (ref.null $java.lang.Object)))
  )
 )
 (elem declare func $m_anApi__jsfunction_Main_ParametricJsFunction@jsfunction.Main.Implementor)
@@ -3865,7 +3865,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.ParamtericImplementation) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:260:6
-  (local.set $o (local.get $t))
+  (local.set $o (ref.cast (ref null $java.lang.Object) (local.get $t)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.ParamtericImplementation)
@@ -4233,7 +4233,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:388:29
-  (call $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation)
@@ -7234,7 +7234,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
-  (return (call_ref $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $arg2))(struct.get $jsfunction.Main.$LambdaImplementor$7.vtable $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.get_desc $jsfunction.Main.$LambdaImplementor$7(local.get $this)))))
+  (return (call_ref $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0))(local.get $arg1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $arg2))(struct.get $jsfunction.Main.$LambdaImplementor$7.vtable $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.get_desc $jsfunction.Main.$LambdaImplementor$7(local.get $this)))))
  )
 )
 (elem declare func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$7)

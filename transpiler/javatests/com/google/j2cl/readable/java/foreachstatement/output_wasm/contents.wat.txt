@@ -323,7 +323,7 @@
        (local.set $e (ref.cast (ref null $java.lang.Exception) (local.get $__$exc)))
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:63:6
        (local.set $$iterator (block (result (ref null $java.lang.Object))
-        (local.set $$qualifier (local.get $e))
+        (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $e)))
         (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
        ))
        (block $LOOP.BREAK
@@ -348,7 +348,7 @@
          (local.set $e_1 (ref.cast (ref null $java.lang.Exception) (local.get $__$exc)))
          ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:66:6
          (local.set $$iterator_1 (block (result (ref null $java.lang.Object))
-          (local.set $$qualifier_1 (local.get $e_1))
+          (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Object) (local.get $e_1)))
           (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_1)))))
          ))
          (block $LOOP_1.BREAK
@@ -394,7 +394,7 @@
        (local.set $e_2 (ref.cast (ref null $java.lang.Exception) (local.get $__$exc_1)))
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:72:6
        (local.set $$iterator_2 (block (result (ref null $java.lang.Object))
-        (local.set $$qualifier_2 (local.get $e_2))
+        (local.set $$qualifier_2 (ref.cast (ref null $java.lang.Object) (local.get $e_2)))
         (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_2)))))
        ))
        (block $LOOP_2.BREAK
@@ -448,7 +448,7 @@
   (local.set $iterable (ref.null $java.lang.Object))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:87:4
   (local.set $$iterator (block (result (ref null $java.lang.Object))
-   (local.set $$qualifier (local.get $iterable))
+   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $iterable)))
    (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier)))))
   ))
   (block $LOOP.BREAK
@@ -483,7 +483,7 @@
   (local.set $integerIterable (ref.null $java.lang.Object))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:94:4
   (local.set $$iterator_2 (block (result (ref null $java.lang.Object))
-   (local.set $$qualifier_1 (local.get $integerIterable))
+   (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Object) (local.get $integerIterable)))
    (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_1)))))
   ))
   (block $LOOP_2.BREAK
@@ -500,7 +500,7 @@
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/foreachstatement/readable-j2wasm.js/foreachstatement/ForEachStatement.java:97:4
   (local.set $$iterator_3 (block (result (ref null $java.lang.Object))
-   (local.set $$qualifier_2 (local.get $integerIterable))
+   (local.set $$qualifier_2 (ref.cast (ref null $java.lang.Object) (local.get $integerIterable)))
    (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (ref $java.lang.Iterable.vtable) (call $get.itable.$java.lang.Iterable (local.get $$qualifier_2)))))
   ))
   (block $LOOP_3.BREAK
