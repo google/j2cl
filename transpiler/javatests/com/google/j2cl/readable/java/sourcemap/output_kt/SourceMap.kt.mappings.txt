@@ -216,6 +216,7 @@
    }
   }] "sourcemap.SourceMap.testLocalClass"
 [Local] => [Local]
+[Local] => [constructor]
 [member1] => [member1]
 [a] => [a] "a"
 [return member2(a) * 2 + new Inner().member3(a);] => [return this.member2(a) * 2 + Inner().member3(a)] "sourcemap.SourceMap$1Local.member1"
@@ -223,6 +224,7 @@
 [b] => [b] "b"
 [return b + outer;] => [return b + outer] "sourcemap.SourceMap$1Local.member2"
 [Inner] => [Inner]
+[Inner] => [constructor]
 [member3] => [member3]
 [c] => [c] "c"
 [return c + 1;] => [return c + 1] "sourcemap.SourceMap$1Local$Inner.member3"
@@ -252,6 +254,7 @@
 [testLocalClass] => [testLocalClass]
 [class LocalClass {}] => [open class LocalClass internal constructor()] "sourcemap.SourceMap.testLocalClass"
 [LocalClass] => [LocalClass]
+[LocalClass] => [constructor]
 [new LocalClass();] => [LocalClass()] "sourcemap.SourceMap.testLocalClass"
 [testSwitchExpression] => [testSwitchExpression]
 [int v = 1;] => [val v: Int = 1] "sourcemap.SourceMap.testSwitchExpression"
@@ -279,6 +282,23 @@
 [o] => [return@Function o] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
 [testTypeLiteral] => [testTypeLiteral]
 [return String.class;] => [return String::class.javaObjectType] "sourcemap.SourceMap.testTypeLiteral"
+[SourceMap] => [companion object {
+  @JvmField
+  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
+
+  init {
+   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+  }
+
+  @JvmField
+  internal var initializedStaticField_pp_sourcemap: String? = "Hello"
+
+  init {
+   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
+    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   }
+  }
+ }]
 [uninitializedStaticField] => [@JvmField
   internal var uninitializedStaticField_pp_sourcemap: Double = 0.0]
 [uninitializedStaticField] => [uninitializedStaticField_pp_sourcemap]

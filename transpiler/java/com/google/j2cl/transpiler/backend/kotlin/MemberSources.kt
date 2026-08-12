@@ -104,12 +104,13 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
 
   private fun source(companionObject: CompanionObject): Source =
     newLineSeparated(
-      spaceSeparated(
-        COMPANION_KEYWORD,
-        OBJECT_KEYWORD,
-        block(emptyLineSeparated(companionObject.members.map { source(it) })),
+        spaceSeparated(
+          COMPANION_KEYWORD,
+          OBJECT_KEYWORD,
+          block(emptyLineSeparated(companionObject.members.map { source(it) })),
+        )
       )
-    )
+      .withMapping(enclosingType.sourcePosition)
 
   internal fun memberSource(member: JavaMember): Source =
     when (member) {
@@ -374,10 +375,11 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
   /** Returns source with `val companion: Type.Companion`. */
   internal fun companionSupplierInterfaceMethodSource(type: Type): Source =
     spaceSeparated(
-      VAL_KEYWORD,
-      colonSeparated(
-        source("companion"),
-        dotSeparated(nameSources.qualifiedNameSource(type.typeDescriptor), source("Companion")),
-      ),
-    )
+        VAL_KEYWORD,
+        colonSeparated(
+          source("companion"),
+          dotSeparated(nameSources.qualifiedNameSource(type.typeDescriptor), source("Companion")),
+        ),
+      )
+      .withMapping(type.sourcePosition)
 }

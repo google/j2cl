@@ -1,4 +1,11 @@
 [MyCollection] => [MyCollection]
+[MyCollection] => [companion object {
+  @JvmStatic
+  fun <T_1> empty(): MyCollection<T_1>? {
+   throw UnsupportedOperationException()
+  }
+ }]
 [empty] => [empty]
 [throw new UnsupportedOperationException();] => [throw UnsupportedOperationException()] "sourcemap.MyCollection.empty"
 [MyCollection] => [MyCollectionCompanionSupplier]
+[MyCollection] => [val companion: MyCollection.Companion]
