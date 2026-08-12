@@ -199,3 +199,16 @@ class PackagePrivateBridge<V, W> internal constructor(): PackagePrivateBridgeSup
   this.m(arg0, arg1, arg2, arg3)
  }
 }
+
+fun interface ParameterizedInterface<T> {
+ fun get(consumer: Consumer<in T>?): String?
+}
+
+abstract class GenericBase<T1, T2> internal constructor(): ParameterizedInterface<T1> {
+ open fun get(consumer: T2): String? {
+  return "GenericBase get T2"
+ }
+}
+
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+open class AligningSubclass<T> internal constructor(): GenericBase<T, Consumer<in T>?>(), ParameterizedInterface<T>

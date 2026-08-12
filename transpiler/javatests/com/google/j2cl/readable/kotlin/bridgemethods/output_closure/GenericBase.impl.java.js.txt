@@ -1,0 +1,48 @@
+goog.module('bridgemethods.GenericBase$impl');
+
+const ParameterizedInterface = goog.require('bridgemethods.ParameterizedInterface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('bridgemethods.Consumer$impl');
+
+/**
+ * @abstract
+ * @template T1, T2
+ * @implements {ParameterizedInterface<T1>}
+ */
+class GenericBase extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__bridgemethods_GenericBase__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {string} */
+ m_get__java_lang_Object__java_lang_String(/** T2 */ consumer) {
+  return 'GenericBase get T2';
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericBase.$clinit = () =>{};
+  GenericBase.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericBase;
+ }
+ /** @abstract @override @nodts @suppress{visibility} @return {string} */
+ m_get__bridgemethods_Consumer__java_lang_String(/** Consumer<?> */ arg0) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParameterizedInterface.$markImplementor(GenericBase);
+$Util.$setClassMetadata(GenericBase, 'bridgemethods.GenericBase');
+
+exports = GenericBase;
+
+//# sourceMappingURL=GenericBase.js.map

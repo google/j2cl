@@ -52,7 +52,6 @@ fun main(vararg unused: String) {
 
   // Hand rolled.
   TestCaseHand1.test()
-  TestCaseHand2.test()
 
   // Minimal versions of existing tests.
   BridgeJsMethodMain.test()

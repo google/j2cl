@@ -33,6 +33,10 @@
  (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
  ))
 )
+(type $bridgemethods.ParameterizedInterface.vtable (sub (struct
+ (field $m_get__bridgemethods_Consumer__java_lang_String (ref $function.m_get__bridgemethods_Consumer__java_lang_String))
+ ))
+)
 (type $bridgemethods.TestCase10036.BI3.vtable (sub (struct
  (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
  ))
@@ -237,6 +241,21 @@
  (field $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods (ref $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods))
  ))
 )
+(type $bridgemethods.GenericBase (sub $java.lang.Object (struct
+ (field $vtable (ref $bridgemethods.GenericBase.vtable))
+ (field $itable (ref $bridgemethods.GenericBase.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $bridgemethods.GenericBase.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__bridgemethods_Consumer__java_lang_String (ref $function.m_get__bridgemethods_Consumer__java_lang_String))
+ (field $m_get__java_lang_Object__java_lang_String (ref $function.m_get__java_lang_Object__java_lang_String))
+ ))
+)
 (type $bridgemethods.SomeOtherFooInterface.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $bridgemethods.SomeOtherFooInterface.$LambdaAdaptor.vtable))
  (field $itable (ref $bridgemethods.SomeOtherFooInterface.$LambdaAdaptor.itable))
@@ -333,6 +352,20 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ ))
+)
+(type $bridgemethods.ParameterizedInterface.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $bridgemethods.ParameterizedInterface.$LambdaAdaptor.vtable))
+ (field $itable (ref $bridgemethods.ParameterizedInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $bridgemethods.ParameterizedInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__bridgemethods_Consumer__java_lang_String (ref $function.m_get__bridgemethods_Consumer__java_lang_String))
  ))
 )
 (type $bridgemethods.TestCase10036.BI1.vtable (sub $bridgemethods.TestCase10036.BI3.vtable (struct
@@ -630,6 +663,22 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods (ref $function.m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods))
+ ))
+)
+(type $bridgemethods.AligningSubclass (sub $bridgemethods.GenericBase (struct
+ (field $vtable (ref $bridgemethods.AligningSubclass.vtable))
+ (field $itable (ref $bridgemethods.AligningSubclass.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $bridgemethods.AligningSubclass.vtable (sub $bridgemethods.GenericBase.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__bridgemethods_Consumer__java_lang_String (ref $function.m_get__bridgemethods_Consumer__java_lang_String))
+ (field $m_get__java_lang_Object__java_lang_String (ref $function.m_get__java_lang_Object__java_lang_String))
+ (field $m_test__void (ref $function.m_test__void))
  ))
 )
 (type $bridgemethods.TestCase10036.BI1.$LambdaAdaptor (sub $java.lang.Object (struct

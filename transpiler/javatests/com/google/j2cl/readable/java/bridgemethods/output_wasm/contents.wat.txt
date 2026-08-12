@@ -203,6 +203,24 @@
 (global $$class@bridgemethods.PackagePrivateBridge (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@bridgemethods.ParameterizedInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.ParameterizedInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@bridgemethods.GenericBase (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.GenericBase (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@bridgemethods.AligningSubclass (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.AligningSubclass (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@bridgemethods.SomeOtherFooInterface.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
@@ -255,6 +273,12 @@
  (i32.const 0)
 )
 (global $$class@bridgemethods.InterfaceOverridingDefaultMethod.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@bridgemethods.ParameterizedInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@bridgemethods.ParameterizedInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@bridgemethods.TestCase10036.BI3 (mut i32)
@@ -661,6 +685,22 @@
   (ref.func $m_m__bridgemethods_PackagePrivateBridgeSuper__java_lang_Object__java_lang_Object__java_lang_Object__void_$pp_bridgemethods@bridgemethods.PackagePrivateBridge)
  )
 )
+(global $bridgemethods.AligningSubclass.vtable (ref $bridgemethods.AligningSubclass.vtable)
+ (struct.new $bridgemethods.AligningSubclass.vtable
+  (ref.func $$getClassImpl__java_lang_Class@bridgemethods.AligningSubclass)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__bridgemethods_Consumer__java_lang_String@bridgemethods.AligningSubclass)
+  (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.GenericBase)
+  (ref.func $m_test__void@bridgemethods.AligningSubclass)
+ )
+)
+(global $bridgemethods.ParameterizedInterface.vtable@$bridgemethods.AligningSubclass (ref $bridgemethods.ParameterizedInterface.vtable)
+ (struct.new $bridgemethods.ParameterizedInterface.vtable
+  (ref.func $m_get__bridgemethods_Consumer__java_lang_String@bridgemethods.AligningSubclass)
+ )
+)
 (global $bridgemethods.TestCase102.C.vtable (ref $bridgemethods.TestCase102.C.vtable)
  (struct.new $bridgemethods.TestCase102.C.vtable
   (ref.func $$getClassImpl__java_lang_Class@bridgemethods.TestCase102.C)
@@ -1039,6 +1079,36 @@
   )
   (global.set $$class@bridgemethods.InterfaceWithDefaultMethod (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.InterfaceWithDefaultMethod.$StringLiterals )))
   (return (global.get $$class@bridgemethods.InterfaceWithDefaultMethod))
+ )
+)
+
+;;; void ParameterizedInterface.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.ParameterizedInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+  (if (global.get $$class-initialized@bridgemethods.ParameterizedInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+  (global.set $$class-initialized@bridgemethods.ParameterizedInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> ParameterizedInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.ParameterizedInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.ParameterizedInterface)))
+   (then
+    (return (global.get $$class@bridgemethods.ParameterizedInterface))
+   )
+  )
+  (global.set $$class@bridgemethods.ParameterizedInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.ParameterizedInterface.$StringLiterals )))
+  (return (global.get $$class@bridgemethods.ParameterizedInterface))
  )
 )
 
@@ -2337,6 +2407,77 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridgeSuper)
 
+;;; void GenericBase.$ctor()
+(func $$ctor__void_$p_bridgemethods_GenericBase@bridgemethods.GenericBase
+ (param $this (ref null $bridgemethods.GenericBase))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String GenericBase.get(T2 consumer)
+(func $m_get__java_lang_Object__java_lang_String@bridgemethods.GenericBase
+ (type $function.m_get__java_lang_Object__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $consumer (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:226:16
+ (local $this (ref null $bridgemethods.GenericBase))
+ (local.set $this (ref.cast (ref $bridgemethods.GenericBase) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:227:4
+  (return (call $$getString_|GenericBase_...|__java_lang_String_<once>_@bridgemethods.GenericBase.$StringLiterals ))
+ )
+)
+(elem declare func $m_get__java_lang_Object__java_lang_String@bridgemethods.GenericBase)
+
+;;; void GenericBase.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.GenericBase
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+  (if (global.get $$class-initialized@bridgemethods.GenericBase)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+  (global.set $$class-initialized@bridgemethods.GenericBase (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:225:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> GenericBase.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.GenericBase
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.GenericBase)))
+   (then
+    (return (global.get $$class@bridgemethods.GenericBase))
+   )
+  )
+  (global.set $$class@bridgemethods.GenericBase (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.GenericBase.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@bridgemethods.GenericBase))
+ )
+)
+
+;;; Class<?> GenericBase.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@bridgemethods.GenericBase
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.GenericBase))
+ (local.set $this (ref.cast (ref $bridgemethods.GenericBase) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.GenericBase ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@bridgemethods.GenericBase)
+
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_bridgemethods_SomeOtherFooInterface_$LambdaAdaptor@bridgemethods.SomeOtherFooInterface.$LambdaAdaptor
  (param $this (ref null $bridgemethods.SomeOtherFooInterface.$LambdaAdaptor))
@@ -2721,6 +2862,61 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgemethods.SpecializingReturnInterface.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_bridgemethods_ParameterizedInterface_$LambdaAdaptor@bridgemethods.ParameterizedInterface.$LambdaAdaptor
+ (param $this (ref null $bridgemethods.ParameterizedInterface.$LambdaAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.ParameterizedInterface.$LambdaAdaptor
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+  (if (global.get $$class-initialized@bridgemethods.ParameterizedInterface.$LambdaAdaptor)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+  (global.set $$class-initialized@bridgemethods.ParameterizedInterface.$LambdaAdaptor (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:221:10
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.ParameterizedInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.ParameterizedInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@bridgemethods.ParameterizedInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@bridgemethods.ParameterizedInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.ParameterizedInterface.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@bridgemethods.ParameterizedInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@bridgemethods.ParameterizedInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.ParameterizedInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $bridgemethods.ParameterizedInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.ParameterizedInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@bridgemethods.ParameterizedInterface.$LambdaAdaptor)
 
 ;;; void BI1.$clinit()
 (func $$clinit__void_<once>_@bridgemethods.TestCase10036.BI1
@@ -4462,6 +4658,121 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@bridgemethods.PackagePrivateBridge)
+
+;;; AligningSubclass<T> AligningSubclass.$create()
+(func $$create__@bridgemethods.AligningSubclass
+ (result (ref null $bridgemethods.AligningSubclass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (call $$clinit__void_<once>_@bridgemethods.AligningSubclass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (return (call $$create_$private__@bridgemethods.AligningSubclass ))
+ )
+)
+
+;;; AligningSubclass<T> AligningSubclass.$create_$private()
+(func $$create_$private__@bridgemethods.AligningSubclass
+ (result (ref null $bridgemethods.AligningSubclass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+ (local $$instance (ref null $bridgemethods.AligningSubclass))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (local.set $$instance (struct.new $bridgemethods.AligningSubclass (global.get $bridgemethods.AligningSubclass.vtable) (global.get $bridgemethods.AligningSubclass.itable) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (call $$ctor__void_$p_bridgemethods_AligningSubclass@bridgemethods.AligningSubclass (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AligningSubclass.$ctor()
+(func $$ctor__void_$p_bridgemethods_AligningSubclass@bridgemethods.AligningSubclass
+ (param $this (ref null $bridgemethods.AligningSubclass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (call $$ctor__void_$p_bridgemethods_GenericBase@bridgemethods.GenericBase (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AligningSubclass.test()
+(func $m_test__void@bridgemethods.AligningSubclass
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:235:14
+ (local $c (ref null $bridgemethods.AligningSubclass))
+ (local $this (ref null $bridgemethods.AligningSubclass))
+ (local.set $this (ref.cast (ref $bridgemethods.AligningSubclass) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:236:4
+  (local.set $c (call $$create_$private__@bridgemethods.AligningSubclass ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:238:4
+  (drop (call_ref $function.m_get__java_lang_Object__java_lang_String (ref.as_non_null (local.get $c))(ref.cast (ref null $java.lang.String) (ref.null $java.lang.Object))(struct.get $bridgemethods.AligningSubclass.vtable $m_get__java_lang_Object__java_lang_String (struct.get $bridgemethods.AligningSubclass $vtable(local.get $c)))))
+ )
+)
+(elem declare func $m_test__void@bridgemethods.AligningSubclass)
+
+;;; String AligningSubclass.get(Consumer<?> arg0)
+(func $m_get__bridgemethods_Consumer__java_lang_String@bridgemethods.AligningSubclass
+ (type $function.m_get__bridgemethods_Consumer__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $bridgemethods.Consumer))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+ (local $this (ref null $bridgemethods.AligningSubclass))
+ (local.set $this (ref.cast (ref $bridgemethods.AligningSubclass) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (return (call $m_get__java_lang_Object__java_lang_String@bridgemethods.GenericBase (ref.as_non_null (local.get $this))(local.get $arg0)))
+ )
+)
+(elem declare func $m_get__bridgemethods_Consumer__java_lang_String@bridgemethods.AligningSubclass)
+
+;;; void AligningSubclass.$clinit()
+(func $$clinit__void_<once>_@bridgemethods.AligningSubclass
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (if (global.get $$class-initialized@bridgemethods.AligningSubclass)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (global.set $$class-initialized@bridgemethods.AligningSubclass (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/bridgemethods/readable-j2wasm.js/bridgemethods/BridgeMethod.java:231:6
+  (call $$clinit__void_<once>_@bridgemethods.GenericBase )
+ )
+)
+
+;;; Class<T> AligningSubclass.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.AligningSubclass
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@bridgemethods.AligningSubclass)))
+   (then
+    (return (global.get $$class@bridgemethods.AligningSubclass))
+   )
+  )
+  (global.set $$class@bridgemethods.AligningSubclass (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|bridgemethod...|__java_lang_String_<once>_@bridgemethods.AligningSubclass.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.GenericBase )))
+  (return (global.get $$class@bridgemethods.AligningSubclass))
+ )
+)
+
+;;; Class<?> AligningSubclass.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@bridgemethods.AligningSubclass
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.AligningSubclass))
+ (local.set $this (ref.cast (ref $bridgemethods.AligningSubclass) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@bridgemethods.AligningSubclass ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@bridgemethods.AligningSubclass)
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_bridgemethods_TestCase10036_BI1_$LambdaAdaptor@bridgemethods.TestCase10036.BI1.$LambdaAdaptor

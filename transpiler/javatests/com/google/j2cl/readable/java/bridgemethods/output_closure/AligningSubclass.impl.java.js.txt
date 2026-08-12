@@ -1,0 +1,59 @@
+goog.module('bridgemethods.AligningSubclass$impl');
+
+const GenericBase = goog.require('bridgemethods.GenericBase$impl');
+const ParameterizedInterface = goog.require('bridgemethods.ParameterizedInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('bridgemethods.Consumer$impl');
+
+/**
+ * @template T
+ * @extends {GenericBase<T, Consumer<?>>}
+ * @implements {ParameterizedInterface<T>}
+ */
+class AligningSubclass extends GenericBase {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!AligningSubclass<T>} */
+ static $create__() {
+  AligningSubclass.$clinit();
+  let $instance = new AligningSubclass();
+  $instance.$ctor__bridgemethods_AligningSubclass__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_AligningSubclass__void() {
+  this.$ctor__bridgemethods_GenericBase__void();
+ }
+ /** @nodts */
+ m_test__void() {
+  let /** AligningSubclass */ c = /**@type {!AligningSubclass}*/ (AligningSubclass.$create__());
+  c.m_get__java_lang_Object__java_lang_String(/**@type {?string}*/ (null));
+ }
+ //Specialized bridge method.
+ /** @override @nodts @return {?string} */
+ m_get__bridgemethods_Consumer__java_lang_String(/** Consumer<?> */ arg0) {
+  return super.m_get__java_lang_Object__java_lang_String(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  AligningSubclass.$clinit = () =>{};
+  AligningSubclass.$loadModules();
+  GenericBase.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AligningSubclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParameterizedInterface.$markImplementor(AligningSubclass);
+$Util.$setClassMetadata(AligningSubclass, 'bridgemethods.AligningSubclass');
+
+exports = AligningSubclass;
+
+//# sourceMappingURL=AligningSubclass.js.map

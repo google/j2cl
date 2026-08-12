@@ -1,0 +1,36 @@
+goog.module('bridgemethods.ParameterizedInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('bridgemethods.Consumer$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class ParameterizedInterface {
+ /** @abstract @nodts @return {string} */
+ m_get__bridgemethods_Consumer__java_lang_String(/** Consumer<?> */ consumer) {}
+ /** @nodts */
+ static $clinit() {
+  ParameterizedInterface.$clinit = () =>{};
+  ParameterizedInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_ParameterizedInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_ParameterizedInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ParameterizedInterface.$markImplementor(/**@type {Function}*/ (ParameterizedInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ParameterizedInterface), 'bridgemethods.ParameterizedInterface');
+
+exports = ParameterizedInterface;
+
+//# sourceMappingURL=ParameterizedInterface.js.map

@@ -201,3 +201,15 @@ internal abstract class DoesNotInheritDefaultMethod1 :
 
 internal abstract class DoesNotInheritDefaultMethod2 :
   InterfaceOverridingDefaultMethod, InterfaceWithDefaultMethod
+
+internal interface ParameterizedInterface<T> {
+  fun get(consumer: Consumer<in T>?): String
+}
+
+internal abstract class GenericBase<T1, T2> : ParameterizedInterface<T1> {
+  open fun get(consumer: T2): String {
+    return "GenericBase get T2"
+  }
+}
+
+internal class AligningSubclass<T> : GenericBase<T, Consumer<in T>?>(), ParameterizedInterface<T> {}

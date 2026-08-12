@@ -217,3 +217,24 @@ final class PackagePrivateBridge<V, W> extends PackagePrivateBridgeSuper<V, W> {
   @Override
   public <S extends V, R extends PackagePrivateBridgeSuper<S, R>> void m(R r, S s, V v, W w) {}
 }
+
+interface ParameterizedInterface<T> {
+  String get(Consumer<? super T> consumer);
+}
+
+abstract class GenericBase<T1, T2> implements ParameterizedInterface<T1> {
+  public String get(T2 consumer) {
+    return "GenericBase get T2";
+  }
+}
+
+class AligningSubclass<T> extends GenericBase<T, Consumer<? super T>>
+    implements ParameterizedInterface<T> {
+  @J2ktIncompatible
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public void test() {
+    AligningSubclass c = new AligningSubclass();
+    // TODO(b/280942747): With raw types it is possible to trigger type errors in JSC.
+    c.get((String) null);
+  }
+}

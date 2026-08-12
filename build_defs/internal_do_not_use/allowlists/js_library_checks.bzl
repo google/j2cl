@@ -9,9 +9,6 @@ OFF = allowlists.of_packages([
     "//samples/react/java/com/google/j2cl/samples/react/state",
     # TODO(b/275736677): toString method patched by ValueType is not recognized by JSC.
     "//transpiler/javatests/com/google/j2cl/autovalue",
-    # TODO(b/280942747): With raw types it is possible to trigger type errors in jscompiler; these
-    # tests expose these problems.
-    "//transpiler/javatests/com/google/j2cl/integration/java/morebridgemethods",
     # TODO(b/277822633): Remove after IObject as parameter is correctly mapped.
     "@jsinterop_generator//javatests/jsinterop/generator/externs/iobjectiarraylike",
     # We don't want to block the readable tests from running even if they have errors.
