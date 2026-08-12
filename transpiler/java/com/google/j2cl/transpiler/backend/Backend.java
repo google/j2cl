@@ -551,6 +551,7 @@ public enum Backend {
           ImplementClassMetadataViaGetters::new,
           InsertCastOnArrayAccess::new,
           () -> new ImplementAssertStatements(/* useWasmDebugFlag= */ true),
+          ImplementJsFunctionInvocationsViaFunctionPointerCall::new,
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
@@ -567,7 +568,6 @@ public enum Backend {
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,
           ImplementFinallyViaControlFlow::new,
-          ImplementJsFunctionInvocationsViaFunctionPointerCall::new,
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,

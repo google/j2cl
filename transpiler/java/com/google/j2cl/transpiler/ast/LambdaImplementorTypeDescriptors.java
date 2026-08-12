@@ -154,6 +154,11 @@ public final class LambdaImplementorTypeDescriptors {
             .filter(DeclaredTypeDescriptor::isFunctionalInterface)
             .findFirst()
             .get();
+
+    if (functionalInterface.isJsFunctionInterface()) {
+      return TypeDescriptors.get().javaemulInternalJsFunctionAdaptor;
+    }
+
     return LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
         functionalInterface);
   }
