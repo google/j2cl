@@ -20,7 +20,7 @@ import java.nio.file.Path;
 /** Profiler facade for the Bazel actions. */
 public interface Profiler {
 
-  static Profiler create(Path workdir, Path profileOutput) {
+  static Profiler create(Path profileOutput) {
     if (profileOutput == null) {
       return new Profiler() {
         @Override
@@ -29,8 +29,7 @@ public interface Profiler {
     }
     try {
       Class<?> clazz = Class.forName("com.google.j2cl.common.bazel.profiler.ProfilerImpl");
-      return (Profiler)
-          clazz.getDeclaredConstructor(Path.class).newInstance(workdir.resolve(profileOutput));
+      return (Profiler) clazz.getDeclaredConstructor(Path.class).newInstance(profileOutput);
     } catch (ReflectiveOperationException e) {
       throw new LinkageError("Failed to start profiler", e);
     }

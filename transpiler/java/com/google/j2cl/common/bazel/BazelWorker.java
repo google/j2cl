@@ -68,7 +68,7 @@ public abstract class BazelWorker {
       return problems.reportAndGetExitCode(pw);
     }
 
-    var profiler = Profiler.create(workdir, profileOutput);
+    var profiler = Profiler.create(profileOutput);
     try {
       run();
     } catch (RuntimeException | Error e) {
