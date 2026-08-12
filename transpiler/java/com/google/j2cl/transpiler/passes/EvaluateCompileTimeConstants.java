@@ -16,9 +16,11 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.SwitchCase;
@@ -65,7 +67,7 @@ public class EvaluateCompileTimeConstants extends NormalizationPass {
       return true;
     }
 
-    return isJsEnumCustomValue(parent, expression);
+    return isJsEnumCustomValue(parent, expression) || isSystemPropertyName(parent, expression);
   }
 
   private static boolean isJsEnumCustomValue(Object parent, Expression expression) {
@@ -79,5 +81,12 @@ public class EvaluateCompileTimeConstants extends NormalizationPass {
     return enclosingTypeDescriptor.isJsEnum()
         && enclosingTypeDescriptor.getJsEnumInfo().hasCustomValue()
         && newInstance.getArguments().get(0) == expression;
+  }
+
+  private static boolean isSystemPropertyName(Object parent, Expression expression) {
+    // This is the first argument to a System.getProperty call.
+    return (parent instanceof MethodCall methodCall
+        && AstUtils.isSystemGetPropertyCall(methodCall)
+        && methodCall.getArguments().get(0) == expression);
   }
 }

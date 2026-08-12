@@ -34,6 +34,7 @@ class Main extends j_l_Object {
   x = j_l_String.m_equals__java_lang_String__java_lang_Object__boolean($Util.$getDefine('jre.bar', 'bar'), 'bar');
   x = j_l_String.m_equals__java_lang_String__java_lang_Object__boolean($Util.$getDefine('jre.classMetadata', Main.m_mightHaveSideEffects__java_lang_String()), 'SIMPLE');
   x = j_l_String.m_equals__java_lang_String__java_lang_Object__boolean($Util.$getDefine('unset.property', Main.m_mightHaveSideEffects__java_lang_String()), 'foo');
+  x = j_l_String.m_equals__java_lang_String__java_lang_Object__boolean(Main.f_propertyWithConcantName__systemgetproperty_Main_, 'SIMPLE');
  }
  /** @nodts @return {?string} */
  static m_mightHaveSideEffects__java_lang_String() {
@@ -46,6 +47,7 @@ class Main extends j_l_Object {
   j_l_Object.$clinit();
   Main.f_property__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata');
   Main.f_propertyWithDefault__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata', 'default');
+  Main.f_propertyWithConcantName__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata');
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -58,10 +60,18 @@ class Main extends j_l_Object {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }
+/**@const {string} @nodts*/
+Main.f_PACKAGE_NAME__systemgetproperty_Main_ = 'jre';
+/**@const {string} @nodts*/
+Main.f_PROPERTY_NAME__systemgetproperty_Main_ = 'classMetadata';
+/**@const {string} @nodts*/
+Main.f_JRE_CLASS_METADATA__systemgetproperty_Main_ = 'jre.classMetadata';
 /**@type {?string} @nodts*/
 Main.f_property__systemgetproperty_Main_;
 /**@type {?string} @nodts*/
 Main.f_propertyWithDefault__systemgetproperty_Main_;
+/**@type {?string} @nodts*/
+Main.f_propertyWithConcantName__systemgetproperty_Main_;
 $Util.$setClassMetadata(Main, 'systemgetproperty.Main');
 
 exports = Main;

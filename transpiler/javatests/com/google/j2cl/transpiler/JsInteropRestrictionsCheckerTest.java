@@ -30,15 +30,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         import jsinterop.annotations.*;
         @JsType
         class Main {
-          public final static String COMPILE_TIME_CONSTANT ="constant";
           public static void main(){
-            System.getProperty(COMPILE_TIME_CONSTANT);
-          > Error: Method 'String System.getProperty(String)' can only take a string literal as its first parameter
             String s="property";
             System.getProperty(s);
-          > Error: Method 'String System.getProperty(String)' can only take a string literal as its first parameter
-            System.getProperty(COMPILE_TIME_CONSTANT,"default");
-          > Error: Method 'String System.getProperty(String, String)' can only take a string literal as its first parameter
+            > Error: Method 'String System.getProperty(String)' can only take a string literal as its first parameter
           }
         }
         """);
@@ -51,10 +46,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             import jsinterop.annotations.*;
             @JsType
             class Main {
+              public final static String COMPILE_TIME_CONSTANT ="constant";
               public static void main(){
                 System.getProperty("java.runtime.name");
                 System.getProperty("java.runtime.name","default");
+                System.getProperty(COMPILE_TIME_CONSTANT);
                 System.getProperty("pro"+"perty");
+                System.getProperty(COMPILE_TIME_CONSTANT,"default");
               }
             }
             """)

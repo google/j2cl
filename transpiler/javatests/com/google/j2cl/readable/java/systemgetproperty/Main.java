@@ -16,10 +16,16 @@
 package systemgetproperty;
 
 public class Main {
+  private static final String PACKAGE_NAME = "jre";
+  private static final String PROPERTY_NAME = "classMetadata";
+  private static final String JRE_CLASS_METADATA = "jre.classMetadata";
 
   private static final String property = System.getProperty("jre.classMetadata");
   private static final String propertyWithDefault =
-      System.getProperty("jre.classMetadata", "default");
+      System.getProperty(JRE_CLASS_METADATA, "default");
+
+  private static final String propertyWithConcantName =
+      System.getProperty(PACKAGE_NAME + "." + PROPERTY_NAME);
 
   public static void main(String[] args) {
     boolean x;
@@ -32,6 +38,8 @@ public class Main {
     x = System.getProperty("jre.bar", "bar").equals("bar");
     x = System.getProperty("jre.classMetadata", mightHaveSideEffects()).equals("SIMPLE");
     x = System.getProperty("unset.property", mightHaveSideEffects()).equals("foo");
+
+    x = propertyWithConcantName.equals("SIMPLE");
   }
 
   private static String mightHaveSideEffects() {

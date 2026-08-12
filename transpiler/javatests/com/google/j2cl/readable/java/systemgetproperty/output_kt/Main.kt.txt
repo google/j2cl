@@ -28,9 +28,22 @@ import kotlin.jvm.JvmStatic
 
 open class Main {
  companion object {
+  private const val PACKAGE_NAME: String = "jre"
+  
+  private const val PROPERTY_NAME: String = "classMetadata"
+  
+  private const val JRE_CLASS_METADATA: String = "jre.classMetadata"
+  
   private val property: String? = System.getProperty("jre.classMetadata")
   
-  private val propertyWithDefault: String? = System.getProperty("jre.classMetadata", "default")
+  private val propertyWithDefault: String? = System.getProperty(
+   Main.JRE_CLASS_METADATA,
+   "default",
+  )
+  
+  private val propertyWithConcantName: String? = System.getProperty(
+   Main.PACKAGE_NAME + "." + Main.PROPERTY_NAME,
+  )
   
   @JvmStatic
   fun main(args: Array<String?>?) {
@@ -49,6 +62,7 @@ open class Main {
     "unset.property",
     Main.mightHaveSideEffects(),
    )!!.equals("foo")
+   x = Main.propertyWithConcantName!!.equals("SIMPLE")
   }
   
   @JvmStatic

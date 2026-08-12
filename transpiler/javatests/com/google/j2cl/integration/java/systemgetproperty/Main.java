@@ -26,8 +26,15 @@ public class Main {
 
   private static int counter = 0;
 
+  private static final String PROPERTY_PACKAGE = "jre";
+  private static final String CLASS_METADATA_PROPERTY_NAME = "classMetadata";
+  private static final String JRE_CLASS_METADATA_PROPERTY_STRING = "jre.classMetadata";
+
   public static void main(String... args) {
     assertTrue(System.getProperty("jre.classMetadata").equals("SIMPLE"));
+    assertTrue(System.getProperty(JRE_CLASS_METADATA_PROPERTY_STRING).equals("SIMPLE"));
+    assertTrue(
+        System.getProperty(PROPERTY_PACKAGE + "." + CLASS_METADATA_PROPERTY_NAME).equals("SIMPLE"));
     assertTrue(System.getProperty("jre.bar", "bar").equals("bar"));
 
     assertTrue(counter == 0);
