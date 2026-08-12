@@ -21,6 +21,8 @@ import subprocess
 import sys
 import tempfile
 
+import repo_util
+
 
 _out = io.StringIO()
 
@@ -112,6 +114,7 @@ class GenValidationTest(ValidationTest):
 
     _j2("gen java/emptyclass")
     _assert_output("Number of stale readables: 4")
+    _assert_empty(_get_untracked_files(READABLE_DIR))
 
     with open(GOLDEN_CLOSURE, "r") as f:
       _assert_not_in("// STALE COMMENT", f.read())
@@ -200,6 +203,26 @@ class GenValidationTest(ValidationTest):
       _j2_expecting_failure("gen java/emptyclass", env=env)
       _assert_output("Error invoking blaze!")
       _assert_output("Unrecognized option: --invalid_flag_for_testing")
+
+  def test_gen_no_untracked_files(self):
+    if _get_vcs_type() == "jj":
+      return  # jj does not need special handling for untracked files.
+
+    new_java_file = os.path.join(READABLE_DIR, "NewClass.java")
+    with open(new_java_file, "w") as f:
+      f.write("package emptyclass;\npublic class NewClass {}\n")
+
+    try:
+      # Verify that the new file is untracked (ensures get_untracked works)
+      _assert_in("NewClass.java", _get_untracked_files(READABLE_DIR))
+
+      # Verify that all files are tracked after j2 gen.
+      _j2("gen java/emptyclass")
+      _assert_empty(_get_untracked_files(READABLE_DIR))
+    finally:
+      # Clean up
+      os.remove(new_java_file)
+      _j2("gen java/emptyclass")
 
 
 EMPTYCLASS_ES5 = "transpiler/javatests/com/google/j2cl/integration/java/emptyclass:opt.es5"
@@ -360,6 +383,29 @@ def _j2_expecting_failure(args_str, env=None):
     raise AssertionError(f"j2 {args_str} expected to fail but didn't.")
   except SystemExit:
     return
+
+
+def _get_untracked_files(path):
+  vcs_type = _get_vcs_type()
+  if vcs_type == "piper":
+    cmd = ["p4", "nothave", path]
+  elif vcs_type in ("fig", "hg"):
+    cmd = ["hg", "status", "-ud", path]
+  else:
+    raise ValueError(f"Unsupported VCS: {vcs_type}")
+
+  return repo_util.run_cmd(cmd)
+
+
+def _get_vcs_type():
+  return repo_util.run_cmd(
+      ["/google/data/ro/teams/fig/bin/vcstool", "debug-vcs-string"]
+  ).strip()
+
+
+def _assert_empty(haystack, msg=None):
+  if haystack:
+    raise AssertionError(msg or f"Expected empty but got '{haystack}'")
 
 
 def _assert_in(needle, haystack, msg=None):
