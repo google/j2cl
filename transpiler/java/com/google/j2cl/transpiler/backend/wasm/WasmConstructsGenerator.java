@@ -300,15 +300,6 @@ public class WasmConstructsGenerator {
       return;
     }
 
-    boolean isAbstractClassConstructor =
-        methodDescriptor.isConstructor()
-            && methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract();
-    if (isAbstractClassConstructor && methodDescriptor.isNative()) {
-      // Native abstract class constructors should not generate any code as they cannot be called
-      // from Wasm.
-      return;
-    }
-
     boolean isNativeConstructor = methodDescriptor.isConstructor() && methodDescriptor.isNative();
     JsMethodImport jsMethodImport = environment.getJsMethodImport(methodDescriptor);
     builder.newLine();

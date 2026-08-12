@@ -184,6 +184,7 @@ import com.google.j2cl.transpiler.passes.PropagateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullability;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityInOverrides;
 import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
+import com.google.j2cl.transpiler.passes.RemoveAbstractNativeConstructors;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveEmptyFallthroughSwitchCases;
 import com.google.j2cl.transpiler.passes.RemoveNameFromJsEnums;
@@ -489,6 +490,7 @@ public enum Backend {
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
+          RemoveAbstractNativeConstructors::new,
           InsertExplicitSuperCalls::new,
           // Make sure that array literals that might have been inserted by previous passes so that
           // JsEnum varargs literals have the proper array type.
