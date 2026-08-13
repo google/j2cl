@@ -149,6 +149,23 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   List<String> strippedAnnotationNames = new ArrayList<>();
 
   @Option(
+      name = "-klibs",
+      metaVar = "<path>",
+      usage = "Paths to cross-platform libraries in the .klib format.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> dependencyKlibs = new ArrayList<>();
+
+  @Option(
+      name = "-friendKlibs",
+      metaVar = "<path>",
+      usage = "Paths to friend cross-platform libraries in the .klib format.",
+      handler = CommandLineParser.MultiPathOptionHandler.class)
+  List<Path> friendKlibs = new ArrayList<>();
+
+  @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
+  boolean enableKlibs = false;
+
+  @Option(
       name = "-kotlinNativeFrameworkHeaderPath",
       metaVar = "<string>",
       usage = "Specifies the Kotlin/Native framework header to include in J2ObjC compat headers.",
@@ -216,9 +233,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setStrippedAnnotationNames(strippedAnnotationNames)
-        .setDependencyKlibs(ImmutableList.of())
-        .setFriendKlibs(ImmutableList.of())
-        .setEnableKlibs(false)
+        .setDependencyKlibs(this.dependencyKlibs)
+        .setFriendKlibs(this.friendKlibs)
+        .setEnableKlibs(this.enableKlibs)
         .setObjCNamePrefix("J2kt")
         .setKotlinNativeFrameworkHeaderPath(kotlinNativeFrameworkHeaderPath)
         .build(problems);
