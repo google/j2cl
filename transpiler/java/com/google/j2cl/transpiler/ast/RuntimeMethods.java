@@ -235,33 +235,21 @@ public final class RuntimeMethods {
     return MethodCall.builderFrom(stringCreator).setArguments(expression).build();
   }
 
-  public static MethodCall createStringFromJsStringMethodCall(Expression expression) {
-    // Use the imprecise getMethodDescriptorByName to avoid having NativeString as a
-    // known type descriptor.
-    MethodDescriptor stringCreator =
-        TypeDescriptors.get().javaLangString.getMethodDescriptorByName("fromJsString");
-    return MethodCall.builderFrom(stringCreator).setArguments(expression).build();
-  }
-
-  public static MethodCall createJsStringFromStringMethodCall(Expression expression) {
-    return MethodCall.builderFrom(getJsStringFromStringMethod()).setArguments(expression).build();
-  }
-
   static MethodDescriptor getJsStringFromStringMethod() {
     return TypeDescriptors.get()
         .javaLangString
-        .getMethodDescriptor("toJsString", TypeDescriptors.get().javaLangString);
+        .getMethodDescriptor("toJs", TypeDescriptors.get().javaLangString);
   }
 
   public static MethodCall createFromJsMethodCall(
       DeclaredTypeDescriptor typeDescriptor, Expression expression) {
-    MethodDescriptor toJs = typeDescriptor.getMethodDescriptorByName("fromJs");
-    return MethodCall.builderFrom(toJs).setArguments(expression).build();
+    MethodDescriptor fromJs = typeDescriptor.getMethodDescriptorByName("fromJs");
+    return MethodCall.builderFrom(fromJs).setArguments(expression).build();
   }
 
   public static MethodCall createToJsMethodCall(
       DeclaredTypeDescriptor typeDescriptor, Expression expression) {
-    MethodDescriptor toJs = typeDescriptor.getMethodDescriptorByName("toJs");
+    MethodDescriptor toJs = typeDescriptor.getMethodDescriptor("toJs", typeDescriptor);
     return MethodCall.builderFrom(toJs).setArguments(expression).build();
   }
 

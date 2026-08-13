@@ -52,7 +52,7 @@ public class Object {
   static WasmExtern toJs(Object obj) {
     return switch (obj) {
       case null -> null;
-      case String s -> (WasmExtern) String.toJsString(s);
+      case String s -> (WasmExtern) String.toJs(s);
       case Double d -> (WasmExtern) Double.toJs(d);
       case Boolean b -> (WasmExtern) Boolean.toJs(b);
       case Long l -> (WasmExtern) Long.toJs(l);
@@ -68,7 +68,7 @@ public class Object {
     }
     return switch (typeOf(extern)) {
       case 0 -> null;
-      case 1 -> String.fromJs(extern);
+      case 1 -> String.fromJs((String.NativeString) extern);
       case 2 -> Boolean.fromJs((Boolean.NativeBoolean) extern);
       case 3 -> Double.fromJs((Double.NativeNumber) extern);
       case 4 -> Long.fromJs((Long.NativeLong) extern);

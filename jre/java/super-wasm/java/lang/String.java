@@ -36,7 +36,6 @@ import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.StringUtil;
-import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -820,23 +819,19 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return new String(nativeFromCharCodeArray(x, 0, length));
   }
 
-  static String fromJs(WasmExtern extern) {
-    return String.fromJsString((NativeString) extern);
-  }
-
   static String fromSafeJsString(NativeString o) {
     return new String(o);
   }
 
-  static String fromJsString(NativeString o) {
+  static String fromJs(NativeString o) {
     return o == null ? null : new String(o);
   }
 
-  static NativeString toJsString(String string) {
+  static NativeString toJs(String string) {
     return string == null ? null : string.value;
   }
 
-  NativeString toJsString() {
+  NativeString toJs() {
     return this.value;
   }
 

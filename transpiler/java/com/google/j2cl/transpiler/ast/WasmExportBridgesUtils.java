@@ -227,10 +227,8 @@ public class WasmExportBridgesUtils {
   /** Converts the given expression to a JS type which can be passed to JS. */
   public static Expression convertToExternal(
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
-    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return RuntimeMethods.createJsStringFromStringMethodCall(expression);
-    }
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+        || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
@@ -257,10 +255,8 @@ public class WasmExportBridgesUtils {
   /** Converts the given expression that was received from JS to a Wasm Java type. */
   public static Expression convertToInternal(
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
-    if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
-      return RuntimeMethods.createStringFromJsStringMethodCall(expression);
-    }
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+        || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
       return RuntimeMethods.createFromJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);

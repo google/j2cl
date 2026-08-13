@@ -82,7 +82,7 @@ public abstract class Number implements Serializable {
    *     validating the range.
    */
   protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
-    String.NativeString nativeString = s.toJsString();
+    String.NativeString nativeString = s.toJs();
     if (!isValidDouble(nativeString)) {
       throw NumberFormatException.forInputString(s);
     }
