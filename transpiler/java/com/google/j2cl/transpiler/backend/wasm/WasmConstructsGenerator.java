@@ -300,8 +300,39 @@ public class WasmConstructsGenerator {
       return;
     }
 
-    boolean isNativeConstructor = methodDescriptor.isConstructor() && methodDescriptor.isNative();
     JsMethodImport jsMethodImport = environment.getJsMethodImport(methodDescriptor);
+    if (jsMethodImport != null) {
+      renderImportedMethod(method, jsMethodImport);
+    } else {
+      renderMethodDefinition(method);
+    }
+  }
+
+  /**
+   * Renders a method that is imported from JS. Imported methods only declare their signature and
+   * don't define locals nor a body.
+   */
+  private void renderImportedMethod(Method method, JsMethodImport jsMethodImport) {
+    builder.newLine();
+    builder.newLine();
+    builder.append(";;; " + method.getReadableDescription());
+    builder.newLine();
+    builder.append(
+        format(
+            "(func %s (import \"%s\" \"%s\") ",
+            environment.getMethodImplementationName(method.getDescriptor()),
+            JsImportsGenerator.MODULE,
+            jsMethodImport.getImportKey()));
+    renderMethodSignature(method);
+    // Imports don't define locals nor body.
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
+  }
+
+  /** Renders a method that is defined in Wasm, including its locals and body. */
+  private void renderMethodDefinition(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
@@ -311,20 +342,34 @@ public class WasmConstructsGenerator {
     }
     builder.newLine();
     builder.append("(func " + environment.getMethodImplementationName(methodDescriptor));
-
-    // Generate an import if the method is native. We don't use the normal qualified js name,
-    // because it doesn't differentiate between js property getters and setters.
-    if (jsMethodImport != null) {
-      builder.append(
-          format(
-              " (import \"%s\" \"%s\") ",
-              JsImportsGenerator.MODULE, jsMethodImport.getImportKey()));
-    }
-
     if (methodDescriptor.getOrigin().isWasmEntryPoint()) {
       builder.append(" (export \"" + methodDescriptor.getName() + "\")");
     }
+    renderMethodSignature(method);
+    renderMethodBody(method);
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
 
+    // Declare a function that will be target of dynamic dispatch.
+    if (methodDescriptor.isPolymorphic()) {
+      builder.newLine();
+      builder.append(
+          format(
+              "(elem declare func %s)",
+              environment.getMethodImplementationName(method.getDescriptor())));
+    }
+  }
+
+  /**
+   * Renders the parameters and the return type of a method.
+   *
+   * <p>Leaves the builder indented so that the caller can emit the method body (or close the
+   * declaration for imported methods).
+   */
+  private void renderMethodSignature(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    boolean isNativeConstructor = methodDescriptor.isConstructor() && methodDescriptor.isNative();
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     // Emit parameters
@@ -362,14 +407,11 @@ public class WasmConstructsGenerator {
       builder.newLine();
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
     }
+  }
 
-    if (jsMethodImport != null) {
-      // Imports don't define locals nor body.
-      builder.unindent();
-      builder.newLine();
-      builder.append(")");
-      return;
-    }
+  private void renderMethodBody(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     // Emit a source mapping at the entry of a method so that when stepping into a method
     // the debugger shows the right source line.
@@ -402,6 +444,7 @@ public class WasmConstructsGenerator {
 
     StatementTranspiler.render(method.getBody(), builder, environment);
 
+    TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)
         && !endsWithReturnOrThrow(method.getBody())) {
       // A method that returns a value will never flow out of the end and will always have an
@@ -410,19 +453,6 @@ public class WasmConstructsGenerator {
       // the validation of the wasm code.
       builder.newLine();
       builder.append("(unreachable)");
-    }
-
-    builder.unindent();
-    builder.newLine();
-    builder.append(")");
-
-    // Declare a function that will be target of dynamic dispatch.
-    if (methodDescriptor.isPolymorphic()) {
-      builder.newLine();
-      builder.append(
-          format(
-              "(elem declare func %s)",
-              environment.getMethodImplementationName(method.getDescriptor())));
     }
   }
 
