@@ -56,7 +56,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 /** Generates all the syntactic .wat constructs for wasm. */
 public class WasmConstructsGenerator {
@@ -282,30 +281,27 @@ public class WasmConstructsGenerator {
   }
 
   void renderImportedMethods(Type type) {
-    type.getMethods().stream().filter(environment::isJsImport).forEach(this::renderMethod);
+    type.getMethods()
+        .forEach(
+            method -> {
+              var jsMethodImport = environment.getJsMethodImport(method.getDescriptor());
+              if (jsMethodImport == null) {
+                return;
+              }
+              renderImportedMethod(method, jsMethodImport);
+            });
   }
 
-  void renderTypeMethods(Type type) {
+  public void renderImplementedMethods(Type type) {
     type.getMethods().stream()
-        .filter(Predicate.not(environment::isJsImport))
-        .forEach(this::renderMethod);
-  }
-
-  public void renderMethod(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    if ((methodDescriptor.isAbstract() && !methodDescriptor.isNative())
-        || getWasmInfo(methodDescriptor) != null) {
-      // Abstract methods don't generate any code, except if they are native; neither do methods
-      // that have @Wasm annotation.
-      return;
-    }
-
-    JsMethodImport jsMethodImport = environment.getJsMethodImport(methodDescriptor);
-    if (jsMethodImport != null) {
-      renderImportedMethod(method, jsMethodImport);
-    } else {
-      renderMethodDefinition(method);
-    }
+        .filter(
+            method -> {
+              MethodDescriptor methodDescriptor = method.getDescriptor();
+              return !methodDescriptor.isAbstract()
+                  && !methodDescriptor.isNative()
+                  && getWasmInfo(methodDescriptor) == null;
+            })
+        .forEach(this::renderMethodDefinition);
   }
 
   /**

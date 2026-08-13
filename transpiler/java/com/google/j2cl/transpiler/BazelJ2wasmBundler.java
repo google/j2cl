@@ -167,8 +167,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     Stream<String> literalGetterMethods =
         compilationUnit.getTypes().stream()
-            .flatMap(t -> t.getMethods().stream())
-            .map(m -> generatorStage.emitToString(g -> g.renderMethod(m)));
+            .map(t -> generatorStage.emitToString(g -> g.renderImplementedMethods(t)));
 
     String literalGlobals = generatorStage.emitToString(g -> g.emitGlobals(library));
 

@@ -195,7 +195,7 @@ public class WasmGeneratorStage {
           generator.emitDataSegments(library);
           generator.emitGlobals(library);
           generator.emitClassDispatchTables(library);
-          generator.emitForEachType(library, generator::renderTypeMethods);
+          generator.emitForEachType(library, generator::renderImplementedMethods);
         });
 
     emitNameMappingFile(library, output);
@@ -275,7 +275,7 @@ public class WasmGeneratorStage {
     WasmConstructsGenerator generator =
         new WasmConstructsGenerator(environment, builder, sourceMappingPathPrefix);
 
-    methods.forEach(generator::renderMethod);
+    typesByDeclaration.values().forEach(generator::renderImplementedMethods);
     output.write("contents.wat", builder.buildToList());
   }
 
