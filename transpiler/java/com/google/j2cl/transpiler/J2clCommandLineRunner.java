@@ -148,9 +148,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       hidden = true)
   List<String> strippedAnnotationNames = new ArrayList<>();
 
-  @Option(name = "-objCNamePrefix", hidden = true)
-  String objCNamePrefix = "J2kt";
-
   @Option(
       name = "-kotlinNativeFrameworkHeaderPath",
       metaVar = "<string>",
