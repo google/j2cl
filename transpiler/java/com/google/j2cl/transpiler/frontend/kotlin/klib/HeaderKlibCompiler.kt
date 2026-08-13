@@ -34,7 +34,7 @@ import org.kohsuke.args4j.Option
  *
  * This is a simple wrapper around the [K2JKlibCompiler].
  */
-public class HeaderKlibCompiler() {
+class HeaderKlibCompiler {
   @Argument(
     metaVar = "<source files>",
     required = true,
@@ -54,6 +54,12 @@ public class HeaderKlibCompiler() {
     // The bytecode in kotlin-compiler.jar is patched to early exit ConvertToIr.runPlatformCheckers
     // disabling platform checks when this system property is set.
     System.setProperty("com.google.kotlin.headerCompile", "true")
+    // Replaces the create method of DiagnosticComponentsFactory with the strictDeps plugin
+    // strictDepsFactory.createComponent which allows to skip compiler checkers.
+    System.setProperty("com.google.kotlin.avoidCheckers", "true")
+    // Header compilation does not register the StrictDepsPluginRegistrar extension, so allow
+    // StrictDepsComponentsFactory to run without the StrictDeps checker registered.
+    System.setProperty("com.google.kotlin.strictdeps.allowMissingPlugin", "true")
 
     val arguments =
       K2JKlibCompilerArguments().apply {
