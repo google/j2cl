@@ -301,7 +301,7 @@ public class WasmConstructsGenerator {
                   && !methodDescriptor.isNative()
                   && getWasmInfo(methodDescriptor) == null;
             })
-        .forEach(this::renderMethodDefinition);
+        .forEach(this::renderMethod);
   }
 
   /**
@@ -327,7 +327,7 @@ public class WasmConstructsGenerator {
   }
 
   /** Renders a method that is defined in Wasm, including its locals and body. */
-  private void renderMethodDefinition(Method method) {
+  private void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     builder.newLine();
     builder.newLine();
