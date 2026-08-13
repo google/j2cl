@@ -25,6 +25,7 @@ fun main(vararg unused: String) {
   testSimpleBridges()
   testBridgeForwardsToSpecializedMethod()
   testBridgeSpecializesSuperclassMethod()
+  testBridgeSpecializesDefaultMethod()
   testAbstractHidesSuperGenericMethod()
   testBridgesMultipleOverloads()
   testParameterizedMethodBridge()
@@ -121,6 +122,28 @@ interface SupplierString {
   fun get(): String
 
   fun f(s: String?): String?
+}
+
+private fun testBridgeSpecializesDefaultMethod() {
+  class SupplierImpl : DefaultSupplier<String>
+
+  val s = SupplierImpl()
+  assertThrowsClassCastException {
+    if (!isJvm()) {
+      val unused: Any = s.get()
+    } else {
+      // The JVM implements default methods differently and the cast is only performed if
+      // needed for type correctness.
+      val unused: String = s.get()
+    }
+  }
+}
+
+interface DefaultSupplier<T> {
+  fun get(): T {
+    @Suppress("UNCHECKED_CAST")
+    return Any() as T
+  }
 }
 
 private fun testAbstractHidesSuperGenericMethod() {

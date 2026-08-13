@@ -27,6 +27,7 @@ public class Main {
     testSimpleBridges();
     testBridgeForwardsToSpecializedMethod();
     testBridgeSpecializesSuperclassMethod();
+    testBridgeSpecializesDefaultMethod();
     testAbstractHidesSuperGenericMethod();
     testBridgesMultipleOverloads();
     testParameterizedMethodBridge();
@@ -135,6 +136,29 @@ public class Main {
     String get();
 
     String f(String s);
+  }
+
+  private static void testBridgeSpecializesDefaultMethod() {
+    class SupplierImpl implements DefaultSupplier<String> {}
+
+    var sImpl = new SupplierImpl();
+    assertThrowsClassCastException(
+        () -> {
+          if (!isJvm()) {
+            Object unused = sImpl.get();
+          } else {
+            // The JVM implements default methods differently and the cast is only performed if
+            // needed for type correctness.
+            String unused = sImpl.get();
+          }
+        });
+  }
+
+  interface DefaultSupplier<T> {
+    @SuppressWarnings("unchecked")
+    default T get() {
+      return (T) new Object();
+    }
   }
 
   private static void testAbstractHidesSuperGenericMethod() {
