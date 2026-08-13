@@ -258,6 +258,9 @@
 
   [obj lowercase:@""];
   Custom_staticlowercase_(@"");
+
+  [Custom.companion eventApiColorIndexFor:@""];
+  Custom_eventApiColorIndexFor_(@"");
 }
 
 - (void)testEnumNames {

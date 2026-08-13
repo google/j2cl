@@ -120,4 +120,8 @@ public final class CustomNames {
   @ObjectiveCName("staticlowercase:")
   @SwiftName("staticlowercase(_:)")
   public static void staticlowercase(String s) {}
+
+  // Reproduction case for b/516712739
+  @ObjectiveCName("eventApiColorIndexFor:")
+  public static void toEventApiColorIndex(String eventColor) {}
 }

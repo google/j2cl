@@ -150,6 +150,8 @@ final class SwiftInteropTest: XCTestCase {
     CustomSwift.companion.customStaticLongMethod(withLong: 1)
     CustomSwift.companion.customStaticLongStringMethod(withLong: 1, with: "")
     CustomSwift.companion.staticlowercase("")
+
+    CustomSwift.companion.toEventApiColorIndex(eventColor: "")
   }
 
   func testEnumNames() {
