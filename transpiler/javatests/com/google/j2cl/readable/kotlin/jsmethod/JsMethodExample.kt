@@ -16,6 +16,7 @@
 package jsmethod
 
 import javaemul.internal.annotations.Wasm
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 
@@ -108,5 +109,16 @@ class JsMethodExample {
 
   class AbstractTypeImpl internal constructor() : AbstractTypeExposingJsMethod() {
     override fun abstractJsMethod(s: String) {}
+  }
+
+  interface ParameterizedInterface<T> {
+    @JsMethod
+    fun m(): T? {
+      return null
+    }
+  }
+
+  class ParameterizedInterfaceImpl : ParameterizedInterface<String> {
+    @JsConstructor constructor() {}
   }
 }

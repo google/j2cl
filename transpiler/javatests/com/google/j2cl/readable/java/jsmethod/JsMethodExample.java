@@ -17,6 +17,7 @@ package jsmethod;
 
 import java.util.ArrayList;
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -107,5 +108,19 @@ public class JsMethodExample {
   static class AbstractTypeImpl extends AbstractTypeExposingJsMethod {
     @Override
     public void abstractJsMethod(String s) {}
+  }
+
+  // Repro for b/545779164
+  interface ParameterizedInterface<T> {
+    @JsMethod
+    default T m() {
+      return null;
+    }
+  }
+
+  static class ParameterizedInterfaceImpl implements ParameterizedInterface<String> {
+    // TODO(b/545780623): Remove the JsConstructor annotation when bug is fixed.
+    @JsConstructor
+    public ParameterizedInterfaceImpl() {}
   }
 }

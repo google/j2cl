@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
 
 /**
@@ -53,12 +54,12 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                   continue;
                 }
 
-                Method bridge =
+                addBridge(
+                    type,
                     WasmExportBridgesUtils.generateBridge(
                         method.getDescriptor(),
                         method.getSourcePosition(),
-                        getBridgeOrigin(method.getDescriptor()));
-                type.addMember(bridge);
+                        getBridgeOrigin(method.getDescriptor())));
               }
 
               // Generate bridges for accidental overrides of interface js methods.
@@ -68,12 +69,12 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                   continue;
                 }
 
-                Method bridge =
+                addBridge(
+                    type,
                     WasmExportBridgesUtils.generateBridge(
                         accidentalOverride,
                         SourcePosition.NONE,
-                        getBridgeOrigin(accidentalOverride));
-                type.addMember(bridge);
+                        getBridgeOrigin(accidentalOverride)));
               }
 
               for (Field field : type.getFields()) {
@@ -81,19 +82,26 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                   continue;
                 }
 
-                Method getter =
+                addBridge(
+                    type,
                     WasmExportBridgesUtils.generateGetterBridge(
-                        field.getDescriptor(), field.getSourcePosition());
-                type.addMember(getter);
+                        field.getDescriptor(), field.getSourcePosition()));
 
                 if (!field.isCompileTimeConstant()) {
-                  Method setter =
+                  addBridge(
+                      type,
                       WasmExportBridgesUtils.generateSetterBridge(
-                          field.getDescriptor(), field.getSourcePosition());
-                  type.addMember(setter);
+                          field.getDescriptor(), field.getSourcePosition()));
                 }
               }
             });
+  }
+
+  private static void addBridge(Type type, Method bridge) {
+    // TODO(b/545779164): The bridges should be unique and the check should not be needed.
+    if (!type.containsMethod(bridge.getDescriptor().getMangledName())) {
+      type.addMember(bridge);
+    }
   }
 
   private static boolean needsBridge(MemberDescriptor memberDescriptor) {

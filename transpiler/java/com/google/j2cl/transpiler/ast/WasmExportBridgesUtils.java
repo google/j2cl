@@ -231,7 +231,14 @@ public class WasmExportBridgesUtils {
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
-          (DeclaredTypeDescriptor) typeDescriptor, expression);
+          (DeclaredTypeDescriptor) typeDescriptor,
+          // TODO(b/545779164): The cast here shouldn't be needed, but the export bridge creator
+          // might create the export bridge on specializing/default bridge. In any case when
+          // the cast is not really needed it gets optimized away.
+          CastExpression.builder()
+              .setExpression(expression)
+              .setCastTypeDescriptor(typeDescriptor)
+              .build());
     }
     if (typeDescriptor.isJsFunctionInterface()) {
       MethodDescriptor toJsMethodDescriptor =

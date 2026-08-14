@@ -1,0 +1,53 @@
+goog.module('jsmethod.JsMethodExample.ParameterizedInterfaceImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ParameterizedInterface = goog.require('jsmethod.JsMethodExample.ParameterizedInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {ParameterizedInterface<string>}
+ */
+class ParameterizedInterfaceImpl extends j_l_Object {
+ 
+ constructor() {
+  ParameterizedInterfaceImpl.$clinit();
+  super();
+  this.$ctor__jsmethod_JsMethodExample_ParameterizedInterfaceImpl__void();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ParameterizedInterfaceImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {?string} */
+ m() {
+  return /**@type {?string}*/ ($Casts.$to(ParameterizedInterface.m_m__$default__jsmethod_JsMethodExample_ParameterizedInterface__java_lang_Object(this), j_l_String));
+ }
+ /** @nodts */
+ static $clinit() {
+  ParameterizedInterfaceImpl.$clinit = () =>{};
+  ParameterizedInterfaceImpl.$loadModules();
+  j_l_Object.$clinit();
+  ParameterizedInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParameterizedInterfaceImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+ParameterizedInterface.$markImplementor(ParameterizedInterfaceImpl);
+$Util.$setClassMetadata(ParameterizedInterfaceImpl, 'jsmethod.JsMethodExample$ParameterizedInterfaceImpl');
+
+exports = ParameterizedInterfaceImpl;
+
+//# sourceMappingURL=JsMethodExample$ParameterizedInterfaceImpl.js.map

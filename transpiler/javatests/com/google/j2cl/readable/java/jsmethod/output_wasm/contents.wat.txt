@@ -89,6 +89,18 @@
 (global $$class@jsmethod.JsMethodExample.AbstractTypeImpl (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsmethod.JsMethodExample.ParameterizedInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethod.JsMethodExample.ParameterizedInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jsmethod.JsMethodExample.ParameterizedInterfaceImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $jsmethod.JsMethodExample.vtable (ref (exact $jsmethod.JsMethodExample.vtable))
  (struct.new $jsmethod.JsMethodExample.vtable
   (ref.null extern)
@@ -188,49 +200,65 @@
   (ref.func $m_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeImpl)
  )
 )
+(global $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.vtable (ref (exact $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.vtable))
+ (struct.new $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.vtable
+  (global.get $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+  (ref.func $m_m__java_lang_String@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+ )
+)
+(global $jsmethod.JsMethodExample.ParameterizedInterface.vtable@$jsmethod.JsMethodExample.ParameterizedInterfaceImpl (ref $jsmethod.JsMethodExample.ParameterizedInterface.vtable)
+ (struct.new $jsmethod.JsMethodExample.ParameterizedInterface.vtable
+  (ref.func $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+ )
+)
 
 
 ;;; void I.s()
 (func $m_s__void@jsmethod.JsMethodExample.I
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.I )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
   (call $m_s_$private__void@jsmethod.JsMethodExample.I )
  )
 )
 
 ;;; void I.s_$private()
 (func $m_s_$private__void@jsmethod.JsMethodExample.I
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
  (block
  )
 )
 
 ;;; void I.s()
 (func $js_export_s__void@jsmethod.JsMethodExample.I
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.I )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:48:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:49:23
   (call $m_s_$private__void@jsmethod.JsMethodExample.I )
  )
 )
 
 ;;; void I.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.I
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.I)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
   (global.set $$class-initialized@jsmethod.JsMethodExample.I (i32.const 1))
  )
 )
@@ -251,16 +279,16 @@
 
 ;;; void InterfaceWithMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceWithMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:79:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:80:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:79:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:80:12
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.InterfaceWithMethod)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:79:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:80:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:79:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:80:12
   (global.set $$class-initialized@jsmethod.JsMethodExample.InterfaceWithMethod (i32.const 1))
  )
 )
@@ -279,19 +307,61 @@
  )
 )
 
+;;; T ParameterizedInterface.m()
+(func $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:116:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:117:6
+  (return (ref.null $java.lang.Object))
+ )
+)
+(elem declare func $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterface)
+
+;;; void ParameterizedInterface.$clinit()
+(func $$clinit__void_<once>_@jsmethod.JsMethodExample.ParameterizedInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:114:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:114:12
+  (if (global.get $$class-initialized@jsmethod.JsMethodExample.ParameterizedInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:114:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:114:12
+  (global.set $$class-initialized@jsmethod.JsMethodExample.ParameterizedInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> ParameterizedInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.ParameterizedInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethod.JsMethodExample.ParameterizedInterface)))
+   (then
+    (return (global.get $$class@jsmethod.JsMethodExample.ParameterizedInterface))
+   )
+  )
+  (global.set $$class@jsmethod.JsMethodExample.ParameterizedInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsmethod.JsM...|__java_lang_String_<once>_@jsmethod.JsMethodExample.ParameterizedInterface.$StringLiterals )))
+  (return (global.get $$class@jsmethod.JsMethodExample.ParameterizedInterface))
+ )
+)
+
 ;;; JsMethodExample JsMethodExample.$create()
 (func $$create__@jsmethod.JsMethodExample
  (result (ref null $jsmethod.JsMethodExample))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
  (local $$instance (ref null $jsmethod.JsMethodExample))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (call $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (return (local.get $$instance))
  )
 )
@@ -299,27 +369,27 @@
 ;;; void JsMethodExample.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample
  (param $this (ref null $jsmethod.JsMethodExample))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void JsMethodExample.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (if (global.get $$class-initialized@jsmethod.JsMethodExample)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (global.set $$class-initialized@jsmethod.JsMethodExample (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:23:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:24:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -354,27 +424,27 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_I_$LambdaAdaptor@jsmethod.JsMethodExample.I.$LambdaAdaptor
  (param $this (ref null $jsmethod.JsMethodExample.I.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.I.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.I.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
   (global.set $$class-initialized@jsmethod.JsMethodExample.I.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:43:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:44:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -409,9 +479,9 @@
 ;;; void Base.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base
  (param $this (ref null $jsmethod.JsMethodExample.Base))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -421,7 +491,7 @@
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:39:9
  (local $this (ref null $jsmethod.JsMethodExample.Base))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Base) (local.get $this.untyped)))
  (block
@@ -434,7 +504,7 @@
  (type $function.m_o__java_lang_String__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:40:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:41:9
  (local $this (ref null $jsmethod.JsMethodExample.Base))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Base) (local.get $this.untyped)))
  (block
@@ -447,11 +517,11 @@
  (type $function.js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:39:9
  (local $this (ref null $jsmethod.JsMethodExample.Base))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Base) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:39:9
   (call_ref $function.m_m__java_lang_Object__void_$pp_jsmethod (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $arg0)))(struct.get $jsmethod.JsMethodExample.Base.vtable $m_m__java_lang_Object__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Base(local.get $this))))
  )
 )
@@ -459,18 +529,18 @@
 
 ;;; void Base.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.Base
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.Base)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
   (global.set $$class-initialized@jsmethod.JsMethodExample.Base (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:36:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:37:24
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -505,7 +575,7 @@
 ;;; void InterfaceExposingJsMethods.m()
 (func $m_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods
  (param $this (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:87:17
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:88:17
  (block
  )
 )
@@ -513,16 +583,16 @@
 
 ;;; void InterfaceExposingJsMethods.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceExposingJsMethods
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.InterfaceExposingJsMethods)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (global.set $$class-initialized@jsmethod.JsMethodExample.InterfaceExposingJsMethods (i32.const 1))
  )
 )
@@ -544,16 +614,16 @@
 ;;; SuperClassWithFinalMethod SuperClassWithFinalMethod.$create()
 (func $$create__@jsmethod.JsMethodExample.SuperClassWithFinalMethod
  (result (ref null $jsmethod.JsMethodExample.SuperClassWithFinalMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
  (local $$instance (ref null $jsmethod.JsMethodExample.SuperClassWithFinalMethod))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.SuperClassWithFinalMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.SuperClassWithFinalMethod (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.SuperClassWithFinalMethod.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_SuperClassWithFinalMethod@jsmethod.JsMethodExample.SuperClassWithFinalMethod (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (return (local.get $$instance))
  )
 )
@@ -561,9 +631,9 @@
 ;;; void SuperClassWithFinalMethod.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_SuperClassWithFinalMethod@jsmethod.JsMethodExample.SuperClassWithFinalMethod
  (param $this (ref null $jsmethod.JsMethodExample.SuperClassWithFinalMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -572,7 +642,7 @@
 (func $m_n__void@jsmethod.JsMethodExample.SuperClassWithFinalMethod
  (type $function.m_n__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:95:22
  (local $this (ref null $jsmethod.JsMethodExample.SuperClassWithFinalMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SuperClassWithFinalMethod) (local.get $this.untyped)))
  (block
@@ -582,18 +652,18 @@
 
 ;;; void SuperClassWithFinalMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.SuperClassWithFinalMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.SuperClassWithFinalMethod)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.SuperClassWithFinalMethod (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:94:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -628,9 +698,9 @@
 ;;; void AbstractTypeExposingJsMethod.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeExposingJsMethod@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
  (param $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -640,11 +710,11 @@
  (type $function.js_export_abstractJsMethod__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null string))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:104:25
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:105:25
  (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:104:25
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:105:25
   (call_ref $function.m_abstractJsMethod__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.vtable $m_abstractJsMethod__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod(local.get $this))))
  )
 )
@@ -652,18 +722,18 @@
 
 ;;; void AbstractTypeExposingJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
   (global.set $$class-initialized@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:102:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:103:24
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -695,12 +765,153 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
 
+;;; ParameterizedInterfaceImpl ParameterizedInterfaceImpl.$create()
+(func $$create__@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (result (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (call $$clinit__void_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (return (call $$create_$private__@jsmethod.JsMethodExample.ParameterizedInterfaceImpl ))
+ )
+)
+
+;;; ParameterizedInterfaceImpl ParameterizedInterfaceImpl.$create_$private()
+(func $$create_$private__@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (result (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+ (local $$instance (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.ParameterizedInterfaceImpl (global.get $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.itable) (i32.const 0) (global.get $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_ParameterizedInterfaceImpl@jsmethod.JsMethodExample.ParameterizedInterfaceImpl (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ParameterizedInterfaceImpl.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_ParameterizedInterfaceImpl@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (param $this (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:40
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String ParameterizedInterfaceImpl.m()
+(func $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (type $function.m_m__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+ (local $this (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ParameterizedInterfaceImpl) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (return (call_ref $function.m_m__java_lang_String (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.vtable $m_m__java_lang_String (ref.get_desc $jsmethod.JsMethodExample.ParameterizedInterfaceImpl(local.get $this)))))
+ )
+)
+(elem declare func $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+
+;;; String ParameterizedInterfaceImpl.m()
+(func $m_m__java_lang_String@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (type $function.m_m__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+ (local $this (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ParameterizedInterfaceImpl) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (return (ref.cast (ref null $java.lang.String) (call $m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterface (ref.as_non_null (local.get $this)))))
+ )
+)
+(elem declare func $m_m__java_lang_String@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+
+;;; ParameterizedInterfaceImpl ParameterizedInterfaceImpl.<init>()
+(func $js_export_<init>__jsmethod_JsMethodExample_ParameterizedInterfaceImpl@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (result (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (call $$clinit__void_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:124:11
+  (return (call $$create_$private__@jsmethod.JsMethodExample.ParameterizedInterfaceImpl ))
+ )
+)
+
+;;; NativeString ParameterizedInterfaceImpl.m()
+(func $js_export_m__java_lang_String_NativeString@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (type $function.js_export_m__java_lang_String_NativeString)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null string))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+ (local $this (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ParameterizedInterfaceImpl) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (return (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call_ref $function.m_m__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.ParameterizedInterfaceImpl.vtable $m_m__java_lang_Object (ref.get_desc $jsmethod.JsMethodExample.ParameterizedInterfaceImpl(local.get $this)))))))
+ )
+)
+(elem declare func $js_export_m__java_lang_String_NativeString@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+
+;;; void ParameterizedInterfaceImpl.$clinit()
+(func $$clinit__void_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (if (global.get $$class-initialized@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (global.set $$class-initialized@jsmethod.JsMethodExample.ParameterizedInterfaceImpl (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:15
+  (call $$clinit__void_<once>_@jsmethod.JsMethodExample.ParameterizedInterface )
+ )
+)
+
+;;; Class<T> ParameterizedInterfaceImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)))
+   (then
+    (return (global.get $$class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+   )
+  )
+  (global.set $$class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethod.JsM...|__java_lang_String_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ )
+)
+
+;;; Class<?> ParameterizedInterfaceImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ParameterizedInterfaceImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
  (param $this (ref null $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -709,11 +920,11 @@
 (func $m_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
  (type $function.m_m__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
  (local $this (ref null $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (call $m_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods (ref.as_non_null (local.get $this)))
  )
 )
@@ -721,20 +932,20 @@
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (global.set $$class-initialized@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:85:12
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:12
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceExposingJsMethods )
  )
 )
@@ -769,16 +980,16 @@
 ;;; Sub Sub.$create()
 (func $$create__@jsmethod.JsMethodExample.Sub
  (result (ref null $jsmethod.JsMethodExample.Sub))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
  (local $$instance (ref null $jsmethod.JsMethodExample.Sub))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.Sub )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.Sub (global.get $jsmethod.JsMethodExample.Sub.itable) (i32.const 0) (global.get $jsmethod.JsMethodExample.Sub.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (return (local.get $$instance))
  )
 )
@@ -786,9 +997,9 @@
 ;;; void Sub.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub
  (param $this (ref null $jsmethod.JsMethodExample.Sub))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (ref.as_non_null (local.get $this)))
  )
 )
@@ -798,7 +1009,7 @@
  (type $function.m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:54:16
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
@@ -811,7 +1022,7 @@
  (type $function.m_o__java_lang_String__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:57:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:58:9
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
@@ -824,11 +1035,11 @@
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
@@ -839,11 +1050,11 @@
  (type $function.js_export_m__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null string))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:54:16
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:54:16
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
@@ -854,11 +1065,11 @@
  (type $function.js_export_o__java_lang_String_NativeString__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null string))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:57:9
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:58:9
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:57:9
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:58:9
   (call_ref $function.m_o__java_lang_String__void_$pp_jsmethod (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_o__java_lang_String__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
@@ -866,18 +1077,18 @@
 
 ;;; void Sub.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.Sub
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.Sub)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.Sub (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:52:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:53:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.Base )
  )
 )
@@ -912,16 +1123,16 @@
 ;;; SubJsType SubJsType.$create()
 (func $$create__@jsmethod.JsMethodExample.SubJsType
  (result (ref null $jsmethod.JsMethodExample.SubJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
  (local $$instance (ref null $jsmethod.JsMethodExample.SubJsType))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.SubJsType )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.SubJsType (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.SubJsType.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_SubJsType@jsmethod.JsMethodExample.SubJsType (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (return (local.get $$instance))
  )
 )
@@ -929,9 +1140,9 @@
 ;;; void SubJsType.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_SubJsType@jsmethod.JsMethodExample.SubJsType
  (param $this (ref null $jsmethod.JsMethodExample.SubJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (ref.as_non_null (local.get $this)))
  )
 )
@@ -941,7 +1152,7 @@
  (type $function.m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:63:16
  (local $this (ref null $jsmethod.JsMethodExample.SubJsType))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsType) (local.get $this.untyped)))
  (block
@@ -951,9 +1162,9 @@
 
 ;;; void SubJsType.n()
 (func $m_n__void@jsmethod.JsMethodExample.SubJsType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:65:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:66:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:65:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:66:16
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.SubJsType )
  )
 )
@@ -963,11 +1174,11 @@
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
  (local $this (ref null $jsmethod.JsMethodExample.SubJsType))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsmethod.JsMethodExample.SubJsType.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsType(local.get $this))))
  )
 )
@@ -975,18 +1186,18 @@
 
 ;;; void SubJsType.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.SubJsType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.SubJsType)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.SubJsType (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:61:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:62:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.Base )
  )
 )
@@ -1021,16 +1232,16 @@
 ;;; SubGenericsJsType<T> SubGenericsJsType.$create()
 (func $$create__@jsmethod.JsMethodExample.SubGenericsJsType
  (result (ref null $jsmethod.JsMethodExample.SubGenericsJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
  (local $$instance (ref null $jsmethod.JsMethodExample.SubGenericsJsType))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.SubGenericsJsType )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.SubGenericsJsType (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.SubGenericsJsType.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_SubGenericsJsType@jsmethod.JsMethodExample.SubGenericsJsType (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (return (local.get $$instance))
  )
 )
@@ -1038,9 +1249,9 @@
 ;;; void SubGenericsJsType.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_SubGenericsJsType@jsmethod.JsMethodExample.SubGenericsJsType
  (param $this (ref null $jsmethod.JsMethodExample.SubGenericsJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (ref.as_non_null (local.get $this)))
  )
 )
@@ -1050,7 +1261,7 @@
  (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:71:16
  (local $this (ref null $jsmethod.JsMethodExample.SubGenericsJsType))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubGenericsJsType) (local.get $this.untyped)))
  (block
@@ -1063,11 +1274,11 @@
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
  (local $this (ref null $jsmethod.JsMethodExample.SubGenericsJsType))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubGenericsJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (call_ref $function.m_m__java_lang_Object__void (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $jsmethod.JsMethodExample.SubGenericsJsType.vtable $m_m__java_lang_Object__void (ref.get_desc $jsmethod.JsMethodExample.SubGenericsJsType(local.get $this))))
  )
 )
@@ -1075,18 +1286,18 @@
 
 ;;; void SubGenericsJsType.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.SubGenericsJsType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.SubGenericsJsType)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.SubGenericsJsType (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:69:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:70:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.Base )
  )
 )
@@ -1121,16 +1332,16 @@
 ;;; SubJsTypeWithRenamedJsMethod SubJsTypeWithRenamedJsMethod.$create()
 (func $$create__@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
  (result (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
  (local $$instance (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_SubJsTypeWithRenamedJsMethod@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (return (local.get $$instance))
  )
 )
@@ -1138,9 +1349,9 @@
 ;;; void SubJsTypeWithRenamedJsMethod.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_SubJsTypeWithRenamedJsMethod@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
  (param $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (ref.as_non_null (local.get $this)))
  )
 )
@@ -1150,7 +1361,7 @@
  (type $function.m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:76:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:77:16
  (local $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod) (local.get $this.untyped)))
  (block
@@ -1163,11 +1374,11 @@
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
  (local $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
  )
 )
@@ -1178,11 +1389,11 @@
  (type $function.js_export_m__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null string))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:76:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:77:16
  (local $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:76:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:77:16
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
  )
 )
@@ -1190,18 +1401,18 @@
 
 ;;; void SubJsTypeWithRenamedJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:74:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:75:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.Base )
  )
 )
@@ -1236,16 +1447,16 @@
 ;;; ExposesOverrideableJsMethod ExposesOverrideableJsMethod.$create()
 (func $$create__@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
  (result (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
  (local $$instance (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.ExposesOverrideableJsMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.ExposesOverrideableJsMethod (global.get $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.itable) (i32.const 0) (global.get $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_ExposesOverrideableJsMethod@jsmethod.JsMethodExample.ExposesOverrideableJsMethod (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (return (local.get $$instance))
  )
 )
@@ -1253,9 +1464,9 @@
 ;;; void ExposesOverrideableJsMethod.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_ExposesOverrideableJsMethod@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
  (param $this (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_SuperClassWithFinalMethod@jsmethod.JsMethodExample.SuperClassWithFinalMethod (ref.as_non_null (local.get $this)))
  )
 )
@@ -1264,11 +1475,11 @@
 (func $m_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
  (type $function.m_m__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
  (local $this (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesOverrideableJsMethod) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call $m_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods (ref.as_non_null (local.get $this)))
  )
 )
@@ -1278,11 +1489,11 @@
 (func $js_export_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
  (type $function.js_export_m__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
  (local $this (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesOverrideableJsMethod) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.ExposesOverrideableJsMethod.vtable $m_m__void (ref.get_desc $jsmethod.JsMethodExample.ExposesOverrideableJsMethod(local.get $this))))
  )
 )
@@ -1302,20 +1513,20 @@
 
 ;;; void ExposesOverrideableJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.ExposesOverrideableJsMethod (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.SuperClassWithFinalMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:99:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:100:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceExposingJsMethods )
  )
 )
@@ -1350,16 +1561,16 @@
 ;;; AbstractTypeImpl AbstractTypeImpl.$create()
 (func $$create__@jsmethod.JsMethodExample.AbstractTypeImpl
  (result (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
  (local $$instance (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.AbstractTypeImpl (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.AbstractTypeImpl.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeImpl@jsmethod.JsMethodExample.AbstractTypeImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (return (local.get $$instance))
  )
 )
@@ -1367,9 +1578,9 @@
 ;;; void AbstractTypeImpl.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeImpl@jsmethod.JsMethodExample.AbstractTypeImpl
  (param $this (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_AbstractTypeExposingJsMethod@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod (ref.as_non_null (local.get $this)))
  )
 )
@@ -1379,7 +1590,7 @@
  (type $function.m_abstractJsMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:109:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:110:16
  (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeImpl))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeImpl) (local.get $this.untyped)))
  (block
@@ -1389,18 +1600,18 @@
 
 ;;; void AbstractTypeImpl.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeImpl
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (if (global.get $$class-initialized@jsmethod.JsMethodExample.AbstractTypeImpl)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (global.set $$class-initialized@jsmethod.JsMethodExample.AbstractTypeImpl (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:107:15
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:108:15
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod )
  )
 )

@@ -20,6 +20,7 @@ package jsmethod
 
 import javaemul.lang.*
 import java.util.ArrayList
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 import kotlin.String
@@ -124,5 +125,17 @@ open class JsMethodExample {
  
  internal open class AbstractTypeImpl internal constructor(): AbstractTypeExposingJsMethod() {
   override fun abstractJsMethod(s: String?) {}
+ }
+ 
+ internal interface ParameterizedInterface<T> {
+  @JsMethod
+  fun m(): T {
+   return null as T
+  }
+ }
+ 
+ internal open class ParameterizedInterfaceImpl: ParameterizedInterface<String?> {
+  @JsConstructor
+  constructor()
  }
 }
