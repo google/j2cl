@@ -12,6 +12,5 @@ integration_test(
     srcs = glob(["*.java"]),
     # Throws ArrayOutOfBoundsException instead of ClassCastException
     enable_kt_native = False,
-    # JsFunction not supported in Wasm.
-    enable_wasm = False,
+    enable_wasm_custom_descriptors_jsinterop = True,
 )
