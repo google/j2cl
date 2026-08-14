@@ -6,13 +6,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class InterfaceWithStaticJsProperties {
- /** @nodts @return {number} */
- static m_getB__int() {
+ /** @return {number} */
+ static get b() {
   InterfaceWithStaticJsProperties.$clinit();
   return 1 + 2 | 0;
  }
- /** @nodts */
- static m_setB__int__void(/** number */ x) {
+ 
+ static set b(/** number */ x) {
   InterfaceWithStaticJsProperties.$clinit();
  }
  /** @nodts */

@@ -160,11 +160,12 @@ interface InterfaceWithStaticJsProperties {
     @JsProperty const val a = 1
 
     @JsProperty
+    @JvmStatic
     fun getB(): Int {
       return a + 2
     }
 
-    @JsProperty fun setB(x: Int) {}
+    @JsProperty @JvmStatic fun setB(x: Int) {}
   }
 }
 
