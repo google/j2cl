@@ -370,6 +370,12 @@ public final class Main {
     MyJsFunction jsFunction = getFunctionFromJs();
     assertEquals(42, jsFunction.foo(10));
 
+    MyJsFunction nullJsFunction = getNullFunctionFromJs();
+    assertEquals(null, nullJsFunction);
+
+    MyJsFunction undefinedJsFunction = getUndefinedJsFunction();
+    assertEquals(null, undefinedJsFunction);
+
     MyJsFunction jsFunctionAsObject = (MyJsFunction) getFunctionAsObjectFromJs();
     assertEquals(42, jsFunctionAsObject.foo(10));
     assertEquals(37, callFunctionInJs(jsFunctionAsObject, 5));
@@ -541,6 +547,12 @@ public final class Main {
   @JsMethod(namespace = "functions", name = "getFunction")
   private static native MyJsFunction getFunctionFromJs();
 
+  @JsMethod(namespace = "functions", name = "getNullFunction")
+  private static native MyJsFunction getNullFunctionFromJs();
+
+  @JsMethod(namespace = "functions", name = "getUndefinedJsFunction")
+  private static native MyJsFunction getUndefinedJsFunction();
+
   @JsMethod(namespace = "functions", name = "getFunctionAsObject")
   private static native Object getFunctionAsObjectFromJs();
 
@@ -573,6 +585,8 @@ public final class Main {
     assertTrue(callEntryPointAdd(5, 10) == 15);
     assertTrue(callEntryPointWithJsType() == 11);
     assertTrue(callJsMethodEntryPointWithJsType() == 11);
+    assertTrue(callEntryPointWithNullJsFunction());
+    assertTrue(callEntryPointWithUndefinedJsFunction());
   }
 
   public static int entryPointAdd(int a, int b) {
@@ -581,6 +595,10 @@ public final class Main {
 
   public static int entryPointWithJsType(SomeJsType o) {
     return o.getNumber();
+  }
+
+  public static boolean entryPointWithJsFunction(MyJsFunction fn) {
+    return fn == null;
   }
 
   @JsMethod(namespace = "nativehelper")
@@ -687,4 +705,10 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native int callJsMethodEntryPointWithJsType();
+
+  @JsMethod(namespace = "nativehelper")
+  static native boolean callEntryPointWithNullJsFunction();
+
+  @JsMethod(namespace = "nativehelper")
+  static native boolean callEntryPointWithUndefinedJsFunction();
 }

@@ -334,6 +334,19 @@ function callJsMethodEntryPointWithJsType() {
   return globalThis['wasmExports']['staticMethod'](instance);
 }
 
+/**
+ * @return {boolean}
+ */
+function callEntryPointWithNullJsFunction() {
+  return globalThis['wasmExports']['entryPointWithJsFunction'](null);
+}
+
+/**
+ * @return {boolean}
+ */
+function callEntryPointWithUndefinedJsFunction() {
+  return globalThis['wasmExports']['entryPointWithJsFunction'](undefined);
+}
 
 exports = {
   newBaseJsType,
@@ -371,5 +384,6 @@ exports = {
   callEntryPointAdd,
   callEntryPointWithJsType,
   callJsMethodEntryPointWithJsType,
+  callEntryPointWithNullJsFunction,
+  callEntryPointWithUndefinedJsFunction,
 };
-

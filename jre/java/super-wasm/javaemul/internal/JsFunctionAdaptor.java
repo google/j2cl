@@ -36,6 +36,9 @@ public class JsFunctionAdaptor {
 
   /** Converts this JsFunction to a JavaScript function reference. */
   public static WasmExtern toJs(JsFunctionAdaptor adaptor) {
+    if (adaptor == null) {
+      return null;
+    }
     if (adaptor.jsFuncref == null) {
       adaptor.jsFuncref =
           bindJsFunction(adaptor.wasmExportBridgeFuncref, WasmExtern.convertToExtern(adaptor));
@@ -43,14 +46,18 @@ public class JsFunctionAdaptor {
     return adaptor.jsFuncref;
   }
 
-  /** Converts a JavaScript function reference to an adaptor callable in Wasm. */
-  public static JsFunctionAdaptor fromJs(WasmExtern jsFuncref) {
+  public static JsFunctionAdaptor fromSafeJsFunction(WasmExtern jsFuncref) {
     JsFunctionAdaptor adaptor = (JsFunctionAdaptor) WasmExtern.convertToAny(getAdaptor(jsFuncref));
     if (adaptor == null) {
       adaptor = new JsFunctionAdaptor(jsFuncref);
       setAdaptor(jsFuncref, WasmExtern.convertToExtern(adaptor));
     }
     return adaptor;
+  }
+
+  /** Converts a JavaScript function reference to an adaptor callable in Wasm. */
+  public static JsFunctionAdaptor fromJs(WasmExtern jsFuncref) {
+    return jsFuncref == null ? null : fromSafeJsFunction(jsFuncref);
   }
 
   @JsMethod(namespace = "j2wasm.JsInteropRuntime", name = "bindJsFunction")

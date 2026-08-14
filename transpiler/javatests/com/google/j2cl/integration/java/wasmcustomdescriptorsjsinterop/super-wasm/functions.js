@@ -24,6 +24,22 @@ function getFunction() {
 }
 
 /**
+ * @return {?function(number): number}
+ * @public
+ */
+function getNullFunction() {
+  return null;
+}
+
+/**
+ * @return {(function(number): number|undefined)}
+ * @public
+ */
+function getUndefinedJsFunction() {
+  return undefined;
+}
+
+/**
  * @return {?}
  * @public
  */
@@ -99,6 +115,8 @@ function isSame(fn1, fn2) {
 
 exports = {
   getFunction,
+  getNullFunction,
+  getUndefinedJsFunction,
   getFunctionAsObject,
   getFunctionWithObject,
   callFunction,

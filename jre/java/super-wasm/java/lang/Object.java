@@ -69,7 +69,7 @@ public class Object {
       case 2 -> Boolean.fromSafeJsBoolean((Boolean.NativeBoolean) extern);
       case 3 -> Double.fromSafeJsNumber((Double.NativeNumber) extern);
       case 4 -> Long.fromSafeJsLong((Long.NativeLong) extern);
-      case 5 -> JsFunctionAdaptor.fromJs(extern);
+      case 5 -> JsFunctionAdaptor.fromSafeJsFunction(extern);
       default -> {
         WasmAny any = WasmExtern.convertToAny(extern);
         if (any instanceof Object) {
