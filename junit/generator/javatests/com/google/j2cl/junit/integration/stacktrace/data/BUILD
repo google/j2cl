@@ -254,6 +254,22 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "KotlinThrowsInImplicitSuperConstructorTest",
+    extra_defs = ["--inline_functions=false"],
+    deps = [":base"],
+)
+
+j2cl_test_integration_test_data(
+    name = "ThrowsInImplicitSuperConstructor",
+    extra_defs = ["--inline_functions=false"],
+    platforms = [
+        "CLOSURE",
+        "J2KT_WEB",
+    ],
+    deps = [":base"],
+)
+
+j2cl_test_integration_test_data(
     name = "ThrowsInSwitchPattern",
     extra_defs = ["--inline_functions=false"],
     deps = [":base"],

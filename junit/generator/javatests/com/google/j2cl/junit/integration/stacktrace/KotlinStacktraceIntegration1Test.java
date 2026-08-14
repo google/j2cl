@@ -75,6 +75,11 @@ public class KotlinStacktraceIntegration1Test extends IntegrationTestBase {
   }
 
   @Test
+  public void testKotlinThrowsInImplicitSuperConstructor() throws Exception {
+    runStacktraceTest("KotlinThrowsInImplicitSuperConstructorTest");
+  }
+
+  @Test
   public void testKotlinThrowsInClassInitializer() throws Exception {
     runStacktraceTest("KotlinThrowsInClassInitializer");
   }

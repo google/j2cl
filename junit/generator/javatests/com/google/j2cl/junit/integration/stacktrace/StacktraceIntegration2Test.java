@@ -52,6 +52,11 @@ public class StacktraceIntegration2Test extends IntegrationTestBase {
   }
 
   @Test
+  public void testThrowsInImplicitSuperConstructor() throws Exception {
+    runStacktraceTest("ThrowsInImplicitSuperConstructor");
+  }
+
+  @Test
   public void testThrowsInInstanceInitializer() throws Exception {
     runStacktraceTest("ThrowsInInstanceInitializer");
   }
