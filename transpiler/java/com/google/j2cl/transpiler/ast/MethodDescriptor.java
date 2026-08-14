@@ -899,8 +899,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns the name for this method descriptor using Closure-style mangling patterns which takes
-   * into account JS members.
+   * Returns the name for this methoanceld descriptor using Closure-style mangling patterns which
+   * takes into account JS members.
    */
   @Memoized
   public String getClosureMangledName() {
@@ -1562,13 +1562,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (getVisibility().isPackagePrivate()) {
       sb.append(" pp");
     }
-    switch (getOrigin()) {
-      case SPECIALIZING_BRIDGE -> sb.append(" s-bridge");
-      case GENERALIZING_BRIDGE -> sb.append(" g-bridge");
-      case DEFAULT_METHOD_BRIDGE -> sb.append(" d-bridge");
-      case ABSTRACT_STUB -> sb.append(" stub");
-      case SOURCE -> {}
-      default -> sb.append(" synthetic");
+    if (!getOrigin().equals(MethodOrigin.SOURCE)) {
+      sb.append(" [" + getOrigin().name() + "]");
     }
     return sb.toString();
   }
