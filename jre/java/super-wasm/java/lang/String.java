@@ -819,12 +819,16 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return new String(nativeFromCharCodeArray(x, 0, length));
   }
 
+  /**
+   * Performs a conversion when the parameter is known to be non-null to avoid the round trip when
+   * comparing native types to `null`
+   */
   static String fromSafeJsString(NativeString o) {
     return new String(o);
   }
 
   static String fromJs(NativeString o) {
-    return o == null ? null : new String(o);
+    return o == null ? null : fromSafeJsString(o);
   }
 
   static NativeString toJs(String string) {

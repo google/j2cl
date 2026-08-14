@@ -282,11 +282,16 @@ public final class Long extends Number implements Comparable<Long> {
     return createfromBits((int) l, LongUtils.getHighBits(l));
   }
 
-  static Long fromJs(NativeLong value) {
-    if (value == null) {
-      return null;
-    }
+  /**
+   * Performs a conversion when the parameter is known to be non-null to avoid the round trip when
+   * comparing native types to `null`
+   */
+  static Long fromSafeJsLong(NativeLong value) {
     return valueOf(LongUtils.fromBits(value.getLowBits(), value.getHighBits()));
+  }
+
+  static Long fromJs(NativeLong value) {
+    return value == null ? null : fromSafeJsLong(value);
   }
 
   @JsMethod(namespace = "goog.math.Long", name = "fromBits")

@@ -121,8 +121,16 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
     return value == null ? null : toJsPrimitive(value.booleanValue());
   }
 
+  /**
+   * Performs a conversion when the parameter is known to be non-null to avoid the round trip when
+   * comparing native types to `null`
+   */
+  static Boolean fromSafeJsBoolean(NativeBoolean value) {
+    return valueOf(toBooleanPrimitive(value));
+  }
+
   static Boolean fromJs(NativeBoolean value) {
-    return value == null ? null : valueOf(toBooleanPrimitive(value));
+    return value == null ? null : fromSafeJsBoolean(value);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Boolean")

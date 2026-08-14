@@ -63,15 +63,12 @@ public class Object {
   }
 
   static Object fromJs(WasmExtern extern) {
-    if (extern == null) {
-      return null;
-    }
     return switch (typeOf(extern)) {
       case 0 -> null;
-      case 1 -> String.fromJs((String.NativeString) extern);
-      case 2 -> Boolean.fromJs((Boolean.NativeBoolean) extern);
-      case 3 -> Double.fromJs((Double.NativeNumber) extern);
-      case 4 -> Long.fromJs((Long.NativeLong) extern);
+      case 1 -> String.fromSafeJsString((String.NativeString) extern);
+      case 2 -> Boolean.fromSafeJsBoolean((Boolean.NativeBoolean) extern);
+      case 3 -> Double.fromSafeJsNumber((Double.NativeNumber) extern);
+      case 4 -> Long.fromSafeJsLong((Long.NativeLong) extern);
       case 5 -> JsFunctionAdaptor.fromJs(extern);
       default -> {
         WasmAny any = WasmExtern.convertToAny(extern);

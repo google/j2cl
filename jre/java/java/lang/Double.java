@@ -192,8 +192,16 @@ public final class Double extends Number implements Comparable<Double> {
     return value == null ? null : toJsPrimitive(value.doubleValue());
   }
 
+  /**
+   * Performs a conversion when the parameter is known to be non-null to avoid the round trip when
+   * comparing native types to `null`
+   */
+  static Double fromSafeJsNumber(NativeNumber value) {
+    return valueOf(toDoublePrimitive(value));
+  }
+
   static Double fromJs(NativeNumber value) {
-    return value == null ? null : valueOf(toDoublePrimitive(value));
+    return value == null ? null : fromSafeJsNumber(value);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number")
