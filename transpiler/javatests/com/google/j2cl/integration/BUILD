@@ -10,9 +10,3 @@ package(
     default_applicable_licenses = ["//:j2cl_license"],
     licenses = ["reciprocal"],
 )
-
-filegroup(
-    name = "integration_tests_warnings_allowlist",
-    srcs = ["integration_tests_warnings_allowlist.txt"],
-    visibility = [":__subpackages__"],
-)
