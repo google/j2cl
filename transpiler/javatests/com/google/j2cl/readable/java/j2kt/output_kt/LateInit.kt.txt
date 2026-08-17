@@ -49,9 +49,7 @@ open class LateInit<T: Any> {
   this.genericField = genericValue
  }
  
- open fun test(): Int {
-  return this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
- }
+ open fun test(): Int = this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  
  private open inner class Inner private constructor() {
   private lateinit var unmarkedInnerField: String

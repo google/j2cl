@@ -29,9 +29,7 @@ open class BridgeMethodShadowedSignature {
  }
  
  abstract class B<B1, B2> internal constructor(): I<B1> {
-  open fun get(consumer: B2): String? {
-   return "B get B2"
-  }
+  open fun get(consumer: B2): String? = "B get B2"
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")

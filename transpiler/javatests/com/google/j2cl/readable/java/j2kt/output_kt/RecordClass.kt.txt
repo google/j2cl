@@ -31,12 +31,10 @@ class RecordClass {
   val a: Int,
   val b: Int,
  ) {
-  fun copy(s: String?): RecordWithUnrelatedCopyMethod? {
-   return RecordWithUnrelatedCopyMethod(
-    s!!.length,
-    s!!.length,
-   )
-  }
+  fun copy(s: String?): RecordWithUnrelatedCopyMethod? = RecordWithUnrelatedCopyMethod(
+   s!!.length,
+   s!!.length,
+  )
  }
  
  @JvmRecord
@@ -44,13 +42,9 @@ class RecordClass {
   val a: Int,
   val b: Int,
  ) {
-  fun component1(i: Int): Int {
-   return i
-  }
+  fun component1(i: Int): Int = i
   
-  fun component3(): Int {
-   return 3
-  }
+  fun component3(): Int = 3
  }
  
  class FieldAccessTest {

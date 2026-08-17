@@ -29,11 +29,9 @@ import kotlin.run
 class PatternMatchingProblem {
  companion object {
   @JvmStatic
-  fun isEmptyString(`object`: Any): Boolean {
-   return `object` is String && run {
-    val string: String = `object` as String
-    (!string.isEmpty())
-   }
+  fun isEmptyString(`object`: Any): Boolean = `object` is String && run {
+   val string: String = `object` as String
+   (!string.isEmpty())
   }
  }
 }

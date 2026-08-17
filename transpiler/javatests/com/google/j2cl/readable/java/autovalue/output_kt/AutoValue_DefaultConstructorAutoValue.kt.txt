@@ -35,13 +35,9 @@ class AutoValue_DefaultConstructorAutoValue: DefaultConstructorAutoValue {
   this.booleanField = booleanField
  }
  
- override fun getBooleanField(): Boolean {
-  return this.booleanField
- }
+ override fun getBooleanField(): Boolean = this.booleanField
  
- override fun toString(): String {
-  return "DefaultConstructorAutoValue{booleanField=" + this.booleanField + "}"
- }
+ override fun toString(): String = "DefaultConstructorAutoValue{booleanField=" + this.booleanField + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

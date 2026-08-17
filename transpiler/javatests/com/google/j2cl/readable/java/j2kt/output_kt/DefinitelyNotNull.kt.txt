@@ -31,14 +31,10 @@ import kotlin.jvm.JvmStatic
 open class DefinitelyNotNull {
  companion object {
   @JvmStatic
-  fun testNotNullSupplier(supplier: NotNullSupplier<out String?>): String {
-   return supplier.getNotNull()!!
-  }
+  fun testNotNullSupplier(supplier: NotNullSupplier<out String?>): String = supplier.getNotNull()!!
   
   @JvmStatic
-  fun <T> testEquivalence(equivalence: Equivalence<in T & Any>, a: T?, b: T?): Boolean {
-   return equivalence.equivalent(a, b)
-  }
+  fun <T> testEquivalence(equivalence: Equivalence<in T & Any>, a: T?, b: T?): Boolean = equivalence.equivalent(a, b)
  }
  
  fun interface NotNullSupplier<T> {
@@ -56,9 +52,7 @@ open class DefinitelyNotNull {
   
   companion object {
    @JvmStatic
-   internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {
-    return ordering.reverse_pp_j2kt<E>()
-   }
+   internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> = ordering.reverse_pp_j2kt<E>()
   }
  }
  
@@ -79,16 +73,12 @@ open class DefinitelyNotNull {
    }
    
    @JvmStatic
-   fun <E> copyOfNullableWithInvalidBounds(iterable: Iterable<E>): ImmutableList<E & Any> {
-    return ImmutableList.copyOf<E & Any>(
-     iterable as Iterable<E & Any>,
-    )
-   }
+   fun <E> copyOfNullableWithInvalidBounds(iterable: Iterable<E>): ImmutableList<E & Any> = ImmutableList.copyOf<E & Any>(
+    iterable as Iterable<E & Any>,
+   )
    
    @JvmStatic
-   fun <E> copyOfNullableWithCorrectBounds(iterable: Iterable<E & Any>): ImmutableList<E & Any> {
-    return ImmutableList.copyOf<E & Any>(iterable)
-   }
+   fun <E> copyOfNullableWithCorrectBounds(iterable: Iterable<E & Any>): ImmutableList<E & Any> = ImmutableList.copyOf<E & Any>(iterable)
   }
  }
  

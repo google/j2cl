@@ -40,8 +40,6 @@ open class NullabilityInferenceProblem3 {
    this.delegate = delegate
   }
   
-  override fun concat(generic: Generic<*>): Concrete {
-   return this.delegate.concat(generic).toConcrete()
-  }
+  override fun concat(generic: Generic<*>): Concrete = this.delegate.concat(generic).toConcrete()
  }
 }

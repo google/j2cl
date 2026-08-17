@@ -26,9 +26,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmField
 
 open class StaticFieldAccessLevels {
- open fun test(): Int {
-  return if (StaticFieldAccessLevels.b) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d_pp_staticfieldaccesslevels
- }
+ open fun test(): Int = if (StaticFieldAccessLevels.b) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d_pp_staticfieldaccesslevels
  
  companion object {
   @JvmField

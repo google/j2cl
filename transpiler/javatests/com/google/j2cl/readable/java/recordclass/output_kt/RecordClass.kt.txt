@@ -169,17 +169,11 @@ open class RecordClass {
  data class RecordWithOverriddenObjectMethods(
   val value: String?,
  ) {
-  override fun equals(other: Any?): Boolean {
-   return false
-  }
+  override fun equals(other: Any?): Boolean = false
   
-  override fun hashCode(): Int {
-   return 0
-  }
+  override fun hashCode(): Int = 0
   
-  override fun toString(): String {
-   return "foo"
-  }
+  override fun toString(): String = "foo"
  }
  
  internal fun interface I {
@@ -210,9 +204,7 @@ open class RecordClass {
  data class PublicRecordWithPublicFactory(
   val i: Int,
  ) {
-  fun factory(i: Int): PublicRecordWithPublicFactory? {
-   return PublicRecordWithPublicFactory(i)
-  }
+  fun factory(i: Int): PublicRecordWithPublicFactory? = PublicRecordWithPublicFactory(i)
  }
  
  @JsType

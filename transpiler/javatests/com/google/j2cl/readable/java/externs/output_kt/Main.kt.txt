@@ -45,9 +45,7 @@ open class Main {
  
  companion object {
   @JvmStatic
-  private fun testFooOverlay(fooOverlay: FooOverlay?): Boolean {
-   return fooOverlay!!.getFoo()!!.equals("Hello")
-  }
+  private fun testFooOverlay(fooOverlay: FooOverlay?): Boolean = fooOverlay!!.getFoo()!!.equals("Hello")
   
   @JvmStatic
   @JsMethod

@@ -62,9 +62,7 @@ open class DefaultNullable {
  
  private var f12: Any = Any()
  
- open fun m1(a: String?, b: List<Double?>?): String? {
-  return ""
- }
+ open fun m1(a: String?, b: List<Double?>?): String? = ""
  
  private var f13: Any
  
@@ -74,9 +72,7 @@ open class DefaultNullable {
   this.f13 = Any()
  }
  
- open fun m2(a: String?, b: List<Double?>?): String? {
-  return null
- }
+ open fun m2(a: String?, b: List<Double?>?): String? = null
  
  @JsMethod
  open fun m3(vararg args: String?) {
@@ -267,12 +263,8 @@ open class DefaultNullable {
   internal fun testNonNullableLambdas_pp_nullability_defaultnullable() {
    val lambda: NullMarkedConsumer<String?> = NullMarkedConsumer { s: String? ->
    }
-   val constructorReference: NullMarkedSupplier<String?> = NullMarkedSupplier {
-    return@NullMarkedSupplier String()
-   }
-   val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction { arg0: Int ->
-    return@NullMarkedIntFunction arrayOfNulls<String>(arg0)
-   }
+   val constructorReference: NullMarkedSupplier<String?> = NullMarkedSupplier { String() }
+   val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction { arg0: Int -> arrayOfNulls<String>(arg0) }
   }
   
   @JvmStatic
@@ -306,17 +298,13 @@ open class DefaultNullable {
    this.defaultNullability_pp_nullability_defaultnullable = defaultNullability
   }
   
-  internal open fun getNullable_pp_nullability_defaultnullable(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability_defaultnullable(): N? = null
   
   internal open fun getNonNullable_pp_nullability_defaultnullable(): N & Any {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
-   return null as N
-  }
+  internal open fun getDefaultNullability_pp_nullability_defaultnullable(): N = null as N
   
   internal open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
   
@@ -340,17 +328,13 @@ open class DefaultNullable {
    this.defaultNullability_pp_nullability_defaultnullable = defaultNullability
   }
   
-  internal open fun getNullable_pp_nullability_defaultnullable(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability_defaultnullable(): N? = null
   
   internal open fun getNonNullable_pp_nullability_defaultnullable(): N & Any {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
-   return null as N
-  }
+  internal open fun getDefaultNullability_pp_nullability_defaultnullable(): N = null as N
   
   internal open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
   
@@ -374,17 +358,13 @@ open class DefaultNullable {
    this.defaultNullability_pp_nullability_defaultnullable = n
   }
   
-  internal open fun getNullable_pp_nullability_defaultnullable(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability_defaultnullable(): N? = null
   
   internal open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
-   return null!!
-  }
+  internal open fun getDefaultNullability_pp_nullability_defaultnullable(): N = null!!
   
   internal open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
   

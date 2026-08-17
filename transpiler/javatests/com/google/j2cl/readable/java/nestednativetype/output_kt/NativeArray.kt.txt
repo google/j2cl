@@ -28,7 +28,5 @@ import kotlin.Suppress
 @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
 class NativeArray {
  @JsOverlay
- fun a(): Any? {
-  return object : Any() {}
- }
+ fun a(): Any? = object : Any() {}
 }

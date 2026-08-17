@@ -29,13 +29,9 @@ open class BoundedJsArrays {
  
  companion object {
   @JvmStatic
-  fun <V> create(): BoundedJsArray<V>? {
-   return BoundedJsArray.create<V>()
-  }
+  fun <V> create(): BoundedJsArray<V>? = BoundedJsArray.create<V>()
   
   @JvmStatic
-  fun <V> createWithSize(size: Int): BoundedJsArray<V>? {
-   return BoundedJsArray.create<V>(size)
-  }
+  fun <V> createWithSize(size: Int): BoundedJsArray<V>? = BoundedJsArray.create<V>(size)
  }
 }

@@ -38,14 +38,10 @@ open class NullabilityInferenceProblem5 {
   }
   
   @JvmStatic
-  internal fun testVoid_pp_j2kt(foo: Foo<*>): Future<Void?> {
-   return NullabilityInferenceProblem5.transform_pp_j2kt(
-    NullabilityInferenceProblem5.nullableFuture_pp_j2kt(foo),
-    Function { it: Foo<*>? ->
-     return@Function null
-    },
-   )
-  }
+  internal fun testVoid_pp_j2kt(foo: Foo<*>): Future<Void?> = NullabilityInferenceProblem5.transform_pp_j2kt(
+   NullabilityInferenceProblem5.nullableFuture_pp_j2kt(foo),
+   Function { it: Foo<*>? -> null },
+  )
  }
  
  internal interface Future<V>

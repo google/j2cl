@@ -40,9 +40,7 @@ internal open class RawType internal constructor() {
  internal var rawBoundDependentIndirect_pp_rawtype: BoundDependentIndirect<Any?, Unbound<Any?>?>? = BoundDependentIndirect<Any?, Unbound<Any?>?>()
  
  internal open class Unbound<T> internal constructor() {
-  internal open fun method_pp_rawtype(t: T): T {
-   return t
-  }
+  internal open fun method_pp_rawtype(t: T): T = t
  }
  
  internal open class Bound<T: RawType?> internal constructor()
@@ -54,9 +52,7 @@ internal open class RawType internal constructor() {
  internal open class BoundDependentIndirect<A, B: Unbound<A>?> internal constructor()
  
  internal open class RawUnboundChild internal constructor(): Unbound<Any?>() {
-  override fun method_pp_rawtype(o: Any?): Any? {
-   return super<Unbound>.method_pp_rawtype(o)
-  }
+  override fun method_pp_rawtype(o: Any?): Any? = super<Unbound>.method_pp_rawtype(o)
  }
  
  internal interface GenericSuperclass<T: RawType?> {

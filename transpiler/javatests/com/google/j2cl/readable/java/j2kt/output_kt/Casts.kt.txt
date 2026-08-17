@@ -25,9 +25,7 @@ import kotlin.Suppress
 
 open class Casts {
  internal open fun test_pp_j2kt() {
-  val transformer: ToStringTransformer = ToStringTransformer { data: Any? ->
-   return@ToStringTransformer data as String?
-  }
+  val transformer: ToStringTransformer = ToStringTransformer { data: Any? -> data as String? }
  }
  
  internal fun interface ToStringTransformer {

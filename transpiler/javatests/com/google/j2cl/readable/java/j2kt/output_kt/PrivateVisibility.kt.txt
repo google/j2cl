@@ -27,9 +27,7 @@ import kotlin.jvm.JvmStatic
 class PrivateVisibility {
  companion object {
   @JvmStatic
-  fun testOuterConstructorReference(): OuterConstructorReference {
-   return OuterConstructorReference()
-  }
+  fun testOuterConstructorReference(): OuterConstructorReference = OuterConstructorReference()
  }
  
  class InnerConstructorReference {
@@ -37,9 +35,7 @@ class PrivateVisibility {
   
   companion object {
    @JvmStatic
-   fun testInnerConstructorReference(): InnerConstructorReference {
-    return InnerConstructorReference()
-   }
+   fun testInnerConstructorReference(): InnerConstructorReference = InnerConstructorReference()
   }
  }
  

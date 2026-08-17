@@ -310,14 +310,10 @@ open class ArithmeticExpressions {
   }
   
   @JvmStatic
-  private fun getLongArray(): LongArray? {
-   return null
-  }
+  private fun getLongArray(): LongArray? = null
   
   @JvmStatic
-  private fun getInteger(): Int? {
-   return null
-  }
+  private fun getInteger(): Int? = null
   
   @JvmStatic
   private fun testSideEffect() {
@@ -328,19 +324,15 @@ open class ArithmeticExpressions {
   }
   
   @JvmStatic
-  private fun getWithSideEffect(): ArithmeticExpressions? {
-   return null
-  }
+  private fun getWithSideEffect(): ArithmeticExpressions? = null
   
   private var counter: kotlin.Long = 0L
   
   @JvmStatic
-  private fun incrementCounter(): kotlin.Long {
-   return run {
-    val ___value: kotlin.Long = ArithmeticExpressions.counter + 1L
-    ArithmeticExpressions.counter = ___value
-    ___value
-   }
+  private fun incrementCounter(): kotlin.Long = run {
+   val ___value: kotlin.Long = ArithmeticExpressions.counter + 1L
+   ArithmeticExpressions.counter = ___value
+   ___value
   }
  }
 }

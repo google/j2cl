@@ -68,9 +68,7 @@ internal enum class Enum2 {
  
  companion object {
   @JvmStatic
-  internal fun f_pp_enums(o: Any?): Enum2? {
-   return null
-  }
+  internal fun f_pp_enums(o: Any?): Enum2? = null
   
   @JvmField
   internal var C_pp_enums: Enum2? = Enum2.f_pp_enums(
@@ -81,9 +79,7 @@ internal enum class Enum2 {
 
 internal enum class Enum3 {
  VALUE1(
-  Function { v: Int? ->
-   return@Function 1 + v!!.toInt()
-  },
+  Function { v: Int? -> 1 + v!!.toInt() },
  );
  
  constructor(function: Function<Int?, Int?>?)

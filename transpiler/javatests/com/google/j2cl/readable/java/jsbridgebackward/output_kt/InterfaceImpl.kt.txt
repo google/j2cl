@@ -29,16 +29,12 @@ fun interface MyJsInterface {
 }
 
 open class A internal constructor() {
- open fun foo(a: Int): Int {
-  return a
- }
+ open fun foo(a: Int): Int = a
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class InterfaceImpl: A(), MyJsInterface
 
 open class SubInterfaceImpl internal constructor(): InterfaceImpl() {
- override fun foo(a: Int): Int {
-  return 0
- }
+ override fun foo(a: Int): Int = 0
 }

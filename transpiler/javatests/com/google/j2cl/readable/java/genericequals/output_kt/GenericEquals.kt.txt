@@ -33,9 +33,7 @@ open class GenericEquals<T> {
   this.value2 = null
  }
  
- open fun foo(other: GenericEquals<*>?): Any? {
-  return other!!.value2!!.value
- }
+ open fun foo(other: GenericEquals<*>?): Any? = other!!.value2!!.value
  
  override fun equals(obj: Any?): Boolean {
   if (obj === this) {

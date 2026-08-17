@@ -29,9 +29,7 @@ internal class MethodReference internal constructor() {
    MethodReference.transform_pp_j2kt(
     inputs,
     object : Function<Foo<out T>, Foo<out T>> {
-     override fun <H> apply(arg0: Foo<out T>): Foo<out T> {
-      return arg0.bar()
-     }
+     override fun <H> apply(arg0: Foo<out T>): Foo<out T> = arg0.bar()
     },
    )
   }

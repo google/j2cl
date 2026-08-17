@@ -43,21 +43,13 @@ class AutoValue_ExtendingAutoValue: ExtendingAutoValue {
   this.stringField = stringField
  }
  
- override fun getBaseField(): Int {
-  return this.baseField
- }
+ override fun getBaseField(): Int = this.baseField
  
- override fun getBooleanField(): Boolean {
-  return this.booleanField
- }
+ override fun getBooleanField(): Boolean = this.booleanField
  
- override fun getStringField(): String? {
-  return this.stringField
- }
+ override fun getStringField(): String? = this.stringField
  
- override fun toString(): String {
-  return "ExtendingAutoValue{baseField=" + this.baseField + ", booleanField=" + this.booleanField + ", stringField=" + this.stringField + "}"
- }
+ override fun toString(): String = "ExtendingAutoValue{baseField=" + this.baseField + ", booleanField=" + this.booleanField + ", stringField=" + this.stringField + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

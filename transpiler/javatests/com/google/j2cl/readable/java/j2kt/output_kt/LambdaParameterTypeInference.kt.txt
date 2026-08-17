@@ -34,9 +34,7 @@ abstract class LambdaParameterTypeInference {
  open fun testInferenceFromReturnType(supplier: Supplier<Void?>) {
   this.transform_pp_j2kt<Void?, Void?>(
    supplier,
-   Function { p: Void? ->
-    return@Function p
-   },
+   Function { p: Void? -> p },
   )
  }
  
@@ -68,26 +66,18 @@ abstract class LambdaParameterTypeInference {
   fun testInference(map: Map<String, Int>) {
    map.asMutableMap().compute(
     "",
-    BiFunction { key: String, value: Int? ->
-     return@BiFunction if (value == null) 1 else value!!.toInt() + 1
-    },
+    BiFunction { key: String, value: Int? -> if (value == null) 1 else value!!.toInt() + 1 },
    )
    LambdaParameterTypeInference.applyToNull<Int>(
-    Function { value_1: Int? ->
-     return@Function if (value_1 == null) 1 else value_1!!.toInt() + 1
-    },
+    Function { value_1: Int? -> if (value_1 == null) 1 else value_1!!.toInt() + 1 },
    )
   }
   
   @JvmStatic
-  private fun <T: Any> applyToNull(function: Function<in T?, Int>): Int {
-   return function.apply(null)!!.toInt()
-  }
+  private fun <T: Any> applyToNull(function: Function<in T?, Int>): Int = function.apply(null)!!.toInt()
   
   @JvmStatic
-  fun <T> processTripleConsumer(tripleConsumer: Consumer<Consumer<Consumer<T>>>): Consumer<Consumer<Consumer<T>>> {
-   return tripleConsumer
-  }
+  fun <T> processTripleConsumer(tripleConsumer: Consumer<Consumer<Consumer<T>>>): Consumer<Consumer<Consumer<T>>> = tripleConsumer
   
   @JvmStatic
   fun testNullableTripleConsumer(nullableTripleConsumer: Consumer<Consumer<Consumer<String?>>>, nullableString: String?) {

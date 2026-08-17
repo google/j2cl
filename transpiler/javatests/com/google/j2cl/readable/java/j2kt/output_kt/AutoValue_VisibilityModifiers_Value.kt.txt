@@ -29,9 +29,7 @@ import kotlin.Suppress
 internal class AutoValue_VisibilityModifiers_Value: Value {
  private constructor()
  
- override fun toString(): String {
-  return "Value{}"
- }
+ override fun toString(): String = "Value{}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {
@@ -49,8 +47,6 @@ internal class AutoValue_VisibilityModifiers_Value: Value {
  }
  
  internal class Builder internal constructor(): j2kt.VisibilityModifiers.Value.Builder() {
-  override fun build_pp_j2kt(): Value {
-   return AutoValue_VisibilityModifiers_Value()
-  }
+  override fun build_pp_j2kt(): Value = AutoValue_VisibilityModifiers_Value()
  }
 }

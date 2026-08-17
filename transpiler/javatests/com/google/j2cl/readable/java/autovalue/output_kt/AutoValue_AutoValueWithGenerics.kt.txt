@@ -33,13 +33,9 @@ class AutoValue_AutoValueWithGenerics<T>: AutoValueWithGenerics<T> {
   this.booleanField = booleanField
  }
  
- override fun getBooleanField(): Boolean {
-  return this.booleanField
- }
+ override fun getBooleanField(): Boolean = this.booleanField
  
- override fun toString(): String {
-  return "AutoValueWithGenerics{booleanField=" + this.booleanField + "}"
- }
+ override fun toString(): String = "AutoValueWithGenerics{booleanField=" + this.booleanField + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

@@ -44,18 +44,12 @@ internal open class NullabilityScopes2 internal constructor() {
  }
  
  internal open class NonNullMarkedScope<T: Recursive<T>> internal constructor() {
-  open fun flatten(recursive: Recursive<T>?): List<Any?>? {
-   return recursive!!.toList().stream().map<List<Any?>?>(
-    Function { arg0: Recursive<T>? ->
-     return@Function this.flatten(arg0)
-    },
-   ).flatMap<Any?>(
-    Function { arg0_1: List<Any?>? ->
-     return@Function arg0_1!!.stream()
-    } as Function<in List<Any?>?, out Stream<*>>,
-   ).collect(
-    NullMarkedScope.toList<Any>() as Collector<in Any?, out Any, List<Any>>,
-   ) as List<Any?>?
-  }
+  open fun flatten(recursive: Recursive<T>?): List<Any?>? = recursive!!.toList().stream().map<List<Any?>?>(
+   Function { arg0: Recursive<T>? -> this.flatten(arg0) },
+  ).flatMap<Any?>(
+   Function { arg0_1: List<Any?>? -> arg0_1!!.stream() } as Function<in List<Any?>?, out Stream<*>>,
+  ).collect(
+   NullMarkedScope.toList<Any>() as Collector<in Any?, out Any, List<Any>>,
+  ) as List<Any?>?
  }
 }

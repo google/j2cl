@@ -178,9 +178,7 @@ open class Arrays {
  
  open fun consumesSerializable(serializable: Serializable?) {}
  
- internal open fun <T> testArrayClone_pp_array(array: Array<T>?): Array<T>? {
-  return array!!.clone()
- }
+ internal open fun <T> testArrayClone_pp_array(array: Array<T>?): Array<T>? = array!!.clone()
  
  private open inner class SomeObject private constructor()
  

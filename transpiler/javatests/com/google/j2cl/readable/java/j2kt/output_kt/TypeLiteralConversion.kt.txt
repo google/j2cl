@@ -34,127 +34,77 @@ import kotlin.jvm.javaObjectType
 import kotlin.jvm.javaPrimitiveType
 
 open class TypeLiteralConversion {
- open fun testSimpleToRaw(): Class<Any> {
-  return Simple::class.javaObjectType as Class<Any>
- }
+ open fun testSimpleToRaw(): Class<Any> = Simple::class.javaObjectType as Class<Any>
  
- open fun testSimpleToNonRaw(): Class<Simple> {
-  return Simple::class.javaObjectType
- }
+ open fun testSimpleToNonRaw(): Class<Simple> = Simple::class.javaObjectType
  
- open fun testSimpleToUnboundWildcard(): Class<*> {
-  return Simple::class.javaObjectType
- }
+ open fun testSimpleToUnboundWildcard(): Class<*> = Simple::class.javaObjectType
  
- open fun testSimpleBoundWildcard(): Class<out Simple> {
-  return Simple::class.javaObjectType
- }
+ open fun testSimpleBoundWildcard(): Class<out Simple> = Simple::class.javaObjectType
  
- open fun testGenericToRaw(): Class<Any> {
-  return Generic::class.javaObjectType as Class<Any>
- }
+ open fun testGenericToRaw(): Class<Any> = Generic::class.javaObjectType as Class<Any>
  
- open fun testGenericToNonRaw(): Class<Generic<Any?>> {
-  return Generic::class.javaObjectType as Class<Generic<Any?>>
- }
+ open fun testGenericToNonRaw(): Class<Generic<Any?>> = Generic::class.javaObjectType as Class<Generic<Any?>>
  
- open fun testGenericToUnboundWildcard(): Class<*> {
-  return Generic::class.javaObjectType as Class<*>
- }
+ open fun testGenericToUnboundWildcard(): Class<*> = Generic::class.javaObjectType as Class<*>
  
- open fun testGenericToBoundWildcard(): Class<out Generic<Any?>> {
-  return Generic::class.javaObjectType as Class<Generic<Any?>>
- }
+ open fun testGenericToBoundWildcard(): Class<out Generic<Any?>> = Generic::class.javaObjectType as Class<Generic<Any?>>
  
- open fun testPrimitiveToRaw(): Class<Any> {
-  return Int::class.javaPrimitiveType!! as Class<Any>
- }
+ open fun testPrimitiveToRaw(): Class<Any> = Int::class.javaPrimitiveType!! as Class<Any>
  
- open fun testPrimitiveToNonRaw(): Class<Int> {
-  return Int::class.javaPrimitiveType!! as Class<Int>
- }
+ open fun testPrimitiveToNonRaw(): Class<Int> = Int::class.javaPrimitiveType!! as Class<Int>
  
- open fun testPrimitiveToUnboundWildcard(): Class<*> {
-  return Int::class.javaPrimitiveType!!
- }
+ open fun testPrimitiveToUnboundWildcard(): Class<*> = Int::class.javaPrimitiveType!!
  
- open fun testPrimitiveToBoundWildcard(): Class<out Number> {
-  return Int::class.javaPrimitiveType!!
- }
+ open fun testPrimitiveToBoundWildcard(): Class<out Number> = Int::class.javaPrimitiveType!!
  
- open fun testArrayToRaw(): Class<Any> {
-  return Array::class.javaObjectType as Class<Any>
- }
+ open fun testArrayToRaw(): Class<Any> = Array::class.javaObjectType as Class<Any>
  
- open fun testArrayToNonRaw(): Class<Array<String>> {
-  return Array::class.javaObjectType as Class<Array<String>>
- }
+ open fun testArrayToNonRaw(): Class<Array<String>> = Array::class.javaObjectType as Class<Array<String>>
  
- open fun testArrayToUnboundWildcard(): Class<*> {
-  return Array::class.javaObjectType as Class<Array<String>>
- }
+ open fun testArrayToUnboundWildcard(): Class<*> = Array::class.javaObjectType as Class<Array<String>>
  
- open fun testPrimitiveArrayToRaw(): Class<Any> {
-  return IntArray::class.javaObjectType as Class<Any>
- }
+ open fun testPrimitiveArrayToRaw(): Class<Any> = IntArray::class.javaObjectType as Class<Any>
  
- open fun testPrimitiveArrayToNonRaw(): Class<IntArray> {
-  return IntArray::class.javaObjectType
- }
+ open fun testPrimitiveArrayToNonRaw(): Class<IntArray> = IntArray::class.javaObjectType
  
- open fun testPrimitiveArrayToUnboundWildcard(): Class<*> {
-  return IntArray::class.javaObjectType
- }
+ open fun testPrimitiveArrayToUnboundWildcard(): Class<*> = IntArray::class.javaObjectType
  
  companion object {
   @JvmStatic
-  fun testGetSimpleInstance(): Simple {
-   return TypeLiteralConversion.getInstance<Simple>(
-    Simple::class.javaObjectType,
-   )
-  }
+  fun testGetSimpleInstance(): Simple = TypeLiteralConversion.getInstance<Simple>(
+   Simple::class.javaObjectType,
+  )
   
   @JvmStatic
-  fun testGetIntegerInstance(): Int {
-   return TypeLiteralConversion.getInstance<Int>(
-    Int::class.javaObjectType,
-   )
-  }
+  fun testGetIntegerInstance(): Int = TypeLiteralConversion.getInstance<Int>(
+   Int::class.javaObjectType,
+  )
   
   @JvmStatic
-  fun testGetPrimitiveInstance(): Int {
-   return TypeLiteralConversion.getInstance<Int>(
-    Integer.TYPE,
-   )!!.toInt()
-  }
+  fun testGetPrimitiveInstance(): Int = TypeLiteralConversion.getInstance<Int>(
+   Integer.TYPE,
+  )!!.toInt()
   
   @JvmStatic
-  fun testGetArrayInstance(): Array<String> {
-   return TypeLiteralConversion.getInstance<Array<String>>(
-    Array::class.javaObjectType as Class<Array<String>>,
-   )
-  }
+  fun testGetArrayInstance(): Array<String> = TypeLiteralConversion.getInstance<Array<String>>(
+   Array::class.javaObjectType as Class<Array<String>>,
+  )
   
   @JvmStatic
-  fun testGetSimpleEnumInstance(): SimpleEnum {
-   return TypeLiteralConversion.getInstance<SimpleEnum>(
-    SimpleEnum::class.javaObjectType,
-   )
-  }
+  fun testGetSimpleEnumInstance(): SimpleEnum = TypeLiteralConversion.getInstance<SimpleEnum>(
+   SimpleEnum::class.javaObjectType,
+  )
   
   @JvmStatic
-  fun testGetRecursiveInstance(): Recursive<*> {
-   return TypeLiteralConversion.getInstance<Recursive<*>>(
-    Recursive::class.javaObjectType as Class<Recursive<*>>,
-   ) as Recursive<*>
-  }
+  fun testGetRecursiveInstance(): Recursive<*> = TypeLiteralConversion.getInstance<Recursive<*>>(
+   Recursive::class.javaObjectType as Class<Recursive<*>>,
+  ) as Recursive<*>
   
   @JvmStatic
-  fun testGetRecursiveSpecializedInstance(): RecursiveSpecialized {
-   return TypeLiteralConversion.getInstance<RecursiveSpecialized>(
-    RecursiveSpecialized::class.javaObjectType,
-   )
-  }
+  fun testGetRecursiveSpecializedInstance(): RecursiveSpecialized = TypeLiteralConversion.getInstance<RecursiveSpecialized>(
+   RecursiveSpecialized::class.javaObjectType,
+  )
   
   @JvmStatic
   fun <T> getInstance(clazz: Class<T & Any>): T {

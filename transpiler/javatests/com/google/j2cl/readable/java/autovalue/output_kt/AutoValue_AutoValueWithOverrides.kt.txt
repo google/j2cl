@@ -34,11 +34,7 @@ class AutoValue_AutoValueWithOverrides: AutoValueWithOverrides {
   this.booleanField = booleanField
  }
  
- override fun getBaseField(): Int {
-  return this.baseField
- }
+ override fun getBaseField(): Int = this.baseField
  
- override fun getBooleanField(): Boolean {
-  return this.booleanField
- }
+ override fun getBooleanField(): Boolean = this.booleanField
 }

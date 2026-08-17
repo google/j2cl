@@ -35,9 +35,7 @@ open class NullabilityInferenceProblem15 {
   }
   
   @JvmStatic
-  private fun <T: SpacersCell<T>> getCellsInRow(table: SpacersTable<T>): JsArray<T> {
-   return table.getCellsInRow() as JsArray<T>
-  }
+  private fun <T: SpacersCell<T>> getCellsInRow(table: SpacersTable<T>): JsArray<T> = table.getCellsInRow() as JsArray<T>
  }
  
  interface JsArray<T>

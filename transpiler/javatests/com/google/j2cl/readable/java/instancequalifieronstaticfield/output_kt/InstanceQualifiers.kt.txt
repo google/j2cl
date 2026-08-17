@@ -36,14 +36,10 @@ open class InstanceQualifiers {
   var sideEffectCount: Int = 0
   
   @JvmStatic
-  fun getStaticValue(): Int {
-   return InstanceQualifiers.staticField
-  }
+  fun getStaticValue(): Int = InstanceQualifiers.staticField
   
   @JvmStatic
-  fun getStaticInstanceQualifiers(): InstanceQualifiers? {
-   return null
-  }
+  fun getStaticInstanceQualifiers(): InstanceQualifiers? = null
   
   @JvmStatic
   fun main(vararg args: String?) {

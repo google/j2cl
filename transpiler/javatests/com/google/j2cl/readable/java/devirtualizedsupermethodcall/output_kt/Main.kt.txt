@@ -29,61 +29,35 @@ import kotlin.Short
 import kotlin.Suppress
 
 internal open class SubNumber internal constructor(): Number() {
- override fun toInt(): Int {
-  return 0
- }
+ override fun toInt(): Int = 0
  
- override fun toLong(): Long {
-  return 0.toLong()
- }
+ override fun toLong(): Long = 0.toLong()
  
- override fun toFloat(): Float {
-  return 0.0f
- }
+ override fun toFloat(): Float = 0.0f
  
- override fun toDouble(): Double {
-  return 0.0
- }
+ override fun toDouble(): Double = 0.0
  
- override fun toByte(): Byte {
-  return toInt().toByte()
- }
+ override fun toByte(): Byte = toInt().toByte()
  
- override fun toShort(): Short {
-  return toInt().toShort()
- }
+ override fun toShort(): Short = toInt().toShort()
 }
 
 internal open class OtherSubNumber internal constructor(): Number() {
- override fun toInt(): Int {
-  return 0
- }
+ override fun toInt(): Int = 0
  
- override fun toLong(): Long {
-  return 0.toLong()
- }
+ override fun toLong(): Long = 0.toLong()
  
- override fun toFloat(): Float {
-  return 0.0f
- }
+ override fun toFloat(): Float = 0.0f
  
- override fun toDouble(): Double {
-  return 0.0
- }
+ override fun toDouble(): Double = 0.0
  
- override fun toByte(): Byte {
-  return 0.toByte()
- }
+ override fun toByte(): Byte = 0.toByte()
  
- override fun toShort(): Short {
-  return 0.toShort()
- }
+ override fun toShort(): Short = 0.toShort()
 }
 
 internal open class FooCallsSuperObjectMethod internal constructor() {
- override fun hashCode(): Int {
-  return super.hashCode()
- }
+ override fun hashCode(): Int = super.hashCode()
 }
 
 open class Main {

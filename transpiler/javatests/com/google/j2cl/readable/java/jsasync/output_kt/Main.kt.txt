@@ -35,9 +35,7 @@ open class Main {
  private val x: IThenable<Int?>? = Promise.resolve<Int?>(10)
  
  @JsAsync
- internal open fun emptyAsyncMethod_pp_jsasync(): IThenable<Void?>? {
-  return null
- }
+ internal open fun emptyAsyncMethod_pp_jsasync(): IThenable<Void?>? = null
  
  @JsAsync
  internal open fun asyncMethod_pp_jsasync(): IThenable<Int?>? {
@@ -48,54 +46,42 @@ open class Main {
  }
  
  @JsAsync
- internal open fun <T> parametricAsyncMethod_pp_jsasync(value: T): IThenable<T>? {
-  return Promise.resolve<T>(
-   Helper.await<T>(
-    Promise.resolve<T>(value),
-   ),
-  )
- }
+ internal open fun <T> parametricAsyncMethod_pp_jsasync(value: T): IThenable<T>? = Promise.resolve<T>(
+  Helper.await<T>(
+   Promise.resolve<T>(value),
+  ),
+ )
  
  @JsAsync
  @JsMethod(name = "jsAsyncAndJsMethod")
- internal open fun jsAsyncAndJsMethod_pp_jsasync(): IThenable<Void?>? {
-  return null
- }
+ internal open fun jsAsyncAndJsMethod_pp_jsasync(): IThenable<Void?>? = null
  
  internal open fun testAsyncLambdas_pp_jsasync() {
-  val i: AsyncInterface = AsyncInterface {
-   return@AsyncInterface Promise.resolve<Int?>(
-    Helper.await<Int?>(
-     Promise.resolve<Int?>(5),
-    ),
-   )
-  }
+  val i: AsyncInterface = AsyncInterface { Promise.resolve<Int?>(
+   Helper.await<Int?>(
+    Promise.resolve<Int?>(5),
+   ),
+  ) }
   val o: BaseInterface = object : BaseInterface {
    @JsAsync
-   override fun asyncCall(): IThenable<Int?>? {
-    return Promise.resolve<Int?>(
-     Helper.await<Int?>(
-      this@Main.x,
-     ),
-    )
-   }
-  }
-  val j: AsyncJsFunctionInterface = AsyncJsFunctionInterface {
-   return@AsyncJsFunctionInterface Promise.resolve<Int?>(
+   override fun asyncCall(): IThenable<Int?>? = Promise.resolve<Int?>(
     Helper.await<Int?>(
-     Promise.resolve<Int?>(5),
+     this@Main.x,
     ),
    )
   }
+  val j: AsyncJsFunctionInterface = AsyncJsFunctionInterface { Promise.resolve<Int?>(
+   Helper.await<Int?>(
+    Promise.resolve<Int?>(5),
+   ),
+  ) }
   val optimizableJsFunction: JsFunctionInterface = object : JsFunctionInterface {
    @JsAsync
-   override fun doSomething(): IThenable<Int?>? {
-    return Promise.resolve<Int?>(
-     Helper.await<Int?>(
-      this@Main.x,
-     ),
-    )
-   }
+   override fun doSomething(): IThenable<Int?>? = Promise.resolve<Int?>(
+    Helper.await<Int?>(
+     this@Main.x,
+    ),
+   )
   }
   val unoptimizableJsFunction: JsFunctionInterface = object : JsFunctionInterface {
    @JsAsync
@@ -113,23 +99,19 @@ open class Main {
  companion object {
   @JvmStatic
   @JsAsync
-  internal fun staticAsyncMethod_pp_jsasync(): IThenable<Void?>? {
-   return Promise.resolve<Void?>(
-    Helper.await<Void?>(
-     Promise.resolve<Void?>(
-      null as Void?,
-     ),
+  internal fun staticAsyncMethod_pp_jsasync(): IThenable<Void?>? = Promise.resolve<Void?>(
+   Helper.await<Void?>(
+    Promise.resolve<Void?>(
+     null as Void?,
     ),
-   )
-  }
+   ),
+  )
  }
  
  @JsType
  internal open class JsTypeClass internal constructor() {
   @JsAsync
-  open fun asyncMethod(): IThenable<Int?>? {
-   return null
-  }
+  open fun asyncMethod(): IThenable<Int?>? = null
  }
  
  internal fun interface BaseInterface {
@@ -143,13 +125,11 @@ open class Main {
  
  internal interface InterfaceWithAsyncDefaultMethod {
   @JsAsync
-  fun asyncCall(): IThenable<Int?>? {
-   return Promise.resolve<Int?>(
-    Helper.await<Int?>(
-     Promise.resolve<Int?>(5),
-    ),
-   )
-  }
+  fun asyncCall(): IThenable<Int?>? = Promise.resolve<Int?>(
+   Helper.await<Int?>(
+    Promise.resolve<Int?>(5),
+   ),
+  )
  }
  
  @JsFunction

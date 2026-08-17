@@ -42,20 +42,12 @@ open class DefinitelyNotNull {
    this.ordering_pp_j2ktnotpassing = ordering
   }
   
-  public fun <S: T?> reverse(): Ordering<S> {
-   return this.ordering_pp_j2ktnotpassing.reverse_pp_j2ktnotpassing().nullsLast_pp_j2ktnotpassing<S>() as Ordering<S>
-  }
+  public fun <S: T?> reverse(): Ordering<S> = this.ordering_pp_j2ktnotpassing.reverse_pp_j2ktnotpassing().nullsLast_pp_j2ktnotpassing<S>() as Ordering<S>
   
-  public fun <S: T?> nullsLast(): Ordering<S?> {
-   return this.ordering_pp_j2ktnotpassing.nullsLast_pp_j2ktnotpassing<S>()
-  }
+  public fun <S: T?> nullsLast(): Ordering<S?> = this.ordering_pp_j2ktnotpassing.nullsLast_pp_j2ktnotpassing<S>()
   
-  override fun <S: T?> reverse_pp_j2ktnotpassing(): Ordering<S> {
-   return this.reverse()
-  }
+  override fun <S: T?> reverse_pp_j2ktnotpassing(): Ordering<S> = this.reverse()
   
-  override fun <S: T?> nullsLast_pp_j2ktnotpassing(): Ordering<S?> {
-   return this.nullsLast()
-  }
+  override fun <S: T?> nullsLast_pp_j2ktnotpassing(): Ordering<S?> = this.nullsLast()
  }
 }

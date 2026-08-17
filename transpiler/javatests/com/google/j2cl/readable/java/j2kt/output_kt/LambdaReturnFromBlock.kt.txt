@@ -30,9 +30,7 @@ import kotlin.synchronized
 
 open class LambdaReturnFromBlock {
  open fun testDoWhile() {
-  val fn: Function<Void> = Function {
-   return@Function null
-  } as Function<Void>
+  val fn: Function<Void> = Function { null } as Function<Void>
  }
  
  open fun testSynchronized() {

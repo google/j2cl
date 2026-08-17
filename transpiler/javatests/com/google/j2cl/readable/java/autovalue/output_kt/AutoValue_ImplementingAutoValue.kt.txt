@@ -37,13 +37,9 @@ class AutoValue_ImplementingAutoValue: ImplementingAutoValue {
   this.foo = foo
  }
  
- override fun getFoo(): String? {
-  return this.foo
- }
+ override fun getFoo(): String? = this.foo
  
- override fun toString(): String {
-  return "ImplementingAutoValue{foo=" + this.foo + "}"
- }
+ override fun toString(): String = "ImplementingAutoValue{foo=" + this.foo + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

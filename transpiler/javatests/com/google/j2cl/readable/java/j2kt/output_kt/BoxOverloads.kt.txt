@@ -153,9 +153,7 @@ open class BoxOverloads {
   }
   
   @JvmStatic
-  fun <T: Any> firstNonNull(t1: T?, t2: T): T {
-   return (if (t1 != null) t1 else t2)!!
-  }
+  fun <T: Any> firstNonNull(t1: T?, t2: T): T = (if (t1 != null) t1 else t2)!!
   
   @JvmStatic
   fun testFirstNonNull(i: Int?) {

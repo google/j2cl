@@ -53,21 +53,13 @@ open class GenericMethod<T> {
   LocalClass<T_1>()
  }
  
- open fun <T_1> bar(): GenericMethod<T_1>? {
-  return null
- }
+ open fun <T_1> bar(): GenericMethod<T_1>? = null
  
- open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? {
-  return array
- }
+ open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? = array
  
- open fun <T_1> checked(): T_1 {
-  return null as T_1
- }
+ open fun <T_1> checked(): T_1 = null as T_1
  
- open fun <T_1> unchecked(): T_1 {
-  return null as T_1
- }
+ open fun <T_1> unchecked(): T_1 = null as T_1
  
  open fun test() {
   val g: GenericMethod<Number?> = GenericMethod<Number?>()
@@ -151,9 +143,7 @@ open class GenericMethod<T> {
   }
   
   @JvmStatic
-  internal fun <V> testUpperWildcardBound_pp_genericmethod(supplier: Supplier<out V>?): V {
-   return supplier!!.get()
-  }
+  internal fun <V> testUpperWildcardBound_pp_genericmethod(supplier: Supplier<out V>?): V = supplier!!.get()
   
   @JvmStatic
   internal fun <T_1: Number?> methodWithBoundTypeVariable_pp_genericmethod(unusedForInference: T_1) {}
@@ -165,21 +155,15 @@ open class GenericMethod<T> {
  }
  
  open class SuperContainer<C: Container<*>?> internal constructor() {
-  internal open fun get_pp_genericmethod(): C {
-   return null as C
-  }
+  internal open fun get_pp_genericmethod(): C = null as C
  }
  
  open class Container<CT: Content?> internal constructor() {
-  internal open fun get_pp_genericmethod(): CT {
-   return null as CT
-  }
+  internal open fun get_pp_genericmethod(): CT = null as CT
  }
  
  open class Content internal constructor() {
-  internal open fun getProp_pp_genericmethod(): String? {
-   return null
-  }
+  internal open fun getProp_pp_genericmethod(): String? = null
  }
  
  fun interface Publisher<V> {

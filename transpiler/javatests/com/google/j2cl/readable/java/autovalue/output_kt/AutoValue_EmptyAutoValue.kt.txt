@@ -29,9 +29,7 @@ import kotlin.Suppress
 class AutoValue_EmptyAutoValue: EmptyAutoValue {
  private constructor()
  
- override fun toString(): String {
-  return "EmptyAutoValue{}"
- }
+ override fun toString(): String = "EmptyAutoValue{}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {
@@ -49,8 +47,6 @@ class AutoValue_EmptyAutoValue: EmptyAutoValue {
  }
  
  class Builder internal constructor(): autovalue.EmptyAutoValue.Builder() {
-  override fun build(): EmptyAutoValue? {
-   return AutoValue_EmptyAutoValue()
-  }
+  override fun build(): EmptyAutoValue? = AutoValue_EmptyAutoValue()
  }
 }

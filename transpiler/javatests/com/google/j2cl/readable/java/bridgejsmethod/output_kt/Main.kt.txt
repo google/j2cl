@@ -56,9 +56,7 @@ open class Main {
  
  open class A<T> {
   @JsMethod
-  open fun `fun`(t: T): T {
-   return t
-  }
+  open fun `fun`(t: T): T = t
   
   open fun bar(t: T) {}
  }
@@ -74,25 +72,19 @@ open class Main {
  
  open class B: A<String?>() {
   @JsMethod
-  override fun `fun`(s: String?): String? {
-   return s
-  }
+  override fun `fun`(s: String?): String? = s
   
   @JsMethod
   override fun bar(s: String?) {}
  }
  
  open class C: A<Int?>() {
-  override fun `fun`(i: Int?): Int? {
-   return i
-  }
+  override fun `fun`(i: Int?): Int? = i
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  open class D: A<Int?>(), I<Int?> {
-  override fun `fun`(i: Int?): Int? {
-   return i
-  }
+  override fun `fun`(i: Int?): Int? = i
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
@@ -107,9 +99,7 @@ open class Main {
  
  open class H<V>: G<V> {
   @JsMethod
-  override fun enclose(value: V): V {
-   return null as V
-  }
+  override fun enclose(value: V): V = null as V
  }
  
  open class K<K1, K2> {
@@ -133,9 +123,7 @@ open class Main {
  internal open inner class O internal constructor(): Main.N() {
   private var b: B? = null
   
-  override fun getB(): B? {
-   return this.b
-  }
+  override fun getB(): B? = this.b
  }
  
  internal fun interface P {
@@ -149,9 +137,7 @@ open class Main {
  
  @JsType
  internal abstract inner class R internal constructor(): Main.Q() {
-  override fun getKey(): String? {
-   return null
-  }
+  override fun getKey(): String? = null
  }
  
  internal open inner class S internal constructor(): Main.R()

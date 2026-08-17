@@ -39,9 +39,7 @@ open class InitializationProblemWithNullLiteral {
  internal open class Foo<V> internal constructor() {
   companion object {
    @JvmStatic
-   internal fun <V> with_pp_j2kt(v: V): Foo<V> {
-    return Foo<V>()
-   }
+   internal fun <V> with_pp_j2kt(v: V): Foo<V> = Foo<V>()
   }
  }
 }

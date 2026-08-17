@@ -339,7 +339,15 @@ internal data class ExpressionSources(
         functionExpression.typeDescriptor.functionalInterface!!,
         omitTypeArguments = true,
       ),
-      block(parametersSource(functionExpression), lambdaBodySource(functionExpression)),
+      functionExpression.singleExpressionOrNull.let { singleExpression ->
+        if (singleExpression == null) {
+          block(parametersSource(functionExpression), lambdaBodySource(functionExpression))
+        } else {
+          inInlineCurlyBrackets(
+            spaceSeparated(parametersSource(functionExpression), expressionSource(singleExpression))
+          )
+        }
+      },
     )
 
   private fun lambdaBodySource(functionExpression: FunctionExpression): Source =

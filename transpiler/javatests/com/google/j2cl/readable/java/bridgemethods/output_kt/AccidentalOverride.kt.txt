@@ -29,20 +29,14 @@ fun interface I<T, S> {
 }
 
 open class A<T, S> internal constructor() {
- open fun `fun`(s: S): T {
-  return null as T
- }
+ open fun `fun`(s: S): T = null as T
  
- open fun get(): T {
-  return null as T
- }
+ open fun get(): T = null as T
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class B internal constructor(): A<Number?, String?>(), I<Int?, String?> {
- override fun `fun`(s: String?): Int? {
-  return Int(1)
- }
+ override fun `fun`(s: String?): Int? = Int(1)
 }
 
 interface SpecializedInterface {

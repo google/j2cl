@@ -16,8 +16,10 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.AstUtils
+import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.TypeDescriptors
@@ -76,3 +78,6 @@ internal val Field.isKtLateInit: Boolean
       !TypeDescriptors.isBoxedType(descriptor.typeDescriptor) &&
       !hasInitializer()
   }
+
+internal val MethodLike.singleExpressionOrNull: Expression?
+  get() = body.statements?.singleOrNull()?.run { this as? ReturnStatement }?.expression

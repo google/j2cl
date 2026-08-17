@@ -55,9 +55,7 @@ open class Main {
   fun m(): Int
   
   @JsOverlay
-  fun callM(): Int {
-   return this@NativeJsTypeInterfaceWithOverlay.m()
-  }
+  fun callM(): Int = this@NativeJsTypeInterfaceWithOverlay.m()
   
   companion object {
    @JvmField
@@ -71,19 +69,13 @@ open class Main {
   external open fun m(): Int
   
   @JsOverlay
-  fun callM(): Int {
-   return this.m()
-  }
+  fun callM(): Int = this.m()
   
   @JsOverlay
-  internal fun foo_private_2(): Int {
-   return 1
-  }
+  internal fun foo_private_2(): Int = 1
   
   @JsOverlay
-  internal fun baz_private_2(): Int {
-   return 1
-  }
+  internal fun baz_private_2(): Int = 1
   
   @JsOverlay
   fun overlayWithJsFunction() {
@@ -108,21 +100,15 @@ open class Main {
    
    @JvmStatic
    @JsOverlay
-   fun `fun`(): Int {
-    return 1
-   }
+   fun `fun`(): Int = 1
    
    @JvmStatic
    @JsOverlay
-   internal fun bar_private_2(): Int {
-    return 1
-   }
+   internal fun bar_private_2(): Int = 1
    
    @JvmStatic
    @JsOverlay
-   fun varargs(vararg a: Int): Int {
-    return a!![0]
-   }
+   fun varargs(vararg a: Int): Int = a!![0]
    
    @JvmStatic
    @JsOverlay

@@ -41,23 +41,15 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
   this.ignored = ignored
  }
  
- override fun getField(): Int {
-  return this.getField
- }
+ override fun getField(): Int = this.getField
  
  @JsMethod(name = "getField2")
- override fun getWithJsMethod_pp_autovalue(): Int {
-  return this.getWithJsMethod
- }
+ override fun getWithJsMethod_pp_autovalue(): Int = this.getWithJsMethod
  
  @JsIgnore
- override fun ignored(): Int {
-  return this.ignored
- }
+ override fun ignored(): Int = this.ignored
  
- override fun toString(): String {
-  return "AutoValueJsType{getField=" + this.getField + ", getWithJsMethod=" + this.getWithJsMethod + ", ignored=" + this.ignored + "}"
- }
+ override fun toString(): String = "AutoValueJsType{getField=" + this.getField + ", getWithJsMethod=" + this.getWithJsMethod + ", ignored=" + this.ignored + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

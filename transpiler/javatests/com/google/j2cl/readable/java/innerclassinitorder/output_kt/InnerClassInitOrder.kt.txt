@@ -181,9 +181,7 @@ open class InnerClassInitOrder {
  }
  
  open class ESOuter private constructor() {
-  open fun newESInner(): ESOuter.ESInner? {
-   return ESInner()
-  }
+  open fun newESInner(): ESOuter.ESInner? = ESInner()
   
   open inner class ESInner {
    @JvmField
@@ -200,9 +198,7 @@ open class InnerClassInitOrder {
  }
  
  open class ESWGOuter<T> private constructor() {
-  open fun newESWGInner(): ESWGOuter<T>.ESWGInner? {
-   return ESWGInner()
-  }
+  open fun newESWGInner(): ESWGOuter<T>.ESWGInner? = ESWGInner()
   
   open inner class ESWGInner {
    @JvmField
@@ -226,36 +222,22 @@ open class InnerClassInitOrder {
    this.value = i
   }
   
-  open fun checkDispatch(): Int {
-   return 1
-  }
+  open fun checkDispatch(): Int = 1
   
   open inner class OuterIsNotSuper {
-   open fun getValue(): Int {
-    return this@Outer.value
-   }
+   open fun getValue(): Int = this@Outer.value
   }
   
   open inner class OuterIsSuper constructor(i: Int): Outer(i) {
-   override fun checkDispatch(): Int {
-    return 2
-   }
+   override fun checkDispatch(): Int = 2
    
-   open fun checkDispatchFromSub1(): Int {
-    return super<Outer>.checkDispatch()
-   }
+   open fun checkDispatchFromSub1(): Int = super<Outer>.checkDispatch()
    
-   open fun checkDispatchFromSub2(): Int {
-    return object : Outer(1) {
-     fun go(): Int {
-      return super<Outer>@OuterIsSuper.checkDispatch()
-     }
-    }.go()
-   }
+   open fun checkDispatchFromSub2(): Int = object : Outer(1) {
+    fun go(): Int = super<Outer>@OuterIsSuper.checkDispatch()
+   }.go()
    
-   open fun unqualifiedAlloc(): Outer.OuterIsNotSuper? {
-    return OuterIsNotSuper()
-   }
+   open fun unqualifiedAlloc(): Outer.OuterIsNotSuper? = OuterIsNotSuper()
   }
   
   open inner class TestUnqualifiedSuperCall: Outer.OuterIsNotSuper()

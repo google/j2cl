@@ -36,9 +36,7 @@ open class NullabilityInferenceProblem16 {
   @JvmStatic
   fun test(holders: NullabilityInferenceProblem16.ImmutableList<Holder<Void?>>) {
    NullabilityInferenceProblem16.wrap<Void?>(holders).check(
-    Predicate { list: NullabilityInferenceProblem16.ImmutableList<Holder<Void>> ->
-     return@Predicate true
-    },
+    Predicate { list: NullabilityInferenceProblem16.ImmutableList<Holder<Void>> -> true },
    )
   }
  }

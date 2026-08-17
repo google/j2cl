@@ -30,9 +30,7 @@ internal open class UnsatisfiedTypeBounds internal constructor() {
  internal interface Command
  
  internal open class FooCommand internal constructor(): Foo<FooCommand>, Command {
-  override fun get(): FooCommand {
-   return this
-  }
+  override fun get(): FooCommand = this
  }
  
  internal class Helper<T: Any> internal constructor()

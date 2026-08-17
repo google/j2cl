@@ -54,9 +54,7 @@ open class LocalClassInStaticContext {
   
   open fun test() {
    open class D internal constructor() {
-    open fun `fun`(): Int {
-     return this@C.f
-    }
+    open fun `fun`(): Int = this@C.f
    }
    D().`fun`()
   }

@@ -104,9 +104,7 @@ open class NullabilityScopes {
    Foo<String?>(nonNullMarkedFoo)
   }
   
-  open fun testRecursiveWildcardConversion(table: Table<out Cell<*>>?): Array<out Cell<*>?>? {
-   return table!!.getNullableCells() as Array<out Cell<*>?>?
-  }
+  open fun testRecursiveWildcardConversion(table: Table<out Cell<*>>?): Array<out Cell<*>?>? = table!!.getNullableCells() as Array<out Cell<*>?>?
   
   open class Foo<K> {
    constructor()

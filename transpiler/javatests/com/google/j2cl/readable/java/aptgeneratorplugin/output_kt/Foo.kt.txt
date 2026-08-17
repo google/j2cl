@@ -25,7 +25,5 @@ import kotlin.Suppress
 import kotlin.jvm.javaObjectType
 
 open class Foo {
- override fun hashCode(): Int {
-  return Dummy::class.javaObjectType.hashCode()
- }
+ override fun hashCode(): Int = Dummy::class.javaObjectType.hashCode()
 }

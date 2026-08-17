@@ -32,16 +32,12 @@ abstract class AutoValueWithExtensions internal constructor() {
  
  abstract fun getStringField(): String?
  
- internal open fun getMemoizedNative_pp_autovalue(): Int {
-  return this.getIntField() * 2
- }
+ internal open fun getMemoizedNative_pp_autovalue(): Int = this.getIntField() * 2
  
  internal abstract fun toPrettyString_pp_autovalue(): String?
  
  companion object {
   @JvmStatic
-  internal fun create_pp_autovalue(): AutoValueWithExtensions? {
-   return AutoValue_AutoValueWithExtensions(42, "text")
-  }
+  internal fun create_pp_autovalue(): AutoValueWithExtensions? = AutoValue_AutoValueWithExtensions(42, "text")
  }
 }

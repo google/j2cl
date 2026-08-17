@@ -105,13 +105,9 @@ open class ExplicitNotNullable {
   this.f13 = Any()
  }
  
- open fun m1(a: String, b: List<Double>): String {
-  return ""
- }
+ open fun m1(a: String, b: List<Double>): String = ""
  
- open fun m2(a: String?, b: List<Double?>): String? {
-  return null
- }
+ open fun m2(a: String?, b: List<Double?>): String? = null
  
  @JsMethod
  open fun m3(vararg args: String) {
@@ -145,14 +141,10 @@ open class ExplicitNotNullable {
  
  @JvmField
  internal var i_pp_nullability_explicitnotnullable: Function<String, String> = object : Function<String, String> {
-  override fun apply(s: String): String {
-   return s
-  }
+  override fun apply(s: String): String = s
  }
  
- internal open fun testDependentWildcards_pp_nullability_explicitnotnullable(x: DependentTypeParameters<*, *>): DependentTypeParameters<*, *> {
-  return x.getThis_pp_nullability_explicitnotnullable()
- }
+ internal open fun testDependentWildcards_pp_nullability_explicitnotnullable(x: DependentTypeParameters<*, *>): DependentTypeParameters<*, *> = x.getThis_pp_nullability_explicitnotnullable()
  
  companion object {
   @JvmStatic
@@ -318,12 +310,8 @@ open class ExplicitNotNullable {
    val nonNullable: Consumer<String> = Consumer { arg0_1: String ->
     ExplicitNotNullable.nonNullableAccept_pp_nullability_explicitnotnullable(arg0_1)
    }
-   val newObject: Supplier<Any> = Supplier {
-    return@Supplier Any()
-   }
-   val newArray: IntFunction<Array<Any>> = IntFunction { arg0_2: Int ->
-    return@IntFunction uninitializedArrayOf<Any>(arg0_2)
-   }
+   val newObject: Supplier<Any> = Supplier { Any() }
+   val newArray: IntFunction<Array<Any>> = IntFunction { arg0_2: Int -> uninitializedArrayOf<Any>(arg0_2) }
   }
   
   @JvmStatic
@@ -402,17 +390,13 @@ open class ExplicitNotNullable {
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
   
-  internal open fun getNullable_pp_nullability_explicitnotnullable(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability_explicitnotnullable(): N? = null
   
   internal open fun getNonNullable_pp_nullability_explicitnotnullable(): N {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N {
-   return null!!
-  }
+  internal open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N = null!!
   
   internal open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
   
@@ -436,17 +420,13 @@ open class ExplicitNotNullable {
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
   
-  internal open fun getNullable_pp_nullability_explicitnotnullable(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability_explicitnotnullable(): N? = null
   
   internal open fun getNonNullable_pp_nullability_explicitnotnullable(): N & Any {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N {
-   return null as N
-  }
+  internal open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N = null as N
   
   internal open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
   
@@ -470,17 +450,13 @@ open class ExplicitNotNullable {
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
   
-  internal open fun getNullable_pp_nullability_explicitnotnullable(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability_explicitnotnullable(): N? = null
   
   internal open fun getNonNullable_pp_nullability_explicitnotnullable(): N {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N {
-   return null!!
-  }
+  internal open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N = null!!
   
   internal open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
   
@@ -506,9 +482,7 @@ open class ExplicitNotNullable {
  }
  
  internal open class DependentTypeParameters<E: Any, T: E?> internal constructor() {
-  internal open fun getThis_pp_nullability_explicitnotnullable(): DependentTypeParameters<E, T> {
-   return this
-  }
+  internal open fun getThis_pp_nullability_explicitnotnullable(): DependentTypeParameters<E, T> = this
  }
 }
 

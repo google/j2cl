@@ -28,10 +28,8 @@ import kotlin.jvm.JvmStatic
 open class NullabilityInferenceProblem4 {
  companion object {
   @JvmStatic
-  fun compareOrThrow(left: Comparable<Any>, right: Comparable<Any>): Int {
-   return left.compareTo(
-    right as Any,
-   )
-  }
+  fun compareOrThrow(left: Comparable<Any>, right: Comparable<Any>): Int = left.compareTo(
+   right as Any,
+  )
  }
 }

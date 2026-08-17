@@ -129,9 +129,7 @@ open class JsMethodExample {
  
  internal interface ParameterizedInterface<T> {
   @JsMethod
-  fun m(): T {
-   return null as T
-  }
+  fun m(): T = null as T
  }
  
  internal open class ParameterizedInterfaceImpl: ParameterizedInterface<String?> {

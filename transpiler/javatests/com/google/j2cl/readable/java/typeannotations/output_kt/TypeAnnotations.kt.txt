@@ -31,13 +31,9 @@ internal abstract class AbstractType internal constructor(): ParametricType<Abst
 internal abstract class AbstractTypeNonNull internal constructor(): ParametricType<AbstractType>
 
 internal open class Parent internal constructor() {
- open fun m(s: String, c: Parent?): Parent? {
-  return c
- }
+ open fun m(s: String, c: Parent?): Parent? = c
  
- open fun m(l: List<String>?, c: Parent?): List<Parent>? {
-  return ArrayList<Parent>()
- }
+ open fun m(l: List<String>?, c: Parent?): List<Parent>? = ArrayList<Parent>()
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")

@@ -136,9 +136,7 @@ open class Varargs {
   }
   
   @JvmStatic
-  fun <T> passthrough(o: T): T {
-   return o
-  }
+  fun <T> passthrough(o: T): T = o
  }
  
  internal fun interface FunctionalInterface {

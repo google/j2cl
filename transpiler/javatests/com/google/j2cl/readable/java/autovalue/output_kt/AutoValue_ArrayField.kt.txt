@@ -37,15 +37,11 @@ class AutoValue_ArrayField: ArrayField {
   this.arrayField = arrayField
  }
  
- override fun getArrayField(): IntArray? {
-  return this.arrayField
- }
+ override fun getArrayField(): IntArray? = this.arrayField
  
- override fun toString(): String {
-  return "ArrayField{arrayField=" + Arrays.toString(
-   this.arrayField,
-  ) + "}"
- }
+ override fun toString(): String = "ArrayField{arrayField=" + Arrays.toString(
+  this.arrayField,
+ ) + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

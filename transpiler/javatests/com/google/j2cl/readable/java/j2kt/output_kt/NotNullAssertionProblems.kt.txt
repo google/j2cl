@@ -257,9 +257,7 @@ open class NotNullAssertionProblems {
   }
   
   @JvmStatic
-  fun <T> getUnsafeNull(): T {
-   return null as T
-  }
+  fun <T> getUnsafeNull(): T = null as T
   
   @JvmStatic
   fun <T: Any> testDefaultValue(value: Any?) {
@@ -276,9 +274,7 @@ open class NotNullAssertionProblems {
   }
   
   @JvmStatic
-  fun <T: Any> getDefaultValue(cls: Class<T>): T {
-   return NotNullAssertionProblems.getUnsafeNull<T>()
-  }
+  fun <T: Any> getDefaultValue(cls: Class<T>): T = NotNullAssertionProblems.getUnsafeNull<T>()
   
   @JvmStatic
   fun <T> accept1(t: T) {}
@@ -310,19 +306,13 @@ open class NotNullAssertionProblems {
   @JvmStatic
   fun testNullWildcardInLambda() {
    val supplier: Supplier<*> = NotNullAssertionProblems.wrap<Any?>(
-    Supplier {
-     return@Supplier null
-    },
+    Supplier { null },
    )
    supplier.getValue()
   }
   
   @JvmStatic
-  fun <T> wrap(supplier: Supplier<out T>): Supplier<T> {
-   return Supplier {
-    return@Supplier supplier.getValue()
-   }
-  }
+  fun <T> wrap(supplier: Supplier<out T>): Supplier<T> = Supplier { supplier.getValue() }
  }
  
  interface Class1
@@ -363,9 +353,7 @@ open class NotNullAssertionProblems {
   @JvmField
   internal var defaultValue_pp_j2kt: V = null as V
   
-  internal open fun f_pp_j2kt(): V {
-   return (if (true) this.defaultValue_pp_j2kt else this.defaultValue_pp_j2kt) as V
-  }
+  internal open fun f_pp_j2kt(): V = (if (true) this.defaultValue_pp_j2kt else this.defaultValue_pp_j2kt) as V
  }
  
  fun interface Supplier<V> {

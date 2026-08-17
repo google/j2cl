@@ -31,15 +31,9 @@ import kotlin.Suppress
 abstract class AutoValueWithOverrides: BaseClass() {
  abstract fun getBooleanField(): Boolean
  
- override fun equals(o: Any?): Boolean {
-  return false
- }
+ override fun equals(o: Any?): Boolean = false
  
- override fun hashCode(): Int {
-  return 1
- }
+ override fun hashCode(): Int = 1
  
- override fun toString(): String {
-  return "x"
- }
+ override fun toString(): String = "x"
 }

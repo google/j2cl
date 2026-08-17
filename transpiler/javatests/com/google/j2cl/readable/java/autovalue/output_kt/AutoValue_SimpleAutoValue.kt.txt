@@ -53,29 +53,17 @@ class AutoValue_SimpleAutoValue: SimpleAutoValue {
   this.nullableField = nullableField
  }
  
- override fun getIntField(): Int {
-  return this.intField
- }
+ override fun getIntField(): Int = this.intField
  
- override fun getBooleanField(): Boolean {
-  return this.booleanField
- }
+ override fun getBooleanField(): Boolean = this.booleanField
  
- override fun getStringField(): String? {
-  return this.stringField
- }
+ override fun getStringField(): String? = this.stringField
  
- override fun getDoubleField(): Double? {
-  return this.doubleField
- }
+ override fun getDoubleField(): Double? = this.doubleField
  
- override fun getNullableField(): Double? {
-  return this.nullableField
- }
+ override fun getNullableField(): Double? = this.nullableField
  
- override fun toString(): String {
-  return "SimpleAutoValue{intField=" + this.intField + ", booleanField=" + this.booleanField + ", stringField=" + this.stringField + ", doubleField=" + this.doubleField + ", nullableField=" + this.nullableField + "}"
- }
+ override fun toString(): String = "SimpleAutoValue{intField=" + this.intField + ", booleanField=" + this.booleanField + ", stringField=" + this.stringField + ", doubleField=" + this.doubleField + ", nullableField=" + this.nullableField + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

@@ -29,50 +29,32 @@ internal fun interface MyInterface {
 }
 
 internal open class SuperParent internal constructor() {
- open fun `fun`(a: Int, b: Int): Int {
-  return a + b + 111
- }
+ open fun `fun`(a: Int, b: Int): Int = a + b + 111
  
- open fun bar(a: Int, b: Int): Int {
-  return a * b + 222
- }
+ open fun bar(a: Int, b: Int): Int = a * b + 222
 }
 
 internal open class Parent internal constructor(): SuperParent() {
  @JsMethod(name = "sum")
- override fun `fun`(a: Int, b: Int): Int {
-  return a + b
- }
+ override fun `fun`(a: Int, b: Int): Int = a + b
  
  @JsMethod
- override fun bar(a: Int, b: Int): Int {
-  return a * b
- }
+ override fun bar(a: Int, b: Int): Int = a * b
  
  @JsMethod(name = "myFoo")
- open fun foo(a: Int): Int {
-  return a
- }
+ open fun foo(a: Int): Int = a
 }
 
 internal open class Child internal constructor(): Parent(), MyInterface {
- override fun `fun`(a: Int, b: Int): Int {
-  return a + b + 1
- }
+ override fun `fun`(a: Int, b: Int): Int = a + b + 1
  
- override fun bar(a: Int, b: Int): Int {
-  return a * b + 1
- }
+ override fun bar(a: Int, b: Int): Int = a * b + 1
  
  @JsMethod(name = "myFoo")
- override fun foo(a: Int): Int {
-  return a
- }
+ override fun foo(a: Int): Int = a
  
  @JsMethod
- override fun intfFoo(): Int {
-  return 1
- }
+ override fun intfFoo(): Int = 1
 }
 
 open class Main {

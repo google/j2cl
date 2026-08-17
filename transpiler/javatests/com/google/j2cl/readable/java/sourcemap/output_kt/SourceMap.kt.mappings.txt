@@ -185,24 +185,17 @@
 ...
           }
         };] => [val f: Function<Int?, Int?> = object : Function<Int?, Int?> {
-   override fun apply(i: Int?): Int? {
+   override fun apply(i: Int?): Int? = helper1(
 ...
-   }
+   private fun helper2(x: Int): Int = x + 1
   }] "sourcemap.SourceMap.testAnonymousClass"
 [f] => [f] "f"
 [apply] => [apply]
 [i] => [i] "i"
-[return helper1(i) + helper2(i);] => [return helper1(
-     i!!.toInt(),
-...
-     i!!.toInt(),
-    )] "sourcemap.SourceMap$1.apply"
 [helper1] => [helper1]
 [x] => [x] "x"
-[return x * 2 + outer;] => [return x * 2 + outer] "sourcemap.SourceMap$1.helper1"
 [helper2] => [helper2]
 [x] => [x] "x"
-[return x + 1;] => [return x + 1] "sourcemap.SourceMap$1.helper2"
 [return f.apply(10);] => [return f.apply(10)!!.toInt()] "sourcemap.SourceMap.testAnonymousClass"
 [testLocalClass] => [testLocalClass]
 [outer] => [outer] "outer"
@@ -211,7 +204,7 @@
 ...
       }
     }] => [open class Local internal constructor() {
-   open fun member1(a: Int): Int {
+   open fun member1(a: Int): Int = this.member2(a) * 2 + Inner().member3(a)
 ...
    }
   }] "sourcemap.SourceMap.testLocalClass"
@@ -219,38 +212,26 @@
 [Local] => [constructor]
 [member1] => [member1]
 [a] => [a] "a"
-[return member2(a) * 2 + new Inner().member3(a);] => [return this.member2(a) * 2 + Inner().member3(a)] "sourcemap.SourceMap$1Local.member1"
 [member2] => [member2]
 [b] => [b] "b"
-[return b + outer;] => [return b + outer] "sourcemap.SourceMap$1Local.member2"
 [Inner] => [Inner]
 [Inner] => [constructor]
 [member3] => [member3]
 [c] => [c] "c"
-[return c + 1;] => [return c + 1] "sourcemap.SourceMap$1Local$Inner.member3"
 [return new Local().member1(5);] => [return Local().member1(5)] "sourcemap.SourceMap.testLocalClass"
 [testLambdaAndMethodReference] => [testLambdaAndMethodReference]
 [n] => [n] "n"
-[Function<Integer, Integer> f = i -> i + 1;] => [val f: Function<Int?, Int?> = Function { i: Int? ->
-   return@Function i!!.toInt() + 1
-  }] "sourcemap.SourceMap.testLambdaAndMethodReference"
+[Function<Integer, Integer> f = i -> i + 1;] => [val f: Function<Int?, Int?> = Function { i: Int? -> i!!.toInt() + 1 }] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f] => [f] "f"
 [i] => [i] "i"
-[i + 1] => [return@Function i!!.toInt() + 1] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [Supplier<Integer> f2 = new ArrayList()::size;] => [val f2: Supplier<Int?> = run {
    val ______q: ArrayList<Any?> = ArrayList<Any?>()
-...
-   }
+   Supplier { (______q as ArrayList<Any?>).size }
   }] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f2] => [f2] "f2"
-[new ArrayList()::size] => [return@Supplier (______q as ArrayList<Any?>).size] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
-[Supplier<Integer> f3 = this::simpleMethod;] => [val f3: Supplier<Int?> = Supplier {
-   return@Supplier this.simpleMethod()
-  }] "sourcemap.SourceMap.testLambdaAndMethodReference"
+[Supplier<Integer> f3 = this::simpleMethod;] => [val f3: Supplier<Int?> = Supplier { this.simpleMethod() }] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [f3] => [f3] "f3"
-[this::simpleMethod] => [return@Supplier this.simpleMethod()] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [simpleMethod] => [simpleMethod]
-[return 1;] => [return 1] "sourcemap.SourceMap.simpleMethod"
 [testLocalClass] => [testLocalClass]
 [class LocalClass {}] => [open class LocalClass internal constructor()] "sourcemap.SourceMap.testLocalClass"
 [LocalClass] => [LocalClass]
@@ -273,15 +254,9 @@
 [20] => [return@run 20] "sourcemap.SourceMap.testSwitchExpression"
 [testInstanceOf] => [testInstanceOf]
 [o] => [o] "o"
-[return o instanceof String;] => [return o is String] "sourcemap.SourceMap.testInstanceOf"
 [testFunctionExpression] => [testFunctionExpression]
-[return (Object o) -> o;] => [return Function { o: Any? ->
-   return@Function o
-  }] "sourcemap.SourceMap.testFunctionExpression"
 [o] => [o] "o"
-[o] => [return@Function o] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
 [testTypeLiteral] => [testTypeLiteral]
-[return String.class;] => [return String::class.javaObjectType] "sourcemap.SourceMap.testTypeLiteral"
 [SourceMap] => [companion object {
   @JvmField
   internal var uninitializedStaticField_pp_sourcemap: Double = 0.0

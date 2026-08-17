@@ -42,151 +42,71 @@ import kotlin.jvm.JvmStatic
 import kotlin.run
 
 open class MethodReferences<T> {
- open fun isA(): Boolean {
-  return true
- }
+ open fun isA(): Boolean = true
  
- internal open fun self_pp_methodreferences(): Any {
-  return this
- }
+ internal open fun self_pp_methodreferences(): Any = this
  
- internal open fun t_pp_methodreferences(): T {
-  return null as T
- }
+ internal open fun t_pp_methodreferences(): T = null as T
  
- internal open fun sameAs_pp_methodreferences(n: Number): Boolean {
-  return false
- }
+ internal open fun sameAs_pp_methodreferences(n: Number): Boolean = false
  
  internal open fun main_pp_methodreferences() {
-  var objectFactory: Producer<Any> = Producer {
-   return@Producer Any()
-  }
-  objectFactory = Producer {
-   return@Producer MethodReferences.m_pp_methodreferences()
-  }
+  var objectFactory: Producer<Any> = Producer { Any() }
+  objectFactory = Producer { MethodReferences.m_pp_methodreferences() }
   objectFactory = run {
    val ______q: MethodReferences<T> = MethodReferences<T>()
-   Producer {
-    return@Producer ______q.isA()
-   }
+   Producer { ______q.isA() }
   }
   val parameterizedInstance: MethodReferences<String> = MethodReferences<String>()
-  val parameterizedFactory: Producer<String> = Producer {
-   return@Producer parameterizedInstance.t_pp_methodreferences()
-  }
-  val biFunction: BiFunction<MethodReferences<T>, Number, Boolean> = BiFunction { arg0: MethodReferences<T>, arg1: Number ->
-   return@BiFunction arg0.sameAs_pp_methodreferences(arg1)
-  }
-  val functionWithParameters: Function<Number, Boolean> = Function { arg0_1: Number ->
-   return@Function this.sameAs_pp_methodreferences(arg0_1)
-  }
-  val objectPredicate: Predicate<MethodReferences<T>> = Predicate { arg0_2: MethodReferences<T> ->
-   return@Predicate arg0_2.isA().booleanValue()
-  }
-  val objectCapturingOuterProducer: Producer<MethodReferences<T>.ObjectCapturingOuter> = Producer {
-   return@Producer ObjectCapturingOuter()
-  }
-  val arrayProducer: ArrayProducer<Any> = ArrayProducer { arg0_3: Int ->
-   return@ArrayProducer uninitializedArrayOf<Double>(arg0_3) as Array<Any>
-  }
+  val parameterizedFactory: Producer<String> = Producer { parameterizedInstance.t_pp_methodreferences() }
+  val biFunction: BiFunction<MethodReferences<T>, Number, Boolean> = BiFunction { arg0: MethodReferences<T>, arg1: Number -> arg0.sameAs_pp_methodreferences(arg1) }
+  val functionWithParameters: Function<Number, Boolean> = Function { arg0_1: Number -> this.sameAs_pp_methodreferences(arg0_1) }
+  val objectPredicate: Predicate<MethodReferences<T>> = Predicate { arg0_2: MethodReferences<T> -> arg0_2.isA().booleanValue() }
+  val objectCapturingOuterProducer: Producer<MethodReferences<T>.ObjectCapturingOuter> = Producer { ObjectCapturingOuter() }
+  val arrayProducer: ArrayProducer<Any> = ArrayProducer { arg0_3: Int -> uninitializedArrayOf<Double>(arg0_3) as Array<Any> }
   objectFactory = run {
    val ______q_1: MethodReferences<Any> = MethodReferences<Any>()
-   Producer {
-    return@Producer ______q_1.self_pp_methodreferences()
-   }
+   Producer { ______q_1.self_pp_methodreferences() }
   }
-  val function: Function<MethodReferences<T>, Any> = Function { arg0_4: MethodReferences<T> ->
-   return@Function arg0_4.self_pp_methodreferences()
-  }
-  val booleanArrayFactory: Function<Int, BooleanArray> = Function { arg0_5: Int ->
-   return@Function BooleanArray(arg0_5.toInt())
-  }
-  val charArrayFactory: Function<Int, CharArray> = Function { arg0_6: Int ->
-   return@Function CharArray(arg0_6.toInt())
-  }
-  val byteArrayFactory: Function<Int, ByteArray> = Function { arg0_7: Int ->
-   return@Function ByteArray(arg0_7.toInt())
-  }
-  val shortArrayFactory: Function<Int, ShortArray> = Function { arg0_8: Int ->
-   return@Function ShortArray(arg0_8.toInt())
-  }
-  val intArrayFactory: Function<Int, IntArray> = Function { arg0_9: Int ->
-   return@Function IntArray(arg0_9.toInt())
-  }
-  val longArrayFactory: Function<Int, LongArray> = Function { arg0_10: Int ->
-   return@Function LongArray(arg0_10.toInt())
-  }
-  val floatArrayFactory: Function<Int, FloatArray> = Function { arg0_11: Int ->
-   return@Function FloatArray(arg0_11.toInt())
-  }
-  val doubleArrayFactory: Function<Int, DoubleArray> = Function { arg0_12: Int ->
-   return@Function DoubleArray(arg0_12.toInt())
-  }
-  val objectArrayFactory: Function<Int, Array<Any>> = Function { arg0_13: Int ->
-   return@Function uninitializedArrayOf<Any>(arg0_13.toInt())
-  }
-  val nullableObjectArrayFactory: Function<Int, Array<Any?>> = Function { arg0_14: Int ->
-   return@Function uninitializedArrayOf<Any>(arg0_14.toInt()) as Array<Any?>
-  }
-  val stringArrayFactory: Function<Int, Array<String>> = Function { arg0_15: Int ->
-   return@Function uninitializedArrayOf<String>(arg0_15.toInt())
-  }
-  val nullableStringArrayFactory: Function<Int, Array<String?>> = Function { arg0_16: Int ->
-   return@Function uninitializedArrayOf<String>(arg0_16.toInt()) as Array<String?>
-  }
-  val superToStringProducer: Producer<String> = Producer {
-   return@Producer super.toString()
-  }
-  var jsobjectFactory: JsProducer<Any> = JsProducer {
-   return@JsProducer Any()
-  }
-  jsobjectFactory = JsProducer {
-   return@JsProducer MethodReferences.m_pp_methodreferences()
-  }
+  val function: Function<MethodReferences<T>, Any> = Function { arg0_4: MethodReferences<T> -> arg0_4.self_pp_methodreferences() }
+  val booleanArrayFactory: Function<Int, BooleanArray> = Function { arg0_5: Int -> BooleanArray(arg0_5.toInt()) }
+  val charArrayFactory: Function<Int, CharArray> = Function { arg0_6: Int -> CharArray(arg0_6.toInt()) }
+  val byteArrayFactory: Function<Int, ByteArray> = Function { arg0_7: Int -> ByteArray(arg0_7.toInt()) }
+  val shortArrayFactory: Function<Int, ShortArray> = Function { arg0_8: Int -> ShortArray(arg0_8.toInt()) }
+  val intArrayFactory: Function<Int, IntArray> = Function { arg0_9: Int -> IntArray(arg0_9.toInt()) }
+  val longArrayFactory: Function<Int, LongArray> = Function { arg0_10: Int -> LongArray(arg0_10.toInt()) }
+  val floatArrayFactory: Function<Int, FloatArray> = Function { arg0_11: Int -> FloatArray(arg0_11.toInt()) }
+  val doubleArrayFactory: Function<Int, DoubleArray> = Function { arg0_12: Int -> DoubleArray(arg0_12.toInt()) }
+  val objectArrayFactory: Function<Int, Array<Any>> = Function { arg0_13: Int -> uninitializedArrayOf<Any>(arg0_13.toInt()) }
+  val nullableObjectArrayFactory: Function<Int, Array<Any?>> = Function { arg0_14: Int -> uninitializedArrayOf<Any>(arg0_14.toInt()) as Array<Any?> }
+  val stringArrayFactory: Function<Int, Array<String>> = Function { arg0_15: Int -> uninitializedArrayOf<String>(arg0_15.toInt()) }
+  val nullableStringArrayFactory: Function<Int, Array<String?>> = Function { arg0_16: Int -> uninitializedArrayOf<String>(arg0_16.toInt()) as Array<String?> }
+  val superToStringProducer: Producer<String> = Producer { super.toString() }
+  var jsobjectFactory: JsProducer<Any> = JsProducer { Any() }
+  jsobjectFactory = JsProducer { MethodReferences.m_pp_methodreferences() }
   jsobjectFactory = run {
    val ______q_2: MethodReferences<Any> = MethodReferences<Any>()
-   JsProducer {
-    return@JsProducer ______q_2.self_pp_methodreferences()
-   }
+   JsProducer { ______q_2.self_pp_methodreferences() }
   }
-  val jsfunction: JsFunctionInterface<MethodReferences<T>, Any> = JsFunctionInterface { arg0_17: MethodReferences<T> ->
-   return@JsFunctionInterface arg0_17.self_pp_methodreferences()
-  }
-  val jsarrayFactory: JsFunctionInterface<Int, Array<Any>> = JsFunctionInterface { arg0_18: Int ->
-   return@JsFunctionInterface uninitializedArrayOf<Any>(arg0_18.toInt())
-  }
-  val jsSuperToStringProducer: JsProducer<String> = JsProducer {
-   return@JsProducer super.toString()
-  }
-  val jsbiFunction: JsBiFunction<MethodReferences<T>, Number, Boolean> = JsBiFunction { arg0_19: MethodReferences<T>, arg1_1: Number ->
-   return@JsBiFunction arg0_19.sameAs_pp_methodreferences(arg1_1)
-  }
-  val jsFunctionWithParameters: JsFunctionInterface<Number, Boolean> = JsFunctionInterface { arg0_20: Number ->
-   return@JsFunctionInterface this.sameAs_pp_methodreferences(arg0_20)
-  }
-  objectFactory = Producer {
-   return@Producer MethodReferences.m_pp_methodreferences()
-  } as Producer<*> as Any as Producer<Any>
+  val jsfunction: JsFunctionInterface<MethodReferences<T>, Any> = JsFunctionInterface { arg0_17: MethodReferences<T> -> arg0_17.self_pp_methodreferences() }
+  val jsarrayFactory: JsFunctionInterface<Int, Array<Any>> = JsFunctionInterface { arg0_18: Int -> uninitializedArrayOf<Any>(arg0_18.toInt()) }
+  val jsSuperToStringProducer: JsProducer<String> = JsProducer { super.toString() }
+  val jsbiFunction: JsBiFunction<MethodReferences<T>, Number, Boolean> = JsBiFunction { arg0_19: MethodReferences<T>, arg1_1: Number -> arg0_19.sameAs_pp_methodreferences(arg1_1) }
+  val jsFunctionWithParameters: JsFunctionInterface<Number, Boolean> = JsFunctionInterface { arg0_20: Number -> this.sameAs_pp_methodreferences(arg0_20) }
+  objectFactory = Producer { MethodReferences.m_pp_methodreferences() } as Producer<*> as Any as Producer<Any>
   MethodReferences.acceptFunctionSuperVariance<MethodReferences<Any>, Any>(
-   Function { arg0_21: MethodReferences<Any> ->
-    return@Function arg0_21.self_pp_methodreferences()
-   },
+   Function { arg0_21: MethodReferences<Any> -> arg0_21.self_pp_methodreferences() },
   )
  }
  
  companion object {
   @JvmStatic
-  internal fun m_pp_methodreferences(): Any {
-   return Any()
-  }
+  internal fun m_pp_methodreferences(): Any = Any()
   
   @JvmField
   internal var staticStringProducer_pp_methodreferences: Producer<String> = run {
    val ______q: Any = MethodReferences.m_pp_methodreferences()
-   Producer {
-    return@Producer ______q.toString()
-   }
+   Producer { ______q.toString() }
   }
   
   @JvmStatic
@@ -206,9 +126,7 @@ open class MethodReferences<T> {
  }
  
  internal open inner class ObjectCapturingOuter internal constructor() {
-  internal open fun getMain_pp_methodreferences(): MethodReferences<T> {
-   return this@MethodReferences
-  }
+  internal open fun getMain_pp_methodreferences(): MethodReferences<T> = this@MethodReferences
  }
  
  internal fun interface Function<T, U> {

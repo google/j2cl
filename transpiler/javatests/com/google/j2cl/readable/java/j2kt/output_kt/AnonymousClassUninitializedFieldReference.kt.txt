@@ -26,9 +26,7 @@ open class AnonymousClassUninitializedFieldReference {
  private val obj: Any
  
  private val anonymous: Any = object : Any() {
-  fun getObj(): Any {
-   return this@AnonymousClassUninitializedFieldReference.obj
-  }
+  fun getObj(): Any = this@AnonymousClassUninitializedFieldReference.obj
  }
  
  constructor(obj: Any) {

@@ -121,30 +121,22 @@ open class ForEachStatement {
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  internal open class Exception1 internal constructor(): java.lang.Exception(), MutableIterableJvm<Number?> {
-  override fun iterator(): MutableIterator<Number?> {
-   return null!!.asMutableIterator()
-  }
+  override fun iterator(): MutableIterator<Number?> = null!!.asMutableIterator()
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  internal open class Exception2 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int?> {
-  override fun iterator(): MutableIterator<Int?> {
-   return null!!.asMutableIterator()
-  }
+  override fun iterator(): MutableIterator<Int?> = null!!.asMutableIterator()
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  internal open class Exception3 internal constructor(): java.lang.Exception(), MutableIterableJvm<Int> {
-  override fun iterator(): MutableIterator<Int> {
-   return null!!.asMutableIterator()
-  }
+  override fun iterator(): MutableIterator<Int> = null!!.asMutableIterator()
  }
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  internal open class Exception4 internal constructor(): java.lang.Exception(), MutableIterableJvm<Any?> {
-  override fun iterator(): MutableIterator<Any?> {
-   return null!!.asMutableIterator()
-  }
+  override fun iterator(): MutableIterator<Any?> = null!!.asMutableIterator()
  }
  
  internal abstract class IterableReturningTypeVariable<U, T: Iterator<Int?>> internal constructor(): MutableIterableJvm<Int?>

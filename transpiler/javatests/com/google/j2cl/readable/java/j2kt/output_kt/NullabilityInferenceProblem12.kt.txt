@@ -23,11 +23,9 @@ import kotlin.Any
 import kotlin.Suppress
 
 open class NullabilityInferenceProblem12<K> {
- open fun test(): MyInterface<K> {
-  return Nested<K & Any>(
-   this@NullabilityInferenceProblem12 as NullabilityInferenceProblem12<K & Any>,
-  ) as MyInterface<K>
- }
+ open fun test(): MyInterface<K> = Nested<K & Any>(
+  this@NullabilityInferenceProblem12 as NullabilityInferenceProblem12<K & Any>,
+ ) as MyInterface<K>
  
  interface MyInterface<T>
  

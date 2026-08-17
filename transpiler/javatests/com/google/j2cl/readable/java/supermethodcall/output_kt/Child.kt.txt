@@ -37,9 +37,7 @@ open class GrandParent internal constructor() {
  
  open fun grandParentWithParams(foo: Int) {}
  
- open fun grandParentWithChangingReturn(): Any? {
-  return null
- }
+ open fun grandParentWithChangingReturn(): Any? = null
  
  open fun defaultParent() {}
  
@@ -52,9 +50,7 @@ open class Parent internal constructor(): GrandParent(), ParentInterface {
  
  open fun parentWithParams(foo: Int) {}
  
- open fun parentWithChangingReturn(): Any? {
-  return null
- }
+ open fun parentWithChangingReturn(): Any? = null
  
  override fun defaultParent() {
   super<GrandParent>.defaultParent()
@@ -119,7 +115,5 @@ open class Sub internal constructor(): Super(), I2, I3 {
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 abstract class SuperToStringTest internal constructor(): I1 {
- override fun toString(): String {
-  return super.toString()
- }
+ override fun toString(): String = super.toString()
 }

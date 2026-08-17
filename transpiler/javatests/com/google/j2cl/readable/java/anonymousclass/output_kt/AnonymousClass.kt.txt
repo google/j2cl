@@ -60,9 +60,7 @@ open class AnonymousClass {
    @JvmField
    internal var other_pp_anonymousclass: Any? = a
    
-   override fun foo(): String? {
-    return "" + this@AnonymousClass.i_pp_anonymousclass
-   }
+   override fun foo(): String? = "" + this@AnonymousClass.i_pp_anonymousclass
   }
  }
  
@@ -76,9 +74,7 @@ open class AnonymousClass {
    @JvmField
    internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
    
-   override fun foo(): String? {
-    return "a"
-   }
+   override fun foo(): String? = "a"
   }
   val instanceWithStaticMembers: SomeClassWithStaticMembers = object : SomeClassWithStaticMembers(
    this@AnonymousClass.i_pp_anonymousclass,
@@ -89,9 +85,7 @@ open class AnonymousClass {
    @JvmField
    internal var outer_pp_anonymousclass: Any? = this@AnonymousClass
    
-   override fun foo(): String? {
-    return "a"
-   }
+   override fun foo(): String? = "a"
   }
  }
 }
@@ -100,9 +94,7 @@ internal interface SomeInterface {
  companion object {
   @JvmField
   val implicitlyStatic: SomeClass? = object : SomeClass(1) {
-   override fun foo(): String? {
-    return "a"
-   }
+   override fun foo(): String? = "a"
   }
   
   @JvmStatic
@@ -117,9 +109,7 @@ internal interface SomeInterface {
     @JvmField
     internal var capturedI_pp_anonymousclass: Int = i
     
-    override fun foo(): String? {
-     return "a"
-    }
+    override fun foo(): String? = "a"
    }
   }
  }

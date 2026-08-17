@@ -33,9 +33,7 @@ internal fun interface Function<I, O> {
 internal interface List<I>
 
 internal open class GenericType<T> internal constructor() {
- internal open fun get_pp_typewildcards(): T {
-  return null as T
- }
+ internal open fun get_pp_typewildcards(): T = null as T
 }
 
 internal open class Bar internal constructor()
@@ -51,17 +49,11 @@ internal open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
 }
 
 open class TypeWildCards {
- internal open fun unbounded(g: GenericType<*>?): Any? {
-  return g!!.get_pp_typewildcards()
- }
+ internal open fun unbounded(g: GenericType<*>?): Any? = g!!.get_pp_typewildcards()
  
- internal open fun upperBound(g: GenericType<out Bar?>?): Bar? {
-  return g!!.get_pp_typewildcards()
- }
+ internal open fun upperBound(g: GenericType<out Bar?>?): Bar? = g!!.get_pp_typewildcards()
  
- internal open fun lowerBound(g: GenericType<in Bar?>?): Any? {
-  return g!!.get_pp_typewildcards()
- }
+ internal open fun lowerBound(g: GenericType<in Bar?>?): Any? = g!!.get_pp_typewildcards()
  
  internal open fun unboundedRecursive(g: RecursiveType<*>?) {}
  
@@ -116,22 +108,16 @@ open class TypeWildCards {
   }
   
   @JvmStatic
-  private fun <F, V> transform(from: List<F>?, function: Function<in F, out V>?): List<V>? {
-   return null
-  }
+  private fun <F, V> transform(from: List<F>?, function: Function<in F, out V>?): List<V>? = null
   
   @JvmStatic
-  private fun <E> concat(a: List<out E>?, b: List<out E>?): List<E>? {
-   return null
-  }
+  private fun <E> concat(a: List<out E>?, b: List<out E>?): List<E>? = null
   
   @JvmStatic
   private fun takesRecursiveGeneric(foo: GenericType<TypeWildCards.Foo?>?) {}
   
   @JvmStatic
-  internal fun <C> testInferredIntersectionWithTypeVariable(ri: RecursiveInterface<out C, C>?): C {
-   return ri!!.m()
-  }
+  internal fun <C> testInferredIntersectionWithTypeVariable(ri: RecursiveInterface<out C, C>?): C = ri!!.m()
   
   @JvmStatic
   fun testWildcardInRecursiveVariableDeclaration() {
@@ -139,9 +125,7 @@ open class TypeWildCards {
   }
   
   @JvmStatic
-  internal fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): MultipleGenerics<D, String?, List<D>?>? {
-   return MultipleGenerics<D, String?, List<D>?>()
-  }
+  internal fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): MultipleGenerics<D, String?, List<D>?>? = MultipleGenerics<D, String?, List<D>?>()
   
   @JvmField
   internal var listWithWildcard_pp_typewildcards: List<*>? = null

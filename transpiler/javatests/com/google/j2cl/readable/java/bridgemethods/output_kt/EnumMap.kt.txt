@@ -27,13 +27,9 @@ fun interface Map<K, V> {
 }
 
 open class AbstractMap<K, V> internal constructor(): Map<K, V> {
- override fun put(key: K, value: V): V {
-  return value
- }
+ override fun put(key: K, value: V): V = value
 }
 
 open class EnumMap<K: Enum<K>, V>: AbstractMap<K, V>() {
- override fun put(key: K, value: V): V {
-  return value
- }
+ override fun put(key: K, value: V): V = value
 }

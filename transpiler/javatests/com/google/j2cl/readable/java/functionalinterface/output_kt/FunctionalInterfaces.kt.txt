@@ -39,9 +39,7 @@ open class FunctionalInterfaces {
  fun interface WithDefaultMethod {
   fun apply(string: String?): String?
   
-  fun defaultApply(string: String?): String? {
-   return this@WithDefaultMethod.apply(string)
-  }
+  fun defaultApply(string: String?): String? = this@WithDefaultMethod.apply(string)
  }
  
  fun interface WithObjectMethods {

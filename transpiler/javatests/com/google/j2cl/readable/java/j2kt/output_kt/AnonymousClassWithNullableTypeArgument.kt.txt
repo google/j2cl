@@ -29,21 +29,15 @@ import kotlin.jvm.JvmStatic
 open class AnonymousClassWithNullableTypeArgument {
  companion object {
   @JvmStatic
-  fun testExplicitTypeArguments(): Supplier<Any?> {
-   return object : Supplier<Any?> {
-    override fun get(): Any? {
-     return null
-    }
-   }
+  fun testExplicitTypeArguments(): Supplier<Any?> = object : Supplier<Any?> {
+   override fun get(): Any? = null
   }
   
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromParameters() {
    AnonymousClassWithNullableTypeArgument.accept<Supplier<Any?>>(
     object : Supplier<Any?> {
-     override fun get(): Any? {
-      return null
-     }
+     override fun get(): Any? = null
     } as Supplier<Any?>,
    )
   }
@@ -52,38 +46,28 @@ open class AnonymousClassWithNullableTypeArgument {
   private fun <T> accept(t: T) {}
   
   @JvmStatic
-  fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> {
-   return object : Supplier<Any?> {
-    override fun get(): Any? {
-     return null
-    }
-   } as Supplier<Any?>
-  }
+  fun testImplicitTypeArguments_inferredFromMembersAndReturnType(): Supplier<Any?> = object : Supplier<Any?> {
+   override fun get(): Any? = null
+  } as Supplier<Any?>
   
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembers() {
    object : Supplier<Any?> {
-    override fun get(): Any? {
-     return null
-    }
+    override fun get(): Any? = null
    }
   }
   
   @JvmStatic
   fun testImplicitTypeArguments_inferredFromMembersAndArgument() {
    object : AbstractHolder<String?>("Supplier") {
-    override fun get(): String? {
-     return null
-    }
+    override fun get(): String? = null
    }
   }
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierDeclaration() {
    val supplier: Supplier<String?> = object : SupplierImpl<String?>() {
-    override fun get(): String? {
-     return null
-    }
+    override fun get(): String? = null
    } as Supplier<String?>
   }
   
@@ -91,28 +75,20 @@ open class AnonymousClassWithNullableTypeArgument {
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierAssignment() {
    var supplier: Supplier<String?>? = null
    supplier = object : SupplierImpl<String?>() {
-    override fun get(): String? {
-     return null
-    }
+    override fun get(): String? = null
    } as Supplier<String?>?
   }
   
   @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType(): Supplier<String?> {
-   return object : SupplierImpl<String?>() {
-    override fun get(): String? {
-     return null
-    }
-   } as Supplier<String?>
-  }
+  fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierReturnType(): Supplier<String?> = object : SupplierImpl<String?>() {
+   override fun get(): String? = null
+  } as Supplier<String?>
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeSupplierParameterType() {
    AnonymousClassWithNullableTypeArgument.acceptSupplierOfNullableString(
     object : SupplierImpl<String?>() {
-     override fun get(): String? {
-      return null
-     }
+     override fun get(): String? = null
     } as Supplier<String?>,
    )
   }
@@ -128,9 +104,7 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> {
-   return object : Holder<String?>("Supplier") {} as Holder<String?>
-  }
+  fun testImplicitTypeArguments_inferredFromArgumentAndReturnType(): Holder<String?> = object : Holder<String?>("Supplier") {} as Holder<String?>
   
   @JvmStatic
   fun <T> testExplicitSuperclassTypeArguments(): ParameterizedEmptyClass<T?> {
@@ -156,9 +130,7 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromReturnType(): ParameterizedEmptyClass<String?> {
-   return object : ParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
-  }
+  fun testAnonymousClass_implicitTypeArguments_fromReturnType(): ParameterizedEmptyClass<String?> = object : ParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromParameterType() {
@@ -182,9 +154,7 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testAnonymousInterface_implicitTypeArguments_fromReturnType(): ParameterizedEmptyInterface<String?> {
-   return object : ParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
-  }
+  fun testAnonymousInterface_implicitTypeArguments_fromReturnType(): ParameterizedEmptyInterface<String?> = object : ParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromParameterType() {
@@ -197,9 +167,7 @@ open class AnonymousClassWithNullableTypeArgument {
   fun acceptOfNullableString(emptyClass: ParameterizedEmptyInterface<String?>) {}
   
   @JvmStatic
-  fun nullableString(): String? {
-   return null
-  }
+  fun nullableString(): String? = null
   
   @JvmStatic
   fun acceptWildcardConsumer(consumer: Consumer<*>) {
@@ -227,9 +195,7 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testAnonymousClass_implicitTypeArguments_fromSupertypeReturnType(): ParameterizedEmptyClass<String?> {
-   return object : SubParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
-  }
+  fun testAnonymousClass_implicitTypeArguments_fromSupertypeReturnType(): ParameterizedEmptyClass<String?> = object : SubParameterizedEmptyClass<String?>() {} as ParameterizedEmptyClass<String?>
   
   @JvmStatic
   fun testAnonymousClass_implicitTypeArguments_fromSupertypeParameterType() {
@@ -250,9 +216,7 @@ open class AnonymousClassWithNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testAnonymousInterface_implicitTypeArguments_fromSupertypeReturnType(): ParameterizedEmptyInterface<String?> {
-   return object : SubParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
-  }
+  fun testAnonymousInterface_implicitTypeArguments_fromSupertypeReturnType(): ParameterizedEmptyInterface<String?> = object : SubParameterizedEmptyInterface<String?> {} as ParameterizedEmptyInterface<String?>
   
   @JvmStatic
   fun testAnonymousInterface_implicitTypeArguments_fromSupertypeParameterType() {

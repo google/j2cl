@@ -43,42 +43,30 @@ internal open class NullabilityInferenceProblem internal constructor() {
   }
   
   @JvmStatic
-  private fun testImplicitTypeArguments(users: Iterable<User>): ImmutableList<User> {
-   return NullabilityInferenceProblem.sortedCopyOf<User>(
-    java.util.Comparator.comparing<User, String>(
-     Function { user: User ->
-      return@Function user.getName().orElse("")!!
-     } as Function<in User, out String>,
-    ),
-    users,
-   )
-  }
+  private fun testImplicitTypeArguments(users: Iterable<User>): ImmutableList<User> = NullabilityInferenceProblem.sortedCopyOf<User>(
+   java.util.Comparator.comparing<User, String>(
+    Function { user: User -> user.getName().orElse("")!! } as Function<in User, out String>,
+   ),
+   users,
+  )
   
   @JvmStatic
-  private fun testExplicitTypeArguments(users: Iterable<User>): ImmutableList<User> {
-   return NullabilityInferenceProblem.sortedCopyOf<User>(
-    java.util.Comparator.comparing<User, String>(
-     Function { user: User ->
-      return@Function user.getName().orElse("")!!
-     } as Function<in User, out String>,
-    ),
-    users,
-   )
-  }
+  private fun testExplicitTypeArguments(users: Iterable<User>): ImmutableList<User> = NullabilityInferenceProblem.sortedCopyOf<User>(
+   java.util.Comparator.comparing<User, String>(
+    Function { user: User -> user.getName().orElse("")!! } as Function<in User, out String>,
+   ),
+   users,
+  )
   
   @JvmStatic
-  private fun testCheckNotNull(users: Iterable<User>): ImmutableList<User> {
-   return NullabilityInferenceProblem.sortedCopyOf<User>(
-    java.util.Comparator.comparing<User, String>(
-     Function { user: User ->
-      return@Function NullabilityInferenceProblem.checkNotNull<String>(
-       user.getName().orElse("")!!,
-      )
-     },
-    ),
-    users,
-   )
-  }
+  private fun testCheckNotNull(users: Iterable<User>): ImmutableList<User> = NullabilityInferenceProblem.sortedCopyOf<User>(
+   java.util.Comparator.comparing<User, String>(
+    Function { user: User -> NullabilityInferenceProblem.checkNotNull<String>(
+     user.getName().orElse("")!!,
+    ) },
+   ),
+   users,
+  )
  }
  
  internal interface ImmutableList<T: Any>: MutableListJvm<T>

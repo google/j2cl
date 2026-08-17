@@ -30,12 +30,10 @@ import kotlin.text.StringBuilder
 abstract class ___AutoValue_AutoValueWithExtensions: ______AutoValue_AutoValueWithExtensions {
  internal constructor(intField: Int, stringField: String?): super(intField, stringField)
  
- final override fun toPrettyString_pp_autovalue(): String? {
-  return "AutoValueWithExtensions {\n  intField = " + this.getIntField() + ",\n  stringField = " + ___AutoValue_AutoValueWithExtensions.format(
-   this.getStringField(),
-   1,
-  ) + ",\n}"
- }
+ final override fun toPrettyString_pp_autovalue(): String? = "AutoValueWithExtensions {\n  intField = " + this.getIntField() + ",\n  stringField = " + ___AutoValue_AutoValueWithExtensions.format(
+  this.getStringField(),
+  1,
+ ) + ",\n}"
  
  companion object {
   @JvmStatic

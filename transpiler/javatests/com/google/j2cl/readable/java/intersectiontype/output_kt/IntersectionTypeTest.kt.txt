@@ -40,9 +40,7 @@ internal interface Serial
 internal fun interface Cmp {
  fun cmp(): Int
  
- fun defaultM(): Int {
-  return 1
- }
+ fun defaultM(): Int = 1
 }
 
 internal fun interface Cmp2<T> {
@@ -50,15 +48,11 @@ internal fun interface Cmp2<T> {
 }
 
 internal open class CmpImpl internal constructor(): Cmp {
- override fun cmp(): Int {
-  return 1
- }
+ override fun cmp(): Int = 1
 }
 
 open class IntersectionTypeTest<U> {
- open fun cast3(s: Any?): Any? {
-  return s
- }
+ open fun cast3(s: Any?): Any? = s
  
  open fun testMethodCall() {
   val o: Any? = IntersectionTypeTest.m()
@@ -92,28 +86,16 @@ open class IntersectionTypeTest<U> {
   }
   
   @JvmStatic
-  internal fun <T> cast1(s: Any?): Getable<Comparable<String>?>? {
-   return s.let { it as Getable<Comparable<String>?>?; it as Setable?; it }
-  }
+  internal fun <T> cast1(s: Any?): Getable<Comparable<String>?>? = s.let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   
   @JvmStatic
-  internal fun <T> cast2(s: Any?): Getable<Comparable<T & Any>?>? {
-   return s.let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
-  }
+  internal fun <T> cast2(s: Any?): Getable<Comparable<T & Any>?>? = s.let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   
   @JvmStatic
-  internal fun method(): Cmp? {
-   return (Cmp {
-    return@Cmp 1
-   }).let { it as Cmp; it as Serial; it }
-  }
+  internal fun method(): Cmp? = (Cmp { 1 }).let { it as Cmp; it as Serial; it }
   
   @JvmStatic
-  internal fun method2(): Cmp2<Any?>? {
-   return Cmp2 { a: Int ->
-    return@Cmp2 1
-   } as Cmp2<Any?>?
-  }
+  internal fun method2(): Cmp2<Any?>? = Cmp2 { a: Int -> 1 } as Cmp2<Any?>?
   
   @JvmStatic
   fun testClosureAssignment(o: Any?) {
@@ -123,21 +105,15 @@ open class IntersectionTypeTest<U> {
   }
   
   @JvmStatic
-  private fun <T> get(t: T): T {
-   return t
-  }
+  private fun <T> get(t: T): T = t
   
   @JvmStatic
-  private fun <T> m(): T where T: A?, T: EmptyA? {
-   return IntersectionTypeTest.get<Any?>(
-    Any(),
-   ) as T
-  }
+  private fun <T> m(): T where T: A?, T: EmptyA? = IntersectionTypeTest.get<Any?>(
+   Any(),
+  ) as T
   
   @JvmStatic
-  private fun <T> n(): Getable<T>? where T: A?, T: EmptyA? {
-   return null
-  }
+  private fun <T> n(): Getable<T>? where T: A?, T: EmptyA? = null
   
   @JvmStatic
   private fun <T> set(t: T) where T: A?, T: EmptyA? {}
@@ -163,9 +139,7 @@ open class IntersectionTypeTest<U> {
  }
  
  internal open inner class MapEntry internal constructor() {
-  open fun <T> method(o: Any?): Getable<T>? {
-   return o.let { it as Getable<T>?; it as Setable?; it }
-  }
+  open fun <T> method(o: Any?): Getable<T>? = o.let { it as Getable<T>?; it as Setable?; it }
  }
  
  private open class A private constructor()

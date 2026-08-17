@@ -106,62 +106,42 @@ internal abstract class SourceMap<T: Number?>: Comparator<T> {
  
  private fun testAnonymousClass(outer: Int): Int {
   val f: Function<Int?, Int?> = object : Function<Int?, Int?> {
-   override fun apply(i: Int?): Int? {
-    return helper1(
-     i!!.toInt(),
-    ) + helper2(
-     i!!.toInt(),
-    )
-   }
+   override fun apply(i: Int?): Int? = helper1(
+    i!!.toInt(),
+   ) + helper2(
+    i!!.toInt(),
+   )
    
-   private fun helper1(x: Int): Int {
-    return x * 2 + outer
-   }
+   private fun helper1(x: Int): Int = x * 2 + outer
    
-   private fun helper2(x: Int): Int {
-    return x + 1
-   }
+   private fun helper2(x: Int): Int = x + 1
   }
   return f.apply(10)!!.toInt()
  }
  
  private fun testLocalClass(outer: Int): Int {
   open class Local internal constructor() {
-   open fun member1(a: Int): Int {
-    return this.member2(a) * 2 + Inner().member3(a)
-   }
+   open fun member1(a: Int): Int = this.member2(a) * 2 + Inner().member3(a)
    
-   private fun member2(b: Int): Int {
-    return b + outer
-   }
+   private fun member2(b: Int): Int = b + outer
    
    internal open inner class Inner internal constructor() {
-    open fun member3(c: Int): Int {
-     return c + 1
-    }
+    open fun member3(c: Int): Int = c + 1
    }
   }
   return Local().member1(5)
  }
  
  private fun testLambdaAndMethodReference(n: Int) {
-  val f: Function<Int?, Int?> = Function { i: Int? ->
-   return@Function i!!.toInt() + 1
-  }
+  val f: Function<Int?, Int?> = Function { i: Int? -> i!!.toInt() + 1 }
   val f2: Supplier<Int?> = run {
    val ______q: ArrayList<Any?> = ArrayList<Any?>()
-   Supplier {
-    return@Supplier (______q as ArrayList<Any?>).size
-   }
+   Supplier { (______q as ArrayList<Any?>).size }
   }
-  val f3: Supplier<Int?> = Supplier {
-   return@Supplier this.simpleMethod()
-  }
+  val f3: Supplier<Int?> = Supplier { this.simpleMethod() }
  }
  
- private fun simpleMethod(): Int {
-  return 1
- }
+ private fun simpleMethod(): Int = 1
  
  private fun testLocalClass() {
   open class LocalClass internal constructor()
@@ -182,19 +162,11 @@ internal abstract class SourceMap<T: Number?>: Comparator<T> {
   }
  }
  
- private fun testInstanceOf(o: Any?): Boolean {
-  return o is String
- }
+ private fun testInstanceOf(o: Any?): Boolean = o is String
  
- private fun testFunctionExpression(): Function<Any?, Any?>? {
-  return Function { o: Any? ->
-   return@Function o
-  }
- }
+ private fun testFunctionExpression(): Function<Any?, Any?>? = Function { o: Any? -> o }
  
- private fun testTypeLiteral(): Class<*>? {
-  return String::class.javaObjectType
- }
+ private fun testTypeLiteral(): Class<*>? = String::class.javaObjectType
  
  companion object {
   @JvmField

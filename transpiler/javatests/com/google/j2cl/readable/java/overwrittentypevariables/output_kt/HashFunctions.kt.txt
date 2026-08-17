@@ -33,21 +33,13 @@ internal fun interface HashFunction<T>: MyFunction<T, String?>
 open class HashFunctions {
  companion object {
   @JvmStatic
-  internal fun <T> hashFunction(): HashFunction<T>? {
-   return object : HashFunction<T> {
-    override fun apply(input: T): String? {
-     return ""
-    }
-   }
+  internal fun <T> hashFunction(): HashFunction<T>? = object : HashFunction<T> {
+   override fun apply(input: T): String? = ""
   }
   
   @JvmStatic
-  internal fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
-   return object : HashFunction<T> {
-    override fun apply(input: T): String? {
-     return "" + input!!.ordinal
-    }
-   }
+  internal fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? = object : HashFunction<T> {
+   override fun apply(input: T): String? = "" + input!!.ordinal
   }
  }
 }

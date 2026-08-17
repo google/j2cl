@@ -40,17 +40,11 @@ internal abstract class ___AutoValue_AutoValueWithExtensions: AutoValueWithExten
   this.intField = intField
  }
  
- override fun getStringField(): String {
-  return this.stringField
- }
+ override fun getStringField(): String = this.stringField
  
- override fun getIntField(): Int {
-  return this.intField
- }
+ override fun getIntField(): Int = this.intField
  
- override fun toString(): String {
-  return "AutoValueWithExtensions{stringField=" + this.stringField + ", intField=" + this.intField + "}"
- }
+ override fun toString(): String = "AutoValueWithExtensions{stringField=" + this.stringField + ", intField=" + this.intField + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {

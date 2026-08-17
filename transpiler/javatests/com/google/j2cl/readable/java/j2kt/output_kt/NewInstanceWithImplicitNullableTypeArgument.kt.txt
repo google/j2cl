@@ -28,9 +28,7 @@ import kotlin.jvm.JvmStatic
 class NewInstanceWithImplicitNullableTypeArgument {
  companion object {
   @JvmStatic
-  fun testFromArguments(nullableString: String?): Any {
-   return ParameterizedEmptyClass<String?>(nullableString)
-  }
+  fun testFromArguments(nullableString: String?): Any = ParameterizedEmptyClass<String?>(nullableString)
   
   @JvmStatic
   fun testFromDeclaration() {
@@ -44,9 +42,7 @@ class NewInstanceWithImplicitNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testFromReturnType(): ParameterizedEmptyClass<String?> {
-   return ParameterizedEmptyClass<String?>()
-  }
+  fun testFromReturnType(): ParameterizedEmptyClass<String?> = ParameterizedEmptyClass<String?>()
   
   @JvmStatic
   fun testImplicitTypeArguments_fromParameterType() {
@@ -70,9 +66,7 @@ class NewInstanceWithImplicitNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testFromSupertypeReturnType(): ParameterizedEmptyClass<String?> {
-   return SubParameterizedEmptyClass<String?>()
-  }
+  fun testFromSupertypeReturnType(): ParameterizedEmptyClass<String?> = SubParameterizedEmptyClass<String?>()
   
   @JvmStatic
   fun testFromSupertypeArgument() {
@@ -82,9 +76,7 @@ class NewInstanceWithImplicitNullableTypeArgument {
   }
   
   @JvmStatic
-  fun testFromSupertypeAndArguments(nullableString: String?): ParameterizedEmptyClass<String?> {
-   return SubParameterizedEmptyClass<String?>(nullableString)
-  }
+  fun testFromSupertypeAndArguments(nullableString: String?): ParameterizedEmptyClass<String?> = SubParameterizedEmptyClass<String?>(nullableString)
   
   @JvmStatic
   fun testWithMultpleTypeParameters() {

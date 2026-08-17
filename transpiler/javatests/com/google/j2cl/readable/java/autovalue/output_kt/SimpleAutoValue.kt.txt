@@ -54,14 +54,10 @@ abstract class SimpleAutoValue {
  
  companion object {
   @JvmStatic
-  internal fun create_pp_autovalue(): SimpleAutoValue? {
-   return AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0)
-  }
+  internal fun create_pp_autovalue(): SimpleAutoValue? = AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0)
   
   @JvmStatic
-  internal fun castAndInstanceOf_pp_autovalue(o: Any?): Array<AutoValue_SimpleAutoValue?>? {
-   return if (o is Array<*>) o as Array<AutoValue_SimpleAutoValue?>? else null
-  }
+  internal fun castAndInstanceOf_pp_autovalue(o: Any?): Array<AutoValue_SimpleAutoValue?>? = if (o is Array<*>) o as Array<AutoValue_SimpleAutoValue?>? else null
  }
  
  abstract class GenericType internal constructor(): AbstractCollection<AutoValue_SimpleAutoValue?>() {

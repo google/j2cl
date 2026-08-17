@@ -27,9 +27,7 @@ open class SimpleLocalClass {
  open fun test(p: Int) {
   val localVar: Int = 1
   open class InnerClass internal constructor() {
-   open fun `fun`(): Int {
-    return localVar + p
-   }
+   open fun `fun`(): Int = localVar + p
   }
   InnerClass().`fun`()
   open class InnerClassWithoutCaptures internal constructor()

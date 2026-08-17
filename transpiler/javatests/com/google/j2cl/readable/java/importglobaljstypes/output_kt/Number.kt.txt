@@ -31,9 +31,7 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class Number {
- open fun testJsDocForLiteralType(a: MyLiteralType?): MyLiteralType? {
-  return a
- }
+ open fun testJsDocForLiteralType(a: MyLiteralType?): MyLiteralType? = a
  
  companion object {
   @JvmStatic
@@ -41,23 +39,17 @@ open class Number {
   external fun f(x: Double): Boolean
   
   @JvmStatic
-  fun test(x: Double): Boolean {
-   return Number.f(x)
-  }
+  fun test(x: Double): Boolean = Number.f(x)
   
   @JvmStatic
   @JsMethod(name = "Array", namespace = JsPackage.GLOBAL)
   private external fun <T> createArray(): NativeArray<T>?
   
   @JvmStatic
-  private fun getStringAt(index: Int): String? {
-   return Number.createArray<String?>()!!.at(index)
-  }
+  private fun getStringAt(index: Int): String? = Number.createArray<String?>()!!.at(index)
   
   @JvmStatic
-  private fun getArrayLength(array: NativeArray<*>?): Int {
-   return array!!.getLength()
-  }
+  private fun getArrayLength(array: NativeArray<*>?): Int = array!!.getLength()
  }
  
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)

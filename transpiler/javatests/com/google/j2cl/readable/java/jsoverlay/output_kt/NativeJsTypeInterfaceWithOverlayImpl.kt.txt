@@ -24,9 +24,7 @@ import kotlin.Int
 import kotlin.Suppress
 
 open class NativeJsTypeInterfaceWithOverlayImpl: NativeJsTypeInterfaceWithOverlay {
- override fun m(): Int {
-  return 0
- }
+ override fun m(): Int = 0
  
  open fun testOverlayInterfaceImpl() {
   val foo: NativeJsTypeInterfaceWithOverlayImpl = NativeJsTypeInterfaceWithOverlayImpl()

@@ -136,7 +136,8 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     spaceSeparated(join(GET_KEYWORD, inParentheses(Source.EMPTY)), bodySource(method))
 
   private fun bodySource(method: Method): Source =
-    block(statementSources.statementsSource(method.includedStatements))
+    method.singleExpressionOrNull?.let { initializer(expressionSources.expressionSource(it)) }
+      ?: block(statementSources.statementsSource(method.includedStatements))
 
   private fun isKtPrimaryConstructor(method: Method): Boolean =
     method == enclosingType.ktPrimaryConstructor

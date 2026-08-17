@@ -43,85 +43,47 @@ import kotlin.let
 import kotlin.run
 
 open class AutoBoxing {
- open fun box(b: Boolean): Boolean? {
-  return b
- }
+ open fun box(b: Boolean): Boolean? = b
  
- open fun box(d: Double): Double? {
-  return d
- }
+ open fun box(d: Double): Double? = d
  
- open fun box(b: Byte): Byte? {
-  return b
- }
+ open fun box(b: Byte): Byte? = b
  
- open fun box(f: Float): Float? {
-  return f
- }
+ open fun box(f: Float): Float? = f
  
- open fun box(i: Int): Int? {
-  return i
- }
+ open fun box(i: Int): Int? = i
  
- open fun box(l: Long): Long? {
-  return l
- }
+ open fun box(l: Long): Long? = l
  
- open fun box(s: Short): Short? {
-  return s
- }
+ open fun box(s: Short): Short? = s
  
- open fun box(c: Char): Char? {
-  return c
- }
+ open fun box(c: Char): Char? = c
  
- open fun unbox(b: Boolean?): Boolean {
-  return b!!.booleanValue()
- }
+ open fun unbox(b: Boolean?): Boolean = b!!.booleanValue()
  
- open fun unbox(d: Double?): Double {
-  return d!!.toDouble()
- }
+ open fun unbox(d: Double?): Double = d!!.toDouble()
  
- open fun unbox(b: Byte?): Byte {
-  return b!!.toByte()
- }
+ open fun unbox(b: Byte?): Byte = b!!.toByte()
  
- open fun unbox(f: Float?): Float {
-  return f!!.toFloat()
- }
+ open fun unbox(f: Float?): Float = f!!.toFloat()
  
- open fun unbox(i: Int?): Int {
-  return i!!.toInt()
- }
+ open fun unbox(i: Int?): Int = i!!.toInt()
  
- open fun unbox(l: Long?): Long {
-  return l!!.toLong()
- }
+ open fun unbox(l: Long?): Long = l!!.toLong()
  
- open fun unbox(s: Short?): Short {
-  return s!!.toShort()
- }
+ open fun unbox(s: Short?): Short = s!!.toShort()
  
- open fun unbox(c: Char?): Char {
-  return c!!.toChar()
- }
+ open fun unbox(c: Char?): Char = c!!.toChar()
  
- open fun takesAndReturnsPrimitiveDouble(d: Double): Double {
-  return d
- }
+ open fun takesAndReturnsPrimitiveDouble(d: Double): Double = d
  
- open fun takesAndReturnsVoid(v: Void?): Void? {
-  return null
- }
+ open fun takesAndReturnsVoid(v: Void?): Void? = null
  
  open fun takesFloatVarArgs(vararg elements: Float?) {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
  
- open fun takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox o: Any?): Double {
-  return o as Double
- }
+ open fun takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox o: Any?): Double = o as Double
  
  open fun sumWithoutBoxing(@DoNotAutobox vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
@@ -481,9 +443,7 @@ open class AutoBoxing {
  
  open fun testUnbox_withCast() {
   open class Supplier<T> internal constructor() {
-   internal open fun get_pp_autoboxing(): T {
-    return null as T
-   }
+   internal open fun get_pp_autoboxing(): T = null as T
   }
   val supplier: Supplier<Int?> = Supplier<Int?>()
   val i: Int = supplier.get_pp_autoboxing()!!.toInt()

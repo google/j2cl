@@ -37,21 +37,15 @@ open class NullabilityInferenceProblem11 {
   }
   
   @JvmStatic
-  fun <T: Any> test(): MyNode<T?> {
-   return NullabilityInferenceProblem11.call_pp_j2ktnotpassing<MyNode<T?>>(
-    Callback { node: MyNode<T?> ->
-     return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T>>(
-      node.getChild(),
-     ) as MyNode<T?>
-    },
-   )
-  }
+  fun <T: Any> test(): MyNode<T?> = NullabilityInferenceProblem11.call_pp_j2ktnotpassing<MyNode<T?>>(
+   Callback { node: MyNode<T?> -> NullabilityInferenceProblem11.assertNotNull<MyNode<T>>(
+    node.getChild(),
+   ) as MyNode<T?> },
+  )
  }
  
  open class Node<T, N: Node<T, N>> {
-  open fun getChild(): N? {
-   return null
-  }
+  open fun getChild(): N? = null
  }
  
  open class MyNode<T>: Node<T, MyNode<T>>()

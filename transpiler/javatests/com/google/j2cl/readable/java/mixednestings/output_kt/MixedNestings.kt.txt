@@ -52,9 +52,7 @@ open class MixedNestings {
          this@A.aa()
          this@B.bb()
          return@MyInterface object : MyInterface {
-          override fun `fun`(b: Int): Int {
-           return b
-          }
+          override fun `fun`(b: Int): Int = b
          }.`fun`(100)
         }
         return@MyInterface iii.`fun`(200)

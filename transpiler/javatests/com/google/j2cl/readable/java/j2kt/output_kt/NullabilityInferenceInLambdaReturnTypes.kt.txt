@@ -27,46 +27,30 @@ import kotlin.jvm.JvmStatic
 open class NullabilityInferenceInLambdaReturnTypes {
  private fun testAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
-   Supplier {
-    return@Supplier null
-   },
+   Supplier { null },
   )
  }
  
  private fun testTransformAndAccept() {
   NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
    NullabilityInferenceInLambdaReturnTypes.transform_pp_j2kt<Any?>(
-    Supplier {
-     return@Supplier null
-    },
+    Supplier { null },
    ),
   )
  }
  
- private fun <V> testReturnArgument_expliciParameterType(): Operator<Foo<V>> {
-  return Operator { foo: Foo<V> ->
-   return@Operator foo
-  }
+ private fun <V> testReturnArgument_expliciParameterType(): Operator<Foo<V>> = Operator { foo: Foo<V> -> foo }
+ 
+ private fun <V> testReturnArgument_inferredParameterType(): Operator<Foo<V>> = Operator { foo: Foo<V> -> foo }
+ 
+ private fun <V> testReturnLocal_explicitParameterType(): Operator<Foo<V>> = Operator { foo: Foo<V> ->
+  val localFoo: Foo<V> = foo
+  return@Operator localFoo
  }
  
- private fun <V> testReturnArgument_inferredParameterType(): Operator<Foo<V>> {
-  return Operator { foo: Foo<V> ->
-   return@Operator foo
-  }
- }
- 
- private fun <V> testReturnLocal_explicitParameterType(): Operator<Foo<V>> {
-  return Operator { foo: Foo<V> ->
-   val localFoo: Foo<V> = foo
-   return@Operator localFoo
-  }
- }
- 
- private fun <V> testReturnLocal_inferredParameterType(): Operator<Foo<V>> {
-  return Operator { foo: Foo<V> ->
-   val localFoo: Foo<V> = foo
-   return@Operator localFoo
-  }
+ private fun <V> testReturnLocal_inferredParameterType(): Operator<Foo<V>> = Operator { foo: Foo<V> ->
+  val localFoo: Foo<V> = foo
+  return@Operator localFoo
  }
  
  companion object {

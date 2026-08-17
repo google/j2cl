@@ -45,14 +45,10 @@ internal open class NotNullable internal constructor() {
 }
 
 internal abstract class Ordering<T> internal constructor() {
- internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
-  return null!!
- }
+ internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> = null!!
  
  companion object {
   @JvmStatic
-  internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> {
-   return ordering.reverse_pp_j2kt<E>()
-  }
+  internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> = ordering.reverse_pp_j2kt<E>()
  }
 }

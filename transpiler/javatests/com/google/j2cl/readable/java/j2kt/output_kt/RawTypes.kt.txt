@@ -23,13 +23,9 @@ import kotlin.Any
 import kotlin.Suppress
 
 open class RawTypes {
- internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> {
-  return child
- }
+ internal open fun <T: RawTypes.Child<T>> copy_pp_j2kt(child: RawTypes.Child<T>): RawTypes.Child<T> = child
  
- internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> {
-  return a
- }
+ internal open fun <T: RawTypes.Child<T>> toParent_pp_j2kt(a: RawTypes.Child<T>): RawTypes.Parent<T> = a
  
  internal open inner class Parent<T: Any> internal constructor()
  

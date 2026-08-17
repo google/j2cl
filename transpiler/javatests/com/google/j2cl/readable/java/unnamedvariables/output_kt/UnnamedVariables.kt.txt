@@ -118,12 +118,8 @@ open class UnnamedVariables {
  }
  
  internal open fun testLambda_pp_unnamedvariables() {
-  val f1: Function<String?, String?> = Function { `_`: String? ->
-   return@Function "Hello"
-  }
-  val f2: Function<String?, String?> = Function { __1: String? ->
-   return@Function "Hello"
-  }
+  val f1: Function<String?, String?> = Function { `_`: String? -> "Hello" }
+  val f2: Function<String?, String?> = Function { __1: String? -> "Hello" }
  }
  
  internal open fun testTryCatch_pp_unnamedvariables() {

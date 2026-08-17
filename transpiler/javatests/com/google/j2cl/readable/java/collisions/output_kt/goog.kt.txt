@@ -36,9 +36,7 @@ internal open class KtBlah internal constructor() {
   internal fun m() {}
   
   @JvmStatic
-  internal fun getN(): Double {
-   return 1.0
-  }
+  internal fun getN(): Double = 1.0
  }
 }
 
@@ -75,9 +73,7 @@ internal open class Other<T> internal constructor() {
 }
 
 internal open class T<T: Number?> internal constructor() {
- internal open fun m_pp_collisions(): T {
-  return null as T
- }
+ internal open fun m_pp_collisions(): T = null as T
  
  internal open fun n_pp_collisions(): T {
   val t: T? = collisions.T<T>().m_pp_collisions()

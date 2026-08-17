@@ -26,31 +26,17 @@ import packageprivatemethods.package1.Parent
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class Child: Parent(), Interface {
- public open fun overrideInParentExposedInChild(a: Int): Int {
-  return a + 1
- }
+ public open fun overrideInParentExposedInChild(a: Int): Int = a + 1
  
- public open fun exposedInChild(a: Int, b: Int): Int {
-  return a + b + 1
- }
+ public open fun exposedInChild(a: Int, b: Int): Int = a + b + 1
  
- override fun exposedInChildWithInterface(a: Int, b: Int): Int {
-  return a + b + 1
- }
+ override fun exposedInChildWithInterface(a: Int, b: Int): Int = a + b + 1
  
- override fun exposedAbstractInParent(a: Int, b: Int, c: Int): Int {
-  return a + b + c + 2
- }
+ override fun exposedAbstractInParent(a: Int, b: Int, c: Int): Int = a + b + c + 2
  
- override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(arg0: Int): Int {
-  return this.overrideInParentExposedInChild(arg0)
- }
+ override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(arg0: Int): Int = this.overrideInParentExposedInChild(arg0)
  
- override fun exposedInChild_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int {
-  return this.exposedInChild(arg0, arg1)
- }
+ override fun exposedInChild_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int = this.exposedInChild(arg0, arg1)
  
- override fun exposedInChildWithInterface_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int {
-  return this.exposedInChildWithInterface(arg0, arg1)
- }
+ override fun exposedInChildWithInterface_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int = this.exposedInChildWithInterface(arg0, arg1)
 }

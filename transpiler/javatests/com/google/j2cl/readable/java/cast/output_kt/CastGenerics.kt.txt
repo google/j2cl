@@ -34,9 +34,7 @@ open class CastGenerics<T, E: Number?> {
  @JvmField
  internal var field_pp_cast: T? = null
  
- internal open fun method_pp_cast(): T {
-  return null as T
- }
+ internal open fun method_pp_cast(): T = null as T
  
  open fun testCastToTypeVariable() {
   val o: Any = Int(1)
@@ -54,9 +52,7 @@ open class CastGenerics<T, E: Number?> {
   c = o as V?
  }
  
- open fun testCastToRawToGeneric(foo: Foo<Any?>?): Foo<String?>? {
-  return foo as Foo<String?>?
- }
+ open fun testCastToRawToGeneric(foo: Foo<Any?>?): Foo<String?>? = foo as Foo<String?>?
  
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class Nested<SS> internal constructor() {
@@ -132,9 +128,7 @@ open class CastGenerics<T, E: Number?> {
   }
   
   @JvmStatic
-  fun <T_1> doSomething(): Foo<T_1>? {
-   return object : Foo<T_1>() {}
-  }
+  fun <T_1> doSomething(): Foo<T_1>? = object : Foo<T_1>() {}
  }
  
  fun interface A {
@@ -154,9 +148,7 @@ open class CastGenerics<T, E: Number?> {
  }
  
  open class Container<T> private constructor() {
-  internal open fun get_pp_cast(): T {
-   return null as T
-  }
+  internal open fun get_pp_cast(): T = null as T
  }
  
  open class NullMarkedContainer<T: Any> {
@@ -166,9 +158,7 @@ open class CastGenerics<T, E: Number?> {
    this.value = value
   }
   
-  internal open fun get_pp_cast(): T {
-   return this.value
-  }
+  internal open fun get_pp_cast(): T = this.value
  }
  
  interface Empty1

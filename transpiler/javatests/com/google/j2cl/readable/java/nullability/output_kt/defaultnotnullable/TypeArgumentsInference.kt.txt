@@ -26,21 +26,15 @@ import kotlin.jvm.JvmStatic
 open class TypeArgumentsInference {
  companion object {
   @JvmStatic
-  fun <K> wildcardPair(): Pair<K, *> {
-   return Pair<K, Any?>()
-  }
+  fun <K> wildcardPair(): Pair<K, *> = Pair<K, Any?>()
   
   @JvmStatic
-  fun <K, V> pairIdentity(pair: Pair<K, V>): Pair<K, V> {
-   return pair
-  }
+  fun <K, V> pairIdentity(pair: Pair<K, V>): Pair<K, V> = pair
   
   @JvmStatic
-  fun <K> wildcardPairAndIdentity(): Pair<K, *> {
-   return TypeArgumentsInference.pairIdentity(
-    TypeArgumentsInference.wildcardPair<K>(),
-   )
-  }
+  fun <K> wildcardPairAndIdentity(): Pair<K, *> = TypeArgumentsInference.pairIdentity(
+   TypeArgumentsInference.wildcardPair<K>(),
+  )
  }
  
  class Pair<K, V>

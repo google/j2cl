@@ -68,13 +68,9 @@ open class Nullability {
   this.f13 = Any()
  }
  
- open fun m1(a: String, b: List<Double>, c: String?): String {
-  return ""
- }
+ open fun m1(a: String, b: List<Double>, c: String?): String = ""
  
- open fun m2(a: String?, b: List<Double?>): String? {
-  return ""
- }
+ open fun m2(a: String?, b: List<Double?>): String? = ""
  
  @JsMethod
  open fun m3(a: String, vararg args: String): String? {
@@ -180,13 +176,9 @@ open class Nullability {
  internal open class Foo<T> internal constructor() {
   internal open fun bar_pp_nullability(t: T) {}
   
-  internal open fun baz_pp_nullability(): T? {
-   return null
-  }
+  internal open fun baz_pp_nullability(): T? = null
   
-  override fun toString(): String {
-   return "Foo"
-  }
+  override fun toString(): String = "Foo"
  }
  
  @JsFunction
@@ -197,15 +189,11 @@ open class Nullability {
  interface StringList: MutableListJvm<String?>
  
  open class StringComparator: Comparator<String> {
-  override fun compare(a: String, b: String): Int {
-   return 0
-  }
+  override fun compare(a: String, b: String): Int = 0
  }
  
  open class NullableStringComparator: Comparator<String?> {
-  override fun compare(a: String?, b: String?): Int {
-   return 0
-  }
+  override fun compare(a: String?, b: String?): Int = 0
  }
  
  internal fun interface NullableTemplatedReturn<T> {
@@ -213,51 +201,37 @@ open class Nullability {
  }
  
  open class NullableTemplatedReturnOverride: NullableTemplatedReturn<String?> {
-  override fun foo(): String? {
-   return "foo"
-  }
+  override fun foo(): String? = "foo"
  }
  
  internal open class ParameterizedDefaultNullability<N> internal constructor() {
-  internal open fun getNullable_pp_nullability(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability(): N? = null
   
   internal open fun getNonNullable_pp_nullability(): N & Any {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability(): N {
-   return null as N
-  }
+  internal open fun getDefaultNullability_pp_nullability(): N = null as N
  }
  
  internal open class ParameterizedNullable<N> internal constructor() {
-  internal open fun getNullable_pp_nullability(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability(): N? = null
   
   internal open fun getNonNullable_pp_nullability(): N & Any {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability(): N {
-   return null as N
-  }
+  internal open fun getDefaultNullability_pp_nullability(): N = null as N
  }
  
  internal open class ParameterizedNonNullable<N: Any> internal constructor() {
-  internal open fun getNullable_pp_nullability(): N? {
-   return null
-  }
+  internal open fun getNullable_pp_nullability(): N? = null
   
   internal open fun getNonNullable_pp_nullability(): N {
    throw RuntimeException()
   }
   
-  internal open fun getDefaultNullability_pp_nullability(): N {
-   return null!!
-  }
+  internal open fun getDefaultNullability_pp_nullability(): N = null!!
  }
  
  internal open class NonNullableInsideNullable<T> internal constructor() {

@@ -72,28 +72,18 @@ open class Main {
    NativeStringEnum.ONE.equals(
     NativeStringEnum.THREE,
    )
-   val supplier: Supplier<ComparableJsEnum?> = Supplier {
-    return@Supplier ComparableJsEnum.ONE
-   }
+   val supplier: Supplier<ComparableJsEnum?> = Supplier { ComparableJsEnum.ONE }
    val consummer: Consumer<ComparableJsEnum?> = Consumer { e: ComparableJsEnum? ->
     e!!.ordinal
    }
    Main.acceptsJsFunctionSupplier(
-    JsFunctionSuppiler {
-     return@JsFunctionSuppiler ComparableJsEnum.ONE
-    },
+    JsFunctionSuppiler { ComparableJsEnum.ONE },
    )
    Main.acceptsSupplierOfSupplier(
-    Supplier {
-     return@Supplier Supplier {
-      return@Supplier ComparableJsEnum.ONE
-     }
-    },
+    Supplier { Supplier { ComparableJsEnum.ONE } },
    )
    Main.acceptsJsFunctionParameterizedByJsEnum(
-    SpecializedJsFunction { e_1: ComparableJsEnum? ->
-     return@SpecializedJsFunction e_1
-    },
+    SpecializedJsFunction { e_1: ComparableJsEnum? -> e_1 },
    )
   }
   
@@ -184,14 +174,10 @@ open class Main {
   }
   
   @JvmStatic
-  private fun returnsJsEnum(): ComparableJsEnum? {
-   return ComparableJsEnum.ONE
-  }
+  private fun returnsJsEnum(): ComparableJsEnum? = ComparableJsEnum.ONE
   
   @JvmStatic
-  private fun returnsNullJsEnum(): ComparableJsEnum? {
-   return null
-  }
+  private fun returnsNullJsEnum(): ComparableJsEnum? = null
   
   @JvmStatic
   private fun takesJsEnum(value: ComparableJsEnum?) {}
@@ -214,9 +200,7 @@ open class Main {
   }
   
   @JvmStatic
-  private fun <T> boxingPassthrough(t: T): T {
-   return t
-  }
+  private fun <T> boxingPassthrough(t: T): T = t
   
   @JvmStatic
   internal fun boxingWithGenerics_pp_jsenum() {
@@ -332,9 +316,7 @@ open class Main {
   ONE,
   TWO;
   
-  fun getValue(): Int {
-   return this.ordinal
-  }
+  fun getValue(): Int = this.ordinal
  }
  
  @JsEnum(hasCustomValue = true)
@@ -347,9 +329,7 @@ open class Main {
   
   private var value: Int = 0
   
-  fun getValue(): Int {
-   return this.value
-  }
+  fun getValue(): Int = this.value
   
   constructor(value: Int) {
    this.value = value
@@ -363,9 +343,7 @@ open class Main {
   
   private var value: String? = null
   
-  fun getValue(): String? {
-   return this.value
-  }
+  fun getValue(): String? = this.value
   
   constructor(value: String?) {
    this.value = value
@@ -379,9 +357,7 @@ open class Main {
   
   private var value: String
   
-  fun getValue(): String? {
-   return this.value
-  }
+  fun getValue(): String? = this.value
   
   constructor(value: String?) {
    this.value = value!!
@@ -412,9 +388,7 @@ open class Main {
    this.value_pp_jsenum = value
   }
   
-  internal open fun getValue_pp_jsenum(): T {
-   return this.value_pp_jsenum
-  }
+  internal open fun getValue_pp_jsenum(): T = this.value_pp_jsenum
  }
  
  internal open class Foo<T> {
@@ -428,17 +402,13 @@ open class Main {
   ONE,
   TWO;
   
-  fun getValue(): Int {
-   return this.ordinal
-  }
+  fun getValue(): Int = this.ordinal
  }
  
  internal open class SupplierConsumerImpl<T> internal constructor(): Supplier<T>, Consumer<T> {
   override fun accept(t: T) {}
   
-  override fun get(): T {
-   return null as T
-  }
+  override fun get(): T = null as T
  }
  
  internal interface ComparableJsEnumSupplierConsumer: Supplier<ComparableJsEnum?>, Consumer<ComparableJsEnum?> {
@@ -455,9 +425,7 @@ open class Main {
  internal open class ComparableJsEnumSupplierConsumerImplWithOverrides internal constructor(): SupplierConsumerImpl<ComparableJsEnum?>(), ComparableJsEnumSupplierConsumer {
   override fun accept(t: ComparableJsEnum?) {}
   
-  override fun get(): ComparableJsEnum? {
-   return null
-  }
+  override fun get(): ComparableJsEnum? = null
  }
  
  @JsEnum

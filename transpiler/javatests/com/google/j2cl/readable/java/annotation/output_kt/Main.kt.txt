@@ -53,14 +53,10 @@ open class Main {
   internal fun testClassValues_pp_annotation(foo: Foo?) {}
   
   @JvmStatic
-  internal fun test_pp_annotation(classImplementingAnnotation: Main.ClassImplementingAnnotation?): Annotation? {
-   return classImplementingAnnotation
-  }
+  internal fun test_pp_annotation(classImplementingAnnotation: Main.ClassImplementingAnnotation?): Annotation? = classImplementingAnnotation
   
   @JvmStatic
-  internal fun test_pp_annotation(interfaceExtendingAnnotation: InterfaceExtendingAnnotation?): Annotation? {
-   return interfaceExtendingAnnotation
-  }
+  internal fun test_pp_annotation(interfaceExtendingAnnotation: InterfaceExtendingAnnotation?): Annotation? = interfaceExtendingAnnotation
  }
  
  internal annotation class Foo(

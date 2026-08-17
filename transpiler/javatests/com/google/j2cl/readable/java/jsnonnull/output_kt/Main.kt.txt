@@ -57,13 +57,9 @@ open class Main {
  @JsConstructor
  constructor(a: String)
  
- open fun m1(a: String, b: List<Double>, c: String?): String {
-  return ""
- }
+ open fun m1(a: String, b: List<Double>, c: String?): String = ""
  
- open fun m2(a: String?, b: List<Double>): String? {
-  return ""
- }
+ open fun m2(a: String?, b: List<Double>): String? = ""
  
  @JsMethod
  open fun m3(a: String, vararg args: String): String? {
@@ -79,21 +75,15 @@ open class Main {
  }
  
  open class StringComparator: Comparator<String> {
-  override fun compare(a: String, b: String): Int {
-   return 0
-  }
+  override fun compare(a: String, b: String): Int = 0
  }
  
  open class NullableStringComparator: Comparator<String?> {
-  override fun compare(a: String?, b: String?): Int {
-   return 0
-  }
+  override fun compare(a: String?, b: String?): Int = 0
  }
  
  open class NonNullableStringSubNullableComparator: NullableStringComparator() {
-  override fun compare(a: String?, b: String?): Int {
-   return 0
-  }
+  override fun compare(a: String?, b: String?): Int = 0
  }
  
  internal interface NonNullableTemplatedReturn<T> {

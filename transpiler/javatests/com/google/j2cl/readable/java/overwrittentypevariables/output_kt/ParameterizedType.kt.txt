@@ -28,7 +28,5 @@ fun interface ParameterizedType<F, T>: overwrittentypevariables.otherpkg.Paramet
 }
 
 internal open class ParameterizedTypeImpl internal constructor(): ParameterizedType<String?, Int?> {
- override fun accept(value: String?): Int? {
-  return 1
- }
+ override fun accept(value: String?): Int? = 1
 }

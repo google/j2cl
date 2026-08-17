@@ -41,9 +41,7 @@ open class JsFunctionOptimization {
         val var1: Int = `var`
         val x1: String = x
         return java.lang.String.valueOf(r) + s + x + `var` + object : F {
-         override fun m(s: String?): String? {
-          return "" + s + r1 + x1 + var1
-         }
+         override fun m(s: String?): String? = "" + s + r1 + x1 + var1
         }.m("hello")
        }
       }
@@ -53,9 +51,7 @@ open class JsFunctionOptimization {
         val var1: Int = `var`
         val x1: String = x
         return java.lang.String.valueOf(r) + s + x + `var` + object : Any() {
-         fun sayHey(): String? {
-          return "Hey"
-         }
+         fun sayHey(): String? = "Hey"
         }.sayHey()
        }
       }
@@ -64,28 +60,20 @@ open class JsFunctionOptimization {
    }
   }
   val f = object : F {
-   override fun m(s: String?): String? {
-    return ""
-   }
+   override fun m(s: String?): String? = ""
   }
   val array: Array<Any?> = arrayOf<Any?>(object : F {
-   override fun m(s: String?): String? {
-    return ""
-   }
+   override fun m(s: String?): String? = ""
   })
   Holder(
    object : F {
-    override fun m(s: String?): String? {
-     return ""
-    }
+    override fun m(s: String?): String? = ""
    },
   )
   Holder(
    1,
    object : F {
-    override fun m(s: String?): String? {
-     return ""
-    }
+    override fun m(s: String?): String? = ""
    },
   )
  }

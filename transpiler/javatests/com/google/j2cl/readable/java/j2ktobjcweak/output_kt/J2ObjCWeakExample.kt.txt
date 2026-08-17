@@ -55,13 +55,9 @@ class J2ObjCWeakExample {
   this.nonNullFooWithInitializer = this.nonNullFooWithoutInitializer
  }
  
- fun getNullableFoo(): Foo? {
-  return this.nullableFooWithoutInitializer
- }
+ fun getNullableFoo(): Foo? = this.nullableFooWithoutInitializer
  
- fun getNonNullFoo(): Foo {
-  return this.nonNullFooWithoutInitializer
- }
+ fun getNonNullFoo(): Foo = this.nonNullFooWithoutInitializer
  
  companion object {
   @JvmStatic

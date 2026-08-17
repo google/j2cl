@@ -135,18 +135,14 @@ open class TryCatch {
   )!!
  }
  
- private fun <T> getT(t: T): T {
-  return t
- }
+ private fun <T> getT(t: T): T = t
  
  @Throws(Throwable::class)
  open fun testThrowBoundGenerics() {
   throw this.getThrowable<Throwable?>()!!
  }
  
- private fun <T: Throwable?> getThrowable(): T {
-  return null as T
- }
+ private fun <T: Throwable?> getThrowable(): T = null as T
  
  @Throws(Throwable::class)
  open fun <T: Throwable?> testThrowsParameterized(throwable: T) {

@@ -32,18 +32,12 @@ internal abstract class AutoValueWithExtensions internal constructor() {
  
  abstract fun getIntField(): Int
  
- internal open fun getMemoizedString_pp_j2ktnotpassing_nullmarked(): String {
-  return this.getStringField() + "!"
- }
+ internal open fun getMemoizedString_pp_j2ktnotpassing_nullmarked(): String = this.getStringField() + "!"
  
- internal open fun getMemoizedInt_pp_j2ktnotpassing_nullmarked(): Int {
-  return this.getIntField() * 2
- }
+ internal open fun getMemoizedInt_pp_j2ktnotpassing_nullmarked(): Int = this.getIntField() * 2
  
  companion object {
   @JvmStatic
-  internal fun create_pp_j2ktnotpassing_nullmarked(stringField: String, intField: Int): AutoValueWithExtensions {
-   return AutoValue_AutoValueWithExtensions(stringField, intField)
-  }
+  internal fun create_pp_j2ktnotpassing_nullmarked(stringField: String, intField: Int): AutoValueWithExtensions = AutoValue_AutoValueWithExtensions(stringField, intField)
  }
 }

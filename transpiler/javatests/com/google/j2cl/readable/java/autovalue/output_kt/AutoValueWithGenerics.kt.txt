@@ -31,8 +31,6 @@ abstract class AutoValueWithGenerics<T> {
  
  companion object {
   @JvmStatic
-  internal fun <T_1> create_pp_autovalue(): AutoValueWithGenerics<T_1>? {
-   return AutoValue_AutoValueWithGenerics<T_1>(true)
-  }
+  internal fun <T_1> create_pp_autovalue(): AutoValueWithGenerics<T_1>? = AutoValue_AutoValueWithGenerics<T_1>(true)
  }
 }

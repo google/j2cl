@@ -30,16 +30,12 @@ open class Main {
  }
  
  open class Bar<T: Comparable<*>?> {
-  open fun getSomething(): T {
-   return null as T
-  }
+  open fun getSomething(): T = null as T
   
-  open fun doSomething(): Foo<T>? {
-   return object : Foo<T>(
-    this@Bar.getSomething(),
-   ) {
-    override fun foo() {}
-   }
+  open fun doSomething(): Foo<T>? = object : Foo<T>(
+   this@Bar.getSomething(),
+  ) {
+   override fun foo() {}
   }
  }
 }

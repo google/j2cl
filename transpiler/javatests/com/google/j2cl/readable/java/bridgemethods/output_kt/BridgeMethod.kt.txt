@@ -79,9 +79,7 @@ fun interface Getter {
 }
 
 open class ClassWithParameterizedGet<T> internal constructor() {
- open fun get(t: T): T {
-  return null as T
- }
+ open fun get(t: T): T = null as T
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
@@ -95,9 +93,7 @@ open class AccidentalOverrideBridge internal constructor(): ClassWithParameteriz
 open class TestCase10036 internal constructor() {
  @JsType
  interface BI3 {
-  fun get(value: String?): String? {
-   return "BI3 get String"
-  }
+  fun get(value: String?): String? = "BI3 get String"
  }
  
  fun interface BI2 {
@@ -137,15 +133,11 @@ open class TestCase102 internal constructor() {
 }
 
 open class ParameterizedParent<T: ParameterizedParent<T>?> internal constructor() {
- internal open fun <Q: T> m_pp_bridgemethods(t: Q): Q {
-  return null as Q
- }
+ internal open fun <Q: T> m_pp_bridgemethods(t: Q): Q = null as Q
 }
 
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?> internal constructor(): ParameterizedParent<E>() {
- override fun <S: E> m_pp_bridgemethods(t: S): S {
-  return null as S
- }
+ override fun <S: E> m_pp_bridgemethods(t: S): S = null as S
 }
 
 open class LeafChild internal constructor(): ReparametrerizedChild<LeafChild?>()
@@ -173,9 +165,7 @@ fun interface SpecializingReturnInterface {
 abstract class SpecializingReturnAbstractSubclass internal constructor(): SpecializingReturnAbstractClass(), SpecializingReturnInterface
 
 interface InterfaceWithDefaultMethod {
- fun foo(): Any? {
-  return "A"
- }
+ fun foo(): Any? = "A"
 }
 
 fun interface InterfaceOverridingDefaultMethod: InterfaceWithDefaultMethod {
@@ -205,9 +195,7 @@ fun interface ParameterizedInterface<T> {
 }
 
 abstract class GenericBase<T1, T2> internal constructor(): ParameterizedInterface<T1> {
- open fun get(consumer: T2): String? {
-  return "GenericBase get T2"
- }
+ open fun get(consumer: T2): String? = "GenericBase get T2"
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")

@@ -35,9 +35,7 @@ abstract class AutoValueWithBuilder {
  
  companion object {
   @JvmStatic
-  internal fun create_pp_autovalue(): AutoValueWithBuilder? {
-   return autovalue.AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true)!!.build()
-  }
+  internal fun create_pp_autovalue(): AutoValueWithBuilder? = autovalue.AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true)!!.build()
  }
  
  @javaemul.lang.annotations.WasAutoValue.Builder

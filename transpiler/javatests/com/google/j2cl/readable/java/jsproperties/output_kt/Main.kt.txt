@@ -32,9 +32,7 @@ internal open class Foo internal constructor() {
   
   @JvmStatic
   @JsProperty
-  fun getA(): Int {
-   return Foo.f + 1
-  }
+  fun getA(): Int = Foo.f + 1
   
   @JvmStatic
   @JsProperty
@@ -44,9 +42,7 @@ internal open class Foo internal constructor() {
   
   @JvmStatic
   @JsProperty(name = "abc")
-  fun getB(): Int {
-   return Foo.f + 3
-  }
+  fun getB(): Int = Foo.f + 3
   
   @JvmStatic
   @JsProperty(name = "abc")
@@ -63,9 +59,7 @@ internal open class Bar internal constructor() {
  private var privateField: Int = -1
  
  @JsProperty
- open fun getA(): Int {
-  return this.f + 1
- }
+ open fun getA(): Int = this.f + 1
  
  @JsProperty
  open fun setA(x: Int) {
@@ -73,9 +67,7 @@ internal open class Bar internal constructor() {
  }
  
  @JsProperty(name = "abc")
- open fun getB(): Int {
-  return this.f + 3
- }
+ open fun getB(): Int = this.f + 3
  
  @JsProperty(name = "abc")
  open fun setB(x: Int) {
@@ -88,26 +80,20 @@ internal open class ReadOnlyJsProperty internal constructor() {
  val a: Int = 1
  
  @JsProperty
- open fun getC(): Int {
-  return 3
- }
+ open fun getC(): Int = 3
  
  companion object {
   const val b: Int = 2
   
   @JvmStatic
   @JsProperty
-  fun getD(): Int {
-   return 4
-  }
+  fun getD(): Int = 4
  }
 }
 
 internal interface InterfaceWithDefaultJsProperties {
  @JsProperty
- fun getM(): Int {
-  return 3
- }
+ fun getM(): Int = 3
  
  @JsProperty
  fun setM(value: Int) {}
@@ -122,9 +108,7 @@ internal interface InterfaceWithStaticJsProperties {
   
   @JvmStatic
   @JsProperty
-  fun getB(): Int {
-   return InterfaceWithStaticJsProperties.A + 2
-  }
+  fun getB(): Int = InterfaceWithStaticJsProperties.A + 2
   
   @JvmStatic
   @JsProperty

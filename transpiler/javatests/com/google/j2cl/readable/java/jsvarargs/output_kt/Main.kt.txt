@@ -44,14 +44,10 @@ open class Main {
  }
  
  @JsMethod
- open fun f3(m: Int, vararg numbers: Int): Int {
-  return this.field_pp_jsvarargs + m + numbers!![1]
- }
+ open fun f3(m: Int, vararg numbers: Int): Int = this.field_pp_jsvarargs + m + numbers!![1]
  
  @JsMethod
- open fun f4(vararg numbers: Int): Int {
-  return this.field_pp_jsvarargs + numbers!![1]
- }
+ open fun f4(vararg numbers: Int): Int = this.field_pp_jsvarargs + numbers!![1]
  
  open fun testStaticMethodNotFirst() {
   Main.f1(1, 1, 2)
@@ -214,15 +210,11 @@ open class Main {
  companion object {
   @JvmStatic
   @JsMethod
-  fun f1(multiplier: Int, vararg numbers: Int): Int {
-   return numbers!!.size + numbers!![0] + multiplier
-  }
+  fun f1(multiplier: Int, vararg numbers: Int): Int = numbers!!.size + numbers!![0] + multiplier
   
   @JvmStatic
   @JsMethod
-  fun f2(vararg numbers: Int): Int {
-   return numbers!!.size + numbers!![0]
-  }
+  fun f2(vararg numbers: Int): Int = numbers!!.size + numbers!![0]
   
   @JvmStatic
   @JsMethod

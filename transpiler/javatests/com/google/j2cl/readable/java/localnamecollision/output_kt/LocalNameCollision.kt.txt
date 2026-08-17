@@ -43,9 +43,7 @@ open class LocalNameCollision {
   assert(localnamecollision.Asserts().n_pp_localnamecollision() == 5)
  }
  
- open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int): Boolean {
-  return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
- }
+ open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int): Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  
  constructor(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A

@@ -37,31 +37,23 @@ open class NullabilityInferenceProblem11 {
   }
   
   @JvmStatic
-  fun <T: Any> workaround1(): MyNode<T?> {
-   return NullabilityInferenceProblem11.call_pp_j2kt<MyNode<T?>>(
-    Callback { node: MyNode<T?> ->
-     return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(
-      node.getChild(),
-     )
-    },
-   )
-  }
+  fun <T: Any> workaround1(): MyNode<T?> = NullabilityInferenceProblem11.call_pp_j2kt<MyNode<T?>>(
+   Callback { node: MyNode<T?> -> NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(
+    node.getChild(),
+   ) },
+  )
   
   @JvmStatic
-  fun <T: Any> workaround2(): MyNode<T?> {
-   return NullabilityInferenceProblem11.call_pp_j2kt<MyNode<T?>>(
-    Callback { node: MyNode<T?> ->
-     val child: MyNode<T?>? = node.getChild() as MyNode<T?>?
-     return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(child)
-    },
-   )
-  }
+  fun <T: Any> workaround2(): MyNode<T?> = NullabilityInferenceProblem11.call_pp_j2kt<MyNode<T?>>(
+   Callback { node: MyNode<T?> ->
+    val child: MyNode<T?>? = node.getChild() as MyNode<T?>?
+    return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(child)
+   },
+  )
  }
  
  open class Node<T, N: Node<T, N>> {
-  open fun getChild(): N? {
-   return null
-  }
+  open fun getChild(): N? = null
  }
  
  open class MyNode<T>: Node<T, MyNode<T>>()
