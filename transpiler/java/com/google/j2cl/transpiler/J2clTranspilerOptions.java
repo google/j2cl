@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.EntryPointPattern;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -135,6 +136,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     abstract ImmutableList<FileInfo> getSources();
 
+    abstract ImmutableList<FileInfo> getNativeSources();
+
     abstract Output getOutput();
 
     abstract Backend getBackend();
@@ -176,6 +179,15 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
               entryPointPattern.getEntryPointPatternString());
         }
       }
+
+      // Do not allow native sources for WASM backend.
+      ImmutableList<FileInfo> allNativeSources = getNativeSources();
+      if (getBackend() == Backend.WASM && !allNativeSources.isEmpty()) {
+        problems.error(
+            "Native sources are not supported for WASM backend: %s",
+            Iterables.transform(allNativeSources, f -> Path.of(f.originalPath()).getFileName()));
+      }
+
       problems.abortIfHasErrors();
 
       checkState(!options.getEmitReadableLibraryInfo() || options.getLibraryInfoOutput() != null);

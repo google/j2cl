@@ -1,4 +1,5 @@
 load("@rules_closure//closure:defs.bzl", "closure_js_library")
+load("//build_defs:rules.bzl", "j2wasm_library")
 load(
     "//transpiler/javatests/com/google/j2cl/integration:integration_test.bzl",
     "integration_test",
@@ -23,6 +24,26 @@ alias(
 alias(
     name = "zoo-j2wasm",
     actual = ":zoo",
+)
+
+j2wasm_library(
+    name = "systemgetproperty-j2wasm",
+    srcs = glob(
+        [
+            "*.java",
+            "*.js",
+        ],
+        exclude = [
+            "Zoo.js",
+            # .native.js files are not supported in J2Wasm.
+            "Main.native.js",
+        ],
+    ),
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2wasm",
+        "//third_party:jsinterop-annotations-j2wasm",
+        "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
+    ],
 )
 
 integration_test(

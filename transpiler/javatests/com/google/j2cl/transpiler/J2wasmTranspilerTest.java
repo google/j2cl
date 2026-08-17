@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithEntryPointValidatorDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithWasmDefaults;
 
 import com.google.common.collect.ImmutableList;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -128,6 +129,15 @@ public final class J2wasmTranspilerTest extends TestCase {
             """)
         .assertErrorsWithoutSourcePosition(
             "Invalid entry point syntax in 'wasm\\.entrypoint.Main#m.*'.");
+  }
+
+  public void testNativeSourcesFails() {
+    newTesterWithWasmDefaults()
+        .addCompilationUnit("test.Main", "class Main {}")
+        .addNativeJsForCompilationUnit("test.Main", "// empty")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "Native sources are not supported for WASM backend: [Main.native.js]");
   }
 
   @CanIgnoreReturnValue

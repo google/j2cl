@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "j2kt_jvm_library")
+load("//build_defs:rules.bzl", "j2kt_jvm_library", "j2wasm_library")
 load(
     "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
     "readable_example",
@@ -9,12 +9,19 @@ package(
     licenses = ["reciprocal"],
 )
 
-# Exclude native sources from j2kt_jvm_library ad j2kt_native_library.
+# Exclude native sources from j2kt_jvm_library and j2kt_native_library.
 j2kt_jvm_library(
     name = "readable-j2kt-jvm",
     srcs = glob(["*.java"]),
     j2kt_j2objc_interop_enabled = False,
     deps = ["//third_party:jsinterop-annotations-j2kt-jvm"],
+)
+
+# Exclude native sources from j2wasm_library.
+j2wasm_library(
+    name = "readable-j2wasm",
+    srcs = glob(["*.java"]),
+    deps = ["//third_party:jsinterop-annotations-j2wasm"],
 )
 
 readable_example(
