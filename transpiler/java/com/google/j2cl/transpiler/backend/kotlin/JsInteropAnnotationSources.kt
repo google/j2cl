@@ -104,11 +104,11 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
         annotationName(
           annotationTargetSource(memberDescriptor),
           nameSources.topLevelQualifiedNameSource(
-            memberDescriptor.declarationJsInfo.jsMemberType.annotationName()
+            memberDescriptor.originalJsInfo.jsMemberType.annotationName()
           ),
         ),
         nameParameterSource(jsAnnotationNameParameterValue(memberDescriptor)),
-        namespaceParameterSource(memberDescriptor.declarationJsInfo.jsNamespace),
+        namespaceParameterSource(memberDescriptor.originalJsInfo.jsNamespace),
       )
     }
 
@@ -123,7 +123,7 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
     }
 
   private fun hasJsInteropAnnotation(memberDescriptor: MemberDescriptor): Boolean =
-    memberDescriptor.declarationJsInfo.hasJsMemberAnnotation ||
+    memberDescriptor.originalJsInfo.hasJsMemberAnnotation ||
       // If the name is mangled but it overrides a member (which means that one was already
       // mangled) then the annotation is already emitted in the overridden member.
       (memberDescriptor.isJsMember &&
@@ -131,7 +131,7 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
         (memberDescriptor !is MethodDescriptor || !memberDescriptor.isJavaOverride))
 
   private fun jsAnnotationNameParameterValue(memberDescriptor: MemberDescriptor): String? =
-    memberDescriptor.declarationJsInfo.jsName
+    memberDescriptor.originalJsInfo.jsName
       // if there is no name specified in the original annotation but the name is mangled in
       // Kotlin, use the simpleJsName otherwise do not emit any name.
       ?: memberDescriptor.simpleJsName.takeIf { environment.isKtNameMangled(memberDescriptor) }
@@ -199,7 +199,7 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
         !enclosingTypeDescriptor.isNative &&
         environment.ktVisibility(this).isPublic &&
         visibility != Visibility.PUBLIC &&
-        declarationJsInfo.jsMemberType == JsMemberType.NONE
+        originalJsInfo.jsMemberType == JsMemberType.NONE
 
   companion object {
     private fun nameParameterSource(typeDeclaration: TypeDeclaration): Source =

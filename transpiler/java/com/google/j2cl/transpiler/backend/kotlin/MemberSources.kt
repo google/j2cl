@@ -162,7 +162,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
         memberDescriptorSources.volatileAnnotationSource(fieldDescriptor),
         objCNameSources.objCAnnotationSource(actualMemberDescriptor),
-        jsInteropAnnotationSources.jsInteropAnnotationsSource(actualMemberDescriptor),
+        jsInteropAnnotationSources.jsInteropAnnotationsSource(fieldDescriptor),
         spaceSeparated(
           memberDescriptorSources.visibilityModifierSource(actualMemberDescriptor),
           Source.emptyUnless(isConst) { CONST_KEYWORD },

@@ -210,13 +210,11 @@ open class RecordClass {
  @JsType
  @JvmRecord
  data class JsInteropRecord(
-  @get:JsProperty(name = "customVal")
+  @JsProperty(name = "customVal")
   val value: Int,
-  @get:JsProperty
   val text: String?,
   @JsIgnore
   val ignored: String?,
-  @get:JsProperty
   val isFoo: Boolean,
  )
  
