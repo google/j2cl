@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.j2cl.transpiler.TranspilerTester.isKlibEnabled;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithKotlinDefaults;
 
@@ -106,11 +107,13 @@ public class KytheIndexingMetadataTest {
     String kytheMetadata =
         assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
 
-    // Ensures there's an anchor on the name of the class declaration.
+    // Ensures there's an anchor on the name of the class declaration (the klib frontend uses the
+    // full class declaration span because deserialized IR nodes lack FIR metadata).
+    // TODO(b/217479735): remove the isKlibEnabled() check once source mapping is fixed for klibs.
     assertImputesEdgeExists(
         kytheMetadata,
-        /* sourceBegin= */ 19,
-        /* sourceEnd= */ 40,
+        /* sourceBegin= */ isKlibEnabled() ? 13 : 19,
+        /* sourceEnd= */ isKlibEnabled() ? 43 : 40,
         /* targetBegin= */ 189,
         /* targetEnd= */ 210);
   }
@@ -135,11 +138,12 @@ public class KytheIndexingMetadataTest {
     String kytheMetadata =
         assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
 
-    // Ensures there's an anchor on the name of the class declaration.
+    // Ensures there's an anchor on the name of the class declaration (the klib frontend uses the
+    // full class declaration span because deserialized IR nodes lack FIR metadata).
     assertImputesEdgeExists(
         kytheMetadata,
-        /* sourceBegin= */ 25,
-        /* sourceEnd= */ 46,
+        /* sourceBegin= */ isKlibEnabled() ? 19 : 25,
+        /* sourceEnd= */ isKlibEnabled() ? 49 : 46,
         /* targetBegin= */ 189,
         /* targetEnd= */ 210);
   }

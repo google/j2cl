@@ -87,8 +87,11 @@ java_test(
     srcs = ["KytheIndexingMetadataTest.java"],
     data = [
         ":jre_bundle_files",
-        ":ktstdlib_bundle_deploy.jar",
     ],
+    jvm_flags = select({
+        ":experimental_enable_klibs": ["-Dj2cl.enable_klib=true"],
+        "//conditions:default": [],
+    }),
     deps = [
         ":tester_lib",
         "//third_party:junit",
@@ -137,6 +140,13 @@ java_test(
     ],
 )
 
+config_setting(
+    name = "experimental_enable_klibs",
+    flag_values = {
+        "//:experimental_enable_klibs": "true",
+    },
+)
+
 # This just a convenient way of zipping since that's what is expected for nativesourcepath.
 java_library(
     name = "jre_native",
@@ -148,7 +158,6 @@ java_test(
     srcs = ["RerunningJ2clTranspilerTest.java"],
     data = [
         ":jre_bundle_files",
-        ":ktstdlib_bundle_deploy.jar",
         ":libjre_native.jar",
         "//samples/box2d/src/main/kotlin/idiomatic:libbox2d_library-j2cl-src.jar",
     ],
@@ -157,7 +166,10 @@ java_test(
         "-XX:+TieredCompilation",
         "-XX:TieredStopAtLevel=2",
         "-XX:MaxGCPauseMillis=100",
-    ],
+    ] + select({
+        ":experimental_enable_klibs": ["-Dj2cl.enable_klib=true"],
+        "//conditions:default": [],
+    }),
     shard_count = 6,
     deps = [
         ":tester_lib",
