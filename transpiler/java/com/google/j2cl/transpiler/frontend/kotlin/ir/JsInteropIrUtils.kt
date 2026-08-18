@@ -107,14 +107,10 @@ private fun IrDeclaration.getJsInteropAnnotation(name: FqName): IrConstructorCal
  * backing fields in Kotlin are never referenced by user code (except in the accessor functions
  * themselves), so `@JsProperty` should be applied to the accessors which are actually referenced.
  *
- * However, there are situations where the backing field should honor the `@JsProperty` annotation:
- * 1. Properties annotated with `@JvmField` as Java-usages will be using the field member.
- * 2. Fields that we see originating from Java
- * 3. Private properties with no explicit accessors. Kotlin will not generate code for these
- *    accessors and instead use the backing field directly.
+ * However, if there are no accessors, the backing field should honor the `@JsProperty` annotation.
  */
 private val IrField.canBeJsProperty: Boolean
-  get() = isJvmField || isFromJava() || correspondingPropertySymbol?.owner?.hasAccessors == false
+  get() = correspondingPropertySymbol?.owner?.hasAccessors == false
 
 fun IrClass.getJsEnumInfo(): JsEnumInfo? {
   val annotation = getJsEnumAnnotation() ?: return null

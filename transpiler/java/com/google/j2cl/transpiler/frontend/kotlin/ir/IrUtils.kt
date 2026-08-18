@@ -190,9 +190,8 @@ val IrDeclarationContainer.methods: List<IrFunction>
 private val IrDeclarationContainer.gettersAndSetters: List<IrFunction>
   get() =
     properties
-      // We only care about getter/setters for real properties, and only if it's not a @JvmField,
-      // as they won't have these functions generated for them.
-      .filter { !it.isKotlinStub && !it.backingField.isJvmField }
+      // We only care about getter/setters for real properties that have accessors.
+      .filter { !it.isKotlinStub && it.hasAccessors }
       .flatMap { sequenceOf(it.getter, it.setter) }
       .filterNotNull()
       .toList()
@@ -791,7 +790,11 @@ fun IrAnnotationContainer.copyAnnotationsWhen(
 }
 
 val IrProperty.hasAccessors: Boolean
-  get() = visibility != DescriptorVisibilities.PRIVATE || hasDefinedAccessors
+  get() =
+    // Properties annotated with `@JvmField` (or `const`) do not have accessors.
+    !backingField.isJvmField &&
+      // Private properties with no explicit accessors do not have accessors.
+      (visibility != DescriptorVisibilities.PRIVATE || hasDefinedAccessors)
 
 private val IrProperty.hasDefinedAccessors: Boolean
   get() =
