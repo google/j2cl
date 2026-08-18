@@ -27,8 +27,9 @@ class NonreferencedMethods {
 
     private external fun getInstance1(): Int
 
+    @Suppress("INAPPLICABLE_JVM_FIELD")
     companion object {
-      private var s: Int = definedExternally
+      @JvmField private var s: Int = definedExternally
 
       @JvmStatic private external fun getStatic(): Int
     }

@@ -30,12 +30,10 @@ import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
-import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
-import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithVisibility
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrField
@@ -176,13 +174,9 @@ private val IrFunction.isJsAsync: Boolean
 private val IrDeclaration.isJsOverlay: Boolean
   get() =
     when {
-      // TODO(b/301155797): clean that up when a more general solution is implemented.
-      // Companion instance field on native JsType and JsFunction need to be marked as JsOverlay as
+      // Synthetic fields on native JsType and JsFunction need to be marked as JsOverlay as
       // they are not part of the native contract.
-      // Backing static field are moved to the enclosing type. For JsFunction, they need to be
-      // marked as JsOverlay.
-      this is IrField &&
-        (isCompanionFieldOfNativeJsTypeOrJsFunction || isStaticBackingFieldOfJsFunction) -> true
+      this is IrField && isSynthetic && (isMemberOfNativeJsType() || isMemberOfJsFunction) -> true
       isCompanionMember -> false
       else -> getJsInteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
     }
@@ -256,17 +250,6 @@ private val IrDeclaration.isMemberOfJsEnum: Boolean
 
 private val IrDeclaration.isMemberOfJsFunction: Boolean
   get() = parentClassOrNull?.isJsFunction ?: false
-
-private val IrField.isStaticBackingFieldOfJsFunction: Boolean
-  get() = isCompanionPropertyBackingField && isMemberOfJsFunction
-
-private val IrDeclaration.isCompanionPropertyBackingField: Boolean
-  get() = origin == JvmLoweredDeclarationOrigin.COMPANION_PROPERTY_BACKING_FIELD
-
-private val IrField.isCompanionFieldOfNativeJsTypeOrJsFunction: Boolean
-  get() =
-    origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE &&
-      (isMemberOfNativeJsType() || isMemberOfJsFunction)
 
 private fun IrDeclaration.isMemberOfNativeJsType(): Boolean = parentClassOrNull?.isNative ?: false
 
