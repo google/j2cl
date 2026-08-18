@@ -67,8 +67,8 @@ function callFunction(fn, a) {
 
 /**
  * @param {?} fn
- * @param {number} a
- * @return {number}
+ * @param {?} a
+ * @return {?}
  * @public
  */
 function callFunctionAsObject(fn, a) {

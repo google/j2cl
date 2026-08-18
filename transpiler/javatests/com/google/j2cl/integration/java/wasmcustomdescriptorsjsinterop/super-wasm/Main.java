@@ -39,6 +39,7 @@ public final class Main {
     testInterfaceMethod();
     testJsSubtyping();
     testJsFunction();
+    testJsFunctionAsObject();
     testJsFunctionIdentity();
     testJsFunctionCrossCasting();
     testParameterizedJsFunction();
@@ -342,7 +343,9 @@ public final class Main {
     MyJsFunction lambda = a -> a + 20;
     assertEquals(25, lambda.foo(5));
     assertEquals(1, lambda.myOverlay());
+    // At the first border crossing the JavaScript function is created by binding the export bridge,
     assertEquals(25, callFunctionInJs(lambda, 5));
+    // and then reused in subsequent calls.
     assertEquals(25, callFunctionAsObjectInJs(lambda, 5));
 
     MyJsFunction staticRef = Main::staticFooImpl;
@@ -417,6 +420,26 @@ public final class Main {
     MyJsFunction withSuperConstructorInstance = new MyJsFunctionWithSuperConstructorImpl();
     assertEquals(105, withSuperConstructorInstance.foo(5));
     assertEquals(105, callFunctionInJs(withSuperConstructorInstance, 5));
+  }
+
+  /**
+   * Tests that the proper export bridge is used when the JavaScript function is created when
+   * crossing the border.
+   */
+  private static void testJsFunctionAsObject() {
+    // Assigning to an Object variable does not trigger the instantiation of the JavaScript
+    // function that needs the export bridge.
+    Object jsFunction = (MyStringFunction) s -> s + "bar";
+    // but calling it using a native function by passing it as `Object` does.
+    assertEquals("foobar", callFunctionAsObjectInJs(jsFunction, "foo"));
+
+    // Use a second JsFunction with incompatible type conversion needs to make sure that the right
+    // bridge is used.
+    MyJsFunction intJsFunction = a -> a + 20;
+    jsFunction = intJsFunction;
+    assertEquals(25, callFunctionAsObjectInJs(jsFunction, 5));
+    // The second call uses the already created JavaScript function.
+    assertEquals(25, callFunctionInJs(intJsFunction, 5));
   }
 
   private static void testJsFunctionIdentity() {
@@ -512,6 +535,11 @@ public final class Main {
   }
 
   @JsFunction
+  interface MyStringFunction {
+    String foo(String s);
+  }
+
+  @JsFunction
   interface MyJsFunctionWithObject {
     Object foo(Object o);
   }
@@ -564,6 +592,9 @@ public final class Main {
 
   @JsMethod(namespace = "functions", name = "callFunctionAsObject")
   private static native int callFunctionAsObjectInJs(Object function, int a);
+
+  @JsMethod(namespace = "functions", name = "callFunctionAsObject")
+  private static native String callFunctionAsObjectInJs(Object function, String a);
 
   @JsMethod(namespace = "functions", name = "callFunctionWithObject")
   private static native Object callFunctionWithObjectInJs(
