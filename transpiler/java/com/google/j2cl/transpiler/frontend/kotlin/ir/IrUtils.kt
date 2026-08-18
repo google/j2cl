@@ -614,13 +614,20 @@ val IrDeclaration.isSynthetic
   get() =
     origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
       isCompanionInstanceField ||
+      isNonJvmFieldCompanionPropertyBackingField ||
       isDataClassSyntheticHelper
 
 private val IrDeclaration.isCompanionInstanceField: Boolean
   get() =
-    this is IrField &&
-      type.getClass()?.isCompanion == true &&
-      origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE
+    origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE &&
+      this is IrField &&
+      type.getClass()?.isCompanion == true
+
+private val IrDeclaration.isNonJvmFieldCompanionPropertyBackingField: Boolean
+  get() =
+    origin == JvmLoweredDeclarationOrigin.COMPANION_PROPERTY_BACKING_FIELD &&
+      this is IrField &&
+      !isJvmField
 
 private val IrDeclaration.isDataClassSyntheticHelper: Boolean
   get() =
