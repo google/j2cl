@@ -39,6 +39,7 @@ public final class Main {
     testInterfaceMethod();
     testJsSubtyping();
     testJsFunction();
+    testJsFunctionCapturing();
     testJsFunctionAsObject();
     testJsFunctionIdentity();
     testJsFunctionCrossCasting();
@@ -420,6 +421,19 @@ public final class Main {
     MyJsFunction withSuperConstructorInstance = new MyJsFunctionWithSuperConstructorImpl();
     assertEquals(105, withSuperConstructorInstance.foo(5));
     assertEquals(105, callFunctionInJs(withSuperConstructorInstance, 5));
+  }
+
+  private static int classField = 10001;
+
+  private static void testJsFunctionCapturing() {
+    int local = 10002;
+    MyJsFunction capturingLocal = a -> a + local;
+    assertEquals(10007, capturingLocal.foo(5));
+    assertEquals(10007, callFunctionInJs(capturingLocal, 5));
+
+    MyJsFunction capturingField = a -> a + classField;
+    assertEquals(10006, capturingField.foo(5));
+    assertEquals(10006, callFunctionInJs(capturingField, 5));
   }
 
   /**
