@@ -164,7 +164,7 @@ val IrClass.isJsEnum: Boolean
   get() = getJsEnumAnnotation() != null
 
 val IrDeclaration.isJsIgnore: Boolean
-  get() = getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null || isSynthetic
+  get() = getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null
 
 val IrFunction.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null
@@ -176,13 +176,7 @@ private val IrFunction.isJsAsync: Boolean
   get() = getJsInteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
 
 private val IrDeclaration.isJsOverlay: Boolean
-  get() =
-    when {
-      // Synthetic fields on native JsType and JsFunction need to be marked as JsOverlay as
-      // they are not part of the native contract.
-      this is IrField && isSynthetic && (isMemberOfNativeJsType() || isMemberOfJsFunction) -> true
-      else -> getJsInteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
-    }
+  get() = getJsInteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
 
 private fun IrDeclaration.getJsMemberAnnotation(): IrConstructorCall? =
   when (this) {
@@ -271,6 +265,9 @@ private fun IrDeclaration.isImplicitJsMember(): Boolean {
 }
 
 private fun IrDeclarationWithVisibility.canBeImplicitJsMember(): Boolean {
+  if (isSynthetic) {
+    return false
+  }
   // Public members are implicitly JsMembers.
   if (visibility == DescriptorVisibilities.PUBLIC) {
     // Java component accessors will inherit JsInfo from the components so should not be considered
