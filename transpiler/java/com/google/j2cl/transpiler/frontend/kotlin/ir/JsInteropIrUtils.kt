@@ -45,7 +45,8 @@ import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.isUnit
-import org.jetbrains.kotlin.ir.util.getAnnotation
+import org.jetbrains.kotlin.ir.util.getAnnotation as kotlinGetAnnotation
+import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.hasEqualFqName
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isGetter
@@ -57,6 +58,7 @@ import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.superClass
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.annotations.JVM_STATIC_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.JAVA_LANG_RECORD_FQ_NAME
 
 private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
@@ -97,6 +99,14 @@ private fun IrDeclaration.getJsInteropAnnotation(name: FqName): IrConstructorCal
     this is IrField && canBeJsProperty -> correspondingPropertySymbol?.owner?.getAnnotation(name)
     else -> null
   }
+}
+
+private fun IrDeclaration.getAnnotation(name: FqName): IrConstructorCall? {
+  val declaration = if (this is IrValueParameter) parent as IrDeclaration else this
+  if (declaration.isCompanionMember && declaration.hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME)) {
+    return null
+  }
+  return kotlinGetAnnotation(name)
 }
 
 /**
@@ -160,9 +170,7 @@ val IrFunction.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null
 
 val IrValueParameter.isJsOptional: Boolean
-  get() =
-    getJsInteropAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null &&
-      (parent as? IrDeclaration)?.isCompanionMember == false
+  get() = getJsInteropAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null
 
 private val IrFunction.isJsAsync: Boolean
   get() = getJsInteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
@@ -173,7 +181,6 @@ private val IrDeclaration.isJsOverlay: Boolean
       // Synthetic fields on native JsType and JsFunction need to be marked as JsOverlay as
       // they are not part of the native contract.
       this is IrField && isSynthetic && (isMemberOfNativeJsType() || isMemberOfJsFunction) -> true
-      isCompanionMember -> false
       else -> getJsInteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
     }
 
@@ -193,8 +200,8 @@ fun IrDeclaration.getJsInfo(): JsInfo =
     .setJsAsync(this is IrFunction && isJsAsync)
     .apply {
       val jsMemberAnnotation = getJsMemberAnnotation()
-      setHasJsMemberAnnotation(jsMemberAnnotation != null)
-      if (!isCompanionMember && jsMemberAnnotation != null) {
+      if (jsMemberAnnotation != null) {
+        setHasJsMemberAnnotation(true)
         setJsName(jsMemberAnnotation.getValueArgumentAsConst(NAME_ANNOTATION_ATTRIBUTE))
         setJsNamespace(jsMemberAnnotation.getValueArgumentAsConst(NAMESPACE_ANNOTATION_ATTRIBUTE))
       }
@@ -205,7 +212,6 @@ fun IrDeclaration.isJsMember(): Boolean =
   when {
     this is IrVariable -> false
     isJsIgnore -> false
-    isCompanionMember -> false
     getJsMemberAnnotation() != null -> true
     isJsEnumEntry() -> true
     isImplicitJsMember() -> !isJsOverlay

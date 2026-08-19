@@ -9,27 +9,25 @@ class $Overlay {
   $Overlay.$clinit();
   return $thisArg(42);
  }
- /** @final @nodts @return {number} */
- static m_getConstant__int() {
-  $Overlay.$clinit();
-  return $Overlay.f_constant__jsfunction_JsFunctionInterface_$Overlay_;
- }
- /** @final @nodts @return {!*} */
- static m_getField__java_lang_Object() {
-  $Overlay.$clinit();
-  return $Overlay.f_field__jsfunction_JsFunctionInterface_$Overlay_;
- }
- /** @final @nodts @return {number} */
+ /** @nodts @return {number} */
  static m_staticOverlayMethod__int() {
   $Overlay.$clinit();
   return 42;
+ }
+ /** @nodts @return {number} */
+ static get f_constant__jsfunction_JsFunctionInterface_$Overlay() {
+  return ($Overlay.$clinit(), $Overlay.$static_constant__jsfunction_JsFunctionInterface_$Overlay);
+ }
+ /** @nodts @return {!*} */
+ static get f_field__jsfunction_JsFunctionInterface_$Overlay() {
+  return ($Overlay.$clinit(), $Overlay.$static_field__jsfunction_JsFunctionInterface_$Overlay);
  }
  /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
-  $Overlay.f_constant__jsfunction_JsFunctionInterface_$Overlay_ = 42;
-  $Overlay.f_field__jsfunction_JsFunctionInterface_$Overlay_ = j_l_Object.$create__();
+  $Overlay.$static_constant__jsfunction_JsFunctionInterface_$Overlay = 42;
+  $Overlay.$static_field__jsfunction_JsFunctionInterface_$Overlay = j_l_Object.$create__();
  }
  
  /** @nodts */
@@ -37,10 +35,10 @@ class $Overlay {
   j_l_Object = goog.module.get('java.lang.Object$impl');
  }
 }
-/**@type {number} @nodts*/
-$Overlay.f_constant__jsfunction_JsFunctionInterface_$Overlay_ = 0;
-/**@type {!*} @nodts*/
-$Overlay.f_field__jsfunction_JsFunctionInterface_$Overlay_;
+/**@private {number} @nodts*/
+$Overlay.$static_constant__jsfunction_JsFunctionInterface_$Overlay = 0;
+/**@private {!*} @nodts*/
+$Overlay.$static_field__jsfunction_JsFunctionInterface_$Overlay;
 
 exports = $Overlay;
 

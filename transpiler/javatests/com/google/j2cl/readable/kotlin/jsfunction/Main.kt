@@ -38,10 +38,10 @@ fun interface JsFunctionInterface {
   }
 
   companion object {
-    @JsOverlay val constant = 42
-    @JsOverlay val field = Any()
+    @JsOverlay @JvmField val constant = 42
+    @JsOverlay @JvmField val field = Any()
 
-    @JsOverlay fun staticOverlayMethod() = 42
+    @JsOverlay @JvmStatic fun staticOverlayMethod() = 42
   }
 }
 
