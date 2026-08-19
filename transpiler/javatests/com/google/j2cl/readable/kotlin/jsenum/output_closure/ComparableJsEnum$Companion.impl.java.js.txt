@@ -1,0 +1,65 @@
+goog.module('jsenum.ComparableJsEnum.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('jsenum.ComparableJsEnum.$Overlay$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jsenum_ComparableJsEnum_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_ComparableJsEnum_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_getStaticField__int() {
+  return $Overlay.m_getStaticField__int();
+ }
+ /** @final @nodts */
+ m_setStaticField__int__void(/** number */ arg0) {
+  $Overlay.m_setStaticField__int__void(arg0);
+ }
+ /** @final @nodts */
+ m_staticMethod__void() {
+  $Overlay.m_staticMethod__void();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jsenum_ComparableJsEnum_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsenum_ComparableJsEnum_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jsenum_ComparableJsEnum_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('jsenum.ComparableJsEnum.$Overlay$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jsenum_ComparableJsEnum_Companion;
+$Util.$setClassMetadata(Companion, 'jsenum.ComparableJsEnum$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=ComparableJsEnum$Companion.js.map

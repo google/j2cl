@@ -14,9 +14,22 @@ class $Overlay {
   return /**@type {number}*/ ($thisArg);
  }
  /** @nodts */
+ static m_staticMethod__void() {
+  $Overlay.$clinit();
+ }
+ /** @nodts @return {number} */
+ static get f_staticField__jsenum_Main_ComparableJsEnum_$Overlay() {
+  return ($Overlay.$clinit(), $Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay);
+ }
+ /** @nodts */
+ static set f_staticField__jsenum_Main_ComparableJsEnum_$Overlay(/** number */ value) {
+  ($Overlay.$clinit(), $Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay = value);
+ }
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
+  $Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay = 1;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -26,6 +39,8 @@ class $Overlay {
  /** @nodts */
  static $loadModules() {}
 }
+/**@private {number} @nodts*/
+$Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay = 0;
 $Util.$setClassMetadata($Overlay, 'jsenum.Main$ComparableJsEnum');
 
 exports = $Overlay;

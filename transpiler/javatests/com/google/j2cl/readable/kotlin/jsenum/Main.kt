@@ -19,6 +19,7 @@ import java.util.Optional
 import jsinterop.annotations.JsEnum
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsOverlay
 import jsinterop.annotations.JsProperty
 
 interface Supplier<T> {
@@ -36,6 +37,12 @@ enum class ComparableJsEnum {
   TWO;
 
   fun getValue() = ordinal
+
+  companion object {
+    var staticField = 1
+
+    fun staticMethod() {}
+  }
 }
 
 @JsEnum(hasCustomValue = true)
@@ -66,7 +73,21 @@ enum class NonNullableStringJsEnum(private val value: String) {
 @JsEnum(isNative = true, namespace = "jsenum", name = "NonNullableStringJsEnum")
 enum class NativeStringEnum {
   ONE,
-  THREE,
+  THREE;
+
+  companion object {
+    @JvmField @JsOverlay var staticOverlayField = 1
+
+    @JvmStatic @JsOverlay fun staticOverlayMethod() {}
+  }
+}
+
+fun testStaticMembers() {
+  val _1 = ComparableJsEnum.staticField
+  ComparableJsEnum.staticMethod()
+
+  val _2 = NativeStringEnum.staticOverlayField
+  NativeStringEnum.staticOverlayMethod()
 }
 
 fun testJsEnumSwitch() {

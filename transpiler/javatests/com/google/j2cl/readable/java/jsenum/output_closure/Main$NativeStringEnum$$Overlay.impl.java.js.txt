@@ -6,14 +6,29 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 /** @nodts */
 class $Overlay {
  /** @nodts */
+ static m_staticOverlayMethod__void() {
+  $Overlay.$clinit();
+ }
+ /** @nodts @return {number} */
+ static get f_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay() {
+  return ($Overlay.$clinit(), $Overlay.$static_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay);
+ }
+ /** @nodts */
+ static set f_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay(/** number */ value) {
+  ($Overlay.$clinit(), $Overlay.$static_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay = value);
+ }
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
+  $Overlay.$static_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay = 1;
  }
  
  /** @nodts */
  static $loadModules() {}
 }
+/**@private {number} @nodts*/
+$Overlay.$static_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay = 0;
 $Util.$setClassMetadata($Overlay, 'jsenum.Main.NonNullableStringJsEnum');
 
 exports = $Overlay;

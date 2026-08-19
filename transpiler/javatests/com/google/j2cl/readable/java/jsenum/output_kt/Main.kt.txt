@@ -25,6 +25,7 @@ import java.util.Optional
 import jsinterop.annotations.JsEnum
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsOverlay
 import jsinterop.annotations.JsProperty
 import kotlin.Any
 import kotlin.Array
@@ -42,6 +43,14 @@ import kotlin.run
 
 open class Main {
  companion object {
+  @JvmStatic
+  private fun testStaticMembers() {
+   val `_`: Int = ComparableJsEnum.staticField
+   ComparableJsEnum.staticMethod()
+   val __1: Int = NativeStringEnum.staticOverlayField
+   NativeStringEnum.staticOverlayMethod()
+  }
+  
   @JvmStatic
   fun testJsEnumSwitch() {
    var comparableJsEnum: ComparableJsEnum? = if (ComparableJsEnum.ONE.getValue() == 1) ComparableJsEnum.TWO else null
@@ -317,6 +326,14 @@ open class Main {
   TWO;
   
   fun getValue(): Int = this.ordinal
+  
+  companion object {
+   @JvmField
+   var staticField: Int = 1
+   
+   @JvmStatic
+   fun staticMethod() {}
+  }
  }
  
  @JsEnum(hasCustomValue = true)
@@ -368,6 +385,16 @@ open class Main {
  internal enum class NativeStringEnum {
   ONE,
   THREE;
+  
+  companion object {
+   @JvmField
+   @JsOverlay
+   var staticOverlayField: Int = 1
+   
+   @JvmStatic
+   @JsOverlay
+   fun staticOverlayMethod() {}
+  }
  }
  
  @JsFunction

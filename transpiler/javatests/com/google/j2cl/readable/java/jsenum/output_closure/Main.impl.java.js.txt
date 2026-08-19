@@ -18,6 +18,7 @@ let Consumer = goog.forwardDeclare('jsenum.Main.Consumer$impl');
 let Foo = goog.forwardDeclare('jsenum.Main.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
+let NativeStringEnum_$Overlay = goog.forwardDeclare('jsenum.Main.NativeStringEnum.$Overlay$impl');
 let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NonNullableStringJsEnum');
 let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
 let SomeJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.SomeJsEnum.$Overlay$impl');
@@ -45,6 +46,13 @@ class Main extends j_l_Object {
  /** @nodts */
  $ctor__jsenum_Main__void() {
   this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testStaticMembers__void() {
+  let _ = $Overlay.f_staticField__jsenum_Main_ComparableJsEnum_$Overlay;
+  $Overlay.m_staticMethod__void();
+  let __1 = NativeStringEnum_$Overlay.f_staticOverlayField__jsenum_Main_NativeStringEnum_$Overlay;
+  NativeStringEnum_$Overlay.m_staticOverlayMethod__void();
  }
  /** @nodts */
  static m_testJsEnumSwitch__void() {
@@ -269,6 +277,7 @@ class Main extends j_l_Object {
   Foo = goog.module.get('jsenum.Main.Foo$impl');
   IntJsEnum = goog.module.get('jsenum.Main.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
+  NativeStringEnum_$Overlay = goog.module.get('jsenum.Main.NativeStringEnum.$Overlay$impl');
   NativeStringEnum = goog.module.get('jsenum.Main.NonNullableStringJsEnum');
   SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');
   SomeJsEnum_$Overlay = goog.module.get('jsenum.Main.SomeJsEnum.$Overlay$impl');

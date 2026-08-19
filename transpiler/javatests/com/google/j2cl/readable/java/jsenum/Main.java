@@ -23,6 +23,7 @@ import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 
 public class Main {
@@ -43,6 +44,10 @@ public class Main {
     public int getValue() {
       return ordinal();
     }
+
+    public static int staticField = 1;
+
+    public static void staticMethod() {}
   }
 
   @JsEnum(hasCustomValue = true)
@@ -97,7 +102,20 @@ public class Main {
   @JsEnum(isNative = true, namespace = "jsenum.Main", name = "NonNullableStringJsEnum")
   enum NativeStringEnum {
     ONE,
-    THREE
+    THREE;
+
+    @JsOverlay public static int staticOverlayField = 1;
+
+    @JsOverlay
+    public static void staticOverlayMethod() {}
+  }
+
+  private static void testStaticMembers() {
+    var _ = ComparableJsEnum.staticField;
+    ComparableJsEnum.staticMethod();
+
+    var _ = NativeStringEnum.staticOverlayField;
+    NativeStringEnum.staticOverlayMethod();
   }
 
   public static void testJsEnumSwitch() {
