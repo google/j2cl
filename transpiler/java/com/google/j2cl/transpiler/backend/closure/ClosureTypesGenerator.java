@@ -665,7 +665,7 @@ class ClosureTypesGenerator {
           .buildOrThrow();
 
   /**
-   * Map from typed eclarations that are mapped into closure native types to the corresponding type
+   * Map from typed declarations that are mapped into closure native types to the corresponding type
    */
   private static final ThreadLocal<Map<TypeDeclaration, ClosureType>> closureTypeByTypeDeclaration =
       ThreadLocal.withInitial(
