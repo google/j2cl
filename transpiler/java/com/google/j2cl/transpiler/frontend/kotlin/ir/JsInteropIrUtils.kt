@@ -57,8 +57,8 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.superClass
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_STATIC_FQ_NAME
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.resolve.annotations.JVM_STATIC_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.JAVA_LANG_RECORD_FQ_NAME
 
 private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
@@ -103,7 +103,7 @@ private fun IrDeclaration.getJsInteropAnnotation(name: FqName): IrConstructorCal
 
 private fun IrDeclaration.getAnnotation(name: FqName): IrConstructorCall? {
   val declaration = if (this is IrValueParameter) parent as IrDeclaration else this
-  if (declaration.isCompanionMember && declaration.hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME)) {
+  if (declaration.isCompanionMember && declaration.hasAnnotation(JVM_STATIC_FQ_NAME)) {
     return null
   }
   return kotlinGetAnnotation(name)
