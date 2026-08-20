@@ -135,4 +135,23 @@ public class JsMethodExample {
   }
 
   static class ParameterizedInterfaceImpl implements ParameterizedInterface<String> {}
+
+  @JsType(isNative = true, namespace = "jsmethod", name = "Foo")
+  static class NativeFoo {}
+
+  @JsType(namespace = "jsmethod")
+  static class Foo {}
+
+  static class ExposesMethodWithDifferentTypes<T> {
+    @JsMethod
+    public void m(
+        String s,
+        Double d,
+        Long l,
+        Comparable c,
+        Object o,
+        T t,
+        NativeFoo nf,
+        ExposesMethodWithDifferentTypes<T> e) {}
+  }
 }

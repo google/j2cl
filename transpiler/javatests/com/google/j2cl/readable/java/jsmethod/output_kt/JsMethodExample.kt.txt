@@ -22,6 +22,10 @@ import javaemul.lang.*
 import java.util.ArrayList
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
+import kotlin.Any
+import kotlin.Comparable
+import kotlin.Double
+import kotlin.Long
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
@@ -147,4 +151,15 @@ open class JsMethodExample {
  }
  
  internal open class ParameterizedInterfaceImpl internal constructor(): ParameterizedInterface<String?>
+ 
+ @JsType(name = "Foo", namespace = "jsmethod", isNative = true)
+ internal open class NativeFoo internal constructor()
+ 
+ @JsType(namespace = "jsmethod")
+ internal open class Foo internal constructor()
+ 
+ internal open class ExposesMethodWithDifferentTypes<T> internal constructor() {
+  @JsMethod
+  open fun m(s: String?, d: Double?, l: Long?, c: Comparable<Any>?, o: Any?, t: T, nf: NativeFoo?, e: ExposesMethodWithDifferentTypes<T>?) {}
+ }
 }

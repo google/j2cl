@@ -1,0 +1,49 @@
+goog.module('jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('goog.math.Long');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let NativeFoo = goog.forwardDeclare('jsmethod.Foo');
+
+/**
+ * @template T
+ */
+class ExposesMethodWithDifferentTypes extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!ExposesMethodWithDifferentTypes<T>} */
+ static $create__() {
+  ExposesMethodWithDifferentTypes.$clinit();
+  let $instance = new ExposesMethodWithDifferentTypes();
+  $instance.$ctor__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ 
+ m(/** ?string */ s, /** ?number */ d, /** Long */ l, /** (Comparable|boolean|number|string|!Long) */ c, /** * */ o, /** T */ t, /** NativeFoo */ nf, /** ExposesMethodWithDifferentTypes<T> */ e) {}
+ /** @nodts */
+ static $clinit() {
+  ExposesMethodWithDifferentTypes.$clinit = () =>{};
+  ExposesMethodWithDifferentTypes.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExposesMethodWithDifferentTypes;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ExposesMethodWithDifferentTypes, 'jsmethod.JsMethodExample$ExposesMethodWithDifferentTypes');
+
+exports = ExposesMethodWithDifferentTypes;
+
+//# sourceMappingURL=JsMethodExample$ExposesMethodWithDifferentTypes.js.map

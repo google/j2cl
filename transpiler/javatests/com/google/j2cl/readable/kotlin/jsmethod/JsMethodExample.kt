@@ -16,6 +16,7 @@
 package jsmethod
 
 import javaemul.internal.annotations.Wasm
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 
@@ -133,5 +134,25 @@ class JsMethodExample {
     }
   }
 
-  class ParameterizedInterfaceImpl : ParameterizedInterface<String>
+  class ParameterizedInterfaceImpl : ParameterizedInterface<String> {
+    @JsConstructor constructor() {}
+  }
+
+  @JsType(isNative = true, namespace = "jsmethod", name = "Foo") class NativeFoo
+
+  @JsType(namespace = "jsmethod") class Foo
+
+  class ExposesMethodWithDifferentTypes<T> {
+    @JsMethod
+    fun m(
+      s: String,
+      d: Double,
+      l: Long,
+      c: Comparable<*>,
+      o: Any,
+      t: T,
+      nf: NativeFoo,
+      e: ExposesMethodWithDifferentTypes<T>,
+    ) {}
+  }
 }
