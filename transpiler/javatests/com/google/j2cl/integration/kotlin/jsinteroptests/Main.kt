@@ -17,7 +17,6 @@ package jsinteroptests
 
 fun main(vararg args: String) {
   JsExportTest.testAll()
-  JsFunctionTest.testAll()
   JsMethodTest.testAll()
   JsPropertyTest.testAll()
   JsTypeArrayTest.testAll()

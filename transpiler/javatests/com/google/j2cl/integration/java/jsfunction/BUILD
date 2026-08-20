@@ -9,8 +9,13 @@ package(
 )
 
 integration_test(
-    srcs = glob(["*.java"]),
-    # Throws ArrayOutOfBoundsException instead of ClassCastException
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
+    # Contains JsInterop features which are only applicable for JS output.
+    enable_jvm_test = False,
     enable_kt_native = False,
+    enable_wasm = False,
     enable_wasm_custom_descriptors_jsinterop = True,
 )

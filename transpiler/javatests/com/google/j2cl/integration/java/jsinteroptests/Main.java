@@ -25,7 +25,6 @@ public class Main {
   @JsIgnore
   public static void main(String... args) {
     JsExportTest.testAll();
-    JsFunctionTest.testAll();
     JsMethodTest.testAll();
     JsPropertyTest.testAll();
     JsTypeArrayTest.testAll();

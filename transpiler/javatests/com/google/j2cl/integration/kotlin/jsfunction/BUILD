@@ -9,7 +9,10 @@ package(
 )
 
 integration_test(
-    srcs = glob(["*.kt"]),
+    srcs = glob([
+        "*.kt",
+        "*.js",
+    ]),
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
 )

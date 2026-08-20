@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteroptests.JsFunctionTestHelper');
+goog.module('jsfunction.JsFunctionTestHelper');
 
 
 /**
@@ -61,36 +61,6 @@ exports.callWithFunctionApply = function(fn, arg) {
  */
 exports.callWithFunctionCall = function(fn, arg) {
   return fn.call(null, arg);
-};
-
-/**
- * @param {?} object
- * @param {string} fieldName
- * @param {number} value
- * @public
- */
-exports.setField = function(object, fieldName, value) {
-  object[fieldName] = value;
-};
-
-/**
- * @param {?} object
- * @param {string} fieldName
- * @return {number}
- * @public
- */
-exports.getField = function(object, fieldName) {
-  return object[fieldName];
-};
-
-/**
- * @param {?} object
- * @param {string} functionName
- * @return {number}
- * @public
- */
-exports.callIntFunction = function(object, functionName) {
-  return object[functionName]();
 };
 
 /**
