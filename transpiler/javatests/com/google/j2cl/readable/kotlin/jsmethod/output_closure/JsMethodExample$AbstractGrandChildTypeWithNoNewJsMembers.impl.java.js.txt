@@ -1,0 +1,38 @@
+goog.module('jsmethod.JsMethodExample.AbstractGrandChildTypeWithNoNewJsMembers$impl');
+
+const AbstractChildTypeWithNoNewJsMembers = goog.require('jsmethod.JsMethodExample.AbstractChildTypeWithNoNewJsMembers$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AbstractGrandChildTypeWithNoNewJsMembers extends AbstractChildTypeWithNoNewJsMembers {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AbstractGrandChildTypeWithNoNewJsMembers__void() {
+  this.$ctor__jsmethod_JsMethodExample_AbstractChildTypeWithNoNewJsMembers__void();
+ }
+ /** @nodts */
+ m_q__void() {}
+ /** @nodts */
+ static $clinit() {
+  AbstractGrandChildTypeWithNoNewJsMembers.$clinit = () =>{};
+  AbstractGrandChildTypeWithNoNewJsMembers.$loadModules();
+  AbstractChildTypeWithNoNewJsMembers.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractGrandChildTypeWithNoNewJsMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractGrandChildTypeWithNoNewJsMembers, 'jsmethod.JsMethodExample$AbstractGrandChildTypeWithNoNewJsMembers');
+
+exports = AbstractGrandChildTypeWithNoNewJsMembers;
+
+//# sourceMappingURL=JsMethodExample$AbstractGrandChildTypeWithNoNewJsMembers.js.map

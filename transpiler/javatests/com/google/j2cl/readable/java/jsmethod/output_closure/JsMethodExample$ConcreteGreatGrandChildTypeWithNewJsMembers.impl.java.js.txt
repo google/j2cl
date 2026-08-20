@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers$impl');
+
+const AbstractGrandChildTypeWithNoNewJsMembers = goog.require('jsmethod.JsMethodExample.AbstractGrandChildTypeWithNoNewJsMembers$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ConcreteGreatGrandChildTypeWithNewJsMembers extends AbstractGrandChildTypeWithNoNewJsMembers {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ConcreteGreatGrandChildTypeWithNewJsMembers} */
+ static $create__() {
+  ConcreteGreatGrandChildTypeWithNewJsMembers.$clinit();
+  let $instance = new ConcreteGreatGrandChildTypeWithNewJsMembers();
+  $instance.$ctor__jsmethod_JsMethodExample_ConcreteGreatGrandChildTypeWithNewJsMembers__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ConcreteGreatGrandChildTypeWithNewJsMembers__void() {
+  this.$ctor__jsmethod_JsMethodExample_AbstractGrandChildTypeWithNoNewJsMembers__void();
+ }
+ 
+ r(/** ?string */ s) {}
+ /** @nodts */
+ static $clinit() {
+  ConcreteGreatGrandChildTypeWithNewJsMembers.$clinit = () =>{};
+  ConcreteGreatGrandChildTypeWithNewJsMembers.$loadModules();
+  AbstractGrandChildTypeWithNoNewJsMembers.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ConcreteGreatGrandChildTypeWithNewJsMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ConcreteGreatGrandChildTypeWithNewJsMembers, 'jsmethod.JsMethodExample$ConcreteGreatGrandChildTypeWithNewJsMembers');
+
+exports = ConcreteGreatGrandChildTypeWithNewJsMembers;
+
+//# sourceMappingURL=JsMethodExample$ConcreteGreatGrandChildTypeWithNewJsMembers.js.map

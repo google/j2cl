@@ -44,7 +44,9 @@ public class JsMethodExample {
   interface I {
     @JsMethod(name = "mString")
     void m(String s);
+  }
 
+  interface InterfaceWithStaticMethod {
     @JsMethod
     public static void s() {}
   }
@@ -64,6 +66,21 @@ public class JsMethodExample {
 
     // not a JsMethod
     static void n() {}
+  }
+
+  abstract static class AbstractChildTypeWithNoNewJsMembers extends SubJsType {
+    public void p() {}
+  }
+
+  abstract static class AbstractGrandChildTypeWithNoNewJsMembers
+      extends AbstractChildTypeWithNoNewJsMembers {
+    public void q() {}
+  }
+
+  static class ConcreteGreatGrandChildTypeWithNewJsMembers
+      extends AbstractGrandChildTypeWithNoNewJsMembers {
+    @JsMethod
+    public void r(String s) {}
   }
 
   @JsType

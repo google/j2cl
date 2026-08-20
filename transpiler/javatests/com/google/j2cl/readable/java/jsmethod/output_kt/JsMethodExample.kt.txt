@@ -44,7 +44,9 @@ open class JsMethodExample {
  internal fun interface I {
   @JsMethod(name = "mString")
   fun m(s: String?)
-  
+ }
+ 
+ internal interface InterfaceWithStaticMethod {
   companion object {
    @JvmStatic
    @JsMethod
@@ -76,6 +78,19 @@ open class JsMethodExample {
    @JvmStatic
    internal fun n_pp_jsmethod() {}
   }
+ }
+ 
+ internal abstract class AbstractChildTypeWithNoNewJsMembers internal constructor(): SubJsType() {
+  open fun p() {}
+ }
+ 
+ internal abstract class AbstractGrandChildTypeWithNoNewJsMembers internal constructor(): AbstractChildTypeWithNoNewJsMembers() {
+  open fun q() {}
+ }
+ 
+ internal open class ConcreteGreatGrandChildTypeWithNewJsMembers internal constructor(): AbstractGrandChildTypeWithNoNewJsMembers() {
+  @JsMethod
+  open fun r(s: String?) {}
  }
  
  @JsType

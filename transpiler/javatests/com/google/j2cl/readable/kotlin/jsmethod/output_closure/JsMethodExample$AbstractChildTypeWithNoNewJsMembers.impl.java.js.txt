@@ -1,0 +1,38 @@
+goog.module('jsmethod.JsMethodExample.AbstractChildTypeWithNoNewJsMembers$impl');
+
+const SubJsType = goog.require('jsmethod.JsMethodExample.SubJsType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AbstractChildTypeWithNoNewJsMembers extends SubJsType {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AbstractChildTypeWithNoNewJsMembers__void() {
+  this.$ctor__jsmethod_JsMethodExample_SubJsType__void();
+ }
+ /** @nodts */
+ m_p__void() {}
+ /** @nodts */
+ static $clinit() {
+  AbstractChildTypeWithNoNewJsMembers.$clinit = () =>{};
+  AbstractChildTypeWithNoNewJsMembers.$loadModules();
+  SubJsType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractChildTypeWithNoNewJsMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractChildTypeWithNoNewJsMembers, 'jsmethod.JsMethodExample$AbstractChildTypeWithNoNewJsMembers');
+
+exports = AbstractChildTypeWithNoNewJsMembers;
+
+//# sourceMappingURL=JsMethodExample$AbstractChildTypeWithNoNewJsMembers.js.map

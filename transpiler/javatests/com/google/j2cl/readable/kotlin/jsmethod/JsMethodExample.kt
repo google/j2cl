@@ -43,7 +43,9 @@ class JsMethodExample {
 
   interface I {
     @JsMethod(name = "mString") fun m(s: String)
+  }
 
+  interface InterfaceWithStaticMethod {
     companion object {
       @JvmStatic @JsMethod fun s() {}
     }
@@ -59,7 +61,7 @@ class JsMethodExample {
   }
 
   @JsType
-  class SubJsType internal constructor() : Base<String>() {
+  open class SubJsType internal constructor() : Base<String>() {
     // This should not be a JsMethod.
     override fun m(s: String) {}
 
@@ -69,6 +71,20 @@ class JsMethodExample {
       // public and part of the JsInterop contract.
       @JvmStatic internal fun n() {}
     }
+  }
+
+  abstract class AbstractChildTypeWithNoNewJsMembers internal constructor() : SubJsType() {
+    open fun p() {}
+  }
+
+  abstract class AbstractGrandChildTypeWithNoNewJsMembers internal constructor() :
+    AbstractChildTypeWithNoNewJsMembers() {
+    open fun q() {}
+  }
+
+  open class ConcreteGreatGrandChildTypeWithNewJsMembers internal constructor() :
+    AbstractGrandChildTypeWithNoNewJsMembers() {
+    @JsMethod open fun r(s: String) {}
   }
 
   @JsType
