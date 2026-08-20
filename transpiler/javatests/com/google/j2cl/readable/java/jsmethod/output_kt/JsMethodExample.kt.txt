@@ -20,7 +20,6 @@ package jsmethod
 
 import javaemul.lang.*
 import java.util.ArrayList
-import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 import kotlin.String
@@ -147,8 +146,5 @@ open class JsMethodExample {
   fun m(): T = null as T
  }
  
- internal open class ParameterizedInterfaceImpl: ParameterizedInterface<String?> {
-  @JsConstructor
-  constructor()
- }
+ internal open class ParameterizedInterfaceImpl internal constructor(): ParameterizedInterface<String?>
 }

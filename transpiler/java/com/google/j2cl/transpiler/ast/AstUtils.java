@@ -1348,12 +1348,23 @@ public final class AstUtils {
 
   /** Returns true if the given type introduces any exported members in Wasm. */
   public static boolean declaresWasmJsExports(TypeDeclaration typeDeclaration) {
+    // TODO(b/545779164): See if this can be simplified by making the bridge method generation
+    // logic more consistent between Closure and Wasm. Then instead of using explicitly collecting
+    // declared instance methods, accidental overrides and defaults bridges, we would just iterate
+    // over polymorphic methods.
     return !typeDeclaration.isNative()
         && (typeDeclaration.getDeclaredMethodDescriptors().stream()
                 .anyMatch(AstUtils::needsWasmJsExport)
             || typeDeclaration.getDeclaredFieldDescriptors().stream()
                 .anyMatch(AstUtils::needsWasmJsExport)
+            // Accidental overrides might make superclass methods become accessible from JS.
             || typeDeclaration.toDescriptor().getAccidentalOverrides().stream()
+                .anyMatch(AstUtils::needsWasmJsExport)
+            // Default methods that are accessible from JS might not have an implementation in the
+            // superclasses and need to be considered separately.
+            || typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
+                .filter(MethodDescriptor::isDefaultMethodBridge)
+                .filter(m -> m.isMemberOf(typeDeclaration))
                 .anyMatch(AstUtils::needsWasmJsExport));
   }
 

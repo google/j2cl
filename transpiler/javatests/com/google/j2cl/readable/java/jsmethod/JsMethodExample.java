@@ -17,7 +17,6 @@ package jsmethod;
 
 import java.util.ArrayList;
 import javaemul.internal.annotations.Wasm;
-import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -135,9 +134,5 @@ public class JsMethodExample {
     }
   }
 
-  static class ParameterizedInterfaceImpl implements ParameterizedInterface<String> {
-    // TODO(b/545780623): Remove the JsConstructor annotation when bug is fixed.
-    @JsConstructor
-    public ParameterizedInterfaceImpl() {}
-  }
+  static class ParameterizedInterfaceImpl implements ParameterizedInterface<String> {}
 }

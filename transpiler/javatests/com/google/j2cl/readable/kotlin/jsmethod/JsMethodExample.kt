@@ -16,7 +16,6 @@
 package jsmethod
 
 import javaemul.internal.annotations.Wasm
-import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 
@@ -134,7 +133,5 @@ class JsMethodExample {
     }
   }
 
-  class ParameterizedInterfaceImpl : ParameterizedInterface<String> {
-    @JsConstructor constructor() {}
-  }
+  class ParameterizedInterfaceImpl : ParameterizedInterface<String>
 }
