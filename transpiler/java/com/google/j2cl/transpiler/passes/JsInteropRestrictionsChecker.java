@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
+import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -1880,8 +1881,7 @@ public class JsInteropRestrictionsChecker {
         // This is safe because users cannot use it.
         || TypeDescriptors.isWasmFuncref(typeDescriptor)
         || (checkWasmCustomDescriptorsJsInterop
-            && (typeDescriptor.isJsFunctionInterface()
-                || AstUtils.isWasmJsExportedType(typeDescriptor)));
+            && (typeDescriptor.isJsFunctionInterface() || isWasmJsExportedType(typeDescriptor)));
   }
 
   private void checkMethodSignature(

@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.MoreCollectors.toOptional;
-import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsExportsIncludingSelf;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.collect.Streams;
@@ -77,12 +76,8 @@ final class JsExternsGenerator {
             });
   }
 
-  static DeclaredTypeDescriptor findExportedSuperType(Type type) {
-    return findSuperTypeWithWasmJsExportsIncludingSelf(type.getSuperTypeDescriptor());
-  }
-
   static boolean shouldGenerateExtern(DeclaredTypeDescriptor typeDescriptor) {
-    // Generate externs if this type or a supertype is visible to JS.
+    // Generate externs if this type is visible to JS.
     return isWasmJsExportedType(typeDescriptor);
   }
 
@@ -306,20 +301,19 @@ final class JsExternsGenerator {
 
     String externName = closureEnvironment.aliasForType(type.getDeclaration());
     String simpleJsName = type.getDeclaration().getSimpleJsName();
-    if (type.isInterface() && !AstUtils.hasWasmJsPrototype(type.getDeclaration())) {
-      generateTypeAlias(sb, simpleJsName, externName);
+    String qualifiedJsName = type.getDeclaration().getQualifiedJsName();
+    if (AstUtils.hasWasmJsPrototype(type.getDeclaration())) {
+      generateConstructorProxy(sb, externName, simpleJsName, qualifiedJsName);
     } else {
-      generateConstructorProxy(
-          sb, externName, simpleJsName, type.getDeclaration().getQualifiedJsName());
+      // Types that do not have a prototype don't need a constructor proxy.
+      generateTypeAlias(sb, simpleJsName, externName);
     }
 
     sb.appendln("");
     sb.appendln(String.format("exports = %s;", simpleJsName));
 
     // Output to externs/my.package.MyClass.java.js
-    output.write(
-        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".java.js").toString(),
-        sb.build());
+    output.write(Path.of(OUTPUT_PATH, qualifiedJsName + ".java.js").toString(), sb.build());
   }
 
   private static void generateConstructorProxy(

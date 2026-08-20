@@ -129,7 +129,7 @@ public class ClosureGenerationEnvironment {
               + getJsDocDeclarationForTypeVariable(
                   type.getDeclaration().getTypeParameterDescriptors()));
     }
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptorToDeclare(type);
+    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null && (isWasmExtern || superTypeDescriptor.hasTypeArguments())) {
       // No need to render if it does not have type arguments as it will also appear in the
       // extends clause of the class definition (unless it's an externs declaration).
@@ -157,14 +157,6 @@ public class ClosureGenerationEnvironment {
         typeDescriptors.stream()
             .map(closureTypesGenerator::getClosureTypeString)
             .collect(joining(", ")));
-  }
-
-  /**
-   * Returns the super type to declare in the Closure JsDoc. The super type declared in Closure is
-   * not necessarily the same as the one in the model.
-   */
-  protected DeclaredTypeDescriptor getSuperTypeDescriptorToDeclare(Type type) {
-    return type.getSuperTypeDescriptor();
   }
 
   /*** Renders a JsDoc clause only if the type is an actual class in JavaScript. */

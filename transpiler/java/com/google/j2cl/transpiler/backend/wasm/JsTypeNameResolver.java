@@ -41,11 +41,6 @@ final class JsTypeNameResolver extends ClosureGenerationEnvironment {
   }
 
   @Override
-  protected DeclaredTypeDescriptor getSuperTypeDescriptorToDeclare(Type type) {
-    return JsExternsGenerator.findExportedSuperType(type);
-  }
-
-  @Override
   protected boolean isJavaScriptClass(DeclaredTypeDescriptor typeDescriptor) {
     return JsExternsGenerator.shouldGenerateExtern(typeDescriptor);
   }

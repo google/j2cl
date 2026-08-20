@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
@@ -284,7 +285,7 @@ public class WasmExportBridgesUtils {
         && !typeDescriptor.isPrimitive()
         && !TypeDescriptors.isWasmFuncref(typeDescriptor)
         // For methods exported by configureAll, we can avoid conversions for exported types.
-        && !(isExport && AstUtils.isWasmJsExportedType(typeDescriptor));
+        && !(isExport && isWasmJsExportedType(typeDescriptor));
   }
 
   private WasmExportBridgesUtils() {}

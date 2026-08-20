@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.ast.AstUtils.findSuperTypeWithWasmJsExportsIncludingSelf;
+import static com.google.j2cl.transpiler.ast.AstUtils.getJsPrototypeOwner;
 import static com.google.j2cl.transpiler.ast.AstUtils.hasWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.lang.String.format;
@@ -650,12 +650,13 @@ public class WasmConstructsGenerator {
 
     builder.indent();
     if (environment.isCustomDescriptorsJsInteropEnabled() && !implementedType.isInterface()) {
-      // For classes, the first field of the vtable for JsTypes is the JS prototype.
-      var jsPrototypeType = findSuperTypeWithWasmJsExportsIncludingSelf(implementedType);
       builder.newLine();
-      if (jsPrototypeType != null) {
+
+      // For classes, the first field of the vtable for JsTypes is the JS prototype.
+      var prototypeOwner = getJsPrototypeOwner(implementedType);
+      if (prototypeOwner != null) {
         builder.append(
-            format("(global.get %s)", environment.getJsPrototypeGlobalName(jsPrototypeType)));
+            format("(global.get %s)", environment.getJsPrototypeGlobalName(prototypeOwner)));
       } else {
         builder.append("(ref.null extern)");
       }

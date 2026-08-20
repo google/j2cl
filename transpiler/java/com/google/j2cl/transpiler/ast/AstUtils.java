@@ -1358,44 +1358,26 @@ public final class AstUtils {
   }
 
   /** Returns true if this type defined in Wasm is exported to/visible in JS. */
-  public static boolean isWasmJsExportedType(TypeDeclaration typeDeclaration) {
-    return findSuperTypeWithWasmJsExportsIncludingSelf(typeDeclaration) != null;
-  }
-
-  /** Returns true if this type defined in Wasm is exported to/visible in JS. */
   public static boolean isWasmJsExportedType(TypeDescriptor typeDescriptor) {
     return typeDescriptor instanceof DeclaredTypeDescriptor dtd
-        && findSuperTypeWithWasmJsExportsIncludingSelf(dtd) != null;
+        && getJsPrototypeOwner(dtd.getTypeDeclaration()) != null;
   }
 
   /**
-   * Returns the first supertype of the given type that has a JS prototype in Wasm, including the
-   * type itself.
+   * Returns the type that owns the JavaScript prototype for this type. It might be itself or a
+   * superclass.
    *
    * <p>If no supertype has a JS prototype, returns null.
    */
   @Nullable
-  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsExportsIncludingSelf(
-      TypeDeclaration typeDeclaration) {
-    return findSuperTypeWithWasmJsExportsIncludingSelf(typeDeclaration.toDescriptor());
-  }
-
-  /**
-   * Returns the first supertype of the given type that has a JS prototype in Wasm, including the
-   * type itself.
-   *
-   * <p>If no supertype has a JS prototype, returns null.
-   */
-  @Nullable
-  public static DeclaredTypeDescriptor findSuperTypeWithWasmJsExportsIncludingSelf(
-      @Nullable DeclaredTypeDescriptor typeDescriptor) {
-    while (typeDescriptor != null) {
-      if (declaresWasmJsExports(typeDescriptor.getTypeDeclaration())) {
-        return typeDescriptor;
-      }
-      typeDescriptor = typeDescriptor.getSuperTypeDescriptor();
+  public static TypeDeclaration getJsPrototypeOwner(@Nullable TypeDeclaration typeDeclaration) {
+    if (typeDeclaration == null) {
+      return null;
     }
-    return null;
+    if (declaresWasmJsExports(typeDeclaration)) {
+      return typeDeclaration;
+    }
+    return getJsPrototypeOwner(typeDeclaration.getSuperTypeDeclaration());
   }
 
   /**
