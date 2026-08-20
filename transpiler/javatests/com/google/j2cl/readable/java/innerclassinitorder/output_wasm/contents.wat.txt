@@ -374,7 +374,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer)
-  (ref.func $m_go__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1)
  )
 )
 (global $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable)
@@ -3005,15 +3004,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:265:17
- (local $$qualifier (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/innerclassinitorder/readable-j2wasm.js/innerclassinitorder/InnerClassInitOrder.java:266:8
-  (return (block (result i32)
-   (local.set $$qualifier (call $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this)(i32.const 1)))
-   (call_ref $function.m_go__int (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable $m_go__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $vtable(local.get $$qualifier))))
-  ))
+  (return (call $m_go__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (ref.as_non_null (call $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this)(i32.const 1)))))
  )
 )
 (elem declare func $m_checkDispatchFromSub2__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)

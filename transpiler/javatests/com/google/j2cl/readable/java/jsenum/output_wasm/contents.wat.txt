@@ -263,7 +263,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$1)
-  (ref.func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$1)
  )
 )
 (global $jsenum.Main.Supplier.vtable@$jsenum.Main.$LambdaImplementor$1 (ref $jsenum.Main.Supplier.vtable)
@@ -278,7 +277,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$2)
-  (ref.func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.$LambdaImplementor$2)
  )
 )
 (global $jsenum.Main.Consumer.vtable@$jsenum.Main.$LambdaImplementor$2 (ref $jsenum.Main.Consumer.vtable)
@@ -293,7 +291,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$3)
-  (ref.func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$3)
  )
 )
 (global $jsenum.Main.JsFunctionSuppiler.vtable@$jsenum.Main.$LambdaImplementor$3 (ref $jsenum.Main.JsFunctionSuppiler.vtable)
@@ -308,7 +305,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$4)
-  (ref.func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$4)
  )
 )
 (global $jsenum.Main.Supplier.vtable@$jsenum.Main.$LambdaImplementor$4 (ref $jsenum.Main.Supplier.vtable)
@@ -323,7 +319,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$5)
-  (ref.func $m_get__jsenum_Main_Supplier@jsenum.Main.$LambdaImplementor$5)
  )
 )
 (global $jsenum.Main.Supplier.vtable@$jsenum.Main.$LambdaImplementor$5 (ref $jsenum.Main.Supplier.vtable)
@@ -338,7 +333,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6)
-  (ref.func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6)
  )
 )
 (global $jsenum.Main.SpecializedJsFunction.vtable@$jsenum.Main.$LambdaImplementor$6 (ref $jsenum.Main.SpecializedJsFunction.vtable)
@@ -353,7 +347,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7)
-  (ref.func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7)
  )
 )
 (global $jsenum.Main.Consumer.vtable@$jsenum.Main.$LambdaImplementor$7 (ref $jsenum.Main.Consumer.vtable)
@@ -2198,7 +2191,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:159:42
-  (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$1.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$1 $vtable(local.get $this)))))
+  (return (call $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $this))))
  )
 )
 (elem declare func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$1)
@@ -2287,7 +2280,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:160:43
-  (call_ref $function.m_accept__jsenum_Main_ComparableJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$2.vtable $m_accept__jsenum_Main_ComparableJsEnum__void (struct.get $jsenum.Main.$LambdaImplementor$2 $vtable(local.get $this))))
+  (call $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$2)
@@ -2379,7 +2372,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:162:30
-  (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$3.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$3 $vtable(local.get $this)))))
+  (return (call $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$3 (ref.as_non_null (local.get $this))))
  )
 )
 (elem declare func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$3)
@@ -2471,7 +2464,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$4) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:163:37
-  (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$4.vtable $m_get__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$4 $vtable(local.get $this)))))
+  (return (call $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$4 (ref.as_non_null (local.get $this))))
  )
 )
 (elem declare func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$4)
@@ -2560,7 +2553,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:163:30
-  (return (call_ref $function.m_get__jsenum_Main_Supplier (ref.as_non_null (local.get $this))(struct.get $jsenum.Main.$LambdaImplementor$5.vtable $m_get__jsenum_Main_Supplier (struct.get $jsenum.Main.$LambdaImplementor$5 $vtable(local.get $this)))))
+  (return (call $m_get__jsenum_Main_Supplier@jsenum.Main.$LambdaImplementor$5 (ref.as_non_null (local.get $this))))
  )
 )
 (elem declare func $m_get__java_lang_Object@jsenum.Main.$LambdaImplementor$5)
@@ -2651,7 +2644,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:164:43
-  (return (call_ref $function.m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$6.vtable $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum (struct.get $jsenum.Main.$LambdaImplementor$6 $vtable(local.get $this)))))
+  (return (call $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))))
  )
 )
 (elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6)
@@ -2740,7 +2733,7 @@
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:36
-  (call_ref $function.m_accept__jsenum_Main_SomeJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $arg0))(struct.get $jsenum.Main.$LambdaImplementor$7.vtable $m_accept__jsenum_Main_SomeJsEnum__void (struct.get $jsenum.Main.$LambdaImplementor$7 $vtable(local.get $this))))
+  (call $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $arg0)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7)

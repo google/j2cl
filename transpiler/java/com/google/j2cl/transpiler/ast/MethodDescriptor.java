@@ -424,6 +424,20 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         && method.getDeclarationDescriptor().equals(candidateTarget.getDeclarationDescriptor());
   }
 
+  /**
+   * Returns true if the method is effectively final.
+   *
+   * <p>This is a conservative property: if true, the method is effectively final, but if it returns
+   * false the method may or may not be effectively final. A class that can be extended but is never
+   * extended is effectively final, but that requires a deeper analysis.
+   */
+  public boolean isEffectivelyFinal() {
+    return isFinal()
+        || getVisibility().isPrivate()
+        || getEnclosingTypeDescriptor().isFinal()
+        || getEnclosingTypeDescriptor().isAnonymous();
+  }
+
   /** Returns the enclosing method descriptor if the descriptor represents a local function. */
   @Nullable
   public abstract MethodDescriptor getEnclosingMethodDescriptor();

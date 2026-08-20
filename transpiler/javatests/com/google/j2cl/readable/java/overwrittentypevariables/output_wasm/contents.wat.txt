@@ -86,7 +86,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$1)
-  (ref.func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$1)
  )
 )
 (global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.$LambdaImplementor$1 (ref $overwrittentypevariables.HashFunction.vtable)
@@ -102,7 +101,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$2)
-  (ref.func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$2)
  )
 )
 (global $overwrittentypevariables.HashFunction.vtable@$overwrittentypevariables.HashFunctions.$LambdaImplementor$2 (ref $overwrittentypevariables.HashFunction.vtable)
@@ -723,7 +721,7 @@
  (local.set $this (ref.cast (ref $overwrittentypevariables.HashFunctions.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/HashFunctions.java:28:20
-  (return (call_ref $function.m_apply__java_lang_Object__java_lang_String (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $overwrittentypevariables.HashFunctions.$LambdaImplementor$1.vtable $m_apply__java_lang_Object__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.$LambdaImplementor$1 $vtable(local.get $this)))))
+  (return (call $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$1)
@@ -814,7 +812,7 @@
  (local.set $this (ref.cast (ref $overwrittentypevariables.HashFunctions.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/HashFunctions.java:37:20
-  (return (call_ref $function.m_apply__java_lang_Enum__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $arg0))(struct.get $overwrittentypevariables.HashFunctions.$LambdaImplementor$2.vtable $m_apply__java_lang_Enum__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.$LambdaImplementor$2 $vtable(local.get $this)))))
+  (return (call $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $arg0))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$2)

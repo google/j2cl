@@ -355,7 +355,6 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_sayHey__java_lang_String@jsfunction.JsFunctionOptimization.1.1.2.1)
  )
 )
 (global $jsfunction.JsFunctionOptimization.1.1.2.vtable (ref (exact $jsfunction.JsFunctionOptimization.1.1.2.vtable))
@@ -380,7 +379,6 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_m__void_$pp_jsfunction@jsfunction.JsFunctionOptimization.1.1)
  )
 )
 (global $jsfunction.JsFunctionOptimization.1.vtable (ref (exact $jsfunction.JsFunctionOptimization.1.vtable))
@@ -390,7 +388,6 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_m__void_$pp_jsfunction@jsfunction.JsFunctionOptimization.1)
  )
 )
 (global $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.vtable (ref (exact $jsfunction.JsFunctionOptimization.$LambdaImplementor$3.vtable))
@@ -585,7 +582,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$7)
-  (ref.func $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7)
  )
 )
 (global $jsfunction.Main.ForEachCallBack.vtable@$jsfunction.Main.$LambdaImplementor$7 (ref $jsfunction.Main.ForEachCallBack.vtable)
@@ -631,7 +627,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$10)
-  (ref.func $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$10)
  )
 )
 (global $jsfunction.Main.ParametricJsFunction.vtable@$jsfunction.Main.$LambdaImplementor$10 (ref $jsfunction.Main.ParametricJsFunction.vtable)
@@ -647,7 +642,6 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$11)
-  (ref.func $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$11)
  )
 )
 (global $jsfunction.Main.ParametricJsFunction.vtable@$jsfunction.Main.$LambdaImplementor$11 (ref $jsfunction.Main.ParametricJsFunction.vtable)
@@ -3252,7 +3246,6 @@
  (local $r1 i32)
  (local $var1 i32)
  (local $x1 (ref null $java.lang.String))
- (local $$qualifier (ref null $jsfunction.JsFunctionOptimization.1.1.2.1))
  (local $this (ref null $jsfunction.JsFunctionOptimization.1.1.2))
  (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization.1.1.2) (local.get $this.untyped)))
  (block
@@ -3263,10 +3256,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:61:20
   (local.set $x1 (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_x@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/JsFunctionOptimization.java:62:20
-  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_r@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this))))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_x@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this))))(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_var@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this))))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (block (result (ref null $java.lang.String))
-   (local.set $$qualifier (call $$create__jsfunction_JsFunctionOptimization_1_1_2@jsfunction.JsFunctionOptimization.1.1.2.1 (local.get $this)))
-   (call_ref $function.m_sayHey__java_lang_String (ref.as_non_null (local.get $$qualifier))(struct.get $jsfunction.JsFunctionOptimization.1.1.2.1.vtable $m_sayHey__java_lang_String (ref.get_desc $jsfunction.JsFunctionOptimization.1.1.2.1(local.get $$qualifier))))
-  ))))
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_r@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this))))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s)))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_x@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this))))(call $m_valueOf__int__java_lang_String@java.lang.String (struct.get $jsfunction.JsFunctionOptimization.1.1.2 $$captured_var@jsfunction.JsFunctionOptimization.1.1.2 (local.get $this))))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_sayHey__java_lang_String@jsfunction.JsFunctionOptimization.1.1.2.1 (ref.as_non_null (call $$create__jsfunction_JsFunctionOptimization_1_1_2@jsfunction.JsFunctionOptimization.1.1.2.1 (local.get $this)))))))
  )
 )
 (elem declare func $m_m__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.1.1.2)
@@ -5416,15 +5406,11 @@
  (param $arg3 (ref null extern))
  (result (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
- (local $$qualifier (ref null $jsfunction.Main.$LambdaImplementor$7))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
   (call $$clinit__void_<once>_@jsfunction.Main.$LambdaImplementor$7 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
-  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (block (result (ref null $java.lang.Object))
-   (local.set $$qualifier (ref.cast (ref null $jsfunction.Main.$LambdaImplementor$7) (any.convert_extern (local.get $arg0))))
-   (call_ref $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.as_non_null (local.get $$qualifier))(call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $arg1))(local.get $arg2)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $arg3)))(struct.get $jsfunction.Main.$LambdaImplementor$7.vtable $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.get_desc $jsfunction.Main.$LambdaImplementor$7(local.get $$qualifier))))
-  ))))
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7 (ref.as_non_null (ref.cast (ref null $jsfunction.Main.$LambdaImplementor$7) (any.convert_extern (local.get $arg0))))(call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $arg1))(local.get $arg2)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $arg3)))))))
  )
 )
 
@@ -5441,7 +5427,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
-  (return (call_ref $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0))(local.get $arg1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $arg2))(struct.get $jsfunction.Main.$LambdaImplementor$7.vtable $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object (ref.get_desc $jsfunction.Main.$LambdaImplementor$7(local.get $this)))))
+  (return (call $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0))(local.get $arg1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $arg2))))
  )
 )
 (elem declare func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$7)
@@ -5702,16 +5688,11 @@
  (param $arg0 (ref null extern))
  (param $arg1 (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
- (local $$qualifier (ref null $jsfunction.Main.$LambdaImplementor$10))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
   (call $$clinit__void_<once>_@jsfunction.Main.$LambdaImplementor$10 )
-  (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
-   (local.set $$qualifier (ref.cast (ref null $jsfunction.Main.$LambdaImplementor$10) (any.convert_extern (local.get $arg0))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
-   (call_ref $function.m_call__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg1))(struct.get $jsfunction.Main.$LambdaImplementor$10.vtable $m_call__java_lang_String__void (ref.get_desc $jsfunction.Main.$LambdaImplementor$10(local.get $$qualifier))))
-  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
+  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$10 (ref.as_non_null (ref.cast (ref null $jsfunction.Main.$LambdaImplementor$10) (any.convert_extern (local.get $arg0))))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg1)))
  )
 )
 
@@ -5725,7 +5706,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$10) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
-  (call_ref $function.m_call__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsfunction.Main.$LambdaImplementor$10.vtable $m_call__java_lang_String__void (ref.get_desc $jsfunction.Main.$LambdaImplementor$10(local.get $this))))
+  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$10 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$10)
@@ -5813,16 +5794,11 @@
  (param $arg0 (ref null extern))
  (param $arg1 (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
- (local $$qualifier (ref null $jsfunction.Main.$LambdaImplementor$11))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
   (call $$clinit__void_<once>_@jsfunction.Main.$LambdaImplementor$11 )
-  (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
-   (local.set $$qualifier (ref.cast (ref null $jsfunction.Main.$LambdaImplementor$11) (any.convert_extern (local.get $arg0))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
-   (call_ref $function.m_call__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg1))(struct.get $jsfunction.Main.$LambdaImplementor$11.vtable $m_call__java_lang_String__void (ref.get_desc $jsfunction.Main.$LambdaImplementor$11(local.get $$qualifier))))
-  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
+  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$11 (ref.as_non_null (ref.cast (ref null $jsfunction.Main.$LambdaImplementor$11) (any.convert_extern (local.get $arg0))))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg1)))
  )
 )
 
@@ -5836,7 +5812,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$11) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
-  (call_ref $function.m_call__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsfunction.Main.$LambdaImplementor$11.vtable $m_call__java_lang_String__void (ref.get_desc $jsfunction.Main.$LambdaImplementor$11(local.get $this))))
+  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$11)

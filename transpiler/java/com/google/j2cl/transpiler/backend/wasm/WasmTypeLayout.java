@@ -195,7 +195,7 @@ abstract class WasmTypeLayout {
       // interfaces (JsFunction interfaces).
       return false;
     }
-    return !(methodDescriptor.getEnclosingTypeDescriptor().isFinal() || methodDescriptor.isFinal())
+    return !methodDescriptor.isEffectivelyFinal()
         // If a method overrides a parent method, it should overwrite the vtable entry.
         || (getWasmSupertypeLayout() != null
             && getWasmSupertypeLayout()

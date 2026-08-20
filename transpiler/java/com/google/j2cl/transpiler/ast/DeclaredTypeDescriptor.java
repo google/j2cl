@@ -116,6 +116,10 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return getTypeDeclaration().isFinal();
   }
 
+  public boolean isAnonymous() {
+    return getTypeDeclaration().isAnonymous();
+  }
+
   @Override
   public boolean isNative() {
     return getTypeDeclaration().isNative();
