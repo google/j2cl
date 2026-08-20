@@ -15,57 +15,58 @@
  */
 package kotlinjavainterop
 
-open class OuterKotlinClass {
-  open class IntermediateKotlinIntSet : JavaIntSet() {
-    override fun add(element: Int?): Boolean {
-      return super.add(element)
-    }
-
-    override fun addAll(elements: Collection<Int>): Boolean {
-      return super.addAll(elements)
-    }
-
-    override fun clear() {
-      super.clear()
-    }
-
-    override fun iterator(): MutableIterator<Int> {
-      return super.iterator()
-    }
-
-    override fun remove(o: Int?): Boolean {
-      return super.remove(o)
-    }
-
-    override fun removeAll(elements: Collection<Int>): Boolean {
-      return super.removeAll(elements)
-    }
-
-    override fun retainAll(elements: Collection<Int>): Boolean {
-      return super.retainAll(elements)
-    }
-
-    override fun contains(o: Int?): Boolean {
-      return super.contains(o)
-    }
-
-    override fun containsAll(elements: Collection<Int>): Boolean {
-      return super.containsAll(elements)
-    }
-
-    override fun isEmpty(): Boolean {
-      return super.isEmpty()
-    }
-
-    override fun toArray(): Array<Any> {
-      return super.toArray()
-    }
-
-    override fun <T : Any?> toArray(a: Array<out T & Any>?): Array<T & Any> {
-      return super.toArray(a)
-    }
-
-    override val size: Int
-      get() = super.size
+// TODO(b/463325394): uncomment the outer class when bug is fixed
+// open class OuterKotlinClass {
+open class IntermediateKotlinIntSet : JavaIntSet() {
+  override fun add(element: Int?): Boolean {
+    return super.add(element)
   }
+
+  override fun addAll(elements: Collection<Int>): Boolean {
+    return super.addAll(elements)
+  }
+
+  override fun clear() {
+    super.clear()
+  }
+
+  override fun iterator(): MutableIterator<Int> {
+    return super.iterator()
+  }
+
+  override fun remove(o: Int?): Boolean {
+    return super.remove(o)
+  }
+
+  override fun removeAll(elements: Collection<Int>): Boolean {
+    return super.removeAll(elements)
+  }
+
+  override fun retainAll(elements: Collection<Int>): Boolean {
+    return super.retainAll(elements)
+  }
+
+  override fun contains(o: Int?): Boolean {
+    return super.contains(o)
+  }
+
+  override fun containsAll(elements: Collection<Int>): Boolean {
+    return super.containsAll(elements)
+  }
+
+  override fun isEmpty(): Boolean {
+    return super.isEmpty()
+  }
+
+  override fun toArray(): Array<Any> {
+    return super.toArray()
+  }
+
+  override fun <T : Any?> toArray(a: Array<out T & Any>?): Array<T & Any> {
+    return super.toArray(a)
+  }
+
+  override val size: Int
+    get() = super.size
 }
+// }

@@ -19,8 +19,9 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class JavaIntSetExtendingIntermediateKotlinIntSet
-    extends OuterKotlinClass.IntermediateKotlinIntSet {
-
+    // TODO(b/463325394): Use the commented extends clause when bug is fixed
+    // extends OuterKotlinClass.IntermediateKotlinIntSet {
+    extends IntermediateKotlinIntSet {
   @Override
   public boolean add(Integer element) {
     return super.add(element);
