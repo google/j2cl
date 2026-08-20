@@ -16,7 +16,6 @@
 package com.google.j2cl.benchmarking.framework;
 
 import java.util.logging.Logger;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -122,25 +121,12 @@ public final class BenchmarkExecutor {
   }
 
   private static void useResult(Object o) {
-    boolean isJvm = System.getProperty("java.version", null) != null;
-    if (isJvm) {
-      // JVM doesn't need user result to disable optimizations.
-      return;
-    }
-    Global.__benchmarking_result = externalize(o);
+    Global.__benchmarking_result = o;
   }
-
-  @Wasm("extern.convert_any")
-  private static External externalize(Object result) {
-    return (External) result;
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  private interface External {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "goog.global")
   private static class Global {
-    public static External __benchmarking_result;
+    public static Object __benchmarking_result;
   }
 
   private BenchmarkExecutor() {}
