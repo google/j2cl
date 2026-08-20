@@ -130,7 +130,7 @@ public final class BenchmarkExecutor {
     Global.__benchmarking_result = externalize(o);
   }
 
-  @Wasm("extern.externalize")
+  @Wasm("extern.convert_any")
   private static External externalize(Object result) {
     return (External) result;
   }
