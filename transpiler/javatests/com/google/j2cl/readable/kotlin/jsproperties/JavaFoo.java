@@ -27,4 +27,9 @@ public class JavaFoo {
   public int getBuzz() {
     return 20;
   }
+
+  @JsProperty(name = "fieldRenamed")
+  public int field = 30;
+
+  @JsProperty public static int staticField = 40;
 }

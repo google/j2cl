@@ -217,6 +217,8 @@ class Main {
   fun testFromJava() {
     JavaFoo().bar()
     JavaFoo().buzz
+    var x = JavaFoo().field
+    x = JavaFoo.staticField
   }
 
   fun testJvmField() {

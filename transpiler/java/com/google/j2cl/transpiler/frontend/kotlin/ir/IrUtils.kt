@@ -790,20 +790,16 @@ fun IrAnnotationContainer.copyAnnotationsWhen(
 }
 
 val IrProperty.hasAccessors: Boolean
-  get() =
-    // Properties annotated with `@JvmField` (or `const`) do not have accessors.
-    !backingField.isJvmField &&
-      // Private properties with no explicit accessors do not have accessors.
-      (visibility != DescriptorVisibilities.PRIVATE || hasDefinedAccessors)
+  get() = !backingField.isJvmField && (getter.isDefinedAccessor || setter.isDefinedAccessor)
 
-private val IrProperty.hasDefinedAccessors: Boolean
-  get() =
-    (getter != null && !getter!!.isDefaultPropertyAccessor) ||
-      (setter != null && !setter!!.isDefaultPropertyAccessor)
+// Private properties with no explicit accessors do not have accessors.
+private val IrFunction?.isDefinedAccessor
+  get() = this != null && !isPrivateDefaultPropertyAccessor
 
-private val IrFunction.isDefaultPropertyAccessor: Boolean
+private val IrFunction.isPrivateDefaultPropertyAccessor
   get() =
-    origin == IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR &&
+    visibility == DescriptorVisibilities.PRIVATE &&
+      origin == IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR &&
       (this is IrSimpleFunction && correspondingPropertySymbol != null)
 
 /**
