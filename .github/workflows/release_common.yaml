@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout current commit
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           # Fetch the entire history to have branch information. This will allow us to check that
           # the commit we start the release on is part of the master branch.
@@ -100,7 +100,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout current commit
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ inputs.git_ref }}
       - name: Create and Push Tag
@@ -113,7 +113,7 @@ jobs:
 
   release:
     needs: create_git_tag
-    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.4.0
+    uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.7.0
     with:
       prerelease: ${{ contains(inputs.version, '-RC') }}
       release_files: ${{ github.event.repository.name }}-*.tar.gz
@@ -140,13 +140,13 @@ jobs:
           check_secret "MAVEN_GPG_PRIVATE_KEY" "${{ secrets.MAVEN_GPG_PRIVATE_KEY }}"
           check_secret "MAVEN_GPG_PASSPHRASE" "${{ secrets.MAVEN_GPG_PASSPHRASE }}"
       - name: Checkout release tag
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ inputs.version }}
 
       # Maven and Bazel require Java to be available.
       - name: Setup Java
-        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654  # v5.2.0
+        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520  # v5.4.0
         with:
           java-version: '21'
           distribution: 'zulu'
@@ -181,7 +181,7 @@ jobs:
   publish_to_bcr:
     if: ${{ inputs.publish_to_bcr }}
     needs: release
-    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.1.0
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.4.1
     with:
       tag_name: ${{ inputs.version }}
       registry_fork: j2cl-github-bot/bazel-central-registry
