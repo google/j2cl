@@ -30,7 +30,6 @@ JRE_JAVAC_OPTS = [
     "-Xep:ShouldNotSubclass:OFF",
     # Remove crv since we don't want to dep on ErrorProne annotations from JRE.
     "-Xep:CheckReturnValue:OFF",
-    "-Xep:MixedArrayDimensions:OFF",  # See go/lsc-mixedarraydimensions
     "-Xep:CompareToZero:OFF",
 ]
 
