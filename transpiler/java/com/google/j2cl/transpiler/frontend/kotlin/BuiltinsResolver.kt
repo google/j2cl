@@ -103,9 +103,9 @@ internal class BuiltinsResolver(
     val arity = kFunctionNClassSymbol.owner.typeParameters.size - 1
 
     return if (kFunctionNClassSymbol.isKSuspendFunction()) {
-      jvmBackendContext.symbols.suspendFunctionN(arity)
+      jvmBackendContext.irBuiltIns.suspendFunctionN(arity).symbol
     } else {
-      jvmBackendContext.symbols.functionN(arity)
+      jvmBackendContext.irBuiltIns.functionN(arity).symbol
     }
   }
 }
