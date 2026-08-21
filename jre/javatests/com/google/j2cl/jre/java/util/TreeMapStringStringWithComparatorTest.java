@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class TreeMapStringStringWithComparatorTest extends TreeMapStringStringTest {
   @Override
-  protected NavigableMap<String, String> createNavigableMap() {
+  NavigableMap<String, String> createNavigableMap() {
     setComparator(
         new Comparator<@Nullable String>() {
           @Override

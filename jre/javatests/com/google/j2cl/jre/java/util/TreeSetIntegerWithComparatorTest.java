@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public class TreeSetIntegerWithComparatorTest extends TreeSetIntegerTest {
   @Override
-  protected NavigableSet<Integer> createNavigableSet() {
+  NavigableSet<Integer> createNavigableSet() {
     setComparator(
         new Comparator<Integer>() {
           @Override
