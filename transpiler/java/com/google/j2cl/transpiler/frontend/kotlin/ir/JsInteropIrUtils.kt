@@ -42,15 +42,13 @@ import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
-import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.getAnnotation as kotlinGetAnnotation
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.hasEqualFqName
 import org.jetbrains.kotlin.ir.util.isFromJava
-import org.jetbrains.kotlin.ir.util.isGetter
-import org.jetbrains.kotlin.ir.util.isSetter
+import org.jetbrains.kotlin.ir.util.isPropertyAccessor
 import org.jetbrains.kotlin.ir.util.isStatic
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
@@ -187,47 +185,48 @@ private fun IrDeclaration.getJsMemberAnnotation(): IrConstructorCall? =
     else -> null
   }
 
-fun IrDeclaration.getJsInfo(): JsInfo =
-  JsInfo.builder()
-    .setJsMemberType(getJsMemberType())
-    .setJsOverlay(isJsOverlay)
-    .setJsAsync(this is IrFunction && isJsAsync)
-    .apply {
-      val jsMemberAnnotation = getJsMemberAnnotation()
-      if (jsMemberAnnotation != null) {
-        setHasJsMemberAnnotation(true)
-        setJsName(jsMemberAnnotation.getValueArgumentAsConst(NAME_ANNOTATION_ATTRIBUTE))
-        setJsNamespace(jsMemberAnnotation.getValueArgumentAsConst(NAMESPACE_ANNOTATION_ATTRIBUTE))
-      }
+fun IrDeclaration.getJsInfo(): JsInfo {
+  val jsOverlay = isJsOverlay
+  val jsAsync = this is IrFunction && isJsAsync
+  val jsMemberAnnotation = getJsMemberAnnotation()
+
+  if (!isJsIgnore) {
+    val implicitJsMember = isImplicitJsMember()
+    val isJsEnumConstant = isJsEnumEntry()
+    val memberOfNativeType = isMemberOfNativeJsType() && !isMemberOfJsEnum
+    if (
+      jsMemberAnnotation != null ||
+        ((implicitJsMember || isJsEnumConstant || memberOfNativeType) && !jsOverlay)
+    ) {
+      return JsInfo.builder()
+        .setJsMemberType(getJsMemberType(jsMemberAnnotation))
+        .setJsName(jsMemberAnnotation?.getValueArgumentAsConst(NAME_ANNOTATION_ATTRIBUTE))
+        .setJsNamespace(jsMemberAnnotation?.getValueArgumentAsConst(NAMESPACE_ANNOTATION_ATTRIBUTE))
+        .setJsOverlay(jsOverlay)
+        .setJsAsync(jsAsync)
+        .setHasJsMemberAnnotation(jsMemberAnnotation != null)
+        .build()
     }
-    .build()
-
-fun IrDeclaration.isJsMember(): Boolean =
-  when {
-    this is IrVariable -> false
-    isJsIgnore -> false
-    getJsMemberAnnotation() != null -> true
-    isJsEnumEntry() -> true
-    isImplicitJsMember() -> !isJsOverlay
-    isMemberOfNativeJsType() -> !isMemberOfJsEnum && !isJsOverlay
-    else -> false
   }
+  return JsInfo.builder()
+    .setJsMemberType(JsMemberType.NONE)
+    .setJsOverlay(jsOverlay)
+    .setJsAsync(jsAsync)
+    .build()
+}
 
-private fun IrDeclaration.getJsMemberType(): JsMemberType =
+private fun IrDeclaration.getJsMemberType(jsMemberAnnotation: IrConstructorCall?): JsMemberType =
   when (this) {
-    is IrFunction -> getJsMemberType()
+    is IrFunction -> getJsMemberType(jsMemberAnnotation)
     is IrField,
-    is IrEnumEntry -> if (isJsMember()) JsMemberType.PROPERTY else JsMemberType.NONE
+    is IrEnumEntry -> JsMemberType.PROPERTY
     else -> JsMemberType.NONE
   }
 
-private fun IrFunction.getJsMemberType(): JsMemberType =
+private fun IrFunction.getJsMemberType(jsMemberAnnotation: IrConstructorCall?): JsMemberType =
   when {
-    !isJsMember() -> JsMemberType.NONE
     this is IrConstructor -> JsMemberType.CONSTRUCTOR
-    isGetter -> JsMemberType.GETTER
-    isSetter -> JsMemberType.SETTER
-    isJsProperty -> {
+    getJsPropertyAnnotation() != null || (jsMemberAnnotation == null && isPropertyAccessor) -> {
       val valueParameters = parameters.filter { it.kind == IrParameterKind.Regular }
       when {
         valueParameters.size == 1 && returnType.isUnit() -> JsMemberType.SETTER
