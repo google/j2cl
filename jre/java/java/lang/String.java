@@ -546,38 +546,50 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   public String[] split(String regex, int maxMatch) {
     // The compiled regular expression created from the string
     NativeRegExp compiled = new NativeRegExp(regex, "g");
-    // the Javascipt array to hold the matches prior to conversion
+    // the Javascript array to hold the pieces
     String[] out = new String[0];
-    // how many matches performed so far
+    // The position in the input where the next piece starts.
+    int index = 0;
+    // how many pieces produced so far
     int count = 0;
-    // The current string that is being matched; trimmed as each piece matches
-    String trail = this;
-    // used to detect repeated zero length matches
-    // Must be null to start with because the first match of "" makes no
-    // progress by intention
-    String lastTrail = null;
-    // We do the split manually to avoid Javascript incompatibility
+    boolean matchLimited = maxMatch > 0;
+    // We do the split manually to avoid Javascript incompatibility with Java
+    // String.split. This mirrors java.util.regex.Pattern.split: matches are
+    // found on the whole input (not on progressively trimmed suffixes) and the
+    // global regex lastIndex is kept in sync so that zero width matches still
+    // make progress, mimicking java.util.regex.Matcher.
     while (true) {
       // None of the information in the match returned are useful as we have no
       // subgroup handling
-      NativeRegExp.Match matchObj = compiled.exec(trail);
-      if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
-        out[count] = trail;
+      NativeRegExp.Match matchObj = compiled.exec(this);
+      if (matchObj == null || (matchLimited && count == maxMatch - 1)) {
         break;
-      } else {
-        int matchIndex = matchObj.getIndex();
-        out[count] = trail.substring(0, matchIndex);
-        trail = trail.substring(matchIndex + matchObj.getAt(0).length(), trail.length());
-        // Force the compiled pattern to reset internal state
-        compiled.setLastIndex(0);
-        // Only one zero length match per character to ensure termination
-        if (lastTrail == trail) {
-          out[count] = trail.substring(0, 1);
-          trail = trail.substring(1);
-        }
-        lastTrail = trail;
-        count++;
       }
+      int matchIndex = matchObj.getIndex();
+      int matchLength = matchObj.getAt(0).length();
+      // Java 8+ does not include an empty leading piece when the first match
+      // is a zero width match at the very beginning of the string, e.g.
+      // "abc".split("") yields {"a", "b", "c"} rather than {"", "a", "b", "c"}.
+      // Skip such a match and advance past it.
+      if (index == 0 && matchIndex == 0 && matchLength == 0) {
+        compiled.setLastIndex(1);
+        continue;
+      }
+      out[count] = substring(index, matchIndex);
+      index = matchIndex + matchLength;
+      count++;
+      // Force the compiled pattern to make progress past a zero width match,
+      // otherwise the next exec would return the same match forever.
+      compiled.setLastIndex(matchLength == 0 ? matchIndex + 1 : matchIndex + matchLength);
+    }
+    // If no match was ever found the result is the input itself.
+    if (index == 0) {
+      return new String[] {this};
+    }
+    // Add the remaining piece after the last match.
+    if (!matchLimited || count < maxMatch) {
+      out[count] = substring(index, length());
+      count++;
     }
     // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
     // however, if the input string is empty, the output should consist of a
