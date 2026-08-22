@@ -41,13 +41,11 @@ import java.util.Map;
 /** Generates JavaScript source impl files. */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private NativeJavaScriptFile nativeSource;
-  private final ClosureTypesGenerator closureTypesGenerator;
 
   public static final String FILE_SUFFIX = ".impl.java.js";
 
   public JavaScriptImplGenerator(Problems problems, Type type, List<Import> imports) {
     super(problems, type, imports);
-    this.closureTypesGenerator = new ClosureTypesGenerator(environment);
   }
 
   private static String getMethodQualifiers(MethodDescriptor methodDescriptor) {
@@ -126,8 +124,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     sourceBuilder.append(
         "/** @enum {"
-            + closureTypesGenerator.getClosureTypeString(
-                AstUtils.getJsEnumValueFieldType(typeDeclaration))
+            + environment.getClosureTypeString(AstUtils.getJsEnumValueFieldType(typeDeclaration))
             + "}");
     if (isDeprecated(type.getDeclaration())) {
       sourceBuilder.append(" @deprecated");

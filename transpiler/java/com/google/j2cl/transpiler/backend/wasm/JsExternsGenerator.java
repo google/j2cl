@@ -46,7 +46,8 @@ final class JsExternsGenerator {
 
   private static final String OUTPUT_PATH = "externs";
 
-  private final JsTypeNameResolver closureEnvironment = new JsTypeNameResolver();
+  private final ClosureExternGenerationEnvironment closureEnvironment =
+      new ClosureExternGenerationEnvironment();
   private final WasmGenerationEnvironment environment;
   private final Output output;
 
@@ -98,7 +99,7 @@ final class JsExternsGenerator {
 
   /** Appends the constructor extern for the given type. */
   private void appendConstructor(SourceBuilder sb, Type type) {
-    String jsDoc = closureEnvironment.getJsDocForType(type, /* isWasmExtern= */ true);
+    String jsDoc = closureEnvironment.getJsDocForType(type);
 
     Method factoryMethod = getExportedConstructor(type);
 

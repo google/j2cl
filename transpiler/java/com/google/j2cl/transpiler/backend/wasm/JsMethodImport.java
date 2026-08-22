@@ -88,9 +88,10 @@ abstract class JsMethodImport {
       ImmutableList<String> jsNameParts = splitQualifiedName(methodDescriptor.getQualifiedJsName());
       return jsNameParts.getFirst();
     } else if (methodDescriptor.hasJsNamespace()) {
-      return JsTypeNameResolver.computeJsAliasWithoutPrefix(methodDescriptor.getJsNamespace());
+      return ClosureExternGenerationEnvironment.computeJsAliasWithoutPrefix(
+          methodDescriptor.getJsNamespace());
     }
-    return JsTypeNameResolver.getJsTypeAlias(
+    return ClosureExternGenerationEnvironment.getJsTypeAlias(
         methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
   }
 

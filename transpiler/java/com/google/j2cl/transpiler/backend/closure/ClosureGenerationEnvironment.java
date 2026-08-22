@@ -103,11 +103,6 @@ public class ClosureGenerationEnvironment {
 
   /** Returns the JsDoc annotation for the given type. */
   public String getJsDocForType(Type type) {
-    return getJsDocForType(type, /* isWasmExtern= */ false);
-  }
-
-  /** Returns the JsDoc annotation for the given type. */
-  public String getJsDocForType(Type type, boolean isWasmExtern) {
     if (type.isOverlayImplementation()) {
       // Overlays do not need any other JsDoc.
       return " @nodts";
@@ -130,18 +125,16 @@ public class ClosureGenerationEnvironment {
                   type.getDeclaration().getTypeParameterDescriptors()));
     }
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null && (isWasmExtern || superTypeDescriptor.hasTypeArguments())) {
+    if (superTypeDescriptor != null
+        && (needsExtendsJsDoc() || superTypeDescriptor.hasTypeArguments())) {
       // No need to render if it does not have type arguments as it will also appear in the
       // extends clause of the class definition (unless it's an externs declaration).
-      renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, isWasmExtern, sb);
+      renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, sb);
     }
 
     String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
     type.getSuperInterfaceTypeDescriptors()
-        .forEach(
-            t ->
-                renderClauseIfTypeExistsInJavaScript(
-                    extendsOrImplementsString, t, isWasmExtern, sb));
+        .forEach(t -> renderClauseIfTypeExistsInJavaScript(extendsOrImplementsString, t, sb));
 
     if (isDeprecated(type.getDeclaration())) {
       appendWithNewLine(sb, " * @deprecated");
@@ -163,7 +156,6 @@ public class ClosureGenerationEnvironment {
   private void renderClauseIfTypeExistsInJavaScript(
       String extendsOrImplementsString,
       DeclaredTypeDescriptor typeDescriptor,
-      boolean isWasmExtern,
       StringBuilder sb) {
     if (!isJavaScriptClass(typeDescriptor)) {
       return;
@@ -179,13 +171,7 @@ public class ClosureGenerationEnvironment {
               // Replace non-native JsEnums with the boxed counterpart since the type
               // arguments on classes that appear in @implements and @extends clauses are
               // rendered explicitly.
-              .map(
-                  t ->
-                      // TODO(b/479895127): Consider JsEnums for Wasm externs. Currently
-                      // just output `t` if we encounter an enum.
-                      (!isWasmExtern && AstUtils.isNonNativeJsEnum(t))
-                          ? TypeDescriptors.getEnumBoxType(t)
-                          : t)
+              .map(t -> AstUtils.isBoxableJsEnumType(t) ? TypeDescriptors.getEnumBoxType(t) : t)
               .map(closureTypesGenerator::getClosureTypeString)
               .collect(joining(", ", "<", ">"));
     }
@@ -195,6 +181,16 @@ public class ClosureGenerationEnvironment {
   /** Returns true if the given type exists as a class in JavaScript. */
   protected boolean isJavaScriptClass(DeclaredTypeDescriptor typeDescriptor) {
     return !typeDescriptor.isStarOrUnknown() && !typeDescriptor.isJsFunctionInterface();
+  }
+
+  /**
+   * Returns true if the @extends JsDoc annotation cannot be omitted if the type has a supertype.
+   *
+   * <p>Note: when emitting ES6 classes, the name of the supertype appears in the @extends clause,
+   * and the clause only needs to be emitted if the supertype is parameterized.
+   */
+  protected boolean needsExtendsJsDoc() {
+    return false;
   }
 
   /** Returns the JsDoc annotation for the given method. */

@@ -116,7 +116,8 @@ public final class JsImportsGenerator {
   private static String createGoogRequire(String importedModule) {
     return String.format(
         "const %s = goog.require('%s');",
-        JsTypeNameResolver.computeJsAliasWithoutPrefix(importedModule), importedModule);
+        ClosureExternGenerationEnvironment.computeJsAliasWithoutPrefix(importedModule),
+        importedModule);
   }
 
   /**
@@ -261,7 +262,8 @@ public final class JsImportsGenerator {
     private final ImmutableMap.Builder<MethodDescriptor, JsMethodImport> methodImports;
     private final ImmutableSet.Builder<String> moduleImports;
     private final Map<String, JsMethodImport> methodImportsByName = new HashMap<>();
-    private final JsTypeNameResolver closureEnvironment = new JsTypeNameResolver();
+    private final ClosureExternGenerationEnvironment closureEnvironment =
+        new ClosureExternGenerationEnvironment();
 
     public ImportCollector(
         Problems problems,
@@ -287,7 +289,8 @@ public final class JsImportsGenerator {
               .build());
 
       // Collect imports for JsDoc.
-      moduleImports.addAll(JsTypeNameResolver.getJsModuleDependencies(methodDescriptor));
+      moduleImports.addAll(
+          ClosureExternGenerationEnvironment.getJsModuleDependencies(methodDescriptor));
     }
 
     private void addMethodImport(JsMethodImport newImport) {
@@ -348,7 +351,8 @@ public final class JsImportsGenerator {
 
   private final Imports imports;
 
-  private final JsTypeNameResolver closureEnvironment = new JsTypeNameResolver();
+  private final ClosureExternGenerationEnvironment closureEnvironment =
+      new ClosureExternGenerationEnvironment();
 
   private JsImportsGenerator(Imports imports) {
     this.imports = imports;

@@ -29,9 +29,9 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
 
-/** A minimal Closure environment for resolving type names. */
-final class JsTypeNameResolver extends ClosureGenerationEnvironment {
-  public JsTypeNameResolver() {
+/** A Closure environment for generating externs and resolving type names. */
+final class ClosureExternGenerationEnvironment extends ClosureGenerationEnvironment {
+  public ClosureExternGenerationEnvironment() {
     super(ImmutableSet.of(), ImmutableMap.of());
   }
 
@@ -43,6 +43,11 @@ final class JsTypeNameResolver extends ClosureGenerationEnvironment {
   @Override
   protected boolean isJavaScriptClass(DeclaredTypeDescriptor typeDescriptor) {
     return JsExternsGenerator.shouldGenerateExtern(typeDescriptor);
+  }
+
+  @Override
+  protected boolean needsExtendsJsDoc() {
+    return true;
   }
 
   /**
