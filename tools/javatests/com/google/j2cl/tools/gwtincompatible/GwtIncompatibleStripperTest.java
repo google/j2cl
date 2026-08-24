@@ -252,6 +252,31 @@ public class GwtIncompatibleStripperTest {
   }
 
   @Test
+  public void testProcessMarkdownJavadoc() {
+    assertAnnotatedCodeStripped(
+        """
+        public class Foo {
+        -  /// doc
+        -  /// doc2
+        -  @GwtIncompatible
+        -  public void m() {}
+        }
+        """,
+        "GwtIncompatible");
+  }
+
+  @Test
+  public void testProcessMarkdownJavadocOnClass() {
+    assertAnnotatedCodeStripped(
+        """
+        -/// doc
+        -@GwtIncompatible
+        -public class Foo {}
+        """,
+        "GwtIncompatible");
+  }
+
+  @Test
   public void testProcessMultiVariable() {
     assertAnnotatedCodeStripped(
         """

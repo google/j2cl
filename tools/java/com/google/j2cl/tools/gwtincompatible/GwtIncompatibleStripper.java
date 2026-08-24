@@ -249,10 +249,15 @@ public final class GwtIncompatibleStripper {
     if (javaDoc != null) {
       int javadocStart = (int) sourcePositions.getStartPosition(compilationUnit, javaDoc, javaDoc);
       checkState(javadocStart < start);
-      // DocTrees.getSourcePositions() returns the position slightly after the initial "/**".
-      // To ensure we strip the entire Javadoc block, we reverse search for the exact "/**"
-      // prefix starting from the returned docStart position.
-      start = fileContent.lastIndexOf("/**", javadocStart);
+      // DocTrees.getSourcePositions() returns the position slightly after the initial "/**" or
+      // "///". To ensure we strip the entire Javadoc block, we reverse search for the exact "/**"
+      // or "///" prefix starting from the returned docStart position.
+      for (start = javadocStart;
+          start >= 0
+              && !fileContent.startsWith("/**", start)
+              && !fileContent.startsWith("///", start);
+          start--) {}
+      checkState(start >= 0);
     }
     return start;
   }
