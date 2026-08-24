@@ -55,6 +55,12 @@ class MyIntList extends j_l_Object {
   return this.m_remove__int__boolean((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
  /** @abstract @nodts @return {number} */
+ m_getSize__int() {}
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ /** @abstract @nodts @return {number} */
  m_indexOf__int__int(/** number */ element) {}
  /** @final @override @return {number} */
  indexOf(/** * */ element) {
@@ -71,12 +77,6 @@ class MyIntList extends j_l_Object {
    return -1;
   }
   return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
- }
- /** @abstract @nodts @return {number} */
- m_getSize__int() {}
- /** @final @override @return {number} */
- size() {
-  return this.m_getSize__int();
  }
  //Default method forwarding stub.
  /** @override @suppress{visibility} @return {Iterator<!Integer>} */
@@ -160,6 +160,8 @@ class MyIntList extends j_l_Object {
  retainAll(/** Collection<?> */ arg0) {}
  /** @abstract @override @suppress{visibility} */
  addAtIndex(/** number */ arg0, /** !Integer */ arg1) {}
+ /** @abstract @override @suppress{visibility} @return {!Integer} */
+ removeAtIndex(/** number */ arg0) {}
  /** @abstract @override @suppress{visibility} @return {boolean} */
  addAllAtIndex(/** number */ arg0, /** Collection<?> */ arg1) {}
  /** @abstract @override @suppress{visibility} @return {!Integer} */
@@ -168,8 +170,6 @@ class MyIntList extends j_l_Object {
  m_listIterator__java_util_ListIterator() {}
  /** @abstract @override @nodts @suppress{visibility} @return {ListIterator<!Integer>} */
  m_listIterator__int__java_util_ListIterator(/** number */ arg0) {}
- /** @abstract @override @suppress{visibility} @return {!Integer} */
- removeAtIndex(/** number */ arg0) {}
  /** @abstract @override @suppress{visibility} @return {!Integer} */
  setAtIndex(/** number */ arg0, /** !Integer */ arg1) {}
  /** @abstract @override @suppress{visibility} @return {List<!Integer>} */

@@ -7,11 +7,11 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
+import org.jetbrains.kotlin.backend.jvm.ir.addJavaLangDeprecatedAnnotation
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.builders.declarations.addField
-import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrGetFieldImpl
@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrSetFieldImpl
 import org.jetbrains.kotlin.ir.symbols.impl.IrAnonymousInitializerSymbolImpl
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
-import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
 /**
  * Move and/or copy companion object fields to static fields of companion's owner.
@@ -42,17 +41,16 @@ internal class MoveOrCopyCompanionObjectFieldsLowering(val context: J2clBackendC
   }
 
   private fun IrClass.handle() {
-    val newDeclarations =
-      declarations.map {
-        when (it) {
-          is IrProperty ->
-            context.cachedDeclarations.getStaticBackingField(it)?.also { newField ->
-              it.backingField = newField
-              newField.correspondingPropertySymbol = it.symbol
-            }
-          else -> null
-        }
+    val newDeclarations = declarations.map {
+      when (it) {
+        is IrProperty ->
+          context.cachedDeclarations.getStaticBackingField(it)?.also { newField ->
+            it.backingField = newField
+            newField.correspondingPropertySymbol = it.symbol
+          }
+        else -> null
       }
+    }
 
     val companionParent = if (isCompanion) parentAsClass else null
     // In case a companion contains no fields, move the anonymous initializers to the parent
@@ -133,11 +131,7 @@ internal class MoveOrCopyCompanionObjectFieldsLowering(val context: J2clBackendC
           }
         annotations += oldField.annotations
         if (oldProperty.parentAsClass.visibility == DescriptorVisibilities.PRIVATE) {
-          context.createJvmIrBuilder(this.symbol).run {
-            annotations =
-              filterOutAnnotations(DeprecationResolver.JAVA_DEPRECATED, annotations) +
-                irCall(irSymbols.javaLangDeprecatedConstructorWithDeprecatedFlag)
-          }
+          context.createJvmIrBuilder(this.symbol).run { addJavaLangDeprecatedAnnotation() }
         }
       }
   }

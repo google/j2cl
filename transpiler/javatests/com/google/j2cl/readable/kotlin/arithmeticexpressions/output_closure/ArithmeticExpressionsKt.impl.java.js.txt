@@ -41,6 +41,41 @@ class ArithmeticExpressionsKt extends j_l_Object {
  $ctor__arithmeticexpressions_ArithmeticExpressionsKt__void() {
   this.$ctor__java_lang_Object__void();
  }
+ /** @nodts @return {!Long} */
+ static m_getOne__long() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setOne__long__void(/** !Long */ set__) {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
+ }
+ /** @nodts @return {!Long} */
+ static m_getFoo__long() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setFoo__long__void(/** !Long */ set__) {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
+ }
+ /** @nodts @return {!Long} */
+ static m_getBar__long() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_bar__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts @return {number} */
+ static m_getCounter__int() {
+  ArithmeticExpressionsKt.$clinit();
+  return ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setCounter__int__void(/** number */ set__) {
+  ArithmeticExpressionsKt.$clinit();
+  ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
+ }
  /** @nodts */
  static m_testCoercions__void() {
   ArithmeticExpressionsKt.$clinit();
@@ -113,31 +148,6 @@ class ArithmeticExpressionsKt extends j_l_Object {
   a *= 4;
   a /= 5;
   a %= 6;
- }
- /** @nodts @return {!Long} */
- static m_getOne__long() {
-  ArithmeticExpressionsKt.$clinit();
-  return ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_;
- }
- /** @nodts */
- static m_setOne__long__void(/** !Long */ set__) {
-  ArithmeticExpressionsKt.$clinit();
-  ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
- }
- /** @nodts @return {!Long} */
- static m_getFoo__long() {
-  ArithmeticExpressionsKt.$clinit();
-  return ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_;
- }
- /** @nodts */
- static m_setFoo__long__void(/** !Long */ set__) {
-  ArithmeticExpressionsKt.$clinit();
-  ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
- }
- /** @nodts @return {!Long} */
- static m_getBar__long() {
-  ArithmeticExpressionsKt.$clinit();
-  return ArithmeticExpressionsKt.f_bar__arithmeticexpressions_ArithmeticExpressionsKt_;
  }
  /** @nodts */
  static m_testCompoundArray__void() {
@@ -242,16 +252,6 @@ class ArithmeticExpressionsKt extends j_l_Object {
   return A.$create__();
  }
  /** @nodts @return {number} */
- static m_getCounter__int() {
-  ArithmeticExpressionsKt.$clinit();
-  return ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_;
- }
- /** @nodts */
- static m_setCounter__int__void(/** number */ set__) {
-  ArithmeticExpressionsKt.$clinit();
-  ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_ = set__;
- }
- /** @nodts @return {number} */
  static m_incrementCounter__int() {
   ArithmeticExpressionsKt.$clinit();
   ArithmeticExpressionsKt.m_setCounter__int__void(ArithmeticExpressionsKt.m_getCounter__int() + 1 | 0);
@@ -349,12 +349,6 @@ class ArithmeticExpressionsKt extends j_l_Object {
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
  }
 }
-/**@const {number} @nodts*/
-ArithmeticExpressionsKt.f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressionsKt_ = 1.100000023841858;
-/**@const {number} @nodts*/
-ArithmeticExpressionsKt.f_DOUBLE_CONSTANT__arithmeticexpressions_ArithmeticExpressionsKt_ = 1.100000023841858;
-/**@const {number} @nodts*/
-ArithmeticExpressionsKt.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__arithmeticexpressions_ArithmeticExpressionsKt_ = 2.200000047683716;
 /**@type {!Long} @nodts*/
 ArithmeticExpressionsKt.f_one__arithmeticexpressions_ArithmeticExpressionsKt_ = Long.fromInt(0);
 /**@type {!Long} @nodts*/
@@ -363,6 +357,12 @@ ArithmeticExpressionsKt.f_foo__arithmeticexpressions_ArithmeticExpressionsKt_ = 
 ArithmeticExpressionsKt.f_bar__arithmeticexpressions_ArithmeticExpressionsKt_ = Long.fromInt(0);
 /**@type {number} @nodts*/
 ArithmeticExpressionsKt.f_counter__arithmeticexpressions_ArithmeticExpressionsKt_ = 0;
+/**@const {number} @nodts*/
+ArithmeticExpressionsKt.f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressionsKt_ = 1.100000023841858;
+/**@const {number} @nodts*/
+ArithmeticExpressionsKt.f_DOUBLE_CONSTANT__arithmeticexpressions_ArithmeticExpressionsKt_ = 1.100000023841858;
+/**@const {number} @nodts*/
+ArithmeticExpressionsKt.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__arithmeticexpressions_ArithmeticExpressionsKt_ = 2.200000047683716;
 $Util.$setClassMetadata(ArithmeticExpressionsKt, 'arithmeticexpressions.ArithmeticExpressionsKt');
 
 exports = ArithmeticExpressionsKt;

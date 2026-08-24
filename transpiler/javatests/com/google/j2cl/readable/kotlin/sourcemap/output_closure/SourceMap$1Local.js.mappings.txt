@@ -1,32 +1,178 @@
-[Local] => [$1Local]
-[Local] => [constructor]
-[Local] => [super();] "sourcemap.SourceMap$1Local.<synthetic: ctor_js>"
-[Local] => [/**@type {!SourceMap<T>} @nodts*/
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [$1Local]
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [constructor]
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [super();] "sourcemap.SourceMap$1Local.<synthetic: ctor_js>"
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [/**@type {!SourceMap<T>} @nodts*/
   this.$outer_this__sourcemap_SourceMap_1Local;] "sourcemap.SourceMap$1Local.<synthetic: ctor_js>"
-[Local] => [$outer_this__sourcemap_SourceMap_1Local]
-[Local] => [/**@type {number} @nodts*/
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [$outer_this__sourcemap_SourceMap_1Local]
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [/**@type {number} @nodts*/
   this.$captured_outer__sourcemap_SourceMap_1Local = 0;] "sourcemap.SourceMap$1Local.<synthetic: ctor_js>"
-[Local] => [$captured_outer__sourcemap_SourceMap_1Local]
-[Local] => [$create__sourcemap_SourceMap__int]
-[Local] => [$1Local.$clinit();] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
-[Local] => [let $instance = new $1Local();] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
-[Local] => [$instance.$ctor__sourcemap_SourceMap_1Local__sourcemap_SourceMap__int__void($outer_this, $captured_outer);] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
-[Local] => [return $instance;] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
-[Local] => [$ctor__sourcemap_SourceMap_1Local__sourcemap_SourceMap__int__void]
-[Local] => [this.$outer_this__sourcemap_SourceMap_1Local = $outer_this;] "sourcemap.SourceMap$1Local.<init>"
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [$captured_outer__sourcemap_SourceMap_1Local]
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [$create__sourcemap_SourceMap__int]
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [$1Local.$clinit();] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [let $instance = new $1Local();] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [$instance.$ctor__sourcemap_SourceMap_1Local__sourcemap_SourceMap__int__void($outer_this, $captured_outer);] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [return $instance;] "sourcemap.SourceMap$1Local.<synthetic: ctor_create>"
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [$ctor__sourcemap_SourceMap_1Local__sourcemap_SourceMap__int__void]
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [this.$outer_this__sourcemap_SourceMap_1Local = $outer_this;] "sourcemap.SourceMap$1Local.<init>"
 [outer: Int] => [this.$captured_outer__sourcemap_SourceMap_1Local = $captured_outer;] "outer"
 [class Local {
       fun member1(a: Int): Int {
 ...
       }
     }] => [this.$ctor__java_lang_Object__void();] "sourcemap.SourceMap$1Local.<init>"
-[member1] => [m_member1__int__int]
+[fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }] => [m_member1__int__int]
 [a: Int] => [a] "a"
 [return member2(a) * 2 + Inner().member3(a)] => [return Math.imul(this.m_member2__int__int_$p_sourcemap_SourceMap_1Local(a), 2) + (/**@type {!$1Inner<T>}*/ ($1Inner.$create__sourcemap_SourceMap_1Local(this))).m_member3__int__int(a) | 0;] "sourcemap.SourceMap$1Local.member1"
-[member2] => [m_member2__int__int_$p_sourcemap_SourceMap_1Local]
+[fun member2(b: Int): Int {
+        return b + outer
+      }] => [m_member2__int__int_$p_sourcemap_SourceMap_1Local]
 [b: Int] => [b] "b"
 [return b + outer] => [return b + this.$captured_outer__sourcemap_SourceMap_1Local | 0;] "sourcemap.SourceMap$1Local.member2"
-[Local] => [$clinit]
-[Local] => [$1Local.$clinit = () =>{};] "sourcemap.SourceMap$1Local.<clinit>"
-[Local] => [$1Local.$loadModules();] "sourcemap.SourceMap$1Local.<clinit>"
-[Local] => [j_l_Object.$clinit();] "sourcemap.SourceMap$1Local.<clinit>"
+[class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }] => [$clinit]
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [$1Local.$clinit = () =>{};] "sourcemap.SourceMap$1Local.<clinit>"
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [$1Local.$loadModules();] "sourcemap.SourceMap$1Local.<clinit>"
+[class Local {
+      fun member1(a: Int): Int {
+...
+      }
+    }] => [j_l_Object.$clinit();] "sourcemap.SourceMap$1Local.<clinit>"

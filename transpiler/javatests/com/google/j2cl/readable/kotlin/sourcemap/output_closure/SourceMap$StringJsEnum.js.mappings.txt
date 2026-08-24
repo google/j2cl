@@ -1,4 +1,9 @@
-[StringJsEnum] => [StringJsEnum]
-[A] => [A]
-[B] => [B]
-[C] => [C]
+[@JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }] => [StringJsEnum]
+[A("FOO"),] => [A]
+[B("BAR"),] => [B]
+[C("BUZZ"),] => [C]

@@ -201,7 +201,18 @@ internal class CompilationUnitBuilder(
   private val labelsInScope: MutableMap<String, ArrayDeque<Label>> = mutableMapOf()
 
   fun convert(irModuleFragment: IrModuleFragment): List<CompilationUnit> =
-    irModuleFragment.files.filterNot(IrFile::isBytecodeGenerationSuppressed).map(::convertFile)
+    irModuleFragment.files
+      .filterNot(IrFile::isBytecodeGenerationSuppressed)
+      .filterNot {
+        // When klib is enabled, this synthetic file is created by the Kotlin compiler and contains
+        // all the FunctionN and SuspendFunctionN interfaces referenced in the module. These
+        // interfaces are mapped to their `kotlin.jvm.functions.FunctionN` and
+        // `kotlin.internal.j2cl.SuspendFunctionN` counterparts present in our stdlib.
+        // TODO(b/550126280): Check if we could directly reuse these interfaces from Kotlin compiler
+        //  instead of maintaining our own in the j2cl stdlib.
+        it.fileEntry.name == "[K][Suspend]Functions"
+      }
+      .map(::convertFile)
 
   private inline fun <R> withIrFileEntry(irFileEntry: IrFileEntry?, block: () -> R): R {
     if (irFileEntry == null) return block()

@@ -15,15 +15,15 @@ package com.google.j2cl.transpiler.frontend.kotlin.klib
 
 import com.google.graal.support.GraalInitGoogle
 import com.google.graal.support.GraalPprof
-import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompiler
-import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompilerArguments
 import java.io.File
 import java.nio.file.Path
 import kotlin.system.exitProcess
+import org.jetbrains.kotlin.cli.common.arguments.K2JKlibCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
+import org.jetbrains.kotlin.cli.jklib.K2JKlibCompiler
 import org.jetbrains.kotlin.config.Services
 import org.kohsuke.args4j.Argument
 import org.kohsuke.args4j.CmdLineParser

@@ -55,6 +55,12 @@ class MyTExtendsStringList extends j_l_Object {
   return this.m_remove__java_lang_String__boolean(/**@type {T}*/ (element));
  }
  /** @abstract @nodts @return {number} */
+ m_getSize__int() {}
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ /** @abstract @nodts @return {number} */
  m_indexOf__java_lang_String__int(/** T */ element) {}
  /** @final @override @return {number} */
  indexOf(/** * */ element) {
@@ -71,12 +77,6 @@ class MyTExtendsStringList extends j_l_Object {
    return -1;
   }
   return this.m_lastIndexOf__java_lang_String__int(/**@type {T}*/ (element));
- }
- /** @abstract @nodts @return {number} */
- m_getSize__int() {}
- /** @final @override @return {number} */
- size() {
-  return this.m_getSize__int();
  }
  //Default method forwarding stub.
  /** @override @suppress{visibility} @return {Iterator<T>} */
@@ -160,6 +160,8 @@ class MyTExtendsStringList extends j_l_Object {
  retainAll(/** Collection<?> */ arg0) {}
  /** @abstract @override @suppress{visibility} */
  addAtIndex(/** number */ arg0, /** T */ arg1) {}
+ /** @abstract @override @suppress{visibility} @return {T} */
+ removeAtIndex(/** number */ arg0) {}
  /** @abstract @override @suppress{visibility} @return {boolean} */
  addAllAtIndex(/** number */ arg0, /** Collection<?> */ arg1) {}
  /** @abstract @override @suppress{visibility} @return {T} */
@@ -168,8 +170,6 @@ class MyTExtendsStringList extends j_l_Object {
  m_listIterator__java_util_ListIterator() {}
  /** @abstract @override @nodts @suppress{visibility} @return {ListIterator<T>} */
  m_listIterator__int__java_util_ListIterator(/** number */ arg0) {}
- /** @abstract @override @suppress{visibility} @return {T} */
- removeAtIndex(/** number */ arg0) {}
  /** @abstract @override @suppress{visibility} @return {T} */
  setAtIndex(/** number */ arg0, /** T */ arg1) {}
  /** @abstract @override @suppress{visibility} @return {List<T>} */

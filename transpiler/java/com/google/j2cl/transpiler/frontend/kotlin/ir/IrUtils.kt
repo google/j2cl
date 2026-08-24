@@ -55,9 +55,9 @@ import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
 import org.jetbrains.kotlin.ir.declarations.IrVariable
+import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
 import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -99,9 +99,8 @@ import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
-import org.jetbrains.kotlin.ir.util.getValueArgument
+import org.jetbrains.kotlin.ir.util.getConstArgument
 import org.jetbrains.kotlin.ir.util.hasAnnotation
-import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
@@ -585,13 +584,11 @@ val IrFunction.isAbstract: Boolean
 val IrFunction.isFinal: Boolean
   get() = this is IrOverridableMember && modality == Modality.FINAL
 
-private fun IrDeclaration.findAnnotation(name: FqName): IrConstructorCall? =
-  getAllAnnotations().firstOrNull { it.isAnnotation(name) }
-
 /**
  * Sequence of annotations on this declaration. This includes property annotations for getters,
  * setters, and backing fields.
  */
+// TODO(b/550323040): return a sequence of IrAnnotation instead of IrConstructorCall.
 fun IrAnnotationContainer.getAllAnnotations(): Sequence<IrConstructorCall> = sequence {
   yieldAll(annotations)
 
@@ -606,8 +603,12 @@ fun IrAnnotationContainer.getAllAnnotations(): Sequence<IrConstructorCall> = seq
   }
 }
 
-inline fun <reified T> IrConstructorCall.getValueArgumentAsConst(name: Name): T? =
-  (getValueArgument(name) as? IrConst)?.value as T?
+// TODO(b/550323040): Update call sites to this function to directly use
+// `IrAnnotation.getConstArgument`
+inline fun <reified T> IrConstructorCall.getValueArgumentAsConst(name: Name): T? {
+  check(this is IrAnnotation)
+  return getConstArgument(name.asString())
+}
 
 val IrDeclaration.isSynthetic
   get() =
@@ -718,12 +719,7 @@ private fun IrSimpleFunction.resolveName(jvmBackendContext: JvmBackendContext): 
       jvmName
     } else if (signatureRequiresMangling) {
       // TODO(b/317553886): Signature mangling should be applied during inline class lowering.
-      InlineClassAbi.mangledNameFor(
-        jvmBackendContext,
-        this,
-        mangleReturnTypes = true,
-        useOldMangleRules = false,
-      )
+      InlineClassAbi.mangledNameFor(this, mangleReturnTypes = true, useOldMangleRules = false)
     } else {
       name
     }
@@ -784,8 +780,8 @@ val IrElement.isTemporaryVariable: Boolean
   get() = this is IrVariable && origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE
 
 fun IrAnnotationContainer.copyAnnotationsWhen(
-  filter: IrConstructorCall.() -> Boolean
-): List<IrConstructorCall> {
+  filter: IrAnnotation.() -> Boolean
+): List<IrAnnotation> {
   return annotations.filter(filter).map { it.deepCopyWithSymbols(this as? IrDeclarationParent) }
 }
 

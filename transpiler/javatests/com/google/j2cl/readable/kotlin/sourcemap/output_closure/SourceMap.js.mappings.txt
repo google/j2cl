@@ -1,19 +1,223 @@
-[SourceMap] => [SourceMap]
-[constructor] => [constructor]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [SourceMap]
+[constructor(i: Int)] => [constructor]
 [i: Int] => [i] "i"
-[constructor] => [SourceMap.$clinit();] "sourcemap.SourceMap.<init>"
-[constructor] => [super();] "sourcemap.SourceMap.<init>"
-[constructor] => [/**@type {number} @nodts*/
+[constructor(i: Int)] => [SourceMap.$clinit();] "sourcemap.SourceMap.<init>"
+[constructor(i: Int)] => [super();] "sourcemap.SourceMap.<init>"
+[constructor(i: Int)] => [/**@type {number} @nodts*/
   this.f_uninitializedInstanceField__sourcemap_SourceMap_ = 0;] "sourcemap.SourceMap.<init>"
-[uninitializedInstanceField] => [f_uninitializedInstanceField__sourcemap_SourceMap_]
-[constructor] => [/**@type {string} @nodts*/
+[var uninitializedInstanceField: Int] => [f_uninitializedInstanceField__sourcemap_SourceMap_]
+[constructor(i: Int)] => [/**@type {string} @nodts*/
   this.f_uninitializedInstanceField2__sourcemap_SourceMap_;] "sourcemap.SourceMap.<init>"
-[uninitializedInstanceField2] => [f_uninitializedInstanceField2__sourcemap_SourceMap_]
-[constructor] => [/**@type {number} @nodts*/
+[var uninitializedInstanceField2: String] => [f_uninitializedInstanceField2__sourcemap_SourceMap_]
+[constructor(i: Int)] => [/**@type {number} @nodts*/
   this.f_initializedInstanceField__sourcemap_SourceMap_ = 0;] "sourcemap.SourceMap.<init>"
-[initializedInstanceField] => [f_initializedInstanceField__sourcemap_SourceMap_]
-[constructor] => [this.$ctor__sourcemap_SourceMap__int__void(i);] "sourcemap.SourceMap.<init>"
-[constructor] => [$ctor__sourcemap_SourceMap__int__void]
+[var initializedInstanceField = 2] => [f_initializedInstanceField__sourcemap_SourceMap_]
+[constructor(i: Int)] => [this.$ctor__sourcemap_SourceMap__int__void(i);] "sourcemap.SourceMap.<init>"
+[constructor(i: Int)] => [$ctor__sourcemap_SourceMap__int__void]
 [i: Int] => [i] "i"
 [abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
 
@@ -39,10 +243,48 @@
 [uninitializedInstanceField2 = "World!"] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'World!';] "sourcemap.SourceMap.<init>"
 [uninitializedInstanceField2 = "Universe!"] => [this.f_uninitializedInstanceField2__sourcemap_SourceMap_ = 'Universe!';] "sourcemap.SourceMap.<init>"
 [2] => [this.f_initializedInstanceField__sourcemap_SourceMap_ = 2;] "sourcemap.SourceMap.<init>"
-[constructor] => [$ctor__sourcemap_SourceMap__int__java_lang_String__void]
+[constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)] => [$ctor__sourcemap_SourceMap__int__java_lang_String__void]
 [uninitializedInstanceField: Int] => [uninitializedInstanceField] "uninitializedInstanceField"
 [uninitializedInstanceField2: String] => [uninitializedInstanceField2] "uninitializedInstanceField2"
-[testStatements] => [m_testStatements__int__int__int__int__int_$p_sourcemap_SourceMap]
+[fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }] => [m_testStatements__int__int__int__int__int_$p_sourcemap_SourceMap]
 [a: Int] => [a] "a"
 [b: Int] => [b] "b"
 [times: Int] => [times] "times"
@@ -116,7 +358,23 @@
    }] "sourcemap.SourceMap.testStatements"
 [break] => [break;] "sourcemap.SourceMap.testStatements"
 [return value] => [return value;] "sourcemap.SourceMap.testStatements"
-[testAnonymousClass] => [m_testAnonymousClass__int__int_$p_sourcemap_SourceMap]
+[fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }] => [m_testAnonymousClass__int__int_$p_sourcemap_SourceMap]
 [outer: Int] => [outer] "outer"
 [val f =
       object : Function<Int, Int> {
@@ -129,10 +387,31 @@
         }
       }] => [f] "f"
 [return f.apply(10)] => [return f.m_apply__int__int(10);] "sourcemap.SourceMap.testAnonymousClass"
-[testLocalClass] => [m_testLocalClass__int__int_$p_sourcemap_SourceMap]
+[fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }] => [m_testLocalClass__int__int_$p_sourcemap_SourceMap]
 [outer: Int] => [outer] "outer"
 [return Local().member1(5)] => [return (/**@type {!$1Local<T>}*/ ($1Local.$create__sourcemap_SourceMap__int(this, outer))).m_member1__int__int(5);] "sourcemap.SourceMap.testLocalClass"
-[testLambdaAndMethodReference] => [m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap]
+[fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }] => [m_testLambdaAndMethodReference__int__void_$p_sourcemap_SourceMap]
 [n: Int] => [n] "n"
 [val f = { i: Int -> i + 1 }] => [let f = Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ i) =>{
    let i_1 = /**@type {!Integer}*/ ($Casts.$to(i, Integer));
@@ -144,20 +423,31 @@
 [i: Int] => [i_1] "i"
 [i + 1] => [return Integer.valueOf(i_1.intValue() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [val f2 = ArrayList<Any>()::size] => [let f2 = /**@type {!MutableKProperty0Impl<!Integer>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {!Integer}*/ (() =>{
-   return Integer.valueOf(tmp0_bound0.size());
+   return Integer.valueOf((/**@type {!ArrayListBase<*>}*/ (tmp0_bound0)).size());
   })), null));] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [val f2 = ArrayList<Any>()::size] => [f2] "f2"
-[ArrayList<Any>()::size] => [return Integer.valueOf(tmp0_bound0.size());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
+[ArrayList<Any>()::size] => [return Integer.valueOf((/**@type {!ArrayListBase<*>}*/ (tmp0_bound0)).size());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [val f3 = this::simpleMethod] => [let f3 = Function0.$adapt(/**  @return {!Integer}*/ (() =>{
    return Integer.valueOf(tmp0_bound0_1.m_simpleMethod__int_$p_sourcemap_SourceMap());
   }));] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [val f3 = this::simpleMethod] => [f3] "f3"
 [this::simpleMethod] => [return Integer.valueOf(tmp0_bound0_1.m_simpleMethod__int_$p_sourcemap_SourceMap());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
-[simpleMethod] => [m_simpleMethod__int_$p_sourcemap_SourceMap]
+[fun simpleMethod() = 1] => [m_simpleMethod__int_$p_sourcemap_SourceMap]
 [1] => [return 1;] "sourcemap.SourceMap.simpleMethod"
-[testLocalClass] => [m_testLocalClass__void_$p_sourcemap_SourceMap]
+[fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }] => [m_testLocalClass__void_$p_sourcemap_SourceMap]
 [LocalClass()] => [$1LocalClass.$create__sourcemap_SourceMap(this);] "sourcemap.SourceMap.testLocalClass"
-[testWhenExpression] => [m_testWhenExpression__void_$p_sourcemap_SourceMap]
+[fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }] => [m_testWhenExpression__void_$p_sourcemap_SourceMap]
 [var v = 1] => [let v = 1;] "sourcemap.SourceMap.testWhenExpression"
 [var v = 1] => [v] "v"
 [val r =
@@ -170,18 +460,32 @@
 ...
         else -> 20
       }] => [r] "r"
-[testInstanceOf] => [m_testInstanceOf__java_lang_Object__boolean_$p_sourcemap_SourceMap]
+[fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }] => [m_testInstanceOf__java_lang_Object__boolean_$p_sourcemap_SourceMap]
 [o: Any] => [o] "o"
 [return o is String] => [return j_l_String.$isInstance(o);] "sourcemap.SourceMap.testInstanceOf"
-[testFunctionExpression] => [m_testFunctionExpression__java_util_function_Function_$p_sourcemap_SourceMap]
+[fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }] => [m_testFunctionExpression__java_util_function_Function_$p_sourcemap_SourceMap]
 [return Function { o: Any? -> o }] => [return j_u_function_Function.$adapt(/**  @return {*}*/ ((/** * */ o) =>{
    return o;
   }));] "sourcemap.SourceMap.testFunctionExpression"
 [o: Any?] => [o] "o"
 [o] => [return o;] "sourcemap.SourceMap.<lambda in testFunctionExpression>"
-[testTypeLiteral] => [m_testTypeLiteral__java_lang_Class_$p_sourcemap_SourceMap]
+[fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }] => [m_testTypeLiteral__java_lang_Class_$p_sourcemap_SourceMap]
 [return String::class.java] => [return Class.$get(j_l_String);] "sourcemap.SourceMap.testTypeLiteral"
-[testInline] => [m_testInline__int_$p_sourcemap_SourceMap]
+[fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }] => [m_testInline__int_$p_sourcemap_SourceMap]
 [nnotations.JsCo] => [let sum = 1 + 2 | 0;] "sourcemap.SourceMap.testInline"
 [nnotations.JsCo] => [sum] "sum"
 [val a = inlineExpression(1, 2)] => [let a = sum;] "sourcemap.SourceMap.testInline"
@@ -201,39 +505,1715 @@
         multiplied + 1
       }] => [b] "b"
 [return b] => [return b;] "sourcemap.SourceMap.testInline"
-[SourceMap] => [m_reversed__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));] "sourcemap.SourceMap.reversed"
-[SourceMap] => [m_thenComparing__java_util_Comparator__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_Comparator__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparing"
-[SourceMap] => [m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator__java_util_Comparator(this, arg0, arg1));] "sourcemap.SourceMap.thenComparing"
-[SourceMap] => [m_thenComparing__java_util_function_Function__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparing"
-[SourceMap] => [m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingInt__$default__java_util_Comparator__java_util_function_ToIntFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingInt"
-[SourceMap] => [m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingLong__$default__java_util_Comparator__java_util_function_ToLongFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingLong"
-[SourceMap] => [m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator]
-[SourceMap] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingDouble__$default__java_util_Comparator__java_util_function_ToDoubleFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingDouble"
-[uninitializedStaticField] => [m_getUninitializedStaticField__double]
-[uninitializedStaticField] => [SourceMap.$clinit();] "sourcemap.SourceMap.getUninitializedStaticField"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_reversed__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_reversed__$default__java_util_Comparator__java_util_Comparator(this));] "sourcemap.SourceMap.reversed"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_thenComparing__java_util_Comparator__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_Comparator__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparing"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator__java_util_Comparator(this, arg0, arg1));] "sourcemap.SourceMap.thenComparing"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_thenComparing__java_util_function_Function__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparing"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingInt__$default__java_util_Comparator__java_util_function_ToIntFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingInt"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingLong__$default__java_util_Comparator__java_util_function_ToLongFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingLong"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [return /**@type {Comparator<T>}*/ (Comparator.m_thenComparingDouble__$default__java_util_Comparator__java_util_function_ToDoubleFunction__java_util_Comparator(this, arg0));] "sourcemap.SourceMap.thenComparingDouble"
+[var uninitializedStaticField: Double] => [m_getUninitializedStaticField__double]
+[var uninitializedStaticField: Double] => [SourceMap.$clinit();] "sourcemap.SourceMap.getUninitializedStaticField"
 [var uninitializedStaticField: Double] => [return SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_;] "sourcemap.SourceMap.getUninitializedStaticField"
-[uninitializedStaticField] => [m_setUninitializedStaticField__double__void]
+[var uninitializedStaticField: Double] => [m_setUninitializedStaticField__double__void]
 [var uninitializedStaticField: Double] => [set__] "<set-?>"
-[uninitializedStaticField] => [SourceMap.$clinit();] "sourcemap.SourceMap.setUninitializedStaticField"
+[var uninitializedStaticField: Double] => [SourceMap.$clinit();] "sourcemap.SourceMap.setUninitializedStaticField"
 [var uninitializedStaticField: Double] => [SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_ = set__;] "sourcemap.SourceMap.setUninitializedStaticField"
-[initializedStaticField] => [m_getInitializedStaticField__java_lang_String]
-[initializedStaticField] => [SourceMap.$clinit();] "sourcemap.SourceMap.getInitializedStaticField"
+[var initializedStaticField] => [m_getInitializedStaticField__java_lang_String]
+[var initializedStaticField] => [SourceMap.$clinit();] "sourcemap.SourceMap.getInitializedStaticField"
 [var initializedStaticField] => [return SourceMap.f_initializedStaticField__sourcemap_SourceMap_;] "sourcemap.SourceMap.getInitializedStaticField"
-[initializedStaticField] => [m_setInitializedStaticField__java_lang_String__void]
+[var initializedStaticField] => [m_setInitializedStaticField__java_lang_String__void]
 [var initializedStaticField] => [set__] "<set-?>"
-[initializedStaticField] => [SourceMap.$clinit();] "sourcemap.SourceMap.setInitializedStaticField"
+[var initializedStaticField] => [SourceMap.$clinit();] "sourcemap.SourceMap.setInitializedStaticField"
 [var initializedStaticField] => [SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = set__;] "sourcemap.SourceMap.setInitializedStaticField"
-[SourceMap] => [$clinit]
-[SourceMap] => [SourceMap.$clinit = () =>{};] "sourcemap.SourceMap.<clinit>"
-[SourceMap] => [SourceMap.$loadModules();] "sourcemap.SourceMap.<clinit>"
-[SourceMap] => [j_l_Object.$clinit();] "sourcemap.SourceMap.<clinit>"
-[SourceMap] => [Comparator.$clinit();] "sourcemap.SourceMap.<clinit>"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [$clinit]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [SourceMap.$clinit = () =>{};] "sourcemap.SourceMap.<clinit>"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [SourceMap.$loadModules();] "sourcemap.SourceMap.<clinit>"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [j_l_Object.$clinit();] "sourcemap.SourceMap.<clinit>"
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+...
+  }
+}] => [Comparator.$clinit();] "sourcemap.SourceMap.<clinit>"
 [uninitializedStaticField = 10.0] => [SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_ = 10;] "sourcemap.SourceMap.<clinit>"
 ["Hello"] => [SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = 'Hello';] "sourcemap.SourceMap.<clinit>"
 [uninitializedStaticField == 10.0) {
@@ -242,9 +2222,417 @@
    SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = 'World';
   }] "sourcemap.SourceMap.<clinit>"
 [initializedStaticField = "World"] => [SourceMap.f_initializedStaticField__sourcemap_SourceMap_ = 'World';] "sourcemap.SourceMap.<clinit>"
-[SourceMap] => [/**@type {number} @nodts*/
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [/**@type {number} @nodts*/
 SourceMap.f_uninitializedStaticField__sourcemap_SourceMap_ = 0;]
-[uninitializedStaticField] => [f_uninitializedStaticField__sourcemap_SourceMap_]
-[SourceMap] => [/**@type {string} @nodts*/
+[var uninitializedStaticField: Double] => [f_uninitializedStaticField__sourcemap_SourceMap_]
+[abstract class SourceMap<T : Number> @JsConstructor constructor(i: Int) : Comparator<T> {
+
+  private var uninitializedInstanceField: Int
+
+  // Instance initializer block
+  init {
+    uninitializedInstanceField = 1000
+  }
+
+  private var uninitializedInstanceField2: String
+
+  // Another instance initializer block
+  init {
+    if (uninitializedInstanceField == 1000) {
+      uninitializedInstanceField2 = "Hello!"
+    } else if (uninitializedInstanceField == 2000) {
+      uninitializedInstanceField2 = "World!"
+    } else {
+      uninitializedInstanceField2 = "Universe!"
+    }
+  }
+
+  private constructor(
+    uninitializedInstanceField: Int,
+    uninitializedInstanceField2: String,
+  ) : this(2)
+
+  private var initializedInstanceField = 2
+
+  companion object {
+    internal var uninitializedStaticField: Double
+
+    // Initializer in a static block
+    init {
+      uninitializedStaticField = 10.0
+    }
+
+    internal var initializedStaticField = "Hello"
+
+    init {
+      if (uninitializedStaticField == 10.0) {
+        initializedStaticField = "World"
+      }
+    }
+  }
+
+  private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+    var value = 0
+    for (i in 0 until times) {
+      value++
+    }
+
+    if (number % 2 == 0) {
+      value += 1
+    } else {
+      value += 2
+    }
+
+    var b2 = b
+    while (b2 > 0 && b2 < 100) {
+      b2 -= 10
+    }
+
+    value += a + b2
+
+    outerLoop@ for (i in 0..2) {
+      when (number) {
+        1 -> {
+          value += 5
+          break
+        }
+        2 -> {
+          value += 2
+          break@outerLoop
+        }
+        3 -> break@outerLoop
+      }
+      if (i == 1) break
+    }
+
+    return value
+  }
+
+  private fun testAnonymousClass(outer: Int): Int {
+    val f =
+      object : Function<Int, Int> {
+        override fun apply(i: Int): Int {
+          return helper1(i) + helper2(i)
+        }
+
+        private fun helper1(x: Int): Int {
+          return x * 2 + outer
+        }
+
+        private fun helper2(x: Int): Int {
+          return x + 1
+        }
+      }
+    return f.apply(10)
+  }
+
+  private fun testLocalClass(outer: Int): Int {
+    class Local {
+      fun member1(a: Int): Int {
+        return member2(a) * 2 + Inner().member3(a)
+      }
+
+      private fun member2(b: Int): Int {
+        return b + outer
+      }
+
+      inner class Inner {
+        fun member3(c: Int): Int {
+          return c + 1
+        }
+      }
+    }
+    return Local().member1(5)
+  }
+
+  private fun testLambdaAndMethodReference(n: Int) {
+    val f = { i: Int -> i + 1 }
+    val f2 = ArrayList<Any>()::size
+    val f3 = this::simpleMethod
+  }
+
+  private fun simpleMethod() = 1
+
+  private fun testLocalClass() {
+    class LocalClass
+    LocalClass()
+  }
+
+  enum class Enum1() {
+    VALUE1,
+    VALUE2(),
+    VALUE3(1);
+
+    constructor(i: Int) : this()
+  }
+
+  private fun testWhenExpression() {
+    var v = 1
+    val r =
+      when (v) {
+        1,
+        2 -> 10
+        else -> 20
+      }
+  }
+
+  private fun testInstanceOf(o: Any): Boolean {
+    return o is String
+  }
+
+  private fun testFunctionExpression(): Function<Any?, Any?> {
+    return Function { o: Any? -> o }
+  }
+
+  private fun testTypeLiteral(): Class<*> {
+    return String::class.java
+  }
+
+  abstract class SuperCalls : SourceMap<Int> {
+    @JsConstructor constructor(i: Int) : super(i)
+  }
+
+  inner class InnerClass {
+    val field: String
+
+    constructor() {
+      field = "0"
+    }
+
+    constructor(i: Int) : this(i.toString())
+
+    constructor(i: String) {
+      field = i
+    }
+  }
+
+  @JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }
+
+  @JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }
+
+  private fun testInline(): Int {
+    val a = inlineExpression(1, 2)
+    val b =
+      inlineWithLambda(10) { x ->
+        val multiplied = x * a
+        multiplied + 1
+      }
+    return b
+  }
+}] => [/**@type {string} @nodts*/
 SourceMap.f_initializedStaticField__sourcemap_SourceMap_;]
-[initializedStaticField] => [f_initializedStaticField__sourcemap_SourceMap_]
+[var initializedStaticField = "Hello"] => [f_initializedStaticField__sourcemap_SourceMap_]

@@ -21,6 +21,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
+import org.jetbrains.kotlin.backend.common.ir.BackendSymbols
 import org.jetbrains.kotlin.backend.jvm.functionByName
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
@@ -51,7 +52,6 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
-import org.jetbrains.kotlin.util.OperatorNameConventions
 
 /**
  * KotlinC uses intrinsics methods for representing some specific operations. The implementations of
@@ -63,7 +63,10 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  *
  * <p> The list on intrinsic methods in KoltinC can be found in http://shortn/_7YGQ0Kch3v
  */
-class IntrinsicMethods(private val pluginContext: IrPluginContext) {
+class IntrinsicMethods(
+  private val pluginContext: IrPluginContext,
+  private val symbols: BackendSymbols,
+) {
   private val irBuiltIns = pluginContext.irBuiltIns
   private val kotlinFqn = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
   private val intFqn = StandardNames.FqNames._int.toSafe()
@@ -131,30 +134,14 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
   fun isDataClassArrayMemberHashCode(irCall: IrCall): Boolean =
     irCall.symbol.toKey() == irBuiltIns.dataClassArrayMemberHashCodeSymbol.toKey()
 
-  // TODO(b/448872338): replace with extensionToString from
-  // `org.jetbrains.kotlin.backend.common.ir.Symbols`
-  val extensionToStringSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findFunctions(
-        CallableId(StandardClassIds.BASE_KOTLIN_PACKAGE, OperatorNameConventions.TO_STRING)
-      )
-      .single { !it.owner.isExpect }
-  }
+  val extensionToStringSymbol: IrSimpleFunctionSymbol
+    get() = symbols.extensionToString
 
-  // TODO(b/448872338): replace with extensionStringPlus from
-  // `org.jetbrains.kotlin.backend.common.ir.Symbols`
-  val extensionStringPlus: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findFunctions(CallableId(StandardClassIds.BASE_KOTLIN_PACKAGE, OperatorNameConventions.PLUS))
-      .single { !it.owner.isExpect }
-  }
-  // TODO(b/448872338): replace with memberStringPlus from
-  // `org.jetbrains.kotlin.backend.common.ir.Symbols`
-  val memberStringPlusSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findFunctions(CallableId(StandardClassIds.String, OperatorNameConventions.PLUS))
-      .single()
-  }
+  val extensionStringPlus: IrSimpleFunctionSymbol
+    get() = symbols.extensionStringPlus
+
+  val memberStringPlus: IrSimpleFunctionSymbol
+    get() = symbols.memberStringPlus
 
   fun isAnyToString(irCall: IrCall) = irCall.symbol.toKey() == extensionToStringSymbol.toKey()
 
@@ -256,7 +243,7 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
           Name.identifier("getContinuation"),
         )
       )
-      .single()
+      .single { !it.owner.isExpect }
   }
 
   private val prefixOperatorByIntrinsicSymbolKey =
@@ -293,7 +280,7 @@ class IntrinsicMethods(private val pluginContext: IrPluginContext) {
         ) +
         listOf(
           extensionStringPlus.toKey() to BinaryOperator.PLUS,
-          memberStringPlusSymbol.toKey() to BinaryOperator.PLUS,
+          memberStringPlus.toKey() to BinaryOperator.PLUS,
         ))
       .toMap()
 

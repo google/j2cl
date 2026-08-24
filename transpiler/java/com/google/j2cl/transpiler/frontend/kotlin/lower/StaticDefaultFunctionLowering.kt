@@ -153,7 +153,6 @@ internal class StaticDefaultFunctionLowering(val context: JvmBackendContext) :
           if (function.parentClassOrNull?.isInterface == true) function.visibility
           else DescriptorVisibilities.PRIVATE,
         // END OF MODIFICATIONS
-        remapMultiFieldValueClassStructure = context::remapMultiFieldValueClassStructure,
       )
     }
 }
@@ -171,7 +170,9 @@ fun IrFactory.createStaticFunctionWithReceivers(
   copyMetadata: Boolean = true,
   typeParametersFromContext: List<IrTypeParameter> = listOf(),
   remapMultiFieldValueClassStructure:
-    (IrFunction, IrFunction, Map<IrValueParameter, IrValueParameter>?) -> Unit,
+    (IrFunction, IrFunction, Map<IrValueParameter, IrValueParameter>?) -> Unit =
+    { _, _, _ ->
+    },
 ): IrSimpleFunction {
   return createSimpleFunction(
       startOffset = oldFunction.startOffset,

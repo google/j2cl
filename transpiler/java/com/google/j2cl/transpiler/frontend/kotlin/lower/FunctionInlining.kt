@@ -9,8 +9,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getCompleteTypeSubstitutionMap
 import org.jetbrains.kotlin.backend.common.*
-import org.jetbrains.kotlin.backend.common.ir.PreSerializationSymbols
-import org.jetbrains.kotlin.backend.common.ir.Symbols
+import org.jetbrains.kotlin.backend.common.ir.BackendSymbols
 import org.jetbrains.kotlin.backend.common.ir.isPure
 import org.jetbrains.kotlin.backend.common.lower.at
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
@@ -68,7 +67,7 @@ class FunctionInlining(
   ): IrExpression {
     expression.transformChildren(this, data)
 
-    if (expression is IrCall && PreSerializationSymbols.isTypeOfIntrinsic(expression.symbol)) {
+    if (expression is IrCall && expression.symbol.isTypeOfIntrinsic()) {
       return expression
     }
     val actualCallee =
@@ -517,7 +516,7 @@ private class CallInlining(
       // Skip creation of temporary variables for arguments that does not have side effects when
       // evaluated. This avoids generating unused temporary variables, which JSC might not always
       // inline,leading to unnecessary code size increase.
-      if (argumentValue.isPure(false, symbols = context.symbols as Symbols)) {
+      if (argumentValue.isPure(false, symbols = context.symbols as BackendSymbols)) {
         parameterToPureExpression[parameter.symbol] = castedArgumentValue
         continue
       }

@@ -77,7 +77,9 @@ public class TranspilerTester {
             // the right JVM target.
             // Note: For Bazel compilation, this is provided through toolchain defaults.
             .addArgs("-kotlincOptions", "-jvm-target=21")
-            .addArgs("-kotlincOptions", "-language-version=2.3");
+            .addArgs("-kotlincOptions", "-language-version=2.4")
+            // Don't complain when using release candidate builds of Kotlin Compiler.
+            .addArgs("-kotlincOptions", "-Xskip-prerelease-check");
 
     if (isKlibEnabled()) {
       return tester

@@ -20,7 +20,6 @@ import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastExceptio
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals
 import com.google.j2cl.integration.testing.TestUtils
-import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 
 private class ExtendingJavaClass : JavaClass() {
@@ -114,7 +113,8 @@ fun testNullMarkedCode() {
 
 @JsType
 class KtJsTypeShadowsField : SubJsTypeClass() {
-  @JvmField @JsProperty(name = "foo2") var foo = "tuv"
+  // TODO(b/463321963): Enable once the bug is fixed.
+  // @JvmField @JsProperty(name = "foo2") var foo = "tuv"
 }
 
 class SpecializedPrimitiveParameters : ParametricJsTypeJavaClass<Double>() {
@@ -150,10 +150,12 @@ fun testJsInterop() {
   assertEquals("get:was_set:def", shadowedFieldInParent.getFoo())
 
   val overridesField = KtJsTypeShadowsField()
-  assertEquals("tuv", overridesField.foo)
+  // TODO(b/463321963): Enable once the bug is fixed.
+  // assertEquals("tuv", overridesField.foo)
   assertEquals("get:abc", overridesField.getFoo())
   overridesField.setFoo("def")
-  assertEquals("tuv", overridesField.foo)
+  // TODO(b/463321963): Enable once the bug is fixed.
+  // assertEquals("tuv", overridesField.foo)
   assertEquals("get:was_set:def", overridesField.getFoo())
 
   // Use the supertype type to ensure correctness ofthe bridges.

@@ -1,7 +1,25 @@
-[StringJsEnum] => [$Overlay]
-[value] => [m_getValue__$devirt__sourcemap_SourceMap_StringJsEnum__java_lang_String]
-[value] => [$Overlay.$clinit();] "sourcemap.SourceMap$StringJsEnum$$Overlay.getValue__$devirt"
+[@JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }] => [$Overlay]
+[val value: String] => [m_getValue__$devirt__sourcemap_SourceMap_StringJsEnum__java_lang_String]
+[val value: String] => [$Overlay.$clinit();] "sourcemap.SourceMap$StringJsEnum$$Overlay.getValue__$devirt"
 [val value: String] => [return /**@type {string}*/ ($thisArg);] "sourcemap.SourceMap$StringJsEnum$$Overlay.getValue__$devirt"
-[StringJsEnum] => [$clinit]
-[StringJsEnum] => [$Overlay.$clinit = () =>{};] "sourcemap.SourceMap$StringJsEnum$$Overlay.<clinit>"
-[StringJsEnum] => [$Overlay.$loadModules();] "sourcemap.SourceMap$StringJsEnum$$Overlay.<clinit>"
+[@JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+    A("FOO"),
+    B("BAR"),
+    C("BUZZ"),
+  }] => [$clinit]
+[@JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+...
+    C("BUZZ"),
+  }] => [$Overlay.$clinit = () =>{};] "sourcemap.SourceMap$StringJsEnum$$Overlay.<clinit>"
+[@JsEnum(hasCustomValue = true)
+  enum class StringJsEnum(val value: String) {
+...
+    C("BUZZ"),
+  }] => [$Overlay.$loadModules();] "sourcemap.SourceMap$StringJsEnum$$Overlay.<clinit>"

@@ -11,10 +11,11 @@ import org.jetbrains.kotlin.backend.jvm.createJvmFileFacadeClass
 import org.jetbrains.kotlin.descriptors.SourceElement
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.expressions.IrConst
+import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.util.createThisReceiverParameter
-import org.jetbrains.kotlin.ir.util.getAnnotation
-import org.jetbrains.kotlin.ir.util.getAnnotationStringValue
+import org.jetbrains.kotlin.ir.util.findAnnotation
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
@@ -30,6 +31,9 @@ import org.jetbrains.kotlin.resolve.jvm.JvmClassName
  * Copied and modified from
  * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/ExternalPackageParentPatcherLowering.kt
  */
+private fun IrConstructorCall.getAnnotationStringValue(): String? =
+  (arguments[0] as? IrConst)?.value as String?
+
 internal class ExternalPackageParentPatcherLowering(val context: JvmBackendContext) :
   FileLoweringPass {
   override fun lower(irFile: IrFile) {
@@ -72,7 +76,6 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
             else IrDeclarationOrigin.FILE_CLASS,
             facadeName.fqNameForTopLevelClassMaybeWithDollars.shortName(),
             deserializedSource,
-            deserializeIr = { irClass -> deserializeTopLevelClass(irClass) },
           )
           .also {
             it.createThisReceiverParameter()
@@ -91,8 +94,8 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
               parentFile.packageFqName
                 .child(
                   Name.identifier(
-                    parentFile
-                      .getAnnotation(JvmStandardClassIds.JVM_NAME)!!
+                    parentFile.annotations
+                      .findAnnotation(JvmStandardClassIds.JVM_NAME)!!
                       .getAnnotationStringValue()!!
                   )
                 )
@@ -111,8 +114,6 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
             origin,
             jvmClassName.fqNameForTopLevelClassMaybeWithDollars.shortName(),
             SourceElement.NO_SOURCE,
-            // No need to deserialize IR as klib contains complete information.
-            deserializeIr = { false },
           )
           .also {
             it.createThisReceiverParameter()
@@ -121,16 +122,6 @@ internal class ExternalPackageParentPatcherLowering(val context: JvmBackendConte
       }
       // END OF MODIFICATIONS
       return null
-    }
-
-    private fun deserializeTopLevelClass(irClass: IrClass): Boolean {
-      return context.irDeserializer.deserializeTopLevelClass(
-        irClass,
-        context.irBuiltIns,
-        context.symbolTable,
-        context.irProviders,
-        context.generatorExtensions,
-      )
     }
 
     private fun handleProperty(property: IrProperty, newParent: IrClass) {

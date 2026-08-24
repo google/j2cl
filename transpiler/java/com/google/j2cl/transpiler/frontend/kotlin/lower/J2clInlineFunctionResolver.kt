@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.UnsignedType
 import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.inline.InlineFunctionResolver
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.util.resolveFakeOverrideOrSelf
@@ -28,28 +27,26 @@ internal class J2clInlineFunctionResolver(private val context: J2clBackendContex
   InlineFunctionResolver() {
 
   override fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction? {
-    return symbol.owner.resolveFakeOverrideOrSelf().takeIf { it.isInline }
-  }
-
-  override fun shouldSkipBecauseOfCallSite(
-    expression: IrMemberAccessExpression<IrFunctionSymbol>
-  ): Boolean {
-    return super.shouldSkipBecauseOfCallSite(expression) ||
+    if (
       // arrayOf functions are inline intrinsic functions in the jvm stdlib and should not be
       // inlined. The calls to these functions are directly handled by our CompilationUnitBuilder.
-      context.intrinsics.isArrayOf(expression.symbol) ||
-      // emptyArray is an inline builtin function in stdlib and should not be inlined.
-      // The calls to this function are directly handled by our EmptyArrayLowering pass.
-      context.intrinsics.isEmptyArray(expression.symbol) ||
-      // The `coroutineContext` getter is an inline intrinsic function.
-      // In Kotlin/JVM, this is replaced at code generation time.
-      // In Kotlin/JS, calls to this inline function are mapped to a top-level inline suspend
-      // function `getCoroutineContext`, which is then inlined.
-      // J2CL cannot easily adopt the Kotlin/JS approach. The top-level replacement function would
-      // need to be attached to a FileClass,
-      // which would require copying logic from the ExternalPackageParentPatcherLowering pass.
-      // Thus, we opt to skip inlining the getter here and instead lower the call later.
-      expression.symbol.isCoroutineContextGetter()
+      context.intrinsics.isArrayOf(symbol) ||
+        // emptyArray is an inline builtin function in stdlib and should not be inlined.
+        // The calls to this function are directly handled by our EmptyArrayLowering pass.
+        context.intrinsics.isEmptyArray(symbol) ||
+        // The `coroutineContext` getter is an inline intrinsic function.
+        // In Kotlin/JVM, this is replaced at code generation time.
+        // In Kotlin/JS, calls to this inline function are mapped to a top-level inline suspend
+        // function `getCoroutineContext`, which is then inlined.
+        // J2CL cannot easily adopt the Kotlin/JS approach. The top-level replacement function would
+        // need to be attached to a FileClass,
+        // which would require copying logic from the ExternalPackageParentPatcherLowering pass.
+        // Thus, we opt to skip inlining the getter here and instead lower the call later.
+        symbol.isCoroutineContextGetter()
+    ) {
+      return null
+    }
+    return symbol.owner.resolveFakeOverrideOrSelf().takeIf { it.isInline }
   }
 
   private fun IrFunctionSymbol.isCoroutineContextGetter(): Boolean =

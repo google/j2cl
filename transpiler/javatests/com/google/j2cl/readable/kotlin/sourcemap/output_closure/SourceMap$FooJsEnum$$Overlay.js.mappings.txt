@@ -1,4 +1,22 @@
-[FooJsEnum] => [$Overlay]
-[FooJsEnum] => [$clinit]
-[FooJsEnum] => [$Overlay.$clinit = () =>{};] "sourcemap.SourceMap$FooJsEnum$$Overlay.<clinit>"
-[FooJsEnum] => [$Overlay.$loadModules();] "sourcemap.SourceMap$FooJsEnum$$Overlay.<clinit>"
+[@JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }] => [$Overlay]
+[@JsEnum
+  enum class FooJsEnum {
+    A,
+    B,
+    C,
+  }] => [$clinit]
+[@JsEnum
+  enum class FooJsEnum {
+...
+    C,
+  }] => [$Overlay.$clinit = () =>{};] "sourcemap.SourceMap$FooJsEnum$$Overlay.<clinit>"
+[@JsEnum
+  enum class FooJsEnum {
+...
+    C,
+  }] => [$Overlay.$loadModules();] "sourcemap.SourceMap$FooJsEnum$$Overlay.<clinit>"

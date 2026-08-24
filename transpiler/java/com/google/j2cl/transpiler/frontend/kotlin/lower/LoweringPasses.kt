@@ -18,9 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
-import com.google.j2cl.transpiler.frontend.kotlin.ir.IrProviderFromPublicSignature
-import com.google.j2cl.transpiler.frontend.kotlin.ir.J2clIrDeserializer
-import com.google.j2cl.transpiler.frontend.kotlin.ir.populate
 import com.google.j2cl.transpiler.frontend.kotlin.lower.SmuggledJvmLoweringPasses.*
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
 import org.jetbrains.kotlin.backend.common.CommonBackendContext
@@ -37,21 +34,22 @@ import org.jetbrains.kotlin.backend.common.lower.loops.ForLoopsLowering
 import org.jetbrains.kotlin.backend.common.runOnFilePostfix
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmBackendExtension
-import org.jetbrains.kotlin.backend.jvm.JvmGeneratorExtensionsImpl
-import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializer
-import org.jetbrains.kotlin.backend.jvm.JvmIrDeserializerImpl
+import org.jetbrains.kotlin.backend.jvm.ModuleMetadataSerializer
 import org.jetbrains.kotlin.backend.jvm.ir.constantValue
+import org.jetbrains.kotlin.backend.jvm.metadata.BuiltinsSerializer
+import org.jetbrains.kotlin.backend.jvm.metadata.MetadataSerializer
+import org.jetbrains.kotlin.codegen.ClassBuilder
 import org.jetbrains.kotlin.codegen.state.GenerationState
-import org.jetbrains.kotlin.config.AnalysisFlags
 import org.jetbrains.kotlin.config.CompilerConfiguration
-import org.jetbrains.kotlin.config.languageVersionSettings
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.backend.js.lower.cleanup.CleanupLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsWithReifiedTypeParametersLowering
+import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.SymbolTable
+import org.jetbrains.org.objectweb.asm.Type
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPhase = loweringPhase {
@@ -217,15 +215,13 @@ private val loweringPhase = loweringPhase {
 class LoweringPasses(
   private val state: GenerationState,
   private val compilerConfiguration: CompilerConfiguration,
-  private val jvmIrDeserializer: JvmIrDeserializer = JvmIrDeserializerImpl(),
 ) : IrGenerationExtension {
   lateinit var jvmBackendContext: JvmBackendContext
   lateinit var intrinsics: IntrinsicMethods
 
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-    jvmBackendContext =
-      createJvmBackendContext(state, compilerConfiguration, pluginContext, jvmIrDeserializer)
-    intrinsics = IntrinsicMethods(pluginContext)
+    jvmBackendContext = createJvmBackendContext(state, compilerConfiguration, pluginContext)
+    intrinsics = IntrinsicMethods(pluginContext, jvmBackendContext.symbols)
 
     val j2clBackendContext = J2clBackendContext(jvmBackendContext, intrinsics)
 
@@ -234,43 +230,37 @@ class LoweringPasses(
 }
 
 @OptIn(UnsafeDuringIrConstructionAPI::class, ObsoleteDescriptorBasedAPI::class)
+private object JvmBackendExtensionStub : JvmBackendExtension {
+  override fun createSerializer(
+    context: JvmBackendContext,
+    klass: IrClass,
+    type: Type,
+    bindings: ClassBuilder,
+    parentSerializer: MetadataSerializer?,
+  ): MetadataSerializer = error("Not supported")
+
+  override fun createModuleMetadataSerializer(
+    context: JvmBackendContext
+  ): ModuleMetadataSerializer = error("Not supported")
+
+  override fun createBuiltinsSerializer(): BuiltinsSerializer = error("Not supported")
+}
+
+@OptIn(ObsoleteDescriptorBasedAPI::class)
 private fun createJvmBackendContext(
   state: GenerationState,
   compilerConfiguration: CompilerConfiguration,
   pluginContext: IrPluginContext,
-  jvmIrDeserializer: JvmIrDeserializer,
 ): JvmBackendContext {
   val symbolTable = pluginContext.symbolTable as SymbolTable
 
-  if (jvmIrDeserializer is J2clIrDeserializer) {
-    // TODO(b/374966022): Remove this once we don't rely on IR serialization anymore for inlining.
-    // K2 does not populate the symbolTable but it still is used by the IR deserializer to know if
-    // the symbols exists or need to be created. We will manually populate the SymbolTable.
-    // Note: This step is skipped during stdlib compilation. This is because the standard library
-    // does not depend on other Kotlin libraries, so no IR deserialization from JAR files will
-    // occur.
-    // Additionally, this avoids an issue in when processing builtins, which are loaded from source
-    // during stdlib compilation rather than from JAR files.
-    if (!compilerConfiguration.languageVersionSettings.getFlag(AnalysisFlags.stdlibCompilation)) {
-      symbolTable.populate(pluginContext.irBuiltIns)
-    }
-    // During IR deserialization, unbound symbols are created for references to external
-    // declarations that haven't been loaded yet. In the K1 frontend, a stub IrProvider relied on
-    // the descriptor API to load these symbols. However, we cannot reuse this in K2 due to the
-    // removal of the descriptor API. Therefore, we utilize this custom IrProvider, which rely on
-    // the public signature of the nbound symbols and the IR plugin API to resolve IR nodes linked
-    // to the symbols.
-    jvmIrDeserializer.defaultIrProvider = IrProviderFromPublicSignature(pluginContext)
-  }
   return JvmBackendContext(
-    state,
-    pluginContext.irBuiltIns,
-    symbolTable,
-    JvmGeneratorExtensionsImpl(compilerConfiguration),
-    JvmBackendExtension.Default,
-    irSerializer = null,
-    irDeserializer = jvmIrDeserializer,
-    irProviders = listOf(),
+    state = state,
+    irBuiltIns = pluginContext.irBuiltIns,
+    symbolTable = symbolTable,
+    debuggerExtensions = null,
+    // Our lowering passes transform the IR to a more Java-like form and do not serialize anything.
+    backendExtension = JvmBackendExtensionStub,
     irPluginContext = pluginContext,
     evaluatorData = null,
   )

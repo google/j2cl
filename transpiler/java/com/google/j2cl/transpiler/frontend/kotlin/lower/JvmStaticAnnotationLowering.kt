@@ -3,6 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
+@file:OptIn(ObsoleteDescriptorBasedAPI::class)
+
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
@@ -14,16 +16,16 @@ import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrStatement
+import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.declarations.lazy.IrLazyFunctionBase
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrBlockImpl
-import org.jetbrains.kotlin.ir.expressions.impl.IrFunctionReferenceImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrTypeOperatorCallImpl
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
-import org.jetbrains.kotlin.resolve.annotations.JVM_STATIC_ANNOTATION_FQ_NAME
+import org.jetbrains.kotlin.name.JvmStandardClassIds
 
 /**
  * Makes `@JvmStatic` functions in non-companion objects static and replaces all call sites in the
@@ -49,12 +51,12 @@ internal class JvmStaticInCompanionLowering(val context: JvmBackendContext) : Fi
 }
 
 private fun IrDeclaration.isJvmStaticDeclaration(): Boolean =
-  hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME) ||
+  hasAnnotation(JvmStandardClassIds.Annotations.JvmStatic) ||
     (this as? IrSimpleFunction)
       ?.correspondingPropertySymbol
       ?.owner
-      ?.hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME) == true ||
-    (this as? IrProperty)?.getter?.hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME) == true
+      ?.hasAnnotation(JvmStandardClassIds.Annotations.JvmStatic) == true ||
+    (this as? IrProperty)?.getter?.hasAnnotation(JvmStandardClassIds.Annotations.JvmStatic) == true
 
 private fun IrDeclaration.isJvmStaticInCompanion(): Boolean =
   isJvmStaticDeclaration() && (parent as? IrClass)?.isCompanion == true
@@ -185,50 +187,17 @@ private class CompanionObjectJvmStaticTransformer(val context: JvmBackendContext
   override fun visitCall(expression: IrCall): IrExpression {
     expression.transformChildrenVoid(this)
     val callee = expression.symbol.owner
-    return when {
-      shouldReplaceWithStaticCall(callee) -> {
-        // MODIFIED BY GOOGLE.
-        // Avoid mangling and visibility promotion of the proxy of internal JvmStatic function.
-        // Original code:
-        // val (staticProxy, _) =
-        //     context.cachedDeclarations.getStaticAndCompanionDeclaration(callee)
-        val (staticProxy, _) = getStaticAndCompanionDeclaration(callee)
-        // END OF MODIFICATIONS.
-        expression.makeStatic(context.irBuiltIns, staticProxy)
-      }
-      callee.symbol == context.symbols.indyLambdaMetafactoryIntrinsic -> {
-        val implFunRef =
-          expression.arguments[1] as? IrFunctionReference
-            ?: throw AssertionError(
-              "'implMethodReference' is expected to be 'IrFunctionReference': ${expression.dump()}"
-            )
-        val implFun = implFunRef.symbol.owner
-        if (
-          implFunRef.dispatchReceiver != null &&
-            implFun is IrSimpleFunction &&
-            shouldReplaceWithStaticCall(implFun)
-        ) {
-          // MODIFIED BY GOOGLE.
-          // Avoid mangling and visibility promotion of the proxy of internal JvmStatic function.
-          // Original code:
-          // val (staticProxy, _) =
-          //     context.cachedDeclarations.getStaticAndCompanionDeclaration(implFun)
-          val (staticProxy, _) = getStaticAndCompanionDeclaration(implFun)
-          // END OF MODIFICATIONS.
-          expression.arguments[1] =
-            IrFunctionReferenceImpl(
-              implFunRef.startOffset,
-              implFunRef.endOffset,
-              implFunRef.type,
-              staticProxy.symbol,
-              staticProxy.typeParameters.size,
-              implFunRef.reflectionTarget,
-              implFunRef.origin,
-            )
-        }
-        expression
-      }
-      else -> expression
+    return if (shouldReplaceWithStaticCall(callee)) {
+      // MODIFIED BY GOOGLE.
+      // Avoid mangling and visibility promotion of the proxy of internal JvmStatic function.
+      // Original code:
+      // val (staticProxy, _) =
+      //     context.cachedDeclarations.getStaticAndCompanionDeclaration(callee)
+      val (staticProxy, _) = getStaticAndCompanionDeclaration(callee)
+      // END OF MODIFICATIONS.
+      expression.makeStatic(context.irBuiltIns, staticProxy)
+    } else {
+      expression
     }
   }
 

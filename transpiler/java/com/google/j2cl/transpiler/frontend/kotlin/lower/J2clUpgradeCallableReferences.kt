@@ -32,13 +32,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 /** Upgrades property and function reference-like nodes to the new IrRichCallableReference node. */
 class J2clUpgradeCallableReferences(context: LoweringContext) :
-  UpgradeCallableReferences(
-    context,
-    upgradeFunctionReferencesAndLambdas = true,
-    upgradeSamConversions = true,
-    upgradePropertyReferences = true,
-    upgradeLocalDelegatedPropertyReferences = true,
-  ) {
+  UpgradeCallableReferences(context, upgradeSamConversions = true, castDispatchReceiver = true) {
 
   override fun lower(irFile: IrFile) {
     super.lower(irFile)

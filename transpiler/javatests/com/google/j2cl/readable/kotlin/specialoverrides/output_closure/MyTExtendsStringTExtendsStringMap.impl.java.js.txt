@@ -77,6 +77,12 @@ class MyTExtendsStringTExtendsStringMap extends j_l_Object {
  entrySet() {
   return this.m_getEntries__java_util_Set();
  }
+ /** @abstract @nodts @return {number} */
+ m_getSize__int() {}
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
  /** @abstract @nodts @return {boolean} */
  m_containsValue__java_lang_String__boolean(/** T */ value) {}
  /** @final @override @return {boolean} */
@@ -94,12 +100,6 @@ class MyTExtendsStringTExtendsStringMap extends j_l_Object {
    return null;
   }
   return this.m_get__java_lang_String__java_lang_String(/**@type {T}*/ (key));
- }
- /** @abstract @nodts @return {number} */
- m_getSize__int() {}
- /** @final @override @return {number} */
- size() {
-  return this.m_getSize__int();
  }
  //Bridge method.
  /** @final @override @nodts @suppress{visibility} @return {T} */

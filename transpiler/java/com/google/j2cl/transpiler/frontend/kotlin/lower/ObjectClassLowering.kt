@@ -9,6 +9,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
+import org.jetbrains.kotlin.backend.jvm.ir.addJavaLangDeprecatedAnnotation
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
@@ -20,11 +21,9 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationContainer
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.util.constructors
-import org.jetbrains.kotlin.ir.util.filterOutAnnotations
 import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
-import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
 /**
  * Adds a static field for object declarations (singletons) to hold the unique instance for the
@@ -97,11 +96,7 @@ internal class ObjectClassLowering(val context: JvmBackendContext) : ClassLoweri
           irClass.visibility == DescriptorVisibilities.PROTECTED)
     ) {
       context.createJvmIrBuilder(irClass.symbol).run {
-        publicInstanceField.annotations =
-          filterOutAnnotations(
-            DeprecationResolver.JAVA_DEPRECATED,
-            publicInstanceField.annotations,
-          ) + irCall(irSymbols.javaLangDeprecatedConstructorWithDeprecatedFlag)
+        publicInstanceField.addJavaLangDeprecatedAnnotation()
       }
     }
 

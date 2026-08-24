@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+// TODO(b/550323040): update this file to use the new IrAnnotation node.
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir

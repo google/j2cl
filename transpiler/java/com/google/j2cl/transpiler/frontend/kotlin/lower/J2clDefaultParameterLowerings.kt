@@ -94,7 +94,7 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
       }
     }
 
-  override fun IrFunction.resolveAnnotations(): List<IrConstructorCall> = copyAnnotationsWhen {
+  override fun IrFunction.resolveAnnotations(): List<IrAnnotation> = copyAnnotationsWhen {
     shouldCopyAnnotationToBridge()
   }
 
@@ -243,20 +243,19 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
       val newVariables: MutableMap<IrValueParameter, IrValueDeclaration> =
         parameters.associateWith { it }.toMutableMap()
       val variableRemapper = VariableRemapper(newVariables)
-      body =
-        irBuilder.irBlockBody {
-          for (parameter in parameters.filter { it.defaultValue != null }) {
-            createDefaultResolutionToTmpVariable(
-                parameter,
-                parameter.remapDefaultExpressionReferences(variableRemapper),
-              )
-              ?.let { newVariables[parameter] = it }
-          }
-
-          // Remap variables from the original body and add the statements to the new body.
-          originalBlockBody.transformChildrenVoid(variableRemapper)
-          +originalBlockBody.statements
+      body = irBuilder.irBlockBody {
+        for (parameter in parameters.filter { it.defaultValue != null }) {
+          createDefaultResolutionToTmpVariable(
+              parameter,
+              parameter.remapDefaultExpressionReferences(variableRemapper),
+            )
+            ?.let { newVariables[parameter] = it }
         }
+
+        // Remap variables from the original body and add the statements to the new body.
+        originalBlockBody.transformChildrenVoid(variableRemapper)
+        +originalBlockBody.statements
+      }
     }
 
     // Mark the function as its own dispatch function.
@@ -273,8 +272,9 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
       )
     }
 
-    private fun IrConstructorCall.shouldCopyAnnotationToBridge(): Boolean =
-      annotationsToNotCopy.none { isAnnotation(it) }
+    private fun IrAnnotation.shouldCopyAnnotationToBridge(): Boolean = annotationsToNotCopy.none {
+      isAnnotation(it)
+    }
 
     private fun IrValueParameter.remapDefaultExpressionReferences(
       variableRemapper: VariableRemapper
@@ -283,8 +283,9 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
     private val IrValueParameter.defaultedTmpVariableName: String
       get() = "${name.asString()}\$defaulted"
 
-    private fun IrClass.hasOutVarianceTypeParameter(): Boolean =
-      typeParameters.any { it.variance == Variance.OUT_VARIANCE }
+    private fun IrClass.hasOutVarianceTypeParameter(): Boolean = typeParameters.any {
+      it.variance == Variance.OUT_VARIANCE
+    }
   }
 }
 
@@ -409,18 +410,16 @@ internal class J2clDefaultParameterInjector(context: J2clBackendContext) :
 
     // Copy over the original arguments, substituting any missing arguments with undefined.
     val mainArguments =
-      this@J2clDefaultParameterInjector.context.jvmBackendContext.multiFieldValueClassReplacements
-        .mapFunctionMfvcStructures(this, stubFunction, declaration) {
-          sourceParameter: IrValueParameter,
-          targetParameterType: IrType ->
-          val originalArgument = expression.arguments[sourceParameter.indexInParameters]
-          if (sourceParameter.hasDefaultValue()) {
-            originalArgument?.maybeCoerceToNull()
-              ?: nullConst(startOffset, endOffset, sourceParameter)
-          } else {
-            originalArgument!!
-          }
+      stubFunction.parameters.take(declaration.parameters.size).associateWith { stubParameter ->
+        val sourceParameter = declaration.parameters[stubParameter.indexInParameters]
+        val originalArgument = expression.arguments[sourceParameter.indexInParameters]
+        if (sourceParameter.hasDefaultValue()) {
+          originalArgument?.maybeCoerceToNull()
+            ?: nullConst(startOffset, endOffset, sourceParameter)
+        } else {
+          originalArgument!!
         }
+      }
 
     return buildMap {
       putAll(mainArguments)

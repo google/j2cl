@@ -172,7 +172,7 @@ private fun generateMultifileFacades(
                 partFile.annotations.singleOrNull {
                   it.isAnnotationWithEqualFqName(JvmStandardClassIds.JVM_MULTIFILE_CLASS)
                 }
-              context.ktDiagnosticReporter
+              context.diagnosticReporter
                 .at(annotation ?: partFile, partFile)
                 .report(JvmBackendErrors.NOT_ALL_MULTIFILE_CLASS_PARTS_ARE_JVM_SYNTHETIC)
             }
@@ -321,7 +321,13 @@ private fun IrSimpleFunction.createMultifileDelegateIfNeeded(
 
   function.copyAttributes(target)
   function.copyAnnotationsFrom(target)
-  val unused = function.copyFunctionSignatureFrom(target)
+  val unused = function.copyTypeParametersFrom(target)
+  function.copyParametersFrom(target)
+  function.returnType =
+    target.returnType.substitute(
+      target.typeParameters,
+      function.typeParameters.map { it.defaultType },
+    )
   function.parent = facadeClass
 
   if (shouldGeneratePartHierarchy) {

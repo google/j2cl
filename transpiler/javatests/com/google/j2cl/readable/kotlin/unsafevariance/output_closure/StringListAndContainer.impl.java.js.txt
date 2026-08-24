@@ -37,10 +37,6 @@ class StringListAndContainer extends j_l_Object {
  m_add__java_lang_String__boolean(/** string */ element) {
   return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
  }
- /** @nodts */
- m_add__int__java_lang_String__void(/** number */ index, /** string */ element) {
-  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
- }
  /** @override @return {boolean} */
  remove(/** * */ element) {
   return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
@@ -69,6 +65,10 @@ class StringListAndContainer extends j_l_Object {
  m_set__int__java_lang_String__java_lang_String(/** number */ index, /** string */ element) {
   return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
  }
+ /** @nodts */
+ m_add__int__java_lang_String__void(/** number */ index, /** string */ element) {
+  Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
  /** @override @return {string} */
  removeAtIndex(/** number */ index) {
   return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
@@ -84,6 +84,12 @@ class StringListAndContainer extends j_l_Object {
  /** @override @nodts @return {boolean} */
  m_removeIf__java_util_function_Predicate__boolean(/** !Predicate<?> */ filter) {
   return Intrinsics.m_throwUnsupportedOperationException__java_lang_String__kotlin_jvm_internal_NothingStub('Operation is not supported for read-only collection');
+ }
+ /** @abstract @nodts @return {number} */
+ m_getSize__int() {}
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
  }
  /** @abstract @override @nodts @return {boolean} */
  m_contains__java_lang_String__boolean(/** string */ element) {}
@@ -111,12 +117,6 @@ class StringListAndContainer extends j_l_Object {
    return -1;
   }
   return this.m_lastIndexOf__java_lang_String__int(/**@type {string}*/ (element));
- }
- /** @abstract @nodts @return {number} */
- m_getSize__int() {}
- /** @final @override @return {number} */
- size() {
-  return this.m_getSize__int();
  }
  //Default method forwarding stub.
  /** @override @suppress{visibility} @return {Iterator<string>} */

@@ -11,6 +11,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let ArrayListBase = goog.forwardDeclare('java.util.ArrayListBase$impl');
 let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
 let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$impl');
 let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
@@ -121,7 +122,7 @@ class SourceMap extends j_l_Object {
   }));
   let tmp0_bound0 = /**@type {!ArrayList<!*>}*/ (ArrayList.$create__());
   let f2 = /**@type {!MutableKProperty0Impl<!Integer>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {!Integer}*/ (() =>{
-   return Integer.valueOf(tmp0_bound0.size());
+   return Integer.valueOf((/**@type {!ArrayListBase<*>}*/ (tmp0_bound0)).size());
   })), null));
   let tmp0_bound0_1 = this;
   let f3 = Function0.$adapt(/**  @return {!Integer}*/ (() =>{

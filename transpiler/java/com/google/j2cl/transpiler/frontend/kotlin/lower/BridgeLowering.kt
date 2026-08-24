@@ -518,11 +518,6 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
           returnType = target.returnType
         }
         // END OF MODIFICATIONS
-        context.remapMultiFieldValueClassStructure(
-          bridge.overridden,
-          this,
-          parametersMappingOrNull = null,
-        )
 
         // If target is a throwing stub, bridge also should just throw
         // UnsupportedOperationException.
@@ -594,11 +589,6 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
           this@addSpecialBridge,
           specialBridge.overridden,
           specialBridge.substitutedParameterTypes,
-        )
-        context.remapMultiFieldValueClassStructure(
-          specialBridge.overridden,
-          this,
-          parametersMappingOrNull = null,
         )
 
         body =
@@ -749,24 +739,20 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
                 superQualifierSymbol = superQualifierSymbol,
               )
               .apply {
-                if (getStructure(target) == null && getStructure(bridge) == null) {
-                  for ((param, targetParam) in bridge.parameters.zip(target.parameters)) {
-                    val argument =
-                      irGet(param).let { argument ->
-                        if (param == bridge.dispatchReceiverParameter) argument
-                        // MODIFIED BY GOOGLE
-                        // Cast to the exact target parameter type to ensure we will generate a
-                        // correct JsDocCast. Casting to the upper bound would be sufficient for JVM
-                        // runtime behavior, but would generate imprecise JsDocCasts.
-                        // Original code:
-                        // else irCastIfNeeded(argument, targetParam.type.upperBound)
-                        else irCastIfNeeded(argument, targetParam.type)
-                        // END OF MODIFICATIONS
-                      }
-                    arguments[targetParam] = argument
-                  }
-                } else {
-                  this@irBlock.addBoxedAndUnboxedMfvcArguments(target, bridge, this)
+                for ((param, targetParam) in bridge.parameters.zip(target.parameters)) {
+                  val argument =
+                    irGet(param).let { argument ->
+                      if (param == bridge.dispatchReceiverParameter) argument
+                      // MODIFIED BY GOOGLE
+                      // Cast to the exact target parameter type to ensure we will generate a
+                      // correct JsDocCast. Casting to the upper bound would be sufficient for JVM
+                      // runtime behavior, but would generate imprecise JsDocCasts.
+                      // Original code:
+                      // else irCastIfNeeded(argument, targetParam.type.upperBound)
+                      else irCastIfNeeded(argument, targetParam.type)
+                      // END OF MODIFICATIONS
+                    }
+                  arguments[targetParam] = argument
                 }
               }
           )
@@ -774,38 +760,6 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
         .unwrapBlock(),
       bridge.returnType.upperBound,
     )
-
-  private fun getStructure(
-    function: IrSimpleFunction
-  ): List<MemoizedMultiFieldValueClassReplacements.RemappedParameter>? {
-    val structure = function.parameterTemplateStructureOfThisNewMfvcBidingFunction ?: return null
-    require(structure.sumOf { it.parameters.size } == function.parameters.size) {
-      "Bad parameters structure: $structure"
-    }
-
-    return structure
-  }
-
-  private fun IrBlockBuilder.addBoxedAndUnboxedMfvcArguments(
-    target: IrSimpleFunction,
-    bridge: IrSimpleFunction,
-    irCall: IrCall,
-  ) {
-    val parameters2arguments =
-      this@BridgeLowering.context.multiFieldValueClassReplacements.mapFunctionMfvcStructures(
-        this,
-        target,
-        bridge,
-      ) { sourceParameter, targetParameterType ->
-        if (sourceParameter == bridge.dispatchReceiverParameter) irGet(sourceParameter)
-        else irCastIfNeeded(irGet(sourceParameter), targetParameterType)
-      }
-    for ((parameter, argument) in parameters2arguments) {
-      if (argument != null) {
-        irCall.arguments[parameter] = argument
-      }
-    }
-  }
 
   private val IrFunction.jvmMethod: Method
     get() = context.bridgeLoweringCache.computeJvmMethod(this)

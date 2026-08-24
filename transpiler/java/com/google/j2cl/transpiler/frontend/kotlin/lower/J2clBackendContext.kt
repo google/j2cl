@@ -14,10 +14,12 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(ObsoleteDescriptorBasedAPI::class, K1Deprecation::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.jvm.CachedFieldsForObjectInstances
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -26,9 +28,10 @@ import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.isJvmInterface
 import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
+import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.builders.declarations.buildField
-import org.jetbrains.kotlin.ir.builders.irCall
+import org.jetbrains.kotlin.ir.builders.irAnnotation
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrProperty
@@ -38,6 +41,7 @@ import org.jetbrains.kotlin.ir.util.isNonCompanionObject
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
 /** Context used in the lowering passes and wrapping the `JvmBackendContext`. */
@@ -131,8 +135,10 @@ class J2ClCachedDeclarations(private val context: J2clBackendContext) {
           annotations =
             if (parentIsPrivate && !isPrivate) {
               context.createJvmIrBuilder(this.symbol).run {
-                filterOutAnnotations(DeprecationResolver.JAVA_DEPRECATED, oldField.annotations) +
-                  irCall(irSymbols.javaLangDeprecatedConstructorWithDeprecatedFlag)
+                filterOutAnnotations(
+                  ClassId.topLevel(DeprecationResolver.JAVA_DEPRECATED),
+                  oldField.annotations,
+                ) + irAnnotation(irSymbols.javaLangDeprecatedConstructorWithDeprecatedFlag)
               }
             } else {
               oldField.annotations

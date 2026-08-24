@@ -91,9 +91,16 @@ internal class WrapInlineDeclarationsWithReifiedTypeParametersLowering(
                       "Unable to get a proper parent while lower ${expression.render()} at ${container.render()}"
                     )
                 val irBuilder = context.createIrBuilder(symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
+                val extensionReceiverParam =
+                  owner.parameters.find { it.kind == IrParameterKind.ExtensionReceiver }
+                val dispatchReceiverParam =
+                  owner.parameters.find { it.kind == IrParameterKind.DispatchReceiver }
+                val ownerValueParameters =
+                  owner.parameters.filter { it.kind == IrParameterKind.Regular }
+
                 val forwardExtensionReceiverAsParam =
-                  owner.extensionReceiverParameter?.let { extensionReceiver ->
-                    runIf(expression.extensionReceiver == null) {
+                  extensionReceiverParam?.let { extensionReceiver ->
+                    runIf(expression.arguments[extensionReceiver] == null) {
                       addValueParameter(
                         extensionReceiver.name,
                         typeSubstitutor.substitute(extensionReceiver.type),
@@ -101,7 +108,7 @@ internal class WrapInlineDeclarationsWithReifiedTypeParametersLowering(
                       true
                     }
                   } ?: false
-                owner.valueParameters.forEach { valueParameter ->
+                ownerValueParameters.forEach { valueParameter ->
                   addValueParameter(
                     valueParameter.name,
                     typeSubstitutor.substitute(valueParameter.type),
@@ -112,21 +119,34 @@ internal class WrapInlineDeclarationsWithReifiedTypeParametersLowering(
                     statements.add(
                       irBuilder.irReturn(
                         irBuilder.irCall(owner.symbol).also { call ->
-                          expression.extensionReceiver?.setDeclarationsParent(this@apply)
-                          expression.dispatchReceiver?.setDeclarationsParent(this@apply)
-                          val (extensionReceiver, forwardedParams) =
-                            if (forwardExtensionReceiverAsParam) {
-                              irBuilder.irGet(valueParameters.first()) to
-                                valueParameters.subList(1, valueParameters.size)
-                            } else {
-                              expression.extensionReceiver to valueParameters
-                            }
-                          call.extensionReceiver = extensionReceiver
-                          call.dispatchReceiver = expression.dispatchReceiver
+                          val wrapperParameters = this@apply.parameters
 
-                          forwardedParams.forEachIndexed { index, valueParameter ->
-                            call.putValueArgument(index, irBuilder.irGet(valueParameter))
+                          extensionReceiverParam?.let {
+                            expression.arguments[it]?.setDeclarationsParent(this@apply)
                           }
+                          dispatchReceiverParam?.let {
+                            expression.arguments[it]?.setDeclarationsParent(this@apply)
+                          }
+
+                          val (extensionReceiverArg, forwardedParams) =
+                            if (forwardExtensionReceiverAsParam) {
+                              irBuilder.irGet(wrapperParameters.first()) to
+                                wrapperParameters.subList(1, wrapperParameters.size)
+                            } else {
+                              (extensionReceiverParam?.let { expression.arguments[it] }) to
+                                wrapperParameters
+                            }
+
+                          extensionReceiverParam?.let { call.arguments[it] = extensionReceiverArg }
+                          dispatchReceiverParam?.let {
+                            call.arguments[it] = expression.arguments[it]
+                          }
+
+                          forwardedParams.zip(ownerValueParameters).forEach {
+                            (wrapperParam, ownerParam) ->
+                            call.arguments[ownerParam] = irBuilder.irGet(wrapperParam)
+                          }
+
                           for (i in expression.typeArguments.indices) {
                             call.typeArguments[i] = expression.typeArguments[i]
                           }

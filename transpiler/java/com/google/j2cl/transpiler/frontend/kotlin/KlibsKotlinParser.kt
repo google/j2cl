@@ -14,7 +14,10 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
-@file:OptIn(org.jetbrains.kotlin.K1Deprecation::class)
+@file:OptIn(
+  org.jetbrains.kotlin.K1Deprecation::class,
+  org.jetbrains.kotlin.CoreEnvironmentDeprecation::class,
+)
 
 package com.google.j2cl.transpiler.frontend.kotlin
 
@@ -24,8 +27,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
-import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompiler
-import com.google.j2cl.transpiler.frontend.kotlin.jklib.K2JKlibCompilerArguments
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
@@ -34,11 +35,13 @@ import java.util.function.Predicate
 import kotlin.io.path.Path
 import kotlin.io.path.absolutePathString
 import org.jetbrains.kotlin.analyzer.CompilationErrorException
+import org.jetbrains.kotlin.cli.common.arguments.K2JKlibCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
+import org.jetbrains.kotlin.cli.jklib.K2JKlibCompiler
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
-import org.jetbrains.kotlin.cli.jvm.compiler.legacy.pipeline.createProjectEnvironment
 import org.jetbrains.kotlin.cli.jvm.config.jvmClasspathRoots
+import org.jetbrains.kotlin.cli.pipeline.jvm.JvmFrontendPipelinePhase.createProjectEnvironment
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.moduleName
 import org.jetbrains.kotlin.ir.IrStatement
@@ -53,8 +56,6 @@ class KlibsKotlinParser(private val problems: Problems) {
 
   /** Returns a list of compilation units after Kotlinc parsing. */
   fun parseFiles(options: FrontendOptions): Library {
-    check(options.enableKlibs) { "This parser only supports Klibs" }
-
     val fileInfoByAbsoluteSourcePath =
       options.sources.associateBy { Path(it.sourcePath()).absolutePathString() }
     val arguments = createCompilerArguments(options, fileInfoByAbsoluteSourcePath)
@@ -135,12 +136,7 @@ class KlibsKotlinParser(private val problems: Problems) {
     )
 
     val projectEnvironment =
-      createProjectEnvironment(
-        configuration,
-        disposable,
-        EnvironmentConfigFiles.JVM_CONFIG_FILES,
-        messageCollector,
-      )
+      createProjectEnvironment(configuration, disposable, EnvironmentConfigFiles.JVM_CONFIG_FILES)
     problems.abortIfCancelled()
 
     val state =
@@ -149,7 +145,6 @@ class KlibsKotlinParser(private val problems: Problems) {
         moduleFragment.descriptor,
         configuration,
         targetId = TargetId(configuration.moduleName!!, "java-production"),
-        diagnosticReporter = compilationResult.diagnosticsCollector,
       )
 
     val lowerings = LoweringPasses(state, configuration)
@@ -177,7 +172,7 @@ class KlibsKotlinParser(private val problems: Problems) {
             lowerings.jvmBackendContext,
             supportedAnnotationFilter,
           ),
-          IntrinsicMethods(pluginContext),
+          IntrinsicMethods(pluginContext, lowerings.jvmBackendContext.symbols),
           fileInfoByAbsoluteSourcePath,
         )
         .convert(moduleFragment)

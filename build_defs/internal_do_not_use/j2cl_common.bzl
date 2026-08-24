@@ -537,7 +537,7 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     # TODO(b/496407053): Remove after the 2.3.20 upgrade.
     "-Xannotations-in-metadata",
     # Set the Kotlin language version to isolate J2CL from Google3 language version updates.
-    "-language-version=2.3",
+    "-language-version=2.4",
 ]
 
 KOTLIN_SERIALIZE_IR_FLAGS = [

@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.builders.IrBuilderWithScope
 import org.jetbrains.kotlin.ir.builders.irCallConstructor
 import org.jetbrains.kotlin.ir.builders.irNull
+import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrRichFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrRichPropertyReference
@@ -39,6 +40,17 @@ import org.jetbrains.kotlin.name.FqName
 @OptIn(UnsafeDuringIrConstructionAPI::class, ObsoleteDescriptorBasedAPI::class)
 internal class J2clPropertyReferenceLowering(context: J2clBackendContext) :
   AbstractPropertyReferenceLowering<J2clBackendContext>(context) {
+
+  // In Kotlin 2.4.20, when compiling the stdlib, requesting `FunctionN` symbols during property
+  // reference lowering causes `IrBasedFunctionFactory` to dynamically create new `IrFile`
+  // for classes like `[K][Suspend]Functions` on the fly and append them to `irModule.files`.
+  // We override `lower(irModule)` to iterate over a copy (`ArrayList(irModule.files)`) so that
+  // on-the-fly additions to `irModule.files` do not trigger a `ConcurrentModificationException`.
+  override fun lower(irModule: IrModuleFragment) {
+    for (file in irModule.files.toList()) {
+      lower(file)
+    }
+  }
 
   override fun functionReferenceClass(arity: Int): IrClassSymbol {
     return context.irBuiltIns.functionN(arity).symbol

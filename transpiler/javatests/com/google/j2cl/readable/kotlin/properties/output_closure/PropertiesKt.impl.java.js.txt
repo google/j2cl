@@ -41,11 +41,6 @@ class PropertiesKt extends j_l_Object {
   PropertiesKt.f_readWrite__properties_PropertiesKt_ = set__;
  }
  /** @nodts @return {number} */
- static m_getReadOnlyCustomGetter__int() {
-  PropertiesKt.$clinit();
-  return 1;
- }
- /** @nodts @return {number} */
  static m_getReadWriteCustomGetter__int() {
   PropertiesKt.$clinit();
   return PropertiesKt.f_readWriteCustomGetter__properties_PropertiesKt_ + 1 | 0;
@@ -83,6 +78,11 @@ class PropertiesKt extends j_l_Object {
  /** @nodts */
  static m_setWithPrivateDSetter__int__void(/** number */ value) {
   PropertiesKt.f_withPrivateDSetter__properties_PropertiesKt_ = value + 1 | 0;
+ }
+ /** @nodts @return {number} */
+ static m_getReadOnlyCustomGetter__int() {
+  PropertiesKt.$clinit();
+  return 1;
  }
  /** @nodts @template E */
  static m_main__void() {

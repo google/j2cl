@@ -28,19 +28,8 @@ class GenericType extends AbstractCollection {
   return /**@type {?}*/ (null);
  }
  /** @nodts @return {boolean} */
- m_contains__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ o) {
-  return super.contains(/**@type {?}*/ (o));
- }
- /** @final @override @return {boolean} */
- contains(/** * */ element) {
-  if (!($Equality.$same(element, null) || SimpleAutoValue.$isInstance(element))) {
-   return false;
-  }
-  return this.m_contains__autovalue_SimpleAutoValue__boolean(/**@type {SimpleAutoValue}*/ (element));
- }
- /** @nodts @return {boolean} */
- m_remove__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ o) {
-  return super.remove(/**@type {?}*/ (o));
+ m_remove__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ element) {
+  return super.remove(/**@type {?}*/ (element));
  }
  /** @final @override @return {boolean} */
  remove(/** * */ element) {
@@ -48,6 +37,17 @@ class GenericType extends AbstractCollection {
    return false;
   }
   return this.m_remove__autovalue_SimpleAutoValue__boolean(/**@type {SimpleAutoValue}*/ (element));
+ }
+ /** @nodts @return {boolean} */
+ m_contains__autovalue_SimpleAutoValue__boolean(/** SimpleAutoValue */ element) {
+  return super.contains(/**@type {?}*/ (element));
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!($Equality.$same(element, null) || SimpleAutoValue.$isInstance(element))) {
+   return false;
+  }
+  return this.m_contains__autovalue_SimpleAutoValue__boolean(/**@type {SimpleAutoValue}*/ (element));
  }
  /** @abstract @nodts @return {number} */
  m_getSize__int() {}

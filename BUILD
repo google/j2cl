@@ -84,7 +84,7 @@ string_flag(
 # Flag to enable klibs experiment. Please talk to j2cl-team@ before using it.
 bool_flag(
     name = "experimental_enable_klibs",
-    build_setting_default = False,
+    build_setting_default = True,
 )
 
 # Flag to enable profiling for particular targets.

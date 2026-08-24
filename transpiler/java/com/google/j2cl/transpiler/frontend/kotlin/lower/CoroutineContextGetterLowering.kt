@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
+import org.jetbrains.kotlin.ir.getterSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
@@ -36,13 +37,10 @@ import org.jetbrains.kotlin.name.StandardClassIds
 internal class CoroutineContextGetterLowering(private val context: J2clBackendContext) :
   FileLoweringPass, IrElementTransformerVoidWithContext() {
   @OptIn(InternalSymbolFinderAPI::class)
-  private val continuationContextGetterSymbol: IrSimpleFunctionSymbol by lazy {
-    context.irBuiltIns.symbolFinder
-      .findProperties(CallableId(StandardClassIds.Continuation, Name.identifier("context")))
-      .single()
-      .owner
-      .getter!!
-      .symbol
+  private val continuationContextGetterSymbol: IrSimpleFunctionSymbol by run {
+    with(context.irBuiltIns) {
+      CallableId(StandardClassIds.Continuation, Name.identifier("context")).getterSymbol()
+    }
   }
 
   override fun lower(irFile: IrFile) {
