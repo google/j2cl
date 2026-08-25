@@ -20,38 +20,34 @@ import com.google.common.collect.ImmutableSet;
 /** Utility that provides handling of recognized annotations. */
 public class SupportedAnnotations {
 
-  // go/keep-sorted start
   public static final ImmutableSet<String> COMMON_ANNOTATIONS =
-      ImmutableSet.of(
-          "java.lang.Deprecated",
-          "java.lang.FunctionalInterface",
-          "java.lang.SuppressWarnings",
-          "jsinterop.annotations.JsIgnore",
-          "com.google.auto.value.AutoValue",
-          "com.google.auto.value.AutoValue.Builder",
-          "javaemul.internal.annotations.DoNotAutobox",
-          "javaemul.lang.annotations.WasAutoValue",
-          "javaemul.lang.annotations.WasAutoValue.Builder",
-          "javaemul.internal.annotations.HasNoSideEffects",
-          "javaemul.internal.annotations.UncheckedCast",
-          "javaemul.internal.annotations.Wasm",
-          "kotlin.Deprecated");
-  // go/keep-sorted end
+      ImmutableSet.<String>builder()
+          // go/keep-sorted start
+          .add("com.google.auto.value.AutoValue")
+          .add("com.google.auto.value.AutoValue.Builder")
+          .add("java.lang.Deprecated")
+          .add("java.lang.FunctionalInterface")
+          .add("java.lang.SuppressWarnings")
+          .add("javaemul.internal.annotations.DoNotAutobox")
+          .add("javaemul.internal.annotations.HasNoSideEffects")
+          .add("javaemul.internal.annotations.UncheckedCast")
+          .add("javaemul.internal.annotations.Wasm")
+          .add("javaemul.lang.annotations.WasAutoValue")
+          .add("javaemul.lang.annotations.WasAutoValue.Builder")
+          .add("jsinterop.annotations.JsIgnore")
+          .add("kotlin.Deprecated")
+          // go/keep-sorted end
+          .build();
 
-  // go/keep-sorted start
   public static final ImmutableSet<String> J2KT_ANNOTATIONS =
       ImmutableSet.<String>builder()
           .addAll(COMMON_ANNOTATIONS)
+          // go/keep-sorted start
           .add("com.google.apps.xplat.dagger.asynccomponent.ComponentRegistryCompatible")
           .add("com.google.apps.xplat.testing.parameterized.RunParameterized")
+          .add("com.google.common.annotations.J2ktPublic")
           .add("com.google.errorprone.annotations.CanIgnoreReturnValue")
           .add("com.google.errorprone.annotations.ResultIgnorabilityUnspecified")
-          .add("dagger.Component")
-          .add("dagger.Inject")
-          .add("javax.inject.Inject")
-          .add("org.junit.runner.RunWith")
-          .add("com.google.common.annotations.J2ktPublic")
-          .add("dagger.internal.DaggerGenerated")
           .add("com.google.j2kt.annotations.HiddenFromObjC")
           .add("com.google.j2kt.annotations.HidesFromObjC")
           .add("com.google.j2kt.annotations.KtNative")
@@ -61,15 +57,19 @@ public class SupportedAnnotations {
           .add("com.google.j2objc.annotations.Property")
           .add("com.google.j2objc.annotations.Property.Suppress")
           .add("com.google.j2objc.annotations.SwiftName")
+          .add("dagger.Component")
+          .add("dagger.Inject")
+          .add("dagger.internal.DaggerGenerated")
           .add("javaemul.internal.annotations.KtDisabled")
           .add("javaemul.internal.annotations.KtIn")
           .add("javaemul.internal.annotations.KtName")
           .add("javaemul.internal.annotations.KtNative")
           .add("javaemul.internal.annotations.KtOut")
           .add("javaemul.internal.annotations.KtProperty")
+          .add("javax.inject.Inject")
+          .add("org.junit.runner.RunWith")
+          // go/keep-sorted end
           .build();
-
-  // go/keep-sorted end
 
   private SupportedAnnotations() {}
 }
