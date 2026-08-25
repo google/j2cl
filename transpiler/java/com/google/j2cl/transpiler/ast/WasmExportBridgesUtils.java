@@ -15,14 +15,15 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import java.util.List;
+import java.util.stream.Stream;
 
 /** Utility for generating bridge methods for Wasm entry points and exported methods. */
 public class WasmExportBridgesUtils {
@@ -39,23 +40,16 @@ public class WasmExportBridgesUtils {
     List<Variable> parameters =
         AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterDescriptors());
 
-    ImmutableList<Expression> arguments =
-        Streams.zip(
-                parameters.stream(),
-                methodDescriptor.getParameterTypeDescriptors().stream(),
-                (parameter, typeDescriptor) ->
-                    convertToInternal(
-                        parameter.createReference(), typeDescriptor, origin.isWasmJsExport()))
-            .collect(toImmutableList());
-
-    TypeDescriptor returnType = methodDescriptor.getReturnTypeDescriptor();
-
     return Method.builder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
         .addStatements(
             createBridgeTargetInvocation(
-                methodDescriptor, sourcePosition, arguments, returnType, origin))
+                methodDescriptor,
+                sourcePosition,
+                parameters.stream().map(Variable::createReference).collect(toImmutableList()),
+                methodDescriptor.getReturnTypeDescriptor(),
+                origin))
         .setJsDocDescription(
             origin.isWasmEntryPoint() ? "Wasm entry point forwarding method." : null)
         .setSourcePosition(sourcePosition)
@@ -116,25 +110,33 @@ public class WasmExportBridgesUtils {
         .build();
   }
 
+  /**
+   * Creates a call to the bridge target method, with necessary JS <-> Wasm conversions of the
+   * arguments and return value.
+   */
   private static Statement createBridgeTargetInvocation(
       MethodDescriptor methodDescriptor,
       SourcePosition sourcePosition,
       List<Expression> arguments,
-      TypeDescriptor returnTypeDescriptor,
+      TypeDescriptor targetReturnTypeDescriptor,
       MethodDescriptor.MethodOrigin origin) {
+    List<Expression> convertedArguments =
+        convertAllToInternal(
+            arguments.stream(), methodDescriptor.getParameterTypeDescriptors(), origin);
+
     if (methodDescriptor.isConstructor()) {
       checkState(
-          returnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
+          targetReturnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
       return ReturnStatement.builder()
           .setExpression(
               NewInstance.builderFrom(methodDescriptor.getDeclarationDescriptor())
-                  .setArguments(AstUtils.maybePackageVarargs(methodDescriptor, arguments))
+                  .setArguments(AstUtils.maybePackageVarargs(methodDescriptor, convertedArguments))
                   .build())
           .setSourcePosition(sourcePosition)
           .build();
     }
 
-    var forwardingStatement =
+    return createBridgeReturnStatement(
         AstUtils.createForwardingStatement(
             sourcePosition,
             /* qualifier= */ methodDescriptor.isStatic()
@@ -142,18 +144,10 @@ public class WasmExportBridgesUtils {
                 : new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()),
             methodDescriptor,
             /* isStaticDispatch= */ methodDescriptor.isStatic(),
-            arguments,
-            returnTypeDescriptor);
-    if (forwardingStatement instanceof ReturnStatement returnStatement
-        && returnStatement.getExpression() != null) {
-      // If a value is returned, convert it to an external type.
-      return returnStatement.toBuilder()
-          .setExpression(
-              convertToExternal(
-                  returnStatement.getExpression(), returnTypeDescriptor, origin.isWasmJsExport()))
-          .build();
-    }
-    return forwardingStatement;
+            convertedArguments,
+            targetReturnTypeDescriptor),
+        targetReturnTypeDescriptor,
+        origin);
   }
 
   private static MethodDescriptor createBridgeDescriptor(
@@ -201,6 +195,104 @@ public class WasmExportBridgesUtils {
         .setParameterTypeDescriptors(
             getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();
+  }
+
+  /**
+   * Generates a static export bridge for a JsFunction interface, intended to be exported via
+   * JsFunctionAdaptor.
+   */
+  public static Method generateJsFunctionBridge(
+      DeclaredTypeDescriptor jsFunctionTypeDescriptor, SourcePosition sourcePosition) {
+    checkArgument(jsFunctionTypeDescriptor.isJsFunctionInterface());
+    MethodDescriptor bridgeMethodDescriptor =
+        getJsFunctionBridgeDescriptor(jsFunctionTypeDescriptor);
+    MethodDescriptor functionalMethod =
+        jsFunctionTypeDescriptor.getJsFunctionMethodDescriptor().getDeclarationDescriptor();
+    List<Variable> parameters =
+        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterDescriptors());
+
+    Variable adaptorParameter = parameters.get(0);
+    List<Expression> convertedArguments =
+        convertAllToInternal(
+            parameters.stream().skip(1).map(Variable::createReference),
+            functionalMethod.getParameterTypeDescriptors(),
+            bridgeMethodDescriptor.getOrigin());
+
+    WasmFuncrefCall wasmFuncrefCall =
+        WasmFuncrefCall.builder()
+            .setInstance(adaptorParameter.createReference())
+            .setFunctionalInterface(jsFunctionTypeDescriptor.toRawTypeDescriptor())
+            .setFuncref(
+                FieldAccess.builder()
+                    .setQualifier(adaptorParameter.createReference())
+                    .setTarget(
+                        TypeDescriptors.get()
+                            .javaemulInternalJsFunctionAdaptor
+                            .getFieldDescriptor("wasmFuncref"))
+                    .build())
+            .setArguments(convertedArguments)
+            .build();
+
+    // static R $js_export_run(JsFunctionAdaptor adaptor, T param) {
+    //   return toJs(
+    //     adaptor.wasmFuncref(adaptor, fromJs(param)));
+    // }
+    return Method.builder()
+        .setMethodDescriptor(bridgeMethodDescriptor)
+        .setParameters(parameters)
+        .addStatements(
+            createBridgeReturnStatement(
+                wasmFuncrefCall,
+                sourcePosition,
+                functionalMethod.getReturnTypeDescriptor(),
+                bridgeMethodDescriptor.getOrigin()))
+        .setSourcePosition(sourcePosition)
+        .build();
+  }
+
+  /** Returns the descriptor of the JsFunction export bridge method on the given interface. */
+  public static MethodDescriptor getJsFunctionBridgeDescriptor(
+      DeclaredTypeDescriptor jsFunctionTypeDescriptor) {
+    checkArgument(jsFunctionTypeDescriptor.isJsFunctionInterface());
+    MethodDescriptor functionalMethod =
+        jsFunctionTypeDescriptor.getJsFunctionMethodDescriptor().getDeclarationDescriptor();
+    return createBridgeDescriptor(
+            functionalMethod, MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_FUNCTION_EXPORT)
+        .toBuilder()
+        .setEnclosingTypeDescriptor(jsFunctionTypeDescriptor.toRawTypeDescriptor())
+        .setStatic(true)
+        .addParameterTypeDescriptors(0, TypeDescriptors.get().javaemulInternalJsFunctionAdaptor)
+        .build();
+  }
+
+  private static Statement createBridgeReturnStatement(
+      Expression forwardingExpression,
+      SourcePosition sourcePosition,
+      TypeDescriptor targetReturnTypeDescriptor,
+      MethodDescriptor.MethodOrigin origin) {
+    return createBridgeReturnStatement(
+        AstUtils.createReturnOrExpressionStatement(
+            sourcePosition, forwardingExpression, targetReturnTypeDescriptor),
+        targetReturnTypeDescriptor,
+        origin);
+  }
+
+  private static Statement createBridgeReturnStatement(
+      Statement forwardingStatement,
+      TypeDescriptor targetReturnTypeDescriptor,
+      MethodDescriptor.MethodOrigin origin) {
+    if (forwardingStatement instanceof ReturnStatement returnStatement
+        && returnStatement.getExpression() != null) {
+      // If a value is returned, convert it to an external type.
+      return returnStatement.toBuilder()
+          .setExpression(
+              convertToExternal(
+                  returnStatement.getExpression(),
+                  targetReturnTypeDescriptor,
+                  origin.isWasmJsExport()))
+          .build();
+    }
+    return forwardingStatement;
   }
 
   /** Returns the corresponding JS type for the given Wasm Java type. */
@@ -257,6 +349,19 @@ public class WasmExportBridgesUtils {
       return RuntimeMethods.createWasmConvertToExternMethodCall(expression);
     }
     return expression;
+  }
+
+  /** Converts the given list of expressions that was received from JS to a Wasm Java type. */
+  private static List<Expression> convertAllToInternal(
+      Stream<Expression> expressions,
+      List<TypeDescriptor> typeDescriptors,
+      MethodDescriptor.MethodOrigin origin) {
+    return Streams.zip(
+            expressions,
+            typeDescriptors.stream(),
+            (expression, typeDescriptor) ->
+                convertToInternal(expression, typeDescriptor, origin.isWasmJsExport()))
+        .collect(toImmutableList());
   }
 
   /** Converts the given expression that was received from JS to a Wasm Java type. */

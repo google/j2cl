@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.MoreCollectors.onlyElement;
+
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Field;
@@ -39,10 +41,14 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
 
   @Override
   public void applyTo(Library library) {
-    if (!enableCustomDescriptorsJsInterop) {
-      return;
+    if (enableCustomDescriptorsJsInterop) {
+      addJsTypeExportBridges(library);
     }
 
+    addJsFunctionExportBridges(library);
+  }
+
+  private static void addJsTypeExportBridges(Library library) {
     library
         .streamTypes()
         .filter(type -> AstUtils.declaresWasmJsExports(type.getDeclaration()))
@@ -94,6 +100,23 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                           field.getDescriptor(), field.getSourcePosition()));
                 }
               }
+            });
+  }
+
+  private static void addJsFunctionExportBridges(Library library) {
+    library
+        .streamTypes()
+        .filter(Type::isJsFunctionInterface)
+        .forEach(
+            type -> {
+              Method jsFunctionMethod =
+                  type.getMethods().stream()
+                      .filter(m -> m.getDescriptor().isJsFunction())
+                      .collect(onlyElement());
+              addBridge(
+                  type,
+                  WasmExportBridgesUtils.generateJsFunctionBridge(
+                      type.getTypeDescriptor(), jsFunctionMethod.getSourcePosition()));
             });
   }
 
