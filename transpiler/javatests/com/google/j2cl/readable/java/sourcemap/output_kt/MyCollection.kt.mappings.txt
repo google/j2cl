@@ -1,3 +1,11 @@
+[MyCollection] => [abstract class MyCollection<T>: MutableCollectionJvm<T> {
+ companion object {
+  @JvmStatic
+  fun <T_1> empty(): MyCollection<T_1>? {
+   throw UnsupportedOperationException()
+  }
+ }
+}]
 [MyCollection] => [MyCollection]
 [MyCollection] => [companion object {
   @JvmStatic

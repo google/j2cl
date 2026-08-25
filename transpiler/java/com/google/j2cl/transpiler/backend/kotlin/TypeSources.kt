@@ -74,26 +74,30 @@ internal data class TypeSources(val nameSources: NameSources) {
         nativeTypeSource(type)
       } else {
         newLineSeparated(
-          objCNameSources.objectiveCAnnotationSource(typeDeclaration),
-          objCNameSources.swiftNameAnnotationSource(typeDeclaration),
-          objCNameSources.hiddenFromObjCAnnotationSource(typeDeclaration),
-          jsInteropAnnotationSources.jsInteropAnnotationsSource(typeDeclaration),
-          autoValueAnnotationsSource(typeDeclaration),
-          jvmRecordAnnotationSource(typeDeclaration),
-          suppressIncompatibleObjCNameOverrideSource(type),
-          spaceSeparated(
-            visibilityModifierSource(typeDeclaration),
-            inheritanceModifierSource(typeDeclaration),
-            classModifiersSource(typeDeclaration),
-            kindModifiersSource(typeDeclaration),
-            colonSeparated(
-              join(typeDeclarationSource(type), ktPrimaryConstructorSource(type)),
-              superTypesSource(type),
+            objCNameSources.objectiveCAnnotationSource(typeDeclaration),
+            objCNameSources.swiftNameAnnotationSource(typeDeclaration),
+            objCNameSources.hiddenFromObjCAnnotationSource(typeDeclaration),
+            jsInteropAnnotationSources.jsInteropAnnotationsSource(typeDeclaration),
+            autoValueAnnotationsSource(typeDeclaration),
+            jvmRecordAnnotationSource(typeDeclaration),
+            suppressIncompatibleObjCNameOverrideSource(type),
+            spaceSeparated(
+              visibilityModifierSource(typeDeclaration),
+              inheritanceModifierSource(typeDeclaration),
+              classModifiersSource(typeDeclaration),
+              kindModifiersSource(typeDeclaration),
+              colonSeparated(
+                join(typeDeclarationSource(type), ktPrimaryConstructorSource(type)),
+                superTypesSource(type),
+              ),
+              nameSources.whereClauseSource(
+                typeDeclaration.directlyDeclaredTypeParameterDescriptors
+              ),
+              typeBodySource(type, skipEmptyBlock = true),
             ),
-            nameSources.whereClauseSource(typeDeclaration.directlyDeclaredTypeParameterDescriptors),
-            typeBodySource(type, skipEmptyBlock = true),
-          ),
-        )
+          )
+          // TODO(b/552479623): Remove umbrella mapping and use specific mappings instead.
+          .withMapping(type.sourcePosition)
       }
     }
 

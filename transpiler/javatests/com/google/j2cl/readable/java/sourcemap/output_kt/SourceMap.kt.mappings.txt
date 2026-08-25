@@ -1,3 +1,206 @@
+[SourceMap] => [internal abstract class SourceMap<T: Number?>: Comparator<T> {
+ private var uninitializedInstanceField: Int = 0
+
+ init {
+  this.uninitializedInstanceField = 1000
+ }
+
+ private var uninitializedInstanceField2: String? = null
+
+ init {
+  if (this.uninitializedInstanceField == 1000) {
+   this.uninitializedInstanceField2 = "Hello!"
+  } else if (this.uninitializedInstanceField == 2000) {
+   this.uninitializedInstanceField2 = "World!"
+  } else {
+   this.uninitializedInstanceField2 = "Universe!"
+  }
+ }
+
+ @JsConstructor
+ internal constructor(i: Int)
+
+ private constructor(uninitializedInstanceField: Int, uninitializedInstanceField2: String?): this(2)
+
+ private var initializedInstanceField: Int = 2
+
+ private fun testStatements(a: Int, b: Int, times: Int, number: Int): Int {
+  var value: Int = 0
+  var i: Int = 0
+  while (i < times) {
+   value = value + 1
+   i = i + 1
+  }
+  if (number % 2 == 0) {
+   value = value + 1
+  } else {
+   value = value + 2
+  }
+  var b2: Int = b
+  while (b2 > 0 && b2 < 100) {
+   b2 = b2 - 10
+  }
+  value = value + (a + b2)
+  var i_1: Int = 0
+  while (i_1 <= 2) {
+   when (number) {
+    1 -> {
+     value = value + 5
+    }
+    2 -> {
+     value = value + 2
+     break
+    }
+    3 -> {
+     break
+    }
+    else -> {}
+   }
+   if (i_1 == 1) {
+    break
+   }
+   i_1 = i_1 + 1
+  }
+  return value
+ }
+
+ private fun testAnonymousClass(outer: Int): Int {
+  val f: Function<Int?, Int?> = object : Function<Int?, Int?> {
+   override fun apply(i: Int?): Int? = helper1(
+    i!!.toInt(),
+   ) + helper2(
+    i!!.toInt(),
+   )
+
+   private fun helper1(x: Int): Int = x * 2 + outer
+
+   private fun helper2(x: Int): Int = x + 1
+  }
+  return f.apply(10)!!.toInt()
+ }
+
+ private fun testLocalClass(outer: Int): Int {
+  open class Local internal constructor() {
+   open fun member1(a: Int): Int = this.member2(a) * 2 + Inner().member3(a)
+
+   private fun member2(b: Int): Int = b + outer
+
+   internal open inner class Inner internal constructor() {
+    open fun member3(c: Int): Int = c + 1
+   }
+  }
+  return Local().member1(5)
+ }
+
+ private fun testLambdaAndMethodReference(n: Int) {
+  val f: Function<Int?, Int?> = Function { i: Int? -> i!!.toInt() + 1 }
+  val f2: Supplier<Int?> = run {
+   val ______q: ArrayList<Any?> = ArrayList<Any?>()
+   Supplier { (______q as ArrayList<Any?>).size }
+  }
+  val f3: Supplier<Int?> = Supplier { this.simpleMethod() }
+ }
+
+ private fun simpleMethod(): Int = 1
+
+ private fun testLocalClass() {
+  open class LocalClass internal constructor()
+  LocalClass()
+ }
+
+ private fun testSwitchExpression() {
+  val v: Int = 1
+  val r: Int = run {
+   when (v) {
+    1, 2 -> {
+     return@run 10
+    }
+    else -> {
+     return@run 20
+    }
+   }
+  }
+ }
+
+ private fun testInstanceOf(o: Any?): Boolean = o is String
+
+ private fun testFunctionExpression(): Function<Any?, Any?>? = Function { o: Any? -> o }
+
+ private fun testTypeLiteral(): Class<*>? = String::class.javaObjectType
+
+ companion object {
+  @JvmField
+  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
+
+  init {
+   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+  }
+
+  @JvmField
+  internal var initializedStaticField_pp_sourcemap: String? = "Hello"
+
+  init {
+   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
+    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   }
+  }
+ }
+
+ internal enum class Enum1 {
+  VALUE1,
+  VALUE2,
+  VALUE3(1);
+
+  constructor()
+
+  constructor(i: Int)
+ }
+
+ abstract class SuperCalls: SourceMap<Int?> {
+  @JsConstructor
+  constructor(i: Int?): super(
+   i!!.toInt(),
+  )
+ }
+
+ inner class InnerClass {
+  @JvmField
+  val field: String?
+
+  constructor() {
+   this.field = "0"
+  }
+
+  constructor(i: Int): this(
+   Integer.toString(i),
+  )
+
+  constructor(i: String?) {
+   this.field = i
+  }
+ }
+
+ @JsEnum
+ enum class FooJsEnum {
+  A,
+  B,
+  C;
+ }
+
+ @JsEnum(hasCustomValue = true)
+ enum class StringJsEnum {
+  A("FOO"),
+  B("BAR"),
+  C("BUZZ");
+
+  @JvmField
+  val value: String?
+
+  constructor(value: String?) {
+   this.value = value
+  }
+ }
+}]
 [SourceMap] => [SourceMap]
 [uninitializedInstanceField] => [private var uninitializedInstanceField: Int = 0]
 [uninitializedInstanceField] => [uninitializedInstanceField]
@@ -214,6 +417,9 @@
 [a] => [a] "a"
 [member2] => [member2]
 [b] => [b] "b"
+[Inner] => [internal open inner class Inner internal constructor() {
+    open fun member3(c: Int): Int = c + 1
+   }]
 [Inner] => [Inner]
 [Inner] => [constructor]
 [member3] => [member3]
@@ -306,6 +512,15 @@
     SourceMap.initializedStaticField_pp_sourcemap = "World"
    }] "sourcemap.SourceMap.<clinit>"
 [initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"] "sourcemap.SourceMap.<clinit>"
+[Enum1] => [internal enum class Enum1 {
+  VALUE1,
+  VALUE2,
+  VALUE3(1);
+
+  constructor()
+
+  constructor(i: Int)
+ }]
 [Enum1] => [Enum1]
 [VALUE1] => [VALUE1]
 [VALUE2] => [VALUE2]
@@ -313,12 +528,34 @@
 [Enum1] => [constructor]
 [Enum1] => [constructor]
 [i] => [i] "i"
+[SuperCalls] => [abstract class SuperCalls: SourceMap<Int?> {
+  @JsConstructor
+  constructor(i: Int?): super(
+   i!!.toInt(),
+  )
+ }]
 [SuperCalls] => [SuperCalls]
 [SuperCalls] => [constructor]
 [i] => [i] "i"
 [super(i);] => [super(
    i!!.toInt(),
   )] "sourcemap.SourceMap$SuperCalls.<init>"
+[InnerClass] => [inner class InnerClass {
+  @JvmField
+  val field: String?
+
+  constructor() {
+   this.field = "0"
+  }
+
+  constructor(i: Int): this(
+   Integer.toString(i),
+  )
+
+  constructor(i: String?) {
+   this.field = i
+  }
+ }]
 [InnerClass] => [InnerClass]
 [field] => [@JvmField
   val field: String?]
@@ -333,10 +570,29 @@
 [InnerClass] => [constructor]
 [i] => [i] "i"
 [field = i;] => [this.field = i] "sourcemap.SourceMap$InnerClass.<init>"
+[FooJsEnum] => [@JsEnum
+ enum class FooJsEnum {
+  A,
+  B,
+  C;
+ }]
 [FooJsEnum] => [FooJsEnum]
 [A] => [A]
 [B] => [B]
 [C] => [C]
+[StringJsEnum] => [@JsEnum(hasCustomValue = true)
+ enum class StringJsEnum {
+  A("FOO"),
+  B("BAR"),
+  C("BUZZ");
+
+  @JvmField
+  val value: String?
+
+  constructor(value: String?) {
+   this.value = value
+  }
+ }]
 [StringJsEnum] => [StringJsEnum]
 [A] => [A]
 [B] => [B]
