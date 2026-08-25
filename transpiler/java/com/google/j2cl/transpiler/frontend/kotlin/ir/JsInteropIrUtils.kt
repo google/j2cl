@@ -41,12 +41,9 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
 import org.jetbrains.kotlin.ir.declarations.IrProperty
-import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.types.isUnit
-import org.jetbrains.kotlin.ir.util.getAnnotation as kotlinGetAnnotation
-import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.hasEqualFqName
 import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.isPropertyAccessor
@@ -56,70 +53,35 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.superClass
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_STATIC_FQ_NAME
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.jvm.JAVA_LANG_RECORD_FQ_NAME
 
 private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_TYPE_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_TYPE_ANNOTATION_FQ_NAME)
 
 private fun IrClass.getJsEnumAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_ENUM_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_ENUM_ANNOTATION_FQ_NAME)
 
 private fun IrClass.getJsFunctionAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_FUNCTION_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_FUNCTION_ANNOTATION_FQ_NAME)
 
 private fun IrClass.getJsTypeOrJsEnumAnnotation(): IrConstructorCall? =
   getJsTypeAnnotation() ?: getJsEnumAnnotation()
 
 private fun IrConstructor.getJsConstructorAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_CONSTRUCTOR_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_CONSTRUCTOR_ANNOTATION_FQ_NAME)
 
 private fun IrFunction.getJsMethodAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_METHOD_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_METHOD_ANNOTATION_FQ_NAME)
 
 private fun IrFunction.getJsPropertyAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
 
 private fun IrField.getJsPropertyAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
+  getAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
 
 private fun IrEnumEntry.getJsPropertyAnnotation(): IrConstructorCall? =
-  getJsInteropAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
-
-private fun IrClass.getJsInteropAnnotation(name: FqName): IrConstructorCall? = getAnnotation(name)
-
-private fun IrDeclaration.getJsInteropAnnotation(name: FqName): IrConstructorCall? {
-  val annotation = getAnnotation(name)
-  if (annotation != null) return annotation
-  return when {
-    // look on the property if this is a property getter or setter
-    this is IrSimpleFunction -> correspondingPropertySymbol?.owner?.getAnnotation(name)
-    this is IrField && canBeJsProperty -> correspondingPropertySymbol?.owner?.getAnnotation(name)
-    else -> null
-  }
-}
-
-private fun IrDeclaration.getAnnotation(name: FqName): IrConstructorCall? {
-  val declaration = if (this is IrValueParameter) parent as IrDeclaration else this
-  if (declaration.isCompanionMember && declaration.hasAnnotation(JVM_STATIC_FQ_NAME)) {
-    return null
-  }
-  return kotlinGetAnnotation(name)
-}
-
-/**
- * Whether this field can have `@JsProperty` applied to it.
- *
- * `@JsProperty` is attached to Kotlin properties which in turn consist of a backing field and
- * accessor functions. We can only apply `@JsProperty` to one or the other, but not both. Generally
- * backing fields in Kotlin are never referenced by user code (except in the accessor functions
- * themselves), so `@JsProperty` should be applied to the accessors which are actually referenced.
- *
- * However, if there are no accessors, the backing field should honor the `@JsProperty` annotation.
- */
-private val IrField.canBeJsProperty: Boolean
-  get() = correspondingPropertySymbol?.owner?.hasAccessors == false
+  getAnnotation(JS_PROPERTY_ANNOTATION_FQ_NAME)
 
 fun IrClass.getJsEnumInfo(): JsEnumInfo? {
   val annotation = getJsEnumAnnotation() ?: return null
@@ -163,19 +125,19 @@ val IrClass.isJsEnum: Boolean
   get() = getJsEnumAnnotation() != null
 
 val IrDeclaration.isJsIgnore: Boolean
-  get() = getJsInteropAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null
+  get() = getAnnotation(JS_IGNORE_ANNOTATION_FQ_NAME) != null
 
 val IrFunction.isJsProperty: Boolean
   get() = getJsPropertyAnnotation() != null
 
 val IrValueParameter.isJsOptional: Boolean
-  get() = getJsInteropAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null
+  get() = getAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null
 
 private val IrFunction.isJsAsync: Boolean
-  get() = getJsInteropAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
+  get() = getAnnotation(JS_ASYNC_ANNOTATION_FQ_NAME) != null
 
 private val IrDeclaration.isJsOverlay: Boolean
-  get() = getJsInteropAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
+  get() = getAnnotation(JS_OVERLAY_ANNOTATION_FQ_NAME) != null
 
 private fun IrDeclaration.getJsMemberAnnotation(): IrConstructorCall? =
   when (this) {

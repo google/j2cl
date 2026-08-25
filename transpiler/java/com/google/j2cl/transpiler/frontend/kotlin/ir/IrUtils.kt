@@ -54,6 +54,7 @@ import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
+import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
@@ -101,6 +102,7 @@ import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.getConstArgument
 import org.jetbrains.kotlin.ir.util.hasAnnotation
+import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
@@ -128,6 +130,7 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.FqNameUnsafe
+import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_STATIC_FQ_NAME
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.NameUtils
 import org.jetbrains.kotlin.types.Variance
@@ -584,24 +587,47 @@ val IrFunction.isAbstract: Boolean
 val IrFunction.isFinal: Boolean
   get() = this is IrOverridableMember && modality == Modality.FINAL
 
-/**
- * Sequence of annotations on this declaration. This includes property annotations for getters,
- * setters, and backing fields.
- */
+fun IrDeclaration.getAnnotation(name: FqName): IrConstructorCall? =
+  getAllAnnotations().firstOrNull { (it as? IrAnnotation)?.isAnnotation(name) == true }
+
+/** Sequence of annotations on this declaration. */
 // TODO(b/550323040): return a sequence of IrAnnotation instead of IrConstructorCall.
-fun IrAnnotationContainer.getAllAnnotations(): Sequence<IrConstructorCall> = sequence {
-  yieldAll(annotations)
+fun IrDeclaration.getAllAnnotations(): Sequence<IrConstructorCall> = sequence {
+  yieldAll(javaLikeAnnotations)
 
   val correspondingProperty =
-    when (this@getAllAnnotations) {
-      is IrSimpleFunction -> correspondingPropertySymbol?.owner
-      is IrField -> correspondingPropertySymbol?.owner
+    when {
+      // Look on the property if this is a property getter or setter.
+      this@getAllAnnotations is IrSimpleFunction -> correspondingPropertySymbol?.owner
+      // Annotations targeting the field are already directly present on the `IrField`. We only
+      // propagate property-level annotations from `IrProperty` when there are no accessors (e.g.
+      // `@JvmField`), to avoid duplicating property annotations on both accessors and backing
+      // fields in the J2CL AST which can cause issues (e.g. ambiguity for jsinterop).
+      this@getAllAnnotations is IrField &&
+        correspondingPropertySymbol?.owner?.hasAccessors == false ->
+        correspondingPropertySymbol?.owner
       else -> null
     }
   if (correspondingProperty != null) {
-    yieldAll(correspondingProperty.getAllAnnotations())
+    yieldAll(correspondingProperty.javaLikeAnnotations)
   }
 }
+
+/**
+ * Annotations directly on this declaration for Java/J2CL AST representation.
+ *
+ * Excludes annotations on companion object forwarding methods for `@JvmStatic` members (and their
+ * parameters), since those annotations are moved to the static declarations on the enclosing class.
+ */
+private val IrDeclaration.javaLikeAnnotations: List<IrConstructorCall>
+  get() = if (isJvmStaticInCompanion) emptyList() else annotations
+
+private val IrDeclaration.isJvmStaticInCompanion: Boolean
+  get() {
+    val declarationContext = if (this is IrValueParameter) parent as IrDeclaration else this
+    return declarationContext.isCompanionMember &&
+      declarationContext.hasAnnotation(JVM_STATIC_FQ_NAME)
+  }
 
 // TODO(b/550323040): Update call sites to this function to directly use
 // `IrAnnotation.getConstArgument`

@@ -83,7 +83,6 @@ import org.jetbrains.kotlin.backend.jvm.ir.constantValue
 import org.jetbrains.kotlin.backend.jvm.ir.eraseToScope
 import org.jetbrains.kotlin.backend.jvm.lower.getFileClassInfo
 import org.jetbrains.kotlin.descriptors.Visibilities
-import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
@@ -288,7 +287,7 @@ internal class KotlinEnvironment(
     }
   }
 
-  private fun createAnnotations(irAnnotationContainer: IrAnnotationContainer) =
+  private fun createAnnotations(irAnnotationContainer: IrDeclaration) =
     ImmutableList.Builder<Annotation>()
       .apply {
         for (annotationCtorCall in irAnnotationContainer.getAllAnnotations()) {
