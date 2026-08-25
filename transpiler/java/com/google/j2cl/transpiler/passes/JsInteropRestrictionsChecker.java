@@ -1234,10 +1234,15 @@ public class JsInteropRestrictionsChecker {
       if (memberDescriptor.isJsAsync()) {
         checkJsAsyncMethod(method);
       }
+      var methodDescriptor = method.getDescriptor();
+      if (methodDescriptor.isSuspendFunction()) {
+        if (!checkSuspendFunction(method)) {
+          return;
+        }
+      }
       if (!checkJsPropertyAccessor(method)) {
         return;
       }
-      var methodDescriptor = method.getDescriptor();
       if (methodDescriptor.isRecordComponentAccessor()) {
         checkRecordComponentAccessor(method);
       }
@@ -1246,9 +1251,6 @@ public class JsInteropRestrictionsChecker {
       }
       if (methodDescriptor.isCustomIsInstanceMethod()) {
         checkCustomIsInstanceMethod(method);
-      }
-      if (methodDescriptor.isSuspendFunction()) {
-        checkSuspendFunction(method);
       }
     }
 
@@ -1331,13 +1333,15 @@ public class JsInteropRestrictionsChecker {
         returnType.getReadableDescription());
   }
 
-  private void checkSuspendFunction(Method method) {
+  private boolean checkSuspendFunction(Method method) {
     if (method.getDescriptor().getJsInfo().getJsMemberType() != JsMemberType.NONE) {
       problems.error(
           method.getSourcePosition(),
           "Suspend function '%s' cannot have JsInterop annotations.",
           method.getReadableDescription());
+      return false;
     }
+    return true;
   }
 
   private void checkRecordComponentAccessor(Method method) {
