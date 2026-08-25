@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
@@ -296,37 +297,50 @@ final class JsExternsGenerator {
   }
 
   private void generateExternsWiring(Type type) {
-    SourceBuilder sb = new SourceBuilder();
-    sb.appendln(String.format("goog.module('%s');", type.getDeclaration().getModuleName()));
-    sb.appendln("");
-
-    String externName = closureEnvironment.aliasForType(type.getDeclaration());
-    String simpleJsName = type.getDeclaration().getSimpleJsName();
-    String qualifiedJsName = type.getDeclaration().getQualifiedJsName();
-    if (AstUtils.hasWasmJsPrototype(type.getDeclaration())) {
-      generateConstructorProxy(sb, externName, simpleJsName, qualifiedJsName);
-    } else {
-      // Types that do not have a prototype don't need a constructor proxy.
-      generateTypeAlias(sb, simpleJsName, externName);
-    }
-
-    sb.appendln("");
-    sb.appendln(String.format("exports = %s;", simpleJsName));
-
     // Output to externs/my.package.MyClass.java.js
-    output.write(Path.of(OUTPUT_PATH, qualifiedJsName + ".java.js").toString(), sb.build());
+    output.write(
+        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".java.js").toString(),
+        getExternsWiringContent(type));
   }
 
-  private static void generateConstructorProxy(
-      SourceBuilder sb, String externName, String simpleJsName, String qualifiedJsName) {
-    sb.appendln("const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');");
-    sb.appendln("");
-    sb.appendln(String.format("/** @const {typeof %s} */", externName));
-    sb.appendln(String.format("const %s = constructorProxy('%s');", simpleJsName, qualifiedJsName));
+  private String getExternsWiringContent(Type type) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    String externName = closureEnvironment.aliasForType(typeDeclaration);
+    String simpleJsName = typeDeclaration.getSimpleJsName();
+    String qualifiedJsName = typeDeclaration.getQualifiedJsName();
+    String moduleName = typeDeclaration.getModuleName();
+    if (AstUtils.hasWasmJsPrototype(typeDeclaration)) {
+      return generateConstructorProxy(moduleName, externName, simpleJsName, qualifiedJsName);
+    } else {
+      return generateTypeAlias(moduleName, externName, simpleJsName);
+    }
   }
 
-  private static void generateTypeAlias(SourceBuilder sb, String simpleJsName, String externName) {
-    sb.appendln(String.format("/** @typedef {%s} */", externName));
-    sb.appendln(String.format("let %s;", simpleJsName));
+  private static String generateConstructorProxy(
+      String moduleName, String externName, String simpleJsName, String qualifiedJsName) {
+    return """
+    goog.module('%1$s');
+
+    const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+
+    /** @const {typeof %2$s} */
+    const %3$s = constructorProxy('%4$s');
+
+    exports = %3$s;
+    """
+        .formatted(moduleName, externName, simpleJsName, qualifiedJsName);
+  }
+
+  private static String generateTypeAlias(
+      String moduleName, String externName, String simpleJsName) {
+    return """
+    goog.module('%1$s');
+
+    /** @typedef {%2$s} */
+    let %3$s;
+
+    exports = %3$s;
+    """
+        .formatted(moduleName, externName, simpleJsName);
   }
 }
