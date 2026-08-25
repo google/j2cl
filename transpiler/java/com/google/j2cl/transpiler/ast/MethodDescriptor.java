@@ -56,9 +56,13 @@ import javax.annotation.Nullable;
 public abstract class MethodDescriptor extends MemberDescriptor {
   /** A method parameter descriptor */
   @AutoValue
-  public abstract static class ParameterDescriptor implements HasAnnotations {
+  public abstract static class ParameterDescriptor implements HasName, HasAnnotations {
 
     public abstract TypeDescriptor getTypeDescriptor();
+
+    @Nullable
+    @Override
+    public abstract String getName();
 
     public abstract boolean isVarargs();
 
@@ -88,6 +92,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @AutoValue.Builder
     public abstract static class Builder {
       public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
+
+      public abstract Builder setName(@Nullable String name);
 
       public abstract Builder setVarargs(boolean isVarargs);
 
@@ -1046,14 +1052,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns the type of the objects that can arrive at runtime as parameters.
+   * Returns the parameter descriptors of the objects that can arrive at runtime as parameters.
    *
-   * <p>For bridge methods those will be the parameter types of the method they are bridging from.
-   * The bridge method is responsible for casting these parameters to the appropriate type before
+   * <p>For bridge methods those will be the parameters of the method they are bridging from. The
+   * bridge method is responsible for casting these parameters to the appropriate type before
    * forwarding to the actual implementation.
    */
-  public List<TypeDescriptor> getDispatchParameterTypeDescriptors() {
-    return getManglingDescriptor().getParameterTypeDescriptors();
+  public ImmutableList<ParameterDescriptor> getDispatchParameterDescriptors() {
+    return getManglingDescriptor().getParameterDescriptors();
   }
 
   public TypeDescriptor getDispatchReturnTypeDescriptor() {

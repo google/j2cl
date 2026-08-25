@@ -37,8 +37,8 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: Container<*>, to: Container<in Any?>) {
    from.forEach(
-    Consumer { arg0: Any? ->
-     to.add(arg0)
+    Consumer { v: Any? ->
+     to.add(v)
     },
    )
   }
@@ -55,8 +55,8 @@ open class NullabilityInferenceProblem6 {
   @JvmStatic
   internal fun testMethodReference_pp_j2kt(from: FooContainer<*>, to: FooContainer<in Foo?>) {
    from.forEach(
-    Consumer { arg0: Foo? ->
-     to.add(arg0)
+    Consumer { v: Foo? ->
+     to.add(v)
     },
    )
   }

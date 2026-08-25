@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
@@ -247,9 +246,7 @@ public final class LambdaAdaptorTypeDescriptors {
             : singleAbstractMethod.getParameterDescriptors().stream()
                 .map(
                     parameterDescriptor ->
-                        ParameterDescriptor.builder()
-                            .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
-                            .build())
+                        parameterDescriptor.toBuilder().setVarargs(false).build())
                 .collect(toImmutableList());
 
     return singleAbstractMethod.toBuilder()

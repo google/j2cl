@@ -232,8 +232,8 @@ open class Main {
     SomeJsEnum.A,
     SomeJsEnum.A,
    )
-   val consumer: Consumer<SomeJsEnum?> = Consumer { arg0: SomeJsEnum? ->
-    Main.varargsConsumer<SomeJsEnum?>(arg0)
+   val consumer: Consumer<SomeJsEnum?> = Consumer { t: SomeJsEnum? ->
+    Main.varargsConsumer<SomeJsEnum?>(t)
    }
   }
   

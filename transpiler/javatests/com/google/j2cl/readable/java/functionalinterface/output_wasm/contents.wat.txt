@@ -484,18 +484,18 @@
  )
 )
 
-;;; String $LambdaAdaptor.defaultApply(String arg0)
+;;; String $LambdaAdaptor.defaultApply(String string)
 (func $m_defaultApply__java_lang_String__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor
  (type $function.m_defaultApply__java_lang_String__java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $string (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functionalinterface/readable-j2wasm.js/functionalinterface/FunctionalInterfaces.java:34:19
  (local $this (ref null $functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/functionalinterface/readable-j2wasm.js/functionalinterface/FunctionalInterfaces.java:34:19
-  (return (call $m_defaultApply__java_lang_String__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_defaultApply__java_lang_String__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod (ref.as_non_null (local.get $this))(local.get $string)))
  )
 )
 (elem declare func $m_defaultApply__java_lang_String__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor)
@@ -752,18 +752,18 @@
  )
 )
 
-;;; String $LambdaAdaptor.apply(T arg0)
+;;; String $LambdaAdaptor.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/functionalinterface/readable-j2wasm.js/functionalinterface/FunctionalInterfaces.java:29:19
  (local $this (ref null $functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/functionalinterface/readable-j2wasm.js/functionalinterface/FunctionalInterfaces.java:29:19
-  (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor.vtable $m_apply__java_lang_String__java_lang_String (struct.get $functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor $vtable(local.get $this)))))
+  (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(struct.get $functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor.vtable $m_apply__java_lang_String__java_lang_String (struct.get $functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor)

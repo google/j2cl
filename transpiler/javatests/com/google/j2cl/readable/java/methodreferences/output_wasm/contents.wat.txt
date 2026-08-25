@@ -2343,36 +2343,36 @@
  )
 )
 
-;;; Boolean <anonymous> implements BiFunction<MethodReferences<T>, Number, Boolean>.apply(MethodReferences<T> arg0, Number arg1)
+;;; Boolean <anonymous> implements BiFunction<MethodReferences<T>, Number, Boolean>.apply(MethodReferences<T> t, Number u)
 (func $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$6
  (type $function.m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $methodreferences.MethodReferences))
- (param $arg1 (ref null $java.lang.Number))
+ (param $t (ref null $methodreferences.MethodReferences))
+ (param $u (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:104:66
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:104:66
-  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (local.get $arg0))(local.get $arg1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (local.get $t))(local.get $u)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $t)))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$6)
 
-;;; Boolean <anonymous> implements BiFunction<MethodReferences<T>, Number, Boolean>.apply(T arg0, U arg1)
+;;; Boolean <anonymous> implements BiFunction<MethodReferences<T>, Number, Boolean>.apply(T t, U u)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:104:66
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:104:66
-  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))(ref.cast (ref null $java.lang.Number) (local.get $arg1))))
+  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $t))(ref.cast (ref null $java.lang.Number) (local.get $u))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6)
@@ -2440,34 +2440,34 @@
  )
 )
 
-;;; Boolean <anonymous> implements Function<Number, Boolean>.apply(Number arg0)
+;;; Boolean <anonymous> implements Function<Number, Boolean>.apply(Number t)
 (func $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$7
  (type $function.m_apply__java_lang_Number__java_lang_Boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Number))
+ (param $t (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:106:55
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:106:55
-  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$7 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $this)))(local.get $arg0)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$7 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $this))))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$7 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $this)))(local.get $t)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$7 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $this))))))
  )
 )
 (elem declare func $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$7)
 
-;;; Boolean <anonymous> implements Function<Number, Boolean>.apply(T arg0)
+;;; Boolean <anonymous> implements Function<Number, Boolean>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$7
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:106:55
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:106:55
-  (return (call $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$7)
@@ -2531,34 +2531,34 @@
  )
 )
 
-;;; boolean <anonymous> implements Predicate<MethodReferences<T>>.apply(MethodReferences<T> arg0)
+;;; boolean <anonymous> implements Predicate<MethodReferences<T>>.apply(MethodReferences<T> parameter)
 (func $m_apply__methodreferences_MethodReferences__boolean@methodreferences.MethodReferences.$LambdaImplementor$8
  (type $function.m_apply__methodreferences_MethodReferences__boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $methodreferences.MethodReferences))
+ (param $parameter (ref null $methodreferences.MethodReferences))
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:109:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$8) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:109:53
-  (return (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (call_ref $function.m_isA__java_lang_Boolean (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))))
+  (return (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (call_ref $function.m_isA__java_lang_Boolean (ref.as_non_null (local.get $parameter))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $parameter)))))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__boolean@methodreferences.MethodReferences.$LambdaImplementor$8)
 
-;;; boolean <anonymous> implements Predicate<MethodReferences<T>>.apply(T arg0)
+;;; boolean <anonymous> implements Predicate<MethodReferences<T>>.apply(T parameter)
 (func $m_apply__java_lang_Object__boolean@methodreferences.MethodReferences.$LambdaImplementor$8
  (type $function.m_apply__java_lang_Object__boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $parameter (ref null $java.lang.Object))
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:109:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$8) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:109:53
-  (return (call $m_apply__methodreferences_MethodReferences__boolean@methodreferences.MethodReferences.$LambdaImplementor$8 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))))
+  (return (call $m_apply__methodreferences_MethodReferences__boolean@methodreferences.MethodReferences.$LambdaImplementor$8 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $parameter))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__boolean@methodreferences.MethodReferences.$LambdaImplementor$8)
@@ -2715,18 +2715,18 @@
  )
 )
 
-;;; Object[] <anonymous> implements ArrayProducer<Object>.produce(int arg0)
+;;; Object[] <anonymous> implements ArrayProducer<Object>.produce(int size)
 (func $m_produce__int__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10
  (type $function.m_produce__int__arrayOf_java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
+ (param $size i32)
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:113:42
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$10) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:113:42
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $arg0)))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $size)))
  )
 )
 (elem declare func $m_produce__int__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10)
@@ -2867,34 +2867,34 @@
  )
 )
 
-;;; Object <anonymous> implements Function<MethodReferences<T>, Object>.apply(MethodReferences<T> arg0)
+;;; Object <anonymous> implements Function<MethodReferences<T>, Object>.apply(MethodReferences<T> t)
 (func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12
  (type $function.m_apply__methodreferences_MethodReferences__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $methodreferences.MethodReferences))
+ (param $t (ref null $methodreferences.MethodReferences))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:117:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$12))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$12) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:117:53
-  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $t))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $t)))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12)
 
-;;; Object <anonymous> implements Function<MethodReferences<T>, Object>.apply(T arg0)
+;;; Object <anonymous> implements Function<MethodReferences<T>, Object>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:117:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$12))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$12) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:117:53
-  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))))
+  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12)
@@ -2958,34 +2958,34 @@
  )
 )
 
-;;; boolean[] <anonymous> implements Function<Integer, boolean[]>.apply(Integer arg0)
+;;; boolean[] <anonymous> implements Function<Integer, boolean[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_boolean@methodreferences.MethodReferences.$LambdaImplementor$13
  (type $function.m_apply__java_lang_Integer__arrayOf_boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfBoolean))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:119:55
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$13) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:119:55
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfBoolean@javaemul.internal.WasmArray.OfBoolean (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfBoolean@javaemul.internal.WasmArray.OfBoolean (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_boolean@methodreferences.MethodReferences.$LambdaImplementor$13)
 
-;;; boolean[] <anonymous> implements Function<Integer, boolean[]>.apply(T arg0)
+;;; boolean[] <anonymous> implements Function<Integer, boolean[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$13
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:119:55
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$13) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:119:55
-  (return (call $m_apply__java_lang_Integer__arrayOf_boolean@methodreferences.MethodReferences.$LambdaImplementor$13 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_boolean@methodreferences.MethodReferences.$LambdaImplementor$13 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$13)
@@ -3049,34 +3049,34 @@
  )
 )
 
-;;; char[] <anonymous> implements Function<Integer, char[]>.apply(Integer arg0)
+;;; char[] <anonymous> implements Function<Integer, char[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_char@methodreferences.MethodReferences.$LambdaImplementor$14
  (type $function.m_apply__java_lang_Integer__arrayOf_char)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfChar))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:121:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$14) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:121:49
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfChar@javaemul.internal.WasmArray.OfChar (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfChar@javaemul.internal.WasmArray.OfChar (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_char@methodreferences.MethodReferences.$LambdaImplementor$14)
 
-;;; char[] <anonymous> implements Function<Integer, char[]>.apply(T arg0)
+;;; char[] <anonymous> implements Function<Integer, char[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$14
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:121:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$14) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:121:49
-  (return (call $m_apply__java_lang_Integer__arrayOf_char@methodreferences.MethodReferences.$LambdaImplementor$14 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_char@methodreferences.MethodReferences.$LambdaImplementor$14 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$14)
@@ -3140,34 +3140,34 @@
  )
 )
 
-;;; byte[] <anonymous> implements Function<Integer, byte[]>.apply(Integer arg0)
+;;; byte[] <anonymous> implements Function<Integer, byte[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_byte@methodreferences.MethodReferences.$LambdaImplementor$15
  (type $function.m_apply__java_lang_Integer__arrayOf_byte)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfByte))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:123:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$15) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:123:49
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfByte@javaemul.internal.WasmArray.OfByte (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfByte@javaemul.internal.WasmArray.OfByte (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_byte@methodreferences.MethodReferences.$LambdaImplementor$15)
 
-;;; byte[] <anonymous> implements Function<Integer, byte[]>.apply(T arg0)
+;;; byte[] <anonymous> implements Function<Integer, byte[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$15
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:123:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$15) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:123:49
-  (return (call $m_apply__java_lang_Integer__arrayOf_byte@methodreferences.MethodReferences.$LambdaImplementor$15 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_byte@methodreferences.MethodReferences.$LambdaImplementor$15 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$15)
@@ -3231,34 +3231,34 @@
  )
 )
 
-;;; short[] <anonymous> implements Function<Integer, short[]>.apply(Integer arg0)
+;;; short[] <anonymous> implements Function<Integer, short[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_short@methodreferences.MethodReferences.$LambdaImplementor$16
  (type $function.m_apply__java_lang_Integer__arrayOf_short)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfShort))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:125:51
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$16) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:125:51
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfShort@javaemul.internal.WasmArray.OfShort (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfShort@javaemul.internal.WasmArray.OfShort (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_short@methodreferences.MethodReferences.$LambdaImplementor$16)
 
-;;; short[] <anonymous> implements Function<Integer, short[]>.apply(T arg0)
+;;; short[] <anonymous> implements Function<Integer, short[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:125:51
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$16) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:125:51
-  (return (call $m_apply__java_lang_Integer__arrayOf_short@methodreferences.MethodReferences.$LambdaImplementor$16 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_short@methodreferences.MethodReferences.$LambdaImplementor$16 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16)
@@ -3322,34 +3322,34 @@
  )
 )
 
-;;; int[] <anonymous> implements Function<Integer, int[]>.apply(Integer arg0)
+;;; int[] <anonymous> implements Function<Integer, int[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_int@methodreferences.MethodReferences.$LambdaImplementor$17
  (type $function.m_apply__java_lang_Integer__arrayOf_int)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:127:47
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$17))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$17) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:127:47
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_int@methodreferences.MethodReferences.$LambdaImplementor$17)
 
-;;; int[] <anonymous> implements Function<Integer, int[]>.apply(T arg0)
+;;; int[] <anonymous> implements Function<Integer, int[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:127:47
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$17))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$17) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:127:47
-  (return (call $m_apply__java_lang_Integer__arrayOf_int@methodreferences.MethodReferences.$LambdaImplementor$17 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_int@methodreferences.MethodReferences.$LambdaImplementor$17 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17)
@@ -3413,34 +3413,34 @@
  )
 )
 
-;;; long[] <anonymous> implements Function<Integer, long[]>.apply(Integer arg0)
+;;; long[] <anonymous> implements Function<Integer, long[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_long@methodreferences.MethodReferences.$LambdaImplementor$18
  (type $function.m_apply__java_lang_Integer__arrayOf_long)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfLong))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:129:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:129:49
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfLong@javaemul.internal.WasmArray.OfLong (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_long@methodreferences.MethodReferences.$LambdaImplementor$18)
 
-;;; long[] <anonymous> implements Function<Integer, long[]>.apply(T arg0)
+;;; long[] <anonymous> implements Function<Integer, long[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:129:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:129:49
-  (return (call $m_apply__java_lang_Integer__arrayOf_long@methodreferences.MethodReferences.$LambdaImplementor$18 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_long@methodreferences.MethodReferences.$LambdaImplementor$18 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18)
@@ -3504,34 +3504,34 @@
  )
 )
 
-;;; float[] <anonymous> implements Function<Integer, float[]>.apply(Integer arg0)
+;;; float[] <anonymous> implements Function<Integer, float[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_float@methodreferences.MethodReferences.$LambdaImplementor$19
  (type $function.m_apply__java_lang_Integer__arrayOf_float)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfFloat))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:131:51
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$19) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:131:51
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfFloat@javaemul.internal.WasmArray.OfFloat (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfFloat@javaemul.internal.WasmArray.OfFloat (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_float@methodreferences.MethodReferences.$LambdaImplementor$19)
 
-;;; float[] <anonymous> implements Function<Integer, float[]>.apply(T arg0)
+;;; float[] <anonymous> implements Function<Integer, float[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$19
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:131:51
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$19) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:131:51
-  (return (call $m_apply__java_lang_Integer__arrayOf_float@methodreferences.MethodReferences.$LambdaImplementor$19 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_float@methodreferences.MethodReferences.$LambdaImplementor$19 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$19)
@@ -3595,34 +3595,34 @@
  )
 )
 
-;;; double[] <anonymous> implements Function<Integer, double[]>.apply(Integer arg0)
+;;; double[] <anonymous> implements Function<Integer, double[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_double@methodreferences.MethodReferences.$LambdaImplementor$20
  (type $function.m_apply__java_lang_Integer__arrayOf_double)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfDouble))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:133:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$20))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$20) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:133:53
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfDouble@javaemul.internal.WasmArray.OfDouble (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfDouble@javaemul.internal.WasmArray.OfDouble (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_double@methodreferences.MethodReferences.$LambdaImplementor$20)
 
-;;; double[] <anonymous> implements Function<Integer, double[]>.apply(T arg0)
+;;; double[] <anonymous> implements Function<Integer, double[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:133:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$20))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$20) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:133:53
-  (return (call $m_apply__java_lang_Integer__arrayOf_double@methodreferences.MethodReferences.$LambdaImplementor$20 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_double@methodreferences.MethodReferences.$LambdaImplementor$20 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20)
@@ -3686,34 +3686,34 @@
  )
 )
 
-;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(Integer arg0)
+;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21
  (type $function.m_apply__java_lang_Integer__arrayOf_java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:135:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$21))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$21) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:135:53
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21)
 
-;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(T arg0)
+;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:135:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$21))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$21) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:135:53
-  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21)
@@ -3777,34 +3777,34 @@
  )
 )
 
-;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(Integer arg0)
+;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22
  (type $function.m_apply__java_lang_Integer__arrayOf_java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:137:71
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$22) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:137:71
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22)
 
-;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(T arg0)
+;;; Object[] <anonymous> implements Function<Integer, Object[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:137:71
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$22))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$22) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:137:71
-  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$22)
@@ -3868,34 +3868,34 @@
  )
 )
 
-;;; String[] <anonymous> implements Function<Integer, String[]>.apply(Integer arg0)
+;;; String[] <anonymous> implements Function<Integer, String[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$23
  (type $function.m_apply__java_lang_Integer__arrayOf_java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:139:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$23))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$23) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:139:53
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$23)
 
-;;; String[] <anonymous> implements Function<Integer, String[]>.apply(T arg0)
+;;; String[] <anonymous> implements Function<Integer, String[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$23
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:139:53
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$23))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$23) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:139:53
-  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$23 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$23 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$23)
@@ -3959,34 +3959,34 @@
  )
 )
 
-;;; String[] <anonymous> implements Function<Integer, String[]>.apply(Integer arg0)
+;;; String[] <anonymous> implements Function<Integer, String[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$24
  (type $function.m_apply__java_lang_Integer__arrayOf_java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:141:71
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$24))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$24) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:141:71
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$24)
 
-;;; String[] <anonymous> implements Function<Integer, String[]>.apply(T arg0)
+;;; String[] <anonymous> implements Function<Integer, String[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$24
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:141:71
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$24))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$24) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:141:71
-  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$24 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_String@methodreferences.MethodReferences.$LambdaImplementor$24 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$24)
@@ -4368,34 +4368,34 @@
  )
 )
 
-;;; Object <anonymous> implements JsFunctionInterface<MethodReferences<T>, Object>.apply(MethodReferences<T> arg0)
+;;; Object <anonymous> implements JsFunctionInterface<MethodReferences<T>, Object>.apply(MethodReferences<T> t)
 (func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$29
  (type $function.m_apply__methodreferences_MethodReferences__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $methodreferences.MethodReferences))
+ (param $t (ref null $methodreferences.MethodReferences))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$29))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$29) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
-  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $t))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $t)))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$29)
 
-;;; Object <anonymous> implements JsFunctionInterface<MethodReferences<T>, Object>.apply(T arg0)
+;;; Object <anonymous> implements JsFunctionInterface<MethodReferences<T>, Object>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$29
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$29))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$29) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:150:66
-  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$29 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))))
+  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$29 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$29)
@@ -4459,34 +4459,34 @@
  )
 )
 
-;;; Object[] <anonymous> implements JsFunctionInterface<Integer, Object[]>.apply(Integer arg0)
+;;; Object[] <anonymous> implements JsFunctionInterface<Integer, Object[]>.apply(Integer t)
 (func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$30
  (type $function.m_apply__java_lang_Integer__arrayOf_java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Integer))
+ (param $t (ref null $java.lang.Integer))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$30))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$30) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $arg0)))))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $t)))))
  )
 )
 (elem declare func $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$30)
 
-;;; Object[] <anonymous> implements JsFunctionInterface<Integer, Object[]>.apply(T arg0)
+;;; Object[] <anonymous> implements JsFunctionInterface<Integer, Object[]>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$30
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$30))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$30) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:152:60
-  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$30 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Integer__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$30 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Integer) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$30)
@@ -4643,36 +4643,36 @@
  )
 )
 
-;;; Boolean <anonymous> implements JsBiFunction<MethodReferences<T>, Number, Boolean>.apply(MethodReferences<T> arg0, Number arg1)
+;;; Boolean <anonymous> implements JsBiFunction<MethodReferences<T>, Number, Boolean>.apply(MethodReferences<T> t, Number u)
 (func $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$32
  (type $function.m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $methodreferences.MethodReferences))
- (param $arg1 (ref null $java.lang.Number))
+ (param $t (ref null $methodreferences.MethodReferences))
+ (param $u (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$32))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$32) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
-  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (local.get $arg0))(local.get $arg1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (local.get $t))(local.get $u)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $t)))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$32)
 
-;;; Boolean <anonymous> implements JsBiFunction<MethodReferences<T>, Number, Boolean>.apply(T arg0, U arg1)
+;;; Boolean <anonymous> implements JsBiFunction<MethodReferences<T>, Number, Boolean>.apply(T t, U u)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$32
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$32))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$32) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:156:70
-  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$32 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))(ref.cast (ref null $java.lang.Number) (local.get $arg1))))
+  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$32 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $t))(ref.cast (ref null $java.lang.Number) (local.get $u))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$32)
@@ -4740,34 +4740,34 @@
  )
 )
 
-;;; Boolean <anonymous> implements JsFunctionInterface<Number, Boolean>.apply(Number arg0)
+;;; Boolean <anonymous> implements JsFunctionInterface<Number, Boolean>.apply(Number t)
 (func $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$33
  (type $function.m_apply__java_lang_Number__java_lang_Boolean)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Number))
+ (param $t (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$33))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$33) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
-  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$33 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$33 (local.get $this)))(local.get $arg0)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$33 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$33 (local.get $this))))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$33 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$33 (local.get $this)))(local.get $t)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$33 $$outer_this@methodreferences.MethodReferences.$LambdaImplementor$33 (local.get $this))))))
  )
 )
 (elem declare func $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$33)
 
-;;; Boolean <anonymous> implements JsFunctionInterface<Number, Boolean>.apply(T arg0)
+;;; Boolean <anonymous> implements JsFunctionInterface<Number, Boolean>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$33
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$33))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$33) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:158:68
-  (return (call $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$33 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Number__java_lang_Boolean@methodreferences.MethodReferences.$LambdaImplementor$33 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$33)
@@ -4905,34 +4905,34 @@
  )
 )
 
-;;; Object <anonymous> implements Function<MethodReferences<Object>, Object>.apply(MethodReferences<Object> arg0)
+;;; Object <anonymous> implements Function<MethodReferences<Object>, Object>.apply(MethodReferences<Object> t)
 (func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35
  (type $function.m_apply__methodreferences_MethodReferences__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $methodreferences.MethodReferences))
+ (param $t (ref null $methodreferences.MethodReferences))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$35))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$35) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
-  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0)))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $t))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $t)))))
  )
 )
 (elem declare func $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35)
 
-;;; Object <anonymous> implements Function<MethodReferences<Object>, Object>.apply(T arg0)
+;;; Object <anonymous> implements Function<MethodReferences<Object>, Object>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$35))
  (local.set $this (ref.cast (ref $methodreferences.MethodReferences.$LambdaImplementor$35) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/methodreferences/readable-j2wasm.js/methodreferences/MethodReferences.java:165:32
-  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $arg0))))
+  (return (call $m_apply__methodreferences_MethodReferences__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35 (ref.as_non_null (local.get $this))(ref.cast (ref null $methodreferences.MethodReferences) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$35)

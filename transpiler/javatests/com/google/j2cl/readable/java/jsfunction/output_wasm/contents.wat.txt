@@ -1479,16 +1479,16 @@
  )
 )
 
-;;; void $Overlay.sort__$devirt(TestJsFunctionInJsOverlayCapturingOuter arg0, JsFunctionInterface arg1)
+;;; void $Overlay.sort__$devirt(TestJsFunctionInJsOverlayCapturingOuter arg0, JsFunctionInterface func)
 (func $m_sort__$devirt__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_Main_JsFunctionInterface__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay
  (param $arg0 (ref null extern))
- (param $arg1 (ref null $java.lang.Object))
+ (param $func (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:385:15
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:385:15
   (call $$clinit__void_<once>_@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:385:15
-  (call $m_sort__$devirt_$private__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_Main_JsFunctionInterface__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay (local.get $arg0)(local.get $arg1))
+  (call $m_sort__$devirt_$private__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_Main_JsFunctionInterface__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay (local.get $arg0)(local.get $func))
  )
 )
 
@@ -2098,17 +2098,17 @@
  )
 )
 
-;;; int Main.callFn(JsFunctionInterface arg0, int arg1)
+;;; int Main.callFn(JsFunctionInterface fn, int a)
 (func $m_callFn__jsfunction_Main_JsFunctionInterface__int__int@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 i32)
+ (param $fn (ref null $java.lang.Object))
+ (param $a i32)
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:83:20
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:83:20
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:83:20
-  (return (call $m_callFn_$private__jsfunction_Main_JsFunctionInterface__int__int@jsfunction.Main (local.get $arg0)(local.get $arg1)))
+  (return (call $m_callFn_$private__jsfunction_Main_JsFunctionInterface__int__int@jsfunction.Main (local.get $fn)(local.get $a)))
  )
 )
 
@@ -2208,15 +2208,15 @@
 )
 (elem declare func $m_testJsFunctionErasureCasts__void@jsfunction.Main)
 
-;;; void Main.acceptsJsFunction(Function<String, String> arg0)
+;;; void Main.acceptsJsFunction(Function<String, String> f)
 (func $m_acceptsJsFunction__jsfunction_Main_Function__void@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
+ (param $f (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:138:21
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:138:21
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:138:21
-  (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (local.get $arg0))
+  (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (local.get $f))
  )
 )
 
@@ -2376,15 +2376,15 @@
 )
 (elem declare func $m_testJsFunctionOptional__void_$pp_jsfunction@jsfunction.Main)
 
-;;; void Main.setParametricJsFunction(ParametricJsFunction<Object> arg0)
+;;; void Main.setParametricJsFunction(ParametricJsFunction<Object> fn)
 (func $m_setParametricJsFunction__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
+ (param $fn (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:265:22
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:265:22
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:265:22
-  (call $m_setParametricJsFunction_$private__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main (local.get $arg0))
+  (call $m_setParametricJsFunction_$private__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main (local.get $fn))
  )
 )
 
@@ -2456,18 +2456,18 @@
 )
 (elem declare func $m_testJsFunctionPropertyCall__void_$pp_jsfunction@jsfunction.Main)
 
-;;; Object Main.callInterfaceRaw(JsBiFunction arg0, Object arg1, Number arg2)
+;;; Object Main.callInterfaceRaw(JsBiFunction f, Object o, Number n)
 (func $m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
- (param $arg2 (ref null $java.lang.Number))
+ (param $f (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:316:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:316:23
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:316:23
-  (return (call $m_callInterfaceRaw_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main (local.get $arg0)(local.get $arg1)(local.get $arg2)))
+  (return (call $m_callInterfaceRaw_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main (local.get $f)(local.get $o)(local.get $n)))
  )
 )
 
@@ -2484,17 +2484,17 @@
  )
 )
 
-;;; String Main.callInterfaceParameterized(JsBiFunction<String, Integer> arg0, String arg1)
+;;; String Main.callInterfaceParameterized(JsBiFunction<String, Integer> f, String s)
 (func $m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.String))
+ (param $f (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:320:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:320:23
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:320:23
-  (return (call $m_callInterfaceParameterized_$private__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String@jsfunction.Main (local.get $arg0)(local.get $arg1)))
+  (return (call $m_callInterfaceParameterized_$private__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String@jsfunction.Main (local.get $f)(local.get $s)))
  )
 )
 
@@ -2510,18 +2510,18 @@
  )
 )
 
-;;; U Main.callInterfaceUnparameterized(JsBiFunction<U, V> arg0, U arg1, V arg2)
+;;; U Main.callInterfaceUnparameterized(JsBiFunction<U, V> f, U u, V v)
 (func $m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
- (param $arg2 (ref null $java.lang.Number))
+ (param $f (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
+ (param $v (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:324:40
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:324:40
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:324:40
-  (return (call $m_callInterfaceUnparameterized_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main (local.get $arg0)(local.get $arg1)(local.get $arg2)))
+  (return (call $m_callInterfaceUnparameterized_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main (local.get $f)(local.get $u)(local.get $v)))
  )
 )
 
@@ -2538,18 +2538,18 @@
  )
 )
 
-;;; Object Main.callImplementorRaw(TIntegerJsBiFunction arg0, Object arg1, Integer arg2)
+;;; Object Main.callImplementorRaw(TIntegerJsBiFunction f, Object o, Integer n)
 (func $m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object@jsfunction.Main
- (param $arg0 (ref null $jsfunction.Main.TIntegerJsBiFunction))
- (param $arg1 (ref null $java.lang.Object))
- (param $arg2 (ref null $java.lang.Integer))
+ (param $f (ref null $jsfunction.Main.TIntegerJsBiFunction))
+ (param $o (ref null $java.lang.Object))
+ (param $n (ref null $java.lang.Integer))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:329:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:329:23
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:329:23
-  (return (call $m_callImplementorRaw_$private__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object@jsfunction.Main (local.get $arg0)(local.get $arg1)(local.get $arg2)))
+  (return (call $m_callImplementorRaw_$private__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object@jsfunction.Main (local.get $f)(local.get $o)(local.get $n)))
  )
 )
 
@@ -2566,17 +2566,17 @@
  )
 )
 
-;;; String Main.callImplementorParameterized(TIntegerJsBiFunction<String> arg0, String arg1)
+;;; String Main.callImplementorParameterized(TIntegerJsBiFunction<String> f, String s)
 (func $m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String@jsfunction.Main
- (param $arg0 (ref null $jsfunction.Main.TIntegerJsBiFunction))
- (param $arg1 (ref null $java.lang.String))
+ (param $f (ref null $jsfunction.Main.TIntegerJsBiFunction))
+ (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:333:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:333:23
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:333:23
-  (return (call $m_callImplementorParameterized_$private__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String@jsfunction.Main (local.get $arg0)(local.get $arg1)))
+  (return (call $m_callImplementorParameterized_$private__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String@jsfunction.Main (local.get $f)(local.get $s)))
  )
 )
 
@@ -2627,16 +2627,16 @@
  )
 )
 
-;;; double Main.callOnFunction(JsBiFunction<Double, Double> arg0)
+;;; double Main.callOnFunction(JsBiFunction<Double, Double> f)
 (func $m_callOnFunction__jsfunction_Main_JsBiFunction__double@jsfunction.Main
- (param $arg0 (ref null $java.lang.Object))
+ (param $f (ref null $java.lang.Object))
  (result f64)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:353:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:353:23
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:353:23
-  (return (call $m_callOnFunction_$private__jsfunction_Main_JsBiFunction__double@jsfunction.Main (local.get $arg0)))
+  (return (call $m_callOnFunction_$private__jsfunction_Main_JsBiFunction__double@jsfunction.Main (local.get $f)))
  )
 )
 
@@ -2708,60 +2708,60 @@
  )
 )
 
-;;; void Main.acceptsVarargsJsFunctionWithTypeVariableInVarargs(WasmExtern arg0)
+;;; void Main.acceptsVarargsJsFunctionWithTypeVariableInVarargs(WasmExtern x)
 (func $js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
  (type $function.js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null extern))
+ (param $x (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:200:11
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:200:11
-  (call_ref $function.m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $arg0)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
+  (call_ref $function.m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
  )
 )
 (elem declare func $js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
 
-;;; void Main.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(WasmExtern arg0)
+;;; void Main.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(WasmExtern x)
 (func $js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
  (type $function.js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null extern))
+ (param $x (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:203:11
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:203:11
-  (call_ref $function.m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $arg0)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
+  (call_ref $function.m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
  )
 )
 (elem declare func $js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
 
-;;; void Main.acceptsJsFunctionInVarargs(WasmExtern arg0)
+;;; void Main.acceptsJsFunctionInVarargs(WasmExtern x)
 (func $js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
  (type $function.js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null extern))
+ (param $x (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:212:7
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:212:7
-  (call_ref $function.m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $arg0)))(struct.get $jsfunction.Main.vtable $m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
+  (call_ref $function.m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
  )
 )
 (elem declare func $js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
 
-;;; void Main.setParametricJsFunction(WasmExtern arg0)
+;;; void Main.setParametricJsFunction(WasmExtern fn)
 (func $js_export_set_setParametricJsFunction__javaemul_internal_WasmExtern__void@jsfunction.Main
- (param $arg0 (ref null extern))
+ (param $fn (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:265:22
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:265:22
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:265:22
-  (call $m_setParametricJsFunction_$private__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main (call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $arg0)))
+  (call $m_setParametricJsFunction_$private__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main (call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $fn)))
  )
 )
 
@@ -2777,16 +2777,16 @@
  )
 )
 
-;;; double Main.callOnFunction(WasmExtern arg0)
+;;; double Main.callOnFunction(WasmExtern f)
 (func $js_export_callOnFunction__javaemul_internal_WasmExtern__double@jsfunction.Main
- (param $arg0 (ref null extern))
+ (param $f (ref null extern))
  (result f64)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:353:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:353:23
   (call $$clinit__void_<once>_@jsfunction.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:353:23
-  (return (call $m_callOnFunction_$private__jsfunction_Main_JsBiFunction__double@jsfunction.Main (call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $arg0))))
+  (return (call $m_callOnFunction_$private__jsfunction_Main_JsBiFunction__double@jsfunction.Main (call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $f))))
  )
 )
 
@@ -3939,19 +3939,19 @@
  )
 )
 
-;;; Double DoubleDoubleJsBiFunction.apply(T arg0, S arg1)
+;;; Double DoubleDoubleJsBiFunction.apply(T t, S s)
 (func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.DoubleDoubleJsBiFunction
  (type $function.java_lang_Object__java_lang_Number__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Number))
+ (param $t (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:302:28
  (local $this (ref null $jsfunction.Main.DoubleDoubleJsBiFunction))
  (local.set $this (ref.cast (ref $jsfunction.Main.DoubleDoubleJsBiFunction) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:302:28
-  (return (call $m_apply__java_lang_Double__java_lang_Double__java_lang_Double@jsfunction.Main.DoubleDoubleJsBiFunction (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Double) (local.get $arg0))(ref.cast (ref null $java.lang.Double) (local.get $arg1))))
+  (return (call $m_apply__java_lang_Double__java_lang_Double__java_lang_Double@jsfunction.Main.DoubleDoubleJsBiFunction (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Double) (local.get $t))(ref.cast (ref null $java.lang.Double) (local.get $s))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.DoubleDoubleJsBiFunction)
@@ -4061,19 +4061,19 @@
  )
 )
 
-;;; T TIntegerJsBiFunction.apply(T arg0, S arg1)
+;;; T TIntegerJsBiFunction.apply(T t, S s)
 (func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.TIntegerJsBiFunction
  (type $function.java_lang_Object__java_lang_Number__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Number))
+ (param $t (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:309:28
  (local $this (ref null $jsfunction.Main.TIntegerJsBiFunction))
  (local.set $this (ref.cast (ref $jsfunction.Main.TIntegerJsBiFunction) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:309:28
-  (return (call $m_apply__java_lang_Object__java_lang_Integer__java_lang_Object@jsfunction.Main.TIntegerJsBiFunction (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast (ref null $java.lang.Integer) (local.get $arg1))))
+  (return (call $m_apply__java_lang_Object__java_lang_Integer__java_lang_Object@jsfunction.Main.TIntegerJsBiFunction (ref.as_non_null (local.get $this))(local.get $t)(ref.cast (ref null $java.lang.Integer) (local.get $s))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.TIntegerJsBiFunction)
@@ -4173,17 +4173,17 @@
  )
 )
 
-;;; void RecursiveParametricJsFunctionImplementation.call(E arg0)
+;;; void RecursiveParametricJsFunctionImplementation.call(E event)
 (func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation
  (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $event (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:388:29
  (local $this (ref null $jsfunction.Main.RecursiveParametricJsFunctionImplementation))
  (local.set $this (ref.cast (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:388:29
-  (call $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0)))
+  (call $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $event)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation)
@@ -4283,17 +4283,17 @@
  )
 )
 
-;;; void RecursiveJsFunctionImplementation.call(E arg0)
+;;; void RecursiveJsFunctionImplementation.call(E event)
 (func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveJsFunctionImplementation
  (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $event (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:394:29
  (local $this (ref null $jsfunction.Main.RecursiveJsFunctionImplementation))
  (local.set $this (ref.cast (ref $jsfunction.Main.RecursiveJsFunctionImplementation) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:394:29
-  (call $m_call__jsfunction_Main_RecursiveJsFunctionImplementation__void@jsfunction.Main.RecursiveJsFunctionImplementation (ref.as_non_null (local.get $this))(ref.cast (ref null $jsfunction.Main.RecursiveJsFunctionImplementation) (local.get $arg0)))
+  (call $m_call__jsfunction_Main_RecursiveJsFunctionImplementation__void@jsfunction.Main.RecursiveJsFunctionImplementation (ref.as_non_null (local.get $this))(ref.cast (ref null $jsfunction.Main.RecursiveJsFunctionImplementation) (local.get $event)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveJsFunctionImplementation)
@@ -5379,20 +5379,20 @@
  )
 )
 
-;;; Object <anonymous> implements ForEachCallBack<ElementalJsFunction>.onInvoke(ElementalJsFunction arg0, int arg1, ElementalJsFunction[] arg2)
+;;; Object <anonymous> implements ForEachCallBack<ElementalJsFunction>.onInvoke(ElementalJsFunction p0, int p1, ElementalJsFunction[] p2)
 (func $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7
  (type $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 i32)
- (param $arg2 (ref null $javaemul.internal.WasmArray.OfObject))
+ (param $p0 (ref null $java.lang.Object))
+ (param $p1 i32)
+ (param $p2 (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
  (local $this (ref null $jsfunction.Main.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
-  (return (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ElementalJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $arg0))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $arg1))(local.get $arg2)))))
+  (return (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ElementalJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $p0))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $p1))(local.get $p2)))))
  )
 )
 (elem declare func $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7)
@@ -5414,20 +5414,20 @@
  )
 )
 
-;;; Object <anonymous> implements ForEachCallBack<ElementalJsFunction>.onInvoke(T arg0, int arg1, T[] arg2)
+;;; Object <anonymous> implements ForEachCallBack<ElementalJsFunction>.onInvoke(T p0, int p1, T[] p2)
 (func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$7
  (type $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 i32)
- (param $arg2 (ref null $javaemul.internal.WasmArray.OfObject))
+ (param $p0 (ref null $java.lang.Object))
+ (param $p1 i32)
+ (param $p2 (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
  (local $this (ref null $jsfunction.Main.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:187:45
-  (return (call $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0))(local.get $arg1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $arg2))))
+  (return (call $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $p0))(local.get $p1)(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $p2))))
  )
 )
 (elem declare func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$7)
@@ -5696,17 +5696,17 @@
  )
 )
 
-;;; void <anonymous> implements ParametricJsFunction<String>.call(E arg0)
+;;; void <anonymous> implements ParametricJsFunction<String>.call(E event)
 (func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$10
  (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $event (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
  (local $this (ref null $jsfunction.Main.$LambdaImplementor$10))
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$10) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:243:62
-  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$10 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$10 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $event)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$10)
@@ -5802,17 +5802,17 @@
  )
 )
 
-;;; void <anonymous> implements ParametricJsFunction<String>.call(E arg0)
+;;; void <anonymous> implements ParametricJsFunction<String>.call(E event)
 (func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$11
  (type $function.java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $event (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
  (local $this (ref null $jsfunction.Main.$LambdaImplementor$11))
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$11) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:274:8
-  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_call__java_lang_String__void@jsfunction.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $event)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.$LambdaImplementor$11)

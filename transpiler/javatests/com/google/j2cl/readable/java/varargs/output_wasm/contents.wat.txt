@@ -249,15 +249,15 @@
 )
 (elem declare func $m_testLambda__varargs_Varargs_FunctionalInterface__void@varargs.Varargs)
 
-;;; void Varargs.fun(T... arg0)
+;;; void Varargs.fun(T... elements)
 (func $m_fun__arrayOf_java_lang_Number__void@varargs.Varargs
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
+ (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
   (call $$clinit__void_<once>_@varargs.Varargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:45:40
-  (call $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs (local.get $arg0))
+  (call $m_fun_$private__arrayOf_java_lang_Number__void@varargs.Varargs (local.get $elements))
  )
 )
 
@@ -282,16 +282,16 @@
  )
 )
 
-;;; T Varargs.passthrough(T arg0)
+;;; T Varargs.passthrough(T o)
 (func $m_passthrough__java_lang_Object__java_lang_Object@varargs.Varargs
- (param $arg0 (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
   (call $$clinit__void_<once>_@varargs.Varargs )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/varargs/readable-j2wasm.js/varargs/Varargs.java:51:22
-  (return (call $m_passthrough_$private__java_lang_Object__java_lang_Object@varargs.Varargs (local.get $arg0)))
+  (return (call $m_passthrough_$private__java_lang_Object__java_lang_Object@varargs.Varargs (local.get $o)))
  )
 )
 

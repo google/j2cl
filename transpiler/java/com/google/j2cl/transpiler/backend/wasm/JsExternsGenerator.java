@@ -259,7 +259,7 @@ final class JsExternsGenerator {
                         .setMethodDescriptor(accidentalOverride)
                         .setParameters(
                             AstUtils.createParameterVariables(
-                                accidentalOverride.getParameterTypeDescriptors()))
+                                accidentalOverride.getParameterDescriptors()))
                         .setSourcePosition(type.getSourcePosition())
                         .build()));
   }

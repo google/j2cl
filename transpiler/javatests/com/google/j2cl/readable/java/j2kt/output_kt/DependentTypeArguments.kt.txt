@@ -43,7 +43,7 @@ open class DependentTypeArguments {
    BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> -> DependentTypeArguments.mergeAll<TestK, Supplier<TestE>, Function<TestK, Supplier<TestE>>>(
     m1,
     m2,
-    BiFunction { arg0: Supplier<TestE>, arg1: Supplier<TestE> -> DependentTypeArguments.addAll<TestE, Supplier<TestE>>(arg0, arg1) },
+    BiFunction { in1: Supplier<TestE>, in2: Supplier<TestE> -> DependentTypeArguments.addAll<TestE, Supplier<TestE>>(in1, in2) },
    ) },
    Function { unused: Function<TestK, Supplier<TestE>> -> map },
   )
@@ -54,7 +54,7 @@ open class DependentTypeArguments {
    BiFunction { m1: Function<TestK, Supplier<TestE>>, m2: Function<TestK, Supplier<TestE>> -> DependentTypeArguments.mergeAll<TestK, Supplier<TestE>, Function<TestK, Supplier<TestE>>>(
     m1,
     m2,
-    BiFunction { arg0: Supplier<TestE>, arg1: Supplier<TestE> -> DependentTypeArguments.addAll<TestE, Supplier<TestE>>(arg0, arg1) },
+    BiFunction { in1: Supplier<TestE>, in2: Supplier<TestE> -> DependentTypeArguments.addAll<TestE, Supplier<TestE>>(in1, in2) },
    ) },
    Function { unused: Function<TestK, Supplier<TestE>> -> map },
   )

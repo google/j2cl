@@ -142,8 +142,7 @@ public class ImplementJsFunctionInvocationsViaFunctionPointerCall extends Normal
         Method.builder()
             .setMethodDescriptor(invokeMethodDescriptor)
             .setParameters(
-                AstUtils.createParameterVariables(
-                    invokeMethodDescriptor.getParameterTypeDescriptors()))
+                AstUtils.createParameterVariables(invokeMethodDescriptor.getParameterDescriptors()))
             .setSourcePosition(type.getSourcePosition())
             .build());
   }
@@ -196,8 +195,8 @@ public class ImplementJsFunctionInvocationsViaFunctionPointerCall extends Normal
     List<Variable> forwardedVariables =
         AstUtils.createParameterVariables(
             staticForwardingMethodDescriptor
-                .getParameterTypeDescriptors()
-                .subList(1, staticForwardingMethodDescriptor.getParameterTypeDescriptors().size()));
+                .getParameterDescriptors()
+                .subList(1, staticForwardingMethodDescriptor.getParameterDescriptors().size()));
 
     List<Variable> parameters = new ArrayList<>();
     parameters.add(jsFunctionInstance);

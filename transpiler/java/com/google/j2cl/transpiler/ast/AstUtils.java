@@ -186,7 +186,7 @@ public final class AstUtils {
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription) {
     List<Variable> parameters =
-        createParameterVariables(fromMethodDescriptor.getParameterTypeDescriptors());
+        createParameterVariables(fromMethodDescriptor.getParameterDescriptors());
 
     Statement statement =
         createForwardingStatement(
@@ -205,13 +205,16 @@ public final class AstUtils {
         .build();
   }
 
-  public static List<Variable> createParameterVariables(List<TypeDescriptor> parameterTypes) {
+  public static List<Variable> createParameterVariables(
+      List<ParameterDescriptor> parameterDescriptors) {
     List<Variable> parameters = new ArrayList<>();
-    for (int i = 0; i < parameterTypes.size(); i++) {
+    for (int i = 0; i < parameterDescriptors.size(); i++) {
+      ParameterDescriptor parameterDescriptor = parameterDescriptors.get(i);
+      String name = parameterDescriptor.getName();
       parameters.add(
           Variable.builder()
-              .setName("arg" + i)
-              .setTypeDescriptor(parameterTypes.get(i))
+              .setName(name != null ? name : "arg" + i)
+              .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
               .setParameter(true)
               .build());
     }

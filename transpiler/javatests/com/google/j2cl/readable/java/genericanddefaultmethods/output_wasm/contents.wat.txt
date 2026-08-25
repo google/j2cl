@@ -215,17 +215,17 @@
  )
 )
 
-;;; void ConcreteClass.foo(String arg0)
+;;; void ConcreteClass.foo(String value)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass
  (type $function.m_foo__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $value (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast (ref $genericanddefaultmethods.ConcreteClass) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this))(local.get $value))
  )
 )
 (elem declare func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)

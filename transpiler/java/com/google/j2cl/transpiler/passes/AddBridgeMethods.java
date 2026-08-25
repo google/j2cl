@@ -58,8 +58,7 @@ public class AddBridgeMethods extends NormalizationPass {
     MethodDescriptor targetMethod = bridgeMethodDescriptor.getBridgeTarget();
 
     List<Variable> parameters =
-        AstUtils.createParameterVariables(
-            bridgeMethodDescriptor.getDispatchParameterTypeDescriptors());
+        AstUtils.createParameterVariables(bridgeMethodDescriptor.getDispatchParameterDescriptors());
 
     List<Expression> arguments =
         Streams.zip(

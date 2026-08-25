@@ -56,15 +56,15 @@
  )
 )
 
-;;; void CastOnArrayInit.fun(Foo<E>... arg0)
+;;; void CastOnArrayInit.fun(Foo<E>... args)
 (func $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/castonarrayinit/readable-j2wasm.js/castonarrayinit/CastOnArrayInit.java:21:25
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/castonarrayinit/readable-j2wasm.js/castonarrayinit/CastOnArrayInit.java:21:25
   (call $$clinit__void_<once>_@castonarrayinit.CastOnArrayInit )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/castonarrayinit/readable-j2wasm.js/castonarrayinit/CastOnArrayInit.java:21:25
-  (call $m_fun_$private__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (local.get $arg0))
+  (call $m_fun_$private__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (local.get $args))
  )
 )
 

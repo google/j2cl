@@ -37,7 +37,7 @@ open class GenericClass<T> internal constructor() {
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 open class ConcreteClass: GenericClass<String?>(), InterfaceWithDefault {
- override fun foo(arg0: String?) {
-  super<GenericClass>.foo(arg0)
+ override fun foo(value: String?) {
+  super<GenericClass>.foo(value)
  }
 }

@@ -16,17 +16,17 @@
 )
 
 
-;;; SimpleGenericType<T, S> SimpleGenericType.$create(T arg0, S arg1)
+;;; SimpleGenericType<T, S> SimpleGenericType.$create(T t, S s)
 (func $$create__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
  (result (ref null $simplegenerictype.SimpleGenericType))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenerictype/readable-j2wasm.js/simplegenerictype/SimpleGenericType.java:22:9
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenerictype/readable-j2wasm.js/simplegenerictype/SimpleGenericType.java:22:9
   (call $$clinit__void_<once>_@simplegenerictype.SimpleGenericType )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplegenerictype/readable-j2wasm.js/simplegenerictype/SimpleGenericType.java:22:9
-  (return (call $$create_$private__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (local.get $arg0)(local.get $arg1)))
+  (return (call $$create_$private__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (local.get $t)(local.get $s)))
  )
 )
 

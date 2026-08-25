@@ -152,7 +152,6 @@ public class JavaEnvironment {
     TypeDescriptors.initialize(this::getTypeDescriptor);
   }
 
-
   @Nullable
   static PrefixOperator getPrefixOperator(com.sun.source.tree.Tree.Kind operator) {
     return switch (operator) {
@@ -811,6 +810,7 @@ public class JavaEnvironment {
       parametersBuilder.add(
           ParameterDescriptor.builder()
               .setTypeDescriptor(parameterType)
+              .setName(methodSymbol.getParameters().get(i).getSimpleName().toString())
               .setJsOptional(JsInteropUtils.isJsOptional(methodSymbol, i))
               .setVarargs(i == parameters.size() - 1 && methodSymbol.isVarArgs())
               .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))

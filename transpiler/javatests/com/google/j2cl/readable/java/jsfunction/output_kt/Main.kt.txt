@@ -116,7 +116,7 @@ open class Main {
  }
  
  open fun testVarArgsMethodReferenceToJsFuncion() {
-  val c: ForEachCallBack<ElementalJsFunction?> = ForEachCallBack { arg0: ElementalJsFunction?, arg1: Int, arg2: Array<ElementalJsFunction?>? -> arg0!!.call(arg1, arg2) }
+  val c: ForEachCallBack<ElementalJsFunction?> = ForEachCallBack { p0: ElementalJsFunction?, p1: Int, p2: Array<ElementalJsFunction?>? -> p0!!.call(p1, p2) }
  }
  
  internal open fun <T> acceptsVarargsJsFunctionWithTypeVariable_pp_jsfunction(x: JsFunctionVarargsGenerics<T>?) {}

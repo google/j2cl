@@ -25,9 +25,9 @@ class $LambdaAdaptor extends j_l_Object {
   this.f_fn__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor = fn;
  }
  /** @override @nodts @return {!Generator<*, T>} */
- *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ arg0, /** T */ arg1) {
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ $continuation, /** T */ param) {
   let /** ?function(Continuation<?>, T):!Generator<*, T> */ $function;
-  return ($function = this.f_fn__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor, (yield* $function(arg0, arg1)));
+  return ($function = this.f_fn__suspendfunction_GenericSuspendFunInterface_$LambdaAdaptor, (yield* $function($continuation, param)));
  }
  /** @nodts */
  static $clinit() {

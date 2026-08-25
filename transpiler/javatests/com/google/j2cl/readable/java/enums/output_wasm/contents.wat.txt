@@ -395,16 +395,16 @@
  )
 )
 
-;;; Enum2 Enum2.f(Object arg0)
+;;; Enum2 Enum2.f(Object o)
 (func $m_f__java_lang_Object__enums_Enum2@enums.Enum2
- (param $arg0 (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
  (result (ref null $enums.Enum2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
   (call $$clinit__void_<once>_@enums.Enum2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:45:15
-  (return (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (local.get $arg0)))
+  (return (call $m_f_$private__java_lang_Object__enums_Enum2@enums.Enum2 (local.get $o)))
  )
 )
 
@@ -440,16 +440,16 @@
 )
 (elem declare func $m_specialMethods__void_$pp_enums@enums.Enum2)
 
-;;; Enum2 Enum2.valueOf(String arg0)
+;;; Enum2 Enum2.valueOf(String name)
 (func $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2
- (param $arg0 (ref null $java.lang.String))
+ (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum2))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
   (call $$clinit__void_<once>_@enums.Enum2 )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/enums/readable-j2wasm.js/enums/Enum1.java:25:5
-  (return (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (local.get $arg0)))
+  (return (call $m_valueOf_$private__java_lang_String__enums_Enum2@enums.Enum2 (local.get $name)))
  )
 )
 

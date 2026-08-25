@@ -1244,16 +1244,16 @@
  )
 )
 
-;;; T Main.varargsConsumer(T... arg0)
+;;; T Main.varargsConsumer(T... args)
 (func $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:23
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:23
   (call $$clinit__void_<once>_@jsenum.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:326:23
-  (return (call $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (local.get $arg0)))
+  (return (call $m_varargsConsumer_$private__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (local.get $args)))
  )
 )
 
@@ -2270,17 +2270,17 @@
 )
 (elem declare func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.$LambdaImplementor$2)
 
-;;; void <anonymous> implements Consumer<ComparableJsEnum>.accept(T arg0)
+;;; void <anonymous> implements Consumer<ComparableJsEnum>.accept(T t)
 (func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$2
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:160:43
  (local $this (ref null $jsenum.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:160:43
-  (call $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0)))
+  (call $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $t)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$2)
@@ -2633,18 +2633,18 @@
 )
 (elem declare func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6)
 
-;;; ComparableJsEnum <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.get(T arg0)
+;;; ComparableJsEnum <anonymous> implements SpecializedJsFunction<ComparableJsEnum>.get(T value)
 (func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6
  (type $function.m_get__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:164:43
  (local $this (ref null $jsenum.Main.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:164:43
-  (return (call $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))))
+  (return (call $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $value))))
  )
 )
 (elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$6)
@@ -2708,32 +2708,32 @@
  )
 )
 
-;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(SomeJsEnum arg0)
+;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(SomeJsEnum t)
 (func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7
  (type $function.m_accept__jsenum_Main_SomeJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $jsenum.Main.SomeJsEnum))
+ (param $t (ref null $jsenum.Main.SomeJsEnum))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:36
  (local $this (ref null $jsenum.Main.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:36
-  (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (local.get $arg0)))))
+  (drop (call $m_varargsConsumer__arrayOf_java_lang_Object__java_lang_Object@jsenum.Main (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (local.get $t)))))
  )
 )
 (elem declare func $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7)
 
-;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(T arg0)
+;;; void <anonymous> implements Consumer<SomeJsEnum>.accept(T t)
 (func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:36
  (local $this (ref null $jsenum.Main.$LambdaImplementor$7))
  (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$7) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:344:36
-  (call $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $arg0)))
+  (call $m_accept__jsenum_Main_SomeJsEnum__void@jsenum.Main.$LambdaImplementor$7 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.SomeJsEnum) (local.get $t)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@jsenum.Main.$LambdaImplementor$7)
@@ -3463,17 +3463,17 @@
 )
 (elem declare func $m_get__jsenum_Main_ComparableJsEnum@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
 
-;;; void ComparableJsEnumSupplierConsumerImpl.accept(ComparableJsEnum arg0)
+;;; void ComparableJsEnumSupplierConsumerImpl.accept(ComparableJsEnum t)
 (func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl
  (type $function.m_accept__jsenum_Main_ComparableJsEnum__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $jsenum.Main.ComparableJsEnum))
+ (param $t (ref null $jsenum.Main.ComparableJsEnum))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImpl))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImpl) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:307:15
-  (call $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_accept__java_lang_Object__void@jsenum.Main.SupplierConsumerImpl (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_accept__jsenum_Main_ComparableJsEnum__void@jsenum.Main.ComparableJsEnumSupplierConsumerImpl)
@@ -3593,17 +3593,17 @@
 )
 (elem declare func $m_get__java_lang_Object@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)
 
-;;; void ComparableJsEnumSupplierConsumerImplWithOverrides.accept(T arg0)
+;;; void ComparableJsEnumSupplierConsumerImplWithOverrides.accept(T t)
 (func $m_accept__java_lang_Object__void@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:310:15
  (local $this (ref null $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides))
  (local.set $this (ref.cast (ref $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:310:15
-  (call_ref $function.m_accept__jsenum_Main_ComparableJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $arg0))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable $m_accept__jsenum_Main_ComparableJsEnum__void (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides $vtable(local.get $this))))
+  (call_ref $function.m_accept__jsenum_Main_ComparableJsEnum__void (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $t))(struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides.vtable $m_accept__jsenum_Main_ComparableJsEnum__void (struct.get $jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides $vtable(local.get $this))))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@jsenum.Main.ComparableJsEnumSupplierConsumerImplWithOverrides)

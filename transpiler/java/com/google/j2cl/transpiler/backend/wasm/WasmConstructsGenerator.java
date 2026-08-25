@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -158,8 +159,8 @@ public class WasmConstructsGenerator {
               " (param (ref %s))",
               environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
     }
-    methodDescriptor
-        .getDispatchParameterTypeDescriptors()
+    methodDescriptor.getDispatchParameterDescriptors().stream()
+        .map(ParameterDescriptor::getTypeDescriptor)
         .forEach(t -> builder.append(format(" (param %s)", environment.getWasmType(t))));
   }
 

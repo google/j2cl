@@ -102,7 +102,7 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
   private static Method createDefaultDisambiguatingStub(Type type, MethodDescriptor targetMethod) {
 
     List<Variable> parameters =
-        AstUtils.createParameterVariables(targetMethod.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(targetMethod.getParameterDescriptors());
 
     ImmutableList<Expression> arguments =
         parameters.stream().map(Variable::createReference).collect(toImmutableList());

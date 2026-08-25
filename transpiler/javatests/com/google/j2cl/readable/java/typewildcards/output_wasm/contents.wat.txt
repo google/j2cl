@@ -1006,16 +1006,16 @@
  )
 )
 
-;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics(List<D> arg0)
+;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics(List<D> foo)
 (func $m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards
- (param $arg0 (ref null $java.lang.Object))
+ (param $foo (ref null $java.lang.Object))
  (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
   (call $$clinit__void_<once>_@typewildcards.TypeWildCards )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:161:50
-  (return (call $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (local.get $arg0)))
+  (return (call $m_createMultipleGenerics_$private__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (local.get $foo)))
  )
 )
 
@@ -1802,18 +1802,18 @@
 )
 (elem declare func $m_apply__typewildcards_TypeWildCards_HasKey__java_lang_Integer@typewildcards.TypeWildCards.$LambdaImplementor$1)
 
-;;; Integer <anonymous> implements Function<(HasKey&IntegerSupplier), Integer>.apply(I arg0)
+;;; Integer <anonymous> implements Function<(HasKey&IntegerSupplier), Integer>.apply(I i)
 (func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:127:12
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $typewildcards.TypeWildCards.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/typewildcards/readable-j2wasm.js/typewildcards/TypeWildCards.java:127:12
-  (return (call $m_apply__typewildcards_TypeWildCards_HasKey__java_lang_Integer@typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $arg0))))
+  (return (call $m_apply__typewildcards_TypeWildCards_HasKey__java_lang_Integer@typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (local.get $i))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)

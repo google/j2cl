@@ -62,7 +62,7 @@ public class AddVisibilityMethodBridgesJ2kt extends NormalizationPass {
             .orElseThrow();
 
     List<Variable> parameters =
-        AstUtils.createParameterVariables(overriddenMethod.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(overriddenMethod.getParameterDescriptors());
 
     ImmutableList<Expression> arguments =
         parameters.stream().map(Variable::createReference).collect(toImmutableList());

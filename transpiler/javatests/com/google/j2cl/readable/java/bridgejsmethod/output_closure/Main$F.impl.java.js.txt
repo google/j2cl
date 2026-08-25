@@ -29,13 +29,13 @@ class F extends A {
  }
  //Specialized bridge method.
  /** @override @return {Integer} */
- mNumber(/** Integer */ arg0) {
-  return /**@type {Integer}*/ ($Casts.$to(super.fun(arg0), Integer));
+ mNumber(/** Integer */ t) {
+  return /**@type {Integer}*/ ($Casts.$to(super.fun(t), Integer));
  }
  //Bridge method.
  /** @final @override @return {Integer} */
- fun(/** Integer */ arg0) {
-  return this.mNumber(/**@type {Integer}*/ ($Casts.$to(arg0, Integer)));
+ fun(/** Integer */ t) {
+  return this.mNumber(/**@type {Integer}*/ ($Casts.$to(t, Integer)));
  }
  /** @nodts */
  static $clinit() {

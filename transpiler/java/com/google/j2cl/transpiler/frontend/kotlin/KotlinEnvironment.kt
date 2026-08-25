@@ -631,6 +631,7 @@ internal class KotlinEnvironment(
                 .kotlinCoroutinesContinuation!!
                 .withTypeArguments(ImmutableList.of(TypeDescriptors.getUnknownType()))
             )
+            .setName("\$continuation")
             .build()
         )
       }
@@ -651,6 +652,7 @@ internal class KotlinEnvironment(
         parameterDescriptorsBuilder.add(
           MethodDescriptor.ParameterDescriptor.builder()
             .setTypeDescriptor(getTypeDescriptor(type))
+            .setName(param.sanitizedName)
             // A parameter is only considered optional if it has a default initializer AND it's
             // default bridge function, or is its own dispatch function.
             .setOptional(

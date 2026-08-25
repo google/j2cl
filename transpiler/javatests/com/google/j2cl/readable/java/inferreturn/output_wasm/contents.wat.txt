@@ -52,16 +52,16 @@
  )
 )
 
-;;; InferReturn<T> InferReturn.inferGeneric(T arg0)
+;;; InferReturn<T> InferReturn.inferGeneric(T foo)
 (func $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn
- (param $arg0 (ref null $java.lang.Object))
+ (param $foo (ref null $java.lang.Object))
  (result (ref null $inferreturn.InferReturn))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:23:35
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:23:35
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:23:35
-  (return (call $m_inferGeneric_$private__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $arg0)))
+  (return (call $m_inferGeneric_$private__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $foo)))
  )
 )
 
@@ -117,16 +117,16 @@
  )
 )
 
-;;; ArrayList<V> InferReturn.newArrayList(V arg0)
+;;; ArrayList<V> InferReturn.newArrayList(V foo)
 (func $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn
- (param $arg0 (ref null $java.lang.Object))
+ (param $foo (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:46:33
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:46:33
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:46:33
-  (return (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (local.get $arg0)))
+  (return (call $m_newArrayList_$private__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (local.get $foo)))
  )
 )
 
@@ -141,16 +141,16 @@
  )
 )
 
-;;; V[] InferReturn.newArray(V arg0)
+;;; V[] InferReturn.newArray(V foo)
 (func $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn
- (param $arg0 (ref null $java.lang.Object))
+ (param $foo (ref null $java.lang.Object))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:50:24
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:50:24
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:50:24
-  (return (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (local.get $arg0)))
+  (return (call $m_newArray_$private__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (local.get $foo)))
  )
 )
 
@@ -165,15 +165,15 @@
  )
 )
 
-;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> arg0)
+;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
 (func $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn
- (param $arg0 (ref null $java.util.ArrayList))
+ (param $foo (ref null $java.util.ArrayList))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:54:21
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:54:21
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:54:21
-  (call $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn (local.get $arg0))
+  (call $m_acceptsArrayListOfObject_$private__java_util_ArrayList__void@inferreturn.InferReturn (local.get $foo))
  )
 )
 
@@ -185,15 +185,15 @@
  )
 )
 
-;;; void InferReturn.acceptsArrayOfObject(Object[] arg0)
+;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
 (func $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn
- (param $arg0 (ref null $javaemul.internal.WasmArray.OfObject))
+ (param $foo (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:58:21
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:58:21
   (call $$clinit__void_<once>_@inferreturn.InferReturn )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/inferreturn/readable-j2wasm.js/inferreturn/InferReturn.java:58:21
-  (call $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $arg0))
+  (call $m_acceptsArrayOfObject_$private__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $foo))
  )
 )
 

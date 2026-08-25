@@ -30,13 +30,13 @@ class F extends A {
  }
  //Specialized bridge method.
  /** @override @suppress{visibility} @return {!Integer} */
- fNumber(/** !Integer */ arg0) {
-  return /**@type {!Integer}*/ ($Casts.$to(super.f(arg0), Integer));
+ fNumber(/** !Integer */ t) {
+  return /**@type {!Integer}*/ ($Casts.$to(super.f(t), Integer));
  }
  //Bridge method.
  /** @final @override @suppress{visibility} @return {!Integer} */
- f(/** !Integer */ arg0) {
-  return this.fNumber(/**@type {!Integer}*/ ($Casts.$to(arg0, Integer)));
+ f(/** !Integer */ t) {
+  return this.fNumber(/**@type {!Integer}*/ ($Casts.$to(t, Integer)));
  }
  /** @nodts */
  static $clinit() {

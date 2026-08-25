@@ -185,8 +185,8 @@ open class PackagePrivateBridgeSuper<T, U> internal constructor() {
 class PackagePrivateBridge<V, W> internal constructor(): PackagePrivateBridgeSuper<V, W>() {
  public fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m(r: R, s: S, v: V, w: W) {}
  
- override fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m_pp_bridgemethods(arg0: R, arg1: S, arg2: V, arg3: W) {
-  this.m(arg0, arg1, arg2, arg3)
+ override fun <S: V, R: PackagePrivateBridgeSuper<S, R>?> m_pp_bridgemethods(r: R, s: S, t: V, u: W) {
+  this.m(r, s, t, u)
  }
 }
 

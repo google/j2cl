@@ -64,8 +64,8 @@ open class JsMethodExample {
   @JsMethod(name = "o")
   override fun o_pp_jsmethod(s: String?) {}
   
-  override fun m_pp_jsmethod(arg0: String?) {
-   this.m(arg0)
+  override fun m_pp_jsmethod(t: String?) {
+   this.m(t)
   }
  }
  
@@ -73,8 +73,8 @@ open class JsMethodExample {
  internal open class SubJsType internal constructor(): Base<String?>() {
   public open fun m(s: String?) {}
   
-  override fun m_pp_jsmethod(arg0: String?) {
-   this.m(arg0)
+  override fun m_pp_jsmethod(t: String?) {
+   this.m(t)
   }
   
   companion object {
@@ -100,8 +100,8 @@ open class JsMethodExample {
  internal open class SubGenericsJsType<T> internal constructor(): Base<T>() {
   public open fun m(s: T) {}
   
-  override fun m_pp_jsmethod(arg0: T) {
-   this.m(arg0)
+  override fun m_pp_jsmethod(t: T) {
+   this.m(t)
   }
  }
  
@@ -110,8 +110,8 @@ open class JsMethodExample {
   @JsMethod(name = "renamedM")
   public open fun m(s: String?) {}
   
-  override fun m_pp_jsmethod(arg0: String?) {
-   this.m(arg0)
+  override fun m_pp_jsmethod(t: String?) {
+   this.m(t)
   }
  }
  

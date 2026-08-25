@@ -29,15 +29,15 @@ open class MethodReferences {
  companion object {
   @JvmStatic
   fun <T> testImplicitTypeArguments(): BiConsumer<Consumer<T>, T> = MethodReferences.apply<Consumer<T>, T>(
-   BiConsumer { arg0: Consumer<T>, arg1: T ->
-    arg0.accept(arg1)
+   BiConsumer { a: Consumer<T>, b: T ->
+    a.accept(b)
    },
   )
   
   @JvmStatic
   fun <T> testExplicitTypeArguments(): BiConsumer<Consumer<T>, T> = MethodReferences.apply<Consumer<T>, T>(
-   BiConsumer { arg0: Consumer<T>, arg1: T ->
-    arg0.accept(arg1)
+   BiConsumer { a: Consumer<T>, b: T ->
+    a.accept(b)
    },
   )
   
@@ -51,8 +51,8 @@ open class MethodReferences {
    val consumerFn: Consumer<Container<Any>>? = null
    val container: Container<Container<Any>>? = null
    container!!.apply(
-    Consumer { arg0: Container<Any> ->
-     consumerFn!!.accept(arg0)
+    Consumer { a: Container<Any> ->
+     consumerFn!!.accept(a)
     },
    )
   }

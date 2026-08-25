@@ -31,17 +31,17 @@ open class GenericMethodReferences {
  internal open fun test_pp_j2kt(instance: GenericMethodReferences) {
   this.accept_pp_j2kt(
    object : InterfaceWithGenericMethod {
-    override fun <T> apply(arg0: T): T = GenericMethodReferences.staticGenericMethod_pp_j2kt<T>(arg0)
+    override fun <T> apply(t: T): T = GenericMethodReferences.staticGenericMethod_pp_j2kt<T>(t)
    },
   )
   this.accept_pp_j2kt(
    object : InterfaceWithGenericMethod {
-    override fun <T> apply(arg0: T): T = this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(arg0)
+    override fun <T> apply(t: T): T = this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(t)
    },
   )
   this.accept_pp_j2kt(
    object : InterfaceWithGenericMethod {
-    override fun <T> apply(arg0: T): T = instance.instanceGenericMethod_pp_j2kt<T>(arg0)
+    override fun <T> apply(t: T): T = instance.instanceGenericMethod_pp_j2kt<T>(t)
    },
   )
  }

@@ -16,17 +16,17 @@
 )
 
 
-;;; GenericConstructor<T> GenericConstructor.$create(S arg0, T arg1)
+;;; GenericConstructor<T> GenericConstructor.$create(S s, T t)
 (func $$create__java_lang_Object__java_lang_Object@genericconstructor.GenericConstructor
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $genericconstructor.GenericConstructor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericconstructor/readable-j2wasm.js/genericconstructor/GenericConstructor.java:20:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericconstructor/readable-j2wasm.js/genericconstructor/GenericConstructor.java:20:13
   (call $$clinit__void_<once>_@genericconstructor.GenericConstructor )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericconstructor/readable-j2wasm.js/genericconstructor/GenericConstructor.java:20:13
-  (return (call $$create_$private__java_lang_Object__java_lang_Object@genericconstructor.GenericConstructor (local.get $arg0)(local.get $arg1)))
+  (return (call $$create_$private__java_lang_Object__java_lang_Object@genericconstructor.GenericConstructor (local.get $s)(local.get $t)))
  )
 )
 
@@ -59,16 +59,16 @@
  )
 )
 
-;;; GenericConstructor<T> GenericConstructor.$create(T arg0)
+;;; GenericConstructor<T> GenericConstructor.$create(T t)
 (func $$create__java_lang_Object@genericconstructor.GenericConstructor
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $genericconstructor.GenericConstructor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericconstructor/readable-j2wasm.js/genericconstructor/GenericConstructor.java:23:13
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericconstructor/readable-j2wasm.js/genericconstructor/GenericConstructor.java:23:13
   (call $$clinit__void_<once>_@genericconstructor.GenericConstructor )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericconstructor/readable-j2wasm.js/genericconstructor/GenericConstructor.java:23:13
-  (return (call $$create_$private__java_lang_Object@genericconstructor.GenericConstructor (local.get $arg0)))
+  (return (call $$create_$private__java_lang_Object@genericconstructor.GenericConstructor (local.get $t)))
  )
 )
 

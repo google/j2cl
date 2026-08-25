@@ -79,8 +79,7 @@ public class AddAbstractMethodStubs extends NormalizationPass {
                               .setEnclosingTypeDescriptor(type.getTypeDescriptor())
                               .makeAbstractStub(m)
                               .build())
-                      .setParameters(
-                          AstUtils.createParameterVariables(m.getParameterTypeDescriptors()))
+                      .setParameters(AstUtils.createParameterVariables(m.getParameterDescriptors()))
                       .setSourcePosition(SourcePosition.NONE)
                       .build());
             });

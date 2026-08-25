@@ -2988,16 +2988,16 @@
 )
 (elem declare func $m_factory__int__recordclass_RecordClass_PublicRecordWithPublicFactory@recordclass.RecordClass.PublicRecordWithPublicFactory)
 
-;;; PublicRecordWithPublicFactory PublicRecordWithPublicFactory.$create(int arg0)
+;;; PublicRecordWithPublicFactory PublicRecordWithPublicFactory.$create(int i)
 (func $$create__int@recordclass.RecordClass.PublicRecordWithPublicFactory
- (param $arg0 i32)
+ (param $i i32)
  (result (ref null $recordclass.RecordClass.PublicRecordWithPublicFactory))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:134:16
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:134:16
   (call $$clinit__void_<once>_@recordclass.RecordClass.PublicRecordWithPublicFactory )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/recordclass/readable-j2wasm.js/recordclass/RecordClass.java:134:16
-  (return (call $$create_$private__int@recordclass.RecordClass.PublicRecordWithPublicFactory (local.get $arg0)))
+  (return (call $$create_$private__int@recordclass.RecordClass.PublicRecordWithPublicFactory (local.get $i)))
  )
 )
 

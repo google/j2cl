@@ -301,7 +301,7 @@ public class ImplementRecordClasses extends NormalizationPass {
             .setNative(false)
             .build();
     List<Variable> parameters =
-        AstUtils.createParameterVariables(methodDescriptor.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(methodDescriptor.getParameterDescriptors());
     type.addMember(
         Method.builder()
             .setMethodDescriptor(generatedMethodDescriptor)

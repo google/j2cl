@@ -4721,34 +4721,34 @@
 )
 (elem declare func $m_nullableAdd__java_lang_String__java_lang_String@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
 
-;;; String ImplementsParameterizedInterface.add(T arg0)
+;;; String ImplementsParameterizedInterface.add(T t)
 (func $m_add__java_lang_Object__java_lang_Object@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
  (type $function.m_add__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:74:8
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
  (local.set $this (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:74:8
-  (return (call_ref $function.m_add__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_add__java_lang_String__java_lang_String (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this)))))
+  (return (call_ref $function.m_add__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_add__java_lang_String__java_lang_String (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_add__java_lang_Object__java_lang_Object@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
 
-;;; String ImplementsParameterizedInterface.nullableAdd(T arg0)
+;;; String ImplementsParameterizedInterface.nullableAdd(T t)
 (func $m_nullableAdd__java_lang_Object__java_lang_Object@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
  (type $function.m_nullableAdd__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:74:8
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
  (local.set $this (ref.cast (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/DefaultNotNullable.java:74:8
-  (return (call_ref $function.m_nullableAdd__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_nullableAdd__java_lang_String__java_lang_String (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this)))))
+  (return (call_ref $function.m_nullableAdd__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_nullableAdd__java_lang_String__java_lang_String (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_nullableAdd__java_lang_Object__java_lang_Object@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
@@ -5467,16 +5467,16 @@
  )
 )
 
-;;; Pair<K, V> TypeArgumentsInference.pairIdentity(Pair<K, V> arg0)
+;;; Pair<K, V> TypeArgumentsInference.pairIdentity(Pair<K, V> pair)
 (func $m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
- (param $arg0 (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ (param $pair (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
  (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
   (call $$clinit__void_<once>_@nullability.defaultnotnullable.TypeArgumentsInference )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
-  (return (call $m_pairIdentity_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference (local.get $arg0)))
+  (return (call $m_pairIdentity_$private__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference (local.get $pair)))
  )
 )
 
@@ -7753,15 +7753,15 @@
 )
 (elem declare func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
 
-;;; void ExplicitNotNullable.consume(T arg0)
+;;; void ExplicitNotNullable.consume(T t)
 (func $m_consume__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:382:18
-  (call $m_consume_$private__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $arg0))
+  (call $m_consume_$private__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $t))
  )
 )
 
@@ -7844,16 +7844,16 @@
  )
 )
 
-;;; T ExplicitNotNullable.assertNotNull(T arg0)
+;;; T ExplicitNotNullable.assertNotNull(T nullable)
 (func $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable
- (param $arg0 (ref null $java.lang.Object))
+ (param $nullable (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
   (call $$clinit__void_<once>_@nullability.explicitnotnullable.ExplicitNotNullable )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:431:15
-  (return (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $arg0)))
+  (return (call $m_assertNotNull_$private__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
  )
 )
 
@@ -9442,17 +9442,17 @@
 )
 (elem declare func $m_accept__java_lang_String__void@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1)
 
-;;; void <anonymous> implements NullMarkedConsumer<String>.accept(T arg0)
+;;; void <anonymous> implements NullMarkedConsumer<String>.accept(T t)
 (func $m_accept__java_lang_Object__void@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:359:40
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:359:40
-  (call $m_accept__java_lang_String__void@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_accept__java_lang_String__void@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$1)
@@ -9605,34 +9605,34 @@
  )
 )
 
-;;; String[] <anonymous> implements NullMarkedIntFunction<String[]>.accept(int arg0)
+;;; String[] <anonymous> implements NullMarkedIntFunction<String[]>.accept(int i)
 (func $m_accept__int__arrayOf_java_lang_String@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3
  (type $function.m_accept__int__arrayOf_java_lang_String)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
+ (param $i i32)
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:361:56
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:361:56
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $arg0)))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $i)))
  )
 )
 (elem declare func $m_accept__int__arrayOf_java_lang_String@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3)
 
-;;; String[] <anonymous> implements NullMarkedIntFunction<String[]>.accept(int arg0)
+;;; String[] <anonymous> implements NullMarkedIntFunction<String[]>.accept(int i)
 (func $m_accept__int__java_lang_Object@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3
  (type $function.m_accept__int__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
+ (param $i i32)
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:361:56
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/defaultnullable/DefaultNullable.java:361:56
-  (return (call $m_accept__int__arrayOf_java_lang_String@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_accept__int__arrayOf_java_lang_String@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3 (ref.as_non_null (local.get $this))(local.get $i)))
  )
 )
 (elem declare func $m_accept__int__java_lang_Object@nullability.defaultnullable.DefaultNullable.$LambdaImplementor$3)
@@ -9709,17 +9709,17 @@
 )
 (elem declare func $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1)
 
-;;; void <anonymous> implements Consumer<String>.accept(T arg0)
+;;; void <anonymous> implements Consumer<String>.accept(T t)
 (func $m_accept__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:364:30
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:364:30
-  (call $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$1)
@@ -9783,32 +9783,32 @@
  )
 )
 
-;;; void <anonymous> implements Consumer<String>.accept(String arg0)
+;;; void <anonymous> implements Consumer<String>.accept(String t)
 (func $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2
  (type $function.m_accept__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $t (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:365:32
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:365:32
-  (call $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable (local.get $arg0))
+  (call $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable (local.get $t))
  )
 )
 (elem declare func $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2)
 
-;;; void <anonymous> implements Consumer<String>.accept(T arg0)
+;;; void <anonymous> implements Consumer<String>.accept(T t)
 (func $m_accept__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:365:32
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:365:32
-  (call $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$2)
@@ -9872,32 +9872,32 @@
  )
 )
 
-;;; void <anonymous> implements Consumer<String>.accept(String arg0)
+;;; void <anonymous> implements Consumer<String>.accept(String t)
 (func $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3
  (type $function.m_accept__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $t (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:366:35
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:366:35
-  (call $m_nonNullableAccept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $arg0))
+  (call $m_nonNullableAccept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $t))
  )
 )
 (elem declare func $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3)
 
-;;; void <anonymous> implements Consumer<String>.accept(T arg0)
+;;; void <anonymous> implements Consumer<String>.accept(T t)
 (func $m_accept__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3
  (type $function.m_accept__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:366:35
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:366:35
-  (call $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_accept__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_accept__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$3)
@@ -10035,34 +10035,34 @@
  )
 )
 
-;;; Object[] <anonymous> implements IntFunction<Object[]>.accept(int arg0)
+;;; Object[] <anonymous> implements IntFunction<Object[]>.accept(int i)
 (func $m_accept__int__arrayOf_java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5
  (type $function.m_accept__int__arrayOf_java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
+ (param $i i32)
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:368:37
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:368:37
-  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $arg0)))
+  (return (call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $i)))
  )
 )
 (elem declare func $m_accept__int__arrayOf_java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5)
 
-;;; Object[] <anonymous> implements IntFunction<Object[]>.accept(int arg0)
+;;; Object[] <anonymous> implements IntFunction<Object[]>.accept(int i)
 (func $m_accept__int__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5
  (type $function.m_accept__int__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
+ (param $i i32)
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:368:37
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:368:37
-  (return (call $m_accept__int__arrayOf_java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_accept__int__arrayOf_java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5 (ref.as_non_null (local.get $this))(local.get $i)))
  )
 )
 (elem declare func $m_accept__int__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5)
@@ -10142,18 +10142,18 @@
 )
 (elem declare func $m_apply__java_lang_String__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6)
 
-;;; String <anonymous> implements Function<String, String>.apply(I arg0)
+;;; String <anonymous> implements Function<String, String>.apply(I i)
 (func $m_apply__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:395:22
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6))
  (local.set $this (ref.cast (ref $nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nullability/readable-j2wasm.js/nullability/explicitnotnullable/ExplicitNotNullable.java:395:22
-  (return (call $m_apply__java_lang_String__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))))
+  (return (call $m_apply__java_lang_String__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $i))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$6)

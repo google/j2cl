@@ -889,21 +889,21 @@ open class Collections {
  
  @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
  abstract class CustomMapDisambiguatingOverrides<K, V>: CustomMap<K, V>(), MutableMapJvm<K, V> {
-  override fun getOrDefault(arg0: K, arg1: V): V {
-   val arg1_1: V? = arg1
-   val arg0_1: Any? = arg0
+  override fun getOrDefault(key: K, defaultValue: V): V {
+   val defaultValue_1: V? = defaultValue
+   val key_1: Any? = key
    return super<CustomMap>.getOrDefault(
-    arg0_1 as K,
-    arg1_1 as V,
+    key_1 as K,
+    defaultValue_1 as V,
    ) as V
   }
   
-  override fun remove(arg0: K, arg1: V): Boolean {
-   val arg1_1: Any? = arg1
-   val arg0_1: Any? = arg0
+  override fun remove(key: K, value: V): Boolean {
+   val value_1: Any? = value
+   val key_1: Any? = key
    return super<CustomMap>.remove(
-    arg0_1 as K,
-    arg1_1 as V,
+    key_1 as K,
+    value_1 as V,
    )
   }
  }

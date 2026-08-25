@@ -551,18 +551,18 @@
 )
 (elem declare func $m_accept__java_lang_String__java_lang_Integer@overwrittentypevariables.ParameterizedTypeImpl)
 
-;;; Integer ParameterizedTypeImpl.accept(F arg0)
+;;; Integer ParameterizedTypeImpl.accept(F value)
 (func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl
  (type $function.m_accept__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/ParameterizedType.java:28:6
  (local $this (ref null $overwrittentypevariables.ParameterizedTypeImpl))
  (local.set $this (ref.cast (ref $overwrittentypevariables.ParameterizedTypeImpl) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/ParameterizedType.java:28:6
-  (return (call_ref $function.m_accept__java_lang_String__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $overwrittentypevariables.ParameterizedTypeImpl.vtable $m_accept__java_lang_String__java_lang_Integer (struct.get $overwrittentypevariables.ParameterizedTypeImpl $vtable(local.get $this)))))
+  (return (call_ref $function.m_accept__java_lang_String__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $value))(struct.get $overwrittentypevariables.ParameterizedTypeImpl.vtable $m_accept__java_lang_String__java_lang_Integer (struct.get $overwrittentypevariables.ParameterizedTypeImpl $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_accept__java_lang_Object__java_lang_Object@overwrittentypevariables.ParameterizedTypeImpl)
@@ -710,18 +710,18 @@
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$1)
 
-;;; String <anonymous> implements HashFunction<T>.apply(F arg0)
+;;; String <anonymous> implements HashFunction<T>.apply(F input)
 (func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$1
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $input (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/HashFunctions.java:28:20
  (local $this (ref null $overwrittentypevariables.HashFunctions.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $overwrittentypevariables.HashFunctions.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/HashFunctions.java:28:20
-  (return (call $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(local.get $input)))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$1)
@@ -801,18 +801,18 @@
 )
 (elem declare func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$2)
 
-;;; String <anonymous> implements HashFunction<T>.apply(F arg0)
+;;; String <anonymous> implements HashFunction<T>.apply(F input)
 (func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$2
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $input (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/HashFunctions.java:37:20
  (local $this (ref null $overwrittentypevariables.HashFunctions.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $overwrittentypevariables.HashFunctions.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/overwrittentypevariables/readable-j2wasm.js/overwrittentypevariables/HashFunctions.java:37:20
-  (return (call $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.$LambdaImplementor$2 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $input))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.$LambdaImplementor$2)

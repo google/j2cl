@@ -541,32 +541,32 @@
  )
 )
 
-;;; void A.foo(T arg0)
+;;; void A.foo(T t)
 (func $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.A
  (type $function.m_foo__interfaces_AccidentalOverride_Left__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:35:22
  (local $this (ref null $interfaces.AccidentalOverride.A))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.A) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:35:22
-  (call $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.Left (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.Left (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.A)
 
-;;; void A.foo(V arg0)
+;;; void A.foo(V t)
 (func $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.A
  (type $function.m_foo__interfaces_AccidentalOverride_Right__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:35:22
  (local $this (ref null $interfaces.AccidentalOverride.A))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.A) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:35:22
-  (call $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.Right (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.Right (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.A)
@@ -765,17 +765,17 @@
  )
 )
 
-;;; void $LambdaAdaptor.defaultMethod(T arg0)
+;;; void $LambdaAdaptor.defaultMethod(T t)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface.$LambdaAdaptor
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
  (local $this (ref null $interfaces.Main.Interface.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $interfaces.Main.Interface.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:20:12
-  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface.$LambdaAdaptor)
@@ -898,62 +898,62 @@
  )
 )
 
-;;; void B.foo(T arg0)
+;;; void B.foo(T t)
 (func $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.B
  (type $function.m_foo__interfaces_AccidentalOverride_Left__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
  (local $this (ref null $interfaces.AccidentalOverride.B))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.B) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
-  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.B) (local.get $arg0)))
+  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.B) (local.get $t)))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.B)
 
-;;; void B.foo(V arg0)
+;;; void B.foo(V t)
 (func $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.B
  (type $function.m_foo__interfaces_AccidentalOverride_Right__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
  (local $this (ref null $interfaces.AccidentalOverride.B))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.B) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
-  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.B) (local.get $arg0)))
+  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.B) (local.get $t)))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.B)
 
-;;; void B.foo(T arg0)
+;;; void B.foo(T t)
 (func $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.B
  (type $function.m_foo__interfaces_AccidentalOverride_Bottom__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
  (local $this (ref null $interfaces.AccidentalOverride.B))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.B) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
-  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.B) (local.get $arg0)))
+  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.B) (local.get $t)))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.B)
 
-;;; void B.foo(B arg0)
+;;; void B.foo(B t)
 (func $m_foo__interfaces_AccidentalOverride_B__void@interfaces.AccidentalOverride.B
  (type $function.m_foo__interfaces_AccidentalOverride_B__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $interfaces.AccidentalOverride.B))
+ (param $t (ref null $interfaces.AccidentalOverride.B))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
  (local $this (ref null $interfaces.AccidentalOverride.B))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.B) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:37:22
-  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.Bottom (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_B__void@interfaces.AccidentalOverride.B)
@@ -1045,47 +1045,47 @@
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_C__void@interfaces.AccidentalOverride.C)
 
-;;; void C.foo(T arg0)
+;;; void C.foo(T t)
 (func $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.C
  (type $function.m_foo__interfaces_AccidentalOverride_Left__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:39:22
  (local $this (ref null $interfaces.AccidentalOverride.C))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.C) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:39:22
-  (call_ref $function.m_foo__interfaces_AccidentalOverride_C__void (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.C) (local.get $arg0))(struct.get $interfaces.AccidentalOverride.C.vtable $m_foo__interfaces_AccidentalOverride_C__void (struct.get $interfaces.AccidentalOverride.C $vtable(local.get $this))))
+  (call_ref $function.m_foo__interfaces_AccidentalOverride_C__void (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.C) (local.get $t))(struct.get $interfaces.AccidentalOverride.C.vtable $m_foo__interfaces_AccidentalOverride_C__void (struct.get $interfaces.AccidentalOverride.C $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Left__void@interfaces.AccidentalOverride.C)
 
-;;; void C.foo(T arg0)
+;;; void C.foo(T t)
 (func $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.C
  (type $function.m_foo__interfaces_AccidentalOverride_Right__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:39:22
  (local $this (ref null $interfaces.AccidentalOverride.C))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.C) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:39:22
-  (call_ref $function.m_foo__interfaces_AccidentalOverride_C__void (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.C) (local.get $arg0))(struct.get $interfaces.AccidentalOverride.C.vtable $m_foo__interfaces_AccidentalOverride_C__void (struct.get $interfaces.AccidentalOverride.C $vtable(local.get $this))))
+  (call_ref $function.m_foo__interfaces_AccidentalOverride_C__void (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.C) (local.get $t))(struct.get $interfaces.AccidentalOverride.C.vtable $m_foo__interfaces_AccidentalOverride_C__void (struct.get $interfaces.AccidentalOverride.C $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Right__void@interfaces.AccidentalOverride.C)
 
-;;; void C.foo(T arg0)
+;;; void C.foo(T t)
 (func $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.C
  (type $function.m_foo__interfaces_AccidentalOverride_Bottom__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:39:22
  (local $this (ref null $interfaces.AccidentalOverride.C))
  (local.set $this (ref.cast (ref $interfaces.AccidentalOverride.C) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/AccidentalOverride.java:39:22
-  (call_ref $function.m_foo__interfaces_AccidentalOverride_C__void (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.C) (local.get $arg0))(struct.get $interfaces.AccidentalOverride.C.vtable $m_foo__interfaces_AccidentalOverride_C__void (struct.get $interfaces.AccidentalOverride.C $vtable(local.get $this))))
+  (call_ref $function.m_foo__interfaces_AccidentalOverride_C__void (ref.as_non_null (local.get $this))(ref.cast (ref null $interfaces.AccidentalOverride.C) (local.get $t))(struct.get $interfaces.AccidentalOverride.C.vtable $m_foo__interfaces_AccidentalOverride_C__void (struct.get $interfaces.AccidentalOverride.C $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__interfaces_AccidentalOverride_Bottom__void@interfaces.AccidentalOverride.C)
@@ -1147,32 +1147,32 @@
  )
 )
 
-;;; void $LambdaAdaptor.defaultMethod(T arg0)
+;;; void $LambdaAdaptor.defaultMethod(T t)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.SubInterface.$LambdaAdaptor
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
  (local $this (ref null $interfaces.Main.SubInterface.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $interfaces.Main.SubInterface.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.SubInterface.$LambdaAdaptor)
 
-;;; void $LambdaAdaptor.defaultMethod(String arg0)
+;;; void $LambdaAdaptor.defaultMethod(String s)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface.$LambdaAdaptor
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
  (local $this (ref null $interfaces.Main.SubInterface.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $interfaces.Main.SubInterface.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:38:12
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface.$LambdaAdaptor)
@@ -1267,32 +1267,32 @@
 )
 (elem declare func $m_interfaceMethod__void@interfaces.Main.Implementor)
 
-;;; void Implementor.defaultMethod(T arg0)
+;;; void Implementor.defaultMethod(T t)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
 
-;;; void Implementor.defaultMethod(String arg0)
+;;; void Implementor.defaultMethod(String s)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (ref $interfaces.Main.Implementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:44:8
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
@@ -1359,32 +1359,32 @@
  )
 )
 
-;;; void AbstractImplementor.defaultMethod(T arg0)
+;;; void AbstractImplementor.defaultMethod(T t)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor)
 
-;;; void AbstractImplementor.defaultMethod(String arg0)
+;;; void AbstractImplementor.defaultMethod(String s)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.AbstractImplementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:50:17
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor)
@@ -1481,32 +1481,32 @@
 )
 (elem declare func $m_interfaceMethod__void@interfaces.Main.EnumImplementor)
 
-;;; void EnumImplementor.defaultMethod(T arg0)
+;;; void EnumImplementor.defaultMethod(T t)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor
  (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:57:7
  (local $this (ref null $interfaces.Main.EnumImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:57:7
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0)))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t)))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.EnumImplementor)
 
-;;; void EnumImplementor.defaultMethod(String arg0)
+;;; void EnumImplementor.defaultMethod(String s)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor
  (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:57:7
  (local $this (ref null $interfaces.Main.EnumImplementor))
  (local.set $this (ref.cast (ref $interfaces.Main.EnumImplementor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/interfaces/readable-j2wasm.js/interfaces/Main.java:57:7
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.EnumImplementor)

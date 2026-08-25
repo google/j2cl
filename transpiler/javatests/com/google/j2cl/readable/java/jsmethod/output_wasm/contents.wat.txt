@@ -667,17 +667,17 @@
 )
 (elem declare func $m_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
 
-;;; void Base.m(WasmExtern arg0)
+;;; void Base.m(WasmExtern t)
 (func $js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
  (type $function.js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null extern))
+ (param $t (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
  (local $this (ref null $jsmethod.JsMethodExample.Base))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Base) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:38:9
-  (call_ref $function.m_m__java_lang_Object__void_$pp_jsmethod (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $arg0)))(struct.get $jsmethod.JsMethodExample.Base.vtable $m_m__java_lang_Object__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Base(local.get $this))))
+  (call_ref $function.m_m__java_lang_Object__void_$pp_jsmethod (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $t)))(struct.get $jsmethod.JsMethodExample.Base.vtable $m_m__java_lang_Object__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Base(local.get $this))))
  )
 )
 (elem declare func $js_export_m__javaemul_internal_WasmExtern__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
@@ -860,17 +860,17 @@
  )
 )
 
-;;; void AbstractTypeExposingJsMethod.abstractJsMethod(NativeString arg0)
+;;; void AbstractTypeExposingJsMethod.abstractJsMethod(NativeString s)
 (func $js_export_abstractJsMethod__java_lang_String_NativeString__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
  (type $function.js_export_abstractJsMethod__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null string))
+ (param $s (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:25
  (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:121:25
-  (call_ref $function.m_abstractJsMethod__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.vtable $m_abstractJsMethod__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod(local.get $this))))
+  (call_ref $function.m_abstractJsMethod__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.vtable $m_abstractJsMethod__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod(local.get $this))))
  )
 )
 (elem declare func $js_export_abstractJsMethod__java_lang_String_NativeString__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
@@ -1158,24 +1158,24 @@
 )
 (elem declare func $m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
 
-;;; void ExposesMethodWithDifferentTypes.m(NativeString arg0, WasmExtern arg1, WasmExtern arg2, WasmExtern arg3, WasmExtern arg4, WasmExtern arg5, NativeFoo arg6, ExposesMethodWithDifferentTypes<T> arg7)
+;;; void ExposesMethodWithDifferentTypes.m(NativeString s, WasmExtern d, WasmExtern l, WasmExtern c, WasmExtern o, WasmExtern t, NativeFoo nf, ExposesMethodWithDifferentTypes<T> e)
 (func $js_export_m__java_lang_String_NativeString__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
  (type $function.js_export_m__java_lang_String_NativeString__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null string))
- (param $arg1 (ref null extern))
- (param $arg2 (ref null extern))
- (param $arg3 (ref null extern))
- (param $arg4 (ref null extern))
- (param $arg5 (ref null extern))
- (param $arg6 (ref null extern))
- (param $arg7 (ref null $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes))
+ (param $s (ref null string))
+ (param $d (ref null extern))
+ (param $l (ref null extern))
+ (param $c (ref null extern))
+ (param $o (ref null extern))
+ (param $t (ref null extern))
+ (param $nf (ref null extern))
+ (param $e (ref null $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:147:16
  (local $this (ref null $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:147:16
-  (call_ref $function.m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(call $m_fromJs__java_lang_Double_NativeNumber__java_lang_Double@java.lang.Double (local.get $arg1))(call $m_fromJs__java_lang_Long_NativeLong__java_lang_Long@java.lang.Long (local.get $arg2))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $arg3)))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $arg4))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $arg5)))(local.get $arg6)(local.get $arg7)(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(call $m_fromJs__java_lang_Double_NativeNumber__java_lang_Double@java.lang.Double (local.get $d))(call $m_fromJs__java_lang_Long_NativeLong__java_lang_Long@java.lang.Long (local.get $l))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $c)))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $o))(ref.cast (ref null $java.lang.Object) (any.convert_extern (local.get $t)))(local.get $nf)(local.get $e)(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))
  )
 )
 (elem declare func $js_export_m__java_lang_String_NativeString__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
@@ -1363,47 +1363,47 @@
 )
 (elem declare func $m_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub)
 
-;;; void Sub.m(T arg0)
+;;; void Sub.m(T t)
 (func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:54:15
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:54:15
-  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub)
 
-;;; void Sub.m(NativeString arg0)
+;;; void Sub.m(NativeString s)
 (func $js_export_m__java_lang_String_NativeString__void@jsmethod.JsMethodExample.Sub
  (type $function.js_export_m__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null string))
+ (param $s (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:55:16
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:55:16
-  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
 (elem declare func $js_export_m__java_lang_String_NativeString__void@jsmethod.JsMethodExample.Sub)
 
-;;; void Sub.o(NativeString arg0)
+;;; void Sub.o(NativeString s)
 (func $js_export_o__java_lang_String_NativeString__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
  (type $function.js_export_o__java_lang_String_NativeString__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null string))
+ (param $s (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:59:9
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.Sub) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:59:9
-  (call_ref $function.m_o__java_lang_String__void_$pp_jsmethod (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_o__java_lang_String__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
+  (call_ref $function.m_o__java_lang_String__void_$pp_jsmethod (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_o__java_lang_String__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
 (elem declare func $js_export_o__java_lang_String_NativeString__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub)
@@ -1502,17 +1502,17 @@
  )
 )
 
-;;; void SubJsType.m(T arg0)
+;;; void SubJsType.m(T t)
 (func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.SubJsType
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:63:15
  (local $this (ref null $jsmethod.JsMethodExample.SubJsType))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsType) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:63:15
-  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsmethod.JsMethodExample.SubJsType.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsType(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(struct.get $jsmethod.JsMethodExample.SubJsType.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsType(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.SubJsType)
@@ -1602,17 +1602,17 @@
 )
 (elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.SubGenericsJsType)
 
-;;; void SubGenericsJsType.m(T arg0)
+;;; void SubGenericsJsType.m(T t)
 (func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.SubGenericsJsType
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:15
  (local $this (ref null $jsmethod.JsMethodExample.SubGenericsJsType))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubGenericsJsType) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:86:15
-  (call_ref $function.m_m__java_lang_Object__void (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $jsmethod.JsMethodExample.SubGenericsJsType.vtable $m_m__java_lang_Object__void (ref.get_desc $jsmethod.JsMethodExample.SubGenericsJsType(local.get $this))))
+  (call_ref $function.m_m__java_lang_Object__void (ref.as_non_null (local.get $this))(local.get $t)(struct.get $jsmethod.JsMethodExample.SubGenericsJsType.vtable $m_m__java_lang_Object__void (ref.get_desc $jsmethod.JsMethodExample.SubGenericsJsType(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.SubGenericsJsType)
@@ -1702,32 +1702,32 @@
 )
 (elem declare func $m_m__java_lang_String__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod)
 
-;;; void SubJsTypeWithRenamedJsMethod.m(T arg0)
+;;; void SubJsTypeWithRenamedJsMethod.m(T t)
 (func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
  (type $function.m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:91:15
  (local $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:91:15
-  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod)
 
-;;; void SubJsTypeWithRenamedJsMethod.m(NativeString arg0)
+;;; void SubJsTypeWithRenamedJsMethod.m(NativeString s)
 (func $js_export_m__java_lang_String_NativeString__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
  (type $function.js_export_m__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null string))
+ (param $s (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:16
  (local $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:93:16
-  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
  )
 )
 (elem declare func $js_export_m__java_lang_String_NativeString__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod)
@@ -2150,17 +2150,17 @@
 )
 (elem declare func $m_r__java_lang_String__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers)
 
-;;; void ConcreteGreatGrandChildTypeWithNewJsMembers.r(NativeString arg0)
+;;; void ConcreteGreatGrandChildTypeWithNewJsMembers.r(NativeString s)
 (func $js_export_r__java_lang_String_NativeString__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers
  (type $function.js_export_r__java_lang_String_NativeString__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null string))
+ (param $s (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:82:16
  (local $this (ref null $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:82:16
-  (call_ref $function.m_r__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers.vtable $m_r__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers(local.get $this))))
+  (call_ref $function.m_r__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers.vtable $m_r__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers(local.get $this))))
  )
 )
 (elem declare func $js_export_r__java_lang_String_NativeString__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers)

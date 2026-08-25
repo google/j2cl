@@ -304,14 +304,14 @@ open class ExplicitNotNullable {
   internal fun testLambdaNullability_pp_nullability_explicitnotnullable() {
    val lambda: Consumer<String> = Consumer { s: String ->
    }
-   val nullable: Consumer<String> = Consumer { arg0: String ->
-    DefaultNullable.nullableAccept_pp_nullability_explicitnotnullable(arg0)
+   val nullable: Consumer<String> = Consumer { t: String ->
+    DefaultNullable.nullableAccept_pp_nullability_explicitnotnullable(t)
    }
-   val nonNullable: Consumer<String> = Consumer { arg0_1: String ->
-    ExplicitNotNullable.nonNullableAccept_pp_nullability_explicitnotnullable(arg0_1)
+   val nonNullable: Consumer<String> = Consumer { t_1: String ->
+    ExplicitNotNullable.nonNullableAccept_pp_nullability_explicitnotnullable(t_1)
    }
    val newObject: Supplier<Any> = Supplier { Any() }
-   val newArray: IntFunction<Array<Any>> = IntFunction { arg0_2: Int -> uninitializedArrayOf<Any>(arg0_2) }
+   val newArray: IntFunction<Array<Any>> = IntFunction { i: Int -> uninitializedArrayOf<Any>(i) }
   }
   
   @JvmStatic

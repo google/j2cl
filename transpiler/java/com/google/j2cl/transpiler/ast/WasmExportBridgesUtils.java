@@ -37,7 +37,7 @@ public class WasmExportBridgesUtils {
       MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor bridgeMethodDescriptor = createBridgeDescriptor(methodDescriptor, origin);
     List<Variable> parameters =
-        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterDescriptors());
 
     ImmutableList<Expression> arguments =
         Streams.zip(
@@ -97,8 +97,7 @@ public class WasmExportBridgesUtils {
       FieldDescriptor fieldDescriptor, SourcePosition sourcePosition) {
     MethodDescriptor bridgeMethodDescriptor = createSetterBridgeDescriptor(fieldDescriptor);
     Variable valueParameter =
-        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterTypeDescriptors())
-            .get(0);
+        AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterDescriptors()).get(0);
 
     return Method.builder()
         .setMethodDescriptor(bridgeMethodDescriptor)

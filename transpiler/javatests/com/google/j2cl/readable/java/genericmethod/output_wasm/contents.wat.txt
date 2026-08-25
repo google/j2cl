@@ -527,15 +527,15 @@
 )
 (elem declare func $m_test__void@genericmethod.GenericMethod)
 
-;;; void GenericMethod.acceptsContent(Content arg0)
+;;; void GenericMethod.acceptsContent(Content content)
 (func $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod
- (param $arg0 (ref null $genericmethod.GenericMethod.Content))
+ (param $content (ref null $genericmethod.GenericMethod.Content))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:96:21
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:96:21
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:96:21
-  (call $m_acceptsContent_$private__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $arg0))
+  (call $m_acceptsContent_$private__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $content))
  )
 )
 
@@ -547,15 +547,15 @@
  )
 )
 
-;;; void GenericMethod.acceptsString(String arg0)
+;;; void GenericMethod.acceptsString(String string)
 (func $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod
- (param $arg0 (ref null $java.lang.String))
+ (param $string (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:98:21
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:98:21
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:98:21
-  (call $m_acceptsString_$private__java_lang_String__void@genericmethod.GenericMethod (local.get $arg0))
+  (call $m_acceptsString_$private__java_lang_String__void@genericmethod.GenericMethod (local.get $string))
  )
 )
 
@@ -711,15 +711,15 @@
  )
 )
 
-;;; void GenericMethod.methodWithBoundTypeVariable(T arg0)
+;;; void GenericMethod.methodWithBoundTypeVariable(T unusedForInference)
 (func $m_methodWithBoundTypeVariable__java_lang_Number__void@genericmethod.GenericMethod
- (param $arg0 (ref null $java.lang.Number))
+ (param $unusedForInference (ref null $java.lang.Number))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
   (call $$clinit__void_<once>_@genericmethod.GenericMethod )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:173:33
-  (call $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod (local.get $arg0))
+  (call $m_methodWithBoundTypeVariable_$private__java_lang_Number__void@genericmethod.GenericMethod (local.get $unusedForInference))
  )
 )
 
@@ -797,32 +797,32 @@
  )
 )
 
-;;; void $LambdaAdaptor.publishSubject(T arg0)
+;;; void $LambdaAdaptor.publishSubject(T subject)
 (func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor
  (type $function.m_publishSubject__genericmethod_GenericMethod_Subject__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $subject (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
  (local $this (ref null $genericmethod.GenericMethod.Publisher.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Publisher.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
-  (call $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $subject))
  )
 )
 (elem declare func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor)
 
-;;; void $LambdaAdaptor.publishIntersectedSubject(T arg0)
+;;; void $LambdaAdaptor.publishIntersectedSubject(T subject)
 (func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor
  (type $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $subject (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
  (local $this (ref null $genericmethod.GenericMethod.Publisher.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Publisher.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:135:12
-  (call $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $subject))
  )
 )
 (elem declare func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher.$LambdaAdaptor)
@@ -1317,32 +1317,32 @@
  )
 )
 
-;;; void $LambdaAdaptor.publishSubject(T arg0)
+;;; void $LambdaAdaptor.publishSubject(T subject)
 (func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor
  (type $function.m_publishSubject__genericmethod_GenericMethod_Subject__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $subject (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
  (local $this (ref null $genericmethod.GenericMethod.Subject.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Subject.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
-  (call $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $subject))
  )
 )
 (elem declare func $m_publishSubject__genericmethod_GenericMethod_Subject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor)
 
-;;; void $LambdaAdaptor.publishIntersectedSubject(T arg0)
+;;; void $LambdaAdaptor.publishIntersectedSubject(T subject)
 (func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor
  (type $function.m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $subject (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
  (local $this (ref null $genericmethod.GenericMethod.Subject.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $genericmethod.GenericMethod.Subject.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericmethod/readable-j2wasm.js/genericmethod/GenericMethod.java:153:12
-  (call $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Publisher (ref.as_non_null (local.get $this))(local.get $subject))
  )
 )
 (elem declare func $m_publishIntersectedSubject__genericmethod_GenericMethod_OtherSubject__void@genericmethod.GenericMethod.Subject.$LambdaAdaptor)

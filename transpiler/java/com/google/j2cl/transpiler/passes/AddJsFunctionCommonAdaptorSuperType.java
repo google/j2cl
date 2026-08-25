@@ -171,7 +171,8 @@ public class AddJsFunctionCommonAdaptorSuperType extends NormalizationPass {
             .setReturnTypeDescriptor(returnType)
             .build();
 
-    List<Variable> parameters = AstUtils.createParameterVariables(parameterTypes);
+    List<Variable> parameters =
+        AstUtils.createParameterVariables(exportBridgeDescriptor.getParameterDescriptors());
 
     // static R m$export(WasmExtern adaptor, A a, B b, ...) {
     //   return toJs(fromJs(adaptor).m(fromJs(a), fromJs(b), ...));

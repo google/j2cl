@@ -53,12 +53,12 @@ class NullabilityPropagationWithMethodReferences {
   
   @JvmStatic
   fun testNewArray(): ArrayFactory<Foo> = NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo>>(
-   ArrayFactory { arg0: Int -> uninitializedArrayOf<Foo>(arg0) },
+   ArrayFactory { size: Int -> uninitializedArrayOf<Foo>(size) },
   )
   
   @JvmStatic
   fun testNullableNewArray(): ArrayFactory<Foo?> = NullabilityPropagationWithMethodReferences.apply<ArrayFactory<Foo?>>(
-   ArrayFactory { arg0: Int -> arrayOfNulls<Foo>(arg0) },
+   ArrayFactory { size: Int -> arrayOfNulls<Foo>(size) },
   )
  }
  

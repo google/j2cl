@@ -264,7 +264,7 @@ open class DefaultNullable {
    val lambda: NullMarkedConsumer<String?> = NullMarkedConsumer { s: String? ->
    }
    val constructorReference: NullMarkedSupplier<String?> = NullMarkedSupplier { String() }
-   val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction { arg0: Int -> arrayOfNulls<String>(arg0) }
+   val newArrayReference: NullMarkedIntFunction<Array<String?>?> = NullMarkedIntFunction { i: Int -> arrayOfNulls<String>(i) }
   }
   
   @JvmStatic

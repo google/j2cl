@@ -169,7 +169,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
     // of the lambda expression. That is done because the type for functions in Closure can not
     // define templates.
     List<Variable> parameters =
-        AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterDescriptors());
 
     // Does the method reference have a qualifier? I.e., the qualifier is not null and is not a
     // class name (modeled as a JsConstructorReference). Used in unqualified instance
@@ -251,7 +251,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
       SourcePosition sourcePosition) {
 
     List<Variable> parameters =
-        AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterDescriptors());
     checkArgument(
         targetConstructorMethodDescriptor.getParameterTypeDescriptors().size()
             == parameters.size());
@@ -291,7 +291,7 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
     Variable parameter =
         Iterables.getOnlyElement(
             AstUtils.createParameterVariables(
-                targetFunctionalMethodDescriptor.getParameterTypeDescriptors()));
+                targetFunctionalMethodDescriptor.getParameterDescriptors()));
 
     // The size of the array is the only parameter in the implemented function. It's legal for
     // the source to provide only one dimension parameter to to create a multidimensional array

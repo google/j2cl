@@ -47,7 +47,7 @@ open class StreamCollectWildcardProblem {
   fun testMethodReferenceMapCollect(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.map(
-     Function { arg0: Foo<*> -> arg0.getThis() },
+     Function { t: Foo<*> -> t.getThis() },
     ).collect(
      Collectors.toList<Foo<*>>(),
     ),
@@ -78,7 +78,7 @@ open class StreamCollectWildcardProblem {
   fun testMethodReferenceMapCollectWithExplicitTypeArgumentFix(list: Stream<Foo<*>>) {
    StreamCollectWildcardProblem.accept(
     list.map(
-     Function { arg0: Foo<*> -> arg0.getThis() },
+     Function { t: Foo<*> -> t.getThis() },
     ).collect(
      Collectors.toList<Foo<*>>(),
     ) as List<Foo<*>>,
@@ -104,13 +104,13 @@ open class StreamCollectWildcardProblem {
   @JvmStatic
   fun testNullabilityInference(stream1: Stream<Foo<Any>>, stream2: Stream<Foo<Any>>, b: Boolean): Stream<String> = Stream.of<Stream<String>?>(
    if (b) stream1.map<String>(
-    Function { arg0: Foo<Any> -> (arg0 as Foo<Any>).getString() },
+    Function { t: Foo<Any> -> (t as Foo<Any>).getString() },
    ) else null,
    if (b) stream2.map<String>(
-    Function { arg0_1: Foo<Any> -> (arg0_1 as Foo<Any>).getString() },
+    Function { t_1: Foo<Any> -> (t_1 as Foo<Any>).getString() },
    ) else null,
   ).filter(
-   Predicate { arg0_2: Stream<String>? -> Objects.nonNull(arg0_2) },
+   Predicate { t_2: Stream<String>? -> Objects.nonNull(t_2) },
   ).flatMap<String>(
    Function { stream: Stream<String>? -> stream } as Function<in Stream<String>?, out Stream<out String>>,
   )

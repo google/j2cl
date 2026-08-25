@@ -2047,17 +2047,17 @@
 )
 (elem declare func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas)
 
-;;; Enum<T> Lambdas.callTypeVariableWithBounds(GenericFunctionalInterface<Enum<T>> arg0, Enum<T> arg1)
+;;; Enum<T> Lambdas.callTypeVariableWithBounds(GenericFunctionalInterface<Enum<T>> intf, Enum<T> e)
 (func $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Enum))
+ (param $intf (ref null $java.lang.Object))
+ (param $e (ref null $java.lang.Enum))
  (result (ref null $java.lang.Enum))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:140:44
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:140:44
   (call $$clinit__void_<once>_@lambdas.Lambdas )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:140:44
-  (return (call $m_callTypeVariableWithBounds_$private__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (local.get $arg0)(local.get $arg1)))
+  (return (call $m_callTypeVariableWithBounds_$private__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (local.get $intf)(local.get $e)))
  )
 )
 
@@ -2490,18 +2490,18 @@
  )
 )
 
-;;; BiFunction<T, U, V> $LambdaAdaptor.andThen(Function<?, ?> arg0)
+;;; BiFunction<T, U, V> $LambdaAdaptor.andThen(Function<?, ?> after)
 (func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction.$LambdaAdaptor
  (type $function.m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $after (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:150:12
  (local $this (ref null $lambdas.Lambdas.BiFunction.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.BiFunction.$LambdaAdaptor) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:150:12
-  (return (call $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction (ref.as_non_null (local.get $this))(local.get $arg0)))
+  (return (call $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction (ref.as_non_null (local.get $this))(local.get $after)))
  )
 )
 (elem declare func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction.$LambdaAdaptor)
@@ -4936,18 +4936,18 @@
 )
 (elem declare func $m_m__java_lang_Error__java_lang_Error@lambdas.Lambdas.$LambdaImplementor$15)
 
-;;; Error <anonymous> implements GenericFunctionalInterface<Error>.m(T arg0)
+;;; Error <anonymous> implements GenericFunctionalInterface<Error>.m(T i)
 (func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$15
  (type $function.m_m__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:171:25
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$15) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:171:25
-  (return (call $m_m__java_lang_Error__java_lang_Error@lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0))))
+  (return (call $m_m__java_lang_Error__java_lang_Error@lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $i))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$15)
@@ -5027,18 +5027,18 @@
 )
 (elem declare func $m_m__java_lang_Error__java_lang_Error@lambdas.Lambdas.$LambdaImplementor$16)
 
-;;; Error <anonymous> implements GenericFunctionalInterface<Error>.m(T arg0)
+;;; Error <anonymous> implements GenericFunctionalInterface<Error>.m(T i)
 (func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$16
  (type $function.m_m__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:22
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$16) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:172:22
-  (return (call $m_m__java_lang_Error__java_lang_Error@lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $arg0))))
+  (return (call $m_m__java_lang_Error__java_lang_Error@lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Error) (local.get $i))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$16)
@@ -5118,18 +5118,18 @@
 )
 (elem declare func $m_m__java_lang_Enum__java_lang_Enum@lambdas.Lambdas.$LambdaImplementor$17)
 
-;;; Enum<T> <anonymous> implements GenericFunctionalInterface<Enum<T>>.m(T arg0)
+;;; Enum<T> <anonymous> implements GenericFunctionalInterface<Enum<T>>.m(T i)
 (func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$17
  (type $function.m_m__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:173:31
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$17) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:173:31
-  (return (call $m_m__java_lang_Enum__java_lang_Enum@lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $arg0))))
+  (return (call $m_m__java_lang_Enum__java_lang_Enum@lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $i))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$17)
@@ -5210,19 +5210,19 @@
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$18)
 
-;;; Double <anonymous> implements BiFunction<Object, String, Double>.apply(T arg0, U arg1)
+;;; Double <anonymous> implements BiFunction<Object, String, Double>.apply(T t, U u)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:175:8
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:175:8
-  (return (call $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast (ref null $java.lang.String) (local.get $arg1))))
+  (return (call $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (local.get $this))(local.get $t)(ref.cast (ref null $java.lang.String) (local.get $u))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$18)
@@ -5305,19 +5305,19 @@
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$19)
 
-;;; Double <anonymous> implements BiFunction<Object, String, Double>.apply(T arg0, U arg1)
+;;; Double <anonymous> implements BiFunction<Object, String, Double>.apply(T t, U u)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$19
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:178:23
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$19) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:178:23
-  (return (call $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast (ref null $java.lang.String) (local.get $arg1))))
+  (return (call $m_apply__java_lang_Object__java_lang_String__java_lang_Double@lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (local.get $this))(local.get $t)(ref.cast (ref null $java.lang.String) (local.get $u))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$19)
@@ -5399,18 +5399,18 @@
 )
 (elem declare func $m_apply__java_lang_Enum__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$20)
 
-;;; Object <anonymous> implements Function<T, Object>.apply(T arg0)
+;;; Object <anonymous> implements Function<T, Object>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$20
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:179:31
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$20) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:179:31
-  (return (call $m_apply__java_lang_Enum__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $arg0))))
+  (return (call $m_apply__java_lang_Enum__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Enum) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$20)
@@ -5490,18 +5490,18 @@
 )
 (elem declare func $m_apply__lambdas_Lambdas_Wrapper__java_lang_String@lambdas.Lambdas.$LambdaImplementor$21)
 
-;;; String <anonymous> implements Function<Wrapper<String>, String>.apply(T arg0)
+;;; String <anonymous> implements Function<Wrapper<String>, String>.apply(T t)
 (func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$21
  (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:180:43
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$21))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$21) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:180:43
-  (return (call $m_apply__lambdas_Lambdas_Wrapper__java_lang_String@lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (local.get $this))(ref.cast (ref null $lambdas.Lambdas.Wrapper) (local.get $arg0))))
+  (return (call $m_apply__lambdas_Lambdas_Wrapper__java_lang_String@lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (local.get $this))(ref.cast (ref null $lambdas.Lambdas.Wrapper) (local.get $t))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$21)
@@ -5806,48 +5806,48 @@
 )
 (elem declare func $m_m__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$25)
 
-;;; String <anonymous> implements GenericFunctionalInterface<String>.m(T arg0)
+;;; String <anonymous> implements GenericFunctionalInterface<String>.m(T i)
 (func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$25
  (type $function.m_m__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:76
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$25) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:76
-  (return (call $m_m__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$25 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))))
+  (return (call $m_m__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$25 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $i))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$25)
 
-;;; void <anonymous> implements GenericFunctionalInterface<String>.method(T arg0)
+;;; void <anonymous> implements GenericFunctionalInterface<String>.method(T t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.$LambdaImplementor$25
  (type $function.m_method__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:76
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$25) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:76
-  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $arg0)))
+  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $t)))
  )
 )
 (elem declare func $m_method__java_lang_Object__void@lambdas.Lambdas.$LambdaImplementor$25)
 
-;;; void <anonymous> implements GenericFunctionalInterface<String>.method(Number arg0)
+;;; void <anonymous> implements GenericFunctionalInterface<String>.method(Number t)
 (func $m_method__java_lang_Number__void@lambdas.Lambdas.$LambdaImplementor$25
  (type $function.m_method__java_lang_Number__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Number))
+ (param $t (ref null $java.lang.Number))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:76
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$25))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$25) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:301:76
-  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_method__java_lang_Number__void@lambdas.Lambdas.$LambdaImplementor$25)
@@ -5929,48 +5929,48 @@
 )
 (elem declare func $m_m__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$26)
 
-;;; String <anonymous> implements GenericFunctionalInterface<String>.m(T arg0)
+;;; String <anonymous> implements GenericFunctionalInterface<String>.m(T i)
 (func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$26
  (type $function.m_m__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:69
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$26) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:69
-  (return (call $m_m__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$26 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))))
+  (return (call $m_m__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$26 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $i))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$26)
 
-;;; void <anonymous> implements GenericFunctionalInterface<String>.method(S arg0)
+;;; void <anonymous> implements GenericFunctionalInterface<String>.method(S t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.$LambdaImplementor$26
  (type $function.m_method__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:69
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$26) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:69
-  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $arg0)))
+  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Number) (local.get $t)))
  )
 )
 (elem declare func $m_method__java_lang_Object__void@lambdas.Lambdas.$LambdaImplementor$26)
 
-;;; void <anonymous> implements GenericFunctionalInterface<String>.method(Number arg0)
+;;; void <anonymous> implements GenericFunctionalInterface<String>.method(Number t)
 (func $m_method__java_lang_Number__void@lambdas.Lambdas.$LambdaImplementor$26
  (type $function.m_method__java_lang_Number__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Number))
+ (param $t (ref null $java.lang.Number))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:69
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$26))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$26) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:304:69
-  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_method__java_lang_Number__void@lambdas.Lambdas.$LambdaImplementor$26)
@@ -6052,17 +6052,17 @@
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$27)
 
-;;; void <anonymous> implements GenericFunctionalInterface<U>.method(V arg0)
+;;; void <anonymous> implements GenericFunctionalInterface<U>.method(V t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.$LambdaImplementor$27
  (type $function.m_method__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:308:59
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$27))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$27) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:308:59
-  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(local.get $arg0))
+  (call $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_method__java_lang_Object__void@lambdas.Lambdas.$LambdaImplementor$27)
@@ -6145,19 +6145,19 @@
 )
 (elem declare func $m_apply__java_lang_String__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$28)
 
-;;; String <anonymous> implements BiFunction<String, String, String>.apply(T arg0, U arg1)
+;;; String <anonymous> implements BiFunction<String, String, String>.apply(T t, U u)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$28
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (param $arg1 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:317:78
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$28))
  (local.set $this (ref.cast (ref $lambdas.Lambdas.$LambdaImplementor$28) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:317:78
-  (return (call $m_apply__java_lang_String__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$28 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(ref.cast (ref null $java.lang.String) (local.get $arg1))))
+  (return (call $m_apply__java_lang_String__java_lang_String__java_lang_String@lambdas.Lambdas.$LambdaImplementor$28 (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $t))(ref.cast (ref null $java.lang.String) (local.get $u))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$28)

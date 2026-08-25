@@ -26,14 +26,14 @@ class $LambdaAdaptor extends j_l_Object {
   this.f_fn__suspendfunction_SuspendFunInterface_$LambdaAdaptor = fn;
  }
  /** @override @nodts @return {!Generator<*, string>} */
- *m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ arg0, /** string */ arg1) {
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(/** Continuation<?> */ $continuation, /** string */ param) {
   let /** ?function(Continuation<?>, string):!Generator<*, string> */ $function;
-  return ($function = this.f_fn__suspendfunction_SuspendFunInterface_$LambdaAdaptor, (yield* $function(arg0, arg1)));
+  return ($function = this.f_fn__suspendfunction_SuspendFunInterface_$LambdaAdaptor, (yield* $function($continuation, param)));
  }
  //Bridge method.
  /** @final @override @nodts @return {!Generator<*, string>} */
- *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ arg0, /** string */ arg1) {
-  return (yield* this.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_(arg0, /**@type {string}*/ ($Casts.$to(arg1, j_l_String))));
+ *m_suspendMe__kotlin_coroutines_Continuation__java_lang_Object__java_lang_Object_$s_(/** Continuation<?> */ $continuation, /** string */ param) {
+  return (yield* this.m_suspendMe__kotlin_coroutines_Continuation__java_lang_String__java_lang_String_$s_($continuation, /**@type {string}*/ ($Casts.$to(param, j_l_String))));
  }
  /** @nodts */
  static $clinit() {

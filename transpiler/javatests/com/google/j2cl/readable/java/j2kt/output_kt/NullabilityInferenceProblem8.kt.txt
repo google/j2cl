@@ -41,7 +41,7 @@ open class NullabilityInferenceProblem8 {
   fun testMethodReference(supplier: NullableSupplier<Any>) {
    NullabilityInferenceProblem8.acceptParameterized(
     NullabilityInferenceProblem8.nonNullWithLowerBound<String, Any>(
-     Function { arg0: String -> supplier.get(arg0) } as Function<in String, Any>,
+     Function { i: String -> supplier.get(i) } as Function<in String, Any>,
     ),
    )
   }
