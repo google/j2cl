@@ -14,6 +14,8 @@
 
 goog.module('jsfunction.JsFunctionTestHelper');
 
+const SomeJsType = goog.requireType('jsfunction.SomeJsType');
+
 
 /**
  * @return {Function}
@@ -41,6 +43,26 @@ exports.callAsFunctionNoArgument = function(fn) {
  */
 exports.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
+};
+
+/**
+ * @param {?} fn
+ * @param {!RegExp} arg
+ * @return {!RegExp}
+ * @public
+ */
+exports.callAsFunctionWithNativeType = function(fn, arg) {
+  return (/** @type {!Function} */ (fn))(arg);
+};
+
+/**
+ * @param {?} fn
+ * @param {!SomeJsType} arg
+ * @return {!SomeJsType}
+ * @public
+ */
+exports.callAsFunctionWithJsType = function(fn, arg) {
+  return (/** @type {!Function} */ (fn))(arg);
 };
 
 /**
@@ -90,6 +112,14 @@ exports.createReferentialFunction = function() {
 exports.createFunction = function() {
   var fun = function(a) { return a; };
   return fun;
+};
+
+/**
+ * @return {function(!SomeJsType):!SomeJsType}
+ * @public
+ */
+exports.createJsFunctionWithJsType = function() {
+  return function(a) { return a; };
 };
 
 /**

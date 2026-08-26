@@ -13,9 +13,11 @@ let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let JsFunctionTestHelper = goog.forwardDeclare('jsfunction.JsFunctionTestHelper');
 let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.Main.ClassWithJsFunctionProperty$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.Main.JsFunctionImplementation$impl');
+let SomeJsType = goog.forwardDeclare('jsfunction.Main.SomeJsType$impl');
 let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.Main.TIntegerJsBiFunction$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -43,11 +45,6 @@ class Main extends j_l_Object {
   this.$ctor__java_lang_Object__void();
   this.$init__void_$p_jsfunction_Main();
  }
- /** @return {?function(number):number} */
- static createNativeFunction() {
-  Main.$clinit();
-  return null;
- }
  /** @nodts @return {number} */
  static m_callFn__jsfunction_Main_JsFunctionInterface__int__int(/** ?function(number):number */ fn, /** number */ a) {
   Main.$clinit();
@@ -57,7 +54,7 @@ class Main extends j_l_Object {
  m_testJsFunction__void() {
   let func = /**@type {JsFunctionImplementation}*/ (JsFunctionImplementation.$create__());
   (/**@type {function(number):number}*/ (func))(10);
-  Main.m_callFn__jsfunction_Main_JsFunctionInterface__int__int(Main.createNativeFunction(), 10);
+  Main.m_callFn__jsfunction_Main_JsFunctionInterface__int__int(JsFunctionTestHelper.createNativeFunction(), 10);
   let a = func.f_field__jsfunction_Main_JsFunctionImplementation;
   JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation__int(func);
  }
@@ -234,12 +231,7 @@ class Main extends j_l_Object {
   Main.m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__()), '');
   tIntegerJsBiFunction('a', Integer.valueOf(1));
   doubleDoubleJsBiFunction(1.1, 1.1);
-  Main.callOnFunction(DoubleDoubleJsBiFunction.$create__());
- }
- /** @return {number} */
- static callOnFunction(/** ?function(?number, ?number):?number */ f) {
-  Main.$clinit();
-  return 0;
+  JsFunctionTestHelper.callOnFunction(DoubleDoubleJsBiFunction.$create__());
  }
  /** @nodts */
  static m_testCast__void() {
@@ -257,6 +249,26 @@ class Main extends j_l_Object {
   let /** TIntegerJsBiFunction */ rawTIntegerJsBiFunction = /**@type {TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
   let parameterizedTIntegerJsBiFunction = /**@type {!TIntegerJsBiFunction}*/ (TIntegerJsBiFunction.$create__());
   let /** ?function(?, ?):? */ rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
+ }
+ /** @nodts */
+ m_testJsFunctionWithNativeType__void() {
+  let nativeObj = new RegExp();
+  let fn = /**  @return {RegExp}*/ ((/** RegExp */ a) =>{
+   return a;
+  });
+  let result = JsFunctionTestHelper.callAsFunctionWithNativeType(fn, nativeObj);
+  let jsFnFromJs = JsFunctionTestHelper.createNativeFunction();
+  let nativeObjResult = jsFnFromJs(nativeObj);
+ }
+ /** @nodts */
+ m_testJsFunctionWithJsType__void() {
+  let jsType = new SomeJsType();
+  let fn = /**  @return {SomeJsType}*/ ((/** SomeJsType */ a) =>{
+   return a;
+  });
+  let result = JsFunctionTestHelper.callAsFunctionWithJsType(fn, jsType);
+  let fnFromJs = JsFunctionTestHelper.createJsFunctionWithJsType();
+  let jsTypeResult = fnFromJs(jsType);
  }
  /** @private @nodts */
  $init__void_$p_jsfunction_Main() {
@@ -285,9 +297,11 @@ class Main extends j_l_Object {
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  JsFunctionTestHelper = goog.module.get('jsfunction.JsFunctionTestHelper');
   ClassWithJsFunctionProperty = goog.module.get('jsfunction.Main.ClassWithJsFunctionProperty$impl');
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.Main.JsFunctionImplementation$impl');
+  SomeJsType = goog.module.get('jsfunction.Main.SomeJsType$impl');
   TIntegerJsBiFunction = goog.module.get('jsfunction.Main.TIntegerJsBiFunction$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
@@ -296,44 +310,6 @@ class Main extends j_l_Object {
  }
 }
 $Util.$setClassMetadata(Main, 'jsfunction.Main');
-
-/* NATIVE.JS EPILOG */
-
-const jsfunction_Main = Main;
-
-// Copyright 2017 Google Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-/**
- * @return {function(number):number}
- * @public
- */
-Main.createNativeFunction = function() {
-  return function(a) {
-    return a;
-  };
-};
-
-/**
- * @param {function(?number, ?number):?number} fn
- * @return {?number}
- * @public
- */
-Main.callOnFunction = function(fn) {
-  return fn(1.1, 1.1);
-};
-
 
 exports = Main;
 

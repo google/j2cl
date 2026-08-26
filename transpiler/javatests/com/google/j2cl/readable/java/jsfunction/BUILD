@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "j2kt_jvm_library", "j2wasm_library")
+load("//build_defs:rules.bzl", "j2kt_jvm_library")
 load(
     "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
     "readable_example",
@@ -17,18 +17,13 @@ j2kt_jvm_library(
     deps = ["//third_party:jsinterop-annotations-j2kt-jvm"],
 )
 
-# Exclude native sources from j2wasm_library.
-j2wasm_library(
-    name = "readable-j2wasm",
-    srcs = glob(["*.java"]),
-    deps = ["//third_party:jsinterop-annotations-j2wasm"],
-)
-
 readable_example(
-    srcs = glob([
-        "*.java",
-        "*.native.js",
-    ]),
+    srcs = glob(
+        [
+            "*.java",
+            "*.js",
+        ],
+    ),
     # Native JsType does not make sense for j2kt-native.
     build_kt_native_readables = False,
     generate_wasm_externs = True,

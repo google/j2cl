@@ -22,6 +22,7 @@ import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsOverlay
@@ -65,6 +66,8 @@ fun main(vararg unused: String) {
   testJsFunctionWithVarArgs()
   testJsFunctionLambda()
   testJsFunctionArray()
+  testJsFunctionWithNativeType()
+  testJsFunctionWithJsType()
 }
 
 @JsFunction
@@ -189,6 +192,8 @@ interface ElementLikeNativeInterface {
 @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
 private class NativeRegExp constructor(regEx: String) {
   external fun exec(s: String): Array<String>
+
+  external fun test(s: String): Boolean
 }
 
 @JsFunction
@@ -636,6 +641,63 @@ private fun testJsFunctionArray() {
     val o: Any = arrayOfNulls<Int>(1)
     val temp = o as Array<JsFunctionInterface>
   }
+}
+
+@JsFunction
+private fun interface JsFunctionWithNativeType {
+  fun f(regExp: NativeRegExp): NativeRegExp
+}
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun callAsFunctionWithNativeType(
+  fn: JsFunctionWithNativeType,
+  arg: NativeRegExp,
+): NativeRegExp
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+private external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType
+
+private fun testJsFunctionWithNativeType() {
+  val regExp = NativeRegExp("a")
+  assertTrue(
+    (JsFunctionWithNativeType { a ->
+        // Make a simple call to ensure the argument isn't just blindly being passed
+        // and that proper conversions are taking place.
+        a.test("a")
+        a
+      })
+      .f(regExp) === regExp
+  )
+
+  val fn = JsFunctionWithNativeType { a -> a }
+  assertTrue(callAsFunctionWithNativeType(fn, regExp) === regExp)
+
+  val fnFromJs = createJsFunctionWithNativeType()
+  assertTrue(fnFromJs.f(regExp) === regExp)
+}
+
+@JsType class SomeJsType @JsConstructor constructor()
+
+@JsFunction
+fun interface JsFunctionWithJsType {
+  fun f(jsType: SomeJsType): SomeJsType
+}
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun callAsFunctionWithJsType(fn: JsFunctionWithJsType, arg: SomeJsType): SomeJsType
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun createJsFunctionWithJsType(): JsFunctionWithJsType
+
+private fun testJsFunctionWithJsType() {
+  val jsType = SomeJsType()
+  assertTrue((JsFunctionWithJsType { a -> a }).f(jsType) === jsType)
+
+  val fn = JsFunctionWithJsType { a -> a }
+  assertTrue(callAsFunctionWithJsType(fn, jsType) === jsType)
+
+  val fnFromJs = createJsFunctionWithJsType()
+  assertTrue(fnFromJs.f(jsType) === jsType)
 }
 
 private fun assertJsTypeDoesntHaveFields(obj: Any?, vararg fields: String) {

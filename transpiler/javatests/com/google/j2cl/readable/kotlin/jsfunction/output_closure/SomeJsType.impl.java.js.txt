@@ -1,0 +1,42 @@
+goog.module('jsfunction.SomeJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class SomeJsType extends j_l_Object {
+ 
+ constructor() {
+  SomeJsType.$clinit();
+  super();
+  this.$ctor__jsfunction_SomeJsType__void();
+ }
+ /** @nodts */
+ $ctor__jsfunction_SomeJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @return {?function(SomeJsType):SomeJsType} */
+ getJsFunction(/** ?function(SomeJsType):SomeJsType */ fn) {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeJsType.$clinit = () =>{};
+  SomeJsType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeJsType, 'jsfunction.SomeJsType');
+
+exports = SomeJsType;
+
+//# sourceMappingURL=SomeJsType.js.map

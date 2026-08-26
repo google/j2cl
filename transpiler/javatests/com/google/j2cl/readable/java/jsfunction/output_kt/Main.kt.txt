@@ -173,10 +173,26 @@ open class Main {
   (if (c != null) c.function_pp_jsfunction else null)!!.call("")
  }
  
+ open fun testJsFunctionWithNativeType() {
+  val nativeObj: NativeRegExp = NativeRegExp()
+  val fn: JsFunctionWithNativeType = JsFunctionWithNativeType { a: NativeRegExp? -> a }
+  val result: NativeRegExp? = Main.callAsFunctionWithNativeType(fn, nativeObj)
+  val jsFnFromJs: JsFunctionWithNativeType? = Main.createJsFunctionWithNativeType()
+  val nativeObjResult: NativeRegExp? = jsFnFromJs!!.f(nativeObj)
+ }
+ 
+ open fun testJsFunctionWithJsType() {
+  val jsType: SomeJsType = SomeJsType()
+  val fn: JsFunctionWithJsType = JsFunctionWithJsType { a: SomeJsType? -> a }
+  val result: SomeJsType? = Main.callAsFunctionWithJsType(fn, jsType)
+  val fnFromJs: JsFunctionWithJsType? = Main.createJsFunctionWithJsType()
+  val jsTypeResult: SomeJsType? = fnFromJs!!.f(jsType)
+ }
+ 
  companion object {
   @JvmStatic
-  @JsMethod
-  internal fun createNativeFunction(): JsFunctionInterface? = null
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  internal external fun createNativeFunction(): JsFunctionInterface?
   
   @JvmStatic
   internal fun callFn(fn: JsFunctionInterface?, a: Int): Int = fn!!.foo(a)
@@ -244,8 +260,8 @@ open class Main {
   }
   
   @JvmStatic
-  @JsMethod
-  internal fun callOnFunction(f: JsBiFunction<Double?, Double?>?): Double = 0.0
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  external fun callOnFunction(f: Any?): Double
   
   @JvmStatic
   fun testCast() {
@@ -263,6 +279,22 @@ open class Main {
    val parameterizedTIntegerJsBiFunction: TIntegerJsBiFunction<String?> = TIntegerJsBiFunction<String?>() as TIntegerJsBiFunction<String?>
    val rawJsBiFunction: JsBiFunction<Any?, Number?> = DoubleDoubleJsBiFunction() as JsBiFunction<Any?, Number?>
   }
+  
+  @JvmStatic
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  internal external fun callAsFunctionWithNativeType(fn: JsFunctionWithNativeType?, arg: NativeRegExp?): NativeRegExp?
+  
+  @JvmStatic
+  @JsMethod(name = "createNativeFunction", namespace = "jsfunction.JsFunctionTestHelper")
+  internal external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType?
+  
+  @JvmStatic
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  internal external fun callAsFunctionWithJsType(fn: JsFunctionWithJsType?, arg: SomeJsType?): SomeJsType?
+  
+  @JvmStatic
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  internal external fun createJsFunctionWithJsType(): JsFunctionWithJsType?
  }
  
  @JsFunction
@@ -415,5 +447,24 @@ open class Main {
  
  private class RecursiveJsFunctionImplementation private constructor(): ParametricJsFunction<RecursiveJsFunctionImplementation?> {
   override fun call(t: RecursiveJsFunctionImplementation?) {}
+ }
+ 
+ @JsType(name = "RegExp", namespace = JsPackage.GLOBAL, isNative = true)
+ internal open class NativeRegExp internal constructor()
+ 
+ @JsFunction
+ internal fun interface JsFunctionWithNativeType {
+  fun f(nativeObj: NativeRegExp?): NativeRegExp?
+ }
+ 
+ @JsType
+ open class SomeJsType {
+  @JsMethod
+  internal open fun getJsFunction(fn: JsFunctionWithJsType?): JsFunctionWithJsType? = null
+ }
+ 
+ @JsFunction
+ internal fun interface JsFunctionWithJsType {
+  fun f(jsType: SomeJsType?): SomeJsType?
  }
 }

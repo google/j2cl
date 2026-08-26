@@ -24,6 +24,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -66,6 +67,8 @@ public class Main {
     testJsFunctionWithVarArgs();
     testJsFunctionLambda();
     testJsFunctionArray();
+    testJsFunctionWithNativeType();
+    testJsFunctionWithJsType();
   }
 
   @JsFunction
@@ -159,13 +162,15 @@ public class Main {
   }
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
-  private static class NativeRegExp {
+  public static class NativeRegExp {
     public NativeRegExp(String regEx) {}
 
     // TODO(b/528427081): Wasm does not yet support Java array conversions on the JS interop
     // boundary.
     @Wasm("nop")
     public native String[] exec(String s);
+
+    public native boolean test(String s);
   }
 
   @JsFunction
@@ -655,6 +660,68 @@ public class Main {
     assertEquals(3, ((JsFunctionWithVarargs) (int n, int[] numbers) -> numbers[n]).f(1, 1, 3));
 
     new JsFunctionWithVarargsTestSub().test();
+  }
+
+  @JsFunction
+  interface JsFunctionWithNativeType {
+    NativeRegExp f(NativeRegExp regExp);
+  }
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native NativeRegExp callAsFunctionWithNativeType(
+      JsFunctionWithNativeType fn, NativeRegExp arg);
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+  public static native JsFunctionWithNativeType createJsFunctionWithNativeType();
+
+  private static void testJsFunctionWithNativeType() {
+    NativeRegExp regExp = new NativeRegExp("a");
+    assertTrue(
+        ((JsFunctionWithNativeType)
+                    (a -> {
+                      // Make a simple call to ensure the argument isn't just blindly being passed
+                      // and that proper conversions are taking place.
+                      a.test("a");
+                      return a;
+                    }))
+                .f(regExp)
+            == regExp);
+
+    JsFunctionWithNativeType fn = a -> a;
+    assertTrue(callAsFunctionWithNativeType(fn, regExp) == regExp);
+
+    JsFunctionWithNativeType fnFromJs = createJsFunctionWithNativeType();
+    assertTrue(fnFromJs.f(regExp) == regExp);
+  }
+
+  @JsType
+  public static class SomeJsType {
+    // TODO(b/549970784): Currently not considered an exported type in Wasm without this. Revisit if
+    // this type ends up being exported.
+    @JsConstructor
+    public SomeJsType() {}
+  }
+
+  @JsFunction
+  interface JsFunctionWithJsType {
+    SomeJsType f(SomeJsType jsType);
+  }
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native SomeJsType callAsFunctionWithJsType(JsFunctionWithJsType fn, SomeJsType arg);
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native JsFunctionWithJsType createJsFunctionWithJsType();
+
+  private static void testJsFunctionWithJsType() {
+    SomeJsType jsType = new SomeJsType();
+    assertTrue(((JsFunctionWithJsType) (a -> a)).f(jsType) == jsType);
+
+    JsFunctionWithJsType fn = a -> a;
+    assertTrue(callAsFunctionWithJsType(fn, jsType) == jsType);
+
+    JsFunctionWithJsType fnFromJs = createJsFunctionWithJsType();
+    assertTrue(fnFromJs.f(jsType) == jsType);
   }
 
   private static void testJsFunctionLambda() {

@@ -75,10 +75,8 @@ public class Main {
     }
   }
 
-  @JsMethod
-  public static JsFunctionInterface createNativeFunction() {
-    return null;
-  }
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native JsFunctionInterface createNativeFunction();
 
   public static int callFn(JsFunctionInterface fn, int a) {
     return fn.foo(a);
@@ -349,10 +347,8 @@ public class Main {
     callOnFunction(new DoubleDoubleJsBiFunction());
   }
 
-  @JsMethod
-  public static double callOnFunction(JsBiFunction<Double, Double> f) {
-    return 0;
-  }
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native double callOnFunction(Object f);
   ;
 
   public static void testCast() {
@@ -394,5 +390,59 @@ public class Main {
   private static final class RecursiveJsFunctionImplementation
       implements ParametricJsFunction<RecursiveJsFunctionImplementation> {
     public void call(RecursiveJsFunctionImplementation t) {}
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "RegExp")
+  static class NativeRegExp {}
+
+  @JsFunction
+  interface JsFunctionWithNativeType {
+    NativeRegExp f(NativeRegExp nativeObj);
+  }
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native NativeRegExp callAsFunctionWithNativeType(
+      JsFunctionWithNativeType fn, NativeRegExp arg);
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createNativeFunction")
+  public static native JsFunctionWithNativeType createJsFunctionWithNativeType();
+
+  public void testJsFunctionWithNativeType() {
+    NativeRegExp nativeObj = new NativeRegExp();
+
+    JsFunctionWithNativeType fn = a -> a;
+    NativeRegExp result = callAsFunctionWithNativeType(fn, nativeObj);
+
+    JsFunctionWithNativeType jsFnFromJs = createJsFunctionWithNativeType();
+    NativeRegExp nativeObjResult = jsFnFromJs.f(nativeObj);
+  }
+
+  @JsType
+  public static class SomeJsType {
+    @JsMethod
+    public JsFunctionWithJsType getJsFunction(JsFunctionWithJsType fn) {
+      return null;
+    }
+  }
+
+  @JsFunction
+  interface JsFunctionWithJsType {
+    SomeJsType f(SomeJsType jsType);
+  }
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native SomeJsType callAsFunctionWithJsType(JsFunctionWithJsType fn, SomeJsType arg);
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native JsFunctionWithJsType createJsFunctionWithJsType();
+
+  public void testJsFunctionWithJsType() {
+    SomeJsType jsType = new SomeJsType();
+
+    JsFunctionWithJsType fn = a -> a;
+    SomeJsType result = callAsFunctionWithJsType(fn, jsType);
+
+    JsFunctionWithJsType fnFromJs = createJsFunctionWithJsType();
+    SomeJsType jsTypeResult = fnFromJs.f(jsType);
   }
 }

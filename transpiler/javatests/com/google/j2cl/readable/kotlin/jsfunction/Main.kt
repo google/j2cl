@@ -70,10 +70,8 @@ class JsFunctionImplementation : JsFunctionInterface {
   }
 }
 
-@JsMethod
-fun createNativeFunction(): JsFunctionInterface {
-  return null!!
-}
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+external fun createNativeFunction(): JsFunctionInterface
 
 fun callFn(fn: JsFunctionInterface, a: Int): Int {
   return fn.foo(a)
@@ -361,10 +359,8 @@ fun testParameterTypes() {
   callOnFunction(DoubleDoubleJsBiFunction())
 }
 
-@JsMethod
-fun callOnFunction(f: JsBiFunction<Double?, Double?>?): Double {
-  return 0.0
-}
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+external fun callOnFunction(f: JsBiFunction<Double?, Double?>?): Double
 
 fun testCast() {
   val o: Any = TIntegerJsBiFunction<String>()
@@ -400,4 +396,59 @@ fun interface InvokableFunction {
 fun testInvokableFunction() {
   val f: InvokableFunction = InvokableFunction { a: Int -> a + 1 }
   f(1)
+}
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "RegExp") class NativeRegExp
+
+@JsFunction
+fun interface JsFunctionWithNativeType {
+  fun f(nativeObj: NativeRegExp): NativeRegExp
+}
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+external fun callAsFunctionWithNativeType(
+  fn: JsFunctionWithNativeType,
+  arg: NativeRegExp,
+): NativeRegExp
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createNativeFunction")
+external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType
+
+fun testJsFunctionWithNativeType() {
+  val nativeObj = NativeRegExp()
+
+  val fn = JsFunctionWithNativeType { a -> a }
+  val result = callAsFunctionWithNativeType(fn, nativeObj)
+
+  val jsFnFromJs = createJsFunctionWithNativeType()
+  val nativeObjResult = jsFnFromJs.f(nativeObj)
+}
+
+@JsType
+class SomeJsType {
+  @JsMethod
+  fun getJsFunction(fn: JsFunctionWithJsType?): JsFunctionWithJsType? {
+    return null
+  }
+}
+
+@JsFunction
+fun interface JsFunctionWithJsType {
+  fun f(jsType: SomeJsType?): SomeJsType?
+}
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+external fun callAsFunctionWithJsType(fn: JsFunctionWithJsType?, arg: SomeJsType?): SomeJsType?
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+external fun createJsFunctionWithJsType(): JsFunctionWithJsType
+
+fun testJsFunctionWithJsType() {
+  val jsType = SomeJsType()
+
+  val fn = JsFunctionWithJsType { a -> a }
+  val result = callAsFunctionWithJsType(fn, jsType)
+
+  val fnFromJs = createJsFunctionWithJsType()
+  val jsTypeResult = fnFromJs.f(jsType)
 }
