@@ -66,6 +66,8 @@ public final class Main {
     assertTrue(callReturnSelf(someJsType) == someJsType);
     assertTrue(callTakesSelf(someJsType, someJsType));
     assertTrue(callGetNumberViaStaticMethod(someJsType) == 11);
+    assertTrue(callGetLong(someJsType) == 123456789L);
+    assertTrue(callGetNativeJsType(someJsType).getNumber() == 929);
   }
 
   private static void testProperty() {
@@ -134,6 +136,16 @@ public final class Main {
     @JsNonNull
     public String getString() {
       return "str";
+    }
+
+    @JsNonNull
+    public Long getLong() {
+      return 123456789L;
+    }
+
+    @JsNonNull
+    public NativeJsType getNativeJsType() {
+      return new NativeJsType(929);
     }
 
     @JsProperty
@@ -662,6 +674,12 @@ public final class Main {
   static native String callGetString(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
+  static native Long callGetLong(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native NativeJsType callGetNativeJsType(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
   static native int getField(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
@@ -756,4 +774,11 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native boolean callEntryPointWithUndefinedJsFunction();
+
+  @JsType(isNative = true, namespace = "native")
+  static class NativeJsType {
+    public NativeJsType(int value) {}
+
+    public native int getNumber();
+  }
 }

@@ -47,8 +47,23 @@ final class JsExternsGenerator {
 
   private static final String OUTPUT_PATH = "externs";
 
-  private final ClosureExternGenerationEnvironment closureEnvironment =
-      new ClosureExternGenerationEnvironment();
+  private final WasmJsInteropClosureGenerationEnvironment closureEnvironment =
+      new WasmJsInteropClosureGenerationEnvironment() {
+        @Override
+        public String aliasForType(TypeDeclaration typeDeclaration) {
+          if (typeDeclaration.isExtern() || typeDeclaration.isNative()) {
+            // In extern files, externs and native types can be referenced using their Javascript
+            // qualified name.
+            // TODO(b/553008530): Investigate why just using the qualified name for native types
+            // works even if there is not corresponding goog.require nor goog.requireType.
+            return typeDeclaration.getQualifiedJsName();
+          }
+          // Wasm types, on the other hand, need a different alias to be used in their externs
+          // definitions.
+          return "$j2wasm$externs_" + super.aliasForType(typeDeclaration);
+        }
+      };
+
   private final WasmGenerationEnvironment environment;
   private final Output output;
 

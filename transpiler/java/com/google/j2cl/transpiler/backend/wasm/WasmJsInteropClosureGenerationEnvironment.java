@@ -20,9 +20,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.Member;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -30,8 +30,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
 
 /** A Closure environment for generating externs and resolving type names. */
-final class ClosureExternGenerationEnvironment extends ClosureGenerationEnvironment {
-  public ClosureExternGenerationEnvironment() {
+class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnvironment {
+  public WasmJsInteropClosureGenerationEnvironment() {
     super(ImmutableSet.of(), ImmutableMap.of());
   }
 
@@ -56,7 +56,7 @@ final class ClosureExternGenerationEnvironment extends ClosureGenerationEnvironm
    * <p>For example, for a type with qualified name "j2wasm.CharUtils", this may give you
    * "j2wasm_CharUtils".
    */
-  public static String getJsTypeAlias(TypeDeclaration typeDeclaration) {
+  static String getJsTypeAlias(TypeDeclaration typeDeclaration) {
     return AstUtils.buildQualifiedName(
         computeJsAlias(typeDeclaration.getEnclosingModule()),
         typeDeclaration.getInnerTypeQualifier());
@@ -66,12 +66,11 @@ final class ClosureExternGenerationEnvironment extends ClosureGenerationEnvironm
     if (typeDeclaration.isExtern()) {
       return typeDeclaration.getQualifiedJsName();
     }
-    String prefix = typeDeclaration.isNative() ? "" : "$j2wasm$externs_";
-    return prefix + computeJsAliasWithoutPrefix(typeDeclaration.getQualifiedJsName());
+    return computeJsAlias(typeDeclaration.getQualifiedJsName());
   }
 
-  public static String computeJsAliasWithoutPrefix(String name) {
-    return name.replace('.', '_');
+  public static String computeJsAlias(String qualifiedName) {
+    return qualifiedName.replace('.', '_');
   }
 
   /** Returns the set of Closure modules that are required to resolve the given type. */
@@ -81,19 +80,11 @@ final class ClosureExternGenerationEnvironment extends ClosureGenerationEnvironm
     type.accept(
         new AbstractVisitor() {
           @Override
-          public void exitMethod(Method method) {
+          public void exitMember(Member method) {
             if (!method.getDescriptor().canBeReferencedExternally()) {
               return;
             }
             collectModuleDependencies(moduleDeps, method.getDescriptor());
-          }
-
-          @Override
-          public void exitField(Field field) {
-            if (!field.getDescriptor().canBeReferencedExternally()) {
-              return;
-            }
-            collectModuleDependencies(moduleDeps, field.getDescriptor());
           }
         });
     return moduleDeps.build();
@@ -110,23 +101,32 @@ final class ClosureExternGenerationEnvironment extends ClosureGenerationEnvironm
   }
 
   private static void collectModuleDependencies(
-      ImmutableSet.Builder<String> moduleDeps, MethodDescriptor methodDescriptor) {
-    if (!methodDescriptor.isExtern()) {
-      if (methodDescriptor.hasJsNamespace()) {
-        moduleDeps.add(methodDescriptor.getJsNamespace());
-      } else {
-        collectModuleDependencies(moduleDeps, methodDescriptor.getEnclosingTypeDescriptor());
+      ImmutableSet.Builder<String> moduleDeps, MemberDescriptor memberDescriptor) {
+    switch (memberDescriptor) {
+      case MethodDescriptor methodDescriptor -> {
+        // Collect module dependencies for types appearing in the parameter list.
+        methodDescriptor
+            .getParameterTypeDescriptors()
+            .forEach(p -> collectModuleDependencies(moduleDeps, p));
+
+        if (methodDescriptor.isExtern()) {
+          // If the method is an extern there is nothing else to collect.
+          break;
+        }
+
+        if (methodDescriptor.hasJsNamespace()) {
+          moduleDeps.add(methodDescriptor.getJsNamespace());
+        } else {
+          collectModuleDependencies(moduleDeps, methodDescriptor.getEnclosingTypeDescriptor());
+        }
+      }
+      case FieldDescriptor fieldDescriptor -> {
+        collectModuleDependencies(moduleDeps, fieldDescriptor.getTypeDescriptor());
+      }
+      default -> {
+        throw new AssertionError("Unexpected MemberDescriptor: " + memberDescriptor);
       }
     }
-
-    methodDescriptor
-        .getParameterTypeDescriptors()
-        .forEach(p -> collectModuleDependencies(moduleDeps, p));
-  }
-
-  private static void collectModuleDependencies(
-      ImmutableSet.Builder<String> moduleDeps, FieldDescriptor fieldDescriptor) {
-    collectModuleDependencies(moduleDeps, fieldDescriptor.getTypeDescriptor());
   }
 
   private static void collectModuleDependencies(

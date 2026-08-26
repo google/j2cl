@@ -116,8 +116,7 @@ public final class JsImportsGenerator {
   private static String createGoogRequire(String importedModule) {
     return String.format(
         "const %s = goog.require('%s');",
-        ClosureExternGenerationEnvironment.computeJsAliasWithoutPrefix(importedModule),
-        importedModule);
+        WasmJsInteropClosureGenerationEnvironment.computeJsAlias(importedModule), importedModule);
   }
 
   /**
@@ -262,8 +261,8 @@ public final class JsImportsGenerator {
     private final ImmutableMap.Builder<MethodDescriptor, JsMethodImport> methodImports;
     private final ImmutableSet.Builder<String> moduleImports;
     private final Map<String, JsMethodImport> methodImportsByName = new HashMap<>();
-    private final ClosureExternGenerationEnvironment closureEnvironment =
-        new ClosureExternGenerationEnvironment();
+    private final WasmJsInteropClosureGenerationEnvironment closureEnvironment =
+        new WasmJsInteropClosureGenerationEnvironment();
 
     public ImportCollector(
         Problems problems,
@@ -290,7 +289,7 @@ public final class JsImportsGenerator {
 
       // Collect imports for JsDoc.
       moduleImports.addAll(
-          ClosureExternGenerationEnvironment.getJsModuleDependencies(methodDescriptor));
+          WasmJsInteropClosureGenerationEnvironment.getJsModuleDependencies(methodDescriptor));
     }
 
     private void addMethodImport(JsMethodImport newImport) {
@@ -351,8 +350,8 @@ public final class JsImportsGenerator {
 
   private final Imports imports;
 
-  private final ClosureExternGenerationEnvironment closureEnvironment =
-      new ClosureExternGenerationEnvironment();
+  private final WasmJsInteropClosureGenerationEnvironment closureEnvironment =
+      new WasmJsInteropClosureGenerationEnvironment();
 
   private JsImportsGenerator(Imports imports) {
     this.imports = imports;

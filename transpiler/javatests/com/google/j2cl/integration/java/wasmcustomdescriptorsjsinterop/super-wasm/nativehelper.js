@@ -25,6 +25,8 @@ const JsInterfaceDefaultMethod = goog.require('wasmcustomdescriptorsjsinterop.Js
 const JsInterfaceGetNumber = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceGetNumber');
 const JsInterfaceRenamedMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceRenamedMethod');
 const JsInterfaceStaticMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceStaticMethod');
+const Long = goog.require('goog.math.Long');
+const NativeJsType = goog.require('native.NativeJsType');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
 
 /**
@@ -69,6 +71,24 @@ function callGetNumberViaStaticMethod(someJsType) {
  */
 function callGetString(someJsType) {
   return someJsType.getString();
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {!Long}
+ * @public
+ */
+function callGetLong(someJsType) {
+  return someJsType.getLong();
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {!NativeJsType}
+ * @public
+ */
+function callGetNativeJsType(someJsType) {
+  return someJsType.getNativeJsType();
 }
 
 /**
@@ -354,6 +374,8 @@ exports = {
   callGetNumber,
   callGetNumberViaStaticMethod,
   callGetString,
+  callGetLong,
+  callGetNativeJsType,
   getField,
   setField,
   getStaticField,
