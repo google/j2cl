@@ -17,10 +17,6 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME
-import com.google.j2cl.transpiler.frontend.kotlin.ir.copyAnnotationsWhen
 import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.common.defaultArgumentsDispatchFunction
@@ -62,7 +58,6 @@ import org.jetbrains.kotlin.ir.util.copyTypeParametersFrom
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
-import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.addToStdlib.assignFrom
 
@@ -94,9 +89,7 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
       }
     }
 
-  override fun IrFunction.resolveAnnotations(): List<IrAnnotation> = copyAnnotationsWhen {
-    shouldCopyAnnotationToBridge()
-  }
+  override fun IrFunction.resolveAnnotations(): List<IrAnnotation> = emptyList()
 
   override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
     if (declaration !is IrFunction || declaration.isExternalOrInheritedFromExternal()) {
@@ -263,18 +256,6 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
   }
 
   companion object {
-    /** List of annotations that should not be copied to bridge functions. */
-    private val annotationsToNotCopy by lazy {
-      listOf(
-        FqName(JS_METHOD_ANNOTATION_NAME),
-        FqName(JS_CONSTRUCTOR_ANNOTATION_NAME),
-        FqName(JS_PROPERTY_ANNOTATION_NAME),
-      )
-    }
-
-    private fun IrAnnotation.shouldCopyAnnotationToBridge(): Boolean = annotationsToNotCopy.none {
-      isAnnotation(it)
-    }
 
     private fun IrValueParameter.remapDefaultExpressionReferences(
       variableRemapper: VariableRemapper

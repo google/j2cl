@@ -36,7 +36,6 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.IrElement
-import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
@@ -96,7 +95,6 @@ import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.allOverridden
 import org.jetbrains.kotlin.ir.util.allTypeParameters
-import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
@@ -804,12 +802,6 @@ internal val IrDeclaration.isCompanionMember: Boolean
 
 val IrElement.isTemporaryVariable: Boolean
   get() = this is IrVariable && origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE
-
-fun IrAnnotationContainer.copyAnnotationsWhen(
-  filter: IrAnnotation.() -> Boolean
-): List<IrAnnotation> {
-  return annotations.filter(filter).map { it.deepCopyWithSymbols(this as? IrDeclarationParent) }
-}
 
 val IrProperty.hasAccessors: Boolean
   get() = !backingField.isJvmField && (getter.isDefinedAccessor || setter.isDefinedAccessor)
