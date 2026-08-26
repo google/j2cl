@@ -480,6 +480,19 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .build();
   }
 
+  /** Returns the method descriptor for $getClassImpl. */
+  public MethodDescriptor getGetClassImplMethodDescriptor() {
+    return TypeDescriptors.get()
+        .javaLangObject
+        .getMethodDescriptor(MethodDescriptor.GET_CLASS_IMPL_METHOD_NAME)
+        .toBuilder()
+        .setDeclarationDescriptor(null)
+        .setEnclosingTypeDescriptor(this)
+        .setOrigin(MethodOrigin.SYNTHETIC_CLASS_GETTER)
+        .setSynthetic(true)
+        .build();
+  }
+
   /** Returns the FieldDescriptor corresponding to the enclosing class instance. */
   public FieldDescriptor getFieldDescriptorForEnclosingInstance() {
     return FieldDescriptor.builder()

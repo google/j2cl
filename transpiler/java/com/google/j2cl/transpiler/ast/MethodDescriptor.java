@@ -138,6 +138,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>"),
     SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
+    SYNTHETIC_CLASS_GETTER,
     SYNTHETIC_CLASS_LITERAL_GETTER,
     SYNTHETIC_STRING_LITERAL_GETTER,
     SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL,
@@ -294,6 +295,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   static final String MARK_IMPLEMENTOR_METHOD_NAME = "$markImplementor";
   static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
   static final String COPY_METHOD_NAME = "$copy";
+  static final String GET_CLASS_IMPL_METHOD_NAME = "$getClassImpl";
 
   public static String buildMethodSignature(
       String name, TypeDescriptor... parameterTypeDescriptors) {

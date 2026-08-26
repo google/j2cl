@@ -72,7 +72,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
     // return Type.class;
     type.addMember(
         Method.builder()
-            .setMethodDescriptor(getGetClassImplMethodDescriptor(type.getTypeDescriptor()))
+            .setMethodDescriptor(type.getTypeDescriptor().getGetClassImplMethodDescriptor())
             .addStatements(
                 ReturnStatement.builder()
                     .setExpression(
@@ -88,17 +88,6 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
       return false;
     }
     return type.getDeclaration().getOrigin() != Origin.LAMBDA_IMPLEMENTOR;
-  }
-
-  private static MethodDescriptor getGetClassImplMethodDescriptor(
-      DeclaredTypeDescriptor typeDescriptor) {
-    return TypeDescriptors.get()
-        .javaLangObject
-        .getMethodDescriptor(GET_CLASS_IMPL_METHOD_NAME)
-        .toBuilder()
-        .setEnclosingTypeDescriptor(typeDescriptor)
-        .setSynthetic(true)
-        .build();
   }
 
   private static Expression getTypeLiteral(

@@ -172,10 +172,10 @@ abstract class WasmTypeLayout {
     // patched here.
     if (!typeDescriptor.isInterface()) {
       MethodDescriptor getClassMethodDescriptor =
-          getGetClassMethodDescriptor(
-              typeDescriptor.getTypeDeclaration().getOrigin() == Origin.LAMBDA_IMPLEMENTOR
+          (typeDescriptor.getTypeDeclaration().getOrigin() == Origin.LAMBDA_IMPLEMENTOR
                   ? typeDescriptor.getSuperTypeDescriptor()
-                  : typeDescriptor);
+                  : typeDescriptor)
+              .getGetClassImplMethodDescriptor();
       instanceMethodsByMangledName.put(
           getClassMethodDescriptor.getMangledName(), getClassMethodDescriptor);
     }
@@ -212,13 +212,5 @@ abstract class WasmTypeLayout {
         // Skip the methods interfaces inherit from java.lang.Object.
         .filter(m -> m.getEnclosingTypeDescriptor().isInterface())
         .anyMatch(m -> m.getMangledName().equals(methodDescriptor.getMangledName()));
-  }
-
-  private static MethodDescriptor getGetClassMethodDescriptor(
-      DeclaredTypeDescriptor typeDescriptor) {
-    return TypeDescriptors.get().javaLangObject.getMethodDescriptor("$getClassImpl").toBuilder()
-        .setEnclosingTypeDescriptor(typeDescriptor)
-        .setSynthetic(true)
-        .build();
   }
 }
