@@ -76,9 +76,7 @@ public final class LambdaAdaptorTypeDescriptors {
     checkArgument(!functionalInterfaceTypeDescriptor.isJsFunctionInterface());
 
     DeclaredTypeDescriptor jsFunctionInterface =
-        functionalInterfaceTypeDescriptor.isJsFunctionInterface()
-            ? functionalInterfaceTypeDescriptor
-            : createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
+        createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
     // those types be declared type descriptors.
@@ -186,9 +184,6 @@ public final class LambdaAdaptorTypeDescriptors {
     return functionalInterfaceMethodDescriptor.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
-        // Remove the method type parameters as they when moved to the adaptor type.
-        .setTypeParameterTypeDescriptors(ImmutableList.of())
-        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .setSynthetic(false)
         .setAbstract(false)
         .setNative(false)
