@@ -68,9 +68,9 @@ private fun testGetClass() {
 private fun testComparableMethods() {
   val string1 = "string1"
   val string2 = "string2"
-  assertTrue(string1.compareTo(string2) == -1)
+  assertTrue(string1.compareTo(string2) < 0)
   assertTrue(string1.compareTo(string1) == 0)
-  assertTrue(string2.compareTo(string1) == 1)
+  assertTrue(string2.compareTo(string1) > 0)
   assertTrue(string2.compareTo(string2) == 0)
 }
 
