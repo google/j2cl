@@ -69,7 +69,8 @@ public abstract class TypeDeclaration
   public enum Origin {
     SOURCE,
     LAMBDA_ABSTRACT_ADAPTOR,
-    LAMBDA_IMPLEMENTOR
+    LAMBDA_IMPLEMENTOR,
+    OVERLAY_CLASS,
   }
 
   private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
@@ -527,6 +528,7 @@ public abstract class TypeDeclaration
         .setOverlaidTypeDeclaration(this)
         .setClassComponents(synthesizeInnerClassComponents(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))
         .setVisibility(Visibility.PUBLIC)
+        .setOrigin(Origin.OVERLAY_CLASS)
         .setKind(getKind())
         .build();
   }

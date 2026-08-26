@@ -22,6 +22,7 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -1344,13 +1345,6 @@ public final class AstUtils {
    * <p>A new prototype is populated if the type adds exported members.
    */
   public static boolean hasWasmJsPrototype(TypeDeclaration typeDeclaration) {
-    // TODO(b/543878914) Remove declaresWasmJsExports when the solution is finalized and combine
-    // with hasWasmJsPrototype.
-    return declaresWasmJsExports(typeDeclaration);
-  }
-
-  /** Returns true if the given type introduces any exported members in Wasm. */
-  public static boolean declaresWasmJsExports(TypeDeclaration typeDeclaration) {
     // TODO(b/545779164): See if this can be simplified by making the bridge method generation
     // logic more consistent between Closure and Wasm. Then instead of using explicitly collecting
     // declared instance methods, accidental overrides and defaults bridges, we would just iterate
@@ -1373,8 +1367,28 @@ public final class AstUtils {
 
   /** Returns true if this type defined in Wasm is exported to/visible in JS. */
   public static boolean isWasmJsExportedType(TypeDescriptor typeDescriptor) {
-    return typeDescriptor instanceof DeclaredTypeDescriptor dtd
-        && getJsPrototypeOwner(dtd.getTypeDeclaration()) != null;
+    if (!(typeDescriptor instanceof DeclaredTypeDescriptor dtd)) {
+      return false;
+    }
+    TypeDeclaration typeDeclaration = dtd.getTypeDeclaration();
+    return !typeDeclaration.isNative()
+        // Non denotable types are not exported to JS.
+        // TODO(b/552059898): Decide how to handle local classes since they are denotable but not
+        // referenceable outside their declaration scope.
+        && !typeDeclaration.isJsFunctionInterface()
+        && !typeDeclaration.isAnonymous()
+        // Only source types are exported to JS.
+        && typeDeclaration.getOrigin() == TypeDeclaration.Origin.SOURCE
+        // Any type that is explicitly declared as a JsType or declares a JsMember, and so are
+        // their subtypes.
+        && typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+            .filter(Predicates.not(TypeDeclaration::isNative))
+            .anyMatch(
+                Predicates.or(
+                    TypeDeclaration::isJsType,
+                    t ->
+                        t.toDescriptor().getDeclaredMemberDescriptors().stream()
+                            .anyMatch(m -> m.isJsMember() && !m.isNative())));
   }
 
   /**
@@ -1388,7 +1402,7 @@ public final class AstUtils {
     if (typeDeclaration == null) {
       return null;
     }
-    if (declaresWasmJsExports(typeDeclaration)) {
+    if (hasWasmJsPrototype(typeDeclaration)) {
       return typeDeclaration;
     }
     return getJsPrototypeOwner(typeDeclaration.getSuperTypeDeclaration());

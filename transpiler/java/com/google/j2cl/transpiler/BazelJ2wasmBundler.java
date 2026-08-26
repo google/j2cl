@@ -230,9 +230,9 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     StringBuilder sb = new StringBuilder();
     sb.append("(elem $js_prototypes externref\n");
-    for (var type : typeGraph.getJsTypes()) {
+    for (var prototype : typeGraph.getPrototypes()) {
       sb.append("  (global.get ");
-      sb.append(type.getPrototypeGlobalName(environment));
+      sb.append(prototype.getPrototypeGlobalName(environment));
       sb.append(")\n");
     }
     sb.append(")\n");
@@ -249,25 +249,27 @@ final class BazelJ2wasmBundler extends BazelWorker {
     // If the type has no js constructors, we will use this dummy constructor. We still need to
     // reference a constructor in the configuration data in order to configure a name for the type
     // in the constructors list.
-    sb.append("(func $js_constructor_placeholder (result anyref)\n");
-    sb.append("  (unreachable)\n");
-    sb.append(")\n");
-    sb.append("\n");
+    sb.append(
+        """
+        (func $js_constructor_placeholder (result anyref)
+          (unreachable)
+        )
+        """);
 
     // List exported methods for all types.
     sb.append("(elem $js_functions funcref\n");
-    for (var type : typeGraph.getJsTypes()) {
-      // Constructor
-      if (type.jsConstructor() != null) {
+    for (var prototype : typeGraph.getPrototypes()) {
+      if (prototype.jsConstructor() != null) {
         sb.append("  (ref.func ");
-        sb.append(type.jsConstructor().getWasmName());
+        sb.append(prototype.jsConstructor().getWasmName());
         sb.append(")\n");
       } else {
         sb.append("  (ref.func $js_constructor_placeholder)\n");
       }
 
       // All other members.
-      type.streamJsMembersExceptConstructor()
+      prototype
+          .streamJsMembersExceptConstructor()
           .forEach(
               m -> {
                 sb.append("  (ref.func ");
@@ -285,8 +287,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
    * <p>Basic format is follows:
    *
    * <ol>
-   *   <li>Number of exported types
-   *   <li>For each exported type:
+   *   <li>Number of types that declare a JavaScript prototype
+   *   <li>For each type:
    *       <ol>
    *         <li>Number of constructors
    *         <li>For each constructor: Name of the constructor (name of the type)
@@ -309,36 +311,37 @@ final class BazelJ2wasmBundler extends BazelWorker {
       return "";
     }
 
-    var exportedTypes = typeGraph.getJsTypes();
+    var prototypes = typeGraph.getPrototypes();
     StringBuilder sb = new StringBuilder();
 
     int configurationDataLength = 0;
     try (ByteArrayOutputStream configurationData = new ByteArrayOutputStream()) {
-      appendDataUnsignedLeb128(exportedTypes.size(), configurationData);
-      for (var type : exportedTypes) {
+      appendDataUnsignedLeb128(prototypes.size(), configurationData);
+      for (var prototype : prototypes) {
         // Constructors.
         // Number of constructors:
         appendDataUnsignedLeb128(1, configurationData);
         // For the constructor, simply output the name of the type.
-        appendDataStringWithLength(type.qualifiedJsName(), configurationData);
+        appendDataStringWithLength(prototype.qualifiedJsName(), configurationData);
 
         // Static members.
-        appendDataUnsignedLeb128(type.staticJsMembers().size(), configurationData);
-        for (var staticMember : type.staticJsMembers()) {
+        appendDataUnsignedLeb128(prototype.staticJsMembers().size(), configurationData);
+        for (var staticMember : prototype.staticJsMembers()) {
           appendDataUnsignedLeb128(TypeGraph.getJsMethodKind(staticMember), configurationData);
           appendDataStringWithLength(staticMember.getJsName(), configurationData);
         }
 
         // Instance members.
-        appendDataUnsignedLeb128(type.instanceJsMembers().size(), configurationData);
-        for (var instanceMember : type.instanceJsMembers()) {
+        appendDataUnsignedLeb128(prototype.instanceJsMembers().size(), configurationData);
+        for (var instanceMember : prototype.instanceJsMembers()) {
           appendDataUnsignedLeb128(TypeGraph.getJsMethodKind(instanceMember), configurationData);
           appendDataStringWithLength(instanceMember.getJsName(), configurationData);
         }
 
         // Index of the super type.
         appendDataSignedLeb128(
-            type.superType() != null ? type.superType().index() : -1, configurationData);
+            prototype.superPrototype() != null ? prototype.superPrototype().index() : -1,
+            configurationData);
       }
 
       sb.append("(data $js_data \"");
@@ -356,26 +359,29 @@ final class BazelJ2wasmBundler extends BazelWorker {
 
     checkState(configurationDataLength > 0);
 
+    int memberCount = prototypes.stream().mapToInt(TypeGraph.Prototype::getJsMemberCount).sum();
+
     // Output the start function. We use the start function to call configureAll with all the
-    // information about the exported JS types.
-    sb.append("(func $start\n");
-    sb.append("  (call $js_configureAll\n");
-    sb.append("    (array.new_elem $js_prototypes_t $js_prototypes\n");
-    sb.append("      (i32.const 0) (i32.const ");
-    sb.append(exportedTypes.size());
-    sb.append("))\n");
-    sb.append("    (array.new_elem $js_functions_t $js_functions\n");
-    sb.append("      (i32.const 0) (i32.const ");
-    sb.append(exportedTypes.stream().mapToInt(TypeGraph.JsTypeInfo::getJsMemberCount).sum());
-    sb.append("))\n");
-    sb.append("    (array.new_data $js_data_t $js_data\n");
-    sb.append("      (i32.const 0) (i32.const ");
-    sb.append(configurationDataLength);
-    sb.append("))\n");
-    sb.append("    (global.get $js_constructors)\n");
-    sb.append("  )\n");
-    sb.append(")\n");
-    sb.append("(start $start)\n");
+    // information about the types that declare a JavaScript prototype.
+    sb.append(
+        """
+        (func $start
+          (call $js_configureAll
+            (array.new_elem $js_prototypes_t $js_prototypes
+              (i32.const 0) (i32.const %1$d)
+            )
+            (array.new_elem $js_functions_t $js_functions
+              (i32.const 0) (i32.const %2$d)
+            )
+            (array.new_data $js_data_t $js_data
+              (i32.const 0) (i32.const %3$d)
+            )
+            (global.get $js_constructors)
+          )
+        )
+        (start $start)
+        """
+            .formatted(prototypes.size(), memberCount, configurationDataLength));
     return sb.toString();
   }
 
@@ -582,8 +588,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
     private final List<TypeGraph.Type> interfaces = new ArrayList<>();
     private final Map<String, TypeGraph.Type> typesByName = new LinkedHashMap<>();
 
-    // List of exported JS types.
-    private final List<TypeGraph.JsTypeInfo> jsTypes = new ArrayList<>();
+    // List of all prototype definitions.
+    private final List<TypeGraph.Prototype> prototypes = new ArrayList<>();
 
     private final ItableAllocator<String> itableAllocator;
 
@@ -659,25 +665,25 @@ final class BazelJ2wasmBundler extends BazelWorker {
         }
       }
 
-      var exportedType =
-          new TypeGraph.JsTypeInfo(
+      var prototype =
+          new TypeGraph.Prototype(
               typeInfo.getJsInfo().getQualifiedJsName(),
-              /* index= */ jsTypes.size(),
-              isInterface ? null : type.getExportedSupertype(),
+              /* index= */ prototypes.size(),
+              isInterface ? null : type.getSuperPrototype(),
               jsConstructor,
               /* staticJsMembers= */ staticJsMembers.build(),
               /* instanceJsMembers= */ instanceJsMembers.build());
 
-      jsTypes.add(exportedType);
-      type.exportedType = exportedType;
+      prototypes.add(prototype);
+      type.prototype = prototype;
     }
 
     List<TypeGraph.Type> getClasses() {
       return classes;
     }
 
-    List<TypeGraph.JsTypeInfo> getJsTypes() {
-      return jsTypes;
+    List<TypeGraph.Prototype> getPrototypes() {
+      return prototypes;
     }
 
     static int getJsMethodKind(JsMemberInfo member) {
@@ -735,7 +741,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
       private Type superType;
       private final Set<Type> implementedInterfaces = new HashSet<>();
       private final boolean isAbstract;
-      private TypeGraph.JsTypeInfo exportedType;
+      private TypeGraph.Prototype prototype;
 
       public Type(String name, boolean isAbstract) {
         this.name = name;
@@ -840,22 +846,21 @@ final class BazelJ2wasmBundler extends BazelWorker {
         return itableFieldTypes;
       }
 
-      private TypeGraph.JsTypeInfo getExportedSupertype() {
-        TypeGraph.Type currentType = superType;
-        while (currentType != null) {
-          if (currentType.exportedType != null) {
-            return currentType.exportedType;
-          }
-          currentType = currentType.superType;
+      private TypeGraph.Prototype getSuperPrototype() {
+        if (superType == null) {
+          return null;
         }
-        return null;
+        if (superType.prototype != null) {
+          return superType.prototype;
+        }
+        return superType.getSuperPrototype();
       }
     }
 
-    private record JsTypeInfo(
+    private record Prototype(
         String qualifiedJsName,
         int index,
-        JsTypeInfo superType,
+        Prototype superPrototype,
         JsMemberInfo jsConstructor,
         ImmutableList<JsMemberInfo> staticJsMembers,
         ImmutableList<JsMemberInfo> instanceJsMembers) {
@@ -874,8 +879,8 @@ final class BazelJ2wasmBundler extends BazelWorker {
       }
 
       /**
-       * Gets the number of functions in this type. Includes constructors, static methods, and
-       * instance methods.
+       * Gets the number of functions involved in this prototype Includes constructors, static
+       * methods, and instance methods.
        */
       int getJsMemberCount() {
         // Note: Adding 1 for the constructor.
