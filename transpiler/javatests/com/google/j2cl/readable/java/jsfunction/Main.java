@@ -133,6 +133,19 @@ public class Main {
     acceptsJsFunction(list.get(0));
   }
 
+  @JsFunction
+  interface IntegerJsFunction {
+    Integer apply(Integer i);
+  }
+
+  public void testJsFunctionCalls_autoboxing() {
+    Function<Integer, Integer> fn = arg -> arg + 1;
+    int result = fn.apply(100);
+
+    IntegerJsFunction intFn = arg -> arg + 1;
+    int result2 = intFn.apply(100);
+  }
+
   public static void acceptsJsFunction(Function<String, String> f) {}
 
   static class TestCaptureOuterParametricClass<T> {

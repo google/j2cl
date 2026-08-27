@@ -67,6 +67,7 @@ public class Main {
     testJsFunctionWithVarArgs();
     testJsFunctionLambda();
     testJsFunctionArray();
+    testJsFunctionCalls_autoboxing();
     testJsFunctionWithNativeType();
     testJsFunctionWithJsType();
   }
@@ -660,6 +661,13 @@ public class Main {
     assertEquals(3, ((JsFunctionWithVarargs) (int n, int[] numbers) -> numbers[n]).f(1, 1, 3));
 
     new JsFunctionWithVarargsTestSub().test();
+  }
+
+  private static void testJsFunctionCalls_autoboxing() {
+    // The Wasm backend transforms JsFunction calls. Make sure that autoboxing continues to work.
+    ParameterizedInterface<Integer> fn = arg -> arg + 1;
+    int result = fn.f(100);
+    assertEquals(101, result);
   }
 
   @JsFunction

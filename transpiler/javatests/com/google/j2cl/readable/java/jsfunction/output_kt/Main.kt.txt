@@ -92,6 +92,13 @@ open class Main {
   )
  }
  
+ open fun testJsFunctionCalls_autoboxing() {
+  val fn: Function<Int?, Int?> = Function { arg: Int? -> arg!!.toInt() + 1 }
+  val result: Int = fn.apply(100)!!.toInt()
+  val intFn: IntegerJsFunction = IntegerJsFunction { arg_1: Int? -> arg_1!!.toInt() + 1 }
+  val result2: Int = intFn.apply(100)!!.toInt()
+ }
+ 
  internal open fun testJsFunctionVarargs_pp_jsfunction(): JsFunctionVarargs? {
   val f: JsFunctionVarargs = JsFunctionVarargs { i: Int, numbers: IntArray? ->
    var sum: Int = i
@@ -345,6 +352,11 @@ open class Main {
   }
   
   override fun foo(a: Int): Int = a + this.bar() + this.field + this.overlayMethod()
+ }
+ 
+ @JsFunction
+ internal fun interface IntegerJsFunction {
+  fun apply(i: Int?): Int?
  }
  
  internal open class TestCaptureOuterParametricClass<T> internal constructor() {

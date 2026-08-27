@@ -109,6 +109,19 @@ class MainKt extends j_l_Object {
   MainKt.m_acceptsJsFunction__jsfunction_Function__void(/**@type {?function(string):string}*/ ($Casts.$to(container.m_get__java_lang_Object(), $JavaScriptFunction)));
  }
  /** @nodts */
+ static m_testJsFunctionCalls_autoboxing__void() {
+  MainKt.$clinit();
+  let fn = /**  @return {Integer}*/ ((/** Integer */ arg) =>{
+   let arg_1 = /**@type {Integer}*/ ($Casts.$to(arg, Integer));
+   return Integer.valueOf(arg_1.intValue() + 1 | 0);
+  });
+  let result = (/**@type {Integer}*/ ($Casts.$to(fn(Integer.valueOf(100)), Integer))).intValue();
+  let intFn = /**  @return {Integer}*/ ((/** Integer */ arg_2) =>{
+   return Integer.valueOf(arg_2.intValue() + 1 | 0);
+  });
+  let result2 = intFn(Integer.valueOf(100)).intValue();
+ }
+ /** @nodts */
  static m_acceptsJsFunction__jsfunction_Function__void(/** ?function(string):string */ f) {
   MainKt.$clinit();
  }

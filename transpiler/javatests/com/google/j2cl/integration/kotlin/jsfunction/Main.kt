@@ -66,6 +66,7 @@ fun main(vararg unused: String) {
   testJsFunctionWithVarArgs()
   testJsFunctionLambda()
   testJsFunctionArray()
+  testJsFunctionCalls_autoboxing()
   testJsFunctionWithNativeType()
   testJsFunctionWithJsType()
 }
@@ -641,6 +642,12 @@ private fun testJsFunctionArray() {
     val o: Any = arrayOfNulls<Int>(1)
     val temp = o as Array<JsFunctionInterface>
   }
+}
+
+private fun testJsFunctionCalls_autoboxing() {
+  val fn: ParameterizedInterface<Int> = { arg -> arg!! + 1 }
+  val result: Int = fn.f(100)!!
+  assertEquals(101, result)
 }
 
 @JsFunction

@@ -135,6 +135,19 @@ fun testJsFunctionErasureCasts() {
   acceptsJsFunction(container.get())
 }
 
+@JsFunction
+fun interface IntegerJsFunction {
+  fun apply(i: Int?): Int?
+}
+
+fun testJsFunctionCalls_autoboxing() {
+  val fn = Function<Int?, Int?> { arg: Int? -> arg!! + 1 }
+  val result: Int = fn.apply(100)!!
+
+  val intFn = IntegerJsFunction { arg: Int? -> arg!! + 1 }
+  val result2: Int = intFn.apply(100)!!
+}
+
 fun acceptsJsFunction(f: Function<String, String>?) {}
 
 internal class TestCaptureOuterParametricClass<T> {
