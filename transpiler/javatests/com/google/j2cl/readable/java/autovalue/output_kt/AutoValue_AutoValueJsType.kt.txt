@@ -20,13 +20,16 @@ package autovalue
 
 import javaemul.lang.*
 import autovalue.AutoValueJsType
+import java.lang.IllegalStateException
 import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsMethod
 import kotlin.Any
 import kotlin.Boolean
+import kotlin.Byte
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
+import kotlin.text.StringBuilder
 
 class AutoValue_AutoValueJsType: AutoValueJsType {
  private val getField: Int
@@ -35,7 +38,7 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
  
  private val ignored: Int
  
- internal constructor(getField: Int, getWithJsMethod: Int, ignored: Int) {
+ private constructor(getField: Int, getWithJsMethod: Int, ignored: Int) {
   this.getField = getField
   this.getWithJsMethod = getWithJsMethod
   this.ignored = ignored
@@ -77,5 +80,62 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
    this.ignored,
   )
   return h___
+ }
+ 
+ class Builder internal constructor(): autovalue.AutoValueJsType.Builder() {
+  private var getField: Int = 0
+  
+  private var getWithJsMethod: Int = 0
+  
+  private var ignored: Int = 0
+  
+  private var set___0: Byte = 0.toByte()
+  
+  override fun setGetField(getField: Int): autovalue.AutoValueJsType.Builder? {
+   this.getField = getField
+   this.set___0 = this.set___0.toInt().or(
+    1.toByte().toInt(),
+   ).toByte()
+   return this
+  }
+  
+  override fun setGetWithJsMethod_pp_autovalue(getWithJsMethod: Int): autovalue.AutoValueJsType.Builder? {
+   this.getWithJsMethod = getWithJsMethod
+   this.set___0 = this.set___0.toInt().or(
+    2.toByte().toInt(),
+   ).toByte()
+   return this
+  }
+  
+  override fun setIgnored(ignored: Int): autovalue.AutoValueJsType.Builder? {
+   this.ignored = ignored
+   this.set___0 = this.set___0.toInt().or(
+    4.toByte().toInt(),
+   ).toByte()
+   return this
+  }
+  
+  override fun build(): AutoValueJsType? {
+   if (this.set___0.toInt() != 7) {
+    val missing: StringBuilder = StringBuilder()
+    if (this.set___0.toInt().and(1) == 0) {
+     missing.append(" getField")
+    }
+    if (this.set___0.toInt().and(2) == 0) {
+     missing.append(" getWithJsMethod")
+    }
+    if (this.set___0.toInt().and(4) == 0) {
+     missing.append(" ignored")
+    }
+    throw IllegalStateException(
+     "Missing required properties:" + missing,
+    )
+   }
+   return AutoValue_AutoValueJsType(
+    this@Builder.getField,
+    this@Builder.getWithJsMethod,
+    this@Builder.ignored,
+   )
+  }
  }
 }

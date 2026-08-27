@@ -39,4 +39,21 @@ abstract class AutoValueJsType {
  
  @JsIgnore
  abstract fun ignored(): Int
+ 
+ @JsType
+ @javaemul.lang.annotations.WasAutoValue.Builder
+ abstract class Builder {
+  @JsIgnore
+  constructor()
+  
+  abstract fun setGetField(x: Int): Builder?
+  
+  @JsMethod(name = "setField2")
+  internal abstract fun setGetWithJsMethod_pp_autovalue(x: Int): Builder?
+  
+  @JsIgnore
+  abstract fun setIgnored(x: Int): Builder?
+  
+  abstract fun build(): AutoValueJsType?
+ }
 }

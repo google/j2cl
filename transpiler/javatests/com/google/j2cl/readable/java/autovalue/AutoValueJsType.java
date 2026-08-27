@@ -25,7 +25,7 @@ import jsinterop.annotations.JsType;
 public abstract class AutoValueJsType {
   protected AutoValueJsType() {}
 
-  // Intentionaly public so it is a js member.
+  // Intentionally public so it is a js member.
   public abstract int getField();
 
   @JsMethod(name = "getField2")
@@ -33,4 +33,22 @@ public abstract class AutoValueJsType {
 
   @JsIgnore
   public abstract int ignored();
+
+  @AutoValue.Builder
+  @JsType
+  public abstract static class Builder {
+    protected Builder() {}
+
+    // Intentionally public so it is a js member.
+    public abstract Builder setGetField(int x);
+
+    @JsMethod(name = "setField2")
+    abstract Builder setGetWithJsMethod(int x);
+
+    // AutoValue does not copy JsIgnore to the AutoValue generated builder.
+    @JsIgnore
+    public abstract Builder setIgnored(int x);
+
+    public abstract AutoValueJsType build();
+  }
 }
