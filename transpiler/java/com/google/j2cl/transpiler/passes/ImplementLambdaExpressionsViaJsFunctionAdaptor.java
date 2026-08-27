@@ -300,7 +300,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     // Create the forwarding method that forwards calls to the functional interface method to
     // the JsFunction lambda.
     MethodDescriptor adaptorForwarderMethodDescriptor =
-        LambdaAdaptorTypeDescriptors.getAdaptorForwardingMethod(adaptorTypeDescriptor);
+        LambdaAdaptorTypeDescriptors.getFunctionalMethodImplementation(adaptorTypeDescriptor);
 
     MethodDescriptor jsFunctionMethodDescriptor =
         jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor().toBuilder()

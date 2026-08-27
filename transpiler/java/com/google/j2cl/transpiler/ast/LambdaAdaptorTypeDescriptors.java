@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
@@ -115,7 +116,7 @@ public final class LambdaAdaptorTypeDescriptors {
       DeclaredTypeDescriptor jsFunctionInterface, DeclaredTypeDescriptor adaptorTypeDescriptor) {
     return ImmutableList.of(
         getLambdaAdaptorConstructor(jsFunctionInterface, adaptorTypeDescriptor),
-        getAdaptorForwardingMethod(adaptorTypeDescriptor));
+        getFunctionalMethodImplementation(adaptorTypeDescriptor));
   }
 
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
@@ -169,12 +170,12 @@ public final class LambdaAdaptorTypeDescriptors {
         .build();
   }
 
-  /** Returns the MethodDescriptor for the SAM implementation in the LambdaAdaptor class. */
+  /** Returns the MethodDescriptor for the functional method implementation in the given type. */
   @SuppressWarnings("ReferenceEquality")
-  public static MethodDescriptor getAdaptorForwardingMethod(
-      DeclaredTypeDescriptor adaptorTypeDescriptor) {
+  public static MethodDescriptor getFunctionalMethodImplementation(
+      DeclaredTypeDescriptor typeDescriptor) {
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        adaptorTypeDescriptor.getFunctionalInterface();
+        typeDescriptor.getFunctionalInterface();
     checkState(
         functionalInterfaceTypeDescriptor.getFunctionalInterface()
             == functionalInterfaceTypeDescriptor);
@@ -183,8 +184,9 @@ public final class LambdaAdaptorTypeDescriptors {
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
     return functionalInterfaceMethodDescriptor.toBuilder()
         .setDeclarationDescriptor(null)
-        .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
-        .setSynthetic(false)
+        .setEnclosingTypeDescriptor(typeDescriptor)
+        .setOrigin(MethodOrigin.SYNTHETIC_LAMBDA_IMPLEMENTOR_METHOD)
+        .setSynthetic(true)
         .setAbstract(false)
         .setNative(false)
         .build();

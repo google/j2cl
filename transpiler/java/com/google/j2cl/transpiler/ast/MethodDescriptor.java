@@ -138,6 +138,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>"),
     SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
+    SYNTHETIC_LAMBDA_IMPLEMENTOR_METHOD,
     SYNTHETIC_CLASS_GETTER,
     SYNTHETIC_CLASS_LITERAL_GETTER,
     SYNTHETIC_STRING_LITERAL_GETTER,
@@ -181,6 +182,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return switch (this) {
         // User written methods and bridges need to be mangled the same way.
         case SOURCE,
+            SYNTHETIC_LAMBDA_IMPLEMENTOR_METHOD,
             GENERALIZING_BRIDGE,
             SPECIALIZING_BRIDGE,
             DEFAULT_METHOD_BRIDGE,

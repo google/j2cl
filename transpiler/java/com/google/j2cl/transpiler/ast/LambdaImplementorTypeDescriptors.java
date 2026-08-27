@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
@@ -128,7 +127,9 @@ public final class LambdaImplementorTypeDescriptors {
         .setClassComponents(classComponents)
         .setDeclaredMethodDescriptorsFactory(
             implementorTypeDeclaration ->
-                ImmutableList.of(getLambdaMethod(implementorTypeDeclaration.toDescriptor())))
+                ImmutableList.of(
+                    LambdaAdaptorTypeDescriptors.getFunctionalMethodImplementation(
+                        implementorTypeDeclaration.toDescriptor())))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameters)
         .setVisibility(Visibility.PUBLIC)
@@ -161,28 +162,6 @@ public final class LambdaImplementorTypeDescriptors {
 
     return LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
         functionalInterface);
-  }
-
-  /** Returns the MethodDescriptor for the SAM implementation in the LambdaImplementor class. */
-  @SuppressWarnings("ReferenceEquality")
-  private static MethodDescriptor getLambdaMethod(
-      DeclaredTypeDescriptor implementorTypeDescriptor) {
-    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        implementorTypeDescriptor.getFunctionalInterface();
-    checkState(
-        functionalInterfaceTypeDescriptor.getFunctionalInterface()
-            == functionalInterfaceTypeDescriptor);
-
-    MethodDescriptor functionalInterfaceMethodDescriptor =
-        functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    return functionalInterfaceMethodDescriptor.toBuilder()
-        .setNative(false)
-        .makeDeclaration()
-        // This is the declaration.
-        .setEnclosingTypeDescriptor(implementorTypeDescriptor)
-        .setSynthetic(false)
-        .setAbstract(false)
-        .build();
   }
 
   private LambdaImplementorTypeDescriptors() {}
