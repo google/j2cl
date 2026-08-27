@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.j2cl.transpiler.ast.AstUtils.isJsEnumBoxingSupported;
 import static com.google.j2cl.transpiler.ast.AstUtils.isNonNativeJsEnum;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.getEnumBoxType;
 import static java.util.stream.Collectors.joining;
@@ -105,9 +106,10 @@ class ClosureTypesGenerator {
       case UnionTypeDescriptor descriptor -> getClosureTypeForUnion(descriptor);
       case IntersectionTypeDescriptor descriptor -> getClosureTypeForIntersection(descriptor);
       case DeclaredTypeDescriptor descriptor -> {
-
-        // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
-        descriptor = replaceJsEnumArguments(descriptor);
+        if (isJsEnumBoxingSupported()) {
+          // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
+          descriptor = replaceJsEnumArguments(descriptor);
+        }
 
         yield descriptor.isJsFunctionInterface()
             ? getClosureTypeForJsFunction(descriptor)
