@@ -62,8 +62,6 @@ class DefaultCompanionName {
     fun clashingWithInstanceMethod(): Boolean = false
 
     fun clashingWithInstanceMethodButDifferentReturnType(): Int = 1
-
-    fun `$isInstance`(o: Any): Boolean = true
   }
 
   fun clashingWithInstanceMethod(): Boolean = true
@@ -92,6 +90,8 @@ class CompanionWithJvmAnnotations {
 
     @JvmStatic
     fun jvmStaticFunction() = jvmStaticNonCompileTimeConstant * jvmFieldNonCompileTimeConstant
+
+    @JvmStatic fun `$isInstance`(o: Any): Boolean = true
   }
 }
 

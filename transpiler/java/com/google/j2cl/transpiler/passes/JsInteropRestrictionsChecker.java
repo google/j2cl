@@ -1375,10 +1375,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkCustomIsInstanceMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    if (methodDescriptor.isInstanceMember()
-        // If the custom `isInstance` method is defined in a Kotlin companion object, The method
-        // will be later moved to the enclosing type and become static.
-        && !methodDescriptor.getEnclosingTypeDescriptor().isOptimizableKotlinCompanion()) {
+    if (methodDescriptor.isInstanceMember() && !isJvmStaticCompanionMethod(methodDescriptor)) {
       problems.error(
           method.getSourcePosition(),
           "Custom '$isInstance' method '%s' has to be static.",
@@ -1396,6 +1393,17 @@ public class JsInteropRestrictionsChecker {
           "Custom '$isInstance' method '%s' has to return 'boolean'.",
           method.getReadableDescription());
     }
+  }
+
+  private static boolean isJvmStaticCompanionMethod(MethodDescriptor methodDescriptor) {
+    DeclaredTypeDescriptor enclosingType = methodDescriptor.getEnclosingTypeDescriptor();
+    if (!enclosingType.isKotlinCompanionClass()) {
+      return false;
+    }
+    DeclaredTypeDescriptor companionEnclosingType = enclosingType.getEnclosingTypeDescriptor();
+    return companionEnclosingType != null
+        && companionEnclosingType.getDeclaredMethodDescriptors().stream()
+            .anyMatch(m -> m.isStatic() && m.isSameSignature(methodDescriptor));
   }
 
   private void checkOverrideConsistency(Member member) {

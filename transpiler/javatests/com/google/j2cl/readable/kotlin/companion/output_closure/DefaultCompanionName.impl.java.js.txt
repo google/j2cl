@@ -67,11 +67,6 @@ class DefaultCompanionName extends j_l_Object {
   DefaultCompanionName.$clinit();
   return 1;
  }
- /** @nodts @return {boolean} */
- static $isInstance(/** !* */ o) {
-  DefaultCompanionName.$clinit();
-  return true;
- }
  /** @nodts */
  static $clinit() {
   DefaultCompanionName.$clinit = () =>{};
@@ -79,6 +74,10 @@ class DefaultCompanionName extends j_l_Object {
   j_l_Object.$clinit();
   DefaultCompanionName.f_nonCompileTimeConstant__companion_DefaultCompanionName_ = j_l_Object.$create__();
   DefaultCompanionName.f_property__companion_DefaultCompanionName_ = j_l_Object.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DefaultCompanionName;
  }
  
  /** @nodts */

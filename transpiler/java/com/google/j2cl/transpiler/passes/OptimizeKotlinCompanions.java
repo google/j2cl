@@ -246,9 +246,8 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
    * JNI compatibility) and creates the forwarding method on the companion. In that particular case
    * we do not have anything to do.
    *
-   * <p>Custom `$isInstance` methods are moved to the enclosing type but no forwarding method is
-   * created on the companion to avoid conflicting with the static `isInstance` method created
-   * later.
+   * <p>For custom `$isInstance` methods, no forwarding method is created on the companion to avoid
+   * conflicting with the static `$isInstance` method created later for the companion object.
    */
   private static void moveCompanionMethodsToEnclosingType(Type enclosingType, Type companion) {
     companion.accept(
