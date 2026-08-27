@@ -94,7 +94,7 @@ public class TranspilerTester {
 
   // TODO(b/491190328): remove once klib is enabled by default.
   public static boolean isKlibEnabled() {
-    return Boolean.getBoolean("j2cl.enable_klib");
+    return true;
   }
 
   /** Creates a new transpiler tester initialized with Kotlin (backend) defaults. */
