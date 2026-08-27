@@ -1,0 +1,41 @@
+goog.module('jsmethod.JsMethodExample.AbstractClassExposingJsMethodM$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const InterfaceWithJsMethod = goog.require('jsmethod.JsMethodExample.InterfaceWithJsMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @implements {InterfaceWithJsMethod}
+ */
+class AbstractClassExposingJsMethodM extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AbstractClassExposingJsMethodM__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractClassExposingJsMethodM.$clinit = () =>{};
+  AbstractClassExposingJsMethodM.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractClassExposingJsMethodM;
+ }
+ /** @abstract @override */
+ m() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithJsMethod.$markImplementor(AbstractClassExposingJsMethodM);
+$Util.$setClassMetadata(AbstractClassExposingJsMethodM, 'jsmethod.JsMethodExample$AbstractClassExposingJsMethodM');
+
+exports = AbstractClassExposingJsMethodM;
+
+//# sourceMappingURL=JsMethodExample$AbstractClassExposingJsMethodM.js.map

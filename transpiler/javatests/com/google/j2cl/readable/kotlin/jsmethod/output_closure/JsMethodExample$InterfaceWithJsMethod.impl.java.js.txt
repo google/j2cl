@@ -1,0 +1,33 @@
+goog.module('jsmethod.JsMethodExample.InterfaceWithJsMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class InterfaceWithJsMethod {
+ /** @abstract */
+ m() {}
+ /** @nodts */
+ static $clinit() {
+  InterfaceWithJsMethod.$clinit = () =>{};
+  InterfaceWithJsMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsmethod_JsMethodExample_InterfaceWithJsMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsmethod_JsMethodExample_InterfaceWithJsMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithJsMethod.$markImplementor(/**@type {Function}*/ (InterfaceWithJsMethod));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (InterfaceWithJsMethod), 'jsmethod.JsMethodExample$InterfaceWithJsMethod');
+
+exports = InterfaceWithJsMethod;
+
+//# sourceMappingURL=JsMethodExample$InterfaceWithJsMethod.js.map

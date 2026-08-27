@@ -17,6 +17,7 @@ package jsmethod;
 
 import java.util.ArrayList;
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -153,5 +154,23 @@ public class JsMethodExample {
         T t,
         NativeFoo nf,
         ExposesMethodWithDifferentTypes<T> e) {}
+  }
+
+  interface InterfaceWithJsMethod {
+    @JsMethod
+    void m();
+  }
+
+  abstract static class AbstractClassExposingJsMethodM implements InterfaceWithJsMethod {}
+
+  abstract static class AbstractSubclassWithNoMembers extends AbstractClassExposingJsMethodM {}
+
+  static class ConcreteSubclassWithNoNewJsMembers extends AbstractSubclassWithNoMembers {
+    public void m() {}
+  }
+
+  static class ConcreteSubclassWithJsConstructor extends ConcreteSubclassWithNoNewJsMembers {
+    @JsConstructor
+    public ConcreteSubclassWithJsConstructor() {}
   }
 }

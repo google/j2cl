@@ -155,4 +155,20 @@ class JsMethodExample {
       e: ExposesMethodWithDifferentTypes<T>,
     ) {}
   }
+
+  interface InterfaceWithJsMethod {
+    @JsMethod fun m()
+  }
+
+  abstract class AbstractClassExposingJsMethodM : InterfaceWithJsMethod {}
+
+  abstract class AbstractSubclassWithNoMembers : AbstractClassExposingJsMethodM() {}
+
+  open class ConcreteSubclassWithNoNewJsMembers : AbstractSubclassWithNoMembers() {
+    override fun m() {}
+  }
+
+  class ConcreteSubclassWithJsConstructor : ConcreteSubclassWithNoNewJsMembers {
+    @JsConstructor constructor() {}
+  }
 }

@@ -1,0 +1,50 @@
+goog.module('jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const InterfaceWithJsMethod = goog.require('jsmethod.JsMethodExample.InterfaceWithJsMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {InterfaceWithJsMethod}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void} @nodts*/
+  this.f_fn__jsmethod_JsMethodExample_InterfaceWithJsMethod_$LambdaAdaptor;
+  this.$ctor__jsmethod_JsMethodExample_InterfaceWithJsMethod_$LambdaAdaptor__jsmethod_JsMethodExample_InterfaceWithJsMethod_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_InterfaceWithJsMethod_$LambdaAdaptor__jsmethod_JsMethodExample_InterfaceWithJsMethod_$JsFunction__void(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__jsmethod_JsMethodExample_InterfaceWithJsMethod_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m() {
+  {
+   let $function = this.f_fn__jsmethod_JsMethodExample_InterfaceWithJsMethod_$LambdaAdaptor;
+   $function();
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+InterfaceWithJsMethod.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'jsmethod.JsMethodExample$InterfaceWithJsMethod$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=JsMethodExample$InterfaceWithJsMethod$$LambdaAdaptor.js.map

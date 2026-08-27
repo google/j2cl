@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers$impl');
+
+const AbstractSubclassWithNoMembers = goog.require('jsmethod.JsMethodExample.AbstractSubclassWithNoMembers$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ConcreteSubclassWithNoNewJsMembers extends AbstractSubclassWithNoMembers {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ConcreteSubclassWithNoNewJsMembers} */
+ static $create__() {
+  ConcreteSubclassWithNoNewJsMembers.$clinit();
+  let $instance = new ConcreteSubclassWithNoNewJsMembers();
+  $instance.$ctor__jsmethod_JsMethodExample_ConcreteSubclassWithNoNewJsMembers__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ConcreteSubclassWithNoNewJsMembers__void() {
+  this.$ctor__jsmethod_JsMethodExample_AbstractSubclassWithNoMembers__void();
+ }
+ /** @override */
+ m() {}
+ /** @nodts */
+ static $clinit() {
+  ConcreteSubclassWithNoNewJsMembers.$clinit = () =>{};
+  ConcreteSubclassWithNoNewJsMembers.$loadModules();
+  AbstractSubclassWithNoMembers.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ConcreteSubclassWithNoNewJsMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ConcreteSubclassWithNoNewJsMembers, 'jsmethod.JsMethodExample$ConcreteSubclassWithNoNewJsMembers');
+
+exports = ConcreteSubclassWithNoNewJsMembers;
+
+//# sourceMappingURL=JsMethodExample$ConcreteSubclassWithNoNewJsMembers.js.map

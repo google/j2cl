@@ -1,0 +1,38 @@
+goog.module('jsmethod.JsMethodExample.AbstractSubclassWithNoMembers$impl');
+
+const AbstractClassExposingJsMethodM = goog.require('jsmethod.JsMethodExample.AbstractClassExposingJsMethodM$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AbstractSubclassWithNoMembers extends AbstractClassExposingJsMethodM {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AbstractSubclassWithNoMembers__void() {
+  this.$ctor__jsmethod_JsMethodExample_AbstractClassExposingJsMethodM__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractSubclassWithNoMembers.$clinit = () =>{};
+  AbstractSubclassWithNoMembers.$loadModules();
+  AbstractClassExposingJsMethodM.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractSubclassWithNoMembers;
+ }
+ /** @abstract @override @suppress{visibility} */
+ m() {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractSubclassWithNoMembers, 'jsmethod.JsMethodExample$AbstractSubclassWithNoMembers');
+
+exports = AbstractSubclassWithNoMembers;
+
+//# sourceMappingURL=JsMethodExample$AbstractSubclassWithNoMembers.js.map

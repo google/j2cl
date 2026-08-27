@@ -1,0 +1,38 @@
+goog.module('jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor$impl');
+
+const ConcreteSubclassWithNoNewJsMembers = goog.require('jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class ConcreteSubclassWithJsConstructor extends ConcreteSubclassWithNoNewJsMembers {
+ 
+ constructor() {
+  ConcreteSubclassWithJsConstructor.$clinit();
+  super();
+  this.$ctor__jsmethod_JsMethodExample_ConcreteSubclassWithJsConstructor__void();
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_ConcreteSubclassWithJsConstructor__void() {
+  this.$ctor__jsmethod_JsMethodExample_ConcreteSubclassWithNoNewJsMembers__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ConcreteSubclassWithJsConstructor.$clinit = () =>{};
+  ConcreteSubclassWithJsConstructor.$loadModules();
+  ConcreteSubclassWithNoNewJsMembers.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ConcreteSubclassWithJsConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ConcreteSubclassWithJsConstructor, 'jsmethod.JsMethodExample$ConcreteSubclassWithJsConstructor');
+
+exports = ConcreteSubclassWithJsConstructor;
+
+//# sourceMappingURL=JsMethodExample$ConcreteSubclassWithJsConstructor.js.map

@@ -15,6 +15,10 @@
  (field $m_m__java_lang_Object (ref $function.m_m__java_lang_Object))
  ))
 )
+(type $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable (sub (struct
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
 (type $jsmethod.JsMethodExample.NativeFoo.$Overlay (sub (descriptor $jsmethod.JsMethodExample.NativeFoo.$Overlay.vtable) (struct
  (field $itable (ref $itable))
  ))
@@ -49,6 +53,20 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
+ ))
+)
+(type $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor (sub $java.lang.Object (descriptor $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor.vtable) (struct
+ (field $itable (ref $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (describes $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
  ))
 )
 (type $jsmethod.JsMethodExample.Base (sub $java.lang.Object (descriptor $jsmethod.JsMethodExample.Base.vtable) (struct
@@ -138,6 +156,20 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref $function.m_m__java_lang_String__java_lang_Double__java_lang_Long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void))
+ ))
+)
+(type $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM (sub $java.lang.Object (descriptor $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM.vtable) (struct
+ (field $itable (ref $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM.vtable (sub $java.lang.Object.vtable (describes $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
  ))
 )
 (type $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor (sub $java.lang.Object (descriptor $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor.vtable) (struct
@@ -248,6 +280,20 @@
  (field $m_abstractJsMethod__java_lang_String__void (ref $function.m_abstractJsMethod__java_lang_String__void))
  ))
 )
+(type $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers (sub $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM (descriptor $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers.vtable) (struct
+ (field $itable (ref $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers.vtable (sub $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM.vtable (describes $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
+ ))
+)
 (type $jsmethod.JsMethodExample.AbstractChildTypeWithNoNewJsMembers (sub $jsmethod.JsMethodExample.SubJsType (descriptor $jsmethod.JsMethodExample.AbstractChildTypeWithNoNewJsMembers.vtable) (struct
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
@@ -263,6 +309,20 @@
  (field $m_o__java_lang_String__void_$pp_jsmethod (ref $function.m_o__java_lang_String__void_$pp_jsmethod))
  (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
  (field $m_p__void (ref $function.m_p__void))
+ ))
+)
+(type $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers (sub $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers (descriptor $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers.vtable) (struct
+ (field $itable (ref $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers.vtable (sub $jsmethod.JsMethodExample.AbstractSubclassWithNoMembers.vtable (describes $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
  ))
 )
 (type $jsmethod.JsMethodExample.AbstractGrandChildTypeWithNoNewJsMembers (sub $jsmethod.JsMethodExample.AbstractChildTypeWithNoNewJsMembers (descriptor $jsmethod.JsMethodExample.AbstractGrandChildTypeWithNoNewJsMembers.vtable) (struct
@@ -281,6 +341,20 @@
  (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
  (field $m_p__void (ref $function.m_p__void))
  (field $m_q__void (ref $function.m_q__void))
+ ))
+)
+(type $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor (sub $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers (descriptor $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor.vtable) (struct
+ (field $itable (ref $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor.vtable (sub $jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers.vtable (describes $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
  ))
 )
 (type $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers (sub $jsmethod.JsMethodExample.AbstractGrandChildTypeWithNoNewJsMembers (descriptor $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers.vtable) (struct

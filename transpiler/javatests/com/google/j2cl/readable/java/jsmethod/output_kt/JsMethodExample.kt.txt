@@ -20,6 +20,7 @@ package jsmethod
 
 import javaemul.lang.*
 import java.util.ArrayList
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 import kotlin.Any
@@ -161,5 +162,23 @@ open class JsMethodExample {
  internal open class ExposesMethodWithDifferentTypes<T> internal constructor() {
   @JsMethod
   open fun m(s: String?, d: Double?, l: Long?, c: Comparable<Any>?, o: Any?, t: T, nf: NativeFoo?, e: ExposesMethodWithDifferentTypes<T>?) {}
+ }
+ 
+ internal fun interface InterfaceWithJsMethod {
+  @JsMethod
+  fun m()
+ }
+ 
+ internal abstract class AbstractClassExposingJsMethodM internal constructor(): InterfaceWithJsMethod
+ 
+ internal abstract class AbstractSubclassWithNoMembers internal constructor(): AbstractClassExposingJsMethodM()
+ 
+ internal open class ConcreteSubclassWithNoNewJsMembers internal constructor(): AbstractSubclassWithNoMembers() {
+  override fun m() {}
+ }
+ 
+ internal open class ConcreteSubclassWithJsConstructor: ConcreteSubclassWithNoNewJsMembers {
+  @JsConstructor
+  constructor()
  }
 }
