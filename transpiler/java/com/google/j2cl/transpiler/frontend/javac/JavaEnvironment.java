@@ -785,7 +785,6 @@ public class JavaEnvironment {
             .setDefaultMethod(isDefaultMethod(methodSymbol))
             .setAbstract(isAbstract(methodSymbol))
             .setSynchronized(isSynchronized(methodSymbol))
-            .setSynthetic(isSynthetic(methodSymbol))
             .setEnumSyntheticMethod(isEnumSyntheticMethod(methodSymbol))
             .setOrigin(
                 isSynthetic(methodSymbol) ? MethodOrigin.SYNTHETIC_METHOD : MethodOrigin.SOURCE)

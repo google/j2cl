@@ -85,6 +85,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public boolean isSyntheticInstanceOfSupportMember() {
       return this == SYNTHETIC_INSTANCE_OF_SUPPORT_FIELD;
     }
+
+    @Override
+    public boolean isSynthetic() {
+      return this != SOURCE;
+    }
   }
 
   /**
@@ -280,7 +285,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setStatic(false)
         .setFinal(false)
         .setVolatile(false)
-        .setSynthetic(false)
         .setEnumConstant(false)
         .setOrigin(FieldOrigin.SOURCE);
   }
@@ -304,8 +308,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setName(String name);
 
     public abstract Builder setEnumConstant(boolean isEnumConstant);
-
-    public abstract Builder setSynthetic(boolean isSynthetic);
 
     public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
 
@@ -366,13 +368,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       }
 
       FieldDescriptor fieldDescriptor = autoBuild();
-
-      if (fieldDescriptor.isSynthetic()) {
-        checkState(
-            fieldDescriptor.getOrigin() != FieldOrigin.SOURCE,
-            "Inconsistent synthetic flag and origin for field: %s",
-            fieldDescriptor);
-      }
 
       return interner.intern(fieldDescriptor);
     }

@@ -96,7 +96,6 @@ public class StringLiteralGettersCreator {
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setOrigin(MethodOrigin.SYNTHETIC_STRING_LITERAL_GETTER)
         .setStatic(true)
-        .setSynthetic(true)
         .build();
   }
 

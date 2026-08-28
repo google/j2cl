@@ -38,6 +38,9 @@ public abstract class MemberDescriptor
 
     /** Returns whether this member is supporting the implementation of the instanceof operation. */
     boolean isSyntheticInstanceOfSupportMember();
+
+    /** Returns whether this origin represents a synthetic member. */
+    boolean isSynthetic();
   }
 
   /** Return JsInfo from the member's annotation. */
@@ -121,7 +124,9 @@ public abstract class MemberDescriptor
    * <p>Returns true only for members that are considered implementation artifacts, like bridges,
    * but not for implicit members like default constructor or record accessors.
    */
-  public abstract boolean isSynthetic();
+  public boolean isSynthetic() {
+    return getOrigin().isSynthetic();
+  }
 
   public abstract Origin getOrigin();
 

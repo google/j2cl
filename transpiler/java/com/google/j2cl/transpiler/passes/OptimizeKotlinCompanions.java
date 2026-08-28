@@ -469,7 +469,6 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
         builder ->
             builder
                 .setStatic(true)
-                .setSynthetic(true)
                 .setOrigin(MethodOrigin.SYNTHETIC_METHOD)
                 .setEnclosingTypeDescriptor(companionEnclosingType)
                 .setOriginalJsInfo(

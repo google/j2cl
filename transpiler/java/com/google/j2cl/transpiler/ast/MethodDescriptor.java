@@ -220,6 +220,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return this == SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD;
     }
 
+    @Override
+    public boolean isSynthetic() {
+      return this != SOURCE;
+    }
+
     public boolean isOnceMethod() {
       return switch (this) {
         case SYNTHETIC_CLASS_INITIALIZER,
@@ -1235,7 +1240,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setNative(false)
         .setStatic(false)
         .setFinal(false)
-        .setSynthetic(false)
         .setSuspendFunction(false)
         .setEnumSyntheticMethod(false)
         .setOrigin(MethodOrigin.SOURCE)
@@ -1619,15 +1623,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setFinal(boolean isFinal);
 
-    public abstract Builder setSynthetic(boolean isSynthetic);
-
     public abstract Builder setSuspendFunction(boolean suspendFunction);
 
     public Builder makeAbstractStub(MethodDescriptor methodDescriptor) {
       return setBridgeOrigin(methodDescriptor)
           .setOrigin(MethodOrigin.ABSTRACT_STUB)
           .setBridgeTarget(null)
-          .setSynthetic(true)
           .makeDeclaration()
           // Clear properties that might have been carried over when creating this
           // descriptor from an existing one.
@@ -1644,7 +1645,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setOrigin(methodOrigin)
           .setBridgeTarget(targetDescriptor)
           .makeDeclaration()
-          .setSynthetic(true)
           // Clear properties that might have been carried over when creating this
           // descriptor from an existing one.
           .setDefaultMethod(false)
@@ -1901,13 +1901,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                 || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
         // Bridge methods have to be marked synthetic,
         checkState(!methodDescriptor.isGeneralizingBridge() || methodDescriptor.isSynthetic());
-
-        if (methodDescriptor.isSynthetic()) {
-          checkState(
-              methodDescriptor.getOrigin() != MethodOrigin.SOURCE,
-              "Inconsistent synthetic flag and origin for method: %s",
-              methodDescriptor);
-        }
 
         // Static methods cannot be abstract
         checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());

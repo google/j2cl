@@ -186,7 +186,6 @@ public final class LambdaAdaptorTypeDescriptors {
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setOrigin(MethodOrigin.SYNTHETIC_LAMBDA_IMPLEMENTOR_METHOD)
-        .setSynthetic(true)
         .setAbstract(false)
         .setNative(false)
         .build();

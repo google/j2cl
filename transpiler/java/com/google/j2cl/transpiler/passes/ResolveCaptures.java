@@ -537,7 +537,6 @@ public class ResolveCaptures extends NormalizationPass {
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
         .setStatic(false)
         .setFinal(true)
-        .setSynthetic(true)
         .setOrigin(FieldOrigin.SYNTHETIC_CAPTURE_FIELD)
         .build();
   }

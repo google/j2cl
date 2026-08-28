@@ -489,7 +489,6 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_GETTER)
-        .setSynthetic(true)
         .build();
   }
 
@@ -500,7 +499,6 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .setName("$outer_this")
         .setTypeDescriptor(getEnclosingTypeDescriptor().toNonNullable())
         .setFinal(true)
-        .setSynthetic(true)
         .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)
         .build();
   }

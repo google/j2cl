@@ -1017,7 +1017,6 @@ public final class AstUtils {
         .setEnumConstant(false)
         .setCompileTimeConstant(true)
         .setConstantValue(fieldDescriptor.getEnumOrdinalValue())
-        .setSynthetic(true)
         .setTypeDescriptor(PrimitiveTypes.INT)
         .setOriginalJsInfo(JsInfo.NONE)
         .setOrigin(FieldOrigin.SYNTHETIC_ORDINAL_FIELD)
@@ -1108,7 +1107,6 @@ public final class AstUtils {
                 ? MethodOrigin.SYNTHETIC_SYSTEM_PROPERTY_GETTER_REQUIRED
                 : MethodOrigin.SYNTHETIC_SYSTEM_PROPERTY_GETTER_OPTIONAL)
         .setStatic(true)
-        .setSynthetic(true)
         .setVisibility(Visibility.PRIVATE)
         .build();
   }

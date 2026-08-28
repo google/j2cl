@@ -617,7 +617,6 @@ public class NormalizeConstructors extends NormalizationPass {
                         .getTypeParameterDescriptors())
                 .addTypeArgumentTypeDescriptors(
                     0, builder.getEnclosingTypeDescriptor().getTypeArgumentDescriptors())
-                .setSynthetic(true)
                 .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR));
   }
 
