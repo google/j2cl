@@ -150,12 +150,13 @@ public class KytheIndexingMetadataTest {
 
   @CanIgnoreReturnValue
   private static String assertKytheMetadata(List<String> lines) {
-    assertThat(lines.size()).isGreaterThan(1);
-    assertThat(lines.get(lines.size() - 2)).isEqualTo("// Kythe Indexing Metadata:");
+    assertThat(lines).isNotEmpty();
     String kytheMetadataLine = lines.getLast();
-    assertThat(kytheMetadataLine).startsWith("// {\"type\":\"KYTHE0\"");
-    // return the JSON string without the "// " prefix.
-    String kytheMetadataJson = kytheMetadataLine.substring(3);
+    assertThat(kytheMetadataLine)
+        .startsWith("// kythe.proto.metadata.GeneratedCodeInfo: {\"type\":\"KYTHE0\"");
+    // return the JSON string without the "// kythe.proto.metadata.GeneratedCodeInfo: " prefix.
+    String kytheMetadataJson =
+        kytheMetadataLine.substring("// kythe.proto.metadata.GeneratedCodeInfo: ".length());
     // Snip out paths as they are not stable across different runs/evironments.
     return PATH_PATTERN.matcher(kytheMetadataJson).replaceAll("\"path\":\"<snip>\"");
   }

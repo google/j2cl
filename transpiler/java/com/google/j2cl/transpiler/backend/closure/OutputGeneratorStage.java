@@ -279,7 +279,7 @@ public class OutputGeneratorStage {
           /* sourceRoot= */ null);
     }
 
-    return String.format("%n// Kythe Indexing Metadata:%n// %s", metadata.toJson());
+    return String.format("%n// kythe.proto.metadata.GeneratedCodeInfo: %s", metadata.toJson());
   }
 
   @Nullable
