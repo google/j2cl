@@ -43,7 +43,24 @@ class ReferencedPrivateMethods {
 
       fun getInstance(): Int {
         var t = NativeReferencedPrivateMethods()
-        return t.x + s + t.getInstance() + getStatic()
+        var t2 = NativeReferencedPrivateWithImplicitConstructor()
+        return t.x +
+          s +
+          t.getInstance() +
+          getStatic() +
+          NativeReferencedPrivateWithImplicitConstructor.callGetInstance(t2)
+      }
+    }
+  }
+
+  // Class with implicit private constructor that is referenced.
+  @JsType(name = "NativeReferencedPrivateMethods", namespace = "nativejstypes", isNative = true)
+  private class NativeReferencedPrivateWithImplicitConstructor {
+    private external fun getInstance(): Int
+
+    companion object {
+      fun callGetInstance(instance: NativeReferencedPrivateWithImplicitConstructor): Int {
+        return instance.getInstance()
       }
     }
   }

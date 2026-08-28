@@ -3,13 +3,17 @@ goog.module('nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMetho
 const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeReferencedPrivateMethods = goog.require('nativejstypes.NativeReferencedPrivateMethods');
 
+let NativeReferencedPrivateWithImplicitConstructor = goog.forwardDeclare('nativejstypes.NativeReferencedPrivateMethods');
+let NativeReferencedPrivateWithImplicitConstructor_$Overlay = goog.forwardDeclare('nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay$impl');
+
 /** @nodts */
 class $Overlay {
  /** @final @nodts @return {number} */
  static m_getInstance__int() {
   $Overlay.$clinit();
   let t = new NativeReferencedPrivateMethods();
-  return t.x + NativeReferencedPrivateMethods.s + t.getInstance() + NativeReferencedPrivateMethods.getStatic() | 0;
+  let t2 = new NativeReferencedPrivateWithImplicitConstructor();
+  return t.x + NativeReferencedPrivateMethods.s + t.getInstance() + NativeReferencedPrivateMethods.getStatic() + NativeReferencedPrivateWithImplicitConstructor_$Overlay.m_callGetInstance__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor__int(t2) | 0;
  }
  /** @nodts */
  static $clinit() {
@@ -22,7 +26,10 @@ class $Overlay {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  NativeReferencedPrivateWithImplicitConstructor = goog.module.get('nativejstypes.NativeReferencedPrivateMethods');
+  NativeReferencedPrivateWithImplicitConstructor_$Overlay = goog.module.get('nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay$impl');
+ }
 }
 $Util.$setClassMetadata($Overlay, 'nativejstypes.NativeReferencedPrivateMethods');
 

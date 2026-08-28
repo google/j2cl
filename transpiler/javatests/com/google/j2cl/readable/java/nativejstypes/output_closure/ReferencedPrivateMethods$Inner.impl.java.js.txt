@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let NativeReferencedPrivateMethods = goog.forwardDeclare('nativejstypes.NativeReferencedPrivateMethods');
+let NativeReferencedPrivateWithImplicitConstructor = goog.forwardDeclare('nativejstypes.NativeReferencedPrivateMethods');
 
 class Inner extends j_l_Object {
  /** @protected @nodts */
@@ -24,7 +25,8 @@ class Inner extends j_l_Object {
  /** @nodts @return {number} */
  m_getInstance__int() {
   let t = new NativeReferencedPrivateMethods();
-  return t.x + NativeReferencedPrivateMethods.s + t.getInstance() + NativeReferencedPrivateMethods.getStatic() | 0;
+  let t2 = new NativeReferencedPrivateWithImplicitConstructor();
+  return t.x + NativeReferencedPrivateMethods.s + t.getInstance() + NativeReferencedPrivateMethods.getStatic() + t2.getInstance() | 0;
  }
  /** @nodts */
  static $clinit() {
@@ -40,6 +42,7 @@ class Inner extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   NativeReferencedPrivateMethods = goog.module.get('nativejstypes.NativeReferencedPrivateMethods');
+  NativeReferencedPrivateWithImplicitConstructor = goog.module.get('nativejstypes.NativeReferencedPrivateMethods');
  }
 }
 $Util.$setClassMetadata(Inner, 'nativejstypes.ReferencedPrivateMethods$Inner');

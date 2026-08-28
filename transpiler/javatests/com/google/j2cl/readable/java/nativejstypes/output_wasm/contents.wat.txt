@@ -113,6 +113,12 @@
 (global $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@nativejstypes.TopLevel.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -235,6 +241,11 @@
 (global $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable (ref $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable)
  (struct.new $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)
+ )
+)
+(global $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay.vtable (ref $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay.vtable)
+ (struct.new $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay)
  )
 )
 (global $nativejstypes.TopLevel.$Overlay.vtable (ref $nativejstypes.TopLevel.$Overlay.vtable)
@@ -802,16 +813,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:33:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:33:23
   (if (global.get $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:33:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:31:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:33:23
   (global.set $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay (i32.const 1))
  )
 )
@@ -842,6 +853,49 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:47:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:47:23
+  (if (global.get $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:47:23
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:47:23
+  (global.set $$class-initialized@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.TopLevel.$Overlay
@@ -1480,13 +1534,16 @@
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:23:15
  (local $t (ref null extern))
+ (local $t2 (ref null extern))
  (local $this (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
  (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods.Inner) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:24:6
   (local.set $t (call $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:25:6
-  (return (i32.add (i32.add (i32.add (call $f_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $f_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )))
+  (local.set $t2 (call $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:27:6
+  (return (i32.add (i32.add (i32.add (i32.add (call $f_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $f_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor (ref.as_non_null (local.get $t2)))))
  )
 )
 (elem declare func $m_getInstance__int@nativejstypes.ReferencedPrivateMethods.Inner)

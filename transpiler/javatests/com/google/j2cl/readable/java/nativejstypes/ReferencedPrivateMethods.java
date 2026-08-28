@@ -22,7 +22,9 @@ class ReferencedPrivateMethods {
   public static class Inner {
     public int getInstance() {
       NativeReferencedPrivateMethods t = new NativeReferencedPrivateMethods();
-      return t.x + t.s + t.getInstance() + t.getStatic();
+      NativeReferencedPrivateWithImplicitConstructor t2 =
+          new NativeReferencedPrivateWithImplicitConstructor();
+      return t.x + t.s + t.getInstance() + t.getStatic() + t2.getInstance();
     }
   }
 
@@ -38,5 +40,11 @@ class ReferencedPrivateMethods {
     private native int getInstance();
 
     private static native int getStatic();
+  }
+
+  // Class with implicit private constructor that is referenced.
+  @JsType(name = "NativeReferencedPrivateMethods", namespace = "nativejstypes", isNative = true)
+  private static class NativeReferencedPrivateWithImplicitConstructor {
+    private native int getInstance();
   }
 }

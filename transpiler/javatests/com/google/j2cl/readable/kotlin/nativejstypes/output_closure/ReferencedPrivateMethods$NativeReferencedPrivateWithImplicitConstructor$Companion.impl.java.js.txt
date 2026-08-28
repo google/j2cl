@@ -1,0 +1,58 @@
+goog.module('nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativeReferencedPrivateWithImplicitConstructor = goog.forwardDeclare('nativejstypes.NativeReferencedPrivateMethods');
+let $Overlay = goog.forwardDeclare('nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_callGetInstance__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor__int(/** !NativeReferencedPrivateWithImplicitConstructor */ instance) {
+  return $Overlay.m_callGetInstance__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor__int(instance);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor.$Overlay$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor_Companion;
+$Util.$setClassMetadata(Companion, 'nativejstypes.ReferencedPrivateMethods$NativeReferencedPrivateWithImplicitConstructor$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=ReferencedPrivateMethods$NativeReferencedPrivateWithImplicitConstructor$Companion.js.map
