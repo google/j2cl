@@ -195,6 +195,12 @@ abstract class WasmTypeLayout {
       // interfaces (JsFunction interfaces).
       return false;
     }
+    if (methodDescriptor.isNative()) {
+      // Exclude native methods which either call into JavaScript or, if @Wasm-annotated, compile to
+      // Wasm instructions.
+      // TODO(b/554033629): This may not be enough; revisit jsinterop restrictions.
+      return false;
+    }
     return !methodDescriptor.isEffectivelyFinal()
         // If a method overrides a parent method, it should overwrite the vtable entry.
         || (getWasmSupertypeLayout() != null
