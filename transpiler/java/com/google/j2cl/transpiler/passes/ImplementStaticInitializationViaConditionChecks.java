@@ -182,6 +182,7 @@ public class ImplementStaticInitializationViaConditionChecks
     return FieldDescriptor.builder()
         .setStatic(true)
         .setSynthetic(true)
+        .setOrigin(FieldDescriptor.FieldOrigin.SYNTHETIC_FIELD)
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
         // Note that we are using an identifier that is not valid in Java.

@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -469,6 +470,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
             builder
                 .setStatic(true)
                 .setSynthetic(true)
+                .setOrigin(MethodOrigin.SYNTHETIC_METHOD)
                 .setEnclosingTypeDescriptor(companionEnclosingType)
                 .setOriginalJsInfo(
                     companionEnclosingType.isNative()

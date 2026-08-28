@@ -69,12 +69,14 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     SYNTHETIC_BACKING_FIELD,
     SYNTHETIC_ORDINAL_FIELD,
     SYNTHETIC_INSTANCE_OF_SUPPORT_FIELD,
+    SYNTHETIC_FIELD, // Catch all for synthetic fields that don't need further identification.
     ;
 
     @Override
     public String getPrefix() {
       return switch (this) {
-        case SOURCE -> "f_"; // User written methods and bridges need to be mangled the same way.
+        case SOURCE, SYNTHETIC_FIELD ->
+            "f_"; // User written methods and bridges need to be mangled the same way.
         default -> ""; // Don't prefix the rest, they all start with "$"
       };
     }
@@ -364,6 +366,13 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       }
 
       FieldDescriptor fieldDescriptor = autoBuild();
+
+      if (fieldDescriptor.isSynthetic()) {
+        checkState(
+            fieldDescriptor.getOrigin() != FieldOrigin.SOURCE,
+            "Inconsistent synthetic flag and origin for field: %s",
+            fieldDescriptor);
+      }
 
       return interner.intern(fieldDescriptor);
     }

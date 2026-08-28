@@ -420,6 +420,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .setName(name)
         .setTypeDescriptor(fieldTypeDescriptor)
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setOrigin(FieldDescriptor.FieldOrigin.SYNTHETIC_FIELD)
         .setStatic(true)
         .setSynthetic(true)
         .build();

@@ -722,6 +722,10 @@ internal class KotlinEnvironment(
         .setOriginalJsInfo(jsInfo)
         .setAnnotations(createAnnotations(irFunction))
         .setSuspendFunction(irFunction.isSuspend)
+        .setOrigin(
+          if (irFunction.isSynthetic) MethodDescriptor.MethodOrigin.SYNTHETIC_METHOD
+          else MethodDescriptor.MethodOrigin.SOURCE
+        )
         .build()
     }
   }
@@ -773,6 +777,10 @@ internal class KotlinEnvironment(
         .setOriginalJsInfo(irField.getJsInfo())
         .setAnnotations(createAnnotations(irField))
         .setVolatile(isVolatile)
+        .setOrigin(
+          if (irField.isSynthetic) FieldDescriptor.FieldOrigin.SYNTHETIC_FIELD
+          else FieldDescriptor.FieldOrigin.SOURCE
+        )
         .build()
     }
   }

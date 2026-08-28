@@ -151,6 +151,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_WASM_JS_GETTER_EXPORT,
     SYNTHETIC_WASM_JS_SETTER_EXPORT,
     SYNTHETIC_WASM_JS_FUNCTION_EXPORT,
+    SYNTHETIC_METHOD, // Catch all for synthetic methods that don't need further identification.
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
@@ -182,6 +183,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return switch (this) {
         // User written methods and bridges need to be mangled the same way.
         case SOURCE,
+            SYNTHETIC_METHOD,
             SYNTHETIC_LAMBDA_IMPLEMENTOR_METHOD,
             GENERALIZING_BRIDGE,
             SPECIALIZING_BRIDGE,
@@ -1899,6 +1901,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                 || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
         // Bridge methods have to be marked synthetic,
         checkState(!methodDescriptor.isGeneralizingBridge() || methodDescriptor.isSynthetic());
+
+        if (methodDescriptor.isSynthetic()) {
+          checkState(
+              methodDescriptor.getOrigin() != MethodOrigin.SOURCE,
+              "Inconsistent synthetic flag and origin for method: %s",
+              methodDescriptor);
+        }
 
         // Static methods cannot be abstract
         checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());

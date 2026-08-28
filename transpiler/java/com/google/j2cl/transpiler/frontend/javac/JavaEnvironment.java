@@ -41,11 +41,13 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation;
 import com.google.j2cl.transpiler.ast.PackageDeclaration;
@@ -697,6 +699,7 @@ public class JavaEnvironment {
                 constantValue != null ? Literal.fromValue(constantValue, thisTypeDescriptor) : null)
             .setEnumConstant(isEnumConstant)
             .setVolatile(isVolatile)
+            .setOrigin(isSynthetic(varSymbol) ? FieldOrigin.SYNTHETIC_FIELD : FieldOrigin.SOURCE)
             .build();
     cachedFieldDescriptors.put(key, fieldDescriptor);
     return fieldDescriptor;
@@ -784,6 +787,8 @@ public class JavaEnvironment {
             .setSynchronized(isSynchronized(methodSymbol))
             .setSynthetic(isSynthetic(methodSymbol))
             .setEnumSyntheticMethod(isEnumSyntheticMethod(methodSymbol))
+            .setOrigin(
+                isSynthetic(methodSymbol) ? MethodOrigin.SYNTHETIC_METHOD : MethodOrigin.SOURCE)
             .build();
     cachedMethodDescriptors.put(key, md);
     return md;

@@ -861,7 +861,10 @@ public final class AstUtils {
                 .addTypeArgumentTypeDescriptors(
                     0, enclosingTypeDescriptor.getTypeArgumentDescriptors())
                 .setStatic(true)
-                .setSynthetic(true)
+                .setOrigin(
+                    methodDescriptor.isSynthetic()
+                        ? methodDescriptor.getOrigin()
+                        : MethodOrigin.SYNTHETIC_METHOD)
                 .setConstructor(false)
                 .setAbstract(false)
                 .setDefaultMethod(false)
