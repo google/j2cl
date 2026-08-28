@@ -257,30 +257,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
      * access from JavaScript.
      */
     public boolean isWasmJsExport() {
-      return isWasmJsMethodExport()
-          || isWasmJsGetterExport()
-          || isWasmJsSetterExport()
-          || isWasmJsConstructorExport();
+      return switch (this) {
+        case SYNTHETIC_WASM_JS_METHOD_EXPORT,
+            SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT,
+            SYNTHETIC_WASM_JS_GETTER_EXPORT,
+            SYNTHETIC_WASM_JS_SETTER_EXPORT ->
+            true;
+        default -> false;
+      };
     }
 
     public boolean isWasmEntryPoint() {
       return this == SYNTHETIC_WASM_ENTRY_POINT;
-    }
-
-    public boolean isWasmJsMethodExport() {
-      return this == SYNTHETIC_WASM_JS_METHOD_EXPORT;
-    }
-
-    public boolean isWasmJsConstructorExport() {
-      return this == SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
-    }
-
-    public boolean isWasmJsGetterExport() {
-      return this == SYNTHETIC_WASM_JS_GETTER_EXPORT;
-    }
-
-    public boolean isWasmJsSetterExport() {
-      return this == SYNTHETIC_WASM_JS_SETTER_EXPORT;
     }
 
     public boolean isWasmJsFunctionExport() {
