@@ -129,6 +129,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Whether the method originated in source code or was synthesized by a pass */
   public enum MethodOrigin implements MemberDescriptor.Origin {
     SOURCE,
+    IMPLICIT_ENUM_METHOD,
     SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
     SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>", Visibility.PROTECTED),
     SYNTHETIC_CTOR_FOR_CONSTRUCTOR("<init>"),
@@ -182,6 +183,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return switch (this) {
         // User written methods and bridges need to be mangled the same way.
         case SOURCE,
+            IMPLICIT_ENUM_METHOD,
             SYNTHETIC_METHOD,
             GENERALIZING_BRIDGE,
             SPECIALIZING_BRIDGE,
@@ -220,7 +222,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     @Override
     public boolean isSynthetic() {
-      return this != SOURCE;
+      return switch (this) {
+        case SOURCE, IMPLICIT_ENUM_METHOD -> false;
+        default -> true;
+      };
     }
 
     public boolean isOnceMethod() {
@@ -870,8 +875,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return false;
   }
 
-  public abstract boolean isEnumSyntheticMethod();
-
   @Override
   public boolean isCustomIsInstanceMethod() {
     return getOrigin() == MethodOrigin.SOURCE
@@ -1239,7 +1242,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setStatic(false)
         .setFinal(false)
         .setSuspendFunction(false)
-        .setEnumSyntheticMethod(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(ImmutableList.of())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
@@ -1677,8 +1679,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     /** Internal use only. Use {@link #makeBridge}. */
     abstract Builder setBridgeTarget(MethodDescriptor bridgeOrigin);
-
-    public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

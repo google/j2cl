@@ -63,6 +63,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewArray;
@@ -766,7 +767,8 @@ public class JsInteropRestrictionsChecker {
               return;
             }
 
-            if (target.getEnclosingTypeDescriptor().isJsEnum() && !target.isEnumSyntheticMethod()) {
+            if (target.getEnclosingTypeDescriptor().isJsEnum()
+                && target.getOrigin() == MethodOrigin.SOURCE) {
               // Methods declared by the user in JsEnum are callable.
               return;
             }

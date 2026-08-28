@@ -598,9 +598,17 @@ public class JavaEnvironment {
     return classSymbol.flatName().toString();
   }
 
-  private boolean isEnumSyntheticMethod(MethodSymbol methodSymbol) {
-    // Enum synthetic methods are not marked as such because per JLS 13.1 these methods are
-    // implicitly declared but are not marked as synthetic.
+  private MethodOrigin getMethodOrigin(MethodSymbol methodSymbol) {
+    if (isSynthetic(methodSymbol)) {
+      return MethodOrigin.SYNTHETIC_METHOD;
+    }
+    if (isEnumImplicitMethod(methodSymbol)) {
+      return MethodOrigin.IMPLICIT_ENUM_METHOD;
+    }
+    return MethodOrigin.SOURCE;
+  }
+
+  private boolean isEnumImplicitMethod(MethodSymbol methodSymbol) {
     return isEnum(getEnclosingClass(methodSymbol))
         && (isValuesMethod(methodSymbol) || isValueOfMethod(methodSymbol));
   }
@@ -733,7 +741,7 @@ public class JavaEnvironment {
 
     boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
     TypeDescriptor returnTypeDescriptor =
-        adjustForSyntheticEnumOrAnnotationMethod(
+        adjustForImplicitEnumOrAnnotationMethod(
             methodSymbol,
             applyNullabilityAnnotations(
                 createTypeDescriptorWithNullability(
@@ -785,9 +793,7 @@ public class JavaEnvironment {
             .setDefaultMethod(isDefaultMethod(methodSymbol))
             .setAbstract(isAbstract(methodSymbol))
             .setSynchronized(isSynchronized(methodSymbol))
-            .setEnumSyntheticMethod(isEnumSyntheticMethod(methodSymbol))
-            .setOrigin(
-                isSynthetic(methodSymbol) ? MethodOrigin.SYNTHETIC_METHOD : MethodOrigin.SOURCE)
+            .setOrigin(getMethodOrigin(methodSymbol))
             .build();
     cachedMethodDescriptors.put(key, md);
     return md;
@@ -804,7 +810,7 @@ public class JavaEnvironment {
       var parameterAnnotations = methodSymbol.getParameters().get(i).getAnnotationMirrors();
 
       TypeDescriptor parameterType =
-          adjustForSyntheticEnumOrAnnotationMethod(
+          adjustForImplicitEnumOrAnnotationMethod(
               methodSymbol,
               applyNullabilityAnnotations(
                   createTypeDescriptorWithNullability(
@@ -823,9 +829,9 @@ public class JavaEnvironment {
     return parametersBuilder.build();
   }
 
-  private TypeDescriptor adjustForSyntheticEnumOrAnnotationMethod(
+  private TypeDescriptor adjustForImplicitEnumOrAnnotationMethod(
       MethodSymbol methodSymbol, TypeDescriptor typeDescriptor) {
-    if (!isEnumSyntheticMethod(methodSymbol) && !isAnnotationMethod(methodSymbol)) {
+    if (!isEnumImplicitMethod(methodSymbol) && !isAnnotationMethod(methodSymbol)) {
       return typeDescriptor;
     }
 
