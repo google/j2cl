@@ -185,7 +185,7 @@ public final class LambdaAdaptorTypeDescriptors {
     return functionalInterfaceMethodDescriptor.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(typeDescriptor)
-        .setOrigin(MethodOrigin.SYNTHETIC_LAMBDA_IMPLEMENTOR_METHOD)
+        .setOrigin(MethodOrigin.SYNTHETIC_METHOD)
         .setAbstract(false)
         .setNative(false)
         .build();
