@@ -70,10 +70,10 @@ public class NormalizeCasts extends NormalizationPass {
             TypeDescriptor typeDescriptor = castExpression.getTypeDescriptor();
 
             Expression expression = castExpression.getExpression();
-            if (canRemoveCast(typeDescriptor, expression)) {
+            if (castExpression.isUnchecked() || canRemoveCast(typeDescriptor, expression)) {
               // No need to perform a cast check but to communicate the right type to jscompiler a
               // JsDoc cast is emitted instead.
-              return createClosureTypeCast(typeDescriptor, expression);
+              return createClosureTypeCast(castExpression);
             }
             return castExpression;
           }
@@ -145,6 +145,7 @@ public class NormalizeCasts extends NormalizationPass {
       case JsDocCastExpression e -> skipPassThroughExpressions(e.getExpression());
       case PostfixExpression e when e.getOperator() == PostfixOperator.NOT_NULL_ASSERTION ->
           skipPassThroughExpressions(e.getOperand());
+      case CastExpression e when e.isUnchecked() -> skipPassThroughExpressions(e.getExpression());
       default -> expression;
     };
   }
@@ -166,14 +167,18 @@ public class NormalizeCasts extends NormalizationPass {
             //   2. communicate the resulting type to closure.
 
             // /** @type {X} */ (Casts.to(expression, JavaType))
+            if (!castExpression.isUnchecked()) {
+              expression = implementRuntimeCheck(castTypeDescriptor, expression);
+            }
             return createClosureTypeCast(
-                castTypeDescriptor, implementRuntimeCheck(castTypeDescriptor, expression));
+                castExpression.toBuilder().setExpression(expression).build());
           }
         });
   }
 
-  private static Expression createClosureTypeCast(
-      TypeDescriptor castTypeDescriptor, Expression expression) {
+  private static Expression createClosureTypeCast(CastExpression castExpression) {
+    var castTypeDescriptor = castExpression.getCastTypeDescriptor();
+    var expression = castExpression.getExpression();
     if (castTypeDescriptor.isIntersection()) {
       // Annotate the expression so that is typed (in closure) with the first type in the
       // intersection. Intersection types do not have a direct representation in closure.
@@ -183,7 +188,7 @@ public class NormalizeCasts extends NormalizationPass {
       // of an intersection cast is the erasure of its first component).
       castTypeDescriptor = ((IntersectionTypeDescriptor) castTypeDescriptor).getFirstType();
     }
-    if (isBoxableJsEnumType(castTypeDescriptor)) {
+    if (!castExpression.isUnchecked() && isBoxableJsEnumType(castTypeDescriptor)) {
       // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
       castTypeDescriptor = TypeDescriptors.getEnumBoxType(castTypeDescriptor);
     }
@@ -234,7 +239,7 @@ public class NormalizeCasts extends NormalizationPass {
   private static Expression createRuntimeCheckForArray(
       ArrayTypeDescriptor arrayCastTypeDescriptor, Expression expression) {
     // Avoid pointlessly nesting type annotations inside of runtime cast calls.
-    expression = AstUtils.removeJsDocCastIfPresent(expression);
+    expression = AstUtils.removeUncheckedTypeConversions(expression);
 
     // Arrays.$castTo(expr, leafType, dimension);
     TypeDescriptor leafTypeDescriptor = arrayCastTypeDescriptor.getLeafTypeDescriptor();
@@ -254,7 +259,7 @@ public class NormalizeCasts extends NormalizationPass {
       DeclaredTypeDescriptor toTypeDescriptor, Expression expression) {
 
     // Avoid pointlessly nesting type annotations inside of runtime cast calls.
-    expression = AstUtils.removeJsDocCastIfPresent(expression);
+    expression = AstUtils.removeUncheckedTypeConversions(expression);
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.builder()

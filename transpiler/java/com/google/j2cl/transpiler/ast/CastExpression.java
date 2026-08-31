@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangString;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloat;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import javax.annotation.Nullable;
@@ -29,10 +30,13 @@ import javax.annotation.Nullable;
 public class CastExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor castTypeDescriptor;
+  private final boolean isUnchecked;
 
-  private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
+  private CastExpression(
+      Expression expression, TypeDescriptor castTypeDescriptor, boolean isUnchecked) {
     this.expression = checkNotNull(expression);
     this.castTypeDescriptor = checkNotNull(castTypeDescriptor);
+    this.isUnchecked = isUnchecked;
   }
 
   public TypeDescriptor getCastTypeDescriptor() {
@@ -41,6 +45,10 @@ public class CastExpression extends Expression {
 
   public Expression getExpression() {
     return expression;
+  }
+
+  public boolean isUnchecked() {
+    return isUnchecked;
   }
 
   @Override
@@ -97,7 +105,7 @@ public class CastExpression extends Expression {
 
   @Override
   public CastExpression clone() {
-    return new CastExpression(expression.clone(), castTypeDescriptor);
+    return new CastExpression(expression.clone(), castTypeDescriptor, isUnchecked);
   }
 
   @Override
@@ -108,7 +116,8 @@ public class CastExpression extends Expression {
   public Builder toBuilder() {
     return builder()
         .setExpression(this.getExpression())
-        .setCastTypeDescriptor(this.getCastTypeDescriptor());
+        .setCastTypeDescriptor(this.getCastTypeDescriptor())
+        .setUnchecked(this.isUnchecked());
   }
 
   public static Builder builder() {
@@ -119,19 +128,29 @@ public class CastExpression extends Expression {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;
+    private boolean isUnchecked = false;
 
+    @CanIgnoreReturnValue
     public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setCastTypeDescriptor(TypeDescriptor castTypeDescriptor) {
       this.castTypeDescriptor = castTypeDescriptor;
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setUnchecked(boolean isUnchecked) {
+      this.isUnchecked = isUnchecked;
+      return this;
+    }
+
     public CastExpression build() {
-      return new CastExpression(AstUtils.removeJsDocCastIfPresent(expression), castTypeDescriptor);
+      return new CastExpression(
+          AstUtils.removeUncheckedTypeConversions(expression), castTypeDescriptor, isUnchecked);
     }
   }
 }

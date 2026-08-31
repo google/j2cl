@@ -46,7 +46,6 @@ import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.IfStatement
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
-import com.google.j2cl.transpiler.ast.JsDocCastExpression
 import com.google.j2cl.transpiler.ast.Label
 import com.google.j2cl.transpiler.ast.LabeledStatement
 import com.google.j2cl.transpiler.ast.Literal
@@ -764,9 +763,10 @@ internal class CompilationUnitBuilder(
     // Wrap the original call in an unchecked cast. This is particularly useful when we're using
     // undefined to stand-in for a primitive type. Otherwise the the boxed type would be used and we
     // would attempt to auto unbox undefined.
-    JsDocCastExpression.builder()
+    CastExpression.builder()
       .setCastTypeDescriptor(environment.getTypeDescriptor(irCall.type))
       .setExpression(convertFunctionCall(irCall))
+      .setUnchecked(true)
       .build()
 
   private fun convertJavaClassPropertyReference(irCall: IrCall): Expression =
@@ -1323,24 +1323,18 @@ internal class CompilationUnitBuilder(
       IrTypeOperator.IMPLICIT_CAST -> {
         val expression = convertExpression(irTypeOperatorCall.argument)
         val testTypeDescriptor = environment.getTypeDescriptor(irTypeOperatorCall.typeOperand)
-        if (
+        // An implicit cast guarantees that the type of the expression is already checked.
+        // However, the boxing/unboxing conversion has not happened yet and in those cases
+        // the cast is an unchecked cast.
+        val isUnchecked =
           irTypeOperatorCall.operator == IrTypeOperator.IMPLICIT_CAST &&
             !testTypeDescriptor.isPrimitive &&
             !expression.typeDescriptor.isPrimitive
-        ) {
-          // An implicit cast guarantees that the type of the expression is already checked.
-          // However, the boxing/unboxing conversion has not happened yet and in those cases
-          // the cast can not be replaced by a JsDocCastExpression.
-          JsDocCastExpression.builder()
-            .setExpression(expression)
-            .setCastTypeDescriptor(testTypeDescriptor)
-            .build()
-        } else {
-          CastExpression.builder()
-            .setExpression(expression)
-            .setCastTypeDescriptor(testTypeDescriptor)
-            .build()
-        }
+        CastExpression.builder()
+          .setExpression(expression)
+          .setCastTypeDescriptor(testTypeDescriptor)
+          .setUnchecked(isUnchecked)
+          .build()
       }
       IrTypeOperator.SAM_CONVERSION,
       IrTypeOperator.SAFE_CAST ->

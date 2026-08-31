@@ -96,7 +96,7 @@ public class JsDocCastExpression extends Expression {
     public JsDocCastExpression build() {
       return new JsDocCastExpression(
           // Avoid pointlessly nesting type annotations.
-          AstUtils.removeJsDocCastIfPresent(expression), castTypeDescriptor);
+          AstUtils.removeUncheckedTypeConversions(expression), castTypeDescriptor);
     }
   }
 }

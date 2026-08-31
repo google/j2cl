@@ -626,9 +626,12 @@ public final class AstUtils {
         .build();
   }
 
-  public static Expression removeJsDocCastIfPresent(Expression expression) {
+  public static Expression removeUncheckedTypeConversions(Expression expression) {
     if (expression instanceof JsDocCastExpression jsDocCastExpression) {
-      return jsDocCastExpression.getExpression();
+      return removeUncheckedTypeConversions(jsDocCastExpression.getExpression());
+    } else if (expression instanceof CastExpression castExpression
+        && castExpression.isUnchecked()) {
+      return removeUncheckedTypeConversions(castExpression.getExpression());
     }
     return expression;
   }

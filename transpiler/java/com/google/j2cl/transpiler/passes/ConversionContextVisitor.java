@@ -425,6 +425,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public Expression rewriteCastExpression(CastExpression castExpression) {
+    if (castExpression.isUnchecked()) {
+      // Unchecked casts do not trigger any conversions.
+      return castExpression;
+    }
     // cast context
     return contextRewriter.rewriteCastContext(castExpression);
   }

@@ -36,8 +36,6 @@ import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Invocation
-import com.google.j2cl.transpiler.ast.JsDocCastExpression
-import com.google.j2cl.transpiler.ast.JsDocExpression
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -175,8 +173,6 @@ internal data class ExpressionSources(
       is FieldAccess -> fieldAccessSource(expression)
       is FunctionExpression -> functionExpressionSource(expression)
       is InstanceOfExpression -> instanceOfExpressionSource(expression)
-      is JsDocExpression -> jsDocExpressionSource(expression)
-      is JsDocCastExpression -> jsDocCastExpressionSource(expression)
       is Literal -> literalSources.literalSource(expression)
       is MethodCall -> methodCallSource(expression)
       is MultiExpression -> multiExpressionSource(expression)
@@ -370,12 +366,6 @@ internal data class ExpressionSources(
       leftSubExpressionSource(instanceOfExpression.ktPrecedence, instanceOfExpression.expression),
       instanceOfTestTypeDescriptorSource(instanceOfExpression.testTypeDescriptor),
     )
-
-  private fun jsDocExpressionSource(expression: JsDocExpression): Source =
-    expressionSource(expression.expression)
-
-  private fun jsDocCastExpressionSource(expression: JsDocCastExpression): Source =
-    expressionSource(expression.expression)
 
   private fun instanceOfTestTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
     if (typeDescriptor is ArrayTypeDescriptor && !typeDescriptor.isPrimitiveArray) {

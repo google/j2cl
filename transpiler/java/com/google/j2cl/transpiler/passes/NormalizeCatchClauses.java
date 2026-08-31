@@ -22,13 +22,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
@@ -177,9 +177,10 @@ public class NormalizeCatchClauses extends NormalizationPass {
         VariableDeclarationExpression.builder()
             .addVariableDeclaration(
                 catchVariable,
-                JsDocCastExpression.builder()
+                CastExpression.builder()
                     .setExpression(exceptionVariable.createReference())
                     .setCastTypeDescriptor(catchVariable.getTypeDescriptor())
+                    .setUnchecked(true)
                     .build())
             .build()
             .makeStatement(catchBody.getSourcePosition());

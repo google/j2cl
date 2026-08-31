@@ -46,6 +46,10 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteCastExpression(CastExpression castExpression) {
+            if (castExpression.isUnchecked()) {
+              return castExpression;
+            }
+
             Expression expression = castExpression.getExpression();
             TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
             TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();

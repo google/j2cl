@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JsConstructorReference;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsForInStatement;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
@@ -292,6 +293,13 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitForEachStatement(ForEachStatement forEachStatement) {
             throw new IllegalStateException();
+          }
+
+          @Override
+          public void exitJsDocCastExpression(JsDocCastExpression castExpression) {
+            if (verifyForWasm) {
+              throw new IllegalStateException();
+            }
           }
 
           @Override

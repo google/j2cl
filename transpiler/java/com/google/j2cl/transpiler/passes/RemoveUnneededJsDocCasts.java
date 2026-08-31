@@ -64,7 +64,7 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
                 MultiExpression.builder()
                     .setExpressions(
                         multiExpression.getExpressions().stream()
-                            .map(AstUtils::removeJsDocCastIfPresent)
+                            .map(AstUtils::removeUncheckedTypeConversions)
                             .collect(toImmutableList()))
                     .build();
 
@@ -88,7 +88,7 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
             // Nested JsDoc cast annotations don't provide any extra information to JS type
             // checkers. Remove the extras.
             Expression innerExpressionWithoutTypeAnnotation =
-                AstUtils.removeJsDocCastIfPresent(expression.getExpression());
+                AstUtils.removeUncheckedTypeConversions(expression.getExpression());
             if (innerExpressionWithoutTypeAnnotation != expression.getExpression()) {
               return expression.toBuilder()
                   .setExpression(innerExpressionWithoutTypeAnnotation)

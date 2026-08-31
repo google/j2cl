@@ -43,7 +43,6 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -203,17 +202,6 @@ final class ExpressionTranspiler {
         render(castExpression.getExpression());
         sourceBuilder.append(")");
         return false;
-      }
-
-      @Override
-      public boolean enterJsDocCastExpression(JsDocCastExpression expression) {
-        // TODO(b/183661534): JsDocCastExpressions should not reach the output stage.
-        // Render JsDoc casts as regular casts for now.
-        return enterCastExpression(
-            CastExpression.builder()
-                .setExpression(expression.getExpression())
-                .setCastTypeDescriptor(expression.getTypeDescriptor())
-                .build());
       }
 
       @Override

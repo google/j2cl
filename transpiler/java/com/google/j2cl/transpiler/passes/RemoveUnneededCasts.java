@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -111,14 +110,15 @@ public class RemoveUnneededCasts extends NormalizationPass {
       return null;
     }
 
-    // Replace the Java cast by a JsDoc cast to preserve the type of the expression.
-    JsDocCastExpression jsDocCast =
-        JsDocCastExpression.builder()
+    // Replace the Java cast by an unchecked cast to preserve the type of the expression.
+    var uncheckedCast =
+        CastExpression.builder()
             .setExpression(castExpression.getExpression())
             .setCastTypeDescriptor(castExpression.getTypeDescriptor())
+            .setUnchecked(true)
             .build();
 
-    return replaceIn(inNode, castExpression, jsDocCast);
+    return replaceIn(inNode, castExpression, uncheckedCast);
   }
 
   /** Returns a cast expression on if it is the first evaluable node in {@code Node}. */
