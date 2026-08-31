@@ -85,6 +85,18 @@ function callFunctionWithObject(fn, a) {
   return fn(a);
 }
 
+
+/**
+ * @template T
+ * @param {function(T): T} fn
+ * @param {T} a
+ * @return {T}
+ * @public
+ */
+function callApplyFunction(fn, a) {
+  return fn(a);
+}
+
 /**
  * @param {function(number): number} fn
  * @return {function(number): number}
@@ -122,7 +134,8 @@ exports = {
   callFunction,
   callFunctionAsObject,
   callFunctionWithObject,
+  callApplyFunction,
   passThrough,
   passThroughAsObject,
-  isSame
+  isSame,
 };

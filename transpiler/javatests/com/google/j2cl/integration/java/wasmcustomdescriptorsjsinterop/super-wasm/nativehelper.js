@@ -210,6 +210,18 @@ function callTakesSelf(someJsType, arg) {
 
 /**
  * @param {!SomeJsType} someJsType
+ * @param {*} o
+ * @param {string} s
+ * @param {number} i
+ * @return {number}
+ * @public
+ */
+function callMethodWithTypeParameters(someJsType, o, s, i) {
+  return someJsType.withTypeParameters(o, s, i);
+}
+
+/**
+ * @param {!SomeJsType} someJsType
  * @return {!CapturesOuter}
  * @public
  */
@@ -389,6 +401,7 @@ exports = {
   callPackagePrivateMethod,
   callReturnSelf,
   callTakesSelf,
+  callMethodWithTypeParameters,
   newCapturesOuter,
   callGetOuter,
   callAbstractMethod,

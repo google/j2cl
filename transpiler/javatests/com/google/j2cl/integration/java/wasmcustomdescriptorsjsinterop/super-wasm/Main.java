@@ -68,6 +68,9 @@ public final class Main {
     assertTrue(callGetNumberViaStaticMethod(someJsType) == 11);
     assertTrue(callGetLong(someJsType) == 123456789L);
     assertTrue(callGetNativeJsType(someJsType).getNumber() == 929);
+    assertEquals(
+        11 + 5 + 6, callMethodWithTypeParameters(someJsType, someJsType, "hello", (Double) 6.0));
+    assertEquals(3 + 5 + 6, callMethodWithTypeParameters(someJsType, "bye", "hello", (Double) 6.0));
   }
 
   private static void testProperty() {
@@ -185,6 +188,20 @@ public final class Main {
 
     public static int staticMethod(SomeJsType self) {
       return self.getNumber();
+    }
+
+    public <T, U extends String, V extends Double> V withTypeParameters(T t, U u, V v) {
+      double result = 0;
+      if (t instanceof SomeJsType someType) {
+        result += someType.getNumber();
+      } else if (t instanceof String s) {
+        result += s.length();
+      } else if (t instanceof Double d) {
+        result += d;
+      }
+      result += u.length();
+      result += v;
+      return (V) (Double) result;
     }
 
     @JsType
@@ -579,10 +596,12 @@ public final class Main {
     ApplyFunction<String> stringJsFunction = s -> s.toLowerCase();
     assertEquals("hello", stringJsFunction.apply("HELLO"));
     assertEquals("hello", callGeneric(stringJsFunction, "HELLO"));
+    assertEquals("hello", callApplyFunctionInJs(stringJsFunction, "HELLO"));
 
     ApplyFunction<Integer> intJsFunction = i -> i + 1;
     assertEquals(2, intJsFunction.apply(1));
     assertEquals(2, callGeneric(intJsFunction, 1));
+    assertEquals((Integer) 2, callApplyFunctionInJs(intJsFunction, 1));
 
     ApplyFunction<Object> objectJsFunction = (ApplyFunction) stringJsFunction;
     assertThrowsClassCastException(() -> objectJsFunction.apply(new Object()));
@@ -719,6 +738,10 @@ public final class Main {
   static native boolean callTakesSelf(SomeJsType someJsType, SomeJsType arg);
 
   @JsMethod(namespace = "nativehelper")
+  static native <T> int callMethodWithTypeParameters(
+      SomeJsType someJsType, T o, String s, Double i);
+
+  @JsMethod(namespace = "nativehelper")
   static native SomeJsType.CapturesOuter newCapturesOuter(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
@@ -781,4 +804,7 @@ public final class Main {
 
     public native int getNumber();
   }
+
+  @JsMethod(namespace = "functions", name = "callApplyFunction")
+  private static native <T> T callApplyFunctionInJs(ApplyFunction<T> function, T a);
 }

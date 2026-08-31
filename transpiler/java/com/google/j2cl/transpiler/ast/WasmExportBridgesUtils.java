@@ -297,6 +297,7 @@ public class WasmExportBridgesUtils {
 
   /** Returns the corresponding JS type for the given Wasm Java type. */
   public static TypeDescriptor getExternalType(TypeDescriptor typeDescriptor, boolean isExport) {
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
       return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
@@ -319,6 +320,7 @@ public class WasmExportBridgesUtils {
   /** Converts the given expression to a JS type which can be passed to JS. */
   public static Expression convertToExternal(
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
@@ -367,6 +369,7 @@ public class WasmExportBridgesUtils {
   /** Converts the given expression that was received from JS to a Wasm Java type. */
   public static Expression convertToInternal(
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
@@ -385,6 +388,7 @@ public class WasmExportBridgesUtils {
 
   private static boolean needsBoundaryExternConversion(
       TypeDescriptor typeDescriptor, boolean isExport) {
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     return !typeDescriptor.isNative()
         && !typeDescriptor.isPrimitive()
         && !TypeDescriptors.isWasmFuncref(typeDescriptor)

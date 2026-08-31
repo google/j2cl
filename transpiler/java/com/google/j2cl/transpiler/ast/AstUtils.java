@@ -1371,6 +1371,7 @@ public final class AstUtils {
 
   /** Returns true if this type defined in Wasm is exported to/visible in JS. */
   public static boolean isWasmJsExportedType(TypeDescriptor typeDescriptor) {
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (!(typeDescriptor instanceof DeclaredTypeDescriptor dtd)) {
       return false;
     }

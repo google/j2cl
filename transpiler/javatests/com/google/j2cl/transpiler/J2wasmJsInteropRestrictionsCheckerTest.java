@@ -47,6 +47,12 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           @JsMethod
           static native <E extends MyNative> void method2(E e);
         }
+        class MyNonNative3 {
+          @JsMethod
+          static native <T> T method1(T t);
+          @JsMethod
+          static native <T extends String> T method2(T t);
+        }
         class Main {
           void test() {
             // Assignment and casting to null is allowed, even when the null literal is of unknown
@@ -70,7 +76,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Native JsType field 'Buggy.anotherField' cannot be of type 'C'.
           Buggy(C arg) {}
         > Error: Parameter 'arg' in 'Buggy(C arg)' cannot be of type 'C'.
-          native <T> void test2(T c);
+          native <T extends C> void test2(T c);
         > Error: Parameter 'c' in 'void Buggy.test2(T c)' cannot be of type 'T'.
           native void test3(C c);
         > Error: Parameter 'c' in 'void Buggy.test3(C c)' cannot be of type 'C'.
@@ -94,7 +100,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         import jsinterop.annotations.*;
         class Main {
           @JsMethod
-          static native <T> void test2(T c);
+          static native <T extends C> void test2(T c);
         > Error: Parameter 'c' in 'void Main.test2(T c)' cannot be of type 'T'.
           @JsMethod
           static native void test3(C c);
