@@ -426,7 +426,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Expression rewriteCastExpression(CastExpression castExpression) {
     if (castExpression.isUnchecked()) {
-      // Unchecked casts do not trigger any conversions.
+      // Unchecked casts are expected to hide type conversions from the compiler and do not trigger
+      // conversion operations. They should only be used if no conversion operation is expected.
       return castExpression;
     }
     // cast context

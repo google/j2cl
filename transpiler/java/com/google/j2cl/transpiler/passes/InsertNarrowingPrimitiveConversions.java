@@ -47,6 +47,8 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
           @Override
           public Expression rewriteCastExpression(CastExpression castExpression) {
             if (castExpression.isUnchecked()) {
+              // Unchecked casts are expected to hide type conversions from compiler and do not
+              // trigger any conversion operations.
               return castExpression;
             }
 

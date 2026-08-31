@@ -47,6 +47,12 @@ public class CastExpression extends Expression {
     return expression;
   }
 
+  /**
+   * Returns true if this cast is unchecked.
+   *
+   * <p>Unchecked casts are expected to hide type conversions from the compiler and do not trigger
+   * any conversion operation.
+   */
   public boolean isUnchecked() {
     return isUnchecked;
   }
@@ -142,6 +148,11 @@ public class CastExpression extends Expression {
       return this;
     }
 
+    /**
+     * Sets whether this cast is unchecked.
+     *
+     * <p>See {@link CastExpression#isUnchecked()}
+     */
     @CanIgnoreReturnValue
     public Builder setUnchecked(boolean isUnchecked) {
       this.isUnchecked = isUnchecked;

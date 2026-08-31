@@ -1324,8 +1324,10 @@ internal class CompilationUnitBuilder(
         val expression = convertExpression(irTypeOperatorCall.argument)
         val testTypeDescriptor = environment.getTypeDescriptor(irTypeOperatorCall.typeOperand)
         // An implicit cast guarantees that the type of the expression is already checked.
-        // However, the boxing/unboxing conversion has not happened yet and in those cases
-        // the cast is an unchecked cast.
+        // However, in the case where the cast should trigger a conversion (such as boxing, etc)
+        // an unchecked cast cannot be used since it would hide the conversion from the compiler.
+        // TODO(b/555301011): Centralize the logic for checking if an unchecked cast can be safely
+        // used.
         val isUnchecked =
           irTypeOperatorCall.operator == IrTypeOperator.IMPLICIT_CAST &&
             !testTypeDescriptor.isPrimitive &&
