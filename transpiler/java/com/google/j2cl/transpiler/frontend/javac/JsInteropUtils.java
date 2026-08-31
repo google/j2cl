@@ -15,121 +15,13 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import static com.google.j2cl.transpiler.frontend.javac.JavaEnvironment.getEnclosingClass;
-import static com.google.j2cl.transpiler.frontend.javac.JavaEnvironment.isRecord;
-import static com.google.j2cl.transpiler.frontend.javac.JavaEnvironment.isStatic;
-
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
-import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.JsMemberType;
-import com.sun.tools.javac.code.Flags;
-import com.sun.tools.javac.code.Symbol;
-import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
-import com.sun.tools.javac.code.Symbol.VarSymbol;
-import java.util.Set;
 import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.type.TypeKind;
 
 /** Utility functions for JsInterop properties. */
 public final class JsInteropUtils {
-  /**
-   * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
-   * there is no "name" is specified in the annotation, just returns null for JsName.
-   */
-  public static JsInfo getJsInfo(MethodSymbol member) {
-    AnnotationMirror annotation = JsInteropAnnotationUtils.getJsMethodAnnotation(member);
-    if (annotation == null) {
-      annotation = JsInteropAnnotationUtils.getJsConstructorAnnotation(member);
-    }
-    if (annotation == null) {
-      // Do not read annotations for synthetic accessor (which are copied from the record
-      // components). We will continue reading annotations from custom accessors so that they
-      // can be checked and rejected by the restriction checker.
-      boolean generated = (((Symbol) member).flags() & Flags.GENERATED_MEMBER) != 0;
-      if (!generated) {
-        annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
-      }
-    }
-    boolean isPropertyAccessor = JsInteropAnnotationUtils.getJsPropertyAnnotation(member) != null;
-    return getJsInfo(
-        member, (ClassSymbol) member.getEnclosingElement(), annotation, isPropertyAccessor);
-  }
-
-  public static JsInfo getJsInfo(VarSymbol member) {
-    AnnotationMirror annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(member);
-    return getJsInfo(member, (ClassSymbol) member.getEnclosingElement(), annotation, false);
-  }
-
-  private static JsInfo getJsInfo(
-      Element member,
-      ClassSymbol classSymbol,
-      AnnotationMirror memberAnnotation,
-      boolean isAccessor) {
-
-    boolean jsOverlay = isJsOverlay(member);
-    boolean jsAsync = isJsAsync(member);
-
-    if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) == null) {
-      boolean implicitJsMember = isJsType(classSymbol) && canBeImplicitJsMember(member);
-      boolean isJsEnumConstant =
-          isJsEnum(classSymbol) && member.getKind() == ElementKind.ENUM_CONSTANT;
-      boolean memberOfNativeType = isJsNativeType(classSymbol) && !isJsEnum(classSymbol);
-      if (memberAnnotation != null
-          || ((implicitJsMember || isJsEnumConstant || memberOfNativeType) && !jsOverlay)) {
-        return JsInfo.builder()
-            .setJsMemberType(getJsMemberType(member, isAccessor))
-            .setJsName(JsInteropAnnotationUtils.getJsName(memberAnnotation))
-            .setJsNamespace(JsInteropAnnotationUtils.getJsNamespace(memberAnnotation))
-            .setJsOverlay(jsOverlay)
-            .setJsAsync(jsAsync)
-            .setHasJsMemberAnnotation(memberAnnotation != null)
-            .build();
-      }
-    }
-
-    return JsInfo.builder()
-        .setJsMemberType(JsMemberType.NONE)
-        .setJsOverlay(jsOverlay)
-        .setJsAsync(jsAsync)
-        .build();
-  }
-
-  private static boolean canBeImplicitJsMember(Element member) {
-    // Public members are implicitly JsMembers.
-    if (member.getModifiers().contains(Modifier.PUBLIC)) {
-      // Component accessors will inherit JsInfo from the components so should not be considered
-      // implicit JsMembers even though they are public.
-      if (isRecordComponentAccessor(member)) {
-        return false;
-      }
-      return true;
-    }
-    // Record components fields, although private, are implicit js members. Later in the process, it
-    // will be used by public accessors to inherit JsInfo from.
-    if (isRecordComponentField(member)) {
-      return true;
-    }
-    return false;
-  }
-
-  private static boolean isRecordComponentAccessor(Element member) {
-    return member.getKind() == ElementKind.METHOD
-        && getEnclosingClass(member).getRecordComponents().stream()
-            .anyMatch(component -> component.getAccessor().equals(member));
-  }
-
-  private static boolean isRecordComponentField(Element member) {
-    return member.getKind() == ElementKind.FIELD
-        && !isStatic(member)
-        && isRecord(getEnclosingClass(member));
-  }
-
   @Nullable
   public static JsEnumInfo getJsEnumInfo(AnnotatedConstruct annotatedConstruct) {
     if (!isJsEnum(annotatedConstruct)) {
@@ -141,56 +33,6 @@ public final class JsInteropUtils {
         .setSupportsComparable(!hasCustomValue || isJsNativeType(annotatedConstruct))
         .setSupportsOrdinal(!hasCustomValue && !isJsNativeType(annotatedConstruct))
         .build();
-  }
-
-  private static JsMemberType getJsMemberType(Element member, boolean isPropertyAccessor) {
-    if (member.getKind().isField()) {
-      return JsMemberType.PROPERTY;
-    }
-    if (member.getKind() == ElementKind.CONSTRUCTOR) {
-      return JsMemberType.CONSTRUCTOR;
-    }
-    if (isPropertyAccessor) {
-      return getJsPropertyAccessorType((MethodSymbol) member);
-    }
-    return JsMemberType.METHOD;
-  }
-
-  private static JsMemberType getJsPropertyAccessorType(MethodSymbol method) {
-    if (method.getParameters().size() == 1 && returnsPrimitiveVoid(method)) {
-      return JsMemberType.SETTER;
-    } else if (method.getParameters().isEmpty()
-        && (!returnsPrimitiveVoid(method) || isDebugger(method))) {
-      return JsMemberType.GETTER;
-    }
-    return JsMemberType.UNDEFINED_ACCESSOR;
-  }
-
-  private static boolean returnsPrimitiveVoid(MethodSymbol method) {
-    return method.getReturnType().getKind() == TypeKind.VOID;
-  }
-
-  private static boolean isDebugger(MethodSymbol method) {
-    Set<Modifier> modifiers = method.getModifiers();
-    return method.getSimpleName().contentEquals("debugger")
-        && modifiers.contains(Modifier.NATIVE)
-        && method.getModifiers().contains(Modifier.STATIC);
-  }
-
-  /**
-   * Returns true if the method is a a JsMember because of immediate conditions (either it is
-   * directly annotated or it's enclosing class is annotated).
-   */
-  public static boolean isJsMember(MethodSymbol method) {
-    return getJsInfo(method).getJsMemberType() != JsMemberType.NONE;
-  }
-
-  public static boolean isJsAsync(AnnotatedConstruct annotatedConstruct) {
-    return JsInteropAnnotationUtils.getJsAsyncAnnotation(annotatedConstruct) != null;
-  }
-
-  public static boolean isJsOverlay(AnnotatedConstruct annotatedConstruct) {
-    return JsInteropAnnotationUtils.getJsOverlayAnnotation(annotatedConstruct) != null;
   }
 
   public static boolean isJsOptional(MethodSymbol method, int i) {

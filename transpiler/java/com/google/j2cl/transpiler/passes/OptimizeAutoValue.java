@@ -353,11 +353,13 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 builder -> {
                   DeclaredTypeDescriptor newEnclosingTypeDescriptor =
                       replaceTypeDescriptors(builder.getEnclosingTypeDescriptor(), fn);
-                  if (!newEnclosingTypeDescriptor.equals(builder.getEnclosingTypeDescriptor())
-                      && descriptor.isJsMember()) {
-                    // When a method moves from one class to another, it might no longer override
-                    // a JsMethod and loose the fact that it needs to remain a JsMethod in the
-                    // new class.
+                  if (!newEnclosingTypeDescriptor.equals(builder.getEnclosingTypeDescriptor())) {
+                    // When a method moves from one class to another, preserve its original
+                    // JsInfo. This is needed both to retain JsMember status (which might no
+                    // longer be inferred from overrides in the new class) and to prevent
+                    // non-JsMember methods from being incorrectly promoted to implicit
+                    // JsMembers when inlined into a @JsType class (e.g. @JsIgnore-d methods
+                    // whose generated implementations lack the annotation).
                     builder.setOriginalJsInfo(descriptor.getJsInfo());
                   }
                   builder

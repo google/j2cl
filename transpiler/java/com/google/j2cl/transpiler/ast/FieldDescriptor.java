@@ -195,6 +195,16 @@ public abstract class FieldDescriptor extends MemberDescriptor {
             || getEnclosingTypeDescriptor().isJsFunctionInterface());
   }
 
+  @Nullable
+  abstract JsInfo getOriginalJsInfoInternal();
+
+  @Memoized
+  @Override
+  public JsInfo getOriginalJsInfo() {
+    JsInfo info = getOriginalJsInfoInternal();
+    return info != null ? info : JsInteropAstUtils.computeOriginalJsInfo(this);
+  }
+
   @Override
   public J2ktInfo getJ2ktInfo() {
     return getOriginalJ2ktInfo();
@@ -279,7 +289,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return new AutoValue_FieldDescriptor.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
-        .setOriginalJsInfo(JsInfo.NONE)
         .setAnnotations(ImmutableList.of())
         .setCompileTimeConstant(false)
         .setStatic(false)
@@ -315,7 +324,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setVisibility(Visibility visibility);
 
-    public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
+    abstract Builder setOriginalJsInfoInternal(JsInfo jsInfo);
+
+    @CanIgnoreReturnValue
+    public Builder setOriginalJsInfo(JsInfo jsInfo) {
+      return setOriginalJsInfoInternal(jsInfo);
+    }
 
     abstract Builder setOriginalJ2ktInfoInternal(J2ktInfo j2ktInfo);
 

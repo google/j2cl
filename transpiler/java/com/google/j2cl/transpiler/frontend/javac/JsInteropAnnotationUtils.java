@@ -15,16 +15,10 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterBoolean;
@@ -40,14 +34,6 @@ public class JsInteropAnnotationUtils {
 
   private JsInteropAnnotationUtils() {}
 
-  public static AnnotationMirror getJsAsyncAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_ASYNC_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJsConstructorAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_CONSTRUCTOR_ANNOTATION_NAME);
-  }
-
   public static AnnotationMirror getJsEnumAnnotation(AnnotatedConstruct annotatedConstruct) {
     return findAnnotationByName(annotatedConstruct, JS_ENUM_ANNOTATION_NAME);
   }
@@ -56,34 +42,18 @@ public class JsInteropAnnotationUtils {
     return findAnnotationByName(annotatedConstruct, JS_FUNCTION_ANNOTATION_NAME);
   }
 
-  public static AnnotationMirror getJsIgnoreAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_IGNORE_ANNOTATION_NAME);
-  }
-
   public static AnnotationMirror getJsTypeAnnotation(AnnotatedConstruct annotatedConstruct) {
     return findAnnotationByName(annotatedConstruct, JS_TYPE_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJsMethodAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_METHOD_ANNOTATION_NAME);
   }
 
   public static AnnotationMirror getJsPackageAnnotation(AnnotatedConstruct annotatedConstruct) {
     return findAnnotationByName(annotatedConstruct, JS_PACKAGE_ANNOTATION_NAME);
   }
 
-  public static AnnotationMirror getJsPropertyAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_PROPERTY_ANNOTATION_NAME);
-  }
-
   public static AnnotationMirror getJsOptionalAnnotation(
       ExecutableElement method, int parameterIndex) {
     return findAnnotationByName(
         method.getParameters().get(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJsOverlayAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_OVERLAY_ANNOTATION_NAME);
   }
 
   public static boolean isJsNative(AnnotatedConstruct annotatedConstruct) {

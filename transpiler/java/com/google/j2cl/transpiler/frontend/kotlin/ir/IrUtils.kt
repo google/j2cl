@@ -207,6 +207,9 @@ val IrField?.isJvmField: Boolean
 val IrClass.enumEntries: List<IrEnumEntry>
   get() = declarations.filterIsInstance<IrEnumEntry>()
 
+val IrFunction.isPropertyAccessor: Boolean
+  get() = this is IrSimpleFunction && correspondingPropertySymbol != null
+
 // TODO(dramaix): This function provides a workaround for accessing arguments of an enum constructor
 // call. Callers should eventually be migrated to directly use `call.arguments` or
 // `call.nonDispatchArguments`. Any remaining necessary logic should be moved to

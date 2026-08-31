@@ -768,7 +768,7 @@ public class JsInteropRestrictionsChecker {
             }
 
             if (target.getEnclosingTypeDescriptor().isJsEnum()
-                && target.getOrigin() == MethodOrigin.SOURCE) {
+                && target.getOrigin() != MethodOrigin.IMPLICIT_ENUM_METHOD) {
               // Methods declared by the user in JsEnum are callable.
               return;
             }

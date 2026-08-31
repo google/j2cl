@@ -34,7 +34,17 @@ public class SupportedAnnotations {
           .add("javaemul.internal.annotations.Wasm")
           .add("javaemul.lang.annotations.WasAutoValue")
           .add("javaemul.lang.annotations.WasAutoValue.Builder")
+          .add("jsinterop.annotations.JsAsync")
+          .add("jsinterop.annotations.JsConstructor")
+          .add("jsinterop.annotations.JsEnum")
+          .add("jsinterop.annotations.JsFunction")
           .add("jsinterop.annotations.JsIgnore")
+          .add("jsinterop.annotations.JsMethod")
+          .add("jsinterop.annotations.JsOptional")
+          .add("jsinterop.annotations.JsOverlay")
+          .add("jsinterop.annotations.JsPackage")
+          .add("jsinterop.annotations.JsProperty")
+          .add("jsinterop.annotations.JsType")
           .add("kotlin.Deprecated")
           // go/keep-sorted end
           .build();

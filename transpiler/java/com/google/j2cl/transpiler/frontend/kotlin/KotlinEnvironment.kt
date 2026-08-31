@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin
 import com.google.j2cl.transpiler.ast.NullabilityAnnotation
 import com.google.j2cl.transpiler.ast.PackageDeclaration
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
@@ -46,7 +47,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllAnnotations
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
@@ -59,6 +59,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isPropertyAccessor
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
@@ -666,7 +667,6 @@ internal class KotlinEnvironment(
         )
       }
 
-      val jsInfo = irFunction.getJsInfo()
       val visibility = irFunction.j2clVisibility
       val isStatic = (irFunction.isStatic || irFunction.parent !is IrDeclaration) && !isConstructor
       val isLocal = irFunction.visibility.delegate == Visibilities.Local
@@ -718,12 +718,14 @@ internal class KotlinEnvironment(
         )
         .setRecordComponentAccessor(isRecordComponentAccessor)
         .setTypeParameterTypeDescriptors(irFunction.typeParameters.map(::getTypeVariable))
-        .setOriginalJsInfo(jsInfo)
         .setAnnotations(createAnnotations(irFunction))
         .setSuspendFunction(irFunction.isSuspend)
         .setOrigin(
-          if (irFunction.isSynthetic) MethodDescriptor.MethodOrigin.SYNTHETIC_METHOD
-          else MethodDescriptor.MethodOrigin.SOURCE
+          when {
+            irFunction.isSynthetic -> MethodOrigin.SYNTHETIC_METHOD
+            irFunction.isPropertyAccessor -> MethodOrigin.KOTLIN_PROPERTY_ACCESSOR
+            else -> MethodOrigin.SOURCE
+          }
         )
         .build()
     }
@@ -772,7 +774,6 @@ internal class KotlinEnvironment(
         .setConstantValue(constantValue)
         .setFinal(irField.isFinal)
         .setStatic(irField.isStatic || irField.parent !is IrDeclaration)
-        .setOriginalJsInfo(irField.getJsInfo())
         .setAnnotations(createAnnotations(irField))
         .setVolatile(isVolatile)
         .setOrigin(
@@ -792,7 +793,6 @@ internal class KotlinEnvironment(
       .setFinal(true)
       .setStatic(true)
       .setEnumConstant(true)
-      .setOriginalJsInfo(irEnumEntry.getJsInfo())
       .setAnnotations(createAnnotations(irEnumEntry))
       .build()
 

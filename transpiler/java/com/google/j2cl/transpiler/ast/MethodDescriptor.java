@@ -129,6 +129,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Whether the method originated in source code or was synthesized by a pass */
   public enum MethodOrigin implements MemberDescriptor.Origin {
     SOURCE,
+    KOTLIN_PROPERTY_ACCESSOR,
     IMPLICIT_ENUM_METHOD,
     SYNTHETIC_FACTORY_FOR_CONSTRUCTOR("<synthetic: ctor_create>"),
     SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR("<synthetic: ctor_js>", Visibility.PROTECTED),
@@ -183,6 +184,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return switch (this) {
         // User written methods and bridges need to be mangled the same way.
         case SOURCE,
+            KOTLIN_PROPERTY_ACCESSOR,
             IMPLICIT_ENUM_METHOD,
             SYNTHETIC_METHOD,
             GENERALIZING_BRIDGE,
@@ -223,7 +225,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @Override
     public boolean isSynthetic() {
       return switch (this) {
-        case SOURCE, IMPLICIT_ENUM_METHOD -> false;
+        case SOURCE, KOTLIN_PROPERTY_ACCESSOR, IMPLICIT_ENUM_METHOD -> false;
         default -> true;
       };
     }
@@ -328,6 +330,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return getSignatureStringForParameter(descriptor.getComponentTypeDescriptor()) + "[]";
     }
     return getSignatureStringForParameter(typeDescriptor.toRawTypeDescriptor());
+  }
+
+  @Nullable
+  abstract JsInfo getOriginalJsInfoInternal();
+
+  @Memoized
+  @Override
+  public JsInfo getOriginalJsInfo() {
+    JsInfo info = getOriginalJsInfoInternal();
+    return info != null ? info : JsInteropAstUtils.computeOriginalJsInfo(this);
   }
 
   public abstract boolean isAbstract();
@@ -1219,7 +1231,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return new AutoValue_MethodDescriptor.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
-        .setOriginalJsInfo(JsInfo.NONE)
         .setAnnotations(ImmutableList.of())
         .setAbstract(false)
         .setSynchronized(false)
@@ -1593,7 +1604,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   /** A Builder for MethodDescriptors. */
   @AutoValue.Builder
-  public abstract static class Builder {
+  public abstract static class Builder implements HasAnnotations {
 
     public abstract Builder setDefaultMethod(boolean isDefault);
 
@@ -1684,9 +1695,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setVisibility(Visibility visibility);
 
-    public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
+    @Override
+    public abstract ImmutableList<Annotation> getAnnotations();
 
-    abstract JsInfo getOriginalJsInfo();
+    abstract Builder setOriginalJsInfoInternal(JsInfo jsInfo);
+
+    @CanIgnoreReturnValue
+    public Builder setOriginalJsInfo(JsInfo jsInfo) {
+      return setOriginalJsInfoInternal(jsInfo);
+    }
+
+    @Nullable
+    abstract JsInfo getOriginalJsInfoInternal();
 
     abstract Builder setOriginalJ2ktInfoInternal(J2ktInfo j2ktInfo);
 
@@ -1846,9 +1866,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         setName(CONSTRUCTOR_METHOD_NAME);
       }
 
+      boolean isJsOverlay =
+          getOriginalJsInfoInternal() != null
+              ? getOriginalJsInfoInternal().isJsOverlay()
+              : hasAnnotation("jsinterop.annotations.JsOverlay");
+
       boolean isNative =
           isNative()
-              || (!getOriginalJsInfo().isJsOverlay()
+              || (!isJsOverlay
                   && getEnclosingTypeDescriptor().isNative()
                   && (isAbstract() || isConstructor()));
       setNative(isNative);

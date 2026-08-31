@@ -61,10 +61,6 @@ public final class AstUtils {
   /** Create default constructor MethodDescriptor. */
   public static MethodDescriptor createImplicitConstructorDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor) {
-    JsInfo jsInfo =
-        isImplicitJsConstructor(enclosingTypeDescriptor.getTypeDeclaration())
-            ? JsInfo.builder().setJsMemberType(JsMemberType.CONSTRUCTOR).build()
-            : JsInfo.NONE;
     // Do not mark the implicit constructor as synthetic. Implicit members are never marked as
     // synthetic because the usage sites have to agree, and they don't have the information of
     // whether they are synthesized or not.
@@ -73,19 +69,11 @@ public final class AstUtils {
             getImplicitConstructorVisibility(enclosingTypeDescriptor.getTypeDeclaration()))
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setConstructor(true)
-        .setOriginalJsInfo(jsInfo)
         .build();
   }
 
   private static Visibility getImplicitConstructorVisibility(TypeDeclaration typeDeclaration) {
     return typeDeclaration.isEnum() ? Visibility.PRIVATE : typeDeclaration.getVisibility();
-  }
-
-  /** Return true if the synthetic implicit default constructor is a JsConstructor. */
-  private static boolean isImplicitJsConstructor(TypeDeclaration typeDeclaration) {
-    return typeDeclaration.isJsType()
-        && (typeDeclaration.isNative()
-            || getImplicitConstructorVisibility(typeDeclaration).isPublic());
   }
 
   /**

@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
@@ -44,7 +45,6 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
-import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -679,7 +679,6 @@ public class JavaEnvironment {
       declarationFieldDescriptor = createFieldDescriptor(varSymbol);
     }
 
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(varSymbol);
     Object constantValue = varSymbol.getConstantValue();
     boolean isCompileTimeConstant = constantValue != null;
     boolean isEnumConstant = varSymbol.isEnum();
@@ -699,7 +698,6 @@ public class JavaEnvironment {
             .setTypeDescriptor(thisTypeDescriptor)
             .setStatic(isStatic)
             .setVisibility(visibility)
-            .setOriginalJsInfo(jsInfo)
             .setFinal(isFinal)
             .setAnnotations(createAnnotations(varSymbol, inNullMarkedScope))
             .setCompileTimeConstant(isCompileTimeConstant)
@@ -763,7 +761,6 @@ public class JavaEnvironment {
             .map(t -> createTypeDescriptor(t, inNullMarkedScope))
             .collect(toImmutableList());
 
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodSymbol);
     boolean isConstructor = methodSymbol.getKind() == ElementKind.CONSTRUCTOR;
     var enclosingClass = (ClassSymbol) methodSymbol.getEnclosingElement();
     boolean isRecordComponentAccessor =
@@ -782,7 +779,6 @@ public class JavaEnvironment {
             .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
             .setTypeArgumentTypeDescriptors(typeArguments)
             .setThrownTypeDescriptors(thrownExceptions)
-            .setOriginalJsInfo(jsInfo)
             .setVisibility(getVisibility(methodSymbol))
             .setStatic(isStatic(methodSymbol))
             .setConstructor(isConstructor)
@@ -1471,7 +1467,17 @@ public class JavaEnvironment {
       return ImmutableList.of();
     }
 
-    return createAnnotations(element.getAnnotationMirrors(), inNullMarkedScope);
+    var annotations = element.getAnnotationMirrors();
+    if (element instanceof MethodSymbol s && (s.flags() & Flags.GENERATED_MEMBER) != 0) {
+      // Do not copy @JsProperty annotations to generated record component accessors.
+      annotations =
+          annotations.stream()
+              .filter(
+                  a -> !AnnotationUtils.getAnnotationName(a).equals(JS_PROPERTY_ANNOTATION_NAME))
+              .collect(toImmutableList());
+    }
+
+    return createAnnotations(annotations, inNullMarkedScope);
   }
 
   private ImmutableList<Annotation> createAnnotations(
