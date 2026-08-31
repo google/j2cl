@@ -88,10 +88,7 @@ java_test(
     data = [
         ":jre_bundle_files",
     ],
-    jvm_flags = select({
-        ":experimental_enable_klibs": ["-Dj2cl.enable_klib=true"],
-        "//conditions:default": [],
-    }),
+    jvm_flags = ["-Dj2cl.enable_klib=true"],
     deps = [
         ":tester_lib",
         "//third_party:junit",
@@ -140,13 +137,6 @@ java_test(
     ],
 )
 
-config_setting(
-    name = "experimental_enable_klibs",
-    flag_values = {
-        "//:experimental_enable_klibs": "true",
-    },
-)
-
 # This just a convenient way of zipping since that's what is expected for nativesourcepath.
 java_library(
     name = "jre_native",
@@ -166,10 +156,8 @@ java_test(
         "-XX:+TieredCompilation",
         "-XX:TieredStopAtLevel=2",
         "-XX:MaxGCPauseMillis=100",
-    ] + select({
-        ":experimental_enable_klibs": ["-Dj2cl.enable_klib=true"],
-        "//conditions:default": [],
-    }),
+        "-Dj2cl.enable_klib=true",
+    ],
     shard_count = 6,
     deps = [
         ":tester_lib",

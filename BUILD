@@ -4,7 +4,7 @@ load("//build_defs:rules.bzl", "j2cl_alias")
 
 # Description:
 #  Public targets available externally. Also see build_defs/rules.bzl for the provided rules.
-load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 
 package(
     default_applicable_licenses = [":j2cl_license"],
@@ -79,12 +79,6 @@ string_flag(
         # Disables J2KT/Web for all targets, regardless of allowlist membership.
         "disabled",
     ],
-)
-
-# Flag to enable klibs experiment. Please talk to j2cl-team@ before using it.
-bool_flag(
-    name = "experimental_enable_klibs",
-    build_setting_default = True,
 )
 
 # Flag to enable profiling for particular targets.
