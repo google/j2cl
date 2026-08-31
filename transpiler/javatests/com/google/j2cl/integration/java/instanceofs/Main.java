@@ -18,12 +18,14 @@ package instanceofs;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.io.Serializable;
 import java.util.function.Supplier;
+import jsinterop.annotations.JsMethod;
 
 /** Test instanceof array. */
 @SuppressWarnings("BadInstanceof")
@@ -37,6 +39,7 @@ public class Main {
     testInstanceOf_sideEffects();
     testInstanceOf_markerInterfaces();
     testInstanceOf_patternVariable();
+    testInstanceOf_doesntInvalidateProperties();
   }
 
   private static void testInstanceOf_class() {
@@ -468,5 +471,27 @@ public class Main {
       o = Integer.valueOf(2);
     } while (!(o instanceof Number n));
     assertEquals(2, n.intValue());
+  }
+
+  // Test that instanceof does not invalidate properties.
+  // We have optimizations that will downgrade some patterns to JsDoc casts, but this can lead to
+  // property invalidations in the JSCompiler. See: b/550539875
+  private static void testInstanceOf_doesntInvalidateProperties() {
+    class HasPropertyThatShouldDisambiguate {
+      @JsMethod
+      public String shouldDisambiguate() {
+        return "dummy";
+      }
+    }
+    class SomeClass extends HasPropertyThatShouldDisambiguate implements ParentInterface {}
+
+    // Explicit cast to ParentInterface to ensure the local variable is inferred to be that type.
+    ParentInterface parent = (ParentInterface) new SomeClass();
+    if (parent instanceof HasPropertyThatShouldDisambiguate) {
+      HasPropertyThatShouldDisambiguate i = (HasPropertyThatShouldDisambiguate) parent;
+      assertEquals("dummy", i.shouldDisambiguate());
+    } else {
+      fail();
+    }
   }
 }

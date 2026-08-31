@@ -8,4 +8,10 @@ package(
     licenses = ["reciprocal"],
 )
 
-integration_test(srcs = glob(["*.kt"]))
+integration_test(
+    srcs = glob(["*.kt"]),
+    defs = [
+        # TODO(b/550539875): uncomment once we no longer generate property invalidation.
+        # "--properties_that_must_disambiguate=shouldDisambiguate"
+    ],
+)

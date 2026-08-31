@@ -10,4 +10,8 @@ package(
 
 integration_test(
     srcs = glob(["*.java"]),
+    defs = [
+        # TODO(b/550539875): uncomment once we no longer generate property invalidation.
+        # "--properties_that_must_disambiguate=shouldDisambiguate",
+    ],
 )

@@ -18,8 +18,10 @@ package instanceofs
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.Asserts.fail
 import java.io.Serializable
 import java.lang.Cloneable
+import jsinterop.annotations.JsMethod
 
 /** Test instanceof array. */
 fun main(vararg unused: String) {
@@ -31,6 +33,7 @@ fun main(vararg unused: String) {
   testInstanceOf_string()
   testInstanceOf_sideEffects()
   testInstanceOf_markerInterfaces()
+  testInstanceOf_doesntInvalidateProperties()
 }
 
 private fun testInstanceOf_class() {
@@ -447,4 +450,22 @@ private class NumberSubclass : Number() {
   override fun toLong(): Long = 0L
 
   override fun toShort(): Short = 0
+}
+
+// Test that instanceof does not invalidate properties.
+// We have optimizations that will downgrade some patterns to JsDoc casts, but this can lead to
+// property invalidations in the JSCompiler. See: b/550539875
+private fun testInstanceOf_doesntInvalidateProperties() {
+  open class HasPropertyThatShouldDisambiguate {
+    @JsMethod fun shouldDisambiguate() = "dummy"
+  }
+  class SomeClass : HasPropertyThatShouldDisambiguate(), ParentInterface {}
+
+  // Explicit cast to ParentInterface to ensure the local variable is inferred to be that type.
+  val parent = SomeClass() as ParentInterface
+  if (parent is HasPropertyThatShouldDisambiguate) {
+    assertEquals("dummy", parent.shouldDisambiguate())
+  } else {
+    fail()
+  }
 }
