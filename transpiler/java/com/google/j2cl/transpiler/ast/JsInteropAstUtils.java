@@ -54,15 +54,12 @@ final class JsInteropAstUtils {
   }
 
   private static boolean isImplicitJsMember(MemberDescriptor member) {
-    if (member.hasAnnotation("jsinterop.annotations.JsOverlay") || member.isSynthetic()) {
+    if (member.hasAnnotation("jsinterop.annotations.JsOverlay")) {
       return false;
     }
     TypeDeclaration enclosingType = member.getEnclosingTypeDescriptor().getTypeDeclaration();
-    if (enclosingType.isJsEnum() && member.isEnumConstant()) {
-      return true;
-    }
-    if (enclosingType.isNative() && !enclosingType.isJsEnum()) {
-      return true;
+    if (enclosingType.isJsEnum()) {
+      return member.isEnumConstant();
     }
     if (enclosingType.isJsType() && canBeImplicitJsTypeMember(member)) {
       return true;
@@ -71,6 +68,14 @@ final class JsInteropAstUtils {
   }
 
   private static boolean canBeImplicitJsTypeMember(MemberDescriptor member) {
+    if (member.isSynthetic()) {
+      // Synthetic artifacts are ignored for jsinterop purposes.
+      return false;
+    }
+    if (member.getEnclosingTypeDescriptor().isNative()) {
+      // All native members are implicit JsMembers, regardless of visibility.
+      return true;
+    }
     if (member.getVisibility().isPublic()) {
       // Java component accessors will inherit JsInfo from the components so should not be
       // considered implicit JsMembers even though they are public.
