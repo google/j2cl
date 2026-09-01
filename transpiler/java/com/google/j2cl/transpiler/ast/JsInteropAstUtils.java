@@ -27,27 +27,13 @@ final class JsInteropAstUtils {
   /** Return the JsInfo for the given member descriptor. */
   public static JsInfo computeOriginalJsInfo(MemberDescriptor member) {
     Annotation memberAnnotation = getJsMemberAnnotation(member);
-    boolean hasJsMemberAnnotation = memberAnnotation != null;
-    boolean isJsOverlay = member.hasAnnotation("jsinterop.annotations.JsOverlay");
-    boolean isJsAsync = member.hasAnnotation("jsinterop.annotations.JsAsync");
-
-    if (!member.hasAnnotation("jsinterop.annotations.JsIgnore")) {
-      if (hasJsMemberAnnotation || isImplicitJsMember(member, isJsOverlay)) {
-        return JsInfo.builder()
-            .setJsMemberType(getJsMemberType(member))
-            .setJsName(getJsName(memberAnnotation))
-            .setJsNamespace(getJsNamespace(memberAnnotation))
-            .setJsOverlay(isJsOverlay)
-            .setJsAsync(isJsAsync)
-            .setHasJsMemberAnnotation(hasJsMemberAnnotation)
-            .build();
-      }
-    }
-
     return JsInfo.builder()
-        .setJsMemberType(JsMemberType.NONE)
-        .setJsOverlay(isJsOverlay)
-        .setJsAsync(isJsAsync)
+        .setJsMemberType(getJsMemberType(member, memberAnnotation))
+        .setJsName(getJsName(memberAnnotation))
+        .setJsNamespace(getJsNamespace(memberAnnotation))
+        .setJsOverlay(member.hasAnnotation("jsinterop.annotations.JsOverlay"))
+        .setJsAsync(member.hasAnnotation("jsinterop.annotations.JsAsync"))
+        .setHasJsMemberAnnotation(memberAnnotation != null)
         .build();
   }
 
@@ -67,8 +53,8 @@ final class JsInteropAstUtils {
     };
   }
 
-  private static boolean isImplicitJsMember(MemberDescriptor member, boolean isJsOverlay) {
-    if (isJsOverlay || member.isSynthetic()) {
+  private static boolean isImplicitJsMember(MemberDescriptor member) {
+    if (member.hasAnnotation("jsinterop.annotations.JsOverlay") || member.isSynthetic()) {
       return false;
     }
     TypeDeclaration enclosingType = member.getEnclosingTypeDescriptor().getTypeDeclaration();
@@ -118,7 +104,14 @@ final class JsInteropAstUtils {
         == SourceLanguage.JAVA;
   }
 
-  private static JsMemberType getJsMemberType(MemberDescriptor member) {
+  private static JsMemberType getJsMemberType(
+      MemberDescriptor member, Annotation jsMemberAnnotation) {
+
+    if (member.hasAnnotation("jsinterop.annotations.JsIgnore")
+        || (jsMemberAnnotation == null && !isImplicitJsMember(member))) {
+      return JsMemberType.NONE;
+    }
+
     return switch (member) {
       case FieldDescriptor f -> JsMemberType.PROPERTY;
       case MethodDescriptor m when m.isConstructor() -> JsMemberType.CONSTRUCTOR;
