@@ -309,6 +309,22 @@ open class Main {
    val arrayWithNull: Array<NativeStringEnum?> = arrayOf<NativeStringEnum?>(null)
    arrayWithNull[0] = null
   }
+  
+  @JvmStatic
+  fun testJsEnumPatternMatch() {
+   val o: Any = ComparableJsEnum.ONE
+   var e: ComparableJsEnum? = null
+   if (o is ComparableJsEnum && run {
+    e = o as ComparableJsEnum
+    true
+   }) {
+    val v: Int = e!!.getValue()
+   }
+   if (o is ComparableJsEnum) {
+    val e_1: ComparableJsEnum? = o as ComparableJsEnum?
+    val v_1: Int = e_1!!.getValue()
+   }
+  }
  }
  
  internal fun interface Supplier<T> {

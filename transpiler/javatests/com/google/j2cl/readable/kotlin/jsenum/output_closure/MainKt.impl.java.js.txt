@@ -298,6 +298,15 @@ class MainKt extends j_l_Object {
   let x = ($arg = MainKt.m_getTRUE__boolean() ? NativeStringEnum.ONE : null, InternalPreconditions.m_checkNotNull__boolean__void($arg != null), $arg);
  }
  /** @nodts */
+ static m_testJsEnumSmartCast__void() {
+  MainKt.$clinit();
+  let o = /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay));
+  if ($Overlay.$isInstance(o)) {
+   let e = /**@type {!ComparableJsEnum}*/ (o);
+   let v = $Overlay.m_getValue__$devirt__jsenum_ComparableJsEnum__int(/**@type {!ComparableJsEnum}*/ (o));
+  }
+ }
+ /** @nodts */
  static $clinit() {
   MainKt.$clinit = () =>{};
   MainKt.$loadModules();

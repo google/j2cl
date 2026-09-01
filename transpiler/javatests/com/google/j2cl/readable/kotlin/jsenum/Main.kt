@@ -352,3 +352,11 @@ fun testNonNullOnJsEnum() {
   // Make sure this gets translated as a multiexpression that introduces a variable.
   val x = (if (TRUE) NativeStringEnum.ONE else null)!!
 }
+
+fun testJsEnumSmartCast() {
+  val o: Any? = ComparableJsEnum.ONE
+  if (o is ComparableJsEnum) {
+    val e: ComparableJsEnum = o
+    val v = o.getValue()
+  }
+}

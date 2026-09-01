@@ -1504,6 +1504,48 @@
  )
 )
 
+;;; void Main.testJsEnumPatternMatch()
+(func $m_testJsEnumPatternMatch__void@jsenum.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:415:21
+ (local $o (ref null $java.lang.Object))
+ (local $e (ref null $jsenum.Main.ComparableJsEnum))
+ (local $v i32)
+ (local $e_1 (ref null $jsenum.Main.ComparableJsEnum))
+ (local $v_1 i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:415:21
+  (call $$clinit__void_<once>_@jsenum.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:416:4
+  (local.set $o (block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:418:4
+  (if (if (result i32) (ref.test (ref $jsenum.Main.ComparableJsEnum) (local.get $o)) (then (block (result i32)
+    (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o)))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:419:6
+     (local.set $v (call $m_getValue__int@jsenum.Main.ComparableJsEnum (ref.as_non_null (local.get $e))))
+    )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:422:4
+  (if (ref.test (ref $jsenum.Main.ComparableJsEnum) (local.get $o))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:423:6
+     (local.set $e_1 (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o)))
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:424:6
+     (local.set $v_1 (call $m_getValue__int@jsenum.Main.ComparableJsEnum (ref.as_non_null (local.get $e_1))))
+    )
+   )
+  )
+ )
+)
+
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:29:13

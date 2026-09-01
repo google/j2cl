@@ -68,6 +68,7 @@ public class Main {
     testNativeEnumClassInitialization();
     testDoNotAutoboxJsEnum();
     testUnckeckedCastJsEnum();
+    testJsEnumPatternMatch();
     testReturnsAndParameters();
     testAutoBoxing_relationalOperations();
     testAutoBoxing_typeInference();
@@ -661,6 +662,14 @@ public class Main {
   private static void testUnckeckedCastJsEnum() {
     StringJsEnum s = uncheckedCast(HELLO_STRING);
     assertTrue(s == StringJsEnum.HELLO);
+  }
+
+  private static void testJsEnumPatternMatch() {
+    Object o = PlainJsEnum.ONE;
+    if (o instanceof PlainJsEnum e) {
+      assertTrue(e == PlainJsEnum.ONE);
+      assertTrue(e.getValue() == 1);
+    }
   }
 
   @UncheckedCast

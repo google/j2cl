@@ -57,6 +57,8 @@ fun main(vararg unused: String) {
   testNativeEnumClassInitialization()
   testDoNotAutoboxJsEnum()
   testUnckeckedCastJsEnum()
+  // TODO(b/555301011): testJsEnumSmartCast() fails because smart cast misses unboxing conversion.
+  // testJsEnumSmartCast()
   testAutoBoxing_relationalOperations()
   testAutoBoxing_typeInference()
   testAutoBoxing_specialMethods()
@@ -653,6 +655,15 @@ private fun returnsAny(n: Int, @DoNotAutobox vararg params: Any?): Any? {
 private fun testUnckeckedCastJsEnum() {
   val s: StringJsEnum = uncheckedCast(HELLO_STRING)
   assertTrue(s === StringJsEnum.HELLO)
+}
+
+private fun testJsEnumSmartCast() {
+  val o: Any? = PlainJsEnum.ONE
+  if (o is PlainJsEnum) {
+    val e: PlainJsEnum = o
+    assertTrue(e === PlainJsEnum.ONE)
+    assertTrue(e.getValue() == 1)
+  }
 }
 
 @UncheckedCast private fun <T> uncheckedCast(@DoNotAutobox obj: Any?): T = obj as T

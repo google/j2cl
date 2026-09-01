@@ -411,4 +411,17 @@ public class Main {
     NativeStringEnum[] arrayWithNull = new NativeStringEnum[] {null};
     arrayWithNull[0] = null;
   }
+
+  public static void testJsEnumPatternMatch() {
+    Object o = ComparableJsEnum.ONE;
+    // Impliclit cast.
+    if (o instanceof ComparableJsEnum e) {
+      int v = e.getValue();
+    }
+    // Optimized cast.
+    if (o instanceof ComparableJsEnum) {
+      ComparableJsEnum e = (ComparableJsEnum) o;
+      int v = e.getValue();
+    }
+  }
 }
