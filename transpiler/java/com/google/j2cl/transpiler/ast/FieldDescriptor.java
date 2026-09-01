@@ -184,17 +184,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return getDeclarationJsInfo();
   }
 
-  @Override
-  public boolean isJsOverlay() {
-    return getJsInfo().isJsOverlay() || isNativeOrJsFunctionSynthetic();
-  }
-
-  private boolean isNativeOrJsFunctionSynthetic() {
-    return isSynthetic()
-        && (getEnclosingTypeDescriptor().isNative()
-            || getEnclosingTypeDescriptor().isJsFunctionInterface());
-  }
-
   @Nullable
   abstract JsInfo getOriginalJsInfoInternal();
 

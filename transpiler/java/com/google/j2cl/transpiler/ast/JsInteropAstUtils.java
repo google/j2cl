@@ -31,7 +31,7 @@ final class JsInteropAstUtils {
         .setJsMemberType(getJsMemberType(member, memberAnnotation))
         .setJsName(getJsName(memberAnnotation))
         .setJsNamespace(getJsNamespace(memberAnnotation))
-        .setJsOverlay(member.hasAnnotation("jsinterop.annotations.JsOverlay"))
+        .setJsOverlay(isJsOverlay(member))
         .setJsAsync(member.hasAnnotation("jsinterop.annotations.JsAsync"))
         .setHasJsMemberAnnotation(memberAnnotation != null)
         .build();
@@ -54,7 +54,7 @@ final class JsInteropAstUtils {
   }
 
   private static boolean isImplicitJsMember(MemberDescriptor member) {
-    if (member.hasAnnotation("jsinterop.annotations.JsOverlay")) {
+    if (isJsOverlay(member)) {
       return false;
     }
     TypeDeclaration enclosingType = member.getEnclosingTypeDescriptor().getTypeDeclaration();
@@ -141,6 +141,16 @@ final class JsInteropAstUtils {
       return JsMemberType.GETTER;
     }
     return JsMemberType.UNDEFINED_ACCESSOR;
+  }
+
+  private static boolean isJsOverlay(MemberDescriptor member) {
+    return member.hasAnnotation("jsinterop.annotations.JsOverlay") || isImplicitJsOverlay(member);
+  }
+
+  private static boolean isImplicitJsOverlay(MemberDescriptor member) {
+    return member.isSynthetic()
+        && (member.getEnclosingTypeDescriptor().isNative()
+            || member.getEnclosingTypeDescriptor().isJsFunctionInterface());
   }
 
   private static boolean isDebugger(MethodDescriptor method) {
