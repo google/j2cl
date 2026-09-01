@@ -17,7 +17,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsEnum
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isImplicitConstructor
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.ir.IrElement
@@ -28,24 +28,21 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.createBlockBody
-import org.jetbrains.kotlin.ir.expressions.IrBlock
-import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrSyntheticBody
 import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.isEnumClass
-import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.util.statements
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 /**
- * Removes super enum constructor calls and effectively empty constructors from enums. This will
- * normalize the AST to better match the Java pattern, where the JLS does not permit an explicit
- * super enum constructor call (it's purely implicit).
+ * Removes super enum constructor calls and implicit constructors from enums. This will normalize
+ * the AST to better match the Java pattern, where the JLS does not permit an explicit super enum
+ * constructor call (it's purely implicit).
  *
  * Remove the <get-entries> special function from Enum classes. All references are rewritten at the
  * call site.
@@ -71,10 +68,8 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
           it.origin == IrDeclarationOrigin.ENUM_CLASS_SPECIAL_MEMBER &&
           (it.body as? IrSyntheticBody)?.kind == IrSyntheticBodyKind.ENUM_ENTRIES
       }
-      // Remove the now empty implicit constructors from JsEnum.
-      if (declaration.isJsEnum) {
-        declaration.declarations.removeIf { it is IrConstructor && it.isEffectivelyEmpty() }
-      }
+      // Remove implicit constructors.
+      declaration.declarations.removeIf { it.isImplicitConstructor }
     }
   }
 
@@ -100,10 +95,3 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
       symbol.owner.parentAsClass.symbol == context.irBuiltIns.enumClass
   }
 }
-
-private fun IrConstructor.isEffectivelyEmpty() =
-  nonDispatchParameters.isEmpty() && annotations.isEmpty() && body.isEmpty()
-
-private fun IrBody?.isEmpty() = this == null || statements.all { it is IrBlock && it.isEmpty() }
-
-private fun IrBlock?.isEmpty() = this == null || statements.isEmpty()

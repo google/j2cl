@@ -673,6 +673,13 @@ val IrDeclaration.isKotlinStub
       // onto the original annotations. We have no use for these stubs.
       origin == JvmLoweredDeclarationOrigin.SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS
 
+val IrDeclaration.isImplicitConstructor: Boolean
+  get() =
+    this is IrConstructor &&
+      isPrimary &&
+      startOffset == parentAsClass.startOffset &&
+      endOffset == parentAsClass.endOffset
+
 private val clinitName = Name.special("<clinit>")
 
 val IrDeclaration.isClinit: Boolean
