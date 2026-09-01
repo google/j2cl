@@ -27,6 +27,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -38,6 +39,7 @@ import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.Annotation;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -1211,6 +1213,10 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
+    if (!checkJsMemberAnnotations(member)) {
+      return;
+    }
+
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     if (enclosingTypeDescriptor.isNative() && enclosingTypeDescriptor.isJsType()) {
       checkMemberOfNativeJsType(member);
@@ -1615,6 +1621,35 @@ public class JsInteropRestrictionsChecker {
     return member.isMethod() && member.isNative();
   }
 
+  private static final ImmutableSet<String> JS_MEMBER_ANNOTATIONS =
+      ImmutableSet.of(
+          "jsinterop.annotations.JsConstructor",
+          "jsinterop.annotations.JsMethod",
+          "jsinterop.annotations.JsProperty",
+          "jsinterop.annotations.JsIgnore",
+          "jsinterop.annotations.JsOverlay");
+
+  private boolean checkJsMemberAnnotations(Member member) {
+    ImmutableList<DeclaredTypeDescriptor> annotations =
+        member.getDescriptor().getAnnotations().stream()
+            .map(Annotation::getTypeDescriptor)
+            .filter(t -> JS_MEMBER_ANNOTATIONS.contains(t.getQualifiedSourceName()))
+            .limit(2)
+            .collect(toImmutableList());
+
+    if (annotations.size() == 2) {
+      problems.error(
+          member.getSourcePosition(),
+          "Member '%s' cannot have both @%s and @%s at the same time.",
+          member.getReadableDescription(),
+          annotations.get(0).getSimpleSourceName(),
+          annotations.get(1).getSimpleSourceName());
+      return false;
+    }
+
+    return true;
+  }
+
   private void checkJsOverlay(Member member) {
     if (member.getDescriptor().isSynthetic()) {
       return;
@@ -1631,13 +1666,6 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (memberDescriptor.isJsMember()) {
-      problems.error(
-          member.getSourcePosition(),
-          "JsOverlay '%s' cannot be nor override a JsProperty or a JsMethod.",
-          readableDescription);
-      return;
-    }
     if (member.isMethod()) {
       if (!isEffectivelyFinal(memberDescriptor)
           && !memberDescriptor.isStatic()

@@ -59,6 +59,49 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testMultipleJsMemberAnnotationsFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        public class Buggy {
+          @JsIgnore @JsConstructor
+          public Buggy() {}
+          > Error: Member 'Buggy()' cannot have both @JsIgnore and @JsConstructor at the same time.
+
+          @JsIgnore @JsProperty
+          public int f1;
+          > Error: Member 'Buggy.f1' cannot have both @JsIgnore and @JsProperty at the same time.
+
+          @JsIgnore @JsMethod
+          public void m1() {}
+          > Error: Member 'void Buggy.m1()' cannot have both @JsIgnore and @JsMethod at the same time.
+
+          @JsProperty @JsMethod
+          public void m2() {}
+          > Error: Member 'void Buggy.m2()' cannot have both @JsProperty and @JsMethod at the same time.
+
+          @JsIgnore @JsProperty @JsMethod
+          public void m3() {}
+          > Error: Member 'void Buggy.m3()' cannot have both @JsIgnore and @JsProperty at the same time.
+        }
+        @JsType(isNative = true)
+        class NativeBuggy {
+          @JsIgnore @JsOverlay
+          public final void m1() {}
+          > Error: Member 'void NativeBuggy.m1()' cannot have both @JsIgnore and @JsOverlay at the same time.
+
+          @JsProperty @JsOverlay
+          public static int f1;
+          > Error: Member 'NativeBuggy.f1' cannot have both @JsProperty and @JsOverlay at the same time.
+
+          @JsMethod @JsOverlay
+          public final void m2() {}
+          > Error: Member 'void NativeBuggy.m2()' cannot have both @JsMethod and @JsOverlay at the same time.
+        }
+        """);
+  }
+
   public void testCollidingNamePackagePrivateFails() {
     assertWithInlineMessages(
         "test.Buggy",
@@ -661,8 +704,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         class ParentBuggy {
           @JsMethod boolean foo() { return false; }
           @JsProperty boolean getBar() { return false; }
-          // TODO(b/35901141): Implement missing restriction check.
           @JsProperty @JsMethod boolean getBax() { return false; }
+        > Error: Member 'boolean ParentBuggy.getBax()' cannot have both @JsProperty and @JsMethod at the same time.
           @JsProperty boolean getBlah() { return false; }
           @JsMethod(name = "bleh") boolean getBleh() { return false; }
         }
@@ -3784,35 +3827,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testJsOverlayOnJsMemberFails() {
-    assertWithInlineMessages(
-        "test.Buggy",
-        """
-        import jsinterop.annotations.*;
-        @JsType(isNative=true) public class Buggy {
-          @JsOverlay public Buggy() { }
-        > Error: annotation interface not applicable to this kind of declaration
-        }
-        """);
-
-    assertWithInlineMessages(
-        "test.Buggy",
-        """
-        import jsinterop.annotations.*;
-        @JsType(isNative=true) public class Buggy {
-          @JsProperty @JsOverlay public int a;
-          > Error: JsOverlay 'Buggy.a' cannot be nor override a JsProperty or a JsMethod.
-          @JsProperty @JsOverlay public static int b;
-          > Error: JsOverlay 'Buggy.b' cannot be nor override a JsProperty or a JsMethod.
-          @JsMethod @JsOverlay public final void m() { }
-          > Error: JsOverlay 'void Buggy.m()' cannot be nor override a JsProperty or a JsMethod.
-          @JsMethod @JsOverlay public static void n() { }
-          > Error: JsOverlay 'void Buggy.n()' cannot be nor override a JsProperty or a JsMethod.
-          @JsProperty @JsOverlay public static void setA(String value) { }
-          > Error: JsOverlay 'void Buggy.setA(String)' cannot be nor override a JsProperty or a JsMethod.
-        }
-        """);
-  }
 
   public void testJsOverlayOnNonNativeJsTypeFails() {
     assertWithInlineMessages(
@@ -4405,6 +4419,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public Promise a() { return null; }
               @JsAsync
               public IThenable b() { return null; }
+              @JsIgnore
+              @JsAsync
+              public Promise c() { return null; }
             }
             """)
         .assertNoWarnings();
