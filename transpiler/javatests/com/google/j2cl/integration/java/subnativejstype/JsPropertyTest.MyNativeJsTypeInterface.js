@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2026 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,20 +11,28 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('test.foo.MyNativeType');
 
-class MyNativeType {
-  constructor(x, y) {
-    this.executed = true;
-    this.x = x;
-    this.y = y;
-  }
+goog.module('subnativejstype.JsPropertyTest.MyNativeJsTypeInterface');
+
+/** @interface */
+class MyNativeJsTypeInterface {
+  /**
+   * @param {number} value
+   * @returns {void}
+   */
+  set x(value) {}
 
   /**
-   * @param {number} a
-   * @return {number}
+   * @returns {number}
    */
-  foo(a) { return this.x + this.y + a; }
+  get x() {}
+
+  /**
+   * @param {number} bias
+   * @return {number}
+   * @public
+   */
+  sum(bias) {}
 }
 
-exports = MyNativeType;
+exports = MyNativeJsTypeInterface;

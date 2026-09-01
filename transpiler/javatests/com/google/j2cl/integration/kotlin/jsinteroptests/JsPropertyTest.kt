@@ -29,23 +29,12 @@ object JsPropertyTest {
   fun testAll() {
     testConcreteJsType()
     testJavaClassImplementingMyJsTypeInterfaceWithProperty()
-    testJsPropertyAccidentalOverrideSuperCall()
-    testJsPropertyBridges()
-    testJsPropertyBridgesSubclass()
     testJsPropertyGetX()
     testJsPropertyIsX()
-    testJsPropertyRemovedAccidentalOverrideSuperCall()
     testNativeJsType()
-    testNativeJsTypeSubclass()
-    testNativeJsTypeSubclassNoOverride()
     testNativeJsTypeWithConstructor()
-    testNativeJsTypeWithConstructorSubclass()
     testProtectedNames()
   }
-
-  @JvmStatic val SET_PARENT_X: Int = 500
-
-  @JvmStatic val GET_PARENT_X: Int = 1000
 
   @JvmStatic val GET_X: Int = 100
 
@@ -170,33 +159,7 @@ object JsPropertyTest {
     assertEquals(91, obj.getY())
   }
 
-  internal class MyNativeJsTypeSubclass @JsConstructor internal constructor() : MyNativeJsType(42) {
 
-    init {
-      setY(52)
-    }
-
-    override fun sum(bias: Int): Int = super.sum(bias) + GET_X
-  }
-
-  private fun testNativeJsTypeSubclass() {
-    val mc = MyNativeJsTypeSubclass()
-    assertTrue(mc.ctorExecuted)
-    assertEquals(143, mc.sum(1))
-
-    mc.x = -mc.x
-    assertEquals(58, mc.sum(0))
-
-    assertEquals(52, mc.getY())
-  }
-
-  internal class MyNativeJsTypeSubclassNoOverride @JsConstructor constructor() : MyNativeJsType()
-
-  private fun testNativeJsTypeSubclassNoOverride() {
-    val myNativeJsType = MyNativeJsTypeSubclassNoOverride()
-    myNativeJsType.x = 12
-    assertEquals(42, myNativeJsType.sum(30))
-  }
 
   @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest", name = "MyNativeJsType")
   open internal class MyNativeJsTypeWithConstructor(x: Int) {
@@ -210,125 +173,7 @@ object JsPropertyTest {
     assertEquals(12, obj.x)
   }
 
-  internal class MyNativeJsTypeWithConstructorSubclass @JsConstructor constructor(x: Int) :
-    MyNativeJsTypeWithConstructor(x)
 
-  private fun testNativeJsTypeWithConstructorSubclass() {
-    val obj = MyNativeJsTypeWithConstructorSubclass(12)
-    assertTrue(obj.ctorExecuted)
-    assertEquals(12, obj.x)
-  }
-
-  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
-  internal interface MyNativeJsTypeInterface {
-    @JsProperty fun getX(): Int
-
-    @JsProperty fun setX(x: Int)
-
-    fun sum(bias: Int): Int
-  }
-
-  internal class MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge :
-    AccidentaImplementor(), MyNativeJsTypeInterface
-
-  internal abstract class AccidentaImplementor() {
-    private var x: Int = 0
-
-    fun getX(): Int = x + GET_X
-
-    fun setX(x: Int) {
-      this.x = x + SET_X
-    }
-
-    fun getXProxy() = x
-
-    fun sum(bias: Int): Int = bias + x
-  }
-
-  private fun testJsPropertyBridges() {
-    val o: MyNativeJsTypeInterface = MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge()
-
-    o.setX(3)
-    assertEquals(3 + 150, o.getX())
-    assertEquals(3 + SET_X, (o as AccidentaImplementor).getXProxy())
-
-    val accidentaImplementor = o as AccidentaImplementor
-
-    accidentaImplementor.setX(3)
-    assertEquals(3 + 150, accidentaImplementor.getX())
-    assertEquals(3 + 150, getProperty(o, "x"))
-    assertEquals(3 + SET_X, accidentaImplementor.getXProxy())
-
-    setProperty(o, "x", 4)
-    assertEquals(4 + 150, accidentaImplementor.getX())
-    assertEquals(4 + 150, getProperty(o, "x"))
-    assertEquals(4 + SET_X, accidentaImplementor.getXProxy())
-
-    assertEquals(3 + 4 + SET_X, accidentaImplementor.sum(3))
-  }
-
-  internal open class MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed :
-    OtherAccidentalImplementer(), MyNativeJsTypeInterface
-
-  internal abstract class OtherAccidentalImplementer() {
-    private var x: Int = 0
-
-    open fun getX(): Int = x + GET_PARENT_X
-
-    open fun setX(x: Int) {
-      this.x = x + SET_PARENT_X
-    }
-
-    fun getXProxy() = x
-
-    open fun sum(bias: Int): Int = bias + x
-  }
-
-  internal class MyNativeJsTypeInterfaceImplNeedingBridgeSubclass :
-    MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed() {
-    internal var y: Int = 0
-
-    override fun getX(): Int = y + GET_X
-
-    override fun setX(y: Int) {
-      this.y = y + SET_X
-    }
-
-    fun setParentX(value: Int) {
-      super.setX(value)
-    }
-
-    fun getXPlusY(): Int = super.getX() + y
-  }
-
-  private fun testJsPropertyBridgesSubclass() {
-    val o: MyNativeJsTypeInterface = MyNativeJsTypeInterfaceImplNeedingBridgeSubclass()
-
-    o.setX(3)
-    assertEquals(3 + 150, o.getX())
-
-    val simple = o as OtherAccidentalImplementer
-
-    simple.setX(3)
-    assertEquals(3 + GET_X + SET_X, simple.getX())
-    assertEquals(3 + GET_X + SET_X, getProperty(o, "x"))
-    assertEquals(3 + SET_X, (o as MyNativeJsTypeInterfaceImplNeedingBridgeSubclass).y)
-    assertEquals(0, (o as OtherAccidentalImplementer).getXProxy())
-
-    setProperty(o, "x", 4)
-    assertEquals(4 + GET_X + SET_X, simple.getX())
-    assertEquals(4 + GET_X + SET_X, getProperty(o, "x"))
-    assertEquals(4 + SET_X, (o as MyNativeJsTypeInterfaceImplNeedingBridgeSubclass).y)
-    assertEquals(0, (o as OtherAccidentalImplementer).getXProxy())
-
-    val subclass = o as MyNativeJsTypeInterfaceImplNeedingBridgeSubclass
-
-    subclass.setParentX(5)
-    assertEquals(8 + SET_PARENT_X, simple.sum(3))
-    assertEquals(9 + SET_PARENT_X + GET_PARENT_X + SET_X, subclass.getXPlusY())
-    assertEquals(4 + SET_X, (o as MyNativeJsTypeInterfaceImplNeedingBridgeSubclass).y)
-    assertEquals(5 + SET_PARENT_X, (o as OtherAccidentalImplementer).getXProxy())
-  }
 
   @JsType(isNative = true)
   internal interface MyJsTypeInterfaceWithProtectedNames {
@@ -368,39 +213,6 @@ object JsPropertyTest {
     assertFalse(o.isX())
   }
 
-  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
-  internal interface AccidentalOverridePropertyJsTypeInterface {
-    @JsProperty fun getX(): Int
-  }
-
-  open internal class AccidentalOverridePropertyBase {
-    fun getX(): Int = 50
-  }
-
-  internal class AccidentalOverrideProperty :
-    AccidentalOverridePropertyBase(), AccidentalOverridePropertyJsTypeInterface
-
-  private fun testJsPropertyAccidentalOverrideSuperCall() {
-    val o = AccidentalOverrideProperty()
-    assertEquals(50, o.getX())
-    assertEquals(50, getProperty(o, "x"))
-  }
-
-  @JsType
-  internal open class RemovedAccidentalOverridePropertyBase internal constructor() {
-    @JsProperty fun getX(): Int = 55
-  }
-
-  internal class RemovedAccidentalOverrideProperty :
-    RemovedAccidentalOverridePropertyBase(), AccidentalOverridePropertyJsTypeInterface
-
-  private fun testJsPropertyRemovedAccidentalOverrideSuperCall() {
-    val o = RemovedAccidentalOverrideProperty()
-    // If the accidental override here were not removed the access to property x would result in
-    // an infinite loop
-    assertEquals(55, o.getX())
-    assertEquals(55, getProperty(o, "x"))
-  }
 
   @JsType(isNative = true)
   internal interface JsTypeGetProperty {

@@ -29,22 +29,13 @@ public class JsPropertyTest {
   public static void testAll() {
     testConcreteJsType();
     testJavaClassImplementingMyJsTypeInterfaceWithProperty();
-    testJsPropertyAccidentalOverrideSuperCall();
-    testJsPropertyBridges();
-    testJsPropertyBridgesSubclass();
     testJsPropertyGetX();
     testJsPropertyIsX();
-    testJsPropertyRemovedAccidentalOverrideSuperCall();
     testNativeJsType();
-    testNativeJsTypeSubclass();
-    testNativeJsTypeSubclassNoOverride();
     testNativeJsTypeWithConstructor();
-    testNativeJsTypeWithConstructorSubclass();
     testProtectedNames();
   }
 
-  private static final int SET_PARENT_X = 500;
-  private static final int GET_PARENT_X = 1000;
   private static final int GET_X = 100;
   private static final int SET_X = 50;
 
@@ -176,42 +167,7 @@ public class JsPropertyTest {
     obj.setY(91);
     assertEquals(91, obj.getY());
   }
-  
-  static class MyNativeJsTypeSubclass extends MyNativeJsType {
 
-    @JsConstructor
-    MyNativeJsTypeSubclass() {
-      super(42);
-      setY(52);
-    }
-
-    @Override
-    public int sum(int bias) {
-      return super.sum(bias) + GET_X;
-    }
-  }
-
-  private static void testNativeJsTypeSubclass() {
-    MyNativeJsTypeSubclass mc = new MyNativeJsTypeSubclass();
-    assertTrue(mc.ctorExecuted);
-    assertEquals(143, mc.sum(1));
-
-    mc.x = -mc.x;
-    assertEquals(58, mc.sum(0));
-
-    assertEquals(52, mc.getY());
-  }
-
-  static class MyNativeJsTypeSubclassNoOverride extends MyNativeJsType {
-    @JsConstructor
-    public MyNativeJsTypeSubclassNoOverride() {}
-  }
-
-  private static void testNativeJsTypeSubclassNoOverride() {
-    MyNativeJsTypeSubclassNoOverride myNativeJsType = new MyNativeJsTypeSubclassNoOverride();
-    myNativeJsType.x = 12;
-    assertEquals(42, myNativeJsType.sum(30));
-  }
 
   @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest", name = "MyNativeJsType")
   static class MyNativeJsTypeWithConstructor {
@@ -227,142 +183,7 @@ public class JsPropertyTest {
     assertEquals(12, obj.x);
   }
 
-  static class MyNativeJsTypeWithConstructorSubclass extends MyNativeJsTypeWithConstructor {
-    @JsConstructor
-    public MyNativeJsTypeWithConstructorSubclass(int x) {
-      super(x);
-    }
-  }
 
-  private static void testNativeJsTypeWithConstructorSubclass() {
-    MyNativeJsTypeWithConstructorSubclass obj = new MyNativeJsTypeWithConstructorSubclass(12);
-    assertTrue(obj.ctorExecuted);
-    assertEquals(12, obj.x);
-  }
-
-  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
-  interface MyNativeJsTypeInterface {
-    @JsProperty
-    int getX();
-
-    @JsProperty
-    void setX(int x);
-
-    int sum(int bias);
-  }
-
-  static class MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge extends AccidentaImplementor
-      implements MyNativeJsTypeInterface {}
-
-  abstract static class AccidentaImplementor {
-    private int x;
-
-    public int getX() {
-      return x + GET_X;
-    }
-
-    public void setX(int x) {
-      this.x = x + SET_X;
-    }
-
-    public int sum(int bias) {
-      return bias + x;
-    }
-  }
-
-  private static void testJsPropertyBridges() {
-    MyNativeJsTypeInterface object = new MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge();
-
-    object.setX(3);
-    assertEquals(3 + 150, object.getX());
-    assertEquals(3 + SET_X, ((AccidentaImplementor) object).x);
-
-    AccidentaImplementor accidentaImplementor = (AccidentaImplementor) object;
-
-    accidentaImplementor.setX(3);
-    assertEquals(3 + 150, accidentaImplementor.getX());
-    assertEquals(3 + 150, getProperty(object, "x"));
-    assertEquals(3 + SET_X, accidentaImplementor.x);
-
-    setProperty(object, "x", 4);
-    assertEquals(4 + 150, accidentaImplementor.getX());
-    assertEquals(4 + 150, getProperty(object, "x"));
-    assertEquals(4 + SET_X, accidentaImplementor.x);
-
-    assertEquals(3 + 4 + SET_X, accidentaImplementor.sum(3));
-  }
-
-  static class MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed extends OtherAccidentalImplementer
-      implements MyNativeJsTypeInterface {}
-
-  abstract static class OtherAccidentalImplementer {
-    private int x;
-
-    public int getX() {
-      return x + GET_PARENT_X;
-    }
-
-    public void setX(int x) {
-      this.x = x + SET_PARENT_X;
-    }
-
-    public int sum(int bias) {
-      return bias + x;
-    }
-  }
-
-  static class MyNativeJsTypeInterfaceImplNeedingBridgeSubclass
-      extends MyNativeJsTypeInterfaceImplNeedingBridgeSubclassed {
-    private int y;
-
-    @Override
-    public int getX() {
-      return y + GET_X;
-    }
-
-    @Override
-    public void setX(int y) {
-      this.y = y + SET_X;
-    }
-
-    public void setParentX(int value) {
-      super.setX(value);
-    }
-
-    public int getXPlusY() {
-      return super.getX() + y;
-    }
-  }
-
-  private static void testJsPropertyBridgesSubclass() {
-    MyNativeJsTypeInterface object = new MyNativeJsTypeInterfaceImplNeedingBridgeSubclass();
-
-    object.setX(3);
-    assertEquals(3 + 150, object.getX());
-
-    OtherAccidentalImplementer simple = (OtherAccidentalImplementer) object;
-
-    simple.setX(3);
-    assertEquals(3 + GET_X + SET_X, simple.getX());
-    assertEquals(3 + GET_X + SET_X, getProperty(object, "x"));
-    assertEquals(3 + SET_X, ((MyNativeJsTypeInterfaceImplNeedingBridgeSubclass) object).y);
-    assertEquals(0, ((OtherAccidentalImplementer) object).x);
-
-    setProperty(object, "x", 4);
-    assertEquals(4 + GET_X + SET_X, simple.getX());
-    assertEquals(4 + GET_X + SET_X, getProperty(object, "x"));
-    assertEquals(4 + SET_X, ((MyNativeJsTypeInterfaceImplNeedingBridgeSubclass) object).y);
-    assertEquals(0, ((OtherAccidentalImplementer) object).x);
-
-    MyNativeJsTypeInterfaceImplNeedingBridgeSubclass subclass =
-        (MyNativeJsTypeInterfaceImplNeedingBridgeSubclass) object;
-
-    subclass.setParentX(5);
-    assertEquals(8 + SET_PARENT_X, simple.sum(3));
-    assertEquals(9 + SET_PARENT_X + GET_PARENT_X + SET_X, subclass.getXPlusY());
-    assertEquals(4 + SET_X, ((MyNativeJsTypeInterfaceImplNeedingBridgeSubclass) object).y);
-    assertEquals(5 + SET_PARENT_X, ((OtherAccidentalImplementer) object).x);
-  }
   
   @JsType(isNative = true)
   interface MyJsTypeInterfaceWithProtectedNames {
@@ -407,46 +228,6 @@ public class JsPropertyTest {
     assertFalse(object.isX());
   }
 
-  @JsType(isNative = true, namespace = "jsinteroptests.JsPropertyTest")
-  interface AccidentalOverridePropertyJsTypeInterface {
-    @JsProperty
-    int getX();
-  }
-
-  static class AccidentalOverridePropertyBase {
-    public int getX() {
-      return 50;
-    }
-  }
-
-  static class AccidentalOverrideProperty extends AccidentalOverridePropertyBase
-      implements AccidentalOverridePropertyJsTypeInterface {}
-
-  private static void testJsPropertyAccidentalOverrideSuperCall() {
-    AccidentalOverrideProperty object = new AccidentalOverrideProperty();
-    assertEquals(50, object.getX());
-    assertEquals(50, getProperty(object, "x"));
-  }
-
-  @JsType
-  static class RemovedAccidentalOverridePropertyBase {
-    private RemovedAccidentalOverridePropertyBase() {}
-    @JsProperty
-    public int getX() {
-      return 55;
-    }
-  }
-
-  static class RemovedAccidentalOverrideProperty extends RemovedAccidentalOverridePropertyBase
-      implements AccidentalOverridePropertyJsTypeInterface {}
-
-  private static void testJsPropertyRemovedAccidentalOverrideSuperCall() {
-    RemovedAccidentalOverrideProperty object = new RemovedAccidentalOverrideProperty();
-    // If the accidental override here were not removed the access to property x would result in
-    // an infinite loop
-    assertEquals(55, object.getX());
-    assertEquals(55, getProperty(object, "x"));
-  }
 
   @JsType(isNative = true)
   interface JsTypeGetProperty {

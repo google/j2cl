@@ -12,27 +12,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteroptests.JsPropertyTest.MyNativeJsTypeInterface');
+goog.module('subnativejstype.JsPropertyTest.MyNativeJsType');
 
-/** @interface */
-class MyNativeJsTypeInterface {
+class MyNativeJsType {
   /**
-   * @param {number} value
-   * @returns {void}
+   * @param {number=} x
+   * @param {number=} y
    */
-  set x(value) {}
+  constructor(x, y) {
+    /** @public {number} */
+    this.x = x || 0;
+    /** @public {number} */
+    this.y = y || 0;
+    /** @public {number} */
+    this.z = 0;
+    /** @public {boolean} */
+    this.ctorExecuted = true;
+  }
 
   /**
-   * @returns {number}
+   * @return {number}
+   * @public
+   * @nocollapse
    */
-  get x() {}
+  static answerToLife() {
+    return 42;
+  }
 
   /**
    * @param {number} bias
    * @return {number}
    * @public
    */
-  sum(bias) {}
+  sum(bias) {
+    return this.x + bias;
+  }
 }
 
-exports = MyNativeJsTypeInterface;
+/**
+ * @public {number}
+ */
+MyNativeJsType.staticX = 33;
+
+exports = MyNativeJsType;
