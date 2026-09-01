@@ -1141,6 +1141,21 @@ public final class AstUtils {
         && isNonNativeJsEnum(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
   }
 
+  /**
+   * Returns true if a cast from {@code fromTypeDescriptor} to {@code toTypeDescriptor} that does
+   * not need a runtime type check is safe to be marked as unchecked.
+   *
+   * <p>A cast cannot be unchecked if it needs to perform a type conversion (e.g. primitive
+   * conversions, boxing/unboxing, or JsEnum boxing/unboxing).
+   */
+  public static boolean canBeUncheckedCast(
+      TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+    return !fromTypeDescriptor.isPrimitive()
+        && !toTypeDescriptor.isPrimitive()
+        && !isNonNativeJsEnum(fromTypeDescriptor)
+        && !isNonNativeJsEnum(toTypeDescriptor);
+  }
+
   /** Gets the initial value for a field or variable for the be assigned to a Wasm variable. */
   public static Expression getInitialValue(TypeDescriptor typeDescriptor) {
     return typeDescriptor.getDefaultValue();

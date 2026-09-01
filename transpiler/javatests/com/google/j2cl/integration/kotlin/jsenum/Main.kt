@@ -57,8 +57,7 @@ fun main(vararg unused: String) {
   testNativeEnumClassInitialization()
   testDoNotAutoboxJsEnum()
   testUnckeckedCastJsEnum()
-  // TODO(b/555301011): testJsEnumSmartCast() fails because smart cast misses unboxing conversion.
-  // testJsEnumSmartCast()
+  testJsEnumSmartCast()
   testAutoBoxing_relationalOperations()
   testAutoBoxing_typeInference()
   testAutoBoxing_specialMethods()

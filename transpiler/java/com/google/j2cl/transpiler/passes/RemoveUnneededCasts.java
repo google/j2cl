@@ -15,8 +15,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -96,12 +99,12 @@ public class RemoveUnneededCasts extends NormalizationPass {
       return null;
     }
 
-    Expression instanceOfTarget = instanceOfExpression.getExpression();
+    var instanceOfTarget = instanceOfExpression.getExpression();
     if (!hasNoSideEffects(instanceOfTarget)) {
       return null;
     }
 
-    CastExpression castExpression = getCast(inNode);
+    var castExpression = getCast(inNode);
     if (castExpression == null) {
       return null;
     }
@@ -110,11 +113,18 @@ public class RemoveUnneededCasts extends NormalizationPass {
       return null;
     }
 
+    var innerExpression = castExpression.getExpression();
+    var castTypeDescriptor = castExpression.getTypeDescriptor();
+    // Only casts that would not trigger conversions (e.g. boxing/unboxing, etc)
+    // are eligible for removal.
+    checkState(
+        AstUtils.canBeUncheckedCast(innerExpression.getTypeDescriptor(), castTypeDescriptor));
+
     // Replace the Java cast by an unchecked cast to preserve the type of the expression.
     var uncheckedCast =
         CastExpression.builder()
-            .setExpression(castExpression.getExpression())
-            .setCastTypeDescriptor(castExpression.getTypeDescriptor())
+            .setExpression(innerExpression)
+            .setCastTypeDescriptor(castTypeDescriptor)
             .setUnchecked(true)
             .build();
 
