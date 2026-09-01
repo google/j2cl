@@ -276,6 +276,8 @@
  (local $n (ref null $java.lang.Number))
  (local $j i32)
  (local $k i32)
+ (local $serializable (ref null $java.lang.Object))
+ (local $_ (ref null $java.lang.Object))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:95:4
   (if (if (result i32) (i32.eqz (block (result i32)
@@ -327,18 +329,37 @@
     )
    )
   )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:117:4
+  (local.set $serializable (ref.null $java.lang.Object))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:118:4
+  (if (if (result i32) (if (result i32) (ref.is_null (local.get $serializable))
+    (then (i32.const 0))
+    (else 
+     (ref.test (ref $java.lang.Appendable.vtable) (call $get.itable.$java.lang.Appendable (local.get $serializable) ))
+    )
+   ) (then (block (result i32)
+    (local.set $_ (ref.cast (ref null $java.lang.Object) (local.get $serializable)))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:119:6
+     (return )
+    )
+   )
+  )
  )
 )
 
 ;;; void InstanceofExpressions.testReproCloneInstanceof()
 (func $m_testReproCloneInstanceof__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions
  (param $this (ref null $instanceofexpression.InstanceofExpressions))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:116:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:123:15
  (local $o (ref null $java.lang.Object))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:117:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:124:4
   (local.set $o (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:118:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:125:4
   (drop (call $$create__int@java.lang.Integer (if (result i32) (ref.test (ref $java.lang.String) (local.get $o)) (then (i32.const 1)) (else (i32.const 2)))))
  )
 )

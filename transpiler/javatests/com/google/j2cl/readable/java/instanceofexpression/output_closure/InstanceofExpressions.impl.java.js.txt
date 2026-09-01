@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $synthetic_goog_math_Long = goog.forwardDeclare('goog.math.Long');
 let $1 = goog.forwardDeclare('instanceofexpression.InstanceofExpressions.$1$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
+let Appendable = goog.forwardDeclare('java.lang.Appendable$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -112,7 +113,7 @@ class InstanceofExpressions extends j_l_Object {
  }
  /** @nodts */
  m_testPatternMatch__void_$p_instanceofexpression_InstanceofExpressions() {
-  let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number|!$synthetic_goog_math_Long) */ n;
+  let /** * */ exp, /** ?string */ s, /** * */ exp_1, /** Integer */ i, /** * */ exp_2, /** (Number|number|!$synthetic_goog_math_Long) */ n, /** Appendable */ _;
   if (!(exp = j_l_Object.$create__(), j_l_String.$isInstance(exp) && (s = (/**@type {string}*/ ($Casts.$to(exp, j_l_String))), true)) || j_l_String.m_length__java_lang_String__int(s) == 2) {
    return;
   }
@@ -123,6 +124,10 @@ class InstanceofExpressions extends j_l_Object {
    let j = j_l_String.m_length__java_lang_String__int(s);
   } else {
    let k = $Numbers.m_byteValue__java_lang_Number__byte(n);
+  }
+  let /** (Serializable|Array) */ serializable = null;
+  if (Appendable.$isInstance(serializable) && (_ = (/**@type {!Appendable}*/ ($Casts.$to(serializable, /**@type {Function}*/ (Appendable)))), true)) {
+   return;
   }
  }
  /** @nodts */
@@ -145,6 +150,7 @@ class InstanceofExpressions extends j_l_Object {
  static $loadModules() {
   $1 = goog.module.get('instanceofexpression.InstanceofExpressions.$1$impl');
   Serializable = goog.module.get('java.io.Serializable$impl');
+  Appendable = goog.module.get('java.lang.Appendable$impl');
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Byte = goog.module.get('java.lang.Byte$impl');
   Character = goog.module.get('java.lang.Character$impl');

@@ -43,6 +43,7 @@ import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOfNulls
 import kotlin.run
+import kotlin.text.Appendable
 
 open class InstanceofExpressions {
  open fun testInstanceofClass() {
@@ -142,6 +143,13 @@ open class InstanceofExpressions {
    val j: Int = s!!.length
   } else {
    val k: Int = n!!.toByte().toInt()
+  }
+  val serializable: Serializable? = null
+  if (serializable is Appendable && run {
+   val `_`: Appendable? = serializable as Appendable?
+   true
+  }) {
+   return
   }
  }
  

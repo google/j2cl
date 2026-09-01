@@ -111,6 +111,13 @@ public class InstanceofExpressions {
     } else {
       int k = n.byteValue();
     }
+
+    // Add a case for non assignable types where the instance of type is an interface, in this case
+    // Serializable and Appendable are unrelated interfaces. (see b/550539875)
+    Serializable serializable = null;
+    if (serializable instanceof Appendable _) {
+      return;
+    }
   }
 
   private void testReproCloneInstanceof() {
