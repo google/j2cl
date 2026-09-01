@@ -44,4 +44,11 @@ class Casts {
     }
     return instance;
   }
+
+  // This method is used to hide some JsDoc casts from the Closure compiler. When using JsDoc casts
+  // between two unrelated types, jscompiler backoffs some optimizations, and that leads to property
+  // invalidations. (see b/550539875)
+  public static Object $unchecked(Object instance) {
+    return instance;
+  }
 }

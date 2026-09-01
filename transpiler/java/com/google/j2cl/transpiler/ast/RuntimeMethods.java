@@ -160,6 +160,11 @@ public final class RuntimeMethods {
         .build();
   }
 
+  public static MethodCall createCastsMethodCall(String methodName, Expression... arguments) {
+    return createRuntimeMethodCall(
+        BootstrapType.CASTS.getDescriptor(), methodName, asList(arguments));
+  }
+
   /** Create a call to String.valueOf method. */
   public static MethodCall createStringValueOfMethodCall(Expression expression) {
     TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
@@ -919,6 +924,25 @@ public final class RuntimeMethods {
                                           TypeDescriptors.get().javaLangObject,
                                           PrimitiveTypes.DOUBLE)
                                       .setRequiredParameters(2)
+                                      .build())
+                              .buildOrThrow())
+                      .put(
+                          BootstrapType.CASTS.getDescriptor(),
+                          // Util methods
+                          ImmutableMap.<String, MethodInfo>builder()
+                              .put(
+                                  "$to",
+                                  MethodInfo.builder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObject)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaLangObject,
+                                          TypeDescriptors.get().javaLangObject)
+                                      .build())
+                              .put(
+                                  "$unchecked",
+                                  MethodInfo.builder()
+                                      .setReturnType(TypeDescriptors.get().javaLangObject)
+                                      .setParameters(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .buildOrThrow())
                       .put(

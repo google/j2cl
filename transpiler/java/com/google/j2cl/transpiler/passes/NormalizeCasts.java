@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
+import static com.google.j2cl.transpiler.ast.RuntimeMethods.createCastsMethodCall;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -28,9 +29,6 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
-import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
@@ -40,7 +38,6 @@ import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 
 /** Replaces cast expression with corresponding cast method call. */
@@ -70,7 +67,7 @@ public class NormalizeCasts extends NormalizationPass {
             TypeDescriptor typeDescriptor = castExpression.getTypeDescriptor();
 
             Expression expression = castExpression.getExpression();
-            if (castExpression.isUnchecked() || canRemoveCast(typeDescriptor, expression)) {
+            if (canRemoveCast(typeDescriptor, expression)) {
               // No need to perform a cast check but to communicate the right type to jscompiler a
               // JsDoc cast is emitted instead.
               return createClosureTypeCast(castExpression);
@@ -165,10 +162,13 @@ public class NormalizeCasts extends NormalizationPass {
             // Casts have two purposes:
             //   1. perform the runtime check required by Java semantics.
             //   2. communicate the resulting type to closure.
-
-            // /** @type {X} */ (Casts.to(expression, JavaType))
             if (!castExpression.isUnchecked()) {
+              // /** @type {X} */ (Casts.to(expression, JavaType))
               expression = implementRuntimeCheck(castTypeDescriptor, expression);
+
+            } else if (needsUncheckedCall(castExpression)) {
+              // /** @type {X} */ (Casts.unchecked(expression, JavaType))
+              expression = createUncheckedCall(expression);
             }
             return createClosureTypeCast(
                 castExpression.toBuilder().setExpression(expression).build());
@@ -261,20 +261,22 @@ public class NormalizeCasts extends NormalizationPass {
     // Avoid pointlessly nesting type annotations inside of runtime cast calls.
     expression = AstUtils.removeUncheckedTypeConversions(expression);
 
-    MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.builder()
-            .setOriginalJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
-            .setName("$to")
-            .setParameterTypeDescriptors(
-                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(toTypeDescriptor)
-            .build();
-
     // Casts.$to(expr, TypeName);
-    return MethodCall.builderFrom(castToMethodDescriptor)
-        .setArguments(expression, toTypeDescriptor.getMetadataConstructorReference())
-        .build();
+    return createCastsMethodCall(
+        "$to", expression, toTypeDescriptor.getMetadataConstructorReference());
+  }
+
+  private static boolean needsUncheckedCall(CastExpression castExpression) {
+    TypeDescriptor fromType = castExpression.getExpression().getTypeDescriptor();
+    TypeDescriptor toType = castExpression.getCastTypeDescriptor();
+    return fromType.isInterface() && !toType.isAssignableTo(fromType);
+  }
+
+  private static Expression createUncheckedCall(Expression expression) {
+    // Avoid pointlessly nesting type annotations inside of runtime cast calls.
+    expression = AstUtils.removeUncheckedTypeConversions(expression);
+
+    // Casts.$unchecked(expr);
+    return createCastsMethodCall("$unchecked", expression);
   }
 }
