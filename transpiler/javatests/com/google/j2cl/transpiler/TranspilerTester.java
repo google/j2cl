@@ -227,7 +227,7 @@ public class TranspilerTester {
   private List<String> args = new ArrayList<>();
   private String temporaryDirectoryPrefix = "transpile_tester";
   private Path outputPath;
-  private boolean assertDelayedCancelChecks = true;
+  private boolean assertDelayedCancelChecks = isAssertDelayedCancelChecksDefault();
 
   @CanIgnoreReturnValue
   public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String code) {
@@ -733,6 +733,17 @@ public class TranspilerTester {
     assertThat(slightlyDelayedCalls).isEmpty();
 
     return problems;
+  }
+
+  private static boolean isAssertDelayedCancelChecksDefault() {
+    String property = System.getProperty("j2cl.assertDelayedCancelChecks");
+    if (property != null) {
+      return Boolean.parseBoolean(property);
+    }
+    // Shared execution on Forge causes timing jitter and sporadic delay spikes that lead to test
+    // flakiness. Default to disabled on Forge unless explicitly enabled via system property, but
+    // keep enabled when running locally or in dedicated Guitar test clusters.
+    return !"1".equals(System.getenv("UNITTEST_ON_FORGE"));
   }
 
   private TranspileResult transpile() {
