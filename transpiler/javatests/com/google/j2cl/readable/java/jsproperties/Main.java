@@ -71,9 +71,17 @@ class Bar {
 
 /** Tests for read only JsProperty. */
 class ReadOnlyJsProperty {
-  public final int a = 1;
+  @JsProperty public final int a = 1;
 
-  public static final int b = 2;
+  @JsProperty public static final int b = 2;
+
+  @JsProperty public final int instanceFinalField;
+
+  @JsProperty public static final int staticFinalField = getD();
+
+  public ReadOnlyJsProperty() {
+    this.instanceFinalField = 10;
+  }
 
   @JsProperty
   public int getC() {
@@ -140,6 +148,8 @@ public class Main {
     int r;
     r = readOnlyJsProperty.a;
     r = ReadOnlyJsProperty.b;
+    r = readOnlyJsProperty.instanceFinalField;
+    r = ReadOnlyJsProperty.staticFinalField;
     readOnlyJsProperty.getC();
     ReadOnlyJsProperty.getD();
   }

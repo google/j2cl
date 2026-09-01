@@ -14,6 +14,9 @@
 (global $$class@jsproperties.Bar (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $staticFinalField@jsproperties.ReadOnlyJsProperty (mut i32)
+ (i32.const 0)
+)
 (global $$class-initialized@jsproperties.ReadOnlyJsProperty (mut i32)
  (i32.const 0)
 )
@@ -128,9 +131,9 @@
 (func $m_getM__int@jsproperties.InterfaceWithDefaultJsProperties
  (param $this (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:91:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:100:4
   (return (i32.const 3))
  )
 )
@@ -140,7 +143,7 @@
 (func $m_setM__int__void@jsproperties.InterfaceWithDefaultJsProperties
  (param $this (ref null $java.lang.Object))
  (param $value i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:96:15
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:104:15
  (block
  )
 )
@@ -148,16 +151,16 @@
 
 ;;; void InterfaceWithDefaultJsProperties.$clinit()
 (func $$clinit__void_<once>_@jsproperties.InterfaceWithDefaultJsProperties
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:89:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:97:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:89:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:97:10
   (if (global.get $$class-initialized@jsproperties.InterfaceWithDefaultJsProperties)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:89:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:97:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:89:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:97:10
   (global.set $$class-initialized@jsproperties.InterfaceWithDefaultJsProperties (i32.const 1))
  )
 )
@@ -179,11 +182,11 @@
 ;;; int InterfaceWithStaticJsProperties.getB()
 (func $m_getB__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
   (return (call $m_getB_$private__int@jsproperties.InterfaceWithStaticJsProperties ))
  )
 )
@@ -191,9 +194,9 @@
 ;;; int InterfaceWithStaticJsProperties.getB_$private()
 (func $m_getB_$private__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:106:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:114:4
   (return (i32.add (i32.const 1) (i32.const 2)))
  )
 )
@@ -201,11 +204,11 @@
 ;;; void InterfaceWithStaticJsProperties.setB(int x)
 (func $m_setB__int__void@jsproperties.InterfaceWithStaticJsProperties
  (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
   (call $m_setB_$private__int__void@jsproperties.InterfaceWithStaticJsProperties (local.get $x))
  )
 )
@@ -213,7 +216,7 @@
 ;;; void InterfaceWithStaticJsProperties.setB_$private(int x)
 (func $m_setB_$private__int__void@jsproperties.InterfaceWithStaticJsProperties
  (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
  (block
  )
 )
@@ -221,11 +224,11 @@
 ;;; int InterfaceWithStaticJsProperties.getB()
 (func $js_export_get_getB__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:105:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
   (return (call $m_getB_$private__int@jsproperties.InterfaceWithStaticJsProperties ))
  )
 )
@@ -233,11 +236,11 @@
 ;;; void InterfaceWithStaticJsProperties.setB(int x)
 (func $js_export_set_setB__int__void@jsproperties.InterfaceWithStaticJsProperties
  (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:14
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
   (call $m_setB_$private__int__void@jsproperties.InterfaceWithStaticJsProperties (local.get $x))
  )
 )
@@ -245,27 +248,27 @@
 ;;; int InterfaceWithStaticJsProperties.A()
 (func $js_export_get_A__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:102:18
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:102:18
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:102:18
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
   (return (i32.const 1))
  )
 )
 
 ;;; void InterfaceWithStaticJsProperties.$clinit()
 (func $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:101:10
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:109:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:101:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:109:10
   (if (global.get $$class-initialized@jsproperties.InterfaceWithStaticJsProperties)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:101:10
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:109:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:101:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:109:10
   (global.set $$class-initialized@jsproperties.InterfaceWithStaticJsProperties (i32.const 1))
  )
 )
@@ -721,16 +724,16 @@
 ;;; ReadOnlyJsProperty ReadOnlyJsProperty.$create()
 (func $$create__@jsproperties.ReadOnlyJsProperty
  (result (ref null $jsproperties.ReadOnlyJsProperty))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:9
  (local $$instance (ref null $jsproperties.ReadOnlyJsProperty))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:9
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
-  (local.set $$instance (struct.new_desc $jsproperties.ReadOnlyJsProperty (global.get $itable.empty) (i32.const 0) (global.get $jsproperties.ReadOnlyJsProperty.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:9
+  (local.set $$instance (struct.new_desc $jsproperties.ReadOnlyJsProperty (global.get $itable.empty) (i32.const 0) (i32.const 0) (global.get $jsproperties.ReadOnlyJsProperty.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:9
   (call $$ctor__void_$p_jsproperties_ReadOnlyJsProperty@jsproperties.ReadOnlyJsProperty (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:9
   (return (local.get $$instance))
  )
 )
@@ -738,10 +741,12 @@
 ;;; void ReadOnlyJsProperty.$ctor()
 (func $$ctor__void_$p_jsproperties_ReadOnlyJsProperty@jsproperties.ReadOnlyJsProperty
  (param $this (ref null $jsproperties.ReadOnlyJsProperty))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:9
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:82:30
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:83:4
+  (struct.set $jsproperties.ReadOnlyJsProperty $instanceFinalField@jsproperties.ReadOnlyJsProperty (local.get $this) (i32.const 10))
  )
 )
 
@@ -750,11 +755,11 @@
  (type $function.m_getC__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:79:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:87:13
  (local $this (ref null $jsproperties.ReadOnlyJsProperty))
  (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:88:4
   (return (i32.const 3))
  )
 )
@@ -763,11 +768,11 @@
 ;;; int ReadOnlyJsProperty.getD()
 (func $m_getD__int@jsproperties.ReadOnlyJsProperty
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
   (return (call $m_getD_$private__int@jsproperties.ReadOnlyJsProperty ))
  )
 )
@@ -775,9 +780,9 @@
 ;;; int ReadOnlyJsProperty.getD_$private()
 (func $m_getD_$private__int@jsproperties.ReadOnlyJsProperty
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:85:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:93:4
   (return (i32.const 4))
  )
 )
@@ -787,11 +792,11 @@
  (type $function.js_export_get_getC__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:79:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:87:13
  (local $this (ref null $jsproperties.ReadOnlyJsProperty))
  (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:79:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:87:13
   (return (call_ref $function.m_getC__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ReadOnlyJsProperty.vtable $m_getC__int (ref.get_desc $jsproperties.ReadOnlyJsProperty(local.get $this)))))
  )
 )
@@ -800,12 +805,93 @@
 ;;; int ReadOnlyJsProperty.getD()
 (func $js_export_get_getD__int@jsproperties.ReadOnlyJsProperty
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:84:20
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
   (return (call $m_getD_$private__int@jsproperties.ReadOnlyJsProperty ))
+ )
+)
+
+;;; int ReadOnlyJsProperty.a()
+(func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_get_a__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:74:31
+ (local $this (ref null $jsproperties.ReadOnlyJsProperty))
+ (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:74:31
+  (return (i32.const 1))
+ )
+)
+(elem declare func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty)
+
+;;; int ReadOnlyJsProperty.b()
+(func $js_export_get_b__int@jsproperties.ReadOnlyJsProperty
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:76:38
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:76:38
+  (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:76:38
+  (return (i32.const 2))
+ )
+)
+
+;;; int ReadOnlyJsProperty.instanceFinalField()
+(func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_get_instanceFinalField__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:31
+ (local $this (ref null $jsproperties.ReadOnlyJsProperty))
+ (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:31
+  (return (struct.get $jsproperties.ReadOnlyJsProperty $instanceFinalField@jsproperties.ReadOnlyJsProperty (local.get $this)))
+ )
+)
+(elem declare func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty)
+
+;;; void ReadOnlyJsProperty.instanceFinalField(int arg0)
+(func $js_export_set_instanceFinalField__int__void@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_set_instanceFinalField__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:31
+ (local $this (ref null $jsproperties.ReadOnlyJsProperty))
+ (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:31
+  (struct.set $jsproperties.ReadOnlyJsProperty $instanceFinalField@jsproperties.ReadOnlyJsProperty (local.get $this) (local.get $arg0))
+ )
+)
+(elem declare func $js_export_set_instanceFinalField__int__void@jsproperties.ReadOnlyJsProperty)
+
+;;; int ReadOnlyJsProperty.staticFinalField()
+(func $js_export_get_staticFinalField__int@jsproperties.ReadOnlyJsProperty
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+  (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+  (return (global.get $staticFinalField@jsproperties.ReadOnlyJsProperty))
+ )
+)
+
+;;; void ReadOnlyJsProperty.staticFinalField(int arg0)
+(func $js_export_set_staticFinalField__int__void@jsproperties.ReadOnlyJsProperty
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+  (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+  (global.set $staticFinalField@jsproperties.ReadOnlyJsProperty (local.get $arg0))
  )
 )
 
@@ -824,6 +910,8 @@
   (global.set $$class-initialized@jsproperties.ReadOnlyJsProperty (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
   (call $$clinit__void_<once>_@java.lang.Object )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+  (global.set $staticFinalField@jsproperties.ReadOnlyJsProperty (call $m_getD_$private__int@jsproperties.ReadOnlyJsProperty ))
  )
 )
 
@@ -857,16 +945,16 @@
 ;;; ImplementsInterfaceWithDefaultJsProperties ImplementsInterfaceWithDefaultJsProperties.$create()
 (func $$create__@jsproperties.ImplementsInterfaceWithDefaultJsProperties
  (result (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (local $$instance (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call $$clinit__void_<once>_@jsproperties.ImplementsInterfaceWithDefaultJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (local.set $$instance (struct.new_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties (global.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.itable) (i32.const 0) (global.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call $$ctor__void_$p_jsproperties_ImplementsInterfaceWithDefaultJsProperties@jsproperties.ImplementsInterfaceWithDefaultJsProperties (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (return (local.get $$instance))
  )
 )
@@ -874,9 +962,9 @@
 ;;; void ImplementsInterfaceWithDefaultJsProperties.$ctor()
 (func $$ctor__void_$p_jsproperties_ImplementsInterfaceWithDefaultJsProperties@jsproperties.ImplementsInterfaceWithDefaultJsProperties
  (param $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -886,11 +974,11 @@
  (type $function.m_getM__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
  (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (return (call $m_getM__int@jsproperties.InterfaceWithDefaultJsProperties (ref.as_non_null (local.get $this))))
  )
 )
@@ -901,11 +989,11 @@
  (type $function.m_setM__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
  (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call $m_setM__int__void@jsproperties.InterfaceWithDefaultJsProperties (ref.as_non_null (local.get $this))(local.get $value))
  )
 )
@@ -916,11 +1004,11 @@
  (type $function.js_export_get_getM__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
  (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (return (call_ref $function.m_getM__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable $m_getM__int (ref.get_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties(local.get $this)))))
  )
 )
@@ -931,11 +1019,11 @@
  (type $function.js_export_set_setM__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
  (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call_ref $function.m_setM__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable $m_setM__int__void (ref.get_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties(local.get $this))))
  )
 )
@@ -943,20 +1031,20 @@
 
 ;;; void ImplementsInterfaceWithDefaultJsProperties.$clinit()
 (func $$clinit__void_<once>_@jsproperties.ImplementsInterfaceWithDefaultJsProperties
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (if (global.get $$class-initialized@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (global.set $$class-initialized@jsproperties.ImplementsInterfaceWithDefaultJsProperties (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:99:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithDefaultJsProperties )
  )
 )
@@ -991,16 +1079,16 @@
 ;;; Main Main.$create()
 (func $$create__@jsproperties.Main
  (result (ref null $jsproperties.Main))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
  (local $$instance (ref null $jsproperties.Main))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (call $$clinit__void_<once>_@jsproperties.Main )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (local.set $$instance (struct.new_desc $jsproperties.Main (global.get $itable.empty) (i32.const 0) (global.get $jsproperties.Main.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (call $$ctor__void_$p_jsproperties_Main@jsproperties.Main (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (return (local.get $$instance))
  )
 )
@@ -1008,9 +1096,9 @@
 ;;; void Main.$ctor()
 (func $$ctor__void_$p_jsproperties_Main@jsproperties.Main
  (param $this (ref null $jsproperties.Main))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1019,18 +1107,18 @@
 (func $m_testNativeJsProperty__void@jsproperties.Main
  (type $function.m_testNativeJsProperty__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:114:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:122:14
  (local $$qualifier (ref null $jsproperties.FooWithNativeProperty))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (ref $jsproperties.Main) (local.get $this.untyped)))
  (block
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:115:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:123:4
    (local.set $$qualifier (call $$create__@jsproperties.FooWithNativeProperty ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:115:4
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:123:4
    (drop (call_ref $function.m_getA__java_lang_Object (ref.as_non_null (local.get $$qualifier))(struct.get $jsproperties.FooWithNativeProperty.vtable $m_getA__java_lang_Object (ref.get_desc $jsproperties.FooWithNativeProperty(local.get $$qualifier)))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:116:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:124:4
   (drop (call $m_getB__double@jsproperties.FooWithNativeProperty ))
  )
 )
@@ -1040,24 +1128,24 @@
 (func $m_testStaticJsProperty__void@jsproperties.Main
  (type $function.m_testStaticJsProperty__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:119:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:127:14
  (local $r i32)
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (ref $jsproperties.Main) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:120:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:128:4
   (drop (call $m_getA__int@jsproperties.Foo ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:129:4
   (call $m_setA__int__void@jsproperties.Foo (i32.const 10))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:122:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:130:4
   (drop (call $m_getB__int@jsproperties.Foo ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:123:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:131:4
   (call $m_setB__int__void@jsproperties.Foo (i32.const 10))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:125:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:133:4
   (local.set $r (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:126:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:134:4
   (drop (call $m_getB__int@jsproperties.InterfaceWithStaticJsProperties ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:127:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:135:4
   (call $m_setB__int__void@jsproperties.InterfaceWithStaticJsProperties (i32.const 10))
  )
 )
@@ -1067,20 +1155,20 @@
 (func $m_testInstanceJsProperty__void@jsproperties.Main
  (type $function.m_testInstanceJsProperty__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:130:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:138:14
  (local $bar (ref null $jsproperties.Bar))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (ref $jsproperties.Main) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:131:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:139:4
   (local.set $bar (call $$create__@jsproperties.Bar ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:132:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:140:4
   (drop (call_ref $function.m_getA__int (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getA__int (ref.get_desc $jsproperties.Bar(local.get $bar)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:133:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:141:4
   (call_ref $function.m_setA__int__void (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (ref.get_desc $jsproperties.Bar(local.get $bar))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:134:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:142:4
   (drop (call_ref $function.m_getB__int (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getB__int (ref.get_desc $jsproperties.Bar(local.get $bar)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:135:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:143:4
   (call_ref $function.m_setB__int__void (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (ref.get_desc $jsproperties.Bar(local.get $bar))))
  )
 )
@@ -1090,23 +1178,30 @@
 (func $m_testReadOnlyJsProperty__void@jsproperties.Main
  (type $function.m_testReadOnlyJsProperty__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:138:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:146:14
  (local $readOnlyJsProperty (ref null $jsproperties.ReadOnlyJsProperty))
  (local $r i32)
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (ref $jsproperties.Main) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:139:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:147:4
   (local.set $readOnlyJsProperty (call $$create__@jsproperties.ReadOnlyJsProperty ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:140:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:148:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:141:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:149:4
   (local.set $r (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:142:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:150:4
   (local.set $r (i32.const 2))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:143:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:151:4
+  (local.set $r (struct.get $jsproperties.ReadOnlyJsProperty $instanceFinalField@jsproperties.ReadOnlyJsProperty (local.get $readOnlyJsProperty)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:152:4
+  (local.set $r (block (result i32)
+   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
+   (global.get $staticFinalField@jsproperties.ReadOnlyJsProperty)
+  ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:153:4
   (drop (call_ref $function.m_getC__int (ref.as_non_null (local.get $readOnlyJsProperty))(struct.get $jsproperties.ReadOnlyJsProperty.vtable $m_getC__int (ref.get_desc $jsproperties.ReadOnlyJsProperty(local.get $readOnlyJsProperty)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:144:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:154:4
   (drop (call $m_getD__int@jsproperties.ReadOnlyJsProperty ))
  )
 )
@@ -1114,18 +1209,18 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsproperties.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (if (global.get $$class-initialized@jsproperties.Main)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (global.set $$class-initialized@jsproperties.Main (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:113:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

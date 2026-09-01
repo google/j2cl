@@ -101,9 +101,27 @@ class Buzz(@JsProperty val f: Int) {
 class ReadOnlyJsProperty {
   @JsProperty val a: Int = 1
 
+  @JsProperty val instanceFinalField: Int
+
+  init {
+    this.instanceFinalField = 10
+  }
+
   @JsProperty
-  fun getB(): Int {
-    return 2
+  fun getC(): Int {
+    return 3
+  }
+
+  companion object {
+    @JsProperty const val b: Int = 2
+
+    @JsProperty @JvmStatic val staticFinalField: Int = getD()
+
+    @JsProperty
+    @JvmStatic
+    fun getD(): Int {
+      return 4
+    }
   }
 }
 
@@ -235,6 +253,16 @@ class Main {
     val y = OtherHasFieldAndGetterSetterFuns()
     y.setValue("a")
     y.getValue()
+  }
+
+  fun testReadOnlyJsProperty() {
+    val readOnlyJsProperty = ReadOnlyJsProperty()
+    var r = readOnlyJsProperty.a
+    r = ReadOnlyJsProperty.b
+    r = readOnlyJsProperty.instanceFinalField
+    r = ReadOnlyJsProperty.staticFinalField
+    readOnlyJsProperty.getC()
+    ReadOnlyJsProperty.getD()
   }
 }
 

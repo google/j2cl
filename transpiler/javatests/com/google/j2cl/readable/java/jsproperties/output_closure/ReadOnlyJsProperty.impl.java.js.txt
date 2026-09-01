@@ -7,8 +7,10 @@ class ReadOnlyJsProperty extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@const {number} @nodts*/
-  this.f_a__jsproperties_ReadOnlyJsProperty = 1;
+  /**@const {number}*/
+  this.a = 1;
+  /**@type {number}*/
+  this.instanceFinalField = 0;
  }
  /** @nodts @return {!ReadOnlyJsProperty} */
  static $create__() {
@@ -20,6 +22,7 @@ class ReadOnlyJsProperty extends j_l_Object {
  /** @nodts */
  $ctor__jsproperties_ReadOnlyJsProperty__void() {
   this.$ctor__java_lang_Object__void();
+  this.instanceFinalField = 10;
  }
  /** @return {number} */
  get c() {
@@ -30,11 +33,16 @@ class ReadOnlyJsProperty extends j_l_Object {
   ReadOnlyJsProperty.$clinit();
   return 4;
  }
+ /** @return {number} */
+ static get staticFinalField() {
+  return (ReadOnlyJsProperty.$clinit(), ReadOnlyJsProperty.$static_staticFinalField__jsproperties_ReadOnlyJsProperty);
+ }
  /** @nodts */
  static $clinit() {
   ReadOnlyJsProperty.$clinit = () =>{};
   ReadOnlyJsProperty.$loadModules();
   j_l_Object.$clinit();
+  ReadOnlyJsProperty.$static_staticFinalField__jsproperties_ReadOnlyJsProperty = ReadOnlyJsProperty.d;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -44,8 +52,10 @@ class ReadOnlyJsProperty extends j_l_Object {
  /** @nodts */
  static $loadModules() {}
 }
-/**@const {number} @nodts*/
-ReadOnlyJsProperty.f_b__jsproperties_ReadOnlyJsProperty = 2;
+/**@const {number}*/
+ReadOnlyJsProperty.b = 2;
+/**@private {number} @nodts*/
+ReadOnlyJsProperty.$static_staticFinalField__jsproperties_ReadOnlyJsProperty = 0;
 $Util.$setClassMetadata(ReadOnlyJsProperty, 'jsproperties.ReadOnlyJsProperty');
 
 exports = ReadOnlyJsProperty;

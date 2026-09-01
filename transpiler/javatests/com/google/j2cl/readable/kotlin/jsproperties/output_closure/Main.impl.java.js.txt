@@ -11,6 +11,7 @@ let InterfaceWithStaticJsProperties = goog.forwardDeclare('jsproperties.Interfac
 let JavaFoo = goog.forwardDeclare('jsproperties.JavaFoo$impl');
 let MainKt = goog.forwardDeclare('jsproperties.MainKt$impl');
 let OtherHasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
+let ReadOnlyJsProperty = goog.forwardDeclare('jsproperties.ReadOnlyJsProperty$impl');
 
 /**
  * @final
@@ -78,6 +79,16 @@ class Main extends j_l_Object {
   y.m_setValue__java_lang_Object__void('a');
   y.m_getValue__java_lang_Object();
  }
+ /** @final @nodts */
+ m_testReadOnlyJsProperty__void() {
+  let readOnlyJsProperty = ReadOnlyJsProperty.$create__();
+  let r = readOnlyJsProperty.a;
+  r = 2;
+  r = readOnlyJsProperty.instanceFinalField;
+  r = ReadOnlyJsProperty.m_getStaticFinalField__int();
+  readOnlyJsProperty.c;
+  ReadOnlyJsProperty.d;
+ }
  /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
@@ -99,6 +110,7 @@ class Main extends j_l_Object {
   JavaFoo = goog.module.get('jsproperties.JavaFoo$impl');
   MainKt = goog.module.get('jsproperties.MainKt$impl');
   OtherHasFieldAndGetterSetterFuns = goog.module.get('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
+  ReadOnlyJsProperty = goog.module.get('jsproperties.ReadOnlyJsProperty$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'jsproperties.Main');

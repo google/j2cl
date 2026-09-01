@@ -75,15 +75,29 @@ internal open class Bar internal constructor() {
  }
 }
 
-internal open class ReadOnlyJsProperty internal constructor() {
+internal open class ReadOnlyJsProperty {
  @JvmField
+ @JsProperty
  val a: Int = 1
+ 
+ @JvmField
+ @JsProperty
+ val instanceFinalField: Int
+ 
+ constructor() {
+  this.instanceFinalField = 10
+ }
  
  @JsProperty
  open fun getC(): Int = 3
  
  companion object {
+  @JsProperty
   const val b: Int = 2
+  
+  @JvmField
+  @JsProperty
+  val staticFinalField: Int = ReadOnlyJsProperty.getD()
   
   @JvmStatic
   @JsProperty
@@ -145,6 +159,8 @@ open class Main {
   var r: Int = 0
   r = readOnlyJsProperty.a
   r = ReadOnlyJsProperty.b
+  r = readOnlyJsProperty.instanceFinalField
+  r = ReadOnlyJsProperty.staticFinalField
   readOnlyJsProperty.getC()
   ReadOnlyJsProperty.getD()
  }

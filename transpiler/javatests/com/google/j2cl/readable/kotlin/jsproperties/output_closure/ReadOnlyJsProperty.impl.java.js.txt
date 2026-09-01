@@ -12,6 +12,8 @@ class ReadOnlyJsProperty extends j_l_Object {
   super();
   /**@type {number} @nodts*/
   this.f_a__jsproperties_ReadOnlyJsProperty_ = 0;
+  /**@type {number} @nodts*/
+  this.f_instanceFinalField__jsproperties_ReadOnlyJsProperty_ = 0;
  }
  /** @nodts @return {!ReadOnlyJsProperty} */
  static $create__() {
@@ -24,20 +26,36 @@ class ReadOnlyJsProperty extends j_l_Object {
  $ctor__jsproperties_ReadOnlyJsProperty__void() {
   this.$ctor__java_lang_Object__void();
   this.f_a__jsproperties_ReadOnlyJsProperty_ = 1;
+  this.f_instanceFinalField__jsproperties_ReadOnlyJsProperty_ = 10;
  }
  /** @return {number} */
  get a() {
   return this.f_a__jsproperties_ReadOnlyJsProperty_;
  }
  /** @return {number} */
- get b() {
-  return 2;
+ get instanceFinalField() {
+  return this.f_instanceFinalField__jsproperties_ReadOnlyJsProperty_;
+ }
+ /** @return {number} */
+ get c() {
+  return 3;
+ }
+ /** @nodts @return {number} */
+ static m_getStaticFinalField__int() {
+  ReadOnlyJsProperty.$clinit();
+  return ReadOnlyJsProperty.f_staticFinalField__jsproperties_ReadOnlyJsProperty_;
+ }
+ /** @return {number} */
+ static get d() {
+  ReadOnlyJsProperty.$clinit();
+  return 4;
  }
  /** @nodts */
  static $clinit() {
   ReadOnlyJsProperty.$clinit = () =>{};
   ReadOnlyJsProperty.$loadModules();
   j_l_Object.$clinit();
+  ReadOnlyJsProperty.f_staticFinalField__jsproperties_ReadOnlyJsProperty_ = ReadOnlyJsProperty.d;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -47,6 +65,10 @@ class ReadOnlyJsProperty extends j_l_Object {
  /** @nodts */
  static $loadModules() {}
 }
+/**@const {number}*/
+ReadOnlyJsProperty.b = 2;
+/**@type {number} @nodts*/
+ReadOnlyJsProperty.f_staticFinalField__jsproperties_ReadOnlyJsProperty_ = 0;
 $Util.$setClassMetadata(ReadOnlyJsProperty, 'jsproperties.ReadOnlyJsProperty');
 
 exports = ReadOnlyJsProperty;
