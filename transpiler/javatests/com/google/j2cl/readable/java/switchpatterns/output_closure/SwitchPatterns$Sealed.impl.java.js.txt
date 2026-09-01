@@ -6,7 +6,6 @@ let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreco
 let J2clSealedTypeMarker = goog.forwardDeclare('javaemul.internal.J2clSealedTypeMarker');
 let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
 let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @interface
@@ -22,9 +21,9 @@ class Sealed {
    let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object($thisArg);
    let /** number */ $caseIndex;
    let /** A */ a, /** B */ b;
-   if (A.$isInstance($selector) && (a = (/**@type {!A}*/ ($Casts.$to($selector, A))), true)) {
+   if (A.$isInstance($selector) && (a = (/**@type {!A}*/ ($selector)), true)) {
     $caseIndex = 0;
-   } else if (B.$isInstance($selector) && (b = (/**@type {!B}*/ ($Casts.$to($selector, B))), true)) {
+   } else if (B.$isInstance($selector) && (b = (/**@type {!B}*/ ($selector)), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;
@@ -58,7 +57,6 @@ class Sealed {
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
   B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 Sealed.$markImplementor(/**@type {Function}*/ (Sealed));

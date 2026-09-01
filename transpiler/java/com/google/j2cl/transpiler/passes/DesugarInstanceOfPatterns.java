@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AnyPattern;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BindingPattern;
@@ -151,6 +152,10 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
                             .setExpression(expressionVariable.createReference())
                             .setCastTypeDescriptor(
                                 patternVariable.getTypeDescriptor().toNonNullable())
+                            .setUnchecked(
+                                AstUtils.canBeUncheckedCast(
+                                    expressionVariable.getTypeDescriptor(),
+                                    patternVariable.getTypeDescriptor()))
                             .build(),
                         nextTerm)))
         .build();
