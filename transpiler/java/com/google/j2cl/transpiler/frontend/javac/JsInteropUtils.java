@@ -39,10 +39,6 @@ public final class JsInteropUtils {
     return JsInteropAnnotationUtils.getJsOptionalAnnotation(method, i) != null;
   }
 
-  public static boolean isJsType(AnnotatedConstruct annotatedConstruct) {
-    return JsInteropAnnotationUtils.getJsTypeAnnotation(annotatedConstruct) != null;
-  }
-
   public static boolean isJsEnum(AnnotatedConstruct annotatedConstruct) {
     return JsInteropAnnotationUtils.getJsEnumAnnotation(annotatedConstruct) != null;
   }

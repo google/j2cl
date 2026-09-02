@@ -57,7 +57,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isFinal
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsFunction
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isPropertyAccessor
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
@@ -277,7 +276,6 @@ internal class KotlinEnvironment(
         .setSealed(irClass.isSealed)
         .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
         .setAnonymous(irClass.isAnonymousObject)
-        .setJsType(irClass.isJsType)
         .setJsFunctionInterface(irClass.isJsFunction)
         .setJsEnumInfo(irClass.getJsEnumInfo())
         .setSimpleJsName(irClass.jsName)

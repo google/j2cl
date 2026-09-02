@@ -76,9 +76,6 @@ val IrClass.isNative: Boolean
 val IrClass.isJsFunction: Boolean
   get() = getJsFunctionAnnotation() != null
 
-val IrClass.isJsType: Boolean
-  get() = getJsTypeAnnotation() != null
-
 val IrClass.isJsEnum: Boolean
   get() = getJsEnumAnnotation() != null
 

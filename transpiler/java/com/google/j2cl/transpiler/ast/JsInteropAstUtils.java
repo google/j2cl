@@ -24,6 +24,10 @@ import javax.annotation.Nullable;
 /** Utility functions for JsInterop properties. */
 public final class JsInteropAstUtils {
 
+  public static boolean isJsType(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.hasAnnotation("jsinterop.annotations.JsType");
+  }
+
   // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
   private static final ThreadLocal<Boolean> ignoreNonNativeJsInfo =
       ThreadLocal.withInitial(() -> false);

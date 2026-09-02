@@ -1214,7 +1214,6 @@ public class JavaEnvironment {
                 isAnnotatedWithKotlinMetadata(classSymbol)
                     ? SourceLanguage.KOTLIN
                     : SourceLanguage.JAVA)
-            .setJsType(JsInteropUtils.isJsType(classSymbol))
             .setJsEnumInfo(jsEnumInfo)
             .setNative(JsInteropUtils.isJsNativeType(classSymbol))
             .setAnonymous(isAnonymous(classSymbol))

@@ -321,7 +321,10 @@ public abstract class TypeDeclaration
 
   public abstract boolean isJsFunctionInterface();
 
-  public abstract boolean isJsType();
+  @Memoized
+  public boolean isJsType() {
+    return JsInteropAstUtils.isJsType(this);
+  }
 
   /**
    * Returns whether the described type is a nested type (i.e. it is defined inside the body of some
@@ -819,7 +822,6 @@ public abstract class TypeDeclaration
         .setFunctionalInterface(false)
         .setAnnotationsFactory(ImmutableList::of)
         .setJsFunctionInterface(false)
-        .setJsType(false)
         .setLocal(false)
         .setNullMarked(false)
         .setTypeParameterDescriptors(ImmutableList.of())
@@ -871,8 +873,6 @@ public abstract class TypeDeclaration
         Supplier<ImmutableList<Annotation>> annotationsFactory);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
-
-    public abstract Builder setJsType(boolean isJsType);
 
     public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
 
