@@ -50,8 +50,6 @@ public interface FrontendOptions {
 
   ImmutableList<String> getKotlincOptions();
 
-  boolean getEnableKlibs();
-
   ImmutableList<Path> getDependencyKlibs();
 
   ImmutableList<Path> getFriendKlibs();

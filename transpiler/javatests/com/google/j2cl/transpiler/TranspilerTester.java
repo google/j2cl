@@ -79,7 +79,6 @@ public class TranspilerTester {
         .addArgs("-kotlincOptions", "-language-version=2.4")
         // Don't complain when using release candidate builds of Kotlin Compiler.
         .addArgs("-kotlincOptions", "-Xskip-prerelease-check")
-        .addArgs("-experimentalEnableKlibs")
         .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar")
         .setKlibPathArg("ktstdlib/j2cl_kt_stdlib.klib");
   }

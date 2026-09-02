@@ -162,9 +162,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       handler = CommandLineParser.MultiPathOptionHandler.class)
   List<Path> friendKlibs = new ArrayList<>();
 
-  @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
-  boolean enableKlibs = false;
-
   @Option(
       name = "-kotlinNativeFrameworkHeaderPath",
       metaVar = "<string>",
@@ -235,7 +232,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setStrippedAnnotationNames(strippedAnnotationNames)
         .setDependencyKlibs(this.dependencyKlibs)
         .setFriendKlibs(this.friendKlibs)
-        .setEnableKlibs(this.enableKlibs)
         .setObjCNamePrefix("J2kt")
         .setKotlinNativeFrameworkHeaderPath(kotlinNativeFrameworkHeaderPath)
         .build(problems);

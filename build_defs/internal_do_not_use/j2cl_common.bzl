@@ -473,7 +473,6 @@ def _j2cl_transpile(
         transitive_inputs.append(annotation_processor_classpath)
 
     if is_klibs_enabled:
-        args.add("-experimentalEnableKlibs")
         args.add_joined(
             "-klibs",
             klib_provider.compilation_klibs,

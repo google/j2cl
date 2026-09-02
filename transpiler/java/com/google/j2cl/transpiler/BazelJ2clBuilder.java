@@ -177,9 +177,6 @@ final class BazelJ2clBuilder extends BazelWorker {
       handler = CommandLineParser.MultiPathOptionHandler.class)
   List<Path> friendKlibs = new ArrayList<>();
 
-  @Option(name = "-experimentalEnableKlibs", usage = "Enable using klibs for the kotlin frontend.")
-  boolean enableKlibs = false;
-
   @Option(name = "-objCNamePrefix", hidden = true)
   String objCNamePrefix = "J2kt";
 
@@ -246,7 +243,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setJavacOptions(javacOptions)
         .setKotlincOptions(kotlincOptions)
         .setStrippedAnnotationNames(strippedAnnotationNames)
-        .setEnableKlibs(enableKlibs)
         .setDependencyKlibs(dependencyKlibs)
         .setFriendKlibs(friendKlibs)
         .setObjCNamePrefix(objCNamePrefix)
