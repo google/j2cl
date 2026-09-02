@@ -153,7 +153,7 @@ final class JsExternsGenerator {
             fieldDescriptor -> {
               sb.appendln("");
               sb.append("/** ");
-              sb.append(closureEnvironment.getJsDocForField(fieldDescriptor, /* isPublic= */ true));
+              sb.append(closureEnvironment.getJsDocForField(fieldDescriptor));
               sb.appendln(" */");
               sb.appendln(
                   String.format(

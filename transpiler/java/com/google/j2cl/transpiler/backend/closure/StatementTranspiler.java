@@ -188,9 +188,7 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterFieldDeclarationStatement(FieldDeclarationStatement declaration) {
-        String jsDoc =
-            environment.getJsDocForField(
-                declaration.getFieldDescriptor(), /* isPublic= */ declaration.isPublic());
+        String jsDoc = environment.getJsDocForField(declaration.getFieldDescriptor());
 
         Runnable renderer =
             () ->

@@ -28,17 +28,12 @@ import com.google.j2cl.common.visitor.Visitable;
 public class FieldDeclarationStatement extends Statement {
   @Visitable Expression expression;
   @Visitable FieldDescriptor fieldDescriptor;
-  private final boolean isPublic;
 
   private FieldDeclarationStatement(
-      SourcePosition sourcePosition,
-      Expression expression,
-      FieldDescriptor fieldDescriptor,
-      boolean isPublic) {
+      SourcePosition sourcePosition, Expression expression, FieldDescriptor fieldDescriptor) {
     super(sourcePosition);
     this.expression = checkNotNull(expression);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
-    this.isPublic = isPublic;
     checkArgument(
         expression instanceof FieldAccess || expression.isSimpleAssignment(),
         "Declaration annotations can only applied to assignments and field references.");
@@ -52,10 +47,6 @@ public class FieldDeclarationStatement extends Statement {
     return fieldDescriptor;
   }
 
-  public boolean isPublic() {
-    return isPublic;
-  }
-
   public boolean isConst() {
     return fieldDescriptor.isCompileTimeConstant();
   }
@@ -67,15 +58,13 @@ public class FieldDeclarationStatement extends Statement {
 
   @Override
   public FieldDeclarationStatement clone() {
-    return new FieldDeclarationStatement(
-        getSourcePosition(), expression.clone(), fieldDescriptor, isPublic);
+    return new FieldDeclarationStatement(getSourcePosition(), expression.clone(), fieldDescriptor);
   }
 
   public Builder toBuilder() {
     return builder()
         .setExpression(this.getExpression())
         .setFieldDescriptor(this.getFieldDescriptor())
-        .setPublic(this.isPublic())
         .setSourcePosition(this.getSourcePosition());
   }
 
@@ -87,7 +76,6 @@ public class FieldDeclarationStatement extends Statement {
   public static class Builder {
     private Expression expression;
     private FieldDescriptor fieldDescriptor;
-    private boolean isPublic;
     private SourcePosition sourcePosition;
 
     @CanIgnoreReturnValue
@@ -103,19 +91,13 @@ public class FieldDeclarationStatement extends Statement {
     }
 
     @CanIgnoreReturnValue
-    public Builder setPublic(boolean isPublic) {
-      this.isPublic = isPublic;
-      return this;
-    }
-
-    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
     public FieldDeclarationStatement build() {
-      return new FieldDeclarationStatement(sourcePosition, expression, fieldDescriptor, isPublic);
+      return new FieldDeclarationStatement(sourcePosition, expression, fieldDescriptor);
     }
   }
 }

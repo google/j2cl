@@ -465,7 +465,6 @@ public final class AstUtils {
   /** Returns a field declaration statement. */
   public static Statement declarationStatement(Field field, SourcePosition sourcePosition) {
     FieldDescriptor fieldDescriptor = field.getDescriptor();
-    boolean isPublic = fieldDescriptor.getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD;
 
     Expression declarationExpression =
         FieldAccess.builder()
@@ -481,7 +480,6 @@ public final class AstUtils {
     return FieldDeclarationStatement.builder()
         .setExpression(declarationExpression)
         .setFieldDescriptor(fieldDescriptor)
-        .setPublic(isPublic)
         .setSourcePosition(
             field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition)
         .build();

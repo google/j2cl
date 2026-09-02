@@ -151,12 +151,12 @@ class ToStringRenderer {
 
       @Override
       public boolean enterFieldDeclarationStatement(FieldDeclarationStatement fieldDeclaration) {
+        FieldDescriptor fieldDescriptor = fieldDeclaration.getFieldDescriptor();
         print(
             String.format(
-                "/** %s {%s} %s */ ",
-                fieldDeclaration.isPublic() ? "@public" : "@private",
-                fieldDeclaration.getFieldDescriptor().getTypeDescriptor().getReadableDescription(),
-                fieldDeclaration.isConst() ? "@const" : ""));
+                "/** %s {%s} */ ",
+                fieldDeclaration.isConst() ? "@const" : "@type",
+                fieldDescriptor.getTypeDescriptor().getReadableDescription()));
         accept(fieldDeclaration.getExpression());
         return false;
       }

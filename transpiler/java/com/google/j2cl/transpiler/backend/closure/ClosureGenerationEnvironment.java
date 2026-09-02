@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.HasAnnotations;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
@@ -309,11 +310,12 @@ public class ClosureGenerationEnvironment {
   }
 
   /** Returns the JsDoc annotation for the given field. */
-  public String getJsDocForField(FieldDescriptor fieldDescriptor, boolean isPublic) {
+  public String getJsDocForField(FieldDescriptor fieldDescriptor) {
     String typeJsDoc = getClosureTypeString(fieldDescriptor.getTypeDescriptor());
     ArrayList<String> jsDocs = new ArrayList<>();
-    if (!isPublic) {
-      jsDocs.add("@private");
+    Visibility visibility = getFieldVisibility(fieldDescriptor);
+    if (visibility != Visibility.PUBLIC) {
+      jsDocs.add("@" + visibility.jsText);
     }
     if (fieldDescriptor.isCompileTimeConstant()) {
       jsDocs.add("@const");
@@ -330,5 +332,11 @@ public class ClosureGenerationEnvironment {
       jsDocs.add("@nodts");
     }
     return String.join(" ", jsDocs);
+  }
+
+  protected Visibility getFieldVisibility(FieldDescriptor fieldDescriptor) {
+    return fieldDescriptor.getOrigin() == FieldOrigin.SYNTHETIC_BACKING_FIELD
+        ? Visibility.PRIVATE
+        : Visibility.PUBLIC;
   }
 }
