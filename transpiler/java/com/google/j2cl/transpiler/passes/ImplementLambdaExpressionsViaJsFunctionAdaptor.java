@@ -285,7 +285,11 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
             typeDescriptor.getFunctionalInterface().getDeclarationDescriptor());
-    Type adaptorType = new Type(sourcePosition, adaptorTypeDescriptor.getTypeDeclaration());
+    Type adaptorType =
+        Type.builder()
+            .setSourcePosition(sourcePosition)
+            .setTypeDeclaration(adaptorTypeDescriptor.getTypeDeclaration())
+            .build();
 
     // Create the field to contain the lambda function as a JsFunction.
     FieldDescriptor jsFunctionFieldDescriptor =

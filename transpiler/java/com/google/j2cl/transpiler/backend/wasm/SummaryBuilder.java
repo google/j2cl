@@ -23,7 +23,6 @@ import static java.util.function.Predicate.not;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -237,13 +236,13 @@ public final class SummaryBuilder {
     return stringLiteralHolderByTypeDeclaration.computeIfAbsent(
         typeDeclaration,
         t ->
-            new Type(
-                SourcePosition.NONE,
-                TypeDeclaration.builder()
-                    .setPackage(t.getPackage())
-                    .setClassComponents(t.synthesizeInnerClassComponents("StringLiterals"))
-                    .setKind(Kind.CLASS)
-                    .build()));
+            Type.builderFrom(
+                    TypeDeclaration.builder()
+                        .setPackage(t.getPackage())
+                        .setClassComponents(t.synthesizeInnerClassComponents("StringLiterals"))
+                        .setKind(Kind.CLASS)
+                        .build())
+                .build());
   }
 
   private Summary build() {

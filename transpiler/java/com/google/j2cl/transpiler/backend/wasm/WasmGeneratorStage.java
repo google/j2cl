@@ -22,7 +22,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -261,8 +260,7 @@ public class WasmGeneratorStage {
           TypeDeclaration typeDeclaration =
               m.getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration();
           Type type =
-              typesByDeclaration.computeIfAbsent(
-                  typeDeclaration, t -> new Type(SourcePosition.NONE, t));
+              typesByDeclaration.computeIfAbsent(typeDeclaration, t -> Type.builderFrom(t).build());
           type.addMember(m);
         });
     typesByDeclaration.values().forEach(cu::addType);

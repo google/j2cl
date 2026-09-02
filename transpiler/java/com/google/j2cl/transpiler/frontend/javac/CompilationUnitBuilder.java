@@ -226,11 +226,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
     TypeDeclaration typeDeclaration = environment.createTypeDeclaration(classSymbol);
 
-    return new Type(
-        typeDeclaration.isAnonymous()
-            ? getSourcePosition(sourcePositionNode)
-            : getNamePosition(sourcePositionNode),
-        typeDeclaration);
+    return Type.builder()
+        .setSourcePosition(
+            typeDeclaration.isAnonymous()
+                ? getSourcePosition(sourcePositionNode)
+                : getNamePosition(sourcePositionNode))
+        .setTypeDeclaration(typeDeclaration)
+        .build();
   }
 
   private Type convertClassDeclaration(JCClassDecl classDecl) {

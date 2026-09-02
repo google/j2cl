@@ -448,12 +448,12 @@ final class BazelJ2wasmBundler extends BazelWorker {
       Collection<SystemPropertyInfo> referencedSystemProperties) {
 
     var stringLiteralHolder =
-        new com.google.j2cl.transpiler.ast.Type(
-            SourcePosition.NONE,
-            TypeDeclaration.builder()
-                .setQualifiedSourceName("wasm.stringLiteral.StringLiteralHolder")
-                .setKind(Kind.CLASS)
-                .build());
+        com.google.j2cl.transpiler.ast.Type.builderFrom(
+                TypeDeclaration.builder()
+                    .setQualifiedSourceName("wasm.stringLiteral.StringLiteralHolder")
+                    .setKind(Kind.CLASS)
+                    .build())
+            .build();
 
     compilationUnit.addType(stringLiteralHolder);
 
@@ -572,7 +572,7 @@ final class BazelJ2wasmBundler extends BazelWorker {
     return typesByDeclaration.computeIfAbsent(
         typeDeclaration,
         t -> {
-          var newType = new com.google.j2cl.transpiler.ast.Type(SourcePosition.NONE, t);
+          var newType = com.google.j2cl.transpiler.ast.Type.builderFrom(t).build();
           compilationUnit.addType(newType);
           return newType;
         });

@@ -247,7 +247,11 @@ internal class CompilationUnitBuilder(
   }
 
   private fun convertClass(irClass: IrClass): Type {
-    val type = Type(getNameSourcePosition(irClass), environment.getDeclarationForType(irClass))
+    val type =
+      Type.builder()
+        .setSourcePosition(getNameSourcePosition(irClass))
+        .setTypeDeclaration(environment.getDeclarationForType(irClass))
+        .build()
     processEnclosedBy(type) {
       ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
 

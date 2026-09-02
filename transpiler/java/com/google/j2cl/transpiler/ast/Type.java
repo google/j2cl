@@ -23,6 +23,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Context;
@@ -49,14 +50,30 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private ImmutableList<DeclaredTypeDescriptor> superInterfaceTypeDescriptors;
   private boolean isOptimizedEnum;
 
-  public Type(SourcePosition sourcePosition, TypeDeclaration typeDeclaration) {
+  private Type(
+      SourcePosition sourcePosition,
+      TypeDeclaration typeDeclaration,
+      List<Member> members,
+      List<Type> types,
+      List<Statement> loadTimeStatements,
+      DeclaredTypeDescriptor superTypeDescriptor,
+      ImmutableList<DeclaredTypeDescriptor> superInterfaceTypeDescriptors,
+      boolean isAbstract,
+      boolean isOptimizedEnum) {
     this.sourcePosition = checkNotNull(sourcePosition);
+    this.typeDeclaration = checkNotNull(typeDeclaration);
     checkArgument(
         typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
-    this.typeDeclaration = typeDeclaration;
-    this.isAbstract = typeDeclaration.isAbstract();
-    this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
-    this.superInterfaceTypeDescriptors = typeDeclaration.getInterfaceTypeDescriptors();
+    if (isOptimizedEnum) {
+      checkState(typeDeclaration.isEnum());
+    }
+    this.members.addAll(members);
+    this.types.addAll(types);
+    this.loadTimeStatements.addAll(loadTimeStatements);
+    this.superTypeDescriptor = superTypeDescriptor;
+    this.superInterfaceTypeDescriptors = superInterfaceTypeDescriptors;
+    this.isAbstract = isAbstract;
+    this.isOptimizedEnum = isOptimizedEnum;
   }
 
   /**
@@ -423,5 +440,110 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .setOrigin(FieldDescriptor.FieldOrigin.SYNTHETIC_FIELD)
         .setStatic(true)
         .build();
+  }
+
+  public Builder toBuilder() {
+    return builder()
+        .setSourcePosition(this.getSourcePosition())
+        .setTypeDeclaration(this.getDeclaration())
+        .setMembers(this.getMembers())
+        .setTypes(this.getTypes())
+        .setLoadTimeStatements(this.getLoadTimeStatements())
+        .setSuperTypeDescriptor(this.getSuperTypeDescriptor())
+        .setSuperInterfaceTypeDescriptors(this.getSuperInterfaceTypeDescriptors())
+        .setAbstract(this.isAbstract())
+        .setOptimizedEnum(this.isOptimizedEnum());
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static Builder builderFrom(TypeDeclaration typeDeclaration) {
+    return builder().setSourcePosition(SourcePosition.NONE).setTypeDeclaration(typeDeclaration);
+  }
+
+  /** A Builder for Type. */
+  public static class Builder {
+    private TypeDeclaration typeDeclaration;
+    private List<Member> members = new ArrayList<>();
+    private List<Type> types = new ArrayList<>();
+    private List<Statement> loadTimeStatements = new ArrayList<>();
+    private SourcePosition sourcePosition;
+    private DeclaredTypeDescriptor superTypeDescriptor;
+    private ImmutableList<DeclaredTypeDescriptor> superInterfaceTypeDescriptors;
+    private boolean isAbstract;
+    private boolean isOptimizedEnum;
+
+    @CanIgnoreReturnValue
+    public Builder setTypeDeclaration(TypeDeclaration typeDeclaration) {
+      this.typeDeclaration = typeDeclaration;
+      this.isAbstract = typeDeclaration.isAbstract();
+      this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
+      this.superInterfaceTypeDescriptors = typeDeclaration.getInterfaceTypeDescriptors();
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setMembers(Collection<? extends Member> members) {
+      this.members = new ArrayList<>(members);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setTypes(Collection<Type> types) {
+      this.types = new ArrayList<>(types);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setLoadTimeStatements(Collection<Statement> loadTimeStatements) {
+      this.loadTimeStatements = new ArrayList<>(loadTimeStatements);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setAbstract(boolean isAbstract) {
+      this.isAbstract = isAbstract;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setSuperTypeDescriptor(@Nullable DeclaredTypeDescriptor superTypeDescriptor) {
+      this.superTypeDescriptor = superTypeDescriptor;
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setSuperInterfaceTypeDescriptors(
+        List<DeclaredTypeDescriptor> superInterfaceTypeDescriptors) {
+      this.superInterfaceTypeDescriptors = ImmutableList.copyOf(superInterfaceTypeDescriptors);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setOptimizedEnum(boolean isOptimizedEnum) {
+      this.isOptimizedEnum = isOptimizedEnum;
+      return this;
+    }
+
+    public Type build() {
+      return new Type(
+          sourcePosition,
+          typeDeclaration,
+          members,
+          types,
+          loadTimeStatements,
+          superTypeDescriptor,
+          superInterfaceTypeDescriptors,
+          isAbstract,
+          isOptimizedEnum);
+    }
   }
 }

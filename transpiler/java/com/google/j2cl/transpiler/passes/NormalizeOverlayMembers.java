@@ -67,7 +67,11 @@ public class NormalizeOverlayMembers extends NormalizationPass {
     TypeDeclaration overlayTypeDeclaration =
         type.getDeclaration().getOverlayImplementationTypeDeclaration();
     DeclaredTypeDescriptor overlayTypeDescriptor = overlayTypeDeclaration.toDescriptor();
-    Type overlayClass = new Type(type.getSourcePosition(), overlayTypeDeclaration);
+    Type overlayClass =
+        Type.builder()
+            .setSourcePosition(type.getSourcePosition())
+            .setTypeDeclaration(overlayTypeDeclaration)
+            .build();
 
     for (Member member : type.getMembers()) {
       if (!isOverlay(member.getDescriptor())) {

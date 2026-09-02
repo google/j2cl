@@ -188,7 +188,10 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
     SourcePosition sourcePosition = functionExpression.getSourcePosition();
     Type lambdaImplementorType =
-        new Type(sourcePosition, implementorTypeDescriptor.getTypeDeclaration());
+        Type.builder()
+            .setSourcePosition(sourcePosition)
+            .setTypeDeclaration(implementorTypeDescriptor.getTypeDeclaration())
+            .build();
 
     // public t method(t1 p1, t2 p2, .....) {
     //   ... code from function expression....;

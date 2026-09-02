@@ -50,7 +50,10 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
                 LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
                     type.getTypeDescriptor());
             Type adaptorType =
-                new Type(type.getSourcePosition(), adaptorTypeDescriptor.getTypeDeclaration());
+                Type.builder()
+                    .setSourcePosition(type.getSourcePosition())
+                    .setTypeDeclaration(adaptorTypeDescriptor.getTypeDeclaration())
+                    .build();
 
             functionalInterfaceAdaptors.add(adaptorType);
           }
