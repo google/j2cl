@@ -22,10 +22,28 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import javax.annotation.Nullable;
 
 /** Utility functions for JsInterop properties. */
-final class JsInteropAstUtils {
+public final class JsInteropAstUtils {
 
-  /** Return the JsInfo for the given member descriptor. */
-  public static JsInfo computeOriginalJsInfo(MemberDescriptor member) {
+  // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
+  private static final ThreadLocal<Boolean> ignoreNonNativeJsInfo =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreNonNativeJsInfo() {
+    ignoreNonNativeJsInfo.set(true);
+  }
+
+  /** Return the original JsInfo for the given member descriptor. */
+  public static JsInfo getOriginalJsInfo(MemberDescriptor member, @Nullable JsInfo originalJsInfo) {
+    if (ignoreNonNativeJsInfo.get()
+        && !member.getEnclosingTypeDescriptor().isNative()
+        && !member.getEnclosingTypeDescriptor().isJsFunctionInterface()
+        && !(member instanceof MethodDescriptor method && method.isNative())) {
+      return JsInfo.NONE;
+    }
+    return originalJsInfo != null ? originalJsInfo : computeOriginalJsInfo(member);
+  }
+
+  private static JsInfo computeOriginalJsInfo(MemberDescriptor member) {
     Annotation memberAnnotation = getJsMemberAnnotation(member);
     return JsInfo.builder()
         .setJsMemberType(getJsMemberType(member, memberAnnotation))
