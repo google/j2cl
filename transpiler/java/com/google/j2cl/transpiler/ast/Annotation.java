@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.Map;
 import javax.annotation.Nullable;
 
@@ -36,6 +37,17 @@ public abstract class Annotation {
       return stringLiteral.getValue();
     }
     return null;
+  }
+
+  public static Builder builderFrom(String qualifiedName) {
+    return builder()
+        .setTypeDescriptor(
+            TypeDeclaration.builder()
+                .setKind(Kind.INTERFACE)
+                .setAnnotation(true)
+                .setQualifiedSourceName(qualifiedName)
+                .build()
+                .toDescriptor());
   }
 
   public static Builder builder() {

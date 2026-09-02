@@ -33,6 +33,7 @@ import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -319,7 +320,10 @@ public abstract class TypeDeclaration
         && getInterfaceTypeDescriptors().stream().anyMatch(TypeDescriptor::isJsFunctionInterface);
   }
 
-  public abstract boolean isJsFunctionInterface();
+  @Memoized
+  public boolean isJsFunctionInterface() {
+    return JsInteropAstUtils.isJsFunction(this);
+  }
 
   @Memoized
   public boolean isJsType() {
@@ -779,13 +783,7 @@ public abstract class TypeDeclaration
 
   abstract Supplier<ImmutableList<Annotation>> getAnnotationsFactory();
 
-  // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
-  private static final ThreadLocal<Boolean> ignoreJsFunctionAnnotations =
-      ThreadLocal.withInitial(() -> false);
 
-  public static void setIgnoreJsFunctionAnnotations() {
-    ignoreJsFunctionAnnotations.set(true);
-  }
 
   // TODO(b/181615162): This is a temporary hack which allows Wasm to treat JsEnums differently from
   // Closure.
@@ -821,7 +819,6 @@ public abstract class TypeDeclaration
         .setSealed(false)
         .setFunctionalInterface(false)
         .setAnnotationsFactory(ImmutableList::of)
-        .setJsFunctionInterface(false)
         .setLocal(false)
         .setNullMarked(false)
         .setTypeParameterDescriptors(ImmutableList.of())
@@ -872,7 +869,19 @@ public abstract class TypeDeclaration
     public abstract Builder setAnnotationsFactory(
         Supplier<ImmutableList<Annotation>> annotationsFactory);
 
-    public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
+    public Builder setAnnotations(List<Annotation> annotations) {
+      return setAnnotationsFactory(() -> ImmutableList.copyOf(annotations));
+    }
+
+    public Builder setAnnotations(Annotation... annotations) {
+      return setAnnotations(Arrays.asList(annotations));
+    }
+
+    @CanIgnoreReturnValue
+    public Builder setJsFunctionInterface() {
+      return setFunctionalInterface(true)
+          .setAnnotations(Annotation.builderFrom("jsinterop.annotations.JsFunction").build());
+    }
 
     public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
 
@@ -968,8 +977,6 @@ public abstract class TypeDeclaration
 
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
 
-    abstract boolean isJsFunctionInterface();
-
     abstract boolean isNative();
 
     abstract Kind getKind();
@@ -983,10 +990,6 @@ public abstract class TypeDeclaration
 
     @SuppressWarnings("ReferenceEquality")
     public TypeDeclaration build() {
-      if (isJsFunctionInterface() && ignoreJsFunctionAnnotations.get()) {
-        setJsFunctionInterface(false);
-      }
-
       // TODO(b/181615162): Find a better way to expose different flavors of type models by backend.
       if (getKind() == Kind.ENUM && isNative() && implementWasmJsInteropSemantics.get()) {
         setJsEnumInfo(null);

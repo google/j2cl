@@ -19,7 +19,6 @@ package com.google.j2cl.transpiler.frontend.common;
 public final class FrontendConstants {
 
   public static final String JS_ENUM_ANNOTATION_NAME = "jsinterop.annotations.JsEnum";
-  public static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   public static final String JS_OPTIONAL_ANNOTATION_NAME = "jsinterop.annotations.JsOptional";
   public static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
   public static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";

@@ -1208,7 +1208,6 @@ public class JavaEnvironment {
             .setFinal(isFinal)
             .setSealed(isSealed(classSymbol))
             .setFunctionalInterface(isFunctionalInterface(classSymbol.asType()))
-            .setJsFunctionInterface(JsInteropUtils.isJsFunction(classSymbol))
             .setAnnotationsFactory(() -> createAnnotations(classSymbol, isNullMarked))
             .setSourceLanguage(
                 isAnnotatedWithKotlinMetadata(classSymbol)

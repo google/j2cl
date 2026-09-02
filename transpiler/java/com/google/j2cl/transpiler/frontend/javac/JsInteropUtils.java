@@ -47,9 +47,5 @@ public final class JsInteropUtils {
     return JsInteropAnnotationUtils.isJsNative(annotatedConstruct);
   }
 
-  public static boolean isJsFunction(AnnotatedConstruct annotatedConstruct) {
-    return JsInteropAnnotationUtils.getJsFunctionAnnotation(annotatedConstruct) != null;
-  }
-
   private JsInteropUtils() {}
 }

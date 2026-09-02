@@ -20,7 +20,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.JsEnumInfo
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
 import org.jetbrains.kotlin.ir.declarations.IrClass
@@ -34,9 +33,6 @@ private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
 
 private fun IrClass.getJsEnumAnnotation(): IrConstructorCall? =
   getAnnotation(JS_ENUM_ANNOTATION_FQ_NAME)
-
-private fun IrClass.getJsFunctionAnnotation(): IrConstructorCall? =
-  getAnnotation(JS_FUNCTION_ANNOTATION_FQ_NAME)
 
 private fun IrClass.getJsTypeOrJsEnumAnnotation(): IrConstructorCall? =
   getJsTypeAnnotation() ?: getJsEnumAnnotation()
@@ -73,9 +69,6 @@ val IrClass.isNative: Boolean
     getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<Boolean>(IS_NATIVE_ANNOTATION_ATTRIBUTE)
       ?: false
 
-val IrClass.isJsFunction: Boolean
-  get() = getJsFunctionAnnotation() != null
-
 val IrClass.isJsEnum: Boolean
   get() = getJsEnumAnnotation() != null
 
@@ -83,7 +76,6 @@ val IrValueParameter.isJsOptional: Boolean
   get() = getAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null
 
 private val JS_ENUM_ANNOTATION_FQ_NAME: FqName = FqName(JS_ENUM_ANNOTATION_NAME)
-private val JS_FUNCTION_ANNOTATION_FQ_NAME: FqName = FqName(JS_FUNCTION_ANNOTATION_NAME)
 private val JS_TYPE_ANNOTATION_FQ_NAME: FqName = FqName(JS_TYPE_ANNOTATION_NAME)
 private val JS_OPTIONAL_ANNOTATION_FQ_NAME: FqName = FqName(JS_OPTIONAL_ANNOTATION_NAME)
 

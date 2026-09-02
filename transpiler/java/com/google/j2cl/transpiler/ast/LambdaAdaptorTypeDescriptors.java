@@ -212,8 +212,7 @@ public final class LambdaAdaptorTypeDescriptors {
         .setEnclosingTypeDeclaration(typeDeclaration)
         .setTypeParameterDescriptors(typeDeclaration.getTypeParameterDescriptors())
         .setClassComponents(classComponents)
-        .setJsFunctionInterface(true)
-        .setFunctionalInterface(true)
+        .setJsFunctionInterface()
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDeclaration ->
                 ImmutableList.of(

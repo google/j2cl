@@ -28,6 +28,21 @@ public final class JsInteropAstUtils {
     return typeDeclaration.hasAnnotation("jsinterop.annotations.JsType");
   }
 
+  // TODO(b/340930928): This is a temporary hack since JsFunction is not supported in Wasm.
+  private static final ThreadLocal<Boolean> ignoreJsFunctionAnnotations =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreJsFunctionAnnotations() {
+    ignoreJsFunctionAnnotations.set(true);
+  }
+
+  public static boolean isJsFunction(TypeDeclaration typeDeclaration) {
+    if (ignoreJsFunctionAnnotations.get()) {
+      return false;
+    }
+    return typeDeclaration.hasAnnotation("jsinterop.annotations.JsFunction");
+  }
+
   // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
   private static final ThreadLocal<Boolean> ignoreNonNativeJsInfo =
       ThreadLocal.withInitial(() -> false);

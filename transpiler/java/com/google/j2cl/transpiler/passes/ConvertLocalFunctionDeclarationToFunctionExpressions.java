@@ -153,8 +153,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
         .setTypeParameterDescriptors(
             localFunctionMethodDescriptor.getTypeParameterTypeDescriptors())
         .setClassComponents(classComponents)
-        .setJsFunctionInterface(true)
-        .setFunctionalInterface(true)
+        .setJsFunctionInterface()
         .setDeclaredMethodDescriptorsFactory(
             td ->
                 ImmutableList.of(

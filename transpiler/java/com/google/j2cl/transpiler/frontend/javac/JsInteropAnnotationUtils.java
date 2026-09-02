@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
@@ -36,10 +35,6 @@ public class JsInteropAnnotationUtils {
 
   public static AnnotationMirror getJsEnumAnnotation(AnnotatedConstruct annotatedConstruct) {
     return findAnnotationByName(annotatedConstruct, JS_ENUM_ANNOTATION_NAME);
-  }
-
-  public static AnnotationMirror getJsFunctionAnnotation(AnnotatedConstruct annotatedConstruct) {
-    return findAnnotationByName(annotatedConstruct, JS_FUNCTION_ANNOTATION_NAME);
   }
 
   public static AnnotationMirror getJsTypeAnnotation(AnnotatedConstruct annotatedConstruct) {
