@@ -88,7 +88,6 @@ java_test(
     data = [
         ":jre_bundle_files",
     ],
-    jvm_flags = ["-Dj2cl.enable_klib=true"],
     deps = [
         ":tester_lib",
         "//third_party:junit",
@@ -156,7 +155,6 @@ java_test(
         "-XX:+TieredCompilation",
         "-XX:TieredStopAtLevel=2",
         "-XX:MaxGCPauseMillis=100",
-        "-Dj2cl.enable_klib=true",
     ],
     shard_count = 6,
     deps = [

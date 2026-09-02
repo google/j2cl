@@ -68,33 +68,20 @@ public class TranspilerTester {
 
   /** Creates a new transpiler tester initialized with Kotlin (frontend) defaults. */
   public static TranspilerTester newTesterWithKotlinDefaults() {
-    TranspilerTester tester =
-        newTester()
-            .addArgs("-kotlincOptions", "-Xmulti-platform")
-            // J2CL Kotlin frontend is based on Koltin/JVM compiler that requires that deps and the
-            // current compilation use the same JVM target in order to inline bytecode. Even we
-            // don't use the bytecode inliner, kotlinc fails in the early stage if we do not specify
-            // the right JVM target.
-            // Note: For Bazel compilation, this is provided through toolchain defaults.
-            .addArgs("-kotlincOptions", "-jvm-target=21")
-            .addArgs("-kotlincOptions", "-language-version=2.4")
-            // Don't complain when using release candidate builds of Kotlin Compiler.
-            .addArgs("-kotlincOptions", "-Xskip-prerelease-check");
-
-    if (isKlibEnabled()) {
-      return tester
-          .addArgs("-experimentalEnableKlibs")
-          .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar")
-          .setKlibPathArg("ktstdlib/j2cl_kt_stdlib.klib");
-    } else {
-      return tester.setClassPathArg(
-          "transpiler/javatests/com/google/j2cl/transpiler/ktstdlib_bundle_deploy.jar");
-    }
-  }
-
-  // TODO(b/491190328): remove once klib is enabled by default.
-  public static boolean isKlibEnabled() {
-    return true;
+    return newTester()
+        .addArgs("-kotlincOptions", "-Xmulti-platform")
+        // J2CL Kotlin frontend is based on Koltin/JVM compiler that requires that deps and the
+        // current compilation use the same JVM target in order to inline bytecode. Even we
+        // don't use the bytecode inliner, kotlinc fails in the early stage if we do not specify
+        // the right JVM target.
+        // Note: For Bazel compilation, this is provided through toolchain defaults.
+        .addArgs("-kotlincOptions", "-jvm-target=21")
+        .addArgs("-kotlincOptions", "-language-version=2.4")
+        // Don't complain when using release candidate builds of Kotlin Compiler.
+        .addArgs("-kotlincOptions", "-Xskip-prerelease-check")
+        .addArgs("-experimentalEnableKlibs")
+        .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar")
+        .setKlibPathArg("ktstdlib/j2cl_kt_stdlib.klib");
   }
 
   /** Creates a new transpiler tester initialized with Kotlin (backend) defaults. */

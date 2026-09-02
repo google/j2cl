@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.j2cl.transpiler.TranspilerTester.isKlibEnabled;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithKotlinDefaults;
 
@@ -109,11 +108,12 @@ public class KytheIndexingMetadataTest {
 
     // Ensures there's an anchor on the name of the class declaration (the klib frontend uses the
     // full class declaration span because deserialized IR nodes lack FIR metadata).
-    // TODO(b/217479735): remove the isKlibEnabled() check once source mapping is fixed for klibs.
     assertImputesEdgeExists(
         kytheMetadata,
-        /* sourceBegin= */ isKlibEnabled() ? 13 : 19,
-        /* sourceEnd= */ isKlibEnabled() ? 43 : 40,
+        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
+        /* sourceBegin= */ 13,
+        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
+        /* sourceEnd= */ 43,
         /* targetBegin= */ 189,
         /* targetEnd= */ 210);
   }
@@ -142,8 +142,10 @@ public class KytheIndexingMetadataTest {
     // full class declaration span because deserialized IR nodes lack FIR metadata).
     assertImputesEdgeExists(
         kytheMetadata,
-        /* sourceBegin= */ isKlibEnabled() ? 19 : 25,
-        /* sourceEnd= */ isKlibEnabled() ? 49 : 46,
+        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
+        /* sourceBegin= */ 19,
+        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
+        /* sourceEnd= */ 49,
         /* targetBegin= */ 189,
         /* targetEnd= */ 210);
   }
