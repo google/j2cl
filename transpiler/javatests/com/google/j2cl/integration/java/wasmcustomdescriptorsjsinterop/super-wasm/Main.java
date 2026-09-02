@@ -45,6 +45,35 @@ public final class Main {
     testJsFunctionCrossCasting();
     testParameterizedJsFunction();
     testEntryPoint();
+    testMethodWithNativeAndLong();
+    testNativeJsTypeConsumer();
+  }
+
+  private static void testMethodWithNativeAndLong() {
+    SomeJsType someJsType = new SomeJsType(123);
+    MyNativeType nativeType = new MyNativeType(456);
+    assertEquals(456L + 789L, callMethodWithNativeAndLong(someJsType, nativeType, 789L));
+    assertEquals(456L, callMethodWithNativeAndLong(someJsType, nativeType, null));
+  }
+
+  private static void testNativeJsTypeConsumer() {
+    NativeJsTypeConsumer consumer = newNativeJsTypeConsumer();
+    MyNativeType nativeType = new MyNativeType(456);
+
+    assertEquals(456, consumer.callGetValue(nativeType));
+
+    assertEquals(456, callConsumerGetValue(consumer, nativeType));
+    assertEquals(466, callConsumerAdd(consumer, nativeType, 10));
+    assertEquals(456, callConsumerGetField(consumer, nativeType));
+    assertEquals(456L + 789L, callConsumerCombineWithLong(consumer, nativeType, 789L));
+    assertEquals(456L, callConsumerCombineWithLong(consumer, nativeType, null));
+
+    // Also test direct Java calls
+    assertEquals(456, consumer.callGetValue(nativeType));
+    assertEquals(466, consumer.callAdd(nativeType, 10));
+    assertEquals(456, consumer.callGetField(nativeType));
+    assertEquals(456L + 789L, consumer.callCombineWithLong(nativeType, 789L));
+    assertEquals(456L, consumer.callCombineWithLong(nativeType, null));
   }
 
   private static void testConstructor() {
@@ -184,6 +213,10 @@ public final class Main {
 
     public boolean takesSelf(SomeJsType self) {
       return self == this;
+    }
+
+    public long methodWithNativeAndLong(MyNativeType nativeType, Long boxedLong) {
+      return nativeType.value + (boxedLong != null ? boxedLong : 0L);
     }
 
     public static int staticMethod(SomeJsType self) {
@@ -797,6 +830,60 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native boolean callEntryPointWithUndefinedJsFunction();
+
+  @JsType(isNative = true, namespace = "nativehelper")
+  static class MyNativeType {
+    public int value;
+
+    public MyNativeType(int value) {}
+
+    public native int getValue();
+
+    public native int add(int delta);
+  }
+
+  @JsType(namespace = "wasmcustomdescriptorsjsinterop")
+  static class NativeJsTypeConsumer {
+    @JsConstructor
+    public NativeJsTypeConsumer() {}
+
+    public int callGetValue(MyNativeType nativeType) {
+      return nativeType.getValue();
+    }
+
+    public int callAdd(MyNativeType nativeType, int delta) {
+      return nativeType.add(delta);
+    }
+
+    public int callGetField(MyNativeType nativeType) {
+      return nativeType.value;
+    }
+
+    public long callCombineWithLong(MyNativeType nativeType, Long boxedLong) {
+      return nativeType.getValue() + (boxedLong != null ? boxedLong : 0L);
+    }
+  }
+
+  @JsMethod(namespace = "nativehelper")
+  static native long callMethodWithNativeAndLong(
+      SomeJsType someJsType, MyNativeType nativeType, Long boxedLong);
+
+  @JsMethod(namespace = "nativehelper")
+  static native NativeJsTypeConsumer newNativeJsTypeConsumer();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callConsumerGetValue(NativeJsTypeConsumer consumer, MyNativeType nativeType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callConsumerAdd(
+      NativeJsTypeConsumer consumer, MyNativeType nativeType, int delta);
+
+  @JsMethod(namespace = "nativehelper")
+  static native int callConsumerGetField(NativeJsTypeConsumer consumer, MyNativeType nativeType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native long callConsumerCombineWithLong(
+      NativeJsTypeConsumer consumer, MyNativeType nativeType, Long boxedLong);
 
   @JsType(isNative = true, namespace = "native")
   static class NativeJsType {

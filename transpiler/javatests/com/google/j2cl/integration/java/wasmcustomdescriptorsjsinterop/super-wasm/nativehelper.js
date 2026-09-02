@@ -26,7 +26,9 @@ const JsInterfaceGetNumber = goog.require('wasmcustomdescriptorsjsinterop.JsInte
 const JsInterfaceRenamedMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceRenamedMethod');
 const JsInterfaceStaticMethod = goog.require('wasmcustomdescriptorsjsinterop.JsInterfaceStaticMethod');
 const Long = goog.require('goog.math.Long');
+const MyNativeType = goog.require('nativehelper.MyNativeType');
 const NativeJsType = goog.require('native.NativeJsType');
+const NativeJsTypeConsumer = goog.require('wasmcustomdescriptorsjsinterop.NativeJsTypeConsumer');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
 
 /**
@@ -380,6 +382,67 @@ function callEntryPointWithUndefinedJsFunction() {
   return globalThis['wasmExports']['entryPointWithJsFunction'](undefined);
 }
 
+/**
+ * @param {!SomeJsType} someJsType
+ * @param {!MyNativeType} nativeType
+ * @param {?Long} boxedLong
+ * @return {?Long}
+ * @public
+ */
+function callMethodWithNativeAndLong(someJsType, nativeType, boxedLong) {
+  return someJsType.methodWithNativeAndLong(nativeType, boxedLong);
+}
+
+/**
+ * @return {!NativeJsTypeConsumer}
+ * @public
+ */
+function newNativeJsTypeConsumer() {
+  return new NativeJsTypeConsumer();
+}
+
+/**
+ * @param {!NativeJsTypeConsumer} consumer
+ * @param {!MyNativeType} nativeType
+ * @return {number}
+ * @public
+ */
+function callConsumerGetValue(consumer, nativeType) {
+  return consumer.callGetValue(nativeType);
+}
+
+/**
+ * @param {!NativeJsTypeConsumer} consumer
+ * @param {!MyNativeType} nativeType
+ * @param {number} delta
+ * @return {number}
+ * @public
+ */
+function callConsumerAdd(consumer, nativeType, delta) {
+  return consumer.callAdd(nativeType, delta);
+}
+
+/**
+ * @param {!NativeJsTypeConsumer} consumer
+ * @param {!MyNativeType} nativeType
+ * @return {number}
+ * @public
+ */
+function callConsumerGetField(consumer, nativeType) {
+  return consumer.callGetField(nativeType);
+}
+
+/**
+ * @param {!NativeJsTypeConsumer} consumer
+ * @param {!MyNativeType} nativeType
+ * @param {?Long} boxedLong
+ * @return {?Long}
+ * @public
+ */
+function callConsumerCombineWithLong(consumer, nativeType, boxedLong) {
+  return consumer.callCombineWithLong(nativeType, boxedLong);
+}
+
 exports = {
   newBaseJsType,
   newSomeJsType,
@@ -421,4 +484,10 @@ exports = {
   callJsMethodEntryPointWithJsType,
   callEntryPointWithNullJsFunction,
   callEntryPointWithUndefinedJsFunction,
+  newNativeJsTypeConsumer,
+  callConsumerAdd,
+  callConsumerCombineWithLong,
+  callConsumerGetField,
+  callConsumerGetValue,
+  callMethodWithNativeAndLong,
 };
