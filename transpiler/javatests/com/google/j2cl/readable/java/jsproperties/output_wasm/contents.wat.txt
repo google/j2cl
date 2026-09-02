@@ -221,6 +221,18 @@
  )
 )
 
+;;; int InterfaceWithStaticJsProperties.A()
+(func $js_export_get_A__int@jsproperties.InterfaceWithStaticJsProperties
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
+  (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
+  (return (i32.const 1))
+ )
+)
+
 ;;; int InterfaceWithStaticJsProperties.getB()
 (func $js_export_get_getB__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
@@ -242,18 +254,6 @@
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:118:14
   (call $m_setB_$private__int__void@jsproperties.InterfaceWithStaticJsProperties (local.get $x))
- )
-)
-
-;;; int InterfaceWithStaticJsProperties.A()
-(func $js_export_get_A__int@jsproperties.InterfaceWithStaticJsProperties
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
-  (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:110:18
-  (return (i32.const 1))
  )
 )
 
@@ -584,66 +584,6 @@
 )
 (elem declare func $m_setB__int__void@jsproperties.Bar)
 
-;;; int Bar.getA()
-(func $js_export_get_getA__int@jsproperties.Bar
- (type $function.js_export_get_getA__int)
- (param $this.untyped (ref $java.lang.Object))
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:52:13
- (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:52:13
-  (return (call_ref $function.m_getA__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.Bar.vtable $m_getA__int (ref.get_desc $jsproperties.Bar(local.get $this)))))
- )
-)
-(elem declare func $js_export_get_getA__int@jsproperties.Bar)
-
-;;; void Bar.setA(int x)
-(func $js_export_set_setA__int__void@jsproperties.Bar
- (type $function.js_export_set_setA__int__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:57:14
- (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:57:14
-  (call_ref $function.m_setA__int__void (ref.as_non_null (local.get $this))(local.get $x)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (ref.get_desc $jsproperties.Bar(local.get $this))))
- )
-)
-(elem declare func $js_export_set_setA__int__void@jsproperties.Bar)
-
-;;; int Bar.getB()
-(func $js_export_get_getB__int@jsproperties.Bar
- (type $function.js_export_get_getB__int)
- (param $this.untyped (ref $java.lang.Object))
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:62:13
- (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:62:13
-  (return (call_ref $function.m_getB__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.Bar.vtable $m_getB__int (ref.get_desc $jsproperties.Bar(local.get $this)))))
- )
-)
-(elem declare func $js_export_get_getB__int@jsproperties.Bar)
-
-;;; void Bar.setB(int x)
-(func $js_export_set_setB__int__void@jsproperties.Bar
- (type $function.js_export_set_setB__int__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:67:14
- (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:67:14
-  (call_ref $function.m_setB__int__void (ref.as_non_null (local.get $this))(local.get $x)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (ref.get_desc $jsproperties.Bar(local.get $this))))
- )
-)
-(elem declare func $js_export_set_setB__int__void@jsproperties.Bar)
-
 ;;; int Bar.privateField()
 (func $js_export_get_privateField__int_$p_jsproperties_Bar@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
@@ -665,6 +605,66 @@
   (struct.set $jsproperties.Bar $privateField@jsproperties.Bar (local.get $this) (local.get $arg0))
  )
 )
+
+;;; int Bar.getA()
+(func $js_export_get_getA__int@jsproperties.Bar
+ (type $function.js_export_get_getA__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+ (local $this (ref null $jsproperties.Bar))
+ (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+  (return (call_ref $function.m_getA__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.Bar.vtable $m_getA__int (ref.get_desc $jsproperties.Bar(local.get $this)))))
+ )
+)
+(elem declare func $js_export_get_getA__int@jsproperties.Bar)
+
+;;; void Bar.setA(int x)
+(func $js_export_set_setA__int__void@jsproperties.Bar
+ (type $function.js_export_set_setA__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+ (local $this (ref null $jsproperties.Bar))
+ (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+  (call_ref $function.m_setA__int__void (ref.as_non_null (local.get $this))(local.get $x)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (ref.get_desc $jsproperties.Bar(local.get $this))))
+ )
+)
+(elem declare func $js_export_set_setA__int__void@jsproperties.Bar)
+
+;;; int Bar.getB()
+(func $js_export_get_getB__int@jsproperties.Bar
+ (type $function.js_export_get_getB__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+ (local $this (ref null $jsproperties.Bar))
+ (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+  (return (call_ref $function.m_getB__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.Bar.vtable $m_getB__int (ref.get_desc $jsproperties.Bar(local.get $this)))))
+ )
+)
+(elem declare func $js_export_get_getB__int@jsproperties.Bar)
+
+;;; void Bar.setB(int x)
+(func $js_export_set_setB__int__void@jsproperties.Bar
+ (type $function.js_export_set_setB__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+ (local $this (ref null $jsproperties.Bar))
+ (local.set $this (ref.cast (ref $jsproperties.Bar) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:46:6
+  (call_ref $function.m_setB__int__void (ref.as_non_null (local.get $this))(local.get $x)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (ref.get_desc $jsproperties.Bar(local.get $this))))
+ )
+)
+(elem declare func $js_export_set_setB__int__void@jsproperties.Bar)
 
 ;;; void Bar.$init()
 (func $$init__void_$p_jsproperties_Bar@jsproperties.Bar
@@ -787,33 +787,6 @@
  )
 )
 
-;;; int ReadOnlyJsProperty.getC()
-(func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty
- (type $function.js_export_get_getC__int)
- (param $this.untyped (ref $java.lang.Object))
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:87:13
- (local $this (ref null $jsproperties.ReadOnlyJsProperty))
- (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:87:13
-  (return (call_ref $function.m_getC__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ReadOnlyJsProperty.vtable $m_getC__int (ref.get_desc $jsproperties.ReadOnlyJsProperty(local.get $this)))))
- )
-)
-(elem declare func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty)
-
-;;; int ReadOnlyJsProperty.getD()
-(func $js_export_get_getD__int@jsproperties.ReadOnlyJsProperty
- (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
-  (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
-  (return (call $m_getD_$private__int@jsproperties.ReadOnlyJsProperty ))
- )
-)
-
 ;;; int ReadOnlyJsProperty.a()
 (func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty
  (type $function.js_export_get_a__int)
@@ -856,21 +829,6 @@
 )
 (elem declare func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty)
 
-;;; void ReadOnlyJsProperty.instanceFinalField(int arg0)
-(func $js_export_set_instanceFinalField__int__void@jsproperties.ReadOnlyJsProperty
- (type $function.js_export_set_instanceFinalField__int__void)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:31
- (local $this (ref null $jsproperties.ReadOnlyJsProperty))
- (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:31
-  (struct.set $jsproperties.ReadOnlyJsProperty $instanceFinalField@jsproperties.ReadOnlyJsProperty (local.get $this) (local.get $arg0))
- )
-)
-(elem declare func $js_export_set_instanceFinalField__int__void@jsproperties.ReadOnlyJsProperty)
-
 ;;; int ReadOnlyJsProperty.staticFinalField()
 (func $js_export_get_staticFinalField__int@jsproperties.ReadOnlyJsProperty
  (result i32)
@@ -883,17 +841,32 @@
  )
 )
 
-;;; void ReadOnlyJsProperty.staticFinalField(int arg0)
-(func $js_export_set_staticFinalField__int__void@jsproperties.ReadOnlyJsProperty
- (param $arg0 i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+;;; int ReadOnlyJsProperty.getD()
+(func $js_export_get_getD__int@jsproperties.ReadOnlyJsProperty
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:80:38
-  (global.set $staticFinalField@jsproperties.ReadOnlyJsProperty (local.get $arg0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:92:20
+  (return (call $m_getD_$private__int@jsproperties.ReadOnlyJsProperty ))
  )
 )
+
+;;; int ReadOnlyJsProperty.getC()
+(func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_get_getC__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+ (local $this (ref null $jsproperties.ReadOnlyJsProperty))
+ (local.set $this (ref.cast (ref $jsproperties.ReadOnlyJsProperty) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:73:6
+  (return (call_ref $function.m_getC__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ReadOnlyJsProperty.vtable $m_getC__int (ref.get_desc $jsproperties.ReadOnlyJsProperty(local.get $this)))))
+ )
+)
+(elem declare func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty)
 
 ;;; void ReadOnlyJsProperty.$clinit()
 (func $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty
@@ -1009,7 +982,7 @@
  (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
-  (return (call_ref $function.m_getM__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable $m_getM__int (ref.get_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties(local.get $this)))))
+  (return (call_ref $function.m_getM__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.InterfaceWithDefaultJsProperties.vtable $m_getM__int (ref.cast (ref $jsproperties.InterfaceWithDefaultJsProperties.vtable) (call $get.itable.$jsproperties.InterfaceWithDefaultJsProperties (local.get $this))))))
  )
 )
 (elem declare func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
@@ -1024,7 +997,7 @@
  (local.set $this (ref.cast (ref $jsproperties.ImplementsInterfaceWithDefaultJsProperties) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:107:6
-  (call_ref $function.m_setM__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $jsproperties.ImplementsInterfaceWithDefaultJsProperties.vtable $m_setM__int__void (ref.get_desc $jsproperties.ImplementsInterfaceWithDefaultJsProperties(local.get $this))))
+  (call_ref $function.m_setM__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $jsproperties.InterfaceWithDefaultJsProperties.vtable $m_setM__int__void (ref.cast (ref $jsproperties.InterfaceWithDefaultJsProperties.vtable) (call $get.itable.$jsproperties.InterfaceWithDefaultJsProperties (local.get $this)))))
  )
 )
 (elem declare func $js_export_set_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties)

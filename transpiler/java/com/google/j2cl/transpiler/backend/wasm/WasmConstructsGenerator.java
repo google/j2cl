@@ -17,8 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.j2cl.transpiler.ast.AstUtils.getJsPrototypeOwner;
-import static com.google.j2cl.transpiler.ast.AstUtils.hasWasmJsPrototype;
+import static com.google.j2cl.transpiler.ast.AstUtils.hasOwnWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.lang.String.format;
 
@@ -57,6 +56,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 
 /** Generates all the syntactic .wat constructs for wasm. */
 public class WasmConstructsGenerator {
@@ -273,7 +273,7 @@ public class WasmConstructsGenerator {
   }
 
   void renderJsPrototypeImport(Type type) {
-    if (!hasWasmJsPrototype(type.getDeclaration())) {
+    if (!hasOwnWasmJsPrototype(type.getDeclaration())) {
       return;
     }
     String name = environment.getJsPrototypeGlobalName(type.getDeclaration());
@@ -654,7 +654,7 @@ public class WasmConstructsGenerator {
       builder.newLine();
 
       // For classes, the first field of the vtable for JsTypes is the JS prototype.
-      var prototypeOwner = getJsPrototypeOwner(implementedType);
+      var prototypeOwner = getOwnerOfJsPrototype(implementedType);
       if (prototypeOwner != null) {
         builder.append(
             format("(global.get %s)", environment.getJsPrototypeGlobalName(prototypeOwner)));
@@ -693,6 +693,23 @@ public class WasmConstructsGenerator {
     builder.unindent();
     builder.newLine();
     builder.append(")");
+  }
+
+  /**
+   * Returns the type that owns the JavaScript prototype for this type. It might be itself or a
+   * superclass.
+   *
+   * <p>If no supertype has a JS prototype, returns null.
+   */
+  @Nullable
+  private static TypeDeclaration getOwnerOfJsPrototype(@Nullable TypeDeclaration typeDeclaration) {
+    if (typeDeclaration == null) {
+      return null;
+    }
+    if (hasOwnWasmJsPrototype(typeDeclaration)) {
+      return typeDeclaration;
+    }
+    return getOwnerOfJsPrototype(typeDeclaration.getSuperTypeDeclaration());
   }
 
   /**

@@ -1,8 +1,6 @@
 goog.module('jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes');
 
-const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
-
-/** @const {typeof $j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes} */
-const ExposesMethodWithDifferentTypes = constructorProxy('jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes');
+/** @typedef {$j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes} */
+let ExposesMethodWithDifferentTypes;
 
 exports = ExposesMethodWithDifferentTypes;

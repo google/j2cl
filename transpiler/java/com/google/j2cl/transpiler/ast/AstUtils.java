@@ -1349,25 +1349,54 @@ public final class AstUtils {
    *
    * <p>A new prototype is populated if the type adds exported members.
    */
-  public static boolean hasWasmJsPrototype(TypeDeclaration typeDeclaration) {
-    // TODO(b/545779164): See if this can be simplified by making the bridge method generation
-    // logic more consistent between Closure and Wasm. Then instead of using explicitly collecting
-    // declared instance methods, accidental overrides and defaults bridges, we would just iterate
-    // over polymorphic methods.
-    return !typeDeclaration.isNative()
-        && (typeDeclaration.getDeclaredMethodDescriptors().stream()
-                .anyMatch(AstUtils::needsWasmJsExport)
-            || typeDeclaration.getDeclaredFieldDescriptors().stream()
-                .anyMatch(AstUtils::needsWasmJsExport)
-            // Accidental overrides might make superclass methods become accessible from JS.
-            || typeDeclaration.toDescriptor().getAccidentalOverrides().stream()
-                .anyMatch(AstUtils::needsWasmJsExport)
-            // Default methods that are accessible from JS might not have an implementation in the
-            // superclasses and need to be considered separately.
-            || typeDeclaration.toDescriptor().getPolymorphicMethods().stream()
-                .filter(MethodDescriptor::isDefaultMethodBridge)
-                .filter(m -> m.isMemberOf(typeDeclaration))
-                .anyMatch(AstUtils::needsWasmJsExport));
+  public static boolean hasOwnWasmJsPrototype(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isNative()) {
+      return false;
+    }
+
+    if (typeDeclaration.toDescriptor().getDeclaredMemberDescriptors().stream()
+        .anyMatch(AstUtils::isExposedToJsViaConstructor)) {
+      return true;
+    }
+
+    return hasNewPrototypeMember(typeDeclaration);
+  }
+
+  private static boolean hasNewPrototypeMember(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isInterface()) {
+      // Interfaces don't really have JavaScript prototypes.
+      return false;
+    }
+
+    return typeDeclaration.getDeclaredFieldDescriptors().stream()
+            .anyMatch(FieldDescriptor::canBeReferencedExternallyForWasm)
+        || !typeDeclaration.toDescriptor().getNewlyExposedInstanceJsMethods().isEmpty();
+  }
+
+  /**
+   * Whether this member causes the constructor to be exported to JavaScript.
+   *
+   * <p>Note that just having new JsMembers does not necessarily mean the constructor will be
+   * exported to JS. In particular, a @JsConstructor of abstract classes or an instance @JsMethod
+   * does not cause the constructor to be exported to JS.
+   */
+  public static boolean isExposedToJsViaConstructor(Member member) {
+    return isExposedToJsViaConstructor(member.getDescriptor());
+  }
+
+  private static boolean isExposedToJsViaConstructor(MemberDescriptor descriptor) {
+    if (descriptor.isConstructor()
+        && descriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract()) {
+      // An abstract class constructor is not accessible from JS since the class cannot be directly
+      // instantiated and subclassing Wasm classes in JavaScript is currently not supported.
+      return false;
+    }
+
+    if (descriptor.isInstanceMember()) {
+      // Instance members are not accessed through the constructor.
+      return false;
+    }
+    return descriptor.canBeReferencedExternallyForWasm();
   }
 
   /** Returns true if this type defined in Wasm is exported to/visible in JS. */
@@ -1395,62 +1424,6 @@ public final class AstUtils {
                     t ->
                         t.toDescriptor().getDeclaredMemberDescriptors().stream()
                             .anyMatch(m -> m.isJsMember() && !m.isNative())));
-  }
-
-  /**
-   * Returns the type that owns the JavaScript prototype for this type. It might be itself or a
-   * superclass.
-   *
-   * <p>If no supertype has a JS prototype, returns null.
-   */
-  @Nullable
-  public static TypeDeclaration getJsPrototypeOwner(@Nullable TypeDeclaration typeDeclaration) {
-    if (typeDeclaration == null) {
-      return null;
-    }
-    if (hasWasmJsPrototype(typeDeclaration)) {
-      return typeDeclaration;
-    }
-    return getJsPrototypeOwner(typeDeclaration.getSuperTypeDeclaration());
-  }
-
-  /**
-   * Returns true if the specified member in Wasm needs an export to be generated (ie, a bridge and
-   * a JS extern).
-   */
-  public static boolean needsWasmJsExport(MemberDescriptor memberDescriptor) {
-    if (!memberDescriptor.canBeReferencedExternally()) {
-      return false;
-    }
-
-    // TODO(b/481799839): Consider "@Wasm native ..." methods.
-    if (memberDescriptor.isNative() || memberDescriptor.isJsFunction()) {
-      return false;
-    }
-
-    if (memberDescriptor instanceof MethodDescriptor methodDescriptor) {
-      // Exclude generated export bridges themselves.
-      if (methodDescriptor.getOrigin().isWasmJsExport()) {
-        return false;
-      }
-
-      // Exclude constructors of abstract types.
-      if (methodDescriptor.isConstructor()
-          && methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isAbstract()) {
-        return false;
-      }
-
-      // JS members that override an already exported JS member don't need a bridge in the
-      // overriding type. The bridge in the overridden method does a polymorphic dispatch.
-      // Exclude interface methods from this check because there's no export bridges
-      // generated for interface methods themselves.
-      if (methodDescriptor.getJsOverriddenMethodDescriptors().stream()
-          .anyMatch(m -> !m.getEnclosingTypeDescriptor().isInterface() && m.isJsOverrideable())) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   /** Creates an expression that evaluates to a Wasm funcref reference. */

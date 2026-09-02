@@ -245,6 +245,13 @@ public abstract class MemberDescriptor
     return (isJsMember() && !NOT_ACCESSIBLE_BY_JS_ORIGINS.contains(getOrigin())) || isJsFunction();
   }
 
+  /** Returns whether the member can be referenced directly from JavaScript code. */
+  public boolean canBeReferencedExternallyForWasm() {
+    // TODO(b/553988945): Members exposed to Js in J2WASM and J2CL should be consistent and only
+    // canBeReferencedExternally should be needed.
+    return canBeReferencedExternally() && !isNative() && !isJsFunction();
+  }
+
   /**
    * Members with these origins are marked as JsMembers for naming or boilerplate reasons, do not
    * consider them accessible by JavaScript code.

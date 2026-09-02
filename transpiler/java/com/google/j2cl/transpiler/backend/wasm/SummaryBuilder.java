@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
-import static com.google.j2cl.transpiler.ast.AstUtils.hasWasmJsPrototype;
+import static com.google.j2cl.transpiler.ast.AstUtils.hasOwnWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.util.function.Predicate.not;
 
@@ -113,7 +113,7 @@ public final class SummaryBuilder {
     }
 
     if (environment.isCustomDescriptorsJsInteropEnabled()
-        && hasWasmJsPrototype(type.getDeclaration())) {
+        && hasOwnWasmJsPrototype(type.getDeclaration())) {
       typeHierarchyInfoBuilder.setJsInfo(getJsInfo(type));
     }
 
@@ -148,15 +148,14 @@ public final class SummaryBuilder {
       jsInfoBuilder.addJsMembers(
           JsMemberInfo.newBuilder()
               .setKind(
-                  switch (methodDescriptor.getJsInfo().getJsMemberType()) {
-                    case CONSTRUCTOR -> JsMemberInfo.Kind.CONSTRUCTOR;
-                    case METHOD -> JsMemberInfo.Kind.METHOD;
-                    case GETTER -> JsMemberInfo.Kind.GETTER;
-                    case SETTER -> JsMemberInfo.Kind.SETTER;
+                  switch (methodDescriptor.getOrigin()) {
+                    case SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> JsMemberInfo.Kind.CONSTRUCTOR;
+                    case SYNTHETIC_WASM_JS_METHOD_EXPORT -> JsMemberInfo.Kind.METHOD;
+                    case SYNTHETIC_WASM_JS_GETTER_EXPORT -> JsMemberInfo.Kind.GETTER;
+                    case SYNTHETIC_WASM_JS_SETTER_EXPORT -> JsMemberInfo.Kind.SETTER;
                     default ->
                         throw new AssertionError(
-                            "Unexpected JsMemberType: "
-                                + methodDescriptor.getJsInfo().getJsMemberType().name());
+                            "Unexpected method origin: " + methodDescriptor.getOrigin());
                   })
               .setWasmName(environment.getMethodImplementationName(methodDescriptor))
               .setJsName(methodDescriptor.getSimpleJsName())

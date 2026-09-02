@@ -227,34 +227,6 @@
  )
 )
 
-;;; void SomeJsType.publicMethod()
-(func $js_export_publicMethod__void@jstype.SomeJsType
- (type $function.js_export_publicMethod__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:28:14
- (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:28:14
-  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
- )
-)
-(elem declare func $js_export_publicMethod__void@jstype.SomeJsType)
-
-;;; void SomeJsType.useFieldsAndMethods()
-(func $js_export_useFieldsAndMethods__void@jstype.SomeJsType
- (type $function.js_export_useFieldsAndMethods__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:36:14
- (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:36:14
-  (call_ref $function.m_useFieldsAndMethods__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_useFieldsAndMethods__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
- )
-)
-(elem declare func $js_export_useFieldsAndMethods__void@jstype.SomeJsType)
-
 ;;; int SomeJsType.publicField()
 (func $js_export_get_publicField__int@jstype.SomeJsType
  (type $function.js_export_get_publicField__int)
@@ -284,6 +256,34 @@
  )
 )
 (elem declare func $js_export_set_publicField__int__void@jstype.SomeJsType)
+
+;;; void SomeJsType.publicMethod()
+(func $js_export_publicMethod__void@jstype.SomeJsType
+ (type $function.js_export_publicMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
+ )
+)
+(elem declare func $js_export_publicMethod__void@jstype.SomeJsType)
+
+;;; void SomeJsType.useFieldsAndMethods()
+(func $js_export_useFieldsAndMethods__void@jstype.SomeJsType
+ (type $function.js_export_useFieldsAndMethods__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (call_ref $function.m_useFieldsAndMethods__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_useFieldsAndMethods__void (ref.get_desc $jstype.SomeJsType(local.get $this))))
+ )
+)
+(elem declare func $js_export_useFieldsAndMethods__void@jstype.SomeJsType)
 
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void_<once>_@jstype.SomeJsType

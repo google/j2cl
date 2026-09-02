@@ -33,10 +33,12 @@ public class WasmExportBridgesUtils {
    * does any necessary JS <-> Wasm argument and return value conversions.
    */
   public static Method generateBridge(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
       MethodDescriptor methodDescriptor,
       SourcePosition sourcePosition,
       MethodDescriptor.MethodOrigin origin) {
-    MethodDescriptor bridgeMethodDescriptor = createBridgeDescriptor(methodDescriptor, origin);
+    MethodDescriptor bridgeMethodDescriptor =
+        createBridgeDescriptor(enclosingTypeDescriptor, methodDescriptor, origin);
     List<Variable> parameters =
         AstUtils.createParameterVariables(bridgeMethodDescriptor.getParameterDescriptors());
 
@@ -151,9 +153,13 @@ public class WasmExportBridgesUtils {
   }
 
   private static MethodDescriptor createBridgeDescriptor(
-      MethodDescriptor descriptor, MethodDescriptor.MethodOrigin origin) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      MethodDescriptor descriptor,
+      MethodDescriptor.MethodOrigin origin) {
     MethodDescriptor.Builder builder =
         descriptor.toBuilder()
+            .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+            .setDeclarationDescriptor(null)
             .makeBridge(
                 origin, /* originDescriptor= */ descriptor, /* targetDescriptor= */ descriptor)
             .setReturnTypeDescriptor(
@@ -257,7 +263,9 @@ public class WasmExportBridgesUtils {
     MethodDescriptor functionalMethod =
         jsFunctionTypeDescriptor.getJsFunctionMethodDescriptor().getDeclarationDescriptor();
     return createBridgeDescriptor(
-            functionalMethod, MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_FUNCTION_EXPORT)
+            jsFunctionTypeDescriptor,
+            functionalMethod,
+            MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_FUNCTION_EXPORT)
         .toBuilder()
         .setEnclosingTypeDescriptor(jsFunctionTypeDescriptor.toRawTypeDescriptor())
         .setStatic(true)

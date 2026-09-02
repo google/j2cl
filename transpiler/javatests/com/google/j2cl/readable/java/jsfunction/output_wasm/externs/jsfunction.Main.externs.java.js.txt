@@ -1,23 +1,24 @@
 /** @externs */
 
 /**
+ * @abstract
  * @constructor
  */
 var $j2wasm$externs_jsfunction_Main = function() {};
 
+/**
+ * @template T
+ */
+$j2wasm$externs_jsfunction_Main.prototype.acceptsVarargsJsFunctionWithTypeVariableInVarargs = function(/** Array<?function(number, ...T):number> */ x) {};
+
+/**
+ * @template T
+ */
+$j2wasm$externs_jsfunction_Main.prototype.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs = function(/** Array<?function(number, ...$j2wasm$externs_java_util_List<T>):number> */ x) {};
+
+/**
+ */
+$j2wasm$externs_jsfunction_Main.prototype.acceptsJsFunctionInVarargs = function(/** Array<?function():void> */ x) {};
+
 /** @type {?function(*):void} */
 $j2wasm$externs_jsfunction_Main.parametricJsFunction;
-
-/**
- * @template T
- */
-$j2wasm$externs_jsfunction_Main.prototype.acceptsVarargsJsFunctionWithTypeVariableInVarargs = function(.../** ...?function(number, ...T):number */ x) {};
-
-/**
- * @template T
- */
-$j2wasm$externs_jsfunction_Main.prototype.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs = function(.../** ...?function(number, ...$j2wasm$externs_java_util_List<T>):number */ x) {};
-
-/**
- */
-$j2wasm$externs_jsfunction_Main.prototype.acceptsJsFunctionInVarargs = function(.../** ...?function():void */ x) {};

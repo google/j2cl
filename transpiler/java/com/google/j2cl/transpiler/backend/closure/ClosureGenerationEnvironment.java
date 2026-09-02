@@ -317,7 +317,7 @@ public class ClosureGenerationEnvironment {
     if (visibility != Visibility.PUBLIC) {
       jsDocs.add("@" + visibility.jsText);
     }
-    if (fieldDescriptor.isCompileTimeConstant()) {
+    if (isConst(fieldDescriptor)) {
       jsDocs.add("@const");
     }
     if (jsDocs.isEmpty()) {
@@ -338,5 +338,10 @@ public class ClosureGenerationEnvironment {
     return fieldDescriptor.getOrigin() == FieldOrigin.SYNTHETIC_BACKING_FIELD
         ? Visibility.PRIVATE
         : Visibility.PUBLIC;
+  }
+
+  protected boolean isConst(FieldDescriptor fieldDescriptor) {
+    // Only compile-time constants are declared as @const.
+    return fieldDescriptor.isCompileTimeConstant();
   }
 }

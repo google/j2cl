@@ -595,6 +595,43 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
             .collect(toImmutableList());
   }
 
+  /**
+   * Returns all the instance JsMethods that are newly exposed by this type and not its superclass.
+   *
+   * <p>Note: not supported on interfaces.
+   */
+  @Memoized
+  public Collection<MethodDescriptor> getNewlyExposedInstanceJsMethods() {
+    checkState(!isInterface());
+    var instanceJsMethods = new LinkedHashMap<>(getClosureMangledNameToInstanceJsMethodMap());
+    if (getSuperTypeDescriptor() != null) {
+      // Remove the methods provided by the superclass.
+      getSuperTypeDescriptor()
+          .getClosureMangledNameToInstanceJsMethodMap()
+          .keySet()
+          .forEach(instanceJsMethods::remove);
+    }
+    return instanceJsMethods.values();
+  }
+
+  /**
+   * Returns all the instance JsMethods available in this type indexed by their closure mangled
+   * name.
+   *
+   * <p>Note: The methods are indexed by their closure mangled name rather than their jsname to
+   * distinguish getter methods from setter methods.
+   */
+  @Memoized
+  ImmutableMap<String, MethodDescriptor> getClosureMangledNameToInstanceJsMethodMap() {
+    return getAllSuperTypesIncludingSelf().stream()
+        .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
+        .filter(MemberDescriptor::isInstanceMember)
+        .filter(MemberDescriptor::canBeReferencedExternallyForWasm)
+        .collect(
+            toImmutableMap(
+                MethodDescriptor::getClosureMangledName, Function.identity(), (m1, m2) -> m1));
+  }
+
   /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */
   @Nullable
   public FieldDescriptor getFieldDescriptor(String name) {

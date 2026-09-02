@@ -94,7 +94,10 @@ public class WasmEntryPointBridgesCreator {
     }
 
     return WasmExportBridgesUtils.generateBridge(
-        methodDescriptor, sourcePosition, MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_ENTRY_POINT);
+        methodDescriptor.getEnclosingTypeDescriptor(),
+        methodDescriptor,
+        sourcePosition,
+        MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_ENTRY_POINT);
   }
 
   private boolean isEntryPoint(MethodDescriptor methodDescriptor) {

@@ -3267,51 +3267,6 @@
 )
 (elem declare func $m_testJsFunctionWithJsType__void@jsfunction.Main)
 
-;;; void Main.acceptsVarargsJsFunctionWithTypeVariableInVarargs(WasmExtern x)
-(func $js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
- (type $function.js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
- (param $this.untyped (ref $java.lang.Object))
- (param $x (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:211:11
- (local $this (ref null $jsfunction.Main))
- (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:211:11
-  (call_ref $function.m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
- )
-)
-(elem declare func $js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
-
-;;; void Main.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(WasmExtern x)
-(func $js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
- (type $function.js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
- (param $this.untyped (ref $java.lang.Object))
- (param $x (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:214:11
- (local $this (ref null $jsfunction.Main))
- (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:214:11
-  (call_ref $function.m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
- )
-)
-(elem declare func $js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
-
-;;; void Main.acceptsJsFunctionInVarargs(WasmExtern x)
-(func $js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
- (type $function.js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
- (param $this.untyped (ref $java.lang.Object))
- (param $x (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:223:7
- (local $this (ref null $jsfunction.Main))
- (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:223:7
-  (call_ref $function.m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
- )
-)
-(elem declare func $js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
-
 ;;; void Main.setParametricJsFunction(WasmExtern fn)
 (func $js_export_set_setParametricJsFunction__javaemul_internal_WasmExtern__void@jsfunction.Main
  (param $fn (ref null extern))
@@ -3335,6 +3290,51 @@
   (return (call $m_toJs__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@javaemul.internal.JsFunctionAdaptor (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call $m_getParametricJsFunction_$private__jsfunction_Main_ParametricJsFunction@jsfunction.Main ))))
  )
 )
+
+;;; void Main.acceptsVarargsJsFunctionWithTypeVariableInVarargs(WasmExtern x)
+(func $js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
+ (type $function.js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:28:13
+ (local $this (ref null $jsfunction.Main))
+ (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:28:13
+  (call_ref $function.m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithTypeVariableInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
+ )
+)
+(elem declare func $js_export_acceptsVarargsJsFunctionWithTypeVariableInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
+
+;;; void Main.acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(WasmExtern x)
+(func $js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
+ (type $function.js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:28:13
+ (local $this (ref null $jsfunction.Main))
+ (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:28:13
+  (call_ref $function.m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__arrayOf_jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
+ )
+)
+(elem declare func $js_export_acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
+
+;;; void Main.acceptsJsFunctionInVarargs(WasmExtern x)
+(func $js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main
+ (type $function.js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:28:13
+ (local $this (ref null $jsfunction.Main))
+ (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:28:13
+  (call_ref $function.m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $x)))(struct.get $jsfunction.Main.vtable $m_acceptsJsFunctionInVarargs__arrayOf_jsfunction_Main_SimpleJsFunction__void_$pp_jsfunction (ref.get_desc $jsfunction.Main(local.get $this))))
+ )
+)
+(elem declare func $js_export_acceptsJsFunctionInVarargs__javaemul_internal_WasmExtern__void_$pp_jsfunction@jsfunction.Main)
 
 ;;; void Main.$init()
 (func $$init__void_$p_jsfunction_Main@jsfunction.Main
@@ -3582,11 +3582,11 @@
  (type $function.js_export_anApi__javaemul_internal_WasmExtern)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:263:39
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:260:15
  (local $this (ref null $jsfunction.Main.Implementor))
  (local.set $this (ref.cast (ref $jsfunction.Main.Implementor) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:263:39
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:260:15
   (return (call $m_toJs__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@javaemul.internal.JsFunctionAdaptor (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call_ref $function.m_anApi__jsfunction_Main_ParametricJsFunction (ref.as_non_null (local.get $this))(struct.get $jsfunction.Main.Implementor.vtable $m_anApi__jsfunction_Main_ParametricJsFunction (ref.get_desc $jsfunction.Main.Implementor(local.get $this)))))))
  )
 )
@@ -3684,11 +3684,11 @@
  (type $function.js_export_get_getFunction__javaemul_internal_WasmExtern_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:295:33
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:291:23
  (local $this (ref null $jsfunction.Main.ClassWithJsFunctionProperty))
  (local.set $this (ref.cast (ref $jsfunction.Main.ClassWithJsFunctionProperty) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:295:33
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:291:23
   (return (call $m_toJs__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@javaemul.internal.JsFunctionAdaptor (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call_ref $function.m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref.as_non_null (local.get $this))(struct.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref.get_desc $jsfunction.Main.ClassWithJsFunctionProperty(local.get $this)))))))
  )
 )
@@ -3810,11 +3810,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $fn (ref null extern))
  (result (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:436:32
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:434:22
  (local $this (ref null $jsfunction.Main.SomeJsType))
  (local.set $this (ref.cast (ref $jsfunction.Main.SomeJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:436:32
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsfunction/readable-j2wasm.js/jsfunction/Main.java:434:22
   (return (call $m_toJs__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@javaemul.internal.JsFunctionAdaptor (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call_ref $function.m_getJsFunction__jsfunction_Main_JsFunctionWithJsType__jsfunction_Main_JsFunctionWithJsType (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (local.get $fn))(struct.get $jsfunction.Main.SomeJsType.vtable $m_getJsFunction__jsfunction_Main_JsFunctionWithJsType__jsfunction_Main_JsFunctionWithJsType (ref.get_desc $jsfunction.Main.SomeJsType(local.get $this)))))))
  )
 )

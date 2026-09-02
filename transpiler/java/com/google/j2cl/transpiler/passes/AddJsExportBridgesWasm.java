@@ -16,16 +16,18 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.MoreCollectors.onlyElement;
+import static com.google.j2cl.transpiler.ast.AstUtils.hasOwnWasmJsPrototype;
 
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Generates forwarding methods for Wasm JsInterop exported methods. The forwarding methods are then
@@ -51,55 +53,56 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
   private static void addJsTypeExportBridges(Library library) {
     library
         .streamTypes()
-        .filter(type -> AstUtils.hasWasmJsPrototype(type.getDeclaration()))
+        .filter(t -> hasOwnWasmJsPrototype(t.getDeclaration()))
         .forEach(
             type -> {
-              // Generate bridges for declared methods.
-              for (Method method : type.getMethods()) {
-                if (!needsBridge(method.getDescriptor())) {
-                  continue;
-                }
+              List<Method> bridges = new ArrayList<>();
 
-                addBridge(
-                    type,
-                    WasmExportBridgesUtils.generateBridge(
-                        method.getDescriptor(),
-                        method.getSourcePosition(),
-                        getBridgeOrigin(method.getDescriptor())));
+              // Create bridges for fields, static methods and constructors directly from Member
+              // objects in Type to account for the effects of normalization. In particular
+              // constructors of inner classes have an extra parameter for the outer class instance
+              // that is not present in the type model.
+              type.getMembers()
+                  .forEach(
+                      m -> {
+                        switch (m) {
+                          case Method method when AstUtils.isExposedToJsViaConstructor(method) ->
+                              bridges.add(
+                                  WasmExportBridgesUtils.generateBridge(
+                                      type.getTypeDescriptor(),
+                                      method.getDescriptor(),
+                                      method.getSourcePosition(),
+                                      getBridgeOrigin(method.getDescriptor())));
+                          case Field field
+                              when field.getDescriptor().canBeReferencedExternally() -> {
+                            bridges.add(
+                                WasmExportBridgesUtils.generateGetterBridge(
+                                    field.getDescriptor(), field.getSourcePosition()));
+                            if (!field.getDescriptor().isFinal()) {
+                              bridges.add(
+                                  WasmExportBridgesUtils.generateSetterBridge(
+                                      field.getDescriptor(), field.getSourcePosition()));
+                            }
+                          }
+                          default -> {}
+                        }
+                      });
+
+              if (!type.isInterface()) {
+                // Only create bridges for newly exposed instance methods.
+                type.getTypeDescriptor()
+                    .getNewlyExposedInstanceJsMethods()
+                    .forEach(
+                        methodDescriptor ->
+                            bridges.add(
+                                WasmExportBridgesUtils.generateBridge(
+                                    type.getTypeDescriptor(),
+                                    methodDescriptor,
+                                    type.getSourcePosition(),
+                                    getBridgeOrigin(methodDescriptor))));
               }
 
-              // Generate bridges for accidental overrides of interface js methods.
-              for (MethodDescriptor accidentalOverride :
-                  type.getTypeDescriptor().getAccidentalOverrides()) {
-                if (!needsBridge(accidentalOverride)) {
-                  continue;
-                }
-
-                addBridge(
-                    type,
-                    WasmExportBridgesUtils.generateBridge(
-                        accidentalOverride,
-                        SourcePosition.NONE,
-                        getBridgeOrigin(accidentalOverride)));
-              }
-
-              for (Field field : type.getFields()) {
-                if (!needsBridge(field.getDescriptor())) {
-                  continue;
-                }
-
-                addBridge(
-                    type,
-                    WasmExportBridgesUtils.generateGetterBridge(
-                        field.getDescriptor(), field.getSourcePosition()));
-
-                if (!field.isCompileTimeConstant()) {
-                  addBridge(
-                      type,
-                      WasmExportBridgesUtils.generateSetterBridge(
-                          field.getDescriptor(), field.getSourcePosition()));
-                }
-              }
+              bridges.forEach(bridge -> addBridge(type, bridge));
             });
   }
 
@@ -127,21 +130,12 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
     }
   }
 
-  private static boolean needsBridge(MemberDescriptor memberDescriptor) {
-    return AstUtils.needsWasmJsExport(memberDescriptor)
-        // TODO(b/543878914): Revisit this when refactored.
-        // For interfaces, only static members need bridges. Instance members are included with
-        // implementations.
-        && (!memberDescriptor.getEnclosingTypeDescriptor().isInterface()
-            || memberDescriptor.isStatic());
-  }
-
-  private static MethodDescriptor.MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
+  private static MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
     return switch (descriptor.getJsInfo().getJsMemberType()) {
-      case CONSTRUCTOR -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
-      case METHOD -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
-      case GETTER -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT;
-      case SETTER -> MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT;
+      case CONSTRUCTOR -> MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
+      case METHOD -> MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
+      case GETTER -> MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT;
+      case SETTER -> MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT;
       default ->
           throw new AssertionError(
               "Unexpected JsMemberType: " + descriptor.getJsInfo().getJsMemberType().name());

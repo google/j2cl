@@ -50,6 +50,11 @@ class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnviron
     return true;
   }
 
+  @Override
+  protected boolean isConst(FieldDescriptor fieldDescriptor) {
+    return fieldDescriptor.isFinal();
+  }
+
   /**
    * Returns the type alias for the given type declaration.
    *
@@ -120,12 +125,10 @@ class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnviron
           collectModuleDependencies(moduleDeps, methodDescriptor.getEnclosingTypeDescriptor());
         }
       }
-      case FieldDescriptor fieldDescriptor -> {
-        collectModuleDependencies(moduleDeps, fieldDescriptor.getTypeDescriptor());
-      }
-      default -> {
-        throw new AssertionError("Unexpected MemberDescriptor: " + memberDescriptor);
-      }
+      case FieldDescriptor fieldDescriptor ->
+          collectModuleDependencies(moduleDeps, fieldDescriptor.getTypeDescriptor());
+
+      default -> throw new AssertionError("Unexpected MemberDescriptor: " + memberDescriptor);
     }
   }
 
