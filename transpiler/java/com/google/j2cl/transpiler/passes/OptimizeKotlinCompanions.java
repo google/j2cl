@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -474,10 +473,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
                 .setOriginalJsInfo(
                     companionEnclosingType.isNative()
                             || companionEnclosingType.isJsFunctionInterface()
-                        ? JsInfo.builder()
-                            .setJsMemberType(JsMemberType.NONE)
-                            .setJsOverlay(true)
-                            .build()
+                        ? JsInfo.OVERLAY
                         : JsInfo.NONE));
   }
 
