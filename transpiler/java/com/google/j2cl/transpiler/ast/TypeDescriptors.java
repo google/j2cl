@@ -598,9 +598,9 @@ public class TypeDescriptors {
                 ? ImmutableList.of(
                     Annotation.builderFrom("jsinterop.annotations.JsType")
                         .addValue("isNative", BooleanLiteral.get(true))
+                        .addValue("namespace", new StringLiteral(jsNamespace))
                         .build())
                 : ImmutableList.of())
-        .setCustomizedJsNamespace(jsNamespace)
         .setPackage(getSyntheticPackage(jsNamespace))
         // Synthetic type declarations do not need to have type variables.
         // TODO(b/63118697): Make sure declarations are consistent with descriptor w.r.t

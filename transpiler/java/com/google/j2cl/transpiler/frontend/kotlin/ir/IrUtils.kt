@@ -98,7 +98,6 @@ import org.jetbrains.kotlin.ir.util.allTypeParameters
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
-import org.jetbrains.kotlin.ir.util.getConstArgument
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
@@ -629,13 +628,6 @@ private val IrDeclaration.isJvmStaticInCompanion: Boolean
     return declarationContext.isCompanionMember &&
       declarationContext.hasAnnotation(JVM_STATIC_FQ_NAME)
   }
-
-// TODO(b/550323040): Update call sites to this function to directly use
-// `IrAnnotation.getConstArgument`
-inline fun <reified T> IrConstructorCall.getValueArgumentAsConst(name: Name): T? {
-  check(this is IrAnnotation)
-  return getConstArgument(name.asString())
-}
 
 val IrDeclaration.isSynthetic
   get() =

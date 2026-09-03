@@ -44,16 +44,11 @@ public final class JsInteropAstUtils {
   }
 
   public static boolean isJsNative(TypeDeclaration typeDeclaration) {
-    Annotation jsType = typeDeclaration.getAnnotation("jsinterop.annotations.JsType");
-    if (jsType != null) {
-      return jsType.getBooleanValue("isNative", false);
+    if (typeDeclaration.isEnum() && TypeDeclaration.implementWasmJsInteropSemantics()) {
+      return false;
     }
-    Annotation jsEnum = typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
-    if (jsEnum != null) {
-      return !TypeDeclaration.implementWasmJsInteropSemantics()
-          && jsEnum.getBooleanValue("isNative", false);
-    }
-    return false;
+    Annotation annotation = getJsTypeOrJsEnumAnnotation(typeDeclaration);
+    return annotation != null && annotation.getBooleanValue("isNative", false);
   }
 
   @Nullable
@@ -73,6 +68,23 @@ public final class JsInteropAstUtils {
         .setSupportsComparable(!hasCustomValue || isNative)
         .setSupportsOrdinal(!hasCustomValue && !isNative)
         .build();
+  }
+
+  public static String getJsName(TypeDeclaration typeDeclaration) {
+    Annotation annotation = getJsTypeOrJsEnumAnnotation(typeDeclaration);
+    String jsName = getJsName(annotation);
+    return jsName != null ? jsName : typeDeclaration.getSimpleSourceName();
+  }
+
+  @Nullable
+  public static String getJsNamespace(TypeDeclaration typeDeclaration) {
+    return getJsNamespace(getJsTypeOrJsEnumAnnotation(typeDeclaration));
+  }
+
+  @Nullable
+  private static Annotation getJsTypeOrJsEnumAnnotation(TypeDeclaration typeDeclaration) {
+    Annotation jsType = typeDeclaration.getAnnotation("jsinterop.annotations.JsType");
+    return jsType != null ? jsType : typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
   }
 
   // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.

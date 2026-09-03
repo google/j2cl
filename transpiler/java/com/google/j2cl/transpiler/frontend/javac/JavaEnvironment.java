@@ -23,7 +23,7 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PR
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasAnnotation;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.hasNullMarkedAnnotation;
-import static com.google.j2cl.transpiler.frontend.javac.JsInteropAnnotationUtils.getJsNamespace;
+import static com.google.j2cl.transpiler.frontend.javac.JsInteropUtils.getJsNamespace;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
@@ -1213,8 +1213,6 @@ public class JavaEnvironment {
             .setAnonymous(isAnonymous(classSymbol))
             // Keep parity with jdt where anonymous classes are also considered local.
             .setLocal(isLocal(classSymbol) || isAnonymous(classSymbol))
-            .setSimpleJsName(JsInteropAnnotationUtils.getJsName(classSymbol))
-            .setCustomizedJsNamespace(getJsNamespace(classSymbol))
             .setNullMarked(isNullMarked)
             .setOriginalSimpleSourceName(
                 classSymbol.getSimpleName() != null ? classSymbol.getSimpleName().toString() : null)

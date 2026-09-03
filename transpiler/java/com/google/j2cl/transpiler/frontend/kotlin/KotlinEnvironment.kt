@@ -60,8 +60,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clKind
 import com.google.j2cl.transpiler.frontend.kotlin.ir.j2clVisibility
-import com.google.j2cl.transpiler.frontend.kotlin.ir.jsName
-import com.google.j2cl.transpiler.frontend.kotlin.ir.jsNamespace
 import com.google.j2cl.transpiler.frontend.kotlin.ir.methods
 import com.google.j2cl.transpiler.frontend.kotlin.ir.overriddenSpecialBridgeSignatures
 import com.google.j2cl.transpiler.frontend.kotlin.ir.resolveName
@@ -273,8 +271,6 @@ internal class KotlinEnvironment(
         .setSealed(irClass.isSealed)
         .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
         .setAnonymous(irClass.isAnonymousObject)
-        .setSimpleJsName(irClass.jsName)
-        .setCustomizedJsNamespace(irClass.jsNamespace)
         .setAnnotationsFactory { createAnnotations(irClass) }
         .build()
     }

@@ -18,11 +18,9 @@ package com.google.j2cl.transpiler.frontend.common;
 /** Constants common to all frontends. */
 public final class FrontendConstants {
 
-  public static final String JS_ENUM_ANNOTATION_NAME = "jsinterop.annotations.JsEnum";
   public static final String JS_OPTIONAL_ANNOTATION_NAME = "jsinterop.annotations.JsOptional";
   public static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
   public static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
-  public static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
 
   public static final String NULL_MARKED_ANNOTATION_NAME = "org.jspecify.annotations.NullMarked";
 

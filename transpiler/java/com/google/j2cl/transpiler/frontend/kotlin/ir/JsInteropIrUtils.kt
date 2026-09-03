@@ -18,45 +18,11 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME
-import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
-import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
-import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.name.Name
-
-private fun IrClass.getJsTypeAnnotation(): IrConstructorCall? =
-  getAnnotation(JS_TYPE_ANNOTATION_FQ_NAME)
-
-private fun IrClass.getJsEnumAnnotation(): IrConstructorCall? =
-  getAnnotation(JS_ENUM_ANNOTATION_FQ_NAME)
-
-private fun IrClass.getJsTypeOrJsEnumAnnotation(): IrConstructorCall? =
-  getJsTypeAnnotation() ?: getJsEnumAnnotation()
-
-val IrClass.jsName: String?
-  get() =
-    getJsTypeOrJsEnumAnnotation()?.let {
-      // If a name attribute is present on the JsInterop annotation, use that. Otherwise use the
-      // unsanitized class name.
-      it.getValueArgumentAsConst<String>(NAME_ANNOTATION_ATTRIBUTE) ?: name.asString()
-    }
-
-val IrClass.jsNamespace: String?
-  get() =
-    getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<String>(NAMESPACE_ANNOTATION_ATTRIBUTE)
-
-val IrClass.isJsEnum: Boolean
-  get() = getJsEnumAnnotation() != null
 
 val IrValueParameter.isJsOptional: Boolean
   get() = getAnnotation(JS_OPTIONAL_ANNOTATION_FQ_NAME) != null
 
-private val JS_ENUM_ANNOTATION_FQ_NAME: FqName = FqName(JS_ENUM_ANNOTATION_NAME)
-private val JS_TYPE_ANNOTATION_FQ_NAME: FqName = FqName(JS_TYPE_ANNOTATION_NAME)
 private val JS_OPTIONAL_ANNOTATION_FQ_NAME: FqName = FqName(JS_OPTIONAL_ANNOTATION_NAME)
-
-private val NAME_ANNOTATION_ATTRIBUTE: Name = Name.identifier("name")
-private val NAMESPACE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("namespace")

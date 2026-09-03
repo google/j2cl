@@ -188,7 +188,7 @@ public abstract class TypeDeclaration
   }
 
   public boolean hasCustomizedJsNamespace() {
-    return getCustomizedJsNamespace() != null;
+    return JsInteropAstUtils.getJsNamespace(this) != null;
   }
 
   public String getImplModuleName() {
@@ -439,8 +439,10 @@ public abstract class TypeDeclaration
    * by JsType.
    */
   @Override
-  @Nullable
-  public abstract String getSimpleJsName();
+  @Memoized
+  public String getSimpleJsName() {
+    return JsInteropAstUtils.getJsName(this);
+  }
 
   /**
    * Returns the qualifier for the type from the root of the module including the module root.
@@ -476,8 +478,9 @@ public abstract class TypeDeclaration
   @Nullable
   @Memoized
   public String getJsNamespace() {
-    if (hasCustomizedJsNamespace()) {
-      return getCustomizedJsNamespace();
+    String customizedJsNamespace = JsInteropAstUtils.getJsNamespace(this);
+    if (customizedJsNamespace != null) {
+      return customizedJsNamespace;
     }
 
     if (getEnclosingTypeDeclaration() == null) {
@@ -508,9 +511,6 @@ public abstract class TypeDeclaration
     }
     return AstUtils.buildQualifiedName(getJsNamespace(), getModuleRelativeJsName());
   }
-
-  @Nullable
-  abstract String getCustomizedJsNamespace();
 
   public abstract boolean isNullMarked();
 
@@ -910,10 +910,6 @@ public abstract class TypeDeclaration
       return this;
     }
 
-    public abstract Builder setSimpleJsName(String simpleJsName);
-
-    public abstract Builder setCustomizedJsNamespace(String jsNamespace);
-
     public abstract Builder setNullMarked(boolean isNullMarked);
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
@@ -975,8 +971,6 @@ public abstract class TypeDeclaration
     // Builder accessors to aid construction.
     abstract Optional<ImmutableList<String>> getClassComponents();
 
-    abstract Optional<String> getSimpleJsName();
-
     abstract Optional<PackageDeclaration> getPackage();
 
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
@@ -1010,10 +1004,6 @@ public abstract class TypeDeclaration
       if (getPackage().isEmpty()) {
         // If no package is set, enclosing type is mandatory where we can get the package from.
         setPackage(getEnclosingTypeDeclaration().get().getPackage());
-      }
-
-      if (getSimpleJsName().isEmpty()) {
-        setSimpleJsName(AstUtils.getSimpleSourceName(getClassComponents().get()));
       }
 
       TypeDeclaration typeDeclaration = autoBuild();
