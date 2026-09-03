@@ -1210,7 +1210,6 @@ public class JavaEnvironment {
                 isAnnotatedWithKotlinMetadata(classSymbol)
                     ? SourceLanguage.KOTLIN
                     : SourceLanguage.JAVA)
-            .setNative(JsInteropUtils.isJsNativeType(classSymbol))
             .setAnonymous(isAnonymous(classSymbol))
             // Keep parity with jdt where anonymous classes are also considered local.
             .setLocal(isLocal(classSymbol) || isAnonymous(classSymbol))

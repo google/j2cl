@@ -20,7 +20,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OP
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
-import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterBoolean;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 
 import java.util.Optional;
@@ -49,14 +48,6 @@ public class JsInteropAnnotationUtils {
       ExecutableElement method, int parameterIndex) {
     return findAnnotationByName(
         method.getParameters().get(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
-  }
-
-  public static boolean isJsNative(AnnotatedConstruct annotatedConstruct) {
-    return isJsNative(getJsTypeOrJsEnumAnnotation(annotatedConstruct));
-  }
-
-  private static boolean isJsNative(AnnotationMirror annotation) {
-    return getAnnotationParameterBoolean(annotation, "isNative", false);
   }
 
   /** The namespace specified on a package, type, method or field. */

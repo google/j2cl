@@ -49,12 +49,6 @@ public final class AnnotationUtils {
     return parameterValue != null ? (String) parameterValue : null;
   }
 
-  static boolean getAnnotationParameterBoolean(
-      AnnotationMirror annotation, String paramName, boolean defaultValue) {
-    var parameterValue = getAnnotationParameterValue(annotation, paramName);
-    return parameterValue != null ? (Boolean) parameterValue : defaultValue;
-  }
-
   @Nullable
   private static Object getAnnotationParameterValue(AnnotationMirror annotation, String paramName) {
     if (annotation == null) {

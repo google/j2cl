@@ -48,11 +48,6 @@ val IrClass.jsNamespace: String?
   get() =
     getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<String>(NAMESPACE_ANNOTATION_ATTRIBUTE)
 
-val IrClass.isNative: Boolean
-  get() =
-    getJsTypeOrJsEnumAnnotation()?.getValueArgumentAsConst<Boolean>(IS_NATIVE_ANNOTATION_ATTRIBUTE)
-      ?: false
-
 val IrClass.isJsEnum: Boolean
   get() = getJsEnumAnnotation() != null
 
@@ -65,4 +60,3 @@ private val JS_OPTIONAL_ANNOTATION_FQ_NAME: FqName = FqName(JS_OPTIONAL_ANNOTATI
 
 private val NAME_ANNOTATION_ATTRIBUTE: Name = Name.identifier("name")
 private val NAMESPACE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("namespace")
-private val IS_NATIVE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("isNative")

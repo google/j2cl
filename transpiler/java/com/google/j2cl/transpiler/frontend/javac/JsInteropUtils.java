@@ -16,16 +16,11 @@
 package com.google.j2cl.transpiler.frontend.javac;
 
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
-import javax.lang.model.AnnotatedConstruct;
 
 /** Utility functions for JsInterop properties. */
 public final class JsInteropUtils {
   public static boolean isJsOptional(MethodSymbol method, int i) {
     return JsInteropAnnotationUtils.getJsOptionalAnnotation(method, i) != null;
-  }
-
-  public static boolean isJsNativeType(AnnotatedConstruct annotatedConstruct) {
-    return JsInteropAnnotationUtils.isJsNative(annotatedConstruct);
   }
 
   private JsInteropUtils() {}

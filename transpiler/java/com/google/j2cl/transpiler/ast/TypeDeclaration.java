@@ -72,6 +72,7 @@ public abstract class TypeDeclaration
     LAMBDA_ABSTRACT_ADAPTOR,
     LAMBDA_IMPLEMENTOR,
     OVERLAY_CLASS,
+    SYNTHETIC,
   }
 
   private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
@@ -345,8 +346,11 @@ public abstract class TypeDeclaration
 
   public abstract boolean isAnonymous();
 
+  @Memoized
   @Override
-  public abstract boolean isNative();
+  public boolean isNative() {
+    return JsInteropAstUtils.isJsNative(this);
+  }
 
   @Nullable
   @Memoized
@@ -545,14 +549,12 @@ public abstract class TypeDeclaration
 
   @Memoized
   public boolean hasOverlayImplementationType() {
-    // TODO(b/116825224): this should just be
-    //           isJsEnum() || isNative() || isJsFunctionInterface() && declaresJsOverlayMembers.
-    // but there are some synthetic type descriptors created by
-    // TypeDescriptors.createNativeGlobalTypeDescriptor that do are marked native and confuse the
-    // rewriting of overlay references.
-    return isJsEnum()
-        || (isJsType() && isNative())
-        || (isJsFunctionInterface() && declaresJsOverlayMembers());
+    // Only source-level types have overlay implementation classes. Synthetic types (e.g. native JS
+    // types created by TypeDescriptors) do not have overlay classes.
+    return getOrigin() == Origin.SOURCE
+        && (isJsEnum()
+            || (isJsType() && isNative())
+            || (isJsFunctionInterface() && declaresJsOverlayMembers()));
   }
 
   private boolean declaresJsOverlayMembers() {
@@ -819,7 +821,6 @@ public abstract class TypeDeclaration
         .setOrigin(Origin.SOURCE)
         .setHasAbstractModifier(false)
         .setAnonymous(false)
-        .setNative(false)
         .setAnnotation(false)
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
@@ -891,8 +892,6 @@ public abstract class TypeDeclaration
     }
 
     public abstract Builder setLocal(boolean local);
-
-    public abstract Builder setNative(boolean isNative);
 
     public abstract Builder setTypeParameterDescriptors(
         Iterable<TypeVariable> typeParameterDescriptors);
@@ -982,8 +981,6 @@ public abstract class TypeDeclaration
 
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
 
-    abstract boolean isNative();
-
     abstract Kind getKind();
 
     abstract boolean isAnnotation();
@@ -995,11 +992,6 @@ public abstract class TypeDeclaration
 
     @SuppressWarnings("ReferenceEquality")
     public TypeDeclaration build() {
-      // TODO(b/181615162): Find a better way to expose different flavors of type models by backend.
-      if (getKind() == Kind.ENUM && isNative() && implementWasmJsInteropSemantics.get()) {
-        setNative(false);
-      }
-
       if (qualifiedSourceName != null) {
         // Setting qualifiedSourceName is only allowed for top-level types and shouldn't be mixed
         // with other construction styles (like providing packages, class components, etc.).

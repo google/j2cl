@@ -43,6 +43,19 @@ public final class JsInteropAstUtils {
     return typeDeclaration.hasAnnotation("jsinterop.annotations.JsFunction");
   }
 
+  public static boolean isJsNative(TypeDeclaration typeDeclaration) {
+    Annotation jsType = typeDeclaration.getAnnotation("jsinterop.annotations.JsType");
+    if (jsType != null) {
+      return jsType.getBooleanValue("isNative", false);
+    }
+    Annotation jsEnum = typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
+    if (jsEnum != null) {
+      return !TypeDeclaration.implementWasmJsInteropSemantics()
+          && jsEnum.getBooleanValue("isNative", false);
+    }
+    return false;
+  }
+
   @Nullable
   public static JsEnumInfo getJsEnumInfo(TypeDeclaration typeDeclaration) {
     Annotation annotation = typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");

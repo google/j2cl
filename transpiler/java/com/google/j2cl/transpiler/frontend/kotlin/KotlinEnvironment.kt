@@ -55,7 +55,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isClassType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFinal
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isJsOptional
-import com.google.j2cl.transpiler.frontend.kotlin.ir.isNative
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isPropertyAccessor
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
@@ -276,7 +275,6 @@ internal class KotlinEnvironment(
         .setAnonymous(irClass.isAnonymousObject)
         .setSimpleJsName(irClass.jsName)
         .setCustomizedJsNamespace(irClass.jsNamespace)
-        .setNative(irClass.isNative)
         .setAnnotationsFactory { createAnnotations(irClass) }
         .build()
     }

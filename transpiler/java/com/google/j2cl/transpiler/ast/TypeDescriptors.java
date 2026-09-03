@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -592,7 +593,13 @@ public class TypeDescriptors {
         .setClassComponents(className)
         // Mark bootstrap classes as non native so that the goog.require doesn't reference
         // overlay.
-        .setNative(!isBootstrapNamespace(jsNamespace))
+        .setAnnotations(
+            !isBootstrapNamespace(jsNamespace)
+                ? ImmutableList.of(
+                    Annotation.builderFrom("jsinterop.annotations.JsType")
+                        .addValue("isNative", BooleanLiteral.get(true))
+                        .build())
+                : ImmutableList.of())
         .setCustomizedJsNamespace(jsNamespace)
         .setPackage(getSyntheticPackage(jsNamespace))
         // Synthetic type declarations do not need to have type variables.
@@ -601,6 +608,7 @@ public class TypeDescriptors {
         .setTypeParameterDescriptors(ImmutableList.of())
         .setVisibility(Visibility.PUBLIC)
         .setKind(kind)
+        .setOrigin(Origin.SYNTHETIC)
         .build()
         .toDescriptor(Arrays.asList(typeArgumentDescriptors));
   }
