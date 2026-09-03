@@ -18,7 +18,6 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.ir
 
-import com.google.j2cl.transpiler.ast.JsEnumInfo
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME
@@ -36,21 +35,6 @@ private fun IrClass.getJsEnumAnnotation(): IrConstructorCall? =
 
 private fun IrClass.getJsTypeOrJsEnumAnnotation(): IrConstructorCall? =
   getJsTypeAnnotation() ?: getJsEnumAnnotation()
-
-fun IrClass.getJsEnumInfo(): JsEnumInfo? {
-  val annotation = getJsEnumAnnotation() ?: return null
-  return JsEnumInfo.builder().run {
-    val hasCustomValue =
-      annotation.getValueArgumentAsConst<Boolean>(HAS_CUSTOM_VALUE_ANNOTATION_ATTRIBUTE) ?: false
-    val isNative =
-      annotation.getValueArgumentAsConst<Boolean>(IS_NATIVE_ANNOTATION_ATTRIBUTE) ?: false
-
-    setHasCustomValue(hasCustomValue)
-    setSupportsComparable(!hasCustomValue || isNative)
-    setSupportsOrdinal(!hasCustomValue && !isNative)
-    build()
-  }
-}
 
 val IrClass.jsName: String?
   get() =
@@ -82,4 +66,3 @@ private val JS_OPTIONAL_ANNOTATION_FQ_NAME: FqName = FqName(JS_OPTIONAL_ANNOTATI
 private val NAME_ANNOTATION_ATTRIBUTE: Name = Name.identifier("name")
 private val NAMESPACE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("namespace")
 private val IS_NATIVE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("isNative")
-private val HAS_CUSTOM_VALUE_ANNOTATION_ATTRIBUTE: Name = Name.identifier("hasCustomValue")

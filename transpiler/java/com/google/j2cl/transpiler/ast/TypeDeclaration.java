@@ -349,7 +349,10 @@ public abstract class TypeDeclaration
   public abstract boolean isNative();
 
   @Nullable
-  public abstract JsEnumInfo getJsEnumInfo();
+  @Memoized
+  public JsEnumInfo getJsEnumInfo() {
+    return JsInteropAstUtils.getJsEnumInfo(this);
+  }
 
   public boolean isJavaRecord() {
     return TypeDescriptors.get().javaLangRecord.isSameBaseType(getSuperTypeDescriptor());
@@ -798,6 +801,10 @@ public abstract class TypeDeclaration
     implementWasmJsInteropSemantics.set(true);
   }
 
+  static boolean implementWasmJsInteropSemantics() {
+    return implementWasmJsInteropSemantics.get();
+  }
+
   TypeDeclaration acceptInternal(Processor processor) {
     return Visitor_TypeDeclaration.visit(processor, this);
   }
@@ -882,8 +889,6 @@ public abstract class TypeDeclaration
       return setFunctionalInterface(true)
           .setAnnotations(Annotation.builderFrom("jsinterop.annotations.JsFunction").build());
     }
-
-    public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
 
     public abstract Builder setLocal(boolean local);
 
@@ -992,7 +997,6 @@ public abstract class TypeDeclaration
     public TypeDeclaration build() {
       // TODO(b/181615162): Find a better way to expose different flavors of type models by backend.
       if (getKind() == Kind.ENUM && isNative() && implementWasmJsInteropSemantics.get()) {
-        setJsEnumInfo(null);
         setNative(false);
       }
 

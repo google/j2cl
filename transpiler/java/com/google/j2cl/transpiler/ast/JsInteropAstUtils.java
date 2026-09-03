@@ -43,6 +43,25 @@ public final class JsInteropAstUtils {
     return typeDeclaration.hasAnnotation("jsinterop.annotations.JsFunction");
   }
 
+  @Nullable
+  public static JsEnumInfo getJsEnumInfo(TypeDeclaration typeDeclaration) {
+    Annotation annotation = typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
+    if (annotation == null) {
+      return null;
+    }
+    if (TypeDeclaration.implementWasmJsInteropSemantics()
+        && annotation.getBooleanValue("isNative", false)) {
+      return null;
+    }
+    boolean hasCustomValue = annotation.getBooleanValue("hasCustomValue", false);
+    boolean isNative = typeDeclaration.isNative();
+    return JsEnumInfo.builder()
+        .setHasCustomValue(hasCustomValue)
+        .setSupportsComparable(!hasCustomValue || isNative)
+        .setSupportsOrdinal(!hasCustomValue && !isNative)
+        .build();
+  }
+
   // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
   private static final ThreadLocal<Boolean> ignoreNonNativeJsInfo =
       ThreadLocal.withInitial(() -> false);

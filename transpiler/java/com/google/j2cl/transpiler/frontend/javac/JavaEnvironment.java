@@ -44,7 +44,6 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -1185,8 +1184,6 @@ public class JavaEnvironment {
                 .map(this::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(classSymbol);
-
     List<TypeParameterElement> typeParameterElements = getTypeParameters(classSymbol);
 
     boolean isNullMarked = isNullMarked(classSymbol);
@@ -1213,7 +1210,6 @@ public class JavaEnvironment {
                 isAnnotatedWithKotlinMetadata(classSymbol)
                     ? SourceLanguage.KOTLIN
                     : SourceLanguage.JAVA)
-            .setJsEnumInfo(jsEnumInfo)
             .setNative(JsInteropUtils.isJsNativeType(classSymbol))
             .setAnonymous(isAnonymous(classSymbol))
             // Keep parity with jdt where anonymous classes are also considered local.

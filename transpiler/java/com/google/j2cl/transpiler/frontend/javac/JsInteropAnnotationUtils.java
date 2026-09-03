@@ -88,12 +88,4 @@ public class JsInteropAnnotationUtils {
     return Optional.ofNullable(getJsTypeAnnotation(annotatedConstruct))
         .orElse(getJsEnumAnnotation(annotatedConstruct));
   }
-
-  public static boolean hasCustomValue(AnnotatedConstruct annotatedConstruct) {
-    return hasCustomValue(getJsEnumAnnotation(annotatedConstruct));
-  }
-
-  private static boolean hasCustomValue(AnnotationMirror annotation) {
-    return getAnnotationParameterBoolean(annotation, "hasCustomValue", false);
-  }
 }

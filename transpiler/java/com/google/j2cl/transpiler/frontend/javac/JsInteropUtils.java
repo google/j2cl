@@ -15,32 +15,13 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
-import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 
 /** Utility functions for JsInterop properties. */
 public final class JsInteropUtils {
-  @Nullable
-  public static JsEnumInfo getJsEnumInfo(AnnotatedConstruct annotatedConstruct) {
-    if (!isJsEnum(annotatedConstruct)) {
-      return null;
-    }
-    boolean hasCustomValue = JsInteropAnnotationUtils.hasCustomValue(annotatedConstruct);
-    return JsEnumInfo.builder()
-        .setHasCustomValue(hasCustomValue)
-        .setSupportsComparable(!hasCustomValue || isJsNativeType(annotatedConstruct))
-        .setSupportsOrdinal(!hasCustomValue && !isJsNativeType(annotatedConstruct))
-        .build();
-  }
-
   public static boolean isJsOptional(MethodSymbol method, int i) {
     return JsInteropAnnotationUtils.getJsOptionalAnnotation(method, i) != null;
-  }
-
-  public static boolean isJsEnum(AnnotatedConstruct annotatedConstruct) {
-    return JsInteropAnnotationUtils.getJsEnumAnnotation(annotatedConstruct) != null;
   }
 
   public static boolean isJsNativeType(AnnotatedConstruct annotatedConstruct) {

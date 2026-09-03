@@ -46,7 +46,6 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.fqnOrFail
 import com.google.j2cl.transpiler.frontend.kotlin.ir.fromQualifiedBinaryName
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllAnnotations
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getAllTypeParameters
-import com.google.j2cl.transpiler.frontend.kotlin.ir.getJsEnumInfo
 import com.google.j2cl.transpiler.frontend.kotlin.ir.getTypeSubstitutionMap
 import com.google.j2cl.transpiler.frontend.kotlin.ir.hasVoidReturn
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isAbstract
@@ -275,7 +274,6 @@ internal class KotlinEnvironment(
         .setSealed(irClass.isSealed)
         .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
         .setAnonymous(irClass.isAnonymousObject)
-        .setJsEnumInfo(irClass.getJsEnumInfo())
         .setSimpleJsName(irClass.jsName)
         .setCustomizedJsNamespace(irClass.jsNamespace)
         .setNative(irClass.isNative)

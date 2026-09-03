@@ -39,6 +39,20 @@ public abstract class Annotation {
     return null;
   }
 
+  @Nullable
+  public Boolean getBooleanValue(String elementName) {
+    AnnotationValue value = getValues().get(elementName);
+    if (value instanceof BooleanLiteral booleanLiteral) {
+      return booleanLiteral.getValue();
+    }
+    return null;
+  }
+
+  public boolean getBooleanValue(String elementName, boolean defaultValue) {
+    Boolean value = getBooleanValue(elementName);
+    return value != null ? value : defaultValue;
+  }
+
   public static Builder builderFrom(String qualifiedName) {
     return builder()
         .setTypeDescriptor(
