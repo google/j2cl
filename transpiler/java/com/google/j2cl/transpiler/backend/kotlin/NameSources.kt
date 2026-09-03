@@ -82,6 +82,9 @@ private constructor(
   private fun topLevelSimpleNameOrNull(qualifiedName: String): String? =
     qualifiedName.qualifiedNameToSimpleName().let { simpleName ->
       when {
+        // Simple name is "Companion" which can be shadowed by a companion object.
+        simpleName == "Companion" -> null
+
         // Simple name shadowed by a field name.
         localFieldNames.contains(simpleName) -> null
 
