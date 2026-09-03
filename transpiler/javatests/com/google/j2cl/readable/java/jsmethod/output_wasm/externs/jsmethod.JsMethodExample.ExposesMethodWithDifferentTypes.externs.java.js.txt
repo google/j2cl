@@ -9,4 +9,14 @@ var $j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes = f
 
 /**
  */
-$j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes.prototype.m = function(/** ?string */ s, /** ?number */ d, /** goog.math.Long */ l, /** ($j2wasm$externs_java_lang_Comparable|boolean|number|string|!goog.math.Long) */ c, /** * */ o, /** T */ t, /** jsmethod.Foo */ nf, /** $j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes<T> */ e) {};
+$j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes.prototype.m = function(/** ?string */ s, /** ?number */ d, /** goog.math.Long */ l, /** !goog.math.Long */ pl, /** ($j2wasm$externs_java_lang_Comparable|boolean|number|string|!goog.math.Long) */ c, /** * */ o, /** T */ t, /** jsmethod.Foo */ nf, /** $j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes<T> */ e) {};
+
+/**
+ * @return {!goog.math.Long}
+ */
+$j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes.prototype.roundtripLong = function(/** !goog.math.Long */ l) {};
+
+/**
+ * @return {!goog.math.Long}
+ */
+$j2wasm$externs_jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes.prototype.callNative = function(/** jsmethod.Foo */ nf, /** !goog.math.Long */ l) {};

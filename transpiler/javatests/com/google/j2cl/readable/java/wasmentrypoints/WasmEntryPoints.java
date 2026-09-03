@@ -26,4 +26,8 @@ public class WasmEntryPoints {
   public static String stringConversionEntryPoint(String arg) {
     return "";
   }
+
+  public static long longConversionEntryPoint(long l) {
+    return l;
+  }
 }

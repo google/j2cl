@@ -21,6 +21,7 @@ package wasmentrypoints
 import javaemul.lang.*
 import kotlin.Float
 import kotlin.Int
+import kotlin.Long
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
@@ -38,5 +39,8 @@ open class WasmEntryPoints {
   
   @JvmStatic
   fun stringConversionEntryPoint(arg: String?): String? = ""
+  
+  @JvmStatic
+  fun longConversionEntryPoint(l: Long): Long = l
  }
 }

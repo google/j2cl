@@ -23,6 +23,7 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -97,6 +98,13 @@ class Main extends j_l_Object {
    return Integer.valueOf(arg_2.intValue() + 1 | 0);
   });
   let result2 = intFn(Integer.valueOf(100)).intValue();
+ }
+ /** @nodts */
+ m_testLongJsFunction__void() {
+  let longFn = /**  @return {!Long}*/ ((/** !Long */ arg) =>{
+   return $LongUtils.plus(arg, Long.fromInt(1));
+  });
+  let result = longFn(Long.fromInt(100));
  }
  /** @nodts */
  static m_acceptsJsFunction__jsfunction_Main_Function__void(/** ?function(?string):?string */ f) {
@@ -302,6 +310,7 @@ class Main extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Long = goog.module.get('goog.math.Long');
   Class = goog.module.get('java.lang.Class$impl');
   Double = goog.module.get('java.lang.Double$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
@@ -319,6 +328,7 @@ class Main extends j_l_Object {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'jsfunction.Main');

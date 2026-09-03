@@ -148,6 +148,16 @@ fun testJsFunctionCalls_autoboxing() {
   val result2: Int = intFn.apply(100)!!
 }
 
+@JsFunction
+fun interface LongJsFunction {
+  fun apply(l: Long): Long
+}
+
+fun testLongJsFunction() {
+  val longFn = LongJsFunction { arg: Long -> arg + 1 }
+  val result: Long = longFn.apply(100L)
+}
+
 fun acceptsJsFunction(f: Function<String, String>?) {}
 
 internal class TestCaptureOuterParametricClass<T> {

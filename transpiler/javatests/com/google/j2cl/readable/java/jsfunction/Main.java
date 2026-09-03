@@ -146,6 +146,16 @@ public class Main {
     int result2 = intFn.apply(100);
   }
 
+  @JsFunction
+  interface LongJsFunction {
+    long apply(long l);
+  }
+
+  public void testLongJsFunction() {
+    LongJsFunction longFn = arg -> arg + 1;
+    long result = longFn.apply(100L);
+  }
+
   public static void acceptsJsFunction(Function<String, String> f) {}
 
   static class TestCaptureOuterParametricClass<T> {

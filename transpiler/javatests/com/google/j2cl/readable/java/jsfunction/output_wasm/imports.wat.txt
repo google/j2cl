@@ -32,6 +32,13 @@
  (result (ref null extern))
 )
 
+;;; long LongJsFunction.$invokeJsFunction(WasmExtern arg0, long arg1)
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__long__long@jsfunction.Main.LongJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction") 
+ (param $arg0 (ref null extern))
+ (param $arg1 i64)
+ (result i64)
+)
+
 ;;; int JsFunctionVarargs.$invokeJsFunction(WasmExtern arg0, int arg1, WasmExtern arg2)
 (func $$invokeJsFunction__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionVarargs (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction") 
  (param $arg0 (ref null extern))

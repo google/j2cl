@@ -138,9 +138,15 @@ class JsMethodExample {
     @JsConstructor constructor() {}
   }
 
-  @JsType(isNative = true, namespace = "jsmethod", name = "Foo") class NativeFoo
+  @JsType(isNative = true, namespace = "jsmethod", name = "Foo")
+  class NativeFoo {
+    external fun takesAndReturnsPrimitiveLong(l: Long): Long
+  }
 
-  @JsType(namespace = "jsmethod") class Foo
+  @JsType(namespace = "jsmethod")
+  class Foo {
+    fun takesAndReturnsPrimitiveLong(l: Long): Long = l
+  }
 
   class ExposesMethodWithDifferentTypes<T> {
     @JsMethod
@@ -148,12 +154,17 @@ class JsMethodExample {
       s: String,
       d: Double,
       l: Long,
+      pl: Long,
       c: Comparable<*>,
       o: Any,
       t: T,
       nf: NativeFoo,
       e: ExposesMethodWithDifferentTypes<T>,
     ) {}
+
+    @JsMethod fun roundtripLong(l: Long): Long = l
+
+    @JsMethod fun callNative(nf: NativeFoo, l: Long): Long = nf.takesAndReturnsPrimitiveLong(l)
   }
 
   interface InterfaceWithJsMethod {

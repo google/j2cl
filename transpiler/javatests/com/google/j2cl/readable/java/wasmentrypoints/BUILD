@@ -14,5 +14,6 @@ readable_example(
         "wasmentrypoints.WasmEntryPoints#singleMatchedEntryPoint",
         ".*#matchedEntryPointPattern.*",
         "wasmentrypoints.WasmEntryPoints#stringConversionEntryPoint",
+        "wasmentrypoints.WasmEntryPoints#longConversionEntryPoint",
     ],
 )

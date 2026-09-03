@@ -138,10 +138,16 @@ public class JsMethodExample {
   static class ParameterizedInterfaceImpl implements ParameterizedInterface<String> {}
 
   @JsType(isNative = true, namespace = "jsmethod", name = "Foo")
-  static class NativeFoo {}
+  static class NativeFoo {
+    public native long takesAndReturnsPrimitiveLong(long l);
+  }
 
   @JsType(namespace = "jsmethod")
-  static class Foo {}
+  static class Foo {
+    public long takesAndReturnsPrimitiveLong(long l) {
+      return l;
+    }
+  }
 
   static class ExposesMethodWithDifferentTypes<T> {
     @JsMethod
@@ -149,11 +155,22 @@ public class JsMethodExample {
         String s,
         Double d,
         Long l,
+        long pl,
         Comparable c,
         Object o,
         T t,
         NativeFoo nf,
         ExposesMethodWithDifferentTypes<T> e) {}
+
+    @JsMethod
+    public long roundtripLong(long l) {
+      return l;
+    }
+
+    @JsMethod
+    public long callNative(NativeFoo nf, long l) {
+      return nf.takesAndReturnsPrimitiveLong(l);
+    }
   }
 
   interface InterfaceWithJsMethod {

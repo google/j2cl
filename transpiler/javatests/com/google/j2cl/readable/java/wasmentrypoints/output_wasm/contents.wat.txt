@@ -84,6 +84,19 @@
  )
 )
 
+;;; long WasmEntryPoints.longConversionEntryPoint(long l)
+(func $m_longConversionEntryPoint__long__long@wasmentrypoints.WasmEntryPoints
+ (param $l i64)
+ (result i64)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/wasmentrypoints/readable-j2wasm.js/wasmentrypoints/WasmEntryPoints.java:30:21
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/wasmentrypoints/readable-j2wasm.js/wasmentrypoints/WasmEntryPoints.java:30:21
+  (call $$clinit__void_<once>_@wasmentrypoints.WasmEntryPoints )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/wasmentrypoints/readable-j2wasm.js/wasmentrypoints/WasmEntryPoints.java:31:4
+  (return (local.get $l))
+ )
+)
+
 ;;; void WasmEntryPoints.$clinit()
 (func $$clinit__void_<once>_@wasmentrypoints.WasmEntryPoints
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/wasmentrypoints/readable-j2wasm.js/wasmentrypoints/WasmEntryPoints.java:18:13

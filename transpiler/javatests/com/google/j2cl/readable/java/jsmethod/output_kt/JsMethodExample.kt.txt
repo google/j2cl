@@ -154,14 +154,24 @@ open class JsMethodExample {
  internal open class ParameterizedInterfaceImpl internal constructor(): ParameterizedInterface<String?>
  
  @JsType(name = "Foo", namespace = "jsmethod", isNative = true)
- internal open class NativeFoo internal constructor()
+ internal open class NativeFoo internal constructor() {
+  external open fun takesAndReturnsPrimitiveLong(l: Long): Long
+ }
  
  @JsType(namespace = "jsmethod")
- internal open class Foo internal constructor()
+ internal open class Foo internal constructor() {
+  open fun takesAndReturnsPrimitiveLong(l: Long): Long = l
+ }
  
  internal open class ExposesMethodWithDifferentTypes<T> internal constructor() {
   @JsMethod
-  open fun m(s: String?, d: Double?, l: Long?, c: Comparable<Any>?, o: Any?, t: T, nf: NativeFoo?, e: ExposesMethodWithDifferentTypes<T>?) {}
+  open fun m(s: String?, d: Double?, l: Long?, pl: Long, c: Comparable<Any>?, o: Any?, t: T, nf: NativeFoo?, e: ExposesMethodWithDifferentTypes<T>?) {}
+  
+  @JsMethod
+  open fun roundtripLong(l: Long): Long = l
+  
+  @JsMethod
+  open fun callNative(nf: NativeFoo?, l: Long): Long = nf!!.takesAndReturnsPrimitiveLong(l)
  }
  
  internal fun interface InterfaceWithJsMethod {

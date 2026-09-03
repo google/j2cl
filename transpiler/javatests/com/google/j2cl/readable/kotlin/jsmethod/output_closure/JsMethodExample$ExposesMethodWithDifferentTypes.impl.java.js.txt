@@ -28,7 +28,15 @@ class ExposesMethodWithDifferentTypes extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @final */
- m(/** string */ s, /** number */ d, /** !Long */ l, /** !(Comparable<?>|boolean|number|string|!Long) */ c, /** !* */ o, /** T */ t, /** !NativeFoo */ nf, /** !ExposesMethodWithDifferentTypes<T> */ e) {}
+ m(/** string */ s, /** number */ d, /** !Long */ l, /** !Long */ pl, /** !(Comparable<?>|boolean|number|string|!Long) */ c, /** !* */ o, /** T */ t, /** !NativeFoo */ nf, /** !ExposesMethodWithDifferentTypes<T> */ e) {}
+ /** @final @return {!Long} */
+ roundtripLong(/** !Long */ l) {
+  return l;
+ }
+ /** @final @return {!Long} */
+ callNative(/** !NativeFoo */ nf, /** !Long */ l) {
+  return nf.takesAndReturnsPrimitiveLong(l);
+ }
  /** @nodts */
  static $clinit() {
   ExposesMethodWithDifferentTypes.$clinit = () =>{};

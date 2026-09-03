@@ -3,6 +3,8 @@ goog.module('wasmentrypoints.WasmEntryPoints$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
+
 class WasmEntryPoints extends j_l_Object {
  /** @protected @nodts */
  constructor() {
@@ -35,6 +37,11 @@ class WasmEntryPoints extends j_l_Object {
  static m_stringConversionEntryPoint__java_lang_String__java_lang_String(/** ?string */ arg) {
   WasmEntryPoints.$clinit();
   return '';
+ }
+ /** @nodts @return {!Long} */
+ static m_longConversionEntryPoint__long__long(/** !Long */ l) {
+  WasmEntryPoints.$clinit();
+  return l;
  }
  /** @nodts */
  static $clinit() {

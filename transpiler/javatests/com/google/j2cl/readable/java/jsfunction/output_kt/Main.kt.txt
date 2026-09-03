@@ -33,6 +33,7 @@ import kotlin.Array
 import kotlin.Double
 import kotlin.Int
 import kotlin.IntArray
+import kotlin.Long
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
@@ -97,6 +98,11 @@ open class Main {
   val result: Int = fn.apply(100)!!.toInt()
   val intFn: IntegerJsFunction = IntegerJsFunction { arg_1: Int? -> arg_1!!.toInt() + 1 }
   val result2: Int = intFn.apply(100)!!.toInt()
+ }
+ 
+ open fun testLongJsFunction() {
+  val longFn: LongJsFunction = LongJsFunction { arg: Long -> arg + 1L }
+  val result: Long = longFn.apply(100L)
  }
  
  internal open fun testJsFunctionVarargs_pp_jsfunction(): JsFunctionVarargs? {
@@ -357,6 +363,11 @@ open class Main {
  @JsFunction
  internal fun interface IntegerJsFunction {
   fun apply(i: Int?): Int?
+ }
+ 
+ @JsFunction
+ internal fun interface LongJsFunction {
+  fun apply(l: Long): Long
  }
  
  internal open class TestCaptureOuterParametricClass<T> internal constructor() {
