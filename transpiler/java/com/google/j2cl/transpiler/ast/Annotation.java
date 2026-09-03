@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -36,6 +38,7 @@ public abstract class Annotation {
     if (value instanceof StringLiteral stringLiteral) {
       return stringLiteral.getValue();
     }
+    checkState(value == null);
     return null;
   }
 
@@ -45,6 +48,7 @@ public abstract class Annotation {
     if (value instanceof BooleanLiteral booleanLiteral) {
       return booleanLiteral.getValue();
     }
+    checkState(value == null);
     return null;
   }
 
