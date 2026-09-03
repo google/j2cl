@@ -1,0 +1,57 @@
+goog.module('jsfunction.Function.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Overlay = goog.forwardDeclare('jsfunction.Function.$Overlay$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jsfunction_Function_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsfunction_Function_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_staticOverlayMethod__int() {
+  return $Overlay.m_staticOverlayMethod__int();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jsfunction_Function_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsfunction_Function_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jsfunction_Function_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Overlay = goog.module.get('jsfunction.Function.$Overlay$impl');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jsfunction_Function_Companion;
+$Util.$setClassMetadata(Companion, 'jsfunction.Function$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Function$Companion.js.map

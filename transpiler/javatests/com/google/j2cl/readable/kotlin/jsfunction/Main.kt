@@ -26,6 +26,15 @@ import jsinterop.annotations.JsType
 @JsFunction
 fun interface Function<T, U> {
   fun apply(u: U): T
+
+  @JsOverlay
+  fun overlayMethod(u: U): T {
+    return apply(u)
+  }
+
+  companion object {
+    @JsOverlay @JvmStatic fun staticOverlayMethod() = 41
+  }
 }
 
 @JsFunction
@@ -107,6 +116,9 @@ fun testJsFunctionsCapturingLocal() {
       }
     }
     .foo(3)
+
+  val f = Function<Int?, Int?> { a: Int? -> a!! + n }
+  f.apply(10)
 }
 
 fun testJsFunctionThis() {

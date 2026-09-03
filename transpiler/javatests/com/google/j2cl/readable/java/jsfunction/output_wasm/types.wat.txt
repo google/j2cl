@@ -63,6 +63,9 @@
  (field $m_f__jsfunction_Main_SomeJsType__jsfunction_Main_SomeJsType (ref $function.jsfunction_Main_SomeJsType__jsfunction_Main_SomeJsType))
  ))
 )
+(type $jsfunction.Main.Function.$Overlay.vtable (sub (struct
+ ))
+)
 (type $jsfunction.Main.JsFunctionInterface.$Overlay.vtable (sub (struct
  ))
 )
@@ -576,7 +579,7 @@
  (field $jsFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null extern)))
  (field $wasmExportBridgeFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
  (field $wasmFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
- (field $$outer_this@jsfunction.Main.$LambdaImplementor$4 (mut (ref null $jsfunction.Main)))
+ (field $$captured_n@jsfunction.Main.$LambdaImplementor$4 (mut i32))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$4.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.$LambdaImplementor$4) (struct
@@ -585,7 +588,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_foo__int__int (ref $function.int__int))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.java_lang_Object__java_lang_Object))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$5 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$5.vtable) (struct
@@ -594,6 +597,7 @@
  (field $jsFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null extern)))
  (field $wasmExportBridgeFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
  (field $wasmFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
+ (field $$outer_this@jsfunction.Main.$LambdaImplementor$5 (mut (ref null $jsfunction.Main)))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$5.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.$LambdaImplementor$5) (struct
@@ -602,7 +606,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.java_lang_Object__java_lang_Object))
+ (field $m_foo__int__int (ref $function.int__int))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$6 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$6.vtable) (struct
@@ -619,7 +623,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_apply__java_lang_Integer__java_lang_Integer (ref $function.java_lang_Integer__java_lang_Integer))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.java_lang_Object__java_lang_Object))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$7 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$7.vtable) (struct
@@ -636,7 +640,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_apply__long__long (ref $function.long__long))
+ (field $m_apply__java_lang_Integer__java_lang_Integer (ref $function.java_lang_Integer__java_lang_Integer))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$8 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$8.vtable) (struct
@@ -653,7 +657,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_m__int__arrayOf_int__int (ref $function.int__arrayOf_int__int))
+ (field $m_apply__long__long (ref $function.long__long))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$9 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$9.vtable) (struct
@@ -687,7 +691,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object))
+ (field $m_m__int__arrayOf_int__int (ref $function.int__arrayOf_int__int))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$11 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$11.vtable) (struct
@@ -704,7 +708,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_m__int__java_lang_Double__int (ref $function.int__java_lang_Double__int))
+ (field $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$12 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$12.vtable) (struct
@@ -721,7 +725,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_call__java_lang_Object__void (ref $function.java_lang_Object__void))
+ (field $m_m__int__java_lang_Double__int (ref $function.int__java_lang_Double__int))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$13 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$13.vtable) (struct
@@ -772,7 +776,7 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_f__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp (ref $function.jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp))
+ (field $m_call__java_lang_Object__void (ref $function.java_lang_Object__void))
  ))
 )
 (type $jsfunction.Main.$LambdaImplementor$16 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$16.vtable) (struct
@@ -789,18 +793,35 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_f__jsfunction_Main_SomeJsType__jsfunction_Main_SomeJsType (ref $function.jsfunction_Main_SomeJsType__jsfunction_Main_SomeJsType))
+ (field $m_f__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp (ref $function.jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp))
  ))
 )
-(type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$17 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$17.vtable) (struct
- (field $itable (ref $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$17.itable))
+(type $jsfunction.Main.$LambdaImplementor$17 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.$LambdaImplementor$17.vtable) (struct
+ (field $itable (ref $jsfunction.Main.$LambdaImplementor$17.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $jsFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null extern)))
  (field $wasmExportBridgeFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
  (field $wasmFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
  ))
 )
-(type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$17.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$17) (struct
+(type $jsfunction.Main.$LambdaImplementor$17.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.$LambdaImplementor$17) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_f__jsfunction_Main_SomeJsType__jsfunction_Main_SomeJsType (ref $function.jsfunction_Main_SomeJsType__jsfunction_Main_SomeJsType))
+ ))
+)
+(type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$18 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$18.vtable) (struct
+ (field $itable (ref $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$18.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $jsFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null extern)))
+ (field $wasmExportBridgeFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
+ (field $wasmFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
+ ))
+)
+(type $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$18.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.TestCaptureOuterParametricClass.$LambdaImplementor$18) (struct
  (field $js_prototype (ref null extern))
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
@@ -809,16 +830,16 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.java_lang_Object__java_lang_Object))
  ))
 )
-(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18.vtable) (struct
- (field $itable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18.itable))
+(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$19 (sub $javaemul.internal.JsFunctionAdaptor (descriptor $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$19.vtable) (struct
+ (field $itable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$19.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $jsFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null extern)))
  (field $wasmExportBridgeFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
  (field $wasmFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
- (field $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18 (mut (ref null extern)))
+ (field $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$19 (mut (ref null extern)))
  ))
 )
-(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18) (struct
+(type $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$19.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (describes $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$19) (struct
  (field $js_prototype (ref null extern))
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))

@@ -32,7 +32,7 @@ import jsinterop.annotations.JsType
 import kotlin.random.Random
 
 fun main(vararg unused: String) {
-  testJsFunction()
+  testJsFunctionOverlay()
   testSpecializedJsFunction()
   testParameterizedJsFunctionMethod()
   testInvokableJsFunction()
@@ -65,6 +65,7 @@ fun main(vararg unused: String) {
   testJsFunctionOptimization()
   testJsFunctionWithVarArgs()
   testJsFunctionLambda()
+  testJsFunctionLambdaCapturingLocal()
   testJsFunctionArray()
   testJsFunctionCalls_autoboxing()
   testJsFunctionWithNativeType()
@@ -72,56 +73,32 @@ fun main(vararg unused: String) {
 }
 
 @JsFunction
-internal fun interface Function {
-  fun call(): Boolean
+internal fun interface Function<T> {
+  fun apply(t: T?): T?
 
   @JsOverlay
-  fun overlay(): Int {
-    return f + if (call()) 1 else 2
+  fun overlay(t: T?): Int {
+    return f + if (apply(t) != null) 1 else 2
   }
 
   companion object {
     @JvmField // TODO(b/570022569): remove when JsInterop support Kotlin construct.
     @JsOverlay
     val f = 1
-  }
-}
 
-@JsFunction
-internal fun interface FunctionWithStaticOverlay {
-  fun call(): Boolean
-
-  companion object {
     @JsOverlay
     @JvmStatic // TODO(b/570022569): remove when JsInterop support Kotlin construct.
-    fun overlay(): Int {
+    fun staticOverlay(): Int {
       return 4
     }
   }
 }
 
-@JsFunction
-internal fun interface FunctionWithStaticField {
-  fun call(): Boolean
-
-  // TODO(b/303321920): Remove when JsFunction with only static field produces an Overlay class.
-  @JsOverlay
-  fun overlay(): Int {
-    return 0
-  }
-
-  companion object {
-    @JvmField // TODO(b/570022569): remove when JsInterop support Kotlin construct.
-    @JsOverlay
-    val f = 1
-  }
-}
-
-private fun testJsFunction() {
-  assertTrue(Function { true }.overlay() == 2)
-  assertTrue(Function { false }.overlay() == 3)
-  assertTrue(FunctionWithStaticOverlay.overlay() == 4)
-  assertTrue(FunctionWithStaticField.f == 1)
+private fun testJsFunctionOverlay() {
+  assertTrue(Function<Int> { t -> t }.overlay(10) == 2)
+  assertTrue(Function<Any?> { t -> t }.overlay(null) == 3)
+  assertTrue(Function.staticOverlay() == 4)
+  assertTrue(Function.f == 1)
 }
 
 private fun testSpecializedJsFunction() {
@@ -617,6 +594,19 @@ private fun testJsFunctionLambda() {
   val jsFunctionInterface = MyJsFunctionInterface { a -> a + 2 }
   assertEquals(12, callAsFunction(jsFunctionInterface, 10))
   assertEquals(12, jsFunctionInterface.foo(10))
+}
+
+private fun testJsFunctionLambdaCapturingLocal() {
+  val local = 123
+
+  val capturingJsFunction = MyJsFunctionInterface { a -> a + local }
+  assertEquals(135, callAsFunction(capturingJsFunction, 12))
+  assertEquals(135, capturingJsFunction.foo(12))
+
+  val localString = "abc"
+
+  val capturingParameterizedJsFunction = ParameterizedInterface<String> { a -> a + localString }
+  assertEquals("bcaabc", capturingParameterizedJsFunction.f("bca"))
 }
 
 private fun testJsFunctionArray() {

@@ -34,7 +34,7 @@ import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
-    testJsFunction();
+    testJsFunctionOverlay();
     testSpecializedJsFunction();
     testParameterizedJsFunctionMethod();
     testCast_crossCastJavaInstance();
@@ -66,6 +66,7 @@ public class Main {
     testJsFunctionOptimization();
     testJsFunctionWithVarArgs();
     testJsFunctionLambda();
+    testJsFunctionLambdaCapturingLocal();
     testJsFunctionArray();
     testJsFunctionCalls_autoboxing();
     testJsFunctionWithNativeType();
@@ -73,39 +74,28 @@ public class Main {
   }
 
   @JsFunction
-  interface Function {
-    boolean invoke();
+  interface Function<T> {
+    T apply(T t);
 
     @JsOverlay int f = 1;
 
     @JsOverlay
-    default int fun() {
-      return f + (invoke() ? 1 : 2);
+    default int overlay(T t) {
+      return f + (apply(t) != null ? 1 : 2);
     }
-  }
-
-  @JsFunction
-  interface FunctionWithStaticOverlay {
-    boolean invoke();
 
     @JsOverlay
-    static int fun() {
+    static int staticOverlay() {
       return 4;
     }
   }
 
-  @JsFunction
-  interface FunctionWithStaticField {
-    boolean invoke();
-
-    @JsOverlay int f = 1;
-  }
-
-  private static void testJsFunction() {
-    assertTrue(((Function) (() -> true)).fun() == 2);
-    assertTrue(((Function) (() -> false)).fun() == 3);
-    assertTrue(FunctionWithStaticOverlay.fun() == 4);
-    assertTrue(FunctionWithStaticField.f == 1);
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static void testJsFunctionOverlay() {
+    assertTrue(((Function<Integer>) (t -> t)).overlay(10) == 2);
+    assertTrue(((Function) (t -> t)).overlay(null) == 3);
+    assertTrue(Function.staticOverlay() == 4);
+    assertTrue(Function.f == 1);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -736,6 +726,19 @@ public class Main {
     MyJsFunctionInterface jsFunctionInterface = a -> a + 2;
     assertEquals(12, callAsFunction(jsFunctionInterface, 10));
     assertEquals(12, jsFunctionInterface.foo(10));
+  }
+
+  private static void testJsFunctionLambdaCapturingLocal() {
+    int local = 123;
+
+    MyJsFunctionInterface capturingJsFunction = a -> a + local;
+    assertEquals(135, callAsFunction(capturingJsFunction, 12));
+    assertEquals(135, capturingJsFunction.foo(12));
+
+    String localString = "abc";
+
+    ParameterizedInterface<String> capturingParameterizedJsFunction = a -> a + localString;
+    assertEquals("bcaabc", capturingParameterizedJsFunction.f("bca"));
   }
 
   private static void testJsFunctionArray() {

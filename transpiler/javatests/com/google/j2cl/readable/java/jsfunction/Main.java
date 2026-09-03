@@ -29,6 +29,16 @@ public class Main {
   @JsFunction
   interface Function<T, U> {
     T apply(U u);
+
+    @JsOverlay
+    default T overlayMethod(U u) {
+      return apply(u);
+    }
+
+    @JsOverlay
+    static int staticOverlayMethod() {
+      return 41;
+    }
   }
 
   @JsFunction
@@ -113,6 +123,9 @@ public class Main {
         return 0;
       }
     }.foo(3);
+
+    Function<Integer, Integer> f = a -> a + n;
+    f.apply(10);
   }
 
   public void testJsFunctionThis() {
