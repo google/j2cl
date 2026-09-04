@@ -591,16 +591,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         || getJavaOverriddenMethodDescriptors().stream().anyMatch(MethodDescriptor::isJsFunction);
   }
 
-  /**
-   * Returns true if it is a vararg method that can be referenced by JavaScript side. A
-   * non-JsOverlay JsMethod, and a JsFunction can be referenced by JavaScript side.
-   *
-   * <p>TODO(rluble): In our AST model, isJsMethod() and isJsOverlay() is NOT mutually-exclusive. We
-   * may want to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the
-   * AST.
-   */
+  /** Returns true if it is a vararg method that can be referenced by JavaScript side. */
   public boolean isJsMethodVarargs() {
-    return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction() || isJsConstructor());
+    return isVarargs() && (isJsMember() || isJsFunction());
   }
 
   @Override
