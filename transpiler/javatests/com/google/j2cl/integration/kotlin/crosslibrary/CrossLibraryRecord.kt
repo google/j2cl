@@ -15,19 +15,6 @@
  */
 package crosslibrary
 
-import com.google.j2cl.integration.testing.Asserts.assertEquals
+import jsinterop.annotations.JsType
 
-fun main(vararg unused: String) {
-  testNativeFunctions()
-  testRecordProperty()
-}
-
-private fun testNativeFunctions() {
-  assertEquals(1.0, NativeMath.internalMin(1.0, 2.0))
-  assertEquals(1.0, NativeMath.publicMin(1.0, 2.0))
-}
-
-private fun testRecordProperty() {
-  val record = CrossLibraryRecord(42)
-  assertEquals(42, record.value)
-}
+@JsType @JvmRecord data class CrossLibraryRecord(val value: Int)

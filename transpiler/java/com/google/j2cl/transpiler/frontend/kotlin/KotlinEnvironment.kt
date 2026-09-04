@@ -942,17 +942,13 @@ internal class KotlinEnvironment(
       // TODO(b/335000000): Remove this if we store Kotlin metadata in our type model.
       fields += jvmBackendContext.cachedDeclarations.getFieldForObjectInstance(companion)
     }
-
-    if (isFromJava()) {
-      // Fields from Java class are represented as Kotlin properties.
-      fields +=
-        declarations
-          .filterIsInstance<IrProperty>()
-          // If a field is on a parent type, all the subtypes will have IrProperty declarations that
-          // override from the parent. We can safely ignore these.
-          .filter { it.overriddenSymbols.isEmpty() }
-          .mapNotNull(IrProperty::backingField)
-    }
+    fields +=
+      declarations
+        .filterIsInstance<IrProperty>()
+        // If a field is on a parent type, all the subtypes will have IrProperty declarations that
+        // override from the parent. We can safely ignore these.
+        .filter { it.overriddenSymbols.isEmpty() }
+        .mapNotNull(IrProperty::backingField)
     return fields
   }
 }
