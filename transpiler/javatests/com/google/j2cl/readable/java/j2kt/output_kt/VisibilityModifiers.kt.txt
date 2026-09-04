@@ -100,7 +100,7 @@ class VisibilityModifiers {
  }
  
  open class ProtectedOverrideOfVisibilityWarningsSuppressed: j2kt.VisibilityModifiers.VisibilityWarningsSuppressed.NonFinal.Public() {
-  override fun protectedMethod() {}
+  public override fun protectedMethod() {}
  }
  
  open class PublicWithRelaxedVisibilityOverride: j2kt.relaxedvisibility.RelaxedVisibilityModifiers.Public() {
@@ -195,7 +195,7 @@ class VisibilityModifiers {
     
     override fun packagePrivateMethod_pp_j2kt() {}
     
-    override fun protectedMethod() {}
+    public override fun protectedMethod() {}
     
     private fun privateMethod() {}
    }

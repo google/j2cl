@@ -142,7 +142,7 @@ val MethodDescriptor.overridesProtected: Boolean
 // target was compiled with actual or relaxed visibilities.
 // See: `MemberDescriptor.isProtectedTranslatedAsPublic`
 val MemberDescriptor.needsExplicitVisibilityModifier: Boolean
-  get() = this is MethodDescriptor && visibility.isPublic && overridesProtected
+  get() = this is MethodDescriptor && ktVisibility.isPublic && overridesProtected
 
 val MethodDescriptor.isEnumValueOf: Boolean
   get() =
