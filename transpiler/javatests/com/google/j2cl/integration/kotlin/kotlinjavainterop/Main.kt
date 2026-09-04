@@ -43,6 +43,15 @@ fun main(vararg unused: String) {
   testNullMarkedCode()
   testJsInterop()
   testJavaRecordJsInterop()
+  testDefaultJavaMethod()
+}
+
+private class MyIterable : Iterable<String> {
+  override fun iterator(): Iterator<String> = emptyList<String>().iterator()
+}
+
+fun testDefaultJavaMethod() {
+  val unused = MyIterable().spliterator()
 }
 
 fun testFieldAccess() {
