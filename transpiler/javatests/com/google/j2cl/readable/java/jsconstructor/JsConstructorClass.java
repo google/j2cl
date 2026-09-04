@@ -157,37 +157,6 @@ public class JsConstructorClass {
     }
   }
 
-  public static class Varargs extends A {
-    @JsConstructor
-    public Varargs(int... args) {
-      super(args[1]);
-    }
-  }
-
-  public static class SubVarargs extends Varargs {
-    @JsConstructor
-    public SubVarargs(Object i, int... args) {
-      super(args);
-    }
-
-    public SubVarargs(int j) {
-      this(new Object(), j);
-    }
-
-    static void subNativeInvocation() {
-      SubVarargs unusedS1 = new SubVarargs(2);
-      SubVarargs unusedS2 = new SubVarargs(new Object(), 1, 2, 3);
-    }
-  }
-
-  @SuppressWarnings("ClassCanBeStatic")
-  public class InstanceVarargs extends A {
-    @JsConstructor
-    public InstanceVarargs(int... args) {
-      super(args[1]);
-    }
-  }
-
   public static class RegularType {
     public RegularType(Object b) {}
   }

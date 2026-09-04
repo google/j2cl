@@ -252,6 +252,48 @@ open class Main {
   }
  }
  
+ open class A {
+  constructor(x: Int)
+ }
+ 
+ open class Varargs: A {
+  @JsConstructor
+  constructor(vararg args: Int): super(
+   args!![1],
+  )
+ }
+ 
+ open class SubVarargs: Varargs {
+  @JsConstructor
+  constructor(i: Any?, vararg args: Int): super(
+   *args!!,
+  )
+  
+  constructor(j: Int): this(
+   Any(),
+   j,
+  )
+  
+  companion object {
+   @JvmStatic
+   internal fun subNativeInvocation_pp_jsvarargs() {
+    val unusedS1: SubVarargs = SubVarargs(2)
+    val unusedS2: SubVarargs = SubVarargs(
+     Any(),
+     1,
+     2,
+     3,
+    )
+   }
+  }
+ }
+ 
+ open inner class InstanceVarargs
+ @JsConstructor
+ constructor(vararg args: Int): A(
+  args!![1],
+ )
+ 
  @JsFunction
  internal fun interface Function {
   fun f1(i: Int, vararg args: Any?): Any?

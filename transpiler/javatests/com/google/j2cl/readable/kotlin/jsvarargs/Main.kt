@@ -31,6 +31,23 @@ open class Main(f: Int) {
   internal class SubVarargsConstructorClass @JsConstructor constructor(i: Int, vararg args: Any?) :
     NativeObject(args)
 
+  open class A(x: Int)
+
+  open class Varargs @JsConstructor constructor(vararg args: Int) : A(args[1])
+
+  class SubVarargs @JsConstructor constructor(i: Any, vararg args: Int) : Varargs(*args) {
+    constructor(j: Int) : this(Object(), j)
+
+    companion object {
+      fun subNativeInvocation() {
+        val unusedS1 = SubVarargs(2)
+        val unusedS2 = SubVarargs(Object(), 1, 2, 3)
+      }
+    }
+  }
+
+  inner class InstanceVarargs @JsConstructor constructor(vararg args: Int) : A(args[1])
+
   @JsFunction
   fun interface Function {
     fun f1(i: Int, vararg args: Any?): Any?

@@ -1,9 +1,9 @@
-goog.module('jsconstructor.SubVarargs.Companion$impl');
+goog.module('jsvarargs.Main.SubVarargs.Companion$impl');
 
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let SubVarargs = goog.forwardDeclare('jsconstructor.SubVarargs$impl');
+let SubVarargs = goog.forwardDeclare('jsvarargs.Main.SubVarargs$impl');
 
 /**
  * @final
@@ -16,11 +16,11 @@ class Companion extends j_l_Object {
  /** @nodts @return {!Companion} */
  static $create__() {
   let $instance = new Companion();
-  $instance.$ctor__jsconstructor_SubVarargs_Companion__void();
+  $instance.$ctor__jsvarargs_Main_SubVarargs_Companion__void();
   return $instance;
  }
  /** @nodts */
- $ctor__jsconstructor_SubVarargs_Companion__void() {
+ $ctor__jsvarargs_Main_SubVarargs_Companion__void() {
   this.$ctor__java_lang_Object__void();
  }
  /** @final @nodts */
@@ -28,15 +28,15 @@ class Companion extends j_l_Object {
   SubVarargs.m_subNativeInvocation__void();
  }
  /** @nodts @return {!Companion} */
- static get f_Companion__jsconstructor_SubVarargs_Companion() {
-  return (Companion.$clinit(), Companion.$static_Companion__jsconstructor_SubVarargs_Companion);
+ static get f_Companion__jsvarargs_Main_SubVarargs_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsvarargs_Main_SubVarargs_Companion);
  }
  /** @nodts */
  static $clinit() {
   Companion.$clinit = () =>{};
   Companion.$loadModules();
   j_l_Object.$clinit();
-  Companion.$static_Companion__jsconstructor_SubVarargs_Companion = Companion.$create__();
+  Companion.$static_Companion__jsvarargs_Main_SubVarargs_Companion = Companion.$create__();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -45,13 +45,13 @@ class Companion extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  SubVarargs = goog.module.get('jsconstructor.SubVarargs$impl');
+  SubVarargs = goog.module.get('jsvarargs.Main.SubVarargs$impl');
  }
 }
 /**@private {!Companion} @nodts*/
-Companion.$static_Companion__jsconstructor_SubVarargs_Companion;
-$Util.$setClassMetadata(Companion, 'jsconstructor.SubVarargs$Companion');
+Companion.$static_Companion__jsvarargs_Main_SubVarargs_Companion;
+$Util.$setClassMetadata(Companion, 'jsvarargs.Main$SubVarargs$Companion');
 
 exports = Companion;
 
-//# sourceMappingURL=SubVarargs$Companion.js.map
+//# sourceMappingURL=Main$SubVarargs$Companion.js.map

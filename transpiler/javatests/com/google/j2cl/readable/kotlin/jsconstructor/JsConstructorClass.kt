@@ -129,27 +129,10 @@ class Outer {
   inner class I @JsConstructor constructor() : G()
 }
 
-open class Varargs @JsConstructor constructor(vararg args: Int) : A(args[1])
-
-class SubVarargs @JsConstructor constructor(i: Any, vararg args: Int) : Varargs(*args) {
-  constructor(j: Int) : this(Object(), j)
-
-  companion object {
-    fun subNativeInvocation() {
-      val unusedS1 = SubVarargs(2)
-      val unusedS2 = SubVarargs(Object(), 1, 2, 3)
-    }
-  }
-}
-
 open class RegularType(b: Any)
 
 class JsConstructorSubtypeOfRegularType @JsConstructor constructor(obj: Any) : RegularType(obj) {
   constructor() : this(Object())
-}
-
-class JsConstructorClass {
-  inner class InstanceVarargs @JsConstructor constructor(vararg args: Int) : A(args[1])
 }
 
 open class JsConstructorClassWithExplicitConstructor {

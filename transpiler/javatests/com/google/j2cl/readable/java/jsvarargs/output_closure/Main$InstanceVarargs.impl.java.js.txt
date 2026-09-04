@@ -1,0 +1,46 @@
+goog.module('jsvarargs.Main.InstanceVarargs$impl');
+
+const A = goog.require('jsvarargs.Main.A$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let Main = goog.forwardDeclare('jsvarargs.Main$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+class InstanceVarargs extends A {
+ 
+ constructor(/** !Main */ $outer_this, .../** ...number */ args) {
+  InstanceVarargs.$clinit();
+  $Arrays.$stampType(args, $int);
+  super();
+  /**@type {!Main} @nodts*/
+  this.$outer_this__jsvarargs_Main_InstanceVarargs;
+  this.$ctor__jsvarargs_Main_InstanceVarargs__jsvarargs_Main__arrayOf_int__void($outer_this, args);
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_InstanceVarargs__jsvarargs_Main__arrayOf_int__void(/** !Main */ $outer_this, /** Array<number> */ args) {
+  this.$outer_this__jsvarargs_Main_InstanceVarargs = $outer_this;
+  this.$ctor__jsvarargs_Main_A__int__void(args[1]);
+ }
+ /** @nodts */
+ static $clinit() {
+  InstanceVarargs.$clinit = () =>{};
+  InstanceVarargs.$loadModules();
+  A.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(InstanceVarargs, 'jsvarargs.Main$InstanceVarargs');
+
+exports = InstanceVarargs;
+
+//# sourceMappingURL=Main$InstanceVarargs.js.map
