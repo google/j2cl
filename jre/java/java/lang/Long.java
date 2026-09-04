@@ -274,12 +274,12 @@ public final class Long extends Number implements Comparable<Long> {
     int getHighBits();
   }
 
+  static NativeLong toJs(long value) {
+    return createfromBits((int) value, LongUtils.getHighBits(value));
+  }
+
   static NativeLong toJs(Long value) {
-    if (value == null) {
-      return null;
-    }
-    long l = value.longValue();
-    return createfromBits((int) l, LongUtils.getHighBits(l));
+    return value == null ? null : toJs(value.longValue());
   }
 
   /**
@@ -287,11 +287,15 @@ public final class Long extends Number implements Comparable<Long> {
    * comparing native types to `null`
    */
   static Long fromSafeJsLong(NativeLong value) {
-    return valueOf(LongUtils.fromBits(value.getLowBits(), value.getHighBits()));
+    return valueOf(toPrimitiveLong(value));
   }
 
   static Long fromJs(NativeLong value) {
     return value == null ? null : fromSafeJsLong(value);
+  }
+
+  static long toPrimitiveLong(NativeLong value) {
+    return LongUtils.fromBits(value.getLowBits(), value.getHighBits());
   }
 
   @JsMethod(namespace = "goog.math.Long", name = "fromBits")

@@ -258,6 +258,18 @@ public final class RuntimeMethods {
     return MethodCall.builderFrom(toJs).setArguments(expression).build();
   }
 
+  public static MethodCall createPrimitiveLongToJsMethodCall(Expression expression) {
+    MethodDescriptor toJsLong =
+        TypeDescriptors.get().javaLangLong.getMethodDescriptor("toJs", PrimitiveTypes.LONG);
+    return MethodCall.builderFrom(toJsLong).setArguments(expression).build();
+  }
+
+  public static MethodCall createPrimitiveLongFromJsMethodCall(Expression expression) {
+    MethodDescriptor toPrimitiveLong =
+        TypeDescriptors.get().javaLangLong.getMethodDescriptorByName("toPrimitiveLong");
+    return MethodCall.builderFrom(toPrimitiveLong).setArguments(expression).build();
+  }
+
   /** Create a call to an Class method. */
   public static MethodCall createClassGetMethodCall(Expression... arguments) {
     checkArgument(arguments.length == 1 || arguments.length == 2);

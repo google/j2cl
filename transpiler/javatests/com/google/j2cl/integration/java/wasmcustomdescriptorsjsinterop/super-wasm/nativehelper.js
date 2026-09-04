@@ -86,6 +86,26 @@ function callGetLong(someJsType) {
 
 /**
  * @param {!SomeJsType} someJsType
+ * @return {!Long}
+ * @public
+ */
+function callGetPrimitiveLong(someJsType) {
+  return someJsType.getPrimitiveLong();
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @param {!Long} a
+ * @param {!Long} b
+ * @return {!Long}
+ * @public
+ */
+function callAddPrimitiveLong(someJsType, a, b) {
+  return someJsType.addPrimitiveLong(a, b);
+}
+
+/**
+ * @param {!SomeJsType} someJsType
  * @return {!NativeJsType}
  * @public
  */
@@ -110,6 +130,25 @@ function getField(someJsType) {
  */
 function setField(someJsType, value) {
   someJsType.field = value;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @return {!Long}
+ * @public
+ */
+function getLongField(someJsType) {
+  return someJsType.longField;
+}
+
+/**
+ * @param {!SomeJsType} someJsType
+ * @param {!Long} value
+ * @return {void}
+ * @public
+ */
+function setLongField(someJsType, value) {
+  someJsType.longField = value;
 }
 
 /**
@@ -443,6 +482,48 @@ function callConsumerCombineWithLong(consumer, nativeType, boxedLong) {
   return consumer.callCombineWithLong(nativeType, boxedLong);
 }
 
+/**
+ * @param {!Long} a
+ * @param {!Long} b
+ * @return {!Long}
+ * @public
+ */
+function callEntryPointAddLong(a, b) {
+  return globalThis['wasmExports']['entryPointAddLong'](a, b);
+}
+
+/**
+ * @return {boolean}
+ * @public
+ */
+function testDirectEntryPointAddLongFromJs() {
+  const a = Long.fromString('1111111111111111111');
+  const b = Long.fromString('2222222222222222222');
+  const result = globalThis['wasmExports']['entryPointAddLong'](a, b);
+  return result instanceof Long && result.toString() === '3333333333333333333';
+}
+
+/**
+ * @param {function(!Long): !Long} fn
+ * @param {!Long} l
+ * @return {!Long}
+ * @public
+ */
+function callLongFunctionInJs(fn, l) {
+  return fn(l);
+}
+
+/**
+ * @param {function(!Long): !Long} fn
+ * @return {boolean}
+ * @public
+ */
+function testDirectJsFunctionLongFromJs(fn) {
+  const input = Long.fromString('5000000000');
+  const result = fn(input);
+  return result instanceof Long && result.toString() === '5000000001';
+}
+
 exports = {
   newBaseJsType,
   newSomeJsType,
@@ -490,4 +571,12 @@ exports = {
   callConsumerGetField,
   callConsumerGetValue,
   callMethodWithNativeAndLong,
+  callGetPrimitiveLong,
+  callAddPrimitiveLong,
+  callEntryPointAddLong,
+  testDirectEntryPointAddLongFromJs,
+  callLongFunctionInJs,
+  testDirectJsFunctionLongFromJs,
+  getLongField,
+  setLongField,
 };

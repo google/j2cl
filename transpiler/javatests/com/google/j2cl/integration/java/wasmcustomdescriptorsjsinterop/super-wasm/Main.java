@@ -96,6 +96,10 @@ public final class Main {
     assertTrue(callTakesSelf(someJsType, someJsType));
     assertTrue(callGetNumberViaStaticMethod(someJsType) == 11);
     assertTrue(callGetLong(someJsType) == 123456789L);
+    assertEquals(1234567890123456789L, callGetPrimitiveLong(someJsType));
+    assertEquals(
+        3333333333333333333L,
+        callAddPrimitiveLong(someJsType, 1111111111111111111L, 2222222222222222222L));
     assertTrue(callGetNativeJsType(someJsType).getNumber() == 929);
     assertEquals(
         11 + 5 + 6, callMethodWithTypeParameters(someJsType, someJsType, "hello", (Double) 6.0));
@@ -108,6 +112,10 @@ public final class Main {
     assertTrue(getField(someJsType) == 123);
     setField(someJsType, 456);
     assertTrue(getField(someJsType) == 456);
+
+    assertEquals(1234567890123456789L, getLongField(someJsType));
+    setLongField(someJsType, 987654321098765432L);
+    assertEquals(987654321098765432L, getLongField(someJsType));
 
     setStaticField(789);
     assertTrue(getStaticField() == 789);
@@ -147,6 +155,7 @@ public final class Main {
   @JsType(namespace = "wasmcustomdescriptorsjsinterop")
   static class SomeJsType extends BaseJsType {
     public int field;
+    public long longField = 1234567890123456789L;
     public static int staticField = 0;
 
     public final int readOnlyField = 111;
@@ -173,6 +182,14 @@ public final class Main {
     @JsNonNull
     public Long getLong() {
       return 123456789L;
+    }
+
+    public long getPrimitiveLong() {
+      return 1234567890123456789L;
+    }
+
+    public long addPrimitiveLong(long a, long b) {
+      return a + b;
     }
 
     @JsNonNull
@@ -483,6 +500,10 @@ public final class Main {
     MyJsFunction withSuperConstructorInstance = new MyJsFunctionWithSuperConstructorImpl();
     assertEquals(105, withSuperConstructorInstance.foo(5));
     assertEquals(105, callFunctionInJs(withSuperConstructorInstance, 5));
+
+    MyLongFunction longLambda = l -> l + 1L;
+    assertEquals(1234567890123456790L, callLongFunctionInJs(longLambda, 1234567890123456789L));
+    assertTrue(testDirectJsFunctionLongFromJs(longLambda));
   }
 
   private static int classField = 10001;
@@ -625,6 +646,11 @@ public final class Main {
     int bar(int a);
   }
 
+  @JsFunction
+  interface MyLongFunction {
+    long foo(long l);
+  }
+
   private static void testParameterizedJsFunction() {
     ApplyFunction<String> stringJsFunction = s -> s.toLowerCase();
     assertEquals("hello", stringJsFunction.apply("HELLO"));
@@ -696,9 +722,16 @@ public final class Main {
     assertTrue(callJsMethodEntryPointWithJsType() == 11);
     assertTrue(callEntryPointWithNullJsFunction());
     assertTrue(callEntryPointWithUndefinedJsFunction());
+    assertEquals(
+        3333333333333333333L, callEntryPointAddLong(1111111111111111111L, 2222222222222222222L));
+    assertTrue(testDirectEntryPointAddLongFromJs());
   }
 
   public static int entryPointAdd(int a, int b) {
+    return a + b;
+  }
+
+  public static long entryPointAddLong(long a, long b) {
     return a + b;
   }
 
@@ -729,6 +762,12 @@ public final class Main {
   static native Long callGetLong(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
+  static native long callGetPrimitiveLong(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native long callAddPrimitiveLong(SomeJsType someJsType, long a, long b);
+
+  @JsMethod(namespace = "nativehelper")
   static native NativeJsType callGetNativeJsType(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
@@ -736,6 +775,12 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native void setField(SomeJsType someJsType, int value);
+
+  @JsMethod(namespace = "nativehelper")
+  static native long getLongField(SomeJsType someJsType);
+
+  @JsMethod(namespace = "nativehelper")
+  static native void setLongField(SomeJsType someJsType, long value);
 
   @JsMethod(namespace = "nativehelper")
   static native int getStaticField();
@@ -830,6 +875,18 @@ public final class Main {
 
   @JsMethod(namespace = "nativehelper")
   static native boolean callEntryPointWithUndefinedJsFunction();
+
+  @JsMethod(namespace = "nativehelper")
+  static native long callEntryPointAddLong(long a, long b);
+
+  @JsMethod(namespace = "nativehelper")
+  static native boolean testDirectEntryPointAddLongFromJs();
+
+  @JsMethod(namespace = "nativehelper")
+  static native long callLongFunctionInJs(MyLongFunction fn, long l);
+
+  @JsMethod(namespace = "nativehelper")
+  static native boolean testDirectJsFunctionLongFromJs(MyLongFunction fn);
 
   @JsType(isNative = true, namespace = "nativehelper")
   static class MyNativeType {

@@ -310,7 +310,8 @@ public class WasmExportBridgesUtils {
       return TypeDescriptors.getNativeStringType().toNullable(typeDescriptor.isNullable());
     }
 
-    if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)
+        || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)
         || typeDescriptor.isJsFunctionInterface()
         || needsBoundaryExternConversion(typeDescriptor, isExport)) {
@@ -329,6 +330,9 @@ public class WasmExportBridgesUtils {
   public static Expression convertToExternal(
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
+    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
+      return RuntimeMethods.createPrimitiveLongToJsMethodCall(expression);
+    }
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
@@ -378,6 +382,9 @@ public class WasmExportBridgesUtils {
   public static Expression convertToInternal(
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
+    if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
+      return RuntimeMethods.createPrimitiveLongFromJsMethodCall(expression);
+    }
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)) {

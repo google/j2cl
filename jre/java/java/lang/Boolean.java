@@ -126,7 +126,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
    * comparing native types to `null`
    */
   static Boolean fromSafeJsBoolean(NativeBoolean value) {
-    return valueOf(toBooleanPrimitive(value));
+    return valueOf(toPrimitiveBoolean(value));
   }
 
   static Boolean fromJs(NativeBoolean value) {
@@ -137,5 +137,5 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   private static native NativeBoolean toJsPrimitive(boolean value);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Boolean")
-  private static native boolean toBooleanPrimitive(NativeBoolean value);
+  private static native boolean toPrimitiveBoolean(NativeBoolean value);
 }
