@@ -1039,12 +1039,18 @@ public class StringTest extends TestCase {
   }
 
   public void testSplit_emptyExpr() {
-    // TODO(rluble):  implement JDK8 string.split semantics and fix test.
-    String[] expected =
-        (TestUtils.getJdkVersion() > 7)
-            ? new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"}
-            : new String[] {"", "a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
+    // Java 8+ semantics: "abc".split("") yields {"a", "b", "c"}.
+    String[] expected = new String[] {"a", "b", "c", "x", "x", "d", "e", "x", "f", "x"};
     compareList("emptyRegexSplit", expected, "abcxxdexfx".split(""));
+    // The limit variants follow the same rules as the JRE.
+    compareList("emptyRegexSplitLimit", new String[] {"a", "b", "cxxdexfx"}, "abcxxdexfx".split("", 3));
+    compareList("emptyRegexSplitNegativeLimit", new String[] {"a", "b", "c", ""}, "abc".split("", -1));
+    compareList("emptyRegexSplitWithTrailingEmpty", new String[] {"a", "b", "c", ""}, "abc".split("", 4));
+    compareList("emptyRegexSplitEmptyString", new String[] {""}, "".split(""));
+    // A trailing empty piece is kept when the limit demands more than one piece
+    // or when the limit is negative.
+    compareList("emptyRegexSplitSingleChar", new String[] {"a", ""}, "a".split("", 2));
+    compareList("emptyRegexSplitSingleCharNegative", new String[] {"a", ""}, "a".split("", -1));
   }
 
   public void testLines() {
