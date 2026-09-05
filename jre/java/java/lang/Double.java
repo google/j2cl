@@ -197,7 +197,7 @@ public final class Double extends Number implements Comparable<Double> {
    * comparing native types to `null`
    */
   static Double fromSafeJsNumber(NativeNumber value) {
-    return valueOf(toDoublePrimitive(value));
+    return valueOf(toPrimitiveDouble(value));
   }
 
   static Double fromJs(NativeNumber value) {
@@ -208,5 +208,5 @@ public final class Double extends Number implements Comparable<Double> {
   private static native NativeNumber toJsPrimitive(double value);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number")
-  private static native double toDoublePrimitive(NativeNumber value);
+  private static native double toPrimitiveDouble(NativeNumber value);
 }
