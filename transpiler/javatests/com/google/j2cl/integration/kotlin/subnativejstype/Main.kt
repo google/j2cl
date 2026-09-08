@@ -16,6 +16,7 @@
 package subnativejstype
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
@@ -25,6 +26,7 @@ import kotlin.js.definedExternally
 
 fun main(vararg args: String) {
   testJsTypeSubclassConstructor()
+  testJsTypeSingleJavaConcreteInterface()
   testJsPropertyNativeJsTypeSubclass()
   testJsPropertyNativeJsTypeSubclassNoOverride()
   testJsPropertyBridges()
@@ -37,6 +39,30 @@ private fun testJsTypeSubclassConstructor() {
   val mc = JsPropertyMyNativeJsTypeSubclass(0, 0)
   assertTrue(mc.ctorExecuted)
 }
+
+private fun testJsTypeSingleJavaConcreteInterface() {
+  // Create a couple of instances and use the objects in some way to avoid complete pruning
+  // of JavaConcrete
+  assertTrue(JsTypeJavaConcrete() != JsTypeJavaConcrete())
+  assertSame(5, JsTypeJavaConcrete().m())
+  assertSame(3, (nativeObjectImplementingM() as JsTypeInterfaceWithSingleJavaConcrete).m())
+}
+
+@JsType(
+  isNative = true,
+  namespace = "subnativejstype.JsTypeTest",
+  name = "InterfaceWithSingleJavaConcrete",
+)
+internal interface JsTypeInterfaceWithSingleJavaConcrete {
+  fun m(): Int
+}
+
+internal class JsTypeJavaConcrete : JsTypeInterfaceWithSingleJavaConcrete {
+  override fun m(): Int = 5
+}
+
+@JsMethod(namespace = "subnativejstype.JsTypeTestHelper")
+private external fun nativeObjectImplementingM(): Any?
 
 val SET_PARENT_X: Int = 500
 val GET_PARENT_X: Int = 1000

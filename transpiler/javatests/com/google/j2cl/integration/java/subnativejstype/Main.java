@@ -16,6 +16,7 @@
 package subnativejstype;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
@@ -26,6 +27,7 @@ import jsinterop.annotations.JsType;
 public class Main {
   public static void main(String... args) {
     testJsTypeSubclassConstructor();
+    testJsTypeSingleJavaConcreteInterface();
     testJsPropertyNativeJsTypeSubclass();
     testJsPropertyNativeJsTypeSubclassNoOverride();
     testJsPropertyBridges();
@@ -38,6 +40,32 @@ public class Main {
     JsPropertyMyNativeJsTypeSubclass mc = new JsPropertyMyNativeJsTypeSubclass(0, 0);
     assertTrue(mc.ctorExecuted);
   }
+
+  private static void testJsTypeSingleJavaConcreteInterface() {
+    // Create a couple of instances and use the objects in some way to avoid complete pruning
+    // of JavaConcrete
+    assertTrue(new JsTypeJavaConcrete() != new JsTypeJavaConcrete());
+    assertSame(5, new JsTypeJavaConcrete().m());
+    assertSame(3, ((JsTypeInterfaceWithSingleJavaConcrete) nativeObjectImplementingM()).m());
+  }
+
+  @JsType(
+      isNative = true,
+      namespace = "subnativejstype.JsTypeTest",
+      name = "InterfaceWithSingleJavaConcrete")
+  interface JsTypeInterfaceWithSingleJavaConcrete {
+    int m();
+  }
+
+  static class JsTypeJavaConcrete implements JsTypeInterfaceWithSingleJavaConcrete {
+    @Override
+    public int m() {
+      return 5;
+    }
+  }
+
+  @JsMethod(namespace = "subnativejstype.JsTypeTestHelper")
+  private static native Object nativeObjectImplementingM();
 
   private static final int SET_PARENT_X = 500;
   private static final int GET_PARENT_X = 1000;

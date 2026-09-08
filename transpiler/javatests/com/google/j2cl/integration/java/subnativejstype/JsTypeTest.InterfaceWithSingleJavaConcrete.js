@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteroptests.JsTypeTest.InterfaceWithSingleJavaConcrete');
+goog.module('subnativejstype.JsTypeTest.InterfaceWithSingleJavaConcrete');
 
 /** @interface */
 class InterfaceWithSingleJavaConcrete {

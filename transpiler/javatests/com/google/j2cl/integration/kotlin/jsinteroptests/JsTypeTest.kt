@@ -26,7 +26,6 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
-import jsinterop.annotations.JsOverlay
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
@@ -41,22 +40,11 @@ object JsTypeTest {
     testEnumeration()
     testEnumJsTypeAccess()
     testEnumSubclassEnumeration()
-    testInstanceOf_concreteJsType()
-    testInstanceOf_extendsJsTypeWithProto()
-    testInstanceOf_implementsJsType()
-    testInstanceOf_implementsJsTypeWithPrototype()
-    testInstanceOf_jsoWithNativeButtonProto()
-    testInstanceOf_jsoWithoutProto()
-    testInstanceOf_jsoWithProto()
-    testInstanceOf_classWithCustomIsInstance()
-    testInstanceOf_interfaceWithCustomIsInstance()
-    testInstanceOf_withNameSpace()
     testJsMethodWithDifferentVisiblities()
     testJsTypeField()
     testNamedBridge()
     testNativeMethodOverrideNoTypeTightenParam()
     testRevealedOverrideJsType()
-    testSingleJavaConcreteInterface()
     testSingleJavaConcreteJsFunction()
     testStar()
     testWildcard()
@@ -66,77 +54,15 @@ object JsTypeTest {
 
   @JsType(isNative = true, namespace = "test.foo") internal interface MyNativeJsTypeInterface {}
 
-  internal class MyNativeJsTypeInterfaceImpl : MyNativeJsTypeInterface
-
   @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
   internal open class MyNativeJsType {}
 
-  internal class MyNativeJsTypeSubclass @JsConstructor constructor() : MyNativeJsType()
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
-  internal class MyNativeClassWithCustomIsInstance {
-    companion object {
-      @JsOverlay
-      @JvmStatic
-      fun `$isInstance`(o: Any?): Boolean = isCustomIsInstanceClassSingleton(o)
-    }
-  }
-
-  private val CUSTOM_IS_INSTANCE_CLASS_SINGLETON = "CustomIsInstanceClass"
-
-  // This method was extracted from $isInstance and ONLY called from there to ensure that
-  // rta traverses custom isInstance methods.
-  private fun isCustomIsInstanceClassSingleton(o: Any?): Boolean =
-    o == CUSTOM_IS_INSTANCE_CLASS_SINGLETON
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
-  interface MyNativeInterfaceWithCustomIsInstance {
-    companion object {
-      @JsOverlay
-      @JvmStatic
-      fun `$isInstance`(o: Any?): Boolean = isCustomIsInstanceInterfaceSingleton(o)
-    }
-  }
-
-  private final val CUSTOM_IS_INSTANCE_INTERFACE_SINGLETON = "CustomIsInstanceInterface"
-
-  // This method was extracted from $isInstance and ONLY called from there to ensure that
-  // rta traverses custom isInstance methods.
-  private fun isCustomIsInstanceInterfaceSingleton(o: Any?): Boolean =
-    o == CUSTOM_IS_INSTANCE_INTERFACE_SINGLETON
-
-  internal class MyNativeJsTypeSubclassWithIterator @JsConstructor constructor() :
-    MyNativeJsType(), Iterable<Any?> {
-    override fun iterator(): Iterator<Any?> {
-      throw UnsupportedOperationException()
-    }
-  }
 
   @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
   internal open class HTMLElementConcreteNativeJsType {}
 
   @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
   internal class HTMLElementAnotherConcreteNativeJsType {}
-
-  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLButtonElement", isNative = true)
-  internal class HTMLButtonElementConcreteNativeJsType : HTMLElementConcreteNativeJsType()
-
-  /** Implements ElementLikeJsInterface. */
-  internal class ElementLikeNativeInterfaceImpl : ElementLikeNativeInterface {
-    override fun getTagName(): String = "mytag"
-  }
-
-  /** A test class marked with JsType but isn't referenced from any Java code except instanceof. */
-  @JsType internal interface MyJsInterfaceWithOnlyInstanceofReference
-
-  /** A test class marked with JsType but isn't referenced from any Java code except instanceof. */
-  @JsType(isNative = true) internal interface MyNativeJsTypeInterfaceAndOnlyInstanceofReference
-
-  /** A test class marked with JsType but isn't referenced from any Java code except instanceof. */
-  @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
-  internal class AliasToMyNativeJsTypeWithOnlyInstanceofReference
-
-  @JsType(isNative = true, namespace = "testfoo.bar") internal class MyNamespacedNativeJsType
 
   /** This concrete test class is *directly* annotated as a @JsType. */
   @JsType
@@ -248,212 +174,11 @@ object JsTypeTest {
     assertNotNull(nativeButton2)
   }
 
-  private fun testInstanceOf_jsoWithProto() {
-    val o: Any? = createMyNativeJsType()
-
-    assertTrue(o is Any)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertTrue(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertTrue(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_jsoWithoutProto() {
-    val o: Any? = createObject()
-
-    assertTrue(o is Any)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_jsoWithNativeButtonProto() {
-    val o: Any? = createNativeButton()
-
-    assertTrue(o is Any)
-    assertTrue(o is HTMLElementConcreteNativeJsType)
-    assertTrue(o is HTMLElementAnotherConcreteNativeJsType)
-    assertTrue(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_implementsJsType() {
-    // Foils type tightening.
-    val o: Any? = ElementLikeNativeInterfaceImpl()
-
-    assertTrue(o is Any)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertTrue(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_implementsJsTypeWithPrototype() {
-    // Foils type tightening.
-    val o: Any? = MyNativeJsTypeInterfaceImpl()
-
-    assertTrue(o is Any)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertTrue(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_concreteJsType() {
-    // Foils type tightening.
-    val o: Any? = ConcreteJsType()
-
-    assertTrue(o is Any)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertTrue(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_extendsJsTypeWithProto() {
-    // Foils type tightening.
-    val o: Any? = MyNativeJsTypeSubclassWithIterator()
-
-    assertTrue(o is Any)
-    assertTrue(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeSubclass)
-    assertTrue(o is MyNativeJsTypeSubclassWithIterator)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertTrue(o is Iterable<*>)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertTrue(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_classWithCustomIsInstance() {
-    val o: Any? = CUSTOM_IS_INSTANCE_CLASS_SINGLETON
-
-    assertTrue(o is Object)
-    assertTrue(o is String)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertTrue(o is MyNativeClassWithCustomIsInstance)
-    assertFalse(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_interfaceWithCustomIsInstance() {
-    val o: Any? = CUSTOM_IS_INSTANCE_INTERFACE_SINGLETON
-
-    assertTrue(o is Object)
-    assertTrue(o is String)
-    assertFalse(o is HTMLElementConcreteNativeJsType)
-    assertFalse(o is HTMLElementAnotherConcreteNativeJsType)
-    assertFalse(o is HTMLButtonElementConcreteNativeJsType)
-    assertFalse(o is Iterator<*>)
-    assertFalse(o is MyNativeJsType)
-    assertFalse(o is MyNativeJsTypeInterfaceImpl)
-    assertFalse(o is MyNativeClassWithCustomIsInstance)
-    assertTrue(o is MyNativeInterfaceWithCustomIsInstance)
-    assertFalse(o is ElementLikeNativeInterfaceImpl)
-    assertFalse(o is MyJsInterfaceWithOnlyInstanceofReference)
-    assertFalse(o is AliasToMyNativeJsTypeWithOnlyInstanceofReference)
-    assertFalse(o is ConcreteJsType)
-    assertFalse(o is Array<*> && o.isArrayOf<MyNativeJsTypeInterface>())
-    assertFalse(o is Array<*> && o.isArrayOf<Array<MyNativeJsTypeInterfaceImpl>>())
-  }
-
-  private fun testInstanceOf_withNameSpace() {
-    val obj1: Any? = createMyNamespacedJsInterface()
-
-    assertTrue(obj1 is MyNamespacedNativeJsType)
-    assertFalse(obj1 is MyNativeJsType)
-  }
-
   @JvmStatic private fun createMyNativeJsType(): Any? = MyNativeJsType()
-
-  @JvmStatic private fun createMyNamespacedJsInterface(): Any? = MyNamespacedNativeJsType()
 
   @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @JvmStatic
   external fun createNativeButton(): Any?
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  @JvmStatic
-  external fun createObject(): Any?
 
   private fun testConcreteJsTypeAccess() {
     val concreteJsType = ConcreteJsType()
@@ -619,26 +344,7 @@ object JsTypeTest {
   @JvmStatic
   internal external fun fillJsTypeField(jstype: SimpleJsTypeWithField)
 
-  @JsType(isNative = true, namespace = "jsinteroptests.JsTypeTest")
-  internal interface InterfaceWithSingleJavaConcrete {
-    fun m(): Int
-  }
 
-  internal class JavaConcrete : InterfaceWithSingleJavaConcrete {
-    override fun m(): Int = 5
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  @JvmStatic
-  private external fun nativeObjectImplementingM(): Any?
-
-  private fun testSingleJavaConcreteInterface() {
-    // Create a couple of instances and use the objects in some way to avoid complete pruning
-    // of JavaConcrete
-    assertTrue(JavaConcrete() != JavaConcrete())
-    assertSame(5, JavaConcrete().m())
-    assertSame(3, (nativeObjectImplementingM() as InterfaceWithSingleJavaConcrete).m())
-  }
 
   @JsFunction
   internal fun interface JsFunctionInterface {

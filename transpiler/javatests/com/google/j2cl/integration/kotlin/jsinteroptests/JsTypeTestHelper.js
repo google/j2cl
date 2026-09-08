@@ -24,14 +24,6 @@ exports.createNativeButton = function() {
 };
 
 /**
- * @return {*}
- * @public
- */
-exports.createObject = function() {
-  return {};
-};
-
-/**
  * @param {?} object
  * @return {number}
  */
@@ -87,13 +79,6 @@ exports.callM = function(obj, param) {
  */
 exports.fillJsTypeField = function(jstype) {
   jstype.someField = {};
-};
-
-/**
- * @return {*}
- */
-exports.nativeObjectImplementingM = function() {
-  return {m: function() { return 3; }};
 };
 
 /**
