@@ -405,28 +405,24 @@ def _j2cl_transpile(
         strip_annotations = ["GwtIncompatible"]):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
     mnemonic = "J2cl" if backend == "CLOSURE" else "J2wasm"
-    is_klibs_enabled = klib_common.is_klibs_experiment_enabled(ctx) and (kt_srcs or kt_common_srcs)
+    has_kotlin_srcs = bool(kt_srcs or kt_common_srcs)
 
     if "-Xstdlib-compilation" in kotlincopts:
         # The stdlib compilation is sensitive to the naming of inputs so we
         # avoid using the srcjar emitted by the Kotlin/JVM compilation and
         # instead just package it ourselves.
         srcs = [_package_kt_stdlib(ctx, kt_common_srcs, kt_srcs)] + js_srcs
-    elif is_klibs_enabled:
+    elif has_kotlin_srcs:
         srcs = []
 
     else:
         # Source files are passed directly to the transpiler.
         srcs = java_srcs + js_srcs
 
-    if is_klibs_enabled:
+    if has_kotlin_srcs:
         compilation_classpath = [klib_provider.compilation_classpath]
-    elif jvm_provider.compilation_info:
-        compilation_classpath = [jvm_provider.compilation_info.compilation_classpath]
     else:
-        # TODO(b/214609427): JavaInfo created through Starlark does not have compilation_info set.
-        # We will compute the classpath manually using transitive_compile_time_jars.
-        compilation_classpath = [d.transitive_compile_time_jars for d in jvm_deps]
+        compilation_classpath = [jvm_provider.compilation_info.compilation_classpath]
 
     classpath = depset(transitive = [get_bootclasspath(ctx)] + compilation_classpath)
     tokenized_javac_opts = [token for opt in javac_opts for token in ctx.tokenize(opt)]
@@ -457,11 +453,6 @@ def _j2cl_transpile(
         if value:
             args.add("-" + flag.replace("_", ""))
 
-    if not is_klibs_enabled:
-        # Forcefully enable IR serialization. J2CL only needs this to have Kotlinc deserialize IR
-        # from dependencies; we do not actually emit any serialized IR (that all happens on the JVM
-        # side).
-        kotlincopts = kotlincopts + KOTLIN_SERIALIZE_IR_FLAGS
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
 
     transitive_inputs = [classpath]
@@ -471,22 +462,6 @@ def _j2cl_transpile(
         args.add_joined("-processor", jvm_provider.annotation_processing.processor_classnames, join_with = ",")
         args.add_joined("-processorpath", annotation_processor_classpath, join_with = ctx.configuration.host_path_separator)
         transitive_inputs.append(annotation_processor_classpath)
-
-    if is_klibs_enabled:
-        args.add_joined(
-            "-klibs",
-            klib_provider.compilation_klibs,
-            join_with = ctx.configuration.host_path_separator,
-        )
-        transitive_inputs.append(klib_provider.compilation_klibs)
-
-        # Friend modules are passed via a separate flag, not kotlincopts. This is necessary for
-        # correct path resolution when J2clTranspiler runs as a Blaze worker.
-        args.add_joined(
-            "-friendKlibs",
-            klib_friends,
-            join_with = ctx.configuration.host_path_separator,
-        )
 
     args.add_all(srcs)
 
@@ -537,14 +512,6 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     "-Xannotations-in-metadata",
     # Set the Kotlin language version to isolate J2CL from Google3 language version updates.
     "-language-version=2.4",
-]
-
-KOTLIN_SERIALIZE_IR_FLAGS = [
-    # Enable the serialization of the IR
-    # Currently all IR elements are being serialized to workaround missing IR in
-    # some instances, ex. a lambda within an inline member. See: b/263391416
-    # TODO(b/264661698): Reduce to just serialization of inline functions.
-    "-Xserialize-ir=all",
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
