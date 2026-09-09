@@ -136,8 +136,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         () -> sourceBuilder.append(environment.aliasForType(typeDeclaration)));
     sourceBuilder.append(" = ");
     sourceBuilder.openBrace();
-    sourceBuilder.newLine();
     for (Field field : type.getStaticFields()) {
+      sourceBuilder.newLine();
       sourceBuilder.emitWithMemberMapping(
           field.getDescriptor(),
           () -> {
@@ -149,7 +149,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             sourceBuilder.append(" : ");
             ExpressionTranspiler.render(field.getInitializer(), environment, sourceBuilder);
             sourceBuilder.append(",");
-            sourceBuilder.newLine();
           });
     }
     sourceBuilder.closeBrace();
