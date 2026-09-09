@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 /** Utility functions for JsInterop properties. */
 public final class JsInteropAstUtils {
 
-  public static boolean isJsType(TypeDeclaration typeDeclaration) {
+  static boolean isJsType(TypeDeclaration typeDeclaration) {
     return typeDeclaration.hasAnnotation("jsinterop.annotations.JsType");
   }
 
@@ -38,14 +38,14 @@ public final class JsInteropAstUtils {
     ignoreJsFunctionAnnotations.set(true);
   }
 
-  public static boolean isJsFunction(TypeDeclaration typeDeclaration) {
+  static boolean isJsFunction(TypeDeclaration typeDeclaration) {
     if (ignoreJsFunctionAnnotations.get()) {
       return false;
     }
     return typeDeclaration.hasAnnotation("jsinterop.annotations.JsFunction");
   }
 
-  public static boolean isJsNative(TypeDeclaration typeDeclaration) {
+  static boolean isJsNative(TypeDeclaration typeDeclaration) {
     if (typeDeclaration.isEnum() && TypeDeclaration.implementWasmJsInteropSemantics()) {
       return false;
     }
@@ -54,7 +54,7 @@ public final class JsInteropAstUtils {
   }
 
   @Nullable
-  public static JsEnumInfo getJsEnumInfo(TypeDeclaration typeDeclaration) {
+  static JsEnumInfo getJsEnumInfo(TypeDeclaration typeDeclaration) {
     Annotation annotation = typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
     if (annotation == null) {
       return null;
@@ -72,14 +72,14 @@ public final class JsInteropAstUtils {
         .build();
   }
 
-  public static String getJsName(TypeDeclaration typeDeclaration) {
+  static String getJsName(TypeDeclaration typeDeclaration) {
     Annotation annotation = getJsTypeOrJsEnumAnnotation(typeDeclaration);
     String jsName = getJsName(annotation);
     return jsName != null ? jsName : typeDeclaration.getSimpleSourceName();
   }
 
   @Nullable
-  public static String getJsNamespace(TypeDeclaration typeDeclaration) {
+  static String getJsNamespace(TypeDeclaration typeDeclaration) {
     return getJsNamespace(getJsTypeOrJsEnumAnnotation(typeDeclaration));
   }
 
@@ -89,12 +89,11 @@ public final class JsInteropAstUtils {
     return jsType != null ? jsType : typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
   }
 
-  public static boolean isJsOptional(ParameterDescriptor parameterDescriptor) {
+  static boolean isJsOptional(ParameterDescriptor parameterDescriptor) {
     return parameterDescriptor.hasAnnotation("jsinterop.annotations.JsOptional");
   }
 
-  public static ParameterDescriptor removeParameterOptionality(
-      ParameterDescriptor parameterDescriptor) {
+  static ParameterDescriptor removeParameterOptionality(ParameterDescriptor parameterDescriptor) {
     if (!isJsOptional(parameterDescriptor)) {
       return parameterDescriptor;
     }
@@ -119,7 +118,7 @@ public final class JsInteropAstUtils {
   }
 
   /** Return the original JsInfo for the given member descriptor. */
-  public static JsInfo getOriginalJsInfo(MemberDescriptor member, @Nullable JsInfo originalJsInfo) {
+  static JsInfo getOriginalJsInfo(MemberDescriptor member, @Nullable JsInfo originalJsInfo) {
     if (ignoreNonNativeJsInfo.get()
         && !member.getEnclosingTypeDescriptor().isNative()
         && !member.getEnclosingTypeDescriptor().isJsFunctionInterface()
