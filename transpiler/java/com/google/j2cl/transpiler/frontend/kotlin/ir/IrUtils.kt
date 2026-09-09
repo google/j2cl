@@ -55,7 +55,6 @@ import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
-import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
@@ -99,7 +98,6 @@ import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.hasAnnotation
-import org.jetbrains.kotlin.ir.util.isAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
@@ -586,9 +584,6 @@ val IrFunction.isAbstract: Boolean
 
 val IrFunction.isFinal: Boolean
   get() = this is IrOverridableMember && modality == Modality.FINAL
-
-fun IrDeclaration.getAnnotation(name: FqName): IrConstructorCall? =
-  getAllAnnotations().firstOrNull { (it as? IrAnnotation)?.isAnnotation(name) == true }
 
 /** Sequence of annotations on this declaration. */
 // TODO(b/550323040): return a sequence of IrAnnotation instead of IrConstructorCall.

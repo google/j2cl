@@ -816,7 +816,6 @@ public class JavaEnvironment {
           ParameterDescriptor.builder()
               .setTypeDescriptor(parameterType)
               .setName(methodSymbol.getParameters().get(i).getSimpleName().toString())
-              .setJsOptional(JsInteropUtils.isJsOptional(methodSymbol, i))
               .setVarargs(i == parameters.size() - 1 && methodSymbol.isVarArgs())
               .setAnnotations(createAnnotations(parameterAnnotations, inNullMarkedScope))
               .build());

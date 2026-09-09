@@ -15,21 +15,15 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.findAnnotationByName;
 import static com.google.j2cl.transpiler.frontend.javac.AnnotationUtils.getAnnotationParameterString;
 
-import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import javax.annotation.Nullable;
 import javax.lang.model.element.PackageElement;
 
 /** Utility functions for JsInterop properties. */
 public final class JsInteropUtils {
-
-  public static boolean isJsOptional(MethodSymbol method, int i) {
-    return findAnnotationByName(method.getParameters().get(i), JS_OPTIONAL_ANNOTATION_NAME) != null;
-  }
 
   /** The namespace specified on a package. */
   @Nullable

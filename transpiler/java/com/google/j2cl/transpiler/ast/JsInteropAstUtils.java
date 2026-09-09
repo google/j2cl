@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import javax.annotation.Nullable;
 
@@ -85,6 +87,27 @@ public final class JsInteropAstUtils {
   private static Annotation getJsTypeOrJsEnumAnnotation(TypeDeclaration typeDeclaration) {
     Annotation jsType = typeDeclaration.getAnnotation("jsinterop.annotations.JsType");
     return jsType != null ? jsType : typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
+  }
+
+  public static boolean isJsOptional(ParameterDescriptor parameterDescriptor) {
+    return parameterDescriptor.hasAnnotation("jsinterop.annotations.JsOptional");
+  }
+
+  public static ParameterDescriptor removeParameterOptionality(
+      ParameterDescriptor parameterDescriptor) {
+    if (!isJsOptional(parameterDescriptor)) {
+      return parameterDescriptor;
+    }
+    return parameterDescriptor.toBuilder()
+        .setAnnotations(
+            parameterDescriptor.getAnnotations().stream()
+                .filter(
+                    a ->
+                        !a.getTypeDescriptor()
+                            .getQualifiedSourceName()
+                            .equals("jsinterop.annotations.JsOptional"))
+                .collect(toImmutableList()))
+        .build();
   }
 
   // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.

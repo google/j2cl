@@ -71,7 +71,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract boolean isOptional();
 
-    public abstract boolean isJsOptional();
+    @Memoized
+    public boolean isJsOptional() {
+      return JsInteropAstUtils.isJsOptional(this);
+    }
 
     @Memoized
     public ParameterDescriptor toRawParameterDescriptor() {
@@ -84,8 +87,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
           .setAnnotations(ImmutableList.of())
-          .setOptional(false)
-          .setJsOptional(false);
+          .setOptional(false);
     }
 
     /** A Builder for ParameterDescriptor. */
@@ -105,20 +107,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
       abstract boolean isOptional();
 
-      public abstract Builder setJsOptional(boolean isJsOptional);
-
-      abstract boolean isJsOptional();
-
       abstract ParameterDescriptor autoBuild();
 
       public ParameterDescriptor build() {
         checkState(!isOptional() || !isVarargs(), "Parameters cannot be both varargs and optional");
+        ParameterDescriptor parameterDescriptor = autoBuild();
         // TODO(b/236400205): we need to think through the implications of something being both
         //  optional and explicitly JsOptional. For now we'll prevent frontends from getting us into
         //  that state.
         checkState(
-            !isOptional() || !isJsOptional(), "Parameters cannot be both optional and JsOptional");
-        return interner.intern(autoBuild());
+            !isOptional() || !parameterDescriptor.isJsOptional(),
+            "Parameters cannot be both optional and JsOptional");
+        return interner.intern(parameterDescriptor);
       }
 
       private static final ThreadLocalInterner<ParameterDescriptor> interner =
@@ -1818,9 +1818,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public Builder removeParameterOptionality() {
       return setParameterDescriptors(
           getParameterDescriptors().stream()
-              .map(
-                  parameterDescriptor ->
-                      parameterDescriptor.toBuilder().setJsOptional(false).build())
+              .map(JsInteropAstUtils::removeParameterOptionality)
               .collect(toImmutableList()));
     }
 
