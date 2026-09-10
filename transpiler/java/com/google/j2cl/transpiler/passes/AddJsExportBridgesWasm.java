@@ -20,7 +20,6 @@ import static com.google.j2cl.transpiler.ast.AstUtils.hasOwnWasmJsPrototype;
 
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -42,85 +41,80 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
   }
 
   @Override
-  public void applyTo(Library library) {
+  public void applyTo(Type type) {
     if (enableCustomDescriptorsJsInterop) {
-      addJsTypeExportBridges(library);
+      addJsTypeExportBridges(type);
     }
 
-    addJsFunctionExportBridges(library);
+    addJsFunctionExportBridges(type);
   }
 
-  private static void addJsTypeExportBridges(Library library) {
-    library
-        .streamTypes()
-        .filter(t -> hasOwnWasmJsPrototype(t.getDeclaration()))
+  private static void addJsTypeExportBridges(Type type) {
+    if (!hasOwnWasmJsPrototype(type.getDeclaration())) {
+      return;
+    }
+
+    List<Method> bridges = new ArrayList<>();
+
+    // Create bridges for fields, static methods and constructors directly from Member
+    // objects in Type to account for the effects of normalization. In particular
+    // constructors of inner classes have an extra parameter for the outer class instance
+    // that is not present in the type model.
+    type.getMembers()
         .forEach(
-            type -> {
-              List<Method> bridges = new ArrayList<>();
-
-              // Create bridges for fields, static methods and constructors directly from Member
-              // objects in Type to account for the effects of normalization. In particular
-              // constructors of inner classes have an extra parameter for the outer class instance
-              // that is not present in the type model.
-              type.getMembers()
-                  .forEach(
-                      m -> {
-                        switch (m) {
-                          case Method method when AstUtils.isExposedToJsViaConstructor(method) ->
-                              bridges.add(
-                                  WasmExportBridgesUtils.generateBridge(
-                                      type.getTypeDescriptor(),
-                                      method.getDescriptor(),
-                                      method.getSourcePosition(),
-                                      getBridgeOrigin(method.getDescriptor())));
-                          case Field field
-                              when field.getDescriptor().canBeReferencedExternally() -> {
-                            bridges.add(
-                                WasmExportBridgesUtils.generateGetterBridge(
-                                    field.getDescriptor(), field.getSourcePosition()));
-                            if (!field.getDescriptor().isFinal()) {
-                              bridges.add(
-                                  WasmExportBridgesUtils.generateSetterBridge(
-                                      field.getDescriptor(), field.getSourcePosition()));
-                            }
-                          }
-                          default -> {}
-                        }
-                      });
-
-              if (!type.isInterface()) {
-                // Only create bridges for newly exposed instance methods.
-                type.getTypeDescriptor()
-                    .getNewlyExposedInstanceJsMethods()
-                    .forEach(
-                        methodDescriptor ->
-                            bridges.add(
-                                WasmExportBridgesUtils.generateBridge(
-                                    type.getTypeDescriptor(),
-                                    methodDescriptor,
-                                    type.getSourcePosition(),
-                                    getBridgeOrigin(methodDescriptor))));
+            m -> {
+              switch (m) {
+                case Method method when AstUtils.isExposedToJsViaConstructor(method) ->
+                    bridges.add(
+                        WasmExportBridgesUtils.generateBridge(
+                            type.getTypeDescriptor(),
+                            method.getDescriptor(),
+                            method.getSourcePosition(),
+                            getBridgeOrigin(method.getDescriptor())));
+                case Field field when field.getDescriptor().canBeReferencedExternally() -> {
+                  bridges.add(
+                      WasmExportBridgesUtils.generateGetterBridge(
+                          field.getDescriptor(), field.getSourcePosition()));
+                  if (!field.getDescriptor().isFinal()) {
+                    bridges.add(
+                        WasmExportBridgesUtils.generateSetterBridge(
+                            field.getDescriptor(), field.getSourcePosition()));
+                  }
+                }
+                default -> {}
               }
-
-              bridges.forEach(bridge -> addBridge(type, bridge));
             });
+
+    if (!type.isInterface()) {
+      // Only create bridges for newly exposed instance methods.
+      type.getTypeDescriptor()
+          .getNewlyExposedInstanceJsMethods()
+          .forEach(
+              methodDescriptor ->
+                  bridges.add(
+                      WasmExportBridgesUtils.generateBridge(
+                          type.getTypeDescriptor(),
+                          methodDescriptor,
+                          type.getSourcePosition(),
+                          getBridgeOrigin(methodDescriptor))));
+    }
+
+    bridges.forEach(bridge -> addBridge(type, bridge));
   }
 
-  private static void addJsFunctionExportBridges(Library library) {
-    library
-        .streamTypes()
-        .filter(Type::isJsFunctionInterface)
-        .forEach(
-            type -> {
-              Method jsFunctionMethod =
-                  type.getMethods().stream()
-                      .filter(m -> m.getDescriptor().isJsFunction())
-                      .collect(onlyElement());
-              addBridge(
-                  type,
-                  WasmExportBridgesUtils.generateJsFunctionBridge(
-                      type.getTypeDescriptor(), jsFunctionMethod.getSourcePosition()));
-            });
+  private static void addJsFunctionExportBridges(Type type) {
+    if (!type.isJsFunctionInterface()) {
+      return;
+    }
+
+    Method jsFunctionMethod =
+        type.getMethods().stream()
+            .filter(m -> m.getDescriptor().isJsFunction())
+            .collect(onlyElement());
+    addBridge(
+        type,
+        WasmExportBridgesUtils.generateJsFunctionBridge(
+            type.getTypeDescriptor(), jsFunctionMethod.getSourcePosition()));
   }
 
   private static void addBridge(Type type, Method bridge) {
