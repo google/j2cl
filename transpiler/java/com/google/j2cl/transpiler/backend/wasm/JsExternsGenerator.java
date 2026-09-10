@@ -87,6 +87,8 @@ final class JsExternsGenerator {
     library
         .streamTypes()
         .filter(t -> shouldGenerateExtern(t.getTypeDescriptor()))
+        // TODO(b/479895127): Remove when JsEnum externs generation is supported.
+        .filter(t -> !t.getDeclaration().isJsEnum())
         .forEach(
             type -> {
               generateExtern(type);

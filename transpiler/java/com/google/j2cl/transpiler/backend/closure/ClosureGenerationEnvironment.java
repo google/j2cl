@@ -111,37 +111,46 @@ public class ClosureGenerationEnvironment {
     StringBuilder sb = new StringBuilder();
     if (type.isInterface()) {
       appendWithNewLine(sb, " * @interface");
+    } else if (type.isJsEnum()) {
+      appendWithNewLine(sb, " * @enum {" + getJsEnumValueType(type.getDeclaration()) + "}");
     } else if (type.isAbstract()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
       appendWithNewLine(sb, " * @abstract");
     }
-    if (type.getDeclaration().isFinal()) {
-      appendWithNewLine(sb, " * @final");
-    }
-    if (type.getDeclaration().hasTypeParameters()) {
-      appendWithNewLine(
-          sb,
-          " *"
-              + getJsDocDeclarationForTypeVariable(
-                  type.getDeclaration().getTypeParameterDescriptors()));
-    }
-    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null
-        && (needsExtendsJsDoc() || superTypeDescriptor.hasTypeArguments())) {
-      // No need to render if it does not have type arguments as it will also appear in the
-      // extends clause of the class definition (unless it's an externs declaration).
-      renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, sb);
-    }
+    if (!type.isJsEnum()) {
+      if (type.getDeclaration().isFinal()) {
+        appendWithNewLine(sb, " * @final");
+      }
+      if (type.getDeclaration().hasTypeParameters()) {
+        appendWithNewLine(
+            sb,
+            " *"
+                + getJsDocDeclarationForTypeVariable(
+                    type.getDeclaration().getTypeParameterDescriptors()));
+      }
+      DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+      if (superTypeDescriptor != null
+          && (needsExtendsJsDoc() || superTypeDescriptor.hasTypeArguments())) {
+        // No need to render if it does not have type arguments as it will also appear in the
+        // extends clause of the class definition (unless it's an externs declaration).
+        renderClauseIfTypeExistsInJavaScript("extends", superTypeDescriptor, sb);
+      }
 
-    String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
-    type.getSuperInterfaceTypeDescriptors()
-        .forEach(t -> renderClauseIfTypeExistsInJavaScript(extendsOrImplementsString, t, sb));
+      String extendsOrImplementsString = type.isInterface() ? "extends" : "implements";
+      type.getSuperInterfaceTypeDescriptors()
+          .forEach(t -> renderClauseIfTypeExistsInJavaScript(extendsOrImplementsString, t, sb));
+    }
 
     if (isDeprecated(type.getDeclaration())) {
       appendWithNewLine(sb, " * @deprecated");
     }
 
     return sb.toString();
+  }
+
+  protected String getJsEnumValueType(TypeDeclaration typeDeclaration) {
+    return closureTypesGenerator.getClosureTypeString(
+        AstUtils.getJsEnumValueFieldType(typeDeclaration));
   }
 
   /** Returns the JsDoc declaration clause for a collection of type variables. */

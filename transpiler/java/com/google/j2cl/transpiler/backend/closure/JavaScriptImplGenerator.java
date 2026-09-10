@@ -121,19 +121,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderClosureEnum() {
-    TypeDeclaration typeDeclaration = type.getDeclaration();
-    sourceBuilder.append(
-        "/** @enum {"
-            + environment.getClosureTypeString(AstUtils.getJsEnumValueFieldType(typeDeclaration))
-            + "}");
-    if (isDeprecated(type.getDeclaration())) {
-      sourceBuilder.append(" @deprecated");
-    }
-    sourceBuilder.appendln(" */");
+    renderTypeAnnotation();
     sourceBuilder.append("const ");
     sourceBuilder.emitWithMapping(
         type.getSourcePosition(),
-        () -> sourceBuilder.append(environment.aliasForType(typeDeclaration)));
+        () -> sourceBuilder.append(environment.aliasForType(type.getDeclaration())));
     sourceBuilder.append(" = ");
     sourceBuilder.openBrace();
     for (Field field : type.getStaticFields()) {
