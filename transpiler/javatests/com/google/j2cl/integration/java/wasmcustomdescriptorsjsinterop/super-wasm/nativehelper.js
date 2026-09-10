@@ -186,6 +186,14 @@ function getStaticReadOnlyField() {
 }
 
 /**
+ * @return {number}
+ * @public
+ */
+function getStaticFieldSameJsNameAsInstanceField() {
+  return SomeJsType.readOnlyField;
+}
+
+/**
  * @param {!SomeJsType} someJsType
  * @return {number}
  * @public
@@ -200,6 +208,14 @@ function getReadOnlyProperty(someJsType) {
  */
 function getStaticReadOnlyProperty() {
   return SomeJsType.staticReadOnlyProperty;
+}
+
+/**
+ * @return {number}
+ * @public
+ */
+function getStaticPropertySameJsNameAsInstanceProperty() {
+  return SomeJsType.readOnlyProperty;
 }
 
 /**
@@ -538,8 +554,10 @@ exports = {
   setStaticField,
   getReadOnlyField,
   getStaticReadOnlyField,
+  getStaticFieldSameJsNameAsInstanceField,
   getReadOnlyProperty,
   getStaticReadOnlyProperty,
+  getStaticPropertySameJsNameAsInstanceProperty,
   getReadWriteProperty,
   setReadWriteProperty,
   callPackagePrivateMethod,

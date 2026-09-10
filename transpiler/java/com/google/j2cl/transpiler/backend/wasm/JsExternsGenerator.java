@@ -210,7 +210,9 @@ final class JsExternsGenerator {
 
   /** Collates getter/setter pairs and presents them as a field descriptor. */
   private static Stream<MemberDescriptor> streamGetterSetterPairsAsFields(Type type) {
-    var getterSetters = new LinkedHashMap<String, GetterSetterPair>();
+    record PropertyKey(String name, boolean isStatic) {}
+
+    var getterSetters = new LinkedHashMap<PropertyKey, GetterSetterPair>();
     streamExportedMembers(type)
         .filter(MemberDescriptor::isJsProperty)
         .filter(MethodDescriptor.class::isInstance)
@@ -218,7 +220,9 @@ final class JsExternsGenerator {
         .forEach(
             m -> {
               GetterSetterPair getterSetterPair =
-                  getterSetters.computeIfAbsent(m.getSimpleJsName(), k -> new GetterSetterPair());
+                  getterSetters.computeIfAbsent(
+                      new PropertyKey(m.getSimpleJsName(), m.isStatic()),
+                      k -> new GetterSetterPair());
               if (m.isJsPropertyGetter()) {
                 getterSetterPair.getter = m;
               } else if (m.isJsPropertySetter()) {

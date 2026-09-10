@@ -122,9 +122,11 @@ public final class Main {
 
     assertTrue(getReadOnlyField(someJsType) == 111);
     assertTrue(getStaticReadOnlyField() == 222);
+    assertTrue(getStaticFieldSameJsNameAsInstanceField() == 666);
 
     assertTrue(getReadOnlyProperty(someJsType) == 333);
     assertTrue(getStaticReadOnlyProperty() == 444);
+    assertTrue(getStaticPropertySameJsNameAsInstanceProperty() == 555);
 
     assertTrue(getReadWriteProperty(someJsType) == 0);
     setReadWriteProperty(someJsType, 567);
@@ -160,6 +162,9 @@ public final class Main {
 
     public final int readOnlyField = 111;
     public static final int staticReadOnlyField = 222;
+
+    @JsProperty(name = "readOnlyField")
+    public static final int staticFieldSameJsNameAsInstanceField = 666;
 
     public SomeJsType(int field) {
       this.field = field;
@@ -205,6 +210,11 @@ public final class Main {
     @JsProperty
     public static int getStaticReadOnlyProperty() {
       return 444;
+    }
+
+    @JsProperty(name = "readOnlyProperty")
+    public static int getStaticPropertySameJsNameAsInstanceProperty() {
+      return 555;
     }
 
     private int ignoredField;
@@ -795,10 +805,16 @@ public final class Main {
   static native int getStaticReadOnlyField();
 
   @JsMethod(namespace = "nativehelper")
+  static native int getStaticFieldSameJsNameAsInstanceField();
+
+  @JsMethod(namespace = "nativehelper")
   static native int getReadOnlyProperty(SomeJsType someJsType);
 
   @JsMethod(namespace = "nativehelper")
   static native int getStaticReadOnlyProperty();
+
+  @JsMethod(namespace = "nativehelper")
+  static native int getStaticPropertySameJsNameAsInstanceProperty();
 
   @JsMethod(namespace = "nativehelper")
   static native int getReadWriteProperty(SomeJsType someJsType);
