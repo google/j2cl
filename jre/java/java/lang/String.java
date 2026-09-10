@@ -546,52 +546,61 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   public String[] split(String regex, int maxMatch) {
     // The compiled regular expression created from the string
     NativeRegExp compiled = new NativeRegExp(regex, "g");
-    // the Javascipt array to hold the matches prior to conversion
+    // the Javascript array to hold the pieces
     String[] out = new String[0];
-    // how many matches performed so far
+    // The position in the input where the next piece starts.
+    int index = 0;
+    // The number of pieces that have been produced so far.
     int count = 0;
-    // The current string that is being matched; trimmed as each piece matches
-    String trail = this;
-    // used to detect repeated zero length matches
-    // Must be null to start with because the first match of "" makes no
-    // progress by intention
-    String lastTrail = null;
-    // We do the split manually to avoid Javascript incompatibility
+    // We do the split manually to avoid Javascript incompatibility with Java
+    // String.split. This mirrors java.util.regex.Pattern.split: matches are
+    // found on the whole input (not on progressively trimmed suffixes) and the
+    // global regex lastIndex is kept in sync so that zero width matches still
+    // make progress, mimicking java.util.regex.Matcher.
     while (true) {
-      // None of the information in the match returned are useful as we have no
-      // subgroup handling
-      NativeRegExp.Match matchObj = compiled.exec(trail);
-      if (matchObj == null || trail == "" || (count == (maxMatch - 1) && maxMatch > 0)) {
-        out[count] = trail;
+      // When maxMatch > 0, the resulting array has at most maxMatch elements.
+      // Since the remaining tail of the string is appended after the loop as the
+      // final piece, stop searching once maxMatch - 1 pieces have been collected.
+      // For maxMatch <= 0, maxMatch - 1 < 0 so count == maxMatch - 1 is never true.
+      if (count == maxMatch - 1) {
         break;
-      } else {
-        int matchIndex = matchObj.getIndex();
-        out[count] = trail.substring(0, matchIndex);
-        trail = trail.substring(matchIndex + matchObj.getAt(0).length(), trail.length());
-        // Force the compiled pattern to reset internal state
-        compiled.setLastIndex(0);
-        // Only one zero length match per character to ensure termination
-        if (lastTrail == trail) {
-          out[count] = trail.substring(0, 1);
-          trail = trail.substring(1);
+      }
+      // For global RegExp (/g), exec() searches from compiled.lastIndex and
+      // returns the next match.
+      NativeRegExp.Match matchObj = compiled.exec(this);
+      if (matchObj == null) {
+        break;
+      }
+      int matchIndex = matchObj.getIndex();
+      int matchLength = matchObj.getAt(0).length();
+      if (matchLength == 0) {
+        // In JS RegExp (/g), exec() automatically advances lastIndex by matchLength.
+        // For zero-width matches (matchLength == 0), lastIndex does not advance,
+        // so we must explicitly advance it past the match to make progress.
+        compiled.setLastIndex(matchIndex + 1);
+        // Java 8+ does not include an empty leading piece when the first match
+        // is a zero-width match at the very beginning of the string, e.g.
+        // "abc".split("") yields {"a", "b", "c"} rather than {"", "a", "b", "c"}.
+        // Skip such a match and advance past it.
+        if (matchIndex == 0) {
+          continue;
         }
-        lastTrail = trail;
-        count++;
       }
+      out[count++] = substring(index, matchIndex);
+      index = matchIndex + matchLength;
     }
-    // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
-    // however, if the input string is empty, the output should consist of a
-    // single empty string
+    // Append the remaining tail of the string as the final piece. If no delimiter
+    // was matched, index == 0 and count == 0, so this emits the entire string [this].
+    out[count++] = substring(index, length());
+    // When maxMatch == 0, discard all trailing empty pieces unless the input
+    // string itself was empty (which produces a single empty string [""]).
     if (maxMatch == 0 && this.length() > 0) {
-      int lastNonEmpty = out.length;
-      while (lastNonEmpty > 0 && out[lastNonEmpty - 1] == "") {
-        --lastNonEmpty;
-      }
-      if (lastNonEmpty < out.length) {
-        ArrayHelper.setLength(out, lastNonEmpty);
+      while (count > 0 && out[count - 1].isEmpty()) {
+        count--;
       }
     }
-    return out;
+    // Resize the array to count, dropping any trailing empty pieces trimmed above.
+    return ArrayHelper.setLength(out, count);
   }
 
   public Stream<String> lines() {
