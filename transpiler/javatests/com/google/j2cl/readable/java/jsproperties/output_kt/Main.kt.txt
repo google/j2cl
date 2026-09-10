@@ -58,6 +58,10 @@ internal open class Bar internal constructor() {
  @JsProperty
  private var privateField: Int = -1
  
+ @JvmField
+ @JsProperty(name = "f")
+ var instanceField: Int = 1
+ 
  @JsProperty
  open fun getA(): Int = this.f + 1
  
@@ -72,6 +76,16 @@ internal open class Bar internal constructor() {
  @JsProperty(name = "abc")
  open fun setB(x: Int) {
   this.f = x + 4
+ }
+ 
+ companion object {
+  @JvmField
+  @JsProperty(name = "f")
+  var staticFieldSameJsNameAsInstanceField: Int = 2
+  
+  @JvmStatic
+  @JsProperty(name = "abc")
+  fun getStaticPropertySameJsNameAsInstanceProperty(): Int = 4
  }
 }
 
@@ -141,9 +155,11 @@ open class Main {
   Foo.setA(10)
   Foo.getB()
   Foo.setB(10)
-  val r: Int = InterfaceWithStaticJsProperties.A
+  var r: Int = InterfaceWithStaticJsProperties.A
   InterfaceWithStaticJsProperties.getB()
   InterfaceWithStaticJsProperties.setB(10)
+  r = Bar.staticFieldSameJsNameAsInstanceField
+  r = Bar.getStaticPropertySameJsNameAsInstanceProperty()
  }
  
  open fun testInstanceJsProperty() {

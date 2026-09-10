@@ -48,6 +48,12 @@ class Bar {
 
   @JsProperty private int privateField = -1;
 
+  @JsProperty(name = "f")
+  public int instanceField = 1;
+
+  @JsProperty(name = "f")
+  public static int staticFieldSameJsNameAsInstanceField = 2;
+
   @JsProperty
   public int getA() {
     return f + 1;
@@ -66,6 +72,11 @@ class Bar {
   @JsProperty(name = "abc")
   public void setB(int x) {
     f = x + 4;
+  }
+
+  @JsProperty(name = "abc")
+  public static int getStaticPropertySameJsNameAsInstanceProperty() {
+    return 4;
   }
 }
 
@@ -133,6 +144,9 @@ public class Main {
     int r = InterfaceWithStaticJsProperties.A;
     InterfaceWithStaticJsProperties.getB();
     InterfaceWithStaticJsProperties.setB(10);
+
+    r = Bar.staticFieldSameJsNameAsInstanceField;
+    r = Bar.getStaticPropertySameJsNameAsInstanceProperty();
   }
 
   public void testInstanceJsProperty() {

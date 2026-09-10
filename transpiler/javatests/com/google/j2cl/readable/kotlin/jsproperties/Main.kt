@@ -46,6 +46,8 @@ fun setB(x: Int) {
 class Bar(private var f: Int) {
   @JsProperty private var privateField: Int = -1
 
+  @JvmField @JsProperty(name = "f") var instanceField: Int = 1
+
   @JsProperty
   fun getA(): Int {
     return f + 1
@@ -64,6 +66,16 @@ class Bar(private var f: Int) {
   @JsProperty(name = "abc")
   fun setB(x: Int) {
     f = x + 4
+  }
+
+  companion object {
+    @JvmField @JsProperty(name = "f") var staticFieldSameJsNameAsInstanceField: Int = 2
+
+    @JsProperty(name = "abc")
+    @JvmStatic
+    fun getStaticPropertySameJsNameAsInstanceProperty(): Int {
+      return 4
+    }
   }
 }
 
@@ -222,6 +234,9 @@ class Main {
     var r = InterfaceWithStaticJsProperties.a
     InterfaceWithStaticJsProperties.getB()
     InterfaceWithStaticJsProperties.setB(10)
+
+    r = Bar.staticFieldSameJsNameAsInstanceField
+    r = Bar.getStaticPropertySameJsNameAsInstanceProperty()
   }
 
   fun testInstanceJsProperty() {

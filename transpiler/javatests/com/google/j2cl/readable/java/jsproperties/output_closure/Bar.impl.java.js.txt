@@ -11,6 +11,8 @@ class Bar extends j_l_Object {
   this.f_f__jsproperties_Bar_ = 0;
   /**@type {number}*/
   this.privateField = 0;
+  /**@type {number}*/
+  this.f = 0;
  }
  /** @nodts @return {!Bar} */
  static $create__() {
@@ -40,15 +42,30 @@ class Bar extends j_l_Object {
  set abc(/** number */ x) {
   this.f_f__jsproperties_Bar_ = x + 4 | 0;
  }
+ /** @return {number} */
+ static get abc() {
+  Bar.$clinit();
+  return 4;
+ }
  /** @private @nodts */
  $init__void_$p_jsproperties_Bar() {
   this.privateField = -1;
+  this.f = 1;
+ }
+ /** @return {number} */
+ static get f() {
+  return (Bar.$clinit(), Bar.$static_staticFieldSameJsNameAsInstanceField__jsproperties_Bar);
+ }
+ 
+ static set f(/** number */ value) {
+  (Bar.$clinit(), Bar.$static_staticFieldSameJsNameAsInstanceField__jsproperties_Bar = value);
  }
  /** @nodts */
  static $clinit() {
   Bar.$clinit = () =>{};
   Bar.$loadModules();
   j_l_Object.$clinit();
+  Bar.$static_staticFieldSameJsNameAsInstanceField__jsproperties_Bar = 2;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -58,6 +75,8 @@ class Bar extends j_l_Object {
  /** @nodts */
  static $loadModules() {}
 }
+/**@private {number} @nodts*/
+Bar.$static_staticFieldSameJsNameAsInstanceField__jsproperties_Bar = 0;
 $Util.$setClassMetadata(Bar, 'jsproperties.Bar');
 
 exports = Bar;
