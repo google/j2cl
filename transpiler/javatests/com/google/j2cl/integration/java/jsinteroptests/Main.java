@@ -26,7 +26,6 @@ public class Main {
   public static void main(String... args) {
     JsExportTest.testAll();
     JsMethodTest.testAll();
-    JsPropertyTest.testAll();
     JsTypeArrayTest.testAll();
     JsTypeBridgeTest.testAll();
     JsTypeTest.testAll();

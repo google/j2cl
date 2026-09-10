@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteroptests.JsPropertyTest.MyNativeJsType');
+goog.module('jsproperties.MyNativeJsType');
 
 class MyNativeJsType {
   /** @param {number=} x */
@@ -23,15 +23,6 @@ class MyNativeJsType {
     this.y = 0;
     /** @public {boolean} */
     this.ctorExecuted = true;
-  }
-
-  /**
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  static answerToLife() {
-    return 42;
   }
 
   /**

@@ -17,4 +17,5 @@ integration_test(
     enable_jvm_test = False,
     enable_kt = False,
     enable_wasm = False,
+    enable_wasm_custom_descriptors_jsinterop = True,
 )
