@@ -16,7 +16,6 @@
 package jsinteroptests;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsIgnore;
 
 /**
  * A test class that exports a constructor.
@@ -29,7 +28,6 @@ public class MyClassExportsConstructor {
     this.a = a;
   }
 
-  @JsIgnore
   public MyClassExportsConstructor() {
     this(1);
   }

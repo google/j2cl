@@ -59,6 +59,152 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testJsIgnoreSucceeds() {
+    assertTranspileSucceeds(
+            "test.Parent",
+            """
+            import jsinterop.annotations.*;
+            @JsType
+            public class Parent {
+              @JsIgnore
+              public Parent() {}
+
+              @JsIgnore
+              public int f;
+
+              @JsIgnore
+              public void m() {}
+            }
+            @JsType
+            interface Interface {
+              @JsIgnore
+              void m();
+
+              @JsIgnore
+              int F = 1;
+            }
+            @JsType
+            record RecordWithJsIgnore(@JsIgnore int x, String y) {}
+            class AutoValue_Foo extends Parent {
+              @JsIgnore
+              @Override
+              public void m() {}
+            }
+            """)
+        .assertNoWarnings();
+  }
+
+  public void testJsIgnoreFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        public class Buggy {
+          @JsIgnore
+          public Buggy() {}
+          > Error: Non-JsType member 'Buggy()' cannot have @JsIgnore.
+
+          @JsIgnore
+          public int f;
+          > Error: Non-JsType member 'Buggy.f' cannot have @JsIgnore.
+
+          @JsIgnore
+          public void m() {}
+          > Error: Non-JsType member 'void Buggy.m()' cannot have @JsIgnore.
+        }
+        interface BuggyInterface {
+          @JsIgnore
+          void m();
+          > Error: Non-JsType member 'void BuggyInterface.m()' cannot have @JsIgnore.
+
+          @JsIgnore
+          static final int F = 1;
+          > Error: Non-JsType member 'BuggyInterface.F' cannot have @JsIgnore.
+        }
+        @JsEnum
+        enum BuggyJsEnum {
+          A, B;
+          @JsIgnore
+          public void m() {}
+          > Error: Non-JsType member 'void BuggyJsEnum.m()' cannot have @JsIgnore.
+        }
+        @JsFunction
+        interface BuggyJsFunction {
+          @JsIgnore
+          void m();
+          > Error: Non-JsType member 'void BuggyJsFunction.m()' cannot have @JsIgnore.
+        }
+        @JsType
+        class JsTypeParent {
+          @JsIgnore
+          public void m() {}
+        }
+        class SubclassOfJsType extends JsTypeParent {
+          @JsIgnore
+          @Override
+          public void m() {}
+          > Error: Non-JsType member 'void SubclassOfJsType.m()' cannot have @JsIgnore.
+        }
+        @JsType
+        class NonPublicMembers {
+          @JsIgnore
+          private NonPublicMembers() {}
+          > Error: Non-public member 'NonPublicMembers()' cannot have @JsIgnore.
+
+          @JsIgnore
+          private int f1;
+          > Error: Non-public member 'NonPublicMembers.f1' cannot have @JsIgnore.
+
+          @JsIgnore
+          protected int f2;
+          > Error: Non-public member 'NonPublicMembers.f2' cannot have @JsIgnore.
+
+          @JsIgnore
+          int f3;
+          > Error: Non-public member 'NonPublicMembers.f3' cannot have @JsIgnore.
+
+          @JsIgnore
+          private void m1() {}
+          > Error: Non-public member 'void NonPublicMembers.m1()' cannot have @JsIgnore.
+
+          @JsIgnore
+          protected void m2() {}
+          > Error: Non-public member 'void NonPublicMembers.m2()' cannot have @JsIgnore.
+
+          @JsIgnore
+          void m3() {}
+          > Error: Non-public member 'void NonPublicMembers.m3()' cannot have @JsIgnore.
+        }
+        class AutoValue_Foo {
+          @JsIgnore
+          void nonPublic() {}
+          > Error: Non-public member 'void AutoValue_Foo.nonPublic()' cannot have @JsIgnore.
+        }
+        @JsType(isNative = true)
+        interface NativeInterface {
+          @JsIgnore
+          void n();
+          > Error: Native JsType member 'void NativeInterface.n()' cannot have @JsIgnore.
+          > Error: [unusable-by-js] Native 'void NativeInterface.n()' is exposed to JavaScript without @JsMethod.
+        }
+        @JsType(isNative = true)
+        abstract class NativeBuggy {
+          @JsIgnore
+          public NativeBuggy() {}
+          > Error: Native JsType member 'NativeBuggy()' cannot have @JsIgnore.
+
+          @JsIgnore
+          public int x;
+          > Error: Native JsType member 'NativeBuggy.x' cannot have @JsIgnore.
+
+          @JsIgnore
+          public native void n();
+          > Error: Native JsType member 'void NativeBuggy.n()' cannot have @JsIgnore.
+          > Error: [unusable-by-js] Native 'void NativeBuggy.n()' is exposed to JavaScript without @JsMethod.
+        }
+        """);
+  }
+
   public void testMultipleJsMemberAnnotationsFails() {
     assertWithInlineMessages(
         "test.Buggy",
@@ -3269,6 +3415,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsConstructor
               CompactJsConstructor {}
             }
+            @JsType
             record IgnoredConstructor(int x, int y) {
               @JsConstructor
               IgnoredConstructor(int x, int y) {
@@ -3827,7 +3974,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-
   public void testJsOverlayOnNonNativeJsTypeFails() {
     assertWithInlineMessages(
         "test.Buggy",
@@ -3959,11 +4105,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         "test.Buggy",
         """
         import jsinterop.annotations.*;
-        @JsType(isNative=true) interface Interface {
-          @JsIgnore public void n();
-        > Error: Native JsType member 'void Interface.n()' cannot have @JsIgnore.
-        > Error: [unusable-by-js] Native 'void Interface.n()' is exposed to JavaScript without @JsMethod.
-        }
         @JsType(isNative=true) abstract class Buggy {
           public static final int s = 42;
         > Error: Native JsType field 'Buggy.s' cannot have initializer.
@@ -3973,13 +4114,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Native JsType field 'Buggy.f' cannot have initializer.
           public int g = 42;
         > Error: Native JsType field 'Buggy.g' cannot have initializer.
-          @JsIgnore public Buggy() { }
-        > Error: Native JsType member 'Buggy()' cannot have @JsIgnore.
-          @JsIgnore public int x;
-        > Error: Native JsType member 'Buggy.x' cannot have @JsIgnore.
-          @JsIgnore public native void n();
-        > Error: Native JsType member 'void Buggy.n()' cannot have @JsIgnore.
-        > Error: [unusable-by-js] Native 'void Buggy.n()' is exposed to JavaScript without @JsMethod.
           public void o() {}
         > Error: Native JsType method 'void Buggy.o()' should be native, abstract or JsOverlay.
           public native void p() /*-{}-*/;
@@ -4419,6 +4553,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public Promise a() { return null; }
               @JsAsync
               public IThenable b() { return null; }
+            }
+            @JsType
+            class JsTypeBuggy {
               @JsIgnore
               @JsAsync
               public Promise c() { return null; }

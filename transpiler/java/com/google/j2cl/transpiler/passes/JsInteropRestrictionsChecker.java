@@ -251,7 +251,7 @@ public class JsInteropRestrictionsChecker {
     return false;
   }
 
-  private boolean checkAutoValueTypeName(TypeDeclaration typeDeclaration) {
+  private static boolean checkAutoValueTypeName(TypeDeclaration typeDeclaration) {
     // TODO(b/221280581): Replace with checking the generator name passed via @Generated when J2CL
     //  starts modeling annotations in the AST.
     return typeDeclaration != null
@@ -1217,6 +1217,10 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
+    if (memberDescriptor.hasAnnotation("jsinterop.annotations.JsIgnore")) {
+      checkJsIgnore(member);
+    }
+
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     if (enclosingTypeDescriptor.isNative() && enclosingTypeDescriptor.isJsType()) {
       checkMemberOfNativeJsType(member);
@@ -1688,6 +1692,37 @@ public class JsInteropRestrictionsChecker {
     checkImplementableStatically(member, "JsOverlay");
   }
 
+  private void checkJsIgnore(Member member) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
+    if (!enclosingTypeDescriptor.isJsType()
+        // AutoValue copies member annotations but not type annotations to the generated
+        // implementation class, resulting in @JsIgnore on a non-@JsType class.
+        && !checkAutoValueTypeName(enclosingTypeDescriptor.getTypeDeclaration())) {
+      cannotHaveJsIgnore(member, "Non-JsType");
+      return;
+    }
+
+    if (enclosingTypeDescriptor.isNative()) {
+      cannotHaveJsIgnore(member, "Native JsType");
+      return;
+    }
+
+    if (!memberDescriptor.getVisibility().isPublic()
+        // Record components are private but still part of the public API.
+        && !(memberDescriptor instanceof FieldDescriptor field && field.isRecordComponentField())) {
+      cannotHaveJsIgnore(member, "Non-public");
+    }
+  }
+
+  private void cannotHaveJsIgnore(Member member, String reason) {
+    problems.error(
+        member.getSourcePosition(),
+        "%s member '%s' cannot have @JsIgnore.",
+        reason,
+        member.getDescriptor().getReadableDescription());
+  }
+
   // Do not move this one to MemberDescriptor since getMemberTypeDeclarations is not correct for
   // enums with subtypes from the dependencies.
   boolean isEffectivelyFinal(MemberDescriptor memberDescriptor) {
@@ -1799,15 +1834,9 @@ public class JsInteropRestrictionsChecker {
           return;
         }
       }
-      case NONE -> {
-        problems.error(
-            member.getSourcePosition(),
-            "Native JsType member '%s' cannot have @JsIgnore.",
-            readableDescription);
-        return;
-      }
-      case UNDEFINED_ACCESSOR -> {
-        // Nothing to check here. An error will be emitted for UNDEFINED_ACCESSOR elsewhere.
+      case NONE, UNDEFINED_ACCESSOR -> {
+        // Nothing to check here. An error will be emitted for NONE and UNDEFINED_ACCESSOR
+        // elsewhere.
         return;
       }
     }

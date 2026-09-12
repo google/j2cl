@@ -16,11 +16,10 @@
 package jsinteroptests
 
 import jsinterop.annotations.JsConstructor
-import jsinterop.annotations.JsIgnore
 
 /** A test class that exports a constructor. */
 class MyClassExportsConstructor @JsConstructor constructor(private val a: Int) {
-  @JsIgnore constructor() : this(1)
+  constructor() : this(1)
 
   fun foo() = a * 2
 }
