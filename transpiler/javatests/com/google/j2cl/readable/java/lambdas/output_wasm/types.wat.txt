@@ -25,7 +25,7 @@
  ))
 )
 (type $lambdas.Lambdas.GenericJsFunction.vtable (sub (struct
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.java_lang_Object__java_lang_Object))
  ))
 )
 (type $lambdas.Lambdas.Equals.vtable (sub (struct
@@ -183,20 +183,6 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
-(type $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor (sub $java.lang.Object (struct
- (field $vtable (ref $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor.vtable))
- (field $itable (ref $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
-(type $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
- ))
-)
 (type $lambdas.Lambdas.Runnable.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable))
  (field $itable (ref $lambdas.Lambdas.Runnable.$LambdaAdaptor.itable))
@@ -294,20 +280,6 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_funInParent__void (ref $function.m_funInParent__void))
- ))
-)
-(type $lambdas.Lambdas.IdentityFunction (sub $java.lang.Object (struct
- (field $vtable (ref $lambdas.Lambdas.IdentityFunction.vtable))
- (field $itable (ref $lambdas.Lambdas.IdentityFunction.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
-(type $lambdas.Lambdas.IdentityFunction.vtable (sub $java.lang.Object.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
  ))
 )
 (type $lambdas.Lambdas.JsSupplier.vtable (sub $lambdas.Lambdas.Equals.vtable (struct
@@ -898,6 +870,23 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_funInParent__void (ref $function.m_funInParent__void))
  (field $m_testLambdaInSubclass__void (ref $function.m_testLambdaInSubclass__void))
+ ))
+)
+(type $lambdas.Lambdas.IdentityFunction (sub $javaemul.internal.JsFunctionAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.IdentityFunction.vtable))
+ (field $itable (ref $lambdas.Lambdas.IdentityFunction.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $jsFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null extern)))
+ (field $wasmExportBridgeFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
+ (field $wasmFuncref@javaemul.internal.JsFunctionAdaptor (mut (ref null func)))
+ ))
+)
+(type $lambdas.Lambdas.IdentityFunction.vtable (sub $javaemul.internal.JsFunctionAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.java_lang_Object__java_lang_Object))
  ))
 )
 (type $lambdas.Lambdas.Outer.$LambdaImplementor$34 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct

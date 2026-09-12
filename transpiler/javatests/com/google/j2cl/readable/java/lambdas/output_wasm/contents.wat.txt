@@ -44,12 +44,6 @@
 (global $$class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor (mut i32)
- (i32.const 0)
-)
-(global $$class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
 (global $$class-initialized@lambdas.Lambdas.JsSupplier.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
@@ -1427,6 +1421,21 @@
  )
 )
 
+;;; WasmExtern GenericJsFunction.apply(JsFunctionAdaptor arg0, WasmExtern t)
+(@binaryen.js.called)
+(func $js_export_apply__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction
+ (param $arg0 (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $t (ref null extern))
+ (result (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:229:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:229:6
+  (call $$clinit__void_<once>_@lambdas.Lambdas.GenericJsFunction )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:229:6
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $arg0)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $arg0)))))))
+ )
+)
+
 ;;; void GenericJsFunction.$clinit()
 (func $$clinit__void_<once>_@lambdas.Lambdas.GenericJsFunction
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
@@ -1454,6 +1463,26 @@
   )
   (global.set $$class@lambdas.Lambdas.GenericJsFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.GenericJsFunction.$StringLiterals )))
   (return (global.get $$class@lambdas.Lambdas.GenericJsFunction))
+ )
+)
+
+;;; R GenericJsFunction.apply$jsFunction(JsFunctionAdaptor $instance, T arg0)
+(func $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+    (return (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+   )(else
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
+    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $arg0))))))
+   )
+  )
  )
 )
 
@@ -2664,61 +2693,6 @@
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor)
 
 ;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_lambdas_Lambdas_GenericJsFunction_$LambdaAdaptor@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor
- (param $this (ref null $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-  (if (global.get $$class-initialized@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-  (global.set $$class-initialized@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-  (call $$clinit__void_<once>_@java.lang.Object )
- )
-)
-
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor)))
-   (then
-    (return (global.get $$class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor))
-   )
-  )
-  (global.set $$class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor))
- )
-)
-
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.GenericJsFunction.$LambdaAdaptor)
-
-;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_lambdas_Lambdas_Runnable_$LambdaAdaptor@lambdas.Lambdas.Runnable.$LambdaAdaptor
  (param $this (ref null $lambdas.Lambdas.Runnable.$LambdaAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:326:12
@@ -3198,94 +3172,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Parent)
-
-;;; IdentityFunction IdentityFunction.$create()
-(func $$create__@lambdas.Lambdas.IdentityFunction
- (result (ref null $lambdas.Lambdas.IdentityFunction))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
- (local $$instance (ref null $lambdas.Lambdas.IdentityFunction))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (call $$clinit__void_<once>_@lambdas.Lambdas.IdentityFunction )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $lambdas.Lambdas.IdentityFunction.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (call $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (return (local.get $$instance))
- )
-)
-
-;;; void IdentityFunction.$ctor()
-(func $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction
- (param $this (ref null $lambdas.Lambdas.IdentityFunction))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; Object IdentityFunction.apply(Object o)
-(func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction
- (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
- (param $o (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:260:18
- (local $this (ref null $lambdas.Lambdas.IdentityFunction))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.IdentityFunction) (local.get $this.untyped)))
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:261:6
-  (return (local.get $o))
- )
-)
-(elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
-
-;;; void IdentityFunction.$clinit()
-(func $$clinit__void_<once>_@lambdas.Lambdas.IdentityFunction
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (if (global.get $$class-initialized@lambdas.Lambdas.IdentityFunction)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (global.set $$class-initialized@lambdas.Lambdas.IdentityFunction (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (call $$clinit__void_<once>_@java.lang.Object )
- )
-)
-
-;;; Class<T> IdentityFunction.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.IdentityFunction
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.IdentityFunction)))
-   (then
-    (return (global.get $$class@lambdas.Lambdas.IdentityFunction))
-   )
-  )
-  (global.set $$class@lambdas.Lambdas.IdentityFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.IdentityFunction.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@lambdas.Lambdas.IdentityFunction))
- )
-)
-
-;;; Class<?> IdentityFunction.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.IdentityFunction
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $lambdas.Lambdas.IdentityFunction))
- (local.set $this (ref.cast (ref $lambdas.Lambdas.IdentityFunction) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.IdentityFunction ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.IdentityFunction)
 
 ;;; void JsSupplier.$clinit()
 (func $$clinit__void_<once>_@lambdas.Lambdas.JsSupplier
@@ -6722,6 +6608,94 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.LambdaInSubClass)
+
+;;; IdentityFunction IdentityFunction.$create()
+(func $$create__@lambdas.Lambdas.IdentityFunction
+ (result (ref null $lambdas.Lambdas.IdentityFunction))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+ (local $$instance (ref null $lambdas.Lambdas.IdentityFunction))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (call $$clinit__void_<once>_@lambdas.Lambdas.IdentityFunction )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $lambdas.Lambdas.IdentityFunction.itable) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (call $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (return (local.get $$instance))
+ )
+)
+
+;;; void IdentityFunction.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction
+ (param $this (ref null $lambdas.Lambdas.IdentityFunction))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction) (ref.func $js_export_apply__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction) )
+ )
+)
+
+;;; Object IdentityFunction.apply(Object o)
+(func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction
+ (type $function.java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:260:18
+ (local $this (ref null $lambdas.Lambdas.IdentityFunction))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.IdentityFunction) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:261:6
+  (return (local.get $o))
+ )
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
+
+;;; void IdentityFunction.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.IdentityFunction
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (if (global.get $$class-initialized@lambdas.Lambdas.IdentityFunction)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (global.set $$class-initialized@lambdas.Lambdas.IdentityFunction (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
+  (call $$clinit__void_<once>_@javaemul.internal.JsFunctionAdaptor )
+ )
+)
+
+;;; Class<T> IdentityFunction.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.IdentityFunction
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.IdentityFunction)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.IdentityFunction))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.IdentityFunction (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.IdentityFunction.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.IdentityFunction))
+ )
+)
+
+;;; Class<?> IdentityFunction.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.IdentityFunction
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.IdentityFunction))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.IdentityFunction) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.IdentityFunction ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.IdentityFunction)
 
 ;;; <anonymous> implements Runnable <anonymous> implements Runnable.$create(Outer $outer_this)
 (func $$create__lambdas_Lambdas_Outer@lambdas.Lambdas.Outer.$LambdaImplementor$34

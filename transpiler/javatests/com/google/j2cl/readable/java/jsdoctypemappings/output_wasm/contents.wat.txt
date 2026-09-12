@@ -5,12 +5,6 @@
 (global $$class@jsdoctypemappings.JsDocTypeMappings (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor (mut i32)
- (i32.const 0)
-)
-(global $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor (mut (ref null $java.lang.Class))
- (ref.null $java.lang.Class)
-)
 (global $$class-initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction (mut i32)
  (i32.const 0)
 )
@@ -133,6 +127,19 @@
 )
 
 
+;;; void NativeFunction.f(JsFunctionAdaptor arg0)
+(@binaryen.js.called)
+(func $js_export_f__javaemul_internal_JsFunctionAdaptor__void@jsdoctypemappings.JsDocTypeMappings.NativeFunction
+ (param $arg0 (ref null $javaemul.internal.JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:27:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:27:9
+  (call $$clinit__void_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:27:9
+  (call_ref $function.void (ref.as_non_null (local.get $arg0)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $arg0))))
+ )
+)
+
 ;;; void NativeFunction.$clinit()
 (func $$clinit__void_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
@@ -160,6 +167,24 @@
   )
   (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$StringLiterals )))
   (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction))
+ )
+)
+
+;;; void NativeFunction.f$jsFunction(JsFunctionAdaptor $instance)
+(func $m_f$jsFunction__javaemul_internal_JsFunctionAdaptor__void@jsdoctypemappings.JsDocTypeMappings.NativeFunction
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
+  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
+    (call_ref $function.void (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   )(else
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
+    (call $$invokeJsFunction__javaemul_internal_WasmExtern__void@jsdoctypemappings.JsDocTypeMappings.NativeFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))
+   )
+  )
  )
 )
 
@@ -1009,61 +1034,6 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
-
-;;; void $LambdaAdaptor.$ctor()
-(func $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings_NativeFunction_$LambdaAdaptor@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor
- (param $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void $LambdaAdaptor.$clinit()
-(func $$clinit__void_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
- (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
-  (if (global.get $$class-initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor)
-   (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
-    (return )
-   )
-  )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
-  (global.set $$class-initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:26:19
-  (call $$clinit__void_<once>_@java.lang.Object )
- )
-)
-
-;;; Class<T> $LambdaAdaptor.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor
- (result (ref null $java.lang.Class))
- (block
-  (if (i32.eqz (ref.is_null (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor)))
-   (then
-    (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor))
-   )
-  )
-  (global.set $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsdoctypemap...|__java_lang_String_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
-  (return (global.get $$class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor))
- )
-)
-
-;;; Class<?> $LambdaAdaptor.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor))
- (local.set $this (ref.cast (ref $jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeFunction.$LambdaAdaptor)
 
 ;;; ExportedType ExportedType.$create(JsDocTypeMappings $outer_this)
 (func $$create__jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings.ExportedType

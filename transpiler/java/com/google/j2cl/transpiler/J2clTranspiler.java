@@ -49,8 +49,6 @@ class J2clTranspiler {
       if (!options.getEnableWasmCustomDescriptorsJsInterop()) {
         // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
         JsInteropAstUtils.setIgnoreNonNativeJsInfo();
-        // TODO(b/479895505): Enable once JsFunction is fully supported.
-        JsInteropAstUtils.setIgnoreJsFunctionAnnotations();
       }
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
       AstUtils.setIgnoreDoNotAutoboxAnnotations();
