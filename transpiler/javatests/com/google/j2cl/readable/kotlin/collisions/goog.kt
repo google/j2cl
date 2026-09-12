@@ -31,6 +31,15 @@ external fun getN(): Double
 
 class foo
 
+@JsType(isNative = true)
+interface ReservedPropertyNames {
+  fun `var`(): String
+
+  @JsProperty fun getImport(): String
+
+  @JsProperty fun setImport(str: String)
+}
+
 class bar {
   init {
     var foo: Int
@@ -47,6 +56,12 @@ class bar {
     // Variable colliding with reserved JavaScript names.
     val delete = 1
     val undefined = 3
+
+    // Property names colliding with reserved JavaScript names but doesn't need rename.
+    val reservedPropertyNames: ReservedPropertyNames? = null
+    reservedPropertyNames!!.`var`()
+    reservedPropertyNames!!.getImport()
+    reservedPropertyNames!!.setImport("import2")
   }
 }
 

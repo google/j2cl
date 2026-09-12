@@ -65,6 +65,12 @@
 (global $$class@collisions.Blah.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@collisions.ReservedPropertyNames.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@collisions.ReservedPropertyNames.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $collisions.goog.vtable (ref $collisions.goog.vtable)
  (struct.new $collisions.goog.vtable
   (ref.func $$getClassImpl__java_lang_Class@collisions.goog)
@@ -210,6 +216,36 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@collisions.ReservedPropertyNames.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:50:10
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:50:10
+  (if (global.get $$class-initialized@collisions.ReservedPropertyNames.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:50:10
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:50:10
+  (global.set $$class-initialized@collisions.ReservedPropertyNames.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@collisions.ReservedPropertyNames.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@collisions.ReservedPropertyNames.$Overlay)))
+   (then
+    (return (global.get $$class@collisions.ReservedPropertyNames.$Overlay))
+   )
+  )
+  (global.set $$class@collisions.ReservedPropertyNames.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|collisions.R...|__java_lang_String_<once>_@collisions.ReservedPropertyNames.$Overlay.$StringLiterals )))
+  (return (global.get $$class@collisions.ReservedPropertyNames.$Overlay))
+ )
+)
 
 ;;; goog goog.$create()
 (func $$create__@collisions.goog
@@ -451,16 +487,16 @@
 ;;; bar bar.$create()
 (func $$create__@collisions.bar
  (result (ref null $collisions.bar))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
  (local $$instance (ref null $collisions.bar))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (call $$clinit__void_<once>_@collisions.bar )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (local.set $$instance (struct.new $collisions.bar (global.get $collisions.bar.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (call $$ctor__void_$p_collisions_bar@collisions.bar (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (return (local.get $$instance))
  )
 )
@@ -468,11 +504,11 @@
 ;;; void bar.$ctor()
 (func $$ctor__void_$p_collisions_bar@collisions.bar
  (param $this (ref null $collisions.bar))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (call $$init__void_$p_collisions_bar@collisions.bar (ref.as_non_null (local.get $this)))
  )
 )
@@ -480,7 +516,7 @@
 ;;; void bar.$init()
 (func $$init__void_$p_collisions_bar@collisions.bar
  (param $this (ref null $collisions.bar))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
  (local $foo i32)
  (local $bar i32)
  (local $goog i32)
@@ -488,48 +524,57 @@
  (local $window i32)
  (local $delete i32)
  (local $undefined i32)
+ (local $reservedPropertyNames (ref null extern))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:62:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:62:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:62:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:62:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:51:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:62:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:52:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:63:4
   (call $m_m__void@collisions.Blah )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:53:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:4
   (drop (call $m_getN__double@collisions.Blah ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:54:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:65:4
   (drop (call $m_<init>__@collisions.Blah ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:55:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:66:4
   (drop (call $$create__@collisions.goog ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:56:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:67:4
   (drop (call $$create__@collisions.foo ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:59:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:70:4
   (local.set $delete (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:71:4
   (local.set $undefined (i32.const 3))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:74:4
+  (local.set $reservedPropertyNames (ref.null extern))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:75:4
+  (drop (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_var__java_lang_String_NativeString@collisions.ReservedPropertyNames (ref.as_non_null (local.get $reservedPropertyNames)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:76:4
+  (drop (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_getImport__java_lang_String_NativeString@collisions.ReservedPropertyNames (ref.as_non_null (local.get $reservedPropertyNames)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:4
+  (call $m_setImport__java_lang_String_NativeString__void@collisions.ReservedPropertyNames (ref.as_non_null (local.get $reservedPropertyNames))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|import2|__java_lang_String_<once>_@collisions.bar.$StringLiterals ))))
  )
 )
 
 ;;; void bar.$clinit()
 (func $$clinit__void_<once>_@collisions.bar
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (if (global.get $$class-initialized@collisions.bar)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (global.set $$class-initialized@collisions.bar (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:49:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:60:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -564,16 +609,16 @@
 ;;; Other<T> Other.$create()
 (func $$create__@collisions.Other
  (result (ref null $collisions.Other))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
  (local $$instance (ref null $collisions.Other))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (call $$clinit__void_<once>_@collisions.Other )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (local.set $$instance (struct.new $collisions.Other (global.get $collisions.Other.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (call $$ctor__void_$p_collisions_Other@collisions.Other (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (return (local.get $$instance))
  )
 )
@@ -581,11 +626,11 @@
 ;;; void Other.$ctor()
 (func $$ctor__void_$p_collisions_Other@collisions.Other
  (param $this (ref null $collisions.Other))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (call $$init__void_$p_collisions_Other@collisions.Other (ref.as_non_null (local.get $this)))
  )
 )
@@ -595,17 +640,17 @@
  (type $function.m_m__java_lang_Object_$pp_collisions)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:70:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:87:8
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
  (local $this (ref null $collisions.Other))
  (local.set $this (ref.cast (ref $collisions.Other) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:71:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:88:4
   (local.set $T_1 (i32.const 5))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:72:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:89:4
   (local.set $o (ref.cast (ref null $collisions.Other) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:73:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:4
   (return (ref.null $java.lang.Object))
  )
 )
@@ -614,31 +659,31 @@
 ;;; void Other.$init()
 (func $$init__void_$p_collisions_Other@collisions.Other
  (param $this (ref null $collisions.Other))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:66:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:83:4
   (local.set $T_1 (i32.const 3))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:67:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:84:4
   (local.set $o (ref.cast (ref null $collisions.Other) (ref.null $java.lang.Object)))
  )
 )
 
 ;;; void Other.$clinit()
 (func $$clinit__void_<once>_@collisions.Other
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (if (global.get $$class-initialized@collisions.Other)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (global.set $$class-initialized@collisions.Other (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:64:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:81:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -673,11 +718,11 @@
 ;;; T<T> T.$create()
 (func $$create__@collisions.T
  (result (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (call $$clinit__void_<once>_@collisions.T )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (return (call $$create_$private__@collisions.T ))
  )
 )
@@ -685,14 +730,14 @@
 ;;; T<T> T.$create_$private()
 (func $$create_$private__@collisions.T
  (result (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
  (local $$instance (ref null $collisions.T))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (local.set $$instance (struct.new $collisions.T (global.get $collisions.T.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (call $$ctor__void_$p_collisions_T@collisions.T (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (return (local.get $$instance))
  )
 )
@@ -700,9 +745,9 @@
 ;;; void T.$ctor()
 (func $$ctor__void_$p_collisions_T@collisions.T
  (param $this (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -712,11 +757,11 @@
  (type $function.m_m__java_lang_Number_$pp_collisions)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Number))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:78:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:95:4
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:79:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:4
   (return (ref.null $java.lang.Number))
  )
 )
@@ -727,20 +772,20 @@
  (type $function.m_n__java_lang_Number_$pp_collisions)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Number))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:82:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:99:4
  (local $t (ref null $java.lang.Number))
  (local $$qualifier (ref null $collisions.T))
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:83:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:100:4
   (local.set $t (block (result (ref null $java.lang.Number))
    (local.set $$qualifier (call $$create_$private__@collisions.T ))
    (call_ref $function.m_m__java_lang_Number_$pp_collisions (ref.as_non_null (local.get $$qualifier))(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
   ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:84:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:101:4
   (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $t))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $t)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:85:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:102:4
   (return (local.get $t))
  )
 )
@@ -750,14 +795,14 @@
 (func $m_o__void_$pp_collisions@collisions.T
  (type $function.m_o__void_$pp_collisions)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:88:7
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:105:7
  (local $r (ref null $java.lang.Object))
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast (ref $collisions.T) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:89:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:106:4
   (local.set $r (call $$create__collisions_T@collisions.T.$LambdaImplementor$1 (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:95:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:112:4
   (local.set $r (call $$create__collisions_T@collisions.T.$LambdaImplementor$2 (local.get $this)))
  )
 )
@@ -765,18 +810,18 @@
 
 ;;; void T.$clinit()
 (func $$clinit__void_<once>_@collisions.T
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (if (global.get $$class-initialized@collisions.T)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (global.set $$class-initialized@collisions.T (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:77:6
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:94:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -812,16 +857,16 @@
 (func $$create__collisions_T@collisions.T.1Local
  (param $$outer_this (ref null $collisions.T))
  (result (ref null $collisions.T.1Local))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
  (local $$instance (ref null $collisions.T.1Local))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (call $$clinit__void_<once>_@collisions.T.1Local )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (local.set $$instance (struct.new $collisions.T.1Local (global.get $collisions.T.1Local.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $collisions.T)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (call $$ctor__collisions_T__void_$p_collisions_T_1Local@collisions.T.1Local (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (return (local.get $$instance))
  )
 )
@@ -830,29 +875,29 @@
 (func $$ctor__collisions_T__void_$p_collisions_T_1Local@collisions.T.1Local
  (param $this (ref null $collisions.T.1Local))
  (param $$outer_this (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (struct.set $collisions.T.1Local $$outer_this@collisions.T.1Local (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Local.$clinit()
 (func $$clinit__void_<once>_@collisions.T.1Local
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (if (global.get $$class-initialized@collisions.T.1Local)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (global.set $$class-initialized@collisions.T.1Local (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:91:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:108:16
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -888,16 +933,16 @@
 (func $$create__collisions_T@collisions.T.2Local
  (param $$outer_this (ref null $collisions.T))
  (result (ref null $collisions.T.2Local))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
  (local $$instance (ref null $collisions.T.2Local))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (call $$clinit__void_<once>_@collisions.T.2Local )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (local.set $$instance (struct.new $collisions.T.2Local (global.get $collisions.T.2Local.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $collisions.T)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (call $$ctor__collisions_T__void_$p_collisions_T_2Local@collisions.T.2Local (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (return (local.get $$instance))
  )
 )
@@ -906,29 +951,29 @@
 (func $$ctor__collisions_T__void_$p_collisions_T_2Local@collisions.T.2Local
  (param $this (ref null $collisions.T.2Local))
  (param $$outer_this (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (struct.set $collisions.T.2Local $$outer_this@collisions.T.2Local (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Local.$clinit()
 (func $$clinit__void_<once>_@collisions.T.2Local
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (if (global.get $$class-initialized@collisions.T.2Local)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (global.set $$class-initialized@collisions.T.2Local (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:97:16
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:114:16
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -964,16 +1009,16 @@
 (func $$create__collisions_T@collisions.T.$LambdaImplementor$1
  (param $$outer_this (ref null $collisions.T))
  (result (ref null $collisions.T.$LambdaImplementor$1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
  (local $$instance (ref null $collisions.T.$LambdaImplementor$1))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (call $$clinit__void_<once>_@collisions.T.$LambdaImplementor$1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (local.set $$instance (struct.new $collisions.T.$LambdaImplementor$1 (global.get $collisions.T.$LambdaImplementor$1.vtable) (global.get $collisions.T.$LambdaImplementor$1.itable) (i32.const 0) (ref.null $collisions.T)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (call $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$1@collisions.T.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (return (local.get $$instance))
  )
 )
@@ -982,11 +1027,11 @@
 (func $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$1@collisions.T.$LambdaImplementor$1
  (param $this (ref null $collisions.T.$LambdaImplementor$1))
  (param $$outer_this (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (struct.set $collisions.T.$LambdaImplementor$1 $$outer_this@collisions.T.$LambdaImplementor$1 (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (call $$ctor__void_$p_java_lang_Runnable_$LambdaAdaptor@java.lang.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -995,11 +1040,11 @@
 (func $m_run__void@collisions.T.$LambdaImplementor$1
  (type $function.m_run__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
  (local $this (ref null $collisions.T.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $collisions.T.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:92:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:109:10
   (drop (call $$create__collisions_T@collisions.T.1Local (struct.get $collisions.T.$LambdaImplementor$1 $$outer_this@collisions.T.$LambdaImplementor$1 (local.get $this))))
  )
 )
@@ -1007,18 +1052,18 @@
 
 ;;; void <anonymous> implements Runnable.$clinit()
 (func $$clinit__void_<once>_@collisions.T.$LambdaImplementor$1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (if (global.get $$class-initialized@collisions.T.$LambdaImplementor$1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (global.set $$class-initialized@collisions.T.$LambdaImplementor$1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:90:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:107:8
   (call $$clinit__void_<once>_@java.lang.Runnable.$LambdaAdaptor )
  )
 )
@@ -1041,16 +1086,16 @@
 (func $$create__collisions_T@collisions.T.$LambdaImplementor$2
  (param $$outer_this (ref null $collisions.T))
  (result (ref null $collisions.T.$LambdaImplementor$2))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
  (local $$instance (ref null $collisions.T.$LambdaImplementor$2))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (call $$clinit__void_<once>_@collisions.T.$LambdaImplementor$2 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (local.set $$instance (struct.new $collisions.T.$LambdaImplementor$2 (global.get $collisions.T.$LambdaImplementor$2.vtable) (global.get $collisions.T.$LambdaImplementor$2.itable) (i32.const 0) (ref.null $collisions.T)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (call $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$2@collisions.T.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (return (local.get $$instance))
  )
 )
@@ -1059,11 +1104,11 @@
 (func $$ctor__collisions_T__void_$p_collisions_T_$LambdaImplementor$2@collisions.T.$LambdaImplementor$2
  (param $this (ref null $collisions.T.$LambdaImplementor$2))
  (param $$outer_this (ref null $collisions.T))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (struct.set $collisions.T.$LambdaImplementor$2 $$outer_this@collisions.T.$LambdaImplementor$2 (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (call $$ctor__void_$p_java_lang_Runnable_$LambdaAdaptor@java.lang.Runnable.$LambdaAdaptor (ref.as_non_null (local.get $this)))
  )
 )
@@ -1072,11 +1117,11 @@
 (func $m_run__void@collisions.T.$LambdaImplementor$2
  (type $function.m_run__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
  (local $this (ref null $collisions.T.$LambdaImplementor$2))
  (local.set $this (ref.cast (ref $collisions.T.$LambdaImplementor$2) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:98:10
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:115:10
   (drop (call $$create__collisions_T@collisions.T.2Local (struct.get $collisions.T.$LambdaImplementor$2 $$outer_this@collisions.T.$LambdaImplementor$2 (local.get $this))))
  )
 )
@@ -1084,18 +1129,18 @@
 
 ;;; void <anonymous> implements Runnable.$clinit()
 (func $$clinit__void_<once>_@collisions.T.$LambdaImplementor$2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (if (global.get $$class-initialized@collisions.T.$LambdaImplementor$2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (global.set $$class-initialized@collisions.T.$LambdaImplementor$2 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:96:8
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/collisions/readable-j2wasm.js/collisions/goog.java:113:8
   (call $$clinit__void_<once>_@java.lang.Runnable.$LambdaAdaptor )
  )
 )

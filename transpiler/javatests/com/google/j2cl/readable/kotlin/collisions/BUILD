@@ -9,6 +9,9 @@ package(
 )
 
 readable_example(
-    srcs = glob(["*.kt"]),
+    srcs = glob([
+        "*.kt",
+        "native_sources/*.js",
+    ]),
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

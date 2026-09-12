@@ -3,6 +3,7 @@ goog.module('collisions.bar$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let ReservedPropertyNames = goog.forwardDeclare('collisions.ReservedPropertyNames');
 let foo = goog.forwardDeclare('collisions.foo$impl');
 let collisions_goog = goog.forwardDeclare('collisions.goog$impl');
 
@@ -37,6 +38,10 @@ class bar extends j_l_Object {
   foo.$create__();
   let delete_1 = 1;
   let undefined_1 = 3;
+  let /** ReservedPropertyNames */ reservedPropertyNames = null;
+  reservedPropertyNames.var();
+  reservedPropertyNames.import;
+  reservedPropertyNames.import = 'import2';
  }
  /** @nodts */
  static $clinit() {

@@ -46,6 +46,17 @@ class KtBlah {
 
 class foo {}
 
+@JsType(isNative = true)
+interface ReservedPropertyNames {
+  String var();
+
+  @JsProperty
+  String getImport();
+
+  @JsProperty
+  void setImport(String str);
+}
+
 class bar {
   {
     int foo, bar, goog, flip, window;
@@ -58,6 +69,12 @@ class bar {
     // Variable colliding with reserved JavaScript names.
     int delete = 1;
     int undefined = 3;
+
+    // Property names colliding with reserved JavaScript names but don't need rename.
+    ReservedPropertyNames reservedPropertyNames = null;
+    reservedPropertyNames.var();
+    reservedPropertyNames.getImport();
+    reservedPropertyNames.setImport("import2");
   }
 }
 

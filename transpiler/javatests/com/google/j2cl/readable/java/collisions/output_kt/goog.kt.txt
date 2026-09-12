@@ -20,9 +20,12 @@ package collisions
 
 import javaemul.lang.*
 import java.lang.Runnable
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
 import kotlin.Double
 import kotlin.Int
 import kotlin.Number
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -42,6 +45,17 @@ internal open class KtBlah internal constructor() {
 
 internal open class foo internal constructor()
 
+@JsType(isNative = true)
+internal interface ReservedPropertyNames {
+ fun `var`(): String?
+ 
+ @JsProperty
+ fun getImport(): String?
+ 
+ @JsProperty
+ fun setImport(str: String?)
+}
+
 internal open class bar internal constructor() {
  init {
   val foo: Int = 0
@@ -56,6 +70,10 @@ internal open class bar internal constructor() {
   collisions.foo()
   val delete: Int = 1
   val undefined: Int = 3
+  val reservedPropertyNames: ReservedPropertyNames? = null
+  reservedPropertyNames!!.`var`()
+  reservedPropertyNames!!.getImport()
+  reservedPropertyNames!!.setImport("import2")
  }
 }
 
