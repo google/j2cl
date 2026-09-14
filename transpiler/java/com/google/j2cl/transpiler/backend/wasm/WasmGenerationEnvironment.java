@@ -106,7 +106,6 @@ public class WasmGenerationEnvironment {
   /** Maps Java type declarations to the corresponding wasm type layout objects. */
   private final Map<TypeDeclaration, WasmTypeLayout> wasmTypeLayoutByTypeDeclaration;
 
-
   /** Returns the wasm type layout for a Java declared type. */
   WasmTypeLayout getWasmTypeLayout(TypeDeclaration typeDeclaration) {
     return checkNotNull(wasmTypeLayoutByTypeDeclaration.get(typeDeclaration));
