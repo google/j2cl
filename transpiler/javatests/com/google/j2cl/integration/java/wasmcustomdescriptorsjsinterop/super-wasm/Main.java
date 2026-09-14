@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
@@ -47,6 +48,7 @@ public final class Main {
     testEntryPoint();
     testMethodWithNativeAndLong();
     testNativeJsTypeConsumer();
+    testJsEnum();
   }
 
   private static void testMethodWithNativeAndLong() {
@@ -967,4 +969,127 @@ public final class Main {
 
   @JsMethod(namespace = "functions", name = "callApplyFunction")
   private static native <T> T callApplyFunctionInJs(ApplyFunction<T> function, T a);
+
+  @JsEnum(namespace = "wasmcustomdescriptorsjsinterop")
+  public enum SimpleJsEnum {
+    ONE,
+    TWO,
+    THREE;
+
+    public int getNumber() {
+      return 100 + ordinal();
+    }
+  }
+
+  @JsEnum(namespace = "wasmcustomdescriptorsjsinterop", hasCustomValue = true)
+  public enum IntValuedJsEnum {
+    MINUS_TEN(-10),
+    TEN(10);
+
+    int value;
+
+    IntValuedJsEnum(int value) {
+      this.value = value;
+    }
+
+    public int getValue() {
+      return value;
+    }
+  }
+
+  @JsEnum(namespace = "wasmcustomdescriptorsjsinterop", hasCustomValue = true)
+  public enum StringValuedJsEnum {
+    FOO("foo"),
+    BAR("bar");
+
+    String value;
+
+    StringValuedJsEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+  }
+
+  private static void testJsEnum() {
+    // Normal enum behaviors
+    assertTrue(SimpleJsEnum.ONE.ordinal() == 0);
+    assertTrue(SimpleJsEnum.TWO.ordinal() == 1);
+    assertTrue(SimpleJsEnum.THREE.ordinal() == 2);
+
+    assertTrue(SimpleJsEnum.ONE.compareTo(SimpleJsEnum.TWO) < 0);
+    assertTrue(SimpleJsEnum.TWO.compareTo(SimpleJsEnum.ONE) > 0);
+    assertTrue(SimpleJsEnum.ONE.compareTo(SimpleJsEnum.ONE) == 0);
+
+    assertTrue(SimpleJsEnum.ONE instanceof Enum);
+    assertTrue(SimpleJsEnum.ONE instanceof SimpleJsEnum);
+
+    assertTrue(SimpleJsEnum.ONE.getNumber() == 100);
+    assertTrue(SimpleJsEnum.TWO.getNumber() == 101);
+
+    assertTrue(getSimpleJsEnumOne() == SimpleJsEnum.ONE);
+    assertTrue(getSimpleJsEnumTwo() == SimpleJsEnum.TWO);
+    assertTrue(getSimpleJsEnumThree() == SimpleJsEnum.THREE);
+
+    assertTrue(checkJsEnumEquality());
+    assertTrue(passThroughJsEnum(SimpleJsEnum.ONE) == SimpleJsEnum.ONE);
+    assertTrue(passThroughJsEnum(SimpleJsEnum.TWO) == SimpleJsEnum.TWO);
+
+    assertTrue(getStringValuedJsEnumFoo() == StringValuedJsEnum.FOO);
+    assertTrue(getStringValuedJsEnumBar() == StringValuedJsEnum.BAR);
+
+    assertTrue(getIntValuedJsEnumMinusTen() == IntValuedJsEnum.MINUS_TEN);
+    assertTrue(getIntValuedJsEnumTen() == IntValuedJsEnum.TEN);
+
+    assertEquals("1-from-js", switchOnSimpleJsEnum(SimpleJsEnum.ONE));
+    assertEquals("2-from-js", switchOnSimpleJsEnum(SimpleJsEnum.TWO));
+    assertEquals("3-from-js", switchOnSimpleJsEnum(SimpleJsEnum.THREE));
+    assertEquals("unknown", switchOnSimpleJsEnum(null));
+
+    assertEquals("-10-from-js", switchOnIntValuedJsEnum(IntValuedJsEnum.MINUS_TEN));
+    assertEquals("10-from-js", switchOnIntValuedJsEnum(IntValuedJsEnum.TEN));
+    assertEquals("unknown", switchOnIntValuedJsEnum(null));
+
+    assertEquals("foo-from-js", switchOnStringValuedJsEnum(StringValuedJsEnum.FOO));
+    assertEquals("bar-from-js", switchOnStringValuedJsEnum(StringValuedJsEnum.BAR));
+    assertEquals("unknown", switchOnStringValuedJsEnum(null));
+  }
+
+  @JsMethod(namespace = "nativehelper")
+  static native SimpleJsEnum getSimpleJsEnumOne();
+
+  @JsMethod(namespace = "nativehelper")
+  static native SimpleJsEnum getSimpleJsEnumTwo();
+
+  @JsMethod(namespace = "nativehelper")
+  static native SimpleJsEnum getSimpleJsEnumThree();
+
+  @JsMethod(namespace = "nativehelper")
+  static native boolean checkJsEnumEquality();
+
+  @JsMethod(namespace = "nativehelper")
+  static native SimpleJsEnum passThroughJsEnum(SimpleJsEnum e);
+
+  @JsMethod(namespace = "nativehelper")
+  static native StringValuedJsEnum getStringValuedJsEnumFoo();
+
+  @JsMethod(namespace = "nativehelper")
+  static native StringValuedJsEnum getStringValuedJsEnumBar();
+
+  @JsMethod(namespace = "nativehelper")
+  static native IntValuedJsEnum getIntValuedJsEnumMinusTen();
+
+  @JsMethod(namespace = "nativehelper")
+  static native IntValuedJsEnum getIntValuedJsEnumTen();
+
+  @JsMethod(namespace = "nativehelper")
+  static native String switchOnSimpleJsEnum(SimpleJsEnum e);
+
+  @JsMethod(namespace = "nativehelper")
+  static native String switchOnIntValuedJsEnum(IntValuedJsEnum e);
+
+  @JsMethod(namespace = "nativehelper")
+  static native String switchOnStringValuedJsEnum(StringValuedJsEnum e);
 }

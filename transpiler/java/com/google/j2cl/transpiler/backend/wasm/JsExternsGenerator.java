@@ -87,8 +87,6 @@ final class JsExternsGenerator {
     library
         .streamTypes()
         .filter(t -> shouldGenerateExtern(t.getTypeDescriptor()))
-        // TODO(b/479895127): Remove when JsEnum externs generation is supported.
-        .filter(t -> !t.getDeclaration().isJsEnum())
         .forEach(
             type -> {
               generateExtern(type);
@@ -137,6 +135,24 @@ final class JsExternsGenerator {
                 .setAbstract(factoryMethod == null || type.isAbstract())
                 .build());
     sb.appendln("");
+    if (type.isJsEnum()) {
+      // Emit an interface so that the value type for the JsEnum is opaque.
+      sb.appendln("/**");
+      sb.appendln(" * @interface");
+      sb.appendln(" */");
+      sb.appendln(
+          String.format(
+              "var %s = function() {};",
+              closureEnvironment.getJsEnumValueType(type.getDeclaration())));
+
+      sb.appendln("");
+      sb.appendln("/**");
+      appendJsDoc(sb, jsDoc);
+      sb.appendln(" */");
+      sb.appendln(
+          String.format("var %s = {};", closureEnvironment.aliasForType(type.getDeclaration())));
+      return;
+    }
     sb.appendln("/**");
     appendJsDoc(sb, jsDoc);
     if (!type.isInterface()) {

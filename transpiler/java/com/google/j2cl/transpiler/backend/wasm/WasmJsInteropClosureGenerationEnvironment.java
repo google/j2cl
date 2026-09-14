@@ -55,6 +55,11 @@ class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnviron
     return fieldDescriptor.isFinal();
   }
 
+  @Override
+  protected String getJsEnumValueType(TypeDeclaration typeDeclaration) {
+    return aliasForType(typeDeclaration) + "$value_type";
+  }
+
   /**
    * Returns the type alias for the given type declaration.
    *

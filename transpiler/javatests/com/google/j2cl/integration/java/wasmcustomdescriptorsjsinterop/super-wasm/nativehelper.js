@@ -18,6 +18,7 @@ goog.module('nativehelper');
 const AbstractJsType = goog.require('wasmcustomdescriptorsjsinterop.AbstractJsType');
 const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');
 const CapturesOuter = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType.CapturesOuter');
+const IntValuedJsEnum = goog.require('wasmcustomdescriptorsjsinterop.IntValuedJsEnum');
 const JsInterface = goog.require('wasmcustomdescriptorsjsinterop.JsInterface');
 const JsInterfaceAccidentalDefaultMethodImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalDefaultMethodImpl');
 const JsInterfaceAccidentalImpl = goog.require('wasmcustomdescriptorsjsinterop.Main.JsInterfaceAccidentalImpl');
@@ -29,7 +30,9 @@ const Long = goog.require('goog.math.Long');
 const MyNativeType = goog.require('nativehelper.MyNativeType');
 const NativeJsType = goog.require('native.NativeJsType');
 const NativeJsTypeConsumer = goog.require('wasmcustomdescriptorsjsinterop.NativeJsTypeConsumer');
+const SimpleJsEnum = goog.require('wasmcustomdescriptorsjsinterop.SimpleJsEnum');
 const SomeJsType = goog.require('wasmcustomdescriptorsjsinterop.SomeJsType');
+const StringValuedJsEnum = goog.require('wasmcustomdescriptorsjsinterop.StringValuedJsEnum');
 
 /**
  * @return {!BaseJsType}
@@ -540,6 +543,129 @@ function testDirectJsFunctionLongFromJs(fn) {
   return result instanceof Long && result.toString() === '5000000001';
 }
 
+/**
+ * @return {!SimpleJsEnum}
+ * @public
+ */
+function getSimpleJsEnumOne() {
+  return SimpleJsEnum.ONE;
+}
+
+/**
+ * @return {!SimpleJsEnum}
+ * @public
+ */
+function getSimpleJsEnumTwo() {
+  return SimpleJsEnum.TWO;
+}
+
+/**
+ * @return {!SimpleJsEnum}
+ * @public
+ */
+function getSimpleJsEnumThree() {
+  return SimpleJsEnum.THREE;
+}
+
+/**
+ * @return {boolean}
+ * @public
+ */
+function checkJsEnumEquality() {
+  return SimpleJsEnum.ONE === SimpleJsEnum.ONE && SimpleJsEnum.ONE !== SimpleJsEnum.TWO;
+}
+
+/**
+ * @param {!SimpleJsEnum} e
+ * @return {!SimpleJsEnum}
+ * @public
+ */
+function passThroughJsEnum(e) {
+  return e;
+}
+
+/**
+ * @return {!StringValuedJsEnum}
+ * @public
+ */
+function getStringValuedJsEnumFoo() {
+  return StringValuedJsEnum.FOO;
+}
+
+/**
+ * @return {!StringValuedJsEnum}
+ * @public
+ */
+function getStringValuedJsEnumBar() {
+  return StringValuedJsEnum.BAR;
+}
+
+/**
+ * @return {!IntValuedJsEnum}
+ * @public
+ */
+function getIntValuedJsEnumMinusTen() {
+  return IntValuedJsEnum.MINUS_TEN;
+}
+
+/**
+ * @return {!IntValuedJsEnum}
+ * @public
+ */
+function getIntValuedJsEnumTen() {
+  return IntValuedJsEnum.TEN;
+}
+
+/**
+ * @param {!SimpleJsEnum} e
+ * @return {string}
+ * @public
+ */
+function switchOnSimpleJsEnum(e) {
+  switch (e) {
+    case SimpleJsEnum.ONE:
+      return "1-from-js";
+    case SimpleJsEnum.TWO:
+      return "2-from-js";
+    case SimpleJsEnum.THREE:
+      return "3-from-js";
+    default:
+      return 'unknown';
+  }
+}
+
+/**
+ * @param {!IntValuedJsEnum} e
+ * @return {string}
+ * @public
+ */
+function switchOnIntValuedJsEnum(e) {
+  switch (e) {
+    case IntValuedJsEnum.MINUS_TEN:
+      return "-10-from-js";
+    case IntValuedJsEnum.TEN:
+      return "10-from-js";
+    default:
+      return 'unknown';
+  }
+}
+
+/**
+ * @param {!StringValuedJsEnum} e
+ * @return {string}
+ * @public
+ */
+function switchOnStringValuedJsEnum(e) {
+  switch (e) {
+    case StringValuedJsEnum.FOO:
+      return 'foo-from-js';
+    case StringValuedJsEnum.BAR:
+      return 'bar-from-js';
+    default:
+      return 'unknown';
+  }
+}
+
 exports = {
   newBaseJsType,
   newSomeJsType,
@@ -597,4 +723,16 @@ exports = {
   testDirectJsFunctionLongFromJs,
   getLongField,
   setLongField,
+  getSimpleJsEnumOne,
+  getSimpleJsEnumTwo,
+  getSimpleJsEnumThree,
+  checkJsEnumEquality,
+  passThroughJsEnum,
+  getStringValuedJsEnumFoo,
+  getStringValuedJsEnumBar,
+  getIntValuedJsEnumMinusTen,
+  getIntValuedJsEnumTen,
+  switchOnSimpleJsEnum,
+  switchOnIntValuedJsEnum,
+  switchOnStringValuedJsEnum,
 };
