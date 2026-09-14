@@ -90,10 +90,10 @@ import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
 import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
+import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstantArray
-import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrVararg
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
@@ -278,28 +278,23 @@ internal class KotlinEnvironment(
   private fun createAnnotations(irAnnotationContainer: IrDeclaration) =
     ImmutableList.Builder<Annotation>()
       .apply {
-        for (annotationCtorCall in irAnnotationContainer.getAllAnnotations()) {
-          val ctor = annotationCtorCall.symbol.owner
-          val typeDescriptor =
-            checkNotNull(getEnclosingTypeDescriptor(ctor)) {
-              "No enclosing type for ${ctor.dump()}"
-            }
+        for (annotation in irAnnotationContainer.getAllAnnotations()) {
+          val annotationClass = annotation.classSymbol.owner
+          val typeDescriptor = getDeclaredTypeDescriptor(annotationClass.defaultType)
           if (!supportedAnnotationFilter.test(typeDescriptor.qualifiedSourceName)) {
             continue
           }
           add(
             Annotation.builder()
               .setTypeDescriptor(typeDescriptor)
-              .addAnnotationValues(annotationCtorCall)
+              .addAnnotationValues(annotation)
               .build()
           )
         }
       }
       .build()
 
-  private fun Annotation.Builder.addAnnotationValues(
-    annotationCtorCall: IrConstructorCall
-  ): Annotation.Builder {
+  private fun Annotation.Builder.addAnnotationValues(annotation: IrAnnotation): Annotation.Builder {
     fun IrExpression?.toAnnotationValue(): AnnotationValue? {
       fun createArrayConstant(type: IrType, values: List<IrExpression>): ArrayConstant? {
         val translatedValues = values.map { it.toAnnotationValue() }
@@ -334,8 +329,8 @@ internal class KotlinEnvironment(
       }
     }
 
-    val annotationCtor = annotationCtorCall.symbol.owner
-    for ((parameter, argument) in annotationCtor.parameters zip annotationCtorCall.arguments) {
+    val annotationCtor = annotation.symbol.owner
+    for ((parameter, argument) in annotationCtor.parameters zip annotation.arguments) {
       val name = parameter.sanitizedName
       val translatedValue = argument.toAnnotationValue() ?: continue
       addValue(name, translatedValue)

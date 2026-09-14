@@ -55,9 +55,9 @@ import org.jetbrains.kotlin.ir.declarations.IrTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
+import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.expressions.IrBreakContinue
 import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
@@ -586,8 +586,7 @@ val IrFunction.isFinal: Boolean
   get() = this is IrOverridableMember && modality == Modality.FINAL
 
 /** Sequence of annotations on this declaration. */
-// TODO(b/550323040): return a sequence of IrAnnotation instead of IrConstructorCall.
-fun IrDeclaration.getAllAnnotations(): Sequence<IrConstructorCall> = sequence {
+fun IrDeclaration.getAllAnnotations(): Sequence<IrAnnotation> = sequence {
   yieldAll(javaLikeAnnotations)
 
   val correspondingProperty =
@@ -614,7 +613,7 @@ fun IrDeclaration.getAllAnnotations(): Sequence<IrConstructorCall> = sequence {
  * Excludes annotations on companion object forwarding methods for `@JvmStatic` members (and their
  * parameters), since those annotations are moved to the static declarations on the enclosing class.
  */
-private val IrDeclaration.javaLikeAnnotations: List<IrConstructorCall>
+private val IrDeclaration.javaLikeAnnotations: List<IrAnnotation>
   get() = if (isJvmStaticInCompanion) emptyList() else annotations
 
 private val IrDeclaration.isJvmStaticInCompanion: Boolean

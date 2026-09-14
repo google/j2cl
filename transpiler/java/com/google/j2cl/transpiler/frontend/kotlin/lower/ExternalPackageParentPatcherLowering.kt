@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.backend.jvm.createJvmFileFacadeClass
 import org.jetbrains.kotlin.descriptors.SourceElement
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.expressions.IrAnnotation
 import org.jetbrains.kotlin.ir.expressions.IrConst
-import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.util.createThisReceiverParameter
 import org.jetbrains.kotlin.ir.util.findAnnotation
@@ -31,8 +31,12 @@ import org.jetbrains.kotlin.resolve.jvm.JvmClassName
  * Copied and modified from
  * compiler/ir/backend.jvm/lower/src/org/jetbrains/kotlin/backend/jvm/lower/ExternalPackageParentPatcherLowering.kt
  */
-private fun IrConstructorCall.getAnnotationStringValue(): String? =
+// MODIFIED BY GOOGLE
+// helper function
+private fun IrAnnotation.getAnnotationStringValue(): String? =
   (arguments[0] as? IrConst)?.value as String?
+
+// END OF MODIFICATIONS
 
 internal class ExternalPackageParentPatcherLowering(val context: JvmBackendContext) :
   FileLoweringPass {
