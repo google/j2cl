@@ -247,6 +247,13 @@ public final class JsInteropAstUtils {
   }
 
   private static boolean isJsOverlay(MemberDescriptor member) {
+    if (TypeDeclaration.implementWasmJsInteropSemantics()
+        && member.getEnclosingTypeDescriptor().isEnum()) {
+      // TODO(b/558808680): Remove once native JsEnums are supported in Wasm.
+      // Without the Wasm jsinterop experimental mode, all enums are treated as regular Java enums
+      // and this method is not even called.
+      return false;
+    }
     return member.hasAnnotation("jsinterop.annotations.JsOverlay") || isImplicitJsOverlay(member);
   }
 

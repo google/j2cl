@@ -13,6 +13,7 @@ readable_example(
         "*.java",
         "*.native.js",
     ]),
+    generate_wasm_externs = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:jsinterop-annotations-j2cl",
