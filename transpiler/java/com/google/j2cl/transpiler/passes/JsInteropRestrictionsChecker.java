@@ -1218,7 +1218,9 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (memberDescriptor.hasAnnotation("jsinterop.annotations.JsIgnore")) {
-      checkJsIgnore(member);
+      if (!checkJsIgnore(member)) {
+        return;
+      }
     }
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
@@ -1692,7 +1694,7 @@ public class JsInteropRestrictionsChecker {
     checkImplementableStatically(member, "JsOverlay");
   }
 
-  private void checkJsIgnore(Member member) {
+  private boolean checkJsIgnore(Member member) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
     if (!enclosingTypeDescriptor.isJsType()
@@ -1700,19 +1702,23 @@ public class JsInteropRestrictionsChecker {
         // implementation class, resulting in @JsIgnore on a non-@JsType class.
         && !checkAutoValueTypeName(enclosingTypeDescriptor.getTypeDeclaration())) {
       cannotHaveJsIgnore(member, "Non-JsType");
-      return;
+      return false;
     }
 
     if (enclosingTypeDescriptor.isNative()) {
       cannotHaveJsIgnore(member, "Native JsType");
-      return;
+      return false;
     }
 
+    // Record components are part of the record's public API and can have @JsIgnore, but their
+    // backing fields are private.
     if (!memberDescriptor.getVisibility().isPublic()
-        // Record components are private but still part of the public API.
         && !(memberDescriptor instanceof FieldDescriptor field && field.isRecordComponentField())) {
       cannotHaveJsIgnore(member, "Non-public");
+      return false;
     }
+
+    return true;
   }
 
   private void cannotHaveJsIgnore(Member member, String reason) {

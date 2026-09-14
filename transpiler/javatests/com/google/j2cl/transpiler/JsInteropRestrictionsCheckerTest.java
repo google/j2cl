@@ -185,7 +185,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsIgnore
           void n();
           > Error: Native JsType member 'void NativeInterface.n()' cannot have @JsIgnore.
-          > Error: [unusable-by-js] Native 'void NativeInterface.n()' is exposed to JavaScript without @JsMethod.
         }
         @JsType(isNative = true)
         abstract class NativeBuggy {
@@ -200,7 +199,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           @JsIgnore
           public native void n();
           > Error: Native JsType member 'void NativeBuggy.n()' cannot have @JsIgnore.
-          > Error: [unusable-by-js] Native 'void NativeBuggy.n()' is exposed to JavaScript without @JsMethod.
         }
         """);
   }
