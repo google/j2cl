@@ -46,7 +46,7 @@ public final class JsInteropAstUtils {
   }
 
   static boolean isJsNative(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.isEnum() && TypeDeclaration.implementWasmJsInteropSemantics()) {
+    if (typeDeclaration.isEnum() && TypeDeclaration.implementsWasmJsInteropSemantics()) {
       return false;
     }
     Annotation annotation = getJsTypeOrJsEnumAnnotation(typeDeclaration);
@@ -59,7 +59,7 @@ public final class JsInteropAstUtils {
     if (annotation == null) {
       return null;
     }
-    if (TypeDeclaration.implementWasmJsInteropSemantics()
+    if (TypeDeclaration.implementsWasmJsInteropSemantics()
         && annotation.getBooleanValue("isNative", false)) {
       return null;
     }
@@ -245,7 +245,7 @@ public final class JsInteropAstUtils {
   }
 
   private static boolean isJsOverlay(MemberDescriptor member) {
-    if (TypeDeclaration.implementWasmJsInteropSemantics()
+    if (TypeDeclaration.implementsWasmJsInteropSemantics()
         && member.getEnclosingTypeDescriptor().isEnum()) {
       // TODO(b/558808680): Remove once native JsEnums are supported in Wasm.
       // Without the Wasm jsinterop experimental mode, all enums are treated as regular Java enums

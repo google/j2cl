@@ -520,7 +520,7 @@ public abstract class TypeDeclaration
       return getOverlayImplementationTypeDeclaration();
     }
 
-    if (isJsFunctionInterface() && !implementWasmJsInteropSemantics.get()) {
+    if (isJsFunctionInterface() && !implementsWasmJsInteropSemantics()) {
       // In Closure, JsFunction interfaces are represented by plain JavaScript functions. Class
       // metadata calls, such as `instanceOf`, are handled by `vmbootstrap.JavaScriptFunction`.
       //
@@ -788,23 +788,21 @@ public abstract class TypeDeclaration
 
   abstract Supplier<ImmutableList<Annotation>> getAnnotationsFactory();
 
-
-
   // TODO(b/181615162): This is a temporary hack which allows Wasm to treat JsEnums differently from
   // Closure.
   // In Wasm:
   // - TODO(b/288145698): Native JsEnums are ignored (the annotation is removed on creation of
   // TypeDeclaration)
   // - The supertype of JsEnums is not modified (it is still Enum, not changed to Object).
-  private static final ThreadLocal<Boolean> implementWasmJsInteropSemantics =
+  private static final ThreadLocal<Boolean> implementsWasmJsInteropSemantics =
       ThreadLocal.withInitial(() -> false);
 
-  public static void setImplementWasmJsInteropSemantics() {
-    implementWasmJsInteropSemantics.set(true);
+  public static void setImplementsWasmJsInteropSemantics() {
+    implementsWasmJsInteropSemantics.set(true);
   }
 
-  static boolean implementWasmJsInteropSemantics() {
-    return implementWasmJsInteropSemantics.get();
+  static boolean implementsWasmJsInteropSemantics() {
+    return implementsWasmJsInteropSemantics.get();
   }
 
   TypeDeclaration acceptInternal(Processor processor) {
