@@ -27,13 +27,18 @@ import jsinterop.annotations.JsType
 
 data class DataClassWithJsProperty(@JsProperty(name = "renamedFoo") val foo: Int)
 
+interface JvmRecordInterface {
+  val z: String
+}
+
 @JsType
 @JvmRecord
 data class JsTypeJvmRecordDataClass(
   @JsProperty(name = "customVal") val x: Int,
   val y: String,
+  override val z: String,
   @JsIgnore val ignored: String,
-)
+) : JvmRecordInterface
 
 fun testDataClassWithJsInterop() {
   val foo1 = JsTypeDataClass(1).foo

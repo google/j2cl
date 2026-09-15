@@ -1,0 +1,33 @@
+goog.module('dataclass.JvmRecordInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class JvmRecordInterface {
+ /** @abstract @nodts @return {string} */
+ m_getZ__java_lang_String() {}
+ /** @nodts */
+ static $clinit() {
+  JvmRecordInterface.$clinit = () =>{};
+  JvmRecordInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__dataclass_JvmRecordInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__dataclass_JvmRecordInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+JvmRecordInterface.$markImplementor(/**@type {Function}*/ (JvmRecordInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (JvmRecordInterface), 'dataclass.JvmRecordInterface');
+
+exports = JvmRecordInterface;
+
+//# sourceMappingURL=JvmRecordInterface.js.map

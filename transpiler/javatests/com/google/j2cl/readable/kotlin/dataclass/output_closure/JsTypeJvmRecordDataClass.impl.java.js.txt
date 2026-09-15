@@ -1,14 +1,16 @@
 goog.module('dataclass.JsTypeJvmRecordDataClass$impl');
 
+const JvmRecordInterface = goog.require('dataclass.JvmRecordInterface$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
  * @final
+ * @implements {JvmRecordInterface}
  */
 class JsTypeJvmRecordDataClass extends Record {
  
- constructor(/** number */ x, /** string */ y, /** string */ ignored) {
+ constructor(/** number */ x, /** string */ y, /** string */ z, /** string */ ignored) {
   JsTypeJvmRecordDataClass.$clinit();
   super();
   /**@type {number} @nodts*/
@@ -16,16 +18,19 @@ class JsTypeJvmRecordDataClass extends Record {
   /**@type {string} @nodts*/
   this.f_y__dataclass_JsTypeJvmRecordDataClass_;
   /**@type {string} @nodts*/
+  this.f_z__dataclass_JsTypeJvmRecordDataClass_;
+  /**@type {string} @nodts*/
   this.f_ignored__dataclass_JsTypeJvmRecordDataClass_;
-  this.$ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__void(x, y, ignored);
+  this.$ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__java_lang_String__void(x, y, z, ignored);
  }
  /** @nodts */
- $ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__void(/** number */ x, /** string */ y, /** string */ ignored) {
+ $ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__java_lang_String__void(/** number */ x, /** string */ y, /** string */ z, /** string */ ignored) {
   this.$ctor__java_lang_Record__void();
   this.f_x__dataclass_JsTypeJvmRecordDataClass_ = x;
   this.f_y__dataclass_JsTypeJvmRecordDataClass_ = y;
+  this.f_z__dataclass_JsTypeJvmRecordDataClass_ = z;
   this.f_ignored__dataclass_JsTypeJvmRecordDataClass_ = ignored;
-  $J2CL_PRESERVE$(this.f_x__dataclass_JsTypeJvmRecordDataClass_, this.f_y__dataclass_JsTypeJvmRecordDataClass_, this.f_ignored__dataclass_JsTypeJvmRecordDataClass_);
+  $J2CL_PRESERVE$(this.f_x__dataclass_JsTypeJvmRecordDataClass_, this.f_y__dataclass_JsTypeJvmRecordDataClass_, this.f_z__dataclass_JsTypeJvmRecordDataClass_, this.f_ignored__dataclass_JsTypeJvmRecordDataClass_);
  }
  /** @return {number} */
  get customVal() {
@@ -34,6 +39,10 @@ class JsTypeJvmRecordDataClass extends Record {
  /** @return {string} */
  get y() {
   return this.f_y__dataclass_JsTypeJvmRecordDataClass_;
+ }
+ /** @return {string} */
+ get z() {
+  return this.f_z__dataclass_JsTypeJvmRecordDataClass_;
  }
  /** @final @nodts @return {string} */
  m_ignored__java_lang_String() {
@@ -49,18 +58,32 @@ class JsTypeJvmRecordDataClass extends Record {
  }
  /** @final @nodts @return {string} */
  m_component3__java_lang_String() {
+  return this.f_z__dataclass_JsTypeJvmRecordDataClass_;
+ }
+ /** @final @nodts @return {string} */
+ m_component4__java_lang_String() {
   return this.f_ignored__dataclass_JsTypeJvmRecordDataClass_;
  }
  /** @final @nodts @return {!JsTypeJvmRecordDataClass} */
- m_copy__int__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** number */ x, /** string */ y, /** string */ ignored) {
-  return new JsTypeJvmRecordDataClass(x, y, ignored);
+ m_copy__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** number */ x, /** string */ y, /** string */ z, /** string */ ignored) {
+  return new JsTypeJvmRecordDataClass(x, y, z, ignored);
  }
  /** @nodts @return {!JsTypeJvmRecordDataClass} */
- static m_copy$default__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** !JsTypeJvmRecordDataClass */ $this, /** number= */ x, /** string= */ y, /** string= */ ignored) {
+ static m_copy$default__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** !JsTypeJvmRecordDataClass */ $this, /** number= */ x, /** string= */ y, /** string= */ z, /** string= */ ignored) {
   let x$defaulted = $Util.$isUndefined(x) ? $this.f_x__dataclass_JsTypeJvmRecordDataClass_ : x;
   let y$defaulted = $Util.$isUndefined(y) ? $this.f_y__dataclass_JsTypeJvmRecordDataClass_ : y;
+  let z$defaulted = $Util.$isUndefined(z) ? $this.f_z__dataclass_JsTypeJvmRecordDataClass_ : z;
   let ignored$defaulted = $Util.$isUndefined(ignored) ? $this.f_ignored__dataclass_JsTypeJvmRecordDataClass_ : ignored;
-  return $this.m_copy__int__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(x$defaulted, y$defaulted, ignored$defaulted);
+  return $this.m_copy__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(x$defaulted, y$defaulted, z$defaulted, ignored$defaulted);
+ }
+ /** @return {string} */
+ getZ() {
+  return this.z;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {string} */
+ m_getZ__java_lang_String() {
+  return this.getZ();
  }
  /** @nodts */
  static $clinit() {
@@ -76,6 +99,7 @@ class JsTypeJvmRecordDataClass extends Record {
  /** @nodts */
  static $loadModules() {}
 }
+JvmRecordInterface.$markImplementor(JsTypeJvmRecordDataClass);
 $Util.$setClassMetadata(JsTypeJvmRecordDataClass, 'dataclass.JsTypeJvmRecordDataClass');
 
 exports = JsTypeJvmRecordDataClass;
