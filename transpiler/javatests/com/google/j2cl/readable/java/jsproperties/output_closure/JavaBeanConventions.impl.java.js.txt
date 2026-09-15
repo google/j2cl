@@ -1,0 +1,62 @@
+goog.module('jsproperties.JavaBeanConventions$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class JavaBeanConventions extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.xCoord = 0;
+  /**@type {number}*/
+  this.yCoord = 0;
+  /**@type {boolean}*/
+  this.isReady = false;
+  /**@type {boolean}*/
+  this.isValid = false;
+  /**@type {boolean}*/
+  this.valid = false;
+  /**@type {?boolean}*/
+  this.isFoo;
+ }
+ /** @nodts @return {!JavaBeanConventions} */
+ static $create__() {
+  JavaBeanConventions.$clinit();
+  let $instance = new JavaBeanConventions();
+  $instance.$ctor__jsproperties_JavaBeanConventions__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_JavaBeanConventions__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_jsproperties_JavaBeanConventions();
+ }
+ /** @private @nodts */
+ $init__void_$p_jsproperties_JavaBeanConventions() {
+  this.xCoord = 1;
+  this.yCoord = 2;
+  this.isReady = true;
+  this.isValid = false;
+  this.valid = true;
+  this.isFoo = true;
+ }
+ /** @nodts */
+ static $clinit() {
+  JavaBeanConventions.$clinit = () =>{};
+  JavaBeanConventions.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JavaBeanConventions;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JavaBeanConventions, 'jsproperties.JavaBeanConventions');
+
+exports = JavaBeanConventions;
+
+//# sourceMappingURL=JavaBeanConventions.js.map

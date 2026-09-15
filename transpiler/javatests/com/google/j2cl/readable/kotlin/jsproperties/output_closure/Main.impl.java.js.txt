@@ -8,6 +8,7 @@ let ClassWithJvmField = goog.forwardDeclare('jsproperties.ClassWithJvmField$impl
 let FooWithNativeProperty = goog.forwardDeclare('jsproperties.FooWithNativeProperty$impl');
 let HasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.HasFieldAndGetterSetterFuns$impl');
 let InterfaceWithStaticJsProperties = goog.forwardDeclare('jsproperties.InterfaceWithStaticJsProperties$impl');
+let JavaBeanConventions = goog.forwardDeclare('jsproperties.JavaBeanConventions$impl');
 let JavaFoo = goog.forwardDeclare('jsproperties.JavaFoo$impl');
 let MainKt = goog.forwardDeclare('jsproperties.MainKt$impl');
 let OtherHasFieldAndGetterSetterFuns = goog.forwardDeclare('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');
@@ -91,6 +92,16 @@ class Main extends j_l_Object {
   readOnlyJsProperty.c;
   ReadOnlyJsProperty.d;
  }
+ /** @final @nodts */
+ m_testJavaBeanConventions__void() {
+  let o = JavaBeanConventions.$create__();
+  let x = o.XCoord;
+  let y = o.YCoord;
+  o.YCoord = 10;
+  let r = o.ready;
+  let v = o.valid;
+  o.valid = true;
+ }
  /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
@@ -109,6 +120,7 @@ class Main extends j_l_Object {
   FooWithNativeProperty = goog.module.get('jsproperties.FooWithNativeProperty$impl');
   HasFieldAndGetterSetterFuns = goog.module.get('jsproperties.HasFieldAndGetterSetterFuns$impl');
   InterfaceWithStaticJsProperties = goog.module.get('jsproperties.InterfaceWithStaticJsProperties$impl');
+  JavaBeanConventions = goog.module.get('jsproperties.JavaBeanConventions$impl');
   JavaFoo = goog.module.get('jsproperties.JavaFoo$impl');
   MainKt = goog.module.get('jsproperties.MainKt$impl');
   OtherHasFieldAndGetterSetterFuns = goog.module.get('jsproperties.OtherHasFieldAndGetterSetterFuns$impl');

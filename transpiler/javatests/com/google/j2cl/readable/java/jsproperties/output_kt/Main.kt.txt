@@ -21,6 +21,7 @@ package jsproperties
 import javaemul.lang.*
 import jsinterop.annotations.JsProperty
 import jsproperties.FooWithNativeProperty
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.jvm.JvmField
@@ -180,4 +181,42 @@ open class Main {
   readOnlyJsProperty.getC()
   ReadOnlyJsProperty.getD()
  }
+ 
+ open fun testJavaBeanConventions() {
+  val o: JavaBeanConventions = JavaBeanConventions()
+  val x: Int = o.xCoord_pp_jsproperties
+  val y: Int = o.yCoord_pp_jsproperties
+  o.yCoord_pp_jsproperties = 10
+  val r: Boolean = o.isReady_pp_jsproperties
+  val v: Boolean = o.isValid_pp_jsproperties
+  o.isValid_pp_jsproperties = true
+  val v2: Boolean = o.valid_pp_jsproperties
+  val f: Boolean? = o.isFoo_pp_jsproperties
+ }
+}
+
+internal open class JavaBeanConventions internal constructor() {
+ @JvmField
+ @JsProperty(name = "xCoord")
+ internal var xCoord_pp_jsproperties: Int = 1
+ 
+ @JvmField
+ @JsProperty(name = "yCoord")
+ internal var yCoord_pp_jsproperties: Int = 2
+ 
+ @JvmField
+ @JsProperty(name = "isReady")
+ internal var isReady_pp_jsproperties: Boolean = true
+ 
+ @JvmField
+ @JsProperty(name = "isValid")
+ internal var isValid_pp_jsproperties: Boolean = false
+ 
+ @JvmField
+ @JsProperty(name = "valid")
+ internal var valid_pp_jsproperties: Boolean = true
+ 
+ @JvmField
+ @JsProperty(name = "isFoo")
+ internal var isFoo_pp_jsproperties: Boolean? = true
 }

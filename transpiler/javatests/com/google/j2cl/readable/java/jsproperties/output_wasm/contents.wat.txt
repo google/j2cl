@@ -50,6 +50,12 @@
 (global $$class@jsproperties.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsproperties.JavaBeanConventions (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsproperties.JavaBeanConventions (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsproperties.FooWithNativeProperty (mut i32)
  (i32.const 0)
 )
@@ -113,9 +119,19 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_testInstanceJsProperty__void@jsproperties.Main)
+  (ref.func $m_testJavaBeanConventions__void@jsproperties.Main)
   (ref.func $m_testNativeJsProperty__void@jsproperties.Main)
   (ref.func $m_testReadOnlyJsProperty__void@jsproperties.Main)
   (ref.func $m_testStaticJsProperty__void@jsproperties.Main)
+ )
+)
+(global $jsproperties.JavaBeanConventions.vtable (ref (exact $jsproperties.JavaBeanConventions.vtable))
+ (struct.new $jsproperties.JavaBeanConventions.vtable
+  (global.get $jsproperties.JavaBeanConventions.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsproperties.JavaBeanConventions)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 (global $jsproperties.FooWithNativeProperty.vtable (ref (exact $jsproperties.FooWithNativeProperty.vtable))
@@ -1282,6 +1298,43 @@
 )
 (elem declare func $m_testReadOnlyJsProperty__void@jsproperties.Main)
 
+;;; void Main.testJavaBeanConventions()
+(func $m_testJavaBeanConventions__void@jsproperties.Main
+ (type $function.m_testJavaBeanConventions__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:171:14
+ (local $o (ref null $jsproperties.JavaBeanConventions))
+ (local $x i32)
+ (local $y i32)
+ (local $r i32)
+ (local $v i32)
+ (local $v2 i32)
+ (local $f (ref null $java.lang.Boolean))
+ (local $this (ref null $jsproperties.Main))
+ (local.set $this (ref.cast (ref $jsproperties.Main) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:172:4
+  (local.set $o (call $$create__@jsproperties.JavaBeanConventions ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:173:4
+  (local.set $x (struct.get $jsproperties.JavaBeanConventions $xCoord@jsproperties.JavaBeanConventions (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:174:4
+  (local.set $y (struct.get $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:175:4
+  (struct.set $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $o) (i32.const 10))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:176:4
+  (local.set $r (struct.get_s $jsproperties.JavaBeanConventions $isReady@jsproperties.JavaBeanConventions (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:177:4
+  (local.set $v (struct.get_s $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:178:4
+  (struct.set $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $o) (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:179:4
+  (local.set $v2 (struct.get_s $jsproperties.JavaBeanConventions $valid@jsproperties.JavaBeanConventions (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:180:4
+  (local.set $f (struct.get $jsproperties.JavaBeanConventions $isFoo@jsproperties.JavaBeanConventions (local.get $o)))
+ )
+)
+(elem declare func $m_testJavaBeanConventions__void@jsproperties.Main)
+
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsproperties.Main
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:132:13
@@ -1326,6 +1379,280 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsproperties.Main)
+
+;;; JavaBeanConventions JavaBeanConventions.$create()
+(func $$create__@jsproperties.JavaBeanConventions
+ (result (ref null $jsproperties.JavaBeanConventions))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+ (local $$instance (ref null $jsproperties.JavaBeanConventions))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (call $$clinit__void_<once>_@jsproperties.JavaBeanConventions )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (local.set $$instance (struct.new_desc $jsproperties.JavaBeanConventions (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Boolean) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $jsproperties.JavaBeanConventions.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (call $$ctor__void_$p_jsproperties_JavaBeanConventions@jsproperties.JavaBeanConventions (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JavaBeanConventions.$ctor()
+(func $$ctor__void_$p_jsproperties_JavaBeanConventions@jsproperties.JavaBeanConventions
+ (param $this (ref null $jsproperties.JavaBeanConventions))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (call $$init__void_$p_jsproperties_JavaBeanConventions@jsproperties.JavaBeanConventions (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int JavaBeanConventions.xCoord()
+(func $js_export_get_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_xCoord__int_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:186:18
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:186:18
+  (return (struct.get $jsproperties.JavaBeanConventions $xCoord@jsproperties.JavaBeanConventions (local.get $this)))
+ )
+)
+(elem declare func $js_export_get_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.xCoord(int arg0)
+(func $js_export_set_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_xCoord__int__void_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:186:18
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:186:18
+  (struct.set $jsproperties.JavaBeanConventions $xCoord@jsproperties.JavaBeanConventions (local.get $this) (local.get $arg0))
+ )
+)
+(elem declare func $js_export_set_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; int JavaBeanConventions.yCoord()
+(func $js_export_get_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_yCoord__int_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:187:18
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:187:18
+  (return (struct.get $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $this)))
+ )
+)
+(elem declare func $js_export_get_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.yCoord(int arg0)
+(func $js_export_set_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_yCoord__int__void_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:187:18
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:187:18
+  (struct.set $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $this) (local.get $arg0))
+ )
+)
+(elem declare func $js_export_set_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; boolean JavaBeanConventions.isReady()
+(func $js_export_get_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_isReady__boolean_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:188:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:188:22
+  (return (struct.get_s $jsproperties.JavaBeanConventions $isReady@jsproperties.JavaBeanConventions (local.get $this)))
+ )
+)
+(elem declare func $js_export_get_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.isReady(boolean arg0)
+(func $js_export_set_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_isReady__boolean__void_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:188:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:188:22
+  (struct.set $jsproperties.JavaBeanConventions $isReady@jsproperties.JavaBeanConventions (local.get $this) (local.get $arg0))
+ )
+)
+(elem declare func $js_export_set_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; boolean JavaBeanConventions.isValid()
+(func $js_export_get_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_isValid__boolean_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:189:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:189:22
+  (return (struct.get_s $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $this)))
+ )
+)
+(elem declare func $js_export_get_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.isValid(boolean arg0)
+(func $js_export_set_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_isValid__boolean__void_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:189:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:189:22
+  (struct.set $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $this) (local.get $arg0))
+ )
+)
+(elem declare func $js_export_set_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; boolean JavaBeanConventions.valid()
+(func $js_export_get_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_valid__boolean_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:190:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:190:22
+  (return (struct.get_s $jsproperties.JavaBeanConventions $valid@jsproperties.JavaBeanConventions (local.get $this)))
+ )
+)
+(elem declare func $js_export_get_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.valid(boolean arg0)
+(func $js_export_set_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_valid__boolean__void_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:190:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:190:22
+  (struct.set $jsproperties.JavaBeanConventions $valid@jsproperties.JavaBeanConventions (local.get $this) (local.get $arg0))
+ )
+)
+(elem declare func $js_export_set_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; WasmExtern JavaBeanConventions.isFoo()
+(func $js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:191:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:191:22
+  (return (call $m_toJs__java_lang_Boolean__java_lang_Boolean_NativeBoolean@java.lang.Boolean (ref.cast (ref null $java.lang.Boolean) (struct.get $jsproperties.JavaBeanConventions $isFoo@jsproperties.JavaBeanConventions (local.get $this)))))
+ )
+)
+(elem declare func $js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.isFoo(WasmExtern arg0)
+(func $js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:191:22
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:191:22
+  (struct.set $jsproperties.JavaBeanConventions $isFoo@jsproperties.JavaBeanConventions (local.get $this) (call $m_fromJs__java_lang_Boolean_NativeBoolean__java_lang_Boolean@java.lang.Boolean (local.get $arg0)))
+ )
+)
+(elem declare func $js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+
+;;; void JavaBeanConventions.$init()
+(func $$init__void_$p_jsproperties_JavaBeanConventions@jsproperties.JavaBeanConventions
+ (param $this (ref null $jsproperties.JavaBeanConventions))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:186:18
+  (struct.set $jsproperties.JavaBeanConventions $xCoord@jsproperties.JavaBeanConventions (local.get $this) (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:187:18
+  (struct.set $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $this) (i32.const 2))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:188:22
+  (struct.set $jsproperties.JavaBeanConventions $isReady@jsproperties.JavaBeanConventions (local.get $this) (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:189:22
+  (struct.set $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $this) (i32.const 0))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:190:22
+  (struct.set $jsproperties.JavaBeanConventions $valid@jsproperties.JavaBeanConventions (local.get $this) (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:191:22
+  (struct.set $jsproperties.JavaBeanConventions $isFoo@jsproperties.JavaBeanConventions (local.get $this) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
+ )
+)
+
+;;; void JavaBeanConventions.$clinit()
+(func $$clinit__void_<once>_@jsproperties.JavaBeanConventions
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (if (global.get $$class-initialized@jsproperties.JavaBeanConventions)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (global.set $$class-initialized@jsproperties.JavaBeanConventions (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:185:6
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> JavaBeanConventions.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsproperties.JavaBeanConventions
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsproperties.JavaBeanConventions)))
+   (then
+    (return (global.get $$class@jsproperties.JavaBeanConventions))
+   )
+  )
+  (global.set $$class@jsproperties.JavaBeanConventions (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsproperties...|__java_lang_String_<once>_@jsproperties.JavaBeanConventions.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsproperties.JavaBeanConventions))
+ )
+)
+
+;;; Class<?> JavaBeanConventions.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsproperties.JavaBeanConventions
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsproperties.JavaBeanConventions))
+ (local.set $this (ref.cast (ref $jsproperties.JavaBeanConventions) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsproperties.JavaBeanConventions ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsproperties.JavaBeanConventions)
 
 ;;; FooWithNativeProperty FooWithNativeProperty.$create()
 (func $$create__@jsproperties.FooWithNativeProperty

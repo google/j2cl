@@ -1,0 +1,78 @@
+goog.module('jsproperties.JavaBeanConventions$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class JavaBeanConventions extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_xCoord__jsproperties_JavaBeanConventions_ = 0;
+  /**@type {number} @nodts*/
+  this.f_yCoord__jsproperties_JavaBeanConventions_ = 0;
+  /**@type {boolean} @nodts*/
+  this.f_isReady__jsproperties_JavaBeanConventions_ = false;
+  /**@type {boolean} @nodts*/
+  this.f_isValid__jsproperties_JavaBeanConventions_ = false;
+ }
+ /** @nodts @return {!JavaBeanConventions} */
+ static $create__() {
+  JavaBeanConventions.$clinit();
+  let $instance = new JavaBeanConventions();
+  $instance.$ctor__jsproperties_JavaBeanConventions__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsproperties_JavaBeanConventions__void() {
+  this.$ctor__java_lang_Object__void();
+  this.f_xCoord__jsproperties_JavaBeanConventions_ = 1;
+  this.f_yCoord__jsproperties_JavaBeanConventions_ = 2;
+  this.f_isReady__jsproperties_JavaBeanConventions_ = true;
+ }
+ /** @return {number} */
+ get XCoord() {
+  return this.f_xCoord__jsproperties_JavaBeanConventions_;
+ }
+ /** @return {number} */
+ get YCoord() {
+  return this.f_yCoord__jsproperties_JavaBeanConventions_;
+ }
+ 
+ set YCoord(/** number */ set__) {
+  this.f_yCoord__jsproperties_JavaBeanConventions_ = set__;
+ }
+ /** @return {boolean} */
+ get ready() {
+  return this.f_isReady__jsproperties_JavaBeanConventions_;
+ }
+ /** @return {boolean} */
+ get valid() {
+  return this.f_isValid__jsproperties_JavaBeanConventions_;
+ }
+ 
+ set valid(/** boolean */ set__) {
+  this.f_isValid__jsproperties_JavaBeanConventions_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  JavaBeanConventions.$clinit = () =>{};
+  JavaBeanConventions.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JavaBeanConventions;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JavaBeanConventions, 'jsproperties.JavaBeanConventions');
+
+exports = JavaBeanConventions;
+
+//# sourceMappingURL=JavaBeanConventions.js.map

@@ -279,6 +279,19 @@ class Main {
     readOnlyJsProperty.getC()
     ReadOnlyJsProperty.getD()
   }
+
+  fun testJavaBeanConventions() {
+    val o = JavaBeanConventions()
+    val x = o.xCoord
+    val y = o.yCoord
+    o.yCoord = 10
+    val r = o.isReady
+    val v = o.isValid
+    o.isValid = true
+    // TODO(b/561808785): Uncomment when the above properties are uncommented.
+    // val v2 = o.valid
+    // val f = o.isFoo
+  }
 }
 
 class KotlinProperties {
@@ -349,4 +362,29 @@ class KotlinProperties {
   @JsProperty
   private var p = 160
     set
+}
+
+/** Tests for property naming mismatches between Kotlin and JavaBeans conventions (b/561808785). */
+class JavaBeanConventions {
+  // Single-letter prefix properties:
+  // In Kotlin, the property name is "xCoord", but kotlinc generates getter "getXCoord()".
+  // Due to JavaBeans Introspector.decapitalize (preserving uppercase if 2nd char is uppercase),
+  // J2CL generates JS property name "XCoord".
+  @JsProperty val xCoord: Int = 1
+  @JsProperty var yCoord: Int = 2
+
+  // Boolean properties with 'is' prefix:
+  // In Kotlin, the property name is "isReady"/"isValid", but kotlinc generates getter "isReady()",
+  // "isValid()", and setter "setValid()". JavaBeans convention strips "is"/"set", turning them
+  // into JS property name "ready"/"valid".
+  @JsProperty val isReady: Boolean = true
+  @JsProperty var isValid: Boolean = false
+
+  // TODO(b/561808785): Uncomment when property name collision is resolved.
+  // Both 'valid' and 'isValid' map to the same JavaScript property name 'valid'.
+  // @JsProperty val valid: Boolean = true
+
+  // TODO(b/561808785): Uncomment when nullable boolean is supported on 'is...' properties.
+  // Kotlin's Boolean? compiles to boxed Boolean, which is rejected by J2CL for 'is...' getters.
+  // @JsProperty val isFoo: Boolean? = true
 }

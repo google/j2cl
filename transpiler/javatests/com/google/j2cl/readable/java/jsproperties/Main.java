@@ -167,4 +167,26 @@ public class Main {
     readOnlyJsProperty.getC();
     ReadOnlyJsProperty.getD();
   }
+
+  public void testJavaBeanConventions() {
+    JavaBeanConventions o = new JavaBeanConventions();
+    int x = o.xCoord;
+    int y = o.yCoord;
+    o.yCoord = 10;
+    boolean r = o.isReady;
+    boolean v = o.isValid;
+    o.isValid = true;
+    boolean v2 = o.valid;
+    Boolean f = o.isFoo;
+  }
+}
+
+/** Tests for property naming with JavaBeans conventions. */
+class JavaBeanConventions {
+  @JsProperty int xCoord = 1;
+  @JsProperty int yCoord = 2;
+  @JsProperty boolean isReady = true;
+  @JsProperty boolean isValid = false;
+  @JsProperty boolean valid = true;
+  @JsProperty Boolean isFoo = true;
 }
