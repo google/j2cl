@@ -157,7 +157,7 @@ public final class JsInteropAstUtils {
   }
 
   private static boolean isImplicitJsMember(MemberDescriptor member) {
-    if (isJsOverlay(member)) {
+    if (isJsOverlay(member) || member.hasAnnotation("jsinterop.annotations.JsIgnore")) {
       return false;
     }
     TypeDeclaration enclosingType = member.getEnclosingTypeDescriptor().getTypeDeclaration();
@@ -214,9 +214,7 @@ public final class JsInteropAstUtils {
 
   private static JsMemberType getJsMemberType(
       MemberDescriptor member, Annotation jsMemberAnnotation) {
-
-    if (member.hasAnnotation("jsinterop.annotations.JsIgnore")
-        || (jsMemberAnnotation == null && !isImplicitJsMember(member))) {
+    if (jsMemberAnnotation == null && !isImplicitJsMember(member)) {
       return JsMemberType.NONE;
     }
 
