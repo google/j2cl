@@ -625,7 +625,7 @@ private val IrDeclaration.isJvmStaticInCompanion: Boolean
 
 val IrDeclaration.isSynthetic
   get() =
-    origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER ||
+    origin.isSynthetic ||
       isCompanionInstanceField ||
       isNonJvmFieldCompanionPropertyBackingField ||
       isDataClassSyntheticHelper

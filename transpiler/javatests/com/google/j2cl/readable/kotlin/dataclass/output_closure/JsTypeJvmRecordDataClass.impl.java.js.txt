@@ -76,14 +76,9 @@ class JsTypeJvmRecordDataClass extends Record {
   let ignored$defaulted = $Util.$isUndefined(ignored) ? $this.f_ignored__dataclass_JsTypeJvmRecordDataClass_ : ignored;
   return $this.m_copy__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(x$defaulted, y$defaulted, z$defaulted, ignored$defaulted);
  }
- /** @return {string} */
- getZ() {
-  return this.z;
- }
- //Bridge method.
- /** @final @override @nodts @suppress{visibility} @return {string} */
+ /** @override @nodts @return {string} */
  m_getZ__java_lang_String() {
-  return this.getZ();
+  return this.z;
  }
  /** @nodts */
  static $clinit() {
