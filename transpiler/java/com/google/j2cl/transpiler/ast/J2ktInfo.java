@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Ascii.isUpperCase;
 import static com.google.common.base.Ascii.toLowerCase;
+import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
 
 import com.google.auto.value.AutoValue;
 import javax.annotation.Nullable;
@@ -59,12 +60,6 @@ public abstract class J2ktInfo {
     return startsWithCamelCase(methodName, "get")
         ? decapitalize(methodName.substring(3))
         : methodName;
-  }
-
-  private static boolean startsWithCamelCase(String string, String prefix) {
-    return string.length() > prefix.length()
-        && string.startsWith(prefix)
-        && Character.isUpperCase(string.charAt(prefix.length()));
   }
 
   /**

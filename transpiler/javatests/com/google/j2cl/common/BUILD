@@ -24,3 +24,13 @@ java_test(
         "//transpiler/java/com/google/j2cl/common",
     ],
 )
+
+java_test(
+    name = "StringUtilsTest",
+    srcs = ["StringUtilsTest.java"],
+    deps = [
+        "//third_party:junit",
+        "//third_party:truth",
+        "//transpiler/java/com/google/j2cl/common",
+    ],
+)

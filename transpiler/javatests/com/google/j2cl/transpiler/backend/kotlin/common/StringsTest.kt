@@ -23,16 +23,6 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class StringsTest {
   @Test
-  fun camelCaseStartWithPrefix() {
-    assertThat("getFoo".camelCaseStartsWith("get")).isTrue()
-    assertThat("getFooBar".camelCaseStartsWith("getFoo")).isTrue()
-
-    assertThat("get".camelCaseStartsWith("get")).isFalse()
-    assertThat("getfoo".camelCaseStartsWith("get")).isFalse()
-    assertThat("gotFoo".camelCaseStartsWith("get")).isFalse()
-  }
-
-  @Test
   fun stringTitleCased() {
     assertThat("foo".titleCased).isEqualTo("Foo")
     assertThat("1a".titleCased).isEqualTo("1a")

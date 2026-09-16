@@ -15,13 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.common
 
-/**
- * Returns whether this camel-case string starts with the given prefix, followed by a non-empty
- * substring.
- */
-fun String.camelCaseStartsWith(prefix: String): Boolean =
-  startsWith(prefix) && getOrNull(prefix.length).run { this != null && !isLowerCase() }
-
 /** Returns title-cased version of this string. */
 val String.titleCased: String
   get() = replaceFirstChar { it.uppercase() }
