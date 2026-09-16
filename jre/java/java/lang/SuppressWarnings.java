@@ -23,7 +23,8 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the named compiler warnings should be suppressed in the annotated element (and in
  * all program elements contained in the annotated element). <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/SuppressWarnings.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/SuppressWarnings.html">[official
+ * Java API docs]</a>
  */
 @Target({
   ElementType.TYPE, ElementType.FIELD, ElementType.METHOD,

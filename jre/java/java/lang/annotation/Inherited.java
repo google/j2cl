@@ -17,8 +17,8 @@ package java.lang.annotation;
 
 /**
  * Annotation which indicates an annotation type is automatically inherited <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Inherited.html">[Sun
- * docs]</a>.
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/annotation/Inherited.html">[official
+ * Java API docs]</a>.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

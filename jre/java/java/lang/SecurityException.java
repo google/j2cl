@@ -16,7 +16,8 @@
 package java.lang;
 
 /**
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/SecurityException.html">the
+ * See <a
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/SecurityException.html">the
  * official Java API doc</a> for details.
  *
  * <p>This exception is never thrown by GWT or GWT's libraries, as GWT does not have a

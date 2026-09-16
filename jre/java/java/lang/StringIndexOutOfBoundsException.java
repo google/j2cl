@@ -17,7 +17,7 @@ package java.lang;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/StringIndexOfBoundsException.html">the
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/StringIndexOutOfBoundsException.html">the
  * official Java API doc</a> for details.
  */
 public class StringIndexOutOfBoundsException extends IndexOutOfBoundsException {

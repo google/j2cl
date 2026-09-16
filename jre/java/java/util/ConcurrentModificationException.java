@@ -17,7 +17,7 @@ package java.util;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ConcurrentModificationException.html">the
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/ConcurrentModificationException.html">the
  * official Java API doc</a> for details.
  */
 public class ConcurrentModificationException extends RuntimeException {

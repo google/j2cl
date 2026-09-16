@@ -17,7 +17,8 @@ package java.lang.annotation;
 
 /**
  * Annotation which indicates how long annotations should be retained <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html">[Sun doc]</a>.
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/annotation/Retention.html">[official
+ * Java API doc]</a>.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

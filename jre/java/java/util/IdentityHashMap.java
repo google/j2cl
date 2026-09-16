@@ -19,7 +19,8 @@ import java.io.Serializable;
 
 /**
  * Map using reference equality on keys. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/IdentityHashMap.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/IdentityHashMap.html">[official
+ * Java API docs]</a>
  *
  * @param <K> key type
  * @param <V> value type

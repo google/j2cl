@@ -18,7 +18,7 @@ package java.lang.annotation;
 /**
  * Indicates the annotation parser determined the annotation was malformed when reading from the
  * class file <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/AnnotationFormatError.html">[Sun
- * docs]</a>.
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/annotation/AnnotationFormatError.html">[official
+ * Java API docs]</a>.
  */
 public class AnnotationFormatError extends Error {}

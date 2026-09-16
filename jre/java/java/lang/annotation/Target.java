@@ -17,8 +17,9 @@ package java.lang.annotation;
 
 /**
  * Annotation which indicates the kinds of program element to which an annotation type is applicable
- * <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html">[Sun
- * docs]</a>.
+ * <a
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/annotation/Target.html">[official
+ * Java API docs]</a>.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

@@ -18,8 +18,9 @@ import javaemul.internal.HashCodes;
 import jsinterop.annotations.JsMethod;
 
 /**
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html">the official Java API
- * doc</a> for details.
+ * See <a
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/Object.html">the
+ * official Java API doc</a> for details.
  */
 public class Object {
 

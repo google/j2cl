@@ -19,7 +19,7 @@ package java.lang;
  * NOTE: in GWT this will never be thrown for normal array accesses, only for explicit throws.
  *
  * <p>See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ArrayIndexOutOfBoundsException.html">the
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/ArrayIndexOutOfBoundsException.html">the
  * official Java API doc</a> for details.
  */
 public class ArrayIndexOutOfBoundsException extends IndexOutOfBoundsException {

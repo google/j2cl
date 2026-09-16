@@ -20,8 +20,9 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/io/BufferedWriter.html">the official
- * Java API doc</a> for details.
+ * See <a
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/io/BufferedWriter.html">the
+ * official Java API doc</a> for details.
  */
 public class BufferedWriter extends Writer {
   private static int defaultCharBufferSize = 8192;

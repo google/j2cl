@@ -22,7 +22,8 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * A program element annotated &#64;Deprecated is one that programmers are discouraged from using,
  * typically because it is dangerous, or because a better alternative exists. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/Deprecated.html">[official
+ * Java API docs]</a>
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

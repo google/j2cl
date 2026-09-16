@@ -17,8 +17,8 @@ package java.lang.annotation;
 
 /**
  * Annotation which indicates annotations should be documented by javadoc/etc <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Documented.html">[Sun
- * docs]</a>.
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/annotation/Documented.html">[official
+ * Java API docs]</a>.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

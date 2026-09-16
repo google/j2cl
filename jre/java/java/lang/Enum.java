@@ -18,8 +18,9 @@ import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsType;
 
 /**
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Enum.html">the official Java API
- * doc</a> for details.
+ * See <a
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/Enum.html">the
+ * official Java API doc</a> for details.
  */
 @JsType
 public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable {

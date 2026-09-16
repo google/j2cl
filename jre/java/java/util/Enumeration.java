@@ -17,7 +17,8 @@ package java.util;
 
 /**
  * An interface to generate a series of elements, one at a time. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Enumeration.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/Enumeration.html">[official
+ * Java API docs]</a>
  *
  * @param <E> the type being enumerated.
  */

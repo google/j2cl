@@ -19,7 +19,8 @@ import javaemul.internal.JsUtils;
 
 /**
  * An interface used a basis for implementing custom ordering. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/Comparable.html">[official
+ * Java API docs]</a>
  *
  * @param <T> the type to compare to.
  */

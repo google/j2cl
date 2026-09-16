@@ -33,8 +33,9 @@ import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsProperty;
 
 /**
- * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html">the official Java
- * API doc</a> for details.
+ * See <a
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/Throwable.html">the
+ * official Java API doc</a> for details.
  */
 public class Throwable implements Serializable {
 

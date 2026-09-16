@@ -19,8 +19,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * Skeletal implementation of the List interface. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractSequentialList.html">[Sun
- * docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/AbstractSequentialList.html">[official
+ * Java API docs]</a>
  *
  * @param <E> element type.
  */

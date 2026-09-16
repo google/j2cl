@@ -17,8 +17,8 @@ package java.lang.annotation;
 
 /**
  * Base interface for all annotation types <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html">[Sun
- * docs]</a>.
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/lang/annotation/Annotation.html">[official
+ * Java API docs]</a>.
  */
 public interface Annotation {
 

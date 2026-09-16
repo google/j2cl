@@ -21,7 +21,8 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 /**
  * Hash table implementation of the Map interface with predictable iteration order. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/LinkedHashMap.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/LinkedHashMap.html">[official
+ * Java API docs]</a>
  *
  * @param <K> key type.
  * @param <V> value type.

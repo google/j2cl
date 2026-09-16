@@ -21,7 +21,8 @@ import java.io.Serializable;
 
 /**
  * Implements a set using a TreeMap. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/TreeSet.html">[Sun docs]</a>
+ * href="https://docs.oracle.com/en/java/javase/27/docs/api/java.base/java/util/TreeSet.html">[official
+ * Java API docs]</a>
  *
  * @param <E> element type.
  */
