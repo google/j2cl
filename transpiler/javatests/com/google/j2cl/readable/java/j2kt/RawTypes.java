@@ -39,6 +39,15 @@ public class RawTypes {
     return a;
   }
 
+  class RecursiveWithNullable<K extends RecursiveChild<K>, V extends @Nullable Object> {
+    RecursiveWithNullable(NullableBound<? extends V> nullableBound) {}
+  }
+
+  <K extends RecursiveChild<K>, V> RecursiveWithNullable<K, V> testRecursiveWithNullable(
+      NullableBound<@Nullable V> nullableBound) {
+    return new RecursiveWithNullable<>(nullableBound);
+  }
+
   @SuppressWarnings({"rawtypes", "unchecked"})
   void testRawParent(NullableBound<Child<?>> nullableBound, Parent rawParent) {
     // TODO(b/504902037): Uncomment once fixed.

@@ -27,6 +27,8 @@ open class RawTypes {
  
  internal open fun <T: RawTypes.RecursiveChild<T>> toParent_pp_j2kt(a: RawTypes.RecursiveChild<T>): RawTypes.Parent<T> = a
  
+ internal open fun <K: RawTypes.RecursiveChild<K>, V: Any> testRecursiveWithNullable_pp_j2kt(nullableBound: RawTypes.NullableBound<V?>): RawTypes.RecursiveWithNullable<K, V> = RecursiveWithNullable<K, V?>(nullableBound) as RawTypes.RecursiveWithNullable<K, V>
+ 
  internal open fun testRawParent_pp_j2kt(nullableBound: RawTypes.NullableBound<RawTypes.Child<*>>, rawParent: RawTypes.Parent<Any>) {}
  
  internal open fun testRawParentRecursive_pp_j2kt(nullableBound: RawTypes.NullableBound<RawTypes.RecursiveChild<*>>, rawParent: RawTypes.Parent<Any>) {}
@@ -40,4 +42,6 @@ open class RawTypes {
  internal open inner class Child<T: Any> internal constructor(): RawTypes.Parent<T>()
  
  internal open inner class RecursiveChild<T: RawTypes.RecursiveChild<T>> internal constructor(): RawTypes.Parent<T>()
+ 
+ internal open inner class RecursiveWithNullable<K: RawTypes.RecursiveChild<K>, V> constructor(nullableBound: RawTypes.NullableBound<out V>)
 }
