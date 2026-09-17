@@ -1,0 +1,50 @@
+goog.module('nativejstypes.NativeOverNonNative$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ExposesNonNative = goog.forwardDeclare('nativetypes.NonNative');
+
+class NativeOverNonNative extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NativeOverNonNative} */
+ static $create__() {
+  NativeOverNonNative.$clinit();
+  let $instance = new NativeOverNonNative();
+  $instance.$ctor__nativejstypes_NativeOverNonNative__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_NativeOverNonNative__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_main__void_$pp_nativejstypes() {
+  let exposesNonNative = new ExposesNonNative(1);
+  exposesNonNative.m();
+  ExposesNonNative.n();
+ }
+ /** @nodts */
+ static $clinit() {
+  NativeOverNonNative.$clinit = () =>{};
+  NativeOverNonNative.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeOverNonNative;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  ExposesNonNative = goog.module.get('nativetypes.NonNative');
+ }
+}
+$Util.$setClassMetadata(NativeOverNonNative, 'nativejstypes.NativeOverNonNative');
+
+exports = NativeOverNonNative;
+
+//# sourceMappingURL=NativeOverNonNative.js.map

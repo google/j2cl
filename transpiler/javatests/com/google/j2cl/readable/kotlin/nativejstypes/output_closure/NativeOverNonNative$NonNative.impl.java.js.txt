@@ -1,0 +1,44 @@
+goog.module('nativetypes.NonNative$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NonNative extends j_l_Object {
+ 
+ constructor(/** number */ x) {
+  NonNative.$clinit();
+  super();
+  this.$ctor__nativejstypes_NativeOverNonNative_NonNative__int__void(x);
+ }
+ /** @nodts */
+ $ctor__nativejstypes_NativeOverNonNative_NonNative__int__void(/** number */ x) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final */
+ m() {}
+ 
+ static n() {
+  NonNative.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  NonNative.$clinit = () =>{};
+  NonNative.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonNative;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonNative, 'nativejstypes.NativeOverNonNative$NonNative');
+
+exports = NonNative;
+
+//# sourceMappingURL=NativeOverNonNative$NonNative.js.map

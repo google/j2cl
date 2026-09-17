@@ -171,6 +171,21 @@
  (result (ref null string))
 )
 
+;;; ExposesNonNative(int x)
+(func $m_<init>__int@nativejstypes.NativeOverNonNative.ExposesNonNative (import "imports" "nativetypes.NonNative.constructor$1") 
+ (param $x i32)
+ (result (ref null extern))
+)
+
+;;; void ExposesNonNative.m()
+(func $m_m__void@nativejstypes.NativeOverNonNative.ExposesNonNative (import "imports" "nativetypes.NonNative.m") 
+ (param $this (ref null extern))
+)
+
+;;; void ExposesNonNative.n()
+(func $m_n__void@nativejstypes.NativeOverNonNative.ExposesNonNative (import "imports" "nativetypes.NonNative.n") 
+)
+
 ;;; int NativeMembersOnPrivateClass.getInstance2()
 (func $m_getInstance2__int@nativejstypes.NonreferencedMethods.NativeMembersOnPrivateClass (import "imports" "nativejstypes.NativeNonreferencedMethods.getInstance2") 
  (param $this (ref null extern))

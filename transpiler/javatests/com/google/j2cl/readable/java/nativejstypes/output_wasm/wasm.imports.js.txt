@@ -12,6 +12,7 @@ const nativejstypes_Bar = goog.require('nativejstypes.Bar');
 const nativejstypes_NativeNonreferencedMethods = goog.require('nativejstypes.NativeNonreferencedMethods');
 const nativejstypes_NativeReferencedPrivateMethods = goog.require('nativejstypes.NativeReferencedPrivateMethods');
 const nativejstypes_Nullability = goog.require('nativejstypes.Nullability');
+const nativetypes_NonNative = goog.require('nativetypes.NonNative');
 const toplevel = goog.require('toplevel');
 
 /** @return {!Object<string, *>} Wasm import object */
@@ -150,6 +151,9 @@ function getImports() {
    'nativejstypes.Nullability.acceptsNull$1': (/** !nativejstypes_Nullability */ $instance, /** string */ arg, ) => $instance.acceptsNull(arg, ),
    'nativejstypes.Nullability.constructor': () => new nativejstypes_Nullability(),
    'nativejstypes.Nullability.doesNotAcceptNull$1': (/** !nativejstypes_Nullability */ $instance, /** string */ arg, ) => $instance.doesNotAcceptNull(arg, ),
+   'nativetypes.NonNative.constructor$1': (/** number */ x, ) => new nativetypes_NonNative(x, ),
+   'nativetypes.NonNative.m': (/** !nativetypes_NonNative */ $instance, ) => $instance.m(),
+   'nativetypes.NonNative.n': nativetypes_NonNative.n,
    'parseFloat': parseFloat,
    'performance.now': () => performance.now(),
    'set Error.stack': (/** !Error */ $instance, /** string */ value, ) => $instance.stack = value,

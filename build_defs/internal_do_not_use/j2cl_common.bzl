@@ -202,6 +202,9 @@ def _compile(
         js_deps,
         js_exports,
         artifact_suffix,
+        # When it is true and there are sources and externs mixed, the externs are dropped and
+        # that causes Wasm modular type check to fail.
+        generate_ijs_tree_artifact_for_tree_artifact_srcs = (backend != "WASM"),
     )
 
     return J2clInfo(

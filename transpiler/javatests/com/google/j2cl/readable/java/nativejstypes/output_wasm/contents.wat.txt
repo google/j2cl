@@ -65,6 +65,24 @@
 (global $$class@nativejstypes.Main (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@nativejstypes.NativeOverNonNative (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.NativeOverNonNative (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@nativejstypes.NativeOverNonNative.NonNative (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.NativeOverNonNative.NonNative (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@nativejstypes.NonreferencedMethods (mut i32)
  (i32.const 0)
 )
@@ -191,6 +209,29 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $nativejstypes.NativeOverNonNative.vtable (ref $nativejstypes.NativeOverNonNative.vtable)
+ (struct.new $nativejstypes.NativeOverNonNative.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_main__void_$pp_nativejstypes@nativejstypes.NativeOverNonNative)
+ )
+)
+(global $nativejstypes.NativeOverNonNative.NonNative.vtable (ref $nativejstypes.NativeOverNonNative.NonNative.vtable)
+ (struct.new $nativejstypes.NativeOverNonNative.NonNative.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative.NonNative)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_m__void@nativejstypes.NativeOverNonNative.NonNative)
+ )
+)
+(global $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay.vtable (ref $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay.vtable)
+ (struct.new $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay)
  )
 )
 (global $nativejstypes.NonreferencedMethods.vtable (ref $nativejstypes.NonreferencedMethods.vtable)
@@ -638,6 +679,49 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:32:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:32:15
+  (if (global.get $$class-initialized@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:32:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:32:15
+  (global.set $$class-initialized@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay
@@ -1355,6 +1439,192 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Main)
+
+;;; NativeOverNonNative NativeOverNonNative.$create()
+(func $$create__@nativejstypes.NativeOverNonNative
+ (result (ref null $nativejstypes.NativeOverNonNative))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+ (local $$instance (ref null $nativejstypes.NativeOverNonNative))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (call $$clinit__void_<once>_@nativejstypes.NativeOverNonNative )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (local.set $$instance (struct.new $nativejstypes.NativeOverNonNative (global.get $nativejstypes.NativeOverNonNative.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (call $$ctor__void_$p_nativejstypes_NativeOverNonNative@nativejstypes.NativeOverNonNative (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NativeOverNonNative.$ctor()
+(func $$ctor__void_$p_nativejstypes_NativeOverNonNative@nativejstypes.NativeOverNonNative
+ (param $this (ref null $nativejstypes.NativeOverNonNative))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void NativeOverNonNative.main()
+(func $m_main__void_$pp_nativejstypes@nativejstypes.NativeOverNonNative
+ (type $function.m_main__void_$pp_nativejstypes)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:40:7
+ (local $exposesNonNative (ref null extern))
+ (local $this (ref null $nativejstypes.NativeOverNonNative))
+ (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:41:4
+  (local.set $exposesNonNative (call $m_<init>__int@nativejstypes.NativeOverNonNative.ExposesNonNative (i32.const 1)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:42:4
+  (call $m_m__void@nativejstypes.NativeOverNonNative.ExposesNonNative (ref.as_non_null (local.get $exposesNonNative)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:43:4
+  (call $m_n__void@nativejstypes.NativeOverNonNative.ExposesNonNative )
+ )
+)
+(elem declare func $m_main__void_$pp_nativejstypes@nativejstypes.NativeOverNonNative)
+
+;;; void NativeOverNonNative.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.NativeOverNonNative
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (if (global.get $$class-initialized@nativejstypes.NativeOverNonNative)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (global.set $$class-initialized@nativejstypes.NativeOverNonNative (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> NativeOverNonNative.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NativeOverNonNative
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NativeOverNonNative)))
+   (then
+    (return (global.get $$class@nativejstypes.NativeOverNonNative))
+   )
+  )
+  (global.set $$class@nativejstypes.NativeOverNonNative (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NativeOverNonNative.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypes.NativeOverNonNative))
+ )
+)
+
+;;; Class<?> NativeOverNonNative.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NativeOverNonNative))
+ (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NativeOverNonNative ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative)
+
+;;; NonNative NonNative.$create(int x)
+(func $$create__int@nativejstypes.NativeOverNonNative.NonNative
+ (param $x i32)
+ (result (ref null $nativejstypes.NativeOverNonNative.NonNative))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
+ (local $$instance (ref null $nativejstypes.NativeOverNonNative.NonNative))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
+  (call $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.NonNative )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
+  (local.set $$instance (struct.new $nativejstypes.NativeOverNonNative.NonNative (global.get $nativejstypes.NativeOverNonNative.NonNative.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
+  (call $$ctor__int__void_$p_nativejstypes_NativeOverNonNative_NonNative@nativejstypes.NativeOverNonNative.NonNative (ref.as_non_null (local.get $$instance))(local.get $x))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NonNative.$ctor(int x)
+(func $$ctor__int__void_$p_nativejstypes_NativeOverNonNative_NonNative@nativejstypes.NativeOverNonNative.NonNative
+ (param $this (ref null $nativejstypes.NativeOverNonNative.NonNative))
+ (param $x i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:28
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void NonNative.m()
+(func $m_m__void@nativejstypes.NativeOverNonNative.NonNative
+ (type $function.m_m__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:26:16
+ (local $this (ref null $nativejstypes.NativeOverNonNative.NonNative))
+ (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative.NonNative) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__void@nativejstypes.NativeOverNonNative.NonNative)
+
+;;; void NonNative.n()
+(func $m_n__void@nativejstypes.NativeOverNonNative.NonNative
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:28:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:28:23
+  (call $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.NonNative )
+ )
+)
+
+;;; void NonNative.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.NonNative
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:23:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:23:15
+  (if (global.get $$class-initialized@nativejstypes.NativeOverNonNative.NonNative)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:23:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:23:15
+  (global.set $$class-initialized@nativejstypes.NativeOverNonNative.NonNative (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:23:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> NonNative.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NativeOverNonNative.NonNative
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.NativeOverNonNative.NonNative)))
+   (then
+    (return (global.get $$class@nativejstypes.NativeOverNonNative.NonNative))
+   )
+  )
+  (global.set $$class@nativejstypes.NativeOverNonNative.NonNative (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.NativeOverNonNative.NonNative.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypes.NativeOverNonNative.NonNative))
+ )
+)
+
+;;; Class<?> NonNative.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative.NonNative
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.NativeOverNonNative.NonNative))
+ (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative.NonNative) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.NativeOverNonNative.NonNative ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.NativeOverNonNative.NonNative)
 
 ;;; NonreferencedMethods NonreferencedMethods.$create()
 (func $$create__@nativejstypes.NonreferencedMethods

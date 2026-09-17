@@ -10,7 +10,13 @@ load(
     "web_library",
 )
 
-def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = ""):
+def j2cl_js_provider(
+        ctx,
+        srcs = [],
+        deps = [],
+        exports = [],
+        artifact_suffix = "",
+        generate_ijs_tree_artifact_for_tree_artifact_srcs = True):
     """ Creates a js provider from provided sources, deps and exports. """
 
     default_j2cl_suppresses = [

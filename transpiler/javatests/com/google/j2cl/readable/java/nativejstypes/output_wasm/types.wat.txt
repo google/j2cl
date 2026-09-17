@@ -74,6 +74,15 @@
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  ))
 )
+(type $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay (sub (struct
+ (field $vtable (ref $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay.vtable))
+ (field $itable (ref $itable))
+ ))
+)
+(type $nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay.vtable (sub (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ ))
+)
 (type $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay (sub (struct
  (field $vtable (ref $nativejstypes.NonreferencedMethods.NativePrivateMembersOnPublicClass.$Overlay.vtable))
  (field $itable (ref $itable))
@@ -180,6 +189,34 @@
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ ))
+)
+(type $nativejstypes.NativeOverNonNative (sub $java.lang.Object (struct
+ (field $vtable (ref $nativejstypes.NativeOverNonNative.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $nativejstypes.NativeOverNonNative.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_main__void_$pp_nativejstypes (ref $function.m_main__void_$pp_nativejstypes))
+ ))
+)
+(type $nativejstypes.NativeOverNonNative.NonNative (sub $java.lang.Object (struct
+ (field $vtable (ref $nativejstypes.NativeOverNonNative.NonNative.vtable))
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $nativejstypes.NativeOverNonNative.NonNative.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_m__void (ref $function.m_m__void))
  ))
 )
 (type $nativejstypes.NonreferencedMethods (sub $java.lang.Object (struct

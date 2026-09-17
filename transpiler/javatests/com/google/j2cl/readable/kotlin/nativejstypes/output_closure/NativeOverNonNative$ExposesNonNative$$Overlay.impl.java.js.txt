@@ -1,0 +1,25 @@
+goog.module('nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const ExposesNonNative = goog.require('nativetypes.NonNative');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExposesNonNative;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'nativetypes.NonNative');
+
+exports = $Overlay;
+
+//# sourceMappingURL=NativeOverNonNative$ExposesNonNative$$Overlay.js.map
