@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -144,11 +143,11 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
                     .map(rewriteItem -> rewriteItem.variable)
                     .collect(toImmutableList());
 
-            ImmutableList<VariableDeclarationFragment> variableDeclarationFragments =
+            ImmutableList<VariableDeclarationExpression> variableDeclarations =
                 rewriteItems.stream()
                     .map(
                         rewriteItem ->
-                            VariableDeclarationFragment.builder()
+                            VariableDeclarationExpression.builder()
                                 .setVariable(
                                     rewriteItem.variable.toBuilder()
                                         .setTypeDescriptor(rewriteItem.rewrittenTypeDescriptor)
@@ -160,8 +159,8 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
             variablesToRewrite.forEach(variable -> variable.setFinal(true));
 
             ImmutableList<Variable> replacementVariables =
-                variableDeclarationFragments.stream()
-                    .map(VariableDeclarationFragment::getVariable)
+                variableDeclarations.stream()
+                    .map(VariableDeclarationExpression::getVariable)
                     .collect(toImmutableList());
 
             List<Statement> statements = block.getStatements();
@@ -183,13 +182,11 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
                     : ImmutableList.of();
 
             ImmutableList<Statement> variableDeclarationStatements =
-                variableDeclarationFragments.stream()
+                variableDeclarations.stream()
                     .map(
-                        fragment ->
-                            VariableDeclarationExpression.builder()
-                                .setVariableDeclarationFragments(ImmutableList.of(fragment))
-                                .build()
-                                .makeStatement(fragment.getVariable().getSourcePosition()))
+                        declaration ->
+                            declaration.makeStatement(
+                                declaration.getVariable().getSourcePosition()))
                     .collect(toImmutableList());
 
             List<Statement> statementsAfterConstructorInvocation =

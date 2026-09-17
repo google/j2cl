@@ -175,8 +175,8 @@ public class NormalizeCatchClauses extends NormalizationPass {
 
     ExpressionStatement assignment =
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(
-                catchVariable,
+            .setVariable(catchVariable)
+            .setInitializer(
                 CastExpression.builder()
                     .setExpression(exceptionVariable.createReference())
                     .setCastTypeDescriptor(catchVariable.getTypeDescriptor())

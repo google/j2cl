@@ -280,7 +280,8 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
 
           Statement declarationStatement =
               VariableDeclarationExpression.builder()
-                  .addVariableDeclaration(parameter, initializer)
+                  .setVariable(parameter)
+                  .setInitializer(initializer)
                   .build()
                   .makeStatement(parameter.getSourcePosition());
           body =

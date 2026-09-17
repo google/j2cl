@@ -661,25 +661,12 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterVariableDeclarationFragment(
-          VariableDeclarationFragment variableDeclarationFragment) {
-        accept(variableDeclarationFragment.getVariable());
-        if (variableDeclarationFragment.getInitializer() != null) {
-          print(" = ");
-          accept(variableDeclarationFragment.getInitializer());
-        }
-        return false;
-      }
-
-      @Override
       public boolean enterVariableDeclarationExpression(
           VariableDeclarationExpression variableDeclarationExpression) {
-        String separator = "";
-        for (VariableDeclarationFragment variableDeclarationFragment :
-            variableDeclarationExpression.getFragments()) {
-          print(separator);
-          separator = ",";
-          accept(variableDeclarationFragment);
+        accept(variableDeclarationExpression.getVariable());
+        if (variableDeclarationExpression.getInitializer() != null) {
+          print(" = ");
+          accept(variableDeclarationExpression.getInitializer());
         }
         return false;
       }

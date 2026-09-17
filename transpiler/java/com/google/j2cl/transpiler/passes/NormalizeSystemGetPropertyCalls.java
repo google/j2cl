@@ -75,8 +75,12 @@ public class NormalizeSystemGetPropertyCalls extends NormalizationPass {
             return MultiExpression.builder()
                 .addExpressions(
                     VariableDeclarationExpression.builder()
-                        .addVariableDeclaration(propertyValueVariable, propertyGetterCall)
-                        .addVariableDeclaration(defaultValueVariable, defaultValue)
+                        .setVariable(propertyValueVariable)
+                        .setInitializer(propertyGetterCall)
+                        .build(),
+                    VariableDeclarationExpression.builder()
+                        .setVariable(defaultValueVariable)
+                        .setInitializer(defaultValue)
                         .build(),
                     ConditionalExpression.builder()
                         .setTypeDescriptor(TypeDescriptors.get().javaLangString)

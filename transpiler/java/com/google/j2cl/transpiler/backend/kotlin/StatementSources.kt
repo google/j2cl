@@ -40,7 +40,7 @@ import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.WhileStatement
 import com.google.j2cl.transpiler.ast.YieldStatement
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.ARROW_OPERATOR
@@ -251,25 +251,27 @@ internal data class StatementSources(
     }
 
   private fun tryStatementBodySource(tryStatement: TryStatement): Source =
-    tryStatement.resourceDeclarations.foldRight(statementsSource(tryStatement.body.statements)) {
-      declaration,
-      outerSource ->
-      declaration.fragments.foldRight(outerSource, ::resourceUseSource)
-    }
-
-  private fun resourceUseSource(fragment: VariableDeclarationFragment, bodySource: Source): Source =
-    spaceSeparated(
-      dotSeparated(
-        resourceUseQualifierSource(fragment),
-        nameSources.extensionMemberQualifiedNameSource("kotlin.use"),
-      ),
-      block(resourceUseParamSource(fragment.variable), bodySource),
+    tryStatement.resourceDeclarations.foldRight(
+      statementsSource(tryStatement.body.statements),
+      ::resourceUseSource,
     )
 
-  private fun resourceUseQualifierSource(fragment: VariableDeclarationFragment): Source =
-    fragment.initializer?.let {
+  private fun resourceUseSource(
+    declaration: VariableDeclarationExpression,
+    bodySource: Source,
+  ): Source =
+    spaceSeparated(
+      dotSeparated(
+        resourceUseQualifierSource(declaration),
+        nameSources.extensionMemberQualifiedNameSource("kotlin.use"),
+      ),
+      block(resourceUseParamSource(declaration.variable), bodySource),
+    )
+
+  private fun resourceUseQualifierSource(declaration: VariableDeclarationExpression): Source =
+    declaration.initializer?.let {
       expressionSources.leftSubExpressionSource(Precedence.MEMBER_ACCESS, it)
-    } ?: nameSources.variableNameSource(fragment.variable)
+    } ?: nameSources.variableNameSource(declaration.variable)
 
   private fun resourceUseParamSource(variable: Variable): Source =
     Source.emptyUnless(resourceUseVariableIsNamed(variable)) {

@@ -55,7 +55,8 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
               return MultiExpression.builder()
                   .setExpressions(
                       VariableDeclarationExpression.builder()
-                          .addVariableDeclaration(qualifierVariable, expression)
+                          .setVariable(qualifierVariable)
+                          .setInitializer(expression)
                           .build(),
                       instanceOfExpression.toBuilder()
                           .setExpression(qualifierVariable.createReference())
@@ -79,7 +80,8 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
               return MultiExpression.builder()
                   .setExpressions(
                       VariableDeclarationExpression.builder()
-                          .addVariableDeclaration(qualifierVariable, qualifier)
+                          .setVariable(qualifierVariable)
+                          .setInitializer(qualifier)
                           .build(),
                       methodCall.toBuilder()
                           .setQualifier(qualifierVariable.createReference())
@@ -102,7 +104,8 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
               return Block.builder()
                   .setStatements(
                       VariableDeclarationExpression.builder()
-                          .addVariableDeclaration(switchVariable, expression)
+                          .setVariable(switchVariable)
+                          .setInitializer(expression)
                           .build()
                           .makeStatement(switchStatement.getSourcePosition()),
                       switchStatement.toBuilder()

@@ -604,7 +604,8 @@ public final class RuntimeMethods {
     return MultiExpression.builder()
         .addExpressions(
             VariableDeclarationExpression.builder()
-                .addVariableDeclaration(tempVariable, argument)
+                .setVariable(tempVariable)
+                .setInitializer(argument)
                 .build(),
             MethodCall.builderFrom(checkNotNull)
                 .setArguments(tempVariable.createReference().infixNotEqualsNull())

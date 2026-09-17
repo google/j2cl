@@ -152,8 +152,8 @@ public class OptimizeXplatForEach extends NormalizationPass {
     // loopVariable = (int) Number(property)
     VariableDeclarationExpression coercedLoopVariable =
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(
-                loopVariable,
+            .setVariable(loopVariable)
+            .setInitializer(
                 JsDocCastExpression.builder()
                     .setExpression(
                         RuntimeMethods.createNumberCall(propertyVariable.createReference()))

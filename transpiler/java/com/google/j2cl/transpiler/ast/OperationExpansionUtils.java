@@ -44,7 +44,7 @@ public class OperationExpansionUtils {
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
 
-    List<VariableDeclarationFragment> temporaryVariableDeclarations = new ArrayList<>();
+    List<VariableDeclarationExpression> temporaryVariableDeclarations = new ArrayList<>();
     Expression lhs =
         leftOperand.isIdempotent()
             ? leftOperand
@@ -60,7 +60,7 @@ public class OperationExpansionUtils {
    * introducing temporary variables if necessary.
    */
   private static Expression decomposeLhs(
-      Expression lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+      Expression lhs, List<VariableDeclarationExpression> temporaryVariableDeclarations) {
     if (lhs instanceof VariableReference) {
       // The lhs will be modified but it can be safely evaluated twice in a row without caring to
       // avoid double side-effects if expanded. See the counter example showing an incorrect
@@ -77,7 +77,7 @@ public class OperationExpansionUtils {
   }
 
   private static FieldAccess decomposeFieldAccess(
-      FieldAccess lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+      FieldAccess lhs, List<VariableDeclarationExpression> temporaryVariableDeclarations) {
 
     if (lhs.getTarget().isStatic()) {
       // The qualifier here should not be extracted since it is a constructor reference.
@@ -110,7 +110,7 @@ public class OperationExpansionUtils {
       TypeDescriptor variableType,
       String variableName,
       Expression expression,
-      List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+      List<VariableDeclarationExpression> temporaryVariableDeclarations) {
 
     Variable qualifierVariable =
         Variable.builder()
@@ -119,7 +119,7 @@ public class OperationExpansionUtils {
             .setTypeDescriptor(variableType)
             .build();
     temporaryVariableDeclarations.add(
-        VariableDeclarationFragment.builder()
+        VariableDeclarationExpression.builder()
             .setVariable(qualifierVariable)
             .setInitializer(expression)
             .build());
@@ -127,7 +127,7 @@ public class OperationExpansionUtils {
   }
 
   private static ArrayAccess decomposeArrayAccess(
-      ArrayAccess lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+      ArrayAccess lhs, List<VariableDeclarationExpression> temporaryVariableDeclarations) {
     Variable arrayExpressionVariable =
         createTemporaryVariableDeclaration(
             lhs.getArrayExpression().getTypeDescriptor(),
@@ -149,23 +149,20 @@ public class OperationExpansionUtils {
    * {@code expressions}.
    */
   private static Expression constructReturnedExpression(
-      List<VariableDeclarationFragment> temporaryVariableDeclarations, Expression... expressions) {
+      List<VariableDeclarationExpression> temporaryVariableDeclarations,
+      Expression... expressions) {
 
-    MultiExpression.Builder builder = MultiExpression.builder();
-    if (!temporaryVariableDeclarations.isEmpty()) {
-      builder.addExpressions(
-          VariableDeclarationExpression.builder()
-              .addVariableDeclarationFragments(temporaryVariableDeclarations)
-              .build());
-    }
-    return builder.addExpressions(expressions).build();
+    return MultiExpression.builder()
+        .addExpressions(temporaryVariableDeclarations)
+        .addExpressions(expressions)
+        .build();
   }
 
   public static Expression expandExpression(PostfixExpression postfixExpression) {
     Expression operand = postfixExpression.getOperand();
     PostfixOperator operator = postfixExpression.getOperator();
 
-    List<VariableDeclarationFragment> temporaryVariableDeclarations = new ArrayList<>();
+    List<VariableDeclarationExpression> temporaryVariableDeclarations = new ArrayList<>();
     Expression lhs =
         operand.isIdempotent() ? operand : decomposeLhs(operand, temporaryVariableDeclarations);
 
@@ -189,7 +186,7 @@ public class OperationExpansionUtils {
     Expression operand = prefixExpression.getOperand();
     PrefixOperator operator = prefixExpression.getOperator();
 
-    List<VariableDeclarationFragment> temporaryVariables = new ArrayList<>();
+    List<VariableDeclarationExpression> temporaryVariables = new ArrayList<>();
     Expression lhs = operand.isIdempotent() ? operand : decomposeLhs(operand, temporaryVariables);
     return constructReturnedExpression(
         temporaryVariables,
@@ -202,7 +199,7 @@ public class OperationExpansionUtils {
   public static Expression expandAssignmentExpression(BinaryExpression binaryExpression) {
     checkArgument(binaryExpression.isSimpleAssignment());
 
-    List<VariableDeclarationFragment> temporaryVariables = new ArrayList<>();
+    List<VariableDeclarationExpression> temporaryVariables = new ArrayList<>();
     Expression newLhs = decomposeLhs(binaryExpression.getLeftOperand(), temporaryVariables);
 
     Variable returnedVariable;

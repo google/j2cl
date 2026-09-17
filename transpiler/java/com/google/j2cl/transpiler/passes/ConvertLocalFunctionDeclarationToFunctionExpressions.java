@@ -106,7 +106,8 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
                 localFunctionMethodDescriptor.getDeclarationDescriptor(), variable);
 
             return VariableDeclarationExpression.builder()
-                .addVariableDeclaration(variable, functionExpression)
+                .setVariable(variable)
+                .setInitializer(functionExpression)
                 .build()
                 .makeStatement(localFunctionDeclarationStatement.getSourcePosition());
           }

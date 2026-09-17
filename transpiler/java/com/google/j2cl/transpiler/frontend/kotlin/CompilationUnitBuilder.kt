@@ -82,7 +82,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.WhileStatement
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
 import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
@@ -543,7 +542,7 @@ internal class CompilationUnitBuilder(
 
   private fun convertForLoop(irForLoop: IrForLoop): Statement =
     ForStatement.builder()
-      .setInitializers(convertVariableDeclarations(irForLoop.initializers))
+      .setInitializers(irForLoop.initializers.map { convertVariableDeclaration(it) })
       .setConditionExpression(convertExpression(irForLoop.condition))
       .setUpdates(convertExpressions(irForLoop.updates))
       .setBody(convertStatement(checkNotNull(irForLoop.body) { "Body cannot not be null." }))
@@ -1478,27 +1477,15 @@ internal class CompilationUnitBuilder(
     }
   }
 
-  private fun convertVariableDeclaration(irVariable: IrVariable): VariableDeclarationExpression =
-    convertVariableDeclarations(listOf(irVariable))
-
-  private fun convertVariableDeclarations(
-    irVariables: List<IrVariable>
-  ): VariableDeclarationExpression {
-
+  private fun convertVariableDeclaration(irVariable: IrVariable): VariableDeclarationExpression {
+    val initializer = irVariable.initializer
+    val initializerExpression =
+      if (initializer != null) {
+        convertExpression(initializer)
+      } else null
     return VariableDeclarationExpression.builder()
-      .addVariableDeclarationFragments(
-        irVariables.map { irVariable ->
-          val initializer = irVariable.initializer
-          val initializerExpression =
-            if (initializer != null) {
-              convertExpression(initializer)
-            } else null
-          VariableDeclarationFragment.builder()
-            .setVariable(createVariable(irVariable))
-            .setInitializer(initializerExpression)
-            .build()
-        }
-      )
+      .setVariable(createVariable(irVariable))
+      .setInitializer(initializerExpression)
       .build()
   }
 

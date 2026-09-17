@@ -156,8 +156,8 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
     // Type $instance = new Type();
     Statement newInstanceStatement =
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(
-                newInstance,
+            .setVariable(newInstance)
+            .setInitializer(
                 NewInstance.builderFrom(constructor.getDescriptor())
                     .setArguments(
                         factoryMethodParameters.stream()

@@ -62,7 +62,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
 import com.google.j2cl.transpiler.ast.YieldStatement
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.AND_OPERATOR
@@ -662,23 +661,14 @@ internal data class ExpressionSources(
   private fun variableDeclarationExpressionSource(
     expression: VariableDeclarationExpression
   ): Source =
-    newLineSeparated(
-      expression.fragments.map {
-        spaceSeparated(
-          if (it.variable.isFinal) VAL_KEYWORD else VAR_KEYWORD,
-          variableDeclarationFragmentSource(it),
-        )
-      }
+    spaceSeparated(
+      if (expression.variable.isFinal) VAL_KEYWORD else VAR_KEYWORD,
+      variableSource(expression.variable),
+      initializer(expression.initializer?.let(this::expressionSource).orEmpty()),
     )
 
   private fun variableReferenceSource(variableReference: VariableReference): Source =
     nameSources.hasNameSource(variableReference.target)
-
-  private fun variableDeclarationFragmentSource(fragment: VariableDeclarationFragment): Source =
-    spaceSeparated(
-      variableSource(fragment.variable),
-      initializer(fragment.initializer?.let(this::expressionSource).orEmpty()),
-    )
 
   private fun variableSource(variable: Variable): Source =
     join(

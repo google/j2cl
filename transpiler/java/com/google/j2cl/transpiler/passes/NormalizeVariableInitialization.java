@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
 /**
  * Normalize all local variables to have an explicit initializer.
@@ -31,8 +31,8 @@ public class NormalizeVariableInitialization extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public VariableDeclarationFragment rewriteVariableDeclarationFragment(
-              VariableDeclarationFragment variableDeclaration) {
+          public VariableDeclarationExpression rewriteVariableDeclarationExpression(
+              VariableDeclarationExpression variableDeclaration) {
             Variable variable = variableDeclaration.getVariable();
             if (variableDeclaration.getInitializer() != null) {
               return variableDeclaration;

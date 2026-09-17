@@ -396,7 +396,7 @@ public class NormalizeConstructors extends NormalizationPass {
         Variable.builder().setName("$thisArg").setTypeDescriptor(type.getTypeDescriptor()).build();
     factoryStatements.add(
         VariableDeclarationExpression.builder()
-            .addVariableDeclarations(thisArg)
+            .setVariable(thisArg)
             .build()
             .makeStatement(constructor.getSourcePosition()));
     factoryStatements.addAll(constructor.getBody().getStatements());
@@ -494,8 +494,8 @@ public class NormalizeConstructors extends NormalizationPass {
                 constructor.getParameters(),
                 factoryMethodParameters,
                 VariableDeclarationExpression.builder()
-                    .addVariableDeclaration(
-                        newInstance,
+                    .setVariable(newInstance)
+                    .setInitializer(
                         NewInstance.builderFrom(javascriptConstructor)
                             .setArguments(javascriptConstructorArguments)
                             .build())

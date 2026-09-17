@@ -79,13 +79,13 @@ public abstract class AbstractCompilationUnitBuilder {
 
     // Create temporary variables for resources declared outside of the try statement.
     return VariableDeclarationExpression.builder()
-        .addVariableDeclaration(
+        .setVariable(
             Variable.builder()
                 .setName("$resource")
                 .setTypeDescriptor(expression.getTypeDescriptor())
                 .setFinal(true)
-                .build(),
-            expression)
+                .build())
+        .setInitializer(expression)
         .build();
   }
 

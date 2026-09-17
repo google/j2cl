@@ -187,7 +187,10 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
             .setFinal(true)
             .build();
     expressions.add(
-        VariableDeclarationExpression.builder().addVariableDeclaration(variable, newArray).build());
+        VariableDeclarationExpression.builder()
+            .setVariable(variable)
+            .setInitializer(newArray)
+            .build());
 
     // tmp[0] = literal_0
     // tmp[1] = literal_1

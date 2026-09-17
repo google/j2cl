@@ -134,7 +134,8 @@ public class ConvertMethodReferencesToLambdas extends NormalizationPass {
       // Declare the temporary variable and initialize to the evaluated qualifier.
       result.add(
           VariableDeclarationExpression.builder()
-              .addVariableDeclaration(variable, qualifier)
+              .setVariable(variable)
+              .setInitializer(qualifier)
               .build());
       // Use the newly introduced variable as a qualifier when forwarding the call within the
       // lambda expression.

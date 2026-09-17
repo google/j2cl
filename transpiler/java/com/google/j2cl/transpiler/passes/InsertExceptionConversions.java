@@ -78,7 +78,8 @@ public class InsertExceptionConversions extends NormalizationPass {
               Variable javaExceptionVariable = catchClause.getExceptionVariable();
               VariableDeclarationExpression declaration =
                   VariableDeclarationExpression.builder()
-                      .addVariableDeclaration(javaExceptionVariable, toJavaCall)
+                      .setVariable(javaExceptionVariable)
+                      .setInitializer(toJavaCall)
                       .build();
               newCatchClause
                   .getBody()

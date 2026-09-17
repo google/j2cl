@@ -110,7 +110,8 @@ public class NormalizeSwitchPatternsJ2kt extends NormalizationPass {
               .build();
       rewrittenSelector.addExpressions(
           VariableDeclarationExpression.builder()
-              .addVariableDeclaration(selectorVariable, selectorExpression)
+              .setVariable(selectorVariable)
+              .setInitializer(selectorExpression)
               .build());
       selectorExpression = selectorVariable.createReference();
     }

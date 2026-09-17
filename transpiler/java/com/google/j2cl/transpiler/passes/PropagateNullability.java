@@ -47,7 +47,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.List;
 
@@ -371,19 +371,22 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           }
 
           @Override
-          public Node rewriteVariableDeclarationFragment(VariableDeclarationFragment fragment) {
-            Variable variable = fragment.getVariable();
-            Expression initializer = fragment.getInitializer();
+          public Node rewriteVariableDeclarationExpression(
+              VariableDeclarationExpression variableDeclarationExpression) {
+            Variable variable = variableDeclarationExpression.getVariable();
+            Expression initializer = variableDeclarationExpression.getInitializer();
             if (initializer == null || !variable.isExplicitlyTyped()) {
-              return fragment;
+              return variableDeclarationExpression;
             }
             Expression rewrittenInitializer =
                 propagateNullabilityToExpression(initializer, variable.getTypeDescriptor());
             if (rewrittenInitializer.equals(initializer)) {
-              return fragment;
+              return variableDeclarationExpression;
             }
             changed[0] = true;
-            return fragment.toBuilder().setInitializer(rewrittenInitializer).build();
+            return variableDeclarationExpression.toBuilder()
+                .setInitializer(rewrittenInitializer)
+                .build();
           }
 
           @Override

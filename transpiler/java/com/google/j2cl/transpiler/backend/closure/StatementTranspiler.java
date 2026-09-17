@@ -140,7 +140,7 @@ public class StatementTranspiler {
             forStatement.getSourcePosition(),
             () -> {
               builder.append("for (");
-              renderSeparated(", ", forStatement.getInitializers());
+              renderForInitializers(forStatement.getInitializers());
               builder.append("; ");
               renderExpression(forStatement.getConditionExpression());
               builder.append("; ");
@@ -151,6 +151,20 @@ public class StatementTranspiler {
         return false;
       }
 
+      private void renderForInitializers(List<Expression> initializers) {
+        if (initializers.isEmpty()) {
+          return;
+        }
+        // Variable declarations in the initializer share a single "let", e.g.
+        // "for (let i = 0, j = 0; ...)". A for-statement never mixes variable declaration and
+        // plain expression initializers, so checking the first one is enough.
+        if (initializers.get(0) instanceof VariableDeclarationExpression) {
+          ExpressionTranspiler.renderMultiVariableDeclaration(initializers, environment, builder);
+        } else {
+          renderSeparated(", ", initializers);
+        }
+      }
+
       @Override
       public boolean enterJsForInStatement(JsForInStatement jsForInStatement) {
         builder.emitWithMapping(
@@ -159,7 +173,7 @@ public class StatementTranspiler {
               builder.append("for(");
               renderExpression(
                   VariableDeclarationExpression.builder()
-                      .addVariableDeclarations(jsForInStatement.getLoopVariable())
+                      .setVariable(jsForInStatement.getLoopVariable())
                       .build());
               builder.append(" in ");
               renderExpression(jsForInStatement.getIterableExpression());

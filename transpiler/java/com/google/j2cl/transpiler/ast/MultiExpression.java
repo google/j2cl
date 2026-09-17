@@ -124,7 +124,7 @@ public class MultiExpression extends Expression {
     }
 
     @CanIgnoreReturnValue
-    public Builder setExpressions(Collection<Expression> expressions) {
+    public Builder setExpressions(Collection<? extends Expression> expressions) {
       this.expressions = new ArrayList<>(expressions);
       return this;
     }
@@ -136,7 +136,7 @@ public class MultiExpression extends Expression {
     }
 
     @CanIgnoreReturnValue
-    public Builder addExpressions(Collection<Expression> expressions) {
+    public Builder addExpressions(Collection<? extends Expression> expressions) {
       this.expressions.addAll(expressions);
       return this;
     }

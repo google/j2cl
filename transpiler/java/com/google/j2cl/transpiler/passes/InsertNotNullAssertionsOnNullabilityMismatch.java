@@ -179,7 +179,8 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
               .build();
       elvisExpressionBuilder.addExpressions(
           VariableDeclarationExpression.builder()
-              .addVariableDeclaration(elvisVariable, expression)
+              .setVariable(elvisVariable)
+              .setInitializer(expression)
               .build());
       expression = elvisVariable.createReference();
     }

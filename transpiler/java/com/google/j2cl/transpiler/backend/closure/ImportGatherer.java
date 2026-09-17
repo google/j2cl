@@ -49,7 +49,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.backend.closure.Import.ImportCategory;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -148,10 +148,10 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   @Override
-  public void exitVariableDeclarationFragment(
-      VariableDeclarationFragment variableDeclarationFragment) {
-    if (variableDeclarationFragment.needsTypeDeclaration()) {
-      Variable variable = variableDeclarationFragment.getVariable();
+  public void exitVariableDeclarationExpression(
+      VariableDeclarationExpression variableDeclarationExpression) {
+    if (variableDeclarationExpression.needsTypeDeclaration()) {
+      Variable variable = variableDeclarationExpression.getVariable();
       collectForJsDoc(variable.getTypeDescriptor());
     }
   }

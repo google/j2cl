@@ -258,7 +258,8 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
         Variable.builder().setName(name).setTypeDescriptor(typeDescriptor).setFinal(true).build();
     initializationStatements.add(
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(selectorVariable, initializer)
+            .setVariable(selectorVariable)
+            .setInitializer(initializer)
             .build()
             .makeStatement(sourcePosition));
     return selectorVariable;
@@ -365,7 +366,8 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
               .build();
       switchExpression.addExpressions(
           VariableDeclarationExpression.builder()
-              .addVariableDeclaration(tempVariable, expression)
+              .setVariable(tempVariable)
+              .setInitializer(expression)
               .build());
       expression = tempVariable.createReference();
     }

@@ -133,7 +133,8 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
               .build();
       resultBuilder.addExpressions(
           VariableDeclarationExpression.builder()
-              .addVariableDeclaration(expressionVariable, expression)
+              .setVariable(expressionVariable)
+              .setInitializer(expression)
               .build());
     }
 
@@ -171,7 +172,8 @@ public class DesugarInstanceOfPatterns extends NormalizationPass {
     return MultiExpression.builder()
         .addExpressions(
             VariableDeclarationExpression.builder()
-                .addVariableDeclaration(patternVariable, expression)
+                .setVariable(patternVariable)
+                .setInitializer(expression)
                 .build(),
             nextTerm)
         .build();

@@ -230,7 +230,7 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
 
     /** Performs the control flow transformation of the try-catch-finally. */
     public Statement build() {
-      Statement variableDeclarations = createVariableDeclarations();
+      List<Statement> variableDeclarations = createVariableDeclarations();
 
       // Remove the finally block. It will be moved out to the end.
       TryStatement tryWithoutFinally =
@@ -242,11 +242,11 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
           wrapTryToHandleExitsViaThrow(tryWithRewrittenExits);
 
       return Block.builder()
-          .setStatements(
-              // Declare introduced tracking variables.
-              variableDeclarations,
-              // Wrap the try-catch block with a finally exit labelled block, that
-              // goes straight to execute the finally block.
+          // Declare introduced tracking variables.
+          .addStatements(variableDeclarations)
+          // Wrap the try-catch block with a finally exit labelled block, that
+          // goes straight to execute the finally block.
+          .addStatements(
               LabeledStatement.builder()
                   .setLabel(finallyLabel)
                   .setStatement(tryWrappedWithExceptionHandling)
@@ -412,14 +412,16 @@ public class ImplementFinallyViaControlFlow extends NormalizationPass {
      * Creates the declaration for the variables that will hold the state to perform the exit from
      * the finally block.
      */
-    private Statement createVariableDeclarations() {
-      return VariableDeclarationExpression.builder()
-          .addVariableDeclarations(
-              Stream.of(exitSelectorVariable, savedReturnValueVariable, savedThrownVariable)
-                  .filter(Predicates.notNull())
-                  .collect(toImmutableList()))
-          .build()
-          .makeStatement(originalTryStatement.getSourcePosition());
+    private List<Statement> createVariableDeclarations() {
+      return Stream.of(exitSelectorVariable, savedReturnValueVariable, savedThrownVariable)
+          .filter(Predicates.notNull())
+          .map(
+              v ->
+                  VariableDeclarationExpression.builder()
+                      .setVariable(v)
+                      .build()
+                      .makeStatement(originalTryStatement.getSourcePosition()))
+          .collect(toImmutableList());
     }
   }
 }

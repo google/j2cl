@@ -66,8 +66,8 @@ public class NormalizeForEachStatementJ2kt extends NormalizationPass {
                     Block.builder()
                         .addStatement(
                             VariableDeclarationExpression.builder()
-                                .addVariableDeclaration(
-                                    loopVariable, newLoopVariable.createReference())
+                                .setVariable(loopVariable)
+                                .setInitializer(newLoopVariable.createReference())
                                 .build()
                                 .makeStatement(body.getSourcePosition()))
                         .addStatements(AstUtils.getBodyStatements(body))

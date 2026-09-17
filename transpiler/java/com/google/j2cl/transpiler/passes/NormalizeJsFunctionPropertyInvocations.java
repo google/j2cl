@@ -87,7 +87,8 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
                 .setExpressions(
                     // Declare the temporary variable and initialize to the evaluated qualifier.
                     VariableDeclarationExpression.builder()
-                        .addVariableDeclaration(qualifierVariable, qualifier)
+                        .setVariable(qualifierVariable)
+                        .setInitializer(qualifier)
                         .build(),
                     methodCall.toBuilder()
                         .setQualifier(qualifierVariable.createReference())

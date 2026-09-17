@@ -101,7 +101,6 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
@@ -440,27 +439,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private List<Expression> convertInitializers(List<JCStatement> statements) {
-    if (statements.stream().anyMatch(s -> s.getKind() == Kind.VARIABLE)) {
-      // The statements are all variable declaration statements, collect them into one
-      // variable declaration expression.
-      return convertVariableDeclarations(statements);
-    }
-
     return statements.stream().map(this::convertInitializer).collect(toImmutableList());
-  }
-
-  private ImmutableList<Expression> convertVariableDeclarations(List<JCStatement> statements) {
-    return ImmutableList.of(
-        VariableDeclarationExpression.builder()
-            .addVariableDeclarationFragments(
-                statements.stream()
-                    .map(s -> createVariableDeclarationFragment((JCVariableDecl) s))
-                    .collect(toImmutableList()))
-            .build());
   }
 
   private Expression convertInitializer(JCStatement statement) {
     return switch (statement.getKind()) {
+      case VARIABLE -> createVariableDeclarationExpression((JCVariableDecl) statement);
       case EXPRESSION_STATEMENT -> convertExpression(((JCExpressionStatement) statement).expr);
       default -> throw new AssertionError();
     };
@@ -637,13 +621,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // Create temporary variables for resources declared outside of the try statement.
     Expression expression = convertIdent(ident);
     return VariableDeclarationExpression.builder()
-        .addVariableDeclaration(
+        .setVariable(
             Variable.builder()
                 .setName("$resource")
                 .setTypeDescriptor(expression.getTypeDescriptor())
                 .setFinal(true)
-                .build(),
-            expression)
+                .build())
+        .setInitializer(expression)
         .build();
   }
 
@@ -684,15 +668,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private VariableDeclarationExpression createVariableDeclarationExpression(
       JCVariableDecl variableDeclaration) {
-    return VariableDeclarationExpression.builder()
-        .addVariableDeclarationFragments(createVariableDeclarationFragment(variableDeclaration))
-        .build();
-  }
-
-  private VariableDeclarationFragment createVariableDeclarationFragment(
-      JCVariableDecl variableDeclaration) {
     Variable variable = createVariable(variableDeclaration, false);
-    return VariableDeclarationFragment.builder()
+    return VariableDeclarationExpression.builder()
         .setVariable(variable)
         .setInitializer(convertExpressionOrNull(variableDeclaration.getInitializer()))
         .build();

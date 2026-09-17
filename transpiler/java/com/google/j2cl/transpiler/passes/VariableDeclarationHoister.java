@@ -32,11 +32,9 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
-import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,10 +80,8 @@ public class VariableDeclarationHoister extends NormalizationPass {
               VariableDeclarationExpression variableDeclarationExpression) {
 
             List<Object> enclosingScopes = collectEnclosingScopes();
-
-            variableDeclarationExpression.getFragments().stream()
-                .map(VariableDeclarationFragment::getVariable)
-                .forEach(v -> enclosingScopesByVariable.put(v, enclosingScopes));
+            enclosingScopesByVariable.put(
+                variableDeclarationExpression.getVariable(), enclosingScopes);
           }
 
           @Override
@@ -127,17 +123,14 @@ public class VariableDeclarationHoister extends NormalizationPass {
           @Override
           public Expression rewriteVariableDeclarationExpression(
               VariableDeclarationExpression variableDeclarationExpression) {
-            // Get any of the variables in the declaration; the declaration, with all its variables,
-            // is moved as a unit.
-            Variable variable =
-                Iterables.getLast(variableDeclarationExpression.getFragments()).getVariable();
+            Variable variable = variableDeclarationExpression.getVariable();
 
             List<Object> enclosingScopes = enclosingScopesByVariable.get(variable);
 
             Object declarationScope = getParent(VariableDeclarationHoister::isScopeNode);
             if (isValidScopeNode(declarationScope)
                 && Iterables.getLast(enclosingScopes) == declarationScope) {
-              // All variables declared here are only accessed with in their scope and are declared
+              // Variable declared here is only accessed within its scope and is declared
               // in a valid context.
               return variableDeclarationExpression;
             }
@@ -164,21 +157,13 @@ public class VariableDeclarationHoister extends NormalizationPass {
                     min(newValue, lastInsertionPoint.intValue()));
 
             // Collect the variables that need to be moved and the target block.
-            variableDeclarationExpression.getFragments().stream()
-                .map(VariableDeclarationFragment::getVariable)
-                .forEach(v -> variableByTargetScopeBlock.put(checkNotNull(block), v));
+            variableByTargetScopeBlock.put(checkNotNull(block), variable);
 
-            // Replace the declarations by assignments.
-            ImmutableList<Expression> assignments =
-                variableDeclarationExpression.getFragments().stream()
-                    .filter(fragment -> fragment.getInitializer() != null)
-                    .map(fragment -> fragment.getVariable().infixAssign(fragment.getInitializer()))
-                    .collect(toImmutableList());
-
-            if (assignments.isEmpty()) {
-              return TypeDescriptors.get().javaLangObject.getNullValue();
+            // Replace the declaration by assignment if initialized.
+            if (variableDeclarationExpression.getInitializer() != null) {
+              return variable.infixAssign(variableDeclarationExpression.getInitializer());
             }
-            return MultiExpression.builder().addExpressions(assignments).build();
+            return TypeDescriptors.get().javaLangObject.getNullValue();
           }
         });
 
@@ -191,16 +176,16 @@ public class VariableDeclarationHoister extends NormalizationPass {
       // Make the variables nullable since the declaration will assign the default value.
       variablesToRelocate.forEach(v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
 
-      block
-          .getStatements()
-          .add(
-              // Note: since we insert all the variables in a single declaration there is no need
-              // to adjust insertion points.
-              insertionPointInBlock,
-              VariableDeclarationExpression.builder()
-                  .addVariableDeclarations(variablesToRelocate)
-                  .build()
-                  .makeStatement(block.getSourcePosition()));
+      var variableDeclarationStatements =
+          variablesToRelocate.stream()
+              .map(
+                  v ->
+                      VariableDeclarationExpression.builder()
+                          .setVariable(v)
+                          .build()
+                          .makeStatement(block.getSourcePosition()))
+              .collect(toImmutableList());
+      block.getStatements().addAll(insertionPointInBlock, variableDeclarationStatements);
     }
   }
 

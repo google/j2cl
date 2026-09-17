@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
+import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JsConstructorReference;
@@ -277,6 +278,17 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           }
 
           @Override
+          public void exitForStatement(ForStatement forStatement) {
+            // Initializers in a for-statement are either all variable declaration expressions or
+            // none.
+            checkState(
+                forStatement.getInitializers().stream()
+                        .allMatch(e -> e instanceof VariableDeclarationExpression)
+                    || forStatement.getInitializers().stream()
+                        .noneMatch(e -> e instanceof VariableDeclarationExpression));
+          }
+
+          @Override
           public void exitBreakStatement(BreakStatement breakStatement) {
             if (verifyForWasm) {
               checkState(breakStatement.getLabelReference() != null);
@@ -373,10 +385,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             if (!verifyForWasm) {
               checkState(getParent() instanceof Statement);
             }
-            checkState(!variableDeclarationExpression.getFragments().isEmpty());
-            checkState(
-                variableDeclarationExpression.getFragments().stream()
-                    .noneMatch(f -> f.getVariable().isParameter()));
+            checkState(!variableDeclarationExpression.getVariable().isParameter());
           }
 
           @Override

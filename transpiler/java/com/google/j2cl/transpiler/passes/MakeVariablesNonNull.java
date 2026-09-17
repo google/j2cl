@@ -28,7 +28,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
 
 /** Removes unnecessary nullable annotations from variable type descriptors. */
@@ -44,9 +44,9 @@ public class MakeVariablesNonNull extends NormalizationPass {
     node.accept(
         new AbstractVisitor() {
           @Override
-          public void exitVariableDeclarationFragment(
-              VariableDeclarationFragment variableDeclarationFragment) {
-            makeNonNullable(variableDeclarationFragment.getVariable());
+          public void exitVariableDeclarationExpression(
+              VariableDeclarationExpression variableDeclarationExpression) {
+            makeNonNullable(variableDeclarationExpression.getVariable());
           }
         });
   }
@@ -60,10 +60,10 @@ public class MakeVariablesNonNull extends NormalizationPass {
       node.accept(
           new AbstractVisitor() {
             @Override
-            public void exitVariableDeclarationFragment(
-                VariableDeclarationFragment variableDeclarationFragment) {
-              Variable variable = variableDeclarationFragment.getVariable();
-              Expression initializer = variableDeclarationFragment.getInitializer();
+            public void exitVariableDeclarationExpression(
+                VariableDeclarationExpression variableDeclarationExpression) {
+              Variable variable = variableDeclarationExpression.getVariable();
+              Expression initializer = variableDeclarationExpression.getInitializer();
               if (initializer != null) {
                 exitAssignment(variable, initializer);
               }

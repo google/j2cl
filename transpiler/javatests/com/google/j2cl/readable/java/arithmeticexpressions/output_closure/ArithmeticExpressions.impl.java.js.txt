@@ -57,7 +57,8 @@ class ArithmeticExpressions extends j_l_Object {
  /** @nodts */
  m_testPrimitives__void() {
   let a = 10;
-  let /** number */ $value, /** number */ $value_1;
+  let /** number */ $value;
+  let /** number */ $value_1;
   let b = ($value = a, a = a + 1 | 0, $value);
   let c = ($value_1 = a, a = a - 1 | 0, $value_1);
   let d = a = a + 1 | 0;
@@ -119,17 +120,20 @@ class ArithmeticExpressions extends j_l_Object {
   $Arrays.$set(ints, 0, ints[0] + 1 | 0);
   let i = 0;
   {
+   let $array = ints;
    let /** number */ $value;
-   let $array = ints, $index = ($value = i, i = i + 1 | 0, $value);
+   let $index = ($value = i, i = i + 1 | 0, $value);
    $Arrays.$set($array, $index, $array[$index] + 1 | 0);
   }
   {
-   let $array_1 = ints, $index_1 = i = i + 1 | 0;
+   let $array_1 = ints;
+   let $index_1 = i = i + 1 | 0;
    $Arrays.$set($array_1, $index_1, $array_1[$index_1] + 1 | 0);
   }
   {
+   let $array_2 = ints;
    let /** number */ $value_1;
-   let $array_2 = ints, $index_2 = ($value_1 = i, i = i + 1 | 0, $value_1);
+   let $index_2 = ($value_1 = i, i = i + 1 | 0, $value_1);
    $Arrays.$set($array_2, $index_2, Primitives.m_coerceDivision__int__int($array_2[$index_2] / 1));
   }
   let /** Array<!Long> */ longs = null;
@@ -137,7 +141,8 @@ class ArithmeticExpressions extends j_l_Object {
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], Long.fromInt(1)));
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], Long.fromInt(1)));
   {
-   let $array_3 = ArithmeticExpressions.m_getLongArray__arrayOf_long(), $index_3 = 0;
+   let $array_3 = ArithmeticExpressions.m_getLongArray__arrayOf_long();
+   let $index_3 = 0;
    $Arrays.$set($array_3, $index_3, $LongUtils.plus($array_3[$index_3], Long.fromInt(1)));
   }
   let /** Array<boolean> */ booleans = null;
@@ -164,7 +169,9 @@ class ArithmeticExpressions extends j_l_Object {
   e = c = Integer.valueOf(c.intValue() + 1 | 0);
   let e2 = 100;
   e2 = Double.m_doubleValue__java_lang_Double__double(e2) + 1;
-  let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
+  let /** Integer */ $value;
+  let /** Integer */ $value_1;
+  let /** Integer */ $value_2;
   let f = ($value = c, c = Integer.valueOf(c.intValue() + 1 | 0), $value);
   f = ($value_1 = c, c = Integer.valueOf(c.intValue() + 1 | 0), $value_1);
   let b = Byte.m_valueOf__byte__java_lang_Byte(0);

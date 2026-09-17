@@ -41,7 +41,7 @@ import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -191,17 +191,17 @@ public class ResolveCaptures extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public VariableDeclarationFragment rewriteVariableDeclarationFragment(
-              VariableDeclarationFragment variableDeclarationFragment) {
-            Variable originalVariable = variableDeclarationFragment.getVariable();
+          public VariableDeclarationExpression rewriteVariableDeclarationExpression(
+              VariableDeclarationExpression variableDeclarationExpression) {
+            Variable originalVariable = variableDeclarationExpression.getVariable();
 
             if (!mutableCapturedVariables.contains(originalVariable)) {
-              return variableDeclarationFragment;
+              return variableDeclarationExpression;
             }
 
             Expression initialValue =
-                variableDeclarationFragment.getInitializer() != null
-                    ? variableDeclarationFragment.getInitializer()
+                variableDeclarationExpression.getInitializer() != null
+                    ? variableDeclarationExpression.getInitializer()
                     : originalVariable.getTypeDescriptor().getDefaultValue();
 
             Expression refWrappingCall =
@@ -216,7 +216,7 @@ public class ResolveCaptures extends NormalizationPass {
                 referenceVariableByVariable.put(originalVariable, referenceWrapperVariable)
                     == null);
 
-            return VariableDeclarationFragment.builder()
+            return VariableDeclarationExpression.builder()
                 .setVariable(referenceWrapperVariable)
                 .setInitializer(refWrappingCall)
                 .build();

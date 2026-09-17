@@ -61,7 +61,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.ast.WasmFuncrefCall;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
@@ -658,20 +657,9 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterVariableDeclarationExpression(VariableDeclarationExpression expression) {
-        // Render the first declaration with no preceding newline. Most places that can have a
-        // declaration already emit the newline (e.g. ExpressionStatement and MultiExpression).
-        boolean isFirst = true;
-        for (VariableDeclarationFragment fragment : expression.getFragments()) {
-          if (fragment.getInitializer() != null) {
-            if (!isFirst) {
-              sourceBuilder.newLine();
-            }
-            isFirst = false;
-
-            renderAssignment(fragment.getVariable().createReference(), fragment.getInitializer());
-          }
+        if (expression.getInitializer() != null) {
+          renderAssignment(expression.getVariable().createReference(), expression.getInitializer());
         }
-
         return false;
       }
 

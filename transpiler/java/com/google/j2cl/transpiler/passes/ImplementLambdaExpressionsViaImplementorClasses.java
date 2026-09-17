@@ -232,8 +232,8 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         lambdaParameter.setParameter(false);
         body.add(
             VariableDeclarationExpression.builder()
-                .addVariableDeclaration(
-                    lambdaParameter,
+                .setVariable(lambdaParameter)
+                .setInitializer(
                     CastExpression.builder()
                         .setExpression(newParameter.createReference())
                         .setCastTypeDescriptor(functionalMethodParameterType)

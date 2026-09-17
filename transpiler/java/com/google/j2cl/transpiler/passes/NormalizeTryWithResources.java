@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,8 +122,8 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<Statement> transformedStatements = new ArrayList<>();
     transformedStatements.add(
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(
-                primaryException, primaryException.getTypeDescriptor().getNullValue())
+            .setVariable(primaryException)
+            .setInitializer(primaryException.getTypeDescriptor().getNullValue())
             .build()
             // TODO(b/65465035): this should be the source position for the variable declaration,
             // but it is not currently available.
@@ -135,19 +134,17 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<VariableDeclarationExpression> resourceDeclarations =
         tryStatement.getResourceDeclarations();
     for (VariableDeclarationExpression declaration : resourceDeclarations) {
-      VariableDeclarationFragment originalResourceDeclaration =
-          declaration.getFragments().getFirst();
-      Variable originalVariable = originalResourceDeclaration.getVariable();
+      Variable originalVariable = declaration.getVariable();
       originalVariable.setFinal(false);
       transformedStatements.add(
           VariableDeclarationExpression.builder()
-              .addVariableDeclaration(
-                  originalVariable, originalVariable.getTypeDescriptor().getNullValue())
+              .setVariable(originalVariable)
+              .setInitializer(originalVariable.getTypeDescriptor().getNullValue())
               .build()
               .makeStatement(sourcePosition));
 
       Expression assignResourceInitializer =
-          originalVariable.infixAssign(originalResourceDeclaration.getInitializer());
+          originalVariable.infixAssign(declaration.getInitializer());
       tryBlockBodyStatements.add(assignResourceInitializer.makeStatement(sourcePosition));
     }
     tryBlockBodyStatements.addAll(tryStatement.getBody().getStatements());
@@ -173,7 +170,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
       MethodCall safeCloseCall =
           RuntimeMethods.createExceptionsMethodCall(
               "safeClose",
-              declaration.getFragments().getFirst().getVariable().createReference(),
+              declaration.getVariable().createReference(),
               primaryException.createReference());
 
       Expression assignExceptionFromSafeCloseCall = primaryException.infixAssign(safeCloseCall);

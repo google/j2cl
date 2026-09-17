@@ -123,8 +123,8 @@ public class NormalizeForEachStatement extends NormalizationPass {
     SourcePosition sourcePosition = forEachStatement.getSourcePosition();
     ExpressionStatement forVariableDeclarationStatement =
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(
-                loopVariable,
+            .setVariable(loopVariable)
+            .setInitializer(
                 ArrayAccess.builder()
                     .setArrayExpression(arrayVariable.createReference())
                     .setIndexExpression(indexVariable.createReference())
@@ -135,8 +135,12 @@ public class NormalizeForEachStatement extends NormalizationPass {
     return ForStatement.builder()
         .setInitializers(
             VariableDeclarationExpression.builder()
-                .addVariableDeclaration(arrayVariable, iterableExpression)
-                .addVariableDeclaration(indexVariable, NumberLiteral.fromInt(0))
+                .setVariable(arrayVariable)
+                .setInitializer(iterableExpression)
+                .build(),
+            VariableDeclarationExpression.builder()
+                .setVariable(indexVariable)
+                .setInitializer(NumberLiteral.fromInt(0))
                 .build())
         .setConditionExpression(condition)
         .setUpdates(
@@ -193,7 +197,8 @@ public class NormalizeForEachStatement extends NormalizationPass {
 
     VariableDeclarationExpression iteratorDeclaration =
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(iteratorVariable, iteratorExpression)
+            .setVariable(iteratorVariable)
+            .setInitializer(iteratorExpression)
             .build();
 
     // $iterator.hasNext();
@@ -207,8 +212,8 @@ public class NormalizeForEachStatement extends NormalizationPass {
     MethodDescriptor nextMethod = iteratorType.getMethodDescriptor("next");
     ExpressionStatement forVariableDeclarationStatement =
         VariableDeclarationExpression.builder()
-            .addVariableDeclaration(
-                loopVariable,
+            .setVariable(loopVariable)
+            .setInitializer(
                 MethodCall.builderFrom(nextMethod)
                     .setQualifier(iteratorVariable.createReference())
                     .build())

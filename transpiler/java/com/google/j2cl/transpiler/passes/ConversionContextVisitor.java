@@ -81,7 +81,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.ast.WasmFuncrefCall;
 import com.google.j2cl.transpiler.ast.YieldStatement;
@@ -794,8 +793,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
-  public VariableDeclarationFragment rewriteVariableDeclarationFragment(
-      VariableDeclarationFragment variableDeclaration) {
+  public VariableDeclarationExpression rewriteVariableDeclarationExpression(
+      VariableDeclarationExpression variableDeclaration) {
     if (variableDeclaration.getInitializer() == null) {
       // Nothing to rewrite.
       return variableDeclaration;

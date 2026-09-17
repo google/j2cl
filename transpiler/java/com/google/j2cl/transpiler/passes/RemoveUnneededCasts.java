@@ -35,7 +35,6 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import javax.annotation.Nullable;
 
@@ -144,10 +143,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
       return castExpression;
     }
     if (node instanceof VariableDeclarationExpression variableDeclarationExpression) {
-      VariableDeclarationFragment variableDeclarationFragment =
-          variableDeclarationExpression.getFragments().getFirst();
-      Expression variableDeclarationInitializer = variableDeclarationFragment.getInitializer();
-      return getCast(variableDeclarationInitializer);
+      return getCast(variableDeclarationExpression.getInitializer());
     }
     return null;
   }

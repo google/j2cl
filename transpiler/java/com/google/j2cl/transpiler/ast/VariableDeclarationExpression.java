@@ -15,31 +15,38 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import javax.annotation.Nullable;
 
-/**
- * Class for variable declaration expression.
- */
+/** Class for variable declaration expression. */
 @Visitable
 public class VariableDeclarationExpression extends Expression {
-  @Visitable List<VariableDeclarationFragment> fragments;
+  @Visitable Variable variable;
+  @Visitable @Nullable Expression initializer;
 
-  private VariableDeclarationExpression(List<VariableDeclarationFragment> fragments) {
-    checkArgument(!fragments.isEmpty());
-    this.fragments = new ArrayList<>(fragments);
+  private VariableDeclarationExpression(Variable variable, @Nullable Expression initializer) {
+    this.variable = checkNotNull(variable);
+    this.initializer = initializer;
   }
 
-  public List<VariableDeclarationFragment> getFragments() {
-    return fragments;
+  public Variable getVariable() {
+    return variable;
+  }
+
+  @Nullable
+  public Expression getInitializer() {
+    return initializer;
+  }
+
+  /** Returns true if the variable declaration needs to be JsDoc annotated on output. */
+  public boolean needsTypeDeclaration() {
+    return initializer == null
+        || initializer instanceof NullLiteral
+        || variable.getTypeDescriptor().isRaw();
   }
 
   @Override
@@ -55,9 +62,10 @@ public class VariableDeclarationExpression extends Expression {
 
   @Override
   public VariableDeclarationExpression clone() {
-    return VariableDeclarationExpression.builder()
-        .setVariableDeclarationFragments(AstUtils.clone(fragments))
-        .build();
+    // DO NOT clone the variable here as it would make all the references be out of sync
+    // pointing to a different variable instance. Variables are replaced explicitly by using
+    // AstUtils.replaceVariables.
+    return new VariableDeclarationExpression(variable, AstUtils.clone(initializer));
   }
 
   @Override
@@ -66,7 +74,7 @@ public class VariableDeclarationExpression extends Expression {
   }
 
   public Builder toBuilder() {
-    return builder().setVariableDeclarationFragments(this.getFragments());
+    return builder().setVariable(this.getVariable()).setInitializer(this.getInitializer());
   }
 
   public static Builder builder() {
@@ -75,53 +83,23 @@ public class VariableDeclarationExpression extends Expression {
 
   /** Builder for VariableDeclarationExpression. */
   public static class Builder {
-    private List<VariableDeclarationFragment> fragments = new ArrayList<>();
+    private Variable variable;
+    private Expression initializer;
 
     @CanIgnoreReturnValue
-    public Builder setVariableDeclarationFragments(
-        List<VariableDeclarationFragment> variableDeclarationFragments) {
-      this.fragments = new ArrayList<>(variableDeclarationFragments);
+    public Builder setVariable(Variable variable) {
+      this.variable = variable;
       return this;
     }
 
     @CanIgnoreReturnValue
-    public Builder addVariableDeclaration(Variable variable, Expression initializer) {
-      fragments.add(
-          VariableDeclarationFragment.builder()
-              .setVariable(variable)
-              .setInitializer(initializer)
-              .build());
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addVariableDeclarations(Variable... variables) {
-      return addVariableDeclarations(Arrays.asList(variables));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addVariableDeclarations(Collection<Variable> variables) {
-      return addVariableDeclarationFragments(
-          variables.stream()
-              .map(v -> VariableDeclarationFragment.builder().setVariable(v).build())
-              .collect(toImmutableList()));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addVariableDeclarationFragments(
-        VariableDeclarationFragment... variableDeclarationFragments) {
-      return addVariableDeclarationFragments(Arrays.asList(variableDeclarationFragments));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addVariableDeclarationFragments(
-        Collection<VariableDeclarationFragment> variableDeclarationFragment) {
-      fragments.addAll(variableDeclarationFragment);
+    public Builder setInitializer(@Nullable Expression initializer) {
+      this.initializer = initializer;
       return this;
     }
 
     public VariableDeclarationExpression build() {
-      return new VariableDeclarationExpression(fragments);
+      return new VariableDeclarationExpression(variable, initializer);
     }
   }
 }
