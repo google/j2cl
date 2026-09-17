@@ -16,24 +16,43 @@
 package j2ktnotpassing;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class RawTypes {
 
-  class Parent<T> {}
+  class NullableBound<T extends @Nullable Object> {}
 
-  class Child<T extends Child<T>> extends Parent<T> {}
+  class Parent<T> {
+    void accept(NullableBound<T> nullableBound) {}
+  }
 
-  <T extends Child<T>> Child<T> copy(Child<T> child) {
+  class Child<T> extends Parent<T> {}
+
+  class RecursiveChild<T extends RecursiveChild<T>> extends Parent<T> {}
+
+  <T extends RecursiveChild<T>> RecursiveChild<T> copy(RecursiveChild<T> child) {
     return child;
   }
 
-  <T extends Child<T>> Parent<T> toParent(Child<T> a) {
+  <T extends RecursiveChild<T>> Parent<T> toParent(RecursiveChild<T> a) {
     return a;
   }
 
+  // Repro for b/504902037.
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  void testRawParent(NullableBound<Child<?>> nullableBound, Parent rawParent) {
+    rawParent.accept(nullableBound);
+  }
+
+  // Repro for b/504902037.
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  void testRawParentRecursive(NullableBound<RecursiveChild<?>> nullableBound, Parent rawParent) {
+    rawParent.accept(nullableBound);
+  }
+
   // Repro for b/450867235.
-  Parent returnsRaw(Child<?> parent) {
-    return toParent(copy((Child) parent));
+  Parent returnsRaw(RecursiveChild<?> parent) {
+    return toParent(copy((RecursiveChild) parent));
   }
 }
