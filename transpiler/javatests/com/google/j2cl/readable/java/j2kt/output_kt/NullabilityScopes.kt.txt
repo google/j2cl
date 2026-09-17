@@ -29,9 +29,7 @@ import kotlin.Suppress
 open class NullabilityScopes {
  open class NullMarkedScope {
   open fun testNullMarkedWildcardConstructorRaw(nullMarkedFoo: Foo<String>) {
-   Foo<Any?>(
-    nullMarkedFoo as Foo<Any?>,
-   )
+   Foo<Any?>(nullMarkedFoo)
   }
   
   open fun testNullMarkedWildcardConstructorImplicitTypeArguments(nullMarkedFoo: Foo<String>) {
@@ -43,9 +41,7 @@ open class NullabilityScopes {
   }
   
   open fun testNonNullMarkedWildcardConstructorRaw(nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
-   j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>(
-    nonNullMarkedFoo as j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>?,
-   )
+   j2kt.NullabilityScopes.NonNullMarkedScope.Foo<Any?>(nonNullMarkedFoo)
   }
   
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguemnts(nonNullMarkedFoo: j2kt.NullabilityScopes.NonNullMarkedScope.Foo<String>) {
@@ -74,7 +70,7 @@ open class NullabilityScopes {
  open class NonNullMarkedScope {
   open fun testNullMarkedWildcardConstructorRaw(nullMarkedFoo: j2kt.NullabilityScopes.NullMarkedScope.Foo<String?>?) {
    j2kt.NullabilityScopes.NullMarkedScope.Foo<Any?>(
-    nullMarkedFoo!! as j2kt.NullabilityScopes.NullMarkedScope.Foo<Any?>,
+    nullMarkedFoo!!,
    )
   }
   
@@ -91,9 +87,7 @@ open class NullabilityScopes {
   }
   
   open fun testNonNullMarkedWildcardConstructorRaw(nonNullMarkedFoo: Foo<String?>?) {
-   Foo<Any?>(
-    nonNullMarkedFoo as Foo<Any?>?,
-   )
+   Foo<Any?>(nonNullMarkedFoo)
   }
   
   open fun testNonNullMarkedWildcardConstructorImplicitTypeArguments(nonNullMarkedFoo: Foo<String?>?) {

@@ -50,18 +50,15 @@ public class RawTypes {
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   void testRawParent(NullableBound<Child<?>> nullableBound, Parent rawParent) {
-    // TODO(b/504902037): Uncomment once fixed.
-    // rawParent.accept(nullableBound);
+    rawParent.accept(nullableBound);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   void testRawParentRecursive(NullableBound<RecursiveChild<?>> nullableBound, Parent rawParent) {
-    // TODO(b/504902037): Uncomment once fixed.
-    // rawParent.accept(nullableBound);
+    rawParent.accept(nullableBound);
   }
 
-  // TODO(b/450867235): Uncomment once fixed.
-  // Parent returnsRaw(RecursiveChild<?> parent) {
-  //   return toParent(copy((RecursiveChild) parent));
-  // }
+  Parent returnsRaw(RecursiveChild<?> parent) {
+    return toParent(copy((RecursiveChild) parent));
+  }
 }

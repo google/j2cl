@@ -384,7 +384,7 @@ public final class NullabilityPropagationUtils {
                         typeArgumentDescriptor,
                         ImmutableSet.of())))
         .setEnclosingTypeDescriptor(
-            methodDescriptor.isStatic()
+            methodDescriptor.isStatic() || methodDescriptor.getEnclosingTypeDescriptor().isRaw()
                 ? methodDescriptor.getEnclosingTypeDescriptor()
                 : (DeclaredTypeDescriptor)
                     reparameterize(
@@ -462,9 +462,17 @@ public final class NullabilityPropagationUtils {
       }
 
       case DeclaredTypeDescriptor declarationDeclaredTypeDescriptor -> {
+        if (declarationDeclaredTypeDescriptor.isRaw()) {
+          return typeDescriptor;
+        }
         DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
         if (declaredTypeDescriptor.isRaw()) {
-          return typeDescriptor;
+          if (declarationDeclaredTypeDescriptor.getTypeDeclaration().hasRecursiveTypeBounds()) {
+            return typeDescriptor;
+          }
+          declaredTypeDescriptor =
+              declarationDeclaredTypeDescriptor.specializeTypeVariables(
+                  TypeVariable::toRawTypeDescriptor);
         }
         return declaredTypeDescriptor.withTypeArguments(
             zip(
