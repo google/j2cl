@@ -44,11 +44,8 @@ class EmptyArrayLowering(val context: J2clBackendContext) :
     irFile.transformChildrenVoid()
   }
 
-  @OptIn(org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI::class)
   override fun visitFunctionAccess(expression: IrFunctionAccessExpression): IrExpression {
     expression.transformChildrenVoid()
-
-    val callee = expression.symbol.owner
 
     if (context.intrinsics.isEmptyArray(expression.symbol)) {
       val arrayType = expression.typeArguments[0]!!.makeNotNull()
