@@ -84,7 +84,6 @@ import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
 import com.google.j2cl.transpiler.passes.InsertExplicitArrayCoercionCasts;
 import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
-import com.google.j2cl.transpiler.passes.InsertExternConversionsWasm;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
 import com.google.j2cl.transpiler.passes.InsertJsDocCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertJsEnumBoxingAndUnboxingConversions;
@@ -102,6 +101,7 @@ import com.google.j2cl.transpiler.passes.InsertStringConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertUnreachableAssertionErrors;
+import com.google.j2cl.transpiler.passes.InsertWasmJsBoundaryConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
@@ -563,9 +563,9 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           // Must happen after RewriteAssignmentExpressions
           NormalizeNativePropertyAccesses::new,
-          InsertExternConversionsWasm::new,
-          // NormalizeNativePropertyAccesses and InsertExternConversionsWasm creates method calls
-          // whose qualifiers might need to be extracted. After extracting qualifiers,
+          InsertWasmJsBoundaryConversions::new,
+          // NormalizeNativePropertyAccesses and InsertWasmJsBoundaryConversions creates method
+          // calls whose qualifiers might need to be extracted. After extracting qualifiers,
           // we must again normalize multi-expressions.
           ExtractNonIdempotentExpressions::new,
           NormalizeMultiExpressions::new,

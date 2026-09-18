@@ -93,7 +93,7 @@ public class WasmEntryPointBridgesCreator {
       return null;
     }
 
-    return WasmExportBridgesUtils.generateBridge(
+    return WasmJsBoundaryUtils.generateBridge(
         methodDescriptor.getEnclosingTypeDescriptor(),
         methodDescriptor,
         sourcePosition,

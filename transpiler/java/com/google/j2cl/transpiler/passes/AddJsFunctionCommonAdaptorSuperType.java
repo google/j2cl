@@ -24,7 +24,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
+import com.google.j2cl.transpiler.ast.WasmJsBoundaryUtils;
 
 /**
  * Normalizes concrete implementations of JsFunction interfaces by adapting them to extend the
@@ -106,7 +106,7 @@ public class AddJsFunctionCommonAdaptorSuperType extends NormalizationPass {
                 jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor()),
             AstUtils.createWasmFuncrefExpression(
                 sourcePosition,
-                WasmExportBridgesUtils.getJsFunctionBridgeDescriptor(jsFunctionTypeDescriptor),
+                WasmJsBoundaryUtils.getJsFunctionBridgeDescriptor(jsFunctionTypeDescriptor),
                 jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))
         .build()
         .makeStatement(sourcePosition);

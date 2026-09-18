@@ -24,7 +24,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.WasmExportBridgesUtils;
+import com.google.j2cl.transpiler.ast.WasmJsBoundaryUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,18 +66,18 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
               switch (m) {
                 case Method method when AstUtils.isExposedToJsViaConstructor(method) ->
                     bridges.add(
-                        WasmExportBridgesUtils.generateBridge(
+                        WasmJsBoundaryUtils.generateBridge(
                             type.getTypeDescriptor(),
                             method.getDescriptor(),
                             method.getSourcePosition(),
                             getBridgeOrigin(method.getDescriptor())));
                 case Field field when field.getDescriptor().canBeReferencedExternally() -> {
                   bridges.add(
-                      WasmExportBridgesUtils.generateGetterBridge(
+                      WasmJsBoundaryUtils.generateGetterBridge(
                           field.getDescriptor(), field.getSourcePosition()));
                   if (!field.getDescriptor().isFinal()) {
                     bridges.add(
-                        WasmExportBridgesUtils.generateSetterBridge(
+                        WasmJsBoundaryUtils.generateSetterBridge(
                             field.getDescriptor(), field.getSourcePosition()));
                   }
                 }
@@ -92,7 +92,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
           .forEach(
               methodDescriptor ->
                   bridges.add(
-                      WasmExportBridgesUtils.generateBridge(
+                      WasmJsBoundaryUtils.generateBridge(
                           type.getTypeDescriptor(),
                           methodDescriptor,
                           type.getSourcePosition(),
@@ -113,7 +113,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
             .collect(onlyElement());
     addBridge(
         type,
-        WasmExportBridgesUtils.generateJsFunctionBridge(
+        WasmJsBoundaryUtils.generateJsFunctionBridge(
             type.getTypeDescriptor(), jsFunctionMethod.getSourcePosition()));
   }
 

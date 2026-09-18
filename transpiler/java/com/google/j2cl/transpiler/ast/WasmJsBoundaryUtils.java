@@ -25,8 +25,8 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.List;
 import java.util.stream.Stream;
 
-/** Utility for generating bridge methods for Wasm entry points and exported methods. */
-public class WasmExportBridgesUtils {
+/** Utility for generating Wasm/JS boundary bridges and type conversions. */
+public class WasmJsBoundaryUtils {
 
   /**
    * Generates a bridge method, intended to be exported, that defers to the specified method and
@@ -411,5 +411,5 @@ public class WasmExportBridgesUtils {
         && !(isExport && isWasmJsExportedType(typeDescriptor));
   }
 
-  private WasmExportBridgesUtils() {}
+  private WasmJsBoundaryUtils() {}
 }
