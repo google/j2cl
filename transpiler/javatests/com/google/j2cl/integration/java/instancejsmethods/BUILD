@@ -41,12 +41,13 @@ j2cl_library(
 integration_test(
     srcs = [
         "Main.java",
-        "Main.native.js",
+        "helper.js",
     ],
-    # Contains JsInterop features which are only applicable for JS output.
+    # Contains JsInterop features which are only applicable for J2CL output.
     enable_jvm_test = False,
     enable_kt = False,
     enable_wasm = False,
+    enable_wasm_custom_descriptors_jsinterop = True,
     deps = [
         ":Child",
         ":MyInterface",

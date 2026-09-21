@@ -41,7 +41,7 @@ j2cl_library(
 integration_test(
     srcs = [
         "Main.kt",
-        "instancejsmethods.MainKt.native.js",
+        "helper.js",
     ],
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,

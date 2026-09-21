@@ -71,16 +71,21 @@ fun testCallByJS() {
   assertTrue(callChildIntfFoo(c, 5) == 5)
 }
 
-@JsMethod external fun callParentFun(p: Parent, a: Int, b: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper")
+external fun callParentFun(p: Parent, a: Int, b: Int): Int
 
-@JsMethod external fun callParentBar(p: Parent, a: Int, b: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper")
+external fun callParentBar(p: Parent, a: Int, b: Int): Int
 
-@JsMethod external fun callParentFoo(p: Parent, a: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper") external fun callParentFoo(p: Parent, a: Int): Int
 
-@JsMethod external fun callChildFun(c: Child, a: Int, b: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper")
+external fun callChildFun(c: Child, a: Int, b: Int): Int
 
-@JsMethod external fun callChildBar(c: Child, a: Int, b: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper")
+external fun callChildBar(c: Child, a: Int, b: Int): Int
 
-@JsMethod external fun callChildFoo(c: Child, a: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper") external fun callChildFoo(c: Child, a: Int): Int
 
-@JsMethod external fun callChildIntfFoo(c: Child, a: Int): Int
+@JsMethod(namespace = "instancejsmethods.helper")
+external fun callChildIntfFoo(c: Child, a: Int): Int

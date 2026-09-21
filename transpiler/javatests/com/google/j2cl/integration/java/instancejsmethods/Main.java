@@ -73,24 +73,24 @@ public class Main {
     assertTrue((callChildIntfFoo(c, 5) == 5));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callParentFun(Parent p, int a, int b);
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callParentBar(Parent p, int a, int b);
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callParentFoo(Parent p, int a);
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callChildFun(Child c, int a, int b);
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callChildBar(Child c, int a, int b);
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callChildFoo(Child c, int a);
 
-  @JsMethod
+  @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callChildIntfFoo(Child c, int a);
 }

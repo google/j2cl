@@ -12,76 +12,81 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('instancejsmethods.helper');
+
+const Child = goog.require('instancejsmethods.Child');
+const Parent = goog.require('instancejsmethods.Parent');
+
 /**
- * @param {*} p
+ * @param {!Parent} p
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-MainKt.callParentFun = function(p, a, b) {
-  MainKt.$clinit();
+exports.callParentFun = function(p, a, b) {
   return p.sum(a, b);
 };
 
 /**
- * @param {*} p
+ * @param {!Parent} p
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-MainKt.callParentBar = function(p, a, b) {
-  MainKt.$clinit();
+exports.callParentBar = function(p, a, b) {
   return p.bar(a, b);
 };
 
 /**
- * @param {*} p
+ * @param {!Parent} p
  * @param {number} a
  * @return {number}
+ * @public
  */
-MainKt.callParentFoo = function(p, a) {
-  MainKt.$clinit();
+exports.callParentFoo = function(p, a) {
   return p.myFoo(a);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-MainKt.callChildFun = function(c, a, b) {
-  MainKt.$clinit();
+exports.callChildFun = function(c, a, b) {
   return c.sum(a, b);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-MainKt.callChildBar = function(c, a, b) {
-  MainKt.$clinit();
+exports.callChildBar = function(c, a, b) {
   return c.bar(a, b);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @return {number}
+ * @public
  */
-MainKt.callChildFoo = function(c, a) {
-  MainKt.$clinit();
+exports.callChildFoo = function(c, a) {
   return c.myFoo(a);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @return {number}
+ * @public
  */
-MainKt.callChildIntfFoo = function(c, a) {
-  MainKt.$clinit();
+exports.callChildIntfFoo = function(c, a) {
   return c.intfFoo(a);
 };

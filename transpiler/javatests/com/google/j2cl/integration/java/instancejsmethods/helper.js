@@ -12,76 +12,81 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('instancejsmethods.helper');
+
+const Child = goog.require('instancejsmethods.Child');
+const Parent = goog.require('instancejsmethods.Parent');
+
 /**
- * @param {*} p
+ * @param {!Parent} p
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-Main.callParentFun = function(p, a, b) {
-  Main.$clinit();
+exports.callParentFun = function(p, a, b) {
   return p.sum(a, b);
 };
 
 /**
- * @param {*} p
+ * @param {!Parent} p
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-Main.callParentBar = function(p, a, b) {
-  Main.$clinit();
+exports.callParentBar = function(p, a, b) {
   return p.bar(a, b);
 };
 
 /**
- * @param {*} p
+ * @param {!Parent} p
  * @param {number} a
  * @return {number}
+ * @public
  */
-Main.callParentFoo = function(p, a) {
-  Main.$clinit();
+exports.callParentFoo = function(p, a) {
   return p.myFoo(a);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-Main.callChildFun = function(c, a, b) {
-  Main.$clinit();
+exports.callChildFun = function(c, a, b) {
   return c.sum(a, b);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @param {number} b
  * @return {number}
+ * @public
  */
-Main.callChildBar = function(c, a, b) {
-  Main.$clinit();
+exports.callChildBar = function(c, a, b) {
   return c.bar(a, b);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @return {number}
+ * @public
  */
-Main.callChildFoo = function(c, a) {
-  Main.$clinit();
+exports.callChildFoo = function(c, a) {
   return c.myFoo(a);
 };
 
 /**
- * @param {*} c
+ * @param {!Child} c
  * @param {number} a
  * @return {number}
+ * @public
  */
-Main.callChildIntfFoo = function(c, a) {
-  Main.$clinit();
+exports.callChildIntfFoo = function(c, a) {
   return c.intfFoo(a);
 };
