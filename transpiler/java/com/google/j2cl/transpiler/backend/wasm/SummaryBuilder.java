@@ -149,10 +149,10 @@ public final class SummaryBuilder {
           JsMemberInfo.newBuilder()
               .setKind(
                   switch (methodDescriptor.getOrigin()) {
-                    case SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT -> JsMemberInfo.Kind.CONSTRUCTOR;
-                    case SYNTHETIC_WASM_JS_METHOD_EXPORT -> JsMemberInfo.Kind.METHOD;
-                    case SYNTHETIC_WASM_JS_GETTER_EXPORT -> JsMemberInfo.Kind.GETTER;
-                    case SYNTHETIC_WASM_JS_SETTER_EXPORT -> JsMemberInfo.Kind.SETTER;
+                    case WASM_JS_CONSTRUCTOR_EXPORT_BRIDGE -> JsMemberInfo.Kind.CONSTRUCTOR;
+                    case WASM_JS_METHOD_EXPORT_BRIDGE -> JsMemberInfo.Kind.METHOD;
+                    case WASM_JS_GETTER_EXPORT_BRIDGE -> JsMemberInfo.Kind.GETTER;
+                    case WASM_JS_SETTER_EXPORT_BRIDGE -> JsMemberInfo.Kind.SETTER;
                     default ->
                         throw new AssertionError(
                             "Unexpected method origin: " + methodDescriptor.getOrigin());

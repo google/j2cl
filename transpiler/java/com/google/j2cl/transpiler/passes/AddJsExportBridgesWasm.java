@@ -126,10 +126,10 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
 
   private static MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {
     return switch (descriptor.getJsInfo().getJsMemberType()) {
-      case CONSTRUCTOR -> MethodOrigin.SYNTHETIC_WASM_JS_CONSTRUCTOR_EXPORT;
-      case METHOD -> MethodOrigin.SYNTHETIC_WASM_JS_METHOD_EXPORT;
-      case GETTER -> MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT;
-      case SETTER -> MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT;
+      case CONSTRUCTOR -> MethodOrigin.WASM_JS_CONSTRUCTOR_EXPORT_BRIDGE;
+      case METHOD -> MethodOrigin.WASM_JS_METHOD_EXPORT_BRIDGE;
+      case GETTER -> MethodOrigin.WASM_JS_GETTER_EXPORT_BRIDGE;
+      case SETTER -> MethodOrigin.WASM_JS_SETTER_EXPORT_BRIDGE;
       default ->
           throw new AssertionError(
               "Unexpected JsMemberType: " + descriptor.getJsInfo().getJsMemberType().name());

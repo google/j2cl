@@ -186,7 +186,7 @@ public class WasmJsBoundaryUtils {
   }
 
   private static MethodDescriptor createGetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
-    var origin = MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_GETTER_EXPORT;
+    var origin = MethodDescriptor.MethodOrigin.WASM_JS_GETTER_EXPORT_BRIDGE;
     return AstUtils.getGetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(origin)
         .setReturnTypeDescriptor(
@@ -195,7 +195,7 @@ public class WasmJsBoundaryUtils {
   }
 
   private static MethodDescriptor createSetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
-    var origin = MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_SETTER_EXPORT;
+    var origin = MethodDescriptor.MethodOrigin.WASM_JS_SETTER_EXPORT_BRIDGE;
     return AstUtils.getSetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(origin)
         .setParameterTypeDescriptors(
@@ -265,7 +265,7 @@ public class WasmJsBoundaryUtils {
     return createBridgeDescriptor(
             jsFunctionTypeDescriptor,
             functionalMethod,
-            MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_JS_FUNCTION_EXPORT)
+            MethodDescriptor.MethodOrigin.WASM_JS_FUNCTION_EXPORT_BRIDGE)
         .toBuilder()
         .setEnclosingTypeDescriptor(jsFunctionTypeDescriptor.toRawTypeDescriptor())
         .setStatic(true)

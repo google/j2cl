@@ -97,7 +97,7 @@ public class WasmEntryPointBridgesCreator {
         methodDescriptor.getEnclosingTypeDescriptor(),
         methodDescriptor,
         sourcePosition,
-        MethodDescriptor.MethodOrigin.SYNTHETIC_WASM_ENTRY_POINT);
+        MethodDescriptor.MethodOrigin.WASM_ENTRY_POINT_BRIDGE);
   }
 
   private boolean isEntryPoint(MethodDescriptor methodDescriptor) {
