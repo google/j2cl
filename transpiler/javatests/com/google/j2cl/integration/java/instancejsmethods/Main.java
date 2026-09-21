@@ -15,15 +15,19 @@
  */
 package instancejsmethods;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
     testCallByConcreteType();
     testCallBySuperParent();
     testCallByJS();
+    testOverloads();
   }
 
   public static void testCallBySuperParent() {
@@ -93,4 +97,52 @@ public class Main {
 
   @JsMethod(namespace = "instancejsmethods.helper")
   public static native int callChildIntfFoo(Child c, int a);
+
+  // Repro for b/560655013.
+  static class Overloads {
+    @JsConstructor
+    public Overloads() {}
+
+    @JsMethod(name = "mObject")
+    public String m(Object o) {
+      return "m(Object)";
+    }
+
+    @JsMethod(name = "mDouble")
+    public String m(Double d) {
+      return "m(Double)";
+    }
+  }
+
+  @JsType(isNative = true, namespace = "instancejsmethods.Main", name = "Overloads")
+  static class NativeOverloads {
+    public native String mObject(Object o);
+
+    // TODO(b/560655013): Uncomment once the bug is fixed.
+    // public native String mDouble(Double d);
+
+    @JsMethod(name = "mObject")
+    public native String m(Object o);
+
+    // TODO(b/560655013): Uncomment once the bug is fixed.
+    // @JsMethod(name = "mDouble")
+    // public native String m(Double o);
+  }
+
+  private static void testOverloads() {
+    Overloads overloads = new Overloads();
+    assertEquals("m(Object)", overloads.m(new Object()));
+    assertEquals("m(Double)", overloads.m(0d));
+
+    NativeOverloads nativeOverloads = new NativeOverloads();
+    // Check overloaded JsMethods.
+    assertEquals("m(Object)", nativeOverloads.mObject(null));
+    // TODO(b/560655013): Uncomment once the bug is fixed.
+    // assertEquals("m(Double)", nativeOverloads.mDouble(0d));
+
+    // Check overloaded native methods.
+    assertEquals("m(Object)", nativeOverloads.m(new Object()));
+    // TODO(b/560655013): Uncomment once the bug is fixed.
+    // assertEquals("m(Double)", nativeOverloads.m(0d));
+  }
 }

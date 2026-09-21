@@ -15,13 +15,17 @@
  */
 package instancejsmethods
 
+import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
   testCallByConcreteType()
   testCallBySuperParent()
   testCallByJS()
+  testOverloads()
 }
 
 fun testCallBySuperParent() {
@@ -89,3 +93,41 @@ external fun callChildBar(c: Child, a: Int, b: Int): Int
 
 @JsMethod(namespace = "instancejsmethods.helper")
 external fun callChildIntfFoo(c: Child, a: Int): Int
+
+class Overloads @JsConstructor constructor() {
+  @JsMethod(name = "mObject")
+  fun m(o: Any?): String {
+    return "m(Object)"
+  }
+
+  @JsMethod(name = "mDouble")
+  fun m(d: Double?): String {
+    return "m(Double)"
+  }
+}
+
+@JsType(isNative = true, namespace = "instancejsmethods", name = "Overloads")
+class NativeOverloads {
+  external fun mObject(o: Any?): String
+
+  external fun mDouble(d: Double?): String
+
+  @JsMethod(name = "mObject") external fun m(o: Any?): String
+
+  @JsMethod(name = "mDouble") external fun m(o: Double?): String
+}
+
+private fun testOverloads() {
+  val overloads = Overloads()
+  assertEquals("m(Object)", overloads.m(Any()))
+  assertEquals("m(Double)", overloads.m(0.0))
+
+  val nativeOverloads = NativeOverloads()
+  // Check overloaded JsMethods.
+  assertEquals("m(Object)", nativeOverloads.mObject(null))
+  assertEquals("m(Double)", nativeOverloads.mDouble(0.0))
+
+  // Check overloaded native methods.
+  assertEquals("m(Object)", nativeOverloads.m(Any()))
+  assertEquals("m(Double)", nativeOverloads.m(0.0))
+}
