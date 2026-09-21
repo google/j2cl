@@ -262,8 +262,8 @@ public class PriorityQueue<E> extends AbstractQueue<E> {
     E value = heap.get(node);
     while (!isLeaf(node, heapSize)) {
       int smallestChild = getSmallestChild(node, heapSize);
-      if (cmp.compare(value, heap.get(smallestChild)) < 0) {
-        // Current node is smaller than the smallest child, so we are done.
+      if (cmp.compare(value, heap.get(smallestChild)) <= 0) {
+        // Current node is smaller than or equal to the smallest child, so we are done.
         break;
       }
       // Move the smallest child up and iterate using its old slot.
