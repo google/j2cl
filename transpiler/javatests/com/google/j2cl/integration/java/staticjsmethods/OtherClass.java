@@ -17,10 +17,10 @@ package staticjsmethods;
 
 public class OtherClass {
   public static int callF1(int a) {
-    return Main.f1(a);
+    return Main.StaticMethods.f1(a);
   }
 
   public static int callF2(int a) {
-    return Main.f2(a);
+    return Main.StaticMethods.f2(a);
   }
 }

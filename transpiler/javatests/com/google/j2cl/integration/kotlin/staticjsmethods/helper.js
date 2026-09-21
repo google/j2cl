@@ -12,20 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('staticjsmethods.helper');
+
+const StaticMethods = goog.require('staticjsmethods.StaticMethods');
+
 /**
  * @param {number} a
  * @return {number}
+ * @public
  */
-Main.callF1 = function(a) {
-  Main.$clinit();
-  return Main.fun(a);
+exports.callF1 = function(a) {
+  return StaticMethods.fun(a);
 };
 
 /**
  * @param {number} a
  * @return {number}
+ * @public
  */
-Main.callF2 = function(a) {
-  Main.$clinit();
-  return Main.f2(a);
+exports.callF2 = function(a) {
+  return StaticMethods.f2(a);
 };

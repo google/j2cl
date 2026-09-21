@@ -18,26 +18,35 @@ package staticjsmethods;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
 public class Main {
-  @JsMethod(name = "fun")
-  public static int f1(int a) {
-    return a + 11;
+
+  public static void main(String... args) {
+    testJsMethodsCalledByJava();
+    testJsMethodsCalledByJS();
+    testJsMethodsCalledByOtherClass();
+    testNativeJsMethod();
+    testDeepNamespaceNativeJsMethod();
   }
 
-  @JsMethod
-  public static int f2(int a) {
-    return a + 22;
+  static class StaticMethods {
+    @JsMethod(name = "fun")
+    public static int f1(int a) {
+      return a + 11;
+    }
+
+    @JsMethod
+    public static int f2(int a) {
+      return a + 22;
+    }
   }
 
   public static void testJsMethodsCalledByJava() {
-    assertTrue(f1(1) == 12);
-    assertTrue(f2(1) == 23);
+    assertTrue(StaticMethods.f1(1) == 12);
+    assertTrue(StaticMethods.f2(1) == 23);
   }
 
-  @Wasm("nop") // .native.js not supported in Wasm.
   public static void testJsMethodsCalledByJS() {
     assertTrue(callF1(1) == 12);
     assertTrue(callF2(1) == 23);
@@ -61,20 +70,10 @@ public class Main {
     assertTrue(fooBarAbs(-1) == 1);
   }
 
-  public static void main(String... args) {
-    testJsMethodsCalledByJava();
-    testJsMethodsCalledByJS();
-    testJsMethodsCalledByOtherClass();
-    testNativeJsMethod();
-    testDeepNamespaceNativeJsMethod();
-  }
-
-  @JsMethod
-  @Wasm("nop")
+  @JsMethod(namespace = "staticjsmethods.helper")
   public static native int callF1(int a);
 
-  @JsMethod
-  @Wasm("nop")
+  @JsMethod(namespace = "staticjsmethods.helper")
   public static native int callF2(int a);
 
   @JsMethod(namespace = GLOBAL, name = "Math.floor")

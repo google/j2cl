@@ -16,7 +16,7 @@
 package staticjsmethods
 
 object OtherClass {
-  fun callF1(a: Int): Int = Main.f1(a)
+  fun callF1(a: Int): Int = StaticMethods.f1(a)
 
-  fun callF2(a: Int): Int = Main.f2(a)
+  fun callF2(a: Int): Int = StaticMethods.f2(a)
 }

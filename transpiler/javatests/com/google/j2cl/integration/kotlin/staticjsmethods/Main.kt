@@ -16,22 +16,28 @@
 package staticjsmethods
 
 import com.google.j2cl.integration.testing.Asserts.assertTrue
-import javaemul.internal.annotations.Wasm
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage.GLOBAL
 
-object Main {
+fun main(vararg args: String) {
+  testJsMethodsCalledByJava()
+  testJsMethodsCalledByJS()
+  testJsMethodsCalledByOtherClass()
+  testNativeJsMethod()
+  testDeepNamespaceNativeJsMethod()
+}
+
+object StaticMethods {
   @JsMethod(name = "fun") @JvmStatic fun f1(a: Int): Int = a + 11
 
   @JsMethod @JvmStatic fun f2(a: Int): Int = a + 22
 }
 
 fun testJsMethodsCalledByJava() {
-  assertTrue(Main.f1(1) == 12)
-  assertTrue(Main.f2(1) == 23)
+  assertTrue(StaticMethods.f1(1) == 12)
+  assertTrue(StaticMethods.f2(1) == 23)
 }
 
-@Wasm("nop") // .native.js not supported in Wasm.
 fun testJsMethodsCalledByJS() {
   assertTrue(callF1(1) == 12)
   assertTrue(callF2(1) == 23)
@@ -55,17 +61,9 @@ fun testDeepNamespaceNativeJsMethod() {
   assertTrue(fooBarAbs(-1.0) == 1.0)
 }
 
-fun main(vararg args: String) {
-  testJsMethodsCalledByJava()
-  testJsMethodsCalledByJS()
-  testJsMethodsCalledByOtherClass()
-  testNativeJsMethod()
-  testDeepNamespaceNativeJsMethod()
-}
+@JsMethod(namespace = "staticjsmethods.helper") external fun callF1(a: Int): Int
 
-@JsMethod @Wasm("nop") external fun callF1(a: Int): Int
-
-@JsMethod @Wasm("nop") external fun callF2(a: Int): Int
+@JsMethod(namespace = "staticjsmethods.helper") external fun callF2(a: Int): Int
 
 @JsMethod(namespace = GLOBAL, name = "Math.floor") external fun floor(d: Double): Int
 
