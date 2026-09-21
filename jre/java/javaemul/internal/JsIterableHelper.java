@@ -54,7 +54,7 @@ public final class JsIterableHelper {
   }
 
   /** Abstraction for JavaScript Iterator. */
-  @JsType(isNative = true, name = "Iterator", namespace = JsPackage.GLOBAL)
+  @JsType(isNative = true, name = "IteratorLike", namespace = JsPackage.GLOBAL)
   public interface JsIterator<T> {
     @JsMethod(name = "next")
     IIterableResult<T> _private_jsNext__();

@@ -10,7 +10,7 @@ JsIterableHelper.makeResult = function(value, done) {
 
 /**
  * @param {!Array<T>} array
- * @return {!Iterator<T>}
+ * @return {!IteratorLike<T>}
  * @template T
  */
 JsIterableHelper.asJsIterator = function(array) {

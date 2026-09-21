@@ -1,7 +1,7 @@
 goog.module('readonlycollections.IteratorImpl$impl');
 
 const j_l_Object = goog.require('java.lang.Object$impl');
-const j_u_Iterator = goog.require('java.util.Iterator$impl');
+const Iterator = goog.require('java.util.Iterator$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
@@ -13,7 +13,7 @@ let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 /**
  * @final
  * @template T
- * @implements {j_u_Iterator<T>}
+ * @implements {Iterator<T>}
  */
 class IteratorImpl extends j_l_Object {
  /** @protected @nodts */
@@ -46,24 +46,24 @@ class IteratorImpl extends j_l_Object {
  //Default method forwarding stub.
  /** @override @suppress{visibility} @return {IIterableResult<T>} */
  next() {
-  return /**@type {IIterableResult<T>}*/ (j_u_Iterator.m__private_jsNext____$default__java_util_Iterator__javaemul_internal_JsIterableHelper_IIterableResult(this));
+  return /**@type {IIterableResult<T>}*/ (Iterator.m__private_jsNext____$default__java_util_Iterator__javaemul_internal_JsIterableHelper_IIterableResult(this));
  }
  //Default method forwarding stub.
- /** @override @suppress{visibility} @return {Iterator<T>} */
+ /** @override @suppress{visibility} @return {IteratorLike<T>} */
  [Symbol.iterator]() {
-  return /**@type {Iterator<T>}*/ (JsIterableBase.m__private_jsIterator____$default__javaemul_internal_JsIterableHelper_JsIterableBase__javaemul_internal_JsIterableHelper_JsIterator(this));
+  return /**@type {IteratorLike<T>}*/ (JsIterableBase.m__private_jsIterator____$default__javaemul_internal_JsIterableHelper_JsIterableBase__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} */
  m_forEachRemaining__java_util_function_Consumer__void(/** !Consumer<?> */ consumer) {
-  j_u_Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, consumer);
+  Iterator.m_forEachRemaining__$default__java_util_Iterator__java_util_function_Consumer__void(this, consumer);
  }
  /** @nodts */
  static $clinit() {
   IteratorImpl.$clinit = () =>{};
   IteratorImpl.$loadModules();
   j_l_Object.$clinit();
-  j_u_Iterator.$clinit();
+  Iterator.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -78,7 +78,7 @@ class IteratorImpl extends j_l_Object {
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
  }
 }
-j_u_Iterator.$markImplementor(IteratorImpl);
+Iterator.$markImplementor(IteratorImpl);
 $Util.$setClassMetadata(IteratorImpl, 'readonlycollections.IteratorImpl');
 
 exports = IteratorImpl;

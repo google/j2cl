@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let UnsupportedOperationException = goog.forwardDeclare('java.lang.UnsupportedOperationException$impl');
-let j_u_Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Predicate = goog.forwardDeclare('java.util.function.Predicate$impl');
@@ -33,9 +33,9 @@ class MyCollection extends j_l_Object {
   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(UnsupportedOperationException.$create__());
  }
  //Default method forwarding stub.
- /** @override @return {!Iterator<T>} */
+ /** @override @return {!IteratorLike<T>} */
  [Symbol.iterator]() {
-  return /**@type {!Iterator<T>}*/ (Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
+  return /**@type {!IteratorLike<T>}*/ (Iterable.m__private_jsIterator____$default__java_lang_Iterable__javaemul_internal_JsIterableHelper_JsIterator(this));
  }
  //Default method forwarding stub.
  /** @override @nodts */
@@ -88,7 +88,7 @@ class MyCollection extends j_l_Object {
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyCollection;
  }
- /** @abstract @override @nodts @return {j_u_Iterator<T>} */
+ /** @abstract @override @nodts @return {Iterator<T>} */
  m_iterator__java_util_Iterator() {}
  /** @abstract @override @return {boolean} */
  add(/** T */ arg0) {}
