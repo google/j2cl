@@ -138,7 +138,7 @@ internal class J2ObjCCompatSources(
       newLineSeparated(
         source("#pragma clang diagnostic push"),
         source("#pragma clang diagnostic ignored \"-Wobjc-property-no-attribute\""),
-        source("#import \"$header\""),
+        source("#import \"$header\"  // IWYU pragma: export"),
         source("#pragma clang diagnostic pop"),
       )
     } ?: Source.EMPTY

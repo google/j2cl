@@ -123,7 +123,7 @@ class KotlinGeneratorStage(
           .substringAfter(sourceGenPrefix)
           .replace(".java", ".h")
       if (originalPathHeader != fqnPath) {
-        output.write(originalPathHeader, "#import \"$fqnPath\"\n")
+        output.write(originalPathHeader, "#import \"$fqnPath\"  // IWYU pragma: export\n")
       }
     }
   }
