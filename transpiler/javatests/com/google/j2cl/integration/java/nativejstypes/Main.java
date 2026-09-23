@@ -15,10 +15,16 @@
  */
 package nativejstypes;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static void testNativeJsTypeWithNamespace() {
@@ -60,10 +66,92 @@ public class Main {
   @JsProperty(namespace = JsPackage.GLOBAL)
   private static native Number getUndefined();
 
+  @JsType(isNative = true, namespace = "test.foo")
+  interface MyNativeJsTypeInterface {}
+
+  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
+  static class HTMLElementConcreteNativeJsType {}
+
+  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
+  static class HTMLElementAnotherConcreteNativeJsType {}
+
+  private static <NI extends MyNativeJsTypeInterface, NC extends HTMLElementConcreteNativeJsType>
+      void testCasts() {
+    Object myClass;
+    assertNotNull(myClass = (ElementLikeNativeInterface) createFoo());
+    assertNotNull(myClass = (MyNativeJsTypeInterface) createFoo());
+    assertNotNull(myClass = (NI) createFoo());
+    assertNotNull(myClass = (HTMLElementConcreteNativeJsType) createNativeButton());
+    assertNotNull(myClass = (NC) createNativeButton());
+
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (HTMLElementConcreteNativeJsType) createFoo();
+        });
+
+    // Test cross cast for native types
+    Object nativeButton1 = (HTMLElementConcreteNativeJsType) createNativeButton();
+    Object nativeButton2 = (HTMLElementAnotherConcreteNativeJsType) nativeButton1;
+
+    /*
+     * If the optimizations are turned on, it is possible for the compiler to dead-strip the
+     * variables since they are not used. Therefore the casts could potentially be stripped.
+     */
+    assertNotNull(myClass);
+    assertNotNull(nativeButton1);
+    assertNotNull(nativeButton2);
+  }
+
+  private static Object createFoo() {
+    return new Foo();
+  }
+
+  @JsMethod(namespace = "nativejstypes.JsTypeTestHelper")
+  public static native Object createNativeButton();
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
+  interface Star {}
+
+  private static void testStar() {
+    Object object = new Object();
+
+    assertNotNull(object);
+
+    object = Double.valueOf(3.0);
+    assertNotNull(object);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface Wildcard {}
+
+  private static void testWildcard() {
+    Object object = new Object();
+
+    assertNotNull(object);
+
+    object = Double.valueOf(3.0);
+    assertNotNull(object);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface NativeFunctionalInterface<T> {
+    int f(T t);
+  }
+
+  @Wasm("nop") // Implementing native types not supported in Wasm.
+  private static void testNativeFunctionalInterface() {
+    NativeFunctionalInterface<String> nativeFunctionalInterface = (s) -> 10;
+    assertEquals(10, nativeFunctionalInterface.f(""));
+  }
+
   public static void main(String... args) {
     testNativeJsTypeWithNamespace();
     testNativeJsTypeWithoutNamespace();
     testGlobalNativeJsType();
     testNativeEquality();
+    testCasts();
+    testStar();
+    testWildcard();
+    testNativeFunctionalInterface();
   }
 }

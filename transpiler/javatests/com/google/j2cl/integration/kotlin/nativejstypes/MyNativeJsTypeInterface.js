@@ -16,6 +16,6 @@ goog.module('test.foo.MyNativeJsTypeInterface');
 /**
  * @interface
  */
-class JsTypeTest$MyNativeJsTypeInterface {}
+class MyNativeJsTypeInterface {}
 
-exports = JsTypeTest$MyNativeJsTypeInterface;
+exports = MyNativeJsTypeInterface;

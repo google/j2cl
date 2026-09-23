@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jsinteroptests
+package nativejstypes;
 
-import jsinterop.annotations.JsProperty
-import jsinterop.annotations.JsType
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /** An interface that represent part of HTML element's contract. */
 @JsType(isNative = true, namespace = "test.foo")
-interface ElementLikeNativeInterface {
-  @JsProperty fun getTagName(): String
+public interface ElementLikeNativeInterface {
+  @JsProperty
+  String getTagName();
 }

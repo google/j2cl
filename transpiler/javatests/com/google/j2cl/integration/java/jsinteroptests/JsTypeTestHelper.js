@@ -14,15 +14,6 @@
 
 goog.module('jsinteroptests.JsTypeTestHelper');
 
-
-/**
- * @return {*}
- * @public
- */
-exports.createNativeButton = function() {
-  return document.createElement('button');
-};
-
 /**
  * @param {?} object
  * @return {number}

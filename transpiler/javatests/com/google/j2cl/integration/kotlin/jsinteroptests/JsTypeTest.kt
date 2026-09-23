@@ -21,7 +21,6 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertNotNull
 import com.google.j2cl.integration.testing.Asserts.assertSame
-import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
@@ -33,7 +32,6 @@ import jsinterop.annotations.JsType
 object JsTypeTest {
   fun testAll() {
     testAbstractJsTypeAccess()
-    testCasts<MyNativeJsTypeInterface, HTMLElementConcreteNativeJsType>()
     testConcreteJsTypeAccess()
     testConcreteJsTypeNoTypeTightenField()
     testConcreteJsTypeSubclassAccess()
@@ -46,23 +44,8 @@ object JsTypeTest {
     testNativeMethodOverrideNoTypeTightenParam()
     testRevealedOverrideJsType()
     testSingleJavaConcreteJsFunction()
-    testStar()
-    testWildcard()
-    testNativeFunctionalInterface()
     testInheritName()
   }
-
-  @JsType(isNative = true, namespace = "test.foo") internal interface MyNativeJsTypeInterface {}
-
-  @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
-  internal open class MyNativeJsType {}
-
-
-  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
-  internal open class HTMLElementConcreteNativeJsType {}
-
-  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
-  internal class HTMLElementAnotherConcreteNativeJsType {}
 
   /** This concrete test class is *directly* annotated as a @JsType. */
   @JsType
@@ -143,42 +126,6 @@ object JsTypeTest {
 
     open fun foo(): Int = 1
   }
-
-  private fun <NI : MyNativeJsTypeInterface, NC : HTMLElementConcreteNativeJsType> testCasts() {
-    var myClass: Any?
-    myClass = createMyNativeJsType() as ElementLikeNativeInterface
-    assertNotNull(myClass)
-    myClass = createMyNativeJsType() as MyNativeJsTypeInterface
-    assertNotNull(myClass)
-    myClass = createMyNativeJsType() as NI
-    assertNotNull(myClass)
-    myClass = createNativeButton() as HTMLElementConcreteNativeJsType
-    assertNotNull(myClass)
-    myClass = createNativeButton() as NC
-    assertNotNull(myClass)
-
-    assertThrowsClassCastException {
-      val unused = createMyNativeJsType() as HTMLElementConcreteNativeJsType
-    }
-
-    // Test cross cast for native types
-    val nativeButton1: Any? = createNativeButton() as HTMLElementConcreteNativeJsType
-    val nativeButton2: Any? = nativeButton1 as HTMLElementAnotherConcreteNativeJsType
-
-    /*
-     * If the optimizations are turned on, it is possible for the compiler to dead-strip the
-     * variables since they are not used. Therefore the casts could potentially be stripped.
-     */
-    assertNotNull(myClass)
-    assertNotNull(nativeButton1)
-    assertNotNull(nativeButton2)
-  }
-
-  @JvmStatic private fun createMyNativeJsType(): Any? = MyNativeJsType()
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  @JvmStatic
-  external fun createNativeButton(): Any?
 
   private fun testConcreteJsTypeAccess() {
     val concreteJsType = ConcreteJsType()
@@ -344,8 +291,6 @@ object JsTypeTest {
   @JvmStatic
   internal external fun fillJsTypeField(jstype: SimpleJsTypeWithField)
 
-
-
   @JsFunction
   internal fun interface JsFunctionInterface {
     fun m(): Int
@@ -415,38 +360,6 @@ object JsTypeTest {
   @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @JvmStatic
   public external fun callBar(obj: Any?, param: Any?): Any?
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*") interface Star
-
-  private fun testStar() {
-    var o = Any()
-
-    assertNotNull(o)
-
-    o = 3.0
-    assertNotNull(o)
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?") interface Wildcard
-
-  private fun testWildcard() {
-    var o = Any()
-
-    assertNotNull(o)
-
-    o = 3.0
-    assertNotNull(o)
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  fun interface NativeFunctionalInterface<T> {
-    fun f(t: T): Int
-  }
-
-  private fun testNativeFunctionalInterface() {
-    val nativeFunctionalInterface = NativeFunctionalInterface<String> { s -> 10 }
-    assertEquals(10, nativeFunctionalInterface.f(""))
-  }
 
   internal open class ClassWithJsMethod {
     @JsMethod(name = "name") open fun className(): String = ClassWithJsMethod::class.java.name

@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
-import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
@@ -32,7 +31,6 @@ import jsinterop.annotations.JsType;
 public class JsTypeTest {
   public static void testAll() {
     testAbstractJsTypeAccess();
-    testCasts();
     testConcreteJsTypeAccess();
     testConcreteJsTypeNoTypeTightenField();
     testConcreteJsTypeSubclassAccess();
@@ -45,25 +43,9 @@ public class JsTypeTest {
     testNativeMethodOverrideNoTypeTightenParam();
     testRevealedOverrideJsType();
     testSingleJavaConcreteJsFunction();
-    testStar();
-    testWildcard();
-    testNativeFunctionalInterface();
     testInheritName();
     testJsTypeRecord();
   }
-
-  @JsType(isNative = true, namespace = "test.foo")
-  interface MyNativeJsTypeInterface {}
-
-  @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
-  static class MyNativeJsType {}
-
-
-  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
-  static class HTMLElementConcreteNativeJsType {}
-
-  @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
-  static class HTMLElementAnotherConcreteNativeJsType {}
 
   /**
    * This concrete test class is *directly* annotated as a @JsType.
@@ -169,40 +151,6 @@ public class JsTypeTest {
       return 1;
     }
   }
-
-  private static <NI extends MyNativeJsTypeInterface, NC extends HTMLElementConcreteNativeJsType>
-      void testCasts() {
-    Object myClass;
-    assertNotNull(myClass = (ElementLikeNativeInterface) createMyNativeJsType());
-    assertNotNull(myClass = (MyNativeJsTypeInterface) createMyNativeJsType());
-    assertNotNull(myClass = (NI) createMyNativeJsType());
-    assertNotNull(myClass = (HTMLElementConcreteNativeJsType) createNativeButton());
-    assertNotNull(myClass = (NC) createNativeButton());
-
-    assertThrowsClassCastException(
-        () -> {
-          Object unused = (HTMLElementConcreteNativeJsType) createMyNativeJsType();
-        });
-
-    // Test cross cast for native types
-    Object nativeButton1 = (HTMLElementConcreteNativeJsType) createNativeButton();
-    Object nativeButton2 = (HTMLElementAnotherConcreteNativeJsType) nativeButton1;
-
-    /*
-     * If the optimizations are turned on, it is possible for the compiler to dead-strip the
-     * variables since they are not used. Therefore the casts could potentially be stripped.
-     */
-    assertNotNull(myClass);
-    assertNotNull(nativeButton1);
-    assertNotNull(nativeButton2);
-  }
-
-  private static Object createMyNativeJsType() {
-    return new MyNativeJsType();
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  public static native Object createNativeButton();
 
   private static void testConcreteJsTypeAccess() {
     ConcreteJsType concreteJsType = new ConcreteJsType();
@@ -441,40 +389,6 @@ public class JsTypeTest {
 
   @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native Object callBar(Object obj, Object param);
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
-  interface Star {}
-
-  private static void testStar() {
-    Object object = new Object();
-
-    assertNotNull(object);
-
-    object = Double.valueOf(3.0);
-    assertNotNull(object);
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  interface Wildcard {}
-
-  private static void testWildcard() {
-    Object object = new Object();
-
-    assertNotNull(object);
-
-    object = Double.valueOf(3.0);
-    assertNotNull(object);
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  interface NativeFunctionalInterface<T> {
-    int f(T t);
-  }
-
-  private static void testNativeFunctionalInterface() {
-    NativeFunctionalInterface<String> nativeFunctionalInterface = (s) -> 10;
-    assertEquals(10, nativeFunctionalInterface.f(""));
-  }
 
   static class ClassWithJsMethod {
     @JsMethod(name = "name")
