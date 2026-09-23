@@ -22,6 +22,7 @@ load(
     "j2wasm_application",
 )
 load("//build_defs/internal_do_not_use:j2cl_common.bzl", "j2cl_common")
+load("//build_defs/internal_do_not_use:j2cl_js_common.bzl", "JsInfo")
 load("//build_defs/internal_do_not_use:j2kt_web_transition.bzl", "j2kt_web_transition")
 load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "J2WASM_FEATURE_SET")
 load("//build_defs/internal_do_not_use:provider.bzl", "J2clInfo", "J2wasmInfo")
@@ -110,6 +111,7 @@ def readable_example(
             feature_set = J2WASM_FEATURE_SET.DEFAULT if not generate_wasm_externs else J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP,
             entry_points = wasm_entry_points,
             generate_imports = generate_wasm_imports,
+            generate_externs = generate_wasm_externs,
         )
     else:
         _empty_readable_targets("output_wasm")
@@ -188,12 +190,12 @@ def _js_readable_targets(readable_target, dir_out, defs):
     _readable_diff_test(
         name = "%s_golden" % readable_target,
         target = ":%s.js" % readable_target,
-        extra_file = "%s_warnings" % readable_target,
+        extra_files = ["%s_warnings" % readable_target],
         dir_out = dir_out,
         tags = ["j2cl"],
     )
 
-def _wasm_readable_targets(feature_set, entry_points, generate_imports):
+def _wasm_readable_targets(feature_set, entry_points, generate_imports, generate_externs):
     _feature_set_enabled_j2wasm_library(
         name = "readable-j2wasm-feature_set",
         j2wasm_library = ":readable-j2wasm",
@@ -207,11 +209,27 @@ def _wasm_readable_targets(feature_set, entry_points, generate_imports):
         feature_set = feature_set,
     )
 
+    _extract_json_warnings(
+        name = "readable_wasm_import_closure_warnings",
+        target = ":readable_wasm",
+    )
+
+    extra_files = ["readable_wasm_import_closure_warnings"]
+    if generate_externs:
+        # Warnings from type checking the transpiled output, which includes the generated externs.
+        _extract_json_warnings(
+            name = "readable_wasm_jsinterop_closure_warnings",
+            target = ":readable-j2wasm-feature_set",
+        )
+        extra_files.append("readable_wasm_jsinterop_closure_warnings")
+    if generate_imports:
+        extra_files.append(":readable_wasm.imports.js.txt")
+
     _readable_diff_test(
         name = "readable_wasm_golden",
         target = ":readable-j2wasm-feature_set",
         target_file = "readable-j2wasm.js",
-        extra_file = ":readable_wasm.imports.js.txt" if generate_imports else None,
+        extra_files = extra_files,
         dir_out = "output_wasm",
         tags = ["j2wasm"],
     )
@@ -222,13 +240,13 @@ def _wasm_readable_targets(feature_set, entry_points, generate_imports):
         tags = ["j2wasm"],
     )
 
-def _readable_diff_test(name, target, dir_out, tags, extra_file = None, target_file = ""):
+def _readable_diff_test(name, target, dir_out, tags, extra_files = [], target_file = ""):
     _golden_output(
         testonly = 1,
         name = name,
         target = target,
         target_file = target_file,
-        extra_file = extra_file,
+        extra_files = extra_files,
     )
 
     sh_test(
@@ -267,19 +285,20 @@ def _golden_output_impl(ctx):
     exclusion_filter = " -o ".join(["-name '*.%s'" % ext for ext in excluded_extensions])
 
     ctx.actions.run_shell(
-        inputs = [input] + ctx.files.extra_file,
+        inputs = [input] + ctx.files.extra_files,
         outputs = [output],
         mnemonic = "J2clGoldenOutputCopy",
         command = "\n".join([
             "set -e",
             "INPUT=%s" % input.path,
             "OUTPUT=%s" % output.path,
-            "EXTRA_FILE=%s" % ctx.files.extra_file[0].path if ctx.files.extra_file else "",
             "cp -L -rf ${INPUT}/* ${OUTPUT}",
-            # Only copy the extra file if it exists and is not empty.
-            "if [[ -n '${EXTRA_FILE}' && -s ${EXTRA_FILE} ]]; then",
-            "  cp -f ${EXTRA_FILE} ${OUTPUT}/${EXTRA_FILE##*/readable_}",
-            "fi",
+            # Only copy the extra files that exist and are not empty.
+            "for EXTRA_FILE in %s; do" % " ".join([f.path for f in ctx.files.extra_files]),
+            "  if [[ -s ${EXTRA_FILE} ]]; then",
+            "    cp -f ${EXTRA_FILE} ${OUTPUT}/${EXTRA_FILE##*/readable_}",
+            "  fi",
+            "done",
             "cd ${OUTPUT}",
             # We don't want to copy .java/.kt and .map files to the final output.
             "find \\( %s \\) -exec rm {} \\;" % exclusion_filter,
@@ -297,7 +316,7 @@ _golden_output = rule(
     attrs = {
         "target": attr.label(allow_files = True),
         "target_file": attr.string(default = ""),
-        "extra_file": attr.label(allow_files = True),
+        "extra_files": attr.label_list(allow_files = True),
     },
 )
 
@@ -324,7 +343,8 @@ def _feature_set_enabled_j2wasm_library_impl(ctx):
     j2wasm_library = ctx.attr.j2wasm_library[0]
     j2wasm_provider = j2wasm_library[J2wasmInfo]
     default_provider = j2wasm_library[DefaultInfo]
-    return [default_provider, j2wasm_provider]
+    js_provider = j2wasm_provider._private_.feature_set_map[ctx.attr.feature_set]._private_.js_info
+    return [default_provider, j2wasm_provider, js_provider]
 
 _j2wasm_feature_set_transition = transition(
     implementation = lambda settings, attr: {"//build_defs/internal_do_not_use:j2wasm_feature_set": attr.feature_set},
@@ -341,7 +361,7 @@ _feature_set_enabled_j2wasm_library = rule(
 )
 
 def _extract_json_warnings_impl(ctx):
-    debug_outputs = ctx.attr.target[J2clInfo]._private_.js_info.debug_outputs.to_list()
+    debug_outputs = ctx.attr.target[JsInfo].debug_outputs.to_list()
     warnings_file = [f for f in debug_outputs if f.basename.endswith("_local_warnings.json")][0]
     output = ctx.actions.declare_file(ctx.label.name + ".log")
     ctx.actions.run_shell(
@@ -362,6 +382,8 @@ def _extract_json_warnings_impl(ctx):
             # Unescape newlines and double quotes.
             gsub(/\\n/, "\n", $0);
             gsub(/\\"/, "\"", $0);
+            # Remove the configuration dependent prefix from the paths of generated files.
+            gsub(/blaze-out\/[^\/]+\/bin\//, "", $0);
             # Print the cleaned record
             if ($0 != "") print $0;
         }
@@ -375,6 +397,6 @@ def _extract_json_warnings_impl(ctx):
 _extract_json_warnings = rule(
     implementation = _extract_json_warnings_impl,
     attrs = {
-        "target": attr.label(providers = [J2clInfo]),
+        "target": attr.label(providers = [JsInfo]),
     },
 )
