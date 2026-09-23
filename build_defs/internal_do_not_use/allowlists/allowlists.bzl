@@ -2,14 +2,14 @@
 
 visibility(["//build_defs/internal_do_not_use/..."])
 
-def _make_package_allowlist(packages, include = [], exclude = []):
+def _make_package_allowlist(packages, exclude = []):
     """Returns an allowlist struct configured for package matching.
 
     Args:
       packages: a list of str, the packages to add to the allowlist. Package
         paths may end with '/...' to allow for subpackage matching.
-      include: a list of allowlist structs, their entries will be added to this
-        allowlist.
+      exclude: a list of allowlist structs, their entries will be excluded from
+        the returned allowlist.
 
     Returns:
       An allowlist struct configured for package matching.
@@ -17,17 +17,16 @@ def _make_package_allowlist(packages, include = [], exclude = []):
     return _make_allowlist(
         check_fn = _is_or_subpackage_of,
         entries = [_check_package_definition(p) for p in packages],
-        include = include,
         exclude = exclude,
     )
 
-def _make_target_allowlist(targets, include = [], exclude = []):
+def _make_target_allowlist(targets, exclude = []):
     """Returns an allowlist struct configured for target matching.
 
     Args:
       targets: a list of (str or Label), the targets to add to the allowlist.
-      include: a list of allowlist structs, their entries will be added to this
-        allowlist.
+      exclude: a list of allowlist structs, their entries will be excluded from
+        the returned allowlist.
     Returns:
       An allowlist struct configured for target matching.
     """
@@ -35,20 +34,16 @@ def _make_target_allowlist(targets, include = [], exclude = []):
     return _make_allowlist(
         check_fn = lambda label, entry: label == entry,
         entries = [_as_label(t) for t in targets],
-        include = include,
         exclude = exclude,
     )
 
-def _make_allowlist(check_fn, entries, include, exclude):
+def _make_allowlist(check_fn, entries, exclude):
     """Returns an allowlist struct configured for the given check and entries."""
 
     def _accepts(target):
         label = _as_label(target)
         for e in entries:
             if check_fn(label, e):
-                return True
-        for i in include:
-            if i.accepts(label):
                 return True
         return False
 

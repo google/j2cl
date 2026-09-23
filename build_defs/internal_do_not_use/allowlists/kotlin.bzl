@@ -1,7 +1,6 @@
 """Kotlin frontend allowlists."""
 
 load(":allowlists.bzl", "allowlists")
-load(":j2kt_web.bzl", "J2KT_WEB_ENABLED", "J2KT_WEB_EXPERIMENT_ENABLED")
 
 visibility(["//build_defs/internal_do_not_use/..."])
 
@@ -14,4 +13,4 @@ KOTLIN_ALLOWLIST = allowlists.of_packages([
     "//third_party/kotlin/kmp_stubs/...",
     "//third_party/kotlin/kotlinx_atomicfu/...",
     "//third_party/kotlin/kotlinx_coroutines/...",
-], include = [J2KT_WEB_ENABLED, J2KT_WEB_EXPERIMENT_ENABLED])
+])
