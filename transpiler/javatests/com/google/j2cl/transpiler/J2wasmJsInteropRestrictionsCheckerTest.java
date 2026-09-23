@@ -356,7 +356,27 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testExportedTypePassedToNativeMethodSucceeds() {
+  public void testExportedTypePassedToNativeMethodFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        class MyJsType {
+          public void m() {}
+        }
+        class Main {
+          @JsMethod
+          static native void acceptJsType(MyJsType jsType);
+        > Error: Parameter 'jsType' in 'void Main.acceptJsType(MyJsType jsType)' cannot be of type 'MyJsType'.
+          @JsMethod
+          static native MyJsType returnJsType();
+        > Error: Return type of 'MyJsType Main.returnJsType()' cannot be of type 'MyJsType'.
+        }
+        """);
+  }
+
+  public void testExportedTypePassedToNativeMethodWithCustomDescriptorsSucceeds() {
     newTesterWithWasmCustomDescriptorsJsInteropEnabled()
         .addCompilationUnit(
             "test.MyNative",
