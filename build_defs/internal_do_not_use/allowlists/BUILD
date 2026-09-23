@@ -1,5 +1,10 @@
+load(":allowlists_test.bzl", "allowlists_test_suite")
+
 package(
     default_applicable_licenses = ["//:j2cl_license"],
-    default_visibility = ["//build_defs/internal_do_not_use:__subpackages__"],
     licenses = ["reciprocal"],
+)
+
+allowlists_test_suite(
+    name = "allowlists_test",
 )

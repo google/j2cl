@@ -40,6 +40,10 @@ def _make_target_allowlist(targets, exclude = []):
 def _make_allowlist(check_fn, entries, exclude):
     """Returns an allowlist struct configured for the given check and entries."""
 
+    for e in exclude:
+        if e._has_excludes:
+            fail("Allowlists used in exclude must not have their own excludes.")
+
     def _accepts(target):
         label = _as_label(target)
         for e in entries:
@@ -59,7 +63,7 @@ def _make_allowlist(check_fn, entries, exclude):
         fn = lambda label: not _rejects(label) and _accepts(label)
     else:
         fn = _accepts
-    return struct(accepts = fn)
+    return struct(accepts = fn, _has_excludes = bool(exclude))
 
 def _as_label(target):
     if type(target) == "Label":
