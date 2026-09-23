@@ -22,8 +22,8 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
 import java.util.List;
 
@@ -138,8 +138,8 @@ abstract class JsMethodImport {
     return getMethod().getDescriptor().isPropertySetter();
   }
 
-  public List<Variable> getParameters() {
-    return getMethod().getParameters();
+  public List<ParameterDescriptor> getParameters() {
+    return getMethod().getDescriptor().getParameterDescriptors();
   }
 
   public boolean emitAsMethodReference() {

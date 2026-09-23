@@ -938,7 +938,11 @@ public final class AstUtils {
   public static MethodDescriptor getSetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
     return createMethodDescriptorBuilderFrom(fieldDescriptor)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_PROPERTY_SETTER)
-        .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
+        .setParameterDescriptors(
+            ParameterDescriptor.builder()
+                .setName("value")
+                .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
+                .build())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setOriginalJsInfo(
             fieldDescriptor.isJsProperty()

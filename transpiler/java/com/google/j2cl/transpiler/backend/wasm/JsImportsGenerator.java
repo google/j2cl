@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
 import java.util.HashMap;
@@ -207,17 +207,16 @@ public final class JsImportsGenerator {
     if (methodImport.isInstance()) {
       sb.append(
           createParameterDefinition(
-              new Variable.Builder()
-                  .setName("$instance")
-                  .setTypeDescriptor(
-                      methodImport
-                          .getMethod()
-                          .getDescriptor()
-                          .getEnclosingTypeDescriptor()
-                          .toNonNullable())
-                  .build()));
+              "$instance",
+              methodImport
+                  .getMethod()
+                  .getDescriptor()
+                  .getEnclosingTypeDescriptor()
+                  .toNonNullable()));
     }
-    methodImport.getParameters().forEach(v -> sb.append(createParameterDefinition(v)));
+    methodImport
+        .getParameters()
+        .forEach(p -> sb.append(createParameterDefinition(p.getName(), p.getTypeDescriptor())));
     sb.append(") => ");
 
     // Emit function name
@@ -248,12 +247,11 @@ public final class JsImportsGenerator {
     return sb.toString();
   }
 
-  private String createParameterDefinition(Variable parameter) {
+  private String createParameterDefinition(String name, TypeDescriptor typeDescriptor) {
     return String.format(
         "/** %s */ %s, ",
         // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
-        closureEnvironment.getClosureTypeString(parameter.getTypeDescriptor().toNonNullable()),
-        parameter.getName());
+        closureEnvironment.getClosureTypeString(typeDescriptor.toNonNullable()), name);
   }
 
   private static class ImportCollector extends AbstractVisitor {

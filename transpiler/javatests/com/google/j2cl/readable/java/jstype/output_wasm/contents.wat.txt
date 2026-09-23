@@ -242,17 +242,17 @@
 )
 (elem declare func $js_export_get_publicField__int@jstype.SomeJsType)
 
-;;; void SomeJsType.publicField(int arg0)
+;;; void SomeJsType.publicField(int value)
 (func $js_export_set_publicField__int__void@jstype.SomeJsType
  (type $function.js_export_set_publicField__int__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
+ (param $value i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:23:13
-  (struct.set $jstype.SomeJsType $publicField@jstype.SomeJsType (local.get $this) (local.get $arg0))
+  (struct.set $jstype.SomeJsType $publicField@jstype.SomeJsType (local.get $this) (local.get $value))
  )
 )
 (elem declare func $js_export_set_publicField__int__void@jstype.SomeJsType)
