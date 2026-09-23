@@ -25,6 +25,10 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         "test.MyNative",
         """
         import jsinterop.annotations.*;
+        @JsFunction
+        interface MyJsFunction {
+          void run();
+        }
         @JsType(isNative = true)
         class MyNative {
           int primitiveField;
@@ -34,12 +38,15 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           Boolean booleanField;
           Long longField;
           MyNative nativeField;
-          MyNative(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c) {}
-          native MyNative test(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c);
+          MyJsFunction jsFunctionField;
+          MyNative(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c, MyJsFunction f) {}
+          native MyNative test(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c, MyJsFunction f);
         }
         class MyNonNative {
           @JsMethod
           static native MyNative test(MyNative c);
+          @JsMethod
+          static native MyJsFunction testJsFunction(MyJsFunction f);
         }
         class MyNonNative2<T extends MyNative> {
           T field;
