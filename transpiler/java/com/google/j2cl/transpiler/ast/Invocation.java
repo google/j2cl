@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.visitor.Visitable;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -89,40 +90,50 @@ public abstract class Invocation extends MemberReference {
     }
 
     @CanIgnoreReturnValue
-    public final T addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
-      return addArgumentsAndUpdateDescriptor(index, Arrays.asList(argumentExpressions));
+    public final T addArgumentsAndUpdateDescriptor(int index, Variable... variables) {
+      return addArgumentsAndUpdateDescriptor(index, Arrays.asList(variables));
     }
 
     @CanIgnoreReturnValue
-    public final T addArgumentsAndUpdateDescriptor(
-        int index, Collection<Expression> argumentExpressions) {
-      if (argumentExpressions.isEmpty()) {
+    public final T addArgumentsAndUpdateDescriptor(int index, Collection<Variable> variables) {
+      if (variables.isEmpty()) {
         return getThis();
       }
 
-      arguments.addAll(index, argumentExpressions);
+      arguments.addAll(
+          index, variables.stream().map(Variable::createReference).collect(toImmutableList()));
       // Add the provided parameters to the proper index position of the existing parameters list.
       return setTarget(
           getTarget()
               .transform(
                   builder ->
-                      builder.addParameterTypeDescriptors(
+                      builder.addParameterDescriptors(
                           index,
-                          argumentExpressions.stream()
-                              .map(Expression::getTypeDescriptor)
+                          variables.stream()
+                              .map(Variable::toParameterDescriptor)
                               .collect(toImmutableList()))));
     }
 
     @CanIgnoreReturnValue
     public final T addArgumentAndUpdateDescriptor(
-        int index, Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
-      arguments.add(index, argumentExpression);
-      // Add the provided parameters to the proper index position of the existing parameters list.
+        int index,
+        Expression argumentExpression,
+        String parameterName,
+        TypeDescriptor parameterTypeDescriptor) {
+      return addArgumentAndUpdateDescriptor(
+          index,
+          argumentExpression,
+          ParameterDescriptor.create(parameterName, parameterTypeDescriptor));
+    }
 
+    @CanIgnoreReturnValue
+    public final T addArgumentAndUpdateDescriptor(
+        int index, Expression argumentExpression, ParameterDescriptor parameterDescriptor) {
+      arguments.add(index, argumentExpression);
+      // Add the provided parameter to the proper index position of the existing parameters list.
       return setTarget(
           getTarget()
-              .transform(
-                  builder -> builder.addParameterTypeDescriptors(index, parameterTypeDescriptor)));
+              .transform(builder -> builder.addParameterDescriptors(index, parameterDescriptor)));
     }
 
     @CanIgnoreReturnValue

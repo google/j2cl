@@ -26,7 +26,9 @@ import static java.util.Arrays.stream;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,10 +135,11 @@ public final class RuntimeMethods {
                 .setStatic(true)
                 .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
                 .setName("$set")
-                .setParameterTypeDescriptors(
-                    TypeDescriptors.get().javaLangObjectArray, // array
-                    PrimitiveTypes.INT, // index
-                    elementType)
+                .setParameterDescriptors(
+                    toParameterDescriptors(
+                        TypeDescriptors.get().javaLangObjectArray, // array
+                        PrimitiveTypes.INT, // index
+                        elementType))
                 .setReturnTypeDescriptor(elementType)
                 .build())
         .setArguments(array, index, value)
@@ -282,7 +285,8 @@ public final class RuntimeMethods {
                 .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangClass)
                 .setName("$get")
                 // Allow the call to use the one or two parameter version.
-                .setParameterTypeDescriptors(parameterTypeDescriptors.subList(0, arguments.length))
+                .setParameterDescriptors(
+                    toParameterDescriptors(parameterTypeDescriptors.subList(0, arguments.length)))
                 .setReturnTypeDescriptor(TypeDescriptors.get().javaLangClass)
                 .build())
         .setArguments(arguments)
@@ -652,7 +656,8 @@ public final class RuntimeMethods {
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
             .setName(name)
-            .setParameterTypeDescriptors(PrimitiveTypes.LONG, PrimitiveTypes.LONG)
+            .setParameterDescriptors(
+                toParameterDescriptors(PrimitiveTypes.LONG, PrimitiveTypes.LONG))
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // LongUtils.someOperation(leftOperand, rightOperand);
@@ -687,7 +692,8 @@ public final class RuntimeMethods {
                 .setStatic(true)
                 .setNative(true)
                 .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeObject)
-                .setParameterTypeDescriptors(PrimitiveTypes.INT, PrimitiveTypes.INT)
+                .setParameterDescriptors(
+                    toParameterDescriptors(PrimitiveTypes.INT, PrimitiveTypes.INT))
                 .setReturnTypeDescriptor(PrimitiveTypes.INT)
                 .build())
         .setArguments(leftOperand, rightOperand)
@@ -707,7 +713,8 @@ public final class RuntimeMethods {
                 .setStatic(true)
                 .setNative(true)
                 .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeObject)
-                .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
+                .setParameterDescriptors(
+                    toParameterDescriptors(TypeDescriptors.get().javaLangString))
                 .setReturnTypeDescriptor(PrimitiveTypes.DOUBLE)
                 .build())
         .setArguments(stringExpression)
@@ -1095,12 +1102,29 @@ public final class RuntimeMethods {
             .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName(methodName)
-            .setParameterTypeDescriptors(parameterTypes.subList(0, arguments.size()))
+            .setParameterDescriptors(
+                toParameterDescriptors(parameterTypes.subList(0, arguments.size())))
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
     // parameter type instead of the type parameter itself.
     return MethodCall.builderFrom(methodDescriptor).setArguments(arguments).build();
+  }
+
+  private static ImmutableList<ParameterDescriptor> toParameterDescriptors(
+      TypeDescriptor... parameterTypes) {
+    return toParameterDescriptors(Arrays.asList(parameterTypes));
+  }
+
+  private static ImmutableList<ParameterDescriptor> toParameterDescriptors(
+      List<TypeDescriptor> parameterTypes) {
+    // Parameter names in runtime MethodDescriptors are never emitted in the generated output
+    // because these descriptors are only used as targets of MethodCalls and never to declare
+    // synthesized Methods.
+    return Streams.mapWithIndex(
+            parameterTypes.stream(),
+            (typeDescriptor, i) -> ParameterDescriptor.create("arg" + i, typeDescriptor))
+        .collect(toImmutableList());
   }
 
   @AutoValue

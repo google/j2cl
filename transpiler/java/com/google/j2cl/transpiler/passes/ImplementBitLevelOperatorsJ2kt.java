@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -64,7 +65,9 @@ public final class ImplementBitLevelOperatorsJ2kt extends NormalizationPass {
             .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setReturnTypeDescriptor(binaryExpression.getTypeDescriptor())
             .setName(methodName)
-            .setParameterTypeDescriptors(binaryExpression.getRightOperand().getTypeDescriptor())
+            .setParameterDescriptors(
+                ParameterDescriptor.create(
+                    "other", binaryExpression.getRightOperand().getTypeDescriptor()))
             .build();
 
     return MethodCall.builderFrom(methodDescriptor)

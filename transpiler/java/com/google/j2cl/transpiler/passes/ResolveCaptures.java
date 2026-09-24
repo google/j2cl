@@ -16,7 +16,6 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.not;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.collect.ImmutableSet;
@@ -306,13 +305,16 @@ public class ResolveCaptures extends NormalizationPass {
             }
 
             // Pass the captured variables.
-            Invocation.Builder<?, ?> invocationBuilder =
-                invocation.toBuilder()
-                    .addArgumentsAndUpdateDescriptor(
-                        0,
-                        captures.stream()
-                            .map(Variable::createReference)
-                            .collect(toImmutableList()));
+            Invocation.Builder<?, ?> invocationBuilder = invocation.toBuilder();
+            int i = 0;
+            for (Variable capture : captures) {
+              invocationBuilder.addArgumentAndUpdateDescriptor(
+                  i++,
+                  capture.createReference(),
+                  createParameterMatchingField(
+                          getFieldDescriptorForCapture(targetTypeDeclaration, capture))
+                      .toParameterDescriptor());
+            }
 
             if (qualifier != null) {
               // Pass the enclosing instance as the first parameter.
@@ -321,7 +323,9 @@ public class ResolveCaptures extends NormalizationPass {
                   .addArgumentAndUpdateDescriptor(
                       0,
                       invocation.getQualifier(),
-                      targetTypeDescriptor.getEnclosingTypeDescriptor().toNonNullable())
+                      createParameterMatchingField(
+                              targetTypeDescriptor.getFieldDescriptorForEnclosingInstance())
+                          .toParameterDescriptor())
                   .setQualifier(null);
             }
             return invocationBuilder.build();

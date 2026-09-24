@@ -137,8 +137,8 @@ public class OptimizeXplatLogger extends NormalizationPass {
     // Make sure to match arguments in size (due to optional parameters).
     return replacementMethodDescriptor.transform(
         builder ->
-            builder.setParameterTypeDescriptors(
-                builder.getParameterTypeDescriptors().subList(0, argsCount)));
+            builder.setParameterDescriptors(
+                builder.getParameterDescriptors().subList(0, argsCount)));
   }
 
   private static String getWellKnownLoggingApiMethodName(MethodCall methodCall) {

@@ -197,12 +197,10 @@ public final class AstUtils {
   public static List<Variable> createParameterVariables(
       List<ParameterDescriptor> parameterDescriptors) {
     List<Variable> parameters = new ArrayList<>();
-    for (int i = 0; i < parameterDescriptors.size(); i++) {
-      ParameterDescriptor parameterDescriptor = parameterDescriptors.get(i);
-      String name = parameterDescriptor.getName();
+    for (ParameterDescriptor parameterDescriptor : parameterDescriptors) {
       parameters.add(
           Variable.builder()
-              .setName(name != null ? name : "arg" + i)
+              .setName(parameterDescriptor.getName())
               .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
               .setParameter(true)
               .build());

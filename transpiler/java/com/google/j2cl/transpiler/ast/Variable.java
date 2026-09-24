@@ -23,6 +23,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 
 /** Class for local variable and parameter. */
 @Visitable
@@ -95,6 +96,10 @@ public class Variable extends NameDeclaration implements Cloneable<Variable>, Ha
 
   public BinaryExpression infixAssign(Expression value) {
     return createReference().infixAssign(value);
+  }
+
+  public ParameterDescriptor toParameterDescriptor() {
+    return ParameterDescriptor.create(getName(), getTypeDescriptor());
   }
 
   @Override

@@ -60,7 +60,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract TypeDescriptor getTypeDescriptor();
 
-    @Nullable
     @Override
     public abstract String getName();
 
@@ -100,7 +99,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract static class Builder {
       public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
 
-      public abstract Builder setName(@Nullable String name);
+      public abstract Builder setName(String name);
 
       public abstract Builder setVarargs(boolean isVarargs);
 
@@ -1730,16 +1729,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
     @CanIgnoreReturnValue
-    public Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
-      return setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
-      return setParameterDescriptors(toParameterDescriptors(parameterTypeDescriptors));
-    }
-
-    @CanIgnoreReturnValue
     public Builder updateParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
       return updateParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
     }
@@ -1752,18 +1741,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                   parameterTypeDescriptors.stream(),
                   (pd, td) -> pd.toBuilder().setTypeDescriptor(td).build())
               .collect(toImmutableList()));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addParameterTypeDescriptors(
-        int index, TypeDescriptor... parameterTypeDescriptors) {
-      return addParameterTypeDescriptors(index, Arrays.asList(parameterTypeDescriptors));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addParameterTypeDescriptors(
-        int index, Collection<TypeDescriptor> parameterTypeDescriptors) {
-      return addParameterDescriptors(index, toParameterDescriptors(parameterTypeDescriptors));
     }
 
     @CanIgnoreReturnValue
@@ -1808,20 +1785,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setTypeArgumentTypeDescriptors(newTypeArgumentTypeDescriptors);
     }
 
-    abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
+    public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
     public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
       return getParameterDescriptors().stream()
           .map(ParameterDescriptor::getTypeDescriptor)
-          .collect(toImmutableList());
-    }
-
-    static ImmutableList<ParameterDescriptor> toParameterDescriptors(
-        Collection<TypeDescriptor> parameterTypeDescriptors) {
-      return parameterTypeDescriptors.stream()
-          .map(
-              typeDescriptor ->
-                  ParameterDescriptor.builder().setTypeDescriptor(typeDescriptor).build())
           .collect(toImmutableList());
     }
 

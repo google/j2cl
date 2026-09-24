@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -553,7 +554,8 @@ public class NormalizeConstructors extends NormalizationPass {
     return NewInstance.builderFrom(
             MethodDescriptor.builder()
                 .setConstructor(true)
-                .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+                .setParameterDescriptors(
+                    ParameterDescriptor.create("cause", TypeDescriptors.get().javaLangObject))
                 .setEnclosingTypeDescriptor(type)
                 .build())
         .setArguments(thisRef)

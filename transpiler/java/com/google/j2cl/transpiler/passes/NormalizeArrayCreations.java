@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
@@ -70,7 +71,8 @@ public class NormalizeArrayCreations extends NormalizationPass {
                 .setConstructor(true)
                 .setOriginalJsInfo(JsInfo.RAW_CTOR)
                 .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
-                .setParameterTypeDescriptors(dimensionExpression.getTypeDescriptor())
+                .setParameterDescriptors(
+                    ParameterDescriptor.create("length", dimensionExpression.getTypeDescriptor()))
                 .build();
 
         return NewInstance.builderFrom(nativeArrayConstructor)

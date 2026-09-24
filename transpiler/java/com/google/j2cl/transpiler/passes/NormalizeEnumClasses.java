@@ -101,10 +101,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
                         }
 
                         return methodCall.toBuilder()
-                            .addArgumentsAndUpdateDescriptor(
-                                0,
-                                nameParameter.createReference(),
-                                ordinalParameter.createReference())
+                            .addArgumentsAndUpdateDescriptor(0, nameParameter, ordinalParameter)
                             .build();
                       }
                     });
@@ -212,10 +209,16 @@ public class NormalizeEnumClasses extends NormalizationPass {
             // Add the name and ordinal as first and second parameters when instantiating
             // the enum value.
             return newInstance.toBuilder()
-                .addArgumentsAndUpdateDescriptor(
+                .addArgumentAndUpdateDescriptor(
                     0,
                     enumReplaceStringMethodCall(new StringLiteral(enumFieldDescriptor.getName())),
-                    FieldAccess.builderFrom(ordinalConstantFieldDescriptor).build())
+                    VALUE_NAME_PARAMETER_NAME,
+                    TypeDescriptors.get().javaLangString)
+                .addArgumentAndUpdateDescriptor(
+                    1,
+                    FieldAccess.builderFrom(ordinalConstantFieldDescriptor).build(),
+                    ORDINAL_PARAMETER_NAME,
+                    PrimitiveTypes.INT)
                 .build();
           }
         });

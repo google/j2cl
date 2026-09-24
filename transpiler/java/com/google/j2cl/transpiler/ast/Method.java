@@ -230,10 +230,10 @@ public class Method extends Member implements MethodLike {
       parameters.addAll(index, newParameters);
       methodDescriptor =
           methodDescriptor.toBuilder()
-              .addParameterTypeDescriptors(
+              .addParameterDescriptors(
                   index,
                   newParameters.stream()
-                      .map(Variable::getTypeDescriptor)
+                      .map(Variable::toParameterDescriptor)
                       .collect(toImmutableList()))
               .build();
       return this;
