@@ -316,7 +316,7 @@ public class WasmConstructsGenerator {
     builder.newLine();
     builder.append(
         format(
-            "(func %s (import \"%s\" \"%s\") ",
+            "(func %s (import \"%s\" \"%s\")",
             environment.getMethodImplementationName(method.getDescriptor()),
             JsImportsGenerator.MODULE,
             jsMethodImport.getImportKey()));
