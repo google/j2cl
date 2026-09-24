@@ -20,10 +20,8 @@ package jsinteroptests
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertNotNull
-import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsConstructor
-import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
@@ -43,7 +41,6 @@ object JsTypeTest {
     testNamedBridge()
     testNativeMethodOverrideNoTypeTightenParam()
     testRevealedOverrideJsType()
-    testSingleJavaConcreteJsFunction()
     testInheritName()
   }
 
@@ -290,27 +287,6 @@ object JsTypeTest {
   @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   @JvmStatic
   internal external fun fillJsTypeField(jstype: SimpleJsTypeWithField)
-
-  @JsFunction
-  internal fun interface JsFunctionInterface {
-    fun m(): Int
-  }
-
-  internal class JavaConcreteJsFunction : JsFunctionInterface {
-    override fun m(): Int = 5
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  @JvmStatic
-  private external fun nativeJsFunction(): Any?
-
-  private fun testSingleJavaConcreteJsFunction() {
-    // Create a couple of instances and use the objects in some way to avoid complete pruning
-    // of JavaConcrete
-    assertTrue(JavaConcreteJsFunction() != JavaConcreteJsFunction())
-    assertSame(5, JavaConcreteJsFunction().m())
-    assertSame(3, (nativeJsFunction() as JsFunctionInterface).m())
-  }
 
   @JsType
   internal abstract class SomeAbstractClass {

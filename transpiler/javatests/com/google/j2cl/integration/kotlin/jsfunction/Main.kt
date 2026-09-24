@@ -63,6 +63,7 @@ fun main(vararg unused: String) {
   testJsFunctionViaFunctionMethods()
   testGetClass()
   testJsFunctionOptimization()
+  testSingleConcreteJsFunction()
   testJsFunctionWithVarArgs()
   testJsFunctionLambda()
   testJsFunctionLambdaCapturingLocal()
@@ -335,7 +336,7 @@ private fun testJsFunctionReferentialIntegrity() {
 
 private fun testCast_fromJsFunction() {
   val c1 = createFunction() as MyJsFunctionInterface
-  assertNotNull(c1)
+  assertEquals(10, c1.foo(10))
   val c2 = createFunction() as MyJsFunctionIdentityInterface
   assertNotNull(c2)
   val i = createFunction() as ElementLikeNativeInterface
@@ -362,11 +363,12 @@ private fun testCast_fromJsObject() {
 private fun testCast_inJava() {
   val o: Any = MyJsFunctionInterfaceImpl()
   val c1 = o as MyJsFunctionInterface
-  assertNotNull(c1)
+  assertEquals(11, c1.foo(10))
   val c2 = c1 as MyJsFunctionInterfaceImpl
   assertEquals(10, c2.publicField)
+  assertEquals(11, c2.foo(10))
   val c3 = o as MyJsFunctionInterfaceImpl
-  assertNotNull(c3)
+  assertEquals(11, c3.foo(10))
   val c4 = o as MyJsFunctionIdentityInterface
   assertNotNull(c4)
   val c5 = o as ElementLikeNativeInterface
@@ -475,6 +477,26 @@ private fun testJsFunctionOptimization() {
       private fun id(a: Int): Int = a
     }
   assertEquals(MyJsFunctionInterface::class.java, unoptimizableInner.javaClass)
+}
+
+@JsFunction
+internal fun interface JsFunctionInterfaceWithSingleImpl {
+  fun m(): Int
+}
+
+internal class JsFunctionInterfaceSingleImpl : JsFunctionInterfaceWithSingleImpl {
+  override fun m(): Int = 5
+}
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun createFunctionSingleImpl(): Any?
+
+// Tests that a JsFunction interface with a single transpiled implementer don't get tightened so
+// that JS implementers still work.
+private fun testSingleConcreteJsFunction() {
+  assertTrue(JsFunctionInterfaceSingleImpl() != JsFunctionInterfaceSingleImpl())
+  assertSame(5, JsFunctionInterfaceSingleImpl().m())
+  assertSame(3, (createFunctionSingleImpl() as JsFunctionInterfaceWithSingleImpl).m())
 }
 
 private fun testInstanceField() {

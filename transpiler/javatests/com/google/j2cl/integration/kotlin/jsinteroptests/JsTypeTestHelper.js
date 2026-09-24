@@ -73,13 +73,6 @@ exports.fillJsTypeField = function(jstype) {
 };
 
 /**
- * @return {*}
- */
-exports.nativeJsFunction = function() {
-  return function() { return 3; };
-};
-
-/**
  * @param {?} obj
  * @return {boolean}
  */

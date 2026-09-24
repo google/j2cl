@@ -18,11 +18,9 @@ package jsinteroptests;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
-import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -42,7 +40,6 @@ public class JsTypeTest {
     testNamedBridge();
     testNativeMethodOverrideNoTypeTightenParam();
     testRevealedOverrideJsType();
-    testSingleJavaConcreteJsFunction();
     testInheritName();
     testJsTypeRecord();
   }
@@ -314,30 +311,6 @@ public class JsTypeTest {
 
   @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
   public static native void fillJsTypeField(SimpleJsTypeWithField jstype);
-
-
-  @JsFunction
-  interface JsFunctionInterface {
-    int m();
-  }
-
-  static final class JavaConcreteJsFunction implements JsFunctionInterface {
-    @Override
-    public int m() {
-      return 5;
-    }
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  private static native Object nativeJsFunction();
-
-  private static void testSingleJavaConcreteJsFunction() {
-    // Create a couple of instances and use the objects in some way to avoid complete pruning
-    // of JavaConcrete
-    assertTrue(new JavaConcreteJsFunction() != new JavaConcreteJsFunction());
-    assertSame(5, new JavaConcreteJsFunction().m());
-    assertSame(3, ((JsFunctionInterface) nativeJsFunction()).m());
-  }
 
   @JsType
   abstract static class SomeAbstractClass {

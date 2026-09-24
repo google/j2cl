@@ -115,6 +115,15 @@ exports.createFunction = function() {
 };
 
 /**
+ * @return {!Function}
+ * @public
+ */
+exports.createFunctionSingleImpl = function() {
+  const fun = function() { return 3; };
+  return fun;
+};
+
+/**
  * @return {function(!SomeJsType):!SomeJsType}
  * @public
  */

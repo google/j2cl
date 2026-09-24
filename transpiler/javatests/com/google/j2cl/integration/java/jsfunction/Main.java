@@ -64,6 +64,7 @@ public class Main {
     testJsFunctionViaFunctionMethods();
     testGetClass();
     testJsFunctionOptimization();
+    testSingleConcreteJsFunction();
     testJsFunctionWithVarArgs();
     testJsFunctionLambda();
     testJsFunctionLambdaCapturingLocal();
@@ -359,7 +360,7 @@ public class Main {
 
   private static void testCast_fromJsFunction() {
     MyJsFunctionInterface c1 = (MyJsFunctionInterface) createFunction();
-    assertNotNull(c1);
+    assertEquals(10, c1.foo(10));
     MyJsFunctionIdentityInterface c2 = (MyJsFunctionIdentityInterface) createFunction();
     assertNotNull(c2);
     ElementLikeNativeInterface i = (ElementLikeNativeInterface) createFunction();
@@ -390,11 +391,12 @@ public class Main {
   private static void testCast_inJava() {
     Object object = new MyJsFunctionInterfaceImpl();
     MyJsFunctionInterface c1 = (MyJsFunctionInterface) object;
-    assertNotNull(c1);
+    assertEquals(11, c1.foo(10));
     MyJsFunctionInterfaceImpl c2 = (MyJsFunctionInterfaceImpl) c1;
     assertEquals(10, c2.publicField);
+    assertEquals(11, c2.foo(10));
     MyJsFunctionInterfaceImpl c3 = (MyJsFunctionInterfaceImpl) object;
-    assertNotNull(c3);
+    assertEquals(11, c3.foo(10));
     MyJsFunctionIdentityInterface c4 = (MyJsFunctionIdentityInterface) object;
     assertNotNull(c4);
     ElementLikeNativeInterface c5 = (ElementLikeNativeInterface) object;
@@ -524,6 +526,29 @@ public class Main {
           }
         };
     assertEquals(MyJsFunctionInterface.class, unoptimizableInner.getClass());
+  }
+
+  @JsFunction
+  interface JsFunctionInterfaceWithSingleImpl {
+    int m();
+  }
+
+  static final class JsFunctionInterfaceSingleImpl implements JsFunctionInterfaceWithSingleImpl {
+    @Override
+    public int m() {
+      return 5;
+    }
+  }
+
+  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  public static native Object createFunctionSingleImpl();
+
+  // Tests that a JsFunction interface with a single transpiled implementer don't get tightened so
+  // that JS implementers still work.
+  private static void testSingleConcreteJsFunction() {
+    assertTrue(new JsFunctionInterfaceSingleImpl() != new JsFunctionInterfaceSingleImpl());
+    assertSame(5, new JsFunctionInterfaceSingleImpl().m());
+    assertSame(3, ((JsFunctionInterfaceWithSingleImpl) createFunctionSingleImpl()).m());
   }
 
   private static void testInstanceField() {
