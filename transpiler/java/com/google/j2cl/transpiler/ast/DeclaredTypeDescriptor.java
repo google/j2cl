@@ -434,7 +434,8 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return MethodDescriptor.builder()
         .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toDescriptor())
-        .setParameterTypeDescriptors(TypeDescriptors.getUnknownType())
+        .setParameterDescriptors(
+            ParameterDescriptor.create("instance", TypeDescriptors.getUnknownType()))
         .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)
@@ -447,7 +448,8 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return MethodDescriptor.builder()
         .setName(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toDescriptor())
-        .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
+        .setParameterDescriptors(
+            ParameterDescriptor.create("ctor", TypeDescriptors.get().nativeFunction))
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)
@@ -472,8 +474,9 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         .setName(MethodDescriptor.COPY_METHOD_NAME)
         .setEnclosingTypeDescriptor(
             getMetadataConstructorReference().getReferencedTypeDeclaration().toDescriptor())
-        .setParameterTypeDescriptors(
-            TypeDescriptors.getUnknownType(), TypeDescriptors.getUnknownType())
+        .setParameterDescriptors(
+            ParameterDescriptor.create("from", TypeDescriptors.getUnknownType()),
+            ParameterDescriptor.create("to", TypeDescriptors.getUnknownType()))
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)

@@ -1,9 +1,9 @@
 
 
-;;; void Function.$invokeJsFunction(WasmExtern arg0, NativeString arg1)
+;;; void Function.$invokeJsFunction(WasmExtern $jsFuncref, NativeString s)
 (func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String_NativeString__void@libraryinfo.Main.Function (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction") 
- (param $arg0 (ref null extern))
- (param $arg1 (ref null string))
+ (param $$jsFuncref (ref null extern))
+ (param $s (ref null string))
 )
 
 ;;; void Main.log(int o)

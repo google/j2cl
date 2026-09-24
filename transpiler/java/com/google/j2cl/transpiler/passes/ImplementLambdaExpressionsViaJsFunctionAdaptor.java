@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -220,7 +221,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
         .setName("$adapt")
         .setOriginalJsInfo(enclosingTypeDescriptor.isNative() ? JsInfo.OVERLAY : JsInfo.RAW)
         .setStatic(true)
-        .setParameterTypeDescriptors(jsFunctionTypeDescriptor)
+        .setParameterDescriptors(ParameterDescriptor.create("fn", jsFunctionTypeDescriptor))
         .setTypeParameterTypeDescriptors(jsFunctionTypeDescriptor.getAllTypeVariables())
         .setReturnTypeDescriptor(enclosingTypeDescriptor.toNonNullable())
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)

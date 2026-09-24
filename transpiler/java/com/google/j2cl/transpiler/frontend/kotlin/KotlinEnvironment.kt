@@ -607,14 +607,12 @@ internal class KotlinEnvironment(
       if (irFunction.isSuspend) {
         // Add the implicit continuation parameter so our type model is correct.
         parameterDescriptorsBuilder.add(
-          MethodDescriptor.ParameterDescriptor.builder()
-            .setTypeDescriptor(
-              TypeDescriptors.get()
-                .kotlinCoroutinesContinuation!!
-                .withTypeArguments(ImmutableList.of(TypeDescriptors.getUnknownType()))
-            )
-            .setName("\$continuation")
-            .build()
+          MethodDescriptor.ParameterDescriptor.create(
+            "\$continuation",
+            TypeDescriptors.get()
+              .kotlinCoroutinesContinuation!!
+              .withTypeArguments(ImmutableList.of(TypeDescriptors.getUnknownType())),
+          )
         )
       }
 

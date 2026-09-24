@@ -843,8 +843,11 @@ public final class AstUtils {
                 .setEnclosingTypeDescriptor(targetTypeDescriptor)
                 // The instance ($thisArg) parameter is assumed non nullable for
                 // the typing perspective.
-                .addParameterTypeDescriptors(
-                    0, enclosingTypeDescriptor.getDeclarationDescriptor().toNonNullable())
+                .addParameterDescriptors(
+                    0,
+                    ParameterDescriptor.create(
+                        "$thisArg",
+                        enclosingTypeDescriptor.getDeclarationDescriptor().toNonNullable()))
                 .addTypeParameterTypeDescriptors(
                     0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
                 .addTypeArgumentTypeDescriptors(
@@ -939,10 +942,7 @@ public final class AstUtils {
     return createMethodDescriptorBuilderFrom(fieldDescriptor)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_PROPERTY_SETTER)
         .setParameterDescriptors(
-            ParameterDescriptor.builder()
-                .setName("value")
-                .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
-                .build())
+            ParameterDescriptor.create("value", fieldDescriptor.getTypeDescriptor()))
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setOriginalJsInfo(
             fieldDescriptor.isJsProperty()

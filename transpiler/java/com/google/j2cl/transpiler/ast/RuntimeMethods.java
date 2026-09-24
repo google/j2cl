@@ -27,7 +27,6 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -870,7 +869,7 @@ public final class RuntimeMethods {
                                   "$castTo",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject,
                                           PrimitiveTypes.INT)
@@ -879,13 +878,13 @@ public final class RuntimeMethods {
                                   "$castToNative",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .put(
                                   "$create",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaLangObjectArray,
                                           TypeDescriptors.get().javaLangObject)
                                       .build())
@@ -893,13 +892,13 @@ public final class RuntimeMethods {
                                   "$createNative",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(TypeDescriptors.get().javaLangObjectArray)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangObjectArray)
                                       .build())
                               .put(
                                   "$createWithInitializer",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           PrimitiveTypes.INT,
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().nativeFunction,
@@ -910,14 +909,14 @@ public final class RuntimeMethods {
                                   "$createNativeWithInitializer",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           PrimitiveTypes.INT, TypeDescriptors.get().nativeFunction)
                                       .build())
                               .put(
                                   "$instanceIsOfType",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangBoolean)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject,
                                           PrimitiveTypes.INT)
@@ -926,13 +925,13 @@ public final class RuntimeMethods {
                                   "$instanceIsOfNative",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangBoolean)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .put(
                                   "$stampType",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObjectArray)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaLangObjectArray,
                                           TypeDescriptors.get().javaLangObject,
                                           PrimitiveTypes.DOUBLE)
@@ -947,7 +946,7 @@ public final class RuntimeMethods {
                                   "$to",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject)
                                       .build())
@@ -955,7 +954,7 @@ public final class RuntimeMethods {
                                   "$unchecked",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .buildOrThrow())
                       .put(
@@ -966,13 +965,13 @@ public final class RuntimeMethods {
                                   "$assertClinit",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.VOID)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .put(
                                   "$makeLambdaFunction",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().nativeFunction)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().nativeFunction,
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().nativeFunction)
@@ -981,19 +980,19 @@ public final class RuntimeMethods {
                                   "$makeEnumName",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangString)
-                                      .setParameters(TypeDescriptors.get().javaLangString)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangString)
                                       .build())
                               .put(
                                   "$makeLogMessage",
                                   MethodInfo.builder()
                                       .setReturnType(TypeDescriptors.get().javaLangString)
-                                      .setParameters(TypeDescriptors.get().javaLangString)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangString)
                                       .build())
                               .put(
                                   "$setClassMetadata",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.VOID)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaemulInternalConstructor,
                                           TypeDescriptors.get().javaLangString)
                                       .build())
@@ -1001,7 +1000,7 @@ public final class RuntimeMethods {
                                   "$setClassMetadataForInterface",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.VOID)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaemulInternalConstructor,
                                           TypeDescriptors.get().javaLangString)
                                       .build())
@@ -1009,7 +1008,7 @@ public final class RuntimeMethods {
                                   "$setClassMetadataForEnum",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.VOID)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaemulInternalConstructor,
                                           TypeDescriptors.get().javaLangString)
                                       .build())
@@ -1017,7 +1016,7 @@ public final class RuntimeMethods {
                                   "$synchronized",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.VOID)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
+                                      .setParameterTypes(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .buildOrThrow())
                       .put(
@@ -1028,7 +1027,7 @@ public final class RuntimeMethods {
                                   "$same",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.BOOLEAN)
-                                      .setParameters(
+                                      .setParameterTypes(
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject)
                                       .build())
@@ -1036,15 +1035,9 @@ public final class RuntimeMethods {
                                   "$sameNumber",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.BOOLEAN)
-                                      .setParameterDescriptors(
-                                          ParameterDescriptor.builder()
-                                              .setTypeDescriptor(
-                                                  TypeDescriptors.get().javaLangDouble)
-                                              .build(),
-                                          ParameterDescriptor.builder()
-                                              .setTypeDescriptor(
-                                                  TypeDescriptors.get().javaLangDouble)
-                                              .build())
+                                      .setParameterTypes(
+                                          TypeDescriptors.get().javaLangDouble,
+                                          TypeDescriptors.get().javaLangDouble)
                                       .build())
                               .buildOrThrow())
                       .put(
@@ -1055,13 +1048,13 @@ public final class RuntimeMethods {
                                   "negate",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.LONG)
-                                      .setParameters(PrimitiveTypes.LONG)
+                                      .setParameterTypes(PrimitiveTypes.LONG)
                                       .build())
                               .put(
                                   "not",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.LONG)
-                                      .setParameters(PrimitiveTypes.LONG)
+                                      .setParameterTypes(PrimitiveTypes.LONG)
                                       .build())
                               .buildOrThrow())
                       .put(
@@ -1072,13 +1065,13 @@ public final class RuntimeMethods {
                                   "fromInt",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.LONG)
-                                      .setParameters(PrimitiveTypes.INT)
+                                      .setParameterTypes(PrimitiveTypes.INT)
                                       .build())
                               .put(
                                   "fromBits",
                                   MethodInfo.builder()
                                       .setReturnType(PrimitiveTypes.LONG)
-                                      .setParameters(PrimitiveTypes.INT, PrimitiveTypes.INT)
+                                      .setParameterTypes(PrimitiveTypes.INT, PrimitiveTypes.INT)
                                       .build())
                               .buildOrThrow())
                       .buildOrThrow());
@@ -1089,11 +1082,11 @@ public final class RuntimeMethods {
     MethodInfo methodInfo =
         runtimeMethodInfoByMethodNameByType.get().get(vmTypeDescriptor).get(methodName);
     checkNotNull(methodInfo, "%s#%s(%s)", vmTypeDescriptor, methodName, arguments);
-    ImmutableList<ParameterDescriptor> parameterDescriptors = methodInfo.getParameterDescriptors();
+    ImmutableList<TypeDescriptor> parameterTypes = methodInfo.getParameterTypes();
     int requiredParameters = methodInfo.getRequiredParameters();
     TypeDescriptor returnTypeDescriptor = methodInfo.getReturnType();
 
-    checkArgument(arguments.size() <= methodInfo.getParameterDescriptors().size());
+    checkArgument(arguments.size() <= parameterTypes.size());
     checkArgument(arguments.size() >= requiredParameters);
 
     MethodDescriptor methodDescriptor =
@@ -1102,7 +1095,7 @@ public final class RuntimeMethods {
             .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName(methodName)
-            .setParameterDescriptors(parameterDescriptors.subList(0, arguments.size()))
+            .setParameterTypeDescriptors(parameterTypes.subList(0, arguments.size()))
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
@@ -1116,7 +1109,7 @@ public final class RuntimeMethods {
 
     public abstract int getRequiredParameters();
 
-    public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
+    public abstract ImmutableList<TypeDescriptor> getParameterTypes();
 
     public static Builder builder() {
       return new AutoValue_RuntimeMethods_MethodInfo.Builder();
@@ -1128,30 +1121,22 @@ public final class RuntimeMethods {
 
       public abstract Builder setRequiredParameters(int requiredParameters);
 
-      public Builder setParameters(TypeDescriptor... parameterTypes) {
-        return setParameterDescriptors(
-            stream(parameterTypes)
-                .map(p -> ParameterDescriptor.builder().setTypeDescriptor(p).build())
-                .toArray(ParameterDescriptor[]::new));
-      }
-
-      public abstract Builder setParameterDescriptors(ParameterDescriptor... parameters);
+      public abstract Builder setParameterTypes(TypeDescriptor... parameterTypes);
 
       public abstract MethodInfo autoBuild();
 
       abstract OptionalInt getRequiredParameters();
 
-      abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
+      abstract ImmutableList<TypeDescriptor> getParameterTypes();
 
       public MethodInfo build() {
         if (getRequiredParameters().isEmpty()) {
-          setRequiredParameters(getParameterDescriptors().size());
+          setRequiredParameters(getParameterTypes().size());
         }
         MethodInfo methodInfo = autoBuild();
         checkArgument(
             methodInfo.getRequiredParameters() >= 0
-                && methodInfo.getRequiredParameters()
-                    <= methodInfo.getParameterDescriptors().size());
+                && methodInfo.getRequiredParameters() <= methodInfo.getParameterTypes().size());
         return methodInfo;
       }
     }

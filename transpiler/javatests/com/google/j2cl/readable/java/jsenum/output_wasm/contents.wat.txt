@@ -673,17 +673,17 @@
  )
 )
 
-;;; WasmExtern JsFunctionSuppiler.get(JsFunctionAdaptor arg0)
+;;; WasmExtern JsFunctionSuppiler.get(JsFunctionAdaptor $instance)
 (@binaryen.js.called)
 (func $js_export_get__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@jsenum.Main.JsFunctionSuppiler
- (param $arg0 (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (result (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:209:6
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:209:6
   (call $$clinit__void_<once>_@jsenum.Main.JsFunctionSuppiler )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:209:6
-  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object (ref.as_non_null (local.get $arg0)) (ref.cast (ref $function.java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $arg0)))))))
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
  )
 )
 
@@ -736,10 +736,10 @@
  )
 )
 
-;;; WasmExtern SpecializedJsFunction.get(JsFunctionAdaptor arg0, WasmExtern value)
+;;; WasmExtern SpecializedJsFunction.get(JsFunctionAdaptor $instance, WasmExtern value)
 (@binaryen.js.called)
 (func $js_export_get__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.SpecializedJsFunction
- (param $arg0 (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $value (ref null extern))
  (result (ref null extern))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:214:6
@@ -747,7 +747,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:214:6
   (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunction )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:214:6
-  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $arg0)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $value)) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $arg0)))))))
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $value)) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
  )
 )
 
@@ -781,10 +781,10 @@
  )
 )
 
-;;; T SpecializedJsFunction.get$jsFunction(JsFunctionAdaptor $instance, T arg0)
+;;; T SpecializedJsFunction.get$jsFunction(JsFunctionAdaptor $instance, T value)
 (func $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
- (param $arg0 (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:213:12
  (block
@@ -792,10 +792,10 @@
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:213:12
-    (return (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+    (return (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $value) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:213:12
-    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.SpecializedJsFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $arg0))))))
+    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsenum.Main.SpecializedJsFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $value))))))
    )
   )
  )

@@ -127,16 +127,16 @@
 )
 
 
-;;; void NativeFunction.f(JsFunctionAdaptor arg0)
+;;; void NativeFunction.f(JsFunctionAdaptor $instance)
 (@binaryen.js.called)
 (func $js_export_f__javaemul_internal_JsFunctionAdaptor__void@jsdoctypemappings.JsDocTypeMappings.NativeFunction
- (param $arg0 (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:27:9
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:27:9
   (call $$clinit__void_<once>_@jsdoctypemappings.JsDocTypeMappings.NativeFunction )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsdoctypemappings/readable-j2wasm.js/jsdoctypemappings/JsDocTypeMappings.java:27:9
-  (call_ref $function.void (ref.as_non_null (local.get $arg0)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $arg0))))
+  (call_ref $function.void (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
  )
 )
 

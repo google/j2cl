@@ -22,7 +22,6 @@ import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -199,12 +198,8 @@ public class WasmJsBoundaryUtils {
     var origin = MethodDescriptor.MethodOrigin.WASM_JS_SETTER_EXPORT_BRIDGE;
     return AstUtils.getSetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(origin)
-        .setParameterDescriptors(
-            ParameterDescriptor.builder()
-                .setName("value")
-                .setTypeDescriptor(
-                    getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
-                .build())
+        .updateParameterTypeDescriptors(
+            getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();
   }
 
@@ -274,7 +269,10 @@ public class WasmJsBoundaryUtils {
         .toBuilder()
         .setEnclosingTypeDescriptor(jsFunctionTypeDescriptor.toRawTypeDescriptor())
         .setStatic(true)
-        .addParameterTypeDescriptors(0, TypeDescriptors.get().javaemulInternalJsFunctionAdaptor)
+        .addParameterDescriptors(
+            0,
+            MethodDescriptor.ParameterDescriptor.create(
+                "$instance", TypeDescriptors.get().javaemulInternalJsFunctionAdaptor))
         .build();
   }
 

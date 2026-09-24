@@ -325,17 +325,17 @@
  )
 )
 
-;;; void Function.apply(JsFunctionAdaptor arg0, NativeString s)
+;;; void Function.apply(JsFunctionAdaptor $instance, NativeString s)
 (@binaryen.js.called)
 (func $js_export_apply__javaemul_internal_JsFunctionAdaptor__java_lang_String_NativeString__void@libraryinfo.Main.Function
- (param $arg0 (ref null $javaemul.internal.JsFunctionAdaptor))
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $s (ref null string))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:51:9
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:51:9
   (call $$clinit__void_<once>_@libraryinfo.Main.Function )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:51:9
-  (call_ref $function.java_lang_String__void (ref.as_non_null (local.get $arg0)) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s)) (ref.cast (ref $function.java_lang_String__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $arg0))))
+  (call_ref $function.java_lang_String__void (ref.as_non_null (local.get $$instance)) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s)) (ref.cast (ref $function.java_lang_String__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
  )
 )
 
@@ -369,20 +369,20 @@
  )
 )
 
-;;; void Function.apply$jsFunction(JsFunctionAdaptor $instance, String arg0)
+;;; void Function.apply$jsFunction(JsFunctionAdaptor $instance, String s)
 (func $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_String__void@libraryinfo.Main.Function
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
- (param $arg0 (ref null $java.lang.String))
+ (param $s (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
-    (call_ref $function.java_lang_String__void (ref.as_non_null (local.get $$instance)) (local.get $arg0) (ref.cast (ref $function.java_lang_String__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+    (call_ref $function.java_lang_String__void (ref.as_non_null (local.get $$instance)) (local.get $s) (ref.cast (ref $function.java_lang_String__void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/libraryinfo/readable-j2wasm.js/libraryinfo/Main.java:50:12
-    (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String_NativeString__void@libraryinfo.Main.Function (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (local.get $arg0))))
+    (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String_NativeString__void@libraryinfo.Main.Function (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (local.get $s))))
    )
   )
  )

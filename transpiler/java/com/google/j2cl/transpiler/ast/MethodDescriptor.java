@@ -83,6 +83,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder toBuilder();
 
+    /** Creates a non-varargs, non-optional parameter descriptor with the given name and type. */
+    public static ParameterDescriptor create(String name, TypeDescriptor typeDescriptor) {
+      return builder().setName(name).setTypeDescriptor(typeDescriptor).build();
+    }
+
     public static Builder builder() {
       return new AutoValue_MethodDescriptor_ParameterDescriptor.Builder()
           .setVarargs(false)
@@ -1735,6 +1740,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     @CanIgnoreReturnValue
+    public Builder updateParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
+      return updateParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
+    }
+
+    @CanIgnoreReturnValue
     public Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
       return setParameterDescriptors(
           Streams.zip(
@@ -1753,9 +1763,20 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @CanIgnoreReturnValue
     public Builder addParameterTypeDescriptors(
         int index, Collection<TypeDescriptor> parameterTypeDescriptors) {
+      return addParameterDescriptors(index, toParameterDescriptors(parameterTypeDescriptors));
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addParameterDescriptors(int index, ParameterDescriptor... parameterDescriptors) {
+      return addParameterDescriptors(index, Arrays.asList(parameterDescriptors));
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addParameterDescriptors(
+        int index, Collection<ParameterDescriptor> parameterDescriptors) {
       List<ParameterDescriptor> newParameterDescriptors =
           new ArrayList<>(getParameterDescriptors());
-      newParameterDescriptors.addAll(index, toParameterDescriptors(parameterTypeDescriptors));
+      newParameterDescriptors.addAll(index, parameterDescriptors);
       return setParameterDescriptors(newParameterDescriptors);
     }
 

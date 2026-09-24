@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
@@ -166,7 +167,7 @@ public final class LambdaAdaptorTypeDescriptors {
         .setConstructor(true)
         .setOriginalJsInfo(JsInfo.RAW_CTOR)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
-        .setParameterTypeDescriptors(jsFunctionInterface)
+        .setParameterDescriptors(ParameterDescriptor.create("fn", jsFunctionInterface))
         .build();
   }
 

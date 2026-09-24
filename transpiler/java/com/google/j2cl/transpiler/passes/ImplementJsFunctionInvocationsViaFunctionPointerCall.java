@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -157,11 +158,11 @@ public class ImplementJsFunctionInvocationsViaFunctionPointerCall extends Normal
         .setName("$invokeJsFunction")
         .setNative(true)
         .setStatic(true)
-        .setParameterTypeDescriptors(
-            ImmutableList.<TypeDescriptor>builder()
-                .add(TypeDescriptors.get().javaemulInternalWasmExtern)
-                .addAll(functionalMethod.getParameterTypeDescriptors())
-                .build())
+        .setParameterDescriptors(
+            createForwardedParameterDescriptors(
+                ParameterDescriptor.create(
+                    "$jsFuncref", TypeDescriptors.get().javaemulInternalWasmExtern),
+                functionalMethod))
         .setReturnTypeDescriptor(functionalMethod.getReturnTypeDescriptor())
         .setOriginalJsInfo(
             JsInfo.builder()
@@ -183,24 +184,11 @@ public class ImplementJsFunctionInvocationsViaFunctionPointerCall extends Normal
     MethodDescriptor staticForwardingMethodDescriptor =
         getStaticForwardingMethodDescriptor(jsFunctionInterfaceType);
 
-    Variable jsFunctionInstance =
-        Variable.builder()
-            .setName("$instance")
-            .setTypeDescriptor(
-                TypeDescriptors.get().javaemulInternalJsFunctionAdaptor.toNonNullable())
-            .setParameter(true)
-            .setFinal(true)
-            .build();
-
-    List<Variable> forwardedVariables =
+    List<Variable> parameters =
         AstUtils.createParameterVariables(
-            staticForwardingMethodDescriptor
-                .getParameterDescriptors()
-                .subList(1, staticForwardingMethodDescriptor.getParameterDescriptors().size()));
-
-    List<Variable> parameters = new ArrayList<>();
-    parameters.add(jsFunctionInstance);
-    parameters.addAll(forwardedVariables);
+            staticForwardingMethodDescriptor.getParameterDescriptors());
+    Variable jsFunctionInstance = parameters.get(0);
+    List<Variable> forwardedVariables = parameters.subList(1, parameters.size());
 
     TypeDescriptor returnTypeDescriptor =
         staticForwardingMethodDescriptor.getReturnTypeDescriptor();
@@ -254,12 +242,28 @@ public class ImplementJsFunctionInvocationsViaFunctionPointerCall extends Normal
         .setEnclosingTypeDescriptor(jsFunctionInterfaceType)
         .setName(functionalMethod.getName() + "$jsFunction")
         .setStatic(true)
-        .setParameterTypeDescriptors(
-            ImmutableList.<TypeDescriptor>builder()
-                .add(TypeDescriptors.get().javaemulInternalJsFunctionAdaptor)
-                .addAll(functionalMethod.getParameterTypeDescriptors())
-                .build())
+        .setParameterDescriptors(
+            createForwardedParameterDescriptors(
+                ParameterDescriptor.create(
+                    "$instance", TypeDescriptors.get().javaemulInternalJsFunctionAdaptor),
+                functionalMethod))
         .setReturnTypeDescriptor(functionalMethod.getReturnTypeDescriptor())
+        .build();
+  }
+
+  /**
+   * Returns parameter descriptors with the given first parameter followed by parameters with the
+   * same names and types as the parameters of the functional method, but that are neither varargs
+   * nor optional since the helper methods receive the arguments as is.
+   */
+  private static ImmutableList<ParameterDescriptor> createForwardedParameterDescriptors(
+      ParameterDescriptor firstParameter, MethodDescriptor functionalMethod) {
+    return ImmutableList.<ParameterDescriptor>builder()
+        .add(firstParameter)
+        .addAll(
+            functionalMethod.getParameterDescriptors().stream()
+                .map(p -> ParameterDescriptor.create(p.getName(), p.getTypeDescriptor()))
+                .iterator())
         .build();
   }
 
