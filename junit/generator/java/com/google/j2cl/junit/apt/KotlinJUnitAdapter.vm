@@ -1,7 +1,11 @@
 #macro( methodExecution $classOrInstance $testMethod)
 ## TODO(b/270609553) to revisit this once j2cl (j2kt web) and j2cl kotlin tests support coroutines.
 #if($testMethod.isAsync())
-$classOrInstance.${testMethod.javaMethodName()}().get(${testMethod.timeout()}.toLong(), java.util.concurrent.TimeUnit.MILLISECONDS);
+try {
+  $classOrInstance.${testMethod.javaMethodName()}().get(${testMethod.timeout()}.toLong(), java.util.concurrent.TimeUnit.MILLISECONDS)
+} catch (e: java.util.concurrent.ExecutionException) {
+  throw e.cause ?: e
+}
 #else
 $classOrInstance.${testMethod.javaMethodName()}();
 #end
