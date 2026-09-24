@@ -54,6 +54,7 @@ readable_example(
     # Native JsType does not make sense for j2kt-native.
     build_kt_native_readables = False,
     experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
+    generate_wasm_externs = True,
     generate_wasm_imports = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",

@@ -15,13 +15,19 @@
  */
 package nativejstypes;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 import org.jspecify.annotations.Nullable;
 
 public class GenericRegularClass<T extends Foo> {
   public @Nullable T field;
 
-  @JsType(isNative = true, namespace = "nativejstypes", name = "Bar.Inner")
+  @JsMethod
+  public T apply(T t) {
+    return t;
+  }
+
+  @JsType(isNative = true, namespace = "nativejstypes", name = "GenericRegularClass")
   private interface NativeInterface<T extends Foo> {
     T apply(T t);
   }

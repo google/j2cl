@@ -15,7 +15,9 @@ goog.module('com.acme.MyFoo');
 
 class MyFoo {
   constructor() {
+    /** @public {number} */
     this.x = 40;
+    /** @public {number} */
     this.y = 2;
   }
 

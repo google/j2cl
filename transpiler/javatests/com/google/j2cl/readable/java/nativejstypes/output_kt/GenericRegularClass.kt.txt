@@ -19,6 +19,7 @@
 package nativejstypes
 
 import javaemul.lang.*
+import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 import kotlin.Suppress
 import kotlin.jvm.JvmField
@@ -28,7 +29,10 @@ open class GenericRegularClass<T: Foo?> {
  @JvmField
  var field: T? = null
  
- @JsType(name = "Bar.Inner", namespace = "nativejstypes", isNative = true)
+ @JsMethod
+ open fun apply(t: T): T = t
+ 
+ @JsType(name = "GenericRegularClass", namespace = "nativejstypes", isNative = true)
  private fun interface NativeInterface<T: Foo?> {
   fun apply(t: T): T
  }

@@ -15,12 +15,15 @@
  */
 package nativejstypes
 
+import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 
 class GenericRegularClass<T : Foo> {
   var field: T? = null
 
-  @JsType(isNative = true, namespace = "nativejstypes", name = "Bar.Inner")
+  @JsMethod fun apply(t: T): T = t
+
+  @JsType(isNative = true, namespace = "nativejstypes", name = "GenericRegularClass")
   private interface NativeInterface<T : Foo> {
     fun apply(t: T): T
   }
