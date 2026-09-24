@@ -39,6 +39,18 @@ class JvmRecordDataClass extends Record {
  m_z__java_lang_String() {
   return this.f_z__dataclass_JvmRecordDataClass_;
  }
+ /** @nodts @return {string} */
+ m_other__java_lang_String() {
+  return 'other';
+ }
+ /** @nodts @return {string} */
+ m_isBar__java_lang_String() {
+  return 'bar';
+ }
+ /** @final @nodts @return {string} */
+ m_other2__java_lang_String() {
+  return 'other2';
+ }
  /** @final @nodts @return {number} */
  m_component1__int() {
   return this.f_f__dataclass_JvmRecordDataClass_;
@@ -61,6 +73,20 @@ class JvmRecordDataClass extends Record {
  m_getF__int() {
   return this.m_f__int();
  }
+ /** @override @nodts @return {string} */
+ m_getOther__java_lang_String() {
+  return this.m_other__java_lang_String();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {string} */
+ m_isBar__java_lang_Object() {
+  return this.m_isBar__java_lang_String();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {number} */
+ m_getZ__int() {
+  return DataClassInterface.m_getZ__$default__dataclass_DataClassInterface__int(this);
+ }
  /** @nodts @return {number} */
  static get f_staticField__dataclass_JvmRecordDataClass() {
   return (JvmRecordDataClass.$clinit(), JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass);
@@ -70,6 +96,7 @@ class JvmRecordDataClass extends Record {
   JvmRecordDataClass.$clinit = () =>{};
   JvmRecordDataClass.$loadModules();
   Record.$clinit();
+  DataClassInterface.$clinit();
   JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass = 1;
  }
  /** @nodts @return {boolean} */

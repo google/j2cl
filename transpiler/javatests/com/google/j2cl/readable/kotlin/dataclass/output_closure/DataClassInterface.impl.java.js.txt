@@ -9,7 +9,18 @@ class DataClassInterface {
  /** @abstract @nodts @return {number} */
  m_getF__int() {}
  /** @abstract @nodts @return {string} */
+ m_getOther__java_lang_String() {}
+ /** @abstract @nodts @return {!*} */
+ m_isBar__java_lang_Object() {}
+ /** @abstract @nodts @return {number} */
+ m_getZ__int() {}
+ /** @abstract @nodts @return {string} */
  m_component2__java_lang_String() {}
+ /** @nodts @return {number} */
+ static m_getZ__$default__dataclass_DataClassInterface__int(/** !DataClassInterface */ $thisArg) {
+  DataClassInterface.$clinit();
+  return 42;
+ }
  /** @nodts */
  static $clinit() {
   DataClassInterface.$clinit = () =>{};
