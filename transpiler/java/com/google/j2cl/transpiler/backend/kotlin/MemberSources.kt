@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INIT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.LATEINIT_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.OBJECT_KEYWORD
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SET_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.SUPER_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.THIS_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAL_KEYWORD
@@ -45,9 +46,11 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.VAR_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.initializer
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.MemberDescriptorSources.Companion.enumValueDeclarationNameSource
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.common.titleCased
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.block
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.colonSeparated
@@ -157,9 +160,18 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
     val actualMemberDescriptor: MemberDescriptor = fieldDescriptor.actualMemberDescriptor
     val isOverride =
       actualMemberDescriptor is MethodDescriptor && actualMemberDescriptor.isJavaOverride
+    val isNonPrivateLateInit =
+      field.isKtLateInit && !environment.ktVisibility(fieldDescriptor).isPrivate
 
     return newLineSeparated(
         Source.emptyUnless(isJvmField) { jvmFieldAnnotationSource() },
+        Source.emptyUnless(isNonPrivateLateInit) {
+          val titleCasedName = environment.ktMangledName(fieldDescriptor).titleCased
+          newLineSeparated(
+            jvmGetterNameAnnotationSource("getLateinit$titleCasedName"),
+            jvmSetterNameAnnotationSource("setLateinit$titleCasedName"),
+          )
+        },
         memberDescriptorSources.volatileAnnotationSource(fieldDescriptor),
         objCNameSources.objCAnnotationSource(actualMemberDescriptor),
         jsInteropAnnotationSources.jsInteropAnnotationsSource(fieldDescriptor),
@@ -187,6 +199,18 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
 
   private fun jvmFieldAnnotationSource(): Source =
     annotation(nameSources.topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
+
+  private fun jvmGetterNameAnnotationSource(name: String): Source =
+    annotation(
+      annotationName(GET_KEYWORD, nameSources.topLevelQualifiedNameSource("kotlin.jvm.JvmName")),
+      literal(name),
+    )
+
+  private fun jvmSetterNameAnnotationSource(name: String): Source =
+    annotation(
+      annotationName(SET_KEYWORD, nameSources.topLevelQualifiedNameSource("kotlin.jvm.JvmName")),
+      literal(name),
+    )
 
   private fun jvmStaticAnnotationSource(): Source =
     annotation(nameSources.topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))

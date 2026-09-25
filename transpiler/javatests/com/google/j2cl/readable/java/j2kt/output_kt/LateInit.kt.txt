@@ -23,9 +23,20 @@ import kotlin.Any
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmName
 
 open class LateInit<T: Any> {
+ @get:JvmName("getLateinitPublicField")
+ @set:JvmName("setLateinitPublicField")
  lateinit var publicField: String
+ 
+ @get:JvmName("getLateinitProtectedField")
+ @set:JvmName("setLateinitProtectedField")
+ protected lateinit var protectedField: String
+ 
+ @get:JvmName("getLateinitPackagePrivateField_pp_j2kt")
+ @set:JvmName("setLateinitPackagePrivateField_pp_j2kt")
+ internal lateinit var packagePrivateField_pp_j2kt: String
  
  private lateinit var privateField: String
  
@@ -45,17 +56,41 @@ open class LateInit<T: Any> {
  
  private fun init(genericValue: T) {
   this.publicField = "public"
+  this.protectedField = "protected"
+  this.packagePrivateField_pp_j2kt = "packagePrivate"
   this.privateField = "private"
   this.genericField = genericValue
  }
  
- open fun test(): Int = this.publicField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
+ open fun getPublicField(): String = this.publicField
+ 
+ open fun setPublicField(publicField: String) {
+  this.publicField = publicField
+ }
+ 
+ internal open fun getPackagePrivateField_pp_j2kt(): String = this.packagePrivateField_pp_j2kt
+ 
+ internal open fun setPackagePrivateField_pp_j2kt(packagePrivateField: String) {
+  this.packagePrivateField_pp_j2kt = packagePrivateField
+ }
+ 
+ open fun test(): Int = this.publicField.length + this.protectedField.length + this.packagePrivateField_pp_j2kt.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  
  private open inner class Inner private constructor() {
   private lateinit var unmarkedInnerField: String
   
   private open inner class InnerInner private constructor() {
    private lateinit var unmarkedInnerInnerField: String
+  }
+ }
+ 
+ open class Sub<T: Any>: LateInit<T> {
+  constructor(genericValue: T): super(genericValue)
+  
+  open fun getProtectedField(): String = this.protectedField
+  
+  open fun setProtectedField(protectedField: String) {
+   this.protectedField = protectedField
   }
  }
 }

@@ -24,6 +24,12 @@ public class LateInit<T> {
   public String publicField;
 
   @SuppressWarnings("nullness:initialization.field.uninitialized")
+  protected String protectedField;
+
+  @SuppressWarnings("nullness:initialization.field.uninitialized")
+  String packagePrivateField;
+
+  @SuppressWarnings("nullness:initialization.field.uninitialized")
   private String privateField;
 
   @SuppressWarnings("nullness:initialization.field.uninitialized")
@@ -56,12 +62,46 @@ public class LateInit<T> {
 
   private void init(T genericValue) {
     publicField = "public";
+    protectedField = "protected";
+    packagePrivateField = "packagePrivate";
     privateField = "private";
     genericField = genericValue;
   }
 
+  public String getPublicField() {
+    return publicField;
+  }
+
+  public void setPublicField(String publicField) {
+    this.publicField = publicField;
+  }
+
+  String getPackagePrivateField() {
+    return packagePrivateField;
+  }
+
+  void setPackagePrivateField(String packagePrivateField) {
+    this.packagePrivateField = packagePrivateField;
+  }
+
+  public static class Sub<T> extends LateInit<T> {
+    public Sub(T genericValue) {
+      super(genericValue);
+    }
+
+    public String getProtectedField() {
+      return protectedField;
+    }
+
+    public void setProtectedField(String protectedField) {
+      this.protectedField = protectedField;
+    }
+  }
+
   public int test() {
     return publicField.length()
+        + protectedField.length()
+        + packagePrivateField.length()
         + privateField.length()
         + initializedField.length()
         + nullableField.length()

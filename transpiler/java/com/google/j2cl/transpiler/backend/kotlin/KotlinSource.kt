@@ -102,6 +102,7 @@ internal object KotlinSource {
   val PROTECTED_KEYWORD = source("protected")
   val PUBLIC_KEYWORD = source("public")
   val RETURN_KEYWORD = source("return")
+  val SET_KEYWORD = source("set")
   val SUPER_KEYWORD = source("super")
   val THIS_KEYWORD = source("this")
   val THROW_KEYWORD = source("throw")
