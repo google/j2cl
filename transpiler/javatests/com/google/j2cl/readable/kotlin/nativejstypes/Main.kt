@@ -76,6 +76,6 @@ fun testTopLevel() {
 }
 
 fun testGenericRegularClass() {
-  val genericRegularClass = GenericRegularClass<Foo>()
+  val genericRegularClass = GenericRegularClass<Foo>(Foo())
   genericRegularClass.field = Foo()
 }

@@ -111,7 +111,9 @@ open class Main {
   
   @JvmStatic
   fun testGenericRegularClass() {
-   val genericRegularClass: GenericRegularClass<Foo?> = GenericRegularClass<Foo?>()
+   val genericRegularClass: GenericRegularClass<Foo?> = GenericRegularClass<Foo?>(
+    Foo(),
+   )
    genericRegularClass.field = Foo()
   }
  }

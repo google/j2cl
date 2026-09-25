@@ -2,13 +2,6 @@
 (import "prototypes" "$nativejstypes.GenericRegularClass.proto" (global $nativejstypes.GenericRegularClass.proto (ref extern)))
 (import "prototypes" "$nativetypes.NonNative.proto" (global $nativetypes.NonNative.proto (ref extern)))
 
-;;; Foo NativeInterface.apply(Foo t)
-(func $m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass.NativeInterface (import "imports" "nativejstypes.GenericRegularClass.apply$1")
- (param $this (ref null extern))
- (param $t (ref null extern))
- (result (ref null extern))
-)
-
 ;;; Bar(int x, int y)
 (func $m_<init>__int__int@nativejstypes.Bar (import "imports" "nativejstypes.Bar.constructor$2")
  (param $x i32)
@@ -152,6 +145,19 @@
 (func $m_y__int__void@nativejstypes.Foo (import "imports" "set com.acme.MyFoo.y")
  (param $this (ref null extern))
  (param $value i32)
+)
+
+;;; NativeGenericClass(Foo t)
+(func $m_<init>__nativejstypes_Foo@nativejstypes.GenericRegularClass.NativeGenericClass (import "imports" "nativejstypes.GenericRegularClass.constructor$1")
+ (param $t (ref null extern))
+ (result (ref null extern))
+)
+
+;;; Foo NativeGenericClass.apply(Foo t)
+(func $m_apply__nativejstypes_Foo__nativejstypes_Foo_$pp_nativejstypes@nativejstypes.GenericRegularClass.NativeGenericClass (import "imports" "nativejstypes.GenericRegularClass.apply$1")
+ (param $this (ref null extern))
+ (param $t (ref null extern))
+ (result (ref null extern))
 )
 
 ;;; Headers()

@@ -15,6 +15,7 @@
  */
 package nativejstypes;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 import org.jspecify.annotations.Nullable;
@@ -22,13 +23,20 @@ import org.jspecify.annotations.Nullable;
 public class GenericRegularClass<T extends Foo> {
   public @Nullable T field;
 
+  @JsConstructor
+  public GenericRegularClass(T t) {
+    this.field = t;
+  }
+
   @JsMethod
   public T apply(T t) {
     return t;
   }
 
   @JsType(isNative = true, namespace = "nativejstypes", name = "GenericRegularClass")
-  private interface NativeInterface<T extends Foo> {
-    T apply(T t);
+  static class NativeGenericClass<T extends Foo> {
+    NativeGenericClass(T t) {}
+
+    native T apply(T t);
   }
 }

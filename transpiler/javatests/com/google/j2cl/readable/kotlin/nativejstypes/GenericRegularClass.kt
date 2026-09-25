@@ -15,16 +15,17 @@
  */
 package nativejstypes
 
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 
-class GenericRegularClass<T : Foo> {
-  var field: T? = null
+class GenericRegularClass<T : Foo> @JsConstructor constructor(t: T) {
+  var field: T? = t
 
   @JsMethod fun apply(t: T): T = t
 
   @JsType(isNative = true, namespace = "nativejstypes", name = "GenericRegularClass")
-  private interface NativeInterface<T : Foo> {
-    fun apply(t: T): T
+  internal class NativeGenericClass<T : Foo>(t: T) {
+    external fun apply(t: T): T
   }
 }

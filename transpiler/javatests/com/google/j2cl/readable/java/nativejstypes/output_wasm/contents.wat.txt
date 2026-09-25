@@ -47,10 +47,10 @@
 (global $$class@nativejstypes.GenericRegularClass (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $$class-initialized@nativejstypes.GenericRegularClass.NativeInterface.$Overlay (mut i32)
+(global $$class-initialized@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay (mut i32)
  (i32.const 0)
 )
-(global $$class@nativejstypes.GenericRegularClass.NativeInterface.$Overlay (mut (ref null $java.lang.Class))
+(global $$class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@nativejstypes.Headers.$Overlay (mut i32)
@@ -205,6 +205,12 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass)
+ )
+)
+(global $nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay.vtable (ref (exact $nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay.vtable))
+ (struct.new $nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay)
  )
 )
 (global $nativejstypes.Headers.$Overlay.vtable (ref (exact $nativejstypes.Headers.$Overlay.vtable))
@@ -634,34 +640,47 @@
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Foo.$Overlay)
 
 ;;; void $Overlay.$clinit()
-(func $$clinit__void_<once>_@nativejstypes.GenericRegularClass.NativeInterface.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:31:20
+(func $$clinit__void_<once>_@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:37:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:31:20
-  (if (global.get $$class-initialized@nativejstypes.GenericRegularClass.NativeInterface.$Overlay)
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:37:15
+  (if (global.get $$class-initialized@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:31:20
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:37:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:31:20
-  (global.set $$class-initialized@nativejstypes.GenericRegularClass.NativeInterface.$Overlay (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:37:15
+  (global.set $$class-initialized@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay (i32.const 1))
  )
 )
 
 ;;; Class<T> $Overlay.$getClassMetadata()
-(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.GenericRegularClass.NativeInterface.$Overlay
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay
  (result (ref null $java.lang.Class))
  (block
-  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.GenericRegularClass.NativeInterface.$Overlay)))
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay)))
    (then
-    (return (global.get $$class@nativejstypes.GenericRegularClass.NativeInterface.$Overlay))
+    (return (global.get $$class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay))
    )
   )
-  (global.set $$class@nativejstypes.GenericRegularClass.NativeInterface.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.GenericRegularClass.NativeInterface.$Overlay.$StringLiterals )))
-  (return (global.get $$class@nativejstypes.GenericRegularClass.NativeInterface.$Overlay))
+  (global.set $$class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay))
  )
 )
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.Headers.$Overlay
@@ -1136,30 +1155,45 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.TopLevel.Nested.$Overlay)
 
-;;; GenericRegularClass<T> GenericRegularClass.$create()
-(func $$create__@nativejstypes.GenericRegularClass
+;;; GenericRegularClass<T> GenericRegularClass.$create(T t)
+(func $$create__nativejstypes_Foo@nativejstypes.GenericRegularClass
+ (param $t (ref null extern))
  (result (ref null $nativejstypes.GenericRegularClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+  (call $$clinit__void_<once>_@nativejstypes.GenericRegularClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+  (return (call $$create_$private__nativejstypes_Foo@nativejstypes.GenericRegularClass (local.get $t)))
+ )
+)
+
+;;; GenericRegularClass<T> GenericRegularClass.$create_$private(T t)
+(func $$create_$private__nativejstypes_Foo@nativejstypes.GenericRegularClass
+ (param $t (ref null extern))
+ (result (ref null $nativejstypes.GenericRegularClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
  (local $$instance (ref null $nativejstypes.GenericRegularClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
-  (call $$clinit__void_<once>_@nativejstypes.GenericRegularClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
   (local.set $$instance (struct.new_desc $nativejstypes.GenericRegularClass (global.get $itable.empty) (i32.const 0) (ref.null extern) (global.get $nativejstypes.GenericRegularClass.vtable)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
-  (call $$ctor__void_$p_nativejstypes_GenericRegularClass@nativejstypes.GenericRegularClass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+  (call $$ctor__nativejstypes_Foo__void_$p_nativejstypes_GenericRegularClass@nativejstypes.GenericRegularClass (ref.as_non_null (local.get $$instance))(local.get $t))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
   (return (local.get $$instance))
  )
 )
 
-;;; void GenericRegularClass.$ctor()
-(func $$ctor__void_$p_nativejstypes_GenericRegularClass@nativejstypes.GenericRegularClass
+;;; void GenericRegularClass.$ctor(T t)
+(func $$ctor__nativejstypes_Foo__void_$p_nativejstypes_GenericRegularClass@nativejstypes.GenericRegularClass
  (param $this (ref null $nativejstypes.GenericRegularClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+ (param $t (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:28:4
+  (struct.set $nativejstypes.GenericRegularClass $field@nativejstypes.GenericRegularClass (local.get $this) (local.get $t))
  )
 )
 
@@ -1169,15 +1203,28 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null extern))
  (result (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:26:11
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:32:11
  (local $this (ref null $nativejstypes.GenericRegularClass))
  (local.set $this (ref.cast (ref $nativejstypes.GenericRegularClass) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:33:4
   (return (local.get $t))
  )
 )
 (elem declare func $m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass)
+
+;;; GenericRegularClass<T> GenericRegularClass.<init>(Foo t)
+(func $js_export_<init>__nativejstypes_Foo@nativejstypes.GenericRegularClass
+ (param $t (ref null extern))
+ (result (ref null $nativejstypes.GenericRegularClass))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+  (call $$clinit__void_<once>_@nativejstypes.GenericRegularClass )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:27:9
+  (return (call $$create_$private__nativejstypes_Foo@nativejstypes.GenericRegularClass (local.get $t)))
+ )
+)
 
 ;;; Foo GenericRegularClass.apply(Foo t)
 (func $js_export_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass
@@ -1185,11 +1232,11 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null extern))
  (result (ref null extern))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
  (local $this (ref null $nativejstypes.GenericRegularClass))
  (local.set $this (ref.cast (ref $nativejstypes.GenericRegularClass) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
   (return (call_ref $function.m_apply__nativejstypes_Foo__nativejstypes_Foo (ref.as_non_null (local.get $this))(local.get $t)(struct.get $nativejstypes.GenericRegularClass.vtable $m_apply__nativejstypes_Foo__nativejstypes_Foo (ref.get_desc $nativejstypes.GenericRegularClass(local.get $this)))))
  )
 )
@@ -1197,18 +1244,18 @@
 
 ;;; void GenericRegularClass.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.GenericRegularClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
   (if (global.get $$class-initialized@nativejstypes.GenericRegularClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
   (global.set $$class-initialized@nativejstypes.GenericRegularClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:22:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/GenericRegularClass.java:23:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1447,7 +1494,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:80:21
   (call $$clinit__void_<once>_@nativejstypes.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:81:4
-  (local.set $genericRegularClass (call $$create__@nativejstypes.GenericRegularClass ))
+  (local.set $genericRegularClass (call $$create__nativejstypes_Foo@nativejstypes.GenericRegularClass (call $m_<init>__@nativejstypes.Foo )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:82:4
   (struct.set $nativejstypes.GenericRegularClass $field@nativejstypes.GenericRegularClass (local.get $genericRegularClass) (call $m_<init>__@nativejstypes.Foo ))
  )

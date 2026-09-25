@@ -19,6 +19,7 @@
 package nativejstypes
 
 import javaemul.lang.*
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
 import kotlin.Suppress
@@ -29,11 +30,19 @@ open class GenericRegularClass<T: Foo?> {
  @JvmField
  var field: T? = null
  
+ @JsConstructor
+ constructor(t: T) {
+  this.field = t
+ }
+ 
  @JsMethod
  open fun apply(t: T): T = t
  
  @JsType(name = "GenericRegularClass", namespace = "nativejstypes", isNative = true)
- private fun interface NativeInterface<T: Foo?> {
-  fun apply(t: T): T
+ internal open class NativeGenericClass<T: Foo?> {
+  internal constructor(t: T)
+  
+  @JsMethod(name = "apply")
+  internal external open fun apply_pp_nativejstypes(t: T): T
  }
 }

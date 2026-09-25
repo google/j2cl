@@ -1,0 +1,27 @@
+goog.module('nativejstypes.GenericRegularClass.NativeGenericClass.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeGenericClass = goog.require('nativejstypes.GenericRegularClass');
+
+let Foo = goog.forwardDeclare('com.acme.MyFoo');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeGenericClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'nativejstypes.GenericRegularClass');
+
+exports = $Overlay;
+
+//# sourceMappingURL=GenericRegularClass$NativeGenericClass$$Overlay.js.map

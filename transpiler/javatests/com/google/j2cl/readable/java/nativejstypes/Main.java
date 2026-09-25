@@ -78,7 +78,7 @@ public class Main {
   }
 
   public static void testGenericRegularClass() {
-    GenericRegularClass<Foo> genericRegularClass = new GenericRegularClass<>();
+    GenericRegularClass<Foo> genericRegularClass = new GenericRegularClass<>(new Foo());
     genericRegularClass.field = new Foo();
   }
 }

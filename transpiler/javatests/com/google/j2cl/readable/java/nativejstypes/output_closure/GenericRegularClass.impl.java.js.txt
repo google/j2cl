@@ -9,22 +9,18 @@ let Foo = goog.forwardDeclare('com.acme.MyFoo');
  * @template T
  */
 class GenericRegularClass extends j_l_Object {
- /** @protected @nodts */
- constructor() {
+ 
+ constructor(/** T */ t) {
+  GenericRegularClass.$clinit();
   super();
   /**@type {?T} @nodts*/
   this.f_field__nativejstypes_GenericRegularClass;
- }
- /** @nodts @template T @return {!GenericRegularClass<T>} */
- static $create__() {
-  GenericRegularClass.$clinit();
-  let $instance = new GenericRegularClass();
-  $instance.$ctor__nativejstypes_GenericRegularClass__void();
-  return $instance;
+  this.$ctor__nativejstypes_GenericRegularClass__nativejstypes_Foo__void(t);
  }
  /** @nodts */
- $ctor__nativejstypes_GenericRegularClass__void() {
+ $ctor__nativejstypes_GenericRegularClass__nativejstypes_Foo__void(/** T */ t) {
   this.$ctor__java_lang_Object__void();
+  this.f_field__nativejstypes_GenericRegularClass = t;
  }
  /** @return {T} */
  apply(/** T */ t) {
