@@ -2,9 +2,9 @@
 
 load("@rules_java//java:defs.bzl", "java_binary")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
-load("//:benchmarking/java/com/google/j2cl/benchmarking/benchmark_library.bzl", "benchmark_library")
+load("//benchmarking/java/com/google/j2cl/benchmarking:benchmark_library.bzl", "benchmark_library")
 load(
-    "//:benchmarking/java/com/google/j2cl/benchmarking/templates.bzl",
+    "//benchmarking/java/com/google/j2cl/benchmarking:templates.bzl",
     "create_j2cl_glue",
     "create_j2wasm_glue",
     "create_launcher",

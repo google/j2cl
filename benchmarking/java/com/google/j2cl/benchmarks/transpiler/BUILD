@@ -1,4 +1,4 @@
-load("//:benchmarking/java/com/google/j2cl/benchmarking/benchmarks.bzl", "benchmark", "gen_benchmark_suite")
+load("//benchmarking/java/com/google/j2cl/benchmarking:benchmarks.bzl", "benchmark", "gen_benchmark_suite")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],

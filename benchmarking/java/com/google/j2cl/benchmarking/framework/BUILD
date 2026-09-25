@@ -1,5 +1,5 @@
 load("@rules_closure//closure:defs.bzl", "closure_js_library")
-load("//:benchmarking/java/com/google/j2cl/benchmarking/benchmark_library.bzl", "benchmark_library")
+load("//benchmarking/java/com/google/j2cl/benchmarking:benchmark_library.bzl", "benchmark_library")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
