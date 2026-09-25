@@ -23,6 +23,8 @@ load("@bazel_tools//tools/build_defs/kotlin/native:rules.bzl", "kt_apple_test_li
 load(":generate_test_input.bzl", "generate_test_input")
 load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
 
+visibility(["//build_defs/..."])
+
 # buildifier: disable=function-docstring-args
 def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags = [], exec_properties = {}):
     """Macro for generating kotlin version of test adapter for kt_jvm test

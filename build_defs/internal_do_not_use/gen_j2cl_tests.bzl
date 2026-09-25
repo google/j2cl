@@ -17,6 +17,8 @@ load(":j2cl_library.bzl", "j2cl_library")
 load(":j2cl_test.bzl", "j2cl_test")
 load(":j2cl_util.bzl", "get_java_package")
 
+visibility(["//build_defs/..."])
+
 def gen_j2cl_tests(
         name,
         srcs,

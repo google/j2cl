@@ -29,6 +29,8 @@ load(":j2kt_import.bzl", "j2kt_jvm_import", "j2kt_native_import")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_import.bzl", "j2wasm_import")
 
+visibility(["//build_defs/..."])
+
 def j2cl_import(
         name,
         jar,

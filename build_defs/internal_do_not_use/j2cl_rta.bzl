@@ -11,6 +11,8 @@ load(
 )
 load(":provider.bzl", "J2clInfo")
 
+visibility(["//build_defs/..."])
+
 _TransitiveLibraryInfo = provider(fields = ["files"])
 _J2clRtaInfo = provider()
 

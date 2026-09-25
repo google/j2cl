@@ -16,6 +16,8 @@ load(":j2cl_util.bzl", "to_parallel_target")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2wasm_common.bzl", "j2wasm_common")
 
+visibility(["//build_defs/..."])
+
 def j2cl_alias(
         name,
         actual,

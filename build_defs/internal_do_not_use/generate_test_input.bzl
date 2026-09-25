@@ -2,6 +2,8 @@
 
 load(":j2cl_util.bzl", "get_java_package")
 
+visibility(["//build_defs/..."])
+
 _TEMPLATE = """
 // THIS IS GENERATED CODE. DO NOT EDIT.
 // GENERATED FROM //%s/BUILD (target: %s)

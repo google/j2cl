@@ -29,6 +29,8 @@ load(":generate_test_input.bzl", "generate_test_input")
 load(":j2wasm_application.bzl", "j2wasm_application")
 load(":j2wasm_library.bzl", "j2wasm_library")
 
+visibility(["//build_defs/..."])
+
 # buildifier: disable=function-docstring-args
 def j2wasm_generate_jsunit_suite(
         name,

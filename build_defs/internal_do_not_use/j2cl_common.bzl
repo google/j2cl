@@ -8,6 +8,12 @@ load(":klib_common.bzl", "klib_common")
 load(":profiling.bzl", "add_profiling_support")
 load(":provider.bzl", "J2clInfo")
 
+visibility([
+    "//build_defs/...",
+    "//jre/java",
+    "//transpiler/javatests/com/google/j2cl/readable",
+])
+
 def _get_jsinfo_provider(j2cl_info):
     return j2cl_info._private_.js_info
 

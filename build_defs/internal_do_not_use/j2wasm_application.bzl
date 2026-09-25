@@ -10,6 +10,8 @@ load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS")
 load(":provider.bzl", "J2wasmInfo")
 
+visibility(["//build_defs/..."])
+
 # Template for the generated JS imports file.
 # The `getImports` function referenced by `instantiateStreaming` is defined by the Wasm backend.
 _JS_IMPORTS_TEMPLATE = """// GENERATED CODE.

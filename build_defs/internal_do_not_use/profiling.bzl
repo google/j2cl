@@ -2,6 +2,8 @@
 
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
+visibility(["//build_defs/..."])
+
 def add_profiling_support(ctx, mnemonic, outputs, args):
     """Adds profiling support by declaring a profiling output file if conditions are met.
 

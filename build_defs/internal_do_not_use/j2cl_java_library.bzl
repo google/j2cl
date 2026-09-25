@@ -9,6 +9,8 @@ load(":j2kt_import.bzl", "create_J2ktInfo_for_java_import")
 load(":klib_common.bzl", "klib_common")
 load(":provider.bzl", "J2clInfo", "J2ktInfo")
 
+visibility(["//build_defs/..."])
+
 def _impl_j2cl_library(ctx):
     enable_j2kt_web = ctx.attr.enable_j2kt_web
 

@@ -11,6 +11,8 @@ load("@rules_java//java:defs.bzl", "JavaInfo")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 load(":j2wasm_common.bzl", "j2wasm_common")
 
+visibility(["//build_defs/..."])
+
 def _j2wasm_import_impl(ctx):
     java_info = ctx.attr.jar[JavaInfo]
 

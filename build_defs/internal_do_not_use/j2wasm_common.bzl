@@ -5,6 +5,13 @@ load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "j2cl_common")
 load(":provider.bzl", "J2wasmInfo")
 
+visibility([
+    "//build_defs/...",
+    "//jre/java",
+    "//transpiler/javatests/com/google/j2cl/integration",
+    "//transpiler/javatests/com/google/j2cl/readable",
+])
+
 def _compile(
         ctx,
         deps = [],

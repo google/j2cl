@@ -39,6 +39,12 @@ load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 load(":provider.bzl", "J2clInfo")
 
+visibility([
+    "//build_defs/...",
+    "//transpiler/javatests/com/google/j2cl/buildtest/kotlin_friends/...",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/crosslibrary",
+])
+
 _KOTLIN_STDLIB_TARGET = "//build_defs/internal_do_not_use:kotlin_stdlib"
 _JRE_J2KT_TARGET = "//third_party/java_src/xplat/j2kt/jre/java:jre-j2kt-web"
 

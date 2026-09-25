@@ -1,5 +1,12 @@
 """Utility functions for the j2cl_* build rules / macros"""
 
+visibility([
+    "//benchmarking/java/com/google/j2cl/benchmarking",
+    "//build_defs/...",
+    "//junit/generator/javatests/com/google/j2cl/junit/integration",
+    "//transpiler/javatests/com/google/j2cl/integration",
+])
+
 def get_java_package(path):
     """Extract the java package from path
 

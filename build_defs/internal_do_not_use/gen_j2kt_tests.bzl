@@ -17,6 +17,8 @@ load(":j2cl_util.bzl", "get_java_package")
 load(":j2kt_library.bzl", "j2kt_native_library")
 load(":j2kt_test.bzl", "j2kt_native_test")
 
+visibility(["//build_defs/..."])
+
 def gen_j2kt_native_tests(
         name,
         srcs,

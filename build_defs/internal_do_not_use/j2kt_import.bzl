@@ -12,6 +12,8 @@ load("@rules_cc//cc/common:cc_info.bzl", "CcInfo")
 load("@rules_java//java:defs.bzl", "JavaInfo")
 load(":provider.bzl", "J2ktInfo")
 
+visibility(["//build_defs/..."])
+
 def create_J2ktInfo_for_java_import(java_info):
     return J2ktInfo(
         _private_ = struct(

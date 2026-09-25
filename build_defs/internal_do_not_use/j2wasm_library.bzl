@@ -9,6 +9,8 @@ load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "JsInfo")
 load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS", "j2wasm_common")
 
+visibility(["//build_defs/..."])
+
 J2WASM_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = [".java", ".srcjar", ".jar", ".js"]),
     "deps": attr.label_list(providers = [[J2wasmInfo], [JsInfo]]),

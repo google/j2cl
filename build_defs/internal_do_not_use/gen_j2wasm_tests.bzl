@@ -16,6 +16,8 @@ load(":j2cl_util.bzl", "get_java_package")
 load(":j2wasm_library.bzl", "j2wasm_library")
 load(":j2wasm_test.bzl", "j2wasm_test")
 
+visibility(["//build_defs/..."])
+
 def gen_j2wasm_tests(
         name,
         srcs,

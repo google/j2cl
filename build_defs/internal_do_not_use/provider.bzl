@@ -1,5 +1,10 @@
 """Contains the common J2clInfo provider definition."""
 
+visibility([
+    "//build_defs/...",
+    "//transpiler/javatests/com/google/j2cl/readable",
+])
+
 J2clInfo = provider(
     "Provider for the J2CL compilation.\n" +
     "NOTE: Data under '_private_' is considered private internal data so do not use.",

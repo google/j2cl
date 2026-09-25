@@ -70,6 +70,8 @@ load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_generate_jsunit_suite.bzl", "j2wasm_generate_jsunit_suite")
 load(":j2wasm_library.bzl", "j2wasm_library")
 
+visibility(["//build_defs/..."])
+
 _JS_UNIT_TEST_PARAMETERS = [
     "args",
     "browsers",

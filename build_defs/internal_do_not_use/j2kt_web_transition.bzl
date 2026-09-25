@@ -1,9 +1,9 @@
 """Defines the user-configuration transition to enable J2KT Web builds."""
 
 visibility([
-    "//transpiler/javatests/com/google/j2cl/readable",
-    "//transpiler/javatests/com/google/j2cl/integration",
     "//junit/generator/javatests/com/google/j2cl/junit/integration",
+    "//transpiler/javatests/com/google/j2cl/integration",
+    "//transpiler/javatests/com/google/j2cl/readable",
 ])
 
 j2kt_web_transition = transition(

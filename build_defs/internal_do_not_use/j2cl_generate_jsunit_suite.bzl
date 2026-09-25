@@ -28,6 +28,8 @@ jsunit_test(
 load(":generate_test_input.bzl", "generate_test_input")
 load(":j2cl_library.bzl", "j2cl_library")
 
+visibility(["//build_defs/..."])
+
 # buildifier: disable=function-docstring-args
 def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
     """Macro for cross compiling a JUnit Suite to JavaScript testSuite"""
