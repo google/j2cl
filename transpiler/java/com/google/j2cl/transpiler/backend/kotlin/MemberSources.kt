@@ -173,6 +173,10 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
           )
         },
         memberDescriptorSources.volatileAnnotationSource(fieldDescriptor),
+        annotationSources.annotationsSource(
+          actualMemberDescriptor,
+          isProperty = actualMemberDescriptor.isKtProperty,
+        ),
         objCNameSources.objCAnnotationSource(actualMemberDescriptor),
         jsInteropAnnotationSources.jsInteropAnnotationsSource(fieldDescriptor),
         spaceSeparated(
