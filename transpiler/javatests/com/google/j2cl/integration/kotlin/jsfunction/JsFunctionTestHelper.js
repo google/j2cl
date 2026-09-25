@@ -14,7 +14,7 @@
 
 goog.module('jsfunction.JsFunctionTestHelper');
 
-const SomeJsType = goog.requireType('jsfunction.SomeJsType');
+const Long = goog.require('goog.math.Long');
 
 
 /**
@@ -37,12 +37,58 @@ exports.callAsFunctionNoArgument = function(fn) {
 
 /**
  * @param {?} fn
- * @param {number} arg
- * @return {number}
+ * @param {?} arg
+ * @return {?}
  * @public
  */
 exports.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
+};
+
+/**
+ * @param {function(!Long): !Long} fn
+ * @return {boolean}
+ * @public
+ */
+exports.testDirectJsFunctionLongFromJs = function(fn) {
+  const input = Long.fromString('5000000000');
+  const result = fn(input);
+  return result instanceof Long && result.toString() === '5000000001';
+};
+
+/**
+ * @param {?} fn
+ * @return {?}
+ * @public
+ */
+exports.passThrough = function(fn) {
+  return fn;
+};
+
+/**
+ * @param {?} fn1
+ * @param {?} fn2
+ * @return {boolean}
+ * @public
+ */
+exports.isSameInJs = function(fn1, fn2) {
+  return fn1 === fn2;
+};
+
+/**
+ * @return {?Function}
+ * @public
+ */
+exports.getNullFunction = function() {
+  return null;
+};
+
+/**
+ * @return {(!Function|undefined)}
+ * @public
+ */
+exports.getUndefinedFunction = function() {
+  return undefined;
 };
 
 /**
@@ -52,16 +98,6 @@ exports.callAsFunction = function(fn, arg) {
  * @public
  */
 exports.callAsFunctionWithNativeType = function(fn, arg) {
-  return (/** @type {!Function} */ (fn))(arg);
-};
-
-/**
- * @param {?} fn
- * @param {!SomeJsType} arg
- * @return {!SomeJsType}
- * @public
- */
-exports.callAsFunctionWithJsType = function(fn, arg) {
   return (/** @type {!Function} */ (fn))(arg);
 };
 
@@ -121,14 +157,6 @@ exports.createFunction = function() {
 exports.createFunctionSingleImpl = function() {
   const fun = function() { return 3; };
   return fun;
-};
-
-/**
- * @return {function(!SomeJsType):!SomeJsType}
- * @public
- */
-exports.createJsFunctionWithJsType = function() {
-  return function(a) { return a; };
 };
 
 /**

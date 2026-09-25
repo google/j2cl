@@ -196,14 +196,6 @@ open class Main {
   val nativeObjResult: NativeRegExp? = jsFnFromJs!!.f(nativeObj)
  }
  
- open fun testJsFunctionWithJsType() {
-  val jsType: SomeJsType = SomeJsType()
-  val fn: JsFunctionWithJsType = JsFunctionWithJsType { a: SomeJsType? -> a }
-  val result: SomeJsType? = Main.callAsFunctionWithJsType(fn, jsType)
-  val fnFromJs: JsFunctionWithJsType? = Main.createJsFunctionWithJsType()
-  val jsTypeResult: SomeJsType? = fnFromJs!!.f(jsType)
- }
- 
  companion object {
   @JvmStatic
   @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
@@ -302,14 +294,6 @@ open class Main {
   @JvmStatic
   @JsMethod(name = "createNativeFunction", namespace = "jsfunction.JsFunctionTestHelper")
   internal external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType?
-  
-  @JvmStatic
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-  internal external fun callAsFunctionWithJsType(fn: JsFunctionWithJsType?, arg: SomeJsType?): SomeJsType?
-  
-  @JvmStatic
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-  internal external fun createJsFunctionWithJsType(): JsFunctionWithJsType?
  }
  
  @JsFunction
@@ -489,16 +473,5 @@ open class Main {
  @JsFunction
  internal fun interface JsFunctionWithNativeType {
   fun f(nativeObj: NativeRegExp?): NativeRegExp?
- }
- 
- @JsType
- open class SomeJsType {
-  @JsMethod
-  internal open fun getJsFunction(fn: JsFunctionWithJsType?): JsFunctionWithJsType? = null
- }
- 
- @JsFunction
- internal fun interface JsFunctionWithJsType {
-  fun f(jsType: SomeJsType?): SomeJsType?
  }
 }

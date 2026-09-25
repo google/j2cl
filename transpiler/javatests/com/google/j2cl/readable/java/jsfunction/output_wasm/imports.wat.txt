@@ -1,8 +1,4 @@
 
-(import "prototypes" "$jsfunction.Main.proto" (global $jsfunction.Main.proto (ref extern)))
-(import "prototypes" "$jsfunction.Main.Implementor.proto" (global $jsfunction.Main.Implementor.proto (ref extern)))
-(import "prototypes" "$jsfunction.Main.ClassWithJsFunctionProperty.proto" (global $jsfunction.Main.ClassWithJsFunctionProperty.proto (ref extern)))
-(import "prototypes" "$jsfunction.Main.SomeJsType.proto" (global $jsfunction.Main.SomeJsType.proto (ref extern)))
 
 ;;; NativeString F.$invokeJsFunction(WasmExtern $jsFuncref, NativeString s)
 (func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsfunction.JsFunctionOptimization.F (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
@@ -105,13 +101,6 @@
  (result (ref null extern))
 )
 
-;;; WasmExtern JsFunctionWithJsType.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern jsType)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.JsFunctionWithJsType (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
- (param $$jsFuncref (ref null extern))
- (param $jsType (ref null extern))
- (result (ref null extern))
-)
-
 ;;; WasmExtern Main.createNativeFunction()
 (func $m_createNativeFunction__javaemul_internal_WasmExtern@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
  (result (ref null extern))
@@ -132,18 +121,6 @@
 
 ;;; WasmExtern Main.createJsFunctionWithNativeType()
 (func $m_createJsFunctionWithNativeType__javaemul_internal_WasmExtern@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
- (result (ref null extern))
-)
-
-;;; WasmExtern Main.callAsFunctionWithJsType(WasmExtern fn, WasmExtern arg)
-(func $m_callAsFunctionWithJsType__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callAsFunctionWithJsType")
- (param $fn (ref null extern))
- (param $arg (ref null extern))
- (result (ref null extern))
-)
-
-;;; WasmExtern Main.createJsFunctionWithJsType()
-(func $m_createJsFunctionWithJsType__javaemul_internal_WasmExtern@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createJsFunctionWithJsType")
  (result (ref null extern))
 )
 

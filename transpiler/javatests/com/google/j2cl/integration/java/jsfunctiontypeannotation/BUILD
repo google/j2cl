@@ -16,6 +16,6 @@ integration_test(
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
     enable_kt = False,
-    enable_wasm = False,
+    enable_wasm = False,  # TODO(b/540451167)
     suppress = ["JSC_TYPE_MISMATCH"],
 )

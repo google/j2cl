@@ -13,9 +13,8 @@ integration_test(
         "*.java",
         "*.js",
     ]),
-    # Contains JsInterop features which are only applicable for JS output.
+    # Contains JsInterop features which are only applicable for J2CL.
     enable_jvm_test = False,
     enable_kt_native = False,
-    enable_wasm = False,
     enable_wasm_custom_descriptors_jsinterop = True,
 )

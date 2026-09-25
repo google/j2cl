@@ -17,7 +17,6 @@ let JsFunctionTestHelper = goog.forwardDeclare('jsfunction.JsFunctionTestHelper'
 let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.Main.ClassWithJsFunctionProperty$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.Main.JsFunctionImplementation$impl');
-let SomeJsType = goog.forwardDeclare('jsfunction.Main.SomeJsType$impl');
 let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.Main.TIntegerJsBiFunction$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -285,16 +284,6 @@ class Main extends j_l_Object {
   let jsFnFromJs = JsFunctionTestHelper.createNativeFunction();
   let nativeObjResult = jsFnFromJs(nativeObj);
  }
- /** @nodts */
- m_testJsFunctionWithJsType__void() {
-  let jsType = new SomeJsType();
-  let fn = /**  @return {SomeJsType}*/ ((/** SomeJsType */ a) =>{
-   return a;
-  });
-  let result = JsFunctionTestHelper.callAsFunctionWithJsType(fn, jsType);
-  let fnFromJs = JsFunctionTestHelper.createJsFunctionWithJsType();
-  let jsTypeResult = fnFromJs(jsType);
- }
  /** @private @nodts */
  $init__void_$p_jsfunction_Main() {
   this.f_jsFunctionFieldWildcard__jsfunction_Main = (/** * */ event) =>{};
@@ -327,7 +316,6 @@ class Main extends j_l_Object {
   ClassWithJsFunctionProperty = goog.module.get('jsfunction.Main.ClassWithJsFunctionProperty$impl');
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.Main.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.Main.JsFunctionImplementation$impl');
-  SomeJsType = goog.module.get('jsfunction.Main.SomeJsType$impl');
   TIntegerJsBiFunction = goog.module.get('jsfunction.Main.TIntegerJsBiFunction$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

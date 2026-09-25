@@ -458,32 +458,3 @@ fun testJsFunctionWithNativeType() {
   val jsFnFromJs = createJsFunctionWithNativeType()
   val nativeObjResult = jsFnFromJs.f(nativeObj)
 }
-
-@JsType
-class SomeJsType {
-  @JsMethod
-  fun getJsFunction(fn: JsFunctionWithJsType?): JsFunctionWithJsType? {
-    return null
-  }
-}
-
-@JsFunction
-fun interface JsFunctionWithJsType {
-  fun f(jsType: SomeJsType?): SomeJsType?
-}
-
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-external fun callAsFunctionWithJsType(fn: JsFunctionWithJsType?, arg: SomeJsType?): SomeJsType?
-
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-external fun createJsFunctionWithJsType(): JsFunctionWithJsType
-
-fun testJsFunctionWithJsType() {
-  val jsType = SomeJsType()
-
-  val fn = JsFunctionWithJsType { a -> a }
-  val result = callAsFunctionWithJsType(fn, jsType)
-
-  val fnFromJs = createJsFunctionWithJsType()
-  val jsTypeResult = fnFromJs.f(jsType)
-}

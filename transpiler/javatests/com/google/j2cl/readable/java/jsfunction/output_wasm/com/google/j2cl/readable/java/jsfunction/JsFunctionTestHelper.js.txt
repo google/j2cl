@@ -14,8 +14,6 @@
 
 goog.module('jsfunction.JsFunctionTestHelper');
 
-const SomeJsType = goog.requireType('jsfunction.Main.SomeJsType');
-
 /**
  * @return {function(number):number}
  * @public
@@ -25,18 +23,6 @@ function createNativeFunction() {
     return a;
   };
 }
-
-/**
- * @return {function(!SomeJsType):!SomeJsType}
- * @public
- */
-function createJsFunctionWithJsType() {
-  return function(a) {
-    return a;
-  };
-}
-
-
 
 /**
  * @param {function(?number, ?number):?number} fn
@@ -57,20 +43,8 @@ function callAsFunctionWithNativeType(fn, arg) {
   return fn(arg);
 }
 
-/**
- * @param {?} fn
- * @param {!SomeJsType} arg
- * @return {!SomeJsType}
- * @public
- */
-function callAsFunctionWithJsType(fn, arg) {
-  return fn(arg);
-}
-
 exports = {
   createNativeFunction,
-  createJsFunctionWithJsType,
   callOnFunction,
   callAsFunctionWithNativeType,
-  callAsFunctionWithJsType,
 };

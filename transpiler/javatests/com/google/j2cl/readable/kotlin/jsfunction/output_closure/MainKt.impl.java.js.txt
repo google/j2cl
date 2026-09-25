@@ -17,7 +17,6 @@ let ContainerImpl = goog.forwardDeclare('jsfunction.ContainerImpl$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.JsFunctionImplementation$impl');
 let JsFunctionTestHelper = goog.forwardDeclare('jsfunction.JsFunctionTestHelper');
-let SomeJsType = goog.forwardDeclare('jsfunction.SomeJsType$impl');
 let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.TIntegerJsBiFunction$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -324,17 +323,6 @@ class MainKt extends j_l_Object {
   let nativeObjResult = jsFnFromJs(nativeObj);
  }
  /** @nodts */
- static m_testJsFunctionWithJsType__void() {
-  MainKt.$clinit();
-  let jsType = new SomeJsType();
-  let fn = /**  @return {SomeJsType}*/ ((/** SomeJsType */ a) =>{
-   return a;
-  });
-  let result = JsFunctionTestHelper.callAsFunctionWithJsType(fn, jsType);
-  let fnFromJs = JsFunctionTestHelper.createJsFunctionWithJsType();
-  let jsTypeResult = fnFromJs(jsType);
- }
- /** @nodts */
  static $clinit() {
   MainKt.$clinit = () =>{};
   MainKt.$loadModules();
@@ -367,7 +355,6 @@ class MainKt extends j_l_Object {
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.JsFunctionImplementation$impl');
   JsFunctionTestHelper = goog.module.get('jsfunction.JsFunctionTestHelper');
-  SomeJsType = goog.module.get('jsfunction.SomeJsType$impl');
   TIntegerJsBiFunction = goog.module.get('jsfunction.TIntegerJsBiFunction$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

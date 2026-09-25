@@ -18,11 +18,11 @@ package jsfunction
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertNotNull
+import com.google.j2cl.integration.testing.Asserts.assertNull
 import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
-import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsOverlay
@@ -35,8 +35,10 @@ fun main(vararg unused: String) {
   testJsFunctionOverlay()
   testSpecializedJsFunction()
   testParameterizedJsFunctionMethod()
+  testJsFunctionWithObject()
   testInvokableJsFunction()
   testCast_crossCastJavaInstance()
+  testCast_crossCastJsInstance()
   testCast_fromJsFunction()
   testCast_fromJsObject()
   testCast_inJava()
@@ -66,11 +68,15 @@ fun main(vararg unused: String) {
   testSingleConcreteJsFunction()
   testJsFunctionWithVarArgs()
   testJsFunctionLambda()
+  testJsFunctionMethodReference()
+  testJsFunctionClassImplementation()
   testJsFunctionLambdaCapturingLocal()
+  testJsFunctionLambdaReferencingStaticField()
   testJsFunctionArray()
   testJsFunctionCalls_autoboxing()
   testJsFunctionWithNativeType()
-  testJsFunctionWithJsType()
+  testJsFunctionAsObject()
+  testJsFunctionWithLong()
 }
 
 @JsFunction
@@ -151,6 +157,34 @@ private fun testParameterizedJsFunctionMethod() {
   }
   A()
   assertEquals("HelloB", parameterInterfaceFn.f(B())!!.m())
+
+  val stringJsFunction = ParameterizedInterface<String> { s -> s!!.lowercase() }
+  assertEquals("hello", callParameterizedFunction(stringJsFunction, "HELLO"))
+
+  val intJsFunction = ParameterizedInterface<Int> { i -> i!! + 1 }
+  val intResult: Int = callParameterizedFunction(intJsFunction, 1)
+  assertEquals(2, intResult)
+}
+
+@JsFunction
+internal fun interface JsFunctionWithObject {
+  fun f(o: Any?): Any?
+}
+
+private fun testJsFunctionWithObject() {
+  val objectLambda = JsFunctionWithObject { o -> o }
+  assertNull(callWithObject(objectLambda, null))
+  val obj = Any()
+  assertSame(obj, callWithObject(objectLambda, obj))
+  assertEquals("hello", callWithObject(objectLambda, "hello"))
+  val regExp = NativeRegExp("a")
+  assertTrue(callWithObject(objectLambda, regExp) as NativeRegExp === regExp)
+
+  val jsFunctionWithObject = createObjectIdentityFunction()
+  assertNull(jsFunctionWithObject.f(null))
+  assertSame(obj, jsFunctionWithObject.f(obj))
+  assertEquals("hello", jsFunctionWithObject.f("hello"))
+  assertTrue(jsFunctionWithObject.f(regExp) as NativeRegExp === regExp)
 }
 
 @JsFunction
@@ -310,6 +344,8 @@ private fun testJsFunctionCallFromAMember() {
 private fun testJsFunctionJs2Java() {
   val intf: MyJsFunctionInterface = createMyJsFunction()
   assertEquals(10, intf.foo(10))
+  assertNull(getNullFunction())
+  assertNull(getUndefinedFunction())
 }
 
 private fun testJsFunctionSuccessiveCalls() {
@@ -332,6 +368,23 @@ private fun testJsFunctionCallbackPattern() {
 private fun testJsFunctionReferentialIntegrity() {
   val intf: MyJsFunctionIdentityInterface = createReferentialFunction()
   assertEquals(intf, intf.identity())
+
+  val fromJs = createMyJsFunction()
+  val fromJs2 = passThrough(fromJs)
+  assertSame(fromJs, fromJs2)
+  assertTrue(isSameInJs(fromJs, fromJs2))
+
+  val fromJsAsObject = createFunction() as MyJsFunctionInterface
+  assertEquals(10, fromJsAsObject.foo(10))
+  assertEquals(5, callMyJsFunction(fromJsAsObject, 5))
+  val fromJsAsObject2 = passThroughAsObject(fromJsAsObject) as MyJsFunctionInterface
+  assertSame(fromJsAsObject, fromJsAsObject2)
+  assertTrue(isSameInJs(fromJsAsObject, fromJsAsObject2))
+
+  val fromKotlin = MyJsFunctionInterface { a -> a + 20 }
+  val fromKotlin2 = passThrough(fromKotlin)
+  assertSame(fromKotlin, fromKotlin2)
+  assertTrue(isSameInJs(fromKotlin, fromKotlin2))
 }
 
 private fun testCast_fromJsFunction() {
@@ -383,6 +436,14 @@ private fun testCast_crossCastJavaInstance() {
   val o: Any = MyJsFunctionInterfaceImpl()
   assertEquals(11, (o as MyOtherJsFunctionInterface).bar(10))
   assertSame(o as MyJsFunctionInterface, o as MyOtherJsFunctionInterface)
+
+  val fromKotlin = MyJsFunctionInterface { a -> a + 20 }
+  assertEquals(30, crossCastFromJs(fromKotlin).bar(10))
+}
+
+private fun testCast_crossCastJsInstance() {
+  val fromJs = createMyJsFunction()
+  assertEquals(10, crossCastFromJs(fromJs).bar(10))
 }
 
 private fun testInstanceOf_jsFunction() {
@@ -612,10 +673,84 @@ private fun testJsFunctionWithVarArgs() {
   JsFunctionWithVarargsTestSub().test()
 }
 
+private fun staticFooImpl(a: Int): Int = a + 11
+
+private class InstanceFooHolder {
+  fun instanceFooImpl(a: Int): Int = a + 12
+}
+
+private class MyJsFunctionWithConstructorImpl(val value: Int) : MyJsFunctionInterface {
+  constructor() : this(1)
+
+  override fun foo(a: Int): Int = a + value
+
+  inner class InnerJsFunctionImpl : MyJsFunctionInterface {
+    override fun foo(a: Int): Int = a + this@MyJsFunctionWithConstructorImpl.value + 1
+  }
+}
+
+private class MyJsFunctionWithSuperConstructorImpl() : MyJsFunctionInterface {
+  override fun foo(a: Int): Int = a + 100
+}
+
 private fun testJsFunctionLambda() {
   val jsFunctionInterface = MyJsFunctionInterface { a -> a + 2 }
+  assertEquals(12, callMyJsFunction(jsFunctionInterface, 10))
   assertEquals(12, callAsFunction(jsFunctionInterface, 10))
   assertEquals(12, jsFunctionInterface.foo(10))
+}
+
+private fun testJsFunctionMethodReference() {
+  val staticRef = MyJsFunctionInterface(::staticFooImpl)
+  assertEquals(16, staticRef.foo(5))
+  assertEquals(16, callMyJsFunction(staticRef, 5))
+  assertEquals(16, callAsFunction(staticRef, 5))
+
+  val instanceRef = MyJsFunctionInterface(InstanceFooHolder()::instanceFooImpl)
+  assertEquals(17, instanceRef.foo(5))
+  assertEquals(17, callMyJsFunction(instanceRef, 5))
+  assertEquals(17, callAsFunction(instanceRef, 5))
+}
+
+private fun testJsFunctionClassImplementation() {
+  val constructorInstance: MyJsFunctionInterface = MyJsFunctionWithConstructorImpl(1000)
+  assertEquals(1005, constructorInstance.foo(5))
+  assertEquals(1005, callMyJsFunction(constructorInstance, 5))
+
+  val constructorInstanceOtherConstructor: MyJsFunctionInterface = MyJsFunctionWithConstructorImpl()
+  assertEquals(6, constructorInstanceOtherConstructor.foo(5))
+  assertEquals(6, callMyJsFunction(constructorInstanceOtherConstructor, 5))
+
+  val innerJsFunction: MyJsFunctionInterface =
+    MyJsFunctionWithConstructorImpl(1000).InnerJsFunctionImpl()
+  assertEquals(1006, innerJsFunction.foo(5))
+  assertEquals(1006, callMyJsFunction(innerJsFunction, 5))
+
+  val withSuperConstructorInstance: MyJsFunctionInterface = MyJsFunctionWithSuperConstructorImpl()
+  assertEquals(105, withSuperConstructorInstance.foo(5))
+  assertEquals(105, callMyJsFunction(withSuperConstructorInstance, 5))
+}
+
+private fun testJsFunctionAsObject() {
+  val strJsFunction: Any = ParameterizedInterface<String> { s -> s!! + "bar" }
+  assertEquals("foobar", callAsFunctionWithString(strJsFunction, "foo"))
+
+  val intJsFunction = MyJsFunctionInterface { a -> a + 20 }
+  val intJsFunctionAsObject: Any = intJsFunction
+  assertEquals(25, callAsFunction(intJsFunctionAsObject, 5))
+  assertEquals(25, callMyJsFunction(intJsFunction, 5))
+}
+
+@JsFunction
+private fun interface JsFunctionWithLong {
+  fun f(l: Long): Long
+}
+
+private fun testJsFunctionWithLong() {
+  val longLambda = JsFunctionWithLong { l -> l + 1L }
+  assertEquals(1234567890123456790L, longLambda.f(1234567890123456789L))
+  assertEquals(1234567890123456790L, callWithLong(longLambda, 1234567890123456789L))
+  assertTrue(testDirectJsFunctionLongFromJs(longLambda))
 }
 
 private fun testJsFunctionLambdaCapturingLocal() {
@@ -629,6 +764,16 @@ private fun testJsFunctionLambdaCapturingLocal() {
 
   val capturingParameterizedJsFunction = ParameterizedInterface<String> { a -> a + localString }
   assertEquals("bcaabc", capturingParameterizedJsFunction.f("bca"))
+}
+
+private var staticField = 10001
+
+// A lambda that reads a static field captures nothing, so it exercises the non-capturing
+// lowering path while still producing a value that is not a compile time constant.
+private fun testJsFunctionLambdaReferencingStaticField() {
+  val referencingStaticField = MyJsFunctionInterface { a -> a + staticField }
+  assertEquals(10006, referencingStaticField.foo(5))
+  assertEquals(10006, callMyJsFunction(referencingStaticField, 5))
 }
 
 private fun testJsFunctionArray() {
@@ -695,30 +840,6 @@ private fun testJsFunctionWithNativeType() {
   assertTrue(fnFromJs.f(regExp) === regExp)
 }
 
-@JsType class SomeJsType @JsConstructor constructor()
-
-@JsFunction
-fun interface JsFunctionWithJsType {
-  fun f(jsType: SomeJsType): SomeJsType
-}
-
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-private external fun callAsFunctionWithJsType(fn: JsFunctionWithJsType, arg: SomeJsType): SomeJsType
-
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-private external fun createJsFunctionWithJsType(): JsFunctionWithJsType
-
-private fun testJsFunctionWithJsType() {
-  val jsType = SomeJsType()
-  assertTrue((JsFunctionWithJsType { a -> a }).f(jsType) === jsType)
-
-  val fn = JsFunctionWithJsType { a -> a }
-  assertTrue(callAsFunctionWithJsType(fn, jsType) === jsType)
-
-  val fnFromJs = createJsFunctionWithJsType()
-  assertTrue(fnFromJs.f(jsType) === jsType)
-}
-
 private fun assertJsTypeDoesntHaveFields(obj: Any?, vararg fields: String) {
   for (field in fields) {
     assertFalse("Field '" + field + "' should not be exported", hasField(obj, field))
@@ -730,6 +851,45 @@ private external fun callAsFunctionNoArgument(fn: Any?): Any?
 
 @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
 private external fun callAsFunction(fn: Any?, arg: Int): Int
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+private external fun callMyJsFunction(fn: MyJsFunctionInterface, arg: Int): Int
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+private external fun callAsFunctionWithString(fn: Any?, arg: String): String
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+private external fun callWithObject(fn: JsFunctionWithObject, arg: Any?): Any?
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+private external fun <T> callParameterizedFunction(fn: ParameterizedInterface<T>, arg: T): T
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+private external fun callWithLong(fn: JsFunctionWithLong, arg: Long): Long
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun testDirectJsFunctionLongFromJs(fn: JsFunctionWithLong): Boolean
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun passThrough(fn: MyJsFunctionInterface): MyJsFunctionInterface
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "passThrough")
+private external fun passThroughAsObject(fn: Any?): Any?
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "passThrough")
+private external fun crossCastFromJs(fn: MyJsFunctionInterface): MyOtherJsFunctionInterface
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun isSameInJs(fn1: MyJsFunctionInterface, fn2: MyJsFunctionInterface): Boolean
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun getNullFunction(): MyJsFunctionInterface?
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+private external fun getUndefinedFunction(): MyJsFunctionInterface?
+
+@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+private external fun createObjectIdentityFunction(): JsFunctionWithObject
 
 @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
 private external fun callWithFunctionApply(fn: Any?, arg: Int): Int

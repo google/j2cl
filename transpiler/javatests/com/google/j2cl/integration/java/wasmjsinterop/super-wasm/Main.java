@@ -27,7 +27,6 @@ import jsinterop.annotations.JsType;
 
 /** Tests J2WASM jsinterop features. */
 public final class Main {
-  // TODO(b/479895505): Add JsFunction tests once the functionality is enabled.
   public static void main(String... args) throws Exception {
     testJsString();
     testJsNumber();

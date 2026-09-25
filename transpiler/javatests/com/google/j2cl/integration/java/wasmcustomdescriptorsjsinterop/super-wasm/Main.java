@@ -16,7 +16,6 @@
 package wasmcustomdescriptorsjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
@@ -26,7 +25,6 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -39,12 +37,7 @@ public final class Main {
     testInheritedMethod();
     testInterfaceMethod();
     testJsSubtyping();
-    testJsFunction();
-    testJsFunctionCapturing();
-    testJsFunctionAsObject();
-    testJsFunctionIdentity();
-    testJsFunctionCrossCasting();
-    testParameterizedJsFunction();
+    testJsFunctionWithJsType();
     testEntryPoint();
     testMethodWithNativeAndLong();
     testNativeJsTypeConsumer();
@@ -429,224 +422,28 @@ public final class Main {
     }
   }
 
-  private static void testJsFunction() {
-    assertEquals(2, MyJsFunction.staticOverlay());
-
-    MyJsFunction lambda = a -> a + 20;
-    assertEquals(25, lambda.foo(5));
-    assertEquals(1, lambda.myOverlay());
-    // At the first border crossing the JavaScript function is created by binding the export bridge,
-    assertEquals(25, callFunctionInJs(lambda, 5));
-    // and then reused in subsequent calls.
-    assertEquals(25, callFunctionAsObjectInJs(lambda, 5));
-
-    MyJsFunction staticRef = Main::staticFooImpl;
-    assertEquals(16, staticRef.foo(5));
-    assertEquals(1, staticRef.myOverlay());
-    assertEquals(16, callFunctionInJs(staticRef, 5));
-    assertEquals(16, callFunctionAsObjectInJs(staticRef, 5));
-
-    MyJsFunction instanceRef = new Main()::instanceFooImpl;
-    assertEquals(17, instanceRef.foo(5));
-    assertEquals(1, instanceRef.myOverlay());
-    assertEquals(17, callFunctionInJs(instanceRef, 5));
-    assertEquals(17, callFunctionAsObjectInJs(instanceRef, 5));
-
+  private static void testJsFunctionWithJsType() {
     MyJsFunctionWithObject objectLambda = o -> o;
-    assertEquals(null, objectLambda.foo(null));
-    Object obj = new Object();
-    assertEquals(obj, objectLambda.foo(obj));
-    assertTrue(callFunctionWithObjectInJs(objectLambda, obj) == obj);
-    assertEquals("hello", callFunctionWithObjectInJs(objectLambda, "hello"));
     SomeJsType someJsType = new SomeJsType(123);
     assertEquals(someJsType, callFunctionWithObjectInJs(objectLambda, someJsType));
     assertTrue(callFunctionWithObjectInJs(objectLambda, someJsType) == someJsType);
 
-    MyJsFunction jsFunction = getFunctionFromJs();
-    assertEquals(42, jsFunction.foo(10));
-
-    MyJsFunction nullJsFunction = getNullFunctionFromJs();
-    assertEquals(null, nullJsFunction);
-
-    MyJsFunction undefinedJsFunction = getUndefinedJsFunction();
-    assertEquals(null, undefinedJsFunction);
-
-    MyJsFunction jsFunctionAsObject = (MyJsFunction) getFunctionAsObjectFromJs();
-    assertEquals(42, jsFunctionAsObject.foo(10));
-    assertEquals(37, callFunctionInJs(jsFunctionAsObject, 5));
-
     MyJsFunctionWithObject jsFunctionWithObject = getFunctionWithObjectFromJs();
-    Object obj2 = new Object();
-    assertTrue(jsFunctionWithObject.foo(obj2) == obj2);
-    assertEquals("hello", jsFunctionWithObject.foo("hello"));
     SomeJsType someJsType2 = new SomeJsType(123);
     assertTrue(jsFunctionWithObject.foo(someJsType2) == someJsType2);
 
-    MyJsFunction concreteInstance = new MyJsFunctionImpl();
-    assertEquals(105, concreteInstance.foo(5));
-    assertEquals(105, callFunctionInJs(concreteInstance, 5));
+    MyJsFunctionWithJsType jsTypeIdentityLambda = s -> s;
+    assertEquals(someJsType, callFunctionWithJsTypeInJs(jsTypeIdentityLambda, someJsType));
+    assertTrue(callFunctionWithJsTypeInJs(jsTypeIdentityLambda, someJsType) == someJsType);
+    assertTrue(jsTypeIdentityLambda.foo(someJsType) == someJsType);
 
-    MyJsFunction anonymousInstance =
-        new MyJsFunction() {
-          @Override
-          public int foo(int a) {
-            return a + 200;
-          }
-        };
-    assertEquals(205, anonymousInstance.foo(5));
-    assertEquals(205, callFunctionInJs(anonymousInstance, 5));
+    MyJsFunctionWithJsType jsTypeLambda = s -> new SomeJsType(s.field + 10);
+    assertEquals(133, callFunctionWithJsTypeInJs(jsTypeLambda, someJsType).field);
 
-    MyJsFunction constructorInstance = new MyJsFunctionWithConstructorImpl(1000);
-    assertEquals(1005, constructorInstance.foo(5));
-    assertEquals(1005, callFunctionInJs(constructorInstance, 5));
-
-    MyJsFunction constructorInstanceOtherConstructor = new MyJsFunctionWithConstructorImpl();
-    assertEquals(6, constructorInstanceOtherConstructor.foo(5));
-    assertEquals(6, callFunctionInJs(constructorInstanceOtherConstructor, 5));
-
-    MyJsFunction innerJsFunction =
-        new MyJsFunctionWithConstructorImpl(1000).new InnerJsFunctionImpl();
-    assertEquals(1006, innerJsFunction.foo(5));
-    assertEquals(1006, callFunctionInJs(innerJsFunction, 5));
-
-    MyJsFunction withSuperConstructorInstance = new MyJsFunctionWithSuperConstructorImpl();
-    assertEquals(105, withSuperConstructorInstance.foo(5));
-    assertEquals(105, callFunctionInJs(withSuperConstructorInstance, 5));
-
-    MyLongFunction longLambda = l -> l + 1L;
-    assertEquals(1234567890123456790L, callLongFunctionInJs(longLambda, 1234567890123456789L));
-    assertTrue(testDirectJsFunctionLongFromJs(longLambda));
+    MyJsFunctionWithJsType jsFunctionWithJsType = getFunctionWithJsTypeFromJs();
+    assertTrue(jsFunctionWithJsType.foo(someJsType2) == someJsType2);
   }
 
-  private static int classField = 10001;
-
-  private static void testJsFunctionCapturing() {
-    int local = 10002;
-    MyJsFunction capturingLocal = a -> a + local;
-    assertEquals(10007, capturingLocal.foo(5));
-    assertEquals(10007, callFunctionInJs(capturingLocal, 5));
-
-    MyJsFunction capturingField = a -> a + classField;
-    assertEquals(10006, capturingField.foo(5));
-    assertEquals(10006, callFunctionInJs(capturingField, 5));
-  }
-
-  /**
-   * Tests that the proper export bridge is used when the JavaScript function is created when
-   * crossing the border.
-   */
-  private static void testJsFunctionAsObject() {
-    // Assigning to an Object variable does not trigger the instantiation of the JavaScript
-    // function that needs the export bridge.
-    Object jsFunction = (MyStringFunction) s -> s + "bar";
-    // but calling it using a native function by passing it as `Object` does.
-    assertEquals("foobar", callFunctionAsObjectInJs(jsFunction, "foo"));
-
-    // Use a second JsFunction with incompatible type conversion needs to make sure that the right
-    // bridge is used.
-    MyJsFunction intJsFunction = a -> a + 20;
-    jsFunction = intJsFunction;
-    assertEquals(25, callFunctionAsObjectInJs(jsFunction, 5));
-    // The second call uses the already created JavaScript function.
-    assertEquals(25, callFunctionInJs(intJsFunction, 5));
-  }
-
-  private static void testJsFunctionIdentity() {
-    MyJsFunction fromJs = getFunctionFromJs();
-    MyJsFunction fromJs2 = passThroughFromJs(fromJs);
-    assertTrue(fromJs == fromJs2);
-    assertTrue(isSameInJs(fromJs, fromJs2));
-
-    MyJsFunction fromJsAsObject = (MyJsFunction) getFunctionAsObjectFromJs();
-    MyJsFunction fromJsAsObject2 = (MyJsFunction) passThroughAsObjectFromJs(fromJsAsObject);
-    assertTrue(fromJsAsObject == fromJsAsObject2);
-    assertTrue(isSameInJs(fromJsAsObject, fromJsAsObject2));
-
-    MyJsFunction fromWasm = a -> a + 20;
-    MyJsFunction fromWasm2 = passThroughFromJs(fromWasm);
-    assertTrue(fromWasm == fromWasm2);
-    assertTrue(isSameInJs(fromWasm, fromWasm2));
-  }
-
-  private static void testJsFunctionCrossCasting() {
-    MyJsFunction fromJs = getFunctionFromJs();
-    MyJsFunction2 crossCastedFromJs = crossCastFromJs(fromJs);
-    assertEquals(42, crossCastedFromJs.bar(10));
-
-    MyJsFunction fromWasm = a -> a + 20;
-    MyJsFunction2 crossCastedFromWasm = crossCastFromJs(fromWasm);
-    assertEquals(30, crossCastedFromWasm.bar(10));
-  }
-
-  static int staticFooImpl(int a) {
-    return a + 11;
-  }
-
-  int instanceFooImpl(int a) {
-    return a + 12;
-  }
-
-  static final class MyJsFunctionImpl implements MyJsFunction {
-    @Override
-    public int foo(int a) {
-      return a + 100;
-    }
-  }
-
-  static final class MyJsFunctionWithConstructorImpl implements MyJsFunction {
-    private final int value;
-
-    public MyJsFunctionWithConstructorImpl() {
-      this(1);
-    }
-
-    public MyJsFunctionWithConstructorImpl(int value) {
-      this.value = value;
-    }
-
-    @Override
-    public int foo(int a) {
-      return a + value;
-    }
-
-    public final class InnerJsFunctionImpl implements MyJsFunction {
-      @Override
-      public int foo(int a) {
-        return a + MyJsFunctionWithConstructorImpl.this.value + 1;
-      }
-    }
-  }
-
-  static final class MyJsFunctionWithSuperConstructorImpl implements MyJsFunction {
-    public MyJsFunctionWithSuperConstructorImpl() {
-      super();
-    }
-
-    @Override
-    public int foo(int a) {
-      return a + 100;
-    }
-  }
-
-  @JsFunction
-  interface MyJsFunction {
-    int foo(int a);
-
-    @JsOverlay
-    default int myOverlay() {
-      return 1;
-    }
-
-    @JsOverlay
-    static int staticOverlay() {
-      return 2;
-    }
-  }
-
-  @JsFunction
-  interface MyStringFunction {
-    String foo(String s);
-  }
 
   @JsFunction
   interface MyJsFunctionWithObject {
@@ -654,79 +451,23 @@ public final class Main {
   }
 
   @JsFunction
-  interface MyJsFunction2 {
-    int bar(int a);
+  interface MyJsFunctionWithJsType {
+    SomeJsType foo(SomeJsType s);
   }
 
-  @JsFunction
-  interface MyLongFunction {
-    long foo(long l);
-  }
-
-  private static void testParameterizedJsFunction() {
-    ApplyFunction<String> stringJsFunction = s -> s.toLowerCase();
-    assertEquals("hello", stringJsFunction.apply("HELLO"));
-    assertEquals("hello", callGeneric(stringJsFunction, "HELLO"));
-    assertEquals("hello", callApplyFunctionInJs(stringJsFunction, "HELLO"));
-
-    ApplyFunction<Integer> intJsFunction = i -> i + 1;
-    assertEquals(2, intJsFunction.apply(1));
-    assertEquals(2, callGeneric(intJsFunction, 1));
-    assertEquals((Integer) 2, callApplyFunctionInJs(intJsFunction, 1));
-
-    ApplyFunction<Object> objectJsFunction = (ApplyFunction) stringJsFunction;
-    assertThrowsClassCastException(() -> objectJsFunction.apply(new Object()));
-  }
-
-  @SuppressWarnings({"rawtypes", "unchecked"})
-  private static Object callGeneric(ApplyFunction af, Object o) {
-    return af.apply(o);
-  }
-
-  @JsFunction
-  interface ApplyFunction<T> {
-    T apply(T a);
-  }
-
-  @JsMethod(namespace = "functions", name = "getFunction")
-  private static native MyJsFunction getFunctionFromJs();
-
-  @JsMethod(namespace = "functions", name = "getNullFunction")
-  private static native MyJsFunction getNullFunctionFromJs();
-
-  @JsMethod(namespace = "functions", name = "getUndefinedJsFunction")
-  private static native MyJsFunction getUndefinedJsFunction();
-
-  @JsMethod(namespace = "functions", name = "getFunctionAsObject")
-  private static native Object getFunctionAsObjectFromJs();
-
-  @JsMethod(namespace = "functions", name = "getFunctionWithObject")
+  @JsMethod(namespace = "nativehelper", name = "getFunctionWithObject")
   private static native MyJsFunctionWithObject getFunctionWithObjectFromJs();
 
-  @JsMethod(namespace = "functions", name = "callFunction")
-  private static native int callFunctionInJs(MyJsFunction function, int a);
-
-  @JsMethod(namespace = "functions", name = "callFunctionAsObject")
-  private static native int callFunctionAsObjectInJs(Object function, int a);
-
-  @JsMethod(namespace = "functions", name = "callFunctionAsObject")
-  private static native String callFunctionAsObjectInJs(Object function, String a);
-
-  @JsMethod(namespace = "functions", name = "callFunctionWithObject")
+  @JsMethod(namespace = "nativehelper", name = "callFunctionWithObject")
   private static native Object callFunctionWithObjectInJs(
       MyJsFunctionWithObject function, Object a);
 
-  @JsMethod(namespace = "functions", name = "passThrough")
-  private static native MyJsFunction passThroughFromJs(MyJsFunction function);
+  @JsMethod(namespace = "nativehelper", name = "getFunctionWithJsType")
+  private static native MyJsFunctionWithJsType getFunctionWithJsTypeFromJs();
 
-  @JsMethod(namespace = "functions", name = "passThroughAsObject")
-  private static native Object passThroughAsObjectFromJs(Object function);
-
-  @JsMethod(namespace = "functions", name = "isSame")
-  private static native boolean isSameInJs(MyJsFunction function1, MyJsFunction function2);
-
-  @JsMethod(namespace = "functions", name = "passThrough")
-  private static native MyJsFunction2 crossCastFromJs(MyJsFunction function);
+  @JsMethod(namespace = "nativehelper", name = "callFunctionWithJsType")
+  private static native SomeJsType callFunctionWithJsTypeInJs(
+      MyJsFunctionWithJsType function, SomeJsType a);
 
   private static void testEntryPoint() {
     assertTrue(callEntryPointAdd(5, 10) == 15);
@@ -751,7 +492,7 @@ public final class Main {
     return o.getNumber();
   }
 
-  public static boolean entryPointWithJsFunction(MyJsFunction fn) {
+  public static boolean entryPointWithJsFunction(MyJsFunctionWithJsType fn) {
     return fn == null;
   }
 
@@ -900,12 +641,6 @@ public final class Main {
   @JsMethod(namespace = "nativehelper")
   static native boolean testDirectEntryPointAddLongFromJs();
 
-  @JsMethod(namespace = "nativehelper")
-  static native long callLongFunctionInJs(MyLongFunction fn, long l);
-
-  @JsMethod(namespace = "nativehelper")
-  static native boolean testDirectJsFunctionLongFromJs(MyLongFunction fn);
-
   @JsType(isNative = true, namespace = "nativehelper")
   static class MyNativeType {
     public int value;
@@ -966,9 +701,6 @@ public final class Main {
 
     public native int getNumber();
   }
-
-  @JsMethod(namespace = "functions", name = "callApplyFunction")
-  private static native <T> T callApplyFunctionInJs(ApplyFunction<T> function, T a);
 
   @JsEnum(namespace = "wasmcustomdescriptorsjsinterop")
   public enum SimpleJsEnum {

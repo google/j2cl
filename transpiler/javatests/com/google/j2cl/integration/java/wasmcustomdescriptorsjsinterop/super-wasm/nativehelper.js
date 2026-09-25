@@ -523,24 +523,39 @@ function testDirectEntryPointAddLongFromJs() {
 }
 
 /**
- * @param {function(!Long): !Long} fn
- * @param {!Long} l
- * @return {!Long}
+ * @return {function(?): ?}
  * @public
  */
-function callLongFunctionInJs(fn, l) {
-  return fn(l);
+function getFunctionWithObject() {
+  return (a) => a;
 }
 
 /**
- * @param {function(!Long): !Long} fn
- * @return {boolean}
+ * @param {function(?): ?} fn
+ * @param {?} a
+ * @return {?}
  * @public
  */
-function testDirectJsFunctionLongFromJs(fn) {
-  const input = Long.fromString('5000000000');
-  const result = fn(input);
-  return result instanceof Long && result.toString() === '5000000001';
+function callFunctionWithObject(fn, a) {
+  return fn(a);
+}
+
+/**
+ * @return {function(?SomeJsType): ?SomeJsType}
+ * @public
+ */
+function getFunctionWithJsType() {
+  return (a) => a;
+}
+
+/**
+ * @param {function(?SomeJsType): ?SomeJsType} fn
+ * @param {?SomeJsType} a
+ * @return {?SomeJsType}
+ * @public
+ */
+function callFunctionWithJsType(fn, a) {
+  return fn(a);
 }
 
 /**
@@ -719,8 +734,10 @@ exports = {
   callAddPrimitiveLong,
   callEntryPointAddLong,
   testDirectEntryPointAddLongFromJs,
-  callLongFunctionInJs,
-  testDirectJsFunctionLongFromJs,
+  getFunctionWithObject,
+  callFunctionWithObject,
+  getFunctionWithJsType,
+  callFunctionWithJsType,
   getLongField,
   setLongField,
   getSimpleJsEnumOne,

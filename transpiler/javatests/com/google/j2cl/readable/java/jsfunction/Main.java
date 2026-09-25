@@ -452,33 +452,4 @@ public class Main {
     JsFunctionWithNativeType jsFnFromJs = createJsFunctionWithNativeType();
     NativeRegExp nativeObjResult = jsFnFromJs.f(nativeObj);
   }
-
-  @JsType
-  public static class SomeJsType {
-    @JsMethod
-    public JsFunctionWithJsType getJsFunction(JsFunctionWithJsType fn) {
-      return null;
-    }
-  }
-
-  @JsFunction
-  interface JsFunctionWithJsType {
-    SomeJsType f(SomeJsType jsType);
-  }
-
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-  public static native SomeJsType callAsFunctionWithJsType(JsFunctionWithJsType fn, SomeJsType arg);
-
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-  public static native JsFunctionWithJsType createJsFunctionWithJsType();
-
-  public void testJsFunctionWithJsType() {
-    SomeJsType jsType = new SomeJsType();
-
-    JsFunctionWithJsType fn = a -> a;
-    SomeJsType result = callAsFunctionWithJsType(fn, jsType);
-
-    JsFunctionWithJsType fnFromJs = createJsFunctionWithJsType();
-    SomeJsType jsTypeResult = fnFromJs.f(jsType);
-  }
 }

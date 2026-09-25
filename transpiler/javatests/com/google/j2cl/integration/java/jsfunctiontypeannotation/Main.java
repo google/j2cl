@@ -109,6 +109,6 @@ public class Main {
     assertTrue(af1 != null);
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jsfunctiontypeannotation.TestHelper")
   public static native double callOnFunction(ApplyFunction<Double, Double> f);
 }
