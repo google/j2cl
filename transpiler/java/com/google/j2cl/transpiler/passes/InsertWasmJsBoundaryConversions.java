@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithWasm;
 
@@ -75,9 +76,11 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
   }
 
   private static MethodDescriptor createNativeImportMethodDescriptor(MethodDescriptor descriptor) {
+    checkState(descriptor.getBridgeOrigin() == null);
     return descriptor.transform(
         builder ->
             builder
+                .makeNativeImport(descriptor)
                 .setReturnTypeDescriptor(getExternalType(builder.getReturnTypeDescriptor()))
                 .setParameterDescriptors(
                     descriptor.getParameterDescriptors().stream()

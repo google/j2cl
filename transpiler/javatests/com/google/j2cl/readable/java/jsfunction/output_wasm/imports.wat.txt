@@ -1,14 +1,14 @@
 
 
 ;;; NativeString F.$invokeJsFunction(WasmExtern $jsFuncref, NativeString s)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsfunction.JsFunctionOptimization.F (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String__java_lang_String@jsfunction.JsFunctionOptimization.F (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $s (ref null string))
  (result (ref null string))
 )
 
 ;;; WasmExtern Function.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern u)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.Function (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object@jsfunction.Main.Function (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $u (ref null extern))
  (result (ref null extern))
@@ -22,21 +22,21 @@
 )
 
 ;;; WasmExtern IntegerJsFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern i)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.IntegerJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Integer__java_lang_Integer@jsfunction.Main.IntegerJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $i (ref null extern))
  (result (ref null extern))
 )
 
 ;;; WasmExtern LongJsFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern l)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.LongJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__long__long@jsfunction.Main.LongJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $l (ref null extern))
  (result (ref null extern))
 )
 
 ;;; int JsFunctionVarargs.$invokeJsFunction(WasmExtern $jsFuncref, int i, WasmExtern numbers)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionVarargs (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__arrayOf_int__int@jsfunction.Main.JsFunctionVarargs (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $i i32)
  (param $numbers (ref null extern))
@@ -44,7 +44,7 @@
 )
 
 ;;; WasmExtern ForEachCallBack.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern p0, int p1, WasmExtern p2)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.ForEachCallBack (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ForEachCallBack (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $p0 (ref null extern))
  (param $p1 i32)
@@ -53,14 +53,14 @@
 )
 
 ;;; WasmExtern ElementalJsFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern args)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.ElementalJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ElementalJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $args (ref null extern))
  (result (ref null extern))
 )
 
 ;;; int JsFunctionVarargsGenerics.$invokeJsFunction(WasmExtern $jsFuncref, int i, WasmExtern numbers)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionVarargsGenerics (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__arrayOf_java_lang_Object__int@jsfunction.Main.JsFunctionVarargsGenerics (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $i i32)
  (param $numbers (ref null extern))
@@ -73,7 +73,7 @@
 )
 
 ;;; int JsFunctionOptional.$invokeJsFunction(WasmExtern $jsFuncref, int i, WasmExtern number)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionOptional (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__java_lang_Double__int@jsfunction.Main.JsFunctionOptional (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $i i32)
  (param $number (ref null extern))
@@ -81,13 +81,13 @@
 )
 
 ;;; void ParametricJsFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern event)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__void@jsfunction.Main.ParametricJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $event (ref null extern))
 )
 
 ;;; WasmExtern JsBiFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern t, WasmExtern s)
-(func $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@jsfunction.Main.JsBiFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
  (param $t (ref null extern))
  (param $s (ref null extern))
@@ -102,25 +102,25 @@
 )
 
 ;;; WasmExtern Main.createNativeFunction()
-(func $m_createNativeFunction__javaemul_internal_WasmExtern@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
+(func $m_createNativeFunction__jsfunction_Main_JsFunctionInterface@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
  (result (ref null extern))
 )
 
 ;;; double Main.callOnFunction(WasmExtern f)
-(func $m_callOnFunction__javaemul_internal_WasmExtern__double@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callOnFunction")
+(func $m_callOnFunction__java_lang_Object__double@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callOnFunction")
  (param $f (ref null extern))
  (result f64)
 )
 
 ;;; NativeRegExp Main.callAsFunctionWithNativeType(WasmExtern fn, NativeRegExp arg)
-(func $m_callAsFunctionWithNativeType__javaemul_internal_WasmExtern__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callAsFunctionWithNativeType")
+(func $m_callAsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callAsFunctionWithNativeType")
  (param $fn (ref null extern))
  (param $arg (ref null extern))
  (result (ref null extern))
 )
 
 ;;; WasmExtern Main.createJsFunctionWithNativeType()
-(func $m_createJsFunctionWithNativeType__javaemul_internal_WasmExtern@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
+(func $m_createJsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
  (result (ref null extern))
 )
 

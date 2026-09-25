@@ -162,6 +162,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     WASM_JS_GETTER_EXPORT_BRIDGE,
     WASM_JS_SETTER_EXPORT_BRIDGE,
     WASM_JS_FUNCTION_EXPORT_BRIDGE,
+    WASM_JS_NATIVE_IMPORT_REDECLARATION,
     ;
 
     private final String stackTraceFrameName;
@@ -195,7 +196,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             GENERALIZING_BRIDGE,
             SPECIALIZING_BRIDGE,
             DEFAULT_METHOD_BRIDGE,
-            ABSTRACT_STUB ->
+            ABSTRACT_STUB,
+            WASM_JS_NATIVE_IMPORT_REDECLARATION ->
             "m_";
 
         // Getters and setters need to be mangled as fields.
@@ -230,7 +232,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     @Override
     public boolean isSynthetic() {
       return switch (this) {
-        case SOURCE, KOTLIN_PROPERTY_ACCESSOR, IMPLICIT_ENUM_METHOD -> false;
+        case SOURCE,
+            KOTLIN_PROPERTY_ACCESSOR,
+            IMPLICIT_ENUM_METHOD,
+            WASM_JS_NATIVE_IMPORT_REDECLARATION ->
+            false;
         default -> true;
       };
     }
@@ -280,6 +286,28 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public boolean isWasmJsFunctionExport() {
       return this == WASM_JS_FUNCTION_EXPORT_BRIDGE;
+    }
+
+    /**
+     * Returns true if the mangled name should use the original method signature
+     *
+     * <p>In some cases we only need to to use the mangled name from the origin but keep the
+     * parameters/return type of the bridges. For example in the wasm js export bridges, the
+     * parameter and return type might be replaced by WasmExtern for overloads with different
+     * signatures, requiring to use the origin signature for mangling to avoid collisions.
+     */
+    // TODO(b/563104753): Review and see if we can have a cleaner way express the different
+    // behaviors needed by different origins.
+    public boolean useOriginalMethodSignatureInMangling() {
+      return switch (this) {
+        case WASM_ENTRY_POINT_BRIDGE,
+            WASM_JS_METHOD_EXPORT_BRIDGE,
+            WASM_JS_CONSTRUCTOR_EXPORT_BRIDGE,
+            WASM_JS_FUNCTION_EXPORT_BRIDGE,
+            WASM_JS_NATIVE_IMPORT_REDECLARATION ->
+            true;
+        default -> false;
+      };
     }
   }
 
@@ -658,7 +686,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     // TODO(b/541381846): Revisit how to propagate JsInfo for exported methods in Wasm.
-    if (getOrigin().isWasmJsExport() && getBridgeOrigin() != null) {
+    if (getOrigin().useOriginalMethodSignatureInMangling()) {
       return getBridgeOrigin().getJsInfo();
     }
 
@@ -1004,6 +1032,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   private String computeManglingSignature() {
+    if (getOrigin().useOriginalMethodSignatureInMangling()) {
+      // Wasm jsinterop bridges might replace the original parameter/return types with WasmExtern
+      // creating colliding signatures in the bridge. For this reason we use the original
+      // parameter/return types to compute the mangling signature.
+      return getBridgeOrigin().getManglingSignature();
+    }
+
     Stream<TypeDescriptor> signatureDescriptors = getParameterTypeDescriptors().stream();
     if (!isConstructor() && getOrigin() != MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
       // Constructors and constructor related factories always return the enclosing class type and
@@ -1048,7 +1083,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // Do not add a prefix to user written methods whose name start with '$'. Some of those internal
     // members like $create, $isInstance, etc could also be provided by the user to customize the
     // behaviour.
-    boolean isInternal = name.startsWith("$") && getOrigin() == MethodOrigin.SOURCE;
+    boolean isInternal = name.startsWith("$") && !getOrigin().isSynthetic();
     return isInternal ? "" : getOrigin().getPrefix();
   }
 
@@ -1638,6 +1673,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setDefaultMethod(false)
           .setAbstract(false)
           .setNative(false);
+    }
+
+    public Builder makeNativeImport(MethodDescriptor originDescriptor) {
+      return setBridgeOrigin(originDescriptor)
+          .setOrigin(MethodOrigin.WASM_JS_NATIVE_IMPORT_REDECLARATION);
     }
 
     public Builder makeDeclaration() {

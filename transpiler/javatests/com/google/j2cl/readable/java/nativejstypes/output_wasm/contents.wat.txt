@@ -1292,9 +1292,9 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:25:4
   (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:26:4
-  (call $f_x__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 50))
+  (call $m_x__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 50))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:27:4
-  (call $f_y__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 5))
+  (call $m_y__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 5))
  )
 )
 
@@ -1326,11 +1326,11 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:37:4
   (local.set $bar (call $m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:38:4
-  (call $f_x__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 50))
+  (call $m_x__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 50))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:39:4
-  (call $f_y__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 5))
+  (call $m_y__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 5))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:40:4
-  (call $f_f__int__void@nativejstypes.Bar (i32.const 10))
+  (call $m_f__int__void@nativejstypes.Bar (i32.const 10))
  )
 )
 
@@ -1367,7 +1367,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:53:4
   (local.set $header (call $m_<init>__@nativejstypes.Headers ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:54:4
-  (call $m_append__java_lang_String_NativeString__java_lang_String_NativeString__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals )))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals ))))
+  (call $m_append__java_lang_String__java_lang_String__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals )))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals ))))
  )
 )
 
@@ -1427,15 +1427,15 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:70:21
   (call $$clinit__void_<once>_@nativejstypes.Main )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:71:4
-  (call $f_x__int__void@nativejstypes.TopLevel (i32.const 2))
+  (call $m_x__int__void@nativejstypes.TopLevel (i32.const 2))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:73:4
   (local.set $nested (call $m_<init>__@nativejstypes.TopLevel.Nested ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:74:4
-  (call $f_x__int__void@nativejstypes.TopLevel.Nested (ref.as_non_null (local.get $nested))(i32.const 3))
+  (call $m_x__int__void@nativejstypes.TopLevel.Nested (ref.as_non_null (local.get $nested))(i32.const 3))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:76:4
   (local.set $topLevelNestedReference (call $m_<init>__@nativejstypes.TopLevelNestedReference ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:77:4
-  (call $f_x__int__void@nativejstypes.TopLevelNestedReference (ref.as_non_null (local.get $topLevelNestedReference))(i32.const 4))
+  (call $m_x__int__void@nativejstypes.TopLevelNestedReference (ref.as_non_null (local.get $topLevelNestedReference))(i32.const 4))
  )
 )
 
@@ -1660,7 +1660,7 @@
 )
 
 ;;; NonNative NonNative.<init>(int x)
-(func $js_export_<init>__int__nativejstypes_NativeOverNonNative_NonNative@nativejstypes.NativeOverNonNative.NonNative
+(func $js_export_<init>__int@nativejstypes.NativeOverNonNative.NonNative
  (param $x i32)
  (result (ref null $nativejstypes.NativeOverNonNative.NonNative))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:24:11
@@ -1929,7 +1929,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:25:6
   (local.set $t2 (call $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/ReferencedPrivateMethods.java:27:6
-  (return (i32.add (i32.add (i32.add (i32.add (call $f_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $f_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor (ref.as_non_null (local.get $t2)))))
+  (return (i32.add (i32.add (i32.add (i32.add (call $m_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $m_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor (ref.as_non_null (local.get $t2)))))
  )
 )
 (elem declare func $m_getInstance__int@nativejstypes.ReferencedPrivateMethods.Inner)

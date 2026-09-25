@@ -1423,7 +1423,7 @@
 
 ;;; WasmExtern GenericJsFunction.apply(JsFunctionAdaptor $instance, WasmExtern t)
 (@binaryen.js.called)
-(func $js_export_apply__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction
+(func $js_export_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $t (ref null extern))
  (result (ref null extern))
@@ -1480,7 +1480,7 @@
     (return (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $t) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:228:19
-    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $t))))))
+    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $t))))))
    )
   )
  )
@@ -6632,7 +6632,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/lambdas/readable-j2wasm.js/lambdas/Lambdas.java:258:29
-  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction) (ref.func $js_export_apply__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern@lambdas.Lambdas.GenericJsFunction) )
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction) (ref.func $js_export_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.GenericJsFunction) )
  )
 )
 

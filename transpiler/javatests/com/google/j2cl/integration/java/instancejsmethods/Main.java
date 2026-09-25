@@ -118,15 +118,13 @@ public class Main {
   static class NativeOverloads {
     public native String mObject(Object o);
 
-    // TODO(b/560655013): Uncomment once the bug is fixed.
-    // public native String mDouble(Double d);
+    public native String mDouble(Double d);
 
     @JsMethod(name = "mObject")
     public native String m(Object o);
 
-    // TODO(b/560655013): Uncomment once the bug is fixed.
-    // @JsMethod(name = "mDouble")
-    // public native String m(Double o);
+    @JsMethod(name = "mDouble")
+    public native String m(Double o);
   }
 
   private static void testOverloads() {
@@ -137,12 +135,10 @@ public class Main {
     NativeOverloads nativeOverloads = new NativeOverloads();
     // Check overloaded JsMethods.
     assertEquals("m(Object)", nativeOverloads.mObject(null));
-    // TODO(b/560655013): Uncomment once the bug is fixed.
-    // assertEquals("m(Double)", nativeOverloads.mDouble(0d));
+    assertEquals("m(Double)", nativeOverloads.mDouble(0d));
 
     // Check overloaded native methods.
     assertEquals("m(Object)", nativeOverloads.m(new Object()));
-    // TODO(b/560655013): Uncomment once the bug is fixed.
-    // assertEquals("m(Double)", nativeOverloads.m(0d));
+    assertEquals("m(Double)", nativeOverloads.m(0d));
   }
 }

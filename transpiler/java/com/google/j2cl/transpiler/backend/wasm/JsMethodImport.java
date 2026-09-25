@@ -139,7 +139,7 @@ abstract class JsMethodImport {
   }
 
   public List<ParameterDescriptor> getParameters() {
-    return getMethod().getDescriptor().getParameterDescriptors();
+    return getMethod().getDescriptor().getBridgeOrigin().getParameterDescriptors();
   }
 
   public boolean emitAsMethodReference() {

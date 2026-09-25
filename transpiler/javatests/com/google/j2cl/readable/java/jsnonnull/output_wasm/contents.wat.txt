@@ -144,7 +144,7 @@
 
 ;;; NativeString MyFunction.x(JsFunctionAdaptor $instance, NativeString a)
 (@binaryen.js.called)
-(func $js_export_x__javaemul_internal_JsFunctionAdaptor__java_lang_String_NativeString__java_lang_String_NativeString@jsnonnull.Main.MyFunction
+(func $js_export_x__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $a (ref null string))
  (result (ref null string))
@@ -201,7 +201,7 @@
     (return (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (local.get $a) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
     ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
-    (return (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String_NativeString__java_lang_String_NativeString@jsnonnull.Main.MyFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (local.get $a))))))
+    (return (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (local.get $a))))))
    )
   )
  )

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.format;
 import static java.util.Comparator.comparingInt;
@@ -331,6 +332,9 @@ public class WasmGenerationEnvironment {
         .flatMap(t -> t.getMethods().stream())
         .map(Method::getDescriptor)
         .filter(MethodDescriptor::isPolymorphic)
+        // Native methods are never polymorphic and their parameter types do not correspond to
+        // their mangled names.
+        .filter(not(MethodDescriptor::isNative))
         .collect(toImmutableMap(this::getFunctionTypeName, Function.identity(), (a, unused) -> a));
   }
 
