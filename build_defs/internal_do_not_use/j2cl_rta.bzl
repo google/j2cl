@@ -85,7 +85,9 @@ j2cl_rta = rule(
         # TODO(b/114732596): Add a check on targets provided in "targets" field.
         "targets": attr.label_list(aspects = [_library_info_aspect]),
         "generate_unused_methods_for_testing_do_not_use": attr.bool(default = False),
-        "legacy_keep_jstype_interfaces_do_not_use": attr.bool(default = False),
+        # TODO(b/193252533): Switch back to False when we have proper support for implementing Java
+        # interfaces in JS.
+        "legacy_keep_jstype_interfaces_do_not_use": attr.bool(default = True),
         "_rta_runner": attr.label(
             default = Label("//tools/java/com/google/j2cl/tools/rta:J2clRta_worker"),
             cfg = "exec",
