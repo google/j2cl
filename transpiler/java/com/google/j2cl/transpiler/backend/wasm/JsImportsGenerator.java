@@ -260,16 +260,16 @@ public final class JsImportsGenerator {
    * function implementing {@code methodImport}.
    *
    * <p>The arrow function is a standalone top-level function in the imports object, so it must
-   * declare both the method's own type parameters and, for instance methods, the enclosing type's
-   * type parameters (which are referenced by the {@code $instance} parameter and any unspecialized
-   * parameter types).
+   * declare both the method's own type parameters and, for instance methods and constructors, the
+   * enclosing type's type parameters (which are referenced by the {@code $instance} parameter and
+   * any unspecialized parameter types).
    */
   private static ImmutableList<TypeVariable> getTemplateVariables(JsMethodImport methodImport) {
     MethodDescriptor methodDescriptor = methodImport.getMethod().getDescriptor();
     return Stream.concat(
-            methodImport.isInstance()
-                // For instance methods, we need to declare both the enclosing type's and the
-                // method's type parameters.
+            methodImport.isInstance() || methodImport.isConstructor()
+                // For instance methods and constructors, we need to declare both the enclosing
+                // type's and the method's type parameters.
                 ? methodDescriptor
                     .getEnclosingTypeDescriptor()
                     .getTypeDeclaration()
