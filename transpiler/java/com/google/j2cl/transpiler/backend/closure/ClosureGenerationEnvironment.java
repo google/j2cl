@@ -154,7 +154,7 @@ public class ClosureGenerationEnvironment {
   }
 
   /** Returns the JsDoc declaration clause for a collection of type variables. */
-  private String getJsDocDeclarationForTypeVariable(Collection<TypeVariable> typeDescriptors) {
+  public String getJsDocDeclarationForTypeVariable(Collection<TypeVariable> typeDescriptors) {
     return String.format(
         " @template %s",
         typeDescriptors.stream()

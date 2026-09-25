@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.util.Comparator.comparing;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -30,11 +32,14 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 /** Generates a JavaScript imports mapping for the Wasm module. */
 public final class JsImportsGenerator {
@@ -202,17 +207,20 @@ public final class JsImportsGenerator {
 
   private String createLambdaExpressionCode(JsMethodImport methodImport) {
     StringBuilder sb = new StringBuilder();
+    MethodDescriptor methodDescriptor = methodImport.getMethod().getDescriptor();
+    List<TypeVariable> templateVariables = getTemplateVariables(methodImport);
+    if (!templateVariables.isEmpty()) {
+      sb.append(
+          String.format(
+              "/**%s */ ",
+              closureEnvironment.getJsDocDeclarationForTypeVariable(templateVariables)));
+    }
     // Emit parameters
     sb.append("(");
     if (methodImport.isInstance()) {
       sb.append(
           createParameterDefinition(
-              "$instance",
-              methodImport
-                  .getMethod()
-                  .getDescriptor()
-                  .getEnclosingTypeDescriptor()
-                  .toNonNullable()));
+              "$instance", methodDescriptor.getEnclosingTypeDescriptor().toNonNullable()));
     }
     methodImport
         .getParameters()
@@ -245,6 +253,32 @@ public final class JsImportsGenerator {
     }
     sb.append(")");
     return sb.toString();
+  }
+
+  /**
+   * Returns the type variables that need to be declared as {@code @template}s for the arrow
+   * function implementing {@code methodImport}.
+   *
+   * <p>The arrow function is a standalone top-level function in the imports object, so it must
+   * declare both the method's own type parameters and, for instance methods, the enclosing type's
+   * type parameters (which are referenced by the {@code $instance} parameter and any unspecialized
+   * parameter types).
+   */
+  private static ImmutableList<TypeVariable> getTemplateVariables(JsMethodImport methodImport) {
+    MethodDescriptor methodDescriptor = methodImport.getMethod().getDescriptor();
+    return Stream.concat(
+            methodImport.isInstance()
+                // For instance methods, we need to declare both the enclosing type's and the
+                // method's type parameters.
+                ? methodDescriptor
+                    .getEnclosingTypeDescriptor()
+                    .getTypeDeclaration()
+                    .getTypeParameterDescriptors()
+                    .stream()
+                : Stream.empty(),
+            methodDescriptor.getTypeParameterTypeDescriptors().stream())
+        .distinct()
+        .collect(toImmutableList());
   }
 
   private String createParameterDefinition(String name, TypeDescriptor typeDescriptor) {

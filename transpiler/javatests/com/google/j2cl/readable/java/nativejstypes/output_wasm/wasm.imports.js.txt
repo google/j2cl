@@ -152,7 +152,7 @@ function getImports() {
    'nativejstypes.Bar.constructor$2': (/** number */ x, /** number */ y, ) => new nativejstypes_Bar(x, y, ),
    'nativejstypes.Bar.getStatic': nativejstypes_Bar.getStatic,
    'nativejstypes.Bar.product': (/** !nativejstypes_Bar */ $instance, ) => $instance.product(),
-   'nativejstypes.GenericRegularClass.apply$1': (/** !nativejstypes_GenericRegularClass<T> */ $instance, /** !com_acme_MyFoo */ t, ) => $instance.apply(t, ),
+   'nativejstypes.GenericRegularClass.apply$1': /** @template T */ (/** !nativejstypes_GenericRegularClass<T> */ $instance, /** !com_acme_MyFoo */ t, ) => $instance.apply(t, ),
    'nativejstypes.NativeNonreferencedMethods.getInstance2': (/** !nativejstypes_NativeNonreferencedMethods */ $instance, ) => $instance.getInstance2(),
    'nativejstypes.NativeReferencedPrivateMethods.constructor': () => new nativejstypes_NativeReferencedPrivateMethods(),
    'nativejstypes.NativeReferencedPrivateMethods.getInstance': (/** !nativejstypes_NativeReferencedPrivateMethods */ $instance, ) => $instance.getInstance(),
