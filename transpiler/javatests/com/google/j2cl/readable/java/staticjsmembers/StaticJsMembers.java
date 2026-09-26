@@ -31,21 +31,21 @@ public class StaticJsMembers {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   public static class Native {
-    @JsProperty(namespace = JsPackage.GLOBAL, name = "Math.PI")
-    public static int field3;
+    @JsProperty(namespace = GLOBAL, name = "window")
+    public static Window window;
 
-    @JsProperty(namespace = GLOBAL, name = "top")
-    public static int field4;
+    @JsProperty(namespace = GLOBAL, name = "window.window")
+    public static Window windowWindow;
 
     @JsProperty(namespace = "foo.Bar", name = "field")
-    public static int field5;
-
-    @JsProperty(namespace = GLOBAL, name = "window.top")
-    public static int field6;
+    public static int barField;
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "window.Object")
   public static class Extern {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Window")
+  public static class Window {}
 
   @JsMethod(name = "fun")
   public static void f1(int a) {}
@@ -94,10 +94,10 @@ public class StaticJsMembers {
 
     int n = field1;
     n = field2;
-    n = Native.field3;
-    n = Native.field4;
-    n = Native.field5;
-    n = Native.field6;
+
+    Window w = Native.window;
+    w = Native.windowWindow;
+    n = Native.barField;
 
     new Native();
     new Extern();

@@ -17,21 +17,24 @@
 (global $$class@packageinfosubpackage.subpackage.Bar (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $packageinfosubpackage.Foo.vtable (ref $packageinfosubpackage.Foo.vtable)
+(global $packageinfosubpackage.Foo.vtable (ref (exact $packageinfosubpackage.Foo.vtable))
  (struct.new $packageinfosubpackage.Foo.vtable
+  (ref.null extern)
   (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-(global $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable)
+(global $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (ref (exact $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable))
  (struct.new $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable
+  (ref.null extern)
   (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
  )
 )
-(global $packageinfosubpackage.subpackage.Bar.vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)
+(global $packageinfosubpackage.subpackage.Bar.vtable (ref (exact $packageinfosubpackage.subpackage.Bar.vtable))
  (struct.new $packageinfosubpackage.subpackage.Bar.vtable
+  (global.get $packageinfosubpackage.subpackage.Bar.proto)
   (ref.func $$getClassImpl__java_lang_Class@packageinfosubpackage.subpackage.Bar)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
@@ -92,7 +95,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$clinit__void_<once>_@packageinfosubpackage.Foo )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
-  (local.set $$instance (struct.new $packageinfosubpackage.Foo (global.get $packageinfosubpackage.Foo.vtable) (global.get $itable.empty) (i32.const 0) (ref.null extern)))
+  (local.set $$instance (struct.new_desc $packageinfosubpackage.Foo (global.get $itable.empty) (i32.const 0) (ref.null extern) (global.get $packageinfosubpackage.Foo.vtable)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/Foo.java:20:13
@@ -171,12 +174,22 @@
 (func $$create__@packageinfosubpackage.subpackage.Bar
  (result (ref null $packageinfosubpackage.subpackage.Bar))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
- (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
-  (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (global.get $packageinfosubpackage.subpackage.Bar.vtable) (global.get $itable.empty) (i32.const 0)))
+  (return (call $$create_$private__@packageinfosubpackage.subpackage.Bar ))
+ )
+)
+
+;;; Bar Bar.$create_$private()
+(func $$create_$private__@packageinfosubpackage.subpackage.Bar
+ (result (ref null $packageinfosubpackage.subpackage.Bar))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
+ (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
+  (local.set $$instance (struct.new_desc $packageinfosubpackage.subpackage.Bar (global.get $itable.empty) (i32.const 0) (global.get $packageinfosubpackage.subpackage.Bar.vtable)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (ref.as_non_null (local.get $$instance)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
@@ -191,6 +204,30 @@
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Bar Bar.<init>()
+(func $js_export_<init>__@packageinfosubpackage.subpackage.Bar
+ (result (ref null $packageinfosubpackage.subpackage.Bar))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
+  (call $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:21:13
+  (return (call $$create_$private__@packageinfosubpackage.subpackage.Bar ))
+ )
+)
+
+;;; int Bar.WOO()
+(func $js_export_get_WOO__int@packageinfosubpackage.subpackage.Bar
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:22:26
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:22:26
+  (call $$clinit__void_<once>_@packageinfosubpackage.subpackage.Bar )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/packageinfosubpackage/readable-j2wasm.js/packageinfosubpackage/subpackage/Bar.java:22:26
+  (return (i32.const 1001))
  )
 )
 

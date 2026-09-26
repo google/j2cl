@@ -15,10 +15,15 @@ goog.module('test.foo.MyNativeType');
 
 class MyNativeType {
   constructor() {
+    /** @public {number} */
     this.publicField = 0;
+    /** @public {number} */
     this.customPublicField = 0;
+    /** @public {number} */
     this.privateField = 0;
+    /** @public {number} */
     this.packageField = 0;
+    /** @public {number} */
     this.protectedField = 0;
   }
 

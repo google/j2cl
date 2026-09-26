@@ -23,6 +23,12 @@
 (global $$class@staticjsmembers.StaticJsMembers.Extern.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@staticjsmembers.StaticJsMembers.Window.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@staticjsmembers.StaticJsMembers.Window.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $staticjsmembers.StaticJsMembers.vtable (ref $staticjsmembers.StaticJsMembers.vtable)
  (struct.new $staticjsmembers.StaticJsMembers.vtable
   (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers)
@@ -40,6 +46,11 @@
 (global $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable (ref $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable)
  (struct.new $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable
   (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay)
+ )
+)
+(global $staticjsmembers.StaticJsMembers.Window.$Overlay.vtable (ref $staticjsmembers.StaticJsMembers.Window.$Overlay.vtable)
+ (struct.new $staticjsmembers.StaticJsMembers.Window.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Window.$Overlay)
  )
 )
 
@@ -89,16 +100,16 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@staticjsmembers.StaticJsMembers.Extern.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:45:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:45:22
   (if (global.get $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:45:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:45:22
   (global.set $$class-initialized@staticjsmembers.StaticJsMembers.Extern.$Overlay (i32.const 1))
  )
 )
@@ -129,6 +140,49 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@staticjsmembers.StaticJsMembers.Window.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+  (if (global.get $$class-initialized@staticjsmembers.StaticJsMembers.Window.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:48:22
+  (global.set $$class-initialized@staticjsmembers.StaticJsMembers.Window.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@staticjsmembers.StaticJsMembers.Window.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@staticjsmembers.StaticJsMembers.Window.$Overlay)))
+   (then
+    (return (global.get $$class@staticjsmembers.StaticJsMembers.Window.$Overlay))
+   )
+  )
+  (global.set $$class@staticjsmembers.StaticJsMembers.Window.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|staticjsmemb...|__java_lang_String_<once>_@staticjsmembers.StaticJsMembers.Window.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@staticjsmembers.StaticJsMembers.Window.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Window.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $staticjsmembers.StaticJsMembers.Window.$Overlay))
+ (local.set $this (ref.cast (ref $staticjsmembers.StaticJsMembers.Window.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticjsmembers.StaticJsMembers.Window.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Window.$Overlay)
 
 ;;; StaticJsMembers StaticJsMembers.$create()
 (func $$create__@staticjsmembers.StaticJsMembers
@@ -203,6 +257,7 @@
  (param $this.untyped (ref $java.lang.Object))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:77:14
  (local $n i32)
+ (local $w (ref null extern))
  (local $this (ref null $staticjsmembers.StaticJsMembers))
  (local.set $this (ref.cast (ref $staticjsmembers.StaticJsMembers) (local.get $this.untyped)))
  (block
@@ -242,14 +297,12 @@
   (local.set $n (global.get $field1@staticjsmembers.StaticJsMembers))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:96:4
   (local.set $n (global.get $field2@staticjsmembers.StaticJsMembers))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:97:4
-  (local.set $n (call $m_field3__int@staticjsmembers.StaticJsMembers.Native ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:98:4
-  (local.set $n (call $m_field4__int@staticjsmembers.StaticJsMembers.Native ))
+  (local.set $w (call $m_window__staticjsmembers_StaticJsMembers_Window@staticjsmembers.StaticJsMembers.Native ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:99:4
-  (local.set $n (call $m_field5__int@staticjsmembers.StaticJsMembers.Native ))
+  (local.set $w (call $m_windowWindow__staticjsmembers_StaticJsMembers_Window@staticjsmembers.StaticJsMembers.Native ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:100:4
-  (local.set $n (call $m_field6__int@staticjsmembers.StaticJsMembers.Native ))
+  (local.set $n (call $m_barField__int@staticjsmembers.StaticJsMembers.Native ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:102:4
   (drop (call $m_<init>__@staticjsmembers.StaticJsMembers.Native ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/staticjsmembers/readable-j2wasm.js/staticjsmembers/StaticJsMembers.java:103:4

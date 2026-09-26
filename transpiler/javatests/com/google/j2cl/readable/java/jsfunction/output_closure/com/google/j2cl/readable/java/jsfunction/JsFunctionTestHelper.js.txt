@@ -15,10 +15,21 @@
 goog.module('jsfunction.JsFunctionTestHelper');
 
 /**
- * @return {function(number):number}
+ * @template T
+ * @return {function(T):T}
  * @public
  */
 function createNativeFunction() {
+  return function(a) {
+    return a;
+  };
+}
+
+/**
+ * @return {function(!SomeJsType):!SomeJsType}
+ * @public
+ */
+function createJsFunctionWithJsType() {
   return function(a) {
     return a;
   };

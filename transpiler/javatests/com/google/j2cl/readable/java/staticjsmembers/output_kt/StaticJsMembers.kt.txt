@@ -50,10 +50,9 @@ open class StaticJsMembers {
   StaticJsMembers.max(1.0, 2.0)
   var n: Int = StaticJsMembers.field1
   n = StaticJsMembers.field2
-  n = Native.field3
-  n = Native.field4
-  n = Native.field5
-  n = Native.field6
+  var w: Window? = Native.window
+  w = Native.windowWindow
+  n = Native.barField
   Native()
   Extern()
  }
@@ -108,23 +107,22 @@ open class StaticJsMembers {
  open class Native {
   companion object {
    @JvmField
-   @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
-   var field3: Int = 0
+   @JsProperty(name = "window", namespace = JsPackage.GLOBAL)
+   var window: Window? = null
    
    @JvmField
-   @JsProperty(name = "top", namespace = JsPackage.GLOBAL)
-   var field4: Int = 0
+   @JsProperty(name = "window.window", namespace = JsPackage.GLOBAL)
+   var windowWindow: Window? = null
    
    @JvmField
    @JsProperty(name = "field", namespace = "foo.Bar")
-   var field5: Int = 0
-   
-   @JvmField
-   @JsProperty(name = "window.top", namespace = JsPackage.GLOBAL)
-   var field6: Int = 0
+   var barField: Int = 0
   }
  }
  
  @JsType(name = "window.Object", namespace = JsPackage.GLOBAL, isNative = true)
  open class Extern
+ 
+ @JsType(namespace = JsPackage.GLOBAL, isNative = true)
+ open class Window
 }

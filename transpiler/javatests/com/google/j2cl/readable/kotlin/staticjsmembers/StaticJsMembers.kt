@@ -27,22 +27,22 @@ class StaticJsMembers {
   class Native {
     companion object {
       @JvmField
-      @JsProperty(namespace = JsPackage.GLOBAL, name = "Math.PI")
-      var field3: Int = definedExternally
+      @JsProperty(namespace = GLOBAL, name = "window")
+      var window: Window = definedExternally
 
-      @JvmField @JsProperty(namespace = GLOBAL, name = "top") var field4: Int = definedExternally
+      @JvmField
+      @JsProperty(namespace = GLOBAL, name = "window.window")
+      var windowWindow: Window = definedExternally
 
       @JvmField
       @JsProperty(namespace = "foo.Bar", name = "field")
-      var field5: Int = definedExternally
-
-      @JvmField
-      @JsProperty(namespace = GLOBAL, name = "window.top")
-      var field6: Int = definedExternally
+      var barField: Int = definedExternally
     }
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "window.Object") class Extern {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Window") class Window {}
 
   companion object {
     @JvmField @JsProperty(name = "field") var field1: Int = 0
@@ -96,10 +96,10 @@ class StaticJsMembers {
 
     var n: Int = field1
     n = field2
-    n = Native.field3
-    n = Native.field4
-    n = Native.field5
-    n = Native.field6
+
+    var w: Window = Native.window
+    w = Native.windowWindow
+    n = Native.barField
 
     Native()
     Extern()
