@@ -22,5 +22,6 @@ readable_example(
         "//third_party:auto_value-j2cl",
         "//third_party:jsinterop-annotations-j2cl",
         "//third_party:jspecify_annotations-j2cl",
+        "//transpiler/javatests/com/google/j2cl/readable/java/j2kt/j2ktpublicdep",
     ],
 )

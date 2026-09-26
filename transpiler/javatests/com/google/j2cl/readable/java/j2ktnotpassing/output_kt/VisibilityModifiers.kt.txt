@@ -19,8 +19,11 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
+import j2ktnotpassing.PackagePrivateWithJ2ktPublicInSeparateLibrary
 import java.lang.UnsupportedOperationException
+import kotlin.Int
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
 
 class VisibilityModifiers {
  open class Public {
@@ -62,6 +65,24 @@ class VisibilityModifiers {
    protected open fun protectedMethod() {}
    
    private fun privateMethod() {}
+  }
+ }
+ 
+ open class PublicExtendsPackagePrivateWithJ2ktPublicInSeparateLibrary: PackagePrivateWithJ2ktPublicInSeparateLibrary() {
+  override fun packagePrivateMethod_pp_j2ktnotpassing() {}
+  
+  public open fun packagePrivateWithPublicOverride() {}
+  
+  override fun packagePrivateWithPublicOverride_pp_j2ktnotpassing() {
+   this.packagePrivateWithPublicOverride()
+  }
+  
+  companion object {
+   @JvmStatic
+   internal fun test(instance: PackagePrivateWithJ2ktPublicInSeparateLibrary) {
+    val unused: Int = instance.field_pp_j2ktnotpassing
+    instance.packagePrivateMethod_pp_j2ktnotpassing()
+   }
   }
  }
 }

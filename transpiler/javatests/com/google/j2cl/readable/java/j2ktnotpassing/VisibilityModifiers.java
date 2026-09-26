@@ -63,4 +63,18 @@ public final class VisibilityModifiers {
       private void privateMethod() {}
     }
   }
+
+  public static class PublicExtendsPackagePrivateWithJ2ktPublicInSeparateLibrary
+      extends PackagePrivateWithJ2ktPublicInSeparateLibrary {
+    @Override
+    void packagePrivateMethod() {}
+
+    @Override
+    public void packagePrivateWithPublicOverride() {}
+
+    public static void test(PackagePrivateWithJ2ktPublicInSeparateLibrary instance) {
+      int unused = instance.field;
+      instance.packagePrivateMethod();
+    }
+  }
 }
