@@ -19,14 +19,14 @@ import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import static java.lang.annotation.RetentionPolicy.CLASS;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /** The presence of this annotation on an API indicates that the method should be public in J2kt. */
-@Retention(SOURCE)
+@Retention(CLASS)
 @Target({TYPE, METHOD, CONSTRUCTOR, FIELD})
 @Documented
 public @interface J2ktPublic {}
