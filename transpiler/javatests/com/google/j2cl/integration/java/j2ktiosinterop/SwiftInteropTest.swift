@@ -66,7 +66,6 @@ final class SwiftInteropTest: XCTestCase {
 
     // @Throws-annotated methods can throw in Swift and need to be wrapped in `try`
     // in J2kt. This causes a warning in J2Objc, where the annotation is not supported.
-    // TODO(b/543354795): Hide these from Swift
     try! obj.throwsMethod()
     try! obj.throwsMethod(s: "")
     try! DefaultNames.companion.staticThrowsMethod()
@@ -81,9 +80,9 @@ final class SwiftInteropTest: XCTestCase {
     #else
       // Fields are not exposed to Swift in J2Objc.
 
-      // TODO(b/543354795): Support in J2kt
-      let _: Bool = obj.throwsMethodAndReturnError(error: nil)
-      let _: Bool = DefaultNames.companion.staticThrowsMethodAndReturnError(error: nil)
+      // Not supported in Swift for both J2Objc and J2kt, use the non-error-returning methods.
+      // let _: Bool = obj.throwsMethodAndReturnError(error: nil)
+      // let _: Bool = DefaultNames.companion.staticThrowsMethodAndReturnError(error: nil)
     #endif
   }
 
