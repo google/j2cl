@@ -99,7 +99,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
                           getBridgeOrigin(methodDescriptor))));
     }
 
-    bridges.forEach(bridge -> addBridge(type, bridge));
+    bridges.forEach(type::addMember);
   }
 
   private static void addJsFunctionExportBridges(Type type) {
@@ -111,17 +111,9 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
         type.getMethods().stream()
             .filter(m -> m.getDescriptor().isJsFunction())
             .collect(onlyElement());
-    addBridge(
-        type,
+    type.addMember(
         WasmJsBoundaryUtils.generateJsFunctionBridge(
             type.getTypeDescriptor(), jsFunctionMethod.getSourcePosition()));
-  }
-
-  private static void addBridge(Type type, Method bridge) {
-    // TODO(b/545779164): The bridges should be unique and the check should not be needed.
-    if (!type.containsMethod(bridge.getDescriptor().getMangledName())) {
-      type.addMember(bridge);
-    }
   }
 
   private static MethodOrigin getBridgeOrigin(MethodDescriptor descriptor) {

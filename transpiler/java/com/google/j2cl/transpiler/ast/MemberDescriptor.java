@@ -322,7 +322,11 @@ public abstract class MemberDescriptor
   /** Utility to compute the mangled name of a member as if it were a property. */
   // TODO(b/158014657): make this method package protected once the bug is fixed.
   public String computePropertyMangledName() {
-    if (isJsMember() && useClosureManglingPatterns()) {
+    return computePropertyMangledName(useClosureManglingPatterns());
+  }
+
+  String computePropertyMangledName(boolean useClosureManglingPatterns) {
+    if (isJsMember() && useClosureManglingPatterns) {
       return getSimpleJsName();
     }
 
