@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses
   BooleanOptimizationTest::class,
   EnumOptimizationTest::class,
   CastDisableOptimizationTest::class,
+  JsFunctionOptimizationTest::class,
   StringOptimizationTest::class,
 )
 class OptimizationTestSuite

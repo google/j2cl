@@ -65,7 +65,6 @@ public class Main {
     testJsFunctionSuccessiveCalls();
     testJsFunctionViaFunctionMethods();
     testGetClass();
-    testJsFunctionOptimization();
     testSingleConcreteJsFunction();
     testJsFunctionWithVarArgs();
     testJsFunctionLambda();
@@ -190,11 +189,6 @@ public class Main {
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   public static class NativeRegExp {
     public NativeRegExp(String regEx) {}
-
-    // TODO(b/528427081): Wasm does not yet support Java array conversions on the JS interop
-    // boundary.
-    @Wasm("nop")
-    public native String[] exec(String s);
 
     public native boolean test(String s);
   }
@@ -527,67 +521,6 @@ public class Main {
     assertEquals(MyJsFunctionInterface.class, ((Object) jsfunctionImplementation).getClass());
     assertEquals(MyJsFunctionInterface.class, createMyJsFunction().getClass());
     assertEquals(MyJsFunctionInterface.class, ((Object) createMyJsFunction()).getClass());
-  }
-
-  // TODO(b/548108681): getClass on JsFunction instances currently calls JsFunctionAdapter.getClass
-  // TODO(b/528427081): Wasm does not yet support Java array conversions on the JS interop boundary
-  // (NativeRegExp uses arrays).
-  @Wasm("nop")
-  private static void testJsFunctionOptimization() {
-    MyJsFunctionInterface lambda = a -> a;
-
-    // inner class optimizable to lambda
-    MyJsFunctionInterface optimizableInner =
-        new MyJsFunctionInterface() {
-          @Override
-          public int foo(int a) {
-            return a;
-          }
-        };
-    assertEquals(MyJsFunctionInterface.class, optimizableInner.getClass());
-
-    // Look at the structure of the two functions to make sure they are plain functions. They should
-    // look something like
-    //
-    //     "function <fn>( /** type */ <par>) { return <par>; }"
-    //
-    NativeRegExp functionRegExp =
-        new NativeRegExp(
-            "function [\\w$]*\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*{\\s*return \\1;\\s*}");
-    //
-    //  or "(/** type */ <par>)=>{ return <par>;}"
-    //
-    NativeRegExp arrowRegExp =
-        new NativeRegExp(
-            "\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*=>\\s*{\\s*return \\1;\\s*}");
-    //
-    //  or "<par>=><par>"
-    //
-    NativeRegExp es6ArrowRegExp =
-        new NativeRegExp("\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\s*=>\\s*\\1\\s*");
-
-    assertTrue(
-        functionRegExp.exec(optimizableInner.toString()) != null
-            || arrowRegExp.exec(optimizableInner.toString()) != null
-            || es6ArrowRegExp.exec(optimizableInner.toString()) != null);
-    assertTrue(
-        functionRegExp.exec(lambda.toString()) != null
-            || arrowRegExp.exec(lambda.toString()) != null
-            || es6ArrowRegExp.exec(lambda.toString()) != null);
-
-    // inner class not optimizable to lambda
-    MyJsFunctionInterface unoptimizableInner =
-        new MyJsFunctionInterface() {
-          @Override
-          public int foo(int a) {
-            return id(a);
-          }
-
-          private int id(int a) {
-            return a;
-          }
-        };
-    assertEquals(MyJsFunctionInterface.class, unoptimizableInner.getClass());
   }
 
   @JsFunction

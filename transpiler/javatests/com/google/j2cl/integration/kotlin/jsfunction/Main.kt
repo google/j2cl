@@ -64,7 +64,6 @@ fun main(vararg unused: String) {
   testJsFunctionSuccessiveCalls()
   testJsFunctionViaFunctionMethods()
   testGetClass()
-  testJsFunctionOptimization()
   testSingleConcreteJsFunction()
   testJsFunctionWithVarArgs()
   testJsFunctionLambda()
@@ -204,8 +203,6 @@ interface ElementLikeNativeInterface {
 
 @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
 private class NativeRegExp constructor(regEx: String) {
-  external fun exec(s: String): Array<String>
-
   external fun test(s: String): Boolean
 }
 
@@ -487,57 +484,6 @@ private fun testGetClass() {
   assertEquals(MyJsFunctionInterface::class.java, (jsfunctionImplementation as Any).javaClass)
   assertEquals(MyJsFunctionInterface::class.java, createMyJsFunction().javaClass)
   assertEquals(MyJsFunctionInterface::class.java, (createMyJsFunction() as Any).javaClass)
-}
-
-private fun testJsFunctionOptimization() {
-  val lambda = MyJsFunctionInterface { a -> a }
-
-  // inner class optimizable to lambda
-  val optimizableInner =
-    object : MyJsFunctionInterface {
-      override fun foo(a: Int): Int = a
-    }
-  assertEquals(MyJsFunctionInterface::class.java, optimizableInner.javaClass)
-
-  // Look at the structure of the two functions to make sure they are plain functions. They should
-  // look something like
-  //
-  //     "function <fn>( /** type */ <par>) { return <par>; }"
-  //
-  val functionRegExp =
-    NativeRegExp(
-      "function [\\w$]*\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*{\\s*return \\1;\\s*}"
-    )
-  //
-  //  or "(/** type */ <par>)=>{ return <par>;}"
-  //
-  val arrowRegExp =
-    NativeRegExp("\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*=>\\s*{\\s*return \\1;\\s*}")
-
-  //
-  //  or "<par>=><par>"
-  //
-  val es6ArrowRegExp = NativeRegExp("\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\s*=>\\s*\\1\\s*")
-
-  assertTrue(
-    functionRegExp.exec(optimizableInner.toString()) != null ||
-      arrowRegExp.exec(optimizableInner.toString()) != null ||
-      es6ArrowRegExp.exec(optimizableInner.toString()) != null
-  )
-  assertTrue(
-    functionRegExp.exec(lambda.toString()) != null ||
-      arrowRegExp.exec(lambda.toString()) != null ||
-      es6ArrowRegExp.exec(lambda.toString()) != null
-  )
-
-  // inner class not optimizable to lambda
-  val unoptimizableInner =
-    object : MyJsFunctionInterface {
-      override fun foo(a: Int): Int = id(a)
-
-      private fun id(a: Int): Int = a
-    }
-  assertEquals(MyJsFunctionInterface::class.java, unoptimizableInner.javaClass)
 }
 
 @JsFunction
