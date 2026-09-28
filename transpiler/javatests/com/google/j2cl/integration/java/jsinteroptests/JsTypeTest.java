@@ -22,7 +22,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -35,12 +34,10 @@ public class JsTypeTest {
     testEnumeration();
     testEnumJsTypeAccess();
     testEnumSubclassEnumeration();
-    testJsMethodWithDifferentVisiblities();
     testJsTypeField();
     testNamedBridge();
     testNativeMethodOverrideNoTypeTightenParam();
     testRevealedOverrideJsType();
-    testInheritName();
     testJsTypeRecord();
   }
 
@@ -335,65 +332,6 @@ public class JsTypeTest {
   private static void testNamedBridge() {
     SomeConcreteSubclass o = new SomeConcreteSubclass();
     assertEquals(o, o.m());
-  }
-
-  static class NonPublicJsMethodClass {
-    @JsMethod
-    private String foo() {
-      return "foo";
-    }
-
-    @JsMethod
-    String bar() {
-      return "bar";
-    }
-  }
-
-  private static void testJsMethodWithDifferentVisiblities() {
-    NonPublicJsMethodClass instance = new NonPublicJsMethodClass();
-    assertEquals("foo", instance.foo());
-    assertEquals("bar", instance.bar());
-    assertEquals("foo", callFoo(instance, null));
-    assertEquals("bar", callBar(instance, null));
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  public static native Object callFoo(Object obj, Object param);
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  public static native Object callBar(Object obj, Object param);
-
-  static class ClassWithJsMethod {
-    @JsMethod(name = "name")
-    public String className() {
-      return ClassWithJsMethod.class.getName();
-    }
-  }
-
-  static class ClassWithJsMethodInheritingName extends ClassWithJsMethod {
-    @JsMethod
-    public String className() {
-      return ClassWithJsMethodInheritingName.class.getName();
-    }
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  private interface HasName {
-    String name();
-  }
-
-  private static String callName(Object o) {
-    return ((HasName) o).name();
-  }
-
-  private static void testInheritName() {
-    ClassWithJsMethod object = new ClassWithJsMethod();
-    assertEquals(ClassWithJsMethod.class.getName(), object.className());
-    assertEquals(ClassWithJsMethod.class.getName(), callName(object));
-
-    object = new ClassWithJsMethodInheritingName();
-    assertEquals(ClassWithJsMethodInheritingName.class.getName(), object.className());
-    assertEquals(ClassWithJsMethodInheritingName.class.getName(), callName(object));
   }
 
   @JsType

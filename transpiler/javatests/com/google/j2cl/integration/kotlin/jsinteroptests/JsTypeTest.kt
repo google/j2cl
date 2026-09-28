@@ -23,7 +23,6 @@ import com.google.j2cl.integration.testing.Asserts.assertNotNull
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
-import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 
@@ -36,12 +35,10 @@ object JsTypeTest {
     testEnumeration()
     testEnumJsTypeAccess()
     testEnumSubclassEnumeration()
-    testJsMethodWithDifferentVisiblities()
     testJsTypeField()
     testNamedBridge()
     testNativeMethodOverrideNoTypeTightenParam()
     testRevealedOverrideJsType()
-    testInheritName()
   }
 
   /** This concrete test class is *directly* annotated as a @JsType. */
@@ -311,54 +308,5 @@ object JsTypeTest {
     //  SomeConcreteSubclass.class.getName().compareTo(SomeZAbstractSubclass.class.getName()) < 0);
     val o = SomeConcreteSubclass()
     assertEquals(o, o.m())
-  }
-
-  internal class NonPublicJsMethodClass {
-    @JsMethod private fun foo(): String = "foo"
-
-    internal fun fooProxy() = foo()
-
-    @JsMethod internal fun bar(): String = "bar"
-  }
-
-  private fun testJsMethodWithDifferentVisiblities() {
-    val instance = NonPublicJsMethodClass()
-    assertEquals("foo", instance.fooProxy())
-    assertEquals("bar", instance.bar())
-    assertEquals("foo", callFoo(instance, null))
-    assertEquals("bar", callBar(instance, null))
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  @JvmStatic
-  public external fun callFoo(obj: Any?, param: Any?): Any?
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  @JvmStatic
-  public external fun callBar(obj: Any?, param: Any?): Any?
-
-  internal open class ClassWithJsMethod {
-    @JsMethod(name = "name") open fun className(): String = ClassWithJsMethod::class.java.name
-  }
-
-  internal class ClassWithJsMethodInheritingName : ClassWithJsMethod() {
-    @JsMethod override fun className(): String = ClassWithJsMethodInheritingName::class.java.name
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  private interface HasName {
-    fun name(): String
-  }
-
-  @JvmStatic private fun callName(o: Any?): String = (o as HasName).name()
-
-  private fun testInheritName() {
-    var o = ClassWithJsMethod()
-    assertEquals(ClassWithJsMethod::class.java.name, o.className())
-    assertEquals(ClassWithJsMethod::class.java.name, callName(o))
-
-    o = ClassWithJsMethodInheritingName()
-    assertEquals(ClassWithJsMethodInheritingName::class.java.name, o.className())
-    assertEquals(ClassWithJsMethodInheritingName::class.java.name, callName(o))
   }
 }

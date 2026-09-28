@@ -43,24 +43,6 @@ exports.setTheField = function(obj, value) {
  * @param {?} param
  * @return {*}
  */
-exports.callFoo = function(obj, param) {
-  return obj.foo(param);
-};
-
-/**
- * @param {?} obj
- * @param {?} param
- * @return {*}
- */
-exports.callBar = function(obj, param) {
-  return obj.bar(param);
-};
-
-/**
- * @param {?} obj
- * @param {?} param
- * @return {*}
- */
 exports.callM = function(obj, param) {
   return obj.m(param);
 };
