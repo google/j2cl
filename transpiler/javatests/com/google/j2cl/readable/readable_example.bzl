@@ -43,8 +43,8 @@ def readable_example(
         generate_js_readables = True,
         generate_readable_source_maps = False,
         generate_wasm_readables = True,
+        generate_wasm_custom_descriptors_jsinterop_readables = False,
         generate_wasm_imports = False,
-        generate_wasm_externs = False,
         wasm_entry_points = [],
         generate_kt_readables = True,
         generate_kt_web_readables = False,
@@ -92,7 +92,7 @@ def readable_example(
         readable_library_info = generate_library_info,
         generate_j2kt_jvm_library = None if generate_kt_readables else False,
         generate_j2kt_native_library = None if build_kt_native_readables else False,
-        generate_j2wasm_library = None if generate_wasm_readables else False,
+        generate_j2wasm_library = None if (generate_wasm_readables or generate_wasm_custom_descriptors_jsinterop_readables) else False,
         j2kt_j2objc_interop_enabled = j2kt_j2objc_interop_enabled,
         **kwargs
     )
@@ -106,12 +106,17 @@ def readable_example(
     else:
         _empty_readable_targets("output_closure")
 
-    if generate_wasm_readables:
+    if generate_wasm_readables or generate_wasm_custom_descriptors_jsinterop_readables:
+        if generate_wasm_custom_descriptors_jsinterop_readables:
+            wasm_feature_set = J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP
+        else:
+            wasm_feature_set = J2WASM_FEATURE_SET.DEFAULT
+
         _wasm_readable_targets(
-            feature_set = J2WASM_FEATURE_SET.DEFAULT if not generate_wasm_externs else J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP,
+            feature_set = wasm_feature_set,
             entry_points = wasm_entry_points,
             generate_imports = generate_wasm_imports,
-            generate_externs = generate_wasm_externs,
+            generate_externs = generate_wasm_custom_descriptors_jsinterop_readables,
         )
     else:
         _empty_readable_targets("output_wasm")
