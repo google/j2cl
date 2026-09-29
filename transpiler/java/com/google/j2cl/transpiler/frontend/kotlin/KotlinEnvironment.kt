@@ -663,10 +663,25 @@ internal class KotlinEnvironment(
             it.name.asString() == name && irFunction.returnType == it.type
           }
 
+      val kotlinOverrideName =
+        if (
+          enclosingTypeDescriptor.typeDeclaration.isJavaRecord &&
+            irFunction is IrSimpleFunction &&
+            irFunction.isPropertyAccessor
+        ) {
+          // Some overridden properties (e.g. CharSequence.length) have the unprefixed name.
+          irFunction.overriddenSymbols
+            .map { it.owner.resolveName(jvmBackendContext) }
+            .firstOrNull { it != name }
+        } else {
+          null
+        }
+
       MethodDescriptor.builder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setEnclosingMethodDescriptor(enclosingMethodDescriptor)
         .setName(name)
+        .setKotlinOverrideName(kotlinOverrideName)
         .setParameterDescriptors(parametersDescriptors)
         .setReturnTypeDescriptor(
           if (irFunction.hasVoidReturn) {

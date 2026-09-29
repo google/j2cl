@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -523,6 +524,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Nullable
   public abstract MethodDescriptor getBridgeTarget();
+
+  /**
+   * The name of the method for override resolution when Kotlin renames a member (e.g. a
+   * {@code @JvmRecord} property accessor overriding a supertype property getter).
+   */
+  @Nullable
+  abstract String getKotlinOverrideName();
 
   /**
    * Returns the descriptor of the method declaration. A method descriptor might describe a
@@ -1178,7 +1186,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         getNameApplyingKotlinRenames(), parameterTypeDescriptors, isSuspendFunction());
   }
 
-  /** Returns the method name but accounts for kotlin's rename of {@code T List.remove(int)}. */
+  /** Returns the method name but accounts for kotlin's rename of certain methods. */
   // TODO(b/372484266): Do this in a more principled manner.
   private String getNameApplyingKotlinRenames() {
     if (getName().equals("remove")
@@ -1198,6 +1206,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       // special override `boolean List<Int>.remove(Int)` which is the one we need to have a
       // special case for here.
       return "remove#specialized";
+    }
+    if (getKotlinOverrideName() != null) {
+      return getKotlinOverrideName();
     }
     return getName();
   }
@@ -1648,6 +1659,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setSuspendFunction(boolean suspendFunction);
 
+    public abstract Builder setKotlinOverrideName(@Nullable String kotlinOverrideName);
+
     public Builder makeAbstractStub(MethodDescriptor methodDescriptor) {
       return setBridgeOrigin(methodDescriptor)
           .setOrigin(MethodOrigin.ABSTRACT_STUB)
@@ -1985,6 +1998,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
               .isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
 
       checkState(methodDescriptor.getName().equals(declaration.getName()));
+      checkState(
+          Objects.equals(
+              methodDescriptor.getKotlinOverrideName(), declaration.getKotlinOverrideName()));
 
       checkState(methodDescriptor.isConstructor() == declaration.isConstructor());
       // TODO(b/159983149): Uncomment when fixed.

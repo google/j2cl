@@ -62,6 +62,7 @@ interface DataClassInterface {
   val f: Int // overridden by component which requires getF() bridge.
   val other: String // overridden by computed property which requires getOther() bridge.
   val isBar: Any // overridden by computed property but "is" methods doesn't require bridge.
+  val length: Int
 
   fun getZ(): Int = 42 // Note that this is NOT overridden by "val z: String" component.
 
@@ -69,7 +70,8 @@ interface DataClassInterface {
 }
 
 @kotlin.jvm.JvmRecord
-data class JvmRecordDataClass(override val f: Int, val z: String) : DataClassInterface {
+data class JvmRecordDataClass(override val f: Int, val z: String) :
+  CharSequence, DataClassInterface {
   override val other: String
     get() = "other"
 
@@ -78,6 +80,14 @@ data class JvmRecordDataClass(override val f: Int, val z: String) : DataClassInt
 
   val other2: String
     get() = "other2"
+
+  // also overrides CharSequence.length() which doesn't have "get" prefix.
+  override val length: Int
+    get() = 1
+
+  override fun get(index: Int): Char = 'a'
+
+  override fun subSequence(startIndex: Int, endIndex: Int): CharSequence = this
 
   companion object {
     @kotlin.jvm.JvmField val staticField = 1

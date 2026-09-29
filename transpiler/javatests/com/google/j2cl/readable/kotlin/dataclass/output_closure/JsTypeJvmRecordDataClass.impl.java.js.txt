@@ -10,7 +10,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class JsTypeJvmRecordDataClass extends Record {
  
- constructor(/** number */ x, /** string */ y, /** string */ z, /** string */ ignored) {
+ constructor(/** number */ x, /** string */ y, /** string */ z, /** boolean */ isFoo, /** string */ zoo, /** string */ ignored) {
   JsTypeJvmRecordDataClass.$clinit();
   super();
   /**@type {number} @nodts*/
@@ -19,18 +19,24 @@ class JsTypeJvmRecordDataClass extends Record {
   this.f_y__dataclass_JsTypeJvmRecordDataClass_;
   /**@type {string} @nodts*/
   this.f_z__dataclass_JsTypeJvmRecordDataClass_;
+  /**@type {boolean} @nodts*/
+  this.f_isFoo__dataclass_JsTypeJvmRecordDataClass_ = false;
+  /**@type {string} @nodts*/
+  this.f_zoo__dataclass_JsTypeJvmRecordDataClass_;
   /**@type {string} @nodts*/
   this.f_ignored__dataclass_JsTypeJvmRecordDataClass_;
-  this.$ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__java_lang_String__void(x, y, z, ignored);
+  this.$ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__boolean__java_lang_String__java_lang_String__void(x, y, z, isFoo, zoo, ignored);
  }
  /** @nodts */
- $ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__java_lang_String__void(/** number */ x, /** string */ y, /** string */ z, /** string */ ignored) {
+ $ctor__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__boolean__java_lang_String__java_lang_String__void(/** number */ x, /** string */ y, /** string */ z, /** boolean */ isFoo, /** string */ zoo, /** string */ ignored) {
   this.$ctor__java_lang_Record__void();
   this.f_x__dataclass_JsTypeJvmRecordDataClass_ = x;
   this.f_y__dataclass_JsTypeJvmRecordDataClass_ = y;
   this.f_z__dataclass_JsTypeJvmRecordDataClass_ = z;
+  this.f_isFoo__dataclass_JsTypeJvmRecordDataClass_ = isFoo;
+  this.f_zoo__dataclass_JsTypeJvmRecordDataClass_ = zoo;
   this.f_ignored__dataclass_JsTypeJvmRecordDataClass_ = ignored;
-  $J2CL_PRESERVE$(this.f_x__dataclass_JsTypeJvmRecordDataClass_, this.f_y__dataclass_JsTypeJvmRecordDataClass_, this.f_z__dataclass_JsTypeJvmRecordDataClass_, this.f_ignored__dataclass_JsTypeJvmRecordDataClass_);
+  $J2CL_PRESERVE$(this.f_x__dataclass_JsTypeJvmRecordDataClass_, this.f_y__dataclass_JsTypeJvmRecordDataClass_, this.f_z__dataclass_JsTypeJvmRecordDataClass_, this.f_isFoo__dataclass_JsTypeJvmRecordDataClass_, this.f_zoo__dataclass_JsTypeJvmRecordDataClass_, this.f_ignored__dataclass_JsTypeJvmRecordDataClass_);
  }
  /** @return {number} */
  get customVal() {
@@ -44,9 +50,21 @@ class JsTypeJvmRecordDataClass extends Record {
  get z() {
   return this.f_z__dataclass_JsTypeJvmRecordDataClass_;
  }
+ /** @return {boolean} */
+ get isFoo() {
+  return this.f_isFoo__dataclass_JsTypeJvmRecordDataClass_;
+ }
+ /** @override @return {string} */
+ get zoo() {
+  return this.f_zoo__dataclass_JsTypeJvmRecordDataClass_;
+ }
  /** @final @nodts @return {string} */
  m_ignored__java_lang_String() {
   return this.f_ignored__dataclass_JsTypeJvmRecordDataClass_;
+ }
+ /** @override @return {string} */
+ get customOther() {
+  return 'other';
  }
  /** @final @nodts @return {number} */
  m_component1__int() {
@@ -60,25 +78,41 @@ class JsTypeJvmRecordDataClass extends Record {
  m_component3__java_lang_String() {
   return this.f_z__dataclass_JsTypeJvmRecordDataClass_;
  }
+ /** @final @nodts @return {boolean} */
+ m_component4__boolean() {
+  return this.f_isFoo__dataclass_JsTypeJvmRecordDataClass_;
+ }
  /** @final @nodts @return {string} */
- m_component4__java_lang_String() {
+ m_component5__java_lang_String() {
+  return this.f_zoo__dataclass_JsTypeJvmRecordDataClass_;
+ }
+ /** @final @nodts @return {string} */
+ m_component6__java_lang_String() {
   return this.f_ignored__dataclass_JsTypeJvmRecordDataClass_;
  }
  /** @final @nodts @return {!JsTypeJvmRecordDataClass} */
- m_copy__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** number */ x, /** string */ y, /** string */ z, /** string */ ignored) {
-  return new JsTypeJvmRecordDataClass(x, y, z, ignored);
+ m_copy__int__java_lang_String__java_lang_String__boolean__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** number */ x, /** string */ y, /** string */ z, /** boolean */ isFoo, /** string */ zoo, /** string */ ignored) {
+  return new JsTypeJvmRecordDataClass(x, y, z, isFoo, zoo, ignored);
  }
  /** @nodts @return {!JsTypeJvmRecordDataClass} */
- static m_copy$default__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** !JsTypeJvmRecordDataClass */ $this, /** number= */ x, /** string= */ y, /** string= */ z, /** string= */ ignored) {
+ static m_copy$default__dataclass_JsTypeJvmRecordDataClass__int__java_lang_String__java_lang_String__boolean__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(/** !JsTypeJvmRecordDataClass */ $this, /** number= */ x, /** string= */ y, /** string= */ z, /** boolean= */ isFoo, /** string= */ zoo, /** string= */ ignored) {
   let x$defaulted = $Util.$isUndefined(x) ? $this.f_x__dataclass_JsTypeJvmRecordDataClass_ : x;
   let y$defaulted = $Util.$isUndefined(y) ? $this.f_y__dataclass_JsTypeJvmRecordDataClass_ : y;
   let z$defaulted = $Util.$isUndefined(z) ? $this.f_z__dataclass_JsTypeJvmRecordDataClass_ : z;
+  let isFoo$defaulted = $Util.$isUndefined(isFoo) ? $this.f_isFoo__dataclass_JsTypeJvmRecordDataClass_ : isFoo;
+  let zoo$defaulted = $Util.$isUndefined(zoo) ? $this.f_zoo__dataclass_JsTypeJvmRecordDataClass_ : zoo;
   let ignored$defaulted = $Util.$isUndefined(ignored) ? $this.f_ignored__dataclass_JsTypeJvmRecordDataClass_ : ignored;
-  return $this.m_copy__int__java_lang_String__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(x$defaulted, y$defaulted, z$defaulted, ignored$defaulted);
+  return $this.m_copy__int__java_lang_String__java_lang_String__boolean__java_lang_String__java_lang_String__dataclass_JsTypeJvmRecordDataClass(x$defaulted, y$defaulted, z$defaulted, isFoo$defaulted, zoo$defaulted, ignored$defaulted);
  }
- /** @override @nodts @return {string} */
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {string} */
  m_getZ__java_lang_String() {
   return this.z;
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {boolean} */
+ m_isFoo__boolean() {
+  return this.isFoo;
  }
  /** @nodts */
  static $clinit() {

@@ -1,11 +1,15 @@
 goog.module('dataclass.JvmRecordDataClass$impl');
 
 const DataClassInterface = goog.require('dataclass.DataClassInterface$impl');
+const CharSequence = goog.require('java.lang.CharSequence$impl');
 const Record = goog.require('java.lang.Record$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let IntStream = goog.forwardDeclare('java.util.stream.IntStream$impl');
+
 /**
  * @final
+ * @implements {CharSequence}
  * @implements {DataClassInterface}
  */
 class JvmRecordDataClass extends Record {
@@ -51,6 +55,18 @@ class JvmRecordDataClass extends Record {
  m_other2__java_lang_String() {
   return 'other2';
  }
+ /** @override @nodts @return {number} */
+ m_length__int() {
+  return 1;
+ }
+ /** @nodts @return {number} */
+ m_get__int__char(/** number */ index) {
+  return 97 /* 'a' */;
+ }
+ /** @override @nodts @return {!(CharSequence|string)} */
+ m_subSequence__int__int__java_lang_CharSequence(/** number */ startIndex, /** number */ endIndex) {
+  return this;
+ }
  /** @final @nodts @return {number} */
  m_component1__int() {
   return this.f_f__dataclass_JvmRecordDataClass_;
@@ -69,11 +85,22 @@ class JvmRecordDataClass extends Record {
   let z$defaulted = $Util.$isUndefined(z) ? $this.f_z__dataclass_JvmRecordDataClass_ : z;
   return $this.m_copy__int__java_lang_String__dataclass_JvmRecordDataClass(f$defaulted, z$defaulted);
  }
- /** @override @nodts @return {number} */
+ /** @final @override @nodts @return {number} */
+ m_charAt__int__char(/** number */ index) {
+  return this.m_get__int__char(index);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @suppress{visibility} @return {IntStream} */
+ m_chars__java_util_stream_IntStream() {
+  return CharSequence.m_chars__$default__java_lang_CharSequence__java_util_stream_IntStream(this);
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
  m_getF__int() {
   return this.m_f__int();
  }
- /** @override @nodts @return {string} */
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {string} */
  m_getOther__java_lang_String() {
   return this.m_other__java_lang_String();
  }
@@ -81,6 +108,11 @@ class JvmRecordDataClass extends Record {
  /** @final @override @nodts @suppress{visibility} @return {string} */
  m_isBar__java_lang_Object() {
   return this.m_isBar__java_lang_String();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {number} */
+ m_getLength__int() {
+  return this.m_length__int();
  }
  //Default method forwarding stub.
  /** @override @nodts @suppress{visibility} @return {number} */
@@ -96,6 +128,7 @@ class JvmRecordDataClass extends Record {
   JvmRecordDataClass.$clinit = () =>{};
   JvmRecordDataClass.$loadModules();
   Record.$clinit();
+  CharSequence.$clinit();
   DataClassInterface.$clinit();
   JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass = 1;
  }
@@ -109,6 +142,7 @@ class JvmRecordDataClass extends Record {
 }
 /**@private {number} @nodts*/
 JvmRecordDataClass.$static_staticField__dataclass_JvmRecordDataClass = 0;
+CharSequence.$markImplementor(JvmRecordDataClass);
 DataClassInterface.$markImplementor(JvmRecordDataClass);
 $Util.$setClassMetadata(JvmRecordDataClass, 'dataclass.JvmRecordDataClass');
 

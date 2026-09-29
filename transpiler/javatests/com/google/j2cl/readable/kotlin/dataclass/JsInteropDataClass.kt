@@ -29,6 +29,9 @@ data class DataClassWithJsProperty(@JsProperty(name = "renamedFoo") val foo: Int
 
 interface JvmRecordInterface {
   val z: String
+  val isFoo: Boolean
+  @JsProperty val zoo: String
+  @JsProperty(name = "customOther") val other: String
 }
 
 @JsType
@@ -37,8 +40,13 @@ data class JsTypeJvmRecordDataClass(
   @JsProperty(name = "customVal") val x: Int,
   val y: String,
   override val z: String,
+  override val isFoo: Boolean,
+  override val zoo: String,
   @JsIgnore val ignored: String,
-) : JvmRecordInterface
+) : JvmRecordInterface {
+  override val other: String
+    get() = "other"
+}
 
 fun testDataClassWithJsInterop() {
   val foo1 = JsTypeDataClass(1).foo

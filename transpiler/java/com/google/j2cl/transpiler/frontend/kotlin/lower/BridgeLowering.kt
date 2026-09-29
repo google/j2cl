@@ -7,6 +7,7 @@
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isPropertyAccessor
 import org.jetbrains.kotlin.backend.common.ClassLoweringPass
 import org.jetbrains.kotlin.backend.common.ir.syntheticBodyIsNotSupported
 import org.jetbrains.kotlin.backend.common.lower.SpecialMethodWithDefaultInfo
@@ -407,9 +408,12 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
       // This would cover cases where the JVM builtin name is different (ex. getSize() vs size()) or
       // cases where Kotlin mangled a name (ex. default functions, internal functions).
       // TODO(b/236236685): Revisit skipping bridges for internal functions.
+      // J2CL manages bridge generation and JsInterop compatibility for record component accessors.
       .filter {
         it.signature.name != bridgeTarget.jvmMethod.name &&
-          it.overridden.visibility != DescriptorVisibilities.INTERNAL
+          it.overridden.visibility != DescriptorVisibilities.INTERNAL &&
+          !(bridgeTarget.isPropertyAccessor &&
+            irClass.hasAnnotation(JvmStandardClassIds.JVM_RECORD_ANNOTATION_FQ_NAME))
       }
       .distinctBy { it.signature.name }
       // END OF MODIFICATIONS
