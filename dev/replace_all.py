@@ -145,6 +145,11 @@ def main(argv):
       if "WASM" in args.platforms
       else []
   )
+  wasm_jsinterop_readables = (
+      get_readables(readable_pattern, "wasm_jsinterop")
+      if "WASM" in args.platforms
+      else []
+  )
   j2kt_readables = (
       get_readables(readable_pattern, "kt")
       if "J2KT" in args.platforms
@@ -158,7 +163,11 @@ def main(argv):
   )
 
   all_readables = (
-      js_readables + wasm_readables + j2kt_readables + j2kt_web_readables
+      js_readables
+      + wasm_readables
+      + wasm_jsinterop_readables
+      + j2kt_readables
+      + j2kt_web_readables
   )
 
   if not all_readables:
@@ -175,6 +184,8 @@ def main(argv):
     _print_readables(j2kt_web_readables)
     print("  Blaze building Wasm:")
     _print_readables(wasm_readables)
+    print("  Blaze building Wasm (JsInterop):")
+    _print_readables(wasm_jsinterop_readables)
     print("  Blaze building J2KT:")
     _print_readables(j2kt_readables)
 

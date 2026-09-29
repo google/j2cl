@@ -71,6 +71,7 @@ def readable_example(
 
         # Wasm is currently not planned for Kotlin Frontend.
         generate_wasm_readables = False
+        generate_wasm_custom_descriptors_jsinterop_readables = False
 
     build_kt_native_readables = generate_kt_readables and build_kt_readables and build_kt_native_readables
     generate_kt_web_readables = generate_kt_readables and generate_kt_web_readables
@@ -106,20 +107,27 @@ def readable_example(
     else:
         _empty_readable_targets("output_closure")
 
-    if generate_wasm_readables or generate_wasm_custom_descriptors_jsinterop_readables:
-        if generate_wasm_custom_descriptors_jsinterop_readables:
-            wasm_feature_set = J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP
-        else:
-            wasm_feature_set = J2WASM_FEATURE_SET.DEFAULT
-
+    if generate_wasm_readables:
         _wasm_readable_targets(
-            feature_set = wasm_feature_set,
+            name = "readable_wasm",
+            dir_out = "output_wasm",
+            feature_set = J2WASM_FEATURE_SET.DEFAULT,
             entry_points = wasm_entry_points,
             generate_imports = generate_wasm_imports,
-            generate_externs = generate_wasm_custom_descriptors_jsinterop_readables,
         )
     else:
         _empty_readable_targets("output_wasm")
+
+    if generate_wasm_custom_descriptors_jsinterop_readables:
+        _wasm_readable_targets(
+            name = "readable_wasm_jsinterop",
+            dir_out = "output_wasm_jsinterop",
+            feature_set = J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP,
+            entry_points = wasm_entry_points,
+            generate_imports = generate_wasm_imports,
+        )
+    else:
+        _empty_readable_targets("output_wasm_jsinterop")
 
     if generate_kt_readables:
         _readable_diff_test(
@@ -200,48 +208,49 @@ def _js_readable_targets(readable_target, dir_out, defs):
         tags = ["j2cl"],
     )
 
-def _wasm_readable_targets(feature_set, entry_points, generate_imports, generate_externs):
+def _wasm_readable_targets(name, dir_out, feature_set, entry_points, generate_imports):
+    j2wasm_target = "%s-j2wasm" % name
     _feature_set_enabled_j2wasm_library(
-        name = "readable-j2wasm-feature_set",
+        name = j2wasm_target,
         j2wasm_library = ":readable-j2wasm",
         feature_set = feature_set,
     )
 
     j2wasm_application(
-        name = "readable_wasm",
-        deps = [":readable-j2wasm-feature_set"],
+        name = name,
+        deps = [":%s" % j2wasm_target],
         entry_points = entry_points,
         feature_set = feature_set,
     )
 
     _extract_json_warnings(
-        name = "readable_wasm_import_closure_warnings",
-        target = ":readable_wasm",
+        name = "%s_import_closure_warnings" % name,
+        target = ":%s" % name,
     )
 
-    extra_files = ["readable_wasm_import_closure_warnings"]
-    if generate_externs:
+    extra_files = ["%s_import_closure_warnings" % name]
+    if feature_set == J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP:
         # Warnings from type checking the transpiled output, which includes the generated externs.
         _extract_json_warnings(
-            name = "readable_wasm_jsinterop_closure_warnings",
-            target = ":readable-j2wasm-feature_set",
+            name = "%s_closure_warnings" % name,
+            target = ":%s" % j2wasm_target,
         )
-        extra_files.append("readable_wasm_jsinterop_closure_warnings")
+        extra_files.append("%s_closure_warnings" % name)
     if generate_imports:
-        extra_files.append(":readable_wasm.imports.js.txt")
+        extra_files.append(":%s.imports.js.txt" % name)
 
     _readable_diff_test(
-        name = "readable_wasm_golden",
-        target = ":readable-j2wasm-feature_set",
+        name = "%s_golden" % name,
+        target = ":%s" % j2wasm_target,
         target_file = "readable-j2wasm.js",
         extra_files = extra_files,
-        dir_out = "output_wasm",
+        dir_out = dir_out,
         tags = ["j2wasm"],
     )
 
     build_test(
-        name = "readable_wasm_build_test",
-        targets = ["readable_wasm"],
+        name = "%s_build_test" % name,
+        targets = [name],
         tags = ["j2wasm"],
     )
 
