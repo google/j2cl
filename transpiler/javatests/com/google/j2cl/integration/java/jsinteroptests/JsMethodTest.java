@@ -35,7 +35,6 @@ public class JsMethodTest {
     testStaticNativeJsMethod();
     testStaticNativeJsPropertyGetter();
     testStaticNativeJsPropertySetter();
-    testLambdaImplementingJsMethod();
     testLambdaRequiringJsMethodBridge();
     testJsOptionalJsVarargsLambda();
   }
@@ -83,16 +82,6 @@ public class JsMethodTest {
   private static void testStaticNativeJsPropertySetter() {
     setJsInteropSecret("very secret!");
     assertEquals("very secret!", getJsInteropSecret());
-  }
-
-  interface FunctionalInterfaceWithJsMethod {
-    @JsMethod
-    String greet();
-  }
-
-  private static void testLambdaImplementingJsMethod() {
-    FunctionalInterfaceWithJsMethod f = () -> "Hello";
-    assertEquals("Hello", f.greet());
   }
 
   interface NullSupplier {

@@ -32,7 +32,6 @@ object JsMethodTest {
     testStaticNativeJsMethod()
     testStaticNativeJsPropertyGetter()
     testStaticNativeJsPropertySetter()
-    testLambdaImplementingJsMethod()
     testLambdaRequiringJsMethodBridge()
     testJsOptionalJsVarargsLambda()
   }
@@ -81,15 +80,6 @@ object JsMethodTest {
   private fun testStaticNativeJsPropertySetter() {
     setJsInteropSecret("very secret!")
     assertEquals("very secret!", getJsInteropSecret())
-  }
-
-  internal fun interface FunctionalInterfaceWithJsMethod {
-    @JsMethod fun greet(): String
-  }
-
-  private fun testLambdaImplementingJsMethod() {
-    val f = FunctionalInterfaceWithJsMethod { "Hello" }
-    assertEquals("Hello", f.greet())
   }
 
   internal interface NullSupplier {

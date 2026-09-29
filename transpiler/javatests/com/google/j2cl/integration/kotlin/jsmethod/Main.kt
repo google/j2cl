@@ -25,6 +25,7 @@ import jsinterop.annotations.JsType
 fun main(vararg args: String) {
   testJsMethodWithDifferentVisiblities()
   testInheritName()
+  testLambdaImplementingJsMethod()
 }
 
 internal class NonPublicJsMethodClass {
@@ -72,4 +73,13 @@ private fun testInheritName() {
   o = ClassWithJsMethodInheritingName()
   assertEquals(ClassWithJsMethodInheritingName::class.java.name, o.className())
   assertEquals(ClassWithJsMethodInheritingName::class.java.name, callName(o))
+}
+
+internal fun interface FunctionalInterfaceWithJsMethod {
+  @JsMethod fun greet(): String
+}
+
+private fun testLambdaImplementingJsMethod() {
+  val f = FunctionalInterfaceWithJsMethod { "Hello" }
+  assertEquals("Hello", f.greet())
 }

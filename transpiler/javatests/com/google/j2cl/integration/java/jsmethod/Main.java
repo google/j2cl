@@ -25,6 +25,7 @@ public class Main {
   public static void main(String... args) {
     testJsMethodWithDifferentVisiblities();
     testInheritName();
+    testLambdaImplementingJsMethod();
   }
 
   static class NonPublicJsMethodClass {
@@ -84,5 +85,15 @@ public class Main {
     object = new ClassWithJsMethodInheritingName();
     assertEquals(ClassWithJsMethodInheritingName.class.getName(), object.className());
     assertEquals(ClassWithJsMethodInheritingName.class.getName(), callName(object));
+  }
+
+  interface FunctionalInterfaceWithJsMethod {
+    @JsMethod
+    String greet();
+  }
+
+  private static void testLambdaImplementingJsMethod() {
+    FunctionalInterfaceWithJsMethod f = () -> "Hello";
+    assertEquals("Hello", f.greet());
   }
 }
