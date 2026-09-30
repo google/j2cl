@@ -145,10 +145,6 @@ class IntListFromScratch extends j_l_Object {
   }
   return this.m_lastIndexOf__int__int((/**@type {!Integer}*/ ($Casts.$to(element, Integer))).intValue());
  }
- /** @nodts @return {number} */
- m_remove__int__int(/** number */ index) {
-  return this.m_removeAt__int__int(index);
- }
  /** @final @override @return {number} */
  indexOf(/** * */ element) {
   if (!Integer.$isInstance(element)) {
@@ -221,7 +217,7 @@ class IntListFromScratch extends j_l_Object {
  //Bridge method.
  /** @override @suppress{visibility} @return {!Integer} */
  removeAtIndex(/** number */ index) {
-  return Integer.valueOf(this.m_remove__int__int(index));
+  return Integer.valueOf(this.m_removeAt__int__int(index));
  }
  //Bridge method.
  /** @override @suppress{visibility} @return {!Integer} */

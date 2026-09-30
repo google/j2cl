@@ -131,6 +131,12 @@ class IntList : ArrayList<Int>() {
   override fun contains(element: Int): Boolean = super.contains(element)
 }
 
+class BooleanList : ArrayList<Boolean>() {
+  override fun removeAt(index: Int): Boolean = super.removeAt(index)
+
+  override fun remove(element: Boolean): Boolean = super.remove(element)
+}
+
 private class IntListFromScratch : MutableList<Int> {
   private val contents = ArrayList<Int>()
 
@@ -204,6 +210,10 @@ fun test() {
   val il = IntList()
   il.remove(2)
   il.removeAt(1)
+
+  val bl = BooleanList()
+  bl.remove(true)
+  bl.removeAt(1)
 
   val ba =
     object : AbstractList<Byte>() {

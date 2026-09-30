@@ -1,0 +1,111 @@
+goog.module('primitivespecialization.BooleanList$impl');
+
+const ArrayList = goog.require('java.util.ArrayList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @extends {ArrayList<boolean>}
+ */
+class BooleanList extends ArrayList {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BooleanList} */
+ static $create__() {
+  BooleanList.$clinit();
+  let $instance = new BooleanList();
+  $instance.$ctor__primitivespecialization_BooleanList__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_BooleanList__void() {
+  this.$ctor__java_util_ArrayList__void();
+ }
+ /** @nodts @return {boolean} */
+ m_removeAt__int__boolean(/** number */ index) {
+  return super.removeAtIndex(index);
+ }
+ /** @nodts @return {boolean} */
+ m_remove__boolean__boolean(/** boolean */ element) {
+  return super.remove(element);
+ }
+ /** @final @override @return {boolean} */
+ remove(/** * */ element) {
+  if (!Boolean.$isInstance(element)) {
+   return false;
+  }
+  return this.m_remove__boolean__boolean(Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Casts.$to(element, Boolean))));
+ }
+ /** @nodts @return {boolean} */
+ m_contains__java_lang_Boolean__boolean(/** boolean */ element) {
+  return super.contains(element);
+ }
+ /** @final @override @return {boolean} */
+ contains(/** * */ element) {
+  if (!Boolean.$isInstance(element)) {
+   return false;
+  }
+  return this.m_contains__java_lang_Boolean__boolean(/**@type {boolean}*/ (element));
+ }
+ /** @nodts @return {number} */
+ m_indexOf__java_lang_Boolean__int(/** boolean */ element) {
+  return super.indexOf(element);
+ }
+ /** @final @override @return {number} */
+ indexOf(/** * */ element) {
+  if (!Boolean.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_indexOf__java_lang_Boolean__int(/**@type {boolean}*/ (element));
+ }
+ /** @nodts @return {number} */
+ m_lastIndexOf__java_lang_Boolean__int(/** boolean */ element) {
+  return super.lastIndexOf(element);
+ }
+ /** @final @override @return {number} */
+ lastIndexOf(/** * */ element) {
+  if (!Boolean.$isInstance(element)) {
+   return -1;
+  }
+  return this.m_lastIndexOf__java_lang_Boolean__int(/**@type {boolean}*/ (element));
+ }
+ /** @nodts @return {number} */
+ m_getSize__int() {
+  return super.size();
+ }
+ /** @final @override @return {number} */
+ size() {
+  return this.m_getSize__int();
+ }
+ //Bridge method.
+ /** @final @override @suppress{visibility} @return {boolean} */
+ removeAtIndex(/** number */ index) {
+  return this.m_removeAt__int__boolean(index);
+ }
+ /** @nodts */
+ static $clinit() {
+  BooleanList.$clinit = () =>{};
+  BooleanList.$loadModules();
+  ArrayList.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BooleanList;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(BooleanList, 'primitivespecialization.BooleanList');
+
+exports = BooleanList;
+
+//# sourceMappingURL=BooleanList.js.map

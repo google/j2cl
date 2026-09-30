@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let BooleanList = goog.forwardDeclare('primitivespecialization.BooleanList$impl');
 let Holder = goog.forwardDeclare('primitivespecialization.Holder$impl');
 let IntHolder = goog.forwardDeclare('primitivespecialization.IntHolder$impl');
 let IntHolderExtendsGetter = goog.forwardDeclare('primitivespecialization.IntHolderExtendsGetter$impl');
@@ -57,6 +58,9 @@ class PrimitiveSpecializationKt extends j_l_Object {
   let il = IntList.$create__();
   il.m_remove__java_lang_Integer__boolean(Integer.valueOf(2));
   il.m_removeAt__int__int(1);
+  let bl = BooleanList.$create__();
+  bl.m_remove__boolean__boolean(true);
+  bl.m_removeAt__int__boolean(1);
   let ba = $1.$create__();
  }
  /** @nodts */
@@ -78,6 +82,7 @@ class PrimitiveSpecializationKt extends j_l_Object {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  BooleanList = goog.module.get('primitivespecialization.BooleanList$impl');
   Holder = goog.module.get('primitivespecialization.Holder$impl');
   IntHolder = goog.module.get('primitivespecialization.IntHolder$impl');
   IntHolderExtendsGetter = goog.module.get('primitivespecialization.IntHolderExtendsGetter$impl');

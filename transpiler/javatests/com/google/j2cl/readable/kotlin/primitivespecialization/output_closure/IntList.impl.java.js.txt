@@ -59,10 +59,6 @@ class IntList extends ArrayList {
  m_contains__int__boolean(/** number */ element) {
   return super.contains(Integer.valueOf(element));
  }
- /** @nodts @return {number} */
- m_remove__int__int(/** number */ index) {
-  return this.m_removeAt__int__int(index);
- }
  /** @final @override @return {boolean} */
  remove(/** * */ element) {
   if (!Integer.$isInstance(element)) {
@@ -102,7 +98,7 @@ class IntList extends ArrayList {
  //Bridge method.
  /** @final @override @suppress{visibility} @return {!Integer} */
  removeAtIndex(/** number */ index) {
-  return Integer.valueOf(this.m_remove__int__int(index));
+  return Integer.valueOf(this.m_removeAt__int__int(index));
  }
  /** @nodts */
  static $clinit() {

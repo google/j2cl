@@ -664,17 +664,26 @@ internal class KotlinEnvironment(
           }
 
       val kotlinOverrideName =
-        if (
+        when {
           enclosingTypeDescriptor.typeDeclaration.isJavaRecord &&
             irFunction is IrSimpleFunction &&
-            irFunction.isPropertyAccessor
-        ) {
-          // Some overridden properties (e.g. CharSequence.length) have the unprefixed name.
-          irFunction.overriddenSymbols
-            .map { it.owner.resolveName(jvmBackendContext) }
-            .firstOrNull { it != name }
-        } else {
-          null
+            irFunction.isPropertyAccessor ->
+            // Some overridden properties (e.g. CharSequence.length) have the unprefixed name.
+            irFunction.overriddenSymbols
+              .map { it.owner.resolveName(jvmBackendContext) }
+              .firstOrNull { it != name }
+
+          name == "remove" &&
+            parametersDescriptors.singleOrNull()?.typeDescriptor == PrimitiveTypes.INT &&
+            irFunction.returnType != pluginContext.irBuiltIns.booleanType &&
+            enclosingTypeDescriptor.isSubtypeOf(TypeDescriptors.get().javaUtilList) ->
+            // Kotlin renames the method `T List<T>.remove(int)` to `removeAt` so that it does not
+            // clash with `boolean List<T>.remove(T)` when specializing to `List<Int>`. Internally
+            // we need to preserve the original names to interoperate with Java code, so the new
+            // name only applies when reasoning about overrides.
+            "removeAt"
+
+          else -> null
         }
 
       MethodDescriptor.builder()

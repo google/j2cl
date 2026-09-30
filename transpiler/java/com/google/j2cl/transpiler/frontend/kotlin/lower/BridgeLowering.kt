@@ -408,12 +408,14 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
       // This would cover cases where the JVM builtin name is different (ex. getSize() vs size()) or
       // cases where Kotlin mangled a name (ex. default functions, internal functions).
       // TODO(b/236236685): Revisit skipping bridges for internal functions.
-      // J2CL manages bridge generation and JsInterop compatibility for record component accessors.
+      // J2CL manages bridge generation and JsInterop compatibility for record component accessors
+      // and removeAt.
       .filter {
         it.signature.name != bridgeTarget.jvmMethod.name &&
           it.overridden.visibility != DescriptorVisibilities.INTERNAL &&
           !(bridgeTarget.isPropertyAccessor &&
-            irClass.hasAnnotation(JvmStandardClassIds.JVM_RECORD_ANNOTATION_FQ_NAME))
+            irClass.hasAnnotation(JvmStandardClassIds.JVM_RECORD_ANNOTATION_FQ_NAME)) &&
+          !(it.signature.name == "remove" && bridgeTarget.jvmMethod.name == "removeAt")
       }
       .distinctBy { it.signature.name }
       // END OF MODIFICATIONS
@@ -431,15 +433,14 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
   // Returns the special bridge overridden by the current methods if it exists.
   private val IrSimpleFunction.specialBridgeOrNull: SpecialBridge?
     // MODIFIED BY GOOGLE
-    // Skip generating the special bridge for remove/removeAt. The bridge collides with the existing
-    // remove() method and would add an overload that only differs on return type.
+    // J2CL manages bridge generation and JsInterop compatibility for removeAt. Skip generating the
+    // special bridge for remove/removeAt.
     //
     // Original Code:
     // get() = context.bridgeLoweringCache.computeSpecialBridge(this)
     //
     get() =
       context.bridgeLoweringCache.computeSpecialBridge(this)?.takeIf {
-        // TODO(b/372484266): remove special case for removeAt.
         it.overridden.name.asString() != "removeAt"
       }
 
@@ -514,14 +515,6 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
       .apply {
         copyAttributes(target)
         copyParametersWithErasure(this@addBridge, bridge.overridden)
-        // MODIFIED BY GOOGLE
-        // In the case of remove/removeAt, the signatures actually match, it just needs to be
-        // specialized. Instead of erasing the return type, copy it from the target function.
-        // TODO(b/372484266): try to avoid special-case resolving this.
-        if (bridge.signature.name == "remove" && target.jvmMethod.name == "removeAt") {
-          returnType = target.returnType
-        }
-        // END OF MODIFICATIONS
 
         // If target is a throwing stub, bridge also should just throw
         // UnsupportedOperationException.
