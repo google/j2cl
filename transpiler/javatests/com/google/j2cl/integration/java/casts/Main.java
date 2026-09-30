@@ -526,6 +526,7 @@ public class Main {
     }
   }
 
+  @SuppressWarnings("unused") // Alternative implementation for J2KT (@J2ktIncompatible).
   private static void testCasts_typeVariableWithNativeBound(Object... unused) {
     if (!isJ2Kt()) {
       fail();
