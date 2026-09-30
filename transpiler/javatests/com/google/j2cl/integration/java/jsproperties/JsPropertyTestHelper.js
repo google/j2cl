@@ -14,9 +14,9 @@
 
 goog.module('jsproperties.JsPropertyTestHelper');
 
+const ClassWithJsProperties = goog.require('jsproperties.Main.ClassWithJsProperties');
 const MyConcreteJsType = goog.require('jsproperties.MyConcreteJsType');
 const MyNativeJsType = goog.require('jsproperties.MyNativeJsType');
-const NonJsType = goog.require('jsproperties.Main.NonJsType');
 
 /**
  * @return {number}
@@ -127,16 +127,16 @@ exports.setProperty = function(object, name, value) {
  * @return {number}
  * @public
  */
-exports.getNonJsTypeStaticX = function() {
-  return NonJsType.staticX;
+exports.getClassWithJsPropertiesStaticX = function() {
+  return ClassWithJsProperties.staticX;
 };
 
 /**
  * @param {number} value
  * @public
  */
-exports.setNonJsTypeStaticX = function(value) {
-  NonJsType.staticX = value;
+exports.setClassWithJsPropertiesStaticX = function(value) {
+  ClassWithJsProperties.staticX = value;
 };
 
 /**
@@ -158,20 +158,20 @@ exports.setMyConcreteJsTypeAbc = function(object, value) {
 };
 
 /**
- * @param {!NonJsType} object
+ * @param {!ClassWithJsProperties} object
  * @return {number}
  * @public
  */
-exports.getNonJsTypeAbc = function(object) {
+exports.getClassWithJsPropertiesAbc = function(object) {
   return object.abc;
 };
 
 /**
- * @param {!NonJsType} object
+ * @param {!ClassWithJsProperties} object
  * @param {number} value
  * @public
  */
-exports.setNonJsTypeAbc = function(object, value) {
+exports.setClassWithJsPropertiesAbc = function(object, value) {
   object.abc = value;
 };
 
@@ -179,15 +179,15 @@ exports.setNonJsTypeAbc = function(object, value) {
  * @return {number}
  * @public
  */
-exports.getNonJsTypeStaticAbc = function() {
-  return NonJsType.abc;
+exports.getClassWithJsPropertiesStaticAbc = function() {
+  return ClassWithJsProperties.abc;
 };
 
 /**
  * @param {number} value
  * @public
  */
-exports.setNonJsTypeStaticAbc = function(value) {
-  NonJsType.abc = value;
+exports.setClassWithJsPropertiesStaticAbc = function(value) {
+  ClassWithJsProperties.abc = value;
 };
 

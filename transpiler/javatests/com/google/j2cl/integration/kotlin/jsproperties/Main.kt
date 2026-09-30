@@ -33,8 +33,8 @@ fun main(vararg args: String) {
   testJsPropertyIsX()
   testNativeJsType()
   testNativeJsTypeWithConstructor()
-  testNonJsType()
-  testNonJsType_static()
+  testClassWithJsProperties()
+  testClassWithJsProperties_static()
   testNativeStaticJsProperty()
   testNativeInstanceJsProperty()
   testDefaultMethodJsProperty()
@@ -307,7 +307,7 @@ private fun testJsPropertyGetX() {
   assertEquals(0, o.getX())
 }
 
-class NonJsType {
+class ClassWithJsProperties {
   private var x: Int = 0
 
   @JsProperty fun getX(): Int = x
@@ -353,8 +353,8 @@ class NonJsType {
   }
 }
 
-private fun testNonJsType() {
-  val obj = NonJsType()
+private fun testClassWithJsProperties() {
+  val obj = ClassWithJsProperties()
 
   obj.setX(10)
   assertEquals(10, obj.getX())
@@ -374,42 +374,42 @@ private fun testNonJsType() {
 
   obj.setC(30)
   assertEquals(30, obj.getC())
-  assertEquals(30, getNonJsTypeAbc(obj))
+  assertEquals(30, getClassWithJsPropertiesAbc(obj))
 
-  setNonJsTypeAbc(obj, 34)
+  setClassWithJsPropertiesAbc(obj, 34)
   assertEquals(34, obj.getC())
-  assertEquals(34, getNonJsTypeAbc(obj))
+  assertEquals(34, getClassWithJsPropertiesAbc(obj))
 }
 
-private fun testNonJsType_static() {
-  NonJsType.setStaticX(10)
-  assertEquals(10, NonJsType.getStaticX())
-  assertEquals(10, getNonJsTypeStaticX())
-  assertEquals(10, NonJsType.staticX)
+private fun testClassWithJsProperties_static() {
+  ClassWithJsProperties.setStaticX(10)
+  assertEquals(10, ClassWithJsProperties.getStaticX())
+  assertEquals(10, getClassWithJsPropertiesStaticX())
+  assertEquals(10, ClassWithJsProperties.staticX)
 
-  setNonJsTypeStaticX(4)
-  assertEquals(4, NonJsType.getStaticX())
-  assertEquals(4, getNonJsTypeStaticX())
-  assertEquals(4, NonJsType.staticX)
+  setClassWithJsPropertiesStaticX(4)
+  assertEquals(4, ClassWithJsProperties.getStaticX())
+  assertEquals(4, getClassWithJsPropertiesStaticX())
+  assertEquals(4, ClassWithJsProperties.staticX)
 
-  NonJsType.setStaticC(20)
-  assertEquals(20, NonJsType.getStaticC())
-  assertEquals(20, getNonJsTypeStaticAbc())
-  assertEquals(20, NonJsType.staticX)
+  ClassWithJsProperties.setStaticC(20)
+  assertEquals(20, ClassWithJsProperties.getStaticC())
+  assertEquals(20, getClassWithJsPropertiesStaticAbc())
+  assertEquals(20, ClassWithJsProperties.staticX)
 
-  setNonJsTypeStaticAbc(24)
-  assertEquals(24, NonJsType.getStaticC())
-  assertEquals(24, getNonJsTypeStaticAbc())
-  assertEquals(24, NonJsType.staticX)
+  setClassWithJsPropertiesStaticAbc(24)
+  assertEquals(24, ClassWithJsProperties.getStaticC())
+  assertEquals(24, getClassWithJsPropertiesStaticAbc())
+  assertEquals(24, ClassWithJsProperties.staticX)
 }
 
 private fun testNativeStaticJsProperty() {
-  val pi = NonJsType.getB().toInt()
+  val pi = ClassWithJsProperties.getB().toInt()
   assertTrue(pi == 3)
 }
 
 private fun testNativeInstanceJsProperty() {
-  assertTrue(NonJsType().getA() != null)
+  assertTrue(ClassWithJsProperties().getA() != null)
 }
 
 interface InterfaceWithDefaultJsProperties {
@@ -475,10 +475,10 @@ internal external fun getProperty(o: Any?, name: String): Int
 internal external fun setProperty(o: Any?, name: String, value: Int)
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun getNonJsTypeStaticX(): Int
+private external fun getClassWithJsPropertiesStaticX(): Int
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun setNonJsTypeStaticX(value: Int)
+private external fun setClassWithJsPropertiesStaticX(value: Int)
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
 private external fun getMyConcreteJsTypeAbc(o: Any?): Int
@@ -487,16 +487,16 @@ private external fun getMyConcreteJsTypeAbc(o: Any?): Int
 private external fun setMyConcreteJsTypeAbc(o: Any?, value: Int)
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun getNonJsTypeAbc(o: Any?): Int
+private external fun getClassWithJsPropertiesAbc(o: Any?): Int
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun setNonJsTypeAbc(o: Any?, value: Int)
+private external fun setClassWithJsPropertiesAbc(o: Any?, value: Int)
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun getNonJsTypeStaticAbc(): Int
+private external fun getClassWithJsPropertiesStaticAbc(): Int
 
 @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun setNonJsTypeStaticAbc(value: Int)
+private external fun setClassWithJsPropertiesStaticAbc(value: Int)
 
 class KotlinProperties {
   @JsProperty

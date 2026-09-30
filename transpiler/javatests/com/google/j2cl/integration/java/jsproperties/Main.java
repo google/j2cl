@@ -18,6 +18,7 @@ package jsproperties;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
@@ -35,8 +36,8 @@ public class Main {
     testJsPropertyIsX();
     testNativeJsType();
     testNativeJsTypeWithConstructor();
-    testNonJsType();
-    testNonJsType_static();
+    testClassWithJsProperties();
+    testClassWithJsProperties_static();
     testNativeStaticJsProperty();
     testNativeInstanceJsProperty();
     testDefaultMethodJsProperty();
@@ -338,7 +339,7 @@ public class Main {
     assertEquals(0, object.getX());
   }
 
-  static class NonJsType {
+  static class ClassWithJsProperties {
     private int x;
 
     @JsProperty public int y;
@@ -372,7 +373,7 @@ public class Main {
 
     @JsProperty
     public static void setStaticX(int x) {
-      NonJsType.staticX = x;
+      ClassWithJsProperties.staticX = x;
     }
 
     @JsProperty(name = "abc")
@@ -382,7 +383,7 @@ public class Main {
 
     @JsProperty(name = "abc")
     public static void setStaticC(int x) {
-      NonJsType.staticX = x;
+      ClassWithJsProperties.staticX = x;
     }
 
     // TODO(b/556880337): Instance native member on non-native type not supported.
@@ -394,8 +395,8 @@ public class Main {
     public static native double getB();
   }
 
-  private static void testNonJsType() {
-    NonJsType object = new NonJsType();
+  private static void testClassWithJsProperties() {
+    ClassWithJsProperties object = new ClassWithJsProperties();
 
     object.setX(10);
     assertEquals(10, object.getX());
@@ -415,44 +416,44 @@ public class Main {
 
     object.setC(30);
     assertEquals(30, object.getC());
-    assertEquals(30, getNonJsTypeAbc(object));
+    assertEquals(30, getClassWithJsPropertiesAbc(object));
 
-    setNonJsTypeAbc(object, 34);
+    setClassWithJsPropertiesAbc(object, 34);
     assertEquals(34, object.getC());
-    assertEquals(34, getNonJsTypeAbc(object));
+    assertEquals(34, getClassWithJsPropertiesAbc(object));
   }
 
-  private static void testNonJsType_static() {
-    NonJsType.setStaticX(10);
-    assertEquals(10, NonJsType.getStaticX());
-    assertEquals(10, getNonJsTypeStaticX());
-    assertEquals(10, NonJsType.staticX);
+  private static void testClassWithJsProperties_static() {
+    ClassWithJsProperties.setStaticX(10);
+    assertEquals(10, ClassWithJsProperties.getStaticX());
+    assertEquals(10, getClassWithJsPropertiesStaticX());
+    assertEquals(10, ClassWithJsProperties.staticX);
 
-    setNonJsTypeStaticX(4);
-    assertEquals(4, NonJsType.getStaticX());
-    assertEquals(4, getNonJsTypeStaticX());
-    assertEquals(4, NonJsType.staticX);
+    setClassWithJsPropertiesStaticX(4);
+    assertEquals(4, ClassWithJsProperties.getStaticX());
+    assertEquals(4, getClassWithJsPropertiesStaticX());
+    assertEquals(4, ClassWithJsProperties.staticX);
 
-    NonJsType.setStaticC(20);
-    assertEquals(20, NonJsType.getStaticC());
-    assertEquals(20, getNonJsTypeStaticAbc());
-    assertEquals(20, NonJsType.staticX);
+    ClassWithJsProperties.setStaticC(20);
+    assertEquals(20, ClassWithJsProperties.getStaticC());
+    assertEquals(20, getClassWithJsPropertiesStaticAbc());
+    assertEquals(20, ClassWithJsProperties.staticX);
 
-    setNonJsTypeStaticAbc(24);
-    assertEquals(24, NonJsType.getStaticC());
-    assertEquals(24, getNonJsTypeStaticAbc());
-    assertEquals(24, NonJsType.staticX);
+    setClassWithJsPropertiesStaticAbc(24);
+    assertEquals(24, ClassWithJsProperties.getStaticC());
+    assertEquals(24, getClassWithJsPropertiesStaticAbc());
+    assertEquals(24, ClassWithJsProperties.staticX);
   }
 
   private static void testNativeStaticJsProperty() {
-    int pi = (int) NonJsType.getB();
+    int pi = (int) ClassWithJsProperties.getB();
     assertTrue(pi == 3);
   }
 
   // TODO(b/556880337): Instance native member on non-native type not supported.
   @Wasm("nop")
   private static void testNativeInstanceJsProperty() {
-    assertTrue(new NonJsType().getA() != null);
+    assertTrue(new ClassWithJsProperties().getA() != null);
   }
 
   interface InterfaceWithDefaultJsProperties {
@@ -528,10 +529,10 @@ public class Main {
   static native void setProperty(Object object, String name, int value);
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-  private static native int getNonJsTypeStaticX();
+  private static native int getClassWithJsPropertiesStaticX();
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-  private static native void setNonJsTypeStaticX(int value);
+  private static native void setClassWithJsPropertiesStaticX(int value);
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
   private static native int getMyConcreteJsTypeAbc(Object object);
@@ -540,14 +541,14 @@ public class Main {
   private static native void setMyConcreteJsTypeAbc(Object object, int value);
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-  private static native int getNonJsTypeAbc(Object object);
+  private static native int getClassWithJsPropertiesAbc(Object object);
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-  private static native void setNonJsTypeAbc(Object object, int value);
+  private static native void setClassWithJsPropertiesAbc(Object object, int value);
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-  private static native int getNonJsTypeStaticAbc();
+  private static native int getClassWithJsPropertiesStaticAbc();
 
   @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-  private static native void setNonJsTypeStaticAbc(int value);
+  private static native void setClassWithJsPropertiesStaticAbc(int value);
 }
