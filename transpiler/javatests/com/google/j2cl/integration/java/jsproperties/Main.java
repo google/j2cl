@@ -492,63 +492,63 @@ public class Main {
     assertTrue(3 == i.getValue());
   }
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native MyNativeJsType createMyNativeJsType();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native JsTypeGetProperty createJsTypeGetProperty();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native JsTypeIsProperty createJsTypeIsProperty();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native boolean isUndefined(int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getMyConcreteJsTypeStaticY();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setMyConcreteJsTypeStaticY(int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getMyConcreteJsTypeStaticX();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setMyConcreteJsTypeStaticX(int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getMyConcreteJsTypeStaticAbc();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setMyConcreteJsTypeStaticAbc(int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   static native int getProperty(Object object, String name);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   static native void setProperty(Object object, String name, int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getClassWithJsPropertiesStaticX();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setClassWithJsPropertiesStaticX(int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getMyConcreteJsTypeAbc(Object object);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setMyConcreteJsTypeAbc(Object object, int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getClassWithJsPropertiesAbc(Object object);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setClassWithJsPropertiesAbc(Object object, int value);
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native int getClassWithJsPropertiesStaticAbc();
 
-  @JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+  @JsMethod(namespace = "jsproperties.helper")
   private static native void setClassWithJsPropertiesStaticAbc(int value);
 }

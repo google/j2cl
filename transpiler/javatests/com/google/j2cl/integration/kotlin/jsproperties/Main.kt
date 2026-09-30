@@ -438,64 +438,61 @@ fun testDefaultMethodJsProperty() {
   assertTrue(3 == i.getValue())
 }
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun createMyNativeJsType(): MyNativeJsType
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun createJsTypeGetProperty(): JsTypeGetProperty
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun createJsTypeIsProperty(): JsTypeIsProperty
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun isUndefined(value: Int): Boolean
+@JsMethod(namespace = "jsproperties.helper") private external fun isUndefined(value: Int): Boolean
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun getMyConcreteJsTypeStaticY(): Int
+@JsMethod(namespace = "jsproperties.helper") private external fun getMyConcreteJsTypeStaticY(): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setMyConcreteJsTypeStaticY(value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
-private external fun getMyConcreteJsTypeStaticX(): Int
+@JsMethod(namespace = "jsproperties.helper") private external fun getMyConcreteJsTypeStaticX(): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setMyConcreteJsTypeStaticX(value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun getMyConcreteJsTypeStaticAbc(): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setMyConcreteJsTypeStaticAbc(value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 internal external fun getProperty(o: Any?, name: String): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 internal external fun setProperty(o: Any?, name: String, value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun getClassWithJsPropertiesStaticX(): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setClassWithJsPropertiesStaticX(value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun getMyConcreteJsTypeAbc(o: Any?): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setMyConcreteJsTypeAbc(o: Any?, value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun getClassWithJsPropertiesAbc(o: Any?): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setClassWithJsPropertiesAbc(o: Any?, value: Int)
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun getClassWithJsPropertiesStaticAbc(): Int
 
-@JsMethod(namespace = "jsproperties.JsPropertyTestHelper")
+@JsMethod(namespace = "jsproperties.helper")
 private external fun setClassWithJsPropertiesStaticAbc(value: Int)
 
 class KotlinProperties {

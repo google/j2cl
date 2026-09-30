@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsproperties.JsPropertyTestHelper');
+goog.module('jsproperties.helper');
 
-const ClassWithJsProperties = goog.require('jsproperties.Main.ClassWithJsProperties');
+const ClassWithJsProperties = goog.require('jsproperties.ClassWithJsProperties');
 const MyConcreteJsType = goog.require('jsproperties.MyConcreteJsType');
 const MyNativeJsType = goog.require('jsproperties.MyNativeJsType');
 
