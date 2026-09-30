@@ -174,6 +174,8 @@ public class AutoBoxing {
     double unusedDouble = takesObjectAndReturnsPrimitiveDouble(4);
     unusedDouble = sumWithoutBoxing(1, 2.2, (byte) 1, (short) 1, (float) 2.2);
     unusedDouble = sumWithoutBoxingJsVarargs(1, 2.2, (byte) 1, (short) 1, (float) 2.2);
+    // @DoNotAutobox doesn't apply to array creation elements.
+    unusedDouble = sumWithoutBoxing(new Object[] {1, 2.2, (byte) 1, (short) 1, (float) 2.2});
     takesFloatVarArgs(1.1f, (float) 'a', (float) 2.2);
 
     // auto-boxing by assignment to Object

@@ -35,6 +35,7 @@ import kotlin.Long
 import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
+import kotlin.arrayOf
 import kotlin.assert
 import kotlin.collections.Iterable
 import kotlin.jvm.JvmField
@@ -161,6 +162,9 @@ open class AutoBoxing {
    1.toByte(),
    1.toShort(),
    2.2.toFloat(),
+  )
+  unusedDouble = this.sumWithoutBoxing(
+   *arrayOf<Any?>(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat()),
   )
   this.takesFloatVarArgs(
    1.1f,
