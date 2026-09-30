@@ -28,3 +28,16 @@ inline fun inlineFunctionFromDepsCallingJava(action: (Int) -> Int): Int {
       JavaClass.NestedClass.staticMethodInNestedClass()
   )
 }
+
+private val privateTopLevelProperty = 100
+
+private fun privateTopLevelFunction() = 1000
+
+class OuterClass(private val outerValue: Int) {
+  inner class InnerClass(private val innerValue: Int) {
+    // Once inlined in another module, the body can only reach the outer `this`, the private members
+    // and the private top-level members through the synthetic accessors generated for this module.
+    internal inline fun sumWithPrivateMembers(): Int =
+      outerValue + innerValue + privateTopLevelProperty + privateTopLevelFunction()
+  }
+}

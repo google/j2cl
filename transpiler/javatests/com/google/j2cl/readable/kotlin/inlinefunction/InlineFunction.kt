@@ -317,3 +317,16 @@ fun testInlineBreakContinue() {
     }
   }
 }
+
+// Once inlined here, the bodies of these inline functions from another module can only reach the
+// outer `this`, the private members and the private top-level members of their library through
+// synthetic accessors.
+fun testInlineFunctionsRequiringSyntheticAccessors() {
+  // TODO(b/567869389): Uncomment when the outer `this` of an inner class can be accessed from
+  // an inline function inlined in another module.
+  // A().B().foo()
+  // TODO(b/567869389): Uncomment when a private top-level property can be accessed from an
+  // inline function inlined in another module.
+  // internalInlineFunctionUsingPrivateTopLevelMembers()
+  ClassWithPrivateMembers().internalInlineFunctionUsingPrivateMembers()
+}

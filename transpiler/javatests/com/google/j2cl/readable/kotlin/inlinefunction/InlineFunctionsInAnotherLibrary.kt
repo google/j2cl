@@ -71,3 +71,32 @@ class HolderInAnotherLibrary(val i: Int) {
 
 inline fun callTopLevelInlineFunctionOnlyReferencedButDeclaredInAnotherFile() =
   topLevelInlineFunctionOnlyReferencedInAnotherFile()
+
+class A {
+  val x: Int = 0
+
+  inner class B {
+    // capture A.this
+    inline fun foo() = x
+  }
+}
+
+private val privateTopLevelProperty: Int = 1
+
+private fun privateTopLevelFunction() = 2
+
+// Leaks the private top-level members above to the friend modules of this library through
+// synthetic accessors.
+internal inline fun internalInlineFunctionUsingPrivateTopLevelMembers() =
+  privateTopLevelProperty + privateTopLevelFunction()
+
+class ClassWithPrivateMembers {
+  private val privateProperty: Int = 3
+
+  private fun privateFunction() = 4
+
+  // Leaks the private members above to the friend modules of this library through synthetic
+  // accessors.
+  internal inline fun internalInlineFunctionUsingPrivateMembers() =
+    privateProperty + privateFunction()
+}

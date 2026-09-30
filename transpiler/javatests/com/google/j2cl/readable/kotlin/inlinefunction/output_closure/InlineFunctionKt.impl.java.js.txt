@@ -8,6 +8,7 @@ let Companion = goog.forwardDeclare('inlinefunction.ClassWithCompanion.Companion
 let ClassWithCompanionKt = goog.forwardDeclare('inlinefunction.ClassWithCompanionKt$impl');
 let ClassWithInlineFun = goog.forwardDeclare('inlinefunction.ClassWithInlineFun$impl');
 let $1 = goog.forwardDeclare('inlinefunction.ClassWithInlineFun.$1$impl');
+let ClassWithPrivateMembers = goog.forwardDeclare('inlinefunction.ClassWithPrivateMembers$impl');
 let Container = goog.forwardDeclare('inlinefunction.Container$impl');
 let ExternalClassWithInlineFun = goog.forwardDeclare('inlinefunction.ExternalClassWithInlineFun$impl');
 let ExternalInlineFunctionKt = goog.forwardDeclare('inlinefunction.ExternalInlineFunctionKt$impl');
@@ -564,6 +565,13 @@ class InlineFunctionKt extends j_l_Object {
   }
  }
  /** @nodts */
+ static m_testInlineFunctionsRequiringSyntheticAccessors__void() {
+  InlineFunctionKt.$clinit();
+  let tmp0__this_ = ClassWithPrivateMembers.$create__();
+  let this_1 = tmp0__this_;
+  this_1.f_privateProperty__inlinefunction_ClassWithPrivateMembers_ + this_1.m_privateFunction__int_$p_inlinefunction_ClassWithPrivateMembers() | 0;
+ }
+ /** @nodts */
  static $clinit() {
   InlineFunctionKt.$clinit = () =>{};
   InlineFunctionKt.$loadModules();
@@ -581,6 +589,7 @@ class InlineFunctionKt extends j_l_Object {
   ClassWithCompanionKt = goog.module.get('inlinefunction.ClassWithCompanionKt$impl');
   ClassWithInlineFun = goog.module.get('inlinefunction.ClassWithInlineFun$impl');
   $1 = goog.module.get('inlinefunction.ClassWithInlineFun.$1$impl');
+  ClassWithPrivateMembers = goog.module.get('inlinefunction.ClassWithPrivateMembers$impl');
   ExternalClassWithInlineFun = goog.module.get('inlinefunction.ExternalClassWithInlineFun$impl');
   ExternalInlineFunctionKt = goog.module.get('inlinefunction.ExternalInlineFunctionKt$impl');
   HolderInAnotherLibrary = goog.module.get('inlinefunction.HolderInAnotherLibrary$impl');
