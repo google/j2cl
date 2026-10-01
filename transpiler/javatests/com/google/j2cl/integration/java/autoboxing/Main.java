@@ -45,6 +45,7 @@ public class Main {
   public static void main(String... args) {
     testBox_byParameter();
     testBox_numberAsDouble();
+    testBox_doNotAutoboxExplicitArray();
     testBox_byAssignment();
     testBox_byCompoundAssignment();
     testUnbox_byParameter();
@@ -108,6 +109,33 @@ public class Main {
 
   private static double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
     return (Double) o;
+  }
+
+  private static void testBox_doNotAutoboxExplicitArray() {
+    // Passing the varargs as an explicit array is normally equivalent to passing them as separate
+    // arguments, i.e. `returnsVarargs(1, (byte) 1, (short) 1, 1f, 'a')`. That is not the case with
+    // @DoNotAutobox, which only applies to the implicit varargs arguments; the elements of an
+    // explicit array are boxed as usual.
+    assertBoxedAsUsual(returnsVarargs(new Object[] {1, (byte) 1, (short) 1, 1f, 'a'}));
+    assertBoxedAsUsual(returnsJsVarargs(new Object[] {1, (byte) 1, (short) 1, 1f, 'a'}));
+  }
+
+  private static void assertBoxedAsUsual(Object[] objects) {
+    assertTrue(objects[0] instanceof Integer);
+    assertTrue(objects[1] instanceof Byte);
+    assertTrue(objects[2] instanceof Short);
+    assertTrue(objects[3] instanceof Float);
+    assertTrue(objects[4] instanceof Character);
+  }
+
+  private static Object[] returnsVarargs(@DoNotAutobox Object... objects) {
+    return objects;
+  }
+
+  // JsMethods have different varargs semantics.
+  @JsMethod
+  private static Object[] returnsJsVarargs(@DoNotAutobox Object... objects) {
+    return objects;
   }
 
   private static double sumWithoutBoxing(@DoNotAutobox Object... numbers) {

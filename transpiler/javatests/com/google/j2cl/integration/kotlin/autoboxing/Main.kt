@@ -29,6 +29,7 @@ import jsinterop.annotations.JsMethod
 fun main(vararg unused: String) {
   testBox_byParameter()
   testBox_numberAsDouble()
+  testBox_doNotAutoboxExplicitArray()
   testBox_byAssignment()
   testBox_byCompoundAssignment()
   testUnbox_byParameter()
@@ -93,6 +94,33 @@ private fun testBox_numberAsDouble() {
 
 private fun takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox o: Any?): Double {
   return o as Double
+}
+
+private fun testBox_doNotAutoboxExplicitArray() {
+  // Passing the varargs as an explicit array is normally equivalent to passing them as separate
+  // arguments, i.e. `returnsVarargs(1, 1.toByte(), 1.toShort(), 1f, 'a')`. That is not the case
+  // with @DoNotAutobox, which only applies to the implicit varargs arguments; the elements of an
+  // explicit array are boxed as usual.
+  assertBoxedAsUsual(returnsVarargs(*arrayOf<Any?>(1, 1.toByte(), 1.toShort(), 1f, 'a')))
+  assertBoxedAsUsual(returnsJsVarargs(*arrayOf<Any?>(1, 1.toByte(), 1.toShort(), 1f, 'a')))
+}
+
+private fun assertBoxedAsUsual(objects: Array<out Any?>) {
+  assertTrue(objects[0] is Int)
+  assertTrue(objects[1] is Byte)
+  assertTrue(objects[2] is Short)
+  assertTrue(objects[3] is Float)
+  assertTrue(objects[4] is Char)
+}
+
+private fun returnsVarargs(@DoNotAutobox vararg objects: Any?): Array<out Any?> {
+  return objects
+}
+
+// JsMethods have different varargs semantics.
+@JsMethod
+private fun returnsJsVarargs(@DoNotAutobox vararg objects: Any?): Array<out Any?> {
+  return objects
 }
 
 private fun sumWithoutBoxing(@DoNotAutobox vararg numbers: Any?): Double {
