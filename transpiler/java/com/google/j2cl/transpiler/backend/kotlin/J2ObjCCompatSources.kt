@@ -380,7 +380,7 @@ internal class J2ObjCCompatSources(
   }
 
   private fun shouldInclude(convention: Convention, methodDescriptor: MethodDescriptor): Boolean =
-    !methodDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
+    !methodDescriptor.isAnnotatedToHideFromObjC &&
       methodDescriptor.visibility.isPublic &&
       when {
         // Enum valueOf(String) methods are not supported.
@@ -460,7 +460,7 @@ internal class J2ObjCCompatSources(
       methodDescriptor.objectiveCKmpMethodSelector != null
 
   private fun shouldInclude(fieldDescriptor: FieldDescriptor): Boolean =
-    !fieldDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") &&
+    !fieldDescriptor.isAnnotatedToHideFromObjC &&
       fieldDescriptor.visibility.isPublic &&
       (fieldDescriptor.isStatic || fieldDescriptor.enclosingTypeDescriptor.isInterface) &&
       shouldInclude(Convention.J2OBJC, fieldDescriptor.typeDescriptor)
@@ -481,7 +481,7 @@ internal class J2ObjCCompatSources(
     shouldIncludeDescriptor(convention, typeDeclaration) &&
       !typeDeclaration.isProtobuf &&
       !typeDeclaration.isAnnotation &&
-      !typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC")
+      !typeDeclaration.isAnnotatedToHideFromObjC
 
   private fun shouldIncludeDescriptor(
     convention: Convention,

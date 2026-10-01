@@ -18,6 +18,13 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.HasAnnotations
 
+private val annotationsToHideFromObjC =
+  setOf(
+    "com.google.j2kt.annotations.HiddenFromObjC",
+    // TODO(b/527953195): Remove when Dagger KSP is available.
+    "dagger.internal.DaggerGenerated",
+  )
+
 internal val HasAnnotations.hasInjectAnnotation: Boolean
   get() = hasAnnotation("dagger.Inject") || hasAnnotation("javax.inject.Inject")
 
@@ -32,3 +39,9 @@ internal val HasAnnotations.isVisibilityWarningSuppressed: Boolean
 
 internal val HasAnnotations.objectiveCKmpMethodAnnotation: Annotation?
   get() = getAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")
+
+internal val HasAnnotations.isAnnotatedToHideFromObjC: Boolean
+  get() = annotations.any {
+    it.typeDescriptor.qualifiedSourceName in annotationsToHideFromObjC ||
+      it.typeDescriptor.typeDeclaration.hasAnnotation("com.google.j2kt.annotations.HidesFromObjC")
+  }

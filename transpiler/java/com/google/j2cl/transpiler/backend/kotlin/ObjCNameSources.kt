@@ -91,7 +91,7 @@ internal class ObjCNameSources(val nameSources: NameSources) {
   fun hiddenFromObjCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      typeDeclaration.isHiddenFromObjC() -> hiddenFromObjCAnnotationSource()
+      typeDeclaration.isAnnotatedToHideFromObjC -> hiddenFromObjCAnnotationSource()
       else -> Source.EMPTY
     }
 
@@ -120,14 +120,14 @@ internal class ObjCNameSources(val nameSources: NameSources) {
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
       methodDescriptor.isConstructor -> Source.EMPTY
-      isHiddenFromObjC(methodDescriptor) -> hiddenFromObjCAnnotationSource(methodDescriptor)
+      methodDescriptor.isAnnotatedToHideFromObjC -> hiddenFromObjCAnnotationSource(methodDescriptor)
       else -> Source.EMPTY
     }
 
   fun objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
     when {
       !isJ2ObjCInteropEnabled -> Source.EMPTY
-      isHiddenFromObjC(fieldDescriptor) -> hiddenFromObjCAnnotationSource(fieldDescriptor)
+      fieldDescriptor.isAnnotatedToHideFromObjC -> hiddenFromObjCAnnotationSource(fieldDescriptor)
       fieldDescriptor.isEnumConstant -> {
         val name = fieldDescriptor.name!!
         val swiftName = name.lowerCamelCased
@@ -184,23 +184,8 @@ internal class ObjCNameSources(val nameSources: NameSources) {
         environment.ktVisibility(fieldDescriptor).needsObjCNameAnnotation
     }
 
-  private fun TypeDeclaration.isHiddenFromObjC(): Boolean =
-    hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC") ||
-      annotations.any {
-        it.typeDescriptor.qualifiedSourceName == "com.google.j2kt.annotations.HidesFromObjC"
-      }
-
-  private fun isHiddenFromObjC(methodDescriptor: MethodDescriptor): Boolean =
-    hasHiddenFromObjCAnnotation(methodDescriptor)
-
-  private fun isHiddenFromObjC(fieldDescriptor: FieldDescriptor): Boolean =
-    hasHiddenFromObjCAnnotation(fieldDescriptor)
-
   companion object {
     private fun parameterSource(name: String, valueSource: Source): Source =
       assignment(source(name), valueSource)
-
-    private fun hasHiddenFromObjCAnnotation(memberDescriptor: MemberDescriptor): Boolean =
-      memberDescriptor.hasAnnotation("com.google.j2kt.annotations.HiddenFromObjC")
   }
 }
