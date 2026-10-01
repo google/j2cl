@@ -3,6 +3,9 @@ goog.module('inlinefunction.InlineFunctionKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
+let ChildInAnotherLibrary = goog.forwardDeclare('inlinefunction.ChildInAnotherLibrary$impl');
+let ChildOfJavaClass = goog.forwardDeclare('inlinefunction.ChildOfJavaClass$impl');
 let ClassWithCompanion = goog.forwardDeclare('inlinefunction.ClassWithCompanion$impl');
 let Companion = goog.forwardDeclare('inlinefunction.ClassWithCompanion.Companion$impl');
 let ClassWithCompanionKt = goog.forwardDeclare('inlinefunction.ClassWithCompanionKt$impl');
@@ -32,6 +35,9 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let StringBuilder = goog.forwardDeclare('java.lang.StringBuilder$impl');
+let System = goog.forwardDeclare('java.lang.System$impl');
+let Date = goog.forwardDeclare('java.util.Date$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
 let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
@@ -572,6 +578,24 @@ class InlineFunctionKt extends j_l_Object {
   this_1.f_privateProperty__inlinefunction_ClassWithPrivateMembers_ + this_1.m_privateFunction__int_$p_inlinefunction_ClassWithPrivateMembers() | 0;
  }
  /** @nodts */
+ static m_testInlineFunctionUsingJavaMembers__void() {
+  InlineFunctionKt.$clinit();
+  let builder = StringBuilder.$create__().m_append__java_lang_String__java_lang_StringBuilder('x').m_append__int__java_lang_StringBuilder(42);
+  System.f_out__java_lang_System.m_println__java_lang_Object__void(builder);
+  j_l_String.m_valueOf__java_lang_Object__java_lang_String(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(Integer.m_toHexString__int__java_lang_String(42))) + Date.$create__long(Long.fromInt(0)).m_getTime__long();
+ }
+ /** @nodts */
+ static m_testInlineFunctionsUsingMembersInheritedWithoutOverride__void() {
+  InlineFunctionKt.$clinit();
+  let tmp0_child = ChildInAnotherLibrary.$create__();
+  let child = tmp0_child;
+  child.m_setParentProperty__int__void(7);
+  child.m_getParentProperty__int() + child.m_parentFunction__int() | 0;
+  let tmp0_child_1 = ChildOfJavaClass.$create__();
+  let child_1 = tmp0_child_1;
+  child_1.m_nextInt__int();
+ }
+ /** @nodts */
  static $clinit() {
   InlineFunctionKt.$clinit = () =>{};
   InlineFunctionKt.$loadModules();
@@ -584,6 +608,9 @@ class InlineFunctionKt extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Long = goog.module.get('goog.math.Long');
+  ChildInAnotherLibrary = goog.module.get('inlinefunction.ChildInAnotherLibrary$impl');
+  ChildOfJavaClass = goog.module.get('inlinefunction.ChildOfJavaClass$impl');
   ClassWithCompanion = goog.module.get('inlinefunction.ClassWithCompanion$impl');
   Companion = goog.module.get('inlinefunction.ClassWithCompanion.Companion$impl');
   ClassWithCompanionKt = goog.module.get('inlinefunction.ClassWithCompanionKt$impl');
@@ -605,6 +632,9 @@ class InlineFunctionKt extends j_l_Object {
   Error = goog.module.get('java.lang.Error$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  StringBuilder = goog.module.get('java.lang.StringBuilder$impl');
+  System = goog.module.get('java.lang.System$impl');
+  Date = goog.module.get('java.util.Date$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Ref = goog.module.get('javaemul.internal.Ref$impl');
   $int = goog.module.get('javaemul.internal.primitives.$int$impl');

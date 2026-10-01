@@ -330,3 +330,12 @@ fun testInlineFunctionsRequiringSyntheticAccessors() {
   // internalInlineFunctionUsingPrivateTopLevelMembers()
   ClassWithPrivateMembers().internalInlineFunctionUsingPrivateMembers()
 }
+
+fun testInlineFunctionUsingJavaMembers() {
+  inlineFunctionUsingJavaMembers(42)
+}
+
+fun testInlineFunctionsUsingMembersInheritedWithoutOverride() {
+  inlineFunctionUsingMembersInheritedByChild(ChildInAnotherLibrary())
+  inlineFunctionUsingJavaMethodInheritedByChild(ChildOfJavaClass())
+}

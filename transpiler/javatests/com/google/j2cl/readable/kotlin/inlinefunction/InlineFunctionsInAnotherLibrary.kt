@@ -100,3 +100,33 @@ class ClassWithPrivateMembers {
   internal inline fun internalInlineFunctionUsingPrivateMembers() =
     privateProperty + privateFunction()
 }
+
+inline fun inlineFunctionUsingJavaMembers(i: Int): String {
+  // Constructor and overloaded instance methods.
+  val builder = java.lang.StringBuilder().append("x").append(i)
+  // Static field.
+  java.lang.System.out.println(builder)
+  // Static method and Java getter used as a property.
+  return java.lang.Integer.toHexString(i) + java.util.Date(0L).time
+}
+
+open class ParentInAnotherLibrary {
+  var parentProperty: Int = 5
+
+  fun parentFunction() = 6
+}
+
+class ChildInAnotherLibrary : ParentInAnotherLibrary()
+
+// Calls the members of the parent class through an instance of the child class, which inherits
+// them without overriding them.
+inline fun inlineFunctionUsingMembersInheritedByChild(child: ChildInAnotherLibrary): Int {
+  child.parentProperty = 7
+  return child.parentProperty + child.parentFunction()
+}
+
+class ChildOfJavaClass : java.util.Random()
+
+// Calls a method of a Java class through an instance of a Kotlin child class, which inherits it
+// without overriding it.
+inline fun inlineFunctionUsingJavaMethodInheritedByChild(child: ChildOfJavaClass) = child.nextInt()
