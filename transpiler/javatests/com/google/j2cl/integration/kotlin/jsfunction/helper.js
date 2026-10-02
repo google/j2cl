@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsfunction.JsFunctionTestHelper');
+goog.module('jsfunction.helper');
 
 const Long = goog.require('goog.math.Long');
 

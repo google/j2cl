@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('nativejstypes.JsTypeTestHelper');
-
+goog.module('jsinteropinstanceof.helper');
 
 /**
  * @return {*}
@@ -21,4 +20,12 @@ goog.module('nativejstypes.JsTypeTestHelper');
  */
 exports.createNativeButton = function() {
   return document.createElement('button');
+};
+
+/**
+ * @return {*}
+ * @public
+ */
+exports.createObject = function() {
+  return {};
 };

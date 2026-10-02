@@ -12,13 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('subnativejstype.JsTypeTestHelper');
-
+goog.module('jsmethod.helper');
 
 /**
+ * @param {?} obj
+ * @param {?} param
  * @return {*}
  */
-exports.nativeObjectImplementingM = function() {
-  return {m: function() { return 3; }};
+exports.callFoo = function(obj, param) {
+  return obj.foo(param);
 };
 
+/**
+ * @param {?} obj
+ * @param {?} param
+ * @return {*}
+ */
+exports.callBar = function(obj, param) {
+  return obj.bar(param);
+};

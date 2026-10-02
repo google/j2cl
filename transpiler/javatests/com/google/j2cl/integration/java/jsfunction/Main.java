@@ -535,7 +535,7 @@ public class Main {
     }
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native Object createFunctionSingleImpl();
 
   // Tests that a JsFunction interface with a single transpiled implementer don't get tightened so
@@ -564,7 +564,7 @@ public class Main {
     Object m();
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   private static native JsFunctionInterface createFunctionThatReturnsThis();
 
   private static void testJsFunctionProperty() {
@@ -685,11 +685,11 @@ public class Main {
     NativeRegExp f(NativeRegExp regExp);
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native NativeRegExp callAsFunctionWithNativeType(
       JsFunctionWithNativeType fn, NativeRegExp arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "createFunction")
   public static native JsFunctionWithNativeType createJsFunctionWithNativeType();
 
   private static void testJsFunctionWithNativeType() {
@@ -884,69 +884,69 @@ public class Main {
     String getTagName();
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native Object callAsFunctionNoArgument(Object fn);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native int callAsFunction(Object fn, int arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
   public static native int callMyJsFunction(MyJsFunctionInterface fn, int arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
   public static native String callAsFunctionWithString(Object fn, String arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
   public static native Object callWithObject(JsFunctionWithObject fn, Object arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
   public static native <T> T callParameterizedFunction(ParameterizedInterface<T> fn, T arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
   public static native long callWithLong(JsFunctionWithLong fn, long arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native boolean testDirectJsFunctionLongFromJs(JsFunctionWithLong fn);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native MyJsFunctionInterface passThrough(MyJsFunctionInterface fn);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "passThrough")
+  @JsMethod(namespace = "jsfunction.helper", name = "passThrough")
   public static native Object passThroughAsObject(Object fn);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "passThrough")
+  @JsMethod(namespace = "jsfunction.helper", name = "passThrough")
   public static native MyOtherJsFunctionInterface crossCastFromJs(MyJsFunctionInterface fn);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native boolean isSameInJs(MyJsFunctionInterface fn1, MyJsFunctionInterface fn2);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native MyJsFunctionInterface getNullFunction();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native MyJsFunctionInterface getUndefinedFunction();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+  @JsMethod(namespace = "jsfunction.helper", name = "createFunction")
   public static native JsFunctionWithObject createObjectIdentityFunction();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native int callWithFunctionApply(Object fn, int arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native int callWithFunctionCall(Object fn, int arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native MyJsFunctionInterface createMyJsFunction();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native MyJsFunctionIdentityInterface createReferentialFunction();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native Object createFunction();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native Object createObject();
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native boolean hasField(Object object, String fieldName);
 }

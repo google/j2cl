@@ -12,22 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsmethod.JsMethodTestHelper');
+goog.module('nativejstypes.helper');
 
 /**
- * @param {?} obj
- * @param {?} param
  * @return {*}
+ * @public
  */
-exports.callFoo = function(obj, param) {
-  return obj.foo(param);
-};
-
-/**
- * @param {?} obj
- * @param {?} param
- * @return {*}
- */
-exports.callBar = function(obj, param) {
-  return obj.bar(param);
+exports.createNativeButton = function() {
+  return document.createElement('button');
 };

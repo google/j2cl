@@ -44,11 +44,9 @@ private fun testJsMethodWithDifferentVisiblities() {
   assertEquals("bar", callBar(instance, null))
 }
 
-@JsMethod(namespace = "jsmethod.JsMethodTestHelper")
-public external fun callFoo(obj: Any?, param: Any?): Any?
+@JsMethod(namespace = "jsmethod.helper") public external fun callFoo(obj: Any?, param: Any?): Any?
 
-@JsMethod(namespace = "jsmethod.JsMethodTestHelper")
-public external fun callBar(obj: Any?, param: Any?): Any?
+@JsMethod(namespace = "jsmethod.helper") public external fun callBar(obj: Any?, param: Any?): Any?
 
 internal open class ClassWithJsMethod {
   @JsMethod(name = "name") open fun className(): String = ClassWithJsMethod::class.java.name

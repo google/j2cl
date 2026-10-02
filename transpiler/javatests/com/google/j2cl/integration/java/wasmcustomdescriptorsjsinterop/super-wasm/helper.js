@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-goog.module('nativehelper');
+goog.module('wasmcustomdescriptorsjsinterop.helper');
 
 const AbstractJsType = goog.require('wasmcustomdescriptorsjsinterop.AbstractJsType');
 const BaseJsType = goog.require('wasmcustomdescriptorsjsinterop.BaseJsType');

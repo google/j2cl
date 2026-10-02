@@ -425,7 +425,6 @@ private fun testCast_inJava() {
   assertNotNull(c5)
   assertThrowsClassCastException {
     val unused = o as HTMLElementConcreteNativeJsType
-
   }
 }
 
@@ -495,8 +494,7 @@ internal class JsFunctionInterfaceSingleImpl : JsFunctionInterfaceWithSingleImpl
   override fun m(): Int = 5
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-private external fun createFunctionSingleImpl(): Any?
+@JsMethod(namespace = "jsfunction.helper") private external fun createFunctionSingleImpl(): Any?
 
 // Tests that a JsFunction interface with a single transpiled implementer don't get tightened so
 // that JS implementers still work.
@@ -521,7 +519,7 @@ fun interface JsFunctionInterface {
   fun m(): Any?
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun createFunctionThatReturnsThis(): JsFunctionInterface
 
 private fun testJsFunctionProperty() {
@@ -758,13 +756,13 @@ private fun interface JsFunctionWithNativeType {
   fun f(regExp: NativeRegExp): NativeRegExp
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun callAsFunctionWithNativeType(
   fn: JsFunctionWithNativeType,
   arg: NativeRegExp,
 ): NativeRegExp
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "createFunction")
 private external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType
 
 private fun testJsFunctionWithNativeType() {
@@ -792,66 +790,66 @@ private fun assertJsTypeDoesntHaveFields(obj: Any?, vararg fields: String) {
   }
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun callAsFunctionNoArgument(fn: Any?): Any?
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun callAsFunction(fn: Any?, arg: Int): Int
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
 private external fun callMyJsFunction(fn: MyJsFunctionInterface, arg: Int): Int
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
 private external fun callAsFunctionWithString(fn: Any?, arg: String): String
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
 private external fun callWithObject(fn: JsFunctionWithObject, arg: Any?): Any?
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
 private external fun <T> callParameterizedFunction(fn: ParameterizedInterface<T>, arg: T): T
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "callAsFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "callAsFunction")
 private external fun callWithLong(fn: JsFunctionWithLong, arg: Long): Long
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun testDirectJsFunctionLongFromJs(fn: JsFunctionWithLong): Boolean
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun passThrough(fn: MyJsFunctionInterface): MyJsFunctionInterface
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "passThrough")
+@JsMethod(namespace = "jsfunction.helper", name = "passThrough")
 private external fun passThroughAsObject(fn: Any?): Any?
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "passThrough")
+@JsMethod(namespace = "jsfunction.helper", name = "passThrough")
 private external fun crossCastFromJs(fn: MyJsFunctionInterface): MyOtherJsFunctionInterface
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun isSameInJs(fn1: MyJsFunctionInterface, fn2: MyJsFunctionInterface): Boolean
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun getNullFunction(): MyJsFunctionInterface?
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun getUndefinedFunction(): MyJsFunctionInterface?
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createFunction")
+@JsMethod(namespace = "jsfunction.helper", name = "createFunction")
 private external fun createObjectIdentityFunction(): JsFunctionWithObject
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun callWithFunctionApply(fn: Any?, arg: Int): Int
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun callWithFunctionCall(fn: Any?, arg: Int): Int
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun createMyJsFunction(): MyJsFunctionInterface
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun createReferentialFunction(): MyJsFunctionIdentityInterface
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper") private external fun createFunction(): Any
+@JsMethod(namespace = "jsfunction.helper") private external fun createFunction(): Any
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper") private external fun createObject(): Any
+@JsMethod(namespace = "jsfunction.helper") private external fun createObject(): Any
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 private external fun hasField(o: Any?, fieldName: String): Boolean

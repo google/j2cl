@@ -444,7 +444,6 @@ public final class Main {
     assertTrue(jsFunctionWithJsType.foo(someJsType2) == someJsType2);
   }
 
-
   @JsFunction
   interface MyJsFunctionWithObject {
     Object foo(Object o);
@@ -455,17 +454,17 @@ public final class Main {
     SomeJsType foo(SomeJsType s);
   }
 
-  @JsMethod(namespace = "nativehelper", name = "getFunctionWithObject")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper", name = "getFunctionWithObject")
   private static native MyJsFunctionWithObject getFunctionWithObjectFromJs();
 
-  @JsMethod(namespace = "nativehelper", name = "callFunctionWithObject")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper", name = "callFunctionWithObject")
   private static native Object callFunctionWithObjectInJs(
       MyJsFunctionWithObject function, Object a);
 
-  @JsMethod(namespace = "nativehelper", name = "getFunctionWithJsType")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper", name = "getFunctionWithJsType")
   private static native MyJsFunctionWithJsType getFunctionWithJsTypeFromJs();
 
-  @JsMethod(namespace = "nativehelper", name = "callFunctionWithJsType")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper", name = "callFunctionWithJsType")
   private static native SomeJsType callFunctionWithJsTypeInJs(
       MyJsFunctionWithJsType function, SomeJsType a);
 
@@ -496,149 +495,149 @@ public final class Main {
     return fn == null;
   }
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native BaseJsType newBaseJsType();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SomeJsType newSomeJsType(int value);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callGetNumber(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callGetNumberViaStaticMethod(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native String callGetString(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native Long callGetLong(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native long callGetPrimitiveLong(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native long callAddPrimitiveLong(SomeJsType someJsType, long a, long b);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native NativeJsType callGetNativeJsType(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getField(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native void setField(SomeJsType someJsType, int value);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native long getLongField(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native void setLongField(SomeJsType someJsType, long value);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getStaticField();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native void setStaticField(int value);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getReadOnlyField(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getStaticReadOnlyField();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getStaticFieldSameJsNameAsInstanceField();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getReadOnlyProperty(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getStaticReadOnlyProperty();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getStaticPropertySameJsNameAsInstanceProperty();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int getReadWriteProperty(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native void setReadWriteProperty(SomeJsType someJsType, int value);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native String callPackagePrivateMethod(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SomeJsType callReturnSelf(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native boolean callTakesSelf(SomeJsType someJsType, SomeJsType arg);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native <T> int callMethodWithTypeParameters(
       SomeJsType someJsType, T o, String s, Double i);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SomeJsType.CapturesOuter newCapturesOuter(SomeJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SomeJsType callGetOuter(SomeJsType.CapturesOuter capturesOuter);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callAbstractMethod(AbstractJsType someJsType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceMethod(JsInterface jsInterface);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceGetNumber(JsInterfaceGetNumber jsInterface);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceRenamedMethod(JsInterfaceRenamedMethod jsInterface);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceDefaultMethod(JsInterfaceDefaultMethod jsInterface);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceStaticMethod();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceStaticProperty();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native void setInterfaceStaticProperty(int value);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callInterfaceStaticField();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callAccidentalMethod(JsInterfaceAccidentalImpl impl);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callAccidentalDefaultMethod(JsInterfaceAccidentalDefaultMethodImpl impl);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SomeJsType createJsSubtype();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callEntryPointAdd(int a, int b);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callEntryPointWithJsType();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callJsMethodEntryPointWithJsType();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native boolean callEntryPointWithNullJsFunction();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native boolean callEntryPointWithUndefinedJsFunction();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native long callEntryPointAddLong(long a, long b);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native boolean testDirectEntryPointAddLongFromJs();
 
   @JsType(isNative = true, namespace = "nativehelper")
@@ -674,24 +673,24 @@ public final class Main {
     }
   }
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native long callMethodWithNativeAndLong(
       SomeJsType someJsType, MyNativeType nativeType, Long boxedLong);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native NativeJsTypeConsumer newNativeJsTypeConsumer();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callConsumerGetValue(NativeJsTypeConsumer consumer, MyNativeType nativeType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callConsumerAdd(
       NativeJsTypeConsumer consumer, MyNativeType nativeType, int delta);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native int callConsumerGetField(NativeJsTypeConsumer consumer, MyNativeType nativeType);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native long callConsumerCombineWithLong(
       NativeJsTypeConsumer consumer, MyNativeType nativeType, Long boxedLong);
 
@@ -789,39 +788,39 @@ public final class Main {
     assertEquals("unknown", switchOnStringValuedJsEnum(null));
   }
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SimpleJsEnum getSimpleJsEnumOne();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SimpleJsEnum getSimpleJsEnumTwo();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SimpleJsEnum getSimpleJsEnumThree();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native boolean checkJsEnumEquality();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native SimpleJsEnum passThroughJsEnum(SimpleJsEnum e);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native StringValuedJsEnum getStringValuedJsEnumFoo();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native StringValuedJsEnum getStringValuedJsEnumBar();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native IntValuedJsEnum getIntValuedJsEnumMinusTen();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native IntValuedJsEnum getIntValuedJsEnumTen();
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native String switchOnSimpleJsEnum(SimpleJsEnum e);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native String switchOnIntValuedJsEnum(IntValuedJsEnum e);
 
-  @JsMethod(namespace = "nativehelper")
+  @JsMethod(namespace = "wasmcustomdescriptorsjsinterop.helper")
   static native String switchOnStringValuedJsEnum(StringValuedJsEnum e);
 }

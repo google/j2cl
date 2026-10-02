@@ -282,40 +282,40 @@ public final class Main {
   @JsMethod(namespace = "test.Foo", name = "create")
   static native FooInterface createFooInterface();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native String appendInJs(String a, String b);
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Double sumDoublesInJs(Double a, Double b);
 
-  @JsMethod(namespace = "test.utils", name = "identityInJs")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "identityInJs")
   private static native Object roundTripAsJavaLangObject(Object o);
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Boolean andBooleansInJs(Boolean a, Boolean b);
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Long sumLongsInJs(Long a, Long b);
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsNull();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsUndefined();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsTrue();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsOnePointFive();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsHello();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsFoo();
 
-  @JsMethod(namespace = "test.utils")
+  @JsMethod(namespace = "wasmjsinterop.helper")
   private static native Object getJsFooArray();
 
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
@@ -324,24 +324,24 @@ public final class Main {
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
   interface OtherNativeJsObject {}
 
-  @JsMethod(namespace = "test.utils", name = "getJsNull")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsNull")
   private static native NativeJsObject getJsNullAsNative();
 
-  @JsMethod(namespace = "test.utils", name = "getJsUndefined")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsUndefined")
   private static native NativeJsObject getJsUndefinedAsNative();
 
-  @JsMethod(namespace = "test.utils", name = "getJsTrue")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsTrue")
   private static native NativeJsObject getJsTrueAsNative();
 
-  @JsMethod(namespace = "test.utils", name = "getJsOnePointFive")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsOnePointFive")
   private static native NativeJsObject getJsOnePointFiveAsNative();
 
-  @JsMethod(namespace = "test.utils", name = "getJsHello")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsHello")
   private static native NativeJsObject getJsHelloAsNative();
 
-  @JsMethod(namespace = "test.utils", name = "getJsFoo")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsFoo")
   private static native NativeJsObject getJsFooAsNative();
 
-  @JsMethod(namespace = "test.utils", name = "getJsFooArray")
+  @JsMethod(namespace = "wasmjsinterop.helper", name = "getJsFooArray")
   private static native NativeJsObject getJsFooArrayAsNative();
 }

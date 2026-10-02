@@ -64,7 +64,7 @@ public class Main {
     }
   }
 
-  @JsMethod(namespace = "subnativejstype.JsTypeTestHelper")
+  @JsMethod(namespace = "subnativejstype.helper")
   private static native Object nativeObjectImplementingM();
 
   private static final int SET_PARENT_X = 500;
@@ -317,9 +317,9 @@ public class Main {
       extends JsPropertyRemovedAccidentalOverridePropertyBase
       implements JsPropertyAccidentalOverridePropertyJsTypeInterface {}
 
-  @JsMethod(namespace = "subnativejstype.JsPropertyTestHelper")
+  @JsMethod(namespace = "subnativejstype.helper")
   private static native int getProperty(Object object, String name);
 
-  @JsMethod(namespace = "subnativejstype.JsPropertyTestHelper")
+  @JsMethod(namespace = "subnativejstype.helper")
   private static native void setProperty(Object object, String name, int value);
 }

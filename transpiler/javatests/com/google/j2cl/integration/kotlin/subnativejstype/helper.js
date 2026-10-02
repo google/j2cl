@@ -12,21 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteropinstanceof.JsTypeTestHelper');
-
+goog.module('subnativejstype.helper');
 
 /**
  * @return {*}
- * @public
  */
-exports.createNativeButton = function() {
-  return document.createElement('button');
+exports.nativeObjectImplementingM = function() {
+  return {m: function() { return 3; }};
 };
 
 /**
- * @return {*}
+ * @param {?} object
+ * @param {string} name
+ * @return {number}
  * @public
  */
-exports.createObject = function() {
-  return {};
+exports.getProperty = function(object, name) {
+  return object[name];
+};
+
+/**
+ * @param {?} object
+ * @param {string} name
+ * @param {?} value
+ * @public
+ */
+exports.setProperty = function(object, name, value) {
+  object[name] = value;
 };

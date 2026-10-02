@@ -106,7 +106,7 @@ public class Main {
     return new Foo();
   }
 
-  @JsMethod(namespace = "nativejstypes.JsTypeTestHelper")
+  @JsMethod(namespace = "nativejstypes.helper")
   public static native Object createNativeButton();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-goog.module('test.utils');
+goog.module('wasmjsinterop.helper');
 
 const Foo = goog.require('test.Foo');
 const Long = goog.require('goog.math.Long');

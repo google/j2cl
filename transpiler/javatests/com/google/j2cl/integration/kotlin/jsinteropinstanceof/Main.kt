@@ -100,8 +100,7 @@ internal class ElementLikeNativeInterfaceImpl : ElementLikeNativeInterface {
 @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
 internal class AliasToMyNativeJsTypeWithOnlyInstanceofReference
 
-@JsType(isNative = true, namespace = "testfoo.bar")
-internal class MyNamespacedNativeJsType
+@JsType(isNative = true, namespace = "testfoo.bar") internal class MyNamespacedNativeJsType
 
 @JsType internal open class ConcreteJsType
 
@@ -316,8 +315,6 @@ private fun createMyNativeJsType(): Any = MyNativeJsType()
 
 private fun createMyNamespacedJsInterface(): Any? = MyNamespacedNativeJsType()
 
-@JsMethod(namespace = "jsinteropinstanceof.JsTypeTestHelper")
-private external fun createNativeButton(): Any?
+@JsMethod(namespace = "jsinteropinstanceof.helper") private external fun createNativeButton(): Any?
 
-@JsMethod(namespace = "jsinteropinstanceof.JsTypeTestHelper")
-private external fun createObject(): Any?
+@JsMethod(namespace = "jsinteropinstanceof.helper") private external fun createObject(): Any?

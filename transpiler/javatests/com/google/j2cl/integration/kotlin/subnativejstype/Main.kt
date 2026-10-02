@@ -61,7 +61,7 @@ internal class JsTypeJavaConcrete : JsTypeInterfaceWithSingleJavaConcrete {
   override fun m(): Int = 5
 }
 
-@JsMethod(namespace = "subnativejstype.JsTypeTestHelper")
+@JsMethod(namespace = "subnativejstype.helper")
 private external fun nativeObjectImplementingM(): Any?
 
 val SET_PARENT_X: Int = 500
@@ -283,8 +283,8 @@ internal class JsPropertyRemovedAccidentalOverrideProperty :
   JsPropertyRemovedAccidentalOverridePropertyBase(),
   JsPropertyAccidentalOverridePropertyJsTypeInterface
 
-@JsMethod(namespace = "subnativejstype.JsPropertyTestHelper")
+@JsMethod(namespace = "subnativejstype.helper")
 private external fun getProperty(o: Any?, name: String): Int
 
-@JsMethod(namespace = "subnativejstype.JsPropertyTestHelper")
+@JsMethod(namespace = "subnativejstype.helper")
 private external fun setProperty(o: Any?, name: String, value: Int)

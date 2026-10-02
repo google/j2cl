@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsfunctiontypeannotation.TestHelper');
+goog.module('jsfunctiontypeannotation.helper');
 
 /**
  * @param {?function(?number, ?number):?number} fn

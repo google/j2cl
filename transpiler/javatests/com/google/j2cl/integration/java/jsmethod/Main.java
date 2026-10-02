@@ -48,10 +48,10 @@ public class Main {
     assertEquals("bar", callBar(instance, null));
   }
 
-  @JsMethod(namespace = "jsmethod.JsMethodTestHelper")
+  @JsMethod(namespace = "jsmethod.helper")
   public static native Object callFoo(Object obj, Object param);
 
-  @JsMethod(namespace = "jsmethod.JsMethodTestHelper")
+  @JsMethod(namespace = "jsmethod.helper")
   public static native Object callBar(Object obj, Object param);
 
   static class ClassWithJsMethod {

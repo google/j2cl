@@ -340,9 +340,9 @@ public class Main {
     return new MyNamespacedNativeJsType();
   }
 
-  @JsMethod(namespace = "jsinteropinstanceof.JsTypeTestHelper")
+  @JsMethod(namespace = "jsinteropinstanceof.helper")
   private static native Object createNativeButton();
 
-  @JsMethod(namespace = "jsinteropinstanceof.JsTypeTestHelper")
+  @JsMethod(namespace = "jsinteropinstanceof.helper")
   private static native Object createObject();
 }

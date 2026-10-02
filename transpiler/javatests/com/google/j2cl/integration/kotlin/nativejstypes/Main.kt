@@ -104,7 +104,7 @@ private fun <NI : MyNativeJsTypeInterface, NC : HTMLElementConcreteNativeJsType>
 
 private fun createFoo(): Any? = Foo()
 
-@JsMethod(namespace = "nativejstypes.JsTypeTestHelper") external fun createNativeButton(): Any?
+@JsMethod(namespace = "nativejstypes.helper") external fun createNativeButton(): Any?
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*") interface Star
 
