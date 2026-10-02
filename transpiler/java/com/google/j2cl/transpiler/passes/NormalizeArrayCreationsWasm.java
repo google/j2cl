@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
@@ -43,12 +42,14 @@ import java.util.List;
 /**
  * Normalizes array creations for wasm.
  *
- * <p>After this pass is run, all array creations are in one of 3 forms:
+ * <p>After this pass is run, all array creations are in one of 4 forms:
  *
  * <ul>
  *   <li>an unidimensional array creation, e.g. {@code new String[3]}
+ *   <li>an array creation with an array literal initializer, e.g. {@code new int[] {1,2}}, which is
+ *       later replaced by its initializer in {@link ImplementArraysAsClasses}.
  *   <li>an array literal, e.g. {@code {1,2}}. (note that the components in array literals are
- *       expressions and if they were array creation they would be in one of these three forms
+ *       expressions and if they were array creation they would be in one of these forms
  *   <li>a call to the runtime to create a multidimensional array).
  * </ul>
  */
@@ -73,25 +74,19 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewArray(NewArray newArray) {
-            if (newArray.getInitializer() != null) {
-              return implementArrayCreationFromArrayLiteral(newArray);
-            } else {
+            if (newArray.getInitializer() == null) {
               return implementArrayCreationWithDimensions(newArray);
             }
+            // Native JsType array literals have already been expanded, so the array creation can
+            // be replaced by its initializer. Other array creations with initializers are kept
+            // until conversions are inserted so that they can be distinguished from the array
+            // literals synthesized for varargs; they are replaced by their initializers in
+            // ImplementArraysAsClasses.
+            return newArray.getTypeDescriptor().isNativeJsArray()
+                ? newArray.getInitializer()
+                : newArray;
           }
         });
-  }
-
-  /**
-   * Replaces array instantiations that have literals with the literal itself.
-   *
-   * <p>After this rewriting arrays are either an explicit creation with dimension expressions, e.g.
-   * {@code new Array[4][]} or array literals e.g. {@code \{\{1,3\},null\}}.
-   */
-  private static Expression implementArrayCreationFromArrayLiteral(NewArray newArray) {
-    Expression initializer = newArray.getInitializer();
-    checkState(initializer instanceof ArrayLiteral || initializer instanceof MultiExpression);
-    return initializer;
   }
 
   /**

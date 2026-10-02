@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -91,12 +92,41 @@ public class InsertBoxingConversions extends NormalizationPass {
           ParameterDescriptor inferredParameterDescriptor,
           ParameterDescriptor declaredParameterDescriptor,
           Expression argument) {
-        if (isAnnotatedWithDoNotAutobox(inferredParameterDescriptor)) {
-          return argument;
+        if (isAnnotatedWithDoNotAutobox(declaredParameterDescriptor)) {
+          if (!areBooleanAndDoubleAndLongBoxed) {
+            // In Closure all primitives are already represented as JS primitives.
+            return argument;
+          }
+          // @DoNotAutobox arguments should use their JS primitive representation (boolean, double,
+          // or long) rather than Java boxed wrappers (Byte, Short, Character, Integer, Float).
+          // Coercing non-JS primitives to double allows maybeBox to box them into Double (and
+          // boolean/long into Boolean/Long).
+          argument = coerceToJsPrimitive(argument);
         }
         return maybeBox(inferredParameterDescriptor.getTypeDescriptor(), argument);
       }
     };
+  }
+
+  /**
+   * Widens primitive types that do not have a distinct JS representation ({@code byte}, {@code
+   * short}, {@code char}, {@code int}, {@code float}) to {@code double}.
+   *
+   * <p>The cast is later lowered to a primitive widening conversion by {@link
+   * InsertWideningPrimitiveConversions}.
+   */
+  private static Expression coerceToJsPrimitive(Expression expression) {
+    TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+    if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
+        // Boolean and long have distinct JS representations, so they should not be
+        // widened to double. Double is double so widening is a no-op.
+        && !TypeDescriptors.isPrimitiveBooleanOrDoubleOrLong(typeDescriptor)) {
+      return CastExpression.builder()
+          .setExpression(expression)
+          .setCastTypeDescriptor(PrimitiveTypes.DOUBLE)
+          .build();
+    }
+    return expression;
   }
 
   private Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {

@@ -90,10 +90,24 @@ private fun testBox_numberAsDouble() {
   assertTrue(takesObjectAndReturnsPrimitiveDouble(3) == 3.0)
   assertTrue(sumWithoutBoxing(1, 1.5, 1.toByte(), 1.toShort(), 1f) == 5.5)
   assertTrue(sumWithoutBoxingJsVarargs(1, 1.5, 1.toByte(), 1.toShort(), 1f) == 5.5)
+  assertTrue(takesTAndReturnsPrimitiveDouble(3) == 3.0)
+  assertTrue(sumWithoutBoxingGeneric(1, 1.5, 1.toByte(), 1.toShort(), 1f) == 5.5)
 }
 
 private fun takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox o: Any?): Double {
   return o as Double
+}
+
+private fun <T> takesTAndReturnsPrimitiveDouble(@DoNotAutobox t: T): Double {
+  return t as Double
+}
+
+private fun <T> sumWithoutBoxingGeneric(@DoNotAutobox vararg numbers: T): Double {
+  var sum = 0.0
+  for (number in numbers) {
+    sum += number as Double
+  }
+  return sum
 }
 
 private fun testBox_doNotAutoboxExplicitArray() {

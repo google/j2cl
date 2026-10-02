@@ -255,6 +255,12 @@ public class ImplementArraysAsClasses extends NormalizationPass {
               return newArray;
             }
 
+            if (newArray.getInitializer() != null) {
+              // The initializer is an array literal that has already been rewritten into a
+              // WasmArray instantiation.
+              return newArray.getInitializer();
+            }
+
             checkState(newArray.getDimensionExpressions().size() == 1);
 
             return MethodCall.builderFrom(

@@ -16,7 +16,6 @@ package com.google.j2cl.transpiler;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.JsInteropAstUtils;
 import com.google.j2cl.transpiler.ast.Library;
@@ -50,8 +49,6 @@ class J2clTranspiler {
         // TODO(b/317164851): Remove hack that makes jsinfo ignored for non-native types in Wasm.
         JsInteropAstUtils.setIgnoreNonNativeJsInfo();
       }
-      // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
-      AstUtils.setIgnoreDoNotAutoboxAnnotations();
     } else if (options.getBackend().isClosure()) {
       MemberDescriptor.setClosureManglingPatterns();
     }

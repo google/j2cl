@@ -445,8 +445,7 @@ public class Main {
     assertTrue(asSeenFromJs(PlainJsEnum.ONE) == ONE_DOUBLE);
   }
 
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
+  @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.
   private static void testComparableJsEnumIntersectionCasts() {
     Object o = PlainJsEnum.ONE;
     // Intersection casts box/or unbox depending on the destination type.
@@ -644,7 +643,7 @@ public class Main {
     assertTrue(nativeClinitCalled);
   }
 
-  @Wasm("nop") // TODO(b/182341814): DoNotAutobox not supported in Wasm.
+  @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.
   private static void testDoNotAutoboxJsEnum() {
     assertTrue(returnsObject(StringJsEnum.HELLO) == HELLO_STRING);
     assertTrue(returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING);
@@ -757,8 +756,7 @@ public class Main {
     assertFalse(jsEnum.equals(stringJsEnum));
   }
 
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
+  @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.
   private static void testAutoBoxing_intersectionCasts() {
     Comparable c = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
     assertTrue(c.compareTo(PlainJsEnum.ZERO) > 0);
@@ -772,8 +770,7 @@ public class Main {
         PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
   }
 
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
+  @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.
   private static void testAutoBoxing_typeInference() {
     assertUnderlyingTypeEquals(Double.class, PlainJsEnum.ONE);
     assertUnderlyingTypeEquals(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
@@ -938,8 +935,7 @@ public class Main {
     // assertUnderlyingTypeEquals(Double.class, jpc.get());
   }
 
-  @Wasm("nop") // TODO(b/182341814, b/295235576): DoNotAutobox not supported in Wasm. JsEnum class
-  // literals not yet supported in Wasm.
+  @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.
   private static void testSpecializedSuperTypeUnderlyingType() {
     PlainJsEnum five = PlainJsEnum.FIVE;
     PlainJsEnumContainer pc = new PlainJsEnumContainer();

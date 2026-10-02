@@ -912,21 +912,9 @@ public final class AstUtils {
         .build();
   }
 
-  // TODO(b/182341814): This is a temporary hack to be able to disable DoNotAutobox annotations
-  // on wasm
-  private static final ThreadLocal<Boolean> ignoreDoNotAutoboxAnnotations =
-      ThreadLocal.withInitial(() -> false);
-
-  public static void setIgnoreDoNotAutoboxAnnotations() {
-    ignoreDoNotAutoboxAnnotations.set(true);
-  }
-
   /** Returns whether the parameter is annotated with {@code @DoNotAutobox}. */
   public static boolean isAnnotatedWithDoNotAutobox(
       MethodDescriptor.ParameterDescriptor parameter) {
-    if (ignoreDoNotAutoboxAnnotations.get()) {
-      return false;
-    }
     return parameter.hasAnnotation("javaemul.internal.annotations.DoNotAutobox");
   }
 

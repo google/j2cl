@@ -284,7 +284,7 @@ public class Main {
           default -> (Integer) 2;
         };
 
-    if (TestUtils.isJavaScript()) {
+    if (TestUtils.isJavaScript() || TestUtils.isWasm()) {
       // Explicitly check that unboxedValue is actually a primitive integer to ensure that we catch
       // the error if the boxing operation was missing and boxedValue contained a primitive.
       assertIsPrimitiveInt(unboxedValue);

@@ -24,6 +24,7 @@ import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
@@ -98,17 +99,32 @@ public class Main {
   }
 
   private static void testBox_numberAsDouble() {
-    // Works only in closure.
-    if (!isJavaScript()) {
+    // Works only in closure and wasm.
+    if (!isJavaScript() && !isWasm()) {
       return;
     }
     assertTrue((takesObjectAndReturnsPrimitiveDouble(3) == 3));
     assertTrue((sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
     assertTrue((sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
+    assertTrue((takesTAndReturnsPrimitiveDouble(3) == 3));
+    assertTrue((sumWithoutBoxingGeneric(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
   }
 
   private static double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
     return (Double) o;
+  }
+
+  private static <T> double takesTAndReturnsPrimitiveDouble(@DoNotAutobox T t) {
+    return (Double) t;
+  }
+
+  @SafeVarargs
+  private static <T> double sumWithoutBoxingGeneric(@DoNotAutobox T... numbers) {
+    double sum = 0;
+    for (T number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
   }
 
   private static void testBox_doNotAutoboxExplicitArray() {
