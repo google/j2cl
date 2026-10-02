@@ -415,22 +415,26 @@ public class Main {
     assertThrowsNullPointerException(
         () -> {
           Object unused = b && b;
+          throw new AssertionError(unused);
         });
     assertThrowsNullPointerException(
         () -> {
           Object unused = !b;
+          throw new AssertionError(unused);
         });
 
     Double d = null;
     assertThrowsNullPointerException(
         () -> {
           Object unused = +d;
+          throw new AssertionError(unused);
         });
 
     Integer n = null;
     assertThrowsNullPointerException(
         () -> {
           Object unused = -n;
+          throw new AssertionError(unused);
         });
   }
 
@@ -740,9 +744,9 @@ public class Main {
         () -> {
           Integer i = null;
           switch (i) {
-              // Some logic inside the switch to prevent jscompiler from optimizing it away.
+            // Some logic inside the switch to prevent jscompiler from optimizing it away.
             case 1:
-              i = 3;
+              fail();
             default:
           }
         });

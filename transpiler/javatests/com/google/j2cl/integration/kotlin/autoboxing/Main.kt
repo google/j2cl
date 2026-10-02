@@ -399,18 +399,22 @@ private fun testUnbox_byOperator_throwsNPE() {
   val b = Ref(null) as Ref<Boolean>
   assertThrowsNullPointerException {
     val unused: Any = b.field && b.field
+    throw AssertionError(unused)
   }
   assertThrowsNullPointerException {
     val unused: Any = !b.field
+    throw AssertionError(unused)
   }
   val d = Ref(null) as Ref<Double>
 
   assertThrowsNullPointerException {
     val unused: Any = +d.field
+    throw AssertionError(unused)
   }
   val n = Ref(null) as Ref<Int>
   assertThrowsNullPointerException {
     val unused: Any = -n.field
+    throw AssertionError(unused)
   }
 }
 
@@ -753,9 +757,9 @@ private fun testUnbox_conditionals() {
   assertThrowsNullPointerException { while (b.field) {} }
   assertThrowsNullPointerException { do {} while (b.field) }
   assertThrowsNullPointerException {
-    var i: Ref<Int> = Ref(null) as Ref<Int>
+    val i: Ref<Int> = Ref(null) as Ref<Int>
     when (i.field) {
-      1 -> i.field = 3
+      1 -> fail()
       else -> {}
     }
   }
