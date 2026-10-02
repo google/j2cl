@@ -1,0 +1,250 @@
+
+(global $$class-initialized@jstype.SomeJsType (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jstype.SomeJsType.Star.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType.Star.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jstype.SomeJsType.Wildcard.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType.Wildcard.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable)
+ (struct.new $jstype.SomeJsType.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstype.SomeJsType)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
+  (ref.func $m_protectedMethod__void@jstype.SomeJsType)
+  (ref.func $m_publicMethod__void@jstype.SomeJsType)
+  (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
+ )
+)
+
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jstype.SomeJsType.Star.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:46:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:46:12
+  (if (global.get $$class-initialized@jstype.SomeJsType.Star.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:46:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:46:12
+  (global.set $$class-initialized@jstype.SomeJsType.Star.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType.Star.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType.Star.$Overlay)))
+   (then
+    (return (global.get $$class@jstype.SomeJsType.Star.$Overlay))
+   )
+  )
+  (global.set $$class@jstype.SomeJsType.Star.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Star.$Overlay.$StringLiterals )))
+  (return (global.get $$class@jstype.SomeJsType.Star.$Overlay))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jstype.SomeJsType.Wildcard.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:49:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:49:12
+  (if (global.get $$class-initialized@jstype.SomeJsType.Wildcard.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:49:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:49:12
+  (global.set $$class-initialized@jstype.SomeJsType.Wildcard.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType.Wildcard.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay)))
+   (then
+    (return (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay))
+   )
+  )
+  (global.set $$class@jstype.SomeJsType.Wildcard.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.Wildcard.$Overlay.$StringLiterals )))
+  (return (global.get $$class@jstype.SomeJsType.Wildcard.$Overlay))
+ )
+)
+
+;;; SomeJsType<T> SomeJsType.$create()
+(func $$create__@jstype.SomeJsType
+ (result (ref null $jstype.SomeJsType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+ (local $$instance (ref null $jstype.SomeJsType))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (call $$clinit__void_<once>_@jstype.SomeJsType )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (local.set $$instance (struct.new $jstype.SomeJsType (global.get $jstype.SomeJsType.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (call $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeJsType.$ctor()
+(func $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType
+ (param $this (ref null $jstype.SomeJsType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SomeJsType.publicMethod()
+(func $m_publicMethod__void@jstype.SomeJsType
+ (type $function.m_publicMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:28:14
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_publicMethod__void@jstype.SomeJsType)
+
+;;; void SomeJsType.privateMethod()
+(func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType
+ (param $this (ref null $jstype.SomeJsType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:30:15
+ (block
+ )
+)
+
+;;; void SomeJsType.packageMethod()
+(func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
+ (type $function.m_packageMethod__void_$pp_jstype)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:32:7
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
+
+;;; void SomeJsType.protectedMethod()
+(func $m_protectedMethod__void@jstype.SomeJsType
+ (type $function.m_protectedMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:34:17
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_protectedMethod__void@jstype.SomeJsType)
+
+;;; void SomeJsType.useFieldsAndMethods()
+(func $m_useFieldsAndMethods__void@jstype.SomeJsType
+ (type $function.m_useFieldsAndMethods__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:36:14
+ (local $value i32)
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:37:4
+  (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $publicField@jstype.SomeJsType (local.get $this)) (struct.get $jstype.SomeJsType $privateField@jstype.SomeJsType (local.get $this))) (struct.get $jstype.SomeJsType $packageField@jstype.SomeJsType (local.get $this))) (struct.get $jstype.SomeJsType $protectedField@jstype.SomeJsType (local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:39:4
+  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:40:4
+  (call $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType (ref.as_non_null (local.get $this)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:41:4
+  (call_ref $function.m_packageMethod__void_$pp_jstype (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:42:4
+  (call_ref $function.m_protectedMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_protectedMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_useFieldsAndMethods__void@jstype.SomeJsType)
+
+;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
+(func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard_$p_jstype_SomeJsType@jstype.SomeJsType
+ (param $this (ref null $jstype.SomeJsType))
+ (param $s (ref null extern))
+ (param $w (ref null extern))
+ (result (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:51:19
+ (local $object (ref null $java.lang.Object))
+ (local $star (ref null extern))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:52:4
+  (local.set $object (call $$create__@java.lang.Object ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:54:4
+  (local.set $star (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:55:4
+  (return (ref.cast (ref null extern) (local.get $star)))
+ )
+)
+
+;;; void SomeJsType.$clinit()
+(func $$clinit__void_<once>_@jstype.SomeJsType
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (if (global.get $$class-initialized@jstype.SomeJsType)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (global.set $$class-initialized@jstype.SomeJsType (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstype/readable-j2wasm.js/jstype/SomeJsType.java:22:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SomeJsType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType)))
+   (then
+    (return (global.get $$class@jstype.SomeJsType))
+   )
+  )
+  (global.set $$class@jstype.SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jstype.SomeJsType))
+ )
+)
+
+;;; Class<?> SomeJsType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstype.SomeJsType
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType)

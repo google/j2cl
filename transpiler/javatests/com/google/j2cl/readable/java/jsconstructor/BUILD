@@ -12,6 +12,5 @@ readable_example(
     srcs = glob(["*.java"]),
     generate_kt_web_readables = True,
     generate_wasm_custom_descriptors_jsinterop_readables = True,
-    generate_wasm_readables = False,
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
