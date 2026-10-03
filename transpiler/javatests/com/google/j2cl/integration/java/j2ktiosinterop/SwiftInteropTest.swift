@@ -245,4 +245,38 @@ final class SwiftInteropTest: XCTestCase {
     XCTAssertEqual(record, record2)
     XCTAssertEqual(record.hash, record2.hash)
   }
+
+  func testBoxedPrimitives() {
+    #if J2KT
+      let _: JavaLangBoolean = JavaLangBoolean(value: true)
+      let _: JavaLangByte = JavaLangByte(value: 1)
+      let _: JavaLangShort = JavaLangShort(value: 1)
+      let _: JavaLangInteger = JavaLangInteger(value: 1)
+      let _: JavaLangLong = JavaLangLong(value: 1)
+      let _: JavaLangFloat = JavaLangFloat(value: 1.0)
+      let _: JavaLangDouble = JavaLangDouble(value: 1.0)
+    #else
+      let _: JavaLangBoolean = JavaLangBoolean_valueOfWithBoolean_(true)
+      let _: JavaLangByte = JavaLangByte_valueOfWithByte_(1)
+      let _: JavaLangShort = JavaLangShort_valueOfWithShort_(1)
+      let _: JavaLangInteger = JavaLangInteger_valueOfWithInt_(1)
+      let _: JavaLangLong = JavaLangLong_valueOfWithLong_(1)
+      let _: JavaLangFloat = JavaLangFloat_valueOfWithFloat_(1.0)
+      let _: JavaLangDouble = JavaLangDouble_valueOfWithDouble_(1.0)
+    #endif
+  }
+
+  func testThrowable() {
+    var throwable: JavaLangThrowable
+    throwable = create_JavaLangThrowable_initWithNSString_("foo")
+    #if J2KT
+      throwable = JavaLangThrowable(message: "foo")
+    #else
+      throwable = JavaLangThrowable(nsString: "foo")
+    #endif
+    let _ = throwable
+
+    let _: JavaLangIllegalArgumentException =
+      create_JavaLangIllegalArgumentException_initWithNSString_("bar")
+  }
 }

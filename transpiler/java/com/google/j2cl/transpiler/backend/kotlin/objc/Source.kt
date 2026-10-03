@@ -39,7 +39,7 @@ fun macroEndif(condition: Source) =
   join(macroDeclaration(source("endif")), source("  "), comment(condition))
 
 fun compatibilityAlias(alias: Source, target: Source) =
-  spaceSeparated(source("@compatibility_alias"), alias, target)
+  spaceSeparated(source("@compatibility_alias"), alias, target).plusSemicolon()
 
 fun defineAlias(alias: Source, target: Source) =
   newLineSeparated(

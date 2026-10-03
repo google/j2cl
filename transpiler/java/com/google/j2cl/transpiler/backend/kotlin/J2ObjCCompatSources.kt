@@ -52,6 +52,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Dependent.Companion.flatte
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
+import com.google.j2cl.transpiler.backend.kotlin.objc.compatibilityAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.defineAlias
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependentFloatSource
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependentMathSource
@@ -218,7 +219,14 @@ internal class J2ObjCCompatSources(
 
   private fun aliasDeclarationDependentSource(typeDeclaration: TypeDeclaration): Dependent<Source> =
     objCNameDependentSource(Convention.J2OBJC, typeDeclaration).map { objCName ->
-      defineAlias(source(objCAlias(typeDeclaration)), objCName)
+      if (
+        typeDeclaration.isClass &&
+          typeDeclaration.ktNativeQualifiedName?.let(::isKotlinStdlibKtNativeName) == true
+      ) {
+        compatibilityAlias(source(objCAlias(typeDeclaration)), objCName)
+      } else {
+        defineAlias(source(objCAlias(typeDeclaration)), objCName)
+      }
     }
 
   private fun aliasDeclarationDependentSource(
@@ -710,7 +718,7 @@ internal class J2ObjCCompatSources(
     }
 
   private fun ktNativeNameObjCNamePrefix(name: String): String =
-    if (name.startsWith("kotlin.")) "GKOT" else objCNamePrefix
+    if (isKotlinStdlibKtNativeName(name)) "GKOT" else objCNamePrefix
 
   private fun ktNativeNameToObjCName(name: String): String =
     ktNativeNameObjCNamePrefix(name) + ktNativeNameObjCNameWithoutPrefix(name)
@@ -721,7 +729,7 @@ internal class J2ObjCCompatSources(
   private fun ktNativeNameObjCPackagePrefix(name: String): String =
     when {
       ktNativeNameUsesSimpleObjCName(name) -> ""
-      name.startsWith("kotlin.") -> "Kotlin"
+      isKotlinStdlibKtNativeName(name) -> "Kotlin"
       else -> name.substring(0, name.lastIndexOf('.')).objCPackagePrefix
     }
 
@@ -730,6 +738,8 @@ internal class J2ObjCCompatSources(
 
   private fun ktNativeNameUsesSimpleObjCName(name: String): Boolean =
     KT_NATIVE_SIMPLE_OBJC_NAME_TYPES.contains(name)
+
+  private fun isKotlinStdlibKtNativeName(name: String): Boolean = name.startsWith("kotlin.")
 
   private fun mappedKtNativeDependentSource(
     kind: TypeDeclaration.Kind,
