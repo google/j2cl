@@ -36,7 +36,7 @@ import kotlin.run
 import kotlin.use
 
 open class UnnamedVariables {
- internal open fun testSwitchPatterns_pp_unnamedvariables() {
+ internal open fun testSwitchPatterns() {
   data class R(
    val o: Any?,
    val s: String?,
@@ -75,7 +75,7 @@ open class UnnamedVariables {
   }
  }
  
- internal open fun testInstanceOfPatterns_pp_unnamedvariables() {
+ internal open fun testInstanceOfPatterns() {
   data class R(
    val o: Any?,
    val s: String?,
@@ -111,25 +111,25 @@ open class UnnamedVariables {
   }
  }
  
- internal open fun testDeclaration_pp_unnamedvariables() {
+ internal open fun testDeclaration() {
   val `_`: String = "Hello"
   val __1: Int = "Hello".length
   val __2: Int = "Bye".length
  }
  
- internal open fun testLambda_pp_unnamedvariables() {
+ internal open fun testLambda() {
   val f1: Function<String?, String?> = Function { `_`: String? -> "Hello" }
   val f2: Function<String?, String?> = Function { __1: String? -> "Hello" }
  }
  
- internal open fun testTryCatch_pp_unnamedvariables() {
+ internal open fun testTryCatch() {
   val closable: AutoCloseable? = null
   try {
    closable.use {}
   } catch (__1: RuntimeException) {} catch (__2: Exception) {} catch (__2: Error) {}
  }
  
- internal open fun testForEach_pp_unnamedvariables() {
+ internal open fun testForEach() {
   val a: Array<String?>? = null
   for (`_` in a!!) {}
   for (__1 in a!!) {}

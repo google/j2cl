@@ -42,10 +42,10 @@ internal enum class Enum2 {
  VALUE4(5);
  
  @JvmField
- internal var foo_pp_enums: Int = Enum1.V1.ordinal
+ internal var foo: Int = Enum1.V1.ordinal
  
  constructor(foo: Int) {
-  this.foo_pp_enums = foo
+  this.foo = foo
  }
  
  constructor(foo: Enum<*>?): this(
@@ -58,7 +58,7 @@ internal enum class Enum2 {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
  
- internal open fun specialMethods_pp_enums() {
+ internal open fun specialMethods() {
   val o1: Int = Enum2.valueOf(
    null!!,
   ).ordinal
@@ -68,10 +68,10 @@ internal enum class Enum2 {
  
  companion object {
   @JvmStatic
-  internal fun f_pp_enums(o: Any?): Enum2? = null
+  internal fun f(o: Any?): Enum2? = null
   
   @JvmField
-  internal var C_pp_enums: Enum2? = Enum2.f_pp_enums(
+  internal var C: Enum2? = Enum2.f(
    Any(),
   )
  }

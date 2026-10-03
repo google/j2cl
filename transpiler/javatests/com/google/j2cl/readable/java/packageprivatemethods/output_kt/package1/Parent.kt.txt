@@ -24,9 +24,7 @@ import kotlin.Suppress
 import packageprivatemethods.package1.SuperParent
 
 abstract class Parent: SuperParent() {
- override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(a: Int): Int = a
+ override fun overrideInParentExposedInChild(a: Int): Int = a
  
- public abstract fun exposedAbstractInParent(a: Int, b: Int, c: Int): Int
- 
- override fun exposedAbstractInParent_pp_packageprivatemethods_package1(a: Int, b: Int, c: Int): Int = this.exposedAbstractInParent(a, b, c)
+ public abstract override fun exposedAbstractInParent(a: Int, b: Int, c: Int): Int
 }

@@ -447,10 +447,10 @@ open class AutoBoxing {
  
  open fun testUnbox_withCast() {
   open class Supplier<T> internal constructor() {
-   internal open fun get_pp_autoboxing(): T = null as T
+   internal open fun get(): T = null as T
   }
   val supplier: Supplier<Int?> = Supplier<Int?>()
-  val i: Int = supplier.get_pp_autoboxing()!!.toInt()
+  val i: Int = supplier.get()!!.toInt()
  }
  
  companion object {
@@ -467,30 +467,30 @@ open class AutoBoxing {
   
   @JvmStatic
   private fun testUnboxingGeneric(integerRef: Ref<Int?>?, booleanRef: Ref<Boolean?>?, stringRef: Ref<String?>?) {
-   integerRef!!.field_pp_autoboxing = integerRef!!.field_pp_autoboxing
-   integerRef!!.field_pp_autoboxing = integerRef!!.field_pp_autoboxing!!.toInt() + 1
-   integerRef!!.field_pp_autoboxing = integerRef!!.field_pp_autoboxing!!.toInt() + 1
+   integerRef!!.field = integerRef!!.field
+   integerRef!!.field = integerRef!!.field!!.toInt() + 1
+   integerRef!!.field = integerRef!!.field!!.toInt() + 1
    AutoBoxing.acceptsInt(
-    integerRef!!.field_pp_autoboxing!!.toInt(),
+    integerRef!!.field!!.toInt(),
    )
    AutoBoxing.acceptsObject(
-    - integerRef!!.field_pp_autoboxing!!.toInt(),
+    - integerRef!!.field!!.toInt(),
    )
    AutoBoxing.acceptsObject(
-    !booleanRef!!.field_pp_autoboxing!!.booleanValue(),
+    !booleanRef!!.field!!.booleanValue(),
    )
    AutoBoxing.acceptsObject(
-    1 + integerRef!!.field_pp_autoboxing!!.toInt(),
+    1 + integerRef!!.field!!.toInt(),
    )
    AutoBoxing.acceptsObject(
-    booleanRef!!.field_pp_autoboxing!!.booleanValue() || booleanRef!!.field_pp_autoboxing!!.booleanValue(),
+    booleanRef!!.field!!.booleanValue() || booleanRef!!.field!!.booleanValue(),
    )
    AutoBoxing.acceptsObject(
-    "" + stringRef!!.field_pp_autoboxing + stringRef!!.field_pp_autoboxing,
+    "" + stringRef!!.field + stringRef!!.field,
    )
-   stringRef!!.field_pp_autoboxing = stringRef!!.field_pp_autoboxing
+   stringRef!!.field = stringRef!!.field
    AutoBoxing.acceptsString(
-    "" + integerRef!!.field_pp_autoboxing,
+    "" + integerRef!!.field,
    )
   }
   
@@ -511,12 +511,12 @@ open class AutoBoxing {
     n
    }
    open class Local<T: Long?> internal constructor() {
-    internal open fun toLong_pp_autoboxing(l: T): Long {
+    internal open fun toLong(l: T): Long {
      assert(l!!.equals(11L))
      return l!!.toLong()
     }
    }
-   l = Local<Long?>().toLong_pp_autoboxing(11L)
+   l = Local<Long?>().toLong(11L)
    assert(l == 11L)
   }
   
@@ -537,12 +537,12 @@ open class AutoBoxing {
     n
    }
    open class Local<T> internal constructor() where T: Long?, T: Comparable<Long>? {
-    internal open fun toLong_pp_autoboxing(l: T): Long {
+    internal open fun toLong(l: T): Long {
      assert(l!!.equals(11L))
      return l!!.toLong()
     }
    }
-   l = Local<Long?>().toLong_pp_autoboxing(11L)
+   l = Local<Long?>().toLong(11L)
    assert(l == 11L)
    val i: Int = 10.let { it as Int; it as Comparable<Int>; it }.toInt()
   }
@@ -550,10 +550,10 @@ open class AutoBoxing {
  
  private open class Ref<T> {
   @JvmField
-  internal var field_pp_autoboxing: T
+  internal var field: T
   
   internal constructor(value: T) {
-   this.field_pp_autoboxing = value
+   this.field = value
   }
  }
 }

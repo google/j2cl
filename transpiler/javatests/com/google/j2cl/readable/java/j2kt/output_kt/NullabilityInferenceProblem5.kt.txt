@@ -28,18 +28,18 @@ import kotlin.jvm.JvmStatic
 open class NullabilityInferenceProblem5 {
  companion object {
   @JvmStatic
-  internal fun <I, O> transform_pp_j2kt(future: Future<I>, fn: Function<in I, out O>): Future<O> {
+  internal fun <I, O> transform(future: Future<I>, fn: Function<in I, out O>): Future<O> {
    throw RuntimeException()
   }
   
   @JvmStatic
-  internal fun <V: Any> nullableFuture_pp_j2kt(v: V): Future<V?> {
+  internal fun <V: Any> nullableFuture(v: V): Future<V?> {
    throw RuntimeException()
   }
   
   @JvmStatic
-  internal fun testVoid_pp_j2kt(foo: Foo<*>): Future<Void?> = NullabilityInferenceProblem5.transform_pp_j2kt(
-   NullabilityInferenceProblem5.nullableFuture_pp_j2kt(foo),
+  internal fun testVoid(foo: Foo<*>): Future<Void?> = NullabilityInferenceProblem5.transform(
+   NullabilityInferenceProblem5.nullableFuture(foo),
    Function { it: Foo<*>? -> null },
   )
  }

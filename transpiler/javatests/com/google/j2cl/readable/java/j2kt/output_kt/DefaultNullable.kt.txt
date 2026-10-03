@@ -27,14 +27,14 @@ import kotlin.jvm.JvmStatic
 open class DefaultNullable {
  companion object {
   @JvmStatic
-  internal fun testNonNullableLambdas_pp_j2kt() {
+  internal fun testNonNullableLambdas() {
    val methodReference: Consumer<String?> = Consumer { t: String? ->
-    DefaultNullable.accept_pp_j2kt(t)
+    DefaultNullable.accept(t)
    }
   }
   
   @JvmStatic
-  internal fun accept_pp_j2kt(s: String?) {}
+  internal fun accept(s: String?) {}
  }
 }
 
@@ -45,10 +45,10 @@ internal open class NotNullable internal constructor() {
 }
 
 internal abstract class Ordering<T> internal constructor() {
- internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> = null!!
+ internal open fun <S: T> reverse(): Ordering<S> = null!!
  
  companion object {
   @JvmStatic
-  internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> = ordering.reverse_pp_j2kt<E>()
+  internal fun <E> reversed(ordering: Ordering<in E>): Ordering<in E> = ordering.reverse<E>()
  }
 }

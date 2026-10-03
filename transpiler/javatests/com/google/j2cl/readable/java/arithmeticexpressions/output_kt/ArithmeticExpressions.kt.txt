@@ -243,15 +243,15 @@ open class ArithmeticExpressions {
   }!!.toInt()
   open class Ref<T> internal constructor() {
    @JvmField
-   internal var field_pp_arithmeticexpressions: T? = null
+   internal var field: T? = null
   }
   val ref: Ref<Byte?>? = null
-  ref!!.field_pp_arithmeticexpressions = (ref!!.field_pp_arithmeticexpressions!!.toByte().toInt() + 1).toByte()
-  val n: Int = 1 + ref!!.field_pp_arithmeticexpressions!!.toByte().toInt()
+  ref!!.field = (ref!!.field!!.toByte().toInt() + 1).toByte()
+  val n: Int = 1 + ref!!.field!!.toByte().toInt()
  }
  
  @JvmField
- internal var intField_pp_arithmeticexpressions: kotlin.Long = 0L
+ internal var intField: kotlin.Long = 0L
  
  open fun testExtendedOperands() {
   var boxedInteger: Int? = 3
@@ -319,8 +319,8 @@ open class ArithmeticExpressions {
   private fun testSideEffect() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect()
    val ___qualifier_1: ArithmeticExpressions? = ___qualifier
-   val ___value: kotlin.Long = ___qualifier!!.intField_pp_arithmeticexpressions + 5L
-   ___qualifier_1!!.intField_pp_arithmeticexpressions = ___value
+   val ___value: kotlin.Long = ___qualifier!!.intField + 5L
+   ___qualifier_1!!.intField = ___value
   }
   
   @JvmStatic

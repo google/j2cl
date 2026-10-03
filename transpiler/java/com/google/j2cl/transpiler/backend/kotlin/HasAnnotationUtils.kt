@@ -37,6 +37,9 @@ internal val HasAnnotations.hasDaggerComponentRegistryCompatibleAnnotation: Bool
 internal val HasAnnotations.isVisibilityWarningSuppressed: Boolean
   get() = isWarningSuppressed("j2kt:visibility")
 
+internal val HasAnnotations.hasJ2ktPublicAnnotation: Boolean
+  get() = hasAnnotation("com.google.common.annotations.J2ktPublic")
+
 internal val HasAnnotations.objectiveCKmpMethodAnnotation: Annotation?
   get() = getAnnotation("com.google.j2objc.annotations.ObjectiveCKmpMethod")
 

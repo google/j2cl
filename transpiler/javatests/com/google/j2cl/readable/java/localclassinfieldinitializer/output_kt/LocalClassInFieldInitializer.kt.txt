@@ -28,16 +28,16 @@ import kotlin.run
 
 open class LocalClassInFieldInitializer {
  @JvmField
- internal var r_pp_localclassinfieldinitializer: Consumer<String?>? = Consumer { s: String? ->
+ internal var r: Consumer<String?>? = Consumer { s: String? ->
   open class Local internal constructor() {
    @JvmField
-   internal var ss_pp_localclassinfieldinitializer: String? = s
+   internal var ss: String? = s
   }
   Local()
  }
  
  @JvmField
- internal var i_pp_localclassinfieldinitializer: Int = run {
+ internal var i: Int = run {
   when (1) {
    1 -> {
     internal open inner class Local internal constructor()

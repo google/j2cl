@@ -38,10 +38,10 @@ open class Main {
  internal var aFoo: FooOverlay? = null
  
  @JvmField
- internal var innerExtern_pp_externs: InnerExtern? = null
+ internal var innerExtern: InnerExtern? = null
  
  @JvmField
- internal var inner_pp_externs: Inner? = null
+ internal var inner: Inner? = null
  
  companion object {
   @JvmStatic
@@ -65,8 +65,8 @@ open class Main {
  
  internal open class FooImpl internal constructor() {
   @JvmField
-  @JsProperty(name = "foo")
-  internal var foo_pp_externs: String? = null
+  @JsProperty
+  internal var foo: String? = null
  }
  
  @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)

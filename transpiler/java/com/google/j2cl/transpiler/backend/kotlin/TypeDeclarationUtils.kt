@@ -141,9 +141,6 @@ internal val TypeDeclaration.ktMutableQualifiedName: String?
 internal val TypeDeclaration.hasInjectAnnotatedMethod: Boolean
   get() = declaredMethodDescriptors.any { it.hasInjectAnnotation }
 
-internal val TypeDeclaration.hasJ2ktPublicAnnotation: Boolean
-  get() = hasAnnotation("com.google.common.annotations.J2ktPublic")
-
 internal val TypeDeclaration.enumFieldDescriptors: List<FieldDescriptor>
   get() = declaredFieldDescriptors.filter { it.isEnumConstant }
 

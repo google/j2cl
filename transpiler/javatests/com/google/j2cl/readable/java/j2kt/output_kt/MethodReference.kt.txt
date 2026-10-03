@@ -25,8 +25,8 @@ import kotlin.jvm.JvmStatic
 internal class MethodReference internal constructor() {
  companion object {
   @JvmStatic
-  internal fun <T> foo_pp_j2kt(inputs: Foo<out Foo<out T>>) {
-   MethodReference.transform_pp_j2kt(
+  internal fun <T> foo(inputs: Foo<out Foo<out T>>) {
+   MethodReference.transform(
     inputs,
     object : Function<Foo<out T>, Foo<out T>> {
      override fun <H> apply(t: Foo<out T>): Foo<out T> = t.bar()
@@ -35,7 +35,7 @@ internal class MethodReference internal constructor() {
   }
   
   @JvmStatic
-  internal fun <F, T> transform_pp_j2kt(foo: Foo<F>, function: Function<in F, out T>) {}
+  internal fun <F, T> transform(foo: Foo<F>, function: Function<in F, out T>) {}
  }
  
  internal interface Function<T, R> {

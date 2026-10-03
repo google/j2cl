@@ -43,13 +43,13 @@ open class InnerClassInitOrder {
  
  open fun testInnerClassCtors() {
   val p1: P1<*> = P1<Any?>()
-  assert(1 == p1.value_pp_innerclassinitorder)
-  assert(2 == P1<Any?>(2).value_pp_innerclassinitorder)
+  assert(1 == p1.value)
+  assert(2 == P1<Any?>(2).value)
   val p2: P1<*>.P2<*> = p1.P2<Any?>()
-  assert(1 == p2.value_pp_innerclassinitorder)
-  assert(2 == p1.P2<Any?>(2).value_pp_innerclassinitorder)
-  assert(1 == p2.P3<Any?>().value_pp_innerclassinitorder)
-  assert(2 == p2.P3<Any?>(2).value_pp_innerclassinitorder)
+  assert(1 == p2.value)
+  assert(2 == p1.P2<Any?>(2).value)
+  assert(1 == p2.P3<Any?>().value)
+  assert(2 == p2.P3<Any?>(2).value)
  }
  
  open fun testInnerClassInitialization() {
@@ -60,10 +60,10 @@ open class InnerClassInitOrder {
  open fun testInnerClassLoop() {
   abstract class AddNumber {
    @JvmField
-   internal var num_pp_innerclassinitorder: Int = 0
+   internal var num: Int = 0
    
    constructor(i: Int) {
-    this.num_pp_innerclassinitorder = i
+    this.num = i
    }
    
    abstract fun act()
@@ -73,7 +73,7 @@ open class InnerClassInitOrder {
   while (i < 10) {
    val ap: AddNumber = object : AddNumber(i) {
     override fun act() {
-     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + num_pp_innerclassinitorder
+     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + num
     }
    }
    results[i] = ap
@@ -139,17 +139,17 @@ open class InnerClassInitOrder {
  
  open inner class InnerClass internal constructor() {
   init {
-   this.callInner_pp_innerclassinitorder()
+   this.callInner()
   }
   
-  internal open fun callInner_pp_innerclassinitorder() {
+  internal open fun callInner() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
    open class ReallyInnerClass internal constructor() {
     init {
-     this.callReallyInner_pp_innerclassinitorder()
+     this.callReallyInner()
     }
     
-    internal open fun callReallyInner_pp_innerclassinitorder() {
+    internal open fun callReallyInner() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
    }
@@ -159,12 +159,12 @@ open class InnerClassInitOrder {
  
  open class P1<T1> {
   @JvmField
-  internal val value_pp_innerclassinitorder: Int
+  internal val value: Int
   
   internal constructor(): this(1)
   
   internal constructor(i: Int) {
-   this.value_pp_innerclassinitorder = i
+   this.value = i
   }
   
   open inner class P2<T2>: P1<T1> {

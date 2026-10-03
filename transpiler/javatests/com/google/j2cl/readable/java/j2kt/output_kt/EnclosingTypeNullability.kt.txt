@@ -24,12 +24,12 @@ import kotlin.String
 import kotlin.Suppress
 
 internal open class EnclosingTypeNullability internal constructor() {
- internal open fun test_pp_j2kt(foo: Outer<String>) {
-  val value: Outer<String>.Inner = foo.getInner_pp_j2kt()
+ internal open fun test(foo: Outer<String>) {
+  val value: Outer<String>.Inner = foo.getInner()
  }
  
  internal class Outer<V> internal constructor() {
-  internal fun getInner_pp_j2kt(): Outer<V>.Inner {
+  internal fun getInner(): Outer<V>.Inner {
    throw RuntimeException()
   }
   

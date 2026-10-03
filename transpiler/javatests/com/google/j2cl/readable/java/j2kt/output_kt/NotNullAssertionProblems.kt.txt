@@ -351,9 +351,9 @@ open class NotNullAssertionProblems {
  
  internal open class C<V> internal constructor() {
   @JvmField
-  internal var defaultValue_pp_j2kt: V = null as V
+  internal var defaultValue: V = null as V
   
-  internal open fun f_pp_j2kt(): V = (if (true) this.defaultValue_pp_j2kt else this.defaultValue_pp_j2kt) as V
+  internal open fun f(): V = (if (true) this.defaultValue else this.defaultValue) as V
  }
  
  fun interface Supplier<V> {

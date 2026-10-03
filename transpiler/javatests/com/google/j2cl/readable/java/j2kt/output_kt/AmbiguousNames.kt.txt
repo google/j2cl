@@ -25,22 +25,22 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 internal open class Companion internal constructor() {
- internal open fun doSomething_pp_j2kt(): j2kt.Companion? = j2kt.Companion()
+ internal open fun doSomething(): j2kt.Companion? = j2kt.Companion()
  
- internal open fun isSameAsSingleton_pp_j2kt(): Boolean = this === j2kt.Companion.INSTANCE_pp_j2kt
+ internal open fun isSameAsSingleton(): Boolean = this === j2kt.Companion.INSTANCE
  
  companion object {
   @JvmField
-  internal val INSTANCE_pp_j2kt: j2kt.Companion? = j2kt.Companion()
+  internal val INSTANCE: j2kt.Companion? = j2kt.Companion()
   
   @JvmStatic
-  internal fun getInstance_pp_j2kt(): j2kt.Companion? = j2kt.Companion.INSTANCE_pp_j2kt
+  internal fun getInstance(): j2kt.Companion? = j2kt.Companion.INSTANCE
  }
 }
 
 internal open class SomeOtherClass internal constructor() {
  companion object {
   @JvmField
-  internal val COMPANION_pp_j2kt: j2kt.Companion? = j2kt.Companion.getInstance_pp_j2kt()
+  internal val COMPANION: j2kt.Companion? = j2kt.Companion.getInstance()
  }
 }

@@ -50,7 +50,7 @@ open class NullabilityInferenceWithLocalVariables {
   @JvmStatic
   fun testMethodChain(): Foo<String> {
    val l1: String = ""
-   return Foo.foo<String>(l1).chain_pp_j2kt(
+   return Foo.foo<String>(l1).chain(
     Foo.foo<String>(""),
    )
   }
@@ -59,7 +59,7 @@ open class NullabilityInferenceWithLocalVariables {
  open class Foo<T> {
   internal constructor(t1: T, t2: T)
   
-  internal open fun chain_pp_j2kt(foo: Foo<T>): Foo<T> {
+  internal open fun chain(foo: Foo<T>): Foo<T> {
    throw RuntimeException()
   }
   

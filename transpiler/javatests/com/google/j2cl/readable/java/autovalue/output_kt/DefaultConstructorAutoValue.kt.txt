@@ -32,14 +32,14 @@ abstract class DefaultConstructorAutoValue {
  
  companion object {
   @JvmStatic
-  internal fun create_pp_autovalue(): DefaultConstructorAutoValue? = autovalue.AutoValue_DefaultConstructorAutoValue.Builder().setBooleanField_pp_autovalue(true)!!.build()
+  internal fun create(): DefaultConstructorAutoValue? = autovalue.AutoValue_DefaultConstructorAutoValue.Builder().setBooleanField(true)!!.build()
  }
  
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   constructor()
   
-  internal abstract fun setBooleanField_pp_autovalue(x: Boolean): Builder?
+  internal abstract fun setBooleanField(x: Boolean): Builder?
   
   abstract fun build(): DefaultConstructorAutoValue?
  }

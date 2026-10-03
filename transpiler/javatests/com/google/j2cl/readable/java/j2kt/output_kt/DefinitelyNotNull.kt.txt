@@ -42,26 +42,26 @@ open class DefinitelyNotNull {
  }
  
  open class Ordering<T> {
-  internal open fun <S: T> reverse_pp_j2kt(): Ordering<S> {
+  internal open fun <S: T> reverse(): Ordering<S> {
    throw RuntimeException()
   }
   
-  internal open fun <S: T> nullsLast_pp_j2kt(): Ordering<S?> {
+  internal open fun <S: T> nullsLast(): Ordering<S?> {
    throw RuntimeException()
   }
   
   companion object {
    @JvmStatic
-   internal fun <E> reversed_pp_j2kt(ordering: Ordering<in E>): Ordering<in E> = ordering.reverse_pp_j2kt<E>()
+   internal fun <E> reversed(ordering: Ordering<in E>): Ordering<in E> = ordering.reverse<E>()
   }
  }
  
  internal inner class NullsFirstOrdering<T> constructor(ordering: Ordering<in T>): Ordering<T?>() {
   @JvmField
-  internal val ordering_pp_j2kt: Ordering<in T>
+  internal val ordering: Ordering<in T>
   
   init {
-   this.ordering_pp_j2kt = ordering
+   this.ordering = ordering
   }
  }
  

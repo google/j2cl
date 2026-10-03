@@ -107,7 +107,7 @@ open class Main {
   val result: Long = longFn.apply(100L)
  }
  
- internal open fun testJsFunctionVarargs_pp_jsfunction(): JsFunctionVarargs? {
+ internal open fun testJsFunctionVarargs(): JsFunctionVarargs? {
   val f: JsFunctionVarargs = JsFunctionVarargs { i: Int, numbers: IntArray? ->
    var sum: Int = i
    for (number in numbers!!) {
@@ -119,7 +119,7 @@ open class Main {
   return f
  }
  
- internal open fun testJsFunctionVarargsInnerClass_pp_jsfunction(): JsFunctionVarargs? = object : JsFunctionVarargs {
+ internal open fun testJsFunctionVarargsInnerClass(): JsFunctionVarargs? = object : JsFunctionVarargs {
   override fun m(i: Int, vararg numbers: Int): Int {
    var sum: Int = i
    for (number in numbers!!) {
@@ -134,44 +134,44 @@ open class Main {
   val c: ForEachCallBack<ElementalJsFunction?> = ForEachCallBack { p0: ElementalJsFunction?, p1: Int, p2: Array<ElementalJsFunction?>? -> p0!!.call(p1, p2) }
  }
  
- internal open fun <T> acceptsVarargsJsFunctionWithTypeVariable_pp_jsfunction(x: JsFunctionVarargsGenerics<T>?) {}
+ internal open fun <T> acceptsVarargsJsFunctionWithTypeVariable(x: JsFunctionVarargsGenerics<T>?) {}
  
- internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedType_pp_jsfunction(x: JsFunctionVarargsGenerics<List<T>?>?) {}
+ internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedType(x: JsFunctionVarargsGenerics<List<T>?>?) {}
  
- @JsMethod(name = "acceptsVarargsJsFunctionWithTypeVariableInVarargs")
- internal open fun <T> acceptsVarargsJsFunctionWithTypeVariableInVarargs_pp_jsfunction(vararg x: JsFunctionVarargsGenerics<T>?) {
+ @JsMethod
+ internal open fun <T> acceptsVarargsJsFunctionWithTypeVariableInVarargs(vararg x: JsFunctionVarargsGenerics<T>?) {
   val x_1: Array<JsFunctionVarargsGenerics<T>?>? = x as Array<JsFunctionVarargsGenerics<T>?>?
  }
  
- @JsMethod(name = "acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs")
- internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs_pp_jsfunction(vararg x: JsFunctionVarargsGenerics<List<T>?>?) {
+ @JsMethod
+ internal open fun <T> acceptsVarargsJsFunctionWithParemetrizedTypeInVarargs(vararg x: JsFunctionVarargsGenerics<List<T>?>?) {
   val x_1: Array<JsFunctionVarargsGenerics<List<T>?>?>? = x as Array<JsFunctionVarargsGenerics<List<T>?>?>?
  }
  
- @JsMethod(name = "acceptsJsFunctionInVarargs")
- internal open fun acceptsJsFunctionInVarargs_pp_jsfunction(vararg x: SimpleJsFunction?) {
+ @JsMethod
+ internal open fun acceptsJsFunctionInVarargs(vararg x: SimpleJsFunction?) {
   val x_1: Array<SimpleJsFunction?>? = x as Array<SimpleJsFunction?>?
  }
  
- internal open fun testJsFunctionClassLiterals_pp_jsfunction() {
+ internal open fun testJsFunctionClassLiterals() {
   val array: Array<SimpleJsFunction?> = arrayOf<SimpleJsFunction?>()
   var o: Any = SimpleJsFunction::class.javaObjectType
   o = Array::class.javaObjectType as Class<Array<SimpleJsFunction?>>
  }
  
- internal open fun testJsFunctionOptional_pp_jsfunction() {
+ internal open fun testJsFunctionOptional() {
   val f: JsFunctionOptional = JsFunctionOptional { i: Int, n: Double? -> (i.toDouble() + n!!.toDouble()).toInt() }
  }
  
  @JvmField
- internal var jsFunctionFieldWildcard_pp_jsfunction: ParametricJsFunction<*>? = ParametricJsFunction { event: Any? ->
+ internal var jsFunctionFieldWildcard: ParametricJsFunction<*>? = ParametricJsFunction { event: Any? ->
  }
  
  @JvmField
- internal var jsFunctionFieldParameterized_pp_jsfunction: ParametricJsFunction<String?>? = ParametricJsFunction { event: String? ->
+ internal var jsFunctionFieldParameterized: ParametricJsFunction<String?>? = ParametricJsFunction { event: String? ->
  }
  
- internal open fun testFunctionExpressionTypeReplacement_pp_jsfunction() {
+ internal open fun testFunctionExpressionTypeReplacement() {
   val f: ParametricJsFunction<String?> = ParametricJsFunction { unused: String? ->
    val l: List<List<*>?> = ArrayList<List<*>?>() as List<List<*>?>
    l.asMutableList().add(
@@ -180,12 +180,12 @@ open class Main {
   }
  }
  
- internal open fun testJsFunctionPropertyCall_pp_jsfunction() {
+ internal open fun testJsFunctionPropertyCall() {
   val c: ClassWithJsFunctionProperty = ClassWithJsFunctionProperty()
-  c.function_pp_jsfunction!!.call("")
-  c.getFunction_pp_jsfunction()!!.call("")
-  c.function_pp_jsfunction!!.call("")
-  (if (c != null) c.function_pp_jsfunction else null)!!.call("")
+  c.function!!.call("")
+  c.getFunction()!!.call("")
+  c.function!!.call("")
+  (if (c != null) c.function else null)!!.call("")
  }
  
  open fun testJsFunctionWithNativeType() {
@@ -427,10 +427,10 @@ open class Main {
  
  private open class ClassWithJsFunctionProperty internal constructor() {
   @JvmField
-  internal var function_pp_jsfunction: ParametricJsFunction<String?>? = null
+  internal var function: ParametricJsFunction<String?>? = null
   
-  @JsProperty(name = "function")
-  internal open fun getFunction_pp_jsfunction(): ParametricJsFunction<String?>? = null
+  @JsProperty
+  internal open fun getFunction(): ParametricJsFunction<String?>? = null
  }
  
  @JsFunction
@@ -449,14 +449,14 @@ open class Main {
  @JsType(name = "Array", namespace = JsPackage.GLOBAL, isNative = true)
  internal open class TestJsFunctionInJsOverlayCapturingOuter internal constructor() {
   @JsOverlay
-  internal fun test_pp_jsfunction() {
-   this.sort_pp_jsfunction(
+  internal fun test() {
+   this.sort(
     JsFunctionInterface { a: Int -> if (this@TestJsFunctionInJsOverlayCapturingOuter == null) 0 else 1 },
    )
   }
   
   @JsOverlay
-  internal fun sort_pp_jsfunction(func: JsFunctionInterface?) {}
+  internal fun sort(func: JsFunctionInterface?) {}
  }
  
  private class RecursiveParametricJsFunctionImplementation<T: ParametricJsFunction<T>?> private constructor(): ParametricJsFunction<T> {

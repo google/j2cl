@@ -15,12 +15,16 @@
  */
 package packageprivatemethods.package1;
 
+import com.google.common.annotations.J2ktPublic;
+
 public class SuperParent {
+  @J2ktPublic
   String fun() {
     return "SuperParent";
   }
 
   // exposed by Child.bar()
+  @J2ktPublic
   int bar(int a) {
     return a;
   }

@@ -26,14 +26,14 @@ import kotlin.jvm.JvmStatic
 
 open class NullabilityInferenceInLambdaReturnTypes {
  private fun testAccept() {
-  NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
+  NullabilityInferenceInLambdaReturnTypes.accept<Any?>(
    Supplier { null },
   )
  }
  
  private fun testTransformAndAccept() {
-  NullabilityInferenceInLambdaReturnTypes.accept_pp_j2kt<Any?>(
-   NullabilityInferenceInLambdaReturnTypes.transform_pp_j2kt<Any?>(
+  NullabilityInferenceInLambdaReturnTypes.accept<Any?>(
+   NullabilityInferenceInLambdaReturnTypes.transform<Any?>(
     Supplier { null },
    ),
   )
@@ -55,12 +55,12 @@ open class NullabilityInferenceInLambdaReturnTypes {
  
  companion object {
   @JvmStatic
-  internal fun <V> accept_pp_j2kt(supplier: Supplier<V>) {
+  internal fun <V> accept(supplier: Supplier<V>) {
    throw RuntimeException()
   }
   
   @JvmStatic
-  internal fun <V> transform_pp_j2kt(supplier: Supplier<V>): Supplier<V> {
+  internal fun <V> transform(supplier: Supplier<V>): Supplier<V> {
    throw RuntimeException()
   }
  }

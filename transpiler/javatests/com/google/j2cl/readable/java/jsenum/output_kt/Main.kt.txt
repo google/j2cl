@@ -196,13 +196,13 @@ open class Main {
    val templatedField: TemplatedField<ComparableJsEnum?> = TemplatedField<ComparableJsEnum?>(
     ComparableJsEnum.ONE,
    )
-   var unboxed: ComparableJsEnum? = templatedField.getValue_pp_jsenum()
-   unboxed = templatedField.value_pp_jsenum
-   templatedField.value_pp_jsenum = ComparableJsEnum.ONE
+   var unboxed: ComparableJsEnum? = templatedField.getValue()
+   unboxed = templatedField.value
+   templatedField.value = ComparableJsEnum.ONE
    Arrays.asList<ComparableJsEnum>(
     ComparableJsEnum.ONE,
    )
-   templatedField.getValue_pp_jsenum()!!.ordinal
+   templatedField.getValue()!!.ordinal
    val b: Boolean = ComparableJsEnum.ONE === Main.boxingPassthrough<ComparableJsEnum?>(
     ComparableJsEnum.ONE,
    )
@@ -212,7 +212,7 @@ open class Main {
   private fun <T> boxingPassthrough(t: T): T = t
   
   @JvmStatic
-  internal fun boxingWithGenerics_pp_jsenum() {
+  internal fun boxingWithGenerics() {
    Foo<Any?>(
     Optional.of<IntJsEnum>(
      IntJsEnum.MINUSONE,
@@ -425,13 +425,13 @@ open class Main {
  
  private open class TemplatedField<T> {
   @JvmField
-  internal var value_pp_jsenum: T
+  internal var value: T
   
   internal constructor(value: T) {
-   this.value_pp_jsenum = value
+   this.value = value
   }
   
-  internal open fun getValue_pp_jsenum(): T = this.value_pp_jsenum
+  internal open fun getValue(): T = this.value
  }
  
  internal open class Foo<T> {

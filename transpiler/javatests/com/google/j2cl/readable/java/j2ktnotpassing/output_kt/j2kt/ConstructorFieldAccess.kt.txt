@@ -25,14 +25,14 @@ import kotlin.jvm.JvmField
 
 open class ConstructorFieldAccess {
  @JvmField
- internal val field_pp_j2kt: String
+ internal val field: String
  
  constructor() {
   open class Inner internal constructor() {
    init {
-    val f: String = this@ConstructorFieldAccess.field_pp_j2kt
+    val f: String = this@ConstructorFieldAccess.field
    }
   }
-  this.field_pp_j2kt = ""
+  this.field = ""
  }
 }

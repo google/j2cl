@@ -38,13 +38,13 @@ open class Implementor: ClassWithAbstractMethod(), Interface, NestedInterface {
  
  enum class SomeEnum {
   COMPATIBLE {
-   override fun method_pp_gwtincompatible() {}
+   override fun method() {}
   },
   INCOMPATIBLE {
-   override fun method_pp_gwtincompatible() {}
+   override fun method() {}
   };
   
-  internal abstract fun method_pp_gwtincompatible()
+  internal abstract fun method()
  }
  
  enum class OneMemberEnum {

@@ -72,7 +72,7 @@ open class Arrays {
   objects2d[0]!![1] = null
  }
  
- internal open fun testIntArrays_pp_array() {
+ internal open fun testIntArrays() {
   var ints: IntArray = IntArray(100)
   ints = IntArray(0)
   ints = intArrayOf(0, 1)
@@ -94,7 +94,7 @@ open class Arrays {
   ints = intArrayOf(b.toInt(), c.code)
  }
  
- internal open fun testLongArrays_pp_array() {
+ internal open fun testLongArrays() {
   var longs: LongArray = LongArray(100)
   longs = LongArray(0)
   longs = longArrayOf(0L, 1L)
@@ -116,7 +116,7 @@ open class Arrays {
   longs = longArrayOf(b.toLong(), c.code.toLong())
  }
  
- internal open fun testDevirtualizedTypeArrays_pp_array() {
+ internal open fun testDevirtualizedTypeArrays() {
   var booleans: Array<Boolean?> = arrayOfNulls<Boolean>(100)
   booleans = arrayOfNulls<Boolean>(0)
   booleans = arrayOf<Boolean?>(true, false)
@@ -131,7 +131,7 @@ open class Arrays {
   booleans2d[0]!![1] = false
  }
  
- internal open fun testStringArrays_pp_array() {
+ internal open fun testStringArrays() {
   var strings: Array<String?> = arrayOfNulls<String>(100)
   strings = arrayOfNulls<String>(0)
   strings = arrayOf<String?>(null, null)
@@ -163,7 +163,7 @@ open class Arrays {
  
  open fun testErasureCastsOnArrayAccess() {
   val container: ArrayContainer<String?>? = null
-  val s: String? = container!!.data_pp_array!![0]
+  val s: String? = container!!.data!![0]
  }
  
  open fun testCovariance() {
@@ -178,7 +178,7 @@ open class Arrays {
  
  open fun consumesSerializable(serializable: Serializable?) {}
  
- internal open fun <T> testArrayClone_pp_array(array: Array<T>?): Array<T>? = array!!.clone()
+ internal open fun <T> testArrayClone(array: Array<T>?): Array<T>? = array!!.clone()
  
  private open inner class SomeObject private constructor()
  
@@ -187,7 +187,7 @@ open class Arrays {
  
  private open class ArrayContainer<T> private constructor() {
   @JvmField
-  internal var data_pp_array: Array<T>? = null
+  internal var data: Array<T>? = null
  }
  
  internal annotation class GwtIncompatible

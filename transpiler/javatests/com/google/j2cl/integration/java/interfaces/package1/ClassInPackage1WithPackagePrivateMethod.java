@@ -15,10 +15,12 @@
  */
 package interfaces.package1;
 
+import com.google.common.annotations.J2ktPublic;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class ClassInPackage1WithPackagePrivateMethod {
+  @J2ktPublic
   String m() {
     return "package-private-m";
   }

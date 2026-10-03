@@ -27,13 +27,13 @@ open class Main {
  init {
   try {} catch (e: RuntimeException) {
    open class A internal constructor() {
-    internal open fun m_pp_unreachableclass() {
+    internal open fun m() {
      open class B internal constructor() {
       private fun n() {}
      }
     }
    }
-   A().m_pp_unreachableclass()
+   A().m()
    object : Any() {}
   }
  }

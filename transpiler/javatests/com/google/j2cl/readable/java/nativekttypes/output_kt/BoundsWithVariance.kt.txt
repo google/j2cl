@@ -40,33 +40,33 @@ internal interface FnWithoutVariance<I, O>
 internal interface FnWithVariance<in I, out O>
 
 internal class BoundsWithVariance internal constructor() {
- internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithoutVariance<in I, out O>) {}
+ internal fun <I: Any, O: Any> accept(o: FnWithoutVariance<in I, out O>) {}
  
- internal fun <I: Any, O: Any> accept_pp_nativekttypes(o: FnWithVariance<I, O>) {}
+ internal fun <I: Any, O: Any> accept(o: FnWithVariance<I, O>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Comparable<E>) {}
+ internal fun <E: Any> accept(o: Comparable<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Iterable<E>) {}
+ internal fun <E: Any> accept(o: Iterable<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Iterator<E>) {}
+ internal fun <E: Any> accept(o: Iterator<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: ListIterator<out E>) {}
+ internal fun <E: Any> accept(o: ListIterator<out E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Collection<E>) {}
+ internal fun <E: Any> accept(o: Collection<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: List<E>) {}
+ internal fun <E: Any> accept(o: List<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: Set<E>) {}
+ internal fun <E: Any> accept(o: Set<E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: AbstractCollection<out E>) {}
+ internal fun <E: Any> accept(o: AbstractCollection<out E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: AbstractList<out E>) {}
+ internal fun <E: Any> accept(o: AbstractList<out E>) {}
  
- internal fun <E: Any> accept_pp_nativekttypes(o: AbstractSet<out E>) {}
+ internal fun <E: Any> accept(o: AbstractSet<out E>) {}
  
- internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: Map<in K, V>) {}
+ internal fun <K: Any, V: Any> accept(o: Map<in K, V>) {}
  
- internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: AbstractMap<in K, out V>) {}
+ internal fun <K: Any, V: Any> accept(o: AbstractMap<in K, out V>) {}
  
- internal fun <K: Any, V: Any> accept_pp_nativekttypes(o: Entry<K, V>) {}
+ internal fun <K: Any, V: Any> accept(o: Entry<K, V>) {}
 }

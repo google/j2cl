@@ -24,30 +24,30 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class GenericMethodReferences {
- internal open fun <T> instanceGenericMethod_pp_j2kt(t: T): T = t
+ internal open fun <T> instanceGenericMethod(t: T): T = t
  
- internal open fun accept_pp_j2kt(fn: InterfaceWithGenericMethod) {}
+ internal open fun accept(fn: InterfaceWithGenericMethod) {}
  
- internal open fun test_pp_j2kt(instance: GenericMethodReferences) {
-  this.accept_pp_j2kt(
+ internal open fun test(instance: GenericMethodReferences) {
+  this.accept(
    object : InterfaceWithGenericMethod {
-    override fun <T> apply(t: T): T = GenericMethodReferences.staticGenericMethod_pp_j2kt<T>(t)
+    override fun <T> apply(t: T): T = GenericMethodReferences.staticGenericMethod<T>(t)
    },
   )
-  this.accept_pp_j2kt(
+  this.accept(
    object : InterfaceWithGenericMethod {
-    override fun <T> apply(t: T): T = this@GenericMethodReferences.instanceGenericMethod_pp_j2kt<T>(t)
+    override fun <T> apply(t: T): T = this@GenericMethodReferences.instanceGenericMethod<T>(t)
    },
   )
-  this.accept_pp_j2kt(
+  this.accept(
    object : InterfaceWithGenericMethod {
-    override fun <T> apply(t: T): T = instance.instanceGenericMethod_pp_j2kt<T>(t)
+    override fun <T> apply(t: T): T = instance.instanceGenericMethod<T>(t)
    },
   )
  }
  
  companion object {
   @JvmStatic
-  internal fun <T> staticGenericMethod_pp_j2kt(t: T): T = t
+  internal fun <T> staticGenericMethod(t: T): T = t
  }
 }

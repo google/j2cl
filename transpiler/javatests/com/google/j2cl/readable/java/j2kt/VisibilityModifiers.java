@@ -113,6 +113,20 @@ public final class VisibilityModifiers {
   public static class PublicExtendsPackagePrivateWithJ2ktPublic
       extends PackagePrivateWithJ2ktPublic {}
 
+  public static class PublicExtendsPackagePrivateWithJ2ktPublicInSeparateLibrary
+      extends PackagePrivateWithJ2ktPublicInSeparateLibrary {
+    @Override
+    void packagePrivateMethod() {}
+
+    @Override
+    public void packagePrivateWithPublicOverride() {}
+
+    public static void test(PackagePrivateWithJ2ktPublicInSeparateLibrary instance) {
+      int unused = instance.field;
+      instance.packagePrivateMethod();
+    }
+  }
+
   abstract static class PackagePrivateCollection implements Collection<PackagePrivate> {
     @Override
     public abstract boolean contains(Object o);

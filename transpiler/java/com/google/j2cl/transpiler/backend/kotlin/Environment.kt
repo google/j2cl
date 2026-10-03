@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.AstUtils
 import com.google.j2cl.transpiler.ast.AstUtils.isJsEnumCustomValueField
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.HasName
@@ -176,13 +177,22 @@ internal data class Environment(
     when (memberDescriptor.visibility!!) {
       Visibility.PUBLIC -> memberDescriptor.ktPropertyNameSuffix
       Visibility.PROTECTED -> memberDescriptor.ktPropertyNameSuffix
-      Visibility.PACKAGE_PRIVATE -> "_pp_${memberDescriptor.ktPackageProtectedNameSuffix}"
+      Visibility.PACKAGE_PRIVATE ->
+        when {
+          needsPackageSuffix(memberDescriptor) -> memberDescriptor.ktPackagePrivateNameSuffix
+          else -> memberDescriptor.ktPropertyNameSuffix
+        }
       Visibility.PRIVATE ->
         when (ktVisibility(memberDescriptor)) {
           KtVisibility.PRIVATE -> memberDescriptor.ktPropertyNameSuffix
-          else -> "_private_${memberDescriptor.ktPrivateNameSuffix}"
+          else -> memberDescriptor.ktPrivateNameSuffix
         }
     }
+
+  private fun needsPackageSuffix(memberDescriptor: MemberDescriptor): Boolean =
+    ktVisibility(memberDescriptor) == KtVisibility.PUBLIC ||
+      (memberDescriptor is MethodDescriptor &&
+        AstUtils.needsPackagePrivateMangling(memberDescriptor))
 
   internal fun isKtNameMangled(memberDescriptor: MemberDescriptor): Boolean =
     memberDescriptor.name != ktMangledName(memberDescriptor)

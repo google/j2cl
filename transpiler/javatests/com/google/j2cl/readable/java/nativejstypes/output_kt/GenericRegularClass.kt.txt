@@ -42,7 +42,6 @@ open class GenericRegularClass<T: Foo?> {
  internal open class NativeGenericClass<T: Foo?> {
   internal constructor(t: T)
   
-  @JsMethod(name = "apply")
-  internal external open fun apply_pp_nativejstypes(t: T): T
+  internal external open fun apply(t: T): T
  }
 }

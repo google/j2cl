@@ -32,30 +32,30 @@ import kotlin.jvm.JvmStatic
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 internal open class Immediate internal constructor(): Transitive() {
  @JsOverlay
- internal fun doImmediateInstanceMethod_pp_transitivejsoverlayimport() {}
+ internal fun doImmediateInstanceMethod() {}
 }
 
 internal open class NonNativeUpper: Immediate {
  @JsConstructor
  constructor()
  
- internal open fun doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport() {}
+ internal open fun doNonNativeUpperInstanceMethod() {}
 }
 
 internal open class NonNativeLower: NonNativeUpper {
  @JsConstructor
  constructor()
  
- internal open fun doNonNativeLowerInstanceMethod_pp_transitivejsoverlayimport() {}
+ internal open fun doNonNativeLowerInstanceMethod() {}
 }
 
 @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
 internal open class Transitive internal constructor() {
  @JsProperty(name = "constructor")
- internal external fun getJsProperty_pp_transitivejsoverlayimport(): Any?
+ internal external fun getJsProperty(): Any?
  
  @JsOverlay
- internal fun doTransitiveInstanceMethod_pp_transitivejsoverlayimport(arg1: String?) {}
+ internal fun doTransitiveInstanceMethod(arg1: String?) {}
 }
 
 open class Main {
@@ -63,23 +63,23 @@ open class Main {
   @JvmStatic
   fun main() {
    val transitive: Transitive = Transitive()
-   transitive.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
-   transitive.getJsProperty_pp_transitivejsoverlayimport()
+   transitive.doTransitiveInstanceMethod("arg1")
+   transitive.getJsProperty()
    val immediate: Immediate = Immediate()
-   immediate.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
-   immediate.getJsProperty_pp_transitivejsoverlayimport()
-   immediate.doImmediateInstanceMethod_pp_transitivejsoverlayimport()
+   immediate.doTransitiveInstanceMethod("arg1")
+   immediate.getJsProperty()
+   immediate.doImmediateInstanceMethod()
    val nonNativeUpper: NonNativeUpper = NonNativeUpper()
-   nonNativeUpper.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
-   nonNativeUpper.getJsProperty_pp_transitivejsoverlayimport()
-   nonNativeUpper.doImmediateInstanceMethod_pp_transitivejsoverlayimport()
-   nonNativeUpper.doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport()
+   nonNativeUpper.doTransitiveInstanceMethod("arg1")
+   nonNativeUpper.getJsProperty()
+   nonNativeUpper.doImmediateInstanceMethod()
+   nonNativeUpper.doNonNativeUpperInstanceMethod()
    val nonNativeLower: NonNativeLower = NonNativeLower()
-   nonNativeLower.doTransitiveInstanceMethod_pp_transitivejsoverlayimport("arg1")
-   nonNativeLower.getJsProperty_pp_transitivejsoverlayimport()
-   nonNativeLower.doImmediateInstanceMethod_pp_transitivejsoverlayimport()
-   nonNativeLower.doNonNativeUpperInstanceMethod_pp_transitivejsoverlayimport()
-   nonNativeLower.doNonNativeLowerInstanceMethod_pp_transitivejsoverlayimport()
+   nonNativeLower.doTransitiveInstanceMethod("arg1")
+   nonNativeLower.getJsProperty()
+   nonNativeLower.doImmediateInstanceMethod()
+   nonNativeLower.doNonNativeUpperInstanceMethod()
+   nonNativeLower.doNonNativeLowerInstanceMethod()
   }
  }
 }

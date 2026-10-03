@@ -34,8 +34,8 @@ open class NativeClass {
   external fun nativeStaticMethod(): NativeClass?
   
   @JvmStatic
-  @JsMethod(name = "notPublicNativeStaticMethod")
-  internal external fun notPublicNativeStaticMethod_pp_nativeinjection(): NativeClass?
+  @JsMethod
+  internal external fun notPublicNativeStaticMethod(): NativeClass?
  }
  
  open class InnerClass {

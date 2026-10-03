@@ -1117,6 +1117,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * <p>This includes both real and accidental overrides.
    */
   public boolean isOverride(MethodDescriptor that) {
+    // To override a package private method one must reside in the same package.
+    if (that.getVisibility().isPackagePrivate()
+        && !getEnclosingTypeDescriptor().isInSamePackage(that.getEnclosingTypeDescriptor())) {
+      return false;
+    }
+
+    return isOverrideIgnoringPackage(that);
+  }
+
+  /**
+   * Returns whether this method descriptor overrides the provided method descriptor from the
+   * Java/Kotlin source perspective, ignoring package restrictions on package-private methods.
+   *
+   * <p>This includes both real and accidental overrides.
+   */
+  private boolean isOverrideIgnoringPackage(MethodDescriptor that) {
     // A method can not override itself.
     if (this == that) {
       return false;
@@ -1129,11 +1145,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     Visibility thatVisibility = that.getVisibility();
     // Private methods can not override nor can they be overridden.
     if (thisVisibility.isPrivate() || thatVisibility.isPrivate()) {
-      return false;
-    }
-    // To override a package private method one must reside in the same package.
-    if (thatVisibility.isPackagePrivate()
-        && !getEnclosingTypeDescriptor().isInSamePackage(that.getEnclosingTypeDescriptor())) {
       return false;
     }
 
@@ -1299,11 +1310,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
-   * the Java semantics perspective.
+   * Returns a set of the method descriptors that are overridden by {@code methodDescriptor}
+   * according to {@code isOverrideFunction}.
    */
-  @Memoized
-  public ImmutableSet<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
+  public ImmutableSet<MethodDescriptor> getOverriddenMethodDescriptors(
+      Predicate<MethodDescriptor> isOverrideFunction) {
     if (!isPolymorphic()) {
       return ImmutableSet.of();
     }
@@ -1312,8 +1323,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .filter(t -> t != getEnclosingTypeDescriptor())
         .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
         .filter(MethodDescriptor::isPolymorphic)
-        .filter(this::isOverride)
+        .filter(isOverrideFunction)
         .collect(toImmutableSet());
+  }
+
+  /**
+   * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
+   * the Java semantics perspective.
+   */
+  @Memoized
+  public ImmutableSet<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
+    return getOverriddenMethodDescriptors(this::isOverride);
   }
 
   /**
@@ -1322,6 +1342,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   public boolean isJavaOverride() {
     return !getJavaOverriddenMethodDescriptors().isEmpty();
+  }
+
+  /**
+   * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
+   * the J2KT perspective.
+   */
+  @Memoized
+  public ImmutableSet<MethodDescriptor> getJ2ktOverriddenMethodDescriptors() {
+    return getOverriddenMethodDescriptors(this::isOverrideIgnoringPackage);
   }
 
   /**

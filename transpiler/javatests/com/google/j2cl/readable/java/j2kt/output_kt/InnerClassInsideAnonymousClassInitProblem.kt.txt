@@ -28,36 +28,36 @@ import kotlin.jvm.JvmField
 open class InnerClassInsideAnonymousClassInitProblem {
  companion object {
   @JvmField
-  internal val obj_pp_j2kt: Any = object : Any() {
+  internal val obj: Any = object : Any() {
    internal open inner class InnerClassWithSingleConstructor constructor(i: Int) {
     @JvmField
-    internal val i_pp_j2kt: Int
+    internal val i: Int
     
     init {
-     this.i_pp_j2kt = i
+     this.i = i
     }
     
-    internal open val property_pp_j2kt: Int
-     get() = this.i_pp_j2kt
+    internal open val property: Int
+     get() = this.i
    }
   }
   
   @JvmField
-  internal val obj2_pp_j2kt: Any = object : Any() {
+  internal val obj2: Any = object : Any() {
    internal open inner class InnerClassWithTwoConstructors {
     @JvmField
-    internal val i_pp_j2kt: Int
+    internal val i: Int
     
     internal constructor(i: Int) {
-     this.i_pp_j2kt = i
+     this.i = i
     }
     
     internal constructor(i: Float) {
-     this.i_pp_j2kt = i.toInt()
+     this.i = i.toInt()
     }
     
-    internal open val property_pp_j2kt: Int
-     get() = this.i_pp_j2kt
+    internal open val property: Int
+     get() = this.i
    }
   }
  }

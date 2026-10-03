@@ -32,9 +32,9 @@ import kotlin.jvm.JvmStatic
 
 open class CastGenerics<T, E: Number?> {
  @JvmField
- internal var field_pp_cast: T? = null
+ internal var field: T? = null
  
- internal open fun method_pp_cast(): T = null as T
+ internal open fun method(): T = null as T
  
  open fun testCastToTypeVariable() {
   val o: Any = Int(1)
@@ -72,52 +72,52 @@ open class CastGenerics<T, E: Number?> {
  companion object {
   @JvmStatic
   fun <T_1, U: T_1> testErasureCast() where T_1: A?, T_1: B? {
-   var str: String? = CastGenerics<String?, Number?>().field_pp_cast
-   str = CastGenerics<String?, Number?>().method_pp_cast()
+   var str: String? = CastGenerics<String?, Number?>().field
+   str = CastGenerics<String?, Number?>().method()
    val containerT: Container<T_1>? = null
-   containerT!!.get_pp_cast()!!.mA()
-   containerT!!.get_pp_cast()!!.mB()
+   containerT!!.get()!!.mA()
+   containerT!!.get()!!.mB()
    val containerU: Container<U>? = null
-   containerU!!.get_pp_cast()!!.mA()
-   containerU!!.get_pp_cast()!!.mB()
+   containerU!!.get()!!.mA()
+   containerU!!.get()!!.mB()
    val containerArrT: Container<Array<T_1>?>? = null
-   val arrT: Array<T_1>? = containerArrT!!.get_pp_cast()
+   val arrT: Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: Array<A?>? = containerArrT!!.get_pp_cast() as Array<A?>?
-   var arrB: Array<B?>? = containerArrT!!.get_pp_cast() as Array<B?>?
+   var arrA: Array<A?>? = containerArrT!!.get() as Array<A?>?
+   var arrB: Array<B?>? = containerArrT!!.get() as Array<B?>?
    val containerArrU: Container<Array<U>?>? = null
-   val arrU: Array<U>? = containerArrU!!.get_pp_cast()
+   val arrU: Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
-   arrA = containerArrU!!.get_pp_cast() as Array<A?>?
-   arrB = containerArrU!!.get_pp_cast() as Array<B?>?
+   arrA = containerArrU!!.get() as Array<A?>?
+   arrB = containerArrU!!.get() as Array<B?>?
    val containerBase: Container<BaseImplementor?>? = null
-   containerBase!!.get_pp_cast()!!.mA()
-   containerBase!!.get_pp_cast()!!.mB()
+   containerBase!!.get()!!.mA()
+   containerBase!!.get()!!.mB()
    val containerImplementor: Container<Implementor?>? = null
-   containerImplementor!!.get_pp_cast()!!.mA()
-   containerImplementor!!.get_pp_cast()!!.mB()
+   containerImplementor!!.get()!!.mA()
+   containerImplementor!!.get()!!.mB()
    val strictlyA: Container<A?>? = null
-   var oA: Any? = strictlyA!!.get_pp_cast()
-   var a: A? = strictlyA!!.get_pp_cast()
+   var oA: Any? = strictlyA!!.get()
+   var a: A? = strictlyA!!.get()
    val extendsA: Container<out A?>? = null
-   oA = extendsA!!.get_pp_cast()
-   a = extendsA!!.get_pp_cast()
+   oA = extendsA!!.get()
+   a = extendsA!!.get()
    val superA: Container<in A?>? = null
-   oA = superA!!.get_pp_cast()
+   oA = superA!!.get()
    val strictlyString: Container<String?>? = null
-   str = strictlyString!!.get_pp_cast()
+   str = strictlyString!!.get()
    val extendsString: Container<out String?>? = null
-   str = extendsString!!.get_pp_cast()
+   str = extendsString!!.get()
    val superString: Container<in String?>? = null
-   oA = superString!!.get_pp_cast()
+   oA = superString!!.get()
   }
   
   @JvmStatic
   fun testErasureCastInNullMarkedCode() {
    val container: NullMarkedContainer<out String> = NullMarkedContainer<String>("abc")
-   val s: String? = container.get_pp_cast()
+   val s: String? = container.get()
   }
   
   @JvmStatic
@@ -148,7 +148,7 @@ open class CastGenerics<T, E: Number?> {
  }
  
  open class Container<T> private constructor() {
-  internal open fun get_pp_cast(): T = null as T
+  internal open fun get(): T = null as T
  }
  
  open class NullMarkedContainer<T: Any> {
@@ -158,7 +158,7 @@ open class CastGenerics<T, E: Number?> {
    this.value = value
   }
   
-  internal open fun get_pp_cast(): T = this.value
+  internal open fun get(): T = this.value
  }
  
  interface Empty1

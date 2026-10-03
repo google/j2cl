@@ -54,15 +54,15 @@ abstract class SimpleAutoValue {
  
  companion object {
   @JvmStatic
-  internal fun create_pp_autovalue(): SimpleAutoValue? = AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0)
+  internal fun create(): SimpleAutoValue? = AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0)
   
   @JvmStatic
-  internal fun castAndInstanceOf_pp_autovalue(o: Any?): Array<AutoValue_SimpleAutoValue?>? = if (o is Array<*>) o as Array<AutoValue_SimpleAutoValue?>? else null
+  internal fun castAndInstanceOf(o: Any?): Array<AutoValue_SimpleAutoValue?>? = if (o is Array<*>) o as Array<AutoValue_SimpleAutoValue?>? else null
  }
  
  abstract class GenericType internal constructor(): AbstractCollection<AutoValue_SimpleAutoValue?>() {
-  internal open fun <T: AutoValue_SimpleAutoValue?> foo_pp_autovalue(o1: List<AutoValue_SimpleAutoValue?>?, o2: List<AutoValue_SimpleAutoValue?>?): T {
-   this.foo_pp_autovalue<AutoValue_SimpleAutoValue?>(null, null)!!.getIntField()
+  internal open fun <T: AutoValue_SimpleAutoValue?> foo(o1: List<AutoValue_SimpleAutoValue?>?, o2: List<AutoValue_SimpleAutoValue?>?): T {
+   this.foo<AutoValue_SimpleAutoValue?>(null, null)!!.getIntField()
    val o: AutoValue_SimpleAutoValue? = o1!!.get(0)
    return null as T
   }

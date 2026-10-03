@@ -35,7 +35,7 @@ abstract class AutoValueJsType {
  abstract fun getField(): Int
  
  @JsMethod(name = "getField2")
- internal abstract fun getWithJsMethod_pp_autovalue(): Int
+ internal abstract fun getWithJsMethod(): Int
  
  @JsIgnore
  abstract fun ignored(): Int
@@ -49,7 +49,7 @@ abstract class AutoValueJsType {
   abstract fun setGetField(x: Int): Builder?
   
   @JsMethod(name = "setField2")
-  internal abstract fun setGetWithJsMethod_pp_autovalue(x: Int): Builder?
+  internal abstract fun setGetWithJsMethod(x: Int): Builder?
   
   @JsIgnore
   abstract fun setIgnored(x: Int): Builder?

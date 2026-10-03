@@ -40,11 +40,11 @@ class AutoValue_AutoValueWithExtensions: ___AutoValue_AutoValueWithExtensions {
  
  internal constructor(intField: Int, stringField: String?): super(intField, stringField)
  
- override fun getMemoizedNative_pp_autovalue(): Int {
+ override fun getMemoizedNative(): Int {
   if (!this.getMemoizedNative___Memoized) {
    synchronized<Unit>(this.monitor!!) {
     if (!this.getMemoizedNative___Memoized) {
-     this.getMemoizedNative = super<___AutoValue_AutoValueWithExtensions>.getMemoizedNative_pp_autovalue()
+     this.getMemoizedNative = super<___AutoValue_AutoValueWithExtensions>.getMemoizedNative()
      this.getMemoizedNative___Memoized = true
     }
    }

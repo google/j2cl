@@ -32,19 +32,19 @@ open class NullabilityInferenceProblem11 {
   }
   
   @JvmStatic
-  internal fun <R> call_pp_j2kt(callback: Callback<R>): R {
+  internal fun <R> call(callback: Callback<R>): R {
    throw RuntimeException()
   }
   
   @JvmStatic
-  fun <T: Any> workaround1(): MyNode<T?> = NullabilityInferenceProblem11.call_pp_j2kt<MyNode<T?>>(
+  fun <T: Any> workaround1(): MyNode<T?> = NullabilityInferenceProblem11.call<MyNode<T?>>(
    Callback { node: MyNode<T?> -> NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(
     node.getChild(),
    ) },
   )
   
   @JvmStatic
-  fun <T: Any> workaround2(): MyNode<T?> = NullabilityInferenceProblem11.call_pp_j2kt<MyNode<T?>>(
+  fun <T: Any> workaround2(): MyNode<T?> = NullabilityInferenceProblem11.call<MyNode<T?>>(
    Callback { node: MyNode<T?> ->
     val child: MyNode<T?>? = node.getChild() as MyNode<T?>?
     return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(child)

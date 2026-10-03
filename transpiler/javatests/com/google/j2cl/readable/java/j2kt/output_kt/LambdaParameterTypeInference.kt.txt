@@ -32,13 +32,13 @@ import kotlin.jvm.JvmStatic
 
 abstract class LambdaParameterTypeInference {
  open fun testInferenceFromReturnType(supplier: Supplier<Void?>) {
-  this.transform_pp_j2kt<Void?, Void?>(
+  this.transform<Void?, Void?>(
    supplier,
    Function { p: Void? -> p },
   )
  }
  
- internal abstract fun <I, O> transform_pp_j2kt(supplier: Supplier<I>, function: Function<in I, out O>): Supplier<O>
+ internal abstract fun <I, O> transform(supplier: Supplier<I>, function: Function<in I, out O>): Supplier<O>
  
  companion object {
   @JvmStatic

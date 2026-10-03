@@ -130,18 +130,18 @@
 
  companion object {
   @JvmField
-  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
+  internal var uninitializedStaticField: Double = 0.0
 
   init {
-   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+   SourceMap.uninitializedStaticField = 10.0
   }
 
   @JvmField
-  internal var initializedStaticField_pp_sourcemap: String? = "Hello"
+  internal var initializedStaticField: String? = "Hello"
 
   init {
-   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
-    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   if (SourceMap.uninitializedStaticField == 10.0) {
+    SourceMap.initializedStaticField = "World"
    }
   }
  }
@@ -465,53 +465,53 @@
 [testTypeLiteral] => [testTypeLiteral]
 [SourceMap] => [companion object {
   @JvmField
-  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
+  internal var uninitializedStaticField: Double = 0.0
 
   init {
-   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+   SourceMap.uninitializedStaticField = 10.0
   }
 
   @JvmField
-  internal var initializedStaticField_pp_sourcemap: String? = "Hello"
+  internal var initializedStaticField: String? = "Hello"
 
   init {
-   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
-    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   if (SourceMap.uninitializedStaticField == 10.0) {
+    SourceMap.initializedStaticField = "World"
    }
   }
  }]
 [uninitializedStaticField] => [@JvmField
-  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0]
-[uninitializedStaticField] => [uninitializedStaticField_pp_sourcemap]
+  internal var uninitializedStaticField: Double = 0.0]
+[uninitializedStaticField] => [uninitializedStaticField]
 [static {
     uninitializedStaticField = 10.0;
   }] => [{
-   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+   SourceMap.uninitializedStaticField = 10.0
   }] "sourcemap.SourceMap.<clinit>"
-[uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField_pp_sourcemap = 10.0] "sourcemap.SourceMap.<clinit>"
+[uninitializedStaticField = 10.0;] => [SourceMap.uninitializedStaticField = 10.0] "sourcemap.SourceMap.<clinit>"
 [initializedStaticField] => [@JvmField
-  internal var initializedStaticField_pp_sourcemap: String? = "Hello"]
-[initializedStaticField] => [initializedStaticField_pp_sourcemap]
+  internal var initializedStaticField: String? = "Hello"]
+[initializedStaticField] => [initializedStaticField]
 [static {
     if (uninitializedStaticField == 10.0) {
 ...
     }
   }] => [{
-   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
+   if (SourceMap.uninitializedStaticField == 10.0) {
 ...
    }
   }] "sourcemap.SourceMap.<clinit>"
 [if (uninitializedStaticField == 10.0) {
       initializedStaticField = "World";
-    }] => [if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
-    SourceMap.initializedStaticField_pp_sourcemap = "World"
+    }] => [if (SourceMap.uninitializedStaticField == 10.0) {
+    SourceMap.initializedStaticField = "World"
    }] "sourcemap.SourceMap.<clinit>"
 [{
       initializedStaticField = "World";
     }] => [{
-    SourceMap.initializedStaticField_pp_sourcemap = "World"
+    SourceMap.initializedStaticField = "World"
    }] "sourcemap.SourceMap.<clinit>"
-[initializedStaticField = "World";] => [SourceMap.initializedStaticField_pp_sourcemap = "World"] "sourcemap.SourceMap.<clinit>"
+[initializedStaticField = "World";] => [SourceMap.initializedStaticField = "World"] "sourcemap.SourceMap.<clinit>"
 [Enum1] => [internal enum class Enum1 {
   VALUE1,
   VALUE2,

@@ -27,19 +27,19 @@ import kotlin.jvm.JvmStatic
 
 open class InitializationProblemWithNullLiteral {
  @JvmField
- internal val completelyNormalFinalField_pp_j2kt: Int
+ internal val completelyNormalFinalField: Int
  
  @JvmField
- internal var problematicFoo_pp_j2kt: Foo<*> = Foo.with_pp_j2kt<Any?>(null)
+ internal var problematicFoo: Foo<*> = Foo.with<Any?>(null)
  
  internal constructor() {
-  this.completelyNormalFinalField_pp_j2kt = 0
+  this.completelyNormalFinalField = 0
  }
  
  internal open class Foo<V> internal constructor() {
   companion object {
    @JvmStatic
-   internal fun <V> with_pp_j2kt(v: V): Foo<V> = Foo<V>()
+   internal fun <V> with(v: V): Foo<V> = Foo<V>()
   }
  }
 }

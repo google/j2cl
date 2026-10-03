@@ -27,32 +27,32 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 open class SmartCasts {
- internal open fun testThisReferenceInConstructor_pp_j2kt() {
+ internal open fun testThisReferenceInConstructor() {
   open class Local<T: Local<T>> {
    @JvmField
-   internal val fieldInitializedInConstructor_pp_j2kt: Any
+   internal val fieldInitializedInConstructor: Any
    
    @JvmField
-   internal var t_pp_j2kt: T
+   internal var t: T
    
    internal constructor() {
-    this.t_pp_j2kt = this as T
-    this.fieldInitializedInConstructor_pp_j2kt = 1
+    this.t = this as T
+    this.fieldInitializedInConstructor = 1
    }
   }
  }
  
- internal open fun testThisReferenceInInitializer_pp_j2kt() {
+ internal open fun testThisReferenceInInitializer() {
   open class Local<T: Local<T>> internal constructor() {
    @JvmField
-   internal var fieldInitializedInInitializer_pp_j2kt: Any
+   internal var fieldInitializedInInitializer: Any
    
    @JvmField
-   internal var t_pp_j2kt: T
+   internal var t: T
    
    init {
-    this.t_pp_j2kt = this as T
-    this.fieldInitializedInInitializer_pp_j2kt = 1
+    this.t = this as T
+    this.fieldInitializedInInitializer = 1
    }
   }
  }

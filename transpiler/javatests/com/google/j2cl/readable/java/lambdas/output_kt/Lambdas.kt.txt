@@ -127,7 +127,7 @@ open class Lambdas {
  
  internal open fun callParameterized(intf: GenericFunctionalInterface<Error?>?, e: Error?): Error? = intf!!.m(e)
  
- internal open fun <T> callWithBiFunction_pp_lambdas(fn: BiFunction<T, String?, Double?>?): GenericFunctionalInterface<T>? = null
+ internal open fun <T> callWithBiFunction(fn: BiFunction<T, String?, Double?>?): GenericFunctionalInterface<T>? = null
  
  open fun <T: Enum<T>> testLambdaWithGenerics() {
   this.callWithTypeVariable<Error?>(
@@ -142,16 +142,16 @@ open class Lambdas {
    GenericFunctionalInterface { i_2: Enum<T>? -> i_2 } as GenericFunctionalInterface<Enum<T>?>?,
    null as Enum<T>?,
   )
-  this.callWithBiFunction_pp_lambdas<Any?>(
+  this.callWithBiFunction<Any?>(
    BiFunction { x: Any?, y: String? ->
     throw RuntimeException()
    },
   )
-  this.callWithBiFunction_pp_lambdas<Any?>(
+  this.callWithBiFunction<Any?>(
    BiFunction { x_1: Any?, y_1: String? -> 3.0 },
   )
   val f: Function<in T, *> = Function { item: T -> 1L }
-  val f2: Function<Wrapper<String?>?, String?> = Function { item_1: Wrapper<String?>? -> item_1!!.wrapped_pp_lambdas }
+  val f2: Function<Wrapper<String?>?, String?> = Function { item_1: Wrapper<String?>? -> item_1!!.wrapped }
  }
  
  open fun testLambdaReturningVoidAsExpression() {
@@ -266,7 +266,7 @@ open class Lambdas {
  
  private open class Wrapper<T> private constructor() {
   @JvmField
-  internal var wrapped_pp_lambdas: T = null as T
+  internal var wrapped: T = null as T
  }
  
  internal fun interface FunctionalInterfaceWithMethodReturningVoid {
@@ -339,33 +339,33 @@ open class Lambdas {
  }
  
  internal open inner class Outer internal constructor() {
-  internal open fun m_pp_lambdas() {}
+  internal open fun m() {}
   
-  internal open fun n_pp_lambdas() {
+  internal open fun n() {
    val r: Runnable = Runnable {
-    this.m_pp_lambdas()
+    this.m()
    }
   }
  }
  
  internal open inner class Super internal constructor() {
-  internal open fun m_pp_lambdas() {}
+  internal open fun m() {}
  }
  
  internal open inner class Sub internal constructor(): Lambdas.Super() {
-  internal open fun n_pp_lambdas() {
+  internal open fun n() {
    val r: Runnable = object : Runnable {
     override fun run() {
-     super<Super>@Sub.m_pp_lambdas()
+     super<Super>@Sub.m()
     }
    }
   }
  }
  
  internal open inner class SubWithLambda internal constructor(): Lambdas.Super() {
-  internal open fun n_pp_lambdas() {
+  internal open fun n() {
    val r: Runnable = Runnable {
-    super<Super>.m_pp_lambdas()
+    super<Super>.m()
    }
   }
  }

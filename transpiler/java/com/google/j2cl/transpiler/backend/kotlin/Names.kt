@@ -68,11 +68,11 @@ internal val CompilationUnit.localTypeNames: Map<String, String>
 internal val MemberDescriptor.ktPropertyNameSuffix: String
   get() = if (this is FieldDescriptor && hasConflictingKtProperty) "_ktPropertyConflict" else ""
 
-internal val MemberDescriptor.ktPackageProtectedNameSuffix: String
-  get() = enclosingTypeDescriptor.typeDeclaration.packageName?.replace('.', '_') ?: ""
+internal val MemberDescriptor.ktPackagePrivateNameSuffix: String
+  get() = "_pp_${enclosingTypeDescriptor.typeDeclaration.packageName?.replace('.', '_') ?: ""}"
 
 internal val MemberDescriptor.ktPrivateNameSuffix: String
-  get() = enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix
+  get() = "_private_${enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix}"
 
 /** Whether this field descriptor has property with conflicting name in Kotlin. */
 private val FieldDescriptor.hasConflictingKtProperty: Boolean

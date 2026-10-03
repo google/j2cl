@@ -32,14 +32,14 @@ open class NullabilityInferenceProblem10 {
  internal open class InNullMarked internal constructor() {
   companion object {
    @JvmStatic
-   internal fun observeNullable_pp_j2kt(foo: Foo?): Future<Void?> {
+   internal fun observeNullable(foo: Foo?): Future<Void?> {
     throw RuntimeException()
    }
    
    @JvmStatic
-   internal fun test_pp_j2kt(lazyObservable: Lazy<Observable<Foo>>) {
+   internal fun test(lazyObservable: Lazy<Observable<Foo>>) {
     lazyObservable.get()!!.addObserver(
-     Observer { v: Foo? -> InNullMarked.observeNullable_pp_j2kt(v) },
+     Observer { v: Foo? -> InNullMarked.observeNullable(v) },
     )
    }
   }

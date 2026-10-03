@@ -34,9 +34,9 @@ open class LateInit<T: Any> {
  @set:JvmName("setLateinitProtectedField")
  protected lateinit var protectedField: String
  
- @get:JvmName("getLateinitPackagePrivateField_pp_j2kt")
- @set:JvmName("setLateinitPackagePrivateField_pp_j2kt")
- internal lateinit var packagePrivateField_pp_j2kt: String
+ @get:JvmName("getLateinitPackagePrivateField")
+ @set:JvmName("setLateinitPackagePrivateField")
+ internal lateinit var packagePrivateField: String
  
  private lateinit var privateField: String
  
@@ -57,7 +57,7 @@ open class LateInit<T: Any> {
  private fun init(genericValue: T) {
   this.publicField = "public"
   this.protectedField = "protected"
-  this.packagePrivateField_pp_j2kt = "packagePrivate"
+  this.packagePrivateField = "packagePrivate"
   this.privateField = "private"
   this.genericField = genericValue
  }
@@ -68,13 +68,13 @@ open class LateInit<T: Any> {
   this.publicField = publicField
  }
  
- internal open fun getPackagePrivateField_pp_j2kt(): String = this.packagePrivateField_pp_j2kt
+ internal open fun getPackagePrivateField(): String = this.packagePrivateField
  
- internal open fun setPackagePrivateField_pp_j2kt(packagePrivateField: String) {
-  this.packagePrivateField_pp_j2kt = packagePrivateField
+ internal open fun setPackagePrivateField(packagePrivateField: String) {
+  this.packagePrivateField = packagePrivateField
  }
  
- open fun test(): Int = this.publicField.length + this.protectedField.length + this.packagePrivateField_pp_j2kt.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
+ open fun test(): Int = this.publicField.length + this.protectedField.length + this.packagePrivateField.length + this.privateField.length + this.initializedField.length + this.nullableField!!.length + this.finalField.length + this.primitiveField + this.genericField.hashCode()
  
  private open inner class Inner private constructor() {
   private lateinit var unmarkedInnerField: String

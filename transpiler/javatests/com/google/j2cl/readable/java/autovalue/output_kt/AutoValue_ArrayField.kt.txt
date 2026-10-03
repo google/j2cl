@@ -79,7 +79,7 @@ class AutoValue_ArrayField: ArrayField {
    return this
   }
   
-  override fun build_pp_autovalue(): ArrayField? {
+  override fun build(): ArrayField? {
    if (this.arrayField == null) {
     val missing: String = " arrayField"
     throw IllegalStateException(

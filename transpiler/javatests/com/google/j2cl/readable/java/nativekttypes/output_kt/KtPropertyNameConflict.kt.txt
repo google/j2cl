@@ -67,9 +67,9 @@ abstract class KtPropertyNameConflict {
    val conflictingNonGetter: Int = o!!.fieldWithConflictingNonGetter
    val fieldWithConflictingRenamedMethod: Int = o!!.fieldWithConflictingRenamedMethod_ktPropertyConflict
    val conflictingRenamedMethod: Int = o!!.fieldWithConflictingRenamedMethod
-   val fieldWithConflictingSuperMethod: Int = o!!.fieldWithConflictingSuperMethod_pp_nativekttypes
+   val fieldWithConflictingSuperMethod: Int = o!!.fieldWithConflictingSuperMethod_ktPropertyConflict
    val conflictingSuperMethod: Int = o!!.fieldWithConflictingSuperMethod
-   val fieldWithConflictingInterfaceMethod: Int = o!!.fieldWithConflictingInterfaceMethod_pp_nativekttypes
+   val fieldWithConflictingInterfaceMethod: Int = o!!.fieldWithConflictingInterfaceMethod_ktPropertyConflict
    val conflictingInterfaceMethod: Int = o!!.fieldWithConflictingInterfaceMethod
   }
  }
@@ -80,12 +80,12 @@ abstract class KtPropertyNameConflict {
  
  abstract inner class Subclass: KtPropertyNameConflict(), Interface {
   @JvmField
-  internal var fieldWithConflictingSuperMethod_pp_nativekttypes: Int = 0
+  internal var fieldWithConflictingSuperMethod_ktPropertyConflict: Int = 0
   
   @JvmField
-  internal var fieldWithConflictingInterfaceMethod_pp_nativekttypes: Int = 0
+  internal var fieldWithConflictingInterfaceMethod_ktPropertyConflict: Int = 0
   
   override val fieldWithConflictingInterfaceMethod: Int
-   get() = this.fieldWithConflictingInterfaceMethod_pp_nativekttypes
+   get() = this.fieldWithConflictingInterfaceMethod_ktPropertyConflict
  }
 }

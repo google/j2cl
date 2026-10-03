@@ -126,14 +126,14 @@ open class IntersectionTypeTest<U> {
   
   @JvmStatic
   private fun <T> callOnIntersectionTypeWithParameterizedType(t: T) where T: GenericType<String?>?, T: Getable<Int?>? {
-   t!!.doSomething_pp_intersectiontype("")
+   t!!.doSomething("")
    t!!.get()
   }
   
   @JvmStatic
   private fun callOnIntersectionTypeWithRawType() {
    val t = GenericType<String?>().let { it as GenericType<Any?>; it as Getable<Any?>; it }
-   (t as GenericType<Any?>).doSomething_pp_intersectiontype("")
+   (t as GenericType<Any?>).doSomething("")
    (t as Getable<Any?>).get()
   }
  }
@@ -151,6 +151,6 @@ open class IntersectionTypeTest<U> {
  private open class SomeConcreteType private constructor()
  
  internal open class GenericType<T> internal constructor() {
-  internal open fun doSomething_pp_intersectiontype(t: T) {}
+  internal open fun doSomething(t: T) {}
  }
 }

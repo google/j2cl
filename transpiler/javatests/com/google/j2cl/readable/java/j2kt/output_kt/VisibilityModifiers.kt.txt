@@ -19,10 +19,12 @@
 package j2kt
 
 import javaemul.lang.*
+import j2kt.PackagePrivateWithJ2ktPublicInSeparateLibrary
 import java.lang.UnsupportedOperationException
 import javaemul.lang.MutableCollectionJvm
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
+import kotlin.Int
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -30,7 +32,7 @@ class VisibilityModifiers {
  open class Public {
   open fun publicMethod() {}
   
-  internal open fun packagePrivateMethod_pp_j2kt() {}
+  internal open fun packagePrivateMethod() {}
   
   protected open fun protectedMethod() {}
   
@@ -48,7 +50,7 @@ class VisibilityModifiers {
  internal open class PackagePrivate internal constructor() {
   open fun publicMethod() {}
   
-  internal open fun packagePrivateMethod_pp_j2kt() {}
+  internal open fun packagePrivateMethod() {}
   
   protected open fun protectedMethod() {}
   
@@ -62,7 +64,7 @@ class VisibilityModifiers {
  protected open class Protected protected constructor() {
   open fun publicMethod() {}
   
-  internal open fun packagePrivateMethod_pp_j2kt() {}
+  internal open fun packagePrivateMethod() {}
   
   protected open fun protectedMethod() {}
   
@@ -72,7 +74,7 @@ class VisibilityModifiers {
  private open class Private private constructor() {
   open fun publicMethod() {}
   
-  internal open fun packagePrivateMethod_pp_j2kt() {}
+  internal open fun packagePrivateMethod() {}
   
   protected open fun protectedMethod() {}
   
@@ -83,7 +85,7 @@ class VisibilityModifiers {
   open class PublicOfPublic<T: Public> {
    open fun publicMethod() {}
    
-   internal open fun packagePrivateMethod_pp_j2kt() {}
+   internal open fun packagePrivateMethod() {}
    
    protected open fun protectedMethod() {}
    
@@ -94,6 +96,24 @@ class VisibilityModifiers {
  open class PackagePrivateWithJ2ktPublic internal constructor()
  
  open class PublicExtendsPackagePrivateWithJ2ktPublic: PackagePrivateWithJ2ktPublic()
+ 
+ open class PublicExtendsPackagePrivateWithJ2ktPublicInSeparateLibrary: PackagePrivateWithJ2ktPublicInSeparateLibrary() {
+  override fun packagePrivateMethod_pp_j2kt() {}
+  
+  open fun packagePrivateWithPublicOverride() {}
+  
+  override fun packagePrivateWithPublicOverride_pp_j2kt() {
+   this.packagePrivateWithPublicOverride()
+  }
+  
+  companion object {
+   @JvmStatic
+   fun test(instance: PackagePrivateWithJ2ktPublicInSeparateLibrary) {
+    val unused: Int = instance.field_pp_j2kt
+    instance.packagePrivateMethod_pp_j2kt()
+   }
+  }
+ }
  
  internal abstract class PackagePrivateCollection internal constructor(): MutableCollectionJvm<PackagePrivate> {
   abstract override fun contains(o: PackagePrivate): Boolean
@@ -118,7 +138,7 @@ class VisibilityModifiers {
  internal abstract class Value internal constructor() {
   @javaemul.lang.annotations.WasAutoValue.Builder
   internal abstract class Builder internal constructor() {
-   internal abstract fun build_pp_j2kt(): Value
+   internal abstract fun build(): Value
   }
  }
  
@@ -139,7 +159,7 @@ class VisibilityModifiers {
    open class Public {
     open fun publicMethod() {}
     
-    internal open fun packagePrivateMethod_pp_j2kt() {}
+    internal open fun packagePrivateMethod() {}
     
     open fun protectedMethod() {}
     
@@ -149,7 +169,7 @@ class VisibilityModifiers {
    open class PackagePrivate internal constructor() {
     open fun publicMethod() {}
     
-    internal open fun packagePrivateMethod_pp_j2kt() {}
+    internal open fun packagePrivateMethod() {}
     
     open fun protectedMethod() {}
     
@@ -173,7 +193,7 @@ class VisibilityModifiers {
    open class Protected public constructor() {
     open fun publicMethod() {}
     
-    internal open fun packagePrivateMethod_pp_j2kt() {}
+    internal open fun packagePrivateMethod() {}
     
     open fun protectedMethod() {}
     
@@ -183,7 +203,7 @@ class VisibilityModifiers {
    open class Private private constructor() {
     open fun publicMethod() {}
     
-    internal open fun packagePrivateMethod_pp_j2kt() {}
+    internal open fun packagePrivateMethod() {}
     
     open fun protectedMethod() {}
     
@@ -193,7 +213,7 @@ class VisibilityModifiers {
    open class PublicExtendsPackagePrivate: PackagePrivate() {
     override fun publicMethod() {}
     
-    override fun packagePrivateMethod_pp_j2kt() {}
+    override fun packagePrivateMethod() {}
     
     public override fun protectedMethod() {}
     
@@ -204,7 +224,7 @@ class VisibilityModifiers {
     open class PublicOfPublic<T: Public> {
      open fun publicMethod() {}
      
-     internal open fun packagePrivateMethod_pp_j2kt() {}
+     internal open fun packagePrivateMethod() {}
      
      open fun protectedMethod() {}
      
@@ -214,7 +234,7 @@ class VisibilityModifiers {
     open class PublicOfPackagePrivate<T: PackagePrivate> {
      open fun publicMethod() {}
      
-     internal open fun packagePrivateMethod_pp_j2kt() {}
+     internal open fun packagePrivateMethod() {}
      
      open fun protectedMethod() {}
      
@@ -224,7 +244,7 @@ class VisibilityModifiers {
     open class PublicOfTransitivePackagePrivate<T: PackagePrivate.Public> {
      open fun publicMethod() {}
      
-     internal open fun packagePrivateMethod_pp_j2kt() {}
+     internal open fun packagePrivateMethod() {}
      
      open fun protectedMethod() {}
      
@@ -237,7 +257,7 @@ class VisibilityModifiers {
    class Public {
     fun publicMethod() {}
     
-    internal fun packagePrivateMethod_pp_j2kt() {}
+    internal fun packagePrivateMethod() {}
     
     fun protectedMethod() {}
     
@@ -247,7 +267,7 @@ class VisibilityModifiers {
    class PackagePrivate internal constructor() {
     fun publicMethod() {}
     
-    internal fun packagePrivateMethod_pp_j2kt() {}
+    internal fun packagePrivateMethod() {}
     
     fun protectedMethod() {}
     
@@ -271,7 +291,7 @@ class VisibilityModifiers {
    class Protected public constructor() {
     fun publicMethod() {}
     
-    internal fun packagePrivateMethod_pp_j2kt() {}
+    internal fun packagePrivateMethod() {}
     
     fun protectedMethod() {}
     
@@ -281,7 +301,7 @@ class VisibilityModifiers {
    class Private private constructor() {
     fun publicMethod() {}
     
-    internal fun packagePrivateMethod_pp_j2kt() {}
+    internal fun packagePrivateMethod() {}
     
     fun protectedMethod() {}
     

@@ -47,7 +47,7 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
  override fun getField(): Int = this.getField
  
  @JsMethod(name = "getField2")
- override fun getWithJsMethod_pp_autovalue(): Int = this.getWithJsMethod
+ override fun getWithJsMethod(): Int = this.getWithJsMethod
  
  @JsIgnore
  override fun ignored(): Int = this.ignored
@@ -60,7 +60,7 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
   }
   if (o is AutoValueJsType) {
    val that: AutoValueJsType? = o as AutoValueJsType?
-   return this.getField == that!!.getField() && this.getWithJsMethod == that!!.getWithJsMethod_pp_autovalue() && this.ignored == that!!.ignored()
+   return this.getField == that!!.getField() && this.getWithJsMethod == that!!.getWithJsMethod() && this.ignored == that!!.ignored()
   }
   return false
  }
@@ -99,7 +99,7 @@ class AutoValue_AutoValueJsType: AutoValueJsType {
    return this
   }
   
-  override fun setGetWithJsMethod_pp_autovalue(getWithJsMethod: Int): autovalue.AutoValueJsType.Builder? {
+  override fun setGetWithJsMethod(getWithJsMethod: Int): autovalue.AutoValueJsType.Builder? {
    this.getWithJsMethod = getWithJsMethod
    this.set___0 = this.set___0.toInt().or(
     2.toByte().toInt(),

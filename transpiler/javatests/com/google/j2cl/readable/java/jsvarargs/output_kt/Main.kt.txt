@@ -37,17 +37,17 @@ import kotlin.jvm.JvmStatic
 
 open class Main {
  @JvmField
- internal var field_pp_jsvarargs: Int = 0
+ internal var field: Int = 0
  
  constructor(f: Int) {
-  this.field_pp_jsvarargs = f
+  this.field = f
  }
  
  @JsMethod
- open fun f3(m: Int, vararg numbers: Int): Int = this.field_pp_jsvarargs + m + numbers!![1]
+ open fun f3(m: Int, vararg numbers: Int): Int = this.field + m + numbers!![1]
  
  @JsMethod
- open fun f4(vararg numbers: Int): Int = this.field_pp_jsvarargs + numbers!![1]
+ open fun f4(vararg numbers: Int): Int = this.field + numbers!![1]
  
  open fun testStaticMethodNotFirst() {
   Main.f1(1, 1, 2)
@@ -276,7 +276,7 @@ open class Main {
   
   companion object {
    @JvmStatic
-   internal fun subNativeInvocation_pp_jsvarargs() {
+   internal fun subNativeInvocation() {
     val unusedS1: SubVarargs = SubVarargs(2)
     val unusedS2: SubVarargs = SubVarargs(
      Any(),

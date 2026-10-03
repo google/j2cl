@@ -26,21 +26,21 @@ import kotlin.Suppress
 import kotlin.intArrayOf
 
 open class CloneMethod {
- internal open fun test_pp_j2kt() {
+ internal open fun test() {
   val a: IntArray = intArrayOf(1, 2)
   val b: IntArray = a.clone()
-  this.m_pp_j2kt(
+  this.m(
    *a.clone(),
   )
-  this.select_pp_j2kt(
+  this.select(
    Supplier { a.clone() },
    1,
   )
  }
  
- internal open fun m_pp_j2kt(vararg a: Int) {}
+ internal open fun m(vararg a: Int) {}
  
- internal open fun select_pp_j2kt(arraySupplier: Supplier<IntArray>, slot: Int) {
+ internal open fun select(arraySupplier: Supplier<IntArray>, slot: Int) {
   val selected: Int = arraySupplier.get()[slot]
  }
  

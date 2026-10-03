@@ -70,7 +70,7 @@ open class NestedGenericClass<T> {
  }
  
  internal open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> internal constructor() {
-  internal open fun test_pp_nestedgenericclass(t: T) {
+  internal open fun test(t: T) {
    t!!.Inner()
   }
   

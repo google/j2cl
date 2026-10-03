@@ -42,7 +42,7 @@ import kotlin.reflect.KClass
 open class AnnotationDefaults {
  companion object {
   @JvmStatic
-  internal fun testDefaults_primitives_pp_j2kt(bar: Bar) {
+  internal fun testDefaults_primitives(bar: Bar) {
    val booleanValue: Boolean = bar.booleanValue
    val byteValue: Byte = bar.byteValue
    val charValue: Char = bar.charValue
@@ -56,14 +56,14 @@ open class AnnotationDefaults {
   }
   
   @JvmStatic
-  internal fun testDefaults_objects_pp_j2kt(bar: Bar) {
+  internal fun testDefaults_objects(bar: Bar) {
    val stringValue: String = bar.stringValue
    val escapedStringValue: String = bar.escapedStringValue
    val enumValue: SomeEnum = bar.enumValue
   }
   
   @JvmStatic
-  internal fun testDefaults_arrays_pp_j2kt(bar: Bar) {
+  internal fun testDefaults_arrays(bar: Bar) {
    val intArray: IntArray = bar.intArray
    val booleanArray: BooleanArray = bar.booleanArray
    val emptyArray: IntArray = bar.emptyArray
@@ -71,16 +71,16 @@ open class AnnotationDefaults {
   }
   
   @JvmStatic
-  internal fun testDefaults_classes_pp_j2kt(withTypeLiteral: WithTypeLiteral) {}
+  internal fun testDefaults_classes(withTypeLiteral: WithTypeLiteral) {}
   
   @JvmStatic
-  internal fun testDefaults_positional_pp_j2kt(positional: Positional) {
+  internal fun testDefaults_positional(positional: Positional) {
    val positionalValue: String = positional.value
    val positionalCount: Int = positional.count
   }
   
   @JvmStatic
-  internal fun testDefaults_nested_pp_j2kt(withNested: WithNested) {}
+  internal fun testDefaults_nested(withNested: WithNested) {}
  }
  
  internal enum class SomeEnum {

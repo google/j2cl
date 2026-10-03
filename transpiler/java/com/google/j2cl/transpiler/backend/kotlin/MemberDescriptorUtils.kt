@@ -52,6 +52,7 @@ internal val MemberDescriptor.ktVisibility: KtVisibility
         // (presumbably accidental) wide method visibility.
         narrowDownVisibility(
           when {
+            hasJ2ktPublicAnnotation -> KtVisibility.PUBLIC
             // TODO(b/483489173): Remove when visibility problem in Dagger (fastinit) is solved
             // differently.
             isConstructor && hasInjectAnnotation -> KtVisibility.PUBLIC

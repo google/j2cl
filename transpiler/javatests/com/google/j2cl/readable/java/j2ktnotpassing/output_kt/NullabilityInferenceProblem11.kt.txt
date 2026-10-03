@@ -32,12 +32,12 @@ open class NullabilityInferenceProblem11 {
   }
   
   @JvmStatic
-  internal fun <R> call_pp_j2ktnotpassing(callback: Callback<R>): R {
+  internal fun <R> call(callback: Callback<R>): R {
    throw RuntimeException()
   }
   
   @JvmStatic
-  fun <T: Any> test(): MyNode<T?> = NullabilityInferenceProblem11.call_pp_j2ktnotpassing<MyNode<T?>>(
+  fun <T: Any> test(): MyNode<T?> = NullabilityInferenceProblem11.call<MyNode<T?>>(
    Callback { node: MyNode<T?> -> NullabilityInferenceProblem11.assertNotNull<MyNode<T>>(
     node.getChild(),
    ) as MyNode<T?> },

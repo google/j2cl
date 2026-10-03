@@ -19,11 +19,8 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
-import j2ktnotpassing.PackagePrivateWithJ2ktPublicInSeparateLibrary
 import java.lang.UnsupportedOperationException
-import kotlin.Int
 import kotlin.Suppress
-import kotlin.jvm.JvmStatic
 
 class VisibilityModifiers {
  open class Public {
@@ -37,7 +34,7 @@ class VisibilityModifiers {
  internal open class PackagePrivate internal constructor() {
   open fun publicMethod() {}
   
-  internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
+  internal open fun packagePrivateMethod() {}
   
   protected open fun protectedMethod() {}
   
@@ -50,7 +47,7 @@ class VisibilityModifiers {
   open class PublicOfPackagePrivate<T: PackagePrivate> {
    open fun publicMethod() {}
    
-   internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
+   internal open fun packagePrivateMethod() {}
    
    protected open fun protectedMethod() {}
    
@@ -60,29 +57,11 @@ class VisibilityModifiers {
   open class PublicOfTransitivePackagePrivate<T: j2ktnotpassing.VisibilityModifiers.PackagePrivate.Public> {
    open fun publicMethod() {}
    
-   internal open fun packagePrivateMethod_pp_j2ktnotpassing() {}
+   internal open fun packagePrivateMethod() {}
    
    protected open fun protectedMethod() {}
    
    private fun privateMethod() {}
-  }
- }
- 
- open class PublicExtendsPackagePrivateWithJ2ktPublicInSeparateLibrary: PackagePrivateWithJ2ktPublicInSeparateLibrary() {
-  override fun packagePrivateMethod_pp_j2ktnotpassing() {}
-  
-  public open fun packagePrivateWithPublicOverride() {}
-  
-  override fun packagePrivateWithPublicOverride_pp_j2ktnotpassing() {
-   this.packagePrivateWithPublicOverride()
-  }
-  
-  companion object {
-   @JvmStatic
-   fun test(instance: PackagePrivateWithJ2ktPublicInSeparateLibrary) {
-    val unused: Int = instance.field_pp_j2ktnotpassing
-    instance.packagePrivateMethod_pp_j2ktnotpassing()
-   }
   }
  }
 }

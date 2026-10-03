@@ -39,16 +39,16 @@ open class Main {
  
  internal open class Outer internal constructor() {
   @JvmField
-  internal var a_pp_jsinnerclass: Int = 2
+  internal var a: Int = 2
   
-  open fun method(): Int = Inner().getB() + this.a_pp_jsinnerclass
+  open fun method(): Int = Inner().getB() + this.a
   
   @JsType(namespace = "com.google.test")
   open inner class Inner constructor() {
    private var b: Int = 0
    
    init {
-    this.b = this@Outer.a_pp_jsinnerclass + 1
+    this.b = this@Outer.a + 1
    }
    
    open fun getB(): Int = this.b

@@ -170,18 +170,18 @@ internal abstract class SourceMap<T: Number?>: Comparator<T> {
  
  companion object {
   @JvmField
-  internal var uninitializedStaticField_pp_sourcemap: Double = 0.0
+  internal var uninitializedStaticField: Double = 0.0
   
   init {
-   SourceMap.uninitializedStaticField_pp_sourcemap = 10.0
+   SourceMap.uninitializedStaticField = 10.0
   }
   
   @JvmField
-  internal var initializedStaticField_pp_sourcemap: String? = "Hello"
+  internal var initializedStaticField: String? = "Hello"
   
   init {
-   if (SourceMap.uninitializedStaticField_pp_sourcemap == 10.0) {
-    SourceMap.initializedStaticField_pp_sourcemap = "World"
+   if (SourceMap.uninitializedStaticField == 10.0) {
+    SourceMap.initializedStaticField = "World"
    }
   }
  }

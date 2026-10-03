@@ -35,28 +35,28 @@ open class Main {
  private val x: IThenable<Int?>? = Promise.resolve<Int?>(10)
  
  @JsAsync
- internal open fun emptyAsyncMethod_pp_jsasync(): IThenable<Void?>? = null
+ internal open fun emptyAsyncMethod(): IThenable<Void?>? = null
  
  @JsAsync
- internal open fun asyncMethod_pp_jsasync(): IThenable<Int?>? {
+ internal open fun asyncMethod(): IThenable<Int?>? {
   val result: Int = Helper.await<Int?>(
    Promise.resolve<Int?>(7),
   )!!.toInt()
-  return this.parametricAsyncMethod_pp_jsasync<Int?>(result)
+  return this.parametricAsyncMethod<Int?>(result)
  }
  
  @JsAsync
- internal open fun <T> parametricAsyncMethod_pp_jsasync(value: T): IThenable<T>? = Promise.resolve<T>(
+ internal open fun <T> parametricAsyncMethod(value: T): IThenable<T>? = Promise.resolve<T>(
   Helper.await<T>(
    Promise.resolve<T>(value),
   ),
  )
  
  @JsAsync
- @JsMethod(name = "jsAsyncAndJsMethod")
- internal open fun jsAsyncAndJsMethod_pp_jsasync(): IThenable<Void?>? = null
+ @JsMethod
+ internal open fun jsAsyncAndJsMethod(): IThenable<Void?>? = null
  
- internal open fun testAsyncLambdas_pp_jsasync() {
+ internal open fun testAsyncLambdas() {
   val i: AsyncInterface = AsyncInterface { Promise.resolve<Int?>(
    Helper.await<Int?>(
     Promise.resolve<Int?>(5),
@@ -99,7 +99,7 @@ open class Main {
  companion object {
   @JvmStatic
   @JsAsync
-  internal fun staticAsyncMethod_pp_jsasync(): IThenable<Void?>? = Promise.resolve<Void?>(
+  internal fun staticAsyncMethod(): IThenable<Void?>? = Promise.resolve<Void?>(
    Helper.await<Void?>(
     Promise.resolve<Void?>(
      null as Void?,

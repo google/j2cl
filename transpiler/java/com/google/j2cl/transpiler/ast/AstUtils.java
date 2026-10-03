@@ -1314,19 +1314,40 @@ public final class AstUtils {
     // The method overrides a non-package private method in a super class, no bridge is actually
     // needed even if there are package-private overridden methods up in the hierarchy.
     if (methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
-        .anyMatch(
-            md ->
-                !md.getEnclosingTypeDescriptor().isInterface()
-                    && md.getVisibility().isPublicOrProtected())) {
+        .filter(md -> !md.getEnclosingTypeDescriptor().isInterface())
+        .anyMatch(md -> md.getVisibility().isPublicOrProtected())) {
       return false;
     }
 
-    // This method overrides and exposes a package-private method from a superclass.
+    // This method overrides and exposes a package-private method from a superclass. A bridge is
+    // needed if the overridden package-private method is mangled (because it is annotated with
+    // @J2ktPublic or shadows a package-private method from a different package).
     return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+        .filter(md -> md.getVisibility().isPackagePrivate())
         .anyMatch(
             md ->
-                !md.getEnclosingTypeDescriptor().isInterface()
-                    && md.getVisibility().isPackagePrivate());
+                md.hasAnnotation("com.google.common.annotations.J2ktPublic")
+                    || needsPackagePrivateMangling(md));
+  }
+
+  /**
+   * Returns whether the package-private {@code methodDescriptor} is mangled in Kotlin to avoid
+   * clashing with a package-private method with the same signature in a superclass in another
+   * package.
+   *
+   * <p>This is decided at the root of the Java override chain, which is mangled if it shadows any
+   * method, and every method in the chain inherits that decision.
+   */
+  public static boolean needsPackagePrivateMangling(MethodDescriptor methodDescriptor) {
+    if (!methodDescriptor.getVisibility().isPackagePrivate()) {
+      return false;
+    }
+    // Mangling is decided at the root(s) of the Java override chain and inherited by overriders.
+    return Stream.concat(
+            Stream.of(methodDescriptor),
+            methodDescriptor.getJavaOverriddenMethodDescriptors().stream())
+        .filter(md -> !md.isJavaOverride())
+        .anyMatch(md -> !md.getJ2ktOverriddenMethodDescriptors().isEmpty());
   }
 
   /** Returns true if the specified type is annotated with Wasm. */

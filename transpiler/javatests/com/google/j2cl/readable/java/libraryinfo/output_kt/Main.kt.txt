@@ -61,8 +61,8 @@ open class Main {
    jsFunction.apply("foo")
    MyJsType()
    object : Any() {
-    @JsMethod(name = "foo")
-    internal fun foo_pp_libraryinfo() {}
+    @JsMethod
+    internal fun foo() {}
    }
   }
   
@@ -74,7 +74,7 @@ open class Main {
   @JsMethod
   fun main() {
    val foo: Main.Foo? = null
-   foo!!.instanceMethod_pp_libraryinfo()
+   foo!!.instanceMethod()
    val clazz: Class<*> = Foo::class.javaObjectType
   }
  }
@@ -119,14 +119,14 @@ open class Main {
  @JsType
  open class MyJsType {
   @JvmField
-  internal var someField_pp_libraryinfo: Any? = null
+  internal var someField: Any? = null
   
   constructor() {
-   this.someField_pp_libraryinfo = Main()
+   this.someField = Main()
   }
  }
  
  open inner class Foo {
-  internal open fun instanceMethod_pp_libraryinfo() {}
+  internal open fun instanceMethod() {}
  }
 }

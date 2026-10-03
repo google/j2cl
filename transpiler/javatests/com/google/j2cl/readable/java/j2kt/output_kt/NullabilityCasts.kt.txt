@@ -26,8 +26,8 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class NullabilityCasts {
- internal open fun testCapturesInLambdas_pp_j2kt(condition: Boolean, async: Async<String?>) {
-  NullabilityCasts.tranformAsync_pp_j2kt<String?, String?>(
+ internal open fun testCapturesInLambdas(condition: Boolean, async: Async<String?>) {
+  NullabilityCasts.tranformAsync<String?, String?>(
    async,
    AsyncFunction { it: String? ->
     if (condition) {
@@ -41,7 +41,7 @@ open class NullabilityCasts {
  
  companion object {
   @JvmStatic
-  internal fun <I, O> tranformAsync_pp_j2kt(async: Async<I>, function: AsyncFunction<in I, out O>): Async<O> {
+  internal fun <I, O> tranformAsync(async: Async<I>, function: AsyncFunction<in I, out O>): Async<O> {
    throw RuntimeException()
   }
  }

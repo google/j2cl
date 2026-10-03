@@ -32,7 +32,7 @@ import switchpatterns.SwitchPatterns.Sealed.A
 import switchpatterns.SwitchPatterns.Sealed.B
 
 open class SwitchPatterns {
- internal open fun testPatternsWithGuards_pp_switchpatterns() {
+ internal open fun testPatternsWithGuards() {
   val o: Any = "Hello"
   when (o) {
    is String if run {
@@ -69,7 +69,7 @@ open class SwitchPatterns {
   }
  }
  
- internal open fun testRecordPatterns_pp_switchpatterns() {
+ internal open fun testRecordPatterns() {
   data class R(
    val o: Any?,
    val s: String?,
@@ -103,13 +103,13 @@ open class SwitchPatterns {
   }
  }
  
- internal open fun getSealed_pp_switchpatterns(): Sealed? = null
+ internal open fun getSealed(): Sealed? = null
  
- internal open fun testExhaustivePatternsWithNoDefault_pp_switchpatterns() {
+ internal open fun testExhaustivePatternsWithNoDefault() {
   var ___selector: Sealed? = null
   val i: Int = run {
    when (run {
-    ___selector = this.getSealed_pp_switchpatterns()
+    ___selector = this.getSealed()
     ___selector
    }!!) {
     is A if run {
@@ -131,20 +131,20 @@ open class SwitchPatterns {
   }
  }
  
- internal open fun testPatternsWithNull_pp_switchpatterns() {
+ internal open fun testPatternsWithNull() {
   val color: Color? = null
   when (color) {
    Color.RED -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
    null -> {}
    else -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
   }
   when (color) {
    Color.RED -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
    else -> {
     val variable: Int = 0
@@ -152,33 +152,33 @@ open class SwitchPatterns {
   }
   when (Color.valueOf("BLUE")) {
    Color.RED -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
    else -> {}
   }
   val digit: Digit? = null
   when (digit) {
    Digit.ZERO -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
    null -> {}
    else -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
   }
   val s: String = "Hi"
   when (s) {
    "Hi" -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
    null -> {}
    else -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
   }
   when (s) {
    "Hi" -> {
-    SwitchPatterns.fail_pp_switchpatterns()
+    SwitchPatterns.fail()
    }
    else -> {}
   }
@@ -186,7 +186,7 @@ open class SwitchPatterns {
  
  companion object {
   @JvmStatic
-  internal fun fail_pp_switchpatterns() {}
+  internal fun fail() {}
  }
  
  internal interface Sealed {

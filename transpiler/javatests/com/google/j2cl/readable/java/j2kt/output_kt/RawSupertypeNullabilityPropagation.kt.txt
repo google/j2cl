@@ -26,11 +26,11 @@ import kotlin.jvm.JvmStatic
 open class RawSupertypeNullabilityPropagation {
  companion object {
   @JvmStatic
-  internal fun register_pp_j2kt(callback: Callback<Any?>) {}
+  internal fun register(callback: Callback<Any?>) {}
   
   @JvmStatic
-  internal fun test_pp_j2kt() {
-   RawSupertypeNullabilityPropagation.register_pp_j2kt(
+  internal fun test() {
+   RawSupertypeNullabilityPropagation.register(
     Callback { result: Any? ->
     } as Callback<Any?>,
    )

@@ -26,16 +26,16 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class NullabilityScopes3 {
- internal open fun testNonNullMarked_pp_j2kt() {
-  Optional.of_pp_j2kt<List<String>>(
-   ImmutableList.of_pp_j2kt<String>(),
+ internal open fun testNonNullMarked() {
+  Optional.of<List<String>>(
+   ImmutableList.of<String>(),
   )
  }
  
  internal class Optional<T: Any> internal constructor() {
   companion object {
    @JvmStatic
-   internal fun <T: Any> of_pp_j2kt(value: T): Optional<T> {
+   internal fun <T: Any> of(value: T): Optional<T> {
     throw RuntimeException()
    }
   }
@@ -46,7 +46,7 @@ open class NullabilityScopes3 {
  internal open class ImmutableList<T: Any> internal constructor(): List<T> {
   companion object {
    @JvmStatic
-   internal fun <T: Any> of_pp_j2kt(): ImmutableList<T> {
+   internal fun <T: Any> of(): ImmutableList<T> {
     throw RuntimeException()
    }
   }

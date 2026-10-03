@@ -26,7 +26,7 @@ import kotlin.jvm.JvmStatic
 open class NullabilityInferenceProblem7 {
  companion object {
   @JvmStatic
-  internal fun <T: Any> test1_pp_j2kt(ordering: Ordering<T>, t1: T, t2: T): T {
+  internal fun <T: Any> test1(ordering: Ordering<T>, t1: T, t2: T): T {
    val local1: T? = t1
    val local2: T? = t2
    return ordering.max<T>(
@@ -36,14 +36,14 @@ open class NullabilityInferenceProblem7 {
   }
   
   @JvmStatic
-  internal fun test2_pp_j2kt(ordering: Ordering<Foo>, foo1: Foo, foo2: Foo): Foo {
+  internal fun test2(ordering: Ordering<Foo>, foo1: Foo, foo2: Foo): Foo {
    val localFoo1: Foo = foo1
    val localFoo2: Foo = foo2
    return ordering.max<Foo>(localFoo1, localFoo2)
   }
   
   @JvmStatic
-  internal fun test3_pp_j2kt(ordering: FooOrdering, foo1: Foo, foo2: Foo): Foo {
+  internal fun test3(ordering: FooOrdering, foo1: Foo, foo2: Foo): Foo {
    val localFoo1: Foo = foo1
    val localFoo2: Foo = foo2
    return ordering.max<Foo>(localFoo1, localFoo2)
