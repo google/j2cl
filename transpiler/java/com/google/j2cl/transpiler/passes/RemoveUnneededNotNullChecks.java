@@ -78,9 +78,13 @@ public class RemoveUnneededNotNullChecks extends NormalizationPass {
 
           @Override
           public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
+            if (!isPostfixNotNullExpression(postfixExpression)) {
+              return postfixExpression;
+            }
             var operand = postfixExpression.getOperand();
-            if (isPostfixNotNullExpression(postfixExpression)
-                && isPostfixNotNullExpression(operand)) {
+            // Primitives can never be null. Note that these might arise e.g. in JavaScript where
+            // boolean and double are not boxed and casts to Object are removed.
+            if (isPostfixNotNullExpression(operand) || operand.getTypeDescriptor().isPrimitive()) {
               return operand;
             }
             return postfixExpression;

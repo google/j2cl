@@ -94,6 +94,18 @@ class CastPrimitives {
     val d = o as Double
   }
 
+  fun testPrimitiveToReferenceNotNull() {
+    // Repro for b/568929345
+    val bool = (true as Any?)!!
+    val unboxedBool = (true as Any) as Boolean
+    val d = (1.0 as Any?)!!
+    val unboxedD = (1.0 as Any) as Double
+    val l = (1L as Any?)!!
+    val unboxedL = (1L as Any) as Long
+    val i = (1 as Any?)!!
+    val unboxedI = (1 as Any) as Int
+  }
+
   fun testLiteralToPrimitive() {
     var b: Byte
     var c: Char
