@@ -288,22 +288,18 @@ public class Main {
     assertEquals(12, obj.x);
   }
 
-  @JsType(isNative = true, namespace = "jsproperties")
-  interface JsTypeIsProperty {
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface HasIsX {
 
-    @Wasm("nop") // TODO(b/559305464): This type of import is not supported in Wasm.
     @JsProperty
     boolean isX();
 
-    @Wasm("nop") // TODO(b/559305464): This type of import is not supported in Wasm.
     @JsProperty
     void setX(boolean x);
   }
 
-  @Wasm("nop") // TODO(b/559305464): This type of import is not supported in Wasm.
   private static void testJsPropertyIsX() {
-    JsTypeIsProperty object = createJsTypeIsProperty();
-
+    HasIsX object = createHasIsX();
     assertFalse(object.isX());
     object.setX(true);
     assertTrue(object.isX());
@@ -311,32 +307,29 @@ public class Main {
     assertFalse(object.isX());
   }
 
-  @JsType(isNative = true, namespace = "jsproperties")
-  interface JsTypeGetProperty {
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface HasGetY {
 
-    @Wasm("nop") // TODO(b/559305464): This type of import is not supported in Wasm.
     @JsProperty
-    int getX();
+    int getY();
 
-    @Wasm("nop") // TODO(b/559305464): This type of import is not supported in Wasm.
     @JsProperty
-    void setX(int x);
+    void setY(int x);
   }
 
   // Native undefined/null indistinguishable after conversion in Wasm.
   @Wasm("nop")
   private static void testJsPropertyGetX_undefined() {
-    JsTypeGetProperty object = createJsTypeGetProperty();
-    assertTrue(isUndefined(object.getX()));
+    HasGetY object = createHasGetY();
+    assertTrue(isUndefined(object.getY()));
   }
 
-  @Wasm("nop") // TODO(b/559305464): This type of import is not supported in Wasm.
   private static void testJsPropertyGetX() {
-    JsTypeGetProperty object = createJsTypeGetProperty();
-    object.setX(10);
-    assertEquals(10, object.getX());
-    object.setX(0);
-    assertEquals(0, object.getX());
+    HasGetY object = createHasGetY();
+    object.setY(10);
+    assertEquals(10, object.getY());
+    object.setY(0);
+    assertEquals(0, object.getY());
   }
 
   static class ClassWithJsProperties {
@@ -495,11 +488,11 @@ public class Main {
   @JsMethod(namespace = "jsproperties.helper")
   private static native MyNativeJsType createMyNativeJsType();
 
-  @JsMethod(namespace = "jsproperties.helper")
-  private static native JsTypeGetProperty createJsTypeGetProperty();
+  @JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
+  private static native HasGetY createHasGetY();
 
-  @JsMethod(namespace = "jsproperties.helper")
-  private static native JsTypeIsProperty createJsTypeIsProperty();
+  @JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
+  private static native HasIsX createHasIsX();
 
   @JsMethod(namespace = "jsproperties.helper")
   private static native boolean isUndefined(int value);

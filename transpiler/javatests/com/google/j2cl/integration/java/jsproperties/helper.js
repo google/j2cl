@@ -78,20 +78,8 @@ exports.createMyNativeJsType = function() {
  * @return {*}
  * @public
  */
-exports.createJsTypeGetProperty = function() {
-  var a = {};
-  a['x'] = undefined;
-  return a;
-};
-
-/**
- * @return {*}
- * @public
- */
-exports.createJsTypeIsProperty = function() {
-  var a = {};
-  a['x'] = false;
-  return a;
+exports.createJsObject = function() {
+  return {};
 };
 
 /**

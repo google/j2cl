@@ -268,8 +268,8 @@ private fun testNativeJsTypeWithConstructor() {
   assertEquals(12, obj.x)
 }
 
-@JsType(isNative = true, namespace = "jsproperties")
-internal interface JsTypeIsProperty {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+internal interface HasIsX {
 
   @JsProperty fun isX(): Boolean
 
@@ -277,34 +277,32 @@ internal interface JsTypeIsProperty {
 }
 
 private fun testJsPropertyIsX() {
-  val o: JsTypeIsProperty = createJsTypeIsProperty()
-
-  assertFalse(o.isX())
+  val o: HasIsX = createHasIsX()
   o.setX(true)
   assertTrue(o.isX())
   o.setX(false)
   assertFalse(o.isX())
 }
 
-@JsType(isNative = true, namespace = "jsproperties")
-internal interface JsTypeGetProperty {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+internal interface HasGetY {
 
-  @JsProperty fun getX(): Int
+  @JsProperty fun getY(): Int
 
-  @JsProperty fun setX(x: Int)
+  @JsProperty fun setY(x: Int)
 }
 
 private fun testJsPropertyGetX_undefined() {
-  val o: JsTypeGetProperty = createJsTypeGetProperty()
-  assertTrue(isUndefined(o.getX()))
+  val o: HasGetY = createHasGetY()
+  assertTrue(isUndefined(o.getY()))
 }
 
 private fun testJsPropertyGetX() {
-  val o: JsTypeGetProperty = createJsTypeGetProperty()
-  o.setX(10)
-  assertEquals(10, o.getX())
-  o.setX(0)
-  assertEquals(0, o.getX())
+  val o: HasGetY = createHasGetY()
+  o.setY(10)
+  assertEquals(10, o.getY())
+  o.setY(0)
+  assertEquals(0, o.getY())
 }
 
 class ClassWithJsProperties {
@@ -441,11 +439,11 @@ fun testDefaultMethodJsProperty() {
 @JsMethod(namespace = "jsproperties.helper")
 private external fun createMyNativeJsType(): MyNativeJsType
 
-@JsMethod(namespace = "jsproperties.helper")
-private external fun createJsTypeGetProperty(): JsTypeGetProperty
+@JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
+private external fun createHasGetY(): HasGetY
 
-@JsMethod(namespace = "jsproperties.helper")
-private external fun createJsTypeIsProperty(): JsTypeIsProperty
+@JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
+private external fun createHasIsX(): HasIsX
 
 @JsMethod(namespace = "jsproperties.helper") private external fun isUndefined(value: Int): Boolean
 
