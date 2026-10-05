@@ -467,17 +467,31 @@ public final class RuntimeMethods {
         BootstrapType.NATIVE_EQUALITY.getDescriptor(), methodName, arguments);
   }
 
-  public static MethodCall createWasmExternEqualityMethodCall(
+  /**
+   * Creates a call to {@code Platform.isSame} to compare references where at least one of the
+   * operands is a native JS value; the overload is selected based on which operands are native.
+   */
+  public static MethodCall createPlatformIsSameCall(
       Expression leftOperand, Expression rightOperand) {
     return MethodCall.builderFrom(
             TypeDescriptors.get()
-                .javaemulInternalWasmExtern
+                .javaemulInternalPlatform
                 .getMethodDescriptor(
                     "isSame",
-                    TypeDescriptors.get().javaemulInternalWasmExtern,
-                    TypeDescriptors.get().javaemulInternalWasmExtern))
+                    getIsSameParameterType(leftOperand),
+                    getIsSameParameterType(rightOperand)))
         .setArguments(leftOperand, rightOperand)
         .build();
+  }
+
+  /**
+   * Returns {@code WasmExtern} for native operands and null literals, so that they don't require
+   * any conversion, and {@code Object} otherwise.
+   */
+  private static DeclaredTypeDescriptor getIsSameParameterType(Expression operand) {
+    return operand.getTypeDescriptor().isNative() || operand instanceof NullLiteral
+        ? TypeDescriptors.get().javaemulInternalWasmExtern
+        : TypeDescriptors.get().javaLangObject;
   }
 
   /** Creates a method call to WasmExtern.convertToExtern(). */

@@ -61,6 +61,28 @@ public class Main {
     Number n3 = getUndefined();
     assertTrue(n3 == null);
     assertTrue(n3 != n1);
+
+    Object o1 = n1;
+    Object o2 = n2;
+    assertTrue(n1 == o1);
+    assertTrue(o1 == n1);
+    assertTrue(n1 != o2);
+    assertTrue(o2 != n1);
+    assertTrue(n3 == (Object) null);
+    assertTrue(n1 != new Object());
+
+    // Comparisons involving a native type use JavaScript semantics.
+    Wildcard hello = (Wildcard) (Object) "hello";
+    assertTrue(hello == (Object) "hello");
+    Wildcard onePointFive = (Wildcard) (Object) 1.5;
+    assertTrue(onePointFive == (Object) 1.5);
+    Wildcard trueValue = (Wildcard) (Object) true;
+    assertTrue(trueValue == (Object) true);
+
+    // In Wasm, each conversion of a native object to Object creates a new wrapper instance
+    // (b/540448377), and == between two Object references compares the wrappers rather than
+    // unwrapping to the underlying JS objects.
+    // assertTrue((Object) n1 == o1);
   }
 
   @JsProperty(namespace = JsPackage.GLOBAL)
@@ -75,7 +97,10 @@ public class Main {
   @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
   static class HTMLElementAnotherConcreteNativeJsType {}
 
-  private static <NI extends MyNativeJsTypeInterface, NC extends HTMLElementConcreteNativeJsType>
+  private static <
+          NI extends MyNativeJsTypeInterface,
+          NC extends HTMLElementConcreteNativeJsType,
+          M extends Main>
       void testCasts() {
     Object myClass;
     assertNotNull(myClass = (ElementLikeNativeInterface) createFoo());
@@ -93,6 +118,19 @@ public class Main {
     Object nativeButton1 = (HTMLElementConcreteNativeJsType) createNativeButton();
     Object nativeButton2 = (HTMLElementAnotherConcreteNativeJsType) nativeButton1;
 
+    Main main = new Main();
+    MyNativeJsTypeInterface nativeMain = (MyNativeJsTypeInterface) main;
+    assertTrue((Main) nativeMain == main);
+    assertTrue((M) nativeMain == main);
+    NI genericNativeMain = (NI) main;
+    assertTrue((Main) genericNativeMain == main);
+    assertTrue((M) genericNativeMain == main);
+
+    Foo foo = passThrough(new Foo());
+    assertTrue(foo.sum() == 42);
+    Foo[] foos = passThrough(new Foo[] {new Foo()});
+    assertTrue(foos[0].sum() == 42);
+
     /*
      * If the optimizations are turned on, it is possible for the compiler to dead-strip the
      * variables since they are not used. Therefore the casts could potentially be stripped.
@@ -100,6 +138,10 @@ public class Main {
     assertNotNull(myClass);
     assertNotNull(nativeButton1);
     assertNotNull(nativeButton2);
+  }
+
+  private static <T> T passThrough(T t) {
+    return t;
   }
 
   private static Object createFoo() {
@@ -113,24 +155,22 @@ public class Main {
   interface Star {}
 
   private static void testStar() {
-    Object object = new Object();
+    Star star = (Star) new Object();
+    assertNotNull(star);
 
-    assertNotNull(object);
-
-    object = Double.valueOf(3.0);
-    assertNotNull(object);
+    star = (Star) (Object) Double.valueOf(3.0);
+    assertNotNull(star);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface Wildcard {}
 
   private static void testWildcard() {
-    Object object = new Object();
+    Wildcard wildcard = (Wildcard) new Object();
+    assertNotNull(wildcard);
 
-    assertNotNull(object);
-
-    object = Double.valueOf(3.0);
-    assertNotNull(object);
+    wildcard = (Wildcard) (Object) Double.valueOf(3.0);
+    assertNotNull(wildcard);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")

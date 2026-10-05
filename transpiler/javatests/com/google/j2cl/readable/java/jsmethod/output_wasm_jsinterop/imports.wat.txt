@@ -15,6 +15,11 @@
 (import "prototypes" "$jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor.proto" (global $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor.proto (ref extern)))
 (import "prototypes" "$jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers.proto" (global $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers.proto (ref extern)))
 
+;;; WasmExtern JsMethodExample.testMethod()
+(func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample (import "imports" "jsmethod.JsMethodExample.testMethod")
+ (result (ref null extern))
+)
+
 ;;; NativeFoo()
 (func $m_<init>__@jsmethod.JsMethodExample.NativeFoo (import "imports" "jsmethod.Foo.constructor")
  (result (ref null extern))

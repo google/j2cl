@@ -1,0 +1,230 @@
+
+(global $$class-initialized@nativejstypeobjectmethods.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypeobjectmethods.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $nativejstypeobjectmethods.Main.vtable (ref $nativejstypeobjectmethods.Main.vtable)
+ (struct.new $nativejstypeobjectmethods.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.vtable (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.vtable)
+ (struct.new $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay)
+ )
+)
+(global $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.vtable (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.vtable)
+ (struct.new $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay)
+ )
+)
+
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:23:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:23:22
+  (if (global.get $$class-initialized@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:23:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:23:22
+  (global.set $$class-initialized@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:30:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:30:22
+  (if (global.get $$class-initialized@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:30:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:30:22
+  (global.set $$class-initialized@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay))
+ (local.set $this (ref.cast (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay)
+
+;;; Main Main.$create()
+(func $$create__@nativejstypeobjectmethods.Main
+ (result (ref null $nativejstypeobjectmethods.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+ (local $$instance (ref null $nativejstypeobjectmethods.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (call $$clinit__void_<once>_@nativejstypeobjectmethods.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (local.set $$instance (struct.new $nativejstypeobjectmethods.Main (global.get $nativejstypeobjectmethods.Main.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (call $$ctor__void_$p_nativejstypeobjectmethods_Main@nativejstypeobjectmethods.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_nativejstypeobjectmethods_Main@nativejstypeobjectmethods.Main
+ (param $this (ref null $nativejstypeobjectmethods.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.test()
+(func $m_test__void@nativejstypeobjectmethods.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:32:21
+ (local $n1 (ref null extern))
+ (local $n2 (ref null $java.lang.Object))
+ (local $n3 (ref null extern))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $n4 (ref null $java.lang.Object))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:32:21
+  (call $$clinit__void_<once>_@nativejstypeobjectmethods.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:33:4
+  (local.set $n1 (call $m_<init>__@nativejstypeobjectmethods.Main.NativeJsTypeWithToString ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:34:4
+  (drop (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_toString__java_lang_String@nativejstypeobjectmethods.Main.NativeJsTypeWithToString (ref.as_non_null (local.get $n1)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:35:4
+  (local.set $n2 (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_<init>__@nativejstypeobjectmethods.Main.NativeJsTypeWithToString )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:36:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $n2))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $n2)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:38:4
+  (local.set $n3 (call $m_<init>__@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString ))
+  (block
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:39:4
+   (local.set $$qualifier (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $n3)))
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:39:4
+   (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:40:4
+  (local.set $n4 (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_<init>__@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:41:4
+  (drop (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $n4))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $n4)))))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@nativejstypeobjectmethods.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (if (global.get $$class-initialized@nativejstypeobjectmethods.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (global.set $$class-initialized@nativejstypeobjectmethods.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypeobjectmethods/readable-j2wasm.js/nativejstypeobjectmethods/Main.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypeobjectmethods.Main)))
+   (then
+    (return (global.get $$class@nativejstypeobjectmethods.Main))
+   )
+  )
+  (global.set $$class@nativejstypeobjectmethods.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypeobjectmethods.Main.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypeobjectmethods.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypeobjectmethods.Main))
+ (local.set $this (ref.cast (ref $nativejstypeobjectmethods.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main)

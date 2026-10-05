@@ -1500,6 +1500,45 @@
  )
 )
 
+;;; void Main.testReferenceEquality()
+(func $m_testReferenceEquality__void@nativejstypes.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:86:21
+ (local $foo (ref null extern))
+ (local $o (ref null $java.lang.Object))
+ (local $b i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:86:21
+  (call $$clinit__void_<once>_@nativejstypes.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:87:4
+  (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:88:4
+  (local.set $o (call $$create__@java.lang.Object ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:89:4
+  (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__java_lang_Object__boolean@javaemul.internal.Platform (local.get $foo)(local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:90:4
+  (local.set $b (i32.eqz (call $m_isSame__java_lang_Object__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $o)(local.get $foo))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:91:4
+  (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $foo)(call $m_<init>__@nativejstypes.Foo )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:92:4
+  (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $foo)(ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:93:4
+  (local.set $b (i32.eqz (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (ref.null extern)(local.get $foo))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:94:4
+  (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_identity__java_lang_Object__java_lang_Object@nativejstypes.Main (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $foo))))(local.get $foo)))
+ )
+)
+
+;;; T Main.identity(T t)
+(func $m_identity__java_lang_Object__java_lang_Object@nativejstypes.Main
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:97:23
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:98:4
+  (return (local.get $t))
+ )
+)
+
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.Main
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/Main.java:18:13

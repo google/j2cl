@@ -133,7 +133,10 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                return maybeInsertObjectBoundaryConversion(inferredTypeDescriptor, expression);
+                // Use the declared type descriptor as it reflects the underlying Wasm
+                // representation of the target (e.g., a type variable with a non-native bound is
+                // represented as a Java Object in Wasm even when specialized to a native JsType).
+                return maybeInsertObjectBoundaryConversion(declaredTypeDescriptor, expression);
               }
 
               @Override
@@ -159,12 +162,25 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
       return expression;
     }
 
-    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+    // Use the declared type descriptor as it reflects the underlying Wasm representation of the
+    // expression (e.g., a method call or field access whose declared type is a type variable with
+    // a non-native bound evaluates to a Java Object in Wasm even when specialized to a native
+    // JsType).
+    TypeDescriptor fromTypeDescriptor = expression.getDeclaredTypeDescriptor();
 
     if (!toTypeDescriptor.isNative() && fromTypeDescriptor.isNative()) {
       // Assignment or cast from native JS to Java.
-      return RuntimeMethods.createFromJsMethodCall(
-          TypeDescriptors.get().javaLangObject, expression);
+      Expression fromJs =
+          RuntimeMethods.createFromJsMethodCall(TypeDescriptors.get().javaLangObject, expression);
+      // Cast to the target type to give it the correct type. This cannot be handled by making
+      // `Object.fromJs` generic because this pass runs after erasure casts are inserted.
+      if (!TypeDescriptors.isJavaLangObject(toTypeDescriptor.toRawTypeDescriptor())) {
+        return CastExpression.builder()
+            .setExpression(fromJs)
+            .setCastTypeDescriptor(toTypeDescriptor)
+            .build();
+      }
+      return fromJs;
     }
 
     if (toTypeDescriptor.isNative() && !fromTypeDescriptor.isNative()) {

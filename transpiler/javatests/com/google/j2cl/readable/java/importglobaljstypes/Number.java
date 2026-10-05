@@ -17,7 +17,6 @@ package importglobaljstypes;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -40,14 +39,12 @@ public class Number {
     @JsProperty
     int getLength();
 
-    @Wasm("nop") // j2wasm doesn't support generic return types on native methods.
     T at(int index);
   }
 
   @JsMethod(name = "Array", namespace = GLOBAL)
   private static native <T> NativeArray<T> createArray();
 
-  @Wasm("nop") // NativeArray#at is marked as nop.
   private static String getStringAt(int index) {
     return Number.<String>createArray().at(index);
   }

@@ -15,7 +15,6 @@
  */
 package jsmethod
 
-import javaemul.internal.annotations.Wasm
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsType
@@ -31,9 +30,7 @@ class JsMethodExample {
   // This would better be handled in a unit test.
   // TODO(b/371249047): Make this static for consistency with Java readable. Move to the appropriate
   // test suite.
-  @Wasm("nop") // Native methods cannot return T in Wasm.
-  @JsMethod
-  external fun <T : ArrayList<String>> testMethod(): T
+  @JsMethod external fun <T : ArrayList<String>> testMethod(): T
 
   abstract class Base<T> {
     @JsMethod open internal fun m(t: T) {}

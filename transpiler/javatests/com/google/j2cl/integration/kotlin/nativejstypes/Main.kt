@@ -60,6 +60,29 @@ fun testNativeEquality() {
   val n3 = getUndefined()
   assertTrue(n3 === null)
   assertTrue(n3 !== n1)
+
+  val o1: Any? = n1
+  val o2: Any? = n2
+  assertTrue(n1 === o1)
+  assertTrue(o1 === n1)
+  assertTrue(n1 !== o2)
+  assertTrue(o2 !== n1)
+  assertTrue(n3 === (null as Any?))
+  assertTrue(n1 !== Any())
+
+  // Comparisons involving a native type use JavaScript semantics.
+  val hello = ("hello" as Any) as Wildcard
+  assertTrue(hello === ("hello" as Any))
+  val onePointFive = (1.5 as Any) as Wildcard
+  assertTrue(onePointFive === (1.5 as Any))
+  val boxedTrue: Any = true
+  val trueValue = boxedTrue as Wildcard
+  assertTrue(trueValue === (true as Any))
+
+  // In Wasm, each conversion of a native object to Any? creates a new wrapper instance
+  // (b/540448377), and === between two Any? references compares the wrappers rather than
+  // unwrapping to the underlying JS objects.
+  // assertTrue((n1 as Any?) === o1)
 }
 
 @JsProperty(namespace = JsPackage.GLOBAL) private external fun getUndefined(): Number
@@ -72,7 +95,13 @@ internal open class HTMLElementConcreteNativeJsType {}
 @JsType(namespace = JsPackage.GLOBAL, name = "HTMLElement", isNative = true)
 internal class HTMLElementAnotherConcreteNativeJsType {}
 
-private fun <NI : MyNativeJsTypeInterface, NC : HTMLElementConcreteNativeJsType> testCasts() {
+private open class NonNativeClass
+
+private fun <
+  NI : MyNativeJsTypeInterface,
+  NC : HTMLElementConcreteNativeJsType,
+  M : NonNativeClass,
+> testCasts() {
   var myClass: Any?
   myClass = createFoo() as ElementLikeNativeInterface
   assertNotNull(myClass)
@@ -93,6 +122,19 @@ private fun <NI : MyNativeJsTypeInterface, NC : HTMLElementConcreteNativeJsType>
   val nativeButton1: Any? = createNativeButton() as HTMLElementConcreteNativeJsType
   val nativeButton2: Any? = nativeButton1 as HTMLElementAnotherConcreteNativeJsType
 
+  val nonNative = NonNativeClass()
+  val nativeNonNative = nonNative as MyNativeJsTypeInterface
+  assertTrue(nativeNonNative as NonNativeClass === nonNative)
+  assertTrue(nativeNonNative as M === nonNative)
+  val genericNativeNonNative = nonNative as NI
+  assertTrue(genericNativeNonNative as NonNativeClass === nonNative)
+  assertTrue(genericNativeNonNative as M === nonNative)
+
+  val foo = passThrough(Foo())
+  assertTrue(foo.sum() == 42)
+  val foos = passThrough(arrayOf(Foo()))
+  assertTrue(foos[0].sum() == 42)
+
   /*
    * If the optimizations are turned on, it is possible for the compiler to dead-strip the
    * variables since they are not used. Therefore the casts could potentially be stripped.
@@ -102,6 +144,8 @@ private fun <NI : MyNativeJsTypeInterface, NC : HTMLElementConcreteNativeJsType>
   assertNotNull(nativeButton2)
 }
 
+private fun <T> passThrough(t: T): T = t
+
 private fun createFoo(): Any? = Foo()
 
 @JsMethod(namespace = "nativejstypes.helper") external fun createNativeButton(): Any?
@@ -109,23 +153,21 @@ private fun createFoo(): Any? = Foo()
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*") interface Star
 
 private fun testStar() {
-  var o = Any()
+  var star = Any() as Star
+  assertNotNull(star)
 
-  assertNotNull(o)
-
-  o = 3.0
-  assertNotNull(o)
+  star = (3.0 as Any) as Star
+  assertNotNull(star)
 }
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?") interface Wildcard
 
 private fun testWildcard() {
-  var o = Any()
+  var wildcard = Any() as Wildcard
+  assertNotNull(wildcard)
 
-  assertNotNull(o)
-
-  o = 3.0
-  assertNotNull(o)
+  wildcard = (3.0 as Any) as Wildcard
+  assertNotNull(wildcard)
 }
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
@@ -143,7 +185,7 @@ fun main(vararg unused: String) {
   testNativeJsTypeWithoutNamespace()
   testGlobalNativeJsType()
   testNativeEquality()
-  testCasts<MyNativeJsTypeInterface, HTMLElementConcreteNativeJsType>()
+  testCasts<MyNativeJsTypeInterface, HTMLElementConcreteNativeJsType, NonNativeClass>()
   testStar()
   testWildcard()
   testNativeFunctionalInterface()

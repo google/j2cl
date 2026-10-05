@@ -563,6 +563,12 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           // Must happen after RewriteAssignmentExpressions
           NormalizeNativePropertyAccesses::new,
+          // Must happen before InsertWasmJsBoundaryConversions as it selects the equality method
+          // based on whether the operands are native, which needs to be determined before the
+          // boundary conversions rewrite the operands. It also ensures the method calls it
+          // introduces (e.g. Platform.isSame) have their arguments converted at the JS boundary
+          // like any other method call.
+          RewriteReferenceEqualityOperations::new,
           InsertWasmJsBoundaryConversions::new,
           // NormalizeNativePropertyAccesses and InsertWasmJsBoundaryConversions creates method
           // calls whose qualifiers might need to be extracted. After extracting qualifiers,
@@ -578,9 +584,6 @@ public enum Backend {
           RemoveNonreferencedNativeMethods::new,
           RemoveNoopStatements::new,
 
-          // Passes that transform the AST to match the requirements of the Wasm instruction set.
-          // Rewrite 'a != b' to '!(a == b)'
-          RewriteReferenceEqualityOperations::new,
           // Make null literals to have the type required by their use.
           NormalizeNullLiterals::new,
 

@@ -16,6 +16,7 @@
 package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
 
 /** Platform specific utilities with Wasm specific implementation. */
 public final class Platform {
@@ -83,6 +84,33 @@ public final class Platform {
 
   @Wasm("ref.is_null")
   public static native boolean isNull(Object o);
+
+  /**
+   * Returns true if two potential JS values are equal. The compiler rewrites `==` where at least
+   * one operand is native into calls to these methods, which compare both values as JS values.
+   *
+   * <p>Note that this makes the semantics of `==` consistent with JS identity rather than Java
+   * identity for values that have a JS representation (e.g. a Java `String` compares equal to a JS
+   * string with the same contents).
+   */
+  @JsMethod(namespace = "j2wasm.EqualityUtils")
+  public static native boolean isSame(WasmExtern left, WasmExtern right);
+
+  /**
+   * See {@link #isSame(WasmExtern, WasmExtern)}.
+   *
+   * <p>The cast to `WasmExtern` converts the Java side to its JS representation (via
+   * `Object.toJs`), which is preferred over converting the JS side via `Object.fromJs` since the
+   * latter might allocate a new wrapper (e.g. `JsObject`).
+   */
+  public static boolean isSame(WasmExtern left, Object right) {
+    return isSame(left, (WasmExtern) right);
+  }
+
+  /** See {@link #isSame(WasmExtern, Object)}. */
+  public static boolean isSame(Object left, WasmExtern right) {
+    return isSame((WasmExtern) left, right);
+  }
 
   private Platform() {}
 }

@@ -25,9 +25,6 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
 public class WasmExtern {
 
-  @JsMethod(namespace = "j2wasm.EqualityUtils")
-  public static native boolean isSame(WasmExtern left, WasmExtern right);
-
   @Wasm("any.convert_extern")
   public static native WasmAny convertToAny(WasmExtern t);
 

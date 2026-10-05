@@ -502,7 +502,6 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Map")
   private static class NativeMap<K, V> {}
 
-  @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   @SuppressWarnings({"rawtypes", "unchecked"})
   // TODO(b/443341543): To enable this test for J2KT, the type variable T should be able
   // to be assigned a native type.
@@ -523,6 +522,10 @@ public class Main {
     {
       Object o = new NativeMap();
       T unused = (T) o;
+      NativeMap<?, ?> map = new NativeMap<>();
+      T unusedFromNative = (T) map;
+      NativeMap<?, ?>[] maps = new NativeMap[0];
+      T[] unusedArrayFromNative = (T[]) maps;
     }
   }
 
@@ -533,7 +536,6 @@ public class Main {
     }
   }
 
-  @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testCasts_parameterizedNativeType() {
     Object a = new NativeMap<String, Object>();
@@ -542,13 +544,22 @@ public class Main {
     assertTrue(e == a);
     NativeMap<String, Object> f = (NativeMap<String, Object>) a;
     assertTrue(f == a);
-    assertTrue(a instanceof NativeMap);
 
     Object os = new NativeMap[] {e};
     NativeMap[] g = (NativeMap[]) os;
     assertTrue(g[0] == e);
     NativeMap<String, Object>[] h = (NativeMap<String, Object>[]) os;
     assertTrue(h[0] == e);
+
+    testInstanceOf_parameterizedNativeType();
+  }
+
+  @Wasm("nop") // instanceof on native types not yet supported in Wasm.
+  private static void testInstanceOf_parameterizedNativeType() {
+    Object a = new NativeMap<String, Object>();
+    assertTrue(a instanceof NativeMap);
+
+    Object os = new NativeMap[0];
     assertTrue(os instanceof NativeMap[]);
   }
 
@@ -589,7 +600,6 @@ public class Main {
         Void.class);
   }
 
-  @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   private static void testCasts_exceptionMessages_jsType() {
     if (isJvm() || isJ2KtNative()) {
       return;

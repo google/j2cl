@@ -191,6 +191,8 @@ public class Arrays {
   public void testArraysSupertypeClosureTypes() {
     consumesCloneable(new Object[10]);
     consumesSerializable(new Object[10]);
+    consumesCloneable(new NativeType[10]);
+    consumesSerializable(new NativeType[10]);
   }
 
   public void consumesCloneable(Cloneable cloneable) {}

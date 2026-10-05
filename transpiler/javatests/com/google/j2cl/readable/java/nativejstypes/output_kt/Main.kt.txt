@@ -116,5 +116,20 @@ open class Main {
    )
    genericRegularClass.field = Foo()
   }
+  
+  @JvmStatic
+  fun testReferenceEquality() {
+   val foo: Foo = Foo()
+   val o: Any = Any()
+   var b: Boolean = foo === o
+   b = o !== foo
+   b = foo === Foo()
+   b = foo == null
+   b = null != foo
+   b = Main.identity<Foo?>(foo) === foo
+  }
+  
+  @JvmStatic
+  private fun <T> identity(t: T): T = t
  }
 }

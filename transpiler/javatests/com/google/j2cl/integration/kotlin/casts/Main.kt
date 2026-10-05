@@ -471,10 +471,8 @@ private fun <T, E : Number?> testCasts_generics() {
   val tts = os as Array<T?>?
 }
 
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Map")
-private class NativeMap<K, V>()
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Map") private class NativeMap<K, V>()
 
-@Wasm("nop") // Casts to/from native types not yet supported in Wasm.
 private fun <T : NativeMap<*, *>?> testCasts_typeVariableWithNativeBound() {
   // Casting Object[] to NativeMap[] is invalid on the JVM.
   if (isJvm()) {
@@ -489,9 +487,12 @@ private fun <T : NativeMap<*, *>?> testCasts_typeVariableWithNativeBound() {
 
   val o2: Any = NativeMap<Any?, Any?>()
   val unused = o2 as T?
+  val map: NativeMap<*, *> = NativeMap<Any?, Any?>()
+  val unusedFromNative = map as T?
+  val maps: Array<NativeMap<*, *>?> = arrayOfNulls(0)
+  val unusedArrayFromNative = maps as Array<T>?
 }
 
-@Wasm("nop") // Casts to/from native types not yet supported in Wasm.
 private fun testCasts_parameterizedNativeType() {
   val a: Any = NativeMap<String, Any>()
 
@@ -499,7 +500,6 @@ private fun testCasts_parameterizedNativeType() {
   assertTrue(e === a)
   val f = a as NativeMap<String, Any>?
   assertTrue(f === a)
-  assertTrue(a is NativeMap<*, *>)
 
   val tmp = arrayOf(e)
   val os: Any = tmp
@@ -508,6 +508,16 @@ private fun testCasts_parameterizedNativeType() {
   assertTrue(g[0] === e)
   val h = os as Array<NativeMap<String, Any>>
   assertTrue(h[0] === e)
+
+  testInstanceOf_parameterizedNativeType()
+}
+
+@Wasm("nop") // instanceof on native types not yet supported in Wasm.
+private fun testInstanceOf_parameterizedNativeType() {
+  val a: Any = NativeMap<String, Any>()
+  assertTrue(a is NativeMap<*, *>)
+
+  val os: Any = arrayOfNulls<NativeMap<*, *>>(0)
   assertTrue(os is Array<*>)
 }
 
@@ -551,7 +561,6 @@ private fun testCasts_exceptionMessages() {
   )
 }
 
-@Wasm("nop") // Casts to/from native types not yet supported in Wasm.
 private fun testCasts_exceptionMessages_jsType() {
   if (!isJvm()) {
     val `object`: Any = Foo()

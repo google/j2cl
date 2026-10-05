@@ -508,6 +508,10 @@
   (call_ref $function.m_consumesCloneable__java_lang_Cloneable__void (ref.as_non_null (local.get $this))(call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:193:4
   (call_ref $function.m_consumesSerializable__java_io_Serializable__void (ref.as_non_null (local.get $this))(call $m_newWithLength__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:194:4
+  (call_ref $function.m_consumesCloneable__java_lang_Cloneable__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_createArray__int__javaemul_internal_WasmExtern@javaemul.internal.WasmExtern (i32.const 10))))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:195:4
+  (call_ref $function.m_consumesSerializable__java_io_Serializable__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.Object) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_createArray__int__javaemul_internal_WasmExtern@javaemul.internal.WasmExtern (i32.const 10))))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
  )
 )
 (elem declare func $m_testArraysSupertypeClosureTypes__void@array.Arrays)
@@ -517,7 +521,7 @@
  (type $function.m_consumesCloneable__java_lang_Cloneable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:196:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:198:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
@@ -530,7 +534,7 @@
  (type $function.m_consumesSerializable__java_io_Serializable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:198:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:200:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (ref $array.Arrays) (local.get $this.untyped)))
  (block
@@ -729,16 +733,16 @@
 
 ;;; void GwtIncompatible.$clinit()
 (func $$clinit__void_<once>_@array.Arrays.GwtIncompatible
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:200:13
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:200:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
   (if (global.get $$class-initialized@array.Arrays.GwtIncompatible)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:200:13
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:200:13
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/array/readable-j2wasm.js/array/Arrays.java:202:13
   (global.set $$class-initialized@array.Arrays.GwtIncompatible (i32.const 1))
  )
 )

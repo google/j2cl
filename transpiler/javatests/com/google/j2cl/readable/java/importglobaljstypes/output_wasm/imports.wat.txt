@@ -6,6 +6,13 @@
  (result i32)
 )
 
+;;; WasmExtern NativeArray.at(int index)
+(func $m_at__int__java_lang_Object@importglobaljstypes.Number.NativeArray (import "imports" "Array.at$1")
+ (param $this (ref null extern))
+ (param $index i32)
+ (result (ref null extern))
+)
+
 ;;; NativeDate()
 (func $m_<init>__@importglobaljstypes.Date.NativeDate (import "imports" "Date.constructor")
  (result (ref null extern))
@@ -26,6 +33,11 @@
 (func $m_f__double__boolean@importglobaljstypes.Number (import "imports" "Number.isInteger")
  (param $x f64)
  (result i32)
+)
+
+;;; NativeArray Number.createArray()
+(func $m_createArray__importglobaljstypes_Number_NativeArray@importglobaljstypes.Number (import "imports" "Array")
+ (result (ref null extern))
 )
 
 ;;; NativeRegExp(NativeString pattern)

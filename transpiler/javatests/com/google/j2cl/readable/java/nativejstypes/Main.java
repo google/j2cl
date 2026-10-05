@@ -81,4 +81,20 @@ public class Main {
     GenericRegularClass<Foo> genericRegularClass = new GenericRegularClass<>(new Foo());
     genericRegularClass.field = new Foo();
   }
+
+  @SuppressWarnings({"ReferenceEquality", "unused"})
+  public static void testReferenceEquality() {
+    Foo foo = new Foo();
+    Object o = new Object();
+    boolean b = foo == o;
+    b = o != foo;
+    b = foo == new Foo();
+    b = foo == null;
+    b = null != foo;
+    b = identity(foo) == foo;
+  }
+
+  private static <T> T identity(T t) {
+    return t;
+  }
 }

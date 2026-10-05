@@ -218,9 +218,6 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
     checkSystemProperties(type);
-
-    checkNativeTypeUsagesInWasm(type);
-    checkNativeTypesAssignabilityInWasm(type);
   }
 
   private boolean checkJSpecifyUsage(TypeDeclaration typeDeclaration) {
@@ -295,122 +292,6 @@ public class JsInteropRestrictionsChecker {
     }
 
     return true;
-  }
-
-  private void checkNativeTypeUsagesInWasm(Type type) {
-    if (!checkWasmRestrictions) {
-      return;
-    }
-
-    checkNativeTypeArguments(type);
-    checkNativeTypeEqualityCheck(type);
-  }
-
-  private void checkNativeTypeArguments(Type type) {
-    type.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
-            checkTypeDescriptor(methodDescriptor.getReturnTypeDescriptor());
-            checkParameterization(
-                "Method", methodDescriptor, methodDescriptor.getLocalParameterization());
-          }
-
-          @Override
-          public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
-            checkTypeDescriptor(fieldDescriptor.getTypeDescriptor());
-          }
-
-          @Override
-          public void exitVariable(Variable variable) {
-            checkTypeDescriptor(variable.getTypeDescriptor());
-          }
-
-          @Override
-          public void exitType(Type type) {
-            type.getSuperTypesStream().forEach(this::checkTypeDescriptor);
-          }
-
-          void checkTypeDescriptor(TypeDescriptor typeDescriptor) {
-            if (typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor) {
-              checkParameterization(
-                  "Type", typeDescriptor, declaredTypeDescriptor.getParameterization());
-            } else if (typeDescriptor instanceof ArrayTypeDescriptor arrayTypeDescriptor) {
-              checkTypeDescriptor(arrayTypeDescriptor.getComponentTypeDescriptor());
-            }
-          }
-
-          private void checkParameterization(
-              String prefix,
-              HasReadableDescription context,
-              Map<TypeVariable, TypeDescriptor> parameterization) {
-            parameterization.forEach(
-                (tv, value) -> {
-                  if (tv.toRawTypeDescriptor().isNative() != value.isNative()) {
-                    problems.error(
-                        getSourcePosition(),
-                        "%s %s cannot be parameterized with native JsType '%s'. (b/290992813)",
-                        prefix,
-                        context.getReadableDescription(),
-                        value.getReadableDescription());
-                  }
-                });
-          }
-        });
-  }
-
-  private void checkNativeTypeEqualityCheck(Type type) {
-    type.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitBinaryExpression(BinaryExpression binaryExpression) {
-            if (!binaryExpression.getOperator().isRelationalOperator()) {
-              return;
-            }
-
-            if (isAllowedForNativeTypeEquality(
-                binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())) {
-              return;
-            }
-
-            var operand =
-                binaryExpression.getLeftOperand().getTypeDescriptor().isNative()
-                    ? binaryExpression.getLeftOperand()
-                    : binaryExpression.getRightOperand();
-            problems.error(
-                getSourcePosition(),
-                "%s cannot be compared with non-native type.",
-                getReadableDescriptionWithPrefix(operand.getTypeDescriptor()));
-          }
-
-          private boolean isAllowedForNativeTypeEquality(Expression left, Expression right) {
-            if (left instanceof NullLiteral || right instanceof NullLiteral) {
-              return true;
-            }
-            return left.getTypeDescriptor().isNative() == right.getTypeDescriptor().isNative();
-          }
-        });
-  }
-
-  private void checkNativeTypesAssignabilityInWasm(Type type) {
-    if (!checkWasmRestrictions) {
-      return;
-    }
-
-    checkTypeAssignments(
-        type,
-        JsInteropRestrictionsChecker::isDisallowedAllowedNativeJsTypeConversion,
-        /* errorMessageSuffix= */ " (b/262009761)");
-  }
-
-  private static boolean isDisallowedAllowedNativeJsTypeConversion(
-      TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
-
-    var isAllowedNativeJdTypeConversion =
-        TypeDescriptors.isJavaLangObject(toTypeDescriptor)
-            || TypeDescriptors.isJavaLangObject(fromTypeDescriptor)
-            || toTypeDescriptor.isNative() == fromTypeDescriptor.isNative();
-    return !isAllowedNativeJdTypeConversion;
   }
 
   private void checkJsFunctionLambdas(Type type) {

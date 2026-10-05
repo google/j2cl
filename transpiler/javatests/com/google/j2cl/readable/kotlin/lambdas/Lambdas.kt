@@ -202,13 +202,11 @@ class Lambdas {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   fun interface Thenable<T> {
-    @Wasm("nop") // Taking a non-native argument in a native method not supported in Wasm.
     fun then(f1: GenericJsFunction<Unit, T>, f2: GenericJsFunction<Unit, Throwable>)
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   fun interface AnotherThenable<T> {
-    @Wasm("nop") // Taking a non-native argument in a native method not supported in Wasm.
     fun then(f1: GenericJsFunction<Unit, T>, f2: GenericJsFunction<Unit, Throwable>)
   }
 

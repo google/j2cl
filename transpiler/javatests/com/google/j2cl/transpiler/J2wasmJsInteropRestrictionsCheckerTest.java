@@ -120,7 +120,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testNativeJsTypeEqualityFails() {
+  public void testNativeJsTypeEqualitySucceeds() {
     assertWithInlineMessages(
         "test.Main",
         """
@@ -132,15 +132,11 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             Native n = new Native();
             Object o = new Object();
             boolean b = n == o;
-        > Error: Native JsType 'Native' cannot be compared with non-native type.
             b = o != n;
-        > Error: Native JsType 'Native' cannot be compared with non-native type.
 
             Native[] arr = new Native[1];
             b = arr == o;
-        > Error: Native JsType 'Native[]' cannot be compared with non-native type.
             b = o != arr;
-        > Error: Native JsType 'Native[]' cannot be compared with non-native type.
           }
         }
         """);
@@ -166,20 +162,29 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.Main",
         """
+        import java.io.Serializable;
         import jsinterop.annotations.*;
         @JsType(isNative = true)
         class Buggy {}
         @JsType(isNative = true)
         class AlsoBuggy {}
+        @JsType(isNative = true)
+        interface NativeInterface {}
+        interface NonNativeInterface {}
         class Main {
           void test() {
             Object obj = new Buggy();
             obj = new Buggy[1];
+            Cloneable cloneable = new Buggy[1];
+            Serializable serializable = new Buggy[1];
             passArgument(new AlsoBuggy());
             passArgument(new AlsoBuggy[1]);
             Object obj2 = (Object) new Buggy();
             Buggy b = (Buggy) new Object();
             Buggy[] bArr = (Buggy[]) new Object();
+            NonNativeInterface nonNativeIntf = (NonNativeInterface) new Buggy();
+            NativeInterface nativeIntf = (NativeInterface) new Main();
+            Main m = (Main) nativeIntf;
             new Buggy().equals(null);
             new Buggy[1].equals(null);
           }
@@ -283,7 +288,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testNativeJsTypeArgumentFails() {
+  public void testNativeJsTypeArgumentSucceeds() {
     assertWithInlineMessages(
         "test.Main",
         """
@@ -294,47 +299,31 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         @JsType(isNative = true)
         class MyNativeType {}
         public class Main<T> {
-        > Error: Type Main<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
           List<MyNativeType> myNativeType;
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
           List<T> tList;
           T t;
           private static void acceptsNativeTypeList(List<MyNativeType> p) {}
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
           private static void acceptsNativeTypeVarargsList(List<MyNativeType>... p) {}
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
           private static List<MyNativeType> returnsNativeTypeList() { return null; }
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
           private static <T> List<T> returnsTList() { return null; }
           private static <T> T returnsT() { return null; }
           private static <T> void acceptsT(T t) {}
           private static void arrays() {
             Object o = new ArrayList<MyNativeType>();
-        > Error: Type ArrayList<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
             List<MyNativeType> arr = null;
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
             o = (List<MyNativeType>) o;
             MyNativeType e = Main.<MyNativeType>returnsTList().get(0);
-        > Error: Method List<MyNativeType> Main.returnsTList() cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
             e = Main.<MyNativeType>returnsT();
-        > Error: Method MyNativeType Main.returnsT() cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
             acceptsT(new MyNativeType());
-        > Error: Method void Main.acceptsT(MyNativeType) cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
-        > Error: Native JsType 'MyNativeType' cannot be assigned to 'T'. (b/262009761)
             e = new Main<MyNativeType>().tList.get(0);
-        > Error: Type Main<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
             e = new Main<List<MyNativeType>>().t.get(0);
-        > Error: Type List<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
           }
           static class Buggy extends Main<MyNativeType> {}
-        > Error: Type Main<MyNativeType> cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
         }
         """);
   }
 
-  public void testNativeJsTypeArrayArgumentFails() {
+  public void testNativeJsTypeArrayArgumentSucceeds() {
     assertWithInlineMessages(
         "test.Main",
         """
@@ -348,16 +337,9 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           T t;
           public void test() {
             List<MyNativeType[]> list = null;
-        > Error: Type List<MyNativeType[]> cannot be parameterized with native JsType 'MyNativeType[]'. (b/290992813)
             MyNativeType e = Main.<MyNativeType>returnsTArray()[0];
-        > Error: Method MyNativeType[] Main.returnsTArray() cannot be parameterized with native JsType 'MyNativeType'. (b/290992813)
-        > Error: Native JsType 'MyNativeType[]' cannot be assigned to 'T[]'. (b/262009761)
             e = Main.<MyNativeType[]>returnsT()[0];
-        > Error: Method MyNativeType[] Main.returnsT() cannot be parameterized with native JsType 'MyNativeType[]'. (b/290992813)
-        > Error: Native JsType 'MyNativeType[]' cannot be assigned to 'T'. (b/262009761)
             e = new Main<MyNativeType[]>().t[0];
-        > Error: Type Main<MyNativeType[]> cannot be parameterized with native JsType 'MyNativeType[]'. (b/290992813)
-        > Error: Native JsType 'MyNativeType[]' cannot be assigned to 'T'. (b/262009761)
           }
         }
         """);

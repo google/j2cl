@@ -26,13 +26,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 
-/**
- * Rewrites equality operations on references.
- *
- * <p>Rewrites {@code a != b} if it is a comparison by reference to {@code !(a == b)}.
- *
- * <p>Rewrites {@code a == null} or {@code null == a} to {@code Platforms.isNull(a)}.
- */
+/** Rewrites reference equality operations into operations supported in Wasm. */
 public class RewriteReferenceEqualityOperations extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -58,14 +52,14 @@ public class RewriteReferenceEqualityOperations extends NormalizationPass {
   private static Expression rewriteEquality(BinaryExpression expression) {
     checkArgument(expression.getOperator() == BinaryOperator.EQUALS);
 
-    if (expression.getLeftOperand().getTypeDescriptor().isNative()
-        || expression.getRightOperand().getTypeDescriptor().isNative()) {
-      return RuntimeMethods.createWasmExternEqualityMethodCall(
-          expression.getLeftOperand(), expression.getRightOperand());
-    } else if (expression.getRightOperand() instanceof NullLiteral) {
-      return RuntimeMethods.createPlatformIsNullCall(expression.getLeftOperand());
-    } else if (expression.getLeftOperand() instanceof NullLiteral) {
-      return RuntimeMethods.createPlatformIsNullCall(expression.getRightOperand());
+    Expression leftOperand = expression.getLeftOperand();
+    Expression rightOperand = expression.getRightOperand();
+    if (leftOperand.getTypeDescriptor().isNative() || rightOperand.getTypeDescriptor().isNative()) {
+      return RuntimeMethods.createPlatformIsSameCall(leftOperand, rightOperand);
+    } else if (rightOperand instanceof NullLiteral) {
+      return RuntimeMethods.createPlatformIsNullCall(leftOperand);
+    } else if (leftOperand instanceof NullLiteral) {
+      return RuntimeMethods.createPlatformIsNullCall(rightOperand);
     } else {
       return expression;
     }

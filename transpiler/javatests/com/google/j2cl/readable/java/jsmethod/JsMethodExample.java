@@ -16,7 +16,6 @@
 package jsmethod;
 
 import java.util.ArrayList;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -30,7 +29,6 @@ public class JsMethodExample {
   //    1. be a @JsMethod
   //    2. return a type variable that is bounded by a generic class that has a constructor.
   // This would better be handled in a unit test.
-  @Wasm("nop") // Native methods cannot return T in Wasm.
   @JsMethod
   public static native <T extends ArrayList<String>> T testMethod();
 
