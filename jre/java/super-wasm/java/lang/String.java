@@ -338,7 +338,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public String concat(String str) {
-    return new String(nativeConcat(value, str.value));
+    return wrapIfChanged(nativeConcat(value, str.value));
   }
 
   public boolean contains(CharSequence s) {
@@ -542,7 +542,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   public String repeat(int count) {
     checkArgument(count >= 0);
-    return new String(value.repeat(count));
+    return wrapIfChanged(value.repeat(count));
   }
 
   public String replace(char from, char to) {
@@ -727,7 +727,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
    * toLowerCase(Locale.getDefault())} instead.
    */
   public String toLowerCase() {
-    return new String(value.toLowerCase());
+    return wrapIfChanged(value.toLowerCase());
   }
 
   /**
@@ -737,21 +737,19 @@ public final class String implements Comparable<String>, CharSequence, Serializa
    * in GWT Locale emulation.
    */
   public String toLowerCase(Locale locale) {
-    return locale == Locale.getDefault()
-        ? new String(value.toLocaleLowerCase())
-        : new String(value.toLowerCase());
+    return wrapIfChanged(
+        locale == Locale.getDefault() ? value.toLocaleLowerCase() : value.toLowerCase());
   }
 
   // See the notes in lowerCase pair.
   public String toUpperCase() {
-    return new String(value.toUpperCase());
+    return wrapIfChanged(value.toUpperCase());
   }
 
   // See the notes in lowerCase pair.
   public String toUpperCase(Locale locale) {
-    return locale == Locale.getDefault()
-        ? new String(value.toLocaleUpperCase())
-        : new String(value.toUpperCase());
+    return wrapIfChanged(
+        locale == Locale.getDefault() ? value.toLocaleUpperCase() : value.toUpperCase());
   }
 
   @Override
@@ -851,6 +849,19 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   NativeString toJs() {
     return this.value;
+  }
+
+  /**
+   * Returns this string if {@code newValue} has the same contents, otherwise wraps {@code newValue}
+   * in a new String.
+   *
+   * <p>Native string operations typically return the original string when there is nothing to
+   * change. Reusing this instance in that case avoids an allocation and keeps the cached hash code.
+   * The check is relatively cheap since {@code string.eq} short-circuits on identical references as
+   * well as on strings with different lengths.
+   */
+  private String wrapIfChanged(NativeString newValue) {
+    return nativeEq(newValue, value) ? this : new String(newValue);
   }
 
   /** Native JS compatible representation of a string. */

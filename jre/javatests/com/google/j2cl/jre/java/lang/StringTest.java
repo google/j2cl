@@ -19,6 +19,7 @@ import static com.google.j2cl.jre.testing.TestUtils.isJvm;
 import static com.google.j2cl.jre.testing.TestUtils.isWasm;
 import static org.junit.Assert.assertThrows;
 
+import com.google.j2cl.jre.testing.J2ktIncompatible;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -143,6 +144,8 @@ public class StringTest extends TestCase {
     assertEquals("abcdef", abc + def);
     assertEquals("abcdef", abc.concat(def));
     assertEquals("", empty.concat(empty));
+    assertEquals("abc", abc.concat(empty));
+    assertEquals("abc", empty.concat(abc));
     char c = def.charAt(0);
     String s = abc;
     assertEquals("abcd", abc + 'd');
@@ -1306,6 +1309,22 @@ public class StringTest extends TestCase {
 
     // surrogate example
     assertEquals("\uD801\uDC1c", hideFromCompiler("\uD801\uDC44").toUpperCase());
+  }
+
+  @J2ktIncompatible // Reusing the same instance is not guaranteed.
+  public void testUnchangedResultIsSameInstance() {
+    String upper = hideFromCompiler("ABC");
+    assertSame(upper, upper.toUpperCase());
+    assertSame(upper, upper.toUpperCase(Locale.US));
+    assertSame(upper, upper.toUpperCase(Locale.getDefault()));
+
+    String lower = hideFromCompiler("abc");
+    assertSame(lower, lower.toLowerCase());
+    assertSame(lower, lower.toLowerCase(Locale.US));
+    assertSame(lower, lower.toLowerCase(Locale.getDefault()));
+
+    assertSame(lower, lower.concat(""));
+    assertSame(lower, lower.repeat(1));
   }
 
   /*
