@@ -156,6 +156,7 @@ def _compile(
 
         _j2cl_transpile(
             ctx,
+            name,
             jvm_srcs,
             jvm_provider,
             jvm_deps,
@@ -328,7 +329,7 @@ def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotat
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
-    add_profiling_support(ctx, mnemonic, outputs, args)
+    add_profiling_support(ctx, name, mnemonic, outputs, args)
     args.add("-d", output_file)
     args.add_all(strip_annotations, format_each = "-annotation=%s")
     args.add_all(java_srcs)
@@ -396,6 +397,7 @@ done
 
 def _j2cl_transpile(
         ctx,
+        name,
         java_srcs,
         jvm_provider,
         jvm_deps,
@@ -440,7 +442,7 @@ def _j2cl_transpile(
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
-    add_profiling_support(ctx, mnemonic, outputs, args)
+    add_profiling_support(ctx, name, mnemonic, outputs, args)
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add_all("-system", jdk_system, expand_directories = False)
     args.add_all(tokenized_javac_opts, format_each = "-javacOptions=%s")
