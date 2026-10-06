@@ -15,9 +15,15 @@
 
 set -ex
 
+j2cl_path="$(pwd)"
+
+# Use the BAZELRC environment variable instead once we've migrated to Bazel 9.
+bazel_rc="--bazelrc=$(pwd)/ci.bazelrc"
+
+
 function bazel_workspace() {
   # Test in its own workspace with local (head) j2cl version.
-  (cd $2 &&  bazel $1 --override_module=j2cl=../.. ... && bazel shutdown)
+  (cd $2 &&  bazel "${bazel_rc}" $1 "--override_module=j2cl=${j2cl_path}" ... && bazel shutdown)
 }
 
 # Build and test Hello World sample in its own workspace
