@@ -226,7 +226,11 @@ def sync_jsize_repo_to_cl(cl):
 def get_last_cl_for_size_report():
   path = SIZE_REPORT
   output = run_cmd(
-      ["p4 changes -m 1 -s submitted %s | awk '{print $2}'" % path], shell=True
+      [
+          f"p4 changes -m 1 -s submitted {path}@{get_current_cl() - 1}"
+          " | awk '{print $2}'"
+      ],
+      shell=True,
   )
   return int(output)
 

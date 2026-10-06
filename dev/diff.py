@@ -363,8 +363,6 @@ def _parse_cl_range(cl_range_str):
 
   if start_cl >= end_cl:
     print(f"Start CL ({start_cl}) must be smaller than end CL ({end_cl}).")
-    if cl_range_str == "auto":
-      print("Your workspace might be out of date. Please sync.")
     sys.exit(1)
   return start_cl, end_cl
 
