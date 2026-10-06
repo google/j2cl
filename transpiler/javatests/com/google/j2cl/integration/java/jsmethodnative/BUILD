@@ -1,0 +1,18 @@
+load(
+    "//transpiler/javatests/com/google/j2cl/integration:integration_test.bzl",
+    "integration_test",
+)
+
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["reciprocal"],
+)
+
+integration_test(
+    srcs = glob([
+        "*.java",
+    ]),
+    # Contains JsInterop features which are only applicable for JS or Wasm output.
+    enable_jvm_test = False,
+    enable_kt = False,
+)

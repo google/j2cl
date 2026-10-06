@@ -16,7 +16,6 @@
 package jsinteroptests;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
@@ -31,34 +30,10 @@ import org.jspecify.annotations.Nullable;
 /** Tests JsMethod functionality. */
 public class JsMethodTest {
   public static void testAll() {
-    testNativeJsMethod();
-    testStaticNativeJsMethod();
     testStaticNativeJsPropertyGetter();
     testStaticNativeJsPropertySetter();
     testLambdaRequiringJsMethodBridge();
     testJsOptionalJsVarargsLambda();
-  }
-
-  static class MyObject {
-    @JsProperty public int mine;
-  }
-
-  private static void testNativeJsMethod() {
-    MyObject obj = new MyObject();
-    obj.mine = 0;
-    assertTrue(PropertyUtils.hasOwnPropertyMine(obj));
-    assertFalse(PropertyUtils.hasOwnPropertyToString(obj));
-  }
-
-  @JsMethod(namespace = GLOBAL)
-  private static native boolean isFinite(double d);
-
-  private static void testStaticNativeJsMethod() {
-    assertFalse(isFinite(Double.POSITIVE_INFINITY));
-    assertFalse(isFinite(Double.NEGATIVE_INFINITY));
-    assertFalse(isFinite(Double.NaN));
-    assertTrue(isFinite(0));
-    assertTrue(isFinite(1));
   }
 
   @JsProperty(namespace = GLOBAL, name = "NaN")

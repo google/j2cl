@@ -57,10 +57,6 @@ object PropertyUtils {
 
   @JvmStatic external fun hasDefaultStaticMethod(obj: Any?): Boolean
 
-  @JvmStatic external fun hasOwnPropertyMine(obj: Any?): Boolean
-
-  @JvmStatic external fun hasOwnPropertyToString(obj: Any?): Boolean
-
   @JvmStatic external fun hasNotExported_1(obj: Any?): Boolean
 
   @JvmStatic external fun hasNotExported_2(obj: Any?): Boolean

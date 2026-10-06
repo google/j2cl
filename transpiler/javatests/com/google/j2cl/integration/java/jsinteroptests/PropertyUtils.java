@@ -56,10 +56,6 @@ public class PropertyUtils {
 
   public static native boolean hasDefaultStaticMethod(Object obj);
 
-  public static native boolean hasOwnPropertyMine(Object obj);
-
-  public static native boolean hasOwnPropertyToString(Object obj);
-
   public static native boolean hasNotExported_1(Object obj);
 
   public static native boolean hasNotExported_2(Object obj);

@@ -172,22 +172,6 @@ class PropertyUtils {
    * @param {?} obj
    * @return {boolean}
    */
-  static hasOwnPropertyMine(obj) {
-    return obj.hasOwnProperty(googReflect.objectProperty('mine', obj));
-  }
-
-  /**
-   * @param {?} obj
-   * @return {boolean}
-   */
-  static hasOwnPropertyToString(obj) {
-    return obj.hasOwnProperty(googReflect.objectProperty('toString', obj));
-  }
-
-  /**
-   * @param {?} obj
-   * @return {boolean}
-   */
   static hasNotExported_1(obj) {
     return obj[googReflect.objectProperty('notExported_1', obj)] != null;
   }

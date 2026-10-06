@@ -16,7 +16,6 @@
 package jsinteroptests
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
-import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsOptional
@@ -28,33 +27,10 @@ import jsinterop.annotations.JsType
 /** Tests JsMethod functionality. */
 object JsMethodTest {
   fun testAll() {
-    testNativeJsMethod()
-    testStaticNativeJsMethod()
     testStaticNativeJsPropertyGetter()
     testStaticNativeJsPropertySetter()
     testLambdaRequiringJsMethodBridge()
     testJsOptionalJsVarargsLambda()
-  }
-
-  class MyObject {
-    @JsProperty @JvmField var mine: Int = 0
-  }
-
-  private fun testNativeJsMethod() {
-    val obj = MyObject()
-    obj.mine = 0
-    assertTrue(PropertyUtils.hasOwnPropertyMine(obj))
-    assertFalse(PropertyUtils.hasOwnPropertyToString(obj))
-  }
-
-  @JsMethod(namespace = GLOBAL) @JvmStatic private external fun isFinite(d: Double): Boolean
-
-  private fun testStaticNativeJsMethod() {
-    assertFalse(isFinite(Double.POSITIVE_INFINITY))
-    assertFalse(isFinite(Double.NEGATIVE_INFINITY))
-    assertFalse(isFinite(Double.NaN))
-    assertTrue(isFinite(0.0))
-    assertTrue(isFinite(1.0))
   }
 
   @JsProperty(namespace = GLOBAL, name = "NaN") @JvmStatic private external fun getNaN(): Double
