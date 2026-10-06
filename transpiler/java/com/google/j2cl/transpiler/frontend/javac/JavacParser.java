@@ -218,6 +218,9 @@ public class JavacParser {
     fileManager.setLocationFromPaths(StandardLocation.PLATFORM_CLASS_PATH, classPath);
     fileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, classPath);
     if (sourceGenPath != null) {
+      // An unset CLASS_OUTPUT lets JDK 18+ place originating-element resources beside inputs.
+      fileManager.setLocationFromPaths(
+          StandardLocation.CLASS_OUTPUT, ImmutableList.of(sourceGenPath));
       fileManager.setLocationFromPaths(
           StandardLocation.SOURCE_OUTPUT, ImmutableList.of(sourceGenPath));
     }
