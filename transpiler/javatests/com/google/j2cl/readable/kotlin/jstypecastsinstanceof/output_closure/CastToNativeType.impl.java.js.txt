@@ -32,22 +32,25 @@ class CastToNativeType extends j_l_Object {
  m_test__void() {
   let a = new NativeJsType();
   let aa = /**@type {!NativeJsType}*/ ($Casts.$to(a, $Overlay));
-  let b = new NativeJsType();
-  let bb = $Overlay.$isInstance(b);
   let c = new NativeJsType();
   let cc = /**@type {!Array<!NativeJsType>}*/ ($Arrays.$castToNative(c));
-  let d = new NativeJsType();
-  let dd = $Arrays.$instanceIsOfNative(/**@type {!Array<*>}*/ ($Arrays.$castTo(d, j_l_Object, 1)));
   let e = new NativeJsType();
   let ee = /**@type {!Object<string, *>}*/ ($Casts.$to(e, NativeObject_$Overlay));
   let f = new NativeJsType();
   let ff = /**@type {!Object<string, *>}*/ ($Casts.$to(f, NativeObject_$Overlay));
-  let g = new NativeJsType();
-  let gg = NativeObject_$Overlay.$isInstance(g);
   let h = new NativeJsType();
   let hh = /**@type {!Array<!Object<?, ?>>}*/ ($Arrays.$castToNative(h));
   let i = new NativeJsType();
   let ii = /**@type {!Array<!Object<string, *>>}*/ ($Arrays.$castToNative(i));
+ }
+ /** @final @nodts */
+ m_testInstanceOf__void_$p_jstypecastsinstanceof_CastToNativeType() {
+  let b = new NativeJsType();
+  let bb = $Overlay.$isInstance(b);
+  let d = new NativeJsType();
+  let dd = $Arrays.$instanceIsOfNative(/**@type {!Array<*>}*/ ($Arrays.$castTo(d, j_l_Object, 1)));
+  let g = new NativeJsType();
+  let gg = NativeObject_$Overlay.$isInstance(g);
   let j = new NativeJsType();
   let jj = $Arrays.$instanceIsOfNative(/**@type {!Array<*>}*/ ($Arrays.$castTo(j, j_l_Object, 1)));
  }

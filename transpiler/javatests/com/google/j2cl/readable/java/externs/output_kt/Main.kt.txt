@@ -21,22 +21,16 @@ package externs
 import javaemul.lang.*
 import externs.Main.TopLevelExtern.Inner
 import externs.Main.TopLevelExtern.InnerExtern
-import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
-import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
-import kotlin.Any
 import kotlin.Array
-import kotlin.Boolean
+import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 open class Main {
- @JvmField
- internal var aFoo: FooOverlay? = null
- 
  @JvmField
  internal var innerExtern: InnerExtern? = null
  
@@ -45,34 +39,12 @@ open class Main {
  
  companion object {
   @JvmStatic
-  private fun testFooOverlay(fooOverlay: FooOverlay?): Boolean = fooOverlay!!.getFoo()!!.equals("Hello")
-  
-  @JvmStatic
-  @JsMethod
-  private external fun useDirectlyAsFoo(fooOverlay: Any?)
-  
-  @JvmStatic
   fun main(vararg args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
-   Main.testFooOverlay(
-    FooImpl() as Any as FooOverlay,
-   )
-   Main.useDirectlyAsFoo(
-    FooImpl(),
-   )
+   val inner: Inner = Inner("Hello")
+   Inner.staticField = Inner.staticMethod()
+   inner.foo = inner.instanceMethod()
   }
- }
- 
- internal open class FooImpl internal constructor() {
-  @JvmField
-  @JsProperty
-  internal var foo: String? = null
- }
- 
- @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
- internal fun interface FooOverlay {
-  @JsProperty
-  fun getFoo(): String?
  }
  
  @JsType(namespace = JsPackage.GLOBAL, isNative = true)
@@ -80,7 +52,22 @@ open class Main {
   @JsType(isNative = true)
   open class InnerExtern
   
-  @JsType(name = "FooImpl", namespace = "externs.Main", isNative = true)
-  open class Inner
+  @JsType(name = "Foo", namespace = JsPackage.GLOBAL, isNative = true)
+  open class Inner {
+   @JvmField
+   var foo: String? = null
+   
+   constructor(str: String?)
+   
+   external open fun instanceMethod(): String?
+   
+   companion object {
+    @JvmField
+    var staticField: Int = 0
+    
+    @JvmStatic
+    external fun staticMethod(): Int
+   }
+  }
  }
 }

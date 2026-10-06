@@ -15,6 +15,7 @@
  */
 package jstypecastsinstanceof;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -29,15 +30,21 @@ public class CastToNativeType {
   public void test() {
     Object a = new NativeJsType();
     NativeJsType b = (NativeJsType) a;
-    boolean c = a instanceof NativeJsType;
     NativeJsType[] d = (NativeJsType[]) a;
-    c = a instanceof NativeJsType[];
 
     NativeObject e = (NativeObject) a;
     NativeObject<String, Object> f = (NativeObject<String, Object>) a;
-    c = a instanceof NativeObject;
     NativeObject[] g = (NativeObject[]) a;
     NativeObject<String, Object>[] h = (NativeObject<String, Object>[]) a;
+  }
+
+  @Wasm("nop") // instanceof on native types not yet supported in Wasm.
+  @SuppressWarnings("unused")
+  private void testInstanceOf() {
+    Object a = new NativeJsType();
+    boolean c = a instanceof NativeJsType;
+    c = a instanceof NativeJsType[];
+    c = a instanceof NativeObject;
     c = a instanceof NativeObject[];
   }
 }

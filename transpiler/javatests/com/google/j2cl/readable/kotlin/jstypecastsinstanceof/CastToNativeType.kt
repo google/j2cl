@@ -15,6 +15,7 @@
  */
 package jstypecastsinstanceof
 
+import javaemul.internal.annotations.Wasm
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 
@@ -29,24 +30,27 @@ class CastToNativeType {
     val a: Any = NativeJsType()
     val aa = a as NativeJsType
 
-    val b: Any = NativeJsType()
-    val bb = b is NativeJsType
-
     val c: Any = NativeJsType()
     val cc = c as Array<NativeJsType>
-    val d: Any = NativeJsType()
-    var dd = (d as Array<*>).isArrayOf<NativeJsType>()
 
     val e: Any = NativeJsType()
     val ee = e as NativeObject<String, *>
     val f: Any = NativeJsType()
     val ff = f as NativeObject<String, Any?>
-    val g: Any = NativeJsType()
-    val gg = g is NativeObject<*, *>
     val h: Any = NativeJsType()
     val hh = h as Array<NativeObject<*, *>>
     val i: Any = NativeJsType()
     val ii = i as Array<NativeObject<String, Any?>>
+  }
+
+  @Wasm("nop") // instanceof on native types not yet supported in Wasm.
+  private fun testInstanceOf() {
+    val b: Any = NativeJsType()
+    val bb = b is NativeJsType
+    val d: Any = NativeJsType()
+    var dd = (d as Array<*>).isArrayOf<NativeJsType>()
+    val g: Any = NativeJsType()
+    val gg = g is NativeObject<*, *>
     val j: Any = NativeJsType()
     val jj = (j as Array<*>).isArrayOf<NativeObject<*, *>>()
   }

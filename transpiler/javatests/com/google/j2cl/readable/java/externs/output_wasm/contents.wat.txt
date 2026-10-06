@@ -1,0 +1,267 @@
+
+(global $$class-initialized@externs.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@externs.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@externs.Main.TopLevelExtern.InnerExtern.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@externs.Main.TopLevelExtern.InnerExtern.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@externs.Main.TopLevelExtern.Inner.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@externs.Main.TopLevelExtern.Inner.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@externs.Main.TopLevelExtern.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@externs.Main.TopLevelExtern.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $externs.Main.vtable (ref $externs.Main.vtable)
+ (struct.new $externs.Main.vtable
+  (ref.func $$getClassImpl__java_lang_Class@externs.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $externs.Main.TopLevelExtern.InnerExtern.$Overlay.vtable (ref $externs.Main.TopLevelExtern.InnerExtern.$Overlay.vtable)
+ (struct.new $externs.Main.TopLevelExtern.InnerExtern.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.InnerExtern.$Overlay)
+ )
+)
+(global $externs.Main.TopLevelExtern.Inner.$Overlay.vtable (ref $externs.Main.TopLevelExtern.Inner.$Overlay.vtable)
+ (struct.new $externs.Main.TopLevelExtern.Inner.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.Inner.$Overlay)
+ )
+)
+(global $externs.Main.TopLevelExtern.$Overlay.vtable (ref $externs.Main.TopLevelExtern.$Overlay.vtable)
+ (struct.new $externs.Main.TopLevelExtern.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.$Overlay)
+ )
+)
+
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@externs.Main.TopLevelExtern.InnerExtern.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
+  (if (global.get $$class-initialized@externs.Main.TopLevelExtern.InnerExtern.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
+  (global.set $$class-initialized@externs.Main.TopLevelExtern.InnerExtern.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@externs.Main.TopLevelExtern.InnerExtern.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@externs.Main.TopLevelExtern.InnerExtern.$Overlay)))
+   (then
+    (return (global.get $$class@externs.Main.TopLevelExtern.InnerExtern.$Overlay))
+   )
+  )
+  (global.set $$class@externs.Main.TopLevelExtern.InnerExtern.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|externs.Main...|__java_lang_String_<once>_@externs.Main.TopLevelExtern.InnerExtern.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@externs.Main.TopLevelExtern.InnerExtern.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.InnerExtern.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $externs.Main.TopLevelExtern.InnerExtern.$Overlay))
+ (local.set $this (ref.cast (ref $externs.Main.TopLevelExtern.InnerExtern.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@externs.Main.TopLevelExtern.InnerExtern.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.InnerExtern.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@externs.Main.TopLevelExtern.Inner.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
+  (if (global.get $$class-initialized@externs.Main.TopLevelExtern.Inner.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
+  (global.set $$class-initialized@externs.Main.TopLevelExtern.Inner.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@externs.Main.TopLevelExtern.Inner.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@externs.Main.TopLevelExtern.Inner.$Overlay)))
+   (then
+    (return (global.get $$class@externs.Main.TopLevelExtern.Inner.$Overlay))
+   )
+  )
+  (global.set $$class@externs.Main.TopLevelExtern.Inner.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|externs.Main...|__java_lang_String_<once>_@externs.Main.TopLevelExtern.Inner.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@externs.Main.TopLevelExtern.Inner.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.Inner.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $externs.Main.TopLevelExtern.Inner.$Overlay))
+ (local.set $this (ref.cast (ref $externs.Main.TopLevelExtern.Inner.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@externs.Main.TopLevelExtern.Inner.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.Inner.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@externs.Main.TopLevelExtern.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
+  (if (global.get $$class-initialized@externs.Main.TopLevelExtern.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
+  (global.set $$class-initialized@externs.Main.TopLevelExtern.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@externs.Main.TopLevelExtern.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@externs.Main.TopLevelExtern.$Overlay)))
+   (then
+    (return (global.get $$class@externs.Main.TopLevelExtern.$Overlay))
+   )
+  )
+  (global.set $$class@externs.Main.TopLevelExtern.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|externs.Main...|__java_lang_String_<once>_@externs.Main.TopLevelExtern.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@externs.Main.TopLevelExtern.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $externs.Main.TopLevelExtern.$Overlay))
+ (local.set $this (ref.cast (ref $externs.Main.TopLevelExtern.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@externs.Main.TopLevelExtern.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@externs.Main.TopLevelExtern.$Overlay)
+
+;;; Main Main.$create()
+(func $$create__@externs.Main
+ (result (ref null $externs.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+ (local $$instance (ref null $externs.Main))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (call $$clinit__void_<once>_@externs.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (local.set $$instance (struct.new $externs.Main (global.get $externs.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null extern) (ref.null extern)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (call $$ctor__void_$p_externs_Main@externs.Main (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_externs_Main@externs.Main
+ (param $this (ref null $externs.Main))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.main(String... args)
+(func $m_main__arrayOf_java_lang_String__void@externs.Main
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:44:21
+ (local $inner (ref null extern))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:44:21
+  (call $$clinit__void_<once>_@externs.Main )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:45:4
+  (local.set $inner (call $m_<init>__java_lang_String@externs.Main.TopLevelExtern.Inner (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|Hello|__java_lang_String_<once>_@externs.Main.$StringLiterals )))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:46:4
+  (call $m_staticField__int__void@externs.Main.TopLevelExtern.Inner (call $m_staticMethod__int@externs.Main.TopLevelExtern.Inner ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:47:4
+  (call $m_foo__java_lang_String__void@externs.Main.TopLevelExtern.Inner (ref.as_non_null (local.get $inner))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_instanceMethod__java_lang_String@externs.Main.TopLevelExtern.Inner (ref.as_non_null (local.get $inner)))))))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@externs.Main
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (if (global.get $$class-initialized@externs.Main)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (global.set $$class-initialized@externs.Main (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@externs.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@externs.Main)))
+   (then
+    (return (global.get $$class@externs.Main))
+   )
+  )
+  (global.set $$class@externs.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|externs.Main|__java_lang_String_<once>_@externs.Main.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@externs.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@externs.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $externs.Main))
+ (local.set $this (ref.cast (ref $externs.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@externs.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@externs.Main)

@@ -14,13 +14,19 @@ j2kt_jvm_library(
     name = "readable-j2kt-jvm",
     srcs = glob(["*.java"]),
     j2kt_j2objc_interop_enabled = False,
-    deps = ["//third_party:jsinterop-annotations-j2kt-jvm"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2kt-jvm",
+        "//third_party:jsinterop-annotations-j2kt-jvm",
+    ],
 )
 
 j2kt_native_library(
     name = "readable-j2kt-native",
     srcs = glob(["*.java"]),
-    deps = ["//third_party:jsinterop-annotations-j2kt-native"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2kt-native",
+        "//third_party:jsinterop-annotations-j2kt-native",
+    ],
 )
 
 readable_example(
@@ -30,7 +36,8 @@ readable_example(
     ]),
     # Native JsType does not make sense for j2kt-native.
     build_kt_native_readables = False,
-    # Casting non-native type to/from native type not supported in Wasm.
-    generate_wasm_readables = False,
-    deps = ["//third_party:jsinterop-annotations-j2cl"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
 )

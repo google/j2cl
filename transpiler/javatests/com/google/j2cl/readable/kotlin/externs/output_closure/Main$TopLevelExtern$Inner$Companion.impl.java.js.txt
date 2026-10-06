@@ -1,0 +1,53 @@
+goog.module('externs.Main.TopLevelExtern.Inner.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__externs_Main_TopLevelExtern_Inner_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__externs_Main_TopLevelExtern_Inner_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {number} */
+ m_staticMethod__int() {
+  return Foo.staticMethod();
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__externs_Main_TopLevelExtern_Inner_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__externs_Main_TopLevelExtern_Inner_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__externs_Main_TopLevelExtern_Inner_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__externs_Main_TopLevelExtern_Inner_Companion;
+$Util.$setClassMetadata(Companion, 'externs.Main$TopLevelExtern$Inner$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Main$TopLevelExtern$Inner$Companion.js.map

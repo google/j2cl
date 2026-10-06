@@ -3,8 +3,6 @@ goog.module('externs.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Inner = goog.forwardDeclare('externs.Main.FooImpl');
-
 /**
  * @final
  */
@@ -12,11 +10,9 @@ class Main extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Foo} @nodts*/
-  this.f_aFoo__externs_Main_;
   /**@type {TopLevelExtern.InnerExtern} @nodts*/
   this.f_innerExtern__externs_Main_;
-  /**@type {Inner} @nodts*/
+  /**@type {Foo} @nodts*/
   this.f_inner__externs_Main_;
  }
  /** @nodts @return {!Main} */
@@ -30,14 +26,6 @@ class Main extends j_l_Object {
  $ctor__externs_Main__void() {
   this.$ctor__java_lang_Object__void();
  }
- /** @final @nodts @return {Foo} */
- m_getAFoo__externs_Main_FooOverlay() {
-  return this.f_aFoo__externs_Main_;
- }
- /** @final @nodts */
- m_setAFoo__externs_Main_FooOverlay__void(/** Foo */ set__) {
-  this.f_aFoo__externs_Main_ = set__;
- }
  /** @final @nodts @return {TopLevelExtern.InnerExtern} */
  m_getInnerExtern__externs_Main_TopLevelExtern_InnerExtern() {
   return this.f_innerExtern__externs_Main_;
@@ -46,12 +34,12 @@ class Main extends j_l_Object {
  m_setInnerExtern__externs_Main_TopLevelExtern_InnerExtern__void(/** TopLevelExtern.InnerExtern */ set__) {
   this.f_innerExtern__externs_Main_ = set__;
  }
- /** @final @nodts @return {Inner} */
+ /** @final @nodts @return {Foo} */
  m_getInner__externs_Main_TopLevelExtern_Inner() {
   return this.f_inner__externs_Main_;
  }
  /** @final @nodts */
- m_setInner__externs_Main_TopLevelExtern_Inner__void(/** Inner */ set__) {
+ m_setInner__externs_Main_TopLevelExtern_Inner__void(/** Foo */ set__) {
   this.f_inner__externs_Main_ = set__;
  }
  /** @nodts */

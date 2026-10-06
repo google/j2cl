@@ -1,6 +1,5 @@
 goog.module('externs.Main.TopLevelExtern.Inner.$Overlay$impl');
 
-const Inner = goog.require('externs.Main.FooImpl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /** @nodts */
@@ -12,13 +11,13 @@ class $Overlay {
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance instanceof Inner;
+  return instance instanceof Foo;
  }
  
  /** @nodts */
  static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'externs.Main.FooImpl');
+$Util.$setClassMetadata($Overlay, 'Foo');
 
 exports = $Overlay;
 

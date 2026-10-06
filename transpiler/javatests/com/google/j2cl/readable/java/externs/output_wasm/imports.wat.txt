@@ -1,0 +1,50 @@
+
+
+;;; InnerExtern()
+(func $m_<init>__@externs.Main.TopLevelExtern.InnerExtern (import "imports" "TopLevelExtern.InnerExtern.constructor")
+ (result (ref null extern))
+)
+
+;;; int Inner.staticMethod()
+(func $m_staticMethod__int@externs.Main.TopLevelExtern.Inner (import "imports" "Foo.staticMethod")
+ (result i32)
+)
+
+;;; Inner(NativeString str)
+(func $m_<init>__java_lang_String@externs.Main.TopLevelExtern.Inner (import "imports" "Foo.constructor$1")
+ (param $str (ref null string))
+ (result (ref null extern))
+)
+
+;;; NativeString Inner.instanceMethod()
+(func $m_instanceMethod__java_lang_String@externs.Main.TopLevelExtern.Inner (import "imports" "Foo.instanceMethod")
+ (param $this (ref null extern))
+ (result (ref null string))
+)
+
+;;; int Inner.staticField()
+(func $m_staticField__int@externs.Main.TopLevelExtern.Inner (import "imports" "get Foo.staticField")
+ (result i32)
+)
+
+;;; void Inner.staticField(int value)
+(func $m_staticField__int__void@externs.Main.TopLevelExtern.Inner (import "imports" "set Foo.staticField")
+ (param $value i32)
+)
+
+;;; NativeString Inner.foo()
+(func $m_foo__java_lang_String@externs.Main.TopLevelExtern.Inner (import "imports" "get Foo.foo")
+ (param $this (ref null extern))
+ (result (ref null string))
+)
+
+;;; void Inner.foo(NativeString value)
+(func $m_foo__java_lang_String__void@externs.Main.TopLevelExtern.Inner (import "imports" "set Foo.foo")
+ (param $this (ref null extern))
+ (param $value (ref null string))
+)
+
+;;; TopLevelExtern()
+(func $m_<init>__@externs.Main.TopLevelExtern (import "imports" "TopLevelExtern.constructor")
+ (result (ref null extern))
+)

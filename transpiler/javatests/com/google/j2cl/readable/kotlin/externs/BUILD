@@ -15,10 +15,7 @@ closure_js_library(
 )
 
 readable_example(
-    srcs = glob([
-        "*.kt",
-        "*.native.js",
-    ]),
+    srcs = glob(["*.kt"]),
     deps = [
         ":externs",
         "//third_party:jsinterop-annotations-j2cl",

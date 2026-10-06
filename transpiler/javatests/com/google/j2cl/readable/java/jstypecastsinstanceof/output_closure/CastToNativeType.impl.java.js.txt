@@ -29,14 +29,18 @@ class CastToNativeType extends j_l_Object {
  m_test__void() {
   let a = new NativeJsType();
   let b = /**@type {NativeJsType}*/ ($Casts.$to(a, $Overlay));
-  let c = $Overlay.$isInstance(a);
   let d = /**@type {Array<NativeJsType>}*/ ($Arrays.$castToNative(a));
-  c = $Arrays.$instanceIsOfNative(a);
   let /** Object */ e = /**@type {Object}*/ ($Casts.$to(a, NativeObject_$Overlay));
   let f = /**@type {Object<?string, *>}*/ ($Casts.$to(a, NativeObject_$Overlay));
-  c = NativeObject_$Overlay.$isInstance(a);
   let g = /**@type {Array<Object>}*/ ($Arrays.$castToNative(a));
   let h = /**@type {Array<Object<?string, *>>}*/ ($Arrays.$castToNative(a));
+ }
+ /** @nodts */
+ m_testInstanceOf__void_$p_jstypecastsinstanceof_CastToNativeType() {
+  let a = new NativeJsType();
+  let c = $Overlay.$isInstance(a);
+  c = $Arrays.$instanceIsOfNative(a);
+  c = NativeObject_$Overlay.$isInstance(a);
   c = $Arrays.$instanceIsOfNative(a);
  }
  /** @nodts */

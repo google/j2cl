@@ -1,0 +1,305 @@
+
+(global $$class-initialized@jstypecastsinstanceof.CastToNativeType (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstypecastsinstanceof.CastToNativeType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jstypecastsinstanceof.CastToTypeVariable.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstypecastsinstanceof.CastToTypeVariable.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $jstypecastsinstanceof.CastToNativeType.vtable (ref $jstypecastsinstanceof.CastToNativeType.vtable)
+ (struct.new $jstypecastsinstanceof.CastToNativeType.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_test__void@jstypecastsinstanceof.CastToNativeType)
+ )
+)
+(global $jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay.vtable (ref $jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay.vtable)
+ (struct.new $jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay)
+ )
+)
+(global $jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay.vtable (ref $jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay.vtable)
+ (struct.new $jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay)
+ )
+)
+(global $jstypecastsinstanceof.CastToTypeVariable.$Overlay.vtable (ref $jstypecastsinstanceof.CastToTypeVariable.$Overlay.vtable)
+ (struct.new $jstypecastsinstanceof.CastToTypeVariable.$Overlay.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToTypeVariable.$Overlay)
+ )
+)
+
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:24:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:24:22
+  (if (global.get $$class-initialized@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:24:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:24:22
+  (global.set $$class-initialized@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay)))
+   (then
+    (return (global.get $$class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay))
+   )
+  )
+  (global.set $$class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypecastsi...|__java_lang_String_<once>_@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay))
+ (local.set $this (ref.cast (ref $jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:27:22
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:27:22
+  (if (global.get $$class-initialized@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:27:22
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:27:22
+  (global.set $$class-initialized@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay)))
+   (then
+    (return (global.get $$class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay))
+   )
+  )
+  (global.set $$class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypecastsi...|__java_lang_String_<once>_@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay))
+ (local.set $this (ref.cast (ref $jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay)
+
+;;; T $Overlay.setField__$devirt(CastToTypeVariable<T> $thisArg, int index, boolean value)
+(func $m_setField__$devirt__jstypecastsinstanceof_CastToTypeVariable__int__boolean__jstypecastsinstanceof_CastToTypeVariable@jstypecastsinstanceof.CastToTypeVariable.$Overlay
+ (param $$thisArg (ref null extern))
+ (param $index i32)
+ (param $value i32)
+ (result (ref null extern))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:26:17
+ (local $o (ref null $java.lang.Object))
+ (local $a (ref null extern))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:26:17
+  (call $$clinit__void_<once>_@jstypecastsinstanceof.CastToTypeVariable.$Overlay )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:27:4
+  (local.set $o (call $$create__@java.lang.Object ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:28:4
+  (local.set $a (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:29:4
+  (return (ref.cast (ref null extern) (local.get $$thisArg)))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jstypecastsinstanceof.CastToTypeVariable.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:23:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:23:13
+  (if (global.get $$class-initialized@jstypecastsinstanceof.CastToTypeVariable.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:23:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToTypeVariable.java:23:13
+  (global.set $$class-initialized@jstypecastsinstanceof.CastToTypeVariable.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToTypeVariable.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypecastsinstanceof.CastToTypeVariable.$Overlay)))
+   (then
+    (return (global.get $$class@jstypecastsinstanceof.CastToTypeVariable.$Overlay))
+   )
+  )
+  (global.set $$class@jstypecastsinstanceof.CastToTypeVariable.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypecastsi...|__java_lang_String_<once>_@jstypecastsinstanceof.CastToTypeVariable.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@jstypecastsinstanceof.CastToTypeVariable.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToTypeVariable.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstypecastsinstanceof.CastToTypeVariable.$Overlay))
+ (local.set $this (ref.cast (ref $jstypecastsinstanceof.CastToTypeVariable.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToTypeVariable.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToTypeVariable.$Overlay)
+
+;;; CastToNativeType CastToNativeType.$create()
+(func $$create__@jstypecastsinstanceof.CastToNativeType
+ (result (ref null $jstypecastsinstanceof.CastToNativeType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+ (local $$instance (ref null $jstypecastsinstanceof.CastToNativeType))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (call $$clinit__void_<once>_@jstypecastsinstanceof.CastToNativeType )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (local.set $$instance (struct.new $jstypecastsinstanceof.CastToNativeType (global.get $jstypecastsinstanceof.CastToNativeType.vtable) (global.get $itable.empty) (i32.const 0)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (call $$ctor__void_$p_jstypecastsinstanceof_CastToNativeType@jstypecastsinstanceof.CastToNativeType (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void CastToNativeType.$ctor()
+(func $$ctor__void_$p_jstypecastsinstanceof_CastToNativeType@jstypecastsinstanceof.CastToNativeType
+ (param $this (ref null $jstypecastsinstanceof.CastToNativeType))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void CastToNativeType.test()
+(func $m_test__void@jstypecastsinstanceof.CastToNativeType
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:30:14
+ (local $a (ref null $java.lang.Object))
+ (local $b (ref null extern))
+ (local $d (ref null extern))
+ (local $e (ref null extern))
+ (local $f (ref null extern))
+ (local $g (ref null extern))
+ (local $h (ref null extern))
+ (local $this (ref null $jstypecastsinstanceof.CastToNativeType))
+ (local.set $this (ref.cast (ref $jstypecastsinstanceof.CastToNativeType) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:31:4
+  (local.set $a (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_<init>__@jstypecastsinstanceof.CastToNativeType.NativeJsType )))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:32:4
+  (local.set $b (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:33:4
+  (local.set $d (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:35:4
+  (local.set $e (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:36:4
+  (local.set $f (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:37:4
+  (local.set $g (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $a)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:38:4
+  (local.set $h (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $a)))
+ )
+)
+(elem declare func $m_test__void@jstypecastsinstanceof.CastToNativeType)
+
+;;; void CastToNativeType.$clinit()
+(func $$clinit__void_<once>_@jstypecastsinstanceof.CastToNativeType
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (if (global.get $$class-initialized@jstypecastsinstanceof.CastToNativeType)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (global.set $$class-initialized@jstypecastsinstanceof.CastToNativeType (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypecastsinstanceof/readable-j2wasm.js/jstypecastsinstanceof/CastToNativeType.java:22:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> CastToNativeType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToNativeType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstypecastsinstanceof.CastToNativeType)))
+   (then
+    (return (global.get $$class@jstypecastsinstanceof.CastToNativeType))
+   )
+  )
+  (global.set $$class@jstypecastsinstanceof.CastToNativeType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstypecastsi...|__java_lang_String_<once>_@jstypecastsinstanceof.CastToNativeType.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jstypecastsinstanceof.CastToNativeType))
+ )
+)
+
+;;; Class<?> CastToNativeType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstypecastsinstanceof.CastToNativeType))
+ (local.set $this (ref.cast (ref $jstypecastsinstanceof.CastToNativeType) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstypecastsinstanceof.CastToNativeType ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstypecastsinstanceof.CastToNativeType)

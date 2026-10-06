@@ -19,16 +19,27 @@
  */
 
 /**
- * @const
+ * @constructor
+ * @param {string} str
  */
-var TopLevelExtern = {};
+function Foo(str) {}
+
+/** @type {number} */
+Foo.staticField;
+
+/** @return {number} */
+Foo.staticMethod = function() {};
+
+/** @type {string} */
+Foo.prototype.foo;
+
+/** @return {string} */
+Foo.prototype.instanceMethod = function() {};
 
 /**
- * @typedef {{foo: string}}
+ * @constructor
  */
-var Foo;
-
-
+function TopLevelExtern() {}
 
 /**
  * @constructor

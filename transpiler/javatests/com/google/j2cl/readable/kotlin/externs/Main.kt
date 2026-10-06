@@ -15,44 +15,35 @@
  */
 package externs
 
-import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
-import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
+import kotlin.js.definedExternally
 
 class Main {
-  class FooImpl {
-    @JsProperty var foo: String? = null
-  }
-
-  // Is overlaying extern "Foo", not Java class FooImpl. The extern Foo is just a @typedef that
-  // declares a string field named "foo".
-  @JsType(isNative = true, name = "Foo", namespace = JsPackage.GLOBAL)
-  interface FooOverlay {
-    /** Returns the foo value. */
-    @JsProperty fun getFoo(): String?
-  }
-
-  var aFoo: FooOverlay? = null
-
   @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   class TopLevelExtern {
     @JsType(isNative = true) class InnerExtern
 
-    @JsType(isNative = true, namespace = "externs.Main", name = "FooImpl") class Inner
+    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Foo")
+    class Inner(str: String?) {
+      @JvmField var foo: String? = definedExternally
+
+      external fun instanceMethod(): String?
+
+      companion object {
+        @JvmField var staticField: Int = definedExternally
+
+        @JvmStatic external fun staticMethod(): Int
+      }
+    }
   }
 
   var innerExtern: TopLevelExtern.InnerExtern? = null
   var inner: TopLevelExtern.Inner? = null
 }
 
-private fun testFooOverlay(fooOverlay: Main.FooOverlay): Boolean {
-  return fooOverlay.getFoo() == "Hello"
-}
-
-@JsMethod private external fun useDirectlyAsFoo(fooOverlay: Any)
-
 fun main(args: Array<String>) {
-  testFooOverlay(Main.FooImpl() as Main.FooOverlay)
-  useDirectlyAsFoo(Main.FooImpl())
+  val inner = Main.TopLevelExtern.Inner("Hello")
+  Main.TopLevelExtern.Inner.staticField = Main.TopLevelExtern.Inner.staticMethod()
+  inner.foo = inner.instanceMethod()
 }

@@ -15,48 +15,35 @@
  */
 package externs;
 
-import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 public class Main {
-  static class FooImpl {
-    @JsProperty String foo;
-  }
-
-  // Is overlaying extern "Foo", not Java class FooImpl. The extern Foo is just a @typedef that
-  // declares a string field named "foo".
-  @JsType(isNative = true, name = "Foo", namespace = JsPackage.GLOBAL)
-  interface FooOverlay {
-    /** Returns the foo value. */
-    @JsProperty
-    String getFoo();
-  }
-
-  public FooOverlay aFoo;
-
-  private static boolean testFooOverlay(FooOverlay fooOverlay) {
-    return fooOverlay.getFoo().equals("Hello");
-  }
-
-  @JsMethod
-  private static native void useDirectlyAsFoo(Object fooOverlay);
-
-  public static void main(String... args) {
-    testFooOverlay((FooOverlay) (Object) new FooImpl());
-    useDirectlyAsFoo(new FooImpl());
-  }
-
   @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   public static class TopLevelExtern {
     @JsType(isNative = true)
     public static class InnerExtern {}
 
-    @JsType(isNative = true, namespace = "externs.Main", name = "FooImpl")
-    public static class Inner {}
+    @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Foo")
+    public static class Inner {
+      public static int staticField;
+
+      public static native int staticMethod();
+
+      public String foo;
+
+      public Inner(String str) {}
+
+      public native String instanceMethod();
+    }
   }
 
   TopLevelExtern.InnerExtern innerExtern;
   TopLevelExtern.Inner inner;
+
+  public static void main(String... args) {
+    TopLevelExtern.Inner inner = new TopLevelExtern.Inner("Hello");
+    TopLevelExtern.Inner.staticField = TopLevelExtern.Inner.staticMethod();
+    inner.foo = inner.instanceMethod();
+  }
 }
