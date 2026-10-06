@@ -318,6 +318,22 @@ fun testInlineBreakContinue() {
   }
 }
 
+inline fun <R> runIf(condition: Boolean, block: () -> R): R = if (condition) block() else block()
+
+fun alwaysFail(): Nothing = throw IllegalStateException()
+
+// Why the `if` matters in `runIf`:
+// - If `R` were erased to `Any?` during inlining, the inliner would wrap the inlined `if` in a
+//   cast to `Nothing`, turning the `if` into an expression:
+//   `IMPLICIT_CAST(if (...) ... else ... to Nothing)`.
+// - That cast makes `BlockDecomposerLowering` decompose this expression into assignments to a
+//   temporary variable.
+// - The `Nothing` calls are then no longer expression statements, so `AddNothingReturnStatements`
+//   doesn't turn them into `return` statements, and the function is missing its trailing `return`.
+fun testNothingTypedInlineCall(condition: Boolean): Int {
+  runIf(condition) { alwaysFail() }
+}
+
 // Once inlined here, the bodies of these inline functions from another module can only reach the
 // outer `this`, the private members and the private top-level members of their library through
 // synthetic accessors.
