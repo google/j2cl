@@ -29,4 +29,23 @@ public class LocalClassInheritance {
       }
     }
   }
+
+  public void testCapturesWithTheSameName(int x) {
+    class Parent {
+      public void n() {
+        int i = x;
+      }
+    }
+    class Outer {
+      public void m(int x) {
+        // Captures the `x` parameter of `m` and, through its superclass, the `x` parameter of
+        // `testCapturesWithTheSameName`.
+        class Child extends Parent {
+          public void n() {
+            int i = x;
+          }
+        }
+      }
+    }
+  }
 }

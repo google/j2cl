@@ -1,0 +1,50 @@
+goog.module('localclassinheritance.LocalClassInheritance.$1Outer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LocalClassInheritance = goog.forwardDeclare('localclassinheritance.LocalClassInheritance$impl');
+
+class $1Outer extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!LocalClassInheritance} @nodts*/
+  this.$outer_this__localclassinheritance_LocalClassInheritance_1Outer;
+  /**@type {number} @nodts*/
+  this.$captured_x__localclassinheritance_LocalClassInheritance_1Outer = 0;
+ }
+ /** @nodts @return {!$1Outer} */
+ static $create__localclassinheritance_LocalClassInheritance__int(/** !LocalClassInheritance */ $outer_this, /** number */ $captured_x) {
+  $1Outer.$clinit();
+  let $instance = new $1Outer();
+  $instance.$ctor__localclassinheritance_LocalClassInheritance_1Outer__localclassinheritance_LocalClassInheritance__int__void($outer_this, $captured_x);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinheritance_LocalClassInheritance_1Outer__localclassinheritance_LocalClassInheritance__int__void(/** !LocalClassInheritance */ $outer_this, /** number */ $captured_x) {
+  this.$outer_this__localclassinheritance_LocalClassInheritance_1Outer = $outer_this;
+  this.$captured_x__localclassinheritance_LocalClassInheritance_1Outer = $captured_x;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m__int__void(/** number */ x) {}
+ /** @nodts */
+ static $clinit() {
+  $1Outer.$clinit = () =>{};
+  $1Outer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Outer;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1Outer, 'localclassinheritance.LocalClassInheritance$1Outer');
+
+exports = $1Outer;
+
+//# sourceMappingURL=LocalClassInheritance$1Outer.js.map

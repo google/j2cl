@@ -46,6 +46,7 @@ import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -263,6 +264,7 @@ public class ResolveCaptures extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public boolean enterType(Type type) {
+            createBackingFields(type.getDeclaration());
             for (Variable variable :
                 capturedVariablesByTypeDeclaration.get(type.getDeclaration())) {
               type.addMember(
@@ -532,17 +534,48 @@ public class ResolveCaptures extends NormalizationPass {
     return currentExpression;
   }
 
+  /**
+   * The backing fields of the captured variables by their corresponding type.
+   *
+   * <p>The names of the backing fields of a type depend on all the variables it captures, so they
+   * are computed together and recorded here to ensure that every use of a captured variable refers
+   * to the same field.
+   */
+  // TODO(b/570540465): Remove the redundancy with `capturedVariablesByTypeDeclaration`, whose
+  //  usages could be replaced by `capturesByTypeDeclaration.get(typeDeclaration).keySet()` if the
+  //  inner maps were `LinkedHashMap`s.
+  private final Map<TypeDeclaration, Map<Variable, FieldDescriptor>> capturesByTypeDeclaration =
+      new HashMap<>();
+
   /** Returns the FieldDescriptor corresponding to the captured variable. */
-  private static FieldDescriptor getFieldDescriptorForCapture(
+  private FieldDescriptor getFieldDescriptorForCapture(
       TypeDeclaration typeDeclaration, Variable capturedVariable) {
-    return FieldDescriptor.builder()
-        .setEnclosingTypeDescriptor(typeDeclaration.toDescriptor())
-        .setName("$captured_" + capturedVariable.getName())
-        .setTypeDescriptor(capturedVariable.getTypeDescriptor())
-        .setStatic(false)
-        .setFinal(true)
-        .setOrigin(FieldOrigin.SYNTHETIC_CAPTURE_FIELD)
-        .build();
+    return capturesByTypeDeclaration.get(typeDeclaration).get(capturedVariable);
+  }
+
+  /** Creates the FieldDescriptors corresponding to the variables captured by the type. */
+  private void createBackingFields(TypeDeclaration typeDeclaration) {
+    Map<Variable, FieldDescriptor> fieldDescriptorByCapturedVariable = new HashMap<>();
+    Set<String> fieldNames = new HashSet<>();
+    for (Variable capturedVariable : capturedVariablesByTypeDeclaration.get(typeDeclaration)) {
+      // Distinct captured variables can have the same name, e.g. the temporary variables created
+      // by the Kotlin inliner for the parameters of the inlined functions.
+      String fieldName = "$captured_" + capturedVariable.getName();
+      for (int i = 1; !fieldNames.add(fieldName); i++) {
+        fieldName = "$captured_" + capturedVariable.getName() + "$" + i;
+      }
+      fieldDescriptorByCapturedVariable.put(
+          capturedVariable,
+          FieldDescriptor.builder()
+              .setEnclosingTypeDescriptor(typeDeclaration.toDescriptor())
+              .setName(fieldName)
+              .setTypeDescriptor(capturedVariable.getTypeDescriptor())
+              .setStatic(false)
+              .setFinal(true)
+              .setOrigin(FieldOrigin.SYNTHETIC_CAPTURE_FIELD)
+              .build());
+    }
+    capturesByTypeDeclaration.put(typeDeclaration, fieldDescriptorByCapturedVariable);
   }
 
   /** Creates a variable that matches a field definition. */

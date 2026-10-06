@@ -355,3 +355,29 @@ fun testInlineFunctionsUsingMembersInheritedWithoutOverride() {
   inlineFunctionUsingMembersInheritedByChild(ChildInAnotherLibrary())
   inlineFunctionUsingJavaMethodInheritedByChild(ChildOfJavaClass())
 }
+
+interface IntSupplier {
+  fun get(): Int
+}
+
+inline fun supplierOf(value: Int, crossinline block: () -> Int): IntSupplier =
+  object : IntSupplier {
+    override fun get() = value + block()
+  }
+
+// Once `supplierOf` is inlined, the anonymous object captures the `value` parameter of this
+// function and the variable holding the `value` argument of `supplierOf`, which have the same name.
+fun testCapturesOfVariablesWithTheSameName(value: Int) = supplierOf(value + 1) { value }
+
+inline fun Int.supplierOfSum(crossinline block: () -> Int): IntSupplier =
+  object : IntSupplier {
+    override fun get() = this@supplierOfSum + block()
+  }
+
+class ClassWithPrivateInlineFun(val i: Int) {
+  // Once inlined, the anonymous object captures the variables holding the receivers of this
+  // function and of `supplierOfSum`, which have the same name.
+  private inline fun privateInlineFun() = 1.supplierOfSum { i }
+
+  fun testCapturesOfReceivers() = privateInlineFun()
+}

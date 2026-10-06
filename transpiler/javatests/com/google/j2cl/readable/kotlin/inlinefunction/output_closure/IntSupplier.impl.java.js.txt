@@ -1,0 +1,33 @@
+goog.module('inlinefunction.IntSupplier$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class IntSupplier {
+ /** @abstract @nodts @return {number} */
+ m_get__int() {}
+ /** @nodts */
+ static $clinit() {
+  IntSupplier.$clinit = () =>{};
+  IntSupplier.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__inlinefunction_IntSupplier = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__inlinefunction_IntSupplier;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IntSupplier.$markImplementor(/**@type {Function}*/ (IntSupplier));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (IntSupplier), 'inlinefunction.IntSupplier');
+
+exports = IntSupplier;
+
+//# sourceMappingURL=IntSupplier.js.map

@@ -36,4 +36,21 @@ open class LocalClassInheritance {
    }
   }
  }
+ 
+ open fun testCapturesWithTheSameName(x: Int) {
+  open class Parent internal constructor() {
+   open fun n() {
+    val i: Int = x
+   }
+  }
+  open class Outer internal constructor() {
+   open fun m(x: Int) {
+    open class Child internal constructor(): Parent() {
+     override fun n() {
+      val i: Int = x
+     }
+    }
+   }
+  }
+ }
 }

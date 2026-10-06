@@ -1,0 +1,55 @@
+goog.module('inlinefunction.ClassWithPrivateInlineFun.$2$impl');
+
+const IntSupplier = goog.require('inlinefunction.IntSupplier$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ClassWithPrivateInlineFun = goog.forwardDeclare('inlinefunction.ClassWithPrivateInlineFun$impl');
+
+/**
+ * @final
+ * @implements {IntSupplier}
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!ClassWithPrivateInlineFun} @nodts*/
+  this.$outer_this__inlinefunction_ClassWithPrivateInlineFun_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__inlinefunction_ClassWithPrivateInlineFun(/** !ClassWithPrivateInlineFun */ $outer_this) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__inlinefunction_ClassWithPrivateInlineFun_2__inlinefunction_ClassWithPrivateInlineFun__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ClassWithPrivateInlineFun_2__inlinefunction_ClassWithPrivateInlineFun__void(/** !ClassWithPrivateInlineFun */ $outer_this) {
+  this.$outer_this__inlinefunction_ClassWithPrivateInlineFun_2 = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_get__int() {
+  return 1 + this.$outer_this__inlinefunction_ClassWithPrivateInlineFun_2.m_getI__int() | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IntSupplier.$markImplementor($2);
+$Util.$setClassMetadata($2, 'inlinefunction.ClassWithPrivateInlineFun$2');
+
+exports = $2;
+
+//# sourceMappingURL=ClassWithPrivateInlineFun$2.js.map

@@ -1,0 +1,55 @@
+goog.module('localclassinheritance.LocalClassInheritance.$1Outer.$1Child$impl');
+
+const $2Parent = goog.require('localclassinheritance.LocalClassInheritance.$2Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1Outer = goog.forwardDeclare('localclassinheritance.LocalClassInheritance.$1Outer$impl');
+
+class $1Child extends $2Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!$1Outer} @nodts*/
+  this.$outer_this__localclassinheritance_LocalClassInheritance_1Outer_1Child;
+  /**@type {number} @nodts*/
+  this.$captured_x__localclassinheritance_LocalClassInheritance_1Outer_1Child = 0;
+  /**@type {number} @nodts*/
+  this.$captured_x$1__localclassinheritance_LocalClassInheritance_1Outer_1Child = 0;
+ }
+ /** @nodts @return {!$1Child} */
+ static $create__localclassinheritance_LocalClassInheritance_1Outer__int__int(/** !$1Outer */ $outer_this, /** number */ $captured_x, /** number */ $captured_x$1) {
+  $1Child.$clinit();
+  let $instance = new $1Child();
+  $instance.$ctor__localclassinheritance_LocalClassInheritance_1Outer_1Child__localclassinheritance_LocalClassInheritance_1Outer__int__int__void($outer_this, $captured_x, $captured_x$1);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinheritance_LocalClassInheritance_1Outer_1Child__localclassinheritance_LocalClassInheritance_1Outer__int__int__void(/** !$1Outer */ $outer_this, /** number */ $captured_x, /** number */ $captured_x$1) {
+  this.$outer_this__localclassinheritance_LocalClassInheritance_1Outer_1Child = $outer_this;
+  this.$captured_x__localclassinheritance_LocalClassInheritance_1Outer_1Child = $captured_x;
+  this.$captured_x$1__localclassinheritance_LocalClassInheritance_1Outer_1Child = $captured_x$1;
+  this.$ctor__localclassinheritance_LocalClassInheritance_2Parent__localclassinheritance_LocalClassInheritance__int__void($outer_this.$outer_this__localclassinheritance_LocalClassInheritance_1Outer, $captured_x$1);
+ }
+ /** @override @nodts */
+ m_n__void() {
+  let i = this.$captured_x__localclassinheritance_LocalClassInheritance_1Outer_1Child;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Child.$clinit = () =>{};
+  $1Child.$loadModules();
+  $2Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1Child, 'localclassinheritance.LocalClassInheritance$1Outer$1Child');
+
+exports = $1Child;
+
+//# sourceMappingURL=LocalClassInheritance$1Outer$1Child.js.map

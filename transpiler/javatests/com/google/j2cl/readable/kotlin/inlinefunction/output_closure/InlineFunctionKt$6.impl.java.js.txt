@@ -1,0 +1,56 @@
+goog.module('inlinefunction.InlineFunctionKt.$6$impl');
+
+const IntSupplier = goog.require('inlinefunction.IntSupplier$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @implements {IntSupplier}
+ */
+class $6 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.$captured_value__inlinefunction_InlineFunctionKt_6 = 0;
+  /**@type {number} @nodts*/
+  this.$captured_value$1__inlinefunction_InlineFunctionKt_6 = 0;
+ }
+ /** @nodts @return {!$6} */
+ static $create__int__int(/** number */ $captured_value, /** number */ $captured_value$1) {
+  $6.$clinit();
+  let $instance = new $6();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_6__int__int__void($captured_value, $captured_value$1);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt_6__int__int__void(/** number */ $captured_value, /** number */ $captured_value$1) {
+  this.$captured_value__inlinefunction_InlineFunctionKt_6 = $captured_value;
+  this.$captured_value$1__inlinefunction_InlineFunctionKt_6 = $captured_value$1;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_get__int() {
+  return this.$captured_value__inlinefunction_InlineFunctionKt_6 + this.$captured_value$1__inlinefunction_InlineFunctionKt_6 | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  $6.$clinit = () =>{};
+  $6.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $6;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IntSupplier.$markImplementor($6);
+$Util.$setClassMetadata($6, 'inlinefunction.InlineFunctionKt$6');
+
+exports = $6;
+
+//# sourceMappingURL=InlineFunctionKt$6.js.map

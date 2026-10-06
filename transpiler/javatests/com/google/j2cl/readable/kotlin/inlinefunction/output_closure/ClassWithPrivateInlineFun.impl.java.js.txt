@@ -1,0 +1,65 @@
+goog.module('inlinefunction.ClassWithPrivateInlineFun$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('inlinefunction.ClassWithPrivateInlineFun.$1$impl');
+let $2 = goog.forwardDeclare('inlinefunction.ClassWithPrivateInlineFun.$2$impl');
+let IntSupplier = goog.forwardDeclare('inlinefunction.IntSupplier$impl');
+
+/**
+ * @final
+ */
+class ClassWithPrivateInlineFun extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_i__inlinefunction_ClassWithPrivateInlineFun_ = 0;
+ }
+ /** @nodts @return {!ClassWithPrivateInlineFun} */
+ static $create__int(/** number */ i) {
+  ClassWithPrivateInlineFun.$clinit();
+  let $instance = new ClassWithPrivateInlineFun();
+  $instance.$ctor__inlinefunction_ClassWithPrivateInlineFun__int__void(i);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ClassWithPrivateInlineFun__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.f_i__inlinefunction_ClassWithPrivateInlineFun_ = i;
+ }
+ /** @final @nodts @return {number} */
+ m_getI__int() {
+  return this.f_i__inlinefunction_ClassWithPrivateInlineFun_;
+ }
+ /** @final @nodts @return {!IntSupplier} */
+ m_privateInlineFun__inlinefunction_IntSupplier_$p_inlinefunction_ClassWithPrivateInlineFun() {
+  return /**@type {!IntSupplier}*/ ($1.$create__inlinefunction_ClassWithPrivateInlineFun(this));
+ }
+ /** @final @nodts @return {!IntSupplier} */
+ m_testCapturesOfReceivers__inlinefunction_IntSupplier() {
+  return /**@type {!IntSupplier}*/ ($2.$create__inlinefunction_ClassWithPrivateInlineFun(this));
+ }
+ /** @nodts */
+ static $clinit() {
+  ClassWithPrivateInlineFun.$clinit = () =>{};
+  ClassWithPrivateInlineFun.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithPrivateInlineFun;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('inlinefunction.ClassWithPrivateInlineFun.$1$impl');
+  $2 = goog.module.get('inlinefunction.ClassWithPrivateInlineFun.$2$impl');
+ }
+}
+$Util.$setClassMetadata(ClassWithPrivateInlineFun, 'inlinefunction.ClassWithPrivateInlineFun');
+
+exports = ClassWithPrivateInlineFun;
+
+//# sourceMappingURL=ClassWithPrivateInlineFun.js.map

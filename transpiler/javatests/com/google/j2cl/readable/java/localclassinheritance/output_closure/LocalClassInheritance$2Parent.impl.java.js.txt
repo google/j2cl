@@ -1,0 +1,52 @@
+goog.module('localclassinheritance.LocalClassInheritance.$2Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LocalClassInheritance = goog.forwardDeclare('localclassinheritance.LocalClassInheritance$impl');
+
+class $2Parent extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!LocalClassInheritance} @nodts*/
+  this.$outer_this__localclassinheritance_LocalClassInheritance_2Parent;
+  /**@type {number} @nodts*/
+  this.$captured_x__localclassinheritance_LocalClassInheritance_2Parent = 0;
+ }
+ /** @nodts @return {!$2Parent} */
+ static $create__localclassinheritance_LocalClassInheritance__int(/** !LocalClassInheritance */ $outer_this, /** number */ $captured_x) {
+  $2Parent.$clinit();
+  let $instance = new $2Parent();
+  $instance.$ctor__localclassinheritance_LocalClassInheritance_2Parent__localclassinheritance_LocalClassInheritance__int__void($outer_this, $captured_x);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinheritance_LocalClassInheritance_2Parent__localclassinheritance_LocalClassInheritance__int__void(/** !LocalClassInheritance */ $outer_this, /** number */ $captured_x) {
+  this.$outer_this__localclassinheritance_LocalClassInheritance_2Parent = $outer_this;
+  this.$captured_x__localclassinheritance_LocalClassInheritance_2Parent = $captured_x;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_n__void() {
+  let i = this.$captured_x__localclassinheritance_LocalClassInheritance_2Parent;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2Parent.$clinit = () =>{};
+  $2Parent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2Parent, 'localclassinheritance.LocalClassInheritance$2Parent');
+
+exports = $2Parent;
+
+//# sourceMappingURL=LocalClassInheritance$2Parent.js.map

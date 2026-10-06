@@ -31,4 +31,25 @@ class LocalClassInheritance {
       }
     }
   }
+
+  fun testCapturesWithTheSameName(x: Int) {
+    open class Parent {
+      open fun n() {
+        val i = x
+      }
+    }
+
+    class Outer {
+      @Suppress("NAME_SHADOWING")
+      fun m(x: Int) {
+        // Captures the `x` parameter of `m` and, through its superclass, the `x` parameter of
+        // `testCapturesWithTheSameName`.
+        class Child : Parent() {
+          override fun n() {
+            val i = x
+          }
+        }
+      }
+    }
+  }
 }
