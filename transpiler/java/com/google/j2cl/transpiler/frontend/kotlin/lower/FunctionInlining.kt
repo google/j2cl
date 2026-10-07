@@ -516,7 +516,12 @@ private class CallInlining(
       // Skip creation of temporary variables for arguments that does not have side effects when
       // evaluated. This avoids generating unused temporary variables, which JSC might not always
       // inline,leading to unnecessary code size increase.
-      if (argumentValue.isPure(false, symbols = context.symbols as BackendSymbols)) {
+      // Varargs are excluded: `isPure` accepts a vararg whose elements are pure, but substituting
+      // it would create a new array at each use of the parameter.
+      if (
+        argumentValue !is IrVararg &&
+          argumentValue.isPure(false, symbols = context.symbols as BackendSymbols)
+      ) {
         parameterToPureExpression[parameter.symbol] = castedArgumentValue
         continue
       }

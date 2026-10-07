@@ -46,6 +46,7 @@ fun main(vararg unused: String) {
   testInlineFactoryFunctionWithCrossinlineLambda()
   testDefaultParams()
   testBreakContinue()
+  testInlineWithVararg()
 }
 
 class MyClass(var f: Int) {
@@ -481,4 +482,16 @@ fun testBreakContinue() {
     }
   }
   assertEquals(11, i)
+}
+
+inline fun isSameVararg(vararg xs: Int): Boolean = xs === xs
+
+inline fun writeInVararg(vararg xs: Int): Int {
+  xs[0] = 42
+  return xs[0]
+}
+
+private fun testInlineWithVararg() {
+  assertTrue(isSameVararg(1, 2))
+  assertEquals(42, writeInVararg(1, 2))
 }
