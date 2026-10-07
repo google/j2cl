@@ -97,11 +97,14 @@ internal class HTMLElementAnotherConcreteNativeJsType {}
 
 private open class NonNativeClass
 
+private class IntersectionImpl : NonNativeClass(), MyNativeJsTypeInterface
+
 private fun <
   NI : MyNativeJsTypeInterface,
   NC : HTMLElementConcreteNativeJsType,
   M : NonNativeClass,
-> testCasts() {
+  IT,
+> testCasts() where IT : NonNativeClass, IT : MyNativeJsTypeInterface {
   var myClass: Any?
   myClass = createFoo() as ElementLikeNativeInterface
   assertNotNull(myClass)
@@ -126,9 +129,21 @@ private fun <
   val nativeNonNative = nonNative as MyNativeJsTypeInterface
   assertTrue(nativeNonNative as NonNativeClass === nonNative)
   assertTrue(nativeNonNative as M === nonNative)
+  assertTrue(nativeNonNative === nonNative)
+  assertTrue(passThrough(nativeNonNative) === nonNative)
+  if (nativeNonNative is NonNativeClass) {
+    assertTrue(nativeNonNative === nonNative)
+  }
+  assertTrue(passThroughWithNativeBound(nonNative as IT) === nonNative)
+  assertTrue(passThroughWithNativeBound(nonNative as IT) !== NonNativeClass())
   val genericNativeNonNative = nonNative as NI
   assertTrue(genericNativeNonNative as NonNativeClass === nonNative)
   assertTrue(genericNativeNonNative as M === nonNative)
+  assertTrue(genericNativeNonNative === nonNative)
+  assertTrue(passThrough(genericNativeNonNative) === nonNative)
+  if (genericNativeNonNative is NonNativeClass) {
+    assertTrue(genericNativeNonNative === nonNative)
+  }
 
   val foo = passThrough(Foo())
   assertTrue(foo.sum() == 42)
@@ -145,6 +160,9 @@ private fun <
 }
 
 private fun <T> passThrough(t: T): T = t
+
+// Returns an expression with a native declared type and a potentially non-native inferred type.
+private fun <T : MyNativeJsTypeInterface> passThroughWithNativeBound(t: T): T = t
 
 private fun createFoo(): Any? = Foo()
 
@@ -185,7 +203,12 @@ fun main(vararg unused: String) {
   testNativeJsTypeWithoutNamespace()
   testGlobalNativeJsType()
   testNativeEquality()
-  testCasts<MyNativeJsTypeInterface, HTMLElementConcreteNativeJsType, NonNativeClass>()
+  testCasts<
+    MyNativeJsTypeInterface,
+    HTMLElementConcreteNativeJsType,
+    NonNativeClass,
+    IntersectionImpl,
+  >()
   testStar()
   testWildcard()
   testNativeFunctionalInterface()

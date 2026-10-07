@@ -100,7 +100,8 @@ public class Main {
   private static <
           NI extends MyNativeJsTypeInterface,
           NC extends HTMLElementConcreteNativeJsType,
-          M extends Main>
+          M extends Main,
+          IT extends Main & MyNativeJsTypeInterface>
       void testCasts() {
     Object myClass;
     assertNotNull(myClass = (ElementLikeNativeInterface) createFoo());
@@ -122,9 +123,16 @@ public class Main {
     MyNativeJsTypeInterface nativeMain = (MyNativeJsTypeInterface) main;
     assertTrue((Main) nativeMain == main);
     assertTrue((M) nativeMain == main);
+    assertTrue(nativeMain == main);
+    assertTrue(passThrough(nativeMain) == main);
+    // TODO(b/570233536): Uncomment when == and != with native declared types are handled in Wasm.
+    // assertTrue(passThroughWithNativeBound((IT) main) == main);
+    // assertTrue(passThroughWithNativeBound((IT) main) != new Main());
     NI genericNativeMain = (NI) main;
     assertTrue((Main) genericNativeMain == main);
     assertTrue((M) genericNativeMain == main);
+    assertTrue(genericNativeMain == main);
+    assertTrue(passThrough(genericNativeMain) == main);
 
     Foo foo = passThrough(new Foo());
     assertTrue(foo.sum() == 42);
@@ -141,6 +149,11 @@ public class Main {
   }
 
   private static <T> T passThrough(T t) {
+    return t;
+  }
+
+  // Returns an expression with a native declared type and a potentially non-native inferred type.
+  private static <T extends MyNativeJsTypeInterface> T passThroughWithNativeBound(T t) {
     return t;
   }
 
