@@ -475,6 +475,21 @@ public class StringTest extends TestCase {
     assertTrue("a", haystack.endsWith("defghi"));
     assertTrue("b", haystack.endsWith(haystack));
     assertFalse("c", haystack.endsWith(haystack + "j"));
+    assertTrue(haystack.endsWith(""));
+    assertTrue("".endsWith(""));
+    assertFalse("".endsWith("a"));
+    assertFalse(haystack.endsWith("abcdefghij"));
+    assertFalse(haystack.endsWith("xyz"));
+  }
+
+  public void testEndsWithNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
+    assertThrows(NullPointerException.class, () -> returnNull().endsWith(""));
+    assertThrows(NullPointerException.class, () -> hideFromCompiler("").endsWith(returnNull()));
   }
 
   public void testEquals() {
@@ -1100,6 +1115,34 @@ public class StringTest extends TestCase {
     assertTrue(haystack.startsWith("bc", 1));
     assertTrue(haystack.startsWith(haystack));
     assertFalse(haystack.startsWith(haystack + "j"));
+    assertTrue(haystack.startsWith(""));
+    assertTrue(haystack.startsWith("", 0));
+    assertTrue(haystack.startsWith("", haystack.length()));
+    assertFalse(haystack.startsWith("", -1));
+    assertFalse(haystack.startsWith("abc", -1));
+    assertFalse(haystack.startsWith("abc", haystack.length()));
+    assertFalse(haystack.startsWith("abc", haystack.length() + 1));
+    assertTrue("".startsWith(""));
+    assertTrue("".startsWith("", 0));
+    assertFalse("".startsWith("", -1));
+    assertFalse("".startsWith("a"));
+    assertFalse("".startsWith("a", 0));
+    if (!isWasm()) {
+      assertFalse(haystack.startsWith("", haystack.length() + 1));
+      assertFalse("".startsWith("", 1));
+    }
+  }
+
+  public void testStartsWithNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
+    assertThrows(NullPointerException.class, () -> returnNull().startsWith(""));
+    assertThrows(NullPointerException.class, () -> hideFromCompiler("").startsWith(returnNull()));
+    assertThrows(
+        NullPointerException.class, () -> hideFromCompiler("").startsWith(returnNull(), 0));
   }
 
   public void testSubstring() {
