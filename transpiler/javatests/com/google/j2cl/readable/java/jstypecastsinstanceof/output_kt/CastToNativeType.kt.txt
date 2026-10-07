@@ -24,8 +24,11 @@ import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
+import kotlin.Comparable
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class CastToNativeType {
  open fun test() {
@@ -38,12 +41,47 @@ open class CastToNativeType {
   val h: Array<NativeObject<String?, Any?>?>? = a as Array<NativeObject<String?, Any?>?>?
  }
  
- private fun testInstanceOf() {
+ private fun testUncheckedCast() {
+  val a: NativeJsType? = CastToNativeType.uncheckedCast<NativeJsType?>(
+   Any(),
+  )
+  val b: Array<NativeJsType?>? = CastToNativeType.uncheckedCast<Array<NativeJsType?>?>(
+   Any(),
+  )
+  val c: NativeObject<Any?, Any?>? = CastToNativeType.uncheckedCast<NativeObject<Any?, Any?>?>(
+   Any(),
+  )
+  val d: NativeObject<String?, Any?>? = CastToNativeType.uncheckedCast<NativeObject<String?, Any?>?>(
+   Any(),
+  )
+  val e: Array<NativeObject<Any?, Any?>?>? = CastToNativeType.uncheckedCast<Array<NativeObject<Any?, Any?>?>?>(
+   Any(),
+  )
+  val f: Array<NativeObject<String?, Any?>?>? = CastToNativeType.uncheckedCast<Array<NativeObject<String?, Any?>?>?>(
+   Any(),
+  )
+ }
+ 
+ private fun testInstanceOfNative() {
   val a: Any = NativeJsType()
   var c: Boolean = a is NativeJsType
   c = a is Array<*>
   c = a is NativeObject<*, *>
   c = a is Array<*>
+ }
+ 
+ private fun testInstanceOfNonNative() {
+  val b: NativeJsType = NativeJsType()
+  var c: Boolean = b is Any
+  c = b is Comparable<*> && run {
+   val i: Comparable<*> = b as Comparable<*>
+   true
+  }
+ }
+ 
+ companion object {
+  @JvmStatic
+  private fun <T> uncheckedCast(o: Any?): T = o as T
  }
  
  @JsType(namespace = "test.foo", isNative = true)

@@ -3,8 +3,11 @@ goog.module('jstypecastsinstanceof.CastToNativeType$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let $Overlay = goog.forwardDeclare('jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
 let NativeObject_$Overlay = goog.forwardDeclare('jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let NativeJsType = goog.forwardDeclare('test.foo.NativeJsType');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -36,12 +39,32 @@ class CastToNativeType extends j_l_Object {
   let h = /**@type {Array<Object<?string, *>>}*/ ($Arrays.$castToNative(a));
  }
  /** @nodts */
- m_testInstanceOf__void_$p_jstypecastsinstanceof_CastToNativeType() {
+ m_testUncheckedCast__void_$p_jstypecastsinstanceof_CastToNativeType() {
+  let a = /**@type {NativeJsType}*/ (CastToNativeType.m_uncheckedCast__java_lang_Object__java_lang_Object(j_l_Object.$create__()));
+  let b = /**@type {Array<NativeJsType>}*/ (CastToNativeType.m_uncheckedCast__java_lang_Object__java_lang_Object(j_l_Object.$create__()));
+  let /** Object */ c = /**@type {Object}*/ (CastToNativeType.m_uncheckedCast__java_lang_Object__java_lang_Object(j_l_Object.$create__()));
+  let d = /**@type {Object<?string, *>}*/ (CastToNativeType.m_uncheckedCast__java_lang_Object__java_lang_Object(j_l_Object.$create__()));
+  let e = /**@type {Array<Object>}*/ (CastToNativeType.m_uncheckedCast__java_lang_Object__java_lang_Object(j_l_Object.$create__()));
+  let f = /**@type {Array<Object<?string, *>>}*/ (CastToNativeType.m_uncheckedCast__java_lang_Object__java_lang_Object(j_l_Object.$create__()));
+ }
+ /** @nodts @template T @return {T} */
+ static m_uncheckedCast__java_lang_Object__java_lang_Object(/** * */ o) {
+  return /**@type {?T}*/ (o);
+ }
+ /** @nodts */
+ m_testInstanceOfNative__void_$p_jstypecastsinstanceof_CastToNativeType() {
   let a = new NativeJsType();
   let c = $Overlay.$isInstance(a);
   c = $Arrays.$instanceIsOfNative(a);
   c = NativeObject_$Overlay.$isInstance(a);
   c = $Arrays.$instanceIsOfNative(a);
+ }
+ /** @nodts */
+ m_testInstanceOfNonNative__void_$p_jstypecastsinstanceof_CastToNativeType() {
+  let b = new NativeJsType();
+  let c = !$Equality.$same(b, null);
+  let /** (Comparable<?>|boolean|number|string|!Long) */ i;
+  c = Comparable.$isInstance(b) && (i = (/**@type {!(Comparable<*>|boolean|number|string|!Long)}*/ (b)), true);
  }
  /** @nodts */
  static $clinit() {
@@ -56,8 +79,10 @@ class CastToNativeType extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Comparable = goog.module.get('java.lang.Comparable$impl');
   $Overlay = goog.module.get('jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
   NativeObject_$Overlay = goog.module.get('jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
   NativeJsType = goog.module.get('test.foo.NativeJsType');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

@@ -15,12 +15,13 @@
  */
 package jstypecastsinstanceof
 
+import javaemul.internal.annotations.UncheckedCast
 import javaemul.internal.annotations.Wasm
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 
 class CastToNativeType {
-  @JsType(isNative = true, namespace = "test.foo") class NativeJsType {}
+  @JsType(isNative = true, namespace = "test.foo") open class NativeJsType {}
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   class NativeObject<K, V> {}
@@ -43,8 +44,19 @@ class CastToNativeType {
     val ii = i as Array<NativeObject<String, Any?>>
   }
 
+  private fun testUncheckedCast() {
+    val a: NativeJsType = uncheckedCast(Any())
+    val b: Array<NativeJsType> = uncheckedCast(Any())
+    val c: NativeObject<String, *> = uncheckedCast(Any())
+    val d: NativeObject<String, Any?> = uncheckedCast(Any())
+    val e: Array<NativeObject<*, *>> = uncheckedCast(Any())
+    val f: Array<NativeObject<String, Any?>> = uncheckedCast(Any())
+  }
+
+  @UncheckedCast @Suppress("UNCHECKED_CAST") private fun <T> uncheckedCast(o: Any?): T = o as T
+
   @Wasm("nop") // instanceof on native types not yet supported in Wasm.
-  private fun testInstanceOf() {
+  private fun testInstanceOfNative() {
     val b: Any = NativeJsType()
     val bb = b is NativeJsType
     val d: Any = NativeJsType()
@@ -53,5 +65,13 @@ class CastToNativeType {
     val gg = g is NativeObject<*, *>
     val j: Any = NativeJsType()
     val jj = (j as Array<*>).isArrayOf<NativeObject<*, *>>()
+  }
+
+  private fun testInstanceOfNonNative() {
+    val b = NativeJsType()
+    val c = b is Any
+    if (b is Comparable<*>) {
+      val i: Comparable<*> = b
+    }
   }
 }

@@ -15,6 +15,7 @@
  */
 package jstypecastsinstanceof;
 
+import javaemul.internal.annotations.UncheckedCast;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -38,13 +39,36 @@ public class CastToNativeType {
     NativeObject<String, Object>[] h = (NativeObject<String, Object>[]) a;
   }
 
+  @SuppressWarnings({"unused", "rawtypes"})
+  private void testUncheckedCast() {
+    NativeJsType a = uncheckedCast(new Object());
+    NativeJsType[] b = uncheckedCast(new Object());
+    NativeObject c = uncheckedCast(new Object());
+    NativeObject<String, Object> d = uncheckedCast(new Object());
+    NativeObject[] e = uncheckedCast(new Object());
+    NativeObject<String, Object>[] f = uncheckedCast(new Object());
+  }
+
+  @UncheckedCast
+  @SuppressWarnings("unchecked")
+  private static <T> T uncheckedCast(Object o) {
+    return (T) o;
+  }
+
   @Wasm("nop") // instanceof on native types not yet supported in Wasm.
   @SuppressWarnings("unused")
-  private void testInstanceOf() {
+  private void testInstanceOfNative() {
     Object a = new NativeJsType();
     boolean c = a instanceof NativeJsType;
     c = a instanceof NativeJsType[];
     c = a instanceof NativeObject;
     c = a instanceof NativeObject[];
+  }
+
+  @SuppressWarnings("unused")
+  private void testInstanceOfNonNative() {
+    NativeJsType b = new NativeJsType();
+    boolean c = b instanceof Object;
+    c = b instanceof Comparable<?> i;
   }
 }

@@ -186,6 +186,16 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       return castExpression;
     }
 
+    /** An unchecked {@code castExpression} that normally does not trigger conversions. */
+    protected Expression rewriteUncheckedCastContext(CastExpression castExpression) {
+      return castExpression;
+    }
+
+    /** An {@code expression} that is the subject of an {@code instanceof} expression. */
+    protected Expression rewriteInstanceOfContext(Expression expression) {
+      return expression;
+    }
+
     /** An {@code expression} that is subject of a switch statement. */
     protected Expression rewriteSwitchSubjectContext(Expression expression, boolean allowsNulls) {
       TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
@@ -427,7 +437,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     if (castExpression.isUnchecked()) {
       // Unchecked casts are expected to hide type conversions from the compiler and do not trigger
       // conversion operations. They should only be used if no conversion operation is expected.
-      return castExpression;
+      return contextRewriter.rewriteUncheckedCastContext(castExpression);
     }
     // cast context
     return contextRewriter.rewriteCastContext(castExpression);
@@ -624,15 +634,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public InstanceOfExpression rewriteInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
-
+    Expression expression = instanceOfExpression.getExpression();
     if (AstUtils.matchesJsEnumBoxingConversionContext(instanceOfExpression)) {
-      Expression expression =
-          contextRewriter.rewriteJsEnumBoxingConversionContext(
-              instanceOfExpression.getExpression());
+      expression = contextRewriter.rewriteJsEnumBoxingConversionContext(expression);
+    } else {
+      expression = contextRewriter.rewriteInstanceOfContext(expression);
+    }
 
-      if (expression != instanceOfExpression.getExpression()) {
-        return instanceOfExpression.toBuilder().setExpression(expression).build();
-      }
+    if (expression != instanceOfExpression.getExpression()) {
+      return instanceOfExpression.toBuilder().setExpression(expression).build();
     }
 
     return instanceOfExpression;

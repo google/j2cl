@@ -149,6 +149,25 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
                 // If the expression was not converted, emit it as is with the cast.
                 return convertedExpression == expression ? castExpression : convertedExpression;
               }
+
+              @Override
+              public Expression rewriteUncheckedCastContext(CastExpression castExpression) {
+                // Even unchecked casts (e.g. from @UncheckedCast or smart casts) between Java and
+                // native JS types must be converted across the Wasm/JS boundary since they have
+                // disjoint representations in Wasm.
+                return rewriteCastContext(castExpression);
+              }
+
+              @Override
+              public Expression rewriteInstanceOfContext(Expression expression) {
+                // `instanceof` non-native type checks (the only allowed in the Wasm backend)
+                // operate on the `any` type hierarchy (cannot be performed directly on `extern`) so
+                // we treat it as a boundary crossing.
+                return rewriteTypeConversionContext(
+                    TypeDescriptors.get().javaLangObject,
+                    TypeDescriptors.get().javaLangObject,
+                    expression);
+              }
             }));
   }
 
