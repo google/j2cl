@@ -28,9 +28,16 @@
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
 #include "java/lang/Double.h"
+#include "java/lang/Enum.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Math.h"
+#include "java/lang/StringBuilder.h"
 #include "java/lang/Throwable.h"
+#include "java/util/Base64.h"
+#include "java/util/Locale.h"
+#include "java/util/regex/Matcher.h"
+#include "java/util/regex/Pattern.h"
 
 @interface TestImplementation : NSObject <J2ktiosinteropTestInterface>
 @end
@@ -640,6 +647,27 @@
 #else
   throwable = [[JavaLangThrowable alloc] initWithNSString:@"foo"];
 #endif
+}
+
+- (void)testJreUtilities {
+  XCTAssertEqual(JavaLangMath_absWithInt_(-1), 1);
+  XCTAssertEqual(JavaLangMath_maxWithInt_withInt_(1, 2), 2);
+
+  XCTAssertNotNil(JavaUtilBase64_getEncoder());
+  XCTAssertNotNil(JavaUtilBase64_getDecoder());
+
+  JavaUtilLocale *locale = JavaUtilLocale_getDefault();
+  XCTAssertNotNil(locale);
+
+  JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"a+");
+  id input = @"aaa";
+  JavaUtilRegexMatcher *matcher = [pattern matcherWithJavaLangCharSequence:input];
+  XCTAssertTrue([matcher matches]);
+
+  JavaLangEnum *enumValue = nil;
+  XCTAssertNil(enumValue);
+  JavaLangStringBuilder *stringBuilder = nil;
+  XCTAssertNil(stringBuilder);
 }
 
 - (void)testInterface {

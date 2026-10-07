@@ -403,6 +403,9 @@ internal class J2ObjCCompatSources(
             // Primitive constructors are not included, as they are currently implemented in Kotlin
             // as `invoke` calls and are deprecated in Java.
             isBoxedType(methodDescriptor.enclosingTypeDescriptor) -> false
+            // Kotlin stdlib classes don't have J2ObjC-compatible initializers, unless bridged.
+            methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isUnbridgedKotlinStdlibType ->
+              false
             else -> true
           }
         else -> false
@@ -741,6 +744,11 @@ internal class J2ObjCCompatSources(
 
   private fun isKotlinStdlibKtNativeName(name: String): Boolean = name.startsWith("kotlin.")
 
+  private val TypeDeclaration.isUnbridgedKotlinStdlibType: Boolean
+    get() =
+      ktBridgeQualifiedName == null &&
+        ktNativeQualifiedName?.let(::isKotlinStdlibKtNativeName) == true
+
   private fun mappedKtNativeDependentSource(
     kind: TypeDeclaration.Kind,
     name: String,
@@ -1004,22 +1012,15 @@ internal class J2ObjCCompatSources(
         "java.io.IOException",
         "java.lang.AutoCloseable",
         "java.lang.Class",
-        "java.lang.Enum",
-        "java.lang.Iterable",
         "java.lang.JsException",
-        "java.lang.Math",
         "java.lang.OutOfMemoryError",
-        "java.lang.StringBuilder",
         "java.lang.StringIndexOutOfBoundsException",
         "java.lang.invoke.",
         "java.lang.ref.WeakReference",
         "java.lang.ref.SoftReference",
         "java.nio.",
-        "java.util.Base64",
-        "java.util.Locale",
         "java.util.Map",
         "java.util.Map.Entry",
-        "java.util.regex.",
         "java.util.concurrent.atomic.",
         "java.util.concurrent.KotlinExecutor",
         "javaemul.",
