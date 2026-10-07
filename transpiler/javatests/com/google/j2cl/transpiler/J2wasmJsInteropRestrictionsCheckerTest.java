@@ -371,20 +371,26 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
             "test.MyNative",
             """
             import jsinterop.annotations.*;
-            @JsType
-            class MyJsType {
-              public void m() {}
-            }
+            class MyType {}
+            interface MyInterface {}
             class Main {
               @JsMethod
-              static native void acceptJsType(MyJsType jsType);
+              static native void acceptType(MyType type);
 
               @JsMethod
-              static native MyJsType returnJsType();
+              static native MyType returnType();
+
+              @JsMethod
+              static native void acceptInterface(MyInterface intf);
+
+              @JsMethod
+              static native MyInterface returnInterface();
 
               private static void test() {
-                acceptJsType(new MyJsType());
-                MyJsType jsType = returnJsType();
+                acceptType(new MyType());
+                MyType type = returnType();
+                acceptInterface(new MyInterface() {});
+                MyInterface intf = returnInterface();
               }
             }
             """)

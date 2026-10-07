@@ -22,7 +22,6 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -1418,23 +1417,14 @@ public final class AstUtils {
     }
     TypeDeclaration typeDeclaration = dtd.getTypeDeclaration();
     return !typeDeclaration.isNative()
+        && !isAnnotatedWithWasm(typeDeclaration)
         // Non denotable types are not exported to JS.
         // TODO(b/552059898): Decide how to handle local classes since they are denotable but not
         // referenceable outside their declaration scope.
         && !typeDeclaration.isJsFunctionInterface()
         && !typeDeclaration.isAnonymous()
         // Only source types are exported to JS.
-        && typeDeclaration.getOrigin() == TypeDeclaration.Origin.SOURCE
-        // Any type that is explicitly declared as a JsType or declares a JsMember, and so are
-        // their subtypes.
-        && typeDeclaration.getAllSuperTypesIncludingSelf().stream()
-            .filter(Predicates.not(TypeDeclaration::isNative))
-            .anyMatch(
-                Predicates.or(
-                    TypeDeclaration::isJsType,
-                    t ->
-                        t.toDescriptor().getDeclaredMemberDescriptors().stream()
-                            .anyMatch(m -> m.isJsMember() && !m.isNative())));
+        && typeDeclaration.getOrigin() == TypeDeclaration.Origin.SOURCE;
   }
 
   /** Creates an expression that evaluates to a Wasm funcref reference. */
