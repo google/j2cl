@@ -30,7 +30,7 @@ Instead JavaScript `number` is used to emulate `float` without any
 instrumentation and results in 64 bit precision. This makes them effectively
 same as the `double` type in Java.
 
-This is rarely noticable in practice but if for your application repeatability
+This is rarely noticeable in practice but if for your application repeatability
 of the floating point arithmetic really matters across different platforms, this
 is something to keep in mind.
 
