@@ -88,7 +88,8 @@ public class RerunningJ2clTranspilerTest extends TestCase {
       result1 = executor.submit(() -> compile(transpile.get()));
       result2 = executor.submit(() -> compile(transpile.get()));
     } finally {
-      MoreExecutors.shutdownAndAwaitTermination(executor, 120, SECONDS);
+      // TODO(b/565818501): Clamp down the timeout once regressions from klib are resolved.
+      MoreExecutors.shutdownAndAwaitTermination(executor, 180, SECONDS);
     }
     result1.get().assertOutputFilesAreSame(result2.get());
   }
