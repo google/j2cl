@@ -101,4 +101,22 @@ public class AnnotationProcessingTest extends TestCase {
         .assertTranspileSucceeds()
         .assertOutputFilesExist("bar/GeneratedFoo.js");
   }
+
+  public void testAnnotationProcessing_withClassOutputResources() throws Exception {
+    newTesterWithDefaults()
+        .addCompilationUnit(
+            "bar.Foo",
+            """
+            import com.google.j2cl.transpiler.TestAnnotation;
+            @TestAnnotation
+            public class Foo {}
+            """)
+        .addArgs("-cp", PROCESSOR_JAR)
+        .addArgs("-processorpath", PROCESSOR_JAR)
+        .addArgs("-processor", TestAptProcessor.class.getName())
+        .addJavacOptions(
+            "-ATestAptProcessor.enabled", "-ATestAptProcessor.generateClassOutputResource")
+        .assertTranspileSucceeds()
+        .assertOutputFilesDoNotExist("META-INF/GeneratedFoo.js");
+  }
 }

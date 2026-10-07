@@ -94,6 +94,7 @@ public class JavacParser {
       CancellationChecker.register(context, problems);
 
       Path sourceGenPath = options.getSourceGenPath();
+      Path classGenPath = options.getClassGenPath();
       JavacTaskImpl task =
           createCompilationTask(
               options.getClasspaths(),
@@ -103,6 +104,7 @@ public class JavacParser {
               fileInfoBySourcePath.keySet().stream().map(Path::of).collect(toImmutableList()),
               diagnostics,
               sourceGenPath,
+              classGenPath,
               problems,
               context);
 
@@ -188,6 +190,7 @@ public class JavacParser {
               /* sources= */ ImmutableList.of(),
               diagnostics,
               /* sourceGenPath= */ null,
+              /* classGenPath= */ null,
               problems,
               new Context());
       reportDiagnosticErrors(diagnostics, problems);
@@ -206,6 +209,7 @@ public class JavacParser {
       Collection<Path> sources,
       DiagnosticCollector<JavaFileObject> diagnostics,
       Path sourceGenPath,
+      Path classGenPath,
       Problems problems,
       Context context)
       throws IOException {
@@ -220,6 +224,13 @@ public class JavacParser {
     if (sourceGenPath != null) {
       fileManager.setLocationFromPaths(
           StandardLocation.SOURCE_OUTPUT, ImmutableList.of(sourceGenPath));
+    }
+    if (classGenPath != null) {
+      // Annotation processors might also write resources to CLASS_OUTPUT. If that location is not
+      // set, javac writes them next to the source file of the originating element or in the current
+      // working directory.
+      fileManager.setLocationFromPaths(
+          StandardLocation.CLASS_OUTPUT, ImmutableList.of(classGenPath));
     }
     if (system != null) {
       fileManager.setLocationFromPaths(StandardLocation.SYSTEM_MODULES, ImmutableList.of(system));

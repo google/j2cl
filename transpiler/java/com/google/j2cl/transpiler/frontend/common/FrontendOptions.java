@@ -35,6 +35,8 @@ public interface FrontendOptions {
 
   Path getSourceGenPath();
 
+  Path getClassGenPath();
+
   @Nullable
   Path getSystem();
 
