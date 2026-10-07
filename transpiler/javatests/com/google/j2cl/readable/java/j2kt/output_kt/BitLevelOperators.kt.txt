@@ -1,0 +1,87 @@
+// Generated from "j2kt/BitLevelOperators.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Byte
+import kotlin.Char
+import kotlin.Int
+import kotlin.Short
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class BitLevelOperators {
+ companion object {
+  @JvmStatic
+  fun testBitwiseAndShiftPromotions(b: Byte, s: Short, c: Char) {
+   var i: Int = 0
+   i = b.toInt().shl(
+    b.toInt(),
+   )
+   i = b.toInt().shr(
+    s.toInt(),
+   )
+   i = b.toInt().ushr(
+    c.code,
+   )
+   i = s.toInt().shl(
+    c.code,
+   )
+   i = s.toInt().shr(
+    b.toInt(),
+   )
+   i = s.toInt().ushr(
+    s.toInt(),
+   )
+   i = c.code.shl(
+    s.toInt(),
+   )
+   i = c.code.shr(
+    c.code,
+   )
+   i = c.code.ushr(
+    b.toInt(),
+   )
+   i = b.toInt().and(
+    b.toInt(),
+   )
+   i = s.toInt().and(
+    s.toInt(),
+   )
+   i = c.code.and(
+    c.code,
+   )
+   i = b.toInt().or(
+    s.toInt(),
+   )
+   i = s.toInt().xor(
+    c.code,
+   )
+   i = b.toInt().inv()
+   i = s.toInt().inv()
+   i = c.code.inv()
+   i = - b.toInt()
+   i = - s.toInt()
+   i = - c.code
+   i = + b.toInt()
+   i = + s.toInt()
+   i = + c.code
+  }
+ }
+}
