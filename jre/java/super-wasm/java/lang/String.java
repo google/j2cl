@@ -354,11 +354,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public boolean endsWith(String suffix) {
-    // If IE8 supported negative start index, we could have just used "-suffixlength".
+    checkNotNull(suffix);
     int suffixlength = suffix.length();
     int length = length();
-    return new String(nativeSubstr(asStringView(value), length - suffixlength, length))
-        .equals(suffix);
+    return suffixlength <= length
+        && nativeEq(nativeSubstr(asStringView(value), length - suffixlength, length), suffix.value);
   }
 
   @Override
@@ -691,9 +691,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public boolean startsWith(String prefix, int toffset) {
+    checkNotNull(prefix);
     return toffset >= 0
-        && new String(nativeSubstr(asStringView(value), toffset, toffset + prefix.length()))
-            .equals(prefix);
+        && toffset <= length() - prefix.length()
+        && nativeEq(
+            nativeSubstr(asStringView(value), toffset, toffset + prefix.length()), prefix.value);
   }
 
   @Override

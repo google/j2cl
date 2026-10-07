@@ -1127,10 +1127,8 @@ public class StringTest extends TestCase {
     assertFalse("".startsWith("", -1));
     assertFalse("".startsWith("a"));
     assertFalse("".startsWith("a", 0));
-    if (!isWasm()) {
-      assertFalse(haystack.startsWith("", haystack.length() + 1));
-      assertFalse("".startsWith("", 1));
-    }
+    assertFalse(haystack.startsWith("", haystack.length() + 1));
+    assertFalse("".startsWith("", 1));
   }
 
   public void testStartsWithNull() {
