@@ -705,12 +705,12 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   public String substring(int beginIndex) {
     checkStringElementIndex(beginIndex, length() + 1);
-    return new String(nativeSubstr(asStringView(value), beginIndex, length()));
+    return wrapIfChanged(nativeSubstr(asStringView(value), beginIndex, length()));
   }
 
   public String substring(int beginIndex, int endIndex) {
     checkStringBounds(beginIndex, endIndex, length());
-    return new String(nativeSubstr(asStringView(value), beginIndex, endIndex));
+    return wrapIfChanged(nativeSubstr(asStringView(value), beginIndex, endIndex));
   }
 
   public char[] toCharArray() {
@@ -769,7 +769,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     while (end > start && charAt(end - 1) <= ' ') {
       end--;
     }
-    return start > 0 || end < length ? substring(start, end) : this;
+    return substring(start, end);
   }
 
   public String strip() {

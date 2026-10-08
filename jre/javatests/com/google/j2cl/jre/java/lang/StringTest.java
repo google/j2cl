@@ -1366,6 +1366,11 @@ public class StringTest extends TestCase {
 
     assertSame(lower, lower.concat(""));
     assertSame(lower, lower.repeat(1));
+    assertSame(lower, lower.substring(hideFromCompiler(0)));
+    assertSame(lower, lower.substring(0, lower.length()));
+    assertSame(lower, lower.subSequence(0, lower.length()));
+    assertSame(lower, lower.split(",")[0]);
+    assertSame(lower, lower.split("a", 1)[0]);
   }
 
   /*
