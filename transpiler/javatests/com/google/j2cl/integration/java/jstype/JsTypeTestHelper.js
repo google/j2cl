@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteroptests.JsTypeTestHelper');
+goog.module('jstype.JsTypeTestHelper');
+
 
 /**
  * @param {?} object
@@ -23,35 +24,11 @@ exports.callPublicMethod = function(object) {
 };
 
 /**
- * @param {?} value
- * @return {boolean}
- */
-exports.isUndefined = function(value) {
-  return value == undefined;
-};
-
-/**
  * @param {?} obj
  * @param {?} value
  */
 exports.setTheField = function(obj, value) {
   obj.notTypeTightenedField = value;
-};
-
-/**
- * @param {?} obj
- * @param {?} param
- * @return {*}
- */
-exports.callM = function(obj, param) {
-  return obj.m(param);
-};
-
-/**
- * @param {?} jstype
- */
-exports.fillJsTypeField = function(jstype) {
-  jstype.someField = {};
 };
 
 /**

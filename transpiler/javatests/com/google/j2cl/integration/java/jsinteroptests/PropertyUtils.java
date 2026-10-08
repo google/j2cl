@@ -22,26 +22,6 @@ import jsinterop.annotations.JsType;
 public class PropertyUtils {
   public static native boolean hasPublicMethod(Object obj);
 
-  public static native boolean hasPublicSubclassMethod(Object obj);
-
-  public static native boolean hasPublicStaticSubclassMethod(Object obj);
-
-  public static native boolean hasPrivateSubclassMethod(Object obj);
-
-  public static native boolean hasProtectedSubclassMethod(Object obj);
-
-  public static native boolean hasPackageSubclassMethod(Object obj);
-
-  public static native boolean hasPublicSubclassField(Object obj);
-
-  public static native boolean hasPublicStaticSubclassField(Object obj);
-
-  public static native boolean hasPrivateSubclassField(Object obj);
-
-  public static native boolean hasProtectedSubclassField(Object obj);
-
-  public static native boolean hasPackageSubclassField(Object obj);
-
   public static native boolean hasPublicFinalField(Object obj);
 
   public static native boolean hasPrivateStaticFinalField(Object obj);

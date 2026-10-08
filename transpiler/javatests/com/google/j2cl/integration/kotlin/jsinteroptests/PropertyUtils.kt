@@ -23,26 +23,6 @@ import kotlin.jvm.JvmStatic
 object PropertyUtils {
   @JvmStatic external fun hasPublicMethod(obj: Any?): Boolean
 
-  @JvmStatic external fun hasPublicSubclassMethod(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPublicStaticSubclassMethod(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPrivateSubclassMethod(obj: Any?): Boolean
-
-  @JvmStatic external fun hasProtectedSubclassMethod(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPackageSubclassMethod(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPublicSubclassField(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPublicStaticSubclassField(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPrivateSubclassField(obj: Any?): Boolean
-
-  @JvmStatic external fun hasProtectedSubclassField(obj: Any?): Boolean
-
-  @JvmStatic external fun hasPackageSubclassField(obj: Any?): Boolean
-
   @JvmStatic external fun hasPublicFinalField(obj: Any?): Boolean
 
   @JvmStatic external fun hasPrivateStaticFinalField(obj: Any?): Boolean

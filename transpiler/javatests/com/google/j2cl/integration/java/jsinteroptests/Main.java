@@ -28,7 +28,6 @@ public class Main {
     JsMethodTest.testAll();
     JsTypeArrayTest.testAll();
     JsTypeBridgeTest.testAll();
-    JsTypeTest.testAll();
     NativeJsTypeTest.testAll();
     JsTypeVarargsTest.testAll();
     JsTypeObjectMethodsTest.testAll();

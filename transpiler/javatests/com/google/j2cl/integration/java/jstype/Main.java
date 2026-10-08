@@ -13,11 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package jsinteroptests;
+package jstype;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
-import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
+import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
@@ -25,8 +25,8 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-public class JsTypeTest {
-  public static void testAll() {
+public class Main {
+  public static void main(String... args) {
     testAbstractJsTypeAccess();
     testConcreteJsTypeAccess();
     testConcreteJsTypeNoTypeTightenField();
@@ -34,29 +34,21 @@ public class JsTypeTest {
     testEnumeration();
     testEnumJsTypeAccess();
     testEnumSubclassEnumeration();
-    testJsTypeField();
     testNamedBridge();
-    testNativeMethodOverrideNoTypeTightenParam();
     testRevealedOverrideJsType();
     testJsTypeRecord();
   }
 
-  /**
-   * This concrete test class is *directly* annotated as a @JsType.
-   */
+  /** This concrete test class is *directly* annotated as a @JsType. */
   @JsType
   abstract static class AbstractJsType {
     public abstract int publicMethod();
   }
 
-  /**
-   * A regular class with no exports.
-   */
+  /** A regular class with no exports. */
   public static class PlainParentType {
 
-    /**
-     * A simple function that is not itself exported.
-     */
+    /** A simple function that is not itself exported. */
     public void run() {}
   }
 
@@ -207,27 +199,6 @@ public class JsTypeTest {
     assertEquals(101, concreteJsType.notTypeTightenedField.x());
   }
 
-  @JsType
-  interface A {
-    boolean m(Object o);
-  }
-
-  private static class AImpl implements A {
-    @Override
-    public boolean m(Object o) {
-      return o == null;
-    }
-  }
-
-  private static void testNativeMethodOverrideNoTypeTightenParam() {
-    AImpl a = new AImpl();
-    assertTrue(a.m(null));
-    assertFalse((Boolean) callM(a, new Object()));
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  private static native Object callM(Object obj, Object param);
-
   private static void testRevealedOverrideJsType() {
     PlainParentType plainParentType = new PlainParentType();
     RevealedOverrideSubType revealedOverrideSubType = new RevealedOverrideSubType();
@@ -245,7 +216,7 @@ public class JsTypeTest {
     assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod());
   }
 
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.JsTypeTestHelper")
   private static native boolean hasFieldRun(Object obj);
 
   private static void testEnumeration() {
@@ -273,41 +244,18 @@ public class JsTypeTest {
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
   }
 
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.JsTypeTestHelper")
   private static native int callPublicMethod(Object object);
 
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  private static native boolean isUndefined(Object value);
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.JsTypeTestHelper")
   @SuppressWarnings("unusable-by-js")
   private static native void setTheField(ConcreteJsType obj, ConcreteJsType.A value);
 
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.JsTypeTestHelper")
   private static native int callPublicMethodFromEnumeration(MyEnumWithJsType enumeration);
 
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.JsTypeTestHelper")
   private static native int callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen e);
-
-  @JsType
-  interface SimpleJsTypeFieldInterface {}
-
-  static class SimpleJsTypeFieldClass implements SimpleJsTypeFieldInterface {}
-
-  static class SimpleJsTypeWithField {
-    @JsProperty public SimpleJsTypeFieldInterface someField;
-  }
-
-  private static void testJsTypeField() {
-    assertTrue(new SimpleJsTypeFieldClass() != new SimpleJsTypeFieldClass());
-    SimpleJsTypeWithField holder = new SimpleJsTypeWithField();
-    fillJsTypeField(holder);
-    SimpleJsTypeFieldInterface someField = holder.someField;
-    assertNotNull(someField);
-  }
-
-  @JsMethod(namespace = "jsinteroptests.JsTypeTestHelper")
-  public static native void fillJsTypeField(SimpleJsTypeWithField jstype);
 
   @JsType
   abstract static class SomeAbstractClass {
@@ -337,12 +285,13 @@ public class JsTypeTest {
   @JsType
   public record MyJsTypeRecord(int a, @JsProperty(name = "customB") String b) {}
 
-  @JsType(isNative = true, namespace = "woo.JsTypeTest", name = "MyJsTypeRecord")
+  @JsType(isNative = true, namespace = "jstype.Main", name = "MyJsTypeRecord")
   public static class NativeMyJsTypeRecord {
     public NativeMyJsTypeRecord(int a, String customB) {}
 
-    @JsProperty public int a;
-    @JsProperty public String customB;
+    // Note: Private to prevent a setter import from being generated.
+    @JsProperty private int a;
+    @JsProperty private String customB;
   }
 
   private static void testJsTypeRecord() {

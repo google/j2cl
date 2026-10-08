@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package jsinteroptests;
+package jstype;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -70,33 +70,33 @@ class ConcreteJsType {
   @SuppressWarnings("unusable-by-js")
   public A notTypeTightenedField = new AImpl1();
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPublicMethod(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPublicStaticMethod(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPrivateMethod(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasProtectedMethod(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPackageMethod(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPublicField(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPublicStaticField(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPrivateField(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasProtectedField(Object obj);
 
-  @JsMethod(namespace = "jsinteroptests.ConcreteJsTypeHelper")
+  @JsMethod(namespace = "jstype.ConcreteJsTypeHelper")
   public static native boolean hasPackageField(Object obj);
 }
