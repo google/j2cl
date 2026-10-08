@@ -32,6 +32,7 @@
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
+#include "java/lang/OutOfMemoryError.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Throwable.h"
 #include "java/util/Base64.h"
@@ -647,6 +648,11 @@
 #else
   throwable = [[JavaLangThrowable alloc] initWithNSString:@"foo"];
 #endif
+}
+
+- (void)testJreExceptions {
+  JavaLangOutOfMemoryError *outOfMemoryError = create_JavaLangOutOfMemoryError_init();
+  XCTAssertNotNil(outOfMemoryError);
 }
 
 - (void)testJreUtilities {
