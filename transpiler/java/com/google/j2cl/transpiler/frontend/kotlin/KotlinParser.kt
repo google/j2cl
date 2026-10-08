@@ -38,10 +38,8 @@ import org.jetbrains.kotlin.analyzer.CompilationErrorException
 import org.jetbrains.kotlin.cli.common.arguments.K2JKlibCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.jklib.K2JKlibCompiler
-import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.cli.jvm.config.jvmClasspathRoots
-import org.jetbrains.kotlin.cli.pipeline.jvm.JvmFrontendPipelinePhase.createProjectEnvironment
 import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.config.moduleName
 import org.jetbrains.kotlin.ir.IrStatement
@@ -136,7 +134,14 @@ class KotlinParser(private val problems: Problems) {
     )
 
     val projectEnvironment =
-      createProjectEnvironment(configuration, disposable, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+      KotlinCoreEnvironment.ProjectEnvironment(
+        disposable,
+        KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForProduction(
+          disposable,
+          configuration,
+        ),
+        configuration,
+      )
     problems.abortIfCancelled()
 
     val state =
@@ -151,14 +156,7 @@ class KotlinParser(private val problems: Problems) {
     lowerings.generate(moduleFragment, pluginContext)
     problems.abortIfCancelled()
 
-    val jarFileSystem =
-      KotlinCoreEnvironment.createForProduction(
-          disposable,
-          configuration,
-          EnvironmentConfigFiles.JVM_CONFIG_FILES,
-        )
-        .projectEnvironment
-        .jarFileSystem
+    val jarFileSystem = projectEnvironment.jarFileSystem
     val classpath = configuration.jvmClasspathRoots.map { jarFileSystem.findFileByPath("$it!/")!! }
 
     val packageInfoCache = PackageInfoCache(classpath)
