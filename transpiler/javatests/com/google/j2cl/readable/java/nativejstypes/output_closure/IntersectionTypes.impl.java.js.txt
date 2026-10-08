@@ -1,0 +1,60 @@
+goog.module('nativejstypes.IntersectionTypes$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let NonNativeInterface = goog.forwardDeclare('nativejstypes.IntersectionTypes.NonNativeInterface$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+class IntersectionTypes extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!IntersectionTypes} */
+ static $create__() {
+  IntersectionTypes.$clinit();
+  let $instance = new IntersectionTypes();
+  $instance.$ctor__nativejstypes_IntersectionTypes__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativejstypes_IntersectionTypes__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template T */
+ static m_testNativeFirst__nativejstypes_IntersectionTypes_NativeInterface__java_lang_Object__void(/** T */ t, /** * */ o) {
+  IntersectionTypes.$clinit();
+  let b = $Equality.$same(t, o);
+  b = $Equality.$same(o, /**@type {Object}*/ ($Casts.$to(o, /**@type {Function}*/ (NonNativeInterface))));
+ }
+ /** @nodts @template T */
+ static m_testNonNativeFirst__nativejstypes_IntersectionTypes_NonNativeInterface__java_lang_Object__void(/** T */ t, /** * */ o) {
+  IntersectionTypes.$clinit();
+  let b = $Equality.$same(t, o);
+  b = $Equality.$same(o, /**@type {NonNativeInterface}*/ ($Casts.$to(o, /**@type {Function}*/ (NonNativeInterface))));
+ }
+ /** @nodts */
+ static $clinit() {
+  IntersectionTypes.$clinit = () =>{};
+  IntersectionTypes.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IntersectionTypes;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  NonNativeInterface = goog.module.get('nativejstypes.IntersectionTypes.NonNativeInterface$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(IntersectionTypes, 'nativejstypes.IntersectionTypes');
+
+exports = IntersectionTypes;
+
+//# sourceMappingURL=IntersectionTypes.js.map

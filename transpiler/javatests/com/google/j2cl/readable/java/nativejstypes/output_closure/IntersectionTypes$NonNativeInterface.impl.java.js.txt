@@ -1,0 +1,31 @@
+goog.module('nativejstypes.IntersectionTypes.NonNativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class NonNativeInterface {
+ /** @nodts */
+ static $clinit() {
+  NonNativeInterface.$clinit = () =>{};
+  NonNativeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nativejstypes_IntersectionTypes_NonNativeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nativejstypes_IntersectionTypes_NonNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NonNativeInterface.$markImplementor(/**@type {Function}*/ (NonNativeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (NonNativeInterface), 'nativejstypes.IntersectionTypes$NonNativeInterface');
+
+exports = NonNativeInterface;
+
+//# sourceMappingURL=IntersectionTypes$NonNativeInterface.js.map

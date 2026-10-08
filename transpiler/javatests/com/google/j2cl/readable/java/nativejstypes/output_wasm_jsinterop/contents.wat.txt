@@ -59,6 +59,24 @@
 (global $$class@nativejstypes.Headers.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@nativejstypes.IntersectionTypes (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.IntersectionTypes (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@nativejstypes.IntersectionTypes.NonNativeInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.IntersectionTypes.NonNativeInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@nativejstypes.IntersectionTypes.NativeInterface.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@nativejstypes.IntersectionTypes.NativeInterface.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@nativejstypes.Main (mut i32)
  (i32.const 0)
 )
@@ -217,6 +235,15 @@
  (struct.new $nativejstypes.Headers.$Overlay.vtable
   (ref.null extern)
   (ref.func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay)
+ )
+)
+(global $nativejstypes.IntersectionTypes.vtable (ref (exact $nativejstypes.IntersectionTypes.vtable))
+ (struct.new $nativejstypes.IntersectionTypes.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@nativejstypes.IntersectionTypes)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 (global $nativejstypes.Main.vtable (ref (exact $nativejstypes.Main.vtable))
@@ -724,6 +751,66 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.Headers.$Overlay)
+
+;;; void NonNativeInterface.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.IntersectionTypes.NonNativeInterface
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:29:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:29:12
+  (if (global.get $$class-initialized@nativejstypes.IntersectionTypes.NonNativeInterface)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:29:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:29:12
+  (global.set $$class-initialized@nativejstypes.IntersectionTypes.NonNativeInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> NonNativeInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.IntersectionTypes.NonNativeInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.IntersectionTypes.NonNativeInterface)))
+   (then
+    (return (global.get $$class@nativejstypes.IntersectionTypes.NonNativeInterface))
+   )
+  )
+  (global.set $$class@nativejstypes.IntersectionTypes.NonNativeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.IntersectionTypes.NonNativeInterface.$StringLiterals )))
+  (return (global.get $$class@nativejstypes.IntersectionTypes.NonNativeInterface))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.IntersectionTypes.NativeInterface.$Overlay
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:27:12
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:27:12
+  (if (global.get $$class-initialized@nativejstypes.IntersectionTypes.NativeInterface.$Overlay)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:27:12
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:27:12
+  (global.set $$class-initialized@nativejstypes.IntersectionTypes.NativeInterface.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.IntersectionTypes.NativeInterface.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.IntersectionTypes.NativeInterface.$Overlay)))
+   (then
+    (return (global.get $$class@nativejstypes.IntersectionTypes.NativeInterface.$Overlay))
+   )
+  )
+  (global.set $$class@nativejstypes.IntersectionTypes.NativeInterface.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.IntersectionTypes.NativeInterface.$Overlay.$StringLiterals )))
+  (return (global.get $$class@nativejstypes.IntersectionTypes.NativeInterface.$Overlay))
+ )
+)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.ExposesNonNative.$Overlay
@@ -1286,6 +1373,94 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@nativejstypes.GenericRegularClass)
+
+;;; IntersectionTypes IntersectionTypes.$create()
+(func $$create__@nativejstypes.IntersectionTypes
+ (result (ref null $nativejstypes.IntersectionTypes))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+ (local $$instance (ref null $nativejstypes.IntersectionTypes))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (call $$clinit__void_<once>_@nativejstypes.IntersectionTypes )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (local.set $$instance (struct.new_desc $nativejstypes.IntersectionTypes (global.get $itable.empty) (i32.const 0) (global.get $nativejstypes.IntersectionTypes.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (call $$ctor__void_$p_nativejstypes_IntersectionTypes@nativejstypes.IntersectionTypes (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void IntersectionTypes.$ctor()
+(func $$ctor__void_$p_nativejstypes_IntersectionTypes@nativejstypes.IntersectionTypes
+ (param $this (ref null $nativejstypes.IntersectionTypes))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void IntersectionTypes.testNonNativeFirst(T t, Object o)
+(func $m_testNonNativeFirst__nativejstypes_IntersectionTypes_NonNativeInterface__java_lang_Object__void@nativejstypes.IntersectionTypes
+ (param $t (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:42:63
+ (local $b i32)
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:42:63
+  (call $$clinit__void_<once>_@nativejstypes.IntersectionTypes )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:43:4
+  (local.set $b (ref.eq (local.get $t) (local.get $o)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:44:4
+  (local.set $b (ref.eq (local.get $o) (ref.cast (ref null $java.lang.Object) (local.get $o))))
+ )
+)
+
+;;; void IntersectionTypes.$clinit()
+(func $$clinit__void_<once>_@nativejstypes.IntersectionTypes
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (if (global.get $$class-initialized@nativejstypes.IntersectionTypes)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (global.set $$class-initialized@nativejstypes.IntersectionTypes (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/IntersectionTypes.java:24:13
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> IntersectionTypes.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.IntersectionTypes
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@nativejstypes.IntersectionTypes)))
+   (then
+    (return (global.get $$class@nativejstypes.IntersectionTypes))
+   )
+  )
+  (global.set $$class@nativejstypes.IntersectionTypes (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|nativejstype...|__java_lang_String_<once>_@nativejstypes.IntersectionTypes.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@nativejstypes.IntersectionTypes))
+ )
+)
+
+;;; Class<?> IntersectionTypes.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@nativejstypes.IntersectionTypes
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativejstypes.IntersectionTypes))
+ (local.set $this (ref.cast (ref $nativejstypes.IntersectionTypes) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypes.IntersectionTypes ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@nativejstypes.IntersectionTypes)
 
 ;;; Main Main.$create()
 (func $$create__@nativejstypes.Main

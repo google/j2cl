@@ -1,0 +1,49 @@
+// Generated from "nativejstypes/IntersectionTypes.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package nativejstypes
+
+import javaemul.lang.*
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+import kotlin.let
+
+open class IntersectionTypes {
+ companion object {
+  @JvmStatic
+  internal fun <T> testNativeFirst(t: T, o: Any?) where T: NativeInterface?, T: NonNativeInterface? {
+   var b: Boolean = t === o
+   b = o === o.let { it as NativeInterface?; it as NonNativeInterface?; it }
+  }
+  
+  @JvmStatic
+  internal fun <T> testNonNativeFirst(t: T, o: Any?) where T: NonNativeInterface?, T: NativeInterface? {
+   var b: Boolean = t === o
+   b = o === o.let { it as NonNativeInterface?; it as NativeInterface?; it }
+  }
+ }
+ 
+ @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
+ internal interface NativeInterface
+ 
+ internal interface NonNativeInterface
+}
