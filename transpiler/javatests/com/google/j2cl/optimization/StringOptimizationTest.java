@@ -82,4 +82,17 @@ public class StringOptimizationTest {
   public void staticFieldEqualsOptimizes() {
     assertFunctionMatches(getStringEqualsStringOnStatic(), "return !0;");
   }
+
+  @JsMethod
+  public void unusedInstanceOf(Object o) {
+    boolean unused = o instanceof String;
+  }
+
+  @JsProperty
+  private native Object getUnusedInstanceOf();
+
+  @Test
+  public void unusedInstanceOfOptimizes() {
+    assertFunctionMatches(getUnusedInstanceOf(), "");
+  }
 }

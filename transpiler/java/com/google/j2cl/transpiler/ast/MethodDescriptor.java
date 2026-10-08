@@ -456,10 +456,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin() == MethodOrigin.DEFAULT_METHOD_BRIDGE;
   }
 
-  /** Returns {@code true} if the method is annotated with {@code HasNoSideEffect}. */
+  /** Returns {@code true} if the method has no side effects. */
   @Memoized
   public boolean isSideEffectFree() {
-    return hasAnnotation("javaemul.internal.annotations.HasNoSideEffects");
+    // Custom $isInstance methods are not guaranteed to be side-effect-free as they  execute
+    // arbitrary user code, but they are expected to behave like `instanceof` which should have no
+    // side effects in Java.
+    return isCustomIsInstanceMethod()
+        || hasAnnotation("javaemul.internal.annotations.HasNoSideEffects");
   }
 
   /** Returns true if the bridge was build with {@code candidateTarget} as its target. */
