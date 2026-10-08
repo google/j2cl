@@ -15,6 +15,7 @@ let ClassWithPrivateMembers = goog.forwardDeclare('inlinefunction.ClassWithPriva
 let Container = goog.forwardDeclare('inlinefunction.Container$impl');
 let ExternalClassWithInlineFun = goog.forwardDeclare('inlinefunction.ExternalClassWithInlineFun$impl');
 let ExternalInlineFunctionKt = goog.forwardDeclare('inlinefunction.ExternalInlineFunctionKt$impl');
+let GenericBox = goog.forwardDeclare('inlinefunction.GenericBox$impl');
 let HolderInAnotherLibrary = goog.forwardDeclare('inlinefunction.HolderInAnotherLibrary$impl');
 let InlineFunctionKt_$1 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1$impl');
 let $1Foo = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1Foo$impl');
@@ -31,6 +32,7 @@ let NonFun = goog.forwardDeclare('inlinefunction.NonFun$impl');
 let ParametrizedContainerReproChild = goog.forwardDeclare('inlinefunction.ParametrizedContainerReproChild$impl');
 let ParametrizedReproChild = goog.forwardDeclare('inlinefunction.ParametrizedReproChild$impl');
 let Repro = goog.forwardDeclare('inlinefunction.Repro$impl');
+let StringBox = goog.forwardDeclare('inlinefunction.StringBox$impl');
 let StringParametrizedReproChild = goog.forwardDeclare('inlinefunction.StringParametrizedReproChild$impl');
 let StringRepro = goog.forwardDeclare('inlinefunction.StringRepro$impl');
 let StringReproChild = goog.forwardDeclare('inlinefunction.StringReproChild$impl');
@@ -645,6 +647,18 @@ class InlineFunctionKt extends j_l_Object {
   InlineFunctionKt.$clinit();
   return $7.$create__int__kotlin_jvm_functions_Function0(this_1, block);
  }
+ /** @nodts @return {string} */
+ static m_testInlineFunctionCalledOnSmartCastReceiver__java_lang_Object__java_lang_String(/** !* */ x) {
+  InlineFunctionKt.$clinit();
+  let /** string */ tmp;
+  if (StringBox.$isInstance(x)) {
+   let v = /**@type {string}*/ ($Casts.$to((/**@type {!GenericBox<string>}*/ (x)).m_getValue__java_lang_Object(), j_l_String));
+   tmp = v;
+  } else {
+   tmp = '';
+  }
+  return tmp;
+ }
  /** @nodts */
  static $clinit() {
   InlineFunctionKt.$clinit = () =>{};
@@ -680,6 +694,7 @@ class InlineFunctionKt extends j_l_Object {
   $7 = goog.module.get('inlinefunction.InlineFunctionKt.$7$impl');
   InlineFunctionsInAnotherLibraryKt = goog.module.get('inlinefunction.InlineFunctionsInAnotherLibraryKt$impl');
   MyClass = goog.module.get('inlinefunction.MyClass$impl');
+  StringBox = goog.module.get('inlinefunction.StringBox$impl');
   WithInlineFunction = goog.module.get('inlinefunction.WithInlineFunction$impl');
   Double = goog.module.get('java.lang.Double$impl');
   Error = goog.module.get('java.lang.Error$impl');

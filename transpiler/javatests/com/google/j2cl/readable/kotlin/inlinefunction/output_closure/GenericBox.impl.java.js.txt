@@ -1,0 +1,55 @@
+goog.module('inlinefunction.GenericBox$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class GenericBox extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_value__inlinefunction_GenericBox_;
+ }
+ /** @nodts @template T @return {!GenericBox<T>} */
+ static $create__java_lang_Object(/** T */ value) {
+  GenericBox.$clinit();
+  let $instance = new GenericBox();
+  $instance.$ctor__inlinefunction_GenericBox__java_lang_Object__void(value);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_GenericBox__java_lang_Object__void(/** T */ value) {
+  this.$ctor__java_lang_Object__void();
+  this.f_value__inlinefunction_GenericBox_ = value;
+ }
+ /** @final @nodts @return {T} */
+ m_getValue__java_lang_Object() {
+  return this.f_value__inlinefunction_GenericBox_;
+ }
+ /** @final @nodts @return {T} */
+ m_get__java_lang_Object() {
+  let v = this.m_getValue__java_lang_Object();
+  return v;
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericBox.$clinit = () =>{};
+  GenericBox.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericBox;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericBox, 'inlinefunction.GenericBox');
+
+exports = GenericBox;
+
+//# sourceMappingURL=GenericBox.js.map

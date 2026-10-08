@@ -381,3 +381,15 @@ class ClassWithPrivateInlineFun(val i: Int) {
 
   fun testCapturesOfReceivers() = privateInlineFun()
 }
+
+open class GenericBox<T>(val value: T) {
+  inline fun get(): T {
+    val v: T = value
+    return v
+  }
+}
+
+class StringBox(s: String) : GenericBox<String>(s)
+
+fun testInlineFunctionCalledOnSmartCastReceiver(x: Any): String =
+  if (x is StringBox) x.get() else ""

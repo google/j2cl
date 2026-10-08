@@ -1,0 +1,44 @@
+goog.module('inlinefunction.StringBox$impl');
+
+const GenericBox = goog.require('inlinefunction.GenericBox$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ * @extends {GenericBox<string>}
+ */
+class StringBox extends GenericBox {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!StringBox} */
+ static $create__java_lang_String(/** string */ s) {
+  StringBox.$clinit();
+  let $instance = new StringBox();
+  $instance.$ctor__inlinefunction_StringBox__java_lang_String__void(s);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_StringBox__java_lang_String__void(/** string */ s) {
+  this.$ctor__inlinefunction_GenericBox__java_lang_Object__void(s);
+ }
+ /** @nodts */
+ static $clinit() {
+  StringBox.$clinit = () =>{};
+  StringBox.$loadModules();
+  GenericBox.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringBox;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(StringBox, 'inlinefunction.StringBox');
+
+exports = StringBox;
+
+//# sourceMappingURL=StringBox.js.map
