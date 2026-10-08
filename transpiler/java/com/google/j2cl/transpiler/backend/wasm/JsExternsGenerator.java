@@ -19,6 +19,7 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.MoreCollectors.toOptional;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
+import static java.util.stream.Collectors.joining;
 
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.SourcePosition;
@@ -36,6 +37,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -48,6 +51,9 @@ final class JsExternsGenerator {
 
   private static final String OUTPUT_PATH = "externs";
 
+  /** The Closure modules that define the native types referenced by the extern. */
+  private final Set<String> referencedNativeModules = new LinkedHashSet<>();
+
   private final WasmJsInteropClosureGenerationEnvironment closureEnvironment =
       new WasmJsInteropClosureGenerationEnvironment() {
         @Override
@@ -55,8 +61,14 @@ final class JsExternsGenerator {
           if (typeDeclaration.isExtern() || typeDeclaration.isNative()) {
             // In extern files, externs and native types can be referenced using their Javascript
             // qualified name.
-            // TODO(b/553008530): Investigate why just using the qualified name for native types
-            // works even if there is not corresponding goog.require nor goog.requireType.
+            if (!typeDeclaration.isExtern()) {
+              // Native types are defined in Closure modules that are not necessarily
+              // goog.require'd by the sources of the library, record them so that they can be
+              // goog.requireType'd from the externs wiring. Otherwise the pruning in the
+              // library level type checking might drop them and the types would be unknown.
+              referencedNativeModules.add(
+                  typeDeclaration.getEnclosingModule().getQualifiedJsName());
+            }
             return typeDeclaration.getQualifiedJsName();
           }
           // Wasm types, on the other hand, need a different alias to be used in their externs
@@ -65,33 +77,32 @@ final class JsExternsGenerator {
         }
       };
 
-  private final WasmGenerationEnvironment environment;
   private final Output output;
+  private final Type type;
 
-  private JsExternsGenerator(Output output, WasmGenerationEnvironment environment) {
-    this.environment = environment;
+  private JsExternsGenerator(Output output, Type type) {
     this.output = output;
+    this.type = type;
   }
 
   /** Generates the JavaScript code to support the imports. */
   public static void generateOutputs(
       Output output, WasmGenerationEnvironment environment, Library library) {
-    JsExternsGenerator externsGenerator = new JsExternsGenerator(output, environment);
-    externsGenerator.generateExterns(library);
-  }
-
-  private void generateExterns(Library library) {
     if (!environment.isCustomDescriptorsJsInteropEnabled()) {
       return;
     }
     library
         .streamTypes()
         .filter(t -> shouldGenerateExtern(t.getTypeDescriptor()))
-        .forEach(
-            type -> {
-              generateExtern(type);
-              generateExternsWiring(type);
-            });
+        .forEach(t -> generateExterns(output, t));
+  }
+
+  private static void generateExterns(Output output, Type type) {
+    var externsGenerator = new JsExternsGenerator(output, type);
+    // Generate the extern first since it records the native modules that need to be required in
+    // the wiring.
+    externsGenerator.generateExtern();
+    externsGenerator.generateExternsWiring();
   }
 
   static boolean shouldGenerateExtern(DeclaredTypeDescriptor typeDescriptor) {
@@ -99,12 +110,12 @@ final class JsExternsGenerator {
     return isWasmJsExportedType(typeDescriptor);
   }
 
-  private void generateExtern(Type type) {
+  private void generateExtern() {
     SourceBuilder sb = new SourceBuilder();
     sb.appendln("/** @externs */");
 
-    appendConstructor(sb, type);
-    appendMembers(sb, type);
+    appendConstructor(sb);
+    appendMembers(sb);
 
     // Output to externs/my.package.MyClass.externs.java.js
     output.write(
@@ -113,8 +124,8 @@ final class JsExternsGenerator {
         sb.build());
   }
 
-  /** Appends the constructor extern for the given type. */
-  private void appendConstructor(SourceBuilder sb, Type type) {
+  /** Appends the constructor extern for the type. */
+  private void appendConstructor(SourceBuilder sb) {
     // Retrieve the synthetic factory method for the constructor, if it exists, since the
     // normalization removes the original constructor.
     Method factoryMethod =
@@ -175,7 +186,7 @@ final class JsExternsGenerator {
         .build();
   }
 
-  private void appendMembers(SourceBuilder sb, Type type) {
+  private void appendMembers(SourceBuilder sb) {
     Stream.concat(streamExportedMembers(type), streamGetterSetterPairsAsFields(type))
         .forEach(
             member -> {
@@ -327,51 +338,70 @@ final class JsExternsGenerator {
     }
   }
 
-  private void generateExternsWiring(Type type) {
+  private void generateExternsWiring() {
     // Output to externs/my.package.MyClass.java.js
     output.write(
         Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".java.js").toString(),
-        getExternsWiringContent(type));
+        getExternsWiringContent());
   }
 
-  private String getExternsWiringContent(Type type) {
+  private String getExternsWiringContent() {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String externName = closureEnvironment.aliasForType(typeDeclaration);
     String simpleJsName = typeDeclaration.getSimpleJsName();
     String qualifiedJsName = typeDeclaration.getQualifiedJsName();
     String moduleName = typeDeclaration.getModuleName();
+    String requireTypes = getRequireTypes(moduleName);
     if (type.getMembers().stream().anyMatch(AstUtils::isExposedToJsViaConstructor)) {
-      return generateConstructorProxy(moduleName, externName, simpleJsName, qualifiedJsName);
+      return generateConstructorProxy(
+          moduleName, requireTypes, externName, simpleJsName, qualifiedJsName);
     } else {
-      return generateTypeAlias(moduleName, externName, simpleJsName);
+      return generateTypeAlias(moduleName, requireTypes, externName, simpleJsName);
     }
   }
 
+  /**
+   * Returns the goog.requireType statements for the modules that define the native types referenced
+   * from the externs.
+   */
+  private String getRequireTypes(String moduleName) {
+    var requires =
+        referencedNativeModules.stream()
+            .filter(not(moduleName::equals))
+            .map("goog.requireType('%s');"::formatted)
+            .collect(joining("\n"));
+    return requires.isEmpty() ? "" : requires + "\n";
+  }
+
   private static String generateConstructorProxy(
-      String moduleName, String externName, String simpleJsName, String qualifiedJsName) {
+      String moduleName,
+      String requireTypes,
+      String externName,
+      String simpleJsName,
+      String qualifiedJsName) {
     return """
     goog.module('%1$s');
 
     const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+    %2$s
+    /** @const {typeof %3$s} */
+    const %4$s = constructorProxy('%5$s');
 
-    /** @const {typeof %2$s} */
-    const %3$s = constructorProxy('%4$s');
-
-    exports = %3$s;
+    exports = %4$s;
     """
-        .formatted(moduleName, externName, simpleJsName, qualifiedJsName);
+        .formatted(moduleName, requireTypes, externName, simpleJsName, qualifiedJsName);
   }
 
   private static String generateTypeAlias(
-      String moduleName, String externName, String simpleJsName) {
+      String moduleName, String requireTypes, String externName, String simpleJsName) {
     return """
     goog.module('%1$s');
+    %2$s
+    /** @typedef {%3$s} */
+    let %4$s;
 
-    /** @typedef {%2$s} */
-    let %3$s;
-
-    exports = %3$s;
+    exports = %4$s;
     """
-        .formatted(moduleName, externName, simpleJsName);
+        .formatted(moduleName, requireTypes, externName, simpleJsName);
   }
 }
