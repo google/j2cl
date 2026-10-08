@@ -83,6 +83,11 @@ public final class PrimitiveTypeDescriptor extends TypeDescriptor {
     return true;
   }
 
+  @Override
+  public boolean isNative() {
+    return false;
+  }
+
   /**
    * Returns true if this is wider than {@code thatType} from the arithmetic precision perspective.
    *

@@ -65,8 +65,15 @@ public abstract sealed class TypeDescriptor
     return null;
   }
 
+  /**
+   * Returns whether this type is a native {@code @JsType} or native {@code @JsEnum} (or an array
+   * thereof).
+   *
+   * <p>For non-declared types (type variables, intersections and unions) this is determined by the
+   * type they erase to, i.e. {@code toRawTypeDescriptor().isNative()}.
+   */
   public boolean isNative() {
-    return false;
+    return toRawTypeDescriptor().isNative();
   }
 
   /** Return whether this type can be used directly by JavaScript code. */

@@ -17,7 +17,6 @@ package nativejstypes;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsType;
 
 /** Intersection types that have native components. */
@@ -29,8 +28,6 @@ public class IntersectionTypes {
   interface NonNativeInterface {}
 
   // The intersection erases to its first component, which is native, so values are native.
-  // TODO(b/571490654): Remove @Wasm("nop") once intersections are considered native.
-  @Wasm("nop")
   @SuppressWarnings({"ReferenceEquality", "unused"})
   static <T extends NativeInterface & NonNativeInterface> void testNativeFirst(T t, Object o) {
     boolean b = t == o;

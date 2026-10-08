@@ -165,11 +165,6 @@ public abstract non-sealed class TypeVariable extends TypeDescriptor
     return toRawTypeDescriptor().isNoopCast();
   }
 
-  @Override
-  public boolean isNative() {
-    return getUpperBoundTypeDescriptor().isNative();
-  }
-
   @Nullable
   @Override
   public TypeDeclaration getMetadataTypeDeclaration() {
