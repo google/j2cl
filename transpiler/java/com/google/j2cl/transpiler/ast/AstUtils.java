@@ -1110,6 +1110,11 @@ public final class AstUtils {
     return typeDescriptor.isJsEnum() && !typeDescriptor.isNative();
   }
 
+  /** Returns true if {@code typeDescriptor} is a native JsEnum. */
+  public static boolean isNativeJsEnum(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isJsEnum() && typeDescriptor.isNative();
+  }
+
   /** Returns true {@code typeDescriptor} requires bridges be generated for boxing/unboxing. */
   public static boolean isBoxableJsEnumType(TypeDescriptor typeDescriptor) {
     return isJsEnumBoxingSupported() && isNonNativeJsEnum(typeDescriptor);

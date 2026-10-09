@@ -148,6 +148,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMethodParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeMinValueIntegralLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
+import com.google.j2cl.transpiler.passes.NormalizeNativeJsEnumsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeNumberLiterals;
@@ -506,6 +507,7 @@ public enum Backend {
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
+          NormalizeNativeJsEnumsWasm::new,
           // Must run after NormalizeEnumClasses
           RemoveNameFromJsEnums::new,
           NormalizeArrayCreationsWasm::new,
@@ -526,7 +528,7 @@ public enum Backend {
           InsertErasureTypeSafetyCasts::new,
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
-          NormalizeSwitchConstructs::new,
+          () -> new NormalizeSwitchConstructs(/* convertNativeJsEnumSwitches= */ true),
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           // It must also run after AddJsExportBridgesWasm so we don't remove fields for which it

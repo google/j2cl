@@ -116,7 +116,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:42:14
  (local $$iterator (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
- (local $element (ref null $xplatforeach.NativeJsEnum))
+ (local $element (ref null extern))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:42:14
   (call $$clinit__void_<once>_@xplatforeach.ForEachStatements )
@@ -131,10 +131,10 @@
     (block $LOOP.CONTINUE
      (block
       ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:43:4
-      (local.set $element (ref.cast (ref null $xplatforeach.NativeJsEnum) (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
+      (local.set $element (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (ref $java.util.Iterator.vtable) (call $get.itable.$java.util.Iterator (local.get $$iterator)))))))
       (block
        ;;@ transpiler/javatests/com/google/j2cl/readable/java/xplatforeach/readable-j2wasm.js/xplatforeach/ForEachStatements.java:44:6
-       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $element)))
+       (drop (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $element))))
       )
      )
     )

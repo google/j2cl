@@ -35,6 +35,13 @@ import javax.annotation.Nullable;
 public class NormalizeFieldInitialization extends NormalizationPass {
   @Override
   public void applyTo(Type type) {
+    if (type.isNative()) {
+      // Skip native types, in particular native JsEnum initialization does not need to be
+      // normalized and leaves the type in an inconsistent state. This only applies to Wasm since
+      // native types in the Closure backend are removed.
+      return;
+    }
+
     // Move field initialization to InitializerBlocks keeping them in source order.
     List<Field> fieldDeclarations = new ArrayList<>();
     type.accept(

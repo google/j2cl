@@ -1,3 +1,4 @@
+load("//build_defs:rules.bzl", "j2kt_jvm_library", "j2kt_native_library")
 load(
     "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
     "readable_example",
@@ -8,10 +9,32 @@ package(
     licenses = ["reciprocal"],
 )
 
+# Exclude native sources from j2kt_jvm_library and j2kt_native_library.
+j2kt_jvm_library(
+    name = "readable-j2kt-jvm",
+    srcs = glob(["*.java"]),
+    j2kt_j2objc_interop_enabled = False,
+    javacopts = ["-XepDisableAllChecks"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2kt-jvm",
+        "//third_party:jsinterop-annotations-j2kt-jvm",
+    ],
+)
+
+j2kt_native_library(
+    name = "readable-j2kt-native",
+    srcs = glob(["*.java"]),
+    javacopts = ["-XepDisableAllChecks"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations-j2kt-native",
+        "//third_party:jsinterop-annotations-j2kt-native",
+    ],
+)
+
 readable_example(
     srcs = glob([
         "*.java",
-        "*.native.js",
+        "native_sources/*.js",
     ]),
     generate_wasm_custom_descriptors_jsinterop_readables = True,
     deps = [

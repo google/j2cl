@@ -15,8 +15,8 @@ let $Overlay = goog.forwardDeclare('jsenum.ComparableJsEnum.$Overlay$impl');
 let Foo = goog.forwardDeclare('jsenum.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.IntJsEnum.$Overlay$impl');
+let NativeStringEnum = goog.forwardDeclare('jsenum.NativeStringEnum');
 let NativeStringEnum_$Overlay = goog.forwardDeclare('jsenum.NativeStringEnum.$Overlay$impl');
-let NativeStringEnum = goog.forwardDeclare('jsenum.NonNullableStringJsEnum');
 let SomeJsEnum = goog.forwardDeclare('jsenum.SomeJsEnum$impl');
 let SomeJsEnum_$Overlay = goog.forwardDeclare('jsenum.SomeJsEnum.$Overlay$impl');
 let StringJsEnum = goog.forwardDeclare('jsenum.StringJsEnum$impl');
@@ -107,6 +107,22 @@ class MainKt extends j_l_Object {
   let tmp2_subject = stringJsEnum;
   switch (tmp2_subject) {
    case StringJsEnum.ONE:
+    {
+     break;
+    }
+   default:
+    {
+     break;
+    }
+  }
+  let nativeStringEnum = NativeStringEnum.ONE;
+  let tmp3_subject = nativeStringEnum;
+  switch (tmp3_subject) {
+   case NativeStringEnum.ONE:
+    {
+     break;
+    }
+   case NativeStringEnum.THREE:
     {
      break;
     }
@@ -330,8 +346,8 @@ class MainKt extends j_l_Object {
   Foo = goog.module.get('jsenum.Foo$impl');
   IntJsEnum = goog.module.get('jsenum.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.IntJsEnum.$Overlay$impl');
+  NativeStringEnum = goog.module.get('jsenum.NativeStringEnum');
   NativeStringEnum_$Overlay = goog.module.get('jsenum.NativeStringEnum.$Overlay$impl');
-  NativeStringEnum = goog.module.get('jsenum.NonNullableStringJsEnum');
   SomeJsEnum = goog.module.get('jsenum.SomeJsEnum$impl');
   SomeJsEnum_$Overlay = goog.module.get('jsenum.SomeJsEnum.$Overlay$impl');
   StringJsEnum = goog.module.get('jsenum.StringJsEnum$impl');

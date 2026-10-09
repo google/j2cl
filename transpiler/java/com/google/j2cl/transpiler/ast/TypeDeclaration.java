@@ -552,9 +552,11 @@ public abstract class TypeDeclaration
     // Only source-level types have overlay implementation classes. Synthetic types (e.g. native JS
     // types created by TypeDescriptors) do not have overlay classes.
     return getOrigin() == Origin.SOURCE
-        && (isJsEnum()
-            || (isJsType() && isNative())
-            || (isJsFunctionInterface() && declaresJsOverlayMembers()));
+        && (isNative()
+            || (isJsFunctionInterface() && declaresJsOverlayMembers())
+            // Methods in non-native JsEnum, in settings where JsEnum boxing is supported, are
+            // implicitly overlays.
+            || (AstUtils.isNonNativeJsEnum(toDescriptor()) && AstUtils.isJsEnumBoxingSupported()));
   }
 
   private boolean declaresJsOverlayMembers() {
@@ -791,8 +793,6 @@ public abstract class TypeDeclaration
   // TODO(b/181615162): This is a temporary hack which allows Wasm to treat JsEnums differently from
   // Closure.
   // In Wasm:
-  // - TODO(b/288145698): Native JsEnums are ignored (the annotation is removed on creation of
-  // TypeDeclaration)
   // - The supertype of JsEnums is not modified (it is still Enum, not changed to Object).
   private static final ThreadLocal<Boolean> implementsWasmJsInteropSemantics =
       ThreadLocal.withInitial(() -> false);
@@ -801,7 +801,7 @@ public abstract class TypeDeclaration
     implementsWasmJsInteropSemantics.set(true);
   }
 
-  static boolean implementsWasmJsInteropSemantics() {
+  private static boolean implementsWasmJsInteropSemantics() {
     return implementsWasmJsInteropSemantics.get();
   }
 

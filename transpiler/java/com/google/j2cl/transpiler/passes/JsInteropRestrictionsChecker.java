@@ -989,14 +989,6 @@ public class JsInteropRestrictionsChecker {
                   "%s against native JsType interface '%s'.",
                   messagePrefix,
                   typeDescriptor.getReadableDescription());
-            } else if (checkWasmRestrictions && typeDescriptor.isNative()) {
-              // We currently do a "ref.test extern" in Wasm for instanceof for all native types,
-              // which is not useful.
-              problems.error(
-                  hasSourcePosition.getSourcePosition(),
-                  "%s against native JsType '%s'.",
-                  messagePrefix,
-                  typeDescriptor.getReadableDescription());
             } else if (AstUtils.isNonNativeJsEnumArray(typeDescriptor)) {
               problems.error(
                   hasSourcePosition.getSourcePosition(),
@@ -1013,6 +1005,14 @@ public class JsInteropRestrictionsChecker {
               problems.error(
                   hasSourcePosition.getSourcePosition(),
                   "%s against native JsEnum '%s'.",
+                  messagePrefix,
+                  typeDescriptor.getReadableDescription());
+            } else if (checkWasmRestrictions && typeDescriptor.isNative()) {
+              // We currently do a "ref.test extern" in Wasm for instanceof for all native types,
+              // which is not useful.
+              problems.error(
+                  hasSourcePosition.getSourcePosition(),
+                  "%s against native JsType '%s'.",
                   messagePrefix,
                   typeDescriptor.getReadableDescription());
             }
@@ -1627,11 +1627,8 @@ public class JsInteropRestrictionsChecker {
     if (type.isEnumOrSubclass()) {
       problems.error(
           type.getSourcePosition(),
-          "Enum '%s' cannot be a native JsType.%s",
-          readableDescription,
-          // TODO(b/288145698): After supporting native JsEnum for Wasm, add the JsEnum text to
-          // error messages.
-          checkWasmRestrictions ? "" : " Use '@JsEnum(isNative = true)' instead.");
+          "Enum '%s' cannot be a native JsType. Use '@JsEnum(isNative = true)' instead.",
+          readableDescription);
       return false;
     }
     if (typeDeclaration.isCapturingEnclosingInstance()) {

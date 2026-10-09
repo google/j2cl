@@ -55,9 +55,6 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       if (!type.getDeclaration().hasOverlayImplementationType()) {
         continue;
       }
-      if (!AstUtils.isJsEnumBoxingSupported() && type.getDeclaration().isJsEnum()) {
-        continue;
-      }
       overlayTypes.add(createOverlayImplementationType(type));
     }
     compilationUnit.getTypes().addAll(overlayTypes);
@@ -158,10 +155,6 @@ public class NormalizeOverlayMembers extends NormalizationPass {
   }
 
   private static boolean isOverlay(MemberDescriptor memberDescriptor) {
-    if (!AstUtils.isJsEnumBoxingSupported()
-        && memberDescriptor.getEnclosingTypeDescriptor().isJsEnum()) {
-      return false;
-    }
     return memberDescriptor.isJsOverlay()
         || (isBoxableJsEnumType(memberDescriptor.getEnclosingTypeDescriptor())
             && !memberDescriptor.isEnumConstant());

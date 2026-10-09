@@ -22,9 +22,9 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals;
 import static com.google.j2cl.integration.testing.Asserts.fail;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 import static jsenum.NativeEnums.nativeClinitCalled;
 
-import com.google.j2cl.integration.testing.TestUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,7 +85,6 @@ public class Main {
     testJsEnumVarargs();
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static void testNativeJsEnum() {
     NativeEnum v = NativeEnum.ACCEPT;
     switch (v) {
@@ -157,10 +156,9 @@ public class Main {
         },
         Boolean.class);
 
-    assertTrue(asSeenFromJs(NativeEnum.ACCEPT) == OK_STRING);
+    assertTrue(asSeenFromJs(NativeEnum.ACCEPT).equals(OK_STRING));
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static void testNativeJsEnumWithMissingValues() {
     NativeEnumWitMissingValues e = (NativeEnumWitMissingValues) (Object) NativeEnum.CANCEL;
     int i =
@@ -171,11 +169,9 @@ public class Main {
     assertEquals(-1, i);
   }
 
-  @JsMethod(name = "passThrough")
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
+  @JsMethod(namespace = "jsenum.helper", name = "passThrough")
   private static native Object asSeenFromJs(NativeEnum s);
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static void testStringNativeJsEnum() {
     StringNativeEnum v = StringNativeEnum.OK;
     switch (v) {
@@ -199,7 +195,7 @@ public class Main {
 
     assertTrue(v == StringNativeEnum.OK);
     assertTrue(v != StringNativeEnum.CANCEL);
-    assertTrue((Object) v == OK_STRING);
+    assertTrue(((Object) v).equals(OK_STRING));
     assertTrue(v == (Object) NativeEnum.ACCEPT);
 
     Object o = StringNativeEnum.OK;
@@ -249,10 +245,9 @@ public class Main {
         },
         Boolean.class);
 
-    assertTrue(asSeenFromJs(StringNativeEnum.OK) == OK_STRING);
+    assertTrue(asSeenFromJs(StringNativeEnum.OK).equals(OK_STRING));
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   public static void testCastOnNative() {
     castToNativeEnum(NativeEnum.ACCEPT);
     castToNativeEnum(StringNativeEnum.OK);
@@ -291,8 +286,7 @@ public class Main {
     return (NumberNativeEnum) o;
   }
 
-  @JsMethod(name = "passThrough")
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
+  @JsMethod(namespace = "jsenum.helper", name = "passThrough")
   private static native Object asSeenFromJs(StringNativeEnum s);
 
   @JsEnum
@@ -405,7 +399,7 @@ public class Main {
     Integer i = v.ordinal();
     assertTrue(i.intValue() == 1);
 
-    if (!TestUtils.isWasm()) {
+    if (!isWasm()) {
       // JsEnums are still instance of Enum in Wasm.
       assertFalse(v instanceof Enum);
     }
@@ -440,7 +434,7 @@ public class Main {
     assertTrue(sortedSet.iterator().next() instanceof PlainJsEnum);
   }
 
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
+  @Wasm("nop") // Non-native JsEnums are only boxed in JS.
   private static void testComparableJsEnumAsSeenFromJs() {
     assertTrue(asSeenFromJs(PlainJsEnum.ONE) == ONE_DOUBLE);
   }
@@ -455,8 +449,8 @@ public class Main {
     assertUnderlyingTypeEquals(Double.class, otherPe);
   }
 
-  @JsMethod(name = "passThrough")
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
+  @JsMethod(namespace = "jsenum.helper", name = "passThrough")
+  @Wasm("nop") // Non exported parameter in native JsMethod not supported in Wasm.
   private static native Object asSeenFromJs(PlainJsEnum d);
 
   public static PlainJsEnum defaultStaticJsEnum;
@@ -531,14 +525,14 @@ public class Main {
 
     assertTrue(v.value.equals(HELLO_STRING));
 
-    if (!TestUtils.isWasm()) {
-      // JsEnums are still instance of Enum in Wasm.
+    if (!isWasm()) {
+      // non-native JsEnums are not subclasses of Enum only in JS.
       assertFalse(v instanceof Enum);
     }
     assertTrue(v instanceof StringJsEnum);
     assertFalse((Object) v instanceof String);
-    if (!TestUtils.isWasm()) {
-      // JsEnums are still instance of Enum in Wasm.
+    if (!isWasm()) {
+      // non-native JsEnums with custom values do not implement Comparable in JS.
       assertFalse(v instanceof Comparable);
     }
     assertTrue(v instanceof Serializable);
@@ -570,20 +564,20 @@ public class Main {
         },
         Comparable.class);
 
-    if (!TestUtils.isWasm()) {
+    if (!isWasm()) {
       // TODO(b/353352388): The value field is not used in toString in Wasm.
       assertTrue(v.toString().equals(HELLO_STRING));
       assertTrue(o.toString().equals(HELLO_STRING));
     }
   }
 
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
+  @Wasm("nop") // Non-native JsEnums are only boxed in JS.
   private static void testStringJsEnumAsSeenFromJs() {
     assertTrue(asSeenFromJs(StringJsEnum.HELLO) == HELLO_STRING);
   }
 
-  @JsMethod(name = "passThrough")
-  @Wasm("nop") // Non-native JsMethod not supported in Wasm.
+  @JsMethod(namespace = "jsenum.helper", name = "passThrough")
+  @Wasm("nop") // Non exported parameter in native JsMethod not supported in Wasm.
   private static native Object asSeenFromJs(StringJsEnum b);
 
   private static boolean nonNativeClinitCalled = false;
@@ -601,30 +595,36 @@ public class Main {
     }
   }
 
-  @Wasm("nop") // In Wasm, there is no boxing logic and clinit is called for JsEnum value accesses.
   private static void testJsEnumClassInitialization() {
+    Object o = null;
     assertFalse(nonNativeClinitCalled);
-    // Access to an enum value does not trigger clinit.
-    Object o = EnumWithClinit.A;
-    assertFalse(nonNativeClinitCalled);
-
     // Cast and instanceof do not trigger clinit.
     if (o instanceof EnumWithClinit) {
       o = (EnumWithClinit) o;
     }
     assertFalse(nonNativeClinitCalled);
 
-    // Access to ordinal() does not trigger clinit.
-    int n = EnumWithClinit.A.ordinal();
-    assertFalse(nonNativeClinitCalled);
+    if (!isWasm()) {
+      // In JavaScript, since the values are unboxed, the following operations which would normally
+      // trigger clinit in Java do not trigger clinit.
 
-    // Access to any devirtualized method triggers clinit.
-    EnumWithClinit.A.getValue();
-    assertTrue(nonNativeClinitCalled);
+      // Access to an enum value does not trigger clinit.
+      o = EnumWithClinit.A;
+      assertFalse(nonNativeClinitCalled);
+
+      // Access to ordinal() does not trigger clinit.
+      int n = EnumWithClinit.A.ordinal();
+      assertFalse(nonNativeClinitCalled);
+
+      // Access to any devirtualized method triggers clinit.
+      EnumWithClinit.A.getValue();
+      assertTrue(nonNativeClinitCalled);
+    }
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static void testNativeEnumClassInitialization() {
+    // Native JsEnums do not follow the same initialization rules as Java enums.
+
     assertFalse(nativeClinitCalled);
     // Access to an enum value does not trigger clinit.
     Object o = NativeEnumWithClinit.OK;
@@ -643,10 +643,18 @@ public class Main {
     assertTrue(nativeClinitCalled);
   }
 
-  @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.
   private static void testDoNotAutoboxJsEnum() {
-    assertTrue(returnsObject(StringJsEnum.HELLO) == HELLO_STRING);
-    assertTrue(returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING);
+    if (!isWasm()) {
+      // Non-native JsEnums are only boxed in JS.
+      assertTrue(returnsObject(StringJsEnum.HELLO) == HELLO_STRING);
+      assertTrue(returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING);
+      StringJsEnum[] arr = new StringJsEnum[] {StringJsEnum.HELLO};
+      assertTrue(returnsObject(arr[0]) == HELLO_STRING);
+    }
+    assertTrue(returnsObject(StringNativeEnum.OK).equals(OK_STRING));
+    assertTrue(returnsObject(0, StringNativeEnum.OK).equals(OK_STRING));
+    StringNativeEnum[] nativeArr = new StringNativeEnum[] {StringNativeEnum.OK};
+    assertTrue(returnsObject(nativeArr[0]).equals(OK_STRING));
   }
 
   private static Object returnsObject(@DoNotAutobox Object object) {
@@ -657,10 +665,15 @@ public class Main {
     return object[0];
   }
 
-  @Wasm("nop") // Unchecked cast not supported in Wasm.
   private static void testUnckeckedCastJsEnum() {
-    StringJsEnum s = uncheckedCast(HELLO_STRING);
-    assertTrue(s == StringJsEnum.HELLO);
+    if (!isWasm()) {
+      // Non-native JsEnums are only boxed in JS.
+      StringJsEnum s = uncheckedCast(HELLO_STRING);
+      assertTrue(s == StringJsEnum.HELLO);
+    }
+
+    StringNativeEnum s = uncheckedCast(OK_STRING);
+    assertTrue(s.equals(StringNativeEnum.OK));
   }
 
   private static void testJsEnumPatternMatch() {
@@ -761,7 +774,7 @@ public class Main {
     Comparable c = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
     assertTrue(c.compareTo(PlainJsEnum.ZERO) > 0);
     PlainJsEnum e = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
-    // e correcly holds an unboxed value.
+    // e correctly holds an unboxed value.
     assertUnderlyingTypeEquals(Double.class, e);
 
     assertTrue(PlainJsEnum.ONE == (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
@@ -951,16 +964,6 @@ public class Main {
     assertUnderlyingTypeEquals(Double.class, jpc.get());
   }
 
-  @JsMethod
-  @Wasm("nop") // Non-native js methods not supported in Wasm.
-  // Pass through an enum value as if it were coming from and going to JavaScript.
-  private static Object passThrough(Object o) {
-    // Supported closure enums can only have number, boolean or string as their underlying type.
-    // Make sure that boxed enums are not passing though here.
-    assertTrue(o instanceof String || o instanceof Double || o instanceof Boolean);
-    return o;
-  }
-
   private static void testBoxingPartialInlining() {
     // TODO(b/315214896) Check the size difference to see if cases such as these take advantage of
     // partial inlining in Wasm to turn this into a simple null check, avoiding boxing.
@@ -1045,7 +1048,6 @@ public class Main {
     assertUnderlyingTypeEquals(String.class, arr2[0]);
   }
 
-  @Wasm("nop") // TODO(b/288145698): Support native JsEnum.
   private static void testNativeJsEnumArray() {
     NativeEnum[] arr = new NativeEnum[] {NativeEnum.ACCEPT, NativeEnum.CANCEL};
     assertTrue(arr.length == 2);

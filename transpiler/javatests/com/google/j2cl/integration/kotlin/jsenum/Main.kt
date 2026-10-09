@@ -51,6 +51,7 @@ fun main(vararg unused: String) {
   testStringNativeJsEnum()
   testCastOnNative()
   testComparableJsEnum()
+  testJsEnumVariableInitialization()
   testStringJsEnum()
   testStringJsEnumAsSeenFromJs()
   testJsEnumClassInitialization()
@@ -58,6 +59,7 @@ fun main(vararg unused: String) {
   testDoNotAutoboxJsEnum()
   testUnckeckedCastJsEnum()
   testJsEnumSmartCast()
+  testReturnsAndParameters()
   testAutoBoxing_relationalOperations()
   testAutoBoxing_typeInference()
   testAutoBoxing_specialMethods()
@@ -68,6 +70,7 @@ fun main(vararg unused: String) {
   testBoxingPartialInlining()
   testNonNativeJsEnumArrays()
   testNonNativeStringJsEnumArrays()
+  testNonNativeJsEnumArrayBoxing()
   testNativeJsEnumArray()
   testJsEnumVarargs()
 }
@@ -173,7 +176,7 @@ private fun testNativeJsEnumWithMissingValues() {
   }
 }
 
-@JsMethod(name = "passThrough") private external fun asSeenFromJs(s: Any?): Any?
+@JsMethod(name = "passThrough") private external fun asSeenFromJs(s: NativeEnum): Any?
 
 @JsEnum(isNative = true, namespace = "test", name = "NativeEnum", hasCustomValue = true)
 enum class StringNativeEnum {
@@ -206,10 +209,12 @@ private fun testStringNativeJsEnum() {
   assertTrue(v.hashCode() !== StringNativeEnum.CANCEL.hashCode())
   assertTrue(v.toString() == OK_STRING)
   assertTrue(v.equals(StringNativeEnum.OK))
+  assertTrue(v.equals(NativeEnum.ACCEPT))
   assertTrue(v.equals(OK_STRING))
 
   // Kotlin equality on a variable of JsEnum type.
   assertTrue(v == StringNativeEnum.OK)
+  assertTrue(v == NativeEnum.ACCEPT as Any?)
   assertTrue(v == OK_STRING)
   // Kotlin doesn't allow equality of incompatible types, so users cannot write:
   // v == NativeEnum.ACCEPT
@@ -462,6 +467,17 @@ private fun testComparableJsEnum() {
 
 @JsMethod(name = "passThrough") private external fun asSeenFromJs(d: PlainJsEnum): Any?
 
+var defaultStaticJsEnum: PlainJsEnum? = null
+var oneStaticJsEnum: PlainJsEnum = PlainJsEnum.ONE
+
+private fun testJsEnumVariableInitialization() {
+  assertEquals(defaultStaticJsEnum, null)
+  assertEquals(oneStaticJsEnum, PlainJsEnum.ONE)
+
+  val oneJsEnum: PlainJsEnum = PlainJsEnum.ONE
+  assertEquals(oneJsEnum, PlainJsEnum.ONE)
+}
+
 @JsEnum(hasCustomValue = true)
 enum class StringJsEnum(internal val value: String) {
   HELLO("Hello"),
@@ -638,9 +654,13 @@ private fun testNativeEnumClassInitialization() {
 private fun testDoNotAutoboxJsEnum() {
   assertTrue(returnsAny(StringJsEnum.HELLO) === HELLO_STRING)
   assertTrue(returnsAny(0, StringJsEnum.HELLO) === HELLO_STRING)
-
   val arr = arrayOf(StringJsEnum.HELLO)
-  assertTrue(returnsAny(arr[0]) == HELLO_STRING)
+  assertTrue(returnsAny(arr[0]) === HELLO_STRING)
+
+  assertTrue(returnsAny(StringNativeEnum.OK) === OK_STRING)
+  assertTrue(returnsAny(0, StringNativeEnum.OK) === OK_STRING)
+  val nativeArr = arrayOf(StringNativeEnum.OK)
+  assertTrue(returnsAny(nativeArr[0]) === OK_STRING)
 }
 
 private fun returnsAny(@DoNotAutobox obj: Any?): Any? {
@@ -654,6 +674,8 @@ private fun returnsAny(n: Int, @DoNotAutobox vararg params: Any?): Any? {
 private fun testUnckeckedCastJsEnum() {
   val s: StringJsEnum = uncheckedCast(HELLO_STRING)
   assertTrue(s === StringJsEnum.HELLO)
+  val sn: StringNativeEnum = uncheckedCast(OK_STRING)
+  assertTrue(sn === StringNativeEnum.OK)
 }
 
 private fun testJsEnumSmartCast() {
@@ -666,6 +688,25 @@ private fun testJsEnumSmartCast() {
 }
 
 @UncheckedCast private fun <T> uncheckedCast(@DoNotAutobox obj: Any?): T = obj as T
+
+private fun testReturnsAndParameters() {
+  assertTrue(PlainJsEnum.ONE === returnsJsEnum())
+  assertTrue(PlainJsEnum.ONE === returnsJsEnum(PlainJsEnum.ONE))
+  assertTrue(null === returnsNullJsEnum())
+  assertTrue(null === returnsJsEnum(null))
+
+  testGenericAssertNull<PlainJsEnum?>(null)
+}
+
+private fun returnsJsEnum(): PlainJsEnum = PlainJsEnum.ONE
+
+private fun returnsJsEnum(value: PlainJsEnum?): PlainJsEnum? = value
+
+private fun returnsNullJsEnum(): PlainJsEnum? = null
+
+private fun <T> testGenericAssertNull(obj: T) {
+  assertTrue(obj === null)
+}
 
 private fun testAutoBoxing_relationalOperations() {
   val one = PlainJsEnum.ONE

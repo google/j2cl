@@ -18,8 +18,8 @@ let Consumer = goog.forwardDeclare('jsenum.Main.Consumer$impl');
 let Foo = goog.forwardDeclare('jsenum.Main.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
+let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NativeStringEnum');
 let NativeStringEnum_$Overlay = goog.forwardDeclare('jsenum.Main.NativeStringEnum.$Overlay$impl');
-let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NonNullableStringJsEnum');
 let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
 let SomeJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.SomeJsEnum.$Overlay$impl');
 let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
@@ -79,6 +79,14 @@ class Main extends j_l_Object {
   let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum__java_lang_String(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, StringJsEnum_$Overlay));
   switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(stringJsEnum, null)), stringJsEnum)) {
    case StringJsEnum.ONE:
+    break;
+   default:
+  }
+  let nativeStringEnum = NativeStringEnum.ONE;
+  switch ((InternalPreconditions.m_checkNotNull__boolean__void(!$Equality.$same(nativeStringEnum, null)), nativeStringEnum)) {
+   case NativeStringEnum.ONE:
+    break;
+   case NativeStringEnum.THREE:
     break;
    default:
   }
@@ -290,8 +298,8 @@ class Main extends j_l_Object {
   Foo = goog.module.get('jsenum.Main.Foo$impl');
   IntJsEnum = goog.module.get('jsenum.Main.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
+  NativeStringEnum = goog.module.get('jsenum.Main.NativeStringEnum');
   NativeStringEnum_$Overlay = goog.module.get('jsenum.Main.NativeStringEnum.$Overlay$impl');
-  NativeStringEnum = goog.module.get('jsenum.Main.NonNullableStringJsEnum');
   SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');
   SomeJsEnum_$Overlay = goog.module.get('jsenum.Main.SomeJsEnum.$Overlay$impl');
   StringJsEnum = goog.module.get('jsenum.Main.StringJsEnum$impl');

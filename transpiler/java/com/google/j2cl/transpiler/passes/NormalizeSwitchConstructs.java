@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.j2cl.transpiler.ast.AstUtils.isNativeJsEnum;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangString;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isNumericPrimitive;
@@ -62,6 +63,16 @@ import java.util.Map;
 
 /** Makes switch statements to comply with Java semantics. */
 public class NormalizeSwitchConstructs extends NormalizationPass {
+  private final boolean convertNativeJsEnumSwitches;
+
+  public NormalizeSwitchConstructs() {
+    this(false);
+  }
+
+  public NormalizeSwitchConstructs(boolean convertNativeJsEnumSwitches) {
+    this.convertNativeJsEnumSwitches = convertNativeJsEnumSwitches;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     removeSwitchExpressions(compilationUnit);
@@ -120,7 +131,8 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
             TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
             if (switchStatement.hasPatterns()
-                || (isBoxedType(expressionTypeDescriptor) && switchStatement.allowsNulls())) {
+                || (isBoxedType(expressionTypeDescriptor) && switchStatement.allowsNulls())
+                || (convertNativeJsEnumSwitches && isNativeJsEnum(expressionTypeDescriptor))) {
               return convertToIntegerSwitch(switchStatement);
             }
 

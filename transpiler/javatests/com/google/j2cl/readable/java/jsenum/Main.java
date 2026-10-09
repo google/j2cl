@@ -99,7 +99,7 @@ public class Main {
     }
   }
 
-  @JsEnum(isNative = true, namespace = "jsenum.Main", name = "NonNullableStringJsEnum")
+  @JsEnum(isNative = true, namespace = "jsenum.Main")
   enum NativeStringEnum {
     ONE,
     THREE;
@@ -149,6 +149,15 @@ public class Main {
     StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;
     switch (stringJsEnum) {
       case ONE:
+        break;
+      default:
+    }
+
+    NativeStringEnum nativeStringEnum = NativeStringEnum.ONE;
+    switch (nativeStringEnum) {
+      case ONE:
+        break;
+      case THREE:
         break;
       default:
     }

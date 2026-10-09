@@ -75,6 +75,12 @@ open class Main {
     StringJsEnum.ONE -> {}
     else -> {}
    }
+   val nativeStringEnum: NativeStringEnum = NativeStringEnum.ONE
+   when (nativeStringEnum) {
+    NativeStringEnum.ONE -> {}
+    NativeStringEnum.THREE -> {}
+    else -> {}
+   }
    NativeStringEnum.ONE.compareTo(
     NativeStringEnum.THREE,
    )
@@ -397,7 +403,7 @@ open class Main {
   }
  }
  
- @JsEnum(name = "NonNullableStringJsEnum", namespace = "jsenum.Main", isNative = true)
+ @JsEnum(namespace = "jsenum.Main", isNative = true)
  internal enum class NativeStringEnum {
   ONE,
   THREE;

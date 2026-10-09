@@ -70,7 +70,7 @@ enum class NonNullableStringJsEnum(private val value: String) {
   fun getValue(): String = value
 }
 
-@JsEnum(isNative = true, namespace = "jsenum", name = "NonNullableStringJsEnum")
+@JsEnum(isNative = true)
 enum class NativeStringEnum {
   ONE,
   THREE;
@@ -118,6 +118,13 @@ fun testJsEnumSwitch() {
   val stringJsEnum = if (StringJsEnum.ONE.getValue() == "10") StringJsEnum.THREE else null
   when (stringJsEnum) {
     StringJsEnum.ONE -> {}
+    else -> {}
+  }
+
+  val nativeStringEnum = NativeStringEnum.ONE
+  when (nativeStringEnum) {
+    NativeStringEnum.ONE -> {}
+    NativeStringEnum.THREE -> {}
     else -> {}
   }
 

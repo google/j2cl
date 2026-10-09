@@ -1,6 +1,8 @@
 goog.module('jsenum.Main.NonNullableStringJsEnum');
 
-/** @typedef {$j2wasm$externs_jsenum_Main_NonNullableStringJsEnum} */
-let NonNullableStringJsEnum;
+const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+
+/** @const {typeof $j2wasm$externs_jsenum_Main_NonNullableStringJsEnum} */
+const NonNullableStringJsEnum = constructorProxy('jsenum.Main.NonNullableStringJsEnum');
 
 exports = NonNullableStringJsEnum;
