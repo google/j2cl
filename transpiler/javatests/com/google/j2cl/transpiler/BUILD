@@ -210,6 +210,7 @@ java_library(
     name = "tester_lib_public",
     testonly = 1,
     data = [
+        ":jre_bundle-j2wasm_files",
         ":jre_bundle_files",
     ],
     visibility = ["//benchmarking/java/com/google/j2cl/benchmarks/transpiler:__pkg__"],
