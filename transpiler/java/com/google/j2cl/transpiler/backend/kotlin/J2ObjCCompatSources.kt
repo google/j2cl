@@ -1021,7 +1021,6 @@ internal class J2ObjCCompatSources(
         "java.util.concurrent.atomic.",
         "java.util.concurrent.KotlinExecutor",
         "javaemul.",
-        "javax.",
       )
 
     // A map from the bridge name supplied by the KtNative annotation to the bridge name

@@ -36,10 +36,15 @@
 #include "java/lang/OutOfMemoryError.h"
 #include "java/lang/StringBuilder.h"
 #include "java/lang/Throwable.h"
+#include "java/security/NoSuchAlgorithmException.h"
 #include "java/util/Base64.h"
 #include "java/util/Locale.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
+#include "javax/crypto/Mac.h"
+#include "javax/crypto/SecretKey.h"
+#include "javax/crypto/ShortBufferException.h"
+#include "javax/crypto/spec/SecretKeySpec.h"
 
 @interface TestImplementation : NSObject <J2ktiosinteropTestInterface>
 @end
@@ -657,6 +662,9 @@
   XCTAssertNotNil(classCastException);
   JavaLangOutOfMemoryError *outOfMemoryError = create_JavaLangOutOfMemoryError_init();
   XCTAssertNotNil(outOfMemoryError);
+  JavaxCryptoShortBufferException *shortBufferException =
+      create_JavaxCryptoShortBufferException_initWithNSString_(@"foo");
+  XCTAssertNotNil(shortBufferException);
 }
 
 - (void)testJreUtilities {
@@ -678,6 +686,17 @@
   XCTAssertNil(enumValue);
   JavaLangStringBuilder *stringBuilder = nil;
   XCTAssertNil(stringBuilder);
+
+  @try {
+    JavaxCryptoMac *mac = JavaxCryptoMac_getInstanceWithNSString_(@"HmacSHA256");
+    XCTAssertEqualObjects([mac getAlgorithm], @"HmacSHA256");
+  } @catch (JavaSecurityNoSuchAlgorithmException *e) {
+    // Expected in J2ObjC when no security provider for HmacSHA256 is linked.
+  }
+  id<JavaxCryptoSecretKey> secretKey = nil;
+  XCTAssertNil(secretKey);
+  JavaxCryptoSpecSecretKeySpec *secretKeySpec = nil;
+  XCTAssertNil(secretKeySpec);
 }
 
 - (void)testInterface {
