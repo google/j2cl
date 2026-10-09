@@ -1014,7 +1014,6 @@ internal class J2ObjCCompatSources(
         "java.io.EOFException",
         "java.io.FileNotFoundException",
         "java.io.IOException",
-        "java.lang.StringIndexOutOfBoundsException",
         "java.nio.",
         "java.util.Map",
         "java.util.Map.Entry",
