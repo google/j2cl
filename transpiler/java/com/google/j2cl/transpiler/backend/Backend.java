@@ -154,7 +154,7 @@ import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeNumberLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizePackagedJsEnumVarargsLiterals;
-import com.google.j2cl.transpiler.passes.NormalizePrimitiveCastsJ2kt;
+import com.google.j2cl.transpiler.passes.NormalizePrimitiveConversionsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
@@ -722,7 +722,7 @@ public enum Backend {
           NormalizeLabeledStatements::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           NormalizeNumberLiterals::new,
-          NormalizePrimitiveCastsJ2kt::new,
+          NormalizePrimitiveConversionsJ2kt::new,
           ImplementBitLevelOperatorsJ2kt::new,
           InsertQualifierProjectionCasts::new,
           InsertNotNullAssertionToPolyNullMethodCalls::new,

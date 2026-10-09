@@ -17,6 +17,8 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.CaseFormat.LOWER_CAMEL;
 import static com.google.common.base.CaseFormat.UPPER_CAMEL;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangDouble;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangFloat;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloatOrDouble;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveInt;
@@ -37,12 +39,36 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
-/** Replaces cast expression on primitive types with corresponding Kotlin cast method call. */
-public class NormalizePrimitiveCastsJ2kt extends NormalizationPass {
+/** Replaces primitive conversion expressions with corresponding Kotlin conversion method calls. */
+public class NormalizePrimitiveConversionsJ2kt extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor methodDescriptor = methodCall.getTarget();
+            DeclaredTypeDescriptor enclosingTypeDescriptor =
+                methodDescriptor.getEnclosingTypeDescriptor();
+            if (!isJavaLangDouble(enclosingTypeDescriptor)
+                && !isJavaLangFloat(enclosingTypeDescriptor)) {
+              return methodCall;
+            }
+
+            if (!methodDescriptor.getSignature().equals("byteValue()")
+                && !methodDescriptor.getSignature().equals("shortValue()")) {
+              return methodCall;
+            }
+
+            // In Kotlin, Float/Double toByte() and toShort() are deprecated (with error);
+            // conversion to byte/short must go through int first.
+            return convertTo(
+                methodCall.toBuilder()
+                    .setTarget(enclosingTypeDescriptor.getMethodDescriptor("intValue"))
+                    .build(),
+                (PrimitiveTypeDescriptor) methodDescriptor.getReturnTypeDescriptor());
+          }
+
           @Override
           public Node rewriteCastExpression(CastExpression castExpression) {
             Expression fromExpression = castExpression.getExpression();
