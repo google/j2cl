@@ -491,19 +491,23 @@ internal class J2ObjCCompatSources(
   private fun shouldInclude(convention: Convention, typeDeclaration: TypeDeclaration): Boolean =
     shouldIncludeDescriptor(convention, typeDeclaration) &&
       !typeDeclaration.isProtobuf &&
-      !typeDeclaration.isAnnotation &&
-      !typeDeclaration.isAnnotatedToHideFromObjC
+      !typeDeclaration.isAnnotation
 
   private fun shouldIncludeDescriptor(
     convention: Convention,
     typeDeclaration: TypeDeclaration,
   ): Boolean =
     typeDeclaration.visibility.isPublic &&
+      !typeDeclaration.isHiddenFromObjC &&
       existsInObjC(typeDeclaration) &&
       when (convention) {
         Convention.J2OBJC -> !typeDeclaration.toDescriptor().isCollection
         Convention.KMP -> true
       }
+
+  /** Whether this type or one of its enclosing types is hidden from ObjC. */
+  private val TypeDeclaration.isHiddenFromObjC: Boolean
+    get() = isAnnotatedToHideFromObjC || enclosingTypeDeclaration?.isHiddenFromObjC == true
 
   private val INTERFACES_MAPPED_TO_OBJC_CLASS: Set<DeclaredTypeDescriptor> =
     setOf(typeDescriptors.javaUtilList, typeDescriptors.javaUtilSet, typeDescriptors.javaUtilMap)
@@ -1010,11 +1014,7 @@ internal class J2ObjCCompatSources(
         "java.io.EOFException",
         "java.io.FileNotFoundException",
         "java.io.IOException",
-        "java.lang.JsException",
         "java.lang.StringIndexOutOfBoundsException",
-        "java.lang.invoke.",
-        "java.lang.ref.WeakReference",
-        "java.lang.ref.SoftReference",
         "java.nio.",
         "java.util.Map",
         "java.util.Map.Entry",
