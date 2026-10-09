@@ -90,7 +90,6 @@ import org.jetbrains.kotlin.ir.types.isArray
 import org.jetbrains.kotlin.ir.types.isClassType
 import org.jetbrains.kotlin.ir.types.isNullableArray
 import org.jetbrains.kotlin.ir.types.isUnit
-import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.util.allOverridden
 import org.jetbrains.kotlin.ir.util.allTypeParameters
@@ -347,7 +346,10 @@ fun IrFunctionAccessExpression.getCompleteTypeSubstitutionMap(
               } else {
                 typeParam.defaultType
               }
-            else -> typeArg.typeOrFail
+            is IrTypeProjection ->
+              // With `in X`, the type argument is only known to be a supertype of `X`. With
+              // `out X`, every value is an `X`.
+              if (typeArg.variance == Variance.IN_VARIANCE) typeParam.defaultType else typeArg.type
           }
         typeParam.symbol to type
       }

@@ -47,6 +47,7 @@ fun main(vararg unused: String) {
   testDefaultParams()
   testBreakContinue()
   testInlineWithVararg()
+  testProjectedReceiverTypeArgument()
 }
 
 class MyClass(var f: Int) {
@@ -494,4 +495,29 @@ inline fun writeInVararg(vararg xs: Int): Int {
 private fun testInlineWithVararg() {
   assertTrue(isSameVararg(1, 2))
   assertEquals(42, writeInVararg(1, 2))
+}
+
+open class Box<T>(val value: T) {
+  inline fun get(): T {
+    val v: T = value
+    return v
+  }
+}
+
+open class SubBox<U>(u: U) : Box<U>(u)
+
+private fun testProjectedReceiverTypeArgument() {
+  // `T` is only known to be a supertype of `String` here, so the inlined body must not assume that
+  // the value is a `String`.
+  val box: Box<in String> = Box<Any>(42)
+  assertTrue(42 == box.get())
+
+  val subBox: SubBox<in String> = SubBox<Any>(42)
+  assertTrue(42 == subBox.get())
+
+  val outBox: Box<out Number> = Box<Int>(42)
+  assertTrue(42 == outBox.get())
+
+  val outSubBox: SubBox<out Number> = SubBox<Int>(42)
+  assertTrue(42 == outSubBox.get())
 }
