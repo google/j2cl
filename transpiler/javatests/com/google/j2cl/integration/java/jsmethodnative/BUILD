@@ -11,6 +11,7 @@ package(
 integration_test(
     srcs = glob([
         "*.java",
+        "*.js",
     ]),
     # Contains JsInterop features which are only applicable for JS or Wasm output.
     enable_jvm_test = False,

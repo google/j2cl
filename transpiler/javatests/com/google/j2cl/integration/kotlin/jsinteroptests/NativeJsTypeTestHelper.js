@@ -79,29 +79,3 @@ exports.createBoxedNumber = function() {
 exports.createBoxedString = function() {
   return new String('hello');
 };
-
-/**
- * @return {*}
- */
-exports.createNativeSubclass = function() {
-  const implementingClass = class {
-    constructor() {
-      /** @private {string|null|undefined} */
-      this.element_ = undefined;
-    }
-    /** @param {string} e */
-    add(e) {
-      this.element_ = e;
-    }
-    /**
-     * @param {string} e
-     * @return {boolean}
-     */
-    remove(e) {
-      let ret = this.element_ == e;
-      this.element_ = null;
-      return ret;
-    }
-  };
-  return new implementingClass();
-};

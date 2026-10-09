@@ -1,4 +1,4 @@
-// Copyright 2021 Google Inc.
+// Copyright 2017 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,14 +11,29 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('woo.NativeJsTypeTest.FunctionNamespace');
 
-/**
- * @param {string} input
- * @return {string}
- */
-function FunctionNamespace(input) {
-  return input + 'bar';
+goog.module('jsmethodnative.NativeClass');
+
+class NativeClass {
+  constructor() {
+    /** @private {string|null|undefined} */
+    this.element_ = undefined;
+  }
+
+  /** @param {string} e */
+  add(e) {
+    this.element_ = e;
+  }
+
+  /**
+   * @param {string} e
+   * @return {boolean}
+   */
+  remove(e) {
+    let ret = this.element_ == e;
+    this.element_ = null;
+    return ret;
+  }
 }
 
-exports = FunctionNamespace;
+exports = NativeClass;

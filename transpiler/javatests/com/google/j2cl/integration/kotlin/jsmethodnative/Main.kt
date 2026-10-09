@@ -21,10 +21,13 @@ import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage.GLOBAL
+import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
   testNativeJsMethodOnNonNativeType()
   testStaticNativeJsMethod()
+  testForwardingMethodsOnNativeClasses()
+  testCallNamespaceAsFunction()
 }
 
 private class NonNativeTypeWithNativeMethods {
@@ -47,4 +50,33 @@ private fun testStaticNativeJsMethod() {
   assertFalse(isFinite(Double.NaN))
   assertTrue(isFinite(0.0))
   assertTrue(isFinite(1.0))
+}
+
+@JsType(isNative = true, namespace = GLOBAL, name = "?")
+internal interface NativeInterface {
+  fun add(element: String?)
+}
+
+@JsType(isNative = true, namespace = "jsmethodnative", name = "NativeClass")
+internal open class NativeSuperClass {
+  external fun add(element: String?)
+
+  external fun remove(element: String?): Boolean
+}
+
+@JsType(isNative = true, namespace = "jsmethodnative", name = "NativeClass")
+internal class NativeSubClassAccidentalOverride : NativeSuperClass(), NativeInterface
+
+private fun testForwardingMethodsOnNativeClasses() {
+  val subClass = NativeSubClassAccidentalOverride()
+  subClass.add("Hi")
+  assertTrue(subClass.remove("Hi"))
+  assertFalse(subClass.remove("Hi"))
+}
+
+@JsMethod(namespace = "jsmethodnative.FunctionNamespace", name = "")
+private external fun callFunctionNamespace(input: String): String
+
+private fun testCallNamespaceAsFunction() {
+  assertEquals("foobar", callFunctionNamespace("foo"))
 }

@@ -23,11 +23,14 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
     testNativeJsMethodOnNonNativeType();
     testStaticNativeJsMethod();
+    testForwardingMethodsOnNativeClasses();
+    testCallNamespaceAsFunction();
   }
 
   static class NonNativeTypeWithNativeMethods {
@@ -60,5 +63,35 @@ public class Main {
     assertFalse(isFinite(Double.NaN));
     assertTrue(isFinite(0));
     assertTrue(isFinite(1));
+  }
+
+  @JsType(isNative = true, namespace = GLOBAL, name = "?")
+  interface NativeInterface {
+    void add(String element);
+  }
+
+  @JsType(isNative = true, namespace = "jsmethodnative", name = "NativeClass")
+  static class NativeSuperClass {
+    public native void add(String element);
+
+    public native boolean remove(String element);
+  }
+
+  @JsType(isNative = true, namespace = "jsmethodnative", name = "NativeClass")
+  static class NativeSubClassAccidentalOverride extends NativeSuperClass
+      implements NativeInterface {}
+
+  private static void testForwardingMethodsOnNativeClasses() {
+    NativeSubClassAccidentalOverride subClass = new NativeSubClassAccidentalOverride();
+    subClass.add("Hi");
+    assertTrue(subClass.remove("Hi"));
+    assertFalse(subClass.remove("Hi"));
+  }
+
+  @JsMethod(namespace = "jsmethodnative.FunctionNamespace", name = "")
+  private static native String callFunctionNamespace(String input);
+
+  private static void testCallNamespaceAsFunction() {
+    assertEquals("foobar", callFunctionNamespace("foo"));
   }
 }

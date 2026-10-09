@@ -41,12 +41,10 @@ public class NativeJsTypeTest {
     testNativeJsTypeWithStaticIntializer();
     testNativeInnerClass();
     testSpecialNativeInstanceOf();
-    testForwaringMethodsOnNativeClasses();
     testUninitializedStaticOverlayField();
     testVariableExternCollision();
     testAliasExternCollision();
     testBridgesNativeSubclass();
-    testCallNamespaceAsFunction();
     testAccessNamespaceAsProperty();
   }
 
@@ -411,32 +409,6 @@ public class NativeJsTypeTest {
   private static native Object getFloat32ArrayBytesPerElement();
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  interface NativeInterface {
-    void add(String element);
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeSuperClass {
-    public native void add(String element);
-
-    public native boolean remove(String element);
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeSubClassAccidentalOverride extends NativeSuperClass
-      implements NativeInterface {}
-
-  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
-  private static native NativeSubClassAccidentalOverride createNativeSubclass();
-
-  private static void testForwaringMethodsOnNativeClasses() {
-    NativeSubClassAccidentalOverride subClass = createNativeSubclass();
-    subClass.add("Hi");
-    assertTrue(subClass.remove("Hi"));
-    assertFalse(subClass.remove("Hi"));
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   static class NativeClassWithStaticOverlayFields {
     @JsOverlay static String uninitializedString;
     @JsOverlay static int uninitializedInt;
@@ -529,13 +501,6 @@ public class NativeJsTypeTest {
 
   @JsMethod(namespace = "woo.NativeJsTypeTest.NativeBridgesSubclass", name = "create")
   private static native AbstractSuperClassForJs createBridgesNativeSubclass();
-
-  @JsMethod(namespace = "woo.NativeJsTypeTest.FunctionNamespace", name = "")
-  private static native String callFunctionNamespace(String input);
-
-  private static void testCallNamespaceAsFunction() {
-    assertEquals("foobar", callFunctionNamespace("foo"));
-  }
 
   @JsProperty(namespace = "woo.NativeJsTypeTest.PropertyNamespace", name = "")
   private static native String getPropertyNamespace();
