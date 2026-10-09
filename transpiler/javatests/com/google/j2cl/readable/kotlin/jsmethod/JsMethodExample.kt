@@ -21,17 +21,6 @@ import jsinterop.annotations.JsType
 
 class JsMethodExample {
 
-  // Regression readable for b/70040143.
-  // The following declaration indirectly triggers the code in MethodDescriptor that fails a
-  // precondition check when building the constructor of a raw type.
-  // To reproduce the failing state the method needs:
-  //    1. be a @JsMethod
-  //    2. return a type variable that is bounded by a generic class that has a constructor.
-  // This would better be handled in a unit test.
-  // TODO(b/371249047): Make this static for consistency with Java readable. Move to the appropriate
-  // test suite.
-  @JsMethod external fun <T : ArrayList<String>> testMethod(): T
-
   abstract class Base<T> {
     @JsMethod open internal fun m(t: T) {}
 
