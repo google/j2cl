@@ -16,7 +16,10 @@
 package jsmethod;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
+import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import java.io.Serializable;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -26,6 +29,7 @@ public class Main {
     testJsMethodWithDifferentVisiblities();
     testInheritName();
     testLambdaImplementingJsMethod();
+    testBoxedTypeSupertypes();
   }
 
   static class NonPublicJsMethodClass {
@@ -95,5 +99,56 @@ public class Main {
   private static void testLambdaImplementingJsMethod() {
     FunctionalInterfaceWithJsMethod f = () -> "Hello";
     assertEquals("Hello", f.greet());
+  }
+
+  // Use instance @JsMethods instead of static @JsMethods because static native @JsMethod imports
+  // are emitted as direct method references (emitAsMethodReference) when building the Wasm imports
+  // object, before the Wasm module is instantiated and populates its exported methods.
+  static class BoxedSuperTypes {
+    @JsMethod
+    Comparable<?> passThroughComparable(Comparable<?> c) {
+      return c;
+    }
+
+    @JsMethod
+    CharSequence passThroughCharSequence(CharSequence cs) {
+      return cs;
+    }
+
+    @JsMethod
+    Number passThroughNumber(Number n) {
+      return n;
+    }
+
+    @JsMethod
+    Serializable passThroughSerializable(Serializable s) {
+      return s;
+    }
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  private interface NativeBoxedSuperTypes {
+    <T> Comparable<T> passThroughComparable(T c);
+
+    CharSequence passThroughCharSequence(Object cs);
+
+    Number passThroughNumber(Object n);
+
+    Serializable passThroughSerializable(Object s);
+  }
+
+  private static void testBoxedTypeSupertypes() {
+    // Cast to a native interface to force the calls to cross the JS boundary.
+    NativeBoxedSuperTypes tester = (NativeBoxedSuperTypes) (Object) new BoxedSuperTypes();
+    assertTrue(tester.passThroughComparable("hello").compareTo("hello") == 0);
+    assertTrue(tester.passThroughComparable(42.5).compareTo(42.5) == 0);
+    assertTrue(tester.passThroughComparable(true).compareTo(true) == 0);
+    assertTrue(tester.passThroughComparable(42L).compareTo(42L) == 0);
+    assertTrue(tester.passThroughComparable(42).compareTo(42) == 0);
+    assertNull(tester.passThroughComparable(null));
+
+    assertTrue(tester.passThroughCharSequence("hello").charAt(1) == 'e');
+    assertTrue(tester.passThroughNumber(42.5).doubleValue() == 42.5);
+    assertEquals(true, tester.passThroughSerializable(true));
   }
 }

@@ -306,7 +306,7 @@ public class WasmJsBoundaryUtils {
     return forwardingStatement;
   }
 
-  /** Returns the corresponding JS type for the given Wasm Java type. */
+  /** Returns the Wasm type used at the JS/Wasm boundary for the given Java type. */
   public static TypeDescriptor getExternalType(TypeDescriptor typeDescriptor, boolean isExport) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (TypeDescriptors.isJavaLangString(typeDescriptor)) {
@@ -316,12 +316,18 @@ public class WasmJsBoundaryUtils {
     if (TypeDescriptors.isPrimitiveLong(typeDescriptor)
         || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)
+        || isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
         || typeDescriptor.isJsFunctionInterface()
         || needsBoundaryExternConversion(typeDescriptor, isExport)) {
       // Use externref since it can either be:
-      //   - a Js primitive valus that can also be null,
-      //   - an (opaque) wasm object that will cross the boundary
-      //   - a type that is explicitly allowed to cross the boundary (e.g a JsType)
+      //   - a JS primitive value (or goog.math.Long) that can also be null,
+      //   - a supertype of boxed primitives (e.g. Comparable) that can hold either a JS primitive
+      //     or a Wasm object,
+      //   - a JsFunction,
+      //   - an opaque Wasm object (including JsTypes) when crossing boundaries that do not pass
+      //     Wasm types directly (note that depending on the mode—e.g. configureAll exports vs
+      //     imports/entry points—exported Wasm types and JsTypes can be passed either as externref
+      //     or directly as Wasm types).
       return TypeDescriptors.get()
           .javaemulInternalWasmExtern
           .toNullable(typeDescriptor.isNullable());
@@ -338,9 +344,12 @@ public class WasmJsBoundaryUtils {
     }
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
-        || TypeDescriptors.isJavaLangObject(typeDescriptor)) {
+        || TypeDescriptors.isJavaLangObject(typeDescriptor)
+        || isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
-          (DeclaredTypeDescriptor) typeDescriptor,
+          isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
+              ? TypeDescriptors.get().javaLangObject
+              : (DeclaredTypeDescriptor) typeDescriptor,
           // TODO(b/545779164): The cast here shouldn't be needed, but the export bridge creator
           // might create the export bridge on specializing/default bridge. In any case when
           // the cast is not really needed it gets optimized away.
@@ -350,11 +359,11 @@ public class WasmJsBoundaryUtils {
               .build());
     }
     if (typeDescriptor.isJsFunctionInterface()) {
-      MethodDescriptor toJsMethodDescriptor =
-          TypeDescriptors.get()
-              .javaemulInternalJsFunctionAdaptor
-              .getMethodDescriptor("toJs", TypeDescriptors.get().javaemulInternalJsFunctionAdaptor);
-      return MethodCall.builderFrom(toJsMethodDescriptor)
+      return MethodCall.builderFrom(
+              TypeDescriptors.get()
+                  .javaemulInternalJsFunctionAdaptor
+                  .getMethodDescriptor(
+                      "toJs", TypeDescriptors.get().javaemulInternalJsFunctionAdaptor))
           .setArguments(
               CastExpression.builder()
                   .setExpression(expression)
@@ -394,6 +403,14 @@ public class WasmJsBoundaryUtils {
       return RuntimeMethods.createFromJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
+    if (isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)) {
+      return CastExpression.builder()
+          .setExpression(
+              RuntimeMethods.createFromJsMethodCall(
+                  TypeDescriptors.get().javaLangObject, expression))
+          .setCastTypeDescriptor(typeDescriptor)
+          .build();
+    }
     if (typeDescriptor.isJsFunctionInterface()) {
       return RuntimeMethods.createFromJsMethodCall(
           TypeDescriptors.get().javaemulInternalJsFunctionAdaptor, expression);
@@ -402,6 +419,13 @@ public class WasmJsBoundaryUtils {
       return RuntimeMethods.createWasmConvertToAnyMethodCall(expression, typeDescriptor);
     }
     return expression;
+  }
+
+  private static boolean isSupertypeOfBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
+    return TypeDescriptors.isJavaLangComparable(typeDescriptor)
+        || TypeDescriptors.isJavaLangCharSequence(typeDescriptor)
+        || TypeDescriptors.isJavaLangNumber(typeDescriptor)
+        || TypeDescriptors.isJavaIoSerializable(typeDescriptor);
   }
 
   private static boolean needsBoundaryExternConversion(

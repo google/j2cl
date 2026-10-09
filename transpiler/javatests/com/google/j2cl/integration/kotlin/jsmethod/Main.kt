@@ -18,6 +18,9 @@
 package jsmethod
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertNull
+import com.google.j2cl.integration.testing.Asserts.assertTrue
+import java.io.Serializable
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
@@ -26,6 +29,7 @@ fun main(vararg args: String) {
   testJsMethodWithDifferentVisiblities()
   testInheritName()
   testLambdaImplementingJsMethod()
+  testBoxedTypeSupertypes()
 }
 
 internal class NonPublicJsMethodClass {
@@ -80,4 +84,43 @@ internal fun interface FunctionalInterfaceWithJsMethod {
 private fun testLambdaImplementingJsMethod() {
   val f = FunctionalInterfaceWithJsMethod { "Hello" }
   assertEquals("Hello", f.greet())
+}
+
+// Use instance @JsMethods instead of static @JsMethods because static native @JsMethod imports
+// are emitted as direct method references (emitAsMethodReference) when building the Wasm imports
+// object, before the Wasm module is instantiated and populates its exported methods.
+internal class BoxedSuperTypes {
+  @JsMethod fun passThroughComparable(c: Comparable<*>?): Comparable<*>? = c
+
+  @JsMethod fun passThroughCharSequence(cs: CharSequence?): CharSequence? = cs
+
+  @JsMethod fun passThroughNumber(n: Number?): Number? = n
+
+  @JsMethod fun passThroughSerializable(s: Serializable?): Serializable? = s
+}
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+private interface NativeBoxedSuperTypes {
+  fun <T> passThroughComparable(c: T?): Comparable<T>?
+
+  fun passThroughCharSequence(cs: Any?): CharSequence?
+
+  fun passThroughNumber(n: Any?): Number?
+
+  fun passThroughSerializable(s: Any?): Serializable?
+}
+
+private fun testBoxedTypeSupertypes() {
+  // Cast to a native interface to force the calls to cross the JS boundary.
+  val tester = BoxedSuperTypes() as Any as NativeBoxedSuperTypes
+  assertTrue(tester.passThroughComparable("hello")!!.compareTo("hello") == 0)
+  assertTrue(tester.passThroughComparable(42.5)!!.compareTo(42.5) == 0)
+  assertTrue(tester.passThroughComparable(true)!!.compareTo(true) == 0)
+  assertTrue(tester.passThroughComparable(42L)!!.compareTo(42L) == 0)
+  assertTrue(tester.passThroughComparable(42)!!.compareTo(42) == 0)
+  assertNull(tester.passThroughComparable<String>(null))
+
+  assertTrue(tester.passThroughCharSequence("hello")!![1] == 'e')
+  assertTrue(tester.passThroughNumber(42.5)!!.toDouble() == 42.5)
+  assertEquals(true, tester.passThroughSerializable(true))
 }

@@ -1407,7 +1407,7 @@
 )
 (elem declare func $m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
 
-;;; void ExposesMethodWithDifferentTypes.m(NativeString s, WasmExtern d, WasmExtern l, WasmExtern pl, Comparable c, WasmExtern o, WasmExtern t, NativeFoo nf, ExposesMethodWithDifferentTypes e)
+;;; void ExposesMethodWithDifferentTypes.m(NativeString s, WasmExtern d, WasmExtern l, WasmExtern pl, WasmExtern c, WasmExtern o, WasmExtern t, NativeFoo nf, ExposesMethodWithDifferentTypes e)
 (func $js_export_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
  (type $function.js_export_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void)
  (param $this.untyped (ref $java.lang.Object))
@@ -1415,7 +1415,7 @@
  (param $d (ref null extern))
  (param $l (ref null extern))
  (param $pl (ref null extern))
- (param $c (ref null $java.lang.Object))
+ (param $c (ref null extern))
  (param $o (ref null extern))
  (param $t (ref null extern))
  (param $nf (ref null extern))
@@ -1425,7 +1425,7 @@
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes) (local.get $this.untyped)))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:150:15
-  (call_ref $function.m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(call $m_fromJs__java_lang_Double_NativeNumber__java_lang_Double@java.lang.Double (local.get $d))(call $m_fromJs__java_lang_Long_NativeLong__java_lang_Long@java.lang.Long (local.get $l))(call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (local.get $pl))(local.get $c)(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $o))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(local.get $nf)(local.get $e)(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(call $m_fromJs__java_lang_Double_NativeNumber__java_lang_Double@java.lang.Double (local.get $d))(call $m_fromJs__java_lang_Long_NativeLong__java_lang_Long@java.lang.Long (local.get $l))(call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (local.get $pl))(ref.cast (ref null $java.lang.Object) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $c)))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $o))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(local.get $nf)(local.get $e)(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))
  )
 )
 (elem declare func $js_export_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
