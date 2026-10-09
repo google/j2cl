@@ -1010,7 +1010,6 @@ internal class J2ObjCCompatSources(
         "java.io.EOFException",
         "java.io.FileNotFoundException",
         "java.io.IOException",
-        "java.lang.Class",
         "java.lang.JsException",
         "java.lang.StringIndexOutOfBoundsException",
         "java.lang.invoke.",

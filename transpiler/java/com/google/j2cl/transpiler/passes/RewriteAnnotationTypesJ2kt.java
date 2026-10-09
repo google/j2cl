@@ -71,6 +71,8 @@ public class RewriteAnnotationTypesJ2kt extends NormalizationPass {
           declaredTypeDescriptor.getTypeDeclaration().toBuilder()
               .setPackage(PackageDeclaration.builder().setName("kotlin.reflect").build())
               .setClassComponents("KClass")
+              // Don't inherit annotations like `KtNative` from `java.lang.Class`.
+              .setAnnotations()
               .build()
               .toDescriptor()
               .toNonNullable()

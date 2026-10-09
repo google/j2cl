@@ -27,6 +27,7 @@
 #import "j2ktiosinterop/PropertyMethodOverride.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
+#include "java/lang/ClassCastException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Enum.h"
 #include "java/lang/Float.h"
@@ -651,6 +652,9 @@
 }
 
 - (void)testJreExceptions {
+  JavaLangClassCastException *classCastException =
+      create_JavaLangClassCastException_initWithNSString_(@"foo");
+  XCTAssertNotNil(classCastException);
   JavaLangOutOfMemoryError *outOfMemoryError = create_JavaLangOutOfMemoryError_init();
   XCTAssertNotNil(outOfMemoryError);
 }
