@@ -16,6 +16,7 @@
 package jsoverlay;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsOverlay;
@@ -84,7 +85,7 @@ public class Main {
     }
   }
 
-  public static void testNativeJsWithOverlay() {
+  public static void testNativeJsTypeWithOverlay() {
     NativeJsTypeWithOverlay object = new NativeJsTypeWithOverlay();
     assertTrue(6 == object.callM());
     assertTrue(20 == NativeJsTypeWithOverlay.fun(4, 5));
@@ -102,7 +103,21 @@ public class Main {
     assertEquals(42, NativesTypeWithOnlyPrivateOverlay.staticMethod());
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  static class NativeTypeWithUninitializedStaticOverlayFields {
+    @JsOverlay static String uninitializedString;
+    @JsOverlay static int uninitializedInt;
+    @JsOverlay static int initializedInt = 5;
+  }
+
+  private static void testUninitializedStaticOverlayField() {
+    assertEquals(0, NativeTypeWithUninitializedStaticOverlayFields.uninitializedInt);
+    assertEquals(5, NativeTypeWithUninitializedStaticOverlayFields.initializedInt);
+    assertNull(NativeTypeWithUninitializedStaticOverlayFields.uninitializedString);
+  }
+
   public static void main(String... args) {
-    testNativeJsWithOverlay();
+    testNativeJsTypeWithOverlay();
+    testUninitializedStaticOverlayField();
   }
 }

@@ -14,23 +14,6 @@
 
 goog.module('jsinteroptests.NativeJsTypeTestHelper');
 
-const NativeJsTypeWithOverlay = goog.require('jsinteroptests.NativeJsTypeTest.NativeJsTypeWithOverlay');
-
-/**
- * @return {NativeJsTypeWithOverlay}
- */
-exports.createNativeJsTypeWithOverlayWithM = function() {
-  let subtypeWithM = class extends NativeJsTypeWithOverlay {
-    constructor() {
-      super();
-      /** @type {?} */ (this)['m'] = function() {
-        return 6;
-      };
-    }
-  };
-  return new subtypeWithM();
-};
-
 /**
  * @return {*}
  */

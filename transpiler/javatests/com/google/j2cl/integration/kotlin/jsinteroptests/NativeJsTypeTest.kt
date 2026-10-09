@@ -38,11 +38,9 @@ object NativeJsTypeTest {
     testGetClass()
     testEqualityOptimization()
     testClassLiterals()
-    testNativeJsTypeWithOverlay()
     testNativeJsTypeWithStaticIntializer()
     testNativeInnerClass()
     testSpecialNativeInstanceOf()
-    testUninitializedStaticOverlayField()
     testVariableExternCollision()
     testAliasExternCollision()
     testBridgesNativeSubclass()
@@ -153,52 +151,6 @@ object NativeJsTypeTest {
   @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   @JvmStatic
   private external fun createNativeArray(): Any
-
-  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
-  internal class NativeJsTypeWithOverlay {
-    companion object {
-      @JsOverlay @JvmField val x: Int = 2
-
-      @JsMethod(namespace = JsPackage.GLOBAL, name = "Object.keys")
-      @JvmStatic
-      external fun keys(o: NativeObject?): Array<String>
-
-      @JsOverlay
-      @JvmStatic
-      fun hasM(obj: Any?): Boolean {
-        for (k in keys(obj as NativeObject)) {
-          if ("m" == k) {
-            return true
-          }
-        }
-        return false
-      }
-    }
-
-    external fun hasOwnProperty(name: String): Boolean
-
-    @JsOverlay fun hasM(): Boolean = hasOwnProperty("m")
-
-    @JvmField var k: Int = definedExternally
-
-    @JsOverlay
-    fun setK(k: Int): NativeJsTypeWithOverlay {
-      this.k = k
-      return this
-    }
-  }
-
-  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
-  @JvmStatic
-  private external fun createNativeJsTypeWithOverlayWithM(): NativeJsTypeWithOverlay
-
-  fun testNativeJsTypeWithOverlay() {
-    val o: NativeJsTypeWithOverlay = createNativeJsTypeWithOverlayWithM()
-    assertTrue(o.hasM())
-    assertTrue(NativeJsTypeWithOverlay.hasM(o))
-    assertEquals(2, NativeJsTypeWithOverlay.x)
-    assertEquals(42, o.setK(3).setK(42).k)
-  }
 
   @JsType(isNative = true)
   internal class NativeJsTypeWithStaticInitializationAndFieldAccess {
@@ -417,24 +369,6 @@ object NativeJsTypeTest {
   @JsProperty(namespace = JsPackage.GLOBAL, name = "Float32Array.BYTES_PER_ELEMENT")
   @JvmStatic
   private external fun getFloat32ArrayBytesPerElement(): Any?
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  internal class NativeClassWithStaticOverlayFields {
-    companion object {
-      // Kotlin requires properties to be explicitly initialized
-      // @JsOverlay @JvmStatic val uninitializedString: String
-      // @JsOverlay @JvmStatic val uninitializedInt: Int
-      @JsOverlay @JvmField val initializedInt: Int = 5
-    }
-  }
-
-  fun testUninitializedStaticOverlayField() {
-    // Kotlin requires properties to be explicitly initialized
-    // assertEquals(0, NativeClassWithStaticOverlayFields.uninitializedInt);
-    assertEquals(5, NativeClassWithStaticOverlayFields.initializedInt)
-    // Kotlin requires properties to be explicitly initialized
-    // assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
-  }
 
   @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest", name = "MyNativeJsType")
   internal class MyNativeJsTypeWithInner {

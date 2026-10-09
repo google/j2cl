@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
-import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
@@ -37,11 +36,9 @@ public class NativeJsTypeTest {
     testGetClass();
     testEqualityOptimization();
     testClassLiterals();
-    testNativeJsTypeWithOverlay();
     testNativeJsTypeWithStaticIntializer();
     testNativeInnerClass();
     testSpecialNativeInstanceOf();
-    testUninitializedStaticOverlayField();
     testVariableExternCollision();
     testAliasExternCollision();
     testBridgesNativeSubclass();
@@ -148,51 +145,6 @@ public class NativeJsTypeTest {
 
   @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
   private static native Object createNativeArray();
-
-  @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest")
-  static class NativeJsTypeWithOverlay {
-
-    @JsOverlay public static final int x = 2;
-
-    @JsMethod(namespace = JsPackage.GLOBAL, name = "Object.keys")
-    public static native String[] keys(NativeObject o);
-
-    @JsOverlay
-    public static final boolean hasM(Object obj) {
-      for (String k : keys((NativeObject) obj)) {
-        if ("m".equals(k)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    public native boolean hasOwnProperty(String name);
-
-    @JsOverlay
-    public final boolean hasM() {
-      return hasOwnProperty("m");
-    }
-
-    public int k;
-
-    @JsOverlay
-    public final NativeJsTypeWithOverlay setK(int k) {
-      this.k = k;
-      return this;
-    }
-  }
-
-  @JsMethod(namespace = "jsinteroptests.NativeJsTypeTestHelper")
-  private static native NativeJsTypeWithOverlay createNativeJsTypeWithOverlayWithM();
-
-  private static void testNativeJsTypeWithOverlay() {
-    NativeJsTypeWithOverlay object = createNativeJsTypeWithOverlayWithM();
-    assertTrue(object.hasM());
-    assertTrue(NativeJsTypeWithOverlay.hasM(object));
-    assertEquals(2, NativeJsTypeWithOverlay.x);
-    assertEquals(42, object.setK(3).setK(42).k);
-  }
 
   @JsType(isNative = true)
   static class NativeJsTypeWithStaticInitializationAndFieldAccess {
@@ -407,19 +359,6 @@ public class NativeJsTypeTest {
 
   @JsProperty(namespace = JsPackage.GLOBAL, name = "Float32Array.BYTES_PER_ELEMENT")
   private static native Object getFloat32ArrayBytesPerElement();
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeClassWithStaticOverlayFields {
-    @JsOverlay static String uninitializedString;
-    @JsOverlay static int uninitializedInt;
-    @JsOverlay static int initializedInt = 5;
-  }
-
-  private static void testUninitializedStaticOverlayField() {
-    assertEquals(0, NativeClassWithStaticOverlayFields.uninitializedInt);
-    assertEquals(5, NativeClassWithStaticOverlayFields.initializedInt);
-    assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
-  }
 
   @JsType(isNative = true, namespace = "jsinteroptests.NativeJsTypeTest", name = "MyNativeJsType")
   static class MyNativeJsTypeWithInner {

@@ -92,7 +92,7 @@ internal class NativesTypeWithOnlyPrivateOverlay<T> {
   }
 }
 
-fun testNativeJsWithOverlay() {
+fun testNativeJsTypeWithOverlay() {
   val obj = NativeJsTypeWithOverlay()
   AssertsBase.assertTrue(6 == obj.callM())
   AssertsBase.assertTrue(20 == NativeJsTypeWithOverlay.func(4, 5))
@@ -110,6 +110,25 @@ fun testNativeJsWithOverlay() {
   Asserts.assertEquals(42, NativesTypeWithOnlyPrivateOverlay.staticMethod())
 }
 
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+internal class NativeTypeWithUninitializedStaticOverlayFields {
+  companion object {
+    // Kotlin requires properties to be explicitly initialized
+    // @JsOverlay @JvmStatic val uninitializedString: String
+    // @JsOverlay @JvmStatic val uninitializedInt: Int
+    @JsOverlay @JvmField val initializedInt: Int = 5
+  }
+}
+
+private fun testUninitializedStaticOverlayField() {
+  // Kotlin requires properties to be explicitly initialized
+  // Asserts.assertEquals(0, NativeTypeWithUninitializedStaticOverlayFields.uninitializedInt);
+  Asserts.assertEquals(5, NativeTypeWithUninitializedStaticOverlayFields.initializedInt)
+  // Kotlin requires properties to be explicitly initialized
+  // Asserts.assertNull(NativeTypeWithUninitializedStaticOverlayFields.uninitializedString);
+}
+
 fun main(vararg unused: String) {
-  testNativeJsWithOverlay()
+  testNativeJsTypeWithOverlay()
+  testUninitializedStaticOverlayField()
 }
