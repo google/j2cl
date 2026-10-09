@@ -17,7 +17,6 @@ package jstype;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
-import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
@@ -216,7 +215,7 @@ public class Main {
     assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod());
   }
 
-  @JsMethod(namespace = "jstype.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.helper")
   private static native boolean hasFieldRun(Object obj);
 
   private static void testEnumeration() {
@@ -244,17 +243,17 @@ public class Main {
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
   }
 
-  @JsMethod(namespace = "jstype.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.helper")
   private static native int callPublicMethod(Object object);
 
-  @JsMethod(namespace = "jstype.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.helper")
   @SuppressWarnings("unusable-by-js")
   private static native void setTheField(ConcreteJsType obj, ConcreteJsType.A value);
 
-  @JsMethod(namespace = "jstype.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.helper")
   private static native int callPublicMethodFromEnumeration(MyEnumWithJsType enumeration);
 
-  @JsMethod(namespace = "jstype.JsTypeTestHelper")
+  @JsMethod(namespace = "jstype.helper")
   private static native int callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen e);
 
   @JsType

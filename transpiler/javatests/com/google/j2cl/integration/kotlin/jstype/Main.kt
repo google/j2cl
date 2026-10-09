@@ -19,7 +19,6 @@ package jstype
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
-import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
@@ -192,8 +191,7 @@ private fun testRevealedOverrideJsType() {
   assertEquals(100, subclassInterface.publicMethodAlsoExposedAsNonJsMethod())
 }
 
-@JsMethod(namespace = "jstype.JsTypeTestHelper")
-private external fun hasFieldRun(obj: Any?): Boolean
+@JsMethod(namespace = "jstype.helper") private external fun hasFieldRun(obj: Any?): Boolean
 
 private fun testEnumeration() {
   assertEquals(2, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST1))
@@ -220,17 +218,16 @@ private fun testEnumSubclassEnumeration() {
   assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C))
 }
 
-@JsMethod(namespace = "jstype.JsTypeTestHelper")
-private external fun callPublicMethod(o: Any?): Int
+@JsMethod(namespace = "jstype.helper") private external fun callPublicMethod(o: Any?): Int
 
-@JsMethod(namespace = "jstype.JsTypeTestHelper")
+@JsMethod(namespace = "jstype.helper")
 @SuppressWarnings("unusable-by-js")
 private external fun setTheField(obj: ConcreteJsType?, value: ConcreteJsType.A?)
 
-@JsMethod(namespace = "jstype.JsTypeTestHelper")
+@JsMethod(namespace = "jstype.helper")
 private external fun callPublicMethodFromEnumeration(enumeration: MyEnumWithJsType?): Int
 
-@JsMethod(namespace = "jstype.JsTypeTestHelper")
+@JsMethod(namespace = "jstype.helper")
 private external fun callPublicMethodFromEnumerationSubclass(e: MyEnumWithSubclassGen?): Int
 
 @JsType
