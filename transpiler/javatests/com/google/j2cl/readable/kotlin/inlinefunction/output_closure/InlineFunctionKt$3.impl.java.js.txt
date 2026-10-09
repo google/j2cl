@@ -5,36 +5,36 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Container = goog.forwardDeclare('inlinefunction.Container$impl');
-let MyClass = goog.forwardDeclare('inlinefunction.MyClass$impl');
-let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
- * @implements {NonFun<!MyClass>}
+ * @template T
+ * @implements {NonFun<T>}
  */
 class $3 extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {!Ref<string>} @nodts*/
-  this.$captured_capturedValue__inlinefunction_InlineFunctionKt_3;
+  /**@type {!Function0<?>} @nodts*/
+  this.$captured_container__inlinefunction_InlineFunctionKt_3;
  }
- /** @nodts @return {!$3} */
- static $create__javaemul_internal_Ref(/** !Ref<string> */ $captured_capturedValue) {
+ /** @nodts @template T @return {!$3<T>} */
+ static $create__kotlin_jvm_functions_Function0(/** !Function0<?> */ $captured_container) {
   $3.$clinit();
   let $instance = new $3();
-  $instance.$ctor__inlinefunction_InlineFunctionKt_3__javaemul_internal_Ref__void($captured_capturedValue);
+  $instance.$ctor__inlinefunction_InlineFunctionKt_3__kotlin_jvm_functions_Function0__void($captured_container);
   return $instance;
  }
  /** @nodts */
- $ctor__inlinefunction_InlineFunctionKt_3__javaemul_internal_Ref__void(/** !Ref<string> */ $captured_capturedValue) {
-  this.$captured_capturedValue__inlinefunction_InlineFunctionKt_3 = $captured_capturedValue;
+ $ctor__inlinefunction_InlineFunctionKt_3__kotlin_jvm_functions_Function0__void(/** !Function0<?> */ $captured_container) {
+  this.$captured_container__inlinefunction_InlineFunctionKt_3 = $captured_container;
   this.$ctor__java_lang_Object__void();
  }
- /** @override @nodts @return {!Container<!MyClass>} */
+ /** @override @nodts @return {!Container<T>} */
  m_container__inlinefunction_Container() {
-  this.$captured_capturedValue__inlinefunction_InlineFunctionKt_3.f_element__javaemul_internal_Ref = 'Modified by lambda in NonFun';
-  return /**@type {!Container<!MyClass>}*/ (Container.$create__java_lang_Object(MyClass.$create__int(12)));
+  return /**@type {!Container<T>}*/ ($Casts.$to(this.$captured_container__inlinefunction_InlineFunctionKt_3.m_invoke__java_lang_Object(), Container));
  }
  /** @nodts */
  static $clinit() {
@@ -50,7 +50,7 @@ class $3 extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Container = goog.module.get('inlinefunction.Container$impl');
-  MyClass = goog.module.get('inlinefunction.MyClass$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 NonFun.$markImplementor($3);

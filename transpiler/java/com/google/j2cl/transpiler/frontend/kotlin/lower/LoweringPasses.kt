@@ -81,10 +81,6 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::LateinitLowering)
   // Extract anonymous classes from inline lambdas.
   perFileLowering(::LocalClassesInInlineLambdasLowering)
-  // Resolve captures for anonymous class defined in inline functions.
-  perFileLowering(::LocalClassesInInlineFunctionsLowering)
-  // Move the anonymous classes from inline functions into the nearest declaration container.
-  perFileLowering(::LocalClassesExtractionFromInlineFunctionsLowering.asPostfix())
   // Create public bridge for private top level function called from inline functions.
   perFileLowering(::SyntheticAccessorLowering)
   // Perform function inlining.

@@ -3,6 +3,8 @@ goog.module('inlinefunction.InlineFunctionKt.$1$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let ClassWithInlineFun = goog.forwardDeclare('inlinefunction.ClassWithInlineFun$impl');
+
 /**
  * @final
  */
@@ -10,21 +12,27 @@ class $1 extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
+  /**@type {!ClassWithInlineFun} @nodts*/
+  this.$captured_this__inlinefunction_InlineFunctionKt_1;
+  /**@type {number} @nodts*/
+  this.$captured_capture__inlinefunction_InlineFunctionKt_1 = 0;
  }
  /** @nodts @return {!$1} */
- static $create__() {
+ static $create__inlinefunction_ClassWithInlineFun__int(/** !ClassWithInlineFun */ $captured_this, /** number */ $captured_capture) {
   $1.$clinit();
   let $instance = new $1();
-  $instance.$ctor__inlinefunction_InlineFunctionKt_1__void();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_1__inlinefunction_ClassWithInlineFun__int__void($captured_this, $captured_capture);
   return $instance;
  }
  /** @nodts */
- $ctor__inlinefunction_InlineFunctionKt_1__void() {
+ $ctor__inlinefunction_InlineFunctionKt_1__inlinefunction_ClassWithInlineFun__int__void(/** !ClassWithInlineFun */ $captured_this, /** number */ $captured_capture) {
+  this.$captured_this__inlinefunction_InlineFunctionKt_1 = $captured_this;
+  this.$captured_capture__inlinefunction_InlineFunctionKt_1 = $captured_capture;
   this.$ctor__java_lang_Object__void();
  }
  /** @final @nodts @return {number} */
  m_compute__int() {
-  return 5;
+  return Math.imul(this.$captured_this__inlinefunction_InlineFunctionKt_1.m_getE__int() + this.$captured_capture__inlinefunction_InlineFunctionKt_1 + 5, 2);
  }
  /** @nodts */
  static $clinit() {

@@ -41,3 +41,6 @@ class OuterClass(private val outerValue: Int) {
       outerValue + innerValue + privateTopLevelProperty + privateTopLevelFunction()
   }
 }
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun inlineFunctionFromDepsWithAnonymousObject(): Any = object {}

@@ -1,0 +1,63 @@
+goog.module('inlinefunction.InlineFunctionKt.$8$impl');
+
+const IntSupplier = goog.require('inlinefunction.IntSupplier$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {IntSupplier}
+ */
+class $8 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.$captured_this__inlinefunction_InlineFunctionKt_8 = 0;
+  /**@type {!Function0<?>} @nodts*/
+  this.$captured_block__inlinefunction_InlineFunctionKt_8;
+ }
+ /** @nodts @return {!$8} */
+ static $create__int__kotlin_jvm_functions_Function0(/** number */ $captured_this, /** !Function0<?> */ $captured_block) {
+  $8.$clinit();
+  let $instance = new $8();
+  $instance.$ctor__inlinefunction_InlineFunctionKt_8__int__kotlin_jvm_functions_Function0__void($captured_this, $captured_block);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionKt_8__int__kotlin_jvm_functions_Function0__void(/** number */ $captured_this, /** !Function0<?> */ $captured_block) {
+  this.$captured_this__inlinefunction_InlineFunctionKt_8 = $captured_this;
+  this.$captured_block__inlinefunction_InlineFunctionKt_8 = $captured_block;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_get__int() {
+  return this.$captured_this__inlinefunction_InlineFunctionKt_8 + (/**@type {!Integer}*/ ($Casts.$to(this.$captured_block__inlinefunction_InlineFunctionKt_8.m_invoke__java_lang_Object(), Integer))).intValue() | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  $8.$clinit = () =>{};
+  $8.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $8;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+IntSupplier.$markImplementor($8);
+$Util.$setClassMetadata($8, 'inlinefunction.InlineFunctionKt$8');
+
+exports = $8;
+
+//# sourceMappingURL=InlineFunctionKt$8.js.map

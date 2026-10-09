@@ -4,10 +4,6 @@ const IntSupplier = goog.require('inlinefunction.IntSupplier$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @final
  * @implements {IntSupplier}
@@ -17,26 +13,26 @@ class $7 extends j_l_Object {
  constructor() {
   super();
   /**@type {number} @nodts*/
-  this.$captured_this__inlinefunction_InlineFunctionKt_7 = 0;
-  /**@type {!Function0<?>} @nodts*/
-  this.$captured_block__inlinefunction_InlineFunctionKt_7;
+  this.$captured_value__inlinefunction_InlineFunctionKt_7 = 0;
+  /**@type {number} @nodts*/
+  this.$captured_value$1__inlinefunction_InlineFunctionKt_7 = 0;
  }
  /** @nodts @return {!$7} */
- static $create__int__kotlin_jvm_functions_Function0(/** number */ $captured_this, /** !Function0<?> */ $captured_block) {
+ static $create__int__int(/** number */ $captured_value, /** number */ $captured_value$1) {
   $7.$clinit();
   let $instance = new $7();
-  $instance.$ctor__inlinefunction_InlineFunctionKt_7__int__kotlin_jvm_functions_Function0__void($captured_this, $captured_block);
+  $instance.$ctor__inlinefunction_InlineFunctionKt_7__int__int__void($captured_value, $captured_value$1);
   return $instance;
  }
  /** @nodts */
- $ctor__inlinefunction_InlineFunctionKt_7__int__kotlin_jvm_functions_Function0__void(/** number */ $captured_this, /** !Function0<?> */ $captured_block) {
-  this.$captured_this__inlinefunction_InlineFunctionKt_7 = $captured_this;
-  this.$captured_block__inlinefunction_InlineFunctionKt_7 = $captured_block;
+ $ctor__inlinefunction_InlineFunctionKt_7__int__int__void(/** number */ $captured_value, /** number */ $captured_value$1) {
+  this.$captured_value__inlinefunction_InlineFunctionKt_7 = $captured_value;
+  this.$captured_value$1__inlinefunction_InlineFunctionKt_7 = $captured_value$1;
   this.$ctor__java_lang_Object__void();
  }
  /** @override @nodts @return {number} */
  m_get__int() {
-  return this.$captured_this__inlinefunction_InlineFunctionKt_7 + (/**@type {!Integer}*/ ($Casts.$to(this.$captured_block__inlinefunction_InlineFunctionKt_7.m_invoke__java_lang_Object(), Integer))).intValue() | 0;
+  return this.$captured_value__inlinefunction_InlineFunctionKt_7 + this.$captured_value$1__inlinefunction_InlineFunctionKt_7 | 0;
  }
  /** @nodts */
  static $clinit() {
@@ -50,10 +46,7 @@ class $7 extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  Integer = goog.module.get('java.lang.Integer$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 IntSupplier.$markImplementor($7);
 $Util.$setClassMetadata($7, 'inlinefunction.InlineFunctionKt$7');

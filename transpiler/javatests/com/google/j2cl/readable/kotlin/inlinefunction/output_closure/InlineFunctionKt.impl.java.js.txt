@@ -10,14 +10,13 @@ let ClassWithCompanion = goog.forwardDeclare('inlinefunction.ClassWithCompanion$
 let Companion = goog.forwardDeclare('inlinefunction.ClassWithCompanion.Companion$impl');
 let ClassWithCompanionKt = goog.forwardDeclare('inlinefunction.ClassWithCompanionKt$impl');
 let ClassWithInlineFun = goog.forwardDeclare('inlinefunction.ClassWithInlineFun$impl');
-let $1 = goog.forwardDeclare('inlinefunction.ClassWithInlineFun.$1$impl');
 let ClassWithPrivateMembers = goog.forwardDeclare('inlinefunction.ClassWithPrivateMembers$impl');
 let Container = goog.forwardDeclare('inlinefunction.Container$impl');
 let ExternalClassWithInlineFun = goog.forwardDeclare('inlinefunction.ExternalClassWithInlineFun$impl');
 let ExternalInlineFunctionKt = goog.forwardDeclare('inlinefunction.ExternalInlineFunctionKt$impl');
 let GenericBox = goog.forwardDeclare('inlinefunction.GenericBox$impl');
 let HolderInAnotherLibrary = goog.forwardDeclare('inlinefunction.HolderInAnotherLibrary$impl');
-let InlineFunctionKt_$1 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1$impl');
+let $1 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1$impl');
 let $1Foo = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$1Foo$impl');
 let $2 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$2$impl');
 let $3 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$3$impl');
@@ -25,6 +24,7 @@ let $4 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$4$impl');
 let $5 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$5$impl');
 let $6 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$6$impl');
 let $7 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$7$impl');
+let $8 = goog.forwardDeclare('inlinefunction.InlineFunctionKt.$8$impl');
 let InlineFunctionsInAnotherLibraryKt = goog.forwardDeclare('inlinefunction.InlineFunctionsInAnotherLibraryKt$impl');
 let IntSupplier = goog.forwardDeclare('inlinefunction.IntSupplier$impl');
 let MyClass = goog.forwardDeclare('inlinefunction.MyClass$impl');
@@ -135,11 +135,11 @@ class InlineFunctionKt extends j_l_Object {
   let tmp0__this__1 = ClassWithInlineFun.$create__int(5);
   let this_2 = tmp0__this__1;
   let capture = 5;
-  let delegate = $1.$create__inlinefunction_ClassWithInlineFun__inlinefunction_ClassWithInlineFun__int__int(null, this_2, capture, 5);
+  let delegate = $1.$create__inlinefunction_ClassWithInlineFun__int(this_2, capture);
   let c = delegate.m_compute__int();
   let tmp0__this__2 = ClassWithInlineFun.$create__int(5);
   let this_3 = tmp0__this__2;
-  let delegate_1 = InlineFunctionKt_$1.$create__();
+  let delegate_1 = $2.$create__();
   let d = delegate_1.m_compute__int();
   let tmp0__this__3 = MyClass.$create__int(5);
   let this_4 = tmp0__this__3;
@@ -433,13 +433,13 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @template T @return {!NonFun<T>} */
  static m_NonFun__kotlin_jvm_functions_Function0__inlinefunction_NonFun(/** !Function0<?> */ container) {
   InlineFunctionKt.$clinit();
-  return /**@type {!$2<T>}*/ ($2.$create__kotlin_jvm_functions_Function0(container));
+  return /**@type {!$3<T>}*/ ($3.$create__kotlin_jvm_functions_Function0(container));
  }
  /** @nodts */
  static m_useAdaptor__void() {
   let capturedValue = /**@type {!Ref<string>}*/ (Ref.$create__java_lang_Object('Initial'));
-  let nf = /**@type {!NonFun<!MyClass>}*/ ($3.$create__javaemul_internal_Ref(capturedValue));
-  let s = /**@type {!Sequence<Integer>}*/ ($4.$create__());
+  let nf = /**@type {!NonFun<!MyClass>}*/ ($4.$create__javaemul_internal_Ref(capturedValue));
+  let s = /**@type {!Sequence<Integer>}*/ ($5.$create__());
  }
  /** @nodts @return {number} */
  static m_testNonReifiedIntTypeParameterErasureInInlineFun__int() {
@@ -633,19 +633,19 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {!IntSupplier} */
  static m_supplierOf__int__kotlin_jvm_functions_Function0__inlinefunction_IntSupplier(/** number */ value, /** !Function0<?> */ block) {
   InlineFunctionKt.$clinit();
-  return $5.$create__int__kotlin_jvm_functions_Function0(value, block);
+  return $6.$create__int__kotlin_jvm_functions_Function0(value, block);
  }
  /** @nodts @return {!IntSupplier} */
  static m_testCapturesOfVariablesWithTheSameName__int__inlinefunction_IntSupplier(/** number */ value) {
   InlineFunctionKt.$clinit();
   let tmp0_value = value + 1 | 0;
   let value_1 = tmp0_value;
-  return /**@type {!IntSupplier}*/ ($6.$create__int__int(value_1, value));
+  return /**@type {!IntSupplier}*/ ($7.$create__int__int(value_1, value));
  }
  /** @nodts @return {!IntSupplier} */
  static m_supplierOfSum__int__kotlin_jvm_functions_Function0__inlinefunction_IntSupplier(/** number */ this_1, /** !Function0<?> */ block) {
   InlineFunctionKt.$clinit();
-  return $7.$create__int__kotlin_jvm_functions_Function0(this_1, block);
+  return $8.$create__int__kotlin_jvm_functions_Function0(this_1, block);
  }
  /** @nodts @return {string} */
  static m_testInlineFunctionCalledOnSmartCastReceiver__java_lang_Object__java_lang_String(/** !* */ x) {
@@ -679,12 +679,11 @@ class InlineFunctionKt extends j_l_Object {
   Companion = goog.module.get('inlinefunction.ClassWithCompanion.Companion$impl');
   ClassWithCompanionKt = goog.module.get('inlinefunction.ClassWithCompanionKt$impl');
   ClassWithInlineFun = goog.module.get('inlinefunction.ClassWithInlineFun$impl');
-  $1 = goog.module.get('inlinefunction.ClassWithInlineFun.$1$impl');
   ClassWithPrivateMembers = goog.module.get('inlinefunction.ClassWithPrivateMembers$impl');
   ExternalClassWithInlineFun = goog.module.get('inlinefunction.ExternalClassWithInlineFun$impl');
   ExternalInlineFunctionKt = goog.module.get('inlinefunction.ExternalInlineFunctionKt$impl');
   HolderInAnotherLibrary = goog.module.get('inlinefunction.HolderInAnotherLibrary$impl');
-  InlineFunctionKt_$1 = goog.module.get('inlinefunction.InlineFunctionKt.$1$impl');
+  $1 = goog.module.get('inlinefunction.InlineFunctionKt.$1$impl');
   $1Foo = goog.module.get('inlinefunction.InlineFunctionKt.$1Foo$impl');
   $2 = goog.module.get('inlinefunction.InlineFunctionKt.$2$impl');
   $3 = goog.module.get('inlinefunction.InlineFunctionKt.$3$impl');
@@ -692,6 +691,7 @@ class InlineFunctionKt extends j_l_Object {
   $5 = goog.module.get('inlinefunction.InlineFunctionKt.$5$impl');
   $6 = goog.module.get('inlinefunction.InlineFunctionKt.$6$impl');
   $7 = goog.module.get('inlinefunction.InlineFunctionKt.$7$impl');
+  $8 = goog.module.get('inlinefunction.InlineFunctionKt.$8$impl');
   InlineFunctionsInAnotherLibraryKt = goog.module.get('inlinefunction.InlineFunctionsInAnotherLibraryKt$impl');
   MyClass = goog.module.get('inlinefunction.MyClass$impl');
   StringBox = goog.module.get('inlinefunction.StringBox$impl');

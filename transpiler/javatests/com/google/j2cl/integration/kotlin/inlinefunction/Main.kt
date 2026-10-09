@@ -386,32 +386,50 @@ private inline fun <R> castToNonReifiedTypeInWhen(): R =
 
 interface Interface<T>
 
-private inline fun inlineFunctionWithLocalClass() = object : Interface<String> {}
+private inline fun inlineFunctionWithAnonymousObject() = object : Interface<String> {}
 
-private inline fun <T> inlineFunctionWithTypeArgumentAndLocalClass() = object : Interface<T> {}
+private inline fun <T> inlineFunctionWithTypeArgumentAndAnonymousObject() = object : Interface<T> {}
 
-private inline fun <reified T> inlineFunctionWithReifiedTypeArgumentAndLocalClass() =
+private inline fun <reified T> inlineFunctionWithReifiedTypeArgumentAndAnonymousObject() =
   object : Interface<T> {}
 
 fun testInlinedLocalClassSemantics() {
-  assertTrue(
-    inlineFunctionWithLocalClass()::class.java === inlineFunctionWithLocalClass()::class.java
-  )
+  // Within a module, Kotlin/JVM shares the anonymous classes declared in inline functions between
+  // all the call sites, while J2CL, like the other KLIB-based backends, copies them at each call
+  // site.
   if (isJvm()) {
     assertTrue(
-      inlineFunctionWithTypeArgumentAndLocalClass<Int>()::class.java ===
-        inlineFunctionWithTypeArgumentAndLocalClass<Int>()::class.java
+      inlineFunctionWithAnonymousObject()::class.java ===
+        inlineFunctionWithAnonymousObject()::class.java
+    )
+    assertTrue(
+      inlineFunctionWithTypeArgumentAndAnonymousObject<Int>()::class.java ===
+        inlineFunctionWithTypeArgumentAndAnonymousObject<Int>()::class.java
     )
   } else {
-    // TODO(b/274670726): J2CL currently treats all type arguments of inline functions as reified.
     assertFalse(
-      inlineFunctionWithTypeArgumentAndLocalClass<Int>()::class.java ===
-        inlineFunctionWithTypeArgumentAndLocalClass<Int>()::class.java
+      inlineFunctionWithAnonymousObject()::class.java ===
+        inlineFunctionWithAnonymousObject()::class.java
+    )
+    assertFalse(
+      inlineFunctionWithTypeArgumentAndAnonymousObject<Int>()::class.java ===
+        inlineFunctionWithTypeArgumentAndAnonymousObject<Int>()::class.java
     )
   }
+  // Even Kotlin/JVM copies the anonymous class at each call site when it uses a reified type
+  // parameter. A reified type parameter has no runtime representation that could be passed to a
+  // shared class, so the class has to be specialized with the type argument, e.g.
+  // `object : Interface<T>` becomes `object : Interface<Int>`. The JVM inliner does this by
+  // regenerating the class at each call site.
   assertFalse(
-    inlineFunctionWithReifiedTypeArgumentAndLocalClass<Int>()::class.java ===
-      inlineFunctionWithReifiedTypeArgumentAndLocalClass<Int>()::class.java
+    inlineFunctionWithReifiedTypeArgumentAndAnonymousObject<Int>()::class.java ===
+      inlineFunctionWithReifiedTypeArgumentAndAnonymousObject<Int>()::class.java
+  )
+  // When the inline function comes from another module, every backend, including Kotlin/JVM,
+  // copies the anonymous class at each call site.
+  assertFalse(
+    inlineFunctionFromDepsWithAnonymousObject()::class.java ===
+      inlineFunctionFromDepsWithAnonymousObject()::class.java
   )
 }
 
