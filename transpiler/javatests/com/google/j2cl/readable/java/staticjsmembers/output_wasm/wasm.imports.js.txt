@@ -98,6 +98,7 @@ function getImports() {
    'get Error.stack': (/** !Error */ $instance, ) => $instance.stack,
    'get RegExpResult.index': (/** !RegExpResult */ $instance, ) => $instance.index,
    'get RegExpResult.length': (/** !RegExpResult */ $instance, ) => $instance.length,
+   'get debugger': () => { debugger; },
    'get foo.Bar.field': () => foo_Bar.field,
    'get window': () => window,
    'get window.window': () => window.window,

@@ -48,6 +48,7 @@ open class StaticJsMembers {
   StaticJsMembers.max(1, 2, 3)
   StaticJsMembers.max(1.0, 2.0)
   StaticJsMembers.max(1.0, 2.0)
+  StaticJsMembers.debugger()
   var n: Int = StaticJsMembers.field1
   n = StaticJsMembers.field2
   var w: Window? = Native.window
@@ -101,6 +102,10 @@ open class StaticJsMembers {
   @JvmStatic
   @JsMethod(name = "Math.max", namespace = JsPackage.GLOBAL)
   external fun max(a: Double, b: Double): Double
+  
+  @JvmStatic
+  @JsProperty(name = "debugger", namespace = JsPackage.GLOBAL)
+  external fun debugger()
  }
  
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)

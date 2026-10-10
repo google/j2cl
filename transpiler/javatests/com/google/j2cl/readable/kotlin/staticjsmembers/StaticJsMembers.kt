@@ -74,6 +74,9 @@ class StaticJsMembers {
     @JvmStatic
     @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
     external fun max(a: Double, b: Double): Double
+
+    // `debugger` is a statement in JavaScript, so it can only be accessed through a void getter.
+    @JvmStatic @JsProperty(namespace = GLOBAL, name = "debugger") external fun debugger()
   }
 
   fun test() {
@@ -93,6 +96,7 @@ class StaticJsMembers {
     max(1, 2, 3)
     StaticJsMembers.max(1.0, 2.0)
     max(1.0, 2.0)
+    debugger()
 
     var n: Int = field1
     n = field2

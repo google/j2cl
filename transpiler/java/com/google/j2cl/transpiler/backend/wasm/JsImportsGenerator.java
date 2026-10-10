@@ -19,6 +19,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -32,6 +33,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
@@ -227,32 +229,38 @@ public final class JsImportsGenerator {
         .forEach(p -> sb.append(createParameterDefinition(p.getName(), p.getTypeDescriptor())));
     sb.append(") => ");
 
-    // Emit function name
-    if (methodImport.isConstructor()) {
-      sb.append(String.format("new %s", methodImport.getJsQualifier()));
-    } else if (methodImport.isInstance()) {
-      sb.append(String.format("$instance.%s", methodImport.getJsName()));
+    // Emit body
+    String target = createTargetExpression(methodImport);
+    if (methodImport.isPropertyGetter()
+        && TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())) {
+      // A void getter is only evaluated for its side effects, so emit it as a statement. This also
+      // supports getters that are statements in JavaScript, e.g. `debugger`.
+      sb.append(String.format("{ %s; }", target));
+    } else if (methodImport.isPropertyGetter()) {
+      sb.append(target);
+    } else if (methodImport.isPropertySetter()) {
+      String value = methodImport.getParameters().getFirst().getName();
+      sb.append(String.format("%s = %s", target, value));
     } else {
-      sb.append(
-          AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName()));
+      String arguments =
+          methodImport.getParameters().stream().map(p -> p.getName() + ", ").collect(joining());
+      sb.append(String.format("%s(%s)", target, arguments));
     }
-
-    // Emit arguments
-    if (methodImport.isPropertyGetter()) {
-      return sb.toString();
-    }
-    if (methodImport.isPropertySetter()) {
-      sb.append(" = ");
-      sb.append(methodImport.getParameters().getFirst().getName());
-      return sb.toString();
-    }
-    sb.append("(");
-    for (var parameter : methodImport.getParameters()) {
-      sb.append(parameter.getName());
-      sb.append(", ");
-    }
-    sb.append(")");
     return sb.toString();
+  }
+
+  /**
+   * Returns the JavaScript expression that the import accesses or calls, e.g. {@code Math.max},
+   * {@code $instance.length} or {@code new Foo}.
+   */
+  private static String createTargetExpression(JsMethodImport methodImport) {
+    if (methodImport.isConstructor()) {
+      return String.format("new %s", methodImport.getJsQualifier());
+    }
+    if (methodImport.isInstance()) {
+      return String.format("$instance.%s", methodImport.getJsName());
+    }
+    return AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName());
   }
 
   /**

@@ -74,6 +74,10 @@ public class StaticJsMembers {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.max")
   public static native double max(double a, double b);
 
+  // `debugger` is a statement in JavaScript, so it can only be accessed through a void getter.
+  @JsProperty(namespace = GLOBAL, name = "debugger")
+  public static native void debugger();
+
   public void test() {
     StaticJsMembers.f1(1);
     f1(1);
@@ -91,6 +95,7 @@ public class StaticJsMembers {
     max(1, 2, 3);
     StaticJsMembers.max(1.0, 2.0);
     max(1.0, 2.0);
+    debugger();
 
     int n = field1;
     n = field2;
