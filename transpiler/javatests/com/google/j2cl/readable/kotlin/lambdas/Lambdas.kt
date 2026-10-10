@@ -202,12 +202,12 @@ class Lambdas {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   fun interface Thenable<T> {
-    fun then(f1: GenericJsFunction<Unit, T>, f2: GenericJsFunction<Unit, Throwable>)
+    fun then(f1: GenericJsFunction<Unit, T>, f2: GenericJsFunction<Unit, Double>)
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   fun interface AnotherThenable<T> {
-    fun then(f1: GenericJsFunction<Unit, T>, f2: GenericJsFunction<Unit, Throwable>)
+    fun then(f1: GenericJsFunction<Unit, T>, f2: GenericJsFunction<Unit, Double>)
   }
 
   fun interface Equals<T> {

@@ -34,7 +34,6 @@ import kotlin.Int
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
-import kotlin.Throwable
 import kotlin.collections.Iterable
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -206,10 +205,10 @@ open class Lambdas {
   
   @JvmStatic
   fun testJsInteropLambdas() {
-   val thenable: Thenable<String?> = Thenable { f1: GenericJsFunction<Void?, String?>?, f2: GenericJsFunction<Void?, Throwable?>? ->
+   val thenable: Thenable<String?> = Thenable { f1: GenericJsFunction<Void?, String?>?, f2: GenericJsFunction<Void?, Double?>? ->
     f1!!.apply(null)
    }
-   val otherThenable: AnotherThenable<String?> = AnotherThenable { f1_1: GenericJsFunction<Void?, String?>?, f2_1: GenericJsFunction<Void?, Throwable?>? ->
+   val otherThenable: AnotherThenable<String?> = AnotherThenable { f1_1: GenericJsFunction<Void?, String?>?, f2_1: GenericJsFunction<Void?, Double?>? ->
     f1_1!!.apply(null)
    }
    val stringJsSupplier: JsSupplier<Int?> = JsSupplier { 1 }
@@ -301,12 +300,12 @@ open class Lambdas {
  
  @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface Thenable<T> {
-  fun then(f1: GenericJsFunction<Void?, T>?, f2: GenericJsFunction<Void?, Throwable?>?)
+  fun then(f1: GenericJsFunction<Void?, T>?, f2: GenericJsFunction<Void?, Double?>?)
  }
  
  @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  fun interface AnotherThenable<T> {
-  fun then(f1: GenericJsFunction<Void?, T>?, f2: GenericJsFunction<Void?, Throwable?>?)
+  fun then(f1: GenericJsFunction<Void?, T>?, f2: GenericJsFunction<Void?, Double?>?)
  }
  
  private class IdentityFunction internal constructor(): GenericJsFunction<Any?, Any?> {

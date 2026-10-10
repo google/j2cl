@@ -231,13 +231,13 @@ public class Lambdas {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   public interface Thenable<T> {
-    void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
+    void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Double> f2);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   @java.lang.FunctionalInterface
   public interface AnotherThenable<T> {
-    void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
+    void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Double> f2);
   }
 
   // @Nullable

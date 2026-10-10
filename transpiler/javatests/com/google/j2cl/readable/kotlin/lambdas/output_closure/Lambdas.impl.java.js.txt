@@ -7,7 +7,6 @@ let Long = goog.forwardDeclare('goog.math.Long');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
@@ -189,11 +188,11 @@ class Lambdas extends j_l_Object {
  }
  /** @final @nodts */
  m_testJsInteropLambdas__void() {
-  let thenable = /**@type {!$LambdaAdaptor$1<string>}*/ (new $LambdaAdaptor$1((/** function(?string):Unit */ f1, /** function(Throwable):Unit */ f2) =>{
+  let thenable = /**@type {!$LambdaAdaptor$1<string>}*/ (new $LambdaAdaptor$1((/** function(?string):Unit */ f1, /** function(?number):Unit */ f2) =>{
    f1(null);
    return;
   }));
-  let otherThenable = /**@type {!$LambdaAdaptor$2<string>}*/ (new $LambdaAdaptor$2((/** function(?string):Unit */ f1_1, /** function(Throwable):Unit */ f2_1) =>{
+  let otherThenable = /**@type {!$LambdaAdaptor$2<string>}*/ (new $LambdaAdaptor$2((/** function(?string):Unit */ f1_1, /** function(?number):Unit */ f2_1) =>{
    f1_1(null);
    return;
   }));

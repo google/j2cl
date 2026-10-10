@@ -3,27 +3,25 @@ goog.module('lambdas.Lambdas.$LambdaAdaptor$1$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
-
 /**
  * @template T
  */
 class $LambdaAdaptor$1 extends j_l_Object {
  /** @nodts */
- constructor(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
+ constructor(/** ?function(?function(T):?void, ?function(?number):?void):void */ fn) {
   $LambdaAdaptor$1.$clinit();
   super();
-  /**@type {?function(?function(T):?void, ?function(Throwable):?void):void} @nodts*/
+  /**@type {?function(?function(T):?void, ?function(?number):?void):void} @nodts*/
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1;
   this.$ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction__void(fn);
  }
  /** @nodts */
- $ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction__void(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
+ $ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction__void(/** ?function(?function(T):?void, ?function(?number):?void):void */ fn) {
   this.$ctor__java_lang_Object__void();
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1 = fn;
  }
  
- then(/** ?function(T):?void */ f1, /** ?function(Throwable):?void */ f2) {
+ then(/** ?function(T):?void */ f1, /** ?function(?number):?void */ f2) {
   {
    let $function = this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1;
    $function(f1, f2);

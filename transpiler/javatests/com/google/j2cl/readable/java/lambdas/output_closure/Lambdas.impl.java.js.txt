@@ -10,7 +10,6 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $3 = goog.forwardDeclare('lambdas.Lambdas.$3$impl');
@@ -225,10 +224,10 @@ class Lambdas extends j_l_Object {
  /** @nodts */
  static m_testJsInteropLambdas__void() {
   Lambdas.$clinit();
-  let thenable = /**@type {!$LambdaAdaptor$1<?string>}*/ (new $LambdaAdaptor$1((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{
+  let thenable = /**@type {!$LambdaAdaptor$1<?string>}*/ (new $LambdaAdaptor$1((/** ?function(?string):?void */ f1, /** ?function(?number):?void */ f2) =>{
    f1(null);
   }));
-  let otherThenable = $Overlay.$adapt__lambdas_Lambdas_AnotherThenable_$JsFunction__lambdas_Lambdas_AnotherThenable((/** ?function(?string):?void */ f1_1, /** ?function(Throwable):?void */ f2_1) =>{
+  let otherThenable = $Overlay.$adapt__lambdas_Lambdas_AnotherThenable_$JsFunction__lambdas_Lambdas_AnotherThenable((/** ?function(?string):?void */ f1_1, /** ?function(?number):?void */ f2_1) =>{
    f1_1(null);
   });
   let stringJsSupplier = JsSupplier.$adapt(/**  @return {Integer}*/ (() =>{

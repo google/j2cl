@@ -3,7 +3,6 @@ goog.module('lambdas.Lambdas.$LambdaAdaptor$2$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Unit = goog.forwardDeclare('kotlin.Unit$impl');
 
 /**
@@ -11,20 +10,20 @@ let Unit = goog.forwardDeclare('kotlin.Unit$impl');
  */
 class $LambdaAdaptor$2 extends j_l_Object {
  /** @nodts */
- constructor(/** ?function(function(?T):Unit, function(Throwable):Unit):void */ fn) {
+ constructor(/** ?function(function(?T):Unit, function(?number):Unit):void */ fn) {
   $LambdaAdaptor$2.$clinit();
   super();
-  /**@type {?function(function(?T):Unit, function(Throwable):Unit):void} @nodts*/
+  /**@type {?function(function(?T):Unit, function(?number):Unit):void} @nodts*/
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$2;
   this.$ctor__lambdas_Lambdas_$LambdaAdaptor$2__lambdas_Lambdas_AnotherThenable_$JsFunction__void(fn);
  }
  /** @nodts */
- $ctor__lambdas_Lambdas_$LambdaAdaptor$2__lambdas_Lambdas_AnotherThenable_$JsFunction__void(/** ?function(function(?T):Unit, function(Throwable):Unit):void */ fn) {
+ $ctor__lambdas_Lambdas_$LambdaAdaptor$2__lambdas_Lambdas_AnotherThenable_$JsFunction__void(/** ?function(function(?T):Unit, function(?number):Unit):void */ fn) {
   this.$ctor__java_lang_Object__void();
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$2 = fn;
  }
  
- then(/** function(?T):Unit */ f1, /** function(Throwable):Unit */ f2) {
+ then(/** function(?T):Unit */ f1, /** function(?number):Unit */ f2) {
   {
    let $function = this.f_fn__lambdas_Lambdas_$LambdaAdaptor$2;
    $function(f1, f2);

@@ -1,12 +1,11 @@
 goog.module('lambdas.Lambdas.AnotherThenable.$Overlay$impl');
 
-let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
 
 /** @nodts */
 class $Overlay {
  /** @nodts @template T @return {?} */
- static $adapt__lambdas_Lambdas_AnotherThenable_$JsFunction__lambdas_Lambdas_AnotherThenable(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
+ static $adapt__lambdas_Lambdas_AnotherThenable_$JsFunction__lambdas_Lambdas_AnotherThenable(/** ?function(?function(T):?void, ?function(?number):?void):void */ fn) {
   $Overlay.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
