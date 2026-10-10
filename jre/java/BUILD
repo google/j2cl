@@ -9,6 +9,7 @@ load("//build_defs/internal_do_not_use:j2wasm_common.bzl", "DEFAULT_J2WASM_JAVAC
 load("@rules_java//java:defs.bzl", "java_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
+load(":package_sources_test.bzl", "package_sources_test_suite")
 
 package(
     default_applicable_licenses = ["//:j2cl_license"],
@@ -173,4 +174,8 @@ j2cl_java_toolchain(
     name = "j2wasm_java_toolchain",
     bootclasspath = ":jre_bootclasspath-j2wasm",
     visibility = ["//build_defs:toolchain_users"],
+)
+
+package_sources_test_suite(
+    name = "package_sources_test",
 )
