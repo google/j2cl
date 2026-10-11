@@ -468,4 +468,14 @@ private fun testInstanceOf_doesntInvalidateProperties() {
   } else {
     fail()
   }
+
+  // Explicit cast to make sure that the variable is typed `HasPropertyThatShouldDisambiguate`
+  // rather than inferred to be `SomeClass`.
+  val child = (SomeClass() as Any) as HasPropertyThatShouldDisambiguate
+  if (child is ParentInterface) {
+    child.dummy()
+    assertEquals("dummy", child.shouldDisambiguate())
+  } else {
+    fail()
+  }
 }

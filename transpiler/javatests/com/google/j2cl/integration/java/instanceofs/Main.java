@@ -493,5 +493,23 @@ public class Main {
     } else {
       fail();
     }
+
+    // Explicit cast to make sure that the variable is typed `HasPropertyThatShouldDisambiguate`
+    // rather than inferred to be `SomeClass`.
+    HasPropertyThatShouldDisambiguate child =
+        (HasPropertyThatShouldDisambiguate) (Object) new SomeClass();
+    if (child instanceof ParentInterface) {
+      ParentInterface i = (ParentInterface) child;
+      i.dummy();
+      assertEquals("dummy", child.shouldDisambiguate());
+    } else {
+      fail();
+    }
+    if (child instanceof ParentInterface i) {
+      i.dummy();
+      assertEquals("dummy", child.shouldDisambiguate());
+    } else {
+      fail();
+    }
   }
 }

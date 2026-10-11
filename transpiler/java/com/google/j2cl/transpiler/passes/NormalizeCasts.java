@@ -269,7 +269,13 @@ public class NormalizeCasts extends NormalizationPass {
   private static boolean needsUncheckedCall(CastExpression castExpression) {
     TypeDescriptor fromType = castExpression.getExpression().getTypeDescriptor();
     TypeDescriptor toType = castExpression.getCastTypeDescriptor();
-    return fromType.isInterface() && !toType.isAssignableTo(fromType);
+    // If the types are incompatible (neither is assignable to the other) and at least one of them
+    // is an interface (interface -> class, class -> interface, or interface -> interface), hide the
+    // cast behind `Casts.$unchecked` to prevent JSCompiler from invalidating property
+    // disambiguation.
+    return (fromType.isInterface() || toType.isInterface())
+        && !toType.isAssignableTo(fromType)
+        && !fromType.isAssignableTo(toType);
   }
 
   private static Expression createUncheckedCall(Expression expression) {
