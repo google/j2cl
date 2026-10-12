@@ -14,6 +14,7 @@
  * the License.
  */
 @file:Suppress("JAVA_MODULE_DOES_NOT_DEPEND_ON_MODULE")
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
 
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
@@ -225,7 +226,7 @@ class LoweringPasses(
   }
 }
 
-@OptIn(UnsafeDuringIrConstructionAPI::class, ObsoleteDescriptorBasedAPI::class)
+@OptIn(ObsoleteDescriptorBasedAPI::class)
 private object JvmBackendExtensionStub : JvmBackendExtension {
   override fun createSerializer(
     context: JvmBackendContext,

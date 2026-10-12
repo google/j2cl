@@ -13,6 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.lower.AbstractPropertyReferenceLowering
@@ -37,7 +39,7 @@ import org.jetbrains.kotlin.name.FqName
  * Transforms [IrRichPropertyReference] into instantiations of the corresponding internal
  * `KProperty` implementation classes from `kotlin.jvm.internal`.
  */
-@OptIn(UnsafeDuringIrConstructionAPI::class, ObsoleteDescriptorBasedAPI::class)
+@OptIn(ObsoleteDescriptorBasedAPI::class)
 internal class J2clPropertyReferenceLowering(context: J2clBackendContext) :
   AbstractPropertyReferenceLowering<J2clBackendContext>(context) {
 

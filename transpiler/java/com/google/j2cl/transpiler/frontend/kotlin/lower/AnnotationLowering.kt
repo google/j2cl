@@ -13,6 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
@@ -51,7 +53,6 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
  * - Rewrite calls to annotation elements to refer to the java-like annotation elements that will be
  *   present at runtime.
  */
-@OptIn(UnsafeDuringIrConstructionAPI::class)
 internal class AnnotationLowering(private val context: JvmBackendContext) :
   FileLoweringPass, IrVisitorVoid() {
   override fun lower(irFile: IrFile) {

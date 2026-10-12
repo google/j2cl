@@ -3,6 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
+@file:OptIn(UnsafeDuringIrConstructionAPI::class)
+
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
@@ -15,6 +17,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrFunctionReferenceImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrGetValueImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrReturnImpl
+import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.symbols.impl.IrSimpleFunctionSymbolImpl
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.util.DeepCopyIrTreeWithSymbols
@@ -181,10 +184,9 @@ class SyntheticAccessorLowering(private val context: LoweringContext) : BodyLowe
       val callee = expression.symbol.owner
 
       functionMap[callee]?.let { newFunction ->
-        val newExpression =
-          expression.run {
-            IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArguments.size, origin)
-          }
+        val newExpression = expression.run {
+          IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArguments.size, origin)
+        }
 
         newExpression.copyTypeArgumentsFrom(expression)
         expression.arguments.forEachIndexed { i, argument -> newExpression.arguments[i] = argument }
@@ -201,17 +203,16 @@ class SyntheticAccessorLowering(private val context: LoweringContext) : BodyLowe
       val callee = expression.symbol.owner
 
       functionMap[callee]?.let { newFunction ->
-        val newExpression =
-          expression.run {
-            // TODO: What has to be done with `reflectionTarget`?
-            IrFunctionReferenceImpl(
-              startOffset,
-              endOffset,
-              type,
-              newFunction.symbol,
-              typeArguments.size,
-            )
-          }
+        val newExpression = expression.run {
+          // TODO: What has to be done with `reflectionTarget`?
+          IrFunctionReferenceImpl(
+            startOffset,
+            endOffset,
+            type,
+            newFunction.symbol,
+            typeArguments.size,
+          )
+        }
 
         newExpression.copyTypeArgumentsFrom(expression)
         expression.arguments.forEachIndexed { i, argument -> newExpression.arguments[i] = argument }
@@ -240,10 +241,9 @@ class SyntheticAccessorLowering(private val context: LoweringContext) : BodyLowe
     val fileHash =
       "${irFile.packageFqName}.${irFile.name}".hashCode().toUInt().toString(Character.MAX_RADIX)
     // END OF MODIFICATIONS
-    val accessors =
-      candidates.map {
-        context.irFactory.stageController.restrictTo(it) { it.createAccessor(fileHash) }
-      }
+    val accessors = candidates.map {
+      context.irFactory.stageController.restrictTo(it) { it.createAccessor(fileHash) }
+    }
     val candidatesMap = candidates.zip(accessors).toMap()
 
     irFile.transformChildrenVoid(CallSiteTransformer(candidatesMap))
