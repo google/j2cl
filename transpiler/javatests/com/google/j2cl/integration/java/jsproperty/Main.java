@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jsproperties;
+package jsproperty;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
@@ -92,7 +92,7 @@ public class Main {
     assertEquals(12 + SET_X, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
   }
 
-  @JsType(namespace = "jsproperties", name = "MyConcreteJsType")
+  @JsType(namespace = "jsproperty", name = "MyConcreteJsType")
   public static class MyConcreteJsType {
     public int x;
 
@@ -360,51 +360,51 @@ public class Main {
     assertTrue(3 == i.getValue());
   }
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getMyConcreteJsTypeStaticY();
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setMyConcreteJsTypeStaticY(int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getMyConcreteJsTypeStaticX();
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setMyConcreteJsTypeStaticX(int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getMyConcreteJsTypeStaticAbc();
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setMyConcreteJsTypeStaticAbc(int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   static native int getProperty(Object object, String name);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   static native void setProperty(Object object, String name, int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getClassWithJsPropertiesStaticX();
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setClassWithJsPropertiesStaticX(int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getMyConcreteJsTypeAbc(Object object);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setMyConcreteJsTypeAbc(Object object, int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getClassWithJsPropertiesAbc(Object object);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setClassWithJsPropertiesAbc(Object object, int value);
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native int getClassWithJsPropertiesStaticAbc();
 
-  @JsMethod(namespace = "jsproperties.helper")
+  @JsMethod(namespace = "jsproperty.helper")
   private static native void setClassWithJsPropertiesStaticAbc(int value);
 }

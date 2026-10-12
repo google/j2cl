@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsproperties.helper');
+goog.module('jsproperty.helper');
 
-const ClassWithJsProperties = goog.require('jsproperties.ClassWithJsProperties');
-const MyConcreteJsType = goog.require('jsproperties.MyConcreteJsType');
+const ClassWithJsProperties = goog.require('jsproperty.ClassWithJsProperties');
+const MyConcreteJsType = goog.require('jsproperty.MyConcreteJsType');
 
 /**
  * @return {number}

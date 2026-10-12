@@ -10,12 +10,9 @@ package(
 
 integration_test(
     srcs = glob([
-        "*.java",
+        "*.kt",
         "*.js",
     ]),
-    # Contains JsInterop features which are only applicable for JS output.
+    # Contains JsInterop features which are only applicable for JS and Wasm output.
     enable_jvm_test = False,
-    enable_kt = False,
-    enable_wasm = False,
-    enable_wasm_custom_descriptors_jsinterop = True,
 )
