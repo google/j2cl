@@ -17,10 +17,12 @@ package jsmethodnative;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import java.io.Serializable;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
@@ -31,6 +33,7 @@ public class Main {
     testStaticNativeJsMethod();
     testForwardingMethodsOnNativeClasses();
     testCallNamespaceAsFunction();
+    testBoxedTypeSupertypes();
   }
 
   static class NonNativeTypeWithNativeMethods {
@@ -93,5 +96,46 @@ public class Main {
 
   private static void testCallNamespaceAsFunction() {
     assertEquals("foobar", callFunctionNamespace("foo"));
+  }
+
+  @JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+  private static native <T> Comparable<T> passThroughComparable(Comparable<T> c);
+
+  @JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+  private static native CharSequence passThroughCharSequence(CharSequence cs);
+
+  @JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+  private static native Number passThroughNumber(Number n);
+
+  @JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+  private static native Serializable passThroughSerializable(Serializable s);
+
+  private static void testBoxedTypeSupertypes() {
+    assertNull(passThroughComparable(null));
+    assertTrue(passThroughComparable("hello").compareTo("hello") == 0);
+    assertTrue(passThroughComparable(42.5).compareTo(42.5) == 0);
+    assertTrue(passThroughComparable(true).compareTo(true) == 0);
+    assertTrue(passThroughComparable(42L).compareTo(42L) == 0);
+    assertTrue(passThroughComparable(42).compareTo(42) == 0);
+    Comparable<Object> customComparable = o -> 0;
+    assertTrue(passThroughComparable(customComparable).compareTo(customComparable) == 0);
+
+    assertNull(passThroughCharSequence(null));
+    assertTrue(passThroughCharSequence("hello").charAt(1) == 'e');
+    CharSequence customCharSequence = new StringBuilder("world");
+    assertTrue(passThroughCharSequence(customCharSequence).charAt(1) == 'o');
+
+    assertNull(passThroughNumber(null));
+    assertTrue(passThroughNumber(42.5).doubleValue() == 42.5);
+    assertTrue(passThroughNumber(42L).longValue() == 42L);
+    assertTrue(passThroughNumber(42).intValue() == 42);
+
+    assertNull(passThroughSerializable(null));
+    assertEquals("hello", passThroughSerializable("hello"));
+    assertEquals(42.5, passThroughSerializable(42.5));
+    assertEquals(true, passThroughSerializable(true));
+    assertEquals(42L, passThroughSerializable(42L));
+    Serializable customSerializable = new Serializable() {};
+    assertSame(customSerializable, passThroughSerializable(customSerializable));
   }
 }

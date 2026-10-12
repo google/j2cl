@@ -468,6 +468,17 @@ public class TypeDescriptors {
         || isJavaLangVoid(typeDescriptor);
   }
 
+  /**
+   * Returns true if {@code typeDescriptor} is a supertype (other than {@code Object}) of a boxed
+   * type represented as a JS primitive.
+   */
+  public static boolean isSupertypeOfBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
+    return isJavaLangComparable(typeDescriptor)
+        || isJavaLangCharSequence(typeDescriptor)
+        || isJavaLangNumber(typeDescriptor)
+        || isJavaIoSerializable(typeDescriptor);
+  }
+
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
     return !typeDescriptor.isPrimitive() && !isBoxedType(typeDescriptor);
   }

@@ -17,8 +17,10 @@ package jsmethodnative
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
+import com.google.j2cl.integration.testing.Asserts.assertNull
 import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import java.io.Serializable
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage.GLOBAL
 import jsinterop.annotations.JsType
@@ -28,6 +30,7 @@ fun main(vararg args: String) {
   testStaticNativeJsMethod()
   testForwardingMethodsOnNativeClasses()
   testCallNamespaceAsFunction()
+  testBoxedTypeSupertypes()
 }
 
 private class NonNativeTypeWithNativeMethods {
@@ -79,4 +82,48 @@ private external fun callFunctionNamespace(input: String): String
 
 private fun testCallNamespaceAsFunction() {
   assertEquals("foobar", callFunctionNamespace("foo"))
+}
+
+@JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+private external fun <T> passThroughComparable(c: Comparable<T>?): Comparable<T>?
+
+@JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+private external fun passThroughCharSequence(cs: CharSequence?): CharSequence?
+
+@JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+private external fun passThroughNumber(n: Number?): Number?
+
+@JsMethod(namespace = "jsmethodnative.helper", name = "passThrough")
+private external fun passThroughSerializable(s: Serializable?): Serializable?
+
+private fun testBoxedTypeSupertypes() {
+  assertNull(passThroughComparable<String>(null))
+  assertTrue(passThroughComparable("hello")!!.compareTo("hello") == 0)
+  assertTrue(passThroughComparable(42.5)!!.compareTo(42.5) == 0)
+  assertTrue(passThroughComparable(true)!!.compareTo(true) == 0)
+  assertTrue(passThroughComparable(42L)!!.compareTo(42L) == 0)
+  assertTrue(passThroughComparable(42)!!.compareTo(42) == 0)
+  val customComparable =
+    object : Comparable<Any> {
+      override fun compareTo(other: Any): Int = 0
+    }
+  assertTrue(passThroughComparable(customComparable)!!.compareTo(customComparable) == 0)
+
+  assertNull(passThroughCharSequence(null))
+  assertTrue(passThroughCharSequence("hello")!![1] == 'e')
+  val customCharSequence: CharSequence = StringBuilder("world")
+  assertTrue(passThroughCharSequence(customCharSequence)!![1] == 'o')
+
+  assertNull(passThroughNumber(null))
+  assertTrue(passThroughNumber(42.5)!!.toDouble() == 42.5)
+  assertTrue(passThroughNumber(42L)!!.toLong() == 42L)
+  assertTrue(passThroughNumber(42)!!.toInt() == 42)
+
+  assertNull(passThroughSerializable(null))
+  assertEquals("hello", passThroughSerializable("hello"))
+  assertEquals(42.5, passThroughSerializable(42.5))
+  assertEquals(true, passThroughSerializable(true))
+  assertEquals(42L, passThroughSerializable(42L))
+  val customSerializable = object : Serializable {}
+  assertSame(customSerializable, passThroughSerializable(customSerializable))
 }

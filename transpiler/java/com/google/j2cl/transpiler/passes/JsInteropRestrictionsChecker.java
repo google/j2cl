@@ -1831,6 +1831,7 @@ public class JsInteropRestrictionsChecker {
         || TypeDescriptors.isJavaLangObject(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
+        || TypeDescriptors.isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
         || typeDescriptor.isNative()
         || typeDescriptor.isJsFunctionInterface()
         // Have to allow funcrefs through, because it is part of the JRE. This is safe because users

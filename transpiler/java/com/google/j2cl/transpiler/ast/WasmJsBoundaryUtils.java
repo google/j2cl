@@ -316,7 +316,7 @@ public class WasmJsBoundaryUtils {
     if (TypeDescriptors.isPrimitiveLong(typeDescriptor)
         || TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)
-        || isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
+        || TypeDescriptors.isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
         || typeDescriptor.isJsFunctionInterface()
         || needsBoundaryExternConversion(typeDescriptor, isExport)) {
       // Use externref since it can either be:
@@ -345,9 +345,9 @@ public class WasmJsBoundaryUtils {
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
         || TypeDescriptors.isJavaLangObject(typeDescriptor)
-        || isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)) {
+        || TypeDescriptors.isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)) {
       return RuntimeMethods.createToJsMethodCall(
-          isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
+          TypeDescriptors.isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
               ? TypeDescriptors.get().javaLangObject
               : (DeclaredTypeDescriptor) typeDescriptor,
           // TODO(b/545779164): The cast here shouldn't be needed, but the export bridge creator
@@ -403,7 +403,7 @@ public class WasmJsBoundaryUtils {
       return RuntimeMethods.createFromJsMethodCall(
           (DeclaredTypeDescriptor) typeDescriptor, expression);
     }
-    if (isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)) {
+    if (TypeDescriptors.isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)) {
       return CastExpression.builder()
           .setExpression(
               RuntimeMethods.createFromJsMethodCall(
@@ -419,13 +419,6 @@ public class WasmJsBoundaryUtils {
       return RuntimeMethods.createWasmConvertToAnyMethodCall(expression, typeDescriptor);
     }
     return expression;
-  }
-
-  private static boolean isSupertypeOfBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
-    return TypeDescriptors.isJavaLangComparable(typeDescriptor)
-        || TypeDescriptors.isJavaLangCharSequence(typeDescriptor)
-        || TypeDescriptors.isJavaLangNumber(typeDescriptor)
-        || TypeDescriptors.isJavaIoSerializable(typeDescriptor);
   }
 
   private static boolean needsBoundaryExternConversion(

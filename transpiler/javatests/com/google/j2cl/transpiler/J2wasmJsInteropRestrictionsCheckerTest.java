@@ -24,6 +24,7 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.MyNative",
         """
+        import java.io.Serializable;
         import jsinterop.annotations.*;
         @JsFunction
         interface MyJsFunction {
@@ -37,10 +38,38 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           Object objectField;
           Boolean booleanField;
           Long longField;
+          Comparable<?> comparableField;
+          CharSequence charSequenceField;
+          Number numberField;
+          Serializable serializableField;
           MyNative nativeField;
           MyJsFunction jsFunctionField;
-          MyNative(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c, MyJsFunction f) {}
-          native MyNative test(int a, String b, Double d, Object o, Boolean bool, Long l, MyNative c, MyJsFunction f);
+          MyNative(
+              int a,
+              String b,
+              Double d,
+              Object o,
+              Boolean bool,
+              Long l,
+              Comparable<?> comp,
+              CharSequence cs,
+              Number n,
+              Serializable s,
+              MyNative c,
+              MyJsFunction f) {}
+          native MyNative test(
+              int a,
+              String b,
+              Double d,
+              Object o,
+              Boolean bool,
+              Long l,
+              Comparable<?> comp,
+              CharSequence cs,
+              Number n,
+              Serializable s,
+              MyNative c,
+              MyJsFunction f);
         }
         class MyNonNative {
           @JsMethod
@@ -59,6 +88,14 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           static native <T> T method1(T t);
           @JsMethod
           static native <T extends String> T method2(T t);
+          @JsMethod
+          static native <T extends Comparable<T>> T method3(T t);
+          @JsMethod
+          static native <T extends CharSequence> T method4(T t);
+          @JsMethod
+          static native <T extends Number> T method5(T t);
+          @JsMethod
+          static native <T extends Serializable> T method6(T t);
         }
         class Main {
           void test() {
