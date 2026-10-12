@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.backend.common.CommonBackendContext
 import org.jetbrains.kotlin.backend.jvm.CachedFieldsForObjectInstances
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
+import org.jetbrains.kotlin.backend.jvm.ir.JvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.isJvmInterface
 import org.jetbrains.kotlin.backend.jvm.ir.replaceThisByStaticReference
@@ -58,7 +59,7 @@ class J2clBackendContext(
     symbol: IrSymbol,
     startOffset: Int = UNDEFINED_OFFSET,
     endOffset: Int = UNDEFINED_OFFSET,
-  ) = jvmBackendContext.createJvmIrBuilder(symbol, startOffset, endOffset)
+  ): JvmIrBuilder = jvmBackendContext.createJvmIrBuilder(symbol, startOffset, endOffset)
 }
 
 /** J2CL specific re-implementation of `org.jetbrains.kotlin.backend.jvm.JvmCachedDeclarations`. */

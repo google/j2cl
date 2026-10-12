@@ -36,9 +36,9 @@ interface WithId {
 var initCounter = 0
 
 class PropertyDelegatedToAnObject(override val id: String) : WithId {
-  val initCounterBefore = initCounter
+  val initCounterBefore: Int = initCounter
   var delegatedProperty: String by DelegateObject()
-  val initCounterAfter = initCounter
+  val initCounterAfter: Int = initCounter
 }
 
 var PropertyDelegatedToAnObject.delegatedExtensionProperty: String by DelegateObject()
@@ -156,7 +156,7 @@ class DelegationToPropertyReference(simpleClassWithOneProperty: SimpleClassWithO
   var stringProperty = "sameClassProperty"
   var delegatedToAnotherSameClassProperty: String by this::stringProperty
 
-  var delegatedToAnotherClassProperty by simpleClassWithOneProperty::property
+  var delegatedToAnotherClassProperty: String by simpleClassWithOneProperty::property
 }
 
 fun testDelegationToPropertyReference() {

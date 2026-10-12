@@ -20,7 +20,7 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 /** Test instance field initializer and instance field reference in field declaration. */
 class Foo {
   var a = 1
-  var b = a * 2
+  var b: Int = a * 2
 }
 
 fun main(vararg unused: String) {

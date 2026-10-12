@@ -19,7 +19,7 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 
 var simpleValue = 5
 
-var calculatedValue = simpleValue * 5
+var calculatedValue: Int = simpleValue * 5
 
 fun someStaticMethod(): Int {
   return simpleValue * calculatedValue

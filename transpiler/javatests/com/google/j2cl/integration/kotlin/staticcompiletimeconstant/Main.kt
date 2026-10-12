@@ -22,7 +22,7 @@ val CONST_WITH_ESCAPES = "A\"SD\"F"
 // Class with circular static initialization used as a way to test that compile time constants are
 // initialized even before $clinit.
 object Foo {
-  var circular = init()
+  var circular: String = init()
 
   const val STRING_COMPILE_TIME_CONSTANT = "qwer"
   const val BYTE_COMPILE_TIME_CONSTANT: Byte = 100
@@ -55,7 +55,7 @@ object Foo {
 // Class with circular static initialization used as a way to test that compile time constants are
 // initialized even before $clinit.
 object Bar {
-  var circular = init()
+  var circular: String = init()
 
   const val STRING_COMPILE_TIME_CONSTANT = "qwer"
   const val BYTE_COMPILE_TIME_CONSTANT: Byte = 100

@@ -16,6 +16,6 @@
 package com.google.j2cl.transpiler.backend.kotlin.common
 
 /** Returns this list with first element mapped using the given function. */
-fun <T> List<T>.mapFirst(fn: (T) -> T) = mapIndexed { index, element ->
+fun <T> List<T>.mapFirst(fn: (T) -> T): List<T> = mapIndexed { index, element ->
   element.runIf(index == 0, fn)
 }

@@ -26,6 +26,6 @@ enum class Planet(private val index: Int) {
   NEPTUNE(8);
 
   companion object {
-    @JvmStatic val extraPlanet = Planet.MERCURY
+    @JvmStatic val extraPlanet: Planet = Planet.MERCURY
   }
 }

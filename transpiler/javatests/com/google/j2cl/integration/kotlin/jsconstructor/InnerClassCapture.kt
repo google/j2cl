@@ -43,7 +43,7 @@ object InnerClassCapture {
     var i = 1
 
     inner class Inner @JsConstructor constructor() : Base() {
-      fun getEnclosingValue() = i
+      fun getEnclosingValue(): Int = i
 
       override fun callFromCtor() {
         // Referencing Outer.i here requires that outer class capture is resolved before we invoke
@@ -53,7 +53,7 @@ object InnerClassCapture {
     }
 
     inner class InnerExtendsJsConstructor @JsConstructor constructor() : BaseJsConstructor() {
-      fun getEnclosingValue() = i
+      fun getEnclosingValue(): Int = i
 
       override fun callFromCtor() {
         // Referencing Outer.i here requires that outer class capture is resolved before we invoke

@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
+import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
@@ -460,7 +461,7 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
     get() = generateSequence(this) { it.superClass }
 }
 
-fun createThrowingStubBody(context: JvmBackendContext, function: IrSimpleFunction) =
+fun createThrowingStubBody(context: JvmBackendContext, function: IrSimpleFunction): IrBlockBody =
   context.createIrBuilder(function.symbol).irBlockBody {
     // Function body consist only of throwing UnsupportedOperationException statement
     +irCall(context.symbols.throwUnsupportedOperationException).apply {

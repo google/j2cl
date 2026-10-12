@@ -72,10 +72,10 @@ fun <T> accept(consumer: Consumer<T>, value: T): Unit = consumer.accept(value)
 var instanceNumber = 0
 
 class Outer {
-  var outerInstanceNumber = instanceNumber++
+  var outerInstanceNumber: Int = instanceNumber++
 
   class SomeObject {
-    val someObjectInstanceNumber = instanceNumber++
+    val someObjectInstanceNumber: Int = instanceNumber++
 
     fun isInstance0() = someObjectInstanceNumber == 0
 
@@ -175,7 +175,7 @@ fun testInstanceMethodReferences() {
 
 var sequenceNumber = 0
 
-fun returnSequenceAsInt() = sequenceNumber++
+fun returnSequenceAsInt(): Int = sequenceNumber++
 
 fun returnSequenceAsString() = "" + sequenceNumber++
 
@@ -430,16 +430,16 @@ fun testQualifierEvaluation_observeUninitializedField() {
   assertThrowsNullPointerException { Sub().stringRefFun.invoke() }
 }
 
-fun String.testAppendX() = this + "X"
+fun String.testAppendX(): String = this + "X"
 
-fun String.testAppend(x: String) = this + x
+fun String.testAppend(x: String): String = this + x
 
 val String.valueWithY: String
   get() = this + "Y"
 
 fun TestClassWithCompanion.Companion.getValueAndX() = "${getValue()}X"
 
-fun Outer.getInstanceNumberExtension() = outerInstanceNumber
+fun Outer.getInstanceNumberExtension(): Int = outerInstanceNumber
 
 fun testExtensionMethodReferences() {
   var variable = "Hello"
@@ -540,13 +540,13 @@ private fun interface ToIntFunction<T> {
   fun toInt(strings: T): Int
 }
 
-fun String.extensionFctWithVarargs(vararg v: String) = this.length + v.size
+fun String.extensionFctWithVarargs(vararg v: String): Int = this.length + v.size
 
 fun String.extensionFctWithVarargsAndTrailingArgument(
   vararg v: String,
   trailing: String,
   trailing2: Int,
-) = this.length + v.size + trailing.length + trailing2
+): Int = this.length + v.size + trailing.length + trailing2
 
 private fun interface StringArrayStringIntToIntFunction {
   fun toInt(strings: Array<String>, s: String, i: Int): Int
