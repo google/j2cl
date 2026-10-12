@@ -16,8 +16,8 @@ let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.ClassWithJsFun
 let ContainerImpl = goog.forwardDeclare('jsfunction.ContainerImpl$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.JsFunctionImplementation$impl');
-let JsFunctionTestHelper = goog.forwardDeclare('jsfunction.JsFunctionTestHelper');
 let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.TIntegerJsBiFunction$impl');
+let helper = goog.forwardDeclare('jsfunction.helper');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -73,7 +73,7 @@ class MainKt extends j_l_Object {
   MainKt.$clinit();
   let func = /**@type {!JsFunctionImplementation}*/ (JsFunctionImplementation.$create__());
   (/**@type {function(number):number}*/ (func))(10);
-  MainKt.m_callFn__jsfunction_JsFunctionInterface__int__int(JsFunctionTestHelper.createNativeFunction(), 10);
+  MainKt.m_callFn__jsfunction_JsFunctionInterface__int__int(helper.createNativeFunction(), 10);
   let a = JsFunctionImplementation.m_getField__jsfunction_JsFunctionImplementation__int(func);
   JsFunctionImplementation.m_bar__jsfunction_JsFunctionImplementation__int(func);
  }
@@ -284,7 +284,7 @@ class MainKt extends j_l_Object {
   MainKt.m_callImplementorParameterized__jsfunction_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {!TIntegerJsBiFunction<?string>}*/ (TIntegerJsBiFunction.$create__()), '');
   tIntegerJsBiFunction('a', Integer.valueOf(1));
   doubleDoubleJsBiFunction(1.1, 1.1);
-  JsFunctionTestHelper.callOnFunction(DoubleDoubleJsBiFunction.$create__());
+  helper.callOnFunction(DoubleDoubleJsBiFunction.$create__());
  }
  /** @nodts */
  static m_testCast__void() {
@@ -318,8 +318,8 @@ class MainKt extends j_l_Object {
   let fn = /**  @return {!RegExp}*/ ((/** !RegExp */ a) =>{
    return a;
   });
-  let result = JsFunctionTestHelper.callAsFunctionWithNativeType(fn, nativeObj);
-  let jsFnFromJs = JsFunctionTestHelper.createNativeFunction();
+  let result = helper.callAsFunctionWithNativeType(fn, nativeObj);
+  let jsFnFromJs = helper.createJsFunctionWithNativeType();
   let nativeObjResult = jsFnFromJs(nativeObj);
  }
  /** @nodts */
@@ -354,8 +354,8 @@ class MainKt extends j_l_Object {
   ContainerImpl = goog.module.get('jsfunction.ContainerImpl$impl');
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.JsFunctionImplementation$impl');
-  JsFunctionTestHelper = goog.module.get('jsfunction.JsFunctionTestHelper');
   TIntegerJsBiFunction = goog.module.get('jsfunction.TIntegerJsBiFunction$impl');
+  helper = goog.module.get('jsfunction.helper');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

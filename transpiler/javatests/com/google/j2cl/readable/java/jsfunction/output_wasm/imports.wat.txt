@@ -102,25 +102,25 @@
 )
 
 ;;; WasmExtern Main.createNativeFunction()
-(func $m_createNativeFunction__jsfunction_Main_JsFunctionInterface@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
+(func $m_createNativeFunction__jsfunction_Main_JsFunctionInterface@jsfunction.Main (import "imports" "jsfunction.helper.createNativeFunction")
  (result (ref null extern))
 )
 
 ;;; double Main.callOnFunction(WasmExtern f)
-(func $m_callOnFunction__java_lang_Object__double@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callOnFunction")
+(func $m_callOnFunction__java_lang_Object__double@jsfunction.Main (import "imports" "jsfunction.helper.callOnFunction")
  (param $f (ref null extern))
  (result f64)
 )
 
 ;;; NativeRegExp Main.callAsFunctionWithNativeType(WasmExtern fn, NativeRegExp arg)
-(func $m_callAsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.callAsFunctionWithNativeType")
+(func $m_callAsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main (import "imports" "jsfunction.helper.callAsFunctionWithNativeType")
  (param $fn (ref null extern))
  (param $arg (ref null extern))
  (result (ref null extern))
 )
 
 ;;; WasmExtern Main.createJsFunctionWithNativeType()
-(func $m_createJsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType@jsfunction.Main (import "imports" "jsfunction.JsFunctionTestHelper.createNativeFunction")
+(func $m_createJsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType@jsfunction.Main (import "imports" "jsfunction.helper.createJsFunctionWithNativeType")
  (result (ref null extern))
 )
 

@@ -198,7 +198,7 @@ open class Main {
  
  companion object {
   @JvmStatic
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   internal external fun createNativeFunction(): JsFunctionInterface?
   
   @JvmStatic
@@ -267,7 +267,7 @@ open class Main {
   }
   
   @JvmStatic
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   external fun callOnFunction(f: Any?): Double
   
   @JvmStatic
@@ -288,11 +288,11 @@ open class Main {
   }
   
   @JvmStatic
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   internal external fun callAsFunctionWithNativeType(fn: JsFunctionWithNativeType?, arg: NativeRegExp?): NativeRegExp?
   
   @JvmStatic
-  @JsMethod(name = "createNativeFunction", namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   internal external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType?
  }
  

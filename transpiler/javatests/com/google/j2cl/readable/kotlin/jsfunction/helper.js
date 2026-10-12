@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsfunction.JsFunctionTestHelper');
+goog.module('jsfunction.helper');
 
 /**
  * @template T
@@ -26,10 +26,10 @@ function createNativeFunction() {
 }
 
 /**
- * @return {function(!SomeJsType):!SomeJsType}
+ * @return {function(!RegExp):!RegExp}
  * @public
  */
-function createJsFunctionWithJsType() {
+function createJsFunctionWithNativeType() {
   return function(a) {
     return a;
   };
@@ -56,6 +56,7 @@ function callAsFunctionWithNativeType(fn, arg) {
 
 exports = {
   createNativeFunction,
+  createJsFunctionWithNativeType,
   callOnFunction,
   callAsFunctionWithNativeType,
 };

@@ -85,7 +85,7 @@ public class Main {
     }
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native JsFunctionInterface createNativeFunction();
 
   public static int callFn(JsFunctionInterface fn, int a) {
@@ -383,7 +383,7 @@ public class Main {
     callOnFunction(new DoubleDoubleJsBiFunction());
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native double callOnFunction(Object f);
   ;
 
@@ -436,11 +436,11 @@ public class Main {
     NativeRegExp f(NativeRegExp nativeObj);
   }
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native NativeRegExp callAsFunctionWithNativeType(
       JsFunctionWithNativeType fn, NativeRegExp arg);
 
-  @JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createNativeFunction")
+  @JsMethod(namespace = "jsfunction.helper")
   public static native JsFunctionWithNativeType createJsFunctionWithNativeType();
 
   public void testJsFunctionWithNativeType() {

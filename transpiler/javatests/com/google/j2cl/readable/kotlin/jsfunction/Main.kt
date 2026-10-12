@@ -79,8 +79,7 @@ class JsFunctionImplementation : JsFunctionInterface {
   }
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
-external fun createNativeFunction(): JsFunctionInterface
+@JsMethod(namespace = "jsfunction.helper") external fun createNativeFunction(): JsFunctionInterface
 
 fun callFn(fn: JsFunctionInterface, a: Int): Int {
   return fn.foo(a)
@@ -394,7 +393,7 @@ fun testParameterTypes() {
   callOnFunction(DoubleDoubleJsBiFunction())
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 external fun callOnFunction(f: JsBiFunction<Double?, Double?>?): Double
 
 fun testCast() {
@@ -440,13 +439,13 @@ fun interface JsFunctionWithNativeType {
   fun f(nativeObj: NativeRegExp): NativeRegExp
 }
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper")
+@JsMethod(namespace = "jsfunction.helper")
 external fun callAsFunctionWithNativeType(
   fn: JsFunctionWithNativeType,
   arg: NativeRegExp,
 ): NativeRegExp
 
-@JsMethod(namespace = "jsfunction.JsFunctionTestHelper", name = "createNativeFunction")
+@JsMethod(namespace = "jsfunction.helper")
 external fun createJsFunctionWithNativeType(): JsFunctionWithNativeType
 
 fun testJsFunctionWithNativeType() {
