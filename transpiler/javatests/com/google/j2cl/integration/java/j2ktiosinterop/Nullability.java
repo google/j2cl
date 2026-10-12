@@ -33,5 +33,13 @@ public final class Nullability {
 
   public static <V extends @Nullable Object> void acceptNullableWithNullableBound(@Nullable V v) {}
 
+  public static @Nullable Character nullableCharacter(char c) {
+    return c;
+  }
+
+  public static @Nullable Character acceptNullableCharacter(@Nullable Character c) {
+    return c;
+  }
+
   private Nullability() {}
 }

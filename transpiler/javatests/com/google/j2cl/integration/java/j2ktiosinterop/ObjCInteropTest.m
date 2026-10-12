@@ -27,6 +27,7 @@
 #import "j2ktiosinterop/PropertyMethodOverride.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
+#include "java/lang/Character.h"
 #include "java/lang/ClassCastException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Enum.h"
@@ -670,6 +671,7 @@
 - (void)testJreUtilities {
   XCTAssertEqual(JavaLangMath_absWithInt_(-1), 1);
   XCTAssertEqual(JavaLangMath_maxWithInt_withInt_(1, 2), 2);
+  XCTAssertTrue(JavaLangCharacter_isDigitWithChar_('5'));
 
   XCTAssertNotNil(JavaUtilBase64_getEncoder());
   XCTAssertNotNil(JavaUtilBase64_getDecoder());
@@ -839,6 +841,12 @@
   J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil);
   J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
   J2ktiosinteropNullability_acceptNullableWithNullableBoundWithId_(nil);
+
+  id c = J2ktiosinteropNullability_nullableCharacterWithChar_('a');
+  XCTAssertNotNil(c);
+  XCTAssertEqualObjects(J2ktiosinteropNullability_acceptNullableCharacterWithJavaLangCharacter_(c),
+                        c);
+  XCTAssertNil(J2ktiosinteropNullability_acceptNullableCharacterWithJavaLangCharacter_(nil));
 }
 
 - (void)testObjectiveCNameOverrides {
