@@ -518,6 +518,11 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--string-lowering",
             "--remove-unused-module-elements",
             "--reorder-globals",
+            # Remove toolchain-specific annotations (e.g. `@binaryen.js.called`)
+            # that are only needed by Binaryen optimization passes so that they
+            # are not emitted in a custom section and don't contribute to the
+            # module size.
+            "--strip-toolchain-annotations",
 
             # Mark all types as 'final' that we can, to help VMs at runtime.
             "--type-finalizing",
