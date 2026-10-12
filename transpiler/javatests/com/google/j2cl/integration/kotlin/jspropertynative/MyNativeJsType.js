@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsproperties.MyNativeJsType');
+goog.module('jspropertynative.MyNativeJsType');
 
 class MyNativeJsType {
   /** @param {number=} x */

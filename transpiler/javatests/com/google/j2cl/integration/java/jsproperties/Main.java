@@ -16,13 +16,9 @@
 package jsproperties;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -31,15 +27,8 @@ public class Main {
     testConcreteJsType();
     testConcreteJsType_static();
     testJavaClassImplementingMyJsTypeInterfaceWithProperty();
-    testJsPropertyGetX();
-    testJsPropertyGetX_undefined();
-    testJsPropertyIsX();
-    testNativeJsType();
-    testNativeJsTypeWithConstructor();
     testClassWithJsProperties();
     testClassWithJsProperties_static();
-    testNativeStaticJsProperty();
-    testNativeInstanceJsProperty();
     testDefaultMethodJsProperty();
   }
 
@@ -237,101 +226,6 @@ public class Main {
     assertEquals(21 + SET_X, MyConcreteJsType.staticX);
   }
 
-  @JsType(isNative = true, namespace = "jsproperties", name = "MyNativeJsType")
-  public static class MyNativeJsType {
-    public MyNativeJsType() {}
-
-    public MyNativeJsType(int n) {}
-
-    public static int staticX;
-
-    public boolean ctorExecuted;
-
-    public int x;
-
-    @JsProperty
-    public native int getY();
-
-    @JsProperty
-    public native void setY(int x);
-
-    public native int sum(int bias);
-  }
-
-  private static void testNativeJsType() {
-    MyNativeJsType.staticX = 34;
-    assertEquals(34, MyNativeJsType.staticX);
-
-    MyNativeJsType obj = createMyNativeJsType();
-    assertTrue(obj.ctorExecuted);
-    assertEquals(obj.x, 0);
-    obj.x = 72;
-    assertEquals(72, obj.x);
-    assertEquals(74, obj.sum(2));
-
-    assertEquals(0, obj.getY());
-    obj.setY(91);
-    assertEquals(91, obj.getY());
-  }
-
-  @JsType(isNative = true, namespace = "jsproperties", name = "MyNativeJsType")
-  public static class MyNativeJsTypeWithConstructor {
-    public MyNativeJsTypeWithConstructor(int x) {}
-
-    public boolean ctorExecuted;
-    public int x;
-  }
-
-  private static void testNativeJsTypeWithConstructor() {
-    MyNativeJsTypeWithConstructor obj = new MyNativeJsTypeWithConstructor(12);
-    assertTrue(obj.ctorExecuted);
-    assertEquals(12, obj.x);
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  interface HasIsX {
-
-    @JsProperty
-    boolean isX();
-
-    @JsProperty
-    void setX(boolean x);
-  }
-
-  private static void testJsPropertyIsX() {
-    HasIsX object = createHasIsX();
-    assertFalse(object.isX());
-    object.setX(true);
-    assertTrue(object.isX());
-    object.setX(false);
-    assertFalse(object.isX());
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  interface HasGetY {
-
-    @JsProperty
-    int getY();
-
-    @JsProperty
-    void setY(int x);
-  }
-
-  // Native undefined/null indistinguishable after conversion in Wasm.
-  @Wasm("nop")
-  private static void testJsPropertyGetX_undefined() {
-    HasGetY object = createHasGetY();
-    assertTrue(isUndefined(object.getY()));
-  }
-
-  private static void testJsPropertyGetX() {
-    HasGetY object = createHasGetY();
-    object.setY(10);
-    assertEquals(10, object.getY());
-    object.setY(0);
-    assertEquals(0, object.getY());
-  }
-
   static class ClassWithJsProperties {
     private int x;
 
@@ -378,14 +272,6 @@ public class Main {
     public static void setStaticC(int x) {
       ClassWithJsProperties.staticX = x;
     }
-
-    // TODO(b/556880337): Instance native member on non-native type not supported.
-    @Wasm("nop")
-    @JsProperty(name = "hasOwnProperty")
-    public native Object getA();
-
-    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
-    public static native double getB();
   }
 
   private static void testClassWithJsProperties() {
@@ -438,17 +324,6 @@ public class Main {
     assertEquals(24, ClassWithJsProperties.staticX);
   }
 
-  private static void testNativeStaticJsProperty() {
-    int pi = (int) ClassWithJsProperties.getB();
-    assertTrue(pi == 3);
-  }
-
-  // TODO(b/556880337): Instance native member on non-native type not supported.
-  @Wasm("nop")
-  private static void testNativeInstanceJsProperty() {
-    assertTrue(new ClassWithJsProperties().getA() != null);
-  }
-
   interface InterfaceWithDefaultJsProperties {
     int getterCalled();
 
@@ -484,18 +359,6 @@ public class Main {
     i.setValue(3);
     assertTrue(3 == i.getValue());
   }
-
-  @JsMethod(namespace = "jsproperties.helper")
-  private static native MyNativeJsType createMyNativeJsType();
-
-  @JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
-  private static native HasGetY createHasGetY();
-
-  @JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
-  private static native HasIsX createHasIsX();
-
-  @JsMethod(namespace = "jsproperties.helper")
-  private static native boolean isUndefined(int value);
 
   @JsMethod(namespace = "jsproperties.helper")
   private static native int getMyConcreteJsTypeStaticY();

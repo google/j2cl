@@ -16,27 +16,17 @@
 package jsproperties
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
-import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsMethod
-import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
-import kotlin.js.definedExternally
 
 fun main(vararg args: String) {
   testConcreteJsType()
   testConcreteJsType_static()
   testJavaClassImplementingMyJsTypeInterfaceWithProperty()
-  testJsPropertyGetX()
-  testJsPropertyGetX_undefined()
-  testJsPropertyIsX()
-  testNativeJsType()
-  testNativeJsTypeWithConstructor()
   testClassWithJsProperties()
   testClassWithJsProperties_static()
-  testNativeStaticJsProperty()
-  testNativeInstanceJsProperty()
   testDefaultMethodJsProperty()
   KotlinProperties().testPropertyAccessors()
 }
@@ -219,92 +209,6 @@ private fun testConcreteJsType_static() {
   assertEquals(21 + SET_X, MyConcreteJsType.staticX)
 }
 
-@JsType(isNative = true, namespace = "jsproperties", name = "MyNativeJsType")
-open internal class MyNativeJsType {
-  constructor(n: Int)
-
-  constructor()
-
-  @JvmField var ctorExecuted: Boolean = definedExternally
-
-  @JvmField var x: Int = definedExternally
-
-  @JsProperty external fun getY(): Int
-
-  @JsProperty external fun setY(x: Int)
-
-  open external fun sum(bias: Int): Int
-
-  companion object {
-    @JvmField var staticX: Int = definedExternally
-  }
-}
-
-private fun testNativeJsType() {
-  MyNativeJsType.staticX = 34
-  assertEquals(34, MyNativeJsType.staticX)
-
-  val obj: MyNativeJsType = createMyNativeJsType()
-  assertTrue(obj.ctorExecuted)
-  assertEquals(obj.x, 0)
-  obj.x = 72
-  assertEquals(72, obj.x)
-  assertEquals(74, obj.sum(2))
-
-  assertEquals(0, obj.getY())
-  obj.setY(91)
-  assertEquals(91, obj.getY())
-}
-
-@JsType(isNative = true, namespace = "jsproperties", name = "MyNativeJsType")
-open internal class MyNativeJsTypeWithConstructor(x: Int) {
-  @JvmField var ctorExecuted: Boolean = definedExternally
-  @JvmField var x: Int = definedExternally
-}
-
-private fun testNativeJsTypeWithConstructor() {
-  val obj = MyNativeJsTypeWithConstructor(12)
-  assertTrue(obj.ctorExecuted)
-  assertEquals(12, obj.x)
-}
-
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-internal interface HasIsX {
-
-  @JsProperty fun isX(): Boolean
-
-  @JsProperty fun setX(x: Boolean)
-}
-
-private fun testJsPropertyIsX() {
-  val o: HasIsX = createHasIsX()
-  o.setX(true)
-  assertTrue(o.isX())
-  o.setX(false)
-  assertFalse(o.isX())
-}
-
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-internal interface HasGetY {
-
-  @JsProperty fun getY(): Int
-
-  @JsProperty fun setY(x: Int)
-}
-
-private fun testJsPropertyGetX_undefined() {
-  val o: HasGetY = createHasGetY()
-  assertTrue(isUndefined(o.getY()))
-}
-
-private fun testJsPropertyGetX() {
-  val o: HasGetY = createHasGetY()
-  o.setY(10)
-  assertEquals(10, o.getY())
-  o.setY(0)
-  assertEquals(0, o.getY())
-}
-
 class ClassWithJsProperties {
   private var x: Int = 0
 
@@ -324,8 +228,6 @@ class ClassWithJsProperties {
 
   @JsProperty var y: Int = 0
 
-  @JsProperty(name = "hasOwnProperty") external fun getA(): Any?
-
   companion object {
     @JvmField internal var staticX: Int = 0
 
@@ -344,10 +246,6 @@ class ClassWithJsProperties {
     fun setStaticC(x: Int) {
       staticX = x
     }
-
-    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
-    @JvmStatic
-    external fun getB(): Double
   }
 }
 
@@ -401,15 +299,6 @@ private fun testClassWithJsProperties_static() {
   assertEquals(24, ClassWithJsProperties.staticX)
 }
 
-private fun testNativeStaticJsProperty() {
-  val pi = ClassWithJsProperties.getB().toInt()
-  assertTrue(pi == 3)
-}
-
-private fun testNativeInstanceJsProperty() {
-  assertTrue(ClassWithJsProperties().getA() != null)
-}
-
 interface InterfaceWithDefaultJsProperties {
   fun getterCalled(): Int
 
@@ -435,17 +324,6 @@ fun testDefaultMethodJsProperty() {
   i.setValue(3)
   assertTrue(3 == i.getValue())
 }
-
-@JsMethod(namespace = "jsproperties.helper")
-private external fun createMyNativeJsType(): MyNativeJsType
-
-@JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
-private external fun createHasGetY(): HasGetY
-
-@JsMethod(namespace = "jsproperties.helper", name = "createJsObject")
-private external fun createHasIsX(): HasIsX
-
-@JsMethod(namespace = "jsproperties.helper") private external fun isUndefined(value: Int): Boolean
 
 @JsMethod(namespace = "jsproperties.helper") private external fun getMyConcreteJsTypeStaticY(): Int
 

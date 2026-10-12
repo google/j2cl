@@ -16,7 +16,6 @@ goog.module('jsproperties.helper');
 
 const ClassWithJsProperties = goog.require('jsproperties.Main.ClassWithJsProperties');
 const MyConcreteJsType = goog.require('jsproperties.MyConcreteJsType');
-const MyNativeJsType = goog.require('jsproperties.MyNativeJsType');
 
 /**
  * @return {number}
@@ -64,31 +63,6 @@ exports.getMyConcreteJsTypeStaticAbc = function() {
  */
 exports.setMyConcreteJsTypeStaticAbc = function(value) {
   MyConcreteJsType.abc = value;
-};
-
-/**
- * @return {*}
- * @public
- */
-exports.createMyNativeJsType = function() {
-  return new MyNativeJsType(0);
-};
-
-/**
- * @return {*}
- * @public
- */
-exports.createJsObject = function() {
-  return {};
-};
-
-/**
- * @param {?} value
- * @return {boolean}
- * @public
- */
-exports.isUndefined = function(value) {
-  return value === undefined;
 };
 
 /**
