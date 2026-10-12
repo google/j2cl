@@ -54,6 +54,8 @@ import org.jetbrains.org.objectweb.asm.Type
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPhase = loweringPhase {
+  // Upgrade the function references and the function expressions to rich callable references.
+  moduleLowering(::J2clUpgradeCallableReferences)
   // Remove expect declarations, the actuals will be used instead.
   moduleLowering(::ExpectDeclarationsRemoveLowering)
   // The K2 frontend does not create a FileKt class  for referenced/ top-level members defined in
@@ -74,9 +76,6 @@ private val loweringPhase = loweringPhase {
   perFileLowering(jvmInventNamesForLocalClassesFactory)
   // Rewrites `Array(size) { index -> value }` using type-specific initializer lambdas.
   perFileLowering(::ArrayConstructorLowering)
-  // TODO(dramaix) : This should be run as the first pass. But our inlining pass is adding function
-  // references and function expression.
-  moduleLowering(::J2clUpgradeCallableReferences)
   // Create nullable backing fields and insert nullability checks for lateinit properties and
   // variables. Must run before JvmPropertiesLowering.
   perFileLowering(::LateinitLowering)

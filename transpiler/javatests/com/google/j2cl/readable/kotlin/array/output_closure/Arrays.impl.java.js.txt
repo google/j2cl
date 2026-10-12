@@ -242,34 +242,31 @@ class Arrays extends j_l_Object {
   let ints = /**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {number}*/ ((/** number */ it) =>{
    return Math.imul(it, 2);
   })));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0) =>{
-   let p0_1 = /**@type {!Integer}*/ ($Casts.$to(p0, Integer));
-   return Integer.valueOf(ArrayKt.m_doubleIt__int__int(p0_1.intValue()));
-  }))))));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {number}*/ ((/** number */ p0) =>{
+   return ArrayKt.m_doubleIt__int__int(p0);
+  }))));
   ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ x) =>{
    let x_1 = /**@type {Integer}*/ ($Casts.$to(x, Integer));
    return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(x_1));
   }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_2) =>{
-   let p0_3 = /**@type {Integer}*/ ($Casts.$to(p0_2, Integer));
-   return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(p0_3));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_1) =>{
+   let p0_2 = /**@type {Integer}*/ ($Casts.$to(p0_1, Integer));
+   return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(p0_2));
   }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_4) =>{
-   let p0_5 = /**@type {!Integer}*/ ($Casts.$to(p0_4, Integer));
-   return Integer.valueOf(ArrayKt.m_acceptsVararg__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([p0_5.intValue()], $int))));
-  }))))));
-  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_6) =>{
-   let p0_7 = /**@type {!Integer}*/ ($Casts.$to(p0_6, Integer));
-   return Integer.valueOf(ArrayKt.m_tailingVararg__int__arrayOf_int__int(p0_7.intValue(), /**@type {!Array<number>}*/ ($Arrays.$create([0], $int))));
-  }))))));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {number}*/ ((/** number */ p0_3) =>{
+   return ArrayKt.m_acceptsVararg__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$stampType([p0_3], $int)));
+  }))));
+  ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {number}*/ ((/** number */ p0_4) =>{
+   return ArrayKt.m_tailingVararg__int__arrayOf_int__int(p0_4, /**@type {!Array<number>}*/ ($Arrays.$create([0], $int)));
+  }))));
   let initializer = Function1.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ x_2) =>{
    let x_3 = /**@type {!Integer}*/ ($Casts.$to(x_2, Integer));
    return x_3;
   }));
   ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(initializer))));
-  let otherInitializer = Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_8) =>{
-   let p0_9 = /**@type {Integer}*/ ($Casts.$to(p0_8, Integer));
-   return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(p0_9));
+  let otherInitializer = Function1.$adapt(/**  @return {!Integer}*/ ((/** Integer */ p0_5) =>{
+   let p0_6 = /**@type {Integer}*/ ($Casts.$to(p0_5, Integer));
+   return Integer.valueOf(ArrayKt.m_toNonNullable__java_lang_Integer__int(p0_6));
   }));
   ints = (/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, ArrayHelpersKt.m_toIntArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_IntArrayInitializer(otherInitializer))));
   let multidimensional = /**@type {!Array<!Array<number>>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {!Array<number>}*/ ((/** number */ it_1) =>{
@@ -280,10 +277,9 @@ class Arrays extends j_l_Object {
   let longs = /**@type {!Array<!Long>}*/ ($Arrays.$createWithInitializer(10, $long, /**  @return {!Long}*/ ((/** number */ it_3) =>{
    return Primitives.m_widenIntToLong__int__long(it_3);
   })));
-  longs = (/**@type {!Array<!Long>}*/ ($Arrays.$createWithInitializer(10, $long, ArrayHelpersKt.m_toLongArrayInitializer__kotlin_jvm_functions_Function1__kotlin_jvm_internal_LongArrayInitializer(Function1.$adapt(/**  @return {!Long}*/ ((/** !Integer */ p0_10) =>{
-   let p0_11 = /**@type {!Integer}*/ ($Casts.$to(p0_10, Integer));
-   return Primitives.m_widenIntToLong__int__long(p0_11.intValue());
-  }))))));
+  longs = (/**@type {!Array<!Long>}*/ ($Arrays.$createWithInitializer(10, $long, /**  @return {!Long}*/ ((/** number */ p0_7) =>{
+   return Primitives.m_widenIntToLong__int__long(p0_7);
+  }))));
  }
  /** @final @nodts @return {number} */
  m_testArrayInitializerEscapesScope__int() {

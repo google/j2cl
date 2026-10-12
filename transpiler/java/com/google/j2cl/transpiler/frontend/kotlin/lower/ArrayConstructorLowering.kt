@@ -42,8 +42,8 @@ import org.jetbrains.kotlin.ir.declarations.IrSymbolOwner
 import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
 import org.jetbrains.kotlin.ir.expressions.IrReturn
+import org.jetbrains.kotlin.ir.expressions.IrRichFunctionReference
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.copyTypeArgumentsFrom
 import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
@@ -53,6 +53,7 @@ import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
+import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classifierOrFail
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
@@ -118,13 +119,17 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
     // context of the lambda (ex. return to the function it's being inlined into). In these cases
     // we must rewrite the call so that the lambda is inlined to the call-site so that the return
     // can be handled properly.
-    if (originalInitializer is IrFunctionExpression && escapesScope(originalInitializer.function)) {
+    val initializerFunction = originalInitializer.initializerFunction
+    if (initializerFunction != null && escapesScope(initializerFunction)) {
       return fallbackTransformer!!.visitConstructorCall(expression)
     }
 
     val originalInitializerType = originalInitializer.type as IrSimpleType
 
-    if (originalInitializer.isEligibleForTypeReplacement) {
+    if (
+      originalInitializer is IrRichFunctionReference &&
+        originalInitializer.isEligibleForTypeReplacement
+    ) {
       // If the initializer is an inline lambda or function reference _and_ it accepts a
       // non-nullable int param, we can simply swap out the type of the functional interface it's
       // implementing.
@@ -144,6 +149,10 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
         )
 
       originalInitializer.type = replacementType
+      originalInitializer.overriddenFunctionSymbol =
+        replacementType.classOrFail.owner.functions
+          .single { it.name == INITIALIZE_FUNCTION_NAME }
+          .symbol
     } else {
       // For all other cases we need to pass the initializer to an adapter that can resolve the
       // boxing difference between the `Function1` functional interface and the replacement
@@ -207,24 +216,24 @@ class ArrayConstructorLowering(private val context: JvmBackendContext) :
   private val IrClassSymbol.isPrimitiveArrayClass: Boolean
     get() = this in context.irBuiltIns.primitiveArraysToPrimitiveTypes
 
-  private val IrExpression.isEligibleForTypeReplacement: Boolean
+  private val IrRichFunctionReference.isEligibleForTypeReplacement: Boolean
     get() {
       // To be eligible for direct type replacement:
-      //   1. It must be a IrFunctionExpression
-      //   2. The function must take a single non-vararg value parameter
-      //   3. The first type argument must be a non-nullable Int.
-      // TODO(b/286111335): IrFunctionReference should also be eligible for replacement.
-      if (
-        this !is IrFunctionExpression ||
-          !function.hasShape(regularParameters = 1) ||
-          function.parameters[0].isVararg
-      )
-        return false
+      //   1. The function must take a single non-vararg value parameter
+      //   2. The first type argument must be a non-nullable Int.
+      val function = invokeFunction
+      if (!function.hasShape(regularParameters = 1) || function.parameters[0].isVararg) return false
 
       return (type as IrSimpleType).arguments.getOrNull(0)?.typeOrNull ==
         context.irBuiltIns.intType.makeNotNull()
     }
 }
+
+private val INITIALIZE_FUNCTION_NAME = Name.identifier("initialize")
+
+/** The function that initializes the array elements, if it is a lambda or a function reference. */
+private val IrExpression.initializerFunction: IrFunction?
+  get() = (this as? IrRichFunctionReference)?.invokeFunction
 
 private fun escapesScope(irFunction: IrFunction): Boolean {
   var escapesScope = false
