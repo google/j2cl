@@ -18,7 +18,7 @@ exports_files(["LICENSE"])
 
 BINARYEN_COPTS = [
     "-fexceptions",
-    "-std=c++17",
+    "-std=c++20",
 ]
 
 BINARYEN_LINKOPTS = [
@@ -75,6 +75,7 @@ cc_library(
 cc_library(
     name = "binaryen_fuzzing",
     srcs = [
+        "src/tools/fuzzing/fuzz-stats.cpp",
         "src/tools/fuzzing/fuzzing.cpp",
         "src/tools/fuzzing/heap-types.cpp",
         "src/tools/fuzzing/parameters.cpp",
@@ -84,6 +85,7 @@ cc_library(
     ],
     hdrs = [
         "src/tools/fuzzing.h",
+        "src/tools/fuzzing/fuzz-stats.h",
         "src/tools/fuzzing/heap-types.h",
         "src/tools/fuzzing/random.h",
     ],
@@ -91,7 +93,6 @@ cc_library(
     includes = ["src/tools"],
     deps = [":binaryen_lib"],
 )
-
 
 cc_binary(
     name = "wasm-opt",
