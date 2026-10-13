@@ -30,7 +30,6 @@ import org.jetbrains.kotlin.backend.common.lower.ExpressionBodyTransformer
 import org.jetbrains.kotlin.backend.common.lower.InitializersCleanupLowering
 import org.jetbrains.kotlin.backend.common.lower.InitializersLowering
 import org.jetbrains.kotlin.backend.common.lower.StripTypeAliasDeclarationsLowering
-import org.jetbrains.kotlin.backend.common.lower.inline.LocalClassesInInlineLambdasLowering
 import org.jetbrains.kotlin.backend.common.lower.loops.ForLoopsLowering
 import org.jetbrains.kotlin.backend.common.runOnFilePostfix
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
@@ -54,8 +53,6 @@ import org.jetbrains.org.objectweb.asm.Type
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPhase = loweringPhase {
-  // Upgrade the function references and the function expressions to rich callable references.
-  moduleLowering(::J2clUpgradeCallableReferences)
   // Remove expect declarations, the actuals will be used instead.
   moduleLowering(::ExpectDeclarationsRemoveLowering)
   // The K2 frontend does not create a FileKt class  for referenced/ top-level members defined in
@@ -79,12 +76,6 @@ private val loweringPhase = loweringPhase {
   // Create nullable backing fields and insert nullability checks for lateinit properties and
   // variables. Must run before JvmPropertiesLowering.
   perFileLowering(::LateinitLowering)
-  // Extract anonymous classes from inline lambdas.
-  perFileLowering(::LocalClassesInInlineLambdasLowering)
-  // Create public bridge for private top level function called from inline functions.
-  perFileLowering(::SyntheticAccessorLowering)
-  // Perform function inlining.
-  moduleLowering(::J2clFunctionInlining)
   // Remove inline functions with reified type parameters as these functions cannot be called from
   // Java
   perFileLowering(::RemoveInlineDeclarationsWithReifiedTypeParametersLowering)

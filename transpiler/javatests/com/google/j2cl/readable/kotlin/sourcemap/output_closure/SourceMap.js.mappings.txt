@@ -423,10 +423,10 @@
 [i: Int] => [i_1] "i"
 [i + 1] => [return Integer.valueOf(i_1.intValue() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [val f2 = ArrayList<Any>()::size] => [let f2 = /**@type {!MutableKProperty0Impl<!Integer>}*/ (MutableKProperty0Impl.$create__kotlin_jvm_functions_Function0__kotlin_jvm_functions_Function1(Function0.$adapt(/**  @return {!Integer}*/ (() =>{
-   return Integer.valueOf((/**@type {!ArrayListBase<*>}*/ (tmp0_bound0)).size());
+   return Integer.valueOf(tmp0_bound0.size());
   })), null));] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [val f2 = ArrayList<Any>()::size] => [f2] "f2"
-[ArrayList<Any>()::size] => [return Integer.valueOf((/**@type {!ArrayListBase<*>}*/ (tmp0_bound0)).size());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
+[ArrayList<Any>()::size] => [return Integer.valueOf(tmp0_bound0.size());] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [val f3 = this::simpleMethod] => [let f3 = Function0.$adapt(/**  @return {!Integer}*/ (() =>{
    return Integer.valueOf(tmp0_bound0_1.m_simpleMethod__int_$p_sourcemap_SourceMap());
   }));] "sourcemap.SourceMap.testLambdaAndMethodReference"
