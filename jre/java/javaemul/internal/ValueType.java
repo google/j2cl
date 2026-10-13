@@ -94,7 +94,8 @@ public abstract class ValueType {
   static String toString(ValueType thisObject) {
     String className = thisObject.getClass().getSimpleName();
     // Remove AutoValue_ prefix used by the APT if it exists.
-    className = className.substring(className.lastIndexOf("AutoValue_") + 1);
+    className =
+        className.startsWith("AutoValue_") ? className.substring("AutoValue_".length()) : className;
     StringJoiner joiner = new StringJoiner(", ", className + "{", "}");
     for (String p : filteredkeys(thisObject)) {
       Object value = JsUtils.getProperty(thisObject, p);

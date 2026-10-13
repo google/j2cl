@@ -27,6 +27,7 @@ import static org.junit.Assert.fail;
 
 import com.google.auto.value.AutoAnnotation;
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
@@ -167,12 +168,15 @@ public class AutoValueTest {
   @AutoValue
   abstract static class StrangeGetters {
     abstract int get1st();
+
     abstract int get_1st(); // by default we'll use _1st where identifiers are needed, so foil that.
 
     @AutoValue.Builder
     abstract static class Builder {
       abstract Builder set1st(int x);
+
       abstract Builder set_1st(int x);
+
       abstract StrangeGetters build();
     }
 
@@ -669,6 +673,28 @@ public class AutoValueTest {
     NestedInInterface.Doubly instance = NestedInInterface.Doubly.create("foo", map);
     assertEquals("foo", instance.string());
     assertEquals(map, instance.map());
+  }
+
+  @AutoValue
+  protected abstract static class TypeWithMemoization {
+    public abstract int foo();
+
+    @Memoized
+    public int memoized() {
+      return foo() * 2;
+    }
+
+    static TypeWithMemoization create(int foo) {
+      return new AutoValue_AutoValueTest_TypeWithMemoization(foo);
+    }
+  }
+
+  @Test
+  public void testMemoizedValue() throws Exception {
+    TypeWithMemoization instance = TypeWithMemoization.create(1);
+    assertEquals(2, instance.memoized());
+    String expectedToStringResult = "AutoValueTest_TypeWithMemoization{foo=1}";
+    assertEquals(expectedToStringResult, instance.toString());
   }
 
   @AutoValue
@@ -2099,6 +2125,7 @@ public class AutoValueTest {
     @AutoValue.Builder
     abstract static class Builder {
       abstract ImmutableList.Builder<String> listBuilder();
+
       abstract PropertyBuilderInheritsType build();
     }
   }
@@ -2879,6 +2906,7 @@ public class AutoValueTest {
     @AutoValue.Builder
     abstract static class Builder {
       abstract Builder setMetrics(ImmutableSet<? extends Number> metrics);
+
       abstract GenericExtends build();
     }
   }
@@ -2903,6 +2931,7 @@ public class AutoValueTest {
     @AutoValue.Builder
     abstract static class Builder {
       abstract Builder setList(List<String> list);
+
       abstract Child build();
     }
   }
