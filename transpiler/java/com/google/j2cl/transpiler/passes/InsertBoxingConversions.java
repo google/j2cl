@@ -21,12 +21,10 @@ import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -73,7 +71,8 @@ public class InsertBoxingConversions extends NormalizationPass {
         TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
         if (needsBoxing(toTypeDescriptor, fromTypeDescriptor)) {
           // Actually remove the cast and replace it with the boxing.
-          Expression boxedExpression = box(castExpression.getExpression());
+          Expression boxedExpression =
+              RuntimeMethods.createBoxingMethodCall(castExpression.getExpression());
           // It's possible that casting a primitive type to a non-boxed reference type.
           // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
           if (!boxedExpression.getTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
@@ -131,7 +130,7 @@ public class InsertBoxingConversions extends NormalizationPass {
 
   private Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {
     if (needsBoxing(toTypeDescriptor, expression.getTypeDescriptor())) {
-      Expression boxedExpression = box(expression);
+      Expression boxedExpression = RuntimeMethods.createBoxingMethodCall(expression);
       // The expression is of some type T that is guaranteed to be a boxed type that, for example,
       // could be assigned back to a variable of type T; therefore the result type should be
       // preserved.
@@ -154,20 +153,5 @@ public class InsertBoxingConversions extends NormalizationPass {
             || !TypeDescriptors.isPrimitiveBooleanOrDoubleOrLong(fromTypeDescriptor))
         // Boxing/unboxing for JsEnum is done in another pass.
         && !isBoxableJsEnumType(toTypeDescriptor);
-  }
-
-  /**
-   * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
-   * expression => Integer.valueOf(expression).
-   */
-  private Expression box(Expression expression) {
-    PrimitiveTypeDescriptor primitiveType =
-        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
-
-    MethodDescriptor valueOfMethodDescriptor =
-        primitiveType
-            .toBoxedType()
-            .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
-    return MethodCall.builderFrom(valueOfMethodDescriptor).setArguments(expression).build();
   }
 }

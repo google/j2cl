@@ -854,6 +854,17 @@ public final class RuntimeMethods {
     return NewInstance.builderFrom(ctor).setArguments(initializer).build();
   }
 
+  /** Creates a method call to BoxedType.valueOf(). */
+  public static MethodCall createBoxingMethodCall(Expression expression) {
+    PrimitiveTypeDescriptor primitiveType =
+        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
+    MethodDescriptor valueOfMethodDescriptor =
+        primitiveType
+            .toBoxedType()
+            .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
+    return MethodCall.builderFrom(valueOfMethodDescriptor).setArguments(expression).build();
+  }
+
   /** Creates a method call to BoxedType.xxxValue(). */
   public static MethodCall createUnboxingMethodCall(
       Expression expression, DeclaredTypeDescriptor boxedType) {
