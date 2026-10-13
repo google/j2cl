@@ -100,7 +100,7 @@ public class Main {
 
   private static void testBox_numberAsDouble() {
     // Works only in closure and wasm.
-    if (!isJavaScript() && !isWasm()) {
+    if ((!isJavaScript() && !isWasm()) || isJ2Kt()) {
       return;
     }
     assertTrue((takesObjectAndReturnsPrimitiveDouble(3) == 3));
