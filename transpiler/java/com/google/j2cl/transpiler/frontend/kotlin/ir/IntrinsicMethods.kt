@@ -243,7 +243,7 @@ class IntrinsicMethods(
           Name.identifier("getContinuation"),
         )
       )
-      .single { !it.owner.isExpect }
+      .single()
   }
 
   private val prefixOperatorByIntrinsicSymbolKey =
