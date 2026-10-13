@@ -173,3 +173,11 @@ abstract class SpecializesMyGeneric : MyGenericList<String>() {
     return false
   }
 }
+
+fun callRemove(list: MutableList<String>, intList: MutableList<Int>) {
+  // Calls java.util.List.remove(Object), which must not be confused with List.remove(int) (i.e.
+  // Kotlin's `removeAt`).
+  list.remove("a")
+  intList.remove(1)
+  intList.removeAt(1)
+}

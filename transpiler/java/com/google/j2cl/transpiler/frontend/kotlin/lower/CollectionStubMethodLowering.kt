@@ -153,36 +153,19 @@ internal class CollectionStubMethodLowering(val context: JvmBackendContext) : Cl
             }
           )
         }
-        "removeAt" -> {
-          //  - 'removeAt' member function:
-          //          kotlin.collections.MutableList<E>#removeAt(Int): E
-          //      We've checked that corresponding 'removeAt(Int)' member function is not present in
-          // the class
-          //      (if it IS present, special bridges for 'remove(I)' would be generated later in
-          // BridgeLowering).
-          //      We can't add 'removeAt' here, because it would be different from what old back-end
-          // generates
-          //      and can break existing Java and/or Kotlin code.
-          //      We should add a member function that overrides
-          //          java.util.List<E>#remove(int): E
-          //      and throws UnsupportedOperationException, just like any other stub.
-          //      Also, we should generate a bridge for it if required.
-          val removeIntFun =
-            createRemoveAtStub(stub, stub.returnType, IrDeclarationOrigin.IR_BUILTINS_STUB)
-          irClass.declarations.add(removeIntFun)
-
-          // MODIFIED BY GOOGLE
-          // We don't need the bridge method as we don't have the same binary constraints
-          // and it would be a duplicate definition.
-
-          // val removeIntBridgeFun = createRemoveAtStub(stub, context.irBuiltIns.anyNType,
-          // IrDeclarationOrigin.BRIDGE)
-          // if (removeIntBridgeFun.toJvmSignature() != removeIntFun.toJvmSignature()) {
-          //     irClass.declarations.add(removeIntBridgeFun)
-          // }
-
-          // END OF MODIFICATIONS
-        }
+        // MODIFIED BY GOOGLE
+        // J2CL keeps removeAt as the method name instead of renaming it to remove(int).
+        // "removeAt" -> {
+        //   val removeIntFun = createRemoveAtStub(stub, stub.returnType,
+        // IrDeclarationOrigin.IR_BUILTINS_STUB)
+        //    irClass.declarations.add(removeIntFun)
+        //    val removeIntBridgeFun = createRemoveAtStub(stub, context.irBuiltIns.anyNType,
+        // IrDeclarationOrigin.BRIDGE)
+        //    if (removeIntBridgeFun.toJvmSignature() != removeIntFun.toJvmSignature()) {
+        //       irClass.declarations.add(removeIntBridgeFun)
+        //    }
+        //  }
+        // END OF MODIFICATIONS
         else -> irClass.declarations.add(stub)
       }
     }

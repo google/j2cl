@@ -1,0 +1,55 @@
+goog.module('specialoverrides.SpecialOverridesKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+
+/**
+ * @final
+ */
+class SpecialOverridesKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SpecialOverridesKt} */
+ static $create__() {
+  SpecialOverridesKt.$clinit();
+  let $instance = new SpecialOverridesKt();
+  $instance.$ctor__specialoverrides_SpecialOverridesKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__specialoverrides_SpecialOverridesKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_callRemove__java_util_List__java_util_List__void(/** !List<string> */ list, /** !List<!Integer> */ intList) {
+  SpecialOverridesKt.$clinit();
+  list.remove('a');
+  intList.remove(Integer.valueOf(1));
+  intList.removeAtIndex(1);
+ }
+ /** @nodts */
+ static $clinit() {
+  SpecialOverridesKt.$clinit = () =>{};
+  SpecialOverridesKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SpecialOverridesKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+ }
+}
+$Util.$setClassMetadata(SpecialOverridesKt, 'specialoverrides.SpecialOverridesKt');
+
+exports = SpecialOverridesKt;
+
+//# sourceMappingURL=SpecialOverridesKt.js.map

@@ -675,12 +675,12 @@ internal class KotlinEnvironment(
 
           name == "remove" &&
             parametersDescriptors.singleOrNull()?.typeDescriptor == PrimitiveTypes.INT &&
-            irFunction.returnType != pluginContext.irBuiltIns.booleanType &&
-            enclosingTypeDescriptor.isSubtypeOf(TypeDescriptors.get().javaUtilList) ->
-            // Kotlin renames the method `T List<T>.remove(int)` to `removeAt` so that it does not
-            // clash with `boolean List<T>.remove(T)` when specializing to `List<Int>`. Internally
-            // we need to preserve the original names to interoperate with Java code, so the new
-            // name only applies when reasoning about overrides.
+            (irFunction.name.asString() == "removeAt" ||
+              enclosingTypeDescriptor.isSameBaseType(TypeDescriptors.get().javaUtilList)) ->
+            // Kotlin renames `T List<T>.remove(int)` to `removeAt` so that it does not clash with
+            // `boolean List<T>.remove(T)` when specializing to `List<Int>`. Preserve the original
+            // name for Java interop, and use `removeAt` as the Kotlin override name so overrides
+            // match.
             "removeAt"
 
           else -> null
