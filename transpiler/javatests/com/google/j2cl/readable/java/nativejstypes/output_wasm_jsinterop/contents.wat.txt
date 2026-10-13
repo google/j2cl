@@ -1301,6 +1301,7 @@
 (elem declare func $m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass)
 
 ;;; GenericRegularClass<T> GenericRegularClass.<init>(Foo t)
+(@binaryen.js.called)
 (func $js_export_<init>__nativejstypes_Foo@nativejstypes.GenericRegularClass
  (param $t (ref null extern))
  (result (ref null $nativejstypes.GenericRegularClass))
@@ -1314,6 +1315,7 @@
 )
 
 ;;; Foo GenericRegularClass.apply(Foo t)
+(@binaryen.js.called)
 (func $js_export_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass
  (type $function.js_export_apply__nativejstypes_Foo__nativejstypes_Foo)
  (param $this.untyped (ref $java.lang.Object))
@@ -1937,6 +1939,7 @@
 )
 
 ;;; NonNative NonNative.<init>(int x)
+(@binaryen.js.called)
 (func $js_export_<init>__int@nativejstypes.NativeOverNonNative.NonNative
  (param $x i32)
  (result (ref null $nativejstypes.NativeOverNonNative.NonNative))
@@ -1950,6 +1953,7 @@
 )
 
 ;;; void NonNative.n()
+(@binaryen.js.called)
 (func $js_export_n__void@nativejstypes.NativeOverNonNative.NonNative
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/nativejstypes/readable-j2wasm.js/nativejstypes/NativeOverNonNative.java:28:23
  (block
@@ -1961,6 +1965,7 @@
 )
 
 ;;; void NonNative.m()
+(@binaryen.js.called)
 (func $js_export_m__void@nativejstypes.NativeOverNonNative.NonNative
  (type $function.js_export_m__void)
  (param $this.untyped (ref $java.lang.Object))

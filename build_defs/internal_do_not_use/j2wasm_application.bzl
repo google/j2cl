@@ -238,6 +238,11 @@ def _impl_j2wasm_application(ctx):
             # Maintain debug information in intermediate stages.
             args.add("--debuginfo")
 
+            # Inform Binaryen that subsequent `wasm-opt` stages will run to avoid final stage only
+            # optimizations (like merging identical functions that only differ in annotations, which
+            # would inhibit optimizations in later stages).
+            args.add("--expect-later-toolchain-opts")
+
         args.add("-o", output)
         outputs.append(output)
         args.add("--output-source-map", output_source_map)

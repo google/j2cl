@@ -241,6 +241,7 @@
 )
 
 ;;; int InterfaceWithStaticJsProperties.A()
+(@binaryen.js.called)
 (func $js_export_get_A__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:121:18
@@ -253,6 +254,7 @@
 )
 
 ;;; int InterfaceWithStaticJsProperties.getB()
+(@binaryen.js.called)
 (func $js_export_get_getB__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:124:13
@@ -265,6 +267,7 @@
 )
 
 ;;; void InterfaceWithStaticJsProperties.setB(int x)
+(@binaryen.js.called)
 (func $js_export_set_setB__int__void@jsproperties.InterfaceWithStaticJsProperties
  (param $x i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:129:14
@@ -422,6 +425,7 @@
 )
 
 ;;; int Foo.getA()
+(@binaryen.js.called)
 (func $js_export_get_getA__int@jsproperties.Foo
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:25:20
@@ -434,6 +438,7 @@
 )
 
 ;;; void Foo.setA(int x)
+(@binaryen.js.called)
 (func $js_export_set_setA__int__void@jsproperties.Foo
  (param $x i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:30:21
@@ -446,6 +451,7 @@
 )
 
 ;;; int Foo.getB()
+(@binaryen.js.called)
 (func $js_export_get_getB__int@jsproperties.Foo
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:35:20
@@ -458,6 +464,7 @@
 )
 
 ;;; void Foo.setB(int x)
+(@binaryen.js.called)
 (func $js_export_set_setB__int__void@jsproperties.Foo
  (param $x i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:40:21
@@ -626,6 +633,7 @@
 )
 
 ;;; int Bar.privateField()
+(@binaryen.js.called)
 (func $js_export_get_privateField__int_$p_jsproperties_Bar@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (result i32)
@@ -637,6 +645,7 @@
 )
 
 ;;; void Bar.privateField(int value)
+(@binaryen.js.called)
 (func $js_export_set_privateField__int__void_$p_jsproperties_Bar@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (param $value i32)
@@ -648,6 +657,7 @@
 )
 
 ;;; int Bar.instanceField()
+(@binaryen.js.called)
 (func $js_export_get_instanceField__int@jsproperties.Bar
  (type $function.js_export_get_instanceField__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -663,6 +673,7 @@
 (elem declare func $js_export_get_instanceField__int@jsproperties.Bar)
 
 ;;; void Bar.instanceField(int value)
+(@binaryen.js.called)
 (func $js_export_set_instanceField__int__void@jsproperties.Bar
  (type $function.js_export_set_instanceField__int__void)
  (param $this.untyped (ref $java.lang.Object))
@@ -678,6 +689,7 @@
 (elem declare func $js_export_set_instanceField__int__void@jsproperties.Bar)
 
 ;;; int Bar.staticFieldSameJsNameAsInstanceField()
+(@binaryen.js.called)
 (func $js_export_get_staticFieldSameJsNameAsInstanceField__int@jsproperties.Bar
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:55:20
@@ -690,6 +702,7 @@
 )
 
 ;;; void Bar.staticFieldSameJsNameAsInstanceField(int value)
+(@binaryen.js.called)
 (func $js_export_set_staticFieldSameJsNameAsInstanceField__int__void@jsproperties.Bar
  (param $value i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:55:20
@@ -702,6 +715,7 @@
 )
 
 ;;; int Bar.getStaticPropertySameJsNameAsInstanceProperty()
+(@binaryen.js.called)
 (func $js_export_get_getStaticPropertySameJsNameAsInstanceProperty__int@jsproperties.Bar
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:78:20
@@ -714,6 +728,7 @@
 )
 
 ;;; int Bar.getA()
+(@binaryen.js.called)
 (func $js_export_get_getA__int@jsproperties.Bar
  (type $function.js_export_get_getA__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -729,6 +744,7 @@
 (elem declare func $js_export_get_getA__int@jsproperties.Bar)
 
 ;;; void Bar.setA(int x)
+(@binaryen.js.called)
 (func $js_export_set_setA__int__void@jsproperties.Bar
  (type $function.js_export_set_setA__int__void)
  (param $this.untyped (ref $java.lang.Object))
@@ -744,6 +760,7 @@
 (elem declare func $js_export_set_setA__int__void@jsproperties.Bar)
 
 ;;; int Bar.getB()
+(@binaryen.js.called)
 (func $js_export_get_getB__int@jsproperties.Bar
  (type $function.js_export_get_getB__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -759,6 +776,7 @@
 (elem declare func $js_export_get_getB__int@jsproperties.Bar)
 
 ;;; void Bar.setB(int x)
+(@binaryen.js.called)
 (func $js_export_set_setB__int__void@jsproperties.Bar
  (type $function.js_export_set_setB__int__void)
  (param $this.untyped (ref $java.lang.Object))
@@ -899,6 +917,7 @@
 )
 
 ;;; int ReadOnlyJsProperty.a()
+(@binaryen.js.called)
 (func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty
  (type $function.js_export_get_a__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -914,6 +933,7 @@
 (elem declare func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty)
 
 ;;; int ReadOnlyJsProperty.b()
+(@binaryen.js.called)
 (func $js_export_get_b__int@jsproperties.ReadOnlyJsProperty
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:87:38
@@ -926,6 +946,7 @@
 )
 
 ;;; int ReadOnlyJsProperty.instanceFinalField()
+(@binaryen.js.called)
 (func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty
  (type $function.js_export_get_instanceFinalField__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -941,6 +962,7 @@
 (elem declare func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty)
 
 ;;; int ReadOnlyJsProperty.staticFinalField()
+(@binaryen.js.called)
 (func $js_export_get_staticFinalField__int@jsproperties.ReadOnlyJsProperty
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:91:38
@@ -953,6 +975,7 @@
 )
 
 ;;; int ReadOnlyJsProperty.getD()
+(@binaryen.js.called)
 (func $js_export_get_getD__int@jsproperties.ReadOnlyJsProperty
  (result i32)
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsproperties/readable-j2wasm.js/jsproperties/Main.java:103:20
@@ -965,6 +988,7 @@
 )
 
 ;;; int ReadOnlyJsProperty.getC()
+(@binaryen.js.called)
 (func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty
  (type $function.js_export_get_getC__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -1084,6 +1108,7 @@
 (elem declare func $m_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
 
 ;;; int ImplementsInterfaceWithDefaultJsProperties.getM()
+(@binaryen.js.called)
 (func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties
  (type $function.js_export_get_getM__int)
  (param $this.untyped (ref $java.lang.Object))
@@ -1099,6 +1124,7 @@
 (elem declare func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
 
 ;;; void ImplementsInterfaceWithDefaultJsProperties.setM(int value)
+(@binaryen.js.called)
 (func $js_export_set_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties
  (type $function.js_export_set_setM__int__void)
  (param $this.untyped (ref $java.lang.Object))
@@ -1410,6 +1436,7 @@
 )
 
 ;;; int JavaBeanConventions.xCoord()
+(@binaryen.js.called)
 (func $js_export_get_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_get_xCoord__int_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1425,6 +1452,7 @@
 (elem declare func $js_export_get_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.xCoord(int value)
+(@binaryen.js.called)
 (func $js_export_set_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_set_xCoord__int__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1440,6 +1468,7 @@
 (elem declare func $js_export_set_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; int JavaBeanConventions.yCoord()
+(@binaryen.js.called)
 (func $js_export_get_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_get_yCoord__int_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1455,6 +1484,7 @@
 (elem declare func $js_export_get_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.yCoord(int value)
+(@binaryen.js.called)
 (func $js_export_set_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_set_yCoord__int__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1470,6 +1500,7 @@
 (elem declare func $js_export_set_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; boolean JavaBeanConventions.isReady()
+(@binaryen.js.called)
 (func $js_export_get_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_get_isReady__boolean_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1485,6 +1516,7 @@
 (elem declare func $js_export_get_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.isReady(boolean value)
+(@binaryen.js.called)
 (func $js_export_set_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_set_isReady__boolean__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1500,6 +1532,7 @@
 (elem declare func $js_export_set_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; boolean JavaBeanConventions.isValid()
+(@binaryen.js.called)
 (func $js_export_get_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_get_isValid__boolean_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1515,6 +1548,7 @@
 (elem declare func $js_export_get_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.isValid(boolean value)
+(@binaryen.js.called)
 (func $js_export_set_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_set_isValid__boolean__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1530,6 +1564,7 @@
 (elem declare func $js_export_set_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; boolean JavaBeanConventions.valid()
+(@binaryen.js.called)
 (func $js_export_get_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_get_valid__boolean_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1545,6 +1580,7 @@
 (elem declare func $js_export_get_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.valid(boolean value)
+(@binaryen.js.called)
 (func $js_export_set_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_set_valid__boolean__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1560,6 +1596,7 @@
 (elem declare func $js_export_set_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; WasmExtern JavaBeanConventions.isFoo()
+(@binaryen.js.called)
 (func $js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
@@ -1575,6 +1612,7 @@
 (elem declare func $js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.isFoo(WasmExtern value)
+(@binaryen.js.called)
 (func $js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties@jsproperties.JavaBeanConventions
  (type $function.js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))

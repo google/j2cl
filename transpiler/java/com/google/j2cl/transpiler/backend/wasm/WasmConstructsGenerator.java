@@ -333,11 +333,11 @@ public class WasmConstructsGenerator {
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
-    if (methodDescriptor.getOrigin().isWasmJsFunctionExport()) {
-      builder.newLine();
-      builder.append("(@binaryen.js.called)");
-    }
     builder.newLine();
+    if (methodDescriptor.getOrigin().isWasmJsExport()
+        || methodDescriptor.getOrigin().isWasmJsFunctionExport()) {
+      builder.appendln("(@binaryen.js.called)");
+    }
     builder.append("(func " + environment.getMethodImplementationName(methodDescriptor));
     if (methodDescriptor.getOrigin().isWasmEntryPoint()) {
       builder.append(" (export \"" + methodDescriptor.getName() + "\")");
