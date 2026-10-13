@@ -13,42 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package instancejsmethods;
+package jsmethod;
 
 import jsinterop.annotations.JsMethod;
 
-public class Child extends Parent implements MyInterface {
+public class Parent extends SuperParent {
   /**
-   * Non-JsMethod that overrides a JsMethod with renaming.
+   * JsMethod that overrides a non-JsMethod with renaming.
    */
   @Override
+  @JsMethod(name = "sum")
   public int fun(int a, int b) {
-    return a + b + 1;
+    return a + b;
   }
 
   /**
-   * Non-JsMethod that overrides a JsMethod without renaming.
-   */
-  @Override
-  public int bar(int a, int b) {
-    return a * b + 1;
-  }
-
-  /**
-   * JsMethod that overrides a JsMethod.
-   */
-  @Override
-  @JsMethod(name = "myFoo")
-  public int foo(int a) {
-    return a + 1;
-  }
-
-  /**
-   * JsMethod that overrides a non-JsMethod from its interface.
+   * JsMethod that overrides a non-JsMethod without renaming.
    */
   @Override
   @JsMethod
-  public int intfFoo(int a) {
+  public int bar(int a, int b) {
+    return a * b;
+  }
+
+  /**
+   * A top level JsMethod.
+   */
+  @JsMethod(name = "myFoo")
+  public int foo(int a) {
     return a;
   }
 }

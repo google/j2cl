@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package instancejsmethods
+package jsmethod
 
 import jsinterop.annotations.JsMethod
 
-class Child : Parent(), MyInterface {
-  /** Non-JsMethod that overrides a JsMethod with renaming. */
-  override fun `fun`(a: Int, b: Int): Int = a + b + 1
+open class Parent : SuperParent() {
+  /** JsMethod that overrides a non-JsMethod with renaming. */
+  @JsMethod(name = "sum") open override fun `fun`(a: Int, b: Int): Int = a + b
 
-  /** Non-JsMethod that overrides a JsMethod without renaming. */
-  override fun bar(a: Int, b: Int): Int = a * b + 1
+  /** JsMethod that overrides a non-JsMethod without renaming. */
+  @JsMethod open override fun bar(a: Int, b: Int): Int = a * b
 
-  /** JsMethod that overrides a JsMethod. */
-  @JsMethod(name = "myFoo") override fun foo(a: Int): Int = a + 1
-
-  /** JsMethod that overrides a non-JsMethod from its interface. */
-  @JsMethod override fun intfFoo(a: Int): Int = a
+  /** A top level JsMethod. */
+  @JsMethod(name = "myFoo") open fun foo(a: Int): Int = a
 }

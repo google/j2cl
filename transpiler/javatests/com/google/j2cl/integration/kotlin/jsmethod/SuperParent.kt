@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package instancejsmethods
+package jsmethod
 
-interface MyInterface {
-  fun intfFoo(a: Int): Int
+open class SuperParent {
+  open fun `fun`(a: Int, b: Int): Int = a + b + 111
+
+  open fun bar(a: Int, b: Int): Int = a * b + 222
 }

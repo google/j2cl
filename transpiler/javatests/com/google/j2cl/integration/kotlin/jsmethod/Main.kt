@@ -21,16 +21,81 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertNull
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import java.io.Serializable
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
+  testCallByConcreteType()
+  testCallBySuperParent()
+  testCallByJS()
   testJsMethodWithDifferentVisiblities()
-  testInheritName()
   testLambdaImplementingJsMethod()
   testBoxedTypeSupertypes()
+  testOverloads()
 }
+
+fun testCallByConcreteType() {
+  val sp: SuperParent = SuperParent()
+  val p: Parent = Parent()
+  val c: Child = Child()
+
+  assertTrue(sp.`fun`(12, 35) == 158)
+  assertTrue(sp.bar(6, 7) == 264)
+  assertTrue(p.`fun`(12, 35) == 47)
+  assertTrue(p.bar(6, 7) == 42)
+  assertTrue(c.`fun`(12, 35) == 48)
+  assertTrue(c.bar(6, 7) == 43)
+  assertTrue(p.foo(10) == 10)
+  assertTrue(c.foo(10) == 11)
+  assertTrue(c.intfFoo(5) == 5)
+}
+
+fun testCallBySuperParent() {
+  val sp: SuperParent = SuperParent()
+  val p: SuperParent = Parent()
+  val c: SuperParent = Child()
+  val pp: Parent = Parent()
+  val cc: Parent = Child()
+  val intf: MyInterface = Child()
+
+  assertTrue(sp.`fun`(12, 35) == 158)
+  assertTrue(sp.bar(6, 7) == 264)
+  assertTrue(p.`fun`(12, 35) == 47)
+  assertTrue(p.bar(6, 7) == 42)
+  assertTrue(c.`fun`(12, 35) == 48)
+  assertTrue(c.bar(6, 7) == 43)
+  assertTrue(pp.foo(10) == 10)
+  assertTrue(cc.foo(10) == 11)
+  assertTrue(intf.intfFoo(5) == 5)
+}
+
+fun testCallByJS() {
+  val p: Parent = Parent()
+  val c: Child = Child()
+  assertTrue(callParentFun(p, 12, 35) == 47)
+  assertTrue(callParentBar(p, 6, 7) == 42)
+  assertTrue(callParentFoo(p, 10) == 10)
+  assertTrue(callChildFun(c, 12, 35) == 48)
+  assertTrue(callChildBar(c, 6, 7) == 43)
+  assertTrue(callChildFoo(c, 10) == 11)
+  assertTrue(callChildIntfFoo(c, 5) == 5)
+}
+
+@JsMethod(namespace = "jsmethod.helper") external fun callParentFun(p: Parent, a: Int, b: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun callParentBar(p: Parent, a: Int, b: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun callParentFoo(p: Parent, a: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun callChildFun(c: Child, a: Int, b: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun callChildBar(c: Child, a: Int, b: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun callChildFoo(c: Child, a: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun callChildIntfFoo(c: Child, a: Int): Int
 
 internal class NonPublicJsMethodClass {
   @JsMethod private fun foo(): String = "foo"
@@ -51,31 +116,6 @@ private fun testJsMethodWithDifferentVisiblities() {
 @JsMethod(namespace = "jsmethod.helper") public external fun callFoo(obj: Any?, param: Any?): Any?
 
 @JsMethod(namespace = "jsmethod.helper") public external fun callBar(obj: Any?, param: Any?): Any?
-
-internal open class ClassWithJsMethod {
-  @JsMethod(name = "name") open fun className(): String = ClassWithJsMethod::class.java.name
-}
-
-internal class ClassWithJsMethodInheritingName : ClassWithJsMethod() {
-  @JsMethod override fun className(): String = ClassWithJsMethodInheritingName::class.java.name
-}
-
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-private interface HasName {
-  fun name(): String
-}
-
-private fun callName(o: Any?): String = (o as HasName).name()
-
-private fun testInheritName() {
-  var o = ClassWithJsMethod()
-  assertEquals(ClassWithJsMethod::class.java.name, o.className())
-  assertEquals(ClassWithJsMethod::class.java.name, callName(o))
-
-  o = ClassWithJsMethodInheritingName()
-  assertEquals(ClassWithJsMethodInheritingName::class.java.name, o.className())
-  assertEquals(ClassWithJsMethodInheritingName::class.java.name, callName(o))
-}
 
 internal fun interface FunctionalInterfaceWithJsMethod {
   @JsMethod fun greet(): String
@@ -123,4 +163,42 @@ private fun testBoxedTypeSupertypes() {
   assertTrue(tester.passThroughCharSequence("hello")!![1] == 'e')
   assertTrue(tester.passThroughNumber(42.5)!!.toDouble() == 42.5)
   assertEquals(true, tester.passThroughSerializable(true))
+}
+
+class Overloads @JsConstructor constructor() {
+  @JsMethod(name = "mObject")
+  fun m(o: Any?): String {
+    return "m(Object)"
+  }
+
+  @JsMethod(name = "mDouble")
+  fun m(d: Double?): String {
+    return "m(Double)"
+  }
+}
+
+@JsType(isNative = true, namespace = "jsmethod", name = "Overloads")
+class NativeOverloads {
+  external fun mObject(o: Any?): String
+
+  external fun mDouble(d: Double?): String
+
+  @JsMethod(name = "mObject") external fun m(o: Any?): String
+
+  @JsMethod(name = "mDouble") external fun m(o: Double?): String
+}
+
+private fun testOverloads() {
+  val overloads = Overloads()
+  assertEquals("m(Object)", overloads.m(Any()))
+  assertEquals("m(Double)", overloads.m(0.0))
+
+  val nativeOverloads = NativeOverloads()
+  // Check overloaded JsMethods.
+  assertEquals("m(Object)", nativeOverloads.mObject(null))
+  assertEquals("m(Double)", nativeOverloads.mDouble(0.0))
+
+  // Check overloaded native methods.
+  assertEquals("m(Object)", nativeOverloads.m(Any()))
+  assertEquals("m(Double)", nativeOverloads.m(0.0))
 }

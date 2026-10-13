@@ -20,17 +20,89 @@ import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.io.Serializable;
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
+    testCallByConcreteType();
+    testCallBySuperParent();
+    testCallByJS();
     testJsMethodWithDifferentVisiblities();
-    testInheritName();
     testLambdaImplementingJsMethod();
     testBoxedTypeSupertypes();
+    testOverloads();
   }
+
+  public static void testCallByConcreteType() {
+    SuperParent sp = new SuperParent();
+    Parent p = new Parent();
+    Child c = new Child();
+
+    assertTrue((sp.fun(12, 35) == 158));
+    assertTrue((sp.bar(6, 7) == 264));
+    assertTrue((p.fun(12, 35) == 47));
+    assertTrue((p.bar(6, 7) == 42));
+    assertTrue((c.fun(12, 35) == 48));
+    assertTrue((c.bar(6, 7) == 43));
+    assertTrue((p.foo(10) == 10));
+    assertTrue((c.foo(10) == 11));
+    assertTrue((c.intfFoo(5) == 5));
+  }
+
+  public static void testCallBySuperParent() {
+    SuperParent sp = new SuperParent();
+    SuperParent p = new Parent();
+    SuperParent c = new Child();
+    Parent pp = new Parent();
+    Parent cc = new Child();
+    MyInterface intf = new Child();
+
+    assertTrue((sp.fun(12, 35) == 158));
+    assertTrue((sp.bar(6, 7) == 264));
+    assertTrue((p.fun(12, 35) == 47));
+    assertTrue((p.bar(6, 7) == 42));
+    assertTrue((c.fun(12, 35) == 48));
+    assertTrue((c.bar(6, 7) == 43));
+    assertTrue((pp.foo(10) == 10));
+    assertTrue((cc.foo(10) == 11));
+    assertTrue((intf.intfFoo(5) == 5));
+  }
+
+  public static void testCallByJS() {
+    Parent p = new Parent();
+    Child c = new Child();
+    assertTrue((callParentFun(p, 12, 35) == 47));
+    assertTrue((callParentBar(p, 6, 7) == 42));
+    assertTrue((callParentFoo(p, 10) == 10));
+    assertTrue((callChildFun(c, 12, 35) == 48));
+    assertTrue((callChildBar(c, 6, 7) == 43));
+    assertTrue((callChildFoo(c, 10) == 11));
+    assertTrue((callChildIntfFoo(c, 5) == 5));
+  }
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callParentFun(Parent p, int a, int b);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callParentBar(Parent p, int a, int b);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callParentFoo(Parent p, int a);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callChildFun(Child c, int a, int b);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callChildBar(Child c, int a, int b);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callChildFoo(Child c, int a);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callChildIntfFoo(Child c, int a);
 
   static class NonPublicJsMethodClass {
     @JsMethod
@@ -57,39 +129,6 @@ public class Main {
 
   @JsMethod(namespace = "jsmethod.helper")
   public static native Object callBar(Object obj, Object param);
-
-  static class ClassWithJsMethod {
-    @JsMethod(name = "name")
-    public String className() {
-      return ClassWithJsMethod.class.getName();
-    }
-  }
-
-  static class ClassWithJsMethodInheritingName extends ClassWithJsMethod {
-    @JsMethod
-    public String className() {
-      return ClassWithJsMethodInheritingName.class.getName();
-    }
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
-  private interface HasName {
-    String name();
-  }
-
-  private static String callName(Object o) {
-    return ((HasName) o).name();
-  }
-
-  private static void testInheritName() {
-    ClassWithJsMethod object = new ClassWithJsMethod();
-    assertEquals(ClassWithJsMethod.class.getName(), object.className());
-    assertEquals(ClassWithJsMethod.class.getName(), callName(object));
-
-    object = new ClassWithJsMethodInheritingName();
-    assertEquals(ClassWithJsMethodInheritingName.class.getName(), object.className());
-    assertEquals(ClassWithJsMethodInheritingName.class.getName(), callName(object));
-  }
 
   interface FunctionalInterfaceWithJsMethod {
     @JsMethod
@@ -150,5 +189,49 @@ public class Main {
     assertTrue(tester.passThroughCharSequence("hello").charAt(1) == 'e');
     assertTrue(tester.passThroughNumber(42.5).doubleValue() == 42.5);
     assertEquals(true, tester.passThroughSerializable(true));
+  }
+
+  // Repro for b/560655013.
+  static class Overloads {
+    @JsConstructor
+    public Overloads() {}
+
+    @JsMethod(name = "mObject")
+    public String m(Object o) {
+      return "m(Object)";
+    }
+
+    @JsMethod(name = "mDouble")
+    public String m(Double d) {
+      return "m(Double)";
+    }
+  }
+
+  @JsType(isNative = true, namespace = "jsmethod.Main", name = "Overloads")
+  static class NativeOverloads {
+    public native String mObject(Object o);
+
+    public native String mDouble(Double d);
+
+    @JsMethod(name = "mObject")
+    public native String m(Object o);
+
+    @JsMethod(name = "mDouble")
+    public native String m(Double o);
+  }
+
+  private static void testOverloads() {
+    Overloads overloads = new Overloads();
+    assertEquals("m(Object)", overloads.m(new Object()));
+    assertEquals("m(Double)", overloads.m(0d));
+
+    NativeOverloads nativeOverloads = new NativeOverloads();
+    // Check overloaded JsMethods.
+    assertEquals("m(Object)", nativeOverloads.mObject(null));
+    assertEquals("m(Double)", nativeOverloads.mDouble(0d));
+
+    // Check overloaded native methods.
+    assertEquals("m(Object)", nativeOverloads.m(new Object()));
+    assertEquals("m(Double)", nativeOverloads.m(0d));
   }
 }

@@ -1,3 +1,4 @@
+load("//build_defs:rules.bzl", "j2cl_library")
 load(
     "//transpiler/javatests/com/google/j2cl/integration:integration_test.bzl",
     "integration_test",
@@ -8,13 +9,46 @@ package(
     licenses = ["reciprocal"],
 )
 
+j2cl_library(
+    name = "SuperParent-j2cl",
+    srcs = ["SuperParent.kt"],
+)
+
+j2cl_library(
+    name = "MyInterface-j2cl",
+    srcs = ["MyInterface.kt"],
+)
+
+j2cl_library(
+    name = "Parent-j2cl",
+    srcs = ["Parent.kt"],
+    deps = [
+        ":SuperParent-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
+)
+
+j2cl_library(
+    name = "Child-j2cl",
+    srcs = ["Child.kt"],
+    deps = [
+        ":MyInterface-j2cl",
+        ":Parent-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
+)
+
 integration_test(
-    srcs = glob([
-        "*.kt",
-        "*.js",
-    ]),
-    # Contains JsInterop features which are only applicable for JS output.
+    srcs = [
+        "Main.kt",
+        "helper.js",
+    ],
+    # Contains JsInterop features which are only applicable for JS and Wasm output.
     enable_jvm_test = False,
-    enable_kt = False,
-    enable_wasm = False,
+    deps = [
+        ":Child",
+        ":MyInterface",
+        ":Parent",
+        ":SuperParent",
+    ],
 )

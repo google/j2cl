@@ -14,6 +14,83 @@
 
 goog.module('jsmethod.helper');
 
+const Child = goog.require('jsmethod.Child');
+const Parent = goog.require('jsmethod.Parent');
+
+/**
+ * @param {!Parent} p
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ * @public
+ */
+exports.callParentFun = function(p, a, b) {
+  return p.sum(a, b);
+};
+
+/**
+ * @param {!Parent} p
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ * @public
+ */
+exports.callParentBar = function(p, a, b) {
+  return p.bar(a, b);
+};
+
+/**
+ * @param {!Parent} p
+ * @param {number} a
+ * @return {number}
+ * @public
+ */
+exports.callParentFoo = function(p, a) {
+  return p.myFoo(a);
+};
+
+/**
+ * @param {!Child} c
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ * @public
+ */
+exports.callChildFun = function(c, a, b) {
+  return c.sum(a, b);
+};
+
+/**
+ * @param {!Child} c
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ * @public
+ */
+exports.callChildBar = function(c, a, b) {
+  return c.bar(a, b);
+};
+
+/**
+ * @param {!Child} c
+ * @param {number} a
+ * @return {number}
+ * @public
+ */
+exports.callChildFoo = function(c, a) {
+  return c.myFoo(a);
+};
+
+/**
+ * @param {!Child} c
+ * @param {number} a
+ * @return {number}
+ * @public
+ */
+exports.callChildIntfFoo = function(c, a) {
+  return c.intfFoo(a);
+};
+
 /**
  * @param {?} obj
  * @param {?} param
