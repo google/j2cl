@@ -254,16 +254,15 @@ public final class RuntimeMethods {
     return MethodCall.builderFrom(fromJs).setArguments(expression).build();
   }
 
-  public static MethodCall createToJsMethodCall(
-      DeclaredTypeDescriptor typeDescriptor, Expression expression) {
-    MethodDescriptor toJs = typeDescriptor.getMethodDescriptor("toJs", typeDescriptor);
-    return MethodCall.builderFrom(toJs).setArguments(expression).build();
+  public static MethodCall createToJsMethodCall(Expression expression) {
+    return createToJsMethodCall(expression.getTypeDescriptor(), expression);
   }
 
-  public static MethodCall createPrimitiveLongToJsMethodCall(Expression expression) {
-    MethodDescriptor toJsLong =
-        TypeDescriptors.get().javaLangLong.getMethodDescriptor("toJs", PrimitiveTypes.LONG);
-    return MethodCall.builderFrom(toJsLong).setArguments(expression).build();
+  public static MethodCall createToJsMethodCall(
+      TypeDescriptor typeDescriptor, Expression expression) {
+    MethodDescriptor toJs =
+        typeDescriptor.toBoxedType().getMethodDescriptor("toJs", typeDescriptor);
+    return MethodCall.builderFrom(toJs).setArguments(expression).build();
   }
 
   public static MethodCall createPrimitiveLongFromJsMethodCall(Expression expression) {
@@ -868,7 +867,6 @@ public final class RuntimeMethods {
   /** Creates a method call to BoxedType.xxxValue(). */
   public static MethodCall createUnboxingMethodCall(
       Expression expression, DeclaredTypeDescriptor boxedType) {
-
     MethodDescriptor valueMethodDescriptor =
         boxedType.getMethodDescriptorByName(
             boxedType.toUnboxedType().getSimpleSourceName() + "Value");

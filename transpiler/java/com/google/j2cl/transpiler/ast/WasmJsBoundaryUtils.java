@@ -340,7 +340,7 @@ public class WasmJsBoundaryUtils {
       Expression expression, TypeDescriptor typeDescriptor, boolean isExport) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
     if (TypeDescriptors.isPrimitiveLong(typeDescriptor)) {
-      return RuntimeMethods.createPrimitiveLongToJsMethodCall(expression);
+      return RuntimeMethods.createToJsMethodCall(typeDescriptor, expression);
     }
     if (TypeDescriptors.isBoxedBooleanOrDoubleOrLong(typeDescriptor)
         || TypeDescriptors.isJavaLangString(typeDescriptor)
@@ -349,7 +349,7 @@ public class WasmJsBoundaryUtils {
       return RuntimeMethods.createToJsMethodCall(
           TypeDescriptors.isSupertypeOfBoxedTypeAsJsPrimitives(typeDescriptor)
               ? TypeDescriptors.get().javaLangObject
-              : (DeclaredTypeDescriptor) typeDescriptor,
+              : typeDescriptor,
           // TODO(b/545779164): The cast here shouldn't be needed, but the export bridge creator
           // might create the export bridge on specializing/default bridge. In any case when
           // the cast is not really needed it gets optimized away.
