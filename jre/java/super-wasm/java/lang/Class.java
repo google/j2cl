@@ -110,7 +110,7 @@ public final class Class<T> implements Type, Serializable {
     if (arrayTypes == null || arrayTypes.length < dimensions) {
       Class<?>[] newArray = new Class<?>[dimensions];
       if (arrayTypes != null) {
-        System.arraycopy(arrayTypes, 0, newArray, 0, arrayTypes.length - 1);
+        System.arraycopy(arrayTypes, 0, newArray, 0, arrayTypes.length);
       }
       arrayTypes = newArray;
     }

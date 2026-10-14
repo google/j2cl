@@ -90,10 +90,6 @@ public class Main {
   }
 
   private static void testArray() {
-    // TODO(b/184675805): enable for Wasm when class metadata is implemented for array
-    if (isWasm()) {
-      return;
-    }
     assertSame(Foo[].class, Foo[].class);
     assertSame(Object.class, Foo[].class.getSuperclass());
 
