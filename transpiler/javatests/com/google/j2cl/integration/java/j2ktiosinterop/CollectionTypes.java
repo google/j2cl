@@ -135,6 +135,16 @@ public final class CollectionTypes {
     return new CustomMap<>();
   }
 
+  public static <K extends @Nullable Object, V extends @Nullable Object>
+      Map.Entry<K, V> getMapEntry() {
+    return new CustomMapEntry<>();
+  }
+
+  public static <K extends @Nullable Object, V extends @Nullable Object>
+      CustomMapEntry<K, V> getCustomMapEntry() {
+    return new CustomMapEntry<>();
+  }
+
   // TODO b/488987142: Remove annotation after Kotlin plugin bug fix.
   @ObjectiveCName("acceptIteratorWithJavaUtilIterator:")
   public static <T extends @Nullable Object> void acceptIterator(Iterator<T> iterator) {}
@@ -198,6 +208,12 @@ public final class CollectionTypes {
 
   public static <K extends @Nullable Object, V extends @Nullable Object> void acceptCustomMap(
       CustomMap<K, V> map) {}
+
+  public static <K extends @Nullable Object, V extends @Nullable Object> void acceptMapEntry(
+      Map.Entry<K, V> entry) {}
+
+  public static <K extends @Nullable Object, V extends @Nullable Object> void acceptCustomMapEntry(
+      CustomMapEntry<K, V> entry) {}
 
   public static final class CustomIterator<T extends @Nullable Object> implements Iterator<T> {
     @Override
@@ -377,6 +393,34 @@ public final class CollectionTypes {
     public static final class Builder<K extends @Nullable Object, V extends @Nullable Object> {
       public CustomMap<K, V> build() {
         return new CustomMap<>();
+      }
+    }
+  }
+
+  public static final class CustomMapEntry<K extends @Nullable Object, V extends @Nullable Object>
+      implements Map.Entry<K, V> {
+    @Override
+    public K getKey() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V getValue() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V setValue(V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    public static <K extends @Nullable Object, V extends @Nullable Object> Builder<K, V> builder() {
+      return new Builder<>();
+    }
+
+    public static final class Builder<K extends @Nullable Object, V extends @Nullable Object> {
+      public CustomMapEntry<K, V> build() {
+        return new CustomMapEntry<>();
       }
     }
   }

@@ -449,6 +449,15 @@
   GKOTMutableDictionary<id, id> *customMap =
       [J2ktiosinteropCollectionTypesCompanion.shared getCustomMap];
 
+  id<GKOTKotlinMapEntry> mapEntry = [J2ktiosinteropCollectionTypesCompanion.shared getMapEntry];
+  J2ktiosinteropCollectionTypes_CustomMapEntry *customMapEntry =
+      [J2ktiosinteropCollectionTypesCompanion.shared getCustomMapEntry];
+
+  // TODO(b/454834286): Generate J2ObjCCompat.h for inner collection classes.
+  // J2ktiosinteropCollectionTypes_CustomMapEntry_Builder *customMapEntryBuilder =
+  //     [J2ktiosinteropCollectionTypes_CustomMapEntryCompanion.shared builder];
+  // customMapEntry = [customMapEntryBuilder build];
+
   [J2ktiosinteropCollectionTypesCompanion.shared acceptIteratorWithJavaUtilIterator:iterator];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptCustomIteratorWithJ2ktiosinteropCollectionTypes_CustomIterator:customIterator];
@@ -492,6 +501,10 @@
       acceptAbstractMapWithJavaUtilAbstractMap:abstractMap];
   [J2ktiosinteropCollectionTypesCompanion.shared
       acceptCustomMapWithJ2ktiosinteropCollectionTypes_CustomMap:customMap];
+
+  [J2ktiosinteropCollectionTypesCompanion.shared acceptMapEntryWithJavaUtilMap_Entry:mapEntry];
+  [J2ktiosinteropCollectionTypesCompanion.shared
+      acceptCustomMapEntryWithJ2ktiosinteropCollectionTypes_CustomMapEntry:customMapEntry];
 #else
   id<JavaUtilIterator> iterator = [J2ktiosinteropCollectionTypes getIterator];
   J2ktiosinteropCollectionTypes_CustomIterator *customIterator =
@@ -557,6 +570,14 @@
       [J2ktiosinteropCollectionTypes_CustomMap builder];
   customMap = [customMapBuilder build];
 
+  id<JavaUtilMap_Entry> mapEntry = [J2ktiosinteropCollectionTypes getMapEntry];
+  J2ktiosinteropCollectionTypes_CustomMapEntry *customMapEntry =
+      [J2ktiosinteropCollectionTypes getCustomMapEntry];
+
+  J2ktiosinteropCollectionTypes_CustomMapEntry_Builder *customMapEntryBuilder =
+      [J2ktiosinteropCollectionTypes_CustomMapEntry builder];
+  customMapEntry = [customMapEntryBuilder build];
+
   [J2ktiosinteropCollectionTypes acceptIteratorWithJavaUtilIterator:iterator];
   [J2ktiosinteropCollectionTypes
       acceptCustomIteratorWithJ2ktiosinteropCollectionTypes_CustomIterator:customIterator];
@@ -595,6 +616,10 @@
   [J2ktiosinteropCollectionTypes acceptAbstractMapWithJavaUtilAbstractMap:abstractMap];
   [J2ktiosinteropCollectionTypes
       acceptCustomMapWithJ2ktiosinteropCollectionTypes_CustomMap:customMap];
+
+  [J2ktiosinteropCollectionTypes acceptMapEntryWithJavaUtilMap_Entry:mapEntry];
+  [J2ktiosinteropCollectionTypes
+      acceptCustomMapEntryWithJ2ktiosinteropCollectionTypes_CustomMapEntry:customMapEntry];
 #endif
 }
 

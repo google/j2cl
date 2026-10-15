@@ -759,11 +759,35 @@ internal class J2ObjCCompatSources(
     when {
       ktNativeNameUsesSimpleObjCName(name) -> ""
       isKotlinStdlibKtNativeName(name) -> "Kotlin"
-      else -> name.substring(0, name.lastIndexOf('.')).objCPackagePrefix
+      else ->
+        name
+          .qualifiedNameComponents()
+          .take(ktNativeNameClassIndex(name))
+          .joinToString(".")
+          .objCPackagePrefix
     }
 
+  // Nested Kotlin stdlib types are concatenated (e.g. `kotlin.collections.Map.Entry` maps to
+  // `KotlinMapEntry`), other nested types are joined with `_` (e.g. `java.util.Map.Entry` maps to
+  // `JavaUtilMap_Entry`).
   private fun ktNativeNameObjCSimpleName(name: String): String =
-    name.substring(name.lastIndexOf('.') + 1)
+    name
+      .qualifiedNameComponents()
+      .drop(ktNativeNameClassIndex(name))
+      .joinToString(if (isKotlinStdlibKtNativeName(name)) "" else "_")
+
+  /**
+   * Returns the index of the outermost class name among the components of a qualified `@KtNative`
+   * name, relying on the convention that package names start with a lowercase letter and class
+   * names don't.
+   */
+  private fun ktNativeNameClassIndex(name: String): Int {
+    val components = name.qualifiedNameComponents()
+    require(components.none { it.isEmpty() }) { "Malformed @KtNative name: '$name'" }
+    val index = components.indexOfFirst { !it.first().isLowerCase() }
+    require(index != -1) { "@KtNative name without a class name: '$name'" }
+    return index
+  }
 
   private fun ktNativeNameUsesSimpleObjCName(name: String): Boolean =
     KT_NATIVE_SIMPLE_OBJC_NAME_TYPES.contains(name)
@@ -1032,8 +1056,6 @@ internal class J2ObjCCompatSources(
         "java.io.EOFException",
         "java.io.FileNotFoundException",
         "java.io.IOException",
-        "java.util.Map",
-        "java.util.Map.Entry",
         "java.util.concurrent.atomic.",
         "java.util.concurrent.KotlinExecutor",
         "javaemul.",
