@@ -148,11 +148,6 @@ private fun testArrayCasts_differentDimensions() {
 }
 
 private fun testArrayCasts_erasureCastsOnArrayAccess_fromArrayOfT() {
-  // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
-  // assertThrows while J2CL does.
-  if (isJvm()) {
-    return
-  }
   // Array of the right type.
   val stringArrayInArrayContainer = ArrayContainer<String>(Array<String?>(1) { null })
   val unusedString: String? = stringArrayInArrayContainer.data[0]
@@ -169,12 +164,16 @@ private fun testArrayCasts_erasureCastsOnArrayAccess_fromArrayOfT() {
   )
   // Make sure access to the length field performs the right cast. The length field
   // has special handling in CompilationUnitBuider.
-  assertThrowsClassCastException(
-    {
-      val unused = objectArrayInArrayContainer.data.size
-    },
-    Array<String>::class.java,
-  )
+  // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
+  // assertThrows while J2CL does.
+  if (!isJvm()) {
+    assertThrowsClassCastException(
+      {
+        val unused = objectArrayInArrayContainer.data.size
+      },
+      Array<String>::class.java,
+    )
+  }
 
   // Not even an array.
   assertThrowsClassCastException(
@@ -194,12 +193,6 @@ private class ArrayContainer<T> internal constructor(array: Any) {
 }
 
 private fun testArrayCasts_erasureCastsOnArrayAccess_fromT() {
-  // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
-  // assertThrows while J2CL does.
-  if (isJvm()) {
-    return
-  }
-
   // Array of the right type.
   val stringArrayInContainer = Container<Array<String>>(Array<String?>(1) { null })
   val unusedString = stringArrayInContainer.data[0]
@@ -214,12 +207,16 @@ private fun testArrayCasts_erasureCastsOnArrayAccess_fromT() {
     },
     Array<String>::class.java,
   )
-  assertThrowsClassCastException(
-    {
-      val unused: Int = objectArrayInContainer.data.size
-    },
-    Array<String>::class.java,
-  )
+  // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
+  // assertThrows while J2CL does.
+  if (!isJvm()) {
+    assertThrowsClassCastException(
+      {
+        val unused: Int = objectArrayInContainer.data.size
+      },
+      Array<String>::class.java,
+    )
+  }
 
   // Not even an array.
   val notAnArrayInContainer = Container<Array<String>>(Any())
@@ -229,12 +226,16 @@ private fun testArrayCasts_erasureCastsOnArrayAccess_fromT() {
     },
     Array<String>::class.java,
   )
-  assertThrowsClassCastException(
-    {
-      val unused: Int = notAnArrayInContainer.data.size
-    },
-    Array<String>::class.java,
-  )
+  // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
+  // assertThrows while J2CL does.
+  if (!isJvm()) {
+    assertThrowsClassCastException(
+      {
+        val unused: Int = notAnArrayInContainer.data.size
+      },
+      Array<String>::class.java,
+    )
+  }
 }
 
 private class Container<T> constructor(array: Any) {

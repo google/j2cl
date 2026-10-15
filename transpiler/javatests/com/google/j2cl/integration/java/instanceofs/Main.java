@@ -121,10 +121,6 @@ public class Main {
   private static class Implementor implements ChildInterface, GenericInterface<String> {}
 
   private static void testInstanceOf_array() {
-    // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
-    if (isWasm()) {
-      return;
-    }
     Object object = new Object();
     assertTrue(object instanceof Object);
     assertTrue(!(object instanceof Object[]));
@@ -141,7 +137,8 @@ public class Main {
     assertTrue(objects1d instanceof Object[]);
     // TODO(b/423010387): instanceof X[] always returns true in J2KT for any reference array
     //  regardless of its type (here and below).
-    if (!isJ2Kt()) {
+    // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
+    if (!isJ2Kt() && !isWasm()) {
       assertTrue(!(objects1d instanceof Object[][]));
       assertTrue(!(objects1d instanceof String[]));
       assertTrue(!(objects1d instanceof String[][]));
@@ -157,11 +154,11 @@ public class Main {
     Object strings1d = new String[1];
     assertTrue(strings1d instanceof Object);
     assertTrue(strings1d instanceof Object[]);
-    if (!isJ2Kt()) {
+    if (!isJ2Kt() && !isWasm()) {
       assertTrue(!(strings1d instanceof Object[][]));
-      assertTrue(strings1d instanceof String[]);
       assertTrue(!(strings1d instanceof String[][]));
     }
+    assertTrue(strings1d instanceof String[]);
     assertTrue(!(strings1d instanceof int[]));
     assertTrue(!(strings1d instanceof Comparable));
     if (!isJ2KtNative()) {
@@ -172,8 +169,8 @@ public class Main {
     Object objects2d = new Object[1][1];
     assertTrue(objects2d instanceof Object);
     assertTrue(objects2d instanceof Object[]);
-    if (!isJ2Kt()) {
-      assertTrue(objects2d instanceof Object[][]);
+    assertTrue(objects2d instanceof Object[][]);
+    if (!isJ2Kt() && !isWasm()) {
       assertTrue(!(objects2d instanceof String[]));
       assertTrue(!(objects2d instanceof String[][]));
     }
@@ -187,11 +184,11 @@ public class Main {
     Object strings2d = new String[1][1];
     assertTrue(strings2d instanceof Object);
     assertTrue(strings2d instanceof Object[]);
-    if (!isJ2Kt()) {
-      assertTrue(strings2d instanceof Object[][]);
+    assertTrue(strings2d instanceof Object[][]);
+    if (!isJ2Kt() && !isWasm()) {
       assertTrue(!(strings2d instanceof String[]));
-      assertTrue(strings2d instanceof String[][]);
     }
+    assertTrue(strings2d instanceof String[][]);
     assertTrue(!(strings2d instanceof int[]));
     assertTrue(!(strings2d instanceof Comparable));
     if (!isJ2KtNative()) {
@@ -215,7 +212,7 @@ public class Main {
     Object ints2d = new int[1][];
     assertTrue(ints2d instanceof Object);
     assertTrue(ints2d instanceof Object[]);
-    if (!isJ2Kt()) {
+    if (!isJ2Kt() && !isWasm()) {
       assertTrue(!(ints2d instanceof Object[][]));
       assertTrue(!(ints2d instanceof String[]));
       assertTrue(!(ints2d instanceof String[][]));
@@ -235,8 +232,8 @@ public class Main {
     assertTrue(!(intsLiteral instanceof String[]));
     assertTrue(!(intsLiteral instanceof String[][]));
     assertTrue(intsLiteral instanceof int[]);
+    assertTrue(!(intsLiteral instanceof Comparable));
     if (!isJ2KtNative()) {
-      assertTrue(!(intsLiteral instanceof Comparable));
       assertTrue(intsLiteral instanceof Serializable);
       assertTrue(intsLiteral instanceof Cloneable);
     }
@@ -381,8 +378,8 @@ public class Main {
     }
     assertTrue(!(o instanceof Cloneable));
 
-    assertTrue((!(new Object() instanceof Void)));
-    assertTrue((!(null instanceof Void)));
+    assertTrue(!(new Object() instanceof Void));
+    assertTrue(!(null instanceof Void));
     assertTrue(!(null instanceof Cloneable));
     assertTrue(!(null instanceof Serializable));
   }

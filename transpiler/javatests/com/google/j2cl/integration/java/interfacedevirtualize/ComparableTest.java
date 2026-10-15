@@ -208,17 +208,15 @@ public class ComparableTest {
   }
 
   public void testThrowsClassCastException() {
-    // TODO(b/420648962): Does not throw on Kotlin/Native.
-    if (isJ2KtNative()) {
-      return;
-    }
-
     assertThrowsClassCastException(() -> compare1(new Double(1.1), new Object()));
     assertThrowsClassCastException(() -> compare1(new Boolean(false), new Object()));
     assertThrowsClassCastException(() -> compare1(new Integer(1000), new Object()));
     assertThrowsClassCastException(() -> compare1(new Long(1000L), new Object()));
     assertThrowsClassCastException(() -> compare1("foo", new Object()));
-    assertThrowsClassCastException(() -> compare1(new ComparableImpl(1000), new Object()));
+    // TODO(b/420648962): Does not throw on Kotlin/Native.
+    if (!isJ2KtNative()) {
+      assertThrowsClassCastException(() -> compare1(new ComparableImpl(1000), new Object()));
+    }
   }
 
   public static void test() {

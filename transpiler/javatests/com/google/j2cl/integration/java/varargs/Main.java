@@ -18,7 +18,6 @@ package varargs;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
-import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +78,8 @@ public class Main {
   }
 
   private static void testVarargs_genericVarargsParameter() {
-    assertTrue((generics(1, 2) == 1));
-    assertTrue((generics("abc", "def").equals("abc")));
+    assertTrue(generics(1, 2) == 1);
+    assertTrue(generics("abc", "def").equals("abc"));
   }
 
   private static <T> T generics(T... elements) {
@@ -127,20 +126,10 @@ public class Main {
   }
 
   private static void testVarargs_implicitSuperConstructorCall() {
-    if (isWasm()) {
-      // TODO(b/184675805): Enable when arrays have metadata.
-      return;
-    }
-
     assertEquals("String", new ChildWithImplicitSuperCall().which);
   }
 
   private static void testVarargs_implicitSuperConstructorCall_implicitParameters() {
-    if (isWasm()) {
-      // TODO(b/184675805): Enable when arrays have metadata.
-      return;
-    }
-
     int captured = 1;
     class Outer {
 
@@ -201,11 +190,6 @@ public class Main {
   }
 
   private static void testVarargs_implicitSuperConstructorCall_genericTypes() {
-    if (isWasm()) {
-      // TODO(b/184675805): Enable when arrays have metadata.
-      return;
-    }
-
     int captured = 1;
     class Parent<T extends List<?>, U extends ArrayList<?>> {
       String which;
@@ -251,11 +235,6 @@ public class Main {
   }
 
   private static void testVarargs_implicitSuperConstructorCall_enum() {
-    if (isWasm()) {
-      // TODO(b/184675805): Enable when arrays have metadata.
-      return;
-    }
-
     assertEquals("String", MyEnum.A.which);
     assertEquals("Object", MyEnum.B.which);
     assertEquals("String", MyEnum.C.which);

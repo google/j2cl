@@ -139,10 +139,6 @@ public class Main {
   }
 
   private static void testJsEnum() {
-    // TODO(b/295235576): enable for Wasm when class metadata is implemented for JsEnum.
-    if (isWasm()) {
-      return;
-    }
     Object o = MyJsEnum.VALUE;
     assertSame(MyJsEnum.class, o.getClass());
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
@@ -277,9 +273,9 @@ public class Main {
     SomeFunctionalInterfaceWithParameter lambdaWithSameInterfaceAsOriginalLambda = (a) -> {};
 
     assertSame(intersectionLambda.getClass(), intersectionLambda.getClass());
-    if (isJvm()) {
-      // J2CL doesn't conform to differentiating the class instance for anonymous types and
-      // lambdas that implement functional interfaces.
+    if (!isWasm()) {
+      // J2CL Wasm doesn't conform to differentiating the class instance for intersection
+      // type lambdas that implement functional interfaces.
       assertNotSame(intersectionLambda.getClass(), anotherIntersectionLambda.getClass());
       assertNotSame(
           intersectionLambda.getClass(), lambdaWithSameInterfaceAsOriginalLambda.getClass());

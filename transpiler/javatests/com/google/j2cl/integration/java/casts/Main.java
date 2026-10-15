@@ -146,14 +146,14 @@ public class Main {
             Object[][][] unused = (Object[][][]) object2d;
           },
           Object[][][].class);
-
-      // A non-array cannot be cast to an array.
-      assertThrowsClassCastException(
-          () -> {
-            Object[] unused = (Object[]) new Object();
-          },
-          Object[].class);
     }
+
+    // A non-array cannot be cast to an array.
+    assertThrowsClassCastException(
+        () -> {
+          Object[] unused = (Object[]) new Object();
+        },
+        Object[].class);
   }
 
   private static void testArrayCasts_erasureCastsOnArrayAccess_fromArrayOfT() {
@@ -176,7 +176,7 @@ public class Main {
     // Make sure access to the length field performs the right cast. The length field
     // has special handling in CompilationUnitBuider.
     // TODO(b/368266647): Erasure cast is missing in Kotlin
-    if (!isJ2Kt()) {
+    if (!isJ2KtJvm() && !isJ2KtNative()) {
       assertThrowsClassCastException(
           () -> {
             int unused = objectArrayInArrayContainer.data.length;
@@ -209,12 +209,14 @@ public class Main {
     // Array of the wrong type.
     Container<String[]> objectArrayInContainer = new Container<>(new Object[1]);
     // TODO(b/368266647): Erasure cast is missing in Kotlin
-    if (!isJ2Kt()) {
+    if (!isJ2KtNative()) {
       assertThrowsClassCastException(
           () -> {
             String unused = objectArrayInContainer.data[0];
           },
           String[].class);
+    }
+    if (!isJ2KtJvm() && !isJ2KtNative()) {
       assertThrowsClassCastException(
           () -> {
             int unused = objectArrayInContainer.data.length;
@@ -468,11 +470,6 @@ public class Main {
   @SuppressWarnings({"unused", "unchecked"})
   private static <T, E extends Number> void testCasts_generics(
       T unusedForInference1, E unusedForInference2) {
-    // TODO(b/420648962): Does not throw on Kotlin/Native
-    if (isJ2KtNative()) {
-      return;
-    }
-
     Object o = new Integer(1);
     E e = (E) o; // cast to type variable with bound, casting Integer instance to Number
     T t = (T) o; // cast to type variable without bound, casting Integer instance to Object
@@ -492,10 +489,13 @@ public class Main {
     Object[] os = new Object[1];
     E[] es = (E[]) is;
     T[] ts = (T[]) is;
-    assertThrowsClassCastException(
-        () -> {
-          E[] ees = (E[]) os;
-        });
+    // TODO(b/420648962): Does not throw on Kotlin/Native
+    if (!isJ2KtNative()) {
+      assertThrowsClassCastException(
+          () -> {
+            E[] ees = (E[]) os;
+          });
+    }
     T[] tts = (T[]) os;
   }
 
