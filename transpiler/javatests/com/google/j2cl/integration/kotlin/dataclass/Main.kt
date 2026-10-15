@@ -18,6 +18,7 @@ package dataclass
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertNotEquals
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isJavaScript
 
 fun main(vararg unused: String) {
   testAccessors()
@@ -26,16 +27,38 @@ fun main(vararg unused: String) {
   testCopy()
   testComponents()
   testToString()
+  testInterfaceDelegation()
+  testSecondaryConstructor()
   testInheritance()
+  testLocalDataClassWithCaptures()
+  testOverriddenObjectMethods()
   testArrayMembers()
+  testFloatingPoint()
   testJvmRecordDataClass()
 }
 
-data class Foo(val bar: Int, val buzz: String?, val optional: Int = 10) {
+data class Foo(val bar: Int, val buzz: String?, var optional: Int = 10) {
   var mutable = "test"
+  var withCustomSetter = 0
+    set(value) {
+      field = value + 1
+    }
+
+  @JvmField var jvmField = 100
+  private var privateField: Int? = null
+  lateinit var lateinitField: String
   val combined = "$bar + $buzz + $optional"
+  val lazyDelegated: String by lazy { mutable }
+
+  init {
+    withCustomSetter = bar
+  }
 
   fun hasBuzz() = buzz != null
+
+  fun setPrivateField(value: Int) {
+    privateField = value
+  }
 }
 
 fun testAccessors() {
@@ -50,6 +73,20 @@ fun testAccessors() {
   assertEquals("test", foo.mutable)
   foo.mutable = "other"
   assertEquals("other", foo.mutable)
+
+  assertEquals(2, foo.withCustomSetter)
+  foo.withCustomSetter = 2
+  assertEquals(3, foo.withCustomSetter)
+
+  assertEquals(100, foo.jvmField)
+  foo.jvmField = 101
+  assertEquals(101, foo.jvmField)
+
+  foo.lateinitField = "lateinit"
+  assertEquals("lateinit", foo.lateinitField)
+
+  // Lazy properties are initialized on first access.
+  assertEquals("other", foo.lazyDelegated)
 }
 
 fun testEquals() {
@@ -62,20 +99,38 @@ fun testEquals() {
   assertNotEquals(foo, Foo(1, null))
   assertNotEquals(foo, Foo(2, "otherStr"))
 
+  // Mutable constructor properties are considered for equality.
+  assertNotEquals(foo, Foo(1, "someStr").apply { optional = 20 })
+
   // Non-constructor properties are not considered for equality.
-  val otherFoo = Foo(1, "someStr")
-  otherFoo.mutable = "other"
-  assertEquals(foo, otherFoo)
+  assertEquals(foo, Foo(1, "someStr").apply { mutable = "other" })
+  assertEquals(foo, Foo(1, "someStr").apply { withCustomSetter = 1 })
+  assertEquals(foo, Foo(1, "someStr").apply { jvmField = 101 })
+  assertEquals(foo, Foo(1, "someStr").apply { lateinitField = "lateinit" })
+  assertEquals(foo, Foo(1, "someStr").apply { setPrivateField(1) })
+  val fooWithInitializedLazy = Foo(1, "someStr")
+  assertEquals("test", fooWithInitializedLazy.lazyDelegated)
+  assertEquals(foo, fooWithInitializedLazy)
 }
 
 fun testHashCode() {
   val foo = Foo(1, "someStr")
-  assertEquals(foo.hashCode(), Foo(1, "someStr").hashCode())
 
-  // Non-constructor properties are not considered for hashcode.
-  val otherFoo = Foo(1, "someStr")
-  otherFoo.mutable = "other"
-  assertEquals(foo.hashCode(), otherFoo.hashCode())
+  assertEquals(foo.hashCode(), Foo(1, "someStr").hashCode())
+  assertEquals(foo.hashCode(), Foo(1, "someStr", 10).hashCode())
+
+  // Mutable constructor properties are considered for hashCode.
+  assertNotEquals(foo.hashCode(), Foo(1, "someStr").apply { optional = 20 }.hashCode())
+
+  // Non-constructor properties are not considered for hashCode.
+  assertEquals(foo.hashCode(), Foo(1, "someStr").apply { mutable = "other" }.hashCode())
+  assertEquals(foo.hashCode(), Foo(1, "someStr").apply { withCustomSetter = 1 }.hashCode())
+  assertEquals(foo.hashCode(), Foo(1, "someStr").apply { jvmField = 101 }.hashCode())
+  assertEquals(foo.hashCode(), Foo(1, "someStr").apply { lateinitField = "lateinit" }.hashCode())
+  assertEquals(foo.hashCode(), Foo(1, "someStr").apply { setPrivateField(1) }.hashCode())
+  val fooWithInitializedLazy = Foo(1, "someStr")
+  assertEquals("test", fooWithInitializedLazy.lazyDelegated)
+  assertEquals(foo.hashCode(), fooWithInitializedLazy.hashCode())
 }
 
 fun testCopy() {
@@ -101,18 +156,51 @@ fun testComponents() {
 
 fun testToString() {
   val foo = Foo(1, "someStr")
+  assertEquals("Foo(bar=1, buzz=someStr, optional=10)", foo.toString())
+
   // Non-constructor properties are not considered for toString.
+  foo.mutable = "other"
+  foo.withCustomSetter = 50
+  foo.jvmField = 101
+  foo.lateinitField = "lateinit"
+  foo.setPrivateField(777)
+  assertEquals("other", foo.lazyDelegated)
   assertEquals("Foo(bar=1, buzz=someStr, optional=10)", foo.toString())
 }
 
-data class ArrayMembers(private val a: IntArray, private val b: Array<String>)
+interface Named {
+  val instance: Named
+}
 
-fun testArrayMembers() {
-  val arrayMembers = ArrayMembers(intArrayOf(1, 2, 3), arrayOf("a", "b"))
+class NamedImpl() : Named {
+  override val instance = this
+}
 
-  assertEquals("ArrayMembers(a=[1, 2, 3], b=[a, b])", arrayMembers.toString())
-  // Just make sure we get a non-zero hashCode.
-  assertNotEquals(0, arrayMembers.hashCode())
+data class DelegatingDataClass(val id: Int) : Named by NamedImpl()
+
+fun testInterfaceDelegation() {
+  assertNotEquals(DelegatingDataClass(1).instance, DelegatingDataClass(1).instance)
+  assertEquals(DelegatingDataClass(1), DelegatingDataClass(1))
+  assertEquals(DelegatingDataClass(1).hashCode(), DelegatingDataClass(1).hashCode())
+  assertNotEquals(DelegatingDataClass(1).instance, DelegatingDataClass(2).instance)
+  assertNotEquals(DelegatingDataClass(1), DelegatingDataClass(2))
+}
+
+data class SecondaryCtor(private val unreadField: Int) {
+  var bar = 0
+
+  constructor(foo: Int, buzz: Int) : this(100) {
+    bar = foo + buzz
+  }
+}
+
+fun testSecondaryConstructor() {
+  assertNotEquals(SecondaryCtor(5), SecondaryCtor(6))
+
+  assertEquals(SecondaryCtor(1, 2), SecondaryCtor(100, 200))
+  assertEquals(SecondaryCtor(1, 2), SecondaryCtor(100))
+  assertEquals(SecondaryCtor(1, 2).hashCode(), SecondaryCtor(100).hashCode())
+  assertEquals("SecondaryCtor(unreadField=100)", SecondaryCtor(1, 2).toString())
 }
 
 interface InterfaceType {
@@ -139,6 +227,7 @@ fun testInheritance() {
   assertEquals(1, child.a)
   assertEquals(2, child.b)
   assertEquals(-1, child.c)
+  assertEquals(3, child.doSomething())
 
   val (a, b, c) = child
   assertEquals(1, a)
@@ -146,10 +235,144 @@ fun testInheritance() {
   assertEquals(-1, c)
 
   assertEquals(child, Child(1, 2))
+  assertNotEquals(child, Child(2, 2))
 
+  // Properties inherited from the superclass are not considered.
   val otherChild = Child(1, 2)
   otherChild.c = 3
   assertEquals(child, otherChild)
+  assertEquals(child.hashCode(), otherChild.hashCode())
+  assertEquals("Child(a=1, b=2)", otherChild.toString())
+}
+
+fun testLocalDataClassWithCaptures() {
+  fun createLocal(captured: String, x: Int): Any {
+    data class Local(val x: Int) {
+      // Captures the local variable `captured`, which becomes a synthetic field.
+      fun describe() = "$captured=$x"
+    }
+    return Local(x)
+  }
+  val local = createLocal("captured=1", 5)
+  // Captured values are not considered for equals, hashCode, or toString.
+  assertEquals(local, createLocal("captured=2", 5))
+  assertEquals(local.hashCode(), createLocal("captured=2", 5).hashCode())
+  assertNotEquals(local, createLocal("captured=1", 6))
+  assertEquals("Local(x=5)", local.toString())
+}
+
+data class CustomToStringDataClass(val x: Int, val y: String) {
+  override fun toString() = "CustomToString:$x:$y"
+}
+
+data class CustomEqualsHashCodeDataClass(val id: Int, val ignoredLabel: String) {
+  override fun equals(other: Any?) = other is CustomEqualsHashCodeDataClass && id == other.id
+
+  override fun hashCode() = id * 31
+}
+
+data class CustomAllObjectMethodsDataClass(val x: Int) {
+  override fun equals(other: Any?) = other is CustomAllObjectMethodsDataClass
+
+  override fun hashCode() = 42
+
+  override fun toString() = "CustomAll"
+}
+
+open class BaseWithOpenObjectMethods {
+  override fun equals(other: Any?) = false
+
+  override fun hashCode() = -999
+
+  override fun toString() = "BaseOpenToString"
+}
+
+data class SubDataClassWithOpenSuperOverrides(val x: Int) : BaseWithOpenObjectMethods()
+
+open class BaseWithFinalObjectMethods {
+  final override fun equals(other: Any?) = false
+
+  final override fun hashCode() = 42
+
+  final override fun toString() = "BaseFinalToString"
+}
+
+data class SubDataClassWithFinalSuperOverrides(val x: Int) : BaseWithFinalObjectMethods()
+
+fun testOverriddenObjectMethods() {
+  // Only toString is overridden.
+  val customToString = CustomToStringDataClass(1, "a")
+  assertEquals("CustomToString:1:a", customToString.toString())
+  assertEquals(customToString, CustomToStringDataClass(1, "a"))
+  assertNotEquals(customToString, CustomToStringDataClass(2, "a"))
+  assertEquals(customToString.hashCode(), CustomToStringDataClass(1, "a").hashCode())
+
+  // Only equals and hashCode are overridden.
+  val customEquals = CustomEqualsHashCodeDataClass(1, "a")
+  assertEquals(customEquals, CustomEqualsHashCodeDataClass(1, "b"))
+  assertNotEquals(customEquals, CustomEqualsHashCodeDataClass(2, "a"))
+  assertEquals(31, customEquals.hashCode())
+  assertEquals("CustomEqualsHashCodeDataClass(id=1, ignoredLabel=a)", customEquals.toString())
+
+  // All three are overridden.
+  val customAll = CustomAllObjectMethodsDataClass(1)
+  assertEquals(customAll, CustomAllObjectMethodsDataClass(999))
+  assertEquals(42, customAll.hashCode())
+  assertEquals("CustomAll", customAll.toString())
+
+  // Open overrides in the superclass are overridden by the generated methods.
+  val openSub: BaseWithOpenObjectMethods = SubDataClassWithOpenSuperOverrides(10)
+  assertEquals(openSub, SubDataClassWithOpenSuperOverrides(10))
+  assertNotEquals(openSub, SubDataClassWithOpenSuperOverrides(20))
+  assertEquals(openSub.hashCode(), SubDataClassWithOpenSuperOverrides(10).hashCode())
+  assertNotEquals(-999, openSub.hashCode())
+  assertEquals("SubDataClassWithOpenSuperOverrides(x=10)", openSub.toString())
+
+  // Final overrides in the superclass are inherited; no methods are generated.
+  val finalSub = SubDataClassWithFinalSuperOverrides(10)
+  assertNotEquals(finalSub, SubDataClassWithFinalSuperOverrides(10))
+  assertEquals(42, finalSub.hashCode())
+  assertEquals("BaseFinalToString", finalSub.toString())
+}
+
+data class FloatData(val f: Float, val d: Double) {}
+
+fun testFloatingPoint() {
+  val posZero = FloatData(0.0f, 0.0)
+  val negZero = FloatData(-0.0f, -0.0)
+  val nan = FloatData(Float.NaN, Double.NaN)
+
+  assertEquals("FloatData(f=NaN, d=NaN)", nan.toString())
+
+  if (isJavaScript()) {
+    // In JS, NaN !== NaN and 0.0 === -0.0
+    assertNotEquals(nan, FloatData(Float.NaN, Double.NaN))
+    assertEquals(posZero, negZero)
+    assertEquals("FloatData(f=0, d=0)", posZero.toString())
+  } else {
+    // In JVM, Float.compare treats NaN == NaN and 0.0 != -0.0
+    assertEquals(nan, FloatData(Float.NaN, Double.NaN))
+    assertNotEquals(posZero, negZero)
+    assertEquals("FloatData(f=0.0, d=0.0)", posZero.toString())
+  }
+}
+
+data class ArrayMembers(private val a: IntArray, private val b: Array<String>)
+
+fun testArrayMembers() {
+  val ints = intArrayOf(1, 2, 3)
+  val strings = arrayOf("a", "b")
+  val arrayMembers = ArrayMembers(ints, strings)
+
+  assertEquals(arrayMembers, ArrayMembers(ints, strings))
+  assertEquals(arrayMembers.hashCode(), ArrayMembers(ints, strings).hashCode())
+  assertEquals("ArrayMembers(a=[1, 2, 3], b=[a, b])", arrayMembers.toString())
+
+  // Array members use reference equality, but content-based hashCode and toString.
+  val otherArrayMembers = ArrayMembers(intArrayOf(1, 2, 3), arrayOf("a", "b"))
+  assertNotEquals(arrayMembers, otherArrayMembers)
+  assertEquals(arrayMembers.hashCode(), otherArrayMembers.hashCode())
+  assertEquals(arrayMembers.toString(), otherArrayMembers.toString())
 }
 
 interface JvmRecordInterface {
@@ -172,4 +395,7 @@ fun testJvmRecordDataClass() {
   assertEquals("2", o.component2())
   assertEquals("2", i.component2())
   assertEquals("Custom", o.toString())
+  assertEquals(o, JvmRecordDataClass(1, "2"))
+  assertNotEquals(o, JvmRecordDataClass(1, "3"))
+  assertEquals(o.hashCode(), JvmRecordDataClass(1, "2").hashCode())
 }
