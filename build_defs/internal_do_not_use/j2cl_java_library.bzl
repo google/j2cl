@@ -156,6 +156,7 @@ _J2KT_WEB_EXPERIMENT_ATTRS = {
         doc = "Whether J2KT Web is enabled for this specific target.",
         default = False,
     ),
+    "j2kt_experimental_webasync_coroutines": attr.bool(default = False),
 }
 
 _J2CL_INTERNAL_LIB_ATTRS = {

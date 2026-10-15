@@ -59,3 +59,7 @@ EXEMPT_FROM_NULLMARKED_ALLOWLIST = allowlists.of_packages([
     # We're permissive of tests not being @NullMarked.
     "//javatests/...",
 ])
+
+WEBASYNC_COROUTINES_ALLOWLIST = allowlists.of_packages([
+    "//transpiler/javatests/com/google/j2cl/readable/java/webasync",
+])
