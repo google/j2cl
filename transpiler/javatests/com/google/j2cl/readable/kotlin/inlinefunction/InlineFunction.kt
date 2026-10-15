@@ -239,6 +239,13 @@ fun testDefaultParams() {
   inlineFunWithDefaultsAndDefaultVarargs(1, 20, 30, 40, 50)
 }
 
+inline fun applyTo1(f: (Int) -> Int): Int = f(1)
+
+fun testPureBoundValueOfInlinedCallableReference() {
+  // The bound value `5` is pure.
+  applyTo1(5::plus)
+}
+
 // This example reproduces a J2CL bug where a local variable declared inside an inlined
 // generic function is incorrectly typed with a generic type parameter (`N`) instead of its
 // concrete type argument (`String`).
