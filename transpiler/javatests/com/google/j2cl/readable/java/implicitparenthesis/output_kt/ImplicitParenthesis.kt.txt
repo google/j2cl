@@ -85,7 +85,7 @@ open class ImplicitParenthesis {
    boxedInt = Int(10)
    boxedBoolean = true
    boxedBoolean = boxedInt!!.toInt() == primitiveInt
-   assert(boxedBoolean!!.booleanValue() == false)
+   assert(boxedBoolean as Boolean == false)
   }
   
   @JvmStatic

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.CaseFormat.LOWER_CAMEL;
 import static com.google.common.base.CaseFormat.UPPER_CAMEL;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangBoolean;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangDouble;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangFloat;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
@@ -50,6 +51,19 @@ public class NormalizePrimitiveConversionsJ2kt extends NormalizationPass {
             MethodDescriptor methodDescriptor = methodCall.getTarget();
             DeclaredTypeDescriptor enclosingTypeDescriptor =
                 methodDescriptor.getEnclosingTypeDescriptor();
+            if (isJavaLangBoolean(enclosingTypeDescriptor)
+                && methodDescriptor.getSignature().equals("booleanValue()")) {
+              // Kotlin has no Boolean.booleanValue(), and unboxing is a no-op since both
+              // java.lang.Boolean and boolean are kotlin.Boolean. Replace the call with a redundant
+              // cast, which keeps the expression primitive-typed for subsequent passes (e.g. so
+              // that value comparisons remain distinguishable from reference comparisons). The
+              // cast to the non-null type also null-checks the qualifier.
+              return CastExpression.builder()
+                  .setExpression(methodCall.getQualifier())
+                  .setCastTypeDescriptor(PrimitiveTypes.BOOLEAN)
+                  .build();
+            }
+
             if (!isJavaLangDouble(enclosingTypeDescriptor)
                 && !isJavaLangFloat(enclosingTypeDescriptor)) {
               return methodCall;

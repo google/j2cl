@@ -125,8 +125,8 @@ open class Arrays {
   }
   booleans2d = arrayOf<Array<Boolean?>?>(arrayOf<Boolean?>(true, false), null)
   booleans2d = arrayOfNulls<Array<Boolean?>>(20)
-  var b: Boolean = booleans[0]!!.booleanValue()
-  b = booleans2d[0]!![1]!!.booleanValue()
+  var b: Boolean = booleans[0] as Boolean
+  b = booleans2d[0]!![1] as Boolean
   booleans[0] = true
   booleans2d[0]!![1] = false
  }

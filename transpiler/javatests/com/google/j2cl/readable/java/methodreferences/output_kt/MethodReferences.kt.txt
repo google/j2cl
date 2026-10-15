@@ -61,7 +61,7 @@ open class MethodReferences<T> {
   val parameterizedFactory: Producer<String> = Producer { parameterizedInstance.t() }
   val biFunction: BiFunction<MethodReferences<T>, Number, Boolean> = BiFunction { t: MethodReferences<T>, u: Number -> t.sameAs(u) }
   val functionWithParameters: Function<Number, Boolean> = Function { t_1: Number -> this.sameAs(t_1) }
-  val objectPredicate: Predicate<MethodReferences<T>> = Predicate { parameter: MethodReferences<T> -> parameter.isA().booleanValue() }
+  val objectPredicate: Predicate<MethodReferences<T>> = Predicate { parameter: MethodReferences<T> -> parameter.isA() as Boolean }
   val objectCapturingOuterProducer: Producer<MethodReferences<T>.ObjectCapturingOuter> = Producer { ObjectCapturingOuter() }
   val arrayProducer: ArrayProducer<Any> = ArrayProducer { size: Int -> uninitializedArrayOf<Double>(size) as Array<Any> }
   objectFactory = run {

@@ -1,0 +1,78 @@
+// Generated from "j2kt/BooleanUnboxing.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+open class BooleanUnboxing {
+ companion object {
+  @JvmStatic
+  fun unbox(b: Boolean): Boolean = b as Boolean
+  
+  @JvmStatic
+  fun unboxNullable(b: Boolean?): Boolean = b as Boolean
+  
+  @JvmStatic
+  fun <T: Boolean> unboxTypeVariable(t: T): Boolean = t as Boolean
+  
+  @JvmStatic
+  fun <T: Boolean?> unboxNullableTypeVariable(t: T): Boolean = t as Boolean
+  
+  @JvmStatic
+  fun unboxConditional(c: Boolean, a: Boolean, b: Boolean): Boolean = !((if (c) a else b) as Boolean)
+  
+  @JvmStatic
+  fun compareWithPrimitive(a: Boolean, b: Boolean): Boolean = a as Boolean == b
+  
+  @JvmStatic
+  fun compareReferences(a: Boolean, b: Boolean): Boolean = a === b
+  
+  @JvmStatic
+  fun compareUnboxed(a: Boolean, b: Boolean): Boolean = a as Boolean == b as Boolean
+  
+  @JvmStatic
+  fun compareUnboxedNullable(a: Boolean?, b: Boolean?): Boolean = a as Boolean != b as Boolean
+  
+  @JvmStatic
+  fun <T: Boolean> compareUnboxedTypeVariable(t: T, b: Boolean): Boolean = t as Boolean == b as Boolean
+  
+  @JvmStatic
+  fun acceptObject(o: Any?) {}
+  
+  @JvmStatic
+  fun acceptBoxed(b: Boolean?) {}
+  
+  @JvmStatic
+  fun passUnboxed(a: Boolean, b: Boolean?) {
+   BooleanUnboxing.acceptObject(
+    a as Boolean,
+   )
+   BooleanUnboxing.acceptObject(
+    b as Boolean,
+   )
+   BooleanUnboxing.acceptBoxed(
+    a as Boolean,
+   )
+  }
+ }
+}

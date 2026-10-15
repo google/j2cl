@@ -60,7 +60,7 @@ open class AutoBoxing {
  
  open fun box(c: Char): Char? = c
  
- open fun unbox(b: Boolean?): Boolean = b!!.booleanValue()
+ open fun unbox(b: Boolean?): Boolean = b as Boolean
  
  open fun unbox(d: Double?): Double = d!!.toDouble()
  
@@ -176,11 +176,11 @@ open class AutoBoxing {
   o = 1.1f
   o = 1
   o = 'a'
-  boxBool = boxBool!!.booleanValue() && boxBool!!.booleanValue()
+  boxBool = boxBool as Boolean && boxBool as Boolean
   boxD = boxD!!.toDouble() + boxD!!.toDouble()
   boxI = boxI!!.toInt() / boxI!!.toInt()
   boxL = boxL!!.toLong() / boxL!!.toLong()
-  boxBool = !boxBool!!.booleanValue()
+  boxBool = !(boxBool as Boolean)
   boxI = + boxI!!.toInt()
   boxI = - boxI!!.toInt()
   boxI = boxI!!.toInt().shl(
@@ -211,7 +211,7 @@ open class AutoBoxing {
    1.toShort(),
   )
   var boxC: Char? = Char('a')
-  var bool: Boolean = boxBool!!.booleanValue()
+  var bool: Boolean = boxBool as Boolean
   var d: Double = boxD!!.toDouble()
   val b: Byte = boxB!!.toByte()
   var f: Float = boxF!!.toFloat()
@@ -220,7 +220,7 @@ open class AutoBoxing {
   val s: Short = boxS!!.toShort()
   val c: Char = boxC!!.toChar()
   boxBool = this.box(
-   boxBool!!.booleanValue(),
+   boxBool as Boolean,
   )
   boxD = this.box(
    boxD!!.toDouble(),
@@ -270,12 +270,12 @@ open class AutoBoxing {
   val v: Void? = this.takesAndReturnsVoid(
    this.takesAndReturnsVoid(null),
   )
-  bool = boxBool!!.booleanValue() && boxBool!!.booleanValue()
+  bool = boxBool as Boolean && boxBool as Boolean
   d = boxD!!.toDouble() + boxD!!.toDouble()
   f = boxF!!.toFloat() - boxF!!.toFloat()
   i = boxI!!.toInt() * boxI!!.toInt()
   l = boxL!!.toLong() / boxL!!.toLong()
-  bool = !boxBool!!.booleanValue()
+  bool = !(boxBool as Boolean)
   i = + boxI!!.toInt()
   i = - boxI!!.toInt()
   i = boxI!!.toInt().inv()
@@ -318,108 +318,108 @@ open class AutoBoxing {
   br = boxB1 !== boxB2
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue().xor(
-   boxB2!!.booleanValue(),
+  boxr = (boxB1 as Boolean).xor(
+   boxB2 as Boolean,
   )
-  br = boxB1!!.booleanValue().xor(
-   boxB2!!.booleanValue(),
-  )
-  assert(boxr)
-  assert(br)
-  boxr = boxB1!!.booleanValue().and(
-   boxB2!!.booleanValue(),
-  )
-  br = boxB1!!.booleanValue().and(
-   boxB2!!.booleanValue(),
+  br = (boxB1 as Boolean).xor(
+   boxB2 as Boolean,
   )
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue().or(
-   boxB2!!.booleanValue(),
+  boxr = (boxB1 as Boolean).and(
+   boxB2 as Boolean,
   )
-  br = boxB1!!.booleanValue().or(
-   boxB2!!.booleanValue(),
+  br = (boxB1 as Boolean).and(
+   boxB2 as Boolean,
   )
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue() && boxB2!!.booleanValue()
-  br = boxB1!!.booleanValue() && boxB2!!.booleanValue()
+  boxr = (boxB1 as Boolean).or(
+   boxB2 as Boolean,
+  )
+  br = (boxB1 as Boolean).or(
+   boxB2 as Boolean,
+  )
   assert(boxr)
   assert(br)
-  boxr = boxB1!!.booleanValue() || boxB2!!.booleanValue()
-  br = boxB1!!.booleanValue() || boxB2!!.booleanValue()
+  boxr = boxB1 as Boolean && boxB2 as Boolean
+  br = boxB1 as Boolean && boxB2 as Boolean
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 as Boolean || boxB2 as Boolean
+  br = boxB1 as Boolean || boxB2 as Boolean
   assert(boxr)
   assert(br)
   boxr = run {
    boxB1 = boxB2
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   br = run {
    boxB1 = boxB2
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   assert(boxr)
   assert(br)
   boxr = run {
-   boxB1 = boxB1!!.booleanValue().and(
-    boxB2!!.booleanValue(),
+   boxB1 = (boxB1 as Boolean).and(
+    boxB2 as Boolean,
    )
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   br = run {
-   boxB1 = boxB1!!.booleanValue().and(
-    boxB2!!.booleanValue(),
+   boxB1 = (boxB1 as Boolean).and(
+    boxB2 as Boolean,
    )
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   assert(boxr)
   assert(br)
   boxr = run {
-   boxB1 = boxB1!!.booleanValue().or(
-    boxB2!!.booleanValue(),
+   boxB1 = (boxB1 as Boolean).or(
+    boxB2 as Boolean,
    )
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   br = run {
-   boxB1 = boxB1!!.booleanValue().or(
-    boxB2!!.booleanValue(),
+   boxB1 = (boxB1 as Boolean).or(
+    boxB2 as Boolean,
    )
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   assert(boxr)
   assert(br)
   boxr = run {
-   boxB1 = boxB1!!.booleanValue().xor(
-    boxB2!!.booleanValue(),
+   boxB1 = (boxB1 as Boolean).xor(
+    boxB2 as Boolean,
    )
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   br = run {
-   boxB1 = boxB1!!.booleanValue().xor(
-    boxB2!!.booleanValue(),
+   boxB1 = (boxB1 as Boolean).xor(
+    boxB2 as Boolean,
    )
    boxB1
-  }!!.booleanValue()
+  } as Boolean
   assert(boxr)
   assert(br)
   var boxB: Boolean? = null
-  boxB = !boxB!!.booleanValue()
-  boxB = boxB!!.booleanValue() && boxB!!.booleanValue()
-  boxB = if (boxB!!.booleanValue()) boxB else boxB
-  if (boxB!!.booleanValue()) {}
+  boxB = !(boxB as Boolean)
+  boxB = boxB as Boolean && boxB as Boolean
+  boxB = if (boxB as Boolean) boxB else boxB
+  if (boxB as Boolean) {}
   var b: Boolean = false
   b = b.or(
    run {
-    boxB = boxB!!.booleanValue().or(
+    boxB = (boxB as Boolean).or(
      run {
       b = b.or(
-       boxB!!.booleanValue(),
+       boxB as Boolean,
       )
       b
      },
     )
     boxB
-   }!!.booleanValue(),
+   } as Boolean,
   )
  }
  
@@ -427,9 +427,9 @@ open class AutoBoxing {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = false
   assert(boxB === boxB)
-  assert(boxB!!.booleanValue() == b)
+  assert(boxB as Boolean == b)
   assert(b != b)
-  assert(b != boxB!!.booleanValue())
+  assert(b != boxB as Boolean)
   val boxI: Int? = Int(1)
   val i: Int = 1
   assert(boxI === boxI)
@@ -441,7 +441,7 @@ open class AutoBoxing {
  open fun testAssertStatement() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = true
-  assert(boxB!!.booleanValue())
+  assert(boxB as Boolean)
   assert(b)
  }
  
@@ -477,13 +477,13 @@ open class AutoBoxing {
     - integerRef!!.field!!.toInt(),
    )
    AutoBoxing.acceptsObject(
-    !booleanRef!!.field!!.booleanValue(),
+    !(booleanRef!!.field as Boolean),
    )
    AutoBoxing.acceptsObject(
     1 + integerRef!!.field!!.toInt(),
    )
    AutoBoxing.acceptsObject(
-    booleanRef!!.field!!.booleanValue() || booleanRef!!.field!!.booleanValue(),
+    booleanRef!!.field as Boolean || booleanRef!!.field as Boolean,
    )
    AutoBoxing.acceptsObject(
     "" + stringRef!!.field + stringRef!!.field,
