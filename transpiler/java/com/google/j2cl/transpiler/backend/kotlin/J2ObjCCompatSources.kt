@@ -525,8 +525,10 @@ internal class J2ObjCCompatSources(
     setOf(typeDescriptors.javaUtilList, typeDescriptors.javaUtilSet, typeDescriptors.javaUtilMap)
 
   private fun isObjCClass(typeDeclaration: TypeDeclaration): Boolean =
-    typeDeclaration.isClass ||
-      INTERFACES_MAPPED_TO_OBJC_CLASS.contains(typeDeclaration.toDescriptor())
+    typeDeclaration.isClass || isInterfaceMappedToObjCClass(typeDeclaration)
+
+  private fun isInterfaceMappedToObjCClass(typeDeclaration: TypeDeclaration): Boolean =
+    typeDeclaration.toDescriptor() in INTERFACES_MAPPED_TO_OBJC_CLASS
 
   private fun functionDependentSources(
     convention: Convention,
@@ -880,17 +882,17 @@ internal class J2ObjCCompatSources(
         declaredTypeDescriptor.typeDeclaration,
         readonly = readonly,
       )
-      ?.let {
+      ?.letIf(isInterfaceMappedToObjCClass(declaredTypeDescriptor.typeDeclaration)) {
         join(
-            it,
-            objCTypeArgumentsDependentSource(
-              convention,
-              declaredTypeDescriptor.typeArgumentDescriptors,
-              readonly = true,
-            ),
-          )
-          .toPointer()
-      } ?: id
+          it,
+          objCTypeArgumentsDependentSource(
+            convention,
+            declaredTypeDescriptor.typeArgumentDescriptors,
+            readonly = true,
+          ),
+        )
+      }
+      ?.toPointer() ?: id
 
   private fun objCTypeArgumentsDependentSource(
     convention: Convention,
