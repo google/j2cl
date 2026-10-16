@@ -96,12 +96,6 @@ internal val TypeDeclaration.declaredKtVisibility: KtVisibility?
 internal fun TypeDeclaration.equalsOrEnclosedIn(other: TypeDeclaration): Boolean =
   this == other || enclosingTypeDeclaration?.equalsOrEnclosedIn(other) ?: false
 
-internal fun TypeDeclaration.isFromJRE(): Boolean =
-  packageName.startsWith("javaemul.") ||
-    packageName.startsWith("java.") ||
-    packageName.startsWith("javax.") ||
-    packageName.startsWith("kotlin.")
-
 private val AUTO_CONVERTER_PREFIXES: List<String> = listOf("AutoConverter_", "AutoEnumConverter_")
 
 internal val TypeDeclaration.isAutoConverter: Boolean

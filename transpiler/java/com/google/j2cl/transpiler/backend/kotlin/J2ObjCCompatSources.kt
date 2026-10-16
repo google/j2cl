@@ -512,7 +512,6 @@ internal class J2ObjCCompatSources(
   ): Boolean =
     typeDeclaration.visibility.isPublic &&
       !typeDeclaration.isHiddenFromObjC &&
-      existsInObjC(typeDeclaration) &&
       when (convention) {
         Convention.J2OBJC -> !typeDeclaration.toDescriptor().isCollection
         Convention.KMP -> true
@@ -528,12 +527,6 @@ internal class J2ObjCCompatSources(
   private fun isObjCClass(typeDeclaration: TypeDeclaration): Boolean =
     typeDeclaration.isClass ||
       INTERFACES_MAPPED_TO_OBJC_CLASS.contains(typeDeclaration.toDescriptor())
-
-  private fun existsInObjC(typeDeclaration: TypeDeclaration): Boolean =
-    !typeDeclaration.isKtNative ||
-      !typeDeclaration.isFromJRE() ||
-      !KT_NATIVE_JRE_EXCLUDE.any { typeDeclaration.qualifiedSourceName.startsWith(it) } ||
-      mappedObjCNameDependentSourceOrNull(typeDeclaration) != null
 
   private fun functionDependentSources(
     convention: Convention,
@@ -1048,16 +1041,6 @@ internal class J2ObjCCompatSources(
         "kotlin.Float",
         "kotlin.Double",
         "kotlin.Number",
-      )
-
-    // Java JRE classes where we generate J2ObjC compat headers.
-    val KT_NATIVE_JRE_EXCLUDE =
-      setOf(
-        // These are Kotlin typealiases for `kotlinx.io` exceptions, so the transpiler doesn't know
-        // the name of the corresponding ObjC class.
-        "java.io.EOFException",
-        "java.io.FileNotFoundException",
-        "java.io.IOException",
       )
 
     // A map from the bridge name supplied by the KtNative annotation to the bridge name
