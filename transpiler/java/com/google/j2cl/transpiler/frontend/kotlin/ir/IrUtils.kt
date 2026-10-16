@@ -98,6 +98,7 @@ import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
+import org.jetbrains.kotlin.ir.util.isClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.isFromJava
@@ -558,6 +559,10 @@ val IrClass.isFinal: Boolean
 
 val IrClass.isSealed: Boolean
   get() = modality == Modality.SEALED
+
+val IrClass.isKotlinDataClass: Boolean
+  // isClass is needed to exclude types declared as `data object`.
+  get() = isData && isClass
 
 val IrClass.isFromSource: Boolean
   get() = source.containingFile != SourceFile.NO_SOURCE_FILE

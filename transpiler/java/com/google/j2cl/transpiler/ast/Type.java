@@ -129,6 +129,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getDeclaration().isJavaRecord();
   }
 
+  public boolean isKotlinDataClass() {
+    return getDeclaration().isKotlinDataClass();
+  }
+
   public TypeDeclaration getOverlaidTypeDeclaration() {
     return typeDeclaration.getOverlaidTypeDeclaration();
   }

@@ -54,6 +54,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isCapturingEnclosingInstanc
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClassType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFinal
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isKotlinDataClass
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isPropertyAccessor
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSynthetic
@@ -268,6 +269,7 @@ internal class KotlinEnvironment(
         .setHasAbstractModifier(irClass.isAbstract)
         .setFinal(irClass.isFinal)
         .setSealed(irClass.isSealed)
+        .setKotlinDataClass(irClass.isKotlinDataClass)
         .setLocal(irClass.isLocal && !irClass.isAnonymousObject)
         .setAnonymous(irClass.isAnonymousObject)
         .setAnnotationsFactory { createAnnotations(irClass) }

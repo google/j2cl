@@ -362,6 +362,8 @@ public abstract class TypeDeclaration
     return TypeDescriptors.get().javaLangRecord.isSameBaseType(getSuperTypeDescriptor());
   }
 
+  public abstract boolean isKotlinDataClass();
+
   public boolean isProtobuf() {
     return getQualifiedSourceName()
             // This is a protobuf type in J2CL and Kotlin/Native protos but not in Java proto lite
@@ -823,6 +825,7 @@ public abstract class TypeDeclaration
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
         .setSealed(false)
+        .setKotlinDataClass(false)
         .setFunctionalInterface(false)
         .setAnnotationsFactory(ImmutableList::of)
         .setLocal(false)
@@ -867,6 +870,8 @@ public abstract class TypeDeclaration
     public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setSealed(boolean isSealed);
+
+    public abstract Builder setKotlinDataClass(boolean isKotlinDataClass);
 
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
 
