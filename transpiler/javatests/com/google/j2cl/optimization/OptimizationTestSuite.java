@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
   ArrayOptimizationTest.class,
   BooleanOptimizationTest.class,
   EnumOptimizationTest.class,
+  IntegerOptimizationTest.class,
   CastDisableOptimizationTest.class,
   JsFunctionOptimizationTest.class,
   NullEqualityOptimizationTest.class,
