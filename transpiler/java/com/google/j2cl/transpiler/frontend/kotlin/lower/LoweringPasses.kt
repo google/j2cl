@@ -53,6 +53,9 @@ import org.jetbrains.org.objectweb.asm.Type
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPhase = loweringPhase {
+  // Remove temporary variables holding pure argument values introduced by function inlining and
+  // substitute their reads directly.
+  perFileLowering(::InlinedPureArgumentsLowering)
   // Remove expect declarations, the actuals will be used instead.
   moduleLowering(::ExpectDeclarationsRemoveLowering)
   // The K2 frontend does not create a FileKt class  for referenced/ top-level members defined in
