@@ -160,6 +160,47 @@ open class CastPrimitives {
   val d: Double = boxedByte!!.toByte().toDouble()
  }
  
+ open fun testConsecutiveConversions(b: Byte, c: Char, s: Short, i: Int, l: Long, f: Float) {
+  var c_1: Char = c
+  var s_1: Short = s
+  var i_1: Int = i
+  var l_1: Long = l
+  var f_1: Float = f
+  i_1 = i_1.toLong().toInt()
+  i_1 = i_1.toDouble().toInt()
+  f_1 = f_1.toDouble().toFloat()
+  c_1 = c_1.code.toChar()
+  s_1 = b.toInt().toShort()
+  l_1 = i_1.toDouble().toLong()
+  i_1 = i_1.toFloat().toInt()
+  l_1 = l_1.toFloat().toLong()
+  l_1 = l_1.toDouble().toLong()
+ }
+ 
+ open fun testCastsInBinaryNumericPromotion(c: Char, i: Int, l: Long, d: Double) {
+  val quotient: Double = i.toDouble() / l.toDouble()
+  val product: Float = i.toFloat() * l.toFloat()
+  val charQuotient: Double = c.code.toDouble() / l.toDouble()
+  val sum: Float = d.toFloat() + l.toFloat()
+ }
+ 
+ open fun testNestedConversions(b: Byte, i: Int, l: Long) {
+  var s: Short = i.toByte().toShort()
+  s = i.toByte().toShort()
+  var d: Double = l.toFloat().toDouble()
+  d = l.toFloat().toDouble()
+  d = l.toFloat().toDouble() + d
+  val widenedChar: Long = b.toInt().toChar().code.toLong()
+  val boxedShort: Any = i.toShort()
+  val boxedInt: Any = b.toInt()
+ }
+ 
+ open fun testCastsThroughReferenceTypes(i: Int) {
+  val unboxedObject: Int = i as Any as Int
+  val unboxedInteger: Int = (i as Any as Int).toInt()
+  val boxedInteger: Int? = i as Any as Int
+ }
+ 
  open fun testImplicitArgumentCasts() {
   val b: Byte = 127.toByte()
   val c: Char = 65535.toChar()

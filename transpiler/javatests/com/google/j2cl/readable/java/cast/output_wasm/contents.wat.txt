@@ -195,10 +195,14 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_testCastsInBinaryNumericPromotion__char__int__long__double__void@cast.CastPrimitives)
+  (ref.func $m_testCastsThroughReferenceTypes__int__void@cast.CastPrimitives)
+  (ref.func $m_testConsecutiveConversions__byte__char__short__int__long__float__void@cast.CastPrimitives)
   (ref.func $m_testImplicitArgumentCasts__void@cast.CastPrimitives)
   (ref.func $m_testImplicitArrayIndexCasts__arrayOf_byte__void@cast.CastPrimitives)
   (ref.func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives)
   (ref.func $m_testLiteralToPrimitive__void@cast.CastPrimitives)
+  (ref.func $m_testNestedConversions__byte__int__long__void@cast.CastPrimitives)
   (ref.func $m_testPrimitiveCasts__void@cast.CastPrimitives)
   (ref.func $m_testReferenceToPrimitive__void@cast.CastPrimitives)
   (ref.func $m_testUnboxAndWiden__void@cast.CastPrimitives)
@@ -1621,11 +1625,133 @@
 )
 (elem declare func $m_testUnboxAndWiden__void@cast.CastPrimitives)
 
+;;; void CastPrimitives.testConsecutiveConversions(byte b, char c, short s, int i, long l, float f)
+(func $m_testConsecutiveConversions__byte__char__short__int__long__float__void@cast.CastPrimitives
+ (type $function.m_testConsecutiveConversions__byte__char__short__int__long__float__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $b i32)
+ (param $c i32)
+ (param $s i32)
+ (param $i i32)
+ (param $l i64)
+ (param $f f32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:158:14
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:160:4
+  (local.set $i (i32.wrap_i64 (i64.extend_i32_s (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:161:4
+  (local.set $i (i32.trunc_sat_f64_s (f64.convert_i32_s (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:162:4
+  (local.set $f (f32.demote_f64 (f64.promote_f32 (local.get $f))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:163:4
+  (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (local.get $c)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:164:4
+  (local.set $s (i32.extend16_s (local.get $b)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:165:4
+  (local.set $l (i64.trunc_sat_f64_s (f64.convert_i32_s (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:167:4
+  (local.set $i (i32.trunc_sat_f32_s (f32.convert_i32_s (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:168:4
+  (local.set $l (i64.trunc_sat_f32_s (f32.convert_i64_s (local.get $l))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:169:4
+  (local.set $l (i64.trunc_sat_f64_s (f64.convert_i64_s (local.get $l))))
+ )
+)
+(elem declare func $m_testConsecutiveConversions__byte__char__short__int__long__float__void@cast.CastPrimitives)
+
+;;; void CastPrimitives.testCastsInBinaryNumericPromotion(char c, int i, long l, double d)
+(func $m_testCastsInBinaryNumericPromotion__char__int__long__double__void@cast.CastPrimitives
+ (type $function.m_testCastsInBinaryNumericPromotion__char__int__long__double__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $c i32)
+ (param $i i32)
+ (param $l i64)
+ (param $d f64)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:172:14
+ (local $quotient f64)
+ (local $product f32)
+ (local $charQuotient f64)
+ (local $sum f32)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:174:4
+  (local.set $quotient (f64.div (f64.convert_i32_s (local.get $i)) (f64.convert_i64_s (local.get $l))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:175:4
+  (local.set $product (f32.mul (f32.convert_i32_s (local.get $i)) (f32.convert_i64_s (local.get $l))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:176:4
+  (local.set $charQuotient (f64.div (f64.convert_i32_u (local.get $c)) (f64.convert_i64_s (local.get $l))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:177:4
+  (local.set $sum (f32.add (f32.demote_f64 (local.get $d)) (f32.convert_i64_s (local.get $l))))
+ )
+)
+(elem declare func $m_testCastsInBinaryNumericPromotion__char__int__long__double__void@cast.CastPrimitives)
+
+;;; void CastPrimitives.testNestedConversions(byte b, int i, long l)
+(func $m_testNestedConversions__byte__int__long__void@cast.CastPrimitives
+ (type $function.m_testNestedConversions__byte__int__long__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $b i32)
+ (param $i i32)
+ (param $l i64)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:180:14
+ (local $s i32)
+ (local $d f64)
+ (local $widenedChar i64)
+ (local $boxedShort (ref null $java.lang.Object))
+ (local $boxedInt (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:181:4
+  (local.set $s (i32.extend8_s (local.get $i)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:182:4
+  (local.set $s (i32.extend16_s (i32.extend8_s (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:183:4
+  (local.set $d (f64.promote_f32 (f32.convert_i64_s (local.get $l))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:184:4
+  (local.set $d (f64.promote_f32 (f32.convert_i64_s (local.get $l))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:185:4
+  (local.set $d (f64.add (f64.promote_f32 (f32.convert_i64_s (local.get $l))) (local.get $d)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:186:4
+  (local.set $widenedChar (i64.extend_i32_s (call $m_widenByteToChar__byte__int@javaemul.internal.Primitives (local.get $b))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:187:4
+  (local.set $boxedShort (call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.extend16_s (local.get $i))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:188:4
+  (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $b)))
+ )
+)
+(elem declare func $m_testNestedConversions__byte__int__long__void@cast.CastPrimitives)
+
+;;; void CastPrimitives.testCastsThroughReferenceTypes(int i)
+(func $m_testCastsThroughReferenceTypes__int__void@cast.CastPrimitives
+ (type $function.m_testCastsThroughReferenceTypes__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:191:14
+ (local $unboxedObject i32)
+ (local $unboxedInteger i32)
+ (local $boxedInteger (ref null $java.lang.Integer))
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:192:4
+  (local.set $unboxedObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $i))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:193:4
+  (local.set $unboxedInteger (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $i))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:194:4
+  (local.set $boxedInteger (ref.cast (ref null $java.lang.Integer) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $i))))
+ )
+)
+(elem declare func $m_testCastsThroughReferenceTypes__int__void@cast.CastPrimitives)
+
 ;;; void CastPrimitives.testImplicitArgumentCasts()
 (func $m_testImplicitArgumentCasts__void@cast.CastPrimitives
  (type $function.m_testImplicitArgumentCasts__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:158:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:197:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1636,47 +1762,47 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:159:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:198:4
   (local.set $b (i32.const 127))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:160:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:199:4
   (local.set $c (i32.const 65535))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:161:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:200:4
   (local.set $s (i32.const 32767))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:162:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:201:4
   (local.set $i (i32.const 2147483647))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:163:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:202:4
   (local.set $l (i64.const 9223372036854775807))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:164:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:203:4
   (local.set $f (f32.const 3.4028234663852886E38))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:165:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:204:4
   (local.set $d (f64.const 1.7976931348623157E308))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:167:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:206:4
   (drop (call $m_getShort__short__short@cast.CastPrimitives (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:168:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:207:4
   (drop (call $m_getInt__int__int@cast.CastPrimitives (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:169:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:208:4
   (drop (call $m_getLong__long__long@cast.CastPrimitives (i64.extend_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:170:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:209:4
   (drop (call $m_getFloat__float__float@cast.CastPrimitives (f32.convert_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:171:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:210:4
   (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.convert_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:173:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:212:4
   (drop (call $m_getFloat__float__float@cast.CastPrimitives (f32.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:174:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:213:4
   (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:175:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:214:4
   (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.promote_f32 (local.get $f))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:178:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:217:4
   (drop (call $$create__int@cast.CastPrimitives.IntValueHolder (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:179:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:218:4
   (drop (call $$create__int@cast.CastPrimitives.IntValueHolder (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:180:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:219:4
   (drop (call $$create__int@cast.CastPrimitives.IntValueHolder (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:182:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:221:4
   (drop (call $$create__long@cast.CastPrimitives.LongValueHolder (i64.extend_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:183:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:222:4
   (drop (call $$create__long@cast.CastPrimitives.LongValueHolder (i64.extend_i32_u (local.get $c))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:184:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:4
   (drop (call $$create__long@cast.CastPrimitives.LongValueHolder (i64.extend_i32_s (local.get $i))))
  )
 )
@@ -1687,7 +1813,7 @@
  (type $function.m_testImplicitArrayIndexCasts__arrayOf_byte__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $array (ref null $javaemul.internal.WasmArray.OfByte))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:187:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:226:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1696,27 +1822,27 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:188:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:4
   (local.set $b (i32.const 127))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:189:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
   (local.set $c (i32.const 65535))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:190:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:229:4
   (local.set $s (i32.const 32767))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:191:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:230:4
   (local.set $i (i32.const 2147483647))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:193:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:232:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:194:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:233:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:195:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:234:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:196:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:235:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:197:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:236:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:199:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:238:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:200:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:239:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (i32.const 97)))
  )
 )
@@ -1726,9 +1852,9 @@
 (func $m_getShort__short__short@cast.CastPrimitives
  (param $value i32)
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:203:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:242:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:204:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:243:4
   (return (local.get $value))
  )
 )
@@ -1737,9 +1863,9 @@
 (func $m_getInt__int__int@cast.CastPrimitives
  (param $value i32)
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:207:21
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:246:21
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:208:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:247:4
   (return (local.get $value))
  )
 )
@@ -1748,9 +1874,9 @@
 (func $m_getLong__long__long@cast.CastPrimitives
  (param $value i64)
  (result i64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:211:22
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:250:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:212:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:251:4
   (return (local.get $value))
  )
 )
@@ -1759,9 +1885,9 @@
 (func $m_getFloat__float__float@cast.CastPrimitives
  (param $value f32)
  (result f32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:215:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:254:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:216:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:255:4
   (return (local.get $value))
  )
 )
@@ -1770,9 +1896,9 @@
 (func $m_getDouble__double__double@cast.CastPrimitives
  (param $value f64)
  (result f64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:219:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:258:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:220:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:259:4
   (return (local.get $value))
  )
 )
@@ -1781,7 +1907,7 @@
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
  (type $function.m_testImplicitLongAssignmentCasts__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:231:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:270:14
  (local $fbyte i32)
  (local $fchar i32)
  (local $fshort i32)
@@ -1793,64 +1919,64 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:232:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:271:4
   (local.set $fbyte (i32.const 11))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:233:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:272:4
   (local.set $fchar (i32.const 12))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:234:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:273:4
   (local.set $fshort (i32.const 13))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:235:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:274:4
   (local.set $fint (i32.const 14))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:236:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:275:4
   (local.set $flong (i64.const 15))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:237:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:276:4
   (local.set $ffloat (f32.const 16.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:238:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:277:4
   (local.set $fdouble (f64.const 17.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:241:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:280:4
   (local.set $tlong (i64.const 0))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:245:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:284:6
    (local.set $tlong (i64.extend_i32_s (local.get $fbyte)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:246:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:285:6
    (local.set $tlong (local.get $flong))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:252:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:291:6
    (local.set $tlong (i64.extend_i32_s (local.get $fint)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:253:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:292:6
    (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:254:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:293:6
    (local.set $tlong (i64.shl (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:260:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:299:6
    (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_u (local.get $fchar))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:261:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:300:6
    (local.set $tlong (i64.add (local.get $tlong) (local.get $flong)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:301:6
    (local.set $tlong (i64.trunc_sat_f32_s (f32.add (f32.convert_i64_s (local.get $tlong)) (local.get $ffloat))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:268:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:307:6
    (local.set $tlong (i64.mul (local.get $flong) (i64.extend_i32_s (local.get $fint))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:269:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:308:6
    (local.set $tlong (i64.shr_s (local.get $flong) (i64.extend_i32_s (local.get $fint))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:275:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:314:6
    (local.set $tlong (i64.add (local.get $flong) (i64.extend_i32_s (local.get $fshort))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:276:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:315:6
    (local.set $tlong (i64.add (local.get $flong) (local.get $flong)))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:281:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:320:6
    (local.set $tlong (i64.shl (local.get $flong) (local.get $tlong)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:282:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:321:6
    (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong)))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:286:6
+   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:325:6
    (local.set $tlong (i64.add (i64.extend_i32_s (i32.add (i32.const 0) (i32.const 1))) (i64.const 2)))
   )
  )
@@ -1906,16 +2032,16 @@
 (func $$create__int@cast.CastPrimitives.IntValueHolder
  (param $value i32)
  (result (ref null $cast.CastPrimitives.IntValueHolder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
  (local $$instance (ref null $cast.CastPrimitives.IntValueHolder))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (call $$clinit__void_<once>_@cast.CastPrimitives.IntValueHolder )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (local.set $$instance (struct.new $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (call $$ctor__int__void_$p_cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (return (local.get $$instance))
  )
 )
@@ -1924,27 +2050,27 @@
 (func $$ctor__int__void_$p_cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder
  (param $this (ref null $cast.CastPrimitives.IntValueHolder))
  (param $value i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:224:30
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:30
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void IntValueHolder.$clinit()
 (func $$clinit__void_<once>_@cast.CastPrimitives.IntValueHolder
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
   (if (global.get $$class-initialized@cast.CastPrimitives.IntValueHolder)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
   (global.set $$class-initialized@cast.CastPrimitives.IntValueHolder (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1980,16 +2106,16 @@
 (func $$create__long@cast.CastPrimitives.LongValueHolder
  (param $value i64)
  (result (ref null $cast.CastPrimitives.LongValueHolder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
  (local $$instance (ref null $cast.CastPrimitives.LongValueHolder))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (call $$clinit__void_<once>_@cast.CastPrimitives.LongValueHolder )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (local.set $$instance (struct.new $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (call $$ctor__long__void_$p_cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (return (local.get $$instance))
  )
 )
@@ -1998,27 +2124,27 @@
 (func $$ctor__long__void_$p_cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder
  (param $this (ref null $cast.CastPrimitives.LongValueHolder))
  (param $value i64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:32
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void LongValueHolder.$clinit()
 (func $$clinit__void_<once>_@cast.CastPrimitives.LongValueHolder
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:23
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
   (if (global.get $$class-initialized@cast.CastPrimitives.LongValueHolder)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:23
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
   (global.set $$class-initialized@cast.CastPrimitives.LongValueHolder (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:23
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

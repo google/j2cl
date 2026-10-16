@@ -16,6 +16,7 @@
 package wideningprimitiveconversion;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
 public class Main {
   private static void testAssignment() {
@@ -152,6 +153,14 @@ public class Main {
     assertTrue((d * mi) == ((double) d * (double) mi));
     assertTrue((d * ml) == ((double) d * (double) ml));
     assertTrue((d * mf) == ((double) d * (double) mf));
+
+    // The cast to a floating point type determines the type of the operation.
+    // TODO(b/574528246): Enable in JavaScript once these are not computed as long operations.
+    if (!isJavaScript()) {
+      assertTrue((double) i / l == 0.75);
+      assertTrue((float) i / l == 0.75f);
+      assertTrue((double) c / l == 24.25);
+    }
 
     // And with equality operators.
     assertTrue(i == l - 1L);

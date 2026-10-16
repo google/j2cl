@@ -464,4 +464,22 @@ public class AutoBoxing {
     Supplier<Integer> supplier = new Supplier<>();
     int i = (int) supplier.get();
   }
+
+  public void testBoxingUnboxedValues(
+      Integer boxedInteger,
+      Double boxedDouble,
+      Boolean boxedBoolean,
+      Character boxedCharacter,
+      Number number) {
+    // Values that are unboxed just to be boxed again.
+    Integer i = (int) boxedInteger;
+    Object o = (int) boxedInteger;
+    acceptsObject((int) boxedInteger);
+    Double d = (double) boxedDouble;
+    Boolean b = (boolean) boxedBoolean;
+    Character c = (char) boxedCharacter;
+    // Unboxing to a different primitive type or from a supertype.
+    Long l = (long) (int) boxedInteger;
+    Integer fromNumber = number.intValue();
+  }
 }

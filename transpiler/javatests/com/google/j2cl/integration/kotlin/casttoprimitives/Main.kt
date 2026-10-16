@@ -26,6 +26,8 @@ fun main(vararg unused: String) {
   testTypeExtendsLongReferenceToPrimitive<Long>()
   testTypeExtendsIntersectionReferenceToPrimitive<Long>()
   testPrimitiveToReference()
+  testBoxingConvertedValues()
+  testCastsThroughReferenceTypes()
 }
 
 // Constants that can not be expressed as literals.
@@ -393,3 +395,38 @@ fun testPrimitiveToReference() {
   o = d
   assertTrue(o != null)
 }
+
+fun testBoxingConvertedValues() {
+  val b: Byte = 1
+  val i = 65
+  val l = 2L
+  val d = 3.5
+
+  // A converted value is boxed with the type it was converted to.
+  assertTrue(asAny(i.toByte()) is Byte)
+  assertTrue(asAny(i.toShort()) is Short)
+  assertTrue(asAny(i.toChar()) is Char)
+  assertTrue(asAny(l.toInt()) is Int)
+  assertTrue(asAny(d.toFloat()) is Float)
+  assertTrue(asAny(b.toInt()) is Int)
+  assertTrue(asAny(i.toLong()) is Long)
+  assertTrue(asAny(i.toDouble()) is Double)
+}
+
+fun testCastsThroughReferenceTypes() {
+  val i = 42
+  assertTrue((i as Any) as Int == 42)
+  assertTrue(((i as Any) as Int?) as Int == 42)
+  assertTrue(((i as Any) as Int?)!!.toLong() == 42L)
+  assertTrue(((i as Any) as Int?) == 42)
+
+  // The boxed value is an Int, so the casts to other types fail.
+  assertThrowsClassCastException {
+    val unused = (i as Any) as Long
+  }
+  assertThrowsClassCastException {
+    val unused = (((i as Any) as Runnable) as Comparable<*>) as Int
+  }
+}
+
+private fun asAny(o: Any): Any = o

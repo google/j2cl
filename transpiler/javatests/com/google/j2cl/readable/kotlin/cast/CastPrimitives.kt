@@ -273,4 +273,18 @@ class CastPrimitives {
     // Repro for b/67599510
     tlong = 0 + 1 + 2L
   }
+
+  fun testConversionsInBinaryNumericPromotion(c: Char, i: Int, l: Long, d: Double) {
+    // The conversion determines the type of the operation, e.g. a floating point division.
+    val quotient = i.toDouble() / l
+    val product = i.toFloat() * l
+    val charQuotient = c.code.toDouble() / l
+    val sum = d.toFloat() + l
+  }
+
+  fun testCastsThroughReferenceTypes(i: Int) {
+    val unboxedAny = (i as Any) as Int
+    val unboxedInt = ((i as Any) as Int?) as Int
+    val boxedInt = (i as Any) as Int?
+  }
 }

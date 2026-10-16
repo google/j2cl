@@ -32,6 +32,7 @@ import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
+import kotlin.Number
 import kotlin.Short
 import kotlin.String
 import kotlin.Suppress
@@ -451,6 +452,19 @@ open class AutoBoxing {
   }
   val supplier: Supplier<Int?> = Supplier<Int?>()
   val i: Int = supplier.get()!!.toInt()
+ }
+ 
+ open fun testBoxingUnboxedValues(boxedInteger: Int?, boxedDouble: Double?, boxedBoolean: Boolean?, boxedCharacter: Char?, number: Number?) {
+  val i: Int? = boxedInteger!!.toInt()
+  val o: Any = boxedInteger!!.toInt()
+  AutoBoxing.acceptsObject(
+   boxedInteger!!.toInt(),
+  )
+  val d: Double? = boxedDouble!!.toDouble()
+  val b: Boolean? = boxedBoolean as Boolean
+  val c: Char? = boxedCharacter!!.toChar()
+  val l: Long? = boxedInteger!!.toInt().toLong()
+  val fromNumber: Int? = number!!.toInt()
  }
  
  companion object {

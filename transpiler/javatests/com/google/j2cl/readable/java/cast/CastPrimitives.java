@@ -155,6 +155,45 @@ public class CastPrimitives {
     double d = (double) boxedByte;
   }
 
+  public void testConsecutiveConversions(byte b, char c, short s, int i, long l, float f) {
+    // Conversions through a type that represents all the values exactly.
+    i = (int) (long) i;
+    i = (int) (double) i;
+    f = (float) (double) f;
+    c = (char) (int) c;
+    s = (short) (int) b;
+    l = (long) (double) i;
+    // Conversions through a type that might not represent the value exactly.
+    i = (int) (float) i;
+    l = (long) (float) l;
+    l = (long) (double) l;
+  }
+
+  public void testCastsInBinaryNumericPromotion(char c, int i, long l, double d) {
+    // The cast determines the type of the operation, e.g. a floating point division.
+    double quotient = (double) i / l;
+    float product = (float) i * l;
+    double charQuotient = (double) c / l;
+    float sum = (float) d + l;
+  }
+
+  public void testNestedConversions(byte b, int i, long l) {
+    short s = (byte) i;
+    s = (short) (byte) i;
+    double d = (float) l;
+    d = (double) (float) l;
+    d = (float) l + d;
+    long widenedChar = (char) b;
+    Object boxedShort = (short) i;
+    Object boxedInt = (int) b;
+  }
+
+  public void testCastsThroughReferenceTypes(int i) {
+    int unboxedObject = (int) (Object) i;
+    int unboxedInteger = (int) (Integer) (Object) i;
+    Integer boxedInteger = (Integer) (Object) i;
+  }
+
   public void testImplicitArgumentCasts() {
     final byte b = 127;
     final char c = 65535;

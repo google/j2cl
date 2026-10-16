@@ -191,6 +191,19 @@ class CastPrimitives extends j_l_Object {
   tlong = $LongUtils.plus(flong, flong);
   tlong = $LongUtils.plus(Primitives.m_widenIntToLong__int__long(0 + 1 | 0), Long.fromInt(2));
  }
+ /** @final @nodts */
+ m_testConversionsInBinaryNumericPromotion__char__int__long__double__void(/** number */ c, /** number */ i, /** !Long */ l, /** number */ d) {
+  let quotient = Primitives.m_widenLongToDouble__long__double($LongUtils.divide(Primitives.m_widenIntToLong__int__long(i), l));
+  let product = Primitives.m_widenLongToFloat__long__double($LongUtils.times(Primitives.m_widenIntToLong__int__long(i), l));
+  let charQuotient = Primitives.m_widenLongToDouble__long__double($LongUtils.divide(Primitives.m_widenCharToLong__int__long(c), l));
+  let sum = d + Primitives.m_widenLongToDouble__long__double(l);
+ }
+ /** @final @nodts */
+ m_testCastsThroughReferenceTypes__int__void(/** number */ i) {
+  let unboxedAny = (/**@type {!Integer}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(Integer.valueOf(i)))).intValue();
+  let unboxedInt = (/**@type {Integer}*/ (Integer.valueOf(i))).intValue();
+  let boxedInt = /**@type {Integer}*/ (Integer.valueOf(i));
+ }
  /** @nodts */
  static $clinit() {
   CastPrimitives.$clinit = () =>{};

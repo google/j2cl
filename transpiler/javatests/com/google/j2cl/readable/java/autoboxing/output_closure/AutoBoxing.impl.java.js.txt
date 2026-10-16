@@ -17,6 +17,7 @@ let Float = goog.forwardDeclare('java.lang.Float$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let j_l_Long = goog.forwardDeclare('java.lang.Long$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
@@ -25,6 +26,7 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 class AutoBoxing extends j_l_Object {
  /** @protected @nodts */
@@ -405,6 +407,17 @@ class AutoBoxing extends j_l_Object {
   let i = (/**@type {Integer}*/ ($Casts.$to(supplier.m_get__java_lang_Object_$pp_autoboxing(), Integer))).intValue();
  }
  /** @nodts */
+ m_testBoxingUnboxedValues__java_lang_Integer__java_lang_Double__java_lang_Boolean__java_lang_Character__java_lang_Number__void(/** Integer */ boxedInteger, /** ?number */ boxedDouble, /** ?boolean */ boxedBoolean, /** Character */ boxedCharacter, /** (Number|number|!Long) */ number_1) {
+  let i = Integer.valueOf(boxedInteger.intValue());
+  let o = Integer.valueOf(boxedInteger.intValue());
+  AutoBoxing.m_acceptsObject__java_lang_Object__void(Integer.valueOf(boxedInteger.intValue()));
+  let d = Double.m_doubleValue__java_lang_Double__double(boxedDouble);
+  let b = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxedBoolean);
+  let c = Character.m_valueOf__char__java_lang_Character(boxedCharacter.m_charValue__char());
+  let l = Primitives.m_widenIntToLong__int__long(boxedInteger.intValue());
+  let fromNumber = Integer.valueOf($Numbers.m_intValue__java_lang_Number__int(number_1));
+ }
+ /** @nodts */
  static $clinit() {
   AutoBoxing.$clinit = () =>{};
   AutoBoxing.$loadModules();
@@ -436,6 +449,7 @@ class AutoBoxing extends j_l_Object {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
  }
 }
 /**@const {number} @nodts*/

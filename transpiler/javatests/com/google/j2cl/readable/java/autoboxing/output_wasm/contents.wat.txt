@@ -51,6 +51,7 @@
   (ref.func $m_takesFloatVarArgs__arrayOf_java_lang_Float__void@autoboxing.AutoBoxing)
   (ref.func $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double@autoboxing.AutoBoxing)
   (ref.func $m_testAssertStatement__void@autoboxing.AutoBoxing)
+  (ref.func $m_testBoxingUnboxedValues__java_lang_Integer__java_lang_Double__java_lang_Boolean__java_lang_Character__java_lang_Number__void@autoboxing.AutoBoxing)
   (ref.func $m_testBoxing__void@autoboxing.AutoBoxing)
   (ref.func $m_testUnbox_withCast__void@autoboxing.AutoBoxing)
   (ref.func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing)
@@ -1429,6 +1430,46 @@
  )
 )
 (elem declare func $m_testUnbox_withCast__void@autoboxing.AutoBoxing)
+
+;;; void AutoBoxing.testBoxingUnboxedValues(Integer boxedInteger, Double boxedDouble, Boolean boxedBoolean, Character boxedCharacter, Number number)
+(func $m_testBoxingUnboxedValues__java_lang_Integer__java_lang_Double__java_lang_Boolean__java_lang_Character__java_lang_Number__void@autoboxing.AutoBoxing
+ (type $function.m_testBoxingUnboxedValues__java_lang_Integer__java_lang_Double__java_lang_Boolean__java_lang_Character__java_lang_Number__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $boxedInteger (ref null $java.lang.Integer))
+ (param $boxedDouble (ref null $java.lang.Double))
+ (param $boxedBoolean (ref null $java.lang.Boolean))
+ (param $boxedCharacter (ref null $java.lang.Character))
+ (param $number (ref null $java.lang.Number))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:468:14
+ (local $i (ref null $java.lang.Integer))
+ (local $o (ref null $java.lang.Object))
+ (local $d (ref null $java.lang.Double))
+ (local $b (ref null $java.lang.Boolean))
+ (local $c (ref null $java.lang.Character))
+ (local $l (ref null $java.lang.Long))
+ (local $fromNumber (ref null $java.lang.Integer))
+ (local $this (ref null $autoboxing.AutoBoxing))
+ (local.set $this (ref.cast (ref $autoboxing.AutoBoxing) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:475:4
+  (local.set $i (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:476:4
+  (local.set $o (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:477:4
+  (call $m_acceptsObject__java_lang_Object__void@autoboxing.AutoBoxing (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:478:4
+  (local.set $d (call $m_valueOf__double__java_lang_Double@java.lang.Double (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (local.get $boxedDouble)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:479:4
+  (local.set $b (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (local.get $boxedBoolean)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:480:4
+  (local.set $c (call $m_valueOf__char__java_lang_Character@java.lang.Character (call $m_charValue__char@java.lang.Character (ref.as_non_null (local.get $boxedCharacter)))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:482:4
+  (local.set $l (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.extend_i32_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxedInteger))))))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autoboxing/readable-j2wasm.js/autoboxing/AutoBoxing.java:483:4
+  (local.set $fromNumber (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call_ref $function.m_intValue__int (ref.as_non_null (local.get $number))(struct.get $java.lang.Number.vtable $m_intValue__int (struct.get $java.lang.Number $vtable(local.get $number))))))
+ )
+)
+(elem declare func $m_testBoxingUnboxedValues__java_lang_Integer__java_lang_Double__java_lang_Boolean__java_lang_Character__java_lang_Number__void@autoboxing.AutoBoxing)
 
 ;;; void AutoBoxing.$clinit()
 (func $$clinit__void_<once>_@autoboxing.AutoBoxing

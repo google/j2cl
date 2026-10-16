@@ -160,6 +160,42 @@ class CastPrimitives extends j_l_Object {
   let d = boxedByte.m_byteValue__byte();
  }
  /** @nodts */
+ m_testConsecutiveConversions__byte__char__short__int__long__float__void(/** number */ b, /** number */ c, /** number */ s, /** number */ i, /** !Long */ l, /** number */ f) {
+  i = Primitives.m_narrowLongToInt__long__int(Primitives.m_widenIntToLong__int__long(i));
+  i = Primitives.m_narrowDoubleToInt__int__int(i);
+  f = f;
+  c = Primitives.m_narrowIntToChar__int__int(c);
+  s = Primitives.m_narrowIntToShort__int__int(b);
+  l = Primitives.m_narrowDoubleToLong__int__long(i);
+  i = Primitives.m_narrowFloatToInt__int__int(i);
+  l = Primitives.m_narrowFloatToLong__int__long(Primitives.m_widenLongToFloat__long__double(l));
+  l = Primitives.m_narrowDoubleToLong__int__long(Primitives.m_widenLongToDouble__long__double(l));
+ }
+ /** @nodts */
+ m_testCastsInBinaryNumericPromotion__char__int__long__double__void(/** number */ c, /** number */ i, /** !Long */ l, /** number */ d) {
+  let quotient = Primitives.m_widenLongToDouble__long__double($LongUtils.divide(Primitives.m_widenIntToLong__int__long(i), l));
+  let product = Primitives.m_widenLongToFloat__long__double($LongUtils.times(Primitives.m_widenIntToLong__int__long(i), l));
+  let charQuotient = Primitives.m_widenLongToDouble__long__double($LongUtils.divide(Primitives.m_widenCharToLong__int__long(c), l));
+  let sum = d + Primitives.m_widenLongToDouble__long__double(l);
+ }
+ /** @nodts */
+ m_testNestedConversions__byte__int__long__void(/** number */ b, /** number */ i, /** !Long */ l) {
+  let s = Primitives.m_narrowIntToByte__int__int(i);
+  s = Primitives.m_narrowIntToShort__int__int(Primitives.m_narrowIntToByte__int__int(i));
+  let d = Primitives.m_widenLongToFloat__long__double(l);
+  d = (/**@type {number}*/ (Primitives.m_widenLongToFloat__long__double(l)));
+  d = Primitives.m_widenLongToFloat__long__double(l) + d;
+  let widenedChar = Primitives.m_widenIntToLong__int__long(Primitives.m_widenByteToChar__int__int(b));
+  let boxedShort = Short.m_valueOf__short__java_lang_Short(Primitives.m_narrowIntToShort__int__int(i));
+  let boxedInt = Integer.valueOf(b);
+ }
+ /** @nodts */
+ m_testCastsThroughReferenceTypes__int__void(/** number */ i) {
+  let unboxedObject = (/**@type {!Integer}*/ (Integer.valueOf(i))).intValue();
+  let unboxedInteger = (/**@type {!Integer}*/ (Integer.valueOf(i))).intValue();
+  let boxedInteger = /**@type {!Integer}*/ (Integer.valueOf(i));
+ }
+ /** @nodts */
  m_testImplicitArgumentCasts__void() {
   let b = 127;
   let c = 65535;

@@ -17,8 +17,9 @@ package casttoprimitives;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
-@SuppressWarnings({"BoxedPrimitiveConstructor", "unchecked"})
+@SuppressWarnings({"BoxedPrimitiveConstructor", "UseValueOf", "unchecked"})
 public class Main {
   public static void main(String... args) {
     testPrimitiveToPrimitive();
@@ -27,6 +28,9 @@ public class Main {
     testTypeExtendsLongReferenceToPrimitive(0L);
     testTypeExtendsIntersectionReferenceToPrimitive(0L);
     testPrimitiveToReference();
+    testConsecutiveConversions();
+    testBoxingConvertedValues();
+    testCastsThroughReferenceTypes();
   }
 
   @SuppressWarnings("unused")
@@ -403,5 +407,80 @@ public class Main {
     assertTrue(o != null);
     o = (Object) d;
     assertTrue(o != null);
+  }
+
+  public static void testConsecutiveConversions() {
+    // Conversions through a type that represents all the values exactly.
+    int i = 16777217; // 2^24 + 1, which is not representable as a float.
+    assertTrue((int) (long) i == 16777217);
+    assertTrue((int) (double) i == 16777217);
+    assertTrue((long) (double) i == 16777217L);
+    char c = 65535;
+    assertTrue((char) (int) c == 65535);
+    assertTrue((short) (int) c == -1);
+    byte b = -1;
+    assertTrue((char) (int) b == 65535);
+    float f = 1.1f;
+    assertTrue((float) (double) f == f);
+
+    // Conversions through a type that might not represent the value exactly.
+    long l = 9007199254740993L; // 2^53 + 1, which is not representable as a double.
+    assertTrue((long) (double) l == 9007199254740992L);
+    if (!isJavaScript()) {
+      // Floats are represented as doubles in JavaScript.
+      assertTrue((int) (float) i == 16777216);
+      assertTrue((long) (float) l == 9007199254740992L);
+    }
+
+    // Boxing and unboxing.
+    Integer boxedInteger = i;
+    assertTrue((int) (Integer) i == 16777217);
+    assertTrue((long) (Integer) i == 16777217L);
+    assertTrue(((Integer) (int) boxedInteger).equals(16777217));
+    Object o = (int) boxedInteger;
+    assertTrue(o.equals(16777217));
+  }
+
+  public static void testBoxingConvertedValues() {
+    byte b = 1;
+    int i = 65;
+    long l = 2L;
+    double d = 3.5;
+
+    // A converted value is boxed with the type it was converted to.
+    Object o = (byte) i;
+    assertTrue(o instanceof Byte);
+    o = (short) i;
+    assertTrue(o instanceof Short);
+    o = (char) i;
+    assertTrue(o instanceof Character);
+    o = (int) l;
+    assertTrue(o instanceof Integer);
+    o = (float) d;
+    assertTrue(o instanceof Float);
+    o = (int) b;
+    assertTrue(o instanceof Integer);
+    o = (long) i;
+    assertTrue(o instanceof Long);
+    o = (double) i;
+    assertTrue(o instanceof Double);
+  }
+
+  public static void testCastsThroughReferenceTypes() {
+    int i = 42;
+    assertTrue((int) (Object) i == 42);
+    assertTrue((int) (Integer) (Object) i == 42);
+    assertTrue((long) (Integer) (Object) i == 42L);
+    assertTrue(((Integer) (Object) i).equals(42));
+
+    // The boxed value is an Integer, so the casts to other reference types fail.
+    assertThrowsClassCastException(
+        () -> {
+          long unused = (long) (Object) i;
+        });
+    assertThrowsClassCastException(
+        () -> {
+          int unused = (int) (Integer) (Comparable<?>) (Runnable) (Object) i;
+        });
   }
 }
