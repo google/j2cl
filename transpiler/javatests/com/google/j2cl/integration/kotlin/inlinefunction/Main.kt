@@ -369,14 +369,17 @@ fun testStdlibInlineFun() {
 }
 
 fun testNonReifiedTypeParameterErasureInInlineFun() {
-  // TODO(b/274670726): Revisit inconsistent semantics for non-reified type parameter in type
-  // operations of inline functions.
-  if (!isJvm()) {
+  if (isJvm()) {
+    val a: Any = castToNonReifiedType<Int>(Any())
+  } else {
+    // `R` is erased to `Any?` when `castToNonReifiedType` is inlined, but the inliner casts the
+    // returned value to the type of the call site (an `IMPLICIT_CAST` to `Int`). J2CL emits that
+    // cast as a checked cast followed by a required unboxing operation, so it throws even though
+    // the value is only used as `Any`. Kotlin/JVM doesn't check the value against `Int` here.
+    // TODO(b/573537209): Implicit casts to the call site type of inlined functions throw on J2CL.
     assertThrowsClassCastException {
       val a: Any = castToNonReifiedType<Int>(Any())
     }
-  } else {
-    val a: Any = castToNonReifiedType<Int>(Any())
   }
 
   assertEquals(2, callNonReifiedIntTypeParameterErasureInWhenInlineFun())
@@ -416,12 +419,7 @@ private inline fun <T> inlineWithDelegatedPropertyOfTypeParameter(a: T): String 
 private operator fun <T> String.getValue(nothing: Any?, property: KProperty<*>) = "OK" as T
 
 private fun testAccidentalReificationOfDelegatedPropertyOfTypeParameter() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithDelegatedPropertyOfTypeParameter<Int>(1))
-  } else {
-    assertThrowsClassCastException { inlineWithDelegatedPropertyOfTypeParameter<Int>(1) }
-  }
+  assertTrue("OK" == inlineWithDelegatedPropertyOfTypeParameter<Int>(1))
 }
 
 private inline fun <T> inlineWithPropertyOfTypeParameterInAnonymousObject(x: Any?): String =
@@ -431,12 +429,7 @@ private inline fun <T> inlineWithPropertyOfTypeParameterInAnonymousObject(x: Any
     .y as String
 
 private fun testAccidentalReificationOfPropertyOfTypeParameterInAnonymousObject() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithPropertyOfTypeParameterInAnonymousObject<Int>("OK"))
-  } else {
-    assertThrowsClassCastException { inlineWithPropertyOfTypeParameterInAnonymousObject<Int>("OK") }
-  }
+  assertTrue("OK" == inlineWithPropertyOfTypeParameterInAnonymousObject<Int>("OK"))
 }
 
 private inline fun <T> inlineWithMethodParameterOfTypeParameterInAnonymousObject(x: Any?): String =
@@ -446,14 +439,7 @@ private inline fun <T> inlineWithMethodParameterOfTypeParameterInAnonymousObject
     .bar(x as T)
 
 private fun testAccidentalReificationOfMethodParameterOfTypeParameterInAnonymousObject() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithMethodParameterOfTypeParameterInAnonymousObject<Int>("OK"))
-  } else {
-    assertThrowsClassCastException {
-      inlineWithMethodParameterOfTypeParameterInAnonymousObject<Int>("OK")
-    }
-  }
+  assertTrue("OK" == inlineWithMethodParameterOfTypeParameterInAnonymousObject<Int>("OK"))
 }
 
 private inline fun <T> inlineWithMethodReturnTypeOfTypeParameterInAnonymousObject(x: Any?): String =
@@ -463,14 +449,7 @@ private inline fun <T> inlineWithMethodReturnTypeOfTypeParameterInAnonymousObjec
     .bar() as String
 
 private fun testAccidentalReificationOfMethodReturnTypeOfTypeParameterInAnonymousObject() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithMethodReturnTypeOfTypeParameterInAnonymousObject<Int>("OK"))
-  } else {
-    assertThrowsClassCastException {
-      inlineWithMethodReturnTypeOfTypeParameterInAnonymousObject<Int>("OK")
-    }
-  }
+  assertTrue("OK" == inlineWithMethodReturnTypeOfTypeParameterInAnonymousObject<Int>("OK"))
 }
 
 private inline fun <T> inlineWithStoreIntoArrayOfTypeParameter(): String {
@@ -482,12 +461,7 @@ private inline fun <T> inlineWithStoreIntoArrayOfTypeParameter(): String {
 private fun <T> okAsTypeParameter(): T = "OK" as T
 
 private fun testAccidentalReificationOfStoreIntoArrayOfTypeParameter() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithStoreIntoArrayOfTypeParameter<Int>())
-  } else {
-    assertThrowsClassCastException { inlineWithStoreIntoArrayOfTypeParameter<Int>() }
-  }
+  assertTrue("OK" == inlineWithStoreIntoArrayOfTypeParameter<Int>())
 }
 
 private inline fun <T> inlineWithCallOnReceiverOfTypeParameter(): String {
@@ -496,12 +470,7 @@ private inline fun <T> inlineWithCallOnReceiverOfTypeParameter(): String {
 }
 
 private fun testAccidentalReificationOfCallOnReceiverOfTypeParameter() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithCallOnReceiverOfTypeParameter<Int>())
-  } else {
-    assertThrowsClassCastException { inlineWithCallOnReceiverOfTypeParameter<Int>() }
-  }
+  assertTrue("OK" == inlineWithCallOnReceiverOfTypeParameter<Int>())
 }
 
 private inline fun <T> inlineWithExtensionFunctionOnTypeParameterInAnonymousObject(
@@ -518,26 +487,14 @@ private inline fun <T> inlineWithExtensionFunctionOnTypeParameterInAnonymousObje
 }
 
 private fun testAccidentalReificationOfExtensionFunctionOnTypeParameterInAnonymousObject() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithExtensionFunctionOnTypeParameterInAnonymousObject<Int>(""))
-  } else {
-    assertThrowsClassCastException {
-      inlineWithExtensionFunctionOnTypeParameterInAnonymousObject<Int>("")
-    }
-  }
+  assertTrue("OK" == inlineWithExtensionFunctionOnTypeParameterInAnonymousObject<Int>(""))
 }
 
 private inline fun <T> inlineWithLambdaParameterOfTypeParameter(x: Any?): String =
   { y: T -> "OK" }.invoke(x as T)
 
 private fun testAccidentalReificationOfLambdaParameterOfTypeParameter() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithLambdaParameterOfTypeParameter<Int>(""))
-  } else {
-    assertThrowsClassCastException { inlineWithLambdaParameterOfTypeParameter<Int>("") }
-  }
+  assertTrue("OK" == inlineWithLambdaParameterOfTypeParameter<Int>(""))
 }
 
 private inline fun <U> inlineWithUncheckedCastToNothing(any: Any): Any {
@@ -546,12 +503,7 @@ private inline fun <U> inlineWithUncheckedCastToNothing(any: Any): Any {
 }
 
 private fun testAccidentalReificationOfUncheckedCastToNothing() {
-  // TODO(b/274670726): Non-reified type parameters are reified by accident when inlined (KT-60174).
-  if (isJvm()) {
-    assertTrue("OK" == inlineWithUncheckedCastToNothing<Nothing>("OK").toString())
-  } else {
-    assertThrowsClassCastException { inlineWithUncheckedCastToNothing<Nothing>("OK") }
-  }
+  assertTrue("OK" == inlineWithUncheckedCastToNothing<Nothing>("OK").toString())
 }
 
 interface Interface<T>

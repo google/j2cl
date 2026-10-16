@@ -17,10 +17,15 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.ir.declarations.IrFile
+import org.jetbrains.kotlin.ir.expressions.IrContainerExpression
 import org.jetbrains.kotlin.ir.expressions.IrExpression
+import org.jetbrains.kotlin.ir.expressions.IrReturnableBlock
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
+import org.jetbrains.kotlin.ir.expressions.IrWhen
+import org.jetbrains.kotlin.ir.types.isNothing
 import org.jetbrains.kotlin.ir.types.makeNotNull
+import org.jetbrains.kotlin.ir.util.isElseBranch
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
 /**
@@ -49,6 +54,26 @@ internal class SmartCastCleaner : FileLoweringPass, IrElementTransformerVoid() {
       return expression.argument
     }
 
+    // Implicit casts to Nothing of expressions that can't complete normally are not needed. The
+    // inliner adds them when the return type of an inlined function is a type parameter that is
+    // erased to its upper bound and instantiated with `Nothing` at the call site. Removing them
+    // avoids decomposing the expression into assignments to a temporary variable, which would hide
+    // the `Nothing` expressions from `AddNothingReturnStatements`.
+    if (targetType.isNothing() && !argument.canCompleteNormally()) {
+      return expression.argument
+    }
+
     return expression
   }
+
+  private fun IrExpression.canCompleteNormally(): Boolean =
+    when {
+      type.isNothing() -> false
+      this is IrWhen ->
+        branches.none { isElseBranch(it) } || branches.any { it.result.canCompleteNormally() }
+      // A returnable block completes normally when one of its returns targets it.
+      this is IrContainerExpression && this !is IrReturnableBlock ->
+        (statements.lastOrNull() as? IrExpression)?.canCompleteNormally() ?: true
+      else -> true
+    }
 }

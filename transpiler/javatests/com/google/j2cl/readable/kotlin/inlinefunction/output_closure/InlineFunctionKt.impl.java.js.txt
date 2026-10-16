@@ -140,7 +140,7 @@ class InlineFunctionKt extends j_l_Object {
   let tmp0_5 = ClassWithInlineFun.$create__int(5);
   let this_3 = tmp0_5;
   let delegate_1 = $2.$create__();
-  let d = delegate_1.m_compute__int();
+  let d = (/**@type {!Integer}*/ ($Casts.$to(delegate_1.m_compute__java_lang_Object(), Integer))).intValue();
   let tmp0_6 = MyClass.$create__int(5);
   let this_4 = tmp0_6;
   let sum_1 = this_4.m_getF__int();
@@ -228,14 +228,15 @@ class InlineFunctionKt extends j_l_Object {
  static m_testFunctionRef__void() {
   InlineFunctionKt.$clinit();
   let foo = MyClass.$create__int(2);
-  foo.m_double__void();
+  (/**@type {!MyClass}*/ (foo)).m_double__void();
+  Unit.f_INSTANCE__kotlin_Unit;
   let tmp0 = MyClass.$create__int(2);
   let target = tmp0;
   for (let inductionVariable = 0; inductionVariable < 5; inductionVariable = inductionVariable + 1 | 0) {
    let i = inductionVariable;
-   target.m_double__void();
+   (/**@type {!MyClass}*/ (target)).m_double__void();
   }
-  let result = target.m_getF__int();
+  let result = (/**@type {!Integer}*/ (Integer.valueOf((/**@type {!MyClass}*/ (target)).m_getF__int()))).intValue();
  }
  /** @nodts */
  static m_testReifiedParameter__void() {
@@ -443,7 +444,7 @@ class InlineFunctionKt extends j_l_Object {
  }
  /** @nodts @return {number} */
  static m_testNonReifiedIntTypeParameterErasureInInlineFun__int() {
-  return 1 + 1 | 0;
+  return (/**@type {!Integer}*/ (Integer.valueOf(1))).intValue() + 1 | 0;
  }
  /** @nodts @template R @return {R} */
  static m_castIntToObj__java_lang_Object() {
@@ -525,14 +526,14 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts @return {?string} */
  static m_find1__inlinefunction_StringRepro__java_lang_String(/** !StringRepro */ this_1) {
   InlineFunctionKt.$clinit();
-  let /** ?string */ value = null;
-  return value;
+  let /** * */ value = null;
+  return /**@type {?string}*/ (value);
  }
  /** @nodts @return {?string} */
  static m_find2__inlinefunction_StringReproChild__java_lang_String(/** !StringReproChild */ this_1) {
   InlineFunctionKt.$clinit();
-  let /** ?string */ value = null;
-  return value;
+  let /** * */ value = null;
+  return /**@type {?string}*/ (value);
  }
  /** @nodts @template S @return {?string} */
  static m_find3__inlinefunction_StringReproChild__java_lang_String(/** S */ this_1) {
@@ -663,8 +664,8 @@ class InlineFunctionKt extends j_l_Object {
   InlineFunctionKt.$clinit();
   let /** string */ tmp;
   if (StringBox.$isInstance(x)) {
-   let v = /**@type {string}*/ ($Casts.$to((/**@type {!GenericBox<string>}*/ (x)).m_getValue__java_lang_Object(), j_l_String));
-   tmp = v;
+   let v = (/**@type {!GenericBox<*>}*/ (x)).m_getValue__java_lang_Object();
+   tmp = (/**@type {string}*/ (v));
   } else {
    tmp = '';
   }

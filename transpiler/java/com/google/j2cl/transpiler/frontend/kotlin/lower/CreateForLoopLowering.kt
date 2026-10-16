@@ -36,6 +36,8 @@ import org.jetbrains.kotlin.ir.expressions.IrGetValue
 import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.expressions.IrSetValue
 import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
+import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
+import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.expressions.IrWhileLoop
 import org.jetbrains.kotlin.ir.expressions.impl.IrBlockImpl
@@ -345,9 +347,18 @@ private class LoopTransformer(
     // Extract the iterable type based on the qualifier of the iterator() call. We also need to
     // check that it actually implements the Iterable type as Kotlin allows for..in loops over any
     // type that merely looks like an iterable, even if only via extension functions.
-    (expression as? IrCall)
+    (expression?.unwrapImplicitCasts() as? IrCall)
       ?.takeIf { it.symbol.owner.overrides(iterableIteratorFunction) }
       ?.dispatchReceiver
+
+  // The iterator() call is wrapped in an implicit cast when it comes from an inlined function
+  // whose type parameters were erased, e.g. `Map.iterator()`.
+  private fun IrExpression.unwrapImplicitCasts(): IrExpression =
+    if (this is IrTypeOperatorCall && operator == IrTypeOperator.IMPLICIT_CAST) {
+      argument.unwrapImplicitCasts()
+    } else {
+      this
+    }
 
   private data class InnerLoopBody(
     val loopVariablesDefinitions: MutableList<IrVariable>,

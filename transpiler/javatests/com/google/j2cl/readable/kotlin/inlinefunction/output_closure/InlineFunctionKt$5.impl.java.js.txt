@@ -11,7 +11,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 /**
  * @final
- * @implements {Sequence<!Integer>}
+ * @implements {Sequence<*>}
  */
 class $5 extends j_l_Object {
  /** @protected @nodts */
@@ -31,7 +31,7 @@ class $5 extends j_l_Object {
  }
  /** @override @nodts @return {!Iterator<?>} */
  m_iterator__java_util_Iterator() {
-  return ArrayIteratorKt.m_iterator__arrayOf_java_lang_Object__java_util_Iterator(/**@type {!Array<!Integer>}*/ ($Arrays.$stampType([Integer.valueOf(1)], Integer)));
+  return /**@type {!Iterator<*>}*/ (ArrayIteratorKt.m_iterator__arrayOf_java_lang_Object__java_util_Iterator(/**@type {!Array<!Integer>}*/ ($Arrays.$stampType([Integer.valueOf(1)], Integer))));
  }
  /** @nodts */
  static $clinit() {

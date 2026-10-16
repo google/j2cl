@@ -330,13 +330,14 @@ inline fun <R> runIf(condition: Boolean, block: () -> R): R = if (condition) blo
 fun alwaysFail(): Nothing = throw IllegalStateException()
 
 // Why the `if` matters in `runIf`:
-// - If `R` were erased to `Any?` during inlining, the inliner would wrap the inlined `if` in a
-//   cast to `Nothing`, turning the `if` into an expression:
+// - `R` is erased to `Any?` during inlining, so the inliner wraps the inlined `if` in a cast to
+//   `Nothing`, turning the `if` into an expression:
 //   `IMPLICIT_CAST(if (...) ... else ... to Nothing)`.
-// - That cast makes `BlockDecomposerLowering` decompose this expression into assignments to a
-//   temporary variable.
-// - The `Nothing` calls are then no longer expression statements, so `AddNothingReturnStatements`
-//   doesn't turn them into `return` statements, and the function is missing its trailing `return`.
+// - Unless `SmartCastCleaner` removes that cast, `BlockDecomposerLowering` decomposes this
+//   expression into assignments to a temporary variable.
+// - The `Nothing` calls would then no longer be expression statements, so
+//   `AddNothingReturnStatements` wouldn't turn them into `return` statements, and the function
+//   would be missing its trailing `return`.
 fun testNothingTypedInlineCall(condition: Boolean): Int {
   runIf(condition) { alwaysFail() }
 }

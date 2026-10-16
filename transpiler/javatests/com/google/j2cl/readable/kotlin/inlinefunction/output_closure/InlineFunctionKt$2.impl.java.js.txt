@@ -3,6 +3,8 @@ goog.module('inlinefunction.InlineFunctionKt.$2$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
 /**
  * @final
  */
@@ -22,9 +24,9 @@ class $2 extends j_l_Object {
  $ctor__inlinefunction_InlineFunctionKt_2__void() {
   this.$ctor__java_lang_Object__void();
  }
- /** @final @nodts @return {number} */
- m_compute__int() {
-  return 5;
+ /** @final @nodts @return {*} */
+ m_compute__java_lang_Object() {
+  return Integer.valueOf(5);
  }
  /** @nodts */
  static $clinit() {
@@ -38,7 +40,9 @@ class $2 extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+ }
 }
 $Util.$setClassMetadata($2, 'inlinefunction.InlineFunctionKt$2');
 
