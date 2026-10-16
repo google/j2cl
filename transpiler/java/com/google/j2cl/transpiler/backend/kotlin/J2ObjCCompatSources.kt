@@ -1053,12 +1053,11 @@ internal class J2ObjCCompatSources(
     // Java JRE classes where we generate J2ObjC compat headers.
     val KT_NATIVE_JRE_EXCLUDE =
       setOf(
+        // These are Kotlin typealiases for `kotlinx.io` exceptions, so the transpiler doesn't know
+        // the name of the corresponding ObjC class.
         "java.io.EOFException",
         "java.io.FileNotFoundException",
         "java.io.IOException",
-        "java.util.concurrent.atomic.",
-        "java.util.concurrent.KotlinExecutor",
-        "javaemul.",
       )
 
     // A map from the bridge name supplied by the KtNative annotation to the bridge name
