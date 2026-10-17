@@ -17,7 +17,7 @@ J2WASM_ALLOWLIST = allowlists.of_packages([
     "//third_party/java/qo_metafile/...",
     "//third_party/java/qo_ole/...",
     "//third_party/java/re2j/...",
-    "//third_party/java_src/animal_sniffer/...",
+    "//third_party/java/animal_sniffer/...",
     "//third_party/java_src/dagger/...",
     "//third_party/java_src/google_common/current/...",
     "//third_party/java_src/jakarta_inject/...",

@@ -19,7 +19,7 @@ J2KT_NATIVE_ALLOWLIST = allowlists.of_packages([
     "//third_party/java/jsr250_annotations/...",
     "//third_party/java/jsr330_inject/...",
     "//third_party/java/junit/...",
-    "//third_party/java_src/animal_sniffer/...",
+    "//third_party/java/animal_sniffer/...",
     "//third_party/java_src/findurl/...",
     "//third_party/java_src/googicu/...",
     "//build_defs/internal_do_not_use/...",

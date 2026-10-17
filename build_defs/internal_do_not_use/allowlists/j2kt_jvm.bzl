@@ -5,7 +5,7 @@ load(":allowlists.bzl", "allowlists")
 visibility(["//build_defs/internal_do_not_use/..."])
 
 J2KT_JVM_ALLOWLIST = allowlists.of_packages([
-    "//third_party/java_src/animal_sniffer/...",
+    "//third_party/java/animal_sniffer/...",
     "//third_party/java_src/google_common/current/java/com/google/common/annotations/...",
     "//benchmarking/java/com/google/j2cl/benchmarks/octane/raytrace/...",
     "//build_defs/internal_do_not_use/...",
