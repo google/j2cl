@@ -1689,6 +1689,17 @@
  )
 )
 
+;;; int Main.testShiftByJsEnumOrdinal(ComparableJsEnum e)
+(func $m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int@jsenum.Main
+ (param $e (ref null $jsenum.Main.ComparableJsEnum))
+ (result i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:437:21
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:439:4
+  (return (i32.shl (i32.const 1) (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $e)))))
+ )
+)
+
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsenum.Main
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsenum/readable-j2wasm.js/jsenum/Main.java:29:13

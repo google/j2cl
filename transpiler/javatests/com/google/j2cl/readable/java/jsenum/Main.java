@@ -433,4 +433,9 @@ public class Main {
       int v = e.getValue();
     }
   }
+
+  private static int testShiftByJsEnumOrdinal(ComparableJsEnum e) {
+    // Repro for b/574644734.
+    return 1 << e.ordinal();
+  }
 }

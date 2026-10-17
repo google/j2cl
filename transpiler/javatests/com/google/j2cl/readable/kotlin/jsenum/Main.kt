@@ -367,3 +367,8 @@ fun testJsEnumSmartCast() {
     val v = o.getValue()
   }
 }
+
+fun testShiftByJsEnumOrdinal(e: ComparableJsEnum): Int {
+  // Repro for b/574644734.
+  return 1 shl e.ordinal
+}

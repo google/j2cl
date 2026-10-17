@@ -331,6 +331,11 @@ open class Main {
     val v_1: Int = e_1!!.getValue()
    }
   }
+  
+  @JvmStatic
+  private fun testShiftByJsEnumOrdinal(e: ComparableJsEnum?): Int = 1.shl(
+   e!!.ordinal,
+  )
  }
  
  internal fun interface Supplier<T> {
