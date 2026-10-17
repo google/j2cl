@@ -15,11 +15,12 @@
  */
 package enums;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import java.util.function.Function;
 
 public enum Enum1 {
   V1,
-  V2
+  V2;
 }
 
 enum Enum2 {
@@ -59,4 +60,15 @@ enum Enum3 {
   VALUE1(v -> 1 + v);
 
   Enum3(Function<Integer, Integer> function) {}
+}
+
+@J2ktIncompatible
+class Test {
+  public static void testLocalEnum() {
+    enum Local {
+      A,
+      B
+    }
+    Local l = Local.A;
+  }
 }

@@ -1,0 +1,76 @@
+goog.module('enums.Test.$1Local$impl');
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @final
+ * @extends {Enum<$1Local>}
+ */
+class $1Local extends Enum {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$1Local} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new $1Local();
+  $instance.$ctor__enums_Test_1Local__java_lang_String__int__void($name, $ordinal);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__enums_Test_1Local__java_lang_String__int__void(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+  this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
+ }
+ /** @nodts @return {!$1Local} */
+ static m_valueOf__java_lang_String__enums_Test_1Local(/** string */ name) {
+  $1Local.$clinit();
+  if ($Equality.$same($1Local.f_namesToValuesMap__enums_Test_1Local_, null)) {
+   $1Local.f_namesToValuesMap__enums_Test_1Local_ = (/**@type {Map<?string, !$1Local>}*/ (Enums.m_createMapFromValues__arrayOf_java_lang_Enum__javaemul_internal_Enums_NativeMap($1Local.m_values__arrayOf_enums_Test_1Local())));
+  }
+  return /**@type {$1Local}*/ (Enums.m_getValueFromNameAndMap__java_lang_String__javaemul_internal_Enums_NativeMap__java_lang_Object(name, $1Local.f_namesToValuesMap__enums_Test_1Local_));
+ }
+ /** @nodts @return {!Array<!$1Local>} */
+ static m_values__arrayOf_enums_Test_1Local() {
+  $1Local.$clinit();
+  return /**@type {!Array<!$1Local>}*/ ($Arrays.$stampType([$1Local.f_A__enums_Test_1Local, $1Local.f_B__enums_Test_1Local], $1Local));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Local.$clinit = () =>{};
+  $1Local.$loadModules();
+  Enum.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Local;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+/**@const {number} @nodts*/
+$1Local.$ordinal_A__enums_Test_1Local = 0;
+/**@const {number} @nodts*/
+$1Local.$ordinal_B__enums_Test_1Local = 1;
+/**@const {!$1Local} @nodts*/
+$1Local.f_A__enums_Test_1Local = /**@pureOrBreakMyCode*/ $1Local.$create__java_lang_String__int($Util.$makeEnumName('A'), $1Local.$ordinal_A__enums_Test_1Local);
+/**@const {!$1Local} @nodts*/
+$1Local.f_B__enums_Test_1Local = /**@pureOrBreakMyCode*/ $1Local.$create__java_lang_String__int($Util.$makeEnumName('B'), $1Local.$ordinal_B__enums_Test_1Local);
+/**@type {Map<?string, !$1Local>} @nodts*/
+$1Local.f_namesToValuesMap__enums_Test_1Local_;
+$Util.$setClassMetadataForEnum($1Local, 'enums.Test$1Local');
+
+exports = $1Local;
+
+//# sourceMappingURL=Test$1Local.js.map

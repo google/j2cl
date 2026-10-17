@@ -355,6 +355,14 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
+    if (type.getDeclaration().isLocal()) {
+      problems.error(
+          type.getSourcePosition(),
+          "Local enum '%s' cannot be a JsEnum.",
+          type.getReadableDescription());
+      return;
+    }
+
     if (type.getDeclaration().isJsType()) {
       problems.error(
           type.getSourcePosition(),

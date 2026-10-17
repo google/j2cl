@@ -681,7 +681,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case ASSERT -> convertAssert((JCAssert) jcStatement);
       case BLOCK -> convertBlock((JCBlock) jcStatement);
       case BREAK -> convertBreak((JCBreak) jcStatement);
-      case CLASS, RECORD ->
+      case CLASS, ENUM, RECORD ->
           new LocalClassDeclarationStatement(
               convertClassDeclaration((JCClassDecl) jcStatement), getSourcePosition(jcStatement));
       case CONTINUE -> convertContinue((JCContinue) jcStatement);

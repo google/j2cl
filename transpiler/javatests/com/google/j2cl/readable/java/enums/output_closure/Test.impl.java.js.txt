@@ -1,0 +1,49 @@
+goog.module('enums.Test$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1Local = goog.forwardDeclare('enums.Test.$1Local$impl');
+
+class Test extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Test} */
+ static $create__() {
+  Test.$clinit();
+  let $instance = new Test();
+  $instance.$ctor__enums_Test__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__enums_Test__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testLocalEnum__void() {
+  Test.$clinit();
+  let l = $1Local.f_A__enums_Test_1Local;
+ }
+ /** @nodts */
+ static $clinit() {
+  Test.$clinit = () =>{};
+  Test.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Test;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1Local = goog.module.get('enums.Test.$1Local$impl');
+ }
+}
+$Util.$setClassMetadata(Test, 'enums.Test');
+
+exports = Test;
+
+//# sourceMappingURL=Test.js.map

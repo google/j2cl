@@ -2286,6 +2286,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         @JsEnum
         enum JsEnumImplementingInterface implements MyInterface { }
         > Error: JsEnum 'JsEnumImplementingInterface' cannot implement any interface.
+        class EnclosingClass {
+          void main() {
+            @JsEnum
+            enum LocalJsEnum { }
+        > Error: Local enum 'LocalJsEnum' cannot be a JsEnum.
+          }
+        }
         """);
   }
 
