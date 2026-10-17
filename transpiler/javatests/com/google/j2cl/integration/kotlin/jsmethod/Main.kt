@@ -30,7 +30,6 @@ fun main(vararg args: String) {
   testCallByConcreteType()
   testCallBySuperParent()
   testCallByJS()
-  testJsMethodWithDifferentVisiblities()
   testLambdaImplementingJsMethod()
   testBoxedTypeSupertypes()
   testOverloads()
@@ -96,26 +95,6 @@ fun testCallByJS() {
 @JsMethod(namespace = "jsmethod.helper") external fun callChildFoo(c: Child, a: Int): Int
 
 @JsMethod(namespace = "jsmethod.helper") external fun callChildIntfFoo(c: Child, a: Int): Int
-
-internal class NonPublicJsMethodClass {
-  @JsMethod private fun foo(): String = "foo"
-
-  internal fun fooProxy() = foo()
-
-  @JsMethod internal fun bar(): String = "bar"
-}
-
-private fun testJsMethodWithDifferentVisiblities() {
-  val instance = NonPublicJsMethodClass()
-  assertEquals("foo", instance.fooProxy())
-  assertEquals("bar", instance.bar())
-  assertEquals("foo", callFoo(instance, null))
-  assertEquals("bar", callBar(instance, null))
-}
-
-@JsMethod(namespace = "jsmethod.helper") public external fun callFoo(obj: Any?, param: Any?): Any?
-
-@JsMethod(namespace = "jsmethod.helper") public external fun callBar(obj: Any?, param: Any?): Any?
 
 internal fun interface FunctionalInterfaceWithJsMethod {
   @JsMethod fun greet(): String

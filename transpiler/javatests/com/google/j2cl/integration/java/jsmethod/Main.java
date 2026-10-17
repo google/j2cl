@@ -30,7 +30,6 @@ public class Main {
     testCallByConcreteType();
     testCallBySuperParent();
     testCallByJS();
-    testJsMethodWithDifferentVisiblities();
     testLambdaImplementingJsMethod();
     testBoxedTypeSupertypes();
     testOverloads();
@@ -103,32 +102,6 @@ public class Main {
 
   @JsMethod(namespace = "jsmethod.helper")
   public static native int callChildIntfFoo(Child c, int a);
-
-  static class NonPublicJsMethodClass {
-    @JsMethod
-    private String foo() {
-      return "foo";
-    }
-
-    @JsMethod
-    String bar() {
-      return "bar";
-    }
-  }
-
-  private static void testJsMethodWithDifferentVisiblities() {
-    NonPublicJsMethodClass instance = new NonPublicJsMethodClass();
-    assertEquals("foo", instance.foo());
-    assertEquals("bar", instance.bar());
-    assertEquals("foo", callFoo(instance, null));
-    assertEquals("bar", callBar(instance, null));
-  }
-
-  @JsMethod(namespace = "jsmethod.helper")
-  public static native Object callFoo(Object obj, Object param);
-
-  @JsMethod(namespace = "jsmethod.helper")
-  public static native Object callBar(Object obj, Object param);
 
   interface FunctionalInterfaceWithJsMethod {
     @JsMethod

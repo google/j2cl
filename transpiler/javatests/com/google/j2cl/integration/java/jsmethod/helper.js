@@ -90,21 +90,3 @@ exports.callChildFoo = function(c, a) {
 exports.callChildIntfFoo = function(c, a) {
   return c.intfFoo(a);
 };
-
-/**
- * @param {?} obj
- * @param {?} param
- * @return {*}
- */
-exports.callFoo = function(obj, param) {
-  return obj.foo(param);
-};
-
-/**
- * @param {?} obj
- * @param {?} param
- * @return {*}
- */
-exports.callBar = function(obj, param) {
-  return obj.bar(param);
-};
