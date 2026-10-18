@@ -107,12 +107,12 @@ final class JsKeywords {
           "with",
           "yield");
 
-  static ImmutableSet<String> getKeywords() {
+  public static ImmutableSet<String> getKeywords() {
     return KEYWORDS;
   }
 
-  static boolean isKeyword(String s) {
-    return !KEYWORDS.contains(s);
+  public static boolean isKeyword(String s) {
+    return KEYWORDS.contains(s);
   }
 
   private JsKeywords() {}
