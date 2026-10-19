@@ -18,12 +18,20 @@ package com.google.j2cl.optimization.kotlin
 import com.google.j2cl.optimization.OptimizationTestUtil.assertFunctionMatches
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsProperty
+import org.junit.Assert.assertFalse
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class BooleanOptimizationTest {
+  @Before
+  fun setUp() {
+    // Refer to static fields of Boolean so that $clinit is not empty and does not get pruned.
+    assertFalse(java.lang.Boolean.TYPE.getName().isEmpty())
+  }
+
   @JsMethod
   fun simpleComp(): Boolean {
     return true == true

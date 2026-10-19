@@ -19,6 +19,7 @@ fun main() {
   val voidClass: Class<Void> = Void.TYPE
 
   val primitiveBooleanClass: Class<Boolean> = Boolean::class.javaPrimitiveType!!
+  val primitiveBooleanType: Class<Boolean> = java.lang.Boolean.TYPE
   val primitiveBooleanArrayClass: Class<BooleanArray> = BooleanArray::class.java
   val primitiveBooleanArrayArrayClass: Class<Array<BooleanArray>> = Array<BooleanArray>::class.java
   val booleanClass: Class<Boolean> = Boolean::class.java
@@ -26,6 +27,7 @@ fun main() {
   val booleanArrayArrayClass: Class<Array<Array<Boolean>>> = Array<Array<Boolean>>::class.java
 
   val primitiveCharClass: Class<Char> = Char::class.javaPrimitiveType!!
+  val primitiveCharType: Class<Char> = java.lang.Character.TYPE
   val primitiveCharArrayClass: Class<CharArray> = CharArray::class.java
   val primitiveCharArrayArrayClass: Class<Array<CharArray>> = Array<CharArray>::class.java
   val charClass: Class<Char> = Char::class.java
@@ -33,6 +35,7 @@ fun main() {
   val charArrayArrayClass: Class<Array<Array<Char>>> = Array<Array<Char>>::class.java
 
   val primitiveByteClass: Class<Byte> = Byte::class.javaPrimitiveType!!
+  val primitiveByteType: Class<Byte> = java.lang.Byte.TYPE
   val primitiveByteArrayClass: Class<ByteArray> = ByteArray::class.java
   val primitiveByteArrayArrayClass: Class<Array<ByteArray>> = Array<ByteArray>::class.java
   val byteClass: Class<Byte> = Byte::class.java
@@ -40,6 +43,7 @@ fun main() {
   val byteArrayArrayClass: Class<Array<Array<Byte>>> = Array<Array<Byte>>::class.java
 
   val primitiveShortClass: Class<Short> = Short::class.javaPrimitiveType!!
+  val primitiveShortType: Class<Short> = java.lang.Short.TYPE
   val primitiveShortArrayClass: Class<ShortArray> = ShortArray::class.java
   val primitiveShortArrayArrayClass: Class<Array<ShortArray>> = Array<ShortArray>::class.java
   val shortClass: Class<Short> = Short::class.java
@@ -47,6 +51,7 @@ fun main() {
   val shortArrayArrayClass: Class<Array<Array<Short>>> = Array<Array<Short>>::class.java
 
   val primitiveIntClass: Class<Int> = Int::class.javaPrimitiveType!!
+  val primitiveIntType: Class<Int> = java.lang.Integer.TYPE
   val primitiveIntArrayClass: Class<IntArray> = IntArray::class.java
   val primitiveIntArrayArrayClass: Class<Array<IntArray>> = Array<IntArray>::class.java
   val intClass: Class<Int> = Int::class.java
@@ -54,6 +59,7 @@ fun main() {
   val intArrayArrayClass: Class<Array<Array<Int>>> = Array<Array<Int>>::class.java
 
   val primitiveLongClass: Class<Long> = Long::class.javaPrimitiveType!!
+  val primitiveLongType: Class<Long> = java.lang.Long.TYPE
   val primitiveLongArrayClass: Class<LongArray> = LongArray::class.java
   val primitiveLongArrayArrayClass: Class<Array<LongArray>> = Array<LongArray>::class.java
   val longClass: Class<Long> = Long::class.java
@@ -61,6 +67,7 @@ fun main() {
   val longArrayArrayClass: Class<Array<Array<Long>>> = Array<Array<Long>>::class.java
 
   val primitiveFloatClass: Class<Float> = Float::class.javaPrimitiveType!!
+  val primitiveFloatType: Class<Float> = java.lang.Float.TYPE
   val primitiveFloatArrayClass: Class<FloatArray> = FloatArray::class.java
   val primitiveFloatArrayArrayClass: Class<Array<FloatArray>> = Array<FloatArray>::class.java
   val floatClass: Class<Float> = Float::class.java
@@ -68,6 +75,7 @@ fun main() {
   val floatArrayArrayClass: Class<Array<Array<Float>>> = Array<Array<Float>>::class.java
 
   val primitiveDoubleClass: Class<Double> = Double::class.javaPrimitiveType!!
+  val primitiveDoubleType: Class<Double> = java.lang.Double.TYPE
   val primitiveDoubleArrayClass: Class<DoubleArray> = DoubleArray::class.java
   val primitiveDoubleArrayArrayClass: Class<Array<DoubleArray>> = Array<DoubleArray>::class.java
   val doubleClass: Class<Double> = Double::class.java

@@ -18,6 +18,7 @@ package com.google.j2cl.optimization.kotlin
 import com.google.j2cl.optimization.OptimizationTestUtil.assertFunctionMatches
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsProperty
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,7 +29,7 @@ class StringOptimizationTest {
   @Before
   fun setUp() {
     // Refer to static fields of String so that $clinit is not empty and does not get pruned.
-    String.CASE_INSENSITIVE_ORDER.compare("aaa", "bbb")
+    assertTrue(String.CASE_INSENSITIVE_ORDER.compare("aaa", "bbb") != 0)
   }
 
   @JsMethod

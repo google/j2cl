@@ -98,6 +98,16 @@ public class Main {
     assertToStringEquals("int", int.class);
 
     assertLiteralType("int.class", LiteralType.PRIMITIVE, int.class);
+
+    assertSame(boolean.class, Boolean.TYPE);
+    assertSame(byte.class, Byte.TYPE);
+    assertSame(short.class, Short.TYPE);
+    assertSame(char.class, Character.TYPE);
+    assertSame(int.class, Integer.TYPE);
+    assertSame(long.class, Long.TYPE);
+    assertSame(float.class, Float.TYPE);
+    assertSame(double.class, Double.TYPE);
+    assertSame(void.class, Void.TYPE);
   }
 
   private enum Bar {

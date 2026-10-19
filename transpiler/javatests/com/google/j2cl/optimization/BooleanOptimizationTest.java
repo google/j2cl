@@ -16,15 +16,23 @@
 package com.google.j2cl.optimization;
 
 import static com.google.j2cl.optimization.OptimizationTestUtil.assertFunctionMatches;
+import static org.junit.Assert.assertFalse;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class BooleanOptimizationTest {
+
+  @Before
+  public void setUp() {
+    // Refer to static fields of Boolean so that $clinit is not empty and does not get pruned.
+    assertFalse(Boolean.TYPE.getName().isEmpty());
+  }
 
   @JsMethod
   public boolean simpleComp() {

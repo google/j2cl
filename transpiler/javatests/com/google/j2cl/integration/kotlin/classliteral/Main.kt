@@ -108,6 +108,15 @@ class Main {
     assertEquals("int", 1.javaClass.toString())
 
     assertLiteralType("int.class", LiteralType.PRIMITIVE, Int::class.java)
+
+    assertSame(Boolean::class.javaPrimitiveType, java.lang.Boolean.TYPE)
+    assertSame(Byte::class.javaPrimitiveType, java.lang.Byte.TYPE)
+    assertSame(Short::class.javaPrimitiveType, java.lang.Short.TYPE)
+    assertSame(Char::class.javaPrimitiveType, java.lang.Character.TYPE)
+    assertSame(Int::class.javaPrimitiveType, java.lang.Integer.TYPE)
+    assertSame(Long::class.javaPrimitiveType, java.lang.Long.TYPE)
+    assertSame(Float::class.javaPrimitiveType, java.lang.Float.TYPE)
+    assertSame(Double::class.javaPrimitiveType, java.lang.Double.TYPE)
   }
 
   private enum class Bar {

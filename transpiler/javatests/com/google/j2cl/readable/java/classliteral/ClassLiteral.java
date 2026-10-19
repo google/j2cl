@@ -19,8 +19,10 @@ public class ClassLiteral {
   @SuppressWarnings("unused")
   public void main() {
     Class<Void> voidClass = void.class;
+    Class<Void> voidType = Void.TYPE;
 
     Class<Boolean> primitiveBooleanClass = boolean.class;
+    Class<Boolean> primitiveBooleanType = Boolean.TYPE;
     Class<boolean[]> primitiveBooleanArrayClass = boolean[].class;
     Class<boolean[][]> primitiveBooleanArrayArrayClass = boolean[][].class;
     Class<Boolean> booleanClass = Boolean.class;
@@ -28,6 +30,7 @@ public class ClassLiteral {
     Class<Boolean[][]> booleanArrayArrayClass = Boolean[][].class;
 
     Class<Character> primitiveCharClass = char.class;
+    Class<Character> primitiveCharType = Character.TYPE;
     Class<char[]> primitiveCharArrayClass = char[].class;
     Class<char[][]> primitiveCharArrayArrayClass = char[][].class;
     Class<Character> characterClass = Character.class;
@@ -35,6 +38,7 @@ public class ClassLiteral {
     Class<Character[][]> characterArrayArrayClass = Character[][].class;
 
     Class<Byte> primitiveByteClass = byte.class;
+    Class<Byte> primitiveByteType = Byte.TYPE;
     Class<byte[]> primitiveByteArrayClass = byte[].class;
     Class<byte[][]> primitiveByteArrayArrayClass = byte[][].class;
     Class<Byte> byteClass = Byte.class;
@@ -42,6 +46,7 @@ public class ClassLiteral {
     Class<Byte[][]> byteArrayArrayClass = Byte[][].class;
 
     Class<Short> primitiveShortClass = short.class;
+    Class<Short> primitiveShortType = Short.TYPE;
     Class<short[]> primitiveShortArrayClass = short[].class;
     Class<short[][]> primitiveShortArrayArrayClass = short[][].class;
     Class<Short> shortClass = Short.class;
@@ -49,6 +54,7 @@ public class ClassLiteral {
     Class<Short[][]> shortArrayArrayClass = Short[][].class;
 
     Class<Integer> primitiveIntClass = int.class;
+    Class<Integer> primitiveIntType = Integer.TYPE;
     Class<int[]> primitiveIntArrayClass = int[].class;
     Class<int[][]> primitiveIntArrayArrayClass = int[][].class;
     Class<Integer> integerClass = Integer.class;
@@ -56,6 +62,7 @@ public class ClassLiteral {
     Class<Integer[][]> integerArrayArrayClass = Integer[][].class;
 
     Class<Long> primitiveLongClass = long.class;
+    Class<Long> primitiveLongType = Long.TYPE;
     Class<long[]> primitiveLongArrayClass = long[].class;
     Class<long[][]> primitiveLongArrayArrayClass = long[][].class;
     Class<Long> longClass = Long.class;
@@ -63,6 +70,7 @@ public class ClassLiteral {
     Class<Long[][]> longArraArrayClass = Long[][].class;
 
     Class<Float> primitiveFloatClass = float.class;
+    Class<Float> primitiveFloatType = Float.TYPE;
     Class<float[]> primitiveFloatArrayClass = float[].class;
     Class<float[][]> primitiveFloatArrayArrayClass = float[][].class;
     Class<Float> floatClass = Float.class;
@@ -70,6 +78,7 @@ public class ClassLiteral {
     Class<Float[][]> floatArrayArrayClass = Float[][].class;
 
     Class<Double> primitiveDoubleClass = double.class;
+    Class<Double> primitiveDoubleType = Double.TYPE;
     Class<double[]> primitiveDoubleArrayClass = double[].class;
     Class<double[][]> primitiveDoubleArrayArrayClass = double[][].class;
     Class<Double> doubleClass = Double.class;

@@ -171,6 +171,7 @@ import com.google.j2cl.transpiler.passes.NormalizeVarargParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
+import com.google.j2cl.transpiler.passes.OptimizeBoxedTypeFields;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
@@ -325,6 +326,7 @@ public enum Backend {
           // Statement/Expression normalizations
           NormalizeShifts::new,
           NormalizeStaticMemberQualifiers::new,
+          OptimizeBoxedTypeFields::new,
           // Runs after NormalizeStaticMemberQualifiersPass.
           DevirtualizeMethodCalls::new,
           NormalizeControlStatements::new,
@@ -521,6 +523,7 @@ public enum Backend {
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),
           NormalizeStaticMemberQualifiers::new,
+          OptimizeBoxedTypeFields::new,
           NormalizeMultiExpressions::new,
 
           // Rewrite operations that do not have direct support in wasm into ones that have.

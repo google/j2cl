@@ -19,7 +19,9 @@
 package classliteral
 
 import javaemul.lang.*
+import java.lang.Character
 import java.lang.Class
+import java.lang.Integer
 import java.lang.Void
 import kotlin.Any
 import kotlin.Array
@@ -46,49 +48,58 @@ import kotlin.jvm.javaPrimitiveType
 open class ClassLiteral {
  open fun main() {
   val voidClass: Class<Void> = Void::class.javaPrimitiveType!! as Class<Void>
+  val voidType: Class<Void> = Void.TYPE
   val primitiveBooleanClass: Class<Boolean> = Boolean::class.javaPrimitiveType!! as Class<Boolean>
+  val primitiveBooleanType: Class<Boolean> = java.lang.Boolean.TYPE
   val primitiveBooleanArrayClass: Class<BooleanArray> = BooleanArray::class.javaObjectType
   val primitiveBooleanArrayArrayClass: Class<Array<BooleanArray?>> = Array::class.javaObjectType as Class<Array<BooleanArray?>>
   val booleanClass: Class<Boolean> = Boolean::class.javaObjectType
   val booleanArrayClass: Class<Array<Boolean?>> = Array::class.javaObjectType as Class<Array<Boolean?>>
   val booleanArrayArrayClass: Class<Array<Array<Boolean?>?>> = Array::class.javaObjectType as Class<Array<Array<Boolean?>?>>
   val primitiveCharClass: Class<Char> = Char::class.javaPrimitiveType!! as Class<Char>
+  val primitiveCharType: Class<Char> = Character.TYPE
   val primitiveCharArrayClass: Class<CharArray> = CharArray::class.javaObjectType
   val primitiveCharArrayArrayClass: Class<Array<CharArray?>> = Array::class.javaObjectType as Class<Array<CharArray?>>
   val characterClass: Class<Char> = Char::class.javaObjectType
   val characterArrayClass: Class<Array<Char?>> = Array::class.javaObjectType as Class<Array<Char?>>
   val characterArrayArrayClass: Class<Array<Array<Char?>?>> = Array::class.javaObjectType as Class<Array<Array<Char?>?>>
   val primitiveByteClass: Class<Byte> = Byte::class.javaPrimitiveType!! as Class<Byte>
+  val primitiveByteType: Class<Byte> = java.lang.Byte.TYPE
   val primitiveByteArrayClass: Class<ByteArray> = ByteArray::class.javaObjectType
   val primitiveByteArrayArrayClass: Class<Array<ByteArray?>> = Array::class.javaObjectType as Class<Array<ByteArray?>>
   val byteClass: Class<Byte> = Byte::class.javaObjectType
   val byteArrayClass: Class<Array<Byte?>> = Array::class.javaObjectType as Class<Array<Byte?>>
   val byteArrayArrayClass: Class<Array<Array<Byte?>?>> = Array::class.javaObjectType as Class<Array<Array<Byte?>?>>
   val primitiveShortClass: Class<Short> = Short::class.javaPrimitiveType!! as Class<Short>
+  val primitiveShortType: Class<Short> = java.lang.Short.TYPE
   val primitiveShortArrayClass: Class<ShortArray> = ShortArray::class.javaObjectType
   val primitiveShortArrayArrayClass: Class<Array<ShortArray?>> = Array::class.javaObjectType as Class<Array<ShortArray?>>
   val shortClass: Class<Short> = Short::class.javaObjectType
   val shortArrayClass: Class<Array<Short?>> = Array::class.javaObjectType as Class<Array<Short?>>
   val shortArrayArrayClass: Class<Array<Array<Short?>?>> = Array::class.javaObjectType as Class<Array<Array<Short?>?>>
   val primitiveIntClass: Class<Int> = Int::class.javaPrimitiveType!! as Class<Int>
+  val primitiveIntType: Class<Int> = Integer.TYPE
   val primitiveIntArrayClass: Class<IntArray> = IntArray::class.javaObjectType
   val primitiveIntArrayArrayClass: Class<Array<IntArray?>> = Array::class.javaObjectType as Class<Array<IntArray?>>
   val integerClass: Class<Int> = Int::class.javaObjectType
   val integerArrayClass: Class<Array<Int?>> = Array::class.javaObjectType as Class<Array<Int?>>
   val integerArrayArrayClass: Class<Array<Array<Int?>?>> = Array::class.javaObjectType as Class<Array<Array<Int?>?>>
   val primitiveLongClass: Class<Long> = Long::class.javaPrimitiveType!! as Class<Long>
+  val primitiveLongType: Class<Long> = java.lang.Long.TYPE
   val primitiveLongArrayClass: Class<LongArray> = LongArray::class.javaObjectType
   val primitiveLongArrayArrayClass: Class<Array<LongArray?>> = Array::class.javaObjectType as Class<Array<LongArray?>>
   val longClass: Class<Long> = Long::class.javaObjectType
   val longArrayClass: Class<Array<Long?>> = Array::class.javaObjectType as Class<Array<Long?>>
   val longArraArrayClass: Class<Array<Array<Long?>?>> = Array::class.javaObjectType as Class<Array<Array<Long?>?>>
   val primitiveFloatClass: Class<Float> = Float::class.javaPrimitiveType!! as Class<Float>
+  val primitiveFloatType: Class<Float> = java.lang.Float.TYPE
   val primitiveFloatArrayClass: Class<FloatArray> = FloatArray::class.javaObjectType
   val primitiveFloatArrayArrayClass: Class<Array<FloatArray?>> = Array::class.javaObjectType as Class<Array<FloatArray?>>
   val floatClass: Class<Float> = Float::class.javaObjectType
   val floatArrayClass: Class<Array<Float?>> = Array::class.javaObjectType as Class<Array<Float?>>
   val floatArrayArrayClass: Class<Array<Array<Float?>?>> = Array::class.javaObjectType as Class<Array<Array<Float?>?>>
   val primitiveDoubleClass: Class<Double> = Double::class.javaPrimitiveType!! as Class<Double>
+  val primitiveDoubleType: Class<Double> = java.lang.Double.TYPE
   val primitiveDoubleArrayClass: Class<DoubleArray> = DoubleArray::class.javaObjectType
   val primitiveDoubleArrayArrayClass: Class<Array<DoubleArray?>> = Array::class.javaObjectType as Class<Array<DoubleArray?>>
   val doubleClass: Class<Double> = Double::class.javaObjectType
