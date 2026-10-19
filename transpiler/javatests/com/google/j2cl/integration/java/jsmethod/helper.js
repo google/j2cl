@@ -15,6 +15,7 @@
 goog.module('jsmethod.helper');
 
 const Child = goog.require('jsmethod.Child');
+const JsKeywords = goog.require('jsmethod.Main.JsKeywords');
 const Parent = goog.require('jsmethod.Parent');
 
 /**
@@ -89,4 +90,14 @@ exports.callChildFoo = function(c, a) {
  */
 exports.callChildIntfFoo = function(c, a) {
   return c.intfFoo(a);
+};
+
+/**
+ * @param {!JsKeywords} k
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+exports.callJsKeywordsTest = function(k, a, b) {
+  return k.test(a, b);
 };

@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -28,11 +29,19 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
+import com.google.j2cl.transpiler.backend.closure.JsKeywords;
 
 /** A Closure environment for generating externs and resolving type names. */
 class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnvironment {
   public WasmJsInteropClosureGenerationEnvironment() {
     super(ImmutableSet.of(), ImmutableMap.of());
+  }
+
+  @Override
+  public String getUniqueNameForVariable(HasName variable) {
+    // TODO(b/574076464): It is possible, but unlikely, that this results in a collision.
+    String name = super.getUniqueNameForVariable(variable);
+    return JsKeywords.isKeyword(name) ? name + "__$" : name;
   }
 
   @Override

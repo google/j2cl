@@ -173,6 +173,12 @@
 (global $$class@jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsmethod.JsMethodExample.JsKeywords (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethod.JsMethodExample.JsKeywords (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsmethod.JsMethodExample.NativeFoo.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -359,6 +365,16 @@
 (global $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable@$jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor (ref $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable)
  (struct.new $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable
   (ref.func $m_m__void@jsmethod.JsMethodExample.ConcreteSubclassWithNoNewJsMembers)
+ )
+)
+(global $jsmethod.JsMethodExample.JsKeywords.vtable (ref (exact $jsmethod.JsMethodExample.JsKeywords.vtable))
+ (struct.new $jsmethod.JsMethodExample.JsKeywords.vtable
+  (global.get $jsmethod.JsMethodExample.JsKeywords.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.JsKeywords)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_test__int__int__void@jsmethod.JsMethodExample.JsKeywords)
  )
 )
 (global $jsmethod.JsMethodExample.NativeFoo.$Overlay.vtable (ref (exact $jsmethod.JsMethodExample.NativeFoo.$Overlay.vtable))
@@ -1587,6 +1603,109 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.AbstractClassExposingJsMethodM)
+
+;;; JsKeywords JsKeywords.$create()
+(func $$create__@jsmethod.JsMethodExample.JsKeywords
+ (result (ref null $jsmethod.JsMethodExample.JsKeywords))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+ (local $$instance (ref null $jsmethod.JsMethodExample.JsKeywords))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (call $$clinit__void_<once>_@jsmethod.JsMethodExample.JsKeywords )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (local.set $$instance (struct.new_desc $jsmethod.JsMethodExample.JsKeywords (global.get $itable.empty) (i32.const 0) (global.get $jsmethod.JsMethodExample.JsKeywords.vtable)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_JsKeywords@jsmethod.JsMethodExample.JsKeywords (ref.as_non_null (local.get $$instance)))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsKeywords.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_JsKeywords@jsmethod.JsMethodExample.JsKeywords
+ (param $this (ref null $jsmethod.JsMethodExample.JsKeywords))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void JsKeywords.test(int in, int let)
+(func $m_test__int__int__void@jsmethod.JsMethodExample.JsKeywords
+ (type $function.m_test__int__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $in i32)
+ (param $let i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:183:16
+ (local $this (ref null $jsmethod.JsMethodExample.JsKeywords))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.JsKeywords) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_test__int__int__void@jsmethod.JsMethodExample.JsKeywords)
+
+;;; void JsKeywords.test(int in, int let)
+(@binaryen.js.called)
+(func $js_export_test__int__int__void@jsmethod.JsMethodExample.JsKeywords
+ (type $function.js_export_test__int__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $in i32)
+ (param $let i32)
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+ (local $this (ref null $jsmethod.JsMethodExample.JsKeywords))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.JsKeywords) (local.get $this.untyped)))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (call_ref $function.m_test__int__int__void (ref.as_non_null (local.get $this))(local.get $in)(local.get $let)(struct.get $jsmethod.JsMethodExample.JsKeywords.vtable $m_test__int__int__void (ref.get_desc $jsmethod.JsMethodExample.JsKeywords(local.get $this))))
+ )
+)
+(elem declare func $js_export_test__int__int__void@jsmethod.JsMethodExample.JsKeywords)
+
+;;; void JsKeywords.$clinit()
+(func $$clinit__void_<once>_@jsmethod.JsMethodExample.JsKeywords
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (if (global.get $$class-initialized@jsmethod.JsMethodExample.JsKeywords)
+   (then
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+    (return )
+   )
+  )
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (global.set $$class-initialized@jsmethod.JsMethodExample.JsKeywords (i32.const 1))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsmethod/readable-j2wasm.js/jsmethod/JsMethodExample.java:181:15
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> JsKeywords.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.JsKeywords
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethod.JsMethodExample.JsKeywords)))
+   (then
+    (return (global.get $$class@jsmethod.JsMethodExample.JsKeywords))
+   )
+  )
+  (global.set $$class@jsmethod.JsMethodExample.JsKeywords (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethod.JsM...|__java_lang_String_<once>_@jsmethod.JsMethodExample.JsKeywords.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsmethod.JsMethodExample.JsKeywords))
+ )
+)
+
+;;; Class<?> JsKeywords.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.JsKeywords
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethod.JsMethodExample.JsKeywords))
+ (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.JsKeywords) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.JsKeywords ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.JsKeywords)
 
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_InterfaceExposingJsMethods_$LambdaAdaptor@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor

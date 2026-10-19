@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.backend.closure;
 import com.google.common.collect.ImmutableSet;
 
 /** All JavaScript keywords and Closure predefined types. */
-final class JsKeywords {
+public final class JsKeywords {
   private static final ImmutableSet<String> KEYWORDS =
       ImmutableSet.of(
           // Main closure namespace, used at generation time.

@@ -168,4 +168,8 @@ class JsMethodExample {
   class ConcreteSubclassWithJsConstructor : ConcreteSubclassWithNoNewJsMembers {
     @JsConstructor constructor() {}
   }
+
+  class JsKeywords {
+    @JsMethod fun test(`in`: Int, let: Int) {}
+  }
 }

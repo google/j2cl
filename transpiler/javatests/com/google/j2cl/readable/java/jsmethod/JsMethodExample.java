@@ -177,4 +177,9 @@ public class JsMethodExample {
     @JsConstructor
     public ConcreteSubclassWithJsConstructor() {}
   }
+
+  static class JsKeywords {
+    @JsMethod
+    public void test(int in, int let) {}
+  }
 }

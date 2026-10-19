@@ -33,6 +33,7 @@ fun main(vararg args: String) {
   testLambdaImplementingJsMethod()
   testBoxedTypeSupertypes()
   testOverloads()
+  testJsKeywords()
 }
 
 fun testCallByConcreteType() {
@@ -181,3 +182,19 @@ private fun testOverloads() {
   assertEquals("m(Object)", nativeOverloads.m(Any()))
   assertEquals("m(Double)", nativeOverloads.m(0.0))
 }
+
+class JsKeywords {
+  @JsMethod
+  fun test(`in`: Int, let: Int): Int {
+    return let + `in`
+  }
+}
+
+private fun testJsKeywords() {
+  val k = JsKeywords()
+  assertEquals(110, k.test(10, 100))
+  assertEquals(110, callJsKeywordsTest(k, 10, 100))
+}
+
+@JsMethod(namespace = "jsmethod.helper")
+external fun callJsKeywordsTest(k: JsKeywords, a: Int, b: Int): Int

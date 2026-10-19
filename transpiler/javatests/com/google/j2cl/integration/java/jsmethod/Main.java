@@ -33,6 +33,7 @@ public class Main {
     testLambdaImplementingJsMethod();
     testBoxedTypeSupertypes();
     testOverloads();
+    testJsKeywords();
   }
 
   public static void testCallByConcreteType() {
@@ -207,4 +208,20 @@ public class Main {
     assertEquals("m(Object)", nativeOverloads.m(new Object()));
     assertEquals("m(Double)", nativeOverloads.m(0d));
   }
+
+  static class JsKeywords {
+    @JsMethod
+    public int test(int in, int let) {
+      return let + in;
+    }
+  }
+
+  private static void testJsKeywords() {
+    JsKeywords k = new JsKeywords();
+    assertEquals(110, k.test(10, 100));
+    assertEquals(110, callJsKeywordsTest(k, 10, 100));
+  }
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callJsKeywordsTest(JsKeywords k, int a, int b);
 }

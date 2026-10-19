@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.JsKeywords$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class JsKeywords extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JsKeywords} */
+ static $create__() {
+  JsKeywords.$clinit();
+  let $instance = new JsKeywords();
+  $instance.$ctor__jsmethod_JsMethodExample_JsKeywords__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_JsKeywords__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ 
+ test(/** number */ in_1, /** number */ let_1) {}
+ /** @nodts */
+ static $clinit() {
+  JsKeywords.$clinit = () =>{};
+  JsKeywords.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsKeywords;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsKeywords, 'jsmethod.JsMethodExample$JsKeywords');
+
+exports = JsKeywords;
+
+//# sourceMappingURL=JsMethodExample$JsKeywords.js.map

@@ -25,6 +25,7 @@ import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Comparable
 import kotlin.Double
+import kotlin.Int
 import kotlin.Long
 import kotlin.String
 import kotlin.Suppress
@@ -167,5 +168,10 @@ open class JsMethodExample {
  internal open class ConcreteSubclassWithJsConstructor: ConcreteSubclassWithNoNewJsMembers {
   @JsConstructor
   constructor()
+ }
+ 
+ internal open class JsKeywords internal constructor() {
+  @JsMethod
+  open fun test(`in`: Int, let: Int) {}
  }
 }
