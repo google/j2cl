@@ -182,6 +182,12 @@ def _get_test_name(target):
 
 
 CLOSURE_LICENSE = """/*
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+"""
+
+LEGACY_CLOSURE_LICENSE = """/*
 
  Copyright The Closure Library Authors.
  SPDX-License-Identifier: Apache-2.0
@@ -201,7 +207,12 @@ def get_compressed_size(file_name):
   else:
     with open(file_name, "r") as f:
       # Drop closure license to reduce noise in size tests.
-      contents = f.read().replace(CLOSURE_LICENSE, "").encode("utf-8")
+      contents = (
+          f.read()
+          .replace(CLOSURE_LICENSE, "")
+          .replace(LEGACY_CLOSURE_LICENSE, "")
+          .encode("utf-8")
+      )
 
   compressed_content = bz2.compress(contents)
   return len(compressed_content)
