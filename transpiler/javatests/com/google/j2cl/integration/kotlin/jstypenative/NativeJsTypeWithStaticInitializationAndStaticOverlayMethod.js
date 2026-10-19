@@ -1,4 +1,4 @@
-// Copyright 2026 Google Inc.
+// Copyright 2017 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,19 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+goog.module('jstypenative.NativeJsTypeWithStaticInitializationAndStaticOverlayMethod');
 
-goog.module('jsinteroptests.NativeJsTypeTest.MyNativeJsType');
+class NativeJsTypeWithStaticInitializationAndStaticOverlayMethod {}
 
-class MyNativeJsType {
-  constructor() {}
-}
-
-MyNativeJsType.Inner = class {
-  /** @param {number} n */
-  constructor(n) {
-    /** @public {number} */
-    this.n = n;
-  }
-};
-
-exports = MyNativeJsType;
+exports = NativeJsTypeWithStaticInitializationAndStaticOverlayMethod;
