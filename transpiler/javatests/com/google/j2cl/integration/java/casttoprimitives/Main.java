@@ -17,6 +17,7 @@ package casttoprimitives;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
 @SuppressWarnings({"BoxedPrimitiveConstructor", "UseValueOf", "unchecked"})
@@ -478,9 +479,12 @@ public class Main {
         () -> {
           long unused = (long) (Object) i;
         });
-    assertThrowsClassCastException(
-        () -> {
-          int unused = (int) (Integer) (Comparable<?>) (Runnable) (Object) i;
-        });
+    // TODO(b/420648962): Does not throw on Kotlin/Native in -c opt mode.
+    if (!isJ2KtNative()) {
+      assertThrowsClassCastException(
+          () -> {
+            int unused = (int) (Integer) (Comparable<?>) (Runnable) (Object) i;
+          });
+    }
   }
 }
