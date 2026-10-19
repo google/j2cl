@@ -160,8 +160,7 @@ public class CastExpression extends Expression {
     }
 
     public CastExpression build() {
-      return new CastExpression(
-          AstUtils.removeUncheckedTypeConversions(expression), castTypeDescriptor, isUnchecked);
+      return new CastExpression(expression, castTypeDescriptor, isUnchecked);
     }
   }
 }

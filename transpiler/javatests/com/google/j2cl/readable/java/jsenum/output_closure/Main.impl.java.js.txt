@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('goog.math.Long');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let Optional = goog.forwardDeclare('java.util.Optional$impl');
@@ -29,7 +28,6 @@ let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
 let TemplatedField = goog.forwardDeclare('jsenum.Main.TemplatedField$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -277,7 +275,7 @@ class Main extends j_l_Object {
  }
  /** @nodts @return {number} */
  static m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int(/** ?ComparableJsEnum */ e) {
-  return 1 << (/**@type {!Integer}*/ ($Casts.$to(/**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(e, $Overlay)), Integer))).intValue();
+  return 1 << (/**@type {number}*/ (e));
  }
  /** @nodts */
  static $clinit() {
@@ -293,7 +291,6 @@ class Main extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Comparable = goog.module.get('java.lang.Comparable$impl');
-  Integer = goog.module.get('java.lang.Integer$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
   Optional = goog.module.get('java.util.Optional$impl');
@@ -315,7 +312,6 @@ class Main extends j_l_Object {
   TemplatedField = goog.module.get('jsenum.Main.TemplatedField$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }

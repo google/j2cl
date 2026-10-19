@@ -1058,10 +1058,6 @@ private open class BaseWithTVarargs<T> {
 private class DerivedWithoutJsEnumVarargs : BaseWithTVarargs<PlainJsEnum>() {}
 
 private fun testShiftByJsEnumOrdinal() {
-  // TODO(b/574644734): Enable in JavaScript once shifting by a JsEnum ordinal does not throw.
-  if (TestUtils.isJavaScript()) {
-    return
-  }
-
+  // Repro for b/574644734.
   assertEquals(4, 1 shl PlainJsEnum.TWO.ordinal)
 }

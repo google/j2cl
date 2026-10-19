@@ -22,7 +22,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals;
 import static com.google.j2cl.integration.testing.Asserts.fail;
-import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 import static jsenum.NativeEnums.nativeClinitCalled;
 
@@ -1106,11 +1105,7 @@ public class Main {
   private static class DerivedWithoutJsEnumVarargs extends BaseWithTVarargs<PlainJsEnum> {}
 
   private static void testShiftByJsEnumOrdinal() {
-    // TODO(b/574644734): Enable in JavaScript once shifting by a JsEnum ordinal does not throw.
-    if (isJavaScript()) {
-      return;
-    }
-
+    // Repro for b/574644734.
     assertEquals(4, 1 << PlainJsEnum.TWO.ordinal());
   }
 }
