@@ -34,6 +34,7 @@ fun main(vararg unused: String) {
   testEnumSubclassEnumeration()
   testNamedBridge()
   testRevealedOverrideJsType()
+  testJsTypeSubclassWithPropertiesFromOtherLibrary()
 }
 
 /** This concrete test class is *directly* annotated as a @JsType. */
@@ -253,4 +254,12 @@ private fun testNamedBridge() {
   //  SomeConcreteSubclass.class.getName().compareTo(SomeZAbstractSubclass.class.getName()) < 0);
   val o = SomeConcreteSubclass()
   assertEquals(o, o.m())
+}
+
+@JsType internal class JsTypeSubclassWithPropertiesFromOtherLibrary : JsTypeFromOtherLibrary(21)
+
+private fun testJsTypeSubclassWithPropertiesFromOtherLibrary() {
+  val o = JsTypeSubclassWithPropertiesFromOtherLibrary()
+  assertEquals(21, o.storedProperty)
+  assertEquals(42, o.computedProperty)
 }
