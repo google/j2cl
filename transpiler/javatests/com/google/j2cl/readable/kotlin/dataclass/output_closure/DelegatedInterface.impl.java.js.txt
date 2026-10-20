@@ -1,0 +1,33 @@
+goog.module('dataclass.DelegatedInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class DelegatedInterface {
+ /** @abstract @nodts @return {string} */
+ m_getDelegatedProp__java_lang_String() {}
+ /** @nodts */
+ static $clinit() {
+  DelegatedInterface.$clinit = () =>{};
+  DelegatedInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__dataclass_DelegatedInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__dataclass_DelegatedInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+DelegatedInterface.$markImplementor(/**@type {Function}*/ (DelegatedInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (DelegatedInterface), 'dataclass.DelegatedInterface');
+
+exports = DelegatedInterface;
+
+//# sourceMappingURL=DelegatedInterface.js.map

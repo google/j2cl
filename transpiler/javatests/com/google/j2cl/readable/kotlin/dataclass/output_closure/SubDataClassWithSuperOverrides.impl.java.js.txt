@@ -1,0 +1,89 @@
+goog.module('dataclass.SubDataClassWithSuperOverrides$impl');
+
+const BaseWithObjectMethod = goog.require('dataclass.BaseWithObjectMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class SubDataClassWithSuperOverrides extends BaseWithObjectMethod {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_intField__dataclass_SubDataClassWithSuperOverrides_ = 0;
+ }
+ /** @nodts @return {!SubDataClassWithSuperOverrides} */
+ static $create__int(/** number */ intField) {
+  SubDataClassWithSuperOverrides.$clinit();
+  let $instance = new SubDataClassWithSuperOverrides();
+  $instance.$ctor__dataclass_SubDataClassWithSuperOverrides__int__void(intField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_SubDataClassWithSuperOverrides__int__void(/** number */ intField) {
+  this.$ctor__dataclass_BaseWithObjectMethod__void();
+  this.f_intField__dataclass_SubDataClassWithSuperOverrides_ = intField;
+ }
+ /** @final @nodts @return {number} */
+ m_getIntField__int() {
+  return this.f_intField__dataclass_SubDataClassWithSuperOverrides_;
+ }
+ /** @final @nodts @return {number} */
+ m_component1__int() {
+  return this.f_intField__dataclass_SubDataClassWithSuperOverrides_;
+ }
+ /** @final @nodts @return {!SubDataClassWithSuperOverrides} */
+ m_copy__int__dataclass_SubDataClassWithSuperOverrides(/** number */ intField) {
+  return SubDataClassWithSuperOverrides.$create__int(intField);
+ }
+ /** @nodts @return {!SubDataClassWithSuperOverrides} */
+ static m_copy$default__dataclass_SubDataClassWithSuperOverrides__int__dataclass_SubDataClassWithSuperOverrides(/** !SubDataClassWithSuperOverrides */ $this, /** number= */ intField) {
+  let intField$defaulted = $Util.$isUndefined(intField) ? $this.f_intField__dataclass_SubDataClassWithSuperOverrides_ : intField;
+  return $this.m_copy__int__dataclass_SubDataClassWithSuperOverrides(intField$defaulted);
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_intField__dataclass_SubDataClassWithSuperOverrides_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!SubDataClassWithSuperOverrides.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!SubDataClassWithSuperOverrides}*/ (other);
+  if (this.f_intField__dataclass_SubDataClassWithSuperOverrides_ != tmp0_other_with_cast.f_intField__dataclass_SubDataClassWithSuperOverrides_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  SubDataClassWithSuperOverrides.$clinit = () =>{};
+  SubDataClassWithSuperOverrides.$loadModules();
+  BaseWithObjectMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubDataClassWithSuperOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(SubDataClassWithSuperOverrides, 'dataclass.SubDataClassWithSuperOverrides');
+
+exports = SubDataClassWithSuperOverrides;
+
+//# sourceMappingURL=SubDataClassWithSuperOverrides.js.map

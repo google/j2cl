@@ -1,0 +1,105 @@
+goog.module('dataclass.DataClassKt.$1LocalDataClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class $1LocalDataClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_intField__dataclass_DataClassKt_1LocalDataClass_ = 0;
+  /**@type {string} @nodts*/
+  this.$captured_capturedLocal__dataclass_DataClassKt_1LocalDataClass;
+  /**@type {number} @nodts*/
+  this.$captured_capturedParam__dataclass_DataClassKt_1LocalDataClass = 0;
+ }
+ /** @nodts @return {!$1LocalDataClass} */
+ static $create__java_lang_String__int__int(/** string */ $captured_capturedLocal, /** number */ $captured_capturedParam, /** number */ intField) {
+  $1LocalDataClass.$clinit();
+  let $instance = new $1LocalDataClass();
+  $instance.$ctor__dataclass_DataClassKt_1LocalDataClass__java_lang_String__int__int__void($captured_capturedLocal, $captured_capturedParam, intField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_DataClassKt_1LocalDataClass__java_lang_String__int__int__void(/** string */ $captured_capturedLocal, /** number */ $captured_capturedParam, /** number */ intField) {
+  this.$captured_capturedLocal__dataclass_DataClassKt_1LocalDataClass = $captured_capturedLocal;
+  this.$captured_capturedParam__dataclass_DataClassKt_1LocalDataClass = $captured_capturedParam;
+  this.$ctor__java_lang_Object__void();
+  this.f_intField__dataclass_DataClassKt_1LocalDataClass_ = intField;
+ }
+ /** @final @nodts @return {number} */
+ m_getIntField__int() {
+  return this.f_intField__dataclass_DataClassKt_1LocalDataClass_;
+ }
+ /** @final @nodts @return {string} */
+ m_describe__java_lang_String() {
+  return '' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.$captured_capturedLocal__dataclass_DataClassKt_1LocalDataClass) + ':' + this.$captured_capturedParam__dataclass_DataClassKt_1LocalDataClass + ':' + this.m_getIntField__int();
+ }
+ /** @final @nodts @return {number} */
+ m_component1__int() {
+  return this.f_intField__dataclass_DataClassKt_1LocalDataClass_;
+ }
+ /** @final @nodts @return {!$1LocalDataClass} */
+ m_copy__int__dataclass_DataClassKt_1LocalDataClass(/** number */ intField) {
+  return $1LocalDataClass.$create__java_lang_String__int__int(this.$captured_capturedLocal__dataclass_DataClassKt_1LocalDataClass, this.$captured_capturedParam__dataclass_DataClassKt_1LocalDataClass, intField);
+ }
+ /** @nodts @return {!$1LocalDataClass} */
+ static m_copy$default__dataclass_DataClassKt_1LocalDataClass__int__dataclass_DataClassKt_1LocalDataClass(/** !$1LocalDataClass */ $this, /** number= */ intField) {
+  let intField$defaulted = $Util.$isUndefined(intField) ? $this.f_intField__dataclass_DataClassKt_1LocalDataClass_ : intField;
+  return $this.m_copy__int__dataclass_DataClassKt_1LocalDataClass(intField$defaulted);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'LocalDataClass(' + 'intField=' + this.f_intField__dataclass_DataClassKt_1LocalDataClass_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_intField__dataclass_DataClassKt_1LocalDataClass_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!$1LocalDataClass.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!$1LocalDataClass}*/ (other);
+  if (this.f_intField__dataclass_DataClassKt_1LocalDataClass_ != tmp0_other_with_cast.f_intField__dataclass_DataClassKt_1LocalDataClass_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1LocalDataClass.$clinit = () =>{};
+  $1LocalDataClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1LocalDataClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata($1LocalDataClass, 'dataclass.DataClassKt$1LocalDataClass');
+
+exports = $1LocalDataClass;
+
+//# sourceMappingURL=DataClassKt$1LocalDataClass.js.map

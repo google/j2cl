@@ -1,0 +1,75 @@
+goog.module('dataclass.DataClassWithOverrides$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class DataClassWithOverrides extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {boolean} @nodts*/
+  this.f_booleanField__dataclass_DataClassWithOverrides_ = false;
+ }
+ /** @nodts @return {!DataClassWithOverrides} */
+ static $create__boolean(/** boolean */ booleanField) {
+  DataClassWithOverrides.$clinit();
+  let $instance = new DataClassWithOverrides();
+  $instance.$ctor__dataclass_DataClassWithOverrides__boolean__void(booleanField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_DataClassWithOverrides__boolean__void(/** boolean */ booleanField) {
+  this.$ctor__java_lang_Object__void();
+  this.f_booleanField__dataclass_DataClassWithOverrides_ = booleanField;
+ }
+ /** @final @nodts @return {boolean} */
+ m_getBooleanField__boolean() {
+  return this.f_booleanField__dataclass_DataClassWithOverrides_;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return 1;
+ }
+ /** @override @return {string} */
+ toString() {
+  return 'x';
+ }
+ /** @final @nodts @return {boolean} */
+ m_component1__boolean() {
+  return this.f_booleanField__dataclass_DataClassWithOverrides_;
+ }
+ /** @final @nodts @return {!DataClassWithOverrides} */
+ m_copy__boolean__dataclass_DataClassWithOverrides(/** boolean */ booleanField) {
+  return DataClassWithOverrides.$create__boolean(booleanField);
+ }
+ /** @nodts @return {!DataClassWithOverrides} */
+ static m_copy$default__dataclass_DataClassWithOverrides__boolean__dataclass_DataClassWithOverrides(/** !DataClassWithOverrides */ $this, /** boolean= */ booleanField) {
+  let booleanField$defaulted = $Util.$isUndefined(booleanField) ? $this.f_booleanField__dataclass_DataClassWithOverrides_ : booleanField;
+  return $this.m_copy__boolean__dataclass_DataClassWithOverrides(booleanField$defaulted);
+ }
+ /** @nodts */
+ static $clinit() {
+  DataClassWithOverrides.$clinit = () =>{};
+  DataClassWithOverrides.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DataClassWithOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(DataClassWithOverrides, 'dataclass.DataClassWithOverrides');
+
+exports = DataClassWithOverrides;
+
+//# sourceMappingURL=DataClassWithOverrides.js.map

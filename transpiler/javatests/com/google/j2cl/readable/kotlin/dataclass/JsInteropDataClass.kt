@@ -16,6 +16,7 @@
 package dataclass
 
 import jsinterop.annotations.JsIgnore
+import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 
@@ -26,6 +27,9 @@ import jsinterop.annotations.JsType
 @JsType data class JsTypeDataClassWithJsIgnore(@JsIgnore val foo: Int)
 
 data class DataClassWithJsProperty(@JsProperty(name = "renamedFoo") val foo: Int)
+
+@JsType
+data class JsTypeDataClassWithJsMethod(@get:JsMethod(name = "getRenamedFoo") internal val foo: Int)
 
 interface JvmRecordInterface {
   val z: String
@@ -53,4 +57,5 @@ fun testDataClassWithJsInterop() {
   val (foo2) = JsTypeDataClassWithJsIgnore(1)
   val foo3 = DataClassWithJsProperty(1).foo
   val (foo4) = DataClassWithJsProperty(1)
+  val foo5 = JsTypeDataClassWithJsMethod(1).foo
 }

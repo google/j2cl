@@ -1,0 +1,99 @@
+goog.module('dataclass.DataClassWithGenerics$impl');
+
+const ValueHolder = goog.require('dataclass.ValueHolder$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {ValueHolder<T>}
+ */
+class DataClassWithGenerics extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_backingValue__dataclass_DataClassWithGenerics_;
+ }
+ /** @nodts @template T @return {!DataClassWithGenerics<T>} */
+ static $create__java_lang_Object(/** T */ backingValue) {
+  DataClassWithGenerics.$clinit();
+  let $instance = new DataClassWithGenerics();
+  $instance.$ctor__dataclass_DataClassWithGenerics__java_lang_Object__void(backingValue);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_DataClassWithGenerics__java_lang_Object__void(/** T */ backingValue) {
+  this.$ctor__java_lang_Object__void();
+  this.f_backingValue__dataclass_DataClassWithGenerics_ = backingValue;
+ }
+ /** @override @nodts @return {T} */
+ m_getBackingValue__java_lang_Object() {
+  return this.f_backingValue__dataclass_DataClassWithGenerics_;
+ }
+ /** @final @nodts @return {T} */
+ m_component1__java_lang_Object() {
+  return this.f_backingValue__dataclass_DataClassWithGenerics_;
+ }
+ /** @final @nodts @return {!DataClassWithGenerics<T>} */
+ m_copy__java_lang_Object__dataclass_DataClassWithGenerics(/** T */ backingValue) {
+  return /**@type {!DataClassWithGenerics<T>}*/ (DataClassWithGenerics.$create__java_lang_Object(backingValue));
+ }
+ /** @nodts @template T_1 @return {!DataClassWithGenerics<T_1>} */
+ static m_copy$default__dataclass_DataClassWithGenerics__java_lang_Object__dataclass_DataClassWithGenerics(/** !DataClassWithGenerics<T_1> */ $this, /** T_1= */ backingValue) {
+  let backingValue$defaulted = $Util.$isUndefined(backingValue) ? $this.f_backingValue__dataclass_DataClassWithGenerics_ : backingValue;
+  return $this.m_copy__java_lang_Object__dataclass_DataClassWithGenerics(backingValue$defaulted);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'DataClassWithGenerics(' + 'backingValue=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_backingValue__dataclass_DataClassWithGenerics_) + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Equality.$same(this.f_backingValue__dataclass_DataClassWithGenerics_, null) ? 0 : $Objects.m_hashCode__java_lang_Object__int(this.f_backingValue__dataclass_DataClassWithGenerics_);
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!DataClassWithGenerics.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!DataClassWithGenerics<T>}*/ (other);
+  if (!Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_backingValue__dataclass_DataClassWithGenerics_, tmp0_other_with_cast.f_backingValue__dataclass_DataClassWithGenerics_)) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  DataClassWithGenerics.$clinit = () =>{};
+  DataClassWithGenerics.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DataClassWithGenerics;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+ValueHolder.$markImplementor(DataClassWithGenerics);
+$Util.$setClassMetadata(DataClassWithGenerics, 'dataclass.DataClassWithGenerics');
+
+exports = DataClassWithGenerics;
+
+//# sourceMappingURL=DataClassWithGenerics.js.map

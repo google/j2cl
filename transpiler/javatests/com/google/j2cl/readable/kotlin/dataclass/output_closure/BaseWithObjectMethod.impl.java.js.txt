@@ -1,0 +1,52 @@
+goog.module('dataclass.BaseWithObjectMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class BaseWithObjectMethod extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BaseWithObjectMethod} */
+ static $create__() {
+  BaseWithObjectMethod.$clinit();
+  let $instance = new BaseWithObjectMethod();
+  $instance.$ctor__dataclass_BaseWithObjectMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_BaseWithObjectMethod__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return 1;
+ }
+ /** @final @override @return {string} */
+ toString() {
+  return 'x';
+ }
+ /** @nodts */
+ static $clinit() {
+  BaseWithObjectMethod.$clinit = () =>{};
+  BaseWithObjectMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BaseWithObjectMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BaseWithObjectMethod, 'dataclass.BaseWithObjectMethod');
+
+exports = BaseWithObjectMethod;
+
+//# sourceMappingURL=BaseWithObjectMethod.js.map

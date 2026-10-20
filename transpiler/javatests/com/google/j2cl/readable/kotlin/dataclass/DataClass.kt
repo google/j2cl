@@ -15,7 +15,17 @@
  */
 package dataclass
 
-data class BasicDataClass(val foo: Int, val bar: Int = 10)
+data class DataClass(
+  val intField: Int,
+  val booleanField: Boolean,
+  var stringField: String,
+  val doubleField: Double,
+  val nullableField: Double?,
+  private val privateField: Int,
+  val defaultField: Int = 10,
+) {
+  constructor(intField: Int) : this(intField, true, "default", 0.0, null, 0)
+}
 
 interface InterfaceType {
   val a: Int
@@ -48,6 +58,8 @@ interface ValueHolder<T> {
 }
 
 data class IntValueHolder(override val backingValue: Int) : ValueHolder<Int>
+
+data class DataClassWithGenerics<T>(override val backingValue: T) : ValueHolder<T>
 
 data class ArrayMembers(private val a: IntArray, private val b: Array<String>)
 
@@ -101,9 +113,80 @@ data class JvmRecordDataClassOverridingEquals(val s: String) {
   }
 }
 
+open class Parent {
+  var parentField: Int = 0
+}
+
+data class DataClassWithFields(val intField: Int) : Parent() {
+  var bodyField: Int = 0
+
+  @JvmField var jvmField: Int = 1
+
+  lateinit var lateinitField: String
+
+  // With backing field
+  val lazyField by lazy { intField * 2 }
+
+  // Without backing field
+  val computedField: Int
+    get() = intField * 2
+
+  companion object {
+    var companionField: Int = 2
+  }
+}
+
+interface DelegatedInterface {
+  val delegatedProp: String
+}
+
+data class DelegatingDataClass(val intField: Int, var delegate: DelegatedInterface) :
+  DelegatedInterface by delegate
+
+data class DataClassWithOverrides(val booleanField: Boolean) {
+  override fun equals(other: Any?): Boolean {
+    return false
+  }
+
+  override fun hashCode(): Int {
+    return 1
+  }
+
+  override fun toString(): String {
+    return "x"
+  }
+}
+
+open class BaseWithObjectMethod {
+  // Kotlin synthesizes equals/hashCode/toString when superclass overrides are open.
+  override fun equals(other: Any?): Boolean {
+    return false
+  }
+
+  override fun hashCode(): Int {
+    return 1
+  }
+
+  // Kotlin does not synthesize equals/hashCode/toString when superclass overrides are final.
+  final override fun toString(): String {
+    return "x"
+  }
+}
+
+data class SubDataClassWithSuperOverrides(val intField: Int) : BaseWithObjectMethod()
+
+fun testLocalDataClass(capturedParam: Int) {
+  val capturedLocal = "captured"
+  data class LocalDataClass(val intField: Int) {
+    fun describe() = "$capturedLocal:$capturedParam:$intField"
+  }
+  val local = LocalDataClass(capturedParam)
+}
+
 fun testDataClass() {
-  val (foo) = BasicDataClass(1)
+  val (intField, booleanField, stringField, doubleField, nullableField) = DataClass(1)
   val (a, b, c) = PolymorphicDataType(1, 2, 3)
+  DataClassWithGenerics(10).backingValue
   IntValueHolder(10).backingValue
   val (f, z) = JvmRecordDataClass(1, "a")
 }

@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let DataClassWithJsProperty = goog.forwardDeclare('dataclass.DataClassWithJsProperty$impl');
 let JsTypeDataClass = goog.forwardDeclare('dataclass.JsTypeDataClass$impl');
 let JsTypeDataClassWithJsIgnore = goog.forwardDeclare('dataclass.JsTypeDataClassWithJsIgnore$impl');
+let JsTypeDataClassWithJsMethod = goog.forwardDeclare('dataclass.JsTypeDataClassWithJsMethod$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
 
 /**
@@ -36,6 +37,7 @@ class JsInteropDataClassKt extends j_l_Object {
   let foo3 = DataClassWithJsProperty.$create__int(1).renamedFoo;
   let destruct_1 = DataClassWithJsProperty.$create__int(1);
   let foo4 = destruct_1.m_component1__int();
+  let foo5 = new JsTypeDataClassWithJsMethod(1).getRenamedFoo();
  }
  /** @nodts */
  static $clinit() {
@@ -53,6 +55,7 @@ class JsInteropDataClassKt extends j_l_Object {
   DataClassWithJsProperty = goog.module.get('dataclass.DataClassWithJsProperty$impl');
   JsTypeDataClass = goog.module.get('dataclass.JsTypeDataClass$impl');
   JsTypeDataClassWithJsIgnore = goog.module.get('dataclass.JsTypeDataClassWithJsIgnore$impl');
+  JsTypeDataClassWithJsMethod = goog.module.get('dataclass.JsTypeDataClassWithJsMethod$impl');
  }
 }
 $Util.$setClassMetadata(JsInteropDataClassKt, 'dataclass.JsInteropDataClassKt');

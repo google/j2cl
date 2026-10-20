@@ -1,0 +1,163 @@
+goog.module('dataclass.DataClassWithFields$impl');
+
+const Parent = goog.require('dataclass.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Lazy = goog.forwardDeclare('kotlin.Lazy$impl');
+let LazyKt = goog.forwardDeclare('kotlin.LazyKt$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
+let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
+let MutableKProperty1Impl = goog.forwardDeclare('kotlin.jvm.internal.MutableKProperty1Impl$impl');
+let KProperty = goog.forwardDeclare('kotlin.reflect.KProperty$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class DataClassWithFields extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_intField__dataclass_DataClassWithFields_ = 0;
+  /**@type {number} @nodts*/
+  this.f_bodyField__dataclass_DataClassWithFields_ = 0;
+  /**@type {number} @nodts*/
+  this.f_jvmField__dataclass_DataClassWithFields = 0;
+  /**@type {?string} @nodts*/
+  this.f_lateinitField__dataclass_DataClassWithFields;
+  /**@type {!Lazy<?>} @nodts*/
+  this.f_lazyField$delegate__dataclass_DataClassWithFields_;
+ }
+ /** @nodts @return {!DataClassWithFields} */
+ static $create__int(/** number */ intField) {
+  DataClassWithFields.$clinit();
+  let $instance = new DataClassWithFields();
+  $instance.$ctor__dataclass_DataClassWithFields__int__void(intField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_DataClassWithFields__int__void(/** number */ intField) {
+  this.$ctor__dataclass_Parent__void();
+  this.f_intField__dataclass_DataClassWithFields_ = intField;
+  this.f_jvmField__dataclass_DataClassWithFields = 1;
+  this.f_lazyField$delegate__dataclass_DataClassWithFields_ = LazyKt.m_lazy__kotlin_jvm_functions_Function0__kotlin_Lazy(Function0.$adapt(/**  @return {!Integer}*/ (() =>{
+   return Integer.valueOf(Math.imul(this.m_getIntField__int(), 2));
+  })));
+ }
+ /** @final @nodts @return {number} */
+ m_getIntField__int() {
+  return this.f_intField__dataclass_DataClassWithFields_;
+ }
+ /** @final @nodts @return {number} */
+ m_getBodyField__int() {
+  return this.f_bodyField__dataclass_DataClassWithFields_;
+ }
+ /** @final @nodts */
+ m_setBodyField__int__void(/** number */ set__) {
+  this.f_bodyField__dataclass_DataClassWithFields_ = set__;
+ }
+ /** @final @nodts @return {string} */
+ m_getLateinitField__java_lang_String() {
+  return /**@type {string}*/ ($Casts.$to(Intrinsics.m_checkInitialized__java_lang_Object__java_lang_Object(this.f_lateinitField__dataclass_DataClassWithFields), j_l_String));
+ }
+ /** @final @nodts */
+ m_setLateinitField__java_lang_String__void(/** string */ set__) {
+  this.f_lateinitField__dataclass_DataClassWithFields = set__;
+ }
+ /** @final @nodts @return {number} */
+ m_getLazyField__int() {
+  let tmp4 = /**@type {!KProperty<*>}*/ (MutableKProperty1Impl.$create__kotlin_jvm_functions_Function1__kotlin_jvm_functions_Function2(Function1.$adapt(/**  @return {!Integer}*/ ((/** !DataClassWithFields */ p0) =>{
+   let p0_1 = /**@type {!DataClassWithFields}*/ ($Casts.$to(p0, DataClassWithFields));
+   return Integer.valueOf(p0_1.m_getLazyField__int());
+  })), null));
+  let property = tmp4;
+  return (/**@type {!Integer}*/ ($Casts.$to((/**@type {!Lazy<*>}*/ (this.f_lazyField$delegate__dataclass_DataClassWithFields_)).m_getValue__java_lang_Object(), Integer))).intValue();
+ }
+ /** @final @nodts @return {number} */
+ m_getComputedField__int() {
+  return Math.imul(this.m_getIntField__int(), 2);
+ }
+ /** @final @nodts @return {number} */
+ m_component1__int() {
+  return this.f_intField__dataclass_DataClassWithFields_;
+ }
+ /** @final @nodts @return {!DataClassWithFields} */
+ m_copy__int__dataclass_DataClassWithFields(/** number */ intField) {
+  return DataClassWithFields.$create__int(intField);
+ }
+ /** @nodts @return {!DataClassWithFields} */
+ static m_copy$default__dataclass_DataClassWithFields__int__dataclass_DataClassWithFields(/** !DataClassWithFields */ $this, /** number= */ intField) {
+  let intField$defaulted = $Util.$isUndefined(intField) ? $this.f_intField__dataclass_DataClassWithFields_ : intField;
+  return $this.m_copy__int__dataclass_DataClassWithFields(intField$defaulted);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'DataClassWithFields(' + 'intField=' + this.f_intField__dataclass_DataClassWithFields_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_intField__dataclass_DataClassWithFields_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!DataClassWithFields.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!DataClassWithFields}*/ (other);
+  if (this.f_intField__dataclass_DataClassWithFields_ != tmp0_other_with_cast.f_intField__dataclass_DataClassWithFields_) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts @return {number} */
+ static m_getCompanionField__int() {
+  DataClassWithFields.$clinit();
+  return DataClassWithFields.f_companionField__dataclass_DataClassWithFields_;
+ }
+ /** @nodts */
+ static m_setCompanionField__int__void(/** number */ set__) {
+  DataClassWithFields.$clinit();
+  DataClassWithFields.f_companionField__dataclass_DataClassWithFields_ = set__;
+ }
+ /** @nodts */
+ static $clinit() {
+  DataClassWithFields.$clinit = () =>{};
+  DataClassWithFields.$loadModules();
+  Parent.$clinit();
+  DataClassWithFields.f_companionField__dataclass_DataClassWithFields_ = 2;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DataClassWithFields;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  LazyKt = goog.module.get('kotlin.LazyKt$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
+  MutableKProperty1Impl = goog.module.get('kotlin.jvm.internal.MutableKProperty1Impl$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+/**@type {number} @nodts*/
+DataClassWithFields.f_companionField__dataclass_DataClassWithFields_ = 0;
+$Util.$setClassMetadata(DataClassWithFields, 'dataclass.DataClassWithFields');
+
+exports = DataClassWithFields;
+
+//# sourceMappingURL=DataClassWithFields.js.map
