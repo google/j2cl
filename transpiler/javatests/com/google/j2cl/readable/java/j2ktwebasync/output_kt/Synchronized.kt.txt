@@ -1,0 +1,99 @@
+// Generated from "j2ktwebasync/Synchronized.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktwebasync
+
+import javaemul.lang.*
+import com.google.calendar.v2a.shared.async.AsyncLock
+import com.google.calendar.v2a.shared.async.AsyncLockable
+import javaemul.lang.J2ktMonitor
+import kotlin.Suppress
+import kotlin.Unit
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.synchronized
+
+open class Synchronized: J2ktMonitor() {
+ @JvmField
+ var lock: Synchronized? = Synchronized()
+ 
+ @JvmField
+ var asyncLock: AsyncLock? = AsyncLock()
+ 
+ open fun doNothing() {
+  synchronized<Unit>(this.lock!!) {
+   Synchronized.call()
+  }
+ }
+ 
+ open fun doSomething() {
+  synchronized<Unit>(this.asyncLock!!) {
+   Synchronized.asyncCall()
+  }
+ }
+ 
+ open fun doNothing2() {
+  synchronized<Unit>(this) {
+   Synchronized.call()
+  }
+ }
+ 
+ open fun nestedSynchronization() {
+  synchronized<Unit>(this) {
+   synchronized<Unit>(this.asyncLock!!) {
+    Synchronized.call()
+   }
+   synchronized<Unit>(this.lock!!) {
+    Synchronized.call()
+   }
+  }
+ }
+ 
+ companion object {
+  @JvmStatic
+  fun call() {}
+  
+  @JvmStatic
+  fun asyncCall() {}
+ }
+ 
+ open class AsyncSynchronized: AsyncLockable() {
+  open fun doSomething() {
+   synchronized<Unit>(this) {
+    Synchronized.asyncCall()
+   }
+  }
+  
+  open fun doNothing() {
+   synchronized<Unit>(this) {
+    Synchronized.call()
+   }
+  }
+  
+  open fun nestedSynchronization() {
+   synchronized<Unit>(this) {
+    synchronized<Unit>(this) {
+     Synchronized.asyncCall()
+    }
+    synchronized<Unit>(this) {
+     Synchronized.call()
+    }
+   }
+  }
+ }
+}

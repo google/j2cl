@@ -1,0 +1,70 @@
+// Generated from "j2ktwebasync/Lambda.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktwebasync
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.Suppress
+
+open class Lambda {
+ open fun testVoid() {
+  val instance1: VoidInterface = VoidInterface {}
+  val instance2: VoidInterface = VoidInterface {
+   this.syncVoidMethod()
+  }
+  val instance4: VoidInterface = VoidInterface {
+   this.asyncVoidMethod()
+  }
+  val instance5: VoidInterface = VoidInterface {
+   this.asyncVoidMethod()
+  }
+  val instance6: VoidInterface = VoidInterface {
+   this.syncVoidMethod()
+  }
+  val instance7: VoidInterface = VoidInterface {
+   this.asyncVoidMethod()
+  }
+ }
+ 
+ open fun testInt() {
+  val instance1: IntegerInterface = IntegerInterface { i: Int -> i }
+  val instance2: IntegerInterface = IntegerInterface { i_1: Int -> this.syncIntMethod(i_1) }
+  val instance4: IntegerInterface = IntegerInterface { i_2: Int -> this.asyncIntMethod(i_2) }
+  val instance5: IntegerInterface = IntegerInterface { i_3: Int -> this.asyncIntMethod(i_3) }
+  val instance6: IntegerInterface = IntegerInterface { i_4: Int -> this.syncIntMethod(i_4) }
+  val instance7: IntegerInterface = IntegerInterface { i_5: Int -> this.asyncIntMethod(i_5) }
+  val instance8: IntegerInterface = IntegerInterface { i_6: Int -> 5 }
+ }
+ 
+ open fun syncVoidMethod() {}
+ 
+ open fun asyncVoidMethod() {}
+ 
+ open fun syncIntMethod(i: Int): Int = i
+ 
+ open fun asyncIntMethod(i: Int): Int = i
+ 
+ fun interface VoidInterface {
+  fun methodVoid()
+ }
+ 
+ fun interface IntegerInterface {
+  fun methodInt(i: Int): Int
+ }
+}

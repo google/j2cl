@@ -1,0 +1,66 @@
+// Generated from "j2ktwebasync/GenerateFuture.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2ktwebasync
+
+import javaemul.lang.*
+import com.google.calendar.v2a.shared.async.AsyncAwait
+import com.google.common.util.concurrent.ListenableFuture
+import com.google.j2objc.annotations.ObjectiveCKmpMethod
+import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsType
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+
+open class GenerateFuture {
+ open fun explicitFuture(id: String?): String? = id
+ 
+ open fun voidFuture() {}
+ 
+ open fun awaitFuture(future: ListenableFuture<String?>?): String? = AsyncAwait.await<String?>(
+  future!!,
+ )
+ 
+ fun interface AsyncInterface {
+  fun compute(x: Int): Int
+ }
+ 
+ open class AsyncInterfaceImpl: AsyncInterface {
+  override fun compute(x: Int): Int = x
+ }
+ 
+ @JsType
+ fun interface JsTypeService {
+  @JsMethod(name = "customName")
+  fun getData(id: String?): String?
+ }
+ 
+ @JsFunction
+ fun interface AsyncJsFunction {
+  fun run(input: String?)
+ }
+ 
+ open class KmpAdapter
+ 
+ open class KmpService {
+  @ObjectiveCKmpMethod(selector = "customSelector:", adapter = KmpAdapter::class)
+  open fun getData(id: String?): String? = id
+ }
+}
