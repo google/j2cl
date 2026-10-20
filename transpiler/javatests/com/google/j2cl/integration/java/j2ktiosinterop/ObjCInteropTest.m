@@ -27,6 +27,9 @@
 #import "j2ktiosinterop/PropertyMethodOverride.h"
 #import "j2ktiosinterop/SpecialNames.h"
 #import "j2ktiosinterop/TestInterface.h"
+#import "j2ktiosinterop/TransitiveThrowsImpl.h"
+#import "j2ktiosinterop/TransitiveThrowsSubInterface.h"
+#import "j2ktiosinterop/TransitiveThrowsSuperInterface.h"
 #include "java/lang/Character.h"
 #include "java/lang/ClassCastException.h"
 #include "java/lang/Double.h"
@@ -906,6 +909,20 @@
       create_J2ktiosinteropDataClassRecord_initWithInt_withNSString_(123, @"foo");
   XCTAssertEqualObjects(record, record2);
   XCTAssertEqual(record.hash, record2.hash);
+}
+
+- (void)testTransitiveInterfaceThrowsAdapter {
+  J2ktiosinteropTransitiveThrowsImpl *impl = create_J2ktiosinteropTransitiveThrowsImpl_init();
+
+  XCTAssertTrue([impl respondsToSelector:@selector(superThrowsMethodAndReturnError:)]);
+  XCTAssertTrue([impl respondsToSelector:@selector(superThrowsMethodWithNSString:error:)]);
+
+  NSError *error = nil;
+  XCTAssertTrue([impl superThrowsMethodAndReturnError:&error]);
+  XCTAssertNil(error);
+
+  XCTAssertTrue([impl superThrowsMethodWithNSString:@"test" error:&error]);
+  XCTAssertNil(error);
 }
 
 @end
