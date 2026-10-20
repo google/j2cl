@@ -53,6 +53,9 @@ import org.jetbrains.org.objectweb.asm.Type
 
 /** The list of lowering passes to run in execution order. */
 private val loweringPhase = loweringPhase {
+  // Rewrite the SAM conversions of property references into references to their getters, as
+  // `UpgradeCallableReferences` leaves them as SAM conversions.
+  perFileLowering(::SamConversionOfPropertyReferenceLowering)
   // Remove temporary variables holding pure argument values introduced by function inlining and
   // substitute their reads directly.
   perFileLowering(::InlinedPureArgumentsLowering)
