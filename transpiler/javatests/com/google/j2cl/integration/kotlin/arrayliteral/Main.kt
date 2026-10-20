@@ -28,6 +28,8 @@ fun main(vararg unused: String) {
   testOneDimensionalLiteral_subclassInInitializer()
   testOneDimensionalLiteral_withInitializer()
   testOneDimensionalLiteral_withInitializerThatEscapes()
+  testOneDimensionalLiteral_withInitializerThatBreaksOrContinues()
+  testOneDimensionalLiteral_withFunctionReferenceInitializer()
   testTwoDimensionalLiteral()
   testTwoDimensionalLiteral_partial()
   testTwoDimensionalLiteral_unbalanced()
@@ -153,6 +155,27 @@ private fun testOneDimensionalLiteral_withInitializer() {
 
 private fun testOneDimensionalLiteral_withInitializerThatEscapes() {
   assertTrue(createArrayThatEscapes() == 100)
+}
+
+private fun testOneDimensionalLiteral_withInitializerThatBreaksOrContinues() {
+  // TODO(b/575319696): Uncomment when non-local break and continue are supported in array
+  // initializers.
+  // for (i in 0 until 2) {
+  //   IntArray(1) { break }
+  //   fail()
+  // }
+  // for (i in 0 until 2) {
+  //   Array<Int>(1) { continue }
+  //   fail()
+  // }
+}
+
+private fun testOneDimensionalLiteral_withFunctionReferenceInitializer() {
+  val strings = Array(2, Int::toString)
+  assertTrue(strings.contentEquals(arrayOf("0", "1")))
+
+  val chars = Array(2, "ab"::get)
+  assertTrue(chars.contentEquals(arrayOf('a', 'b')))
 }
 
 private fun testTwoDimensionalLiteral() {

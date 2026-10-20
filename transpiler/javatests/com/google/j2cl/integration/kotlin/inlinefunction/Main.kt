@@ -56,6 +56,7 @@ fun main(vararg unused: String) {
   testBreakContinue()
   testInlineWithVararg()
   testProjectedReceiverTypeArgument()
+  testInlineFunctionWithArrayInitializer()
 }
 
 class MyClass(var f: Int) {
@@ -660,4 +661,49 @@ private fun testProjectedReceiverTypeArgument() {
 
   val outSubBox: SubBox<out Number> = SubBox<Int>(42)
   assertTrue(42 == outSubBox.get())
+}
+
+inline fun <reified T> inlineFunctionWithArrayInitializer(size: Int, init: (Int) -> T): Array<T> =
+  Array(size) { init(it) }
+
+private fun nonLocalReturnFromArrayInitializer(): Int {
+  inlineFunctionWithArrayInitializer<Int>(1) {
+    return 1
+  }
+  return 0
+}
+
+private fun nonLocalReturnFromArrayInitializerFromDeps(): Int {
+  inlineFunctionFromDepsWithArrayInitializer<Int>(1) {
+    return 1
+  }
+  return 0
+}
+
+private fun testInlineFunctionWithArrayInitializer() {
+  val strings = inlineFunctionWithArrayInitializer(2) { "$it" }
+  assertTrue(strings.contentEquals(arrayOf("0", "1")))
+
+  val stringsFromDeps = inlineFunctionFromDepsWithArrayInitializer(2) { "$it" }
+  assertTrue(stringsFromDeps.contentEquals(arrayOf("0", "1")))
+
+  assertTrue(
+    inlineFunctionFromDepsWithArrayInitializer(2, Int::toString).contentEquals(arrayOf("0", "1"))
+  )
+
+  // TODO(b/575318947): Uncomment when a non-local return forwarded to an array initializer by an
+  // inline function returns from the enclosing function.
+  // assertEquals(1, nonLocalReturnFromArrayInitializer())
+  // assertEquals(1, nonLocalReturnFromArrayInitializerFromDeps())
+
+  // TODO(b/575319696): Uncomment when non-local break and continue are supported in array
+  // initializers.
+  // for (i in 0 until 2) {
+  //   inlineFunctionWithArrayInitializer<Int>(1) { break }
+  //   fail()
+  // }
+  // for (i in 0 until 2) {
+  //   inlineFunctionFromDepsWithArrayInitializer<Int>(1) { continue }
+  //   fail()
+  // }
 }

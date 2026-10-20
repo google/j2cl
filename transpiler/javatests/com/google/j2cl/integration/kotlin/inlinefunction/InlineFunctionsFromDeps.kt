@@ -44,3 +44,8 @@ class OuterClass(private val outerValue: Int) {
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun inlineFunctionFromDepsWithAnonymousObject(): Any = object {}
+
+inline fun <reified T> inlineFunctionFromDepsWithArrayInitializer(
+  size: Int,
+  init: (Int) -> T,
+): Array<T> = Array(size) { init(it) }
