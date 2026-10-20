@@ -949,7 +949,7 @@ internal class KotlinEnvironment(
   }
 
   fun IrClass.getDeclaredFields(): Set<IrField> {
-    val fields = declarations.filterIsInstance<IrField>().filter { !it.isSynthetic }.toMutableSet()
+    val fields = declarations.filterIsInstance<IrField>().toMutableSet()
 
     val companion = declarations.filterIsInstance<IrClass>().firstOrNull(IrClass::isCompanion)
     if (companion != null) {
