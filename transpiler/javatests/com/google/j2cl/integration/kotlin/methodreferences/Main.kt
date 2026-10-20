@@ -20,6 +20,7 @@ import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isJvm
 
 fun main(vararg unused: String) {
   testConstructorReferences()
@@ -35,6 +36,9 @@ fun main(vararg unused: String) {
   testInlineFunctionReferences()
   testVarargs()
   testLocalFunctionReferences()
+  testSamConversionOfFunctionValues()
+  testSamConversionEquality()
+  testSamConversionOfPropertyReferenceEquality()
 }
 
 fun interface Function<I, O> {
@@ -598,4 +602,68 @@ fun testLocalFunctionReferences() {
 
   fun String.localExtensionFunction() = this + "bar"
   assertEquals("foobar", Producer<String>("foo"::localExtensionFunction).produce())
+}
+
+private fun testSamConversionOfFunctionValues() {
+  sequenceNumber = 0
+  val functionReference = ::returnSequenceAsInt
+  // TODO(b/575820667): Uncomment when the SAM conversion of function values is supported.
+  // assertEquals(0, Producer(functionReference).produce())
+
+  val propertyReference = ::sequenceNumber
+  // TODO(b/575820667): Uncomment when the SAM conversion of function values is supported.
+  // assertEquals(1, Producer(propertyReference).produce())
+
+  val lambda = { 1 }
+  // TODO(b/575820667): Uncomment when the SAM conversion of function values is supported.
+  // val producer = Producer(lambda)
+  // assertEquals(1, producer.produce())
+  // // The SAM wrapper of a function value delegates `equals` and `hashCode` to the value.
+  // assertTrue(producer == Producer(lambda))
+  // assertTrue(producer.hashCode() == Producer(lambda).hashCode())
+  // assertTrue(Producer(functionReference) == Producer(::returnSequenceAsInt))
+}
+
+private fun testSamConversionEquality() {
+  // The SAM wrappers of different callable references, or of the same callable reference bound to
+  // different receivers, are not equal.
+  assertFalse(Producer(::returnSequenceAsInt) == Producer(::sequenceNumber))
+  assertFalse(
+    Producer(Outer.SomeObject()::isInstance0) == Producer(Outer.SomeObject()::isInstance0)
+  )
+
+  val instance = Outer.SomeObject()
+  // TODO(b/575820491): Remove the isJvm branching when the SAM wrappers of callable references
+  // implement `equals` and `hashCode`.
+  if (isJvm()) {
+    assertTrue(Producer(::returnSequenceAsInt) == Producer(::returnSequenceAsInt))
+    assertTrue(
+      Producer(::returnSequenceAsInt).hashCode() == Producer(::returnSequenceAsInt).hashCode()
+    )
+    assertTrue(Producer(::sequenceNumber) == Producer(::sequenceNumber))
+    assertTrue(Producer(::sequenceNumber).hashCode() == Producer(::sequenceNumber).hashCode())
+    assertTrue(Producer(instance::isInstance0) == Producer(instance::isInstance0))
+    assertTrue(
+      Producer(instance::someObjectInstanceNumber) == Producer(instance::someObjectInstanceNumber)
+    )
+  } else {
+    assertFalse(Producer(::returnSequenceAsInt) == Producer(::returnSequenceAsInt))
+    assertFalse(
+      Producer(::returnSequenceAsInt).hashCode() == Producer(::returnSequenceAsInt).hashCode()
+    )
+    assertFalse(Producer(::sequenceNumber) == Producer(::sequenceNumber))
+    assertFalse(Producer(::sequenceNumber).hashCode() == Producer(::sequenceNumber).hashCode())
+    assertFalse(Producer(instance::isInstance0) == Producer(instance::isInstance0))
+    assertFalse(
+      Producer(instance::someObjectInstanceNumber) == Producer(instance::someObjectInstanceNumber)
+    )
+  }
+}
+
+private fun testSamConversionOfPropertyReferenceEquality() {
+  val propertyReference = ::sequenceNumber
+  // TODO(b/575820667, b/575822395): Uncomment when the SAM conversion of function values is
+  // supported, and the SAM conversion of a property reference preserves the identity of the
+  // property.
+  // assertTrue(Producer(propertyReference) == Producer(::sequenceNumber))
 }
