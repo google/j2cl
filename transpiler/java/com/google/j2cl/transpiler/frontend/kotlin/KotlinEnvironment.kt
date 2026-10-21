@@ -54,6 +54,7 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isCapturingEnclosingInstanc
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isClassType
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFinal
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isFunctionalInterface
+import com.google.j2cl.transpiler.frontend.kotlin.ir.isJvmField
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isKotlinDataClass
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isPropertyAccessor
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isSealed
@@ -774,7 +775,7 @@ internal class KotlinEnvironment(
         .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor(irField))
         .setName(irField.sanitizedName)
         .setTypeDescriptor(fieldTypeDescriptor)
-        .setVisibility(irField.j2clVisibility)
+        .setVisibility(irField.j2clFieldVisibility)
         .setCompileTimeConstant(constantValue != null)
         .setConstantValue(constantValue)
         .setFinal(irField.isFinal)
@@ -788,6 +789,25 @@ internal class KotlinEnvironment(
         .build()
     }
   }
+
+  // TODO(b/575428700): Use `j2clVisibility` directly once FIR2IR gives the backing fields of the
+  // properties of the dependencies their actual visibility.
+  /**
+   * The visibility of the field in the J2CL type model.
+   *
+   * FIR2IR gives the backing fields of the properties of the dependencies the visibility of their
+   * property, but backing fields are private unless they are `@JvmField` or `const`.
+   */
+  private val IrField.j2clFieldVisibility: Visibility
+    get() =
+      if (
+        correspondingPropertySymbol?.owner?.origin ==
+          IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB && !isJvmField
+      ) {
+        Visibility.PRIVATE
+      } else {
+        j2clVisibility
+      }
 
   fun getDeclaredFieldDescriptor(irEnumEntry: IrEnumEntry): FieldDescriptor =
     FieldDescriptor.builder()

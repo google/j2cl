@@ -16,7 +16,10 @@ integration_library(
 
 integration_library(
     name = "externalinlinefunction",
-    srcs = ["InlineFunctionsFromDeps.kt"],
+    srcs = [
+        "InlineFunctionsFromDeps.kt",
+        "InlineFunctionsInRenamedFileFacade.kt",
+    ],
     deps = [":java_library"],
 )
 

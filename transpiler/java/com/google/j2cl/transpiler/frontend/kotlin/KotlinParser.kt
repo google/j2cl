@@ -97,8 +97,7 @@ class KotlinParser(private val problems: Problems) {
 
     val messageCollector = problems.createMessageCollector()
 
-    val compilationResult =
-      K2JKlibCompiler().compileKlibAndDeserializeIr(arguments, messageCollector, disposable)
+    val compilationResult = K2JKlibCompiler().compileToIr(arguments, messageCollector, disposable)
     problems.abortIfHasErrors()
 
     checkNotNull(compilationResult) {
@@ -198,11 +197,6 @@ class KotlinParser(private val problems: Problems) {
           .map { it.key }
           .toTypedArray()
       arguments.freeArgs = fileInfoByAbsoluteSourcePath.keys.toList()
-
-      // TODO(b/505790341): Remove temporary file once everything is done in memory.
-      // Temporary file used to store the intermediate klib file.
-      val klibDirectory = options.output.createTempDirectory("_klib")
-      arguments.destination = klibDirectory.resolve("tmp.klib").toString()
     }
   }
 }

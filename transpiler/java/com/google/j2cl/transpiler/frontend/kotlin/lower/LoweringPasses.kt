@@ -61,19 +61,18 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::InlinedPureArgumentsLowering)
   // Remove expect declarations, the actuals will be used instead.
   moduleLowering(::ExpectDeclarationsRemoveLowering)
-  // The K2 frontend does not create a FileKt class  for referenced/ top-level members defined in
-  // another compilation unit. Instead, it attaches them to an IrPackageFragment.
-  // This lowering addresses this by creating the necessary file class and moving the top-level
-  // members into it. This is needed to ensure the serialized IR for top-level inline functions
-  // can be deserialized correctly. (The serialized IR being part of the metadata of the enclosing
-  // class after Kotlin/JVM compilation.)
-  moduleLowering(::ExternalPackageParentPatcherLowering)
   // Remove assignments to definedExternally.
   moduleLowering(::DefinedExternallyLowering)
   // Remove typealias declarations from the IR.
   perFileLowering(::StripTypeAliasDeclarationsLowering)
   // Put file level function and property declaration into a class.
   moduleLowering(fileClassLoweringFactory)
+  // The K2 frontend does not create a FileKt class  for referenced/ top-level members defined in
+  // another compilation unit. Instead, it attaches them to an IrPackageFragment.
+  // This lowering addresses this by creating the necessary file class and moving the top-level
+  // members into it. It runs after the file class lowering, so that the top-level members of the
+  // current compilation unit are already in their file class.
+  moduleLowering(::ExternalPackageParentPatcherLowering)
   // Invent names for local classes and anonymous objects. Later passes may require all classes
   // to have a name for computing function signature.
   perFileLowering(jvmInventNamesForLocalClassesFactory)

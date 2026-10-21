@@ -4,6 +4,8 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('goog.math.Long');
+let A = goog.forwardDeclare('inlinefunction.A$impl');
+let B = goog.forwardDeclare('inlinefunction.A.B$impl');
 let ChildInAnotherLibrary = goog.forwardDeclare('inlinefunction.ChildInAnotherLibrary$impl');
 let ChildOfJavaClass = goog.forwardDeclare('inlinefunction.ChildOfJavaClass$impl');
 let ClassWithCompanion = goog.forwardDeclare('inlinefunction.ClassWithCompanion$impl');
@@ -619,9 +621,13 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts */
  static m_testInlineFunctionsRequiringSyntheticAccessors__void() {
   InlineFunctionKt.$clinit();
-  let tmp0 = ClassWithPrivateMembers.$create__();
+  let tmp0 = B.$create__inlinefunction_A(A.$create__());
   let this_1 = tmp0;
-  ClassWithPrivateMembers.m_access$_get_privateProperty___inlinefunction_ClassWithPrivateMembers__int(this_1) + ClassWithPrivateMembers.m_access$privateFunction__inlinefunction_ClassWithPrivateMembers__int(this_1) | 0;
+  B.m_access$_outer_this_0___inlinefunction_A_B__inlinefunction_A(this_1).m_getX__int();
+  InlineFunctionsInAnotherLibraryKt.m_access$_get_privateTopLevelProperty_$tInlineFunctionsInAnotherLibraryKt__int() + InlineFunctionsInAnotherLibraryKt.m_access$privateTopLevelFunction$tInlineFunctionsInAnotherLibraryKt__int() | 0;
+  let tmp0_1 = ClassWithPrivateMembers.$create__();
+  let this_2 = tmp0_1;
+  ClassWithPrivateMembers.m_access$_get_privateProperty___inlinefunction_ClassWithPrivateMembers__int(this_2) + ClassWithPrivateMembers.m_access$privateFunction__inlinefunction_ClassWithPrivateMembers__int(this_2) | 0;
  }
  /** @nodts */
  static m_testInlineFunctionUsingJavaMembers__void() {
@@ -684,6 +690,8 @@ class InlineFunctionKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Long = goog.module.get('goog.math.Long');
+  A = goog.module.get('inlinefunction.A$impl');
+  B = goog.module.get('inlinefunction.A.B$impl');
   ChildInAnotherLibrary = goog.module.get('inlinefunction.ChildInAnotherLibrary$impl');
   ChildOfJavaClass = goog.module.get('inlinefunction.ChildOfJavaClass$impl');
   ClassWithCompanion = goog.module.get('inlinefunction.ClassWithCompanion$impl');

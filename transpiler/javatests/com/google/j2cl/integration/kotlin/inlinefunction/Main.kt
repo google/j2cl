@@ -216,10 +216,11 @@ private fun testCrossModuleInlining() {
   // (1 + 2 + 3) * 2
   assertEquals(12, b)
 
-  // TODO(b/567869389): Uncomment when the outer `this` of an inner class and private top-level
-  // properties can be accessed from an inline function inlined in another module.
-  // val c = OuterClass(1).InnerClass(10).sumWithPrivateMembers()
-  // assertEquals(1111, c)
+  val c = OuterClass(1).InnerClass(10).sumWithPrivateMembers()
+  assertEquals(1111, c)
+
+  val d = sumWithPrivateMembersOfRenamedFileFacade()
+  assertEquals(30, d)
 }
 
 inline fun inlineFunWithNoInlineParam(noinline notInlined: () -> Int): Any {

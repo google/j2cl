@@ -106,14 +106,11 @@ public class KytheIndexingMetadataTest {
     String kytheMetadata =
         assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
 
-    // Ensures there's an anchor on the name of the class declaration (the klib frontend uses the
-    // full class declaration span because deserialized IR nodes lack FIR metadata).
+    // Ensures there's an anchor on the name of the class declaration.
     assertImputesEdgeExists(
         kytheMetadata,
-        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
-        /* sourceBegin= */ 13,
-        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
-        /* sourceEnd= */ 43,
+        /* sourceBegin= */ 19,
+        /* sourceEnd= */ 40,
         /* targetBegin= */ 189,
         /* targetEnd= */ 210);
   }
@@ -138,14 +135,11 @@ public class KytheIndexingMetadataTest {
     String kytheMetadata =
         assertKytheMetadata(result.getOutputSource("test/KytheIndexingMetadata.impl.java.js"));
 
-    // Ensures there's an anchor on the name of the class declaration (the klib frontend uses the
-    // full class declaration span because deserialized IR nodes lack FIR metadata).
+    // Ensures there's an anchor on the name of the class declaration.
     assertImputesEdgeExists(
         kytheMetadata,
-        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
-        /* sourceBegin= */ 19,
-        // TODO(b/217479735): update source position once source mapping is fixed for klibs.
-        /* sourceEnd= */ 49,
+        /* sourceBegin= */ 25,
+        /* sourceEnd= */ 46,
         /* targetBegin= */ 189,
         /* targetEnd= */ 210);
   }
