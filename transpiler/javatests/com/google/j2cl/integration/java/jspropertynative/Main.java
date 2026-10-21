@@ -18,6 +18,7 @@ package jspropertynative;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
@@ -32,8 +33,8 @@ public class Main {
     testJsPropertyIsX();
     testNativeJsType();
     testNativeJsTypeWithConstructor();
-    testNativeStaticJsProperty();
-    testNativeInstanceJsProperty();
+    testStaticNativeJsProperty();
+    testInstanceNativeJsPropertyOnNonNativeType();
   }
 
   @JsType(isNative = true, namespace = "jspropertynative", name = "MyNativeJsType")
@@ -87,6 +88,27 @@ public class Main {
     assertEquals(12, obj.x);
   }
 
+  @JsProperty(namespace = GLOBAL, name = "NaN")
+  private static native double getNaN();
+
+  @JsProperty(namespace = GLOBAL, name = "Infinity")
+  private static native double infinity();
+
+  @JsProperty(namespace = GLOBAL, name = "window.name")
+  private static native void setWindowName(String magic);
+
+  @JsProperty(namespace = GLOBAL, name = "window.name")
+  private static native String getWindowName();
+
+  private static void testStaticNativeJsProperty() {
+    assertTrue(getNaN() != getNaN());
+    assertTrue(Double.isInfinite(infinity()));
+    assertTrue(Double.isInfinite(-infinity()));
+
+    setWindowName("very secret!");
+    assertEquals("very secret!", getWindowName());
+  }
+
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface HasIsX {
 
@@ -136,19 +158,11 @@ public class Main {
     @Wasm("nop")
     @JsProperty(name = "hasOwnProperty")
     public native Object getA();
-
-    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
-    public static native double getB();
-  }
-
-  private static void testNativeStaticJsProperty() {
-    int pi = (int) NonNativeTypeWithNativeProperties.getB();
-    assertTrue(pi == 3);
   }
 
   // TODO(b/556880337): Instance native member on non-native type not supported.
   @Wasm("nop")
-  private static void testNativeInstanceJsProperty() {
+  private static void testInstanceNativeJsPropertyOnNonNativeType() {
     assertTrue(new NonNativeTypeWithNativeProperties().getA() != null);
   }
 

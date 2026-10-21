@@ -20,6 +20,7 @@ import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsPackage.GLOBAL
 import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 import kotlin.js.definedExternally
@@ -30,8 +31,8 @@ fun main(vararg args: String) {
   testJsPropertyIsX()
   testNativeJsType()
   testNativeJsTypeWithConstructor()
-  testNativeStaticJsProperty()
-  testNativeInstanceJsProperty()
+  testStaticNativeJsProperty()
+  testInstanceNativeJsPropertyOnNonNativeType()
 }
 
 @JsType(isNative = true, namespace = "jspropertynative", name = "MyNativeJsType")
@@ -83,6 +84,24 @@ private fun testNativeJsTypeWithConstructor() {
   assertEquals(12, obj.x)
 }
 
+@JsProperty(namespace = GLOBAL, name = "NaN") private external fun getNaN(): Double
+
+@JsProperty(namespace = GLOBAL, name = "Infinity") private external fun infinity(): Double
+
+@JsProperty(namespace = GLOBAL, name = "window.name")
+private external fun setWindowName(magic: String)
+
+@JsProperty(namespace = GLOBAL, name = "window.name") private external fun getWindowName(): String
+
+private fun testStaticNativeJsProperty() {
+  assertTrue(getNaN() != getNaN())
+  assertTrue(infinity().isInfinite())
+  assertTrue((-infinity()).isInfinite())
+
+  setWindowName("very secret!")
+  assertEquals("very secret!", getWindowName())
+}
+
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
 internal interface HasIsX {
 
@@ -122,20 +141,9 @@ private fun testJsPropertyGetY() {
 
 class NonNativeTypeWithNativeProperties {
   @JsProperty(name = "hasOwnProperty") external fun getA(): Any?
-
-  companion object {
-    @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
-    @JvmStatic
-    external fun getB(): Double
-  }
 }
 
-private fun testNativeStaticJsProperty() {
-  val pi = NonNativeTypeWithNativeProperties.getB().toInt()
-  assertTrue(pi == 3)
-}
-
-private fun testNativeInstanceJsProperty() {
+private fun testInstanceNativeJsPropertyOnNonNativeType() {
   assertTrue(NonNativeTypeWithNativeProperties().getA() != null)
 }
 

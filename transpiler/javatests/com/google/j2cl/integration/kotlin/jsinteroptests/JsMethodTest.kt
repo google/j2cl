@@ -16,46 +16,16 @@
 package jsinteroptests
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
-import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsOptional
 import jsinterop.annotations.JsPackage
-import jsinterop.annotations.JsPackage.GLOBAL
-import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 
 /** Tests JsMethod functionality. */
 object JsMethodTest {
   fun testAll() {
-    testStaticNativeJsPropertyGetter()
-    testStaticNativeJsPropertySetter()
     testLambdaRequiringJsMethodBridge()
     testJsOptionalJsVarargsLambda()
-  }
-
-  @JsProperty(namespace = GLOBAL, name = "NaN") @JvmStatic private external fun getNaN(): Double
-
-  @JsProperty(namespace = GLOBAL, name = "Infinity")
-  @JvmStatic
-  private external fun infinity(): Double
-
-  private fun testStaticNativeJsPropertyGetter() {
-    assertTrue(getNaN() != getNaN())
-    assertTrue(infinity().isInfinite())
-    assertTrue((-infinity()).isInfinite())
-  }
-
-  @JsProperty(namespace = GLOBAL, name = "window.jsInteropSecret")
-  @JvmStatic
-  private external fun setJsInteropSecret(magic: String)
-
-  @JsProperty(namespace = GLOBAL, name = "window.jsInteropSecret")
-  @JvmStatic
-  private external fun getJsInteropSecret(): String
-
-  private fun testStaticNativeJsPropertySetter() {
-    setJsInteropSecret("very secret!")
-    assertEquals("very secret!", getJsInteropSecret())
   }
 
   internal interface NullSupplier {

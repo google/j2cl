@@ -16,47 +16,19 @@
 package jsinteroptests;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import java.util.Arrays;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOptional;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.jspecify.annotations.Nullable;
 
 /** Tests JsMethod functionality. */
 public class JsMethodTest {
   public static void testAll() {
-    testStaticNativeJsPropertyGetter();
-    testStaticNativeJsPropertySetter();
     testLambdaRequiringJsMethodBridge();
     testJsOptionalJsVarargsLambda();
-  }
-
-  @JsProperty(namespace = GLOBAL, name = "NaN")
-  private static native double getNaN();
-
-  @JsProperty(namespace = GLOBAL, name = "Infinity")
-  private static native double infinity();
-
-  private static void testStaticNativeJsPropertyGetter() {
-    assertTrue(getNaN() != getNaN());
-    assertTrue(Double.isInfinite(infinity()));
-    assertTrue(Double.isInfinite(-infinity()));
-  }
-
-  @JsProperty(namespace = GLOBAL, name = "window.jsInteropSecret")
-  private static native void setJsInteropSecret(String magic);
-
-  @JsProperty(namespace = GLOBAL, name = "window.jsInteropSecret")
-  private static native String getJsInteropSecret();
-
-  private static void testStaticNativeJsPropertySetter() {
-    setJsInteropSecret("very secret!");
-    assertEquals("very secret!", getJsInteropSecret());
   }
 
   interface NullSupplier {
