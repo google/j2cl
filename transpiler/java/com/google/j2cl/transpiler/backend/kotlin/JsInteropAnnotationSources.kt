@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.J2ktAstUtils.isWebAsync
 import com.google.j2cl.transpiler.ast.JsMemberType
 import com.google.j2cl.transpiler.ast.JsUtils
 import com.google.j2cl.transpiler.ast.MemberDescriptor
@@ -137,7 +138,7 @@ internal data class JsInteropAnnotationSources(val nameSources: NameSources) {
       ?: memberDescriptor.simpleJsName.takeIf { environment.isKtNameMangled(memberDescriptor) }
 
   private fun jsFunctionAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-    emptyUnless(typeDeclaration.isJsFunctionInterface) {
+    emptyUnless(typeDeclaration.isJsFunctionInterface && !isWebAsync(typeDeclaration)) {
       annotation(nameSources.topLevelQualifiedNameSource("jsinterop.annotations.JsFunction"))
     }
 

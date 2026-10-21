@@ -24,25 +24,25 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 open class WebAsyncExample {
- open fun method1(): A? {
+ open suspend fun method1(): A? {
   val i: Int = this.getFive()
   return this.method2(
    A.getNull<A?>(),
   )
  }
  
- open fun method2(a: A?): A? = a
+ open suspend fun method2(a: A?): A? = a
  
- open fun getFive(): Int = 5
+ open suspend fun getFive(): Int = 5
  
- open fun varargs(a: Int, vararg more: Int) {}
+ open suspend fun varargs(a: Int, vararg more: Int) {}
  
  class A {
   private constructor()
   
   companion object {
    @JvmStatic
-   fun <T> getNull(): T = null as T
+   suspend fun <T> getNull(): T = null as T
   }
  }
 }

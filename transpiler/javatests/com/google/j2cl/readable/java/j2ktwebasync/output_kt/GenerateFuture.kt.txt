@@ -19,48 +19,78 @@
 package j2ktwebasync
 
 import javaemul.lang.*
-import com.google.calendar.v2a.shared.async.AsyncAwait
+import com.google.calendar.v2a.shared.async.AsyncCallable
+import com.google.calendar.v2a.shared.async.AsyncRunnable
+import com.google.calendar.v2a.shared.async.InterruptionToken
+import com.google.calendar.v2a.shared.async.Suspension
 import com.google.common.util.concurrent.ListenableFuture
-import com.google.j2objc.annotations.ObjectiveCKmpMethod
-import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsIgnore
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsOptional
 import jsinterop.annotations.JsType
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 
 open class GenerateFuture {
- open fun explicitFuture(id: String?): String? = id
+ open suspend fun explicitFuture(id: String?): String? = id
  
- open fun voidFuture() {}
+ open suspend fun voidFuture() {}
  
- open fun awaitFuture(future: ListenableFuture<String?>?): String? = AsyncAwait.await<String?>(
+ open suspend fun awaitFuture(future: ListenableFuture<String?>?): String? = Suspension.await<String?>(
   future!!,
  )
  
+ open fun explicitFuture(id: String?, interruptionToken: InterruptionToken?): ListenableFuture<String?> = Suspension.future(
+  AsyncCallable { this.explicitFuture(id) },
+ )
+ 
+ open fun voidFuture(interruptionToken: InterruptionToken?): ListenableFuture<*> = Suspension.futureVoid(
+  AsyncRunnable {
+   this.voidFuture()
+  },
+ )
+ 
  fun interface AsyncInterface {
-  fun compute(x: Int): Int
+  suspend fun compute(x: Int): Int
+  
+  fun compute(x: Int, interruptionToken: InterruptionToken?): ListenableFuture<Int> = Suspension.future(
+   AsyncCallable { this.compute(x) },
+  )
  }
  
  open class AsyncInterfaceImpl: AsyncInterface {
-  override fun compute(x: Int): Int = x
+  override suspend fun compute(x: Int): Int = x
  }
  
  @JsType
  fun interface JsTypeService {
+  @JsIgnore
+  suspend fun getData(id: String?): String?
+  
   @JsMethod(name = "customName")
-  fun getData(id: String?): String?
+  fun getData(id: String?, @JsOptional interruptionToken: InterruptionToken?): ListenableFuture<String?> = Suspension.future(
+   AsyncCallable { this.getData(id) },
+  )
  }
  
- @JsFunction
  fun interface AsyncJsFunction {
-  fun run(input: String?)
+  suspend fun run(input: String?)
+  
+  fun run(input: String?, interruptionToken: InterruptionToken?): ListenableFuture<*> = Suspension.futureVoid(
+   AsyncRunnable {
+    this.run(input)
+   },
+  )
  }
  
  open class KmpAdapter
  
  open class KmpService {
-  @ObjectiveCKmpMethod(selector = "customSelector:", adapter = KmpAdapter::class)
-  open fun getData(id: String?): String? = id
+  open suspend fun getData(id: String?): String? = id
+  
+  open fun getData(id: String?, interruptionToken: InterruptionToken?): ListenableFuture<String?> = Suspension.future(
+   AsyncCallable { this.getData(id) },
+  )
  }
 }

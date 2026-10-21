@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitF
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringConcatenation;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
+import com.google.j2cl.transpiler.passes.ImplementWebAsyncMethodsJ2kt;
 import com.google.j2cl.transpiler.passes.ImplementYieldStatement;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
@@ -679,6 +680,7 @@ public enum Backend {
 
           // Normalizations
           AddDisambiguatingSuperMethodForwardingStubs::new,
+          ImplementWebAsyncMethodsJ2kt::new,
 
           // Must be run after AddDisambiguatingSuperMethodForwardingStubs
           FixJavaKotlinMethodOverrideMismatch::new,

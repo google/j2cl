@@ -18,6 +18,4 @@ package com.google.calendar.v2a.shared.async;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class AsyncLockable {
-  synchronized void monitor() {}
-}
+public class AsyncLockable {}

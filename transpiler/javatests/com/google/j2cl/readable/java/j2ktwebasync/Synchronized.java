@@ -26,7 +26,7 @@ import com.google.calendar.v2a.shared.async.WebAsync;
  */
 public class Synchronized {
 
-  public Synchronized lock = new Synchronized();
+  public Object lock = new Object();
   public AsyncLock asyncLock = new AsyncLock();
 
   @WebAsync

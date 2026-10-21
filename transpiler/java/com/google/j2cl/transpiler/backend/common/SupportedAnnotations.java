@@ -55,6 +55,8 @@ public class SupportedAnnotations {
           // go/keep-sorted start
           .add("com.google.apps.xplat.dagger.asynccomponent.ComponentRegistryCompatible")
           .add("com.google.apps.xplat.testing.parameterized.RunParameterized")
+          .add("com.google.calendar.v2a.shared.async.DbAsync")
+          .add("com.google.calendar.v2a.shared.async.WebAsync")
           .add("com.google.common.annotations.J2ktPublic")
           .add("com.google.errorprone.annotations.CanIgnoreReturnValue")
           .add("com.google.errorprone.annotations.ResultIgnorabilityUnspecified")

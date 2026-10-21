@@ -25,16 +25,16 @@ class Super {
  private constructor()
  
  open class A {
-  open fun m1() {}
+  open suspend fun m1() {}
  }
  
  open class B: A() {
-  override fun m1() {
-   super<A>.m1()
-   super<A>.m1()
+  override suspend fun m1() {
+   super.m1()
+   super.m1()
   }
   
-  open fun m2() {
+  open suspend fun m2() {
    this.m1()
    this.m1()
   }

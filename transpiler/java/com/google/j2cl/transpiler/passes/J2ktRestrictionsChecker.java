@@ -20,6 +20,7 @@ import static com.google.j2cl.common.Problems.Severity.ERROR;
 import static com.google.j2cl.common.Problems.Severity.WARNING;
 import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isSubtypeOfJ2ktMonitor;
 import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isValidSynchronizedStatementExpressionTypeDescriptor;
+import static com.google.j2cl.transpiler.ast.J2ktAstUtils.isWebAsync;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static java.lang.Boolean.getBoolean;
 
@@ -40,6 +41,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
@@ -294,7 +296,10 @@ public final class J2ktRestrictionsChecker {
 
           private void checkSynchronizedMethods(Type type) {
             boolean hasSynchronizedMethods =
-                type.getMethods().stream().anyMatch(it -> it.getDescriptor().isSynchronized());
+                type.getMethods().stream()
+                    .anyMatch(
+                        it ->
+                            it.getDescriptor().isSynchronized() && !isWebAsync(it.getDescriptor()));
             if (!hasSynchronizedMethods) {
               return;
             }
@@ -313,6 +318,11 @@ public final class J2ktRestrictionsChecker {
           }
 
           private void checkSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
+            MethodLike enclosingMethod = (MethodLike) getParent(MethodLike.class::isInstance);
+            if (enclosingMethod != null && isWebAsync(enclosingMethod.getDescriptor())) {
+              return;
+            }
+
             TypeDescriptor expressionTypeDescriptor =
                 synchronizedStatement.getExpression().getTypeDescriptor();
             if (isValidSynchronizedStatementExpressionTypeDescriptor(expressionTypeDescriptor)) {

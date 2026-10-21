@@ -54,17 +54,17 @@ open class Lambda {
  
  open fun syncVoidMethod() {}
  
- open fun asyncVoidMethod() {}
+ open suspend fun asyncVoidMethod() {}
  
  open fun syncIntMethod(i: Int): Int = i
  
- open fun asyncIntMethod(i: Int): Int = i
+ open suspend fun asyncIntMethod(i: Int): Int = i
  
  fun interface VoidInterface {
-  fun methodVoid()
+  suspend fun methodVoid()
  }
  
  fun interface IntegerInterface {
-  fun methodInt(i: Int): Int
+  suspend fun methodInt(i: Int): Int
  }
 }

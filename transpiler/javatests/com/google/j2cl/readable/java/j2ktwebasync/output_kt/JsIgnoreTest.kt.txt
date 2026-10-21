@@ -27,7 +27,7 @@ import kotlin.Suppress
 @JsType
 class JsIgnoreTest {
  @JsIgnore
- fun ignoredAsyncMethod(): Long = 6L
+ suspend fun ignoredAsyncMethod(): Long = 6L
  
  @JsType
  interface IgnoredMethodsInterface {
@@ -35,17 +35,18 @@ class JsIgnoreTest {
   fun ignoredInterfaceMethod(): Long
   
   @JsIgnore
-  fun ignoredAsyncInterfaceMethod(): Long
+  suspend fun ignoredAsyncInterfaceMethod(): Long
   
-  fun asyncInterfaceMethod(): Long
+  @JsIgnore
+  suspend fun asyncInterfaceMethod(): Long
  }
  
  class IgnoredMethodsInterfaceImpl: IgnoredMethodsInterface {
   override fun ignoredInterfaceMethod(): Long = 0L
   
-  override fun ignoredAsyncInterfaceMethod(): Long = 1L
+  override suspend fun ignoredAsyncInterfaceMethod(): Long = 1L
   
-  override fun asyncInterfaceMethod(): Long = 2L
+  override suspend fun asyncInterfaceMethod(): Long = 2L
  }
  
  @JsType
@@ -54,16 +55,17 @@ class JsIgnoreTest {
   abstract fun ignoredAbstractMethod(): Long
   
   @JsIgnore
-  abstract fun ignoredAsyncAbstractMethod(): Long
+  abstract suspend fun ignoredAsyncAbstractMethod(): Long
   
-  abstract fun asyncAbstractMethod(): Long
+  @JsIgnore
+  abstract suspend fun asyncAbstractMethod(): Long
  }
  
  class IgnoredMethodsAbstractClassImpl: IgnoredMethodsAbstractClass() {
   override fun ignoredAbstractMethod(): Long = 3L
   
-  override fun ignoredAsyncAbstractMethod(): Long = 4L
+  override suspend fun ignoredAsyncAbstractMethod(): Long = 4L
   
-  override fun asyncAbstractMethod(): Long = 5L
+  override suspend fun asyncAbstractMethod(): Long = 5L
  }
 }

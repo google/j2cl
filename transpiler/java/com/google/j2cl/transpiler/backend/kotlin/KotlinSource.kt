@@ -104,6 +104,7 @@ internal object KotlinSource {
   val RETURN_KEYWORD = source("return")
   val SET_KEYWORD = source("set")
   val SUPER_KEYWORD = source("super")
+  val SUSPEND_KEYWORD = source("suspend")
   val THIS_KEYWORD = source("this")
   val THROW_KEYWORD = source("throw")
   val TRY_KEYWORD = source("try")

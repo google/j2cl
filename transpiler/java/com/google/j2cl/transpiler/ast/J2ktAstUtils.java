@@ -18,9 +18,15 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject;
 
 import java.util.List;
+import javax.annotation.Nullable;
 
 /** J2KT AST utilities. */
 public class J2ktAstUtils {
+  private static final String WEB_ASYNC_ANNOTATION_NAME =
+      "com.google.calendar.v2a.shared.async.WebAsync";
+  private static final String DB_ASYNC_ANNOTATION_NAME =
+      "com.google.calendar.v2a.shared.async.DbAsync";
+
   /** Construct J2ktInfo from the given annotations. */
   public static J2ktInfo getJ2ktInfo(List<Annotation> annotations) {
     if (annotations.isEmpty()) {
@@ -82,6 +88,36 @@ public class J2ktAstUtils {
     return typeDescriptor instanceof DeclaredTypeDescriptor descriptor
         && (descriptor.isSubtypeOf(TypeDescriptors.get().javaLangClass)
             || isSubtypeOfJ2ktMonitor(descriptor));
+  }
+
+  /** Returns the @WebAsync or @DbAsync annotation on the given method declaration, or null. */
+  @Nullable
+  public static Annotation getWebAsyncAnnotation(MethodDescriptor methodDescriptor) {
+    MethodDescriptor declaration = methodDescriptor.getDeclarationDescriptor();
+    Annotation annotation = declaration.getAnnotation(WEB_ASYNC_ANNOTATION_NAME);
+    return annotation != null ? annotation : declaration.getAnnotation(DB_ASYNC_ANNOTATION_NAME);
+  }
+
+  /** Returns whether the given method declaration is annotated with @WebAsync or @DbAsync. */
+  public static boolean hasWebAsyncAnnotation(MethodDescriptor methodDescriptor) {
+    return getWebAsyncAnnotation(methodDescriptor) != null;
+  }
+
+  /** Returns whether the given method overrides a @WebAsync or @DbAsync method. */
+  public static boolean isWebAsyncOverride(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+        .anyMatch(J2ktAstUtils::hasWebAsyncAnnotation);
+  }
+
+  /** Returns whether the given method is or overrides a @WebAsync or @DbAsync method. */
+  public static boolean isWebAsync(MethodDescriptor methodDescriptor) {
+    return hasWebAsyncAnnotation(methodDescriptor) || isWebAsyncOverride(methodDescriptor);
+  }
+
+  /** Returns whether the given type declares any @WebAsync or @DbAsync method. */
+  public static boolean isWebAsync(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.getDeclaredMethodDescriptors().stream()
+        .anyMatch(J2ktAstUtils::isWebAsync);
   }
 
   private J2ktAstUtils() {}

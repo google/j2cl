@@ -267,6 +267,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         )
       },
       Source.emptyUnless(method.isJavaOverride) { KotlinSource.OVERRIDE_KEYWORD },
+      Source.emptyUnless(method.descriptor.isSuspendFunction) { KotlinSource.SUSPEND_KEYWORD },
     )
 
   private fun visibilityModifierSource(method: Method): Source =

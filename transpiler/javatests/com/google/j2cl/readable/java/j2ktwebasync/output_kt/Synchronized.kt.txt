@@ -21,46 +21,68 @@ package j2ktwebasync
 import javaemul.lang.*
 import com.google.calendar.v2a.shared.async.AsyncLock
 import com.google.calendar.v2a.shared.async.AsyncLockable
+import com.google.calendar.v2a.shared.async.Suspension
 import javaemul.lang.J2ktMonitor
+import kotlin.Any
 import kotlin.Suppress
-import kotlin.Unit
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
-import kotlin.synchronized
 
 open class Synchronized: J2ktMonitor() {
  @JvmField
- var lock: Synchronized? = Synchronized()
+ var lock: Any? = Any()
  
  @JvmField
  var asyncLock: AsyncLock? = AsyncLock()
  
- open fun doNothing() {
-  synchronized<Unit>(this.lock!!) {
+ open suspend fun doNothing() {
+  val ___lock: Any? = this.lock
+  Suspension.lock(___lock)
+  try {
    Synchronized.call()
+  } finally {
+   Suspension.unlock(___lock)
   }
  }
  
- open fun doSomething() {
-  synchronized<Unit>(this.asyncLock!!) {
+ open suspend fun doSomething() {
+  val ___lock: AsyncLock? = this.asyncLock
+  Suspension.lock(___lock)
+  try {
    Synchronized.asyncCall()
+  } finally {
+   Suspension.unlock(___lock)
   }
  }
  
- open fun doNothing2() {
-  synchronized<Unit>(this) {
+ open suspend fun doNothing2() {
+  Suspension.lock(this)
+  try {
    Synchronized.call()
+  } finally {
+   Suspension.unlock(this)
   }
  }
  
- open fun nestedSynchronization() {
-  synchronized<Unit>(this) {
-   synchronized<Unit>(this.asyncLock!!) {
+ open suspend fun nestedSynchronization() {
+  Suspension.lock(this)
+  try {
+   val ___lock: AsyncLock? = this.asyncLock
+   Suspension.lock(___lock)
+   try {
     Synchronized.call()
+   } finally {
+    Suspension.unlock(___lock)
    }
-   synchronized<Unit>(this.lock!!) {
+   val ___lock_1: Any? = this.lock
+   Suspension.lock(___lock_1)
+   try {
     Synchronized.call()
+   } finally {
+    Suspension.unlock(___lock_1)
    }
+  } finally {
+   Suspension.unlock(this)
   }
  }
  
@@ -69,30 +91,45 @@ open class Synchronized: J2ktMonitor() {
   fun call() {}
   
   @JvmStatic
-  fun asyncCall() {}
+  suspend fun asyncCall() {}
  }
  
  open class AsyncSynchronized: AsyncLockable() {
-  open fun doSomething() {
-   synchronized<Unit>(this) {
+  open suspend fun doSomething() {
+   Suspension.lock(this)
+   try {
     Synchronized.asyncCall()
+   } finally {
+    Suspension.unlock(this)
    }
   }
   
-  open fun doNothing() {
-   synchronized<Unit>(this) {
+  open suspend fun doNothing() {
+   Suspension.lock(this)
+   try {
     Synchronized.call()
+   } finally {
+    Suspension.unlock(this)
    }
   }
   
-  open fun nestedSynchronization() {
-   synchronized<Unit>(this) {
-    synchronized<Unit>(this) {
+  open suspend fun nestedSynchronization() {
+   Suspension.lock(this)
+   try {
+    Suspension.lock(this)
+    try {
      Synchronized.asyncCall()
+    } finally {
+     Suspension.unlock(this)
     }
-    synchronized<Unit>(this) {
+    Suspension.lock(this)
+    try {
      Synchronized.call()
+    } finally {
+     Suspension.unlock(this)
     }
+   } finally {
+    Suspension.unlock(this)
    }
   }
  }
