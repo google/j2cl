@@ -243,7 +243,7 @@ internal class J2ObjCCompatSources(
     companionDeclaration: CompanionDeclaration
   ): Dependent<Source> =
     objCNameDependentSource(companionDeclaration).map { objCName ->
-      defineAlias(source(objCAlias(companionDeclaration)), objCName)
+      compatibilityAlias(source(objCAlias(companionDeclaration)), objCName)
     }
 
   private fun objCAlias(typeDeclaration: TypeDeclaration): String =

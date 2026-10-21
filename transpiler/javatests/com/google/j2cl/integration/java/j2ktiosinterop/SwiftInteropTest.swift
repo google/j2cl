@@ -77,6 +77,8 @@ final class SwiftInteropTest: XCTestCase {
       i = obj.finalIntField
       i = obj.intField
       obj.intField = i
+
+      J2ktiosinteropDefaultNamesCompanion.shared.staticMethod()
     #else
       // Fields are not exposed to Swift in J2Objc.
 
@@ -214,6 +216,11 @@ final class SwiftInteropTest: XCTestCase {
     Nullability.companion.acceptNullableWithNonNullBound(v: nil)
     Nullability.companion.acceptWithNullableBound(v: nil)
     Nullability.companion.acceptNullableWithNullableBound(v: nil)
+
+    J2ktiosinteropNullabilityCompanion.shared.acceptNullable(v: nil)
+    J2ktiosinteropNullabilityCompanion.shared.acceptNullableWithNonNullBound(v: nil)
+    J2ktiosinteropNullabilityCompanion.shared.acceptWithNullableBound(v: nil)
+    J2ktiosinteropNullabilityCompanion.shared.acceptNullableWithNullableBound(v: nil)
 
     J2ktiosinteropNullability_acceptNullableWithId_(nil)
     J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil)

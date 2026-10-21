@@ -27,9 +27,7 @@ NS_INLINE J2ktProtobufProtobuf* new_ProtobufProtobuf_init(void) {
 #define ProtobufProtobuf_Test J2ktProtobufProtobuf_Test
 #endif  // !defined(ProtobufProtobuf_Test)
 
-#ifndef ProtobufProtobuf_TestCompanion
-#define ProtobufProtobuf_TestCompanion J2ktProtobufProtobuf_TestCompanion
-#endif  // !defined(ProtobufProtobuf_TestCompanion)
+@compatibility_alias ProtobufProtobuf_TestCompanion J2ktProtobufProtobuf_TestCompanion;
 
 NS_INLINE void ProtobufProtobuf_Test_acceptStaticWithMyMessage_(id arg0) {
  [J2ktProtobufProtobuf_TestCompanion.shared acceptStaticWithMyMessage:arg0];

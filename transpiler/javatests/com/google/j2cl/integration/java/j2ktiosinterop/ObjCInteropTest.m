@@ -865,6 +865,8 @@
 }
 
 - (void)testNullability {
+  [J2ktiosinteropNullabilityCompanion.shared acceptNullableWithId:nil];
+
   J2ktiosinteropNullability_acceptNullableWithId_(nil);
   J2ktiosinteropNullability_acceptNullableWithNonNullBoundWithId_(nil);
   J2ktiosinteropNullability_acceptWithNullableBoundWithId_(nil);
