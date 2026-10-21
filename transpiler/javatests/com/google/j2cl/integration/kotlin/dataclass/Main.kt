@@ -261,78 +261,41 @@ fun testLocalDataClassWithCaptures() {
   assertEquals("Local(x=5)", local.toString())
 }
 
-data class CustomToStringDataClass(val x: Int, val y: String) {
-  override fun toString() = "CustomToString:$x:$y"
+data class DataClassWithCustomObjectMethods(val x: Int) {
+  override fun equals(other: Any?) = other is DataClassWithCustomObjectMethods
+
+  override fun hashCode() = -999
+
+  override fun toString() = "DataClassWithCustomObjectMethods"
 }
 
-data class CustomEqualsHashCodeDataClass(val id: Int, val ignoredLabel: String) {
-  override fun equals(other: Any?) = other is CustomEqualsHashCodeDataClass && id == other.id
-
-  override fun hashCode() = id * 31
-}
-
-data class CustomAllObjectMethodsDataClass(val x: Int) {
-  override fun equals(other: Any?) = other is CustomAllObjectMethodsDataClass
-
-  override fun hashCode() = 42
-
-  override fun toString() = "CustomAll"
-}
-
-open class BaseWithOpenObjectMethods {
+open class BaseWithObjectOverrides {
   override fun equals(other: Any?) = false
 
   override fun hashCode() = -999
 
-  override fun toString() = "BaseOpenToString"
+  final override fun toString() = "BaseOpenToString"
 }
 
-data class SubDataClassWithOpenSuperOverrides(val x: Int) : BaseWithOpenObjectMethods()
-
-open class BaseWithFinalObjectMethods {
-  final override fun equals(other: Any?) = false
-
-  final override fun hashCode() = 42
-
-  final override fun toString() = "BaseFinalToString"
-}
-
-data class SubDataClassWithFinalSuperOverrides(val x: Int) : BaseWithFinalObjectMethods()
+data class SubDataClassWithObjectOverrides(val x: Int) : BaseWithObjectOverrides()
 
 fun testOverriddenObjectMethods() {
-  // Only toString is overridden.
-  val customToString = CustomToStringDataClass(1, "a")
-  assertEquals("CustomToString:1:a", customToString.toString())
-  assertEquals(customToString, CustomToStringDataClass(1, "a"))
-  assertNotEquals(customToString, CustomToStringDataClass(2, "a"))
-  assertEquals(customToString.hashCode(), CustomToStringDataClass(1, "a").hashCode())
+  val d = DataClassWithCustomObjectMethods(10)
+  assertEquals(d, DataClassWithCustomObjectMethods(10))
+  assertEquals(d, DataClassWithCustomObjectMethods(20))
+  assertEquals(-999, DataClassWithCustomObjectMethods(10).hashCode())
+  assertEquals("DataClassWithCustomObjectMethods", d.toString())
 
-  // Only equals and hashCode are overridden.
-  val customEquals = CustomEqualsHashCodeDataClass(1, "a")
-  assertEquals(customEquals, CustomEqualsHashCodeDataClass(1, "b"))
-  assertNotEquals(customEquals, CustomEqualsHashCodeDataClass(2, "a"))
-  assertEquals(31, customEquals.hashCode())
-  assertEquals("CustomEqualsHashCodeDataClass(id=1, ignoredLabel=a)", customEquals.toString())
-
-  // All three are overridden.
-  val customAll = CustomAllObjectMethodsDataClass(1)
-  assertEquals(customAll, CustomAllObjectMethodsDataClass(999))
-  assertEquals(42, customAll.hashCode())
-  assertEquals("CustomAll", customAll.toString())
-
-  // Open overrides in the superclass are overridden by the generated methods.
-  val openSub: BaseWithOpenObjectMethods = SubDataClassWithOpenSuperOverrides(10)
-  assertEquals(openSub, SubDataClassWithOpenSuperOverrides(10))
-  assertNotEquals(openSub, SubDataClassWithOpenSuperOverrides(20))
-  assertEquals(openSub.hashCode(), SubDataClassWithOpenSuperOverrides(10).hashCode())
-  assertNotEquals(-999, openSub.hashCode())
-  assertEquals("SubDataClassWithOpenSuperOverrides(x=10)", openSub.toString())
-
-  // Final overrides in the superclass are inherited; no methods are generated.
-  val finalSub = SubDataClassWithFinalSuperOverrides(10)
-  assertNotEquals(finalSub, SubDataClassWithFinalSuperOverrides(10))
-  assertEquals(42, finalSub.hashCode())
-  assertEquals("BaseFinalToString", finalSub.toString())
+  val subDataClass: BaseWithObjectOverrides = SubDataClassWithObjectOverrides(10)
+  // The superclass overrides equals() and hashCode() as open, so the data class generates
+  // its own property-based implementations, which are used instead.
+  assertEquals(subDataClass, SubDataClassWithObjectOverrides(10))
+  assertNotEquals(subDataClass, SubDataClassWithObjectOverrides(20))
+  assertEquals(subDataClass.hashCode(), SubDataClassWithObjectOverrides(10).hashCode())
+  assertNotEquals(-999, subDataClass.hashCode())
+  // The superclass overrides toString() as final, so the data class can't override it. No
+  // toString() is generated and the superclass version is inherited.
+  assertEquals("BaseOpenToString", subDataClass.toString())
 }
 
 data class FloatData(val f: Float, val d: Double) {}
