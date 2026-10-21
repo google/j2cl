@@ -35,6 +35,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
+import com.google.j2cl.transpiler.backend.kotlin.ast.Member as KtMember
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.toCompanionObjectOrNull
@@ -185,10 +187,19 @@ internal class J2ObjCCompatSources(
   private fun shouldInclude(type: Type): Boolean =
     !nameIsMappedInObjC(type.declaration) && shouldInclude(Convention.J2OBJC, type.declaration)
 
+  private fun shouldInclude(companionObject: CompanionObject): Boolean =
+    companionObject.members.any {
+      it is KtMember.WithJavaMember &&
+        it.javaMember.descriptor.visibility.isPublic &&
+        !it.javaMember.descriptor.isAnnotatedToHideFromObjC
+    }
+
   private fun declarationsDependentSources(type: Type): List<Dependent<Source>> = buildList {
     if (objCNamePrefix.isNotEmpty()) {
       add(aliasDeclarationDependentSource(type.declaration))
-      type.toCompanionObjectOrNull()?.let { add(aliasDeclarationDependentSource(it.declaration)) }
+      type.toCompanionObjectOrNull()?.takeIf(::shouldInclude)?.let {
+        add(aliasDeclarationDependentSource(it.declaration))
+      }
     }
 
     if (type.declaration.isEnum) {
