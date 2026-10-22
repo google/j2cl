@@ -270,7 +270,7 @@ def _run_bloaty(original, modified, group_by):
         "package": "package",
     }
     subprocess.call([
-        "/google/bin/releases/protobuf-team/bloaty/bloaty",
+        "/google/bin/releases/bloaty/bloaty",
         "--allow_unsafe_non_google3_input",
         "--domain=file",
         "-c", config.name,
