@@ -102,7 +102,7 @@ public final class StringUtil {
     return nativeReplace(str, escapeForRegExpSearch(from), to, /* replaceAll= */ true, ignoreCase);
   }
 
-  public static String replace(String str, CharSequence from, CharSequence to, boolean ignoreCase) {
+  public static String replace(String str, String from, String to, boolean ignoreCase) {
     // Implementation note: This uses a regex replacement instead of
     // a string literal replacement because Safari does not
     // follow the spec for "$$" in the replacement string: it
@@ -145,8 +145,7 @@ public final class StringUtil {
   }
 
   /** Replaces the first instance of the literal match with the literal replacement. */
-  public static String replaceFirstLiteral(
-      String str, CharSequence from, CharSequence to, boolean ignoreCase) {
+  public static String replaceFirstLiteral(String str, String from, String to, boolean ignoreCase) {
     return nativeReplace(
         str,
         escapeForRegExpSearch(from),
@@ -192,15 +191,15 @@ public final class StringUtil {
     return "\\u" + "0000".substring(hex.length()) + hex;
   }
 
-  /** Escapes the given CharSerquence such that is can be used in a RegExp search. */
-  private static String escapeForRegExpSearch(CharSequence str) {
-    return str.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
+  /** Escapes the given String such that it can be used in a RegExp search. */
+  private static String escapeForRegExpSearch(String str) {
+    return str.replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
   }
 
-  /** Escapes the given CharSerquence such that is can be used in a RegExp repleacement. */
-  private static String escapeForRegExpReplacement(CharSequence str) {
+  /** Escapes the given String such that it can be used in a RegExp replacement. */
+  private static String escapeForRegExpReplacement(String str) {
     // Escape $ since it is for match backrefs and \ since it is used to escape $.
-    return str.toString().toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
+    return str.replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
   }
 
   private StringUtil() {}

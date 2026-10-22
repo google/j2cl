@@ -550,7 +550,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public String replace(CharSequence from, CharSequence to) {
-    return StringUtil.replace(this, from, to, /* ignoreCase= */ false);
+    return StringUtil.replace(this, from.toString(), to.toString(), /* ignoreCase= */ false);
   }
 
   /**
