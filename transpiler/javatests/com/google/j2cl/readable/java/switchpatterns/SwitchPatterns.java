@@ -57,6 +57,23 @@ public class SwitchPatterns {
     }
   }
 
+  void testReassignedBindings() {
+    Object o = "Hello";
+    switch (o) {
+      case String s -> s = s + "!";
+      default -> {}
+    }
+
+    String result =
+        switch (o) {
+          case String s -> {
+            s = s + "?";
+            yield s;
+          }
+          default -> "";
+        };
+  }
+
   sealed interface Sealed {
     final class A implements Sealed {}
 

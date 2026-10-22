@@ -159,4 +159,15 @@ open class InstanceofExpressions {
    if (o is String) 1 else 2,
   )
  }
+ 
+ private fun testReassignedPatternVariable() {
+  val o: Any = Any()
+  var s: String? = null
+  if (o is String && run {
+   s = o as String
+   true
+  }) {
+   s = "" + s + "!"
+  }
+ }
 }

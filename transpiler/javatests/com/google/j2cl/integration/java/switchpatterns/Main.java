@@ -31,6 +31,7 @@ public class Main {
     testSwitchValues();
     testSwitchSideEffectInExpression();
     testSwitchCaseEvaluationOrder();
+    testSwitchReassignedBinding();
     // TODO(b/465574821):Add tests for jsenums.
   }
 
@@ -274,5 +275,28 @@ public class Main {
     }
 
     assertEquals("12", s.sideEffects);
+  }
+
+  private static void testSwitchReassignedBinding() {
+    // Pattern variables are not implicitly final and can be reassigned.
+    Object o = "hello";
+    switch (o) {
+      case String s -> {
+        s = s + "!";
+        assertEquals("hello!", s);
+      }
+      default -> fail();
+    }
+
+    String result =
+        switch (o) {
+          case String s -> {
+            s = s + "?";
+            yield s;
+          }
+          default -> "";
+        };
+    assertEquals("hello?", result);
+    assertEquals("hello", o);
   }
 }

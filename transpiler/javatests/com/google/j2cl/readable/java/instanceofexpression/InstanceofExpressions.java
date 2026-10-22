@@ -124,4 +124,11 @@ public class InstanceofExpressions {
     Object o = null;
     new Integer(o instanceof String ? 1 : 2);
   }
+
+  private void testReassignedPatternVariable() {
+    Object o = new Object();
+    if (o instanceof String s) {
+      s = s + "!";
+    }
+  }
 }

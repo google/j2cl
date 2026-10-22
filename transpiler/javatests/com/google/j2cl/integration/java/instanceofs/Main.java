@@ -40,6 +40,7 @@ public class Main {
     testInstanceOf_markerInterfaces();
     testInstanceOf_patternVariable();
     testInstanceOf_doesntInvalidateProperties();
+    testInstanceOf_reassignedPatternVariable();
   }
 
   private static void testInstanceOf_class() {
@@ -505,6 +506,17 @@ public class Main {
     if (child instanceof ParentInterface i) {
       i.dummy();
       assertEquals("dummy", child.shouldDisambiguate());
+    } else {
+      fail();
+    }
+  }
+
+  private static void testInstanceOf_reassignedPatternVariable() {
+    // Pattern variables are not implicitly final and can be reassigned.
+    final Object o = "hello";
+    if (o instanceof String s) {
+      s = s + "!";
+      assertEquals("hello!", s);
     } else {
       fail();
     }

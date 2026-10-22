@@ -364,6 +364,30 @@
  )
 )
 
+;;; void InstanceofExpressions.testReassignedPatternVariable()
+(func $m_testReassignedPatternVariable__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $instanceofexpression.InstanceofExpressions))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:128:15
+ (local $o (ref null $java.lang.Object))
+ (local $s (ref null $java.lang.String))
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:129:4
+  (local.set $o (call $$create__@java.lang.Object ))
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:130:4
+  (if (if (result i32) (ref.test (ref $java.lang.String) (local.get $o)) (then (block (result i32)
+    (local.set $s (ref.cast (ref null $java.lang.String) (local.get $o)))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+   (then
+    (block
+     ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:131:6
+     (local.set $s (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $s))(call $$getString_|_|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.$StringLiterals )))
+    )
+   )
+  )
+ )
+)
+
 ;;; void InstanceofExpressions.$clinit()
 (func $$clinit__void_<once>_@instanceofexpression.InstanceofExpressions
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceofexpression/readable-j2wasm.js/instanceofexpression/InstanceofExpressions.java:20:13

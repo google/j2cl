@@ -142,6 +142,46 @@ class SwitchPatterns extends j_l_Object {
    }
   }
  }
+ /** @nodts */
+ m_testReassignedBindings__void_$pp_switchpatterns() {
+  let o = 'Hello';
+  {
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
+   let /** number */ $caseIndex;
+   let /** ?string */ s;
+   if (j_l_String.$isInstance($selector) && (s = (/**@type {string}*/ ($selector)), true)) {
+    $caseIndex = 0;
+   } else {
+    $caseIndex = 1;
+   }
+   switch ($caseIndex) {
+    case 0:
+     s = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s) + '!';
+     break;
+    default:
+     break;
+   }
+  }
+  let result = (() =>{
+   let $selector_1 = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
+   let /** number */ $caseIndex_1;
+   let /** ?string */ s_1;
+   if (j_l_String.$isInstance($selector_1) && (s_1 = (/**@type {string}*/ ($selector_1)), true)) {
+    $caseIndex_1 = 0;
+   } else {
+    $caseIndex_1 = 1;
+   }
+   switch ($caseIndex_1) {
+    case 0:
+     {
+      s_1 = j_l_String.m_valueOf__java_lang_Object__java_lang_String(s_1) + '?';
+      return s_1;
+     }
+    default:
+     return '';
+   }
+  })();
+ }
  /** @nodts @return {Sealed} */
  m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns() {
   return null;
