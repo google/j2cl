@@ -17,6 +17,12 @@ package jstype
 
 import jsinterop.annotations.JsType
 
+/**
+ * `@JsType` is required to reproduce the issue: it implicitly makes every public member a JsMember,
+ * including the public field that could wrongly be seen for a property when this class is read from
+ * another library. Replacing it with explicit `@JsProperty` annotations would not work, because
+ * J2CL only puts the annotation on the accessors, so that field would not be a JsMember.
+ */
 @JsType
 open class JsTypeFromOtherLibrary(private val value: Int) {
   // Its backing field is private, so it must not be seen as a JavaScript field clashing with the
