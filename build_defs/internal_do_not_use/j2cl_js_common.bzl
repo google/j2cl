@@ -157,6 +157,7 @@ def j2cl_web_test(
         data = data,
         testonly = 1,
         entry_points = ["javatests." + test_class + "_AdapterSuite"],
+        defs = args.get("defs"),
         tags = tags,
         lenient = True,
     )
