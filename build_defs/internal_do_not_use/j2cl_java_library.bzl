@@ -117,7 +117,10 @@ def _impl_j2cl_library(ctx):
     if output_js:
         outputs.append(output_js)
 
-    extra_providers = [DefaultInfo(files = depset(outputs))]
+    extra_providers = [
+        DefaultInfo(files = depset(outputs)),
+        j2cl_provider._private_.java_info,
+    ]
     if j2kt_provider:
         extra_providers.append(j2kt_provider)
 
