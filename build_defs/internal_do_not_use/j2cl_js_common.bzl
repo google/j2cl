@@ -95,6 +95,7 @@ def j2cl_web_test(
         data,
         test_class,
         tags,
+        compilation_level = None,
         default_browser = None,
         browsers = [],
         **args):  # @unused
@@ -148,11 +149,14 @@ def j2cl_web_test(
     if not browsers:
         compile = True
 
+    if compilation_level == None:
+        compilation_level = "ADVANCED" if compile else "BUNDLE"
+
     closure_js_test(
         name = name,
         srcs = [":%s" % testsuite_file_name],
         deps = deps,
-        compilation_level = "ADVANCED" if compile else "BUNDLE",
+        compilation_level = compilation_level,
         browsers = browsers,
         data = data,
         testonly = 1,
