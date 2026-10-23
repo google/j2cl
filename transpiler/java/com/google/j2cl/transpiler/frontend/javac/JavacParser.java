@@ -263,6 +263,11 @@ public class JavacParser {
     ImmutableList<String> javacOptions = options.getJavacOptions();
     for (int i = 0; i < javacOptions.size(); i++) {
       String javacOption = javacOptions.get(i);
+      if (javacOption.equals("-XDaddTypeAnnotationsToSymbol=true")) {
+        // JDK 21 processors need this option to read type annotations from classpath entries.
+        builder.add(javacOption);
+        continue;
+      }
       if (javacOption.startsWith("-A")) {
         // Directly forward APT options; these are owned by processors (not javac or J2CL).
         builder.add(javacOption);
