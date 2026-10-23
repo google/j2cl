@@ -1490,6 +1490,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return getAllSuperTypesIncludingSelf().stream()
         .filter(supertype -> supertype.getTypeDeclaration().equals(supertypeDeclaration))
         .findFirst()
+        .map(supertype -> (DeclaredTypeDescriptor) supertype.toNullable(isNullable()))
         .orElse(null);
   }
 
