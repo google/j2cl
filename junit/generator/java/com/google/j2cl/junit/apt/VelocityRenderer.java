@@ -20,9 +20,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.escapevelocity.Template;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Map;
 
 /** Renders Apache Velocity templates using templates from the JAR resources. */
@@ -40,10 +41,13 @@ final class VelocityRenderer {
   }
 
   private Reader openResource(String resourceName) throws IOException {
-    InputStream in = clz.getResourceAsStream(resourceName);
-    if (in == null) {
+    URL resource = clz.getResource(resourceName);
+    if (resource == null) {
       throw new FileNotFoundException("Could not find file: " + resourceName);
     }
-    return new InputStreamReader(in, UTF_8);
+    URLConnection connection = resource.openConnection();
+    // Another annotation processor's classloader can close a cached JarFile while we read it.
+    connection.setUseCaches(false);
+    return new InputStreamReader(connection.getInputStream(), UTF_8);
   }
 }

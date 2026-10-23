@@ -48,3 +48,12 @@ java_test(
         "//third_party:truth",
     ],
 )
+
+java_test(
+    name = "VelocityRendererTest",
+    srcs = ["VelocityRendererTest.java"],
+    deps = [
+        "//junit/generator/java/com/google/j2cl/junit/apt:junit_processor",
+        "//third_party:junit",
+    ],
+)
