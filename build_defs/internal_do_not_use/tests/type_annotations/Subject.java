@@ -15,4 +15,6 @@
  */
 package example;
 
-public class Subject {}
+public class Subject {
+  public Dependency dependency;
+}

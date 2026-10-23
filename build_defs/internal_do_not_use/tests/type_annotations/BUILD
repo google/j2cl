@@ -33,5 +33,8 @@ j2cl_library(
 
 build_test(
     name = "dependency_type_annotations_test",
-    targets = [":subject"],
+    # The javac option is available in recent JDK 21 updates. Run this regression
+    # with --tool_java_runtime_version selecting such a runtime (or a newer JDK).
+    tags = ["manual"],
+    targets = [":subject.js"],
 )
