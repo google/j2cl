@@ -1,0 +1,33 @@
+goog.module('jsenum.Main.IntJsEnum.$Overlay$impl');
+
+const Enums = goog.require('javaemul.internal.Enums$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BoxedLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedLightEnum$impl');
+let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {number} */
+ static m_getValue__$devirt__jsenum_Main_IntJsEnum__int(/** !IntJsEnum */ $thisArg) {
+  $Overlay.$clinit();
+  return /**@type {number}*/ ($thisArg);
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return Enums.m_isInstanceOf__java_lang_Object__javaemul_internal_Constructor__boolean(instance, $Overlay);
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'jsenum.Main$IntJsEnum');
+
+exports = $Overlay;
+
+//# sourceMappingURL=Main$IntJsEnum$$Overlay.js.map

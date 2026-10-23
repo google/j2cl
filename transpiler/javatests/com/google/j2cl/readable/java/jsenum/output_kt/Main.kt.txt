@@ -171,6 +171,22 @@ open class Main {
   }
   
   @JvmStatic
+  private fun testJsEnumListElementEquals() {
+   Main.getComparableJsEnumList()!!.get(0)!!.equals(
+    ComparableJsEnum.ONE,
+   )
+   Main.getNativeStringEnumList()!!.get(0)!!.equals(
+    NativeStringEnum.ONE,
+   )
+  }
+  
+  @JvmStatic
+  private fun getComparableJsEnumList(): List<ComparableJsEnum?>? = null
+  
+  @JvmStatic
+  private fun getNativeStringEnumList(): List<NativeStringEnum?>? = null
+  
+  @JvmStatic
   private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum?>?) {}
   
   @JvmStatic
@@ -403,8 +419,8 @@ open class Main {
   
   fun getValue(): String? = this.value
   
-  constructor(value: String?) {
-   this.value = value!!
+  constructor(value: String) {
+   this.value = value
   }
  }
  
@@ -499,6 +515,4 @@ open class Main {
    SomeJsEnum.A,
   )
  }
- 
- private open class SubtypeImplicitVarargs private constructor(): BaseVarargs<SomeJsEnum?>()
 }

@@ -180,6 +180,15 @@ fun testJsEnumAutoboxingSpecialMethods() {
   boxingPassthrough(ComparableJsEnum.ONE).equals(boxingPassthrough(StringJsEnum.ONE))
 }
 
+private fun testJsEnumListElementEquals() {
+  getComparableJsEnumList()[0].equals(ComparableJsEnum.ONE)
+  getNativeStringEnumList()[0].equals(NativeStringEnum.ONE)
+}
+
+private fun getComparableJsEnumList(): List<ComparableJsEnum> = emptyList()
+
+private fun getNativeStringEnumList(): List<NativeStringEnum> = emptyList()
+
 @JsFunction
 fun interface JsFunctionSuppiler<T> {
   fun get(): T

@@ -18,6 +18,7 @@ j2kt_jvm_library(
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-jvm",
         "//third_party:jsinterop-annotations-j2kt-jvm",
+        "//transpiler/javatests/com/google/j2cl/readable/java/common:common-j2kt-jvm",
     ],
 )
 
@@ -28,6 +29,7 @@ j2kt_native_library(
     deps = [
         "//jre/java:javaemul_internal_annotations-j2kt-native",
         "//third_party:jsinterop-annotations-j2kt-native",
+        "//transpiler/javatests/com/google/j2cl/readable/java/common:common-j2kt-native",
     ],
 )
 
@@ -36,6 +38,7 @@ readable_example(
         "*.java",
         "native_sources/*.js",
     ]),
+    generate_kt_web_readables = True,
     generate_wasm_custom_descriptors_jsinterop_readables = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",

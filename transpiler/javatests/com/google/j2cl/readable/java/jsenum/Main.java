@@ -15,6 +15,7 @@
  */
 package jsenum;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,7 +95,7 @@ public class Main {
       return value;
     }
 
-    NonNullableStringJsEnum(String value) {
+    NonNullableStringJsEnum(@JsNonNull String value) {
       this.value = value;
     }
   }
@@ -211,6 +212,19 @@ public class Main {
 
     boxingPassthrough(ComparableJsEnum.ONE).equals(boxingPassthrough(ComparableJsEnum.ONE));
     boxingPassthrough(ComparableJsEnum.ONE).equals(boxingPassthrough(StringJsEnum.ONE));
+  }
+
+  private static void testJsEnumListElementEquals() {
+    getComparableJsEnumList().get(0).equals(ComparableJsEnum.ONE);
+    getNativeStringEnumList().get(0).equals(NativeStringEnum.ONE);
+  }
+
+  private static List<ComparableJsEnum> getComparableJsEnumList() {
+    return null;
+  }
+
+  private static List<NativeStringEnum> getNativeStringEnumList() {
+    return null;
   }
 
   @JsFunction
@@ -346,6 +360,8 @@ public class Main {
     }
   }
 
+  // J2KT-web rejects the implicit varargs array since it is typed as a JsEnum array.
+  @J2ktIncompatible
   private static class SubtypeImplicitVarargs extends BaseVarargs<SomeJsEnum> {}
 
   private static void testVarargs() {

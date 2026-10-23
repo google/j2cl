@@ -1,0 +1,33 @@
+goog.module('jsenum.Main.NonNullableStringJsEnum.$Overlay$impl');
+
+const Enums = goog.require('javaemul.internal.Enums$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BoxedLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedLightEnum$impl');
+let NonNullableStringJsEnum = goog.forwardDeclare('jsenum.Main.NonNullableStringJsEnum$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {?string} */
+ static m_getValue__$devirt__jsenum_Main_NonNullableStringJsEnum__java_lang_String(/** !NonNullableStringJsEnum */ $thisArg) {
+  $Overlay.$clinit();
+  return /**@type {string}*/ ($thisArg);
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return Enums.m_isInstanceOf__java_lang_Object__javaemul_internal_Constructor__boolean(instance, $Overlay);
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'jsenum.Main$NonNullableStringJsEnum');
+
+exports = $Overlay;
+
+//# sourceMappingURL=Main$NonNullableStringJsEnum$$Overlay.js.map

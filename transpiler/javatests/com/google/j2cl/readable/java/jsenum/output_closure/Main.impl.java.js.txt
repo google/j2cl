@@ -7,6 +7,7 @@ let Long = goog.forwardDeclare('goog.math.Long');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
 let Optional = goog.forwardDeclare('java.util.Optional$impl');
 let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
 let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
@@ -151,6 +152,19 @@ class Main extends j_l_Object {
   $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {BoxedLightEnum<!StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(StringJsEnum.ONE, StringJsEnum_$Overlay)), /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(jsEnum, $Overlay)));
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay))), $Overlay)), /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay))), $Overlay)));
   $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay))), $Overlay)), $Overlay)), /**@type {BoxedLightEnum<?StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(/**@type {?StringJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {BoxedLightEnum<!StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(StringJsEnum.ONE, StringJsEnum_$Overlay))), StringJsEnum_$Overlay)), StringJsEnum_$Overlay)));
+ }
+ /** @nodts */
+ static m_testJsEnumListElementEquals__void() {
+  Enums.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(Main.m_getComparableJsEnumList__java_util_List().getAtIndex(0), $Overlay)), ComparableJsEnum.ONE);
+  $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {?NativeStringEnum}*/ (Main.m_getNativeStringEnumList__java_util_List().getAtIndex(0)), NativeStringEnum.ONE);
+ }
+ /** @nodts @return {List<BoxedComparableLightEnum<?ComparableJsEnum>>} */
+ static m_getComparableJsEnumList__java_util_List() {
+  return null;
+ }
+ /** @nodts @return {List<?NativeStringEnum>} */
+ static m_getNativeStringEnumList__java_util_List() {
+  return null;
  }
  /** @nodts */
  static m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(/** ?function():BoxedComparableLightEnum<?ComparableJsEnum> */ supplier) {}

@@ -1,0 +1,48 @@
+goog.module('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+
+const Enums = goog.require('javaemul.internal.Enums$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
+let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @final @nodts @return {number} */
+ static m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(/** !ComparableJsEnum */ $thisArg) {
+  $Overlay.$clinit();
+  return /**@type {number}*/ ($thisArg);
+ }
+ /** @final @nodts */
+ static m_staticMethod__void() {
+  $Overlay.$clinit();
+ }
+ /** @nodts @return {number} */
+ static get f_staticField__jsenum_Main_ComparableJsEnum_$Overlay() {
+  return ($Overlay.$clinit(), $Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay);
+ }
+ /** @nodts */
+ static set f_staticField__jsenum_Main_ComparableJsEnum_$Overlay(/** number */ value) {
+  ($Overlay.$clinit(), $Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+  $Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay = 1;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return Enums.m_isInstanceOf__java_lang_Object__javaemul_internal_Constructor__boolean(instance, $Overlay);
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+$Overlay.$static_staticField__jsenum_Main_ComparableJsEnum_$Overlay = 0;
+$Util.$setClassMetadata($Overlay, 'jsenum.Main$ComparableJsEnum');
+
+exports = $Overlay;
+
+//# sourceMappingURL=Main$ComparableJsEnum$$Overlay.js.map
