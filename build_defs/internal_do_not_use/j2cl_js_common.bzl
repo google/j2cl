@@ -9,6 +9,7 @@ load(
     "create_closure_js_library",
     "web_library",
 )
+load(":j2cl_test_suite.bzl", "j2cl_extract_single_js")
 
 def j2cl_js_provider(
         ctx,
@@ -98,44 +99,13 @@ def j2cl_web_test(
         default_browser = None,
         browsers = [],
         **args):  # @unused
-    # TODO(b/259118921): support multiple testsuites.
-    fail_multiple_testsuites = """
-        FAIL: j2cl_test currently supports testing with a single testsuite only.
-        IF YOU HAVE MULTIPLE TESTSUITES, WE DO NOT KNOW IF ALL OF YOUR TESTS PASS OR NOT!
-    """
-
-    fail_suiteclass = """
-        FAIL: j2cl_test currently doesn't support testing with @RunWith(Suite.class) format.
-        Please directly provide the tests that has @RunWith(JUnit4.class).
-    """
-
     testsuite_file_name = name + "_test.js"
 
-    # unzip generated_suite.js.zip and take 1 testsuite js file
-    # fail if multiple testsuites or suiteclasses are provided
-    native.genrule(
+    # Extract the single testsuite JavaScript file from generated_suite.js.zip.
+    j2cl_extract_single_js(
         name = "gen" + name + "_test.js",
-        srcs = [src],
-        outs = [
-            testsuite_file_name,
-        ],
-        cmd = "\n".join([
-            "TMP=$$(mktemp -d)",
-            "WD=$$(pwd)",
-            "unzip -q -o $(locations %s) *.js -d $$TMP" % src,
-            "cd $$TMP",
-            "if [ $$(find . -name *.js | wc -l) -ne 1 ]; then",
-            "  echo \"%s\"" % fail_multiple_testsuites,
-            "  exit 1",
-            "fi",
-            "testsuite=$$(find . -name *.js)",
-            "if [ -z \"$$testsuite\" ]; then",
-            "  echo \"%s\"" % fail_suiteclass,
-            "  exit 1",
-            "fi",
-            "mv \"$$testsuite\" $$WD/$@;",
-            "rm -rf $$TMP",
-        ]),
+        src = src,
+        out = testsuite_file_name,
         testonly = 1,
     )
 
