@@ -21,6 +21,17 @@ import com.google.j2cl.junit.apt.J2clTestInput;
 public class %s {}
 """
 
+def _generate_test_input_impl(ctx):
+    ctx.actions.write(ctx.outputs.out, ctx.attr.content)
+
+_generate_test_input = rule(
+    implementation = _generate_test_input_impl,
+    attrs = {
+        "content": attr.string(mandatory = True),
+        "out": attr.output(mandatory = True),
+    },
+)
+
 def generate_test_input(name, test_class):
     """Generate the test input for @J2clTestInput.
 
@@ -36,10 +47,10 @@ def generate_test_input(name, test_class):
     java_class = name.replace("-", "_").title() + "J2clTestInput"
     java_code = _TEMPLATE % (native.package_name(), name, java_package, test_class, java_class)
 
-    native.genrule(
+    _generate_test_input(
         name = java_class,
-        outs = [java_class + ".java"],
-        cmd = "echo \"%s\" > $@" % java_code,
+        out = java_class + ".java",
+        content = java_code,
         tags = ["manual", "notap"],
         testonly = 1,
     )
