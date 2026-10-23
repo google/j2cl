@@ -1515,9 +1515,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         class BadImplicitConstructor extends SubBuggyJsType {
         > Error: Class 'BadImplicitConstructor' should have a JsConstructor.
         }
-        class DelegatingToImplicitConstructor extends ImplicitConstructor {
-          public DelegatingToImplicitConstructor(int a) { }
-        }
         class SubSubBuggyJsType extends SubBuggyJsType {
           public SubSubBuggyJsType() { this(1);}
           @JsConstructor
@@ -1576,6 +1573,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         @JsType
         public class ImplicitJsConstructor extends BuggyJsType {
           // Correct: Implicit JsConstructor delegating to the JsConstructor.
+        }
+        class DelegatingToImplicitConstructor extends ImplicitJsConstructor {
+        > Error: Class 'DelegatingToImplicitConstructor' should have a JsConstructor.
+          public DelegatingToImplicitConstructor(int a) { }
         }
         """);
   }
