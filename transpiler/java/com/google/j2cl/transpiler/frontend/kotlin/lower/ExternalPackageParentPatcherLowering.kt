@@ -50,9 +50,7 @@ private fun IrAnnotation.getAnnotationStringValue(): String? =
 internal class ExternalPackageParentPatcherLowering(val context: JvmBackendContext) :
   FileLoweringPass {
   override fun lower(irFile: IrFile) {
-    if (context.config.useFir) {
-      irFile.acceptVoid(Visitor())
-    }
+    irFile.acceptVoid(Visitor())
   }
 
   private inner class Visitor : IrVisitorVoid() {
