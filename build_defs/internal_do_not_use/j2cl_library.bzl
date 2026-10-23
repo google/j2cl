@@ -69,6 +69,13 @@ def j2cl_library(
 
     See j2cl_java_library.bzl#j2cl_library for the arguments.
 
+    The target also provides JavaInfo for compilation metadata and Java outputs.
+    Annotation-processor resources written to CLASS_OUTPUT are preserved in the
+    runtime_output_jars, including resources named .js or .native.js. Consumers
+    can collect these archives through JavaInfo without inspecting J2clInfo's
+    private fields or treating resources as JavaScript sources. The Java outputs
+    use the J2CL emulated runtime and are not a replacement for a JVM library.
+
     Implicit output targets:
       lib<name>.jar: A java archive containing the byte code.
       lib<name>-src.jar: A java archive containing the sources (source jar).
