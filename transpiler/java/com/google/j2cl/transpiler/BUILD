@@ -12,6 +12,7 @@ java_library(
         "J2clTranspiler.java",
         "J2clTranspilerOptions.java",
     ],
+    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
         "//third_party:auto_value",
         "//third_party:error_prone_annotations",
