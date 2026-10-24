@@ -2824,6 +2824,37 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testJsEnumTypeVariableUsagesFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum {A, B}
+          @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
+            A(1),
+            B(2);
+            int value;
+            JsEnumWithCustomValue(int value) { this.value = value; }
+          }
+          private static <T extends MyJsEnum, C extends JsEnumWithCustomValue> void main(T t, C c) {
+            // TODO(b/114468916): Should be rejected; `T` erases to a JsEnum, which is not an Enum.
+            Enum e = t;
+            // TODO(b/114468916): Should be rejected; `C` erases to a custom-valued JsEnum, which is
+            // not Comparable.
+            Comparable comparable = c;
+            // TODO(b/114468916): Should be rejected; JsEnums do not support name().
+            t.name();
+          }
+          private static <T extends MyJsEnum> void arrays(T[] ts) {
+            // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which is not an
+            // Object[].
+            Object[] objects = ts;
+          }
+        }
+        """);
+  }
+
   public void testJsEnumAssignmentSucceeds() {
     assertTranspileSucceeds(
             "test.Main",
@@ -2888,6 +2919,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private static void acceptsJsEnumVarargs(MyJsEnum... p) {}
               private static void acceptsJsEnumVarargsArray(MyJsEnum[]... p) {}
               private static <T> void acceptsTVarargs(T... p) {}
+              private static <T extends MyJsEnum> void acceptsJsEnumTypeVariableVarargs(T... p) {
+                T[] array = p;
+              }
               private static MyJsEnum[] returnsJsEnumArray() { return null; }
               static class ParametricConstructorVarargs<E> {
                 ParametricConstructorVarargs(E... p) {}
@@ -2907,6 +2941,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 // specifically make an exception for varargs (we change the type of the passed array to
                 // Object[] in a desugaring pass, JsEnums are allowed as elements of Object[]).
                 acceptsTVarargs(MyJsEnum.A, MyJsEnum.B);
+                acceptsJsEnumTypeVariableVarargs(MyJsEnum.A, MyJsEnum.B);
                 new ParametricConstructorVarargs<>(MyJsEnum.A, MyJsEnum.B);
                 MyJsEnum e = returnsJsEnumArray()[0];
               }

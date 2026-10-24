@@ -74,6 +74,7 @@ fun main(vararg unused: String) {
   testNativeJsEnumArray()
   testJsEnumVarargs()
   testShiftByJsEnumOrdinal()
+  testJsEnumTypeVariables()
 }
 
 @JsEnum(isNative = true, namespace = "test")
@@ -1061,3 +1062,133 @@ private fun testShiftByJsEnumOrdinal() {
   // Repro for b/574644734.
   assertEquals(4, 1 shl PlainJsEnum.TWO.ordinal)
 }
+
+private fun testJsEnumTypeVariables() {
+  checkJsEnumTypeVariable(PlainJsEnum.ONE)
+  checkNullJsEnumTypeVariable<PlainJsEnum?>(null)
+  checkStringJsEnumTypeVariable(StringJsEnum.HELLO)
+  checkJsEnumTypeVariableInLambdas(PlainJsEnum.ONE)
+  checkJsEnumTypeVariableInGenerics(PlainJsEnum.ONE)
+  checkJsEnumTypeVariableVarargs(PlainJsEnum.ONE)
+  checkJsEnumTypeVariableBoundChain(PlainJsEnum.ONE)
+  checkNativeJsEnumTypeVariable(NativeEnum.ACCEPT)
+
+  val nativeList = mutableListOf(NativeEnum.ACCEPT)
+  val plainList = mutableListOf(PlainJsEnum.ONE)
+  // TODO(b/576859020): Throws ClassCastException since the elements are cast to Enum to call
+  // equals().
+  // assertTrue(testWildcardEquals(nativeList, plainList))
+  assertTrue(jsEnumTypeVariablePassthrough(plainList[0]) === PlainJsEnum.ONE)
+}
+
+private fun <T : PlainJsEnum> checkJsEnumTypeVariable(t: T) {
+  val e: PlainJsEnum = t
+  val o = boxingIdentity(t)
+  assertUnderlyingTypeEquals(PlainJsEnum::class.java, o)
+  assertTrue(o!!.equals(t))
+  assertTrue(t === e)
+  assertTrue(t === o)
+  assertTrue(t is PlainJsEnum)
+  // TODO(b/576859020): Throws ClassCastException since `t` is cast to Enum to call ordinal.
+  // assertTrue(t.ordinal == 1)
+  assertTrue(t.getValue() == 1)
+  // TODO(b/576859020): Throws ClassCastException since `t` is cast to Enum to call equals().
+  // assertTrue(t.equals(e))
+  // assertFalse(t.equals(OtherPlainJsEnum.UNIT))
+  // assertFalse(t.equals(ONE_DOUBLE))
+  // TODO(b/576859020): Throw ClassCastException since `t` is cast to Enum to call compareTo(),
+  // hashCode() and toString().
+  // assertTrue(t.compareTo(PlainJsEnum.ZERO) > 0)
+  // assertTrue(t.hashCode() == PlainJsEnum.ONE.hashCode())
+  // assertTrue(t.toString() == PlainJsEnum.ONE.toString())
+  assertTrue(("" + t) == ("" + PlainJsEnum.ONE))
+  assertTrue(o as T === t)
+  assertTrue(e as T === t)
+  assertTrue(jsEnumTypeVariablePassthrough(t) === t)
+  // TODO(b/576859020): Fails since `t` is boxed.
+  // assertUnderlyingTypeEquals(Double::class.javaObjectType, t)
+
+  val conditionalJsEnum: PlainJsEnum = if (t === e) t else PlainJsEnum.ZERO
+  assertTrue(conditionalJsEnum === t)
+  assertUnderlyingTypeEquals(Double::class.javaObjectType, conditionalJsEnum)
+  val conditionalObject: Any = if (t === e) t else Any()
+  assertTrue(conditionalObject === o)
+  assertUnderlyingTypeEquals(PlainJsEnum::class.java, conditionalObject)
+
+  when (t) {
+    PlainJsEnum.ONE -> {}
+    else -> fail()
+  }
+}
+
+private fun <T : PlainJsEnum> jsEnumTypeVariablePassthrough(t: T): T = t
+
+private fun <T : PlainJsEnum?> checkNullJsEnumTypeVariable(t: T) {
+  assertTrue(t == null)
+  // TODO(b/576859020): Do not throw NullPointerException in optimized JS since `t` is treated as
+  // a regular Enum and the unused calls are optimized away.
+  // assertThrowsNullPointerException { t!!.equals(PlainJsEnum.ONE) }
+  // assertThrowsNullPointerException { t!!.compareTo(PlainJsEnum.ONE) }
+}
+
+private fun <C : StringJsEnum> checkStringJsEnumTypeVariable(c: C) {
+  assertTrue(c === StringJsEnum.HELLO)
+  assertTrue(c.value == HELLO_STRING)
+  // TODO(b/576859020): Throws ClassCastException since `c` is cast to Enum to call equals().
+  // assertTrue(c.equals(StringJsEnum.HELLO))
+  // assertFalse(c.equals(StringJsEnum.GOODBYE))
+  val o = boxingIdentity(c)
+  assertUnderlyingTypeEquals(StringJsEnum::class.java, o)
+  assertTrue(o !== HELLO_STRING)
+  assertTrue(o as C === c)
+  // TODO(b/576859020): Fails since `c` is boxed.
+  // assertUnderlyingTypeEquals(String::class.java, c)
+}
+
+private fun <T : PlainJsEnum> checkJsEnumTypeVariableInLambdas(t: T) {
+  val supplier = Supplier<T> { t }
+  assertTrue(supplier.get() === t)
+  val ordinal = Function<T, Int> { x -> x.ordinal }
+  // TODO(b/576859020): Throws ClassCastException since `t` is cast to Enum to call ordinal.
+  // assertTrue(ordinal.apply(t) == 1)
+  val valueReference: (T) -> Int = PlainJsEnum::getValue
+  assertTrue(valueReference(t) == 1)
+}
+
+private fun <T : PlainJsEnum> checkJsEnumTypeVariableInGenerics(t: T) {
+  val list = mutableListOf<T>()
+  list.add(t)
+  assertTrue(list[0] === t)
+  // TODO(b/576859020): Throws ClassCastException since the element is cast to Enum to call
+  // ordinal.
+  // assertTrue(list[0].ordinal == 1)
+  assertTrue(boxingPassthrough(t) === t)
+}
+
+private fun <T : PlainJsEnum> checkJsEnumTypeVariableVarargs(vararg ts: T) {
+  assertTrue(ts.size == 1)
+  assertTrue(ts[0] === PlainJsEnum.ONE)
+  // TODO(b/576859020): Throws ClassCastException since the element is cast to Enum to call
+  // ordinal.
+  // assertTrue(ts[0].ordinal == 1)
+}
+
+private fun <S : PlainJsEnum, T : S> checkJsEnumTypeVariableBoundChain(t: T) {
+  assertTrue(t === PlainJsEnum.ONE)
+  // TODO(b/576859020): Throw ClassCastException since `t` is cast to Enum to call ordinal and
+  // equals().
+  // assertTrue(t.ordinal == 1)
+  // assertTrue(t.equals(PlainJsEnum.ONE))
+  // TODO(b/576859020): Fails since `t` is boxed.
+  // assertUnderlyingTypeEquals(Double::class.javaObjectType, t)
+}
+
+private fun <T : NativeEnum> checkNativeJsEnumTypeVariable(t: T) {
+  // TODO(b/576859020): Throws ClassCastException since `t` is cast to Enum to call equals().
+  // assertTrue(t.equals(NativeEnum.ACCEPT))
+}
+
+private fun testWildcardEquals(
+  nativeList: MutableList<out NativeEnum>,
+  plainList: MutableList<out PlainJsEnum>,
+): Boolean = nativeList[0].equals(NativeEnum.ACCEPT) && plainList[0].equals(PlainJsEnum.ONE)

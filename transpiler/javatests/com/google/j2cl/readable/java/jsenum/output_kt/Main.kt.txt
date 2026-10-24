@@ -22,6 +22,7 @@ import javaemul.lang.*
 import java.util.ArrayList
 import java.util.Arrays
 import java.util.Optional
+import java.util.function.Function
 import jsinterop.annotations.JsEnum
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
@@ -37,6 +38,7 @@ import kotlin.Suppress
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
 import kotlin.collections.List
+import kotlin.collections.MutableList
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
@@ -352,6 +354,74 @@ open class Main {
   private fun testShiftByJsEnumOrdinal(e: ComparableJsEnum?): Int = 1.shl(
    e!!.ordinal,
   )
+  
+  @JvmStatic
+  private fun <T: ComparableJsEnum?> testJsEnumTypeVariable(t: T, listWildCardExtends: List<ComparableJsEnum?>?, listWildCardSuper: MutableList<in ComparableJsEnum?>?, listJsEnum: List<ComparableJsEnum?>?): T {
+   var t_1: T? = t
+   var e: ComparableJsEnum? = t_1
+   e = listWildCardExtends!!.get(0)
+   e = listJsEnum!!.get(0)
+   var o: Any? = t_1
+   o = listWildCardExtends!!.get(0)
+   o = listWildCardSuper!!.get(0)
+   o = listJsEnum!!.get(0)
+   t_1 = o as T?
+   t_1 = e as T?
+   var b: Boolean = t_1 === e
+   b = t_1 === o
+   b = t_1 is ComparableJsEnum
+   val ordinal: Int = t_1!!.ordinal
+   b = t_1!!.equals(e)
+   b = listWildCardExtends!!.get(0)!!.equals(e)
+   b = listWildCardSuper!!.get(0)!!.equals(e)
+   b = listJsEnum!!.get(0)!!.equals(e)
+   return Main.jsEnumTypeVariablePassthrough<T>(
+    t_1 as T,
+   )
+  }
+  
+  @JvmStatic
+  private fun <T: ComparableJsEnum?> jsEnumTypeVariablePassthrough(t: T): T = t
+  
+  @JvmStatic
+  private fun <T: ComparableJsEnum?> testJsEnumTypeVariableInLambdas(t: T) {
+   val supplier: Supplier<T> = Supplier { t }
+   val ordinal: Function<T, Int?> = Function { x: T -> x!!.ordinal }
+   val ordinalReference: Function<T, Int?> = Function { arg0: T -> arg0!!.ordinal }
+  }
+  
+  @JvmStatic
+  private fun <T: ComparableJsEnum?> testJsEnumTypeVariableVarargs(t: T) {
+   var e: ComparableJsEnum? = Main.jsEnumTypeVariableVarargs<T>(t, t)
+   e = Main.jsEnumTypeVariableVarargs<ComparableJsEnum?>(
+    ComparableJsEnum.ONE,
+   )
+  }
+  
+  @JvmStatic
+  private fun <T: ComparableJsEnum?> jsEnumTypeVariableVarargs(vararg ts: T): T {
+   val ts_1: Array<T>? = ts as Array<T>?
+   return ts_1!![0]
+  }
+  
+  @JvmStatic
+  private fun <I: IntJsEnum?, S: StringJsEnum?> testCustomValuedJsEnumTypeVariables(i: I, s: S) {
+   var i_1: I? = i
+   var s_1: S? = s
+   val intValue: Int = i_1!!.getValue()
+   var b: Boolean = i_1 === IntJsEnum.TWENTY
+   b = i_1!!.equals(
+    IntJsEnum.TWENTY,
+   )
+   var o: Any? = i_1
+   i_1 = o as I?
+   val stringValue: String? = s_1!!.getValue()
+   b = s_1!!.equals(
+    StringJsEnum.ONE,
+   )
+   o = s_1
+   s_1 = o as S?
+  }
  }
  
  internal fun interface Supplier<T> {

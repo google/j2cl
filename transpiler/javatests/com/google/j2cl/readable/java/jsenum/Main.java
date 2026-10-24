@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -453,5 +455,67 @@ public class Main {
   private static int testShiftByJsEnumOrdinal(ComparableJsEnum e) {
     // Repro for b/574644734.
     return 1 << e.ordinal();
+  }
+
+  private static <T extends ComparableJsEnum> T testJsEnumTypeVariable(
+      T t,
+      List<? extends ComparableJsEnum> listWildCardExtends,
+      List<? super ComparableJsEnum> listWildCardSuper,
+      List<ComparableJsEnum> listJsEnum) {
+    ComparableJsEnum e = t;
+    e = listWildCardExtends.get(0);
+    e = listJsEnum.get(0);
+
+    Object o = t;
+    o = listWildCardExtends.get(0);
+    o = listWildCardSuper.get(0);
+    o = listJsEnum.get(0);
+
+    t = (T) o;
+    t = (T) e;
+
+    boolean b = t == e;
+    b = t == o;
+    b = t instanceof ComparableJsEnum;
+    int ordinal = t.ordinal();
+    b = t.equals(e);
+    b = listWildCardExtends.get(0).equals(e);
+    b = listWildCardSuper.get(0).equals(e);
+    b = listJsEnum.get(0).equals(e);
+    return jsEnumTypeVariablePassthrough(t);
+  }
+
+  private static <T extends ComparableJsEnum> T jsEnumTypeVariablePassthrough(T t) {
+    return t;
+  }
+
+  private static <T extends ComparableJsEnum> void testJsEnumTypeVariableInLambdas(T t) {
+    Supplier<T> supplier = () -> t;
+    Function<T, Integer> ordinal = x -> x.ordinal();
+    Function<T, Integer> ordinalReference = ComparableJsEnum::ordinal;
+  }
+
+  private static <T extends ComparableJsEnum> void testJsEnumTypeVariableVarargs(T t) {
+    ComparableJsEnum e = jsEnumTypeVariableVarargs(t, t);
+    e = jsEnumTypeVariableVarargs(ComparableJsEnum.ONE);
+  }
+
+  @SafeVarargs
+  private static <T extends ComparableJsEnum> T jsEnumTypeVariableVarargs(T... ts) {
+    return ts[0];
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <I extends IntJsEnum, S extends StringJsEnum>
+      void testCustomValuedJsEnumTypeVariables(I i, S s) {
+    int intValue = i.getValue();
+    boolean b = i == IntJsEnum.TWENTY;
+    b = i.equals(IntJsEnum.TWENTY);
+    Object o = i;
+    i = (I) o;
+    String stringValue = s.getValue();
+    b = s.equals(StringJsEnum.ONE);
+    o = s;
+    s = (S) o;
   }
 }

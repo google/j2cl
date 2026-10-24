@@ -84,6 +84,7 @@ public class Main {
     testNativeJsEnumArray();
     testJsEnumVarargs();
     testShiftByJsEnumOrdinal();
+    testJsEnumTypeVariables();
   }
 
   private static void testNativeJsEnum() {
@@ -1107,5 +1108,153 @@ public class Main {
   private static void testShiftByJsEnumOrdinal() {
     // Repro for b/574644734.
     assertEquals(4, 1 << PlainJsEnum.TWO.ordinal());
+  }
+
+  private static void testJsEnumTypeVariables() {
+    checkJsEnumTypeVariable(PlainJsEnum.ONE);
+    checkNullJsEnumTypeVariable(null);
+    checkStringJsEnumTypeVariable(StringJsEnum.HELLO);
+    checkJsEnumTypeVariableInLambdas(PlainJsEnum.ONE);
+    checkJsEnumTypeVariableInGenerics(PlainJsEnum.ONE);
+    checkJsEnumTypeVariableVarargs(PlainJsEnum.ONE);
+    checkJsEnumTypeVariableBoundChain(PlainJsEnum.ONE);
+    checkNativeJsEnumTypeVariable(NativeEnum.ACCEPT);
+
+    // Note: Arrays.asList() is not used here since native JsEnum varargs are not supported in Wasm.
+    List<NativeEnum> nativeList = new ArrayList<>();
+    nativeList.add(NativeEnum.ACCEPT);
+    List<PlainJsEnum> plainList = new ArrayList<>();
+    plainList.add(PlainJsEnum.ONE);
+    // TODO(b/576859020): Throws ClassCastException in JS since the elements are cast to Enum to
+    // call equals().
+    // assertTrue(testWildcardEquals(nativeList, plainList));
+    assertTrue(jsEnumTypeVariablePassthrough(plainList.get(0)) == PlainJsEnum.ONE);
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <T extends PlainJsEnum> void checkJsEnumTypeVariable(T t) {
+    PlainJsEnum e = t;
+    Object o = t;
+    assertTrue(t == e);
+    assertTrue(t == o);
+    assertTrue(t instanceof PlainJsEnum);
+    assertTrue(t.getValue() == 1);
+    // TODO(b/576859020): Throw ClassCastException in JS since `t` is cast to Enum to call
+    // ordinal() and equals().
+    // assertTrue(t.ordinal() == 1);
+    // assertTrue(t.equals(e));
+    // assertFalse(t.equals(OtherPlainJsEnum.UNIT));
+    // assertFalse(t.equals(ONE_DOUBLE));
+    assertTrue(o.equals(t));
+    // TODO(b/576859020): Throw ClassCastException in JS since `t` is cast to Enum to call
+    // compareTo(), hashCode() and toString().
+    // assertTrue(t.compareTo(PlainJsEnum.ZERO) > 0);
+    // assertTrue(t.hashCode() == PlainJsEnum.ONE.hashCode());
+    // assertTrue(t.toString().equals(PlainJsEnum.ONE.toString()));
+    assertTrue(("" + t).equals("" + PlainJsEnum.ONE));
+    assertTrue((T) o == t);
+    assertTrue((T) e == t);
+    assertTrue(jsEnumTypeVariablePassthrough(t) == t);
+
+    PlainJsEnum conditionalJsEnum = t != null ? t : PlainJsEnum.ZERO;
+    assertTrue(conditionalJsEnum == t);
+    Object conditionalObject = t != null ? t : new Object();
+    assertTrue(conditionalObject == o);
+
+    if (!isWasm()) {
+      // JsEnums are only unboxed in JS.
+      // TODO(b/576859020): Fails since `t` is boxed in JS.
+      // assertUnderlyingTypeEquals(Double.class, t);
+      assertUnderlyingTypeEquals(Double.class, conditionalJsEnum);
+      assertUnderlyingTypeEquals(PlainJsEnum.class, o);
+      assertUnderlyingTypeEquals(PlainJsEnum.class, conditionalObject);
+    }
+  }
+
+  private static <T extends PlainJsEnum> T jsEnumTypeVariablePassthrough(T t) {
+    return t;
+  }
+
+  private static <T extends PlainJsEnum> void checkNullJsEnumTypeVariable(T t) {
+    assertTrue(t == null);
+    // TODO(b/576859020): Do not throw NullPointerException in optimized JS since `t` is treated
+    // as a regular Enum and the unused calls are optimized away.
+    // assertThrowsNullPointerException(() -> t.equals(PlainJsEnum.ONE));
+    // assertThrowsNullPointerException(() -> t.compareTo(PlainJsEnum.ONE));
+  }
+
+  @SuppressWarnings("unchecked")
+  private static <C extends StringJsEnum> void checkStringJsEnumTypeVariable(C c) {
+    assertTrue(c == StringJsEnum.HELLO);
+    // TODO(b/576859020): Crashes the transpiler since `C` is not treated as a JsEnum when
+    // accessing its value field.
+    // assertTrue(c.value.equals(HELLO_STRING));
+    // TODO(b/576859020): Throw ClassCastException in JS since `c` is cast to Enum to call
+    // equals().
+    // assertTrue(c.equals(StringJsEnum.HELLO));
+    // assertFalse(c.equals(StringJsEnum.GOODBYE));
+    Object o = c;
+    assertTrue(o != HELLO_STRING);
+    assertTrue((C) o == c);
+    if (!isWasm()) {
+      // JsEnums are only unboxed in JS.
+      // TODO(b/576859020): Fails since `c` is boxed in JS.
+      // assertUnderlyingTypeEquals(String.class, c);
+      assertUnderlyingTypeEquals(StringJsEnum.class, o);
+    }
+  }
+
+  private static <T extends PlainJsEnum> void checkJsEnumTypeVariableInLambdas(T t) {
+    Supplier<T> supplier = () -> t;
+    assertTrue(supplier.get() == t);
+    Function<T, Integer> ordinal = x -> x.ordinal();
+    Function<T, Integer> ordinalReference = PlainJsEnum::ordinal;
+    // TODO(b/576859020): Throw ClassCastException in JS since `t` is cast to Enum to call
+    // ordinal().
+    // assertTrue(ordinal.apply(t) == 1);
+    // assertTrue(ordinalReference.apply(t) == 1);
+  }
+
+  private static <T extends PlainJsEnum> void checkJsEnumTypeVariableInGenerics(T t) {
+    List<T> list = new ArrayList<>();
+    list.add(t);
+    assertTrue(list.get(0) == t);
+    // TODO(b/576859020): Throws ClassCastException in JS since the element is cast to Enum to
+    // call ordinal().
+    // assertTrue(list.get(0).ordinal() == 1);
+    assertTrue(boxingPassthrough(t) == t);
+  }
+
+  @SafeVarargs
+  private static <T extends PlainJsEnum> void checkJsEnumTypeVariableVarargs(T... ts) {
+    assertTrue(ts.length == 1);
+    assertTrue(ts[0] == PlainJsEnum.ONE);
+    // TODO(b/576859020): Throws ClassCastException in JS since the element is cast to Enum to
+    // call ordinal().
+    // assertTrue(ts[0].ordinal() == 1);
+  }
+
+  private static <S extends PlainJsEnum, T extends S> void checkJsEnumTypeVariableBoundChain(T t) {
+    assertTrue(t == PlainJsEnum.ONE);
+    // TODO(b/576859020): Throw ClassCastException in JS since `t` is cast to Enum to call
+    // ordinal() and equals().
+    // assertTrue(t.ordinal() == 1);
+    // assertTrue(t.equals(PlainJsEnum.ONE));
+    // TODO(b/576859020): Fails since `t` is boxed in JS.
+    // if (!isWasm()) {
+    //   // JsEnums are only unboxed in JS.
+    //   assertUnderlyingTypeEquals(Double.class, t);
+    // }
+  }
+
+  private static <T extends NativeEnum> void checkNativeJsEnumTypeVariable(T t) {
+    // TODO(b/576859020): Throws ClassCastException in JS since `t` is cast to Enum to call
+    // equals().
+    // assertTrue(t.equals(NativeEnum.ACCEPT));
+  }
+
+  private static boolean testWildcardEquals(
+      List<? extends NativeEnum> nativeList, List<? extends PlainJsEnum> plainList) {
+    return nativeList.get(0).equals(NativeEnum.ACCEPT) && plainList.get(0).equals(PlainJsEnum.ONE);
   }
 }

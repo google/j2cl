@@ -381,3 +381,59 @@ fun testShiftByJsEnumOrdinal(e: ComparableJsEnum): Int {
   // Repro for b/574644734.
   return 1 shl e.ordinal
 }
+
+fun <T : ComparableJsEnum> testJsEnumTypeVariable(
+  t: T,
+  listWildCardExtends: MutableList<out ComparableJsEnum>,
+  listWildCardSuper: MutableList<in ComparableJsEnum>,
+  listJsEnum: MutableList<ComparableJsEnum>,
+): T {
+  var e: ComparableJsEnum = t
+  e = listWildCardExtends.get(0)
+  e = listJsEnum.get(0)
+
+  var o: Any? = t
+  o = listWildCardExtends.get(0)
+  o = listWildCardSuper.get(0)
+  o = listJsEnum.get(0)
+
+  var tt = o as T
+  tt = e as T
+
+  var b = tt === e
+  b = tt === o
+  b = tt is ComparableJsEnum
+  val ordinal = tt.ordinal
+  b = tt.equals(e)
+  b = listWildCardExtends.get(0).equals(e)
+  b = listWildCardSuper.get(0)!!.equals(e)
+  b = listJsEnum.get(0).equals(e)
+  return jsEnumTypeVariablePassthrough(tt)
+}
+
+fun <T : ComparableJsEnum> jsEnumTypeVariablePassthrough(t: T): T = t
+
+fun <T : ComparableJsEnum> testJsEnumTypeVariableInLambdas(t: T) {
+  val supplier: () -> T = { t }
+  val ordinal: (T) -> Int = { x -> x.ordinal }
+  val valueReference: (T) -> Int = ComparableJsEnum::getValue
+}
+
+fun <T : ComparableJsEnum> testJsEnumTypeVariableVarargs(t: T) {
+  var e: ComparableJsEnum = jsEnumTypeVariableVarargs(t, t)
+  e = jsEnumTypeVariableVarargs(ComparableJsEnum.ONE)
+}
+
+fun <T : ComparableJsEnum> jsEnumTypeVariableVarargs(vararg ts: T): T = ts[0]
+
+fun <I : IntJsEnum, S : StringJsEnum> testCustomValuedJsEnumTypeVariables(i: I, s: S) {
+  val intValue = i.getValue()
+  var b = i === IntJsEnum.TWENTY
+  b = i.equals(IntJsEnum.TWENTY)
+  var o: Any? = i
+  var ii = o as I
+  val stringValue = s.getValue()
+  b = s.equals(StringJsEnum.ONE)
+  o = s
+  var ss = o as S
+}
