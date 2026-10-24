@@ -968,7 +968,7 @@ public class JsInteropRestrictionsChecker {
             }
             SourcePosition sourcePosition = fieldAccess.getSourcePosition();
             problems.error(
-                sourcePosition == SourcePosition.NONE ? type.getSourcePosition() : sourcePosition,
+                sourcePosition == SourcePosition.NONE ? getSourcePosition() : sourcePosition,
                 "Custom-valued JsEnum value field '%s' cannot be assigned.",
                 fieldDescriptor.getReadableDescription());
           }

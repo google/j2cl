@@ -2492,12 +2492,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         import jsinterop.annotations.*;
         @JsEnum(hasCustomValue = true)
         public enum CustomValued {
-        > Error: Custom-valued JsEnum value field 'CustomValued.value' cannot be assigned.
           A(1);
           int value;
           CustomValued(int value) { this.value = value; }
           static void setValue() {
             A.value = 3;
+        > Error: Custom-valued JsEnum value field 'CustomValued.value' cannot be assigned.
           }
         }
         @JsEnum(hasCustomValue = true)
