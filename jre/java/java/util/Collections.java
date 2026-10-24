@@ -1306,7 +1306,7 @@ public class Collections {
     return unmodifiableMap(map);
   }
 
-  public static <T> void sort(List<T> target) {
+  public static <T extends Comparable<? super T>> void sort(List<T> target) {
     target.sort(null);
   }
 
