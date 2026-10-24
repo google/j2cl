@@ -2844,19 +2844,19 @@ public class JsInteropRestrictionsChecker {
         new AbstractVisitor() {
           @Override
           public void exitType(Type nestedType) {
-            TypeDescriptor superTypeDescriptor = type.getTypeDescriptor().getSuperTypeDescriptor();
-            if (superTypeDescriptor == null) {
-              return;
-            }
-            errorIfDisallowedType(
-                superTypeDescriptor,
-                superTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
-                nestedType.getSourcePosition(),
-                messageSuffix,
-                "Supertype of '%s'",
-                nestedType.getReadableDescription());
+            nestedType
+                .getSuperTypesStream()
+                .forEach(
+                    superTypeDescriptor ->
+                        errorIfDisallowedType(
+                            superTypeDescriptor,
+                            superTypeDescriptor,
+                            isTypeDisallowed,
+                            onlyCheckTypeSpecialization,
+                            nestedType.getSourcePosition(),
+                            messageSuffix,
+                            "Supertype of '%s'",
+                            nestedType.getReadableDescription()));
           }
 
           @Override

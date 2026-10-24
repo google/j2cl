@@ -3080,8 +3080,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.
           }
         }
-        class Derived extends Main<Main.MyJsEnum[]> {}
+        class Derived extends Main<Main.MyJsEnum[]> {
         > Error: Supertype of 'Derived' cannot be of type 'Main<MyJsEnum[]>'.
+          abstract class NestedImplements implements List<Main.MyJsEnum[]> {}
+        > Error: Supertype of 'NestedImplements' cannot be of type 'List<MyJsEnum[]>'.
+        }
         class BaseWithTArrayParams<T>{
           void acceptsTVarargs(T... p) {}
           void acceptsTArray(T[] p) {}
