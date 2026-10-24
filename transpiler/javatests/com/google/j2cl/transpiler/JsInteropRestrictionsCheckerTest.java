@@ -2492,9 +2492,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         import jsinterop.annotations.*;
         @JsEnum(hasCustomValue = true)
         public enum CustomValued {
+        > Error: Custom-valued JsEnum value field 'CustomValued.value' cannot be assigned.
           A(1);
           int value;
           CustomValued(int value) { this.value = value; }
+          static void setValue() {
+            A.value = 3;
+          }
         }
         @JsEnum(hasCustomValue = true)
         enum InvalidCustomValueType {
@@ -2740,10 +2744,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.Main",
         """
-        import java.io.Serializable;
         import jsinterop.annotations.*;
         public class Main {
-        > Error: Custom-valued JsEnum value field 'JsEnumWithCustomValue.value' cannot be assigned.
           @JsEnum(isNative = true) enum Native {A, B}
           @JsEnum enum MyJsEnum {A, B}
           @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
@@ -2761,8 +2763,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Enum'.
             Comparable c = JsEnumWithCustomValue.A;
         > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Comparable'.
-            Serializable s = JsEnumWithCustomValue.A;
-            JsEnumWithCustomValue.A.value = 3;
+            Object o = (Enum) MyJsEnum.A;
+        > Error: JsEnum 'MyJsEnum' cannot be cast to 'Enum'.
+            o = (Enum<?>) Native.A;
+        > Error: JsEnum 'Native' cannot be cast to 'Enum<?>'.
+            o = (Comparable<?>) JsEnumWithCustomValue.A;
+        > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be cast to 'Comparable<?>'.
           }
         }
         """);
@@ -2870,6 +2876,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 B;
               }
               @JsEnum enum MyJsEnum {A, B}
+              @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
+                A(1);
+                int value;
+                JsEnumWithCustomValue(int value) { this.value = value; }
+              }
               private static void acceptsObject(Object o) {}
               private static void acceptsSerializable(Serializable s) {}
               private static void acceptsComparable(Comparable c) {}
@@ -2895,9 +2906,18 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                   acceptsComparable(MyJsEnum.A);
                   MyJsEnum myJsEnum = MyJsEnum.A;
                   acceptsMyJsEnum(MyJsEnum.A);
+                  o = (Object) MyJsEnum.A;
+                  o = (Serializable) MyJsEnum.A;
+                  o = (Comparable<?>) MyJsEnum.A;
+                  o = (MyJsEnum) MyJsEnum.A;
+                  myJsEnum = (MyJsEnum) o;
                   List<MyJsEnum> l1 = null; l1.add(MyJsEnum.A);
                   List<Object> l2 = null; l2.add(MyJsEnum.A);
                   List<? extends Serializable> l3 = new ArrayList<MyJsEnum>();
+                }
+                {
+                  Object o = JsEnumWithCustomValue.A;
+                  Serializable s = JsEnumWithCustomValue.A;
                 }
               }
             }

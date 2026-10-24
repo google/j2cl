@@ -717,8 +717,19 @@ public class JsInteropRestrictionsChecker {
                   Expression expression) {
                 // Handle here all the scenarios related to the JsEnum being used as an enum, e.g.
                 // assignment, parameter passing, etc.
-                checkJsEnumAssignment(inferredTypeDescriptor, expression);
+                checkJsEnumAssignment(inferredTypeDescriptor, expression, "assigned to");
                 return expression;
+              }
+
+              @Override
+              public Expression rewriteCastContext(CastExpression castExpression) {
+                // Casts to supertypes are always allowed, so they need to be checked as well, e.g.
+                // `(Enum<?>) MyJsEnum.A`.
+                checkJsEnumAssignment(
+                    castExpression.getCastTypeDescriptor(),
+                    castExpression.getExpression(),
+                    "cast to");
+                return castExpression;
               }
 
               @Override
@@ -731,7 +742,7 @@ public class JsInteropRestrictionsChecker {
               }
 
               private void checkJsEnumAssignment(
-                  TypeDescriptor toTypeDescriptor, Expression expression) {
+                  TypeDescriptor toTypeDescriptor, Expression expression, String conversion) {
                 TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
                 if (isDisallowedJsEnumAssignment(toTypeDescriptor, expressionTypeDescriptor)) {
@@ -739,11 +750,12 @@ public class JsInteropRestrictionsChecker {
                   // the error reporting here should include source position.
                   problems.error(
                       getSourcePosition(),
-                      "%s'%s' cannot be assigned to '%s'.",
+                      "%s'%s' cannot be %s '%s'.",
                       TypeDescriptors.isJavaLangComparable(toTypeDescriptor.toRawTypeDescriptor())
                           ? getTypeKindPrefix(expressionTypeDescriptor)
                           : "JsEnum ",
                       expressionTypeDescriptor.getReadableDescription(),
+                      conversion,
                       toTypeDescriptor.getReadableDescription());
                 }
               }
