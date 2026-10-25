@@ -99,7 +99,7 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
-import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
@@ -885,8 +885,8 @@ public class JsInteropRestrictionsChecker {
 
   private void checkOverrides(
       Type type,
-      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedParameterOverride,
-      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedReturnTypeOverride,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
       String checkedTypeMessage) {
     type.getMembers()
         .forEach(
@@ -900,8 +900,8 @@ public class JsInteropRestrictionsChecker {
 
   private void checkOverrides(
       Member member,
-      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedParameterOverride,
-      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isDisallowedReturnTypeOverride,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
       String checkedTypeMessage) {
     if (!member.isMethod()) {
       return;
@@ -919,7 +919,7 @@ public class JsInteropRestrictionsChecker {
         TypeDescriptor overriddenParameterDescriptor =
             overriddenMethodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
 
-        if (isDisallowedParameterOverride.apply(
+        if (isDisallowedParameterOverride.test(
             overriddenParameterDescriptor, parameterDescriptor)) {
           problems.error(
               member.getSourcePosition(),
@@ -930,7 +930,7 @@ public class JsInteropRestrictionsChecker {
         }
       }
 
-      if (isDisallowedReturnTypeOverride.apply(
+      if (isDisallowedReturnTypeOverride.test(
           overriddenMethodDescriptor.getReturnTypeDescriptor(),
           methodDescriptor.getReturnTypeDescriptor())) {
         problems.error(
@@ -2709,7 +2709,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkTypeAssignments(
       Type type,
-      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isAssignmentDisallowed,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isAssignmentDisallowed,
       String errorMessageSuffix) {
     type.accept(
         new ConversionContextVisitor(
@@ -2719,15 +2719,7 @@ public class JsInteropRestrictionsChecker {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                if (isAssignmentDisallowed(
-                    declaredTypeDescriptor, expression, isAssignmentDisallowed)) {
-                  problems.error(
-                      getSourcePosition(),
-                      "%s cannot be assigned to %s.%s",
-                      getReadableDescriptionWithPrefix(expression.getTypeDescriptor()),
-                      getReadableDescriptionWithPrefix(declaredTypeDescriptor),
-                      errorMessageSuffix);
-                }
+                checkTypeAssignment(declaredTypeDescriptor, expression, "assigned to");
                 return expression;
               }
 
@@ -2744,8 +2736,7 @@ public class JsInteropRestrictionsChecker {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression qualifierExpression) {
-                if (isAssignmentDisallowed(
-                    declaredTypeDescriptor, qualifierExpression, isAssignmentDisallowed)) {
+                if (isAssignmentDisallowed(declaredTypeDescriptor, qualifierExpression)) {
                   problems.error(
                       getSourcePosition(),
                       "Cannot access member of %s with %s.%s",
@@ -2758,34 +2749,38 @@ public class JsInteropRestrictionsChecker {
 
               @Override
               public Expression rewriteCastContext(CastExpression castExpression) {
-                if (isAssignmentDisallowed(
+                checkTypeAssignment(
                     castExpression.getCastTypeDescriptor(),
                     castExpression.getExpression(),
-                    isAssignmentDisallowed)) {
-                  problems.error(
-                      getSourcePosition(),
-                      "%s cannot be cast to %s.%s",
-                      getReadableDescriptionWithPrefix(
-                          castExpression.getExpression().getTypeDescriptor()),
-                      getReadableDescriptionWithPrefix(castExpression.getCastTypeDescriptor()),
-                      errorMessageSuffix);
-                }
+                    "cast to");
                 return castExpression;
               }
+
+              private void checkTypeAssignment(
+                  TypeDescriptor toTypeDescriptor, Expression expression, String conversion) {
+                if (isAssignmentDisallowed(toTypeDescriptor, expression)) {
+                  problems.error(
+                      getSourcePosition(),
+                      "%s cannot be %s %s.%s",
+                      getReadableDescriptionWithPrefix(expression.getTypeDescriptor()),
+                      conversion,
+                      getReadableDescriptionWithPrefix(toTypeDescriptor),
+                      errorMessageSuffix);
+                }
+              }
+
+              private boolean isAssignmentDisallowed(
+                  TypeDescriptor toTypeDescriptor, Expression expression) {
+                // Allow NullLiteral to be assigned. NullLiteral is typed as Object until a later
+                // normalization pass.
+                if (expression instanceof NullLiteral) {
+                  return false;
+                }
+
+                return isAssignmentDisallowed.test(
+                    toTypeDescriptor, expression.getTypeDescriptor());
+              }
             }));
-  }
-
-  private boolean isAssignmentDisallowed(
-      TypeDescriptor toTypeDescriptor,
-      Expression expression,
-      BiFunction<TypeDescriptor, TypeDescriptor, Boolean> isAssignmentDisallowed) {
-    // Allow NullLiteral to be assigned. NullLiteral is typed as Object until a later normalization
-    // pass.
-    if (expression instanceof NullLiteral) {
-      return false;
-    }
-
-    return isAssignmentDisallowed.apply(toTypeDescriptor, expression.getTypeDescriptor());
   }
 
   /**
