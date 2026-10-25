@@ -2344,13 +2344,11 @@ public class JsInteropRestrictionsChecker {
 
     Method jsConstructor = getJsConstructor(type);
     if (jsConstructor == null) {
-      // The JsConstructor is the implicit constructor and delegates to the default constructor
-      // for the super class.
+      // The JsConstructor is the implicit constructor and delegates to the target of the implicit
+      // super() call.
       MethodDescriptor implicitJsConstructorDescriptor =
           type.getDeclaration().getJsConstructorMethodDescriptors().getFirst();
-      if (!type.getSuperTypeDescriptor()
-          .getDefaultConstructorMethodDescriptor()
-          .isJsConstructor()) {
+      if (!type.getImplicitSuperCallTarget().isJsConstructor()) {
         problems.error(
             type.getSourcePosition(),
             "Implicit JsConstructor '%s' can only delegate to super JsConstructor '%s'.",
@@ -2360,8 +2358,11 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
+    // At this point the JsConstructor is the primary constructor, so it either has an explicit
+    // super() call or an implicit one.
+    MethodCall superCall = AstUtils.getConstructorInvocation(jsConstructor);
     MethodDescriptor delegatedSuperConstructor =
-        AstUtils.getDelegatedSuperConstructorDescriptor(jsConstructor);
+        superCall != null ? superCall.getTarget() : type.getImplicitSuperCallTarget();
     if (!delegatedSuperConstructor.isJsConstructor()) {
       problems.error(
           jsConstructor.getSourcePosition(),

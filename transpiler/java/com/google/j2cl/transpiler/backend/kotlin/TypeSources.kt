@@ -149,7 +149,9 @@ internal data class TypeSources(val nameSources: NameSources) {
         join(
           Source.SPACE,
           spaceSeparated(
-            environment.ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor).source,
+            environment
+              .ktVisibility(type.typeDescriptor.defaultConstructorMethodDescriptor!!)
+              .source,
             KotlinSource.CONSTRUCTOR_KEYWORD.withMapping(type.sourcePosition),
           ),
           inParentheses(Source.EMPTY),

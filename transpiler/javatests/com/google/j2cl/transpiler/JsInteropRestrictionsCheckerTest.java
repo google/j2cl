@@ -1478,6 +1478,25 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public class ImplicitSubExplicitSuper extends ExplicitSubImplicitSuper {
             }
             """)
+        .addCompilationUnit(
+            "otherpkg.SuperVarargsJsConstructor",
+            """
+            import jsinterop.annotations.*;
+            public class SuperVarargsJsConstructor {
+              SuperVarargsJsConstructor() { this(1); }
+              @JsConstructor
+              public SuperVarargsJsConstructor(int... a) {}
+            }
+            """)
+        .addCompilationUnit(
+            "test.SubVarargsJsConstructor",
+            """
+            import jsinterop.annotations.*;
+            import otherpkg.SuperVarargsJsConstructor;
+            @JsType
+            public class SubVarargsJsConstructor extends SuperVarargsJsConstructor {
+            }
+            """)
         .assertTranspileSucceeds();
   }
 
@@ -1552,12 +1571,26 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Class 'SomeClass2' should have a JsConstructor.
         }
         """,
+        "otherpkg.SuperPackagePrivateJsConstructor",
+        """
+        import jsinterop.annotations.*;
+        public class SuperPackagePrivateJsConstructor {
+          @JsConstructor
+          SuperPackagePrivateJsConstructor() {}
+          public SuperPackagePrivateJsConstructor(int... a) { this(); }
+        }
+        """,
         "test.BadImplicitJsConstructor",
         """
         import jsinterop.annotations.*;
+        import otherpkg.SuperPackagePrivateJsConstructor;
         @JsType
         public class BadImplicitJsConstructor extends SubBuggyJsType {
         > Error: Implicit JsConstructor 'BadImplicitJsConstructor()' can only delegate to super JsConstructor 'SubBuggyJsType(int)'.
+          @JsType
+          public static class SubPackagePrivateJsConstructor extends SuperPackagePrivateJsConstructor {
+          > Error: Implicit JsConstructor 'SubPackagePrivateJsConstructor()' can only delegate to super JsConstructor 'SuperPackagePrivateJsConstructor()'.
+          }
         }
         """,
         "test.ImplicitConstructor",

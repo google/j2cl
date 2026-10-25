@@ -51,6 +51,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -1247,14 +1248,90 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     return targetReturnTypeDescriptor;
   }
 
-  /** Returns the default (parameterless) constructor for the type. */
+  /** Returns the default constructor for the type if any. */
   @Memoized
+  @Nullable
   public MethodDescriptor getDefaultConstructorMethodDescriptor() {
-    return getDeclaredMethodDescriptors().stream()
-        .filter(MethodDescriptor::isConstructor)
-        .filter(methodDescriptor -> methodDescriptor.getParameterTypeDescriptors().isEmpty())
-        .findFirst()
-        .get();
+    return getImplicitConstructorTarget(this);
+  }
+
+  /**
+   * Returns the constructor in this type that is the target of a parameterless constructor
+   * invocation from {@code from}.
+   *
+   * <p>Note: Implicit super constructor calls are inserted when no explicit call to super() or
+   * this() appear in the constructor (JLS 8.8.7). Such call, super() with no parameters, is treated
+   * as if written by the user and is subject to standard overloading rules (JLS 15.12.2.1 to
+   * 15.12.2.6). JLS 15.12.2 describes how the match should be made. The rules are rather complex
+   * but they become simpler when the method is not an instance method, and boil down to finding the
+   * most specific overload.
+   *
+   * <p>Since the implicit method call has no parameters the only other possible match apart of the
+   * 0-parameter constructor is the 1-parameter varargs which could have many overloads.
+   */
+  @Nullable
+  MethodDescriptor getImplicitConstructorTarget(DeclaredTypeDescriptor from) {
+    // Get all possible targets of an implicit super() call. The targets can either be a
+    // parameterless constructor or if there is no parameterless constructor a varargs constructor
+    // that can be called with no parameters.
+    // TODO(b/178437774): The implicit constructor for java.lang.Enum has two parameters. Fix the
+    // behavior accordingly when we rollback the hack for b/74986525.
+    boolean isJavaLangEnum = TypeDescriptors.isJavaLangEnum(this);
+    Optional<MethodDescriptor> target =
+        getDeclaredMethodDescriptors().stream()
+            .filter(MethodDescriptor::isConstructor)
+            .filter(m -> m.isVisibleFrom(from))
+            .filter(
+                m ->
+                    m.getParameterDescriptors().isEmpty()
+                        // The implicit enum constructor target is defined with two parameters.
+                        || (isJavaLangEnum && m.getParameterDescriptors().size() == 2))
+            .collect(toOptional());
+
+    if (target.isEmpty()) {
+      // If no 0-argument constructor find a 1-argument varargs constructor. There might be more
+      // than 1 varargs constructor, if so apply the more specific overload rule. At this point
+      // there should be no ambiguity and a more specific overload is guaranteed. This is because at
+      // this point type checking succeeded in the frontend and if there were any ambiguity the
+      // compile would have produced an error already.
+      target =
+          getDeclaredMethodDescriptors().stream()
+              .filter(MethodDescriptor::isConstructor)
+              .filter(m -> m.isVisibleFrom(from))
+              .filter(m -> m.getParameterDescriptors().size() == 1)
+              .filter(m -> Iterables.getOnlyElement(m.getParameterDescriptors()).isVarargs())
+              .min(DeclaredTypeDescriptor::getParameterSpecificityComparator);
+    }
+
+    if (target.isPresent()) {
+      if (isJavaLangEnum) {
+        // If the super type is java.lang.Enum, remove the implicit parameters from the descriptor
+        // which are present in the class, but should be implicit in the constructor invocations.
+        return target.get().transform(MethodDescriptor.Builder::removeParameterTypeDescriptors);
+      }
+      return target.get();
+    }
+
+    if (getDeclaredMethodDescriptors().stream().noneMatch(MethodDescriptor::isConstructor)) {
+      // No appropriate constructor found, it must be the implicit constructor.
+      return AstUtils.createImplicitConstructorDescriptor(this);
+    }
+
+    return null;
+  }
+
+  /**
+   * Returns a comparator for methods with exactly 1 parameter where the method with the most
+   * specific parameter comes first.
+   *
+   * <p>Note: Assumes that there is one that is more specific. The assumption is guaranteed by the
+   * Java type resolution in this narrow scenario.
+   */
+  private static int getParameterSpecificityComparator(MethodDescriptor m1, MethodDescriptor m2) {
+    return Iterables.getOnlyElement(m1.getParameterTypeDescriptors())
+            .isAssignableTo(Iterables.getOnlyElement(m2.getParameterTypeDescriptors()))
+        ? -1
+        : 1;
   }
 
   /**

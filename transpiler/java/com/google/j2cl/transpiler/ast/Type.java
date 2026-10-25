@@ -328,11 +328,27 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   @Nullable
   public Method getDefaultConstructor() {
-    // TODO(b/215777271): This doesn't consider varargs constructors as a default constructor.
+    MethodDescriptor defaultConstructorDescriptor =
+        getTypeDescriptor().getDefaultConstructorMethodDescriptor();
     return getMethods().stream()
-        .filter(m -> m.isConstructor() && m.getParameters().isEmpty())
+        .filter(m -> m.getDescriptor().equals(defaultConstructorDescriptor))
         .findFirst()
         .orElse(null);
+  }
+
+  /**
+   * Returns the constructor in the super type that is the target of an implicit (or parameterless)
+   * super() call from a constructor in this type.
+   *
+   * <p>Note: This resolves against {@code getSuperTypeDescriptor()} rather than {@code
+   * getTypeDescriptor().getSuperTypeDescriptor()}. These are not necessarily the same; some passes
+   * (e.g. {@code OptimizeAutoValue}) replace the super type of the {@code Type} without updating
+   * its declaration, and the implicit super() call needs to target a constructor in the actual
+   * super type.
+   */
+  @Nullable
+  public MethodDescriptor getImplicitSuperCallTarget() {
+    return getSuperTypeDescriptor().getImplicitConstructorTarget(getTypeDescriptor());
   }
 
   /** Returns the primary constructor if the the type has one. */

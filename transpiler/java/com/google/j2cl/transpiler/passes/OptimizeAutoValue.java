@@ -293,8 +293,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     if (defaultCtor == null) {
       // If there are no default constructors in the parent, there is nothing to update since
       // implicit behavior is still correct.
-      // TODO(b/215777271): Handle single varargs constructors which are currently not considered
-      // as targets for the parameterless and implicit super invocation but should.
       return;
     }
 

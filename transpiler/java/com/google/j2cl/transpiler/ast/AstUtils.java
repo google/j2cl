@@ -141,27 +141,6 @@ public final class AstUtils {
   }
 
   /**
-   * Returns the superclass constructor method descriptor this constructor delegates to if any or
-   * {@code null} otherwise.
-   */
-  @Nullable
-  public static MethodDescriptor getDelegatedSuperConstructorDescriptor(Method method) {
-    checkArgument(method.isConstructor());
-    if (!hasConstructorInvocation(method)) {
-      return method
-          .getDescriptor()
-          .getEnclosingTypeDescriptor()
-          .getSuperTypeDescriptor()
-          .getDefaultConstructorMethodDescriptor();
-    }
-    MethodDescriptor delegatedMethodDescriptor = getConstructorInvocation(method).getTarget();
-
-    return delegatedMethodDescriptor.inSameTypeAs(method.getDescriptor())
-        ? null
-        : delegatedMethodDescriptor;
-  }
-
-  /**
    * Creates forwarding method {@code fromMethodDescriptor} that delegates to {@code
    * toMethodDescriptor}, e.g.
    *
