@@ -785,18 +785,14 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsEnumArrays(Type type) {
     // JsEnum arrays cannot be assigned to Object[], T[], T..., and so on.
-    checkTypeAssignments(
-        type,
-        JsInteropRestrictionsChecker::isDisallowedJsEnumArrayAssignment,
-        /* errorMessageSuffix= */ "");
+    checkTypeAssignments(type, JsInteropRestrictionsChecker::isDisallowedJsEnumArrayAssignment);
 
     // JsEnum arrays are not allowed to be used in most type parameters.
     checkAllowedTypes(
         type,
         AstUtils::isNonNativeJsEnumArray,
         /* onlyCheckTypeSpecialization= */ true,
-        /* disallowedTypeDescription= */ "JsEnum array type",
-        /* messageSuffix= */ "");
+        /* disallowedTypeDescription= */ "JsEnum array type");
 
     checkOverrides(
         type,
@@ -1838,7 +1834,7 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    checkMethodSignature(method, this::canCrossWasmJavaScriptBoundary, "");
+    checkMethodSignature(method, this::canCrossWasmJavaScriptBoundary);
   }
 
   /**
@@ -1860,19 +1856,17 @@ public class JsInteropRestrictionsChecker {
         || (checkWasmCustomDescriptorsJsInterop && isWasmJsExportedType(typeDescriptor));
   }
 
-  private void checkMethodSignature(
-      MethodLike methodLike, Predicate<TypeDescriptor> checkType, String errorMessageSuffix) {
+  private void checkMethodSignature(MethodLike methodLike, Predicate<TypeDescriptor> checkType) {
     for (Variable parameter : methodLike.getParameters()) {
       TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
       SourcePosition sourcePosition = parameter.getSourcePosition();
       if (!checkType.test(parameterTypeDescriptor)) {
         problems.error(
             sourcePosition == SourcePosition.NONE ? methodLike.getSourcePosition() : sourcePosition,
-            "Parameter '%s' in '%s' cannot be of type '%s'.%s",
+            "Parameter '%s' in '%s' cannot be of type '%s'.",
             parameter.getName(),
             methodLike.getReadableDescription(),
-            parameterTypeDescriptor.getReadableDescription(),
-            errorMessageSuffix);
+            parameterTypeDescriptor.getReadableDescription());
       }
     }
 
@@ -1885,10 +1879,9 @@ public class JsInteropRestrictionsChecker {
     if (!checkType.test(returnTypeDescriptor)) {
       problems.error(
           methodLike.getSourcePosition(),
-          "Return type of '%s' cannot be of type '%s'.%s",
+          "Return type of '%s' cannot be of type '%s'.",
           methodLike.getReadableDescription(),
-          returnTypeDescriptor.getReadableDescription(),
-          errorMessageSuffix);
+          returnTypeDescriptor.getReadableDescription());
     }
   }
 
@@ -2708,9 +2701,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkTypeAssignments(
-      Type type,
-      BiPredicate<TypeDescriptor, TypeDescriptor> isAssignmentDisallowed,
-      String errorMessageSuffix) {
+      Type type, BiPredicate<TypeDescriptor, TypeDescriptor> isAssignmentDisallowed) {
     type.accept(
         new ConversionContextVisitor(
             new ContextRewriter() {
@@ -2739,10 +2730,9 @@ public class JsInteropRestrictionsChecker {
                 if (isAssignmentDisallowed(declaredTypeDescriptor, qualifierExpression)) {
                   problems.error(
                       getSourcePosition(),
-                      "Cannot access member of %s with %s.%s",
+                      "Cannot access member of %s with %s.",
                       getReadableDescriptionWithPrefix(declaredTypeDescriptor),
-                      getReadableDescriptionWithPrefix(qualifierExpression.getTypeDescriptor()),
-                      errorMessageSuffix);
+                      getReadableDescriptionWithPrefix(qualifierExpression.getTypeDescriptor()));
                 }
                 return qualifierExpression;
               }
@@ -2761,11 +2751,10 @@ public class JsInteropRestrictionsChecker {
                 if (isAssignmentDisallowed(toTypeDescriptor, expression)) {
                   problems.error(
                       getSourcePosition(),
-                      "%s cannot be %s %s.%s",
+                      "%s cannot be %s %s.",
                       getReadableDescriptionWithPrefix(expression.getTypeDescriptor()),
                       conversion,
-                      getReadableDescriptionWithPrefix(toTypeDescriptor),
-                      errorMessageSuffix);
+                      getReadableDescriptionWithPrefix(toTypeDescriptor));
                 }
               }
 
@@ -2833,8 +2822,7 @@ public class JsInteropRestrictionsChecker {
       Type type,
       Predicate<TypeDescriptor> isTypeDisallowed,
       boolean onlyCheckTypeSpecialization,
-      String disallowedTypeDescription,
-      String messageSuffix) {
+      String disallowedTypeDescription) {
     type.accept(
         new AbstractVisitor() {
           @Override
@@ -2849,7 +2837,6 @@ public class JsInteropRestrictionsChecker {
                             isTypeDisallowed,
                             onlyCheckTypeSpecialization,
                             nestedType.getSourcePosition(),
-                            messageSuffix,
                             "Supertype of '%s'",
                             nestedType.getReadableDescription()));
           }
@@ -2868,7 +2855,6 @@ public class JsInteropRestrictionsChecker {
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
                 sourcePosition == SourcePosition.NONE ? getSourcePosition() : sourcePosition,
-                messageSuffix,
                 "Variable '%s'",
                 variable.getName());
           }
@@ -2878,8 +2864,7 @@ public class JsInteropRestrictionsChecker {
             checkMethodSignature(
                 method,
                 Predicates.not(
-                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)),
-                messageSuffix);
+                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)));
           }
 
           @Override
@@ -2887,8 +2872,7 @@ public class JsInteropRestrictionsChecker {
             checkMethodSignature(
                 functionExpression,
                 Predicates.not(
-                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)),
-                messageSuffix);
+                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)));
           }
 
           @Override
@@ -2901,7 +2885,6 @@ public class JsInteropRestrictionsChecker {
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
                 field.getSourcePosition(),
-                messageSuffix,
                 "Field '%s'",
                 field.getReadableDescription());
           }
@@ -2921,7 +2904,6 @@ public class JsInteropRestrictionsChecker {
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
                 getSourcePosition(),
-                messageSuffix,
                 "Reference to field '%s'",
                 fieldAccess.getTarget().getReadableDescription());
           }
@@ -2942,7 +2924,6 @@ public class JsInteropRestrictionsChecker {
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
                 getSourcePosition(),
-                messageSuffix,
                 "Returned type in call to method '%s'",
                 methodCall.getTarget().getReadableDescription());
           }
@@ -2956,7 +2937,6 @@ public class JsInteropRestrictionsChecker {
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
                 getSourcePosition(),
-                messageSuffix,
                 "Array creation '%s'",
                 // TODO(b/65465035): Emit the expression source position when it is tracked, and
                 // avoid toString() in an AST nodes.
@@ -2972,7 +2952,6 @@ public class JsInteropRestrictionsChecker {
                 isTypeDisallowed,
                 onlyCheckTypeSpecialization,
                 getSourcePosition(),
-                messageSuffix,
                 "Object creation '%s'",
                 // TODO(b/65465035): Emit the expression source position when it is tracked, and
                 // avoid toString() in an AST nodes.
@@ -2989,10 +2968,9 @@ public class JsInteropRestrictionsChecker {
                 onlyCheckTypeSpecialization)) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against %s '%s'.%s",
+                  "Cannot do instanceof against %s '%s'.",
                   disallowedTypeDescription,
-                  testTypeDescriptor.getReadableDescription(),
-                  messageSuffix);
+                  testTypeDescriptor.getReadableDescription());
             }
           }
 
@@ -3007,10 +2985,9 @@ public class JsInteropRestrictionsChecker {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
                   getSourcePosition(),
-                  "Cannot cast to %s '%s'.%s",
+                  "Cannot cast to %s '%s'.",
                   disallowedTypeDescription,
-                  castTypeDescriptor.getReadableDescription(),
-                  messageSuffix);
+                  castTypeDescriptor.getReadableDescription());
             }
           }
         });
@@ -3023,7 +3000,6 @@ public class JsInteropRestrictionsChecker {
       Predicate<TypeDescriptor> isTypeDisallowed,
       boolean onlyCheckTypeSpecialization,
       SourcePosition sourcePosition,
-      String messageSuffix,
       @FormatString String messagePrefixFormat,
       Object... messagePrefixArgs) {
     if (hasDisallowedType(
@@ -3033,10 +3009,9 @@ public class JsInteropRestrictionsChecker {
         onlyCheckTypeSpecialization)) {
       problems.error(
           sourcePosition,
-          "%s cannot be of type '%s'.%s",
+          "%s cannot be of type '%s'.",
           String.format(messagePrefixFormat, messagePrefixArgs),
-          inferredTypeDescriptor.getReadableDescription(),
-          messageSuffix);
+          inferredTypeDescriptor.getReadableDescription());
     }
   }
 
