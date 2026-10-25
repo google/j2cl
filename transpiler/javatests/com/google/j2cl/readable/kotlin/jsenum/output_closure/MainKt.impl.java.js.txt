@@ -339,6 +339,18 @@ class MainKt extends j_l_Object {
    let v = $Overlay.m_getValue__$devirt__jsenum_ComparableJsEnum__int(/**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay)));
   }
  }
+ /** @nodts */
+ static m_testOptimizedCast__void() {
+  MainKt.$clinit();
+  let o = /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay));
+  if ($Overlay.$isInstance(o)) {
+   let e = /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), $Overlay));
+  }
+  let x = ComparableJsEnum.ONE;
+  if (!$Equality.$same(x, null)) {
+   let y = x;
+  }
+ }
  /** @nodts @return {number} */
  static m_testShiftByJsEnumOrdinal__jsenum_ComparableJsEnum__int(/** !ComparableJsEnum */ e) {
   MainKt.$clinit();
@@ -409,6 +421,13 @@ class MainKt extends j_l_Object {
   b = (/**@type {!Enum<!BoxedLightEnum<!StringJsEnum>>}*/ ($Casts.$to(s, Enum))).equals(/**@type {BoxedLightEnum<!StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(StringJsEnum.ONE, StringJsEnum_$Overlay)));
   o = s;
   let ss = /**@type {S}*/ ($Casts.$to($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), StringJsEnum_$Overlay), StringJsEnum_$Overlay));
+ }
+ /** @nodts @template T, I */
+ static m_testJsEnumTypeVariableIdentity__jsenum_ComparableJsEnum__jsenum_IntJsEnum__jsenum_IntJsEnum__void(/** T */ t, /** I */ i, /** !IntJsEnum */ e) {
+  MainKt.$clinit();
+  let b = $Equality.$same(t, i);
+  b = !$Equality.$same(t, i);
+  b = $Equality.$same(t, /**@type {BoxedLightEnum<!IntJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(e, IntJsEnum_$Overlay)));
  }
  /** @nodts */
  static $clinit() {

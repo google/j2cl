@@ -377,6 +377,17 @@ fun testJsEnumSmartCast() {
   }
 }
 
+fun testOptimizedCast() {
+  val o: Any? = ComparableJsEnum.ONE
+  if (o is ComparableJsEnum) {
+    val e: ComparableJsEnum = o as ComparableJsEnum
+  }
+  val x = ComparableJsEnum.ONE
+  if (x is ComparableJsEnum) {
+    val y: ComparableJsEnum = x as ComparableJsEnum
+  }
+}
+
 fun testShiftByJsEnumOrdinal(e: ComparableJsEnum): Int {
   // Repro for b/574644734.
   return 1 shl e.ordinal
@@ -436,4 +447,11 @@ fun <I : IntJsEnum, S : StringJsEnum> testCustomValuedJsEnumTypeVariables(i: I, 
   b = s.equals(StringJsEnum.ONE)
   o = s
   var ss = o as S
+}
+
+fun <T : ComparableJsEnum, I : IntJsEnum> testJsEnumTypeVariableIdentity(t: T, i: I, e: IntJsEnum) {
+  // Values of different JsEnums can be compared when they are typed as type variables.
+  var b = t === i
+  b = t !== i
+  b = t === e
 }

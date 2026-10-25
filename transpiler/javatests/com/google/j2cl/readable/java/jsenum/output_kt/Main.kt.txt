@@ -41,6 +41,7 @@ import kotlin.collections.List
 import kotlin.collections.MutableList
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.let
 import kotlin.run
 
 open class Main {
@@ -351,6 +352,26 @@ open class Main {
   }
   
   @JvmStatic
+  fun testOptimizedCast() {
+   val o: Any = ComparableJsEnum.ONE
+   if (o is ComparableJsEnum) {
+    val e: ComparableJsEnum? = o as ComparableJsEnum?
+   }
+   val x: ComparableJsEnum = ComparableJsEnum.ONE
+   if (x is ComparableJsEnum) {
+    val y: ComparableJsEnum? = x as ComparableJsEnum?
+   }
+  }
+  
+  @JvmStatic
+  fun testSwitchOnIntersection(o: Any?) {
+   when (o.let { it as ComparableJsEnum?; it as Comparable<ComparableJsEnum>?; it }!!) {
+    ComparableJsEnum.ZERO.let { it as ComparableJsEnum; it as Comparable<ComparableJsEnum>; it } -> {}
+    else -> {}
+   }
+  }
+  
+  @JvmStatic
   private fun testShiftByJsEnumOrdinal(e: ComparableJsEnum?): Int = 1.shl(
    e!!.ordinal,
   )
@@ -421,6 +442,17 @@ open class Main {
    )
    o = s_1
    s_1 = o as S?
+  }
+  
+  @JvmStatic
+  private fun <T> testJsEnumIntersectionTypeVariable(t: T) where T: ComparableJsEnum?, T: Comparable<ComparableJsEnum>? {
+   val e: ComparableJsEnum? = t
+   val o: Any? = t
+   val ordinal: Int = t!!.ordinal
+   val b: Boolean = t!!.equals(e)
+   val c: Int = t!!.compareTo(
+    e!!,
+   )
   }
  }
  

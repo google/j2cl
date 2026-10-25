@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -452,6 +453,27 @@ public class Main {
     }
   }
 
+  public static void testOptimizedCast() {
+    Object o = ComparableJsEnum.ONE;
+    if (o instanceof ComparableJsEnum) {
+      ComparableJsEnum e = (ComparableJsEnum) o;
+    }
+
+    ComparableJsEnum x = ComparableJsEnum.ONE;
+    if (x instanceof ComparableJsEnum) {
+      ComparableJsEnum y = (ComparableJsEnum) x;
+    }
+  }
+
+  @Wasm("nop") // TODO(b/577118779): Remove once switching on intersection types is supported.
+  public static void testSwitchOnIntersection(Object o) {
+    switch ((ComparableJsEnum & Comparable<ComparableJsEnum>) o) {
+      case ComparableJsEnum.ZERO:
+        break;
+      default:
+    }
+  }
+
   private static int testShiftByJsEnumOrdinal(ComparableJsEnum e) {
     // Repro for b/574644734.
     return 1 << e.ordinal();
@@ -517,5 +539,14 @@ public class Main {
     b = s.equals(StringJsEnum.ONE);
     o = s;
     s = (S) o;
+  }
+
+  private static <T extends ComparableJsEnum & Comparable<ComparableJsEnum>>
+      void testJsEnumIntersectionTypeVariable(T t) {
+    ComparableJsEnum e = t;
+    Object o = t;
+    int ordinal = t.ordinal();
+    boolean b = t.equals(e);
+    int c = t.compareTo(e);
   }
 }

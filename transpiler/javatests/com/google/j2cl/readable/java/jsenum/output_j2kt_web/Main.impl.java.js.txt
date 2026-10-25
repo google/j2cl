@@ -375,6 +375,31 @@ class Main extends j_l_Object {
    let v_1 = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(e_1);
   }
  }
+ /** @nodts */
+ static m_testOptimizedCast__void() {
+  Main.$clinit();
+  let o = /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay));
+  if ($Overlay.$isInstance(o)) {
+   let e = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay));
+  }
+  let x = ComparableJsEnum.ONE;
+  if (!$Equality.$same(x, null)) {
+   let y = x;
+  }
+ }
+ /** @nodts */
+ static m_testSwitchOnIntersection__java_lang_Object__void(/** * */ o) {
+  Main.$clinit();
+  Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay);
+  $Casts.$to(o, /**@type {Function}*/ (Comparable));
+  let /** ?ComparableJsEnum */ $arg;
+  let tmp0_subject = ($arg = (/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(/**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay)), $Overlay)), $Overlay))), InternalPreconditions.m_checkNotNull__boolean__void($arg != null), $arg);
+  let tmp0 = /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ZERO, $Overlay));
+  let this_1 = tmp0;
+  Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this_1), $Overlay);
+  $Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(this_1), /**@type {Function}*/ (Comparable));
+  if ($Equality.$same(tmp0_subject, /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(this_1, $Overlay)), $Overlay)), $Overlay)))) {} else {}
+ }
  /** @nodts @return {number} */
  static m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int(/** ?ComparableJsEnum */ e) {
   Main.$clinit();
@@ -449,6 +474,15 @@ class Main extends j_l_Object {
   b = (/**@type {!Enum<!BoxedLightEnum<!StringJsEnum>>}*/ ($Casts.$to(s_1, Enum))).equals(/**@type {BoxedLightEnum<!StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(StringJsEnum.ONE, StringJsEnum_$Overlay)));
   o = s_1;
   s_1 = (/**@type {?}*/ ($Casts.$to($Casts.$to(o, StringJsEnum_$Overlay), StringJsEnum_$Overlay)));
+ }
+ /** @nodts @template T */
+ static m_testJsEnumIntersectionTypeVariable__jsenum_Main_ComparableJsEnum__void(/** T */ t) {
+  Main.$clinit();
+  let e = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(t, $Overlay));
+  let o = t;
+  let ordinal = (/**@type {!Enum<!BoxedComparableLightEnum<!ComparableJsEnum>>}*/ ($Casts.$to(t, Enum))).ordinal();
+  let b = (/**@type {!Enum<!BoxedComparableLightEnum<!ComparableJsEnum>>}*/ ($Casts.$to(t, Enum))).equals(/**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(e, $Overlay)));
+  let c = (/**@type {!Enum<!BoxedComparableLightEnum<!ComparableJsEnum>>}*/ ($Casts.$to(t, Enum))).compareTo(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum((InternalPreconditions.m_checkNotNull__boolean__void(e != null), e), $Overlay)));
  }
  /** @nodts */
  static $clinit() {

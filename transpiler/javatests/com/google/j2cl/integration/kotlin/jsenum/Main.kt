@@ -75,6 +75,9 @@ fun main(vararg unused: String) {
   testJsEnumVarargs()
   testShiftByJsEnumOrdinal()
   testJsEnumTypeVariables()
+  testJsEnumTypeVariableBridges()
+  testJsEnumCollectionElements()
+  testJsEnumTypeVariableIdentity()
 }
 
 @JsEnum(isNative = true, namespace = "test")
@@ -1072,13 +1075,9 @@ private fun testJsEnumTypeVariables() {
   checkJsEnumTypeVariableVarargs(PlainJsEnum.ONE)
   checkJsEnumTypeVariableBoundChain(PlainJsEnum.ONE)
   checkNativeJsEnumTypeVariable(NativeEnum.ACCEPT)
-
-  val nativeList = mutableListOf(NativeEnum.ACCEPT)
-  val plainList = mutableListOf(PlainJsEnum.ONE)
-  // TODO(b/576859020): Throws ClassCastException since the elements are cast to Enum to call
-  // equals().
-  // assertTrue(testWildcardEquals(nativeList, plainList))
-  assertTrue(jsEnumTypeVariablePassthrough(plainList[0]) === PlainJsEnum.ONE)
+  checkJsEnumIntersectionTypeVariable(PlainJsEnum.ONE)
+  checkJsEnumTypeVariableImpossibleCast(PlainJsEnum.ONE)
+  checkJsEnumTypeVariableSpread(PlainJsEnum.ONE, PlainJsEnum.TWO)
 }
 
 private fun <T : PlainJsEnum> checkJsEnumTypeVariable(t: T) {
@@ -1168,10 +1167,13 @@ private fun <T : PlainJsEnum> checkJsEnumTypeVariableInGenerics(t: T) {
 private fun <T : PlainJsEnum> checkJsEnumTypeVariableVarargs(vararg ts: T) {
   assertTrue(ts.size == 1)
   assertTrue(ts[0] === PlainJsEnum.ONE)
+  assertTrue(firstJsEnum(ts) === PlainJsEnum.ONE)
   // TODO(b/576859020): Throws ClassCastException since the element is cast to Enum to call
   // ordinal.
   // assertTrue(ts[0].ordinal == 1)
 }
+
+private fun <U : PlainJsEnum> firstJsEnum(us: Array<out U>): U = us[0]
 
 private fun <S : PlainJsEnum, T : S> checkJsEnumTypeVariableBoundChain(t: T) {
   assertTrue(t === PlainJsEnum.ONE)
@@ -1188,7 +1190,99 @@ private fun <T : NativeEnum> checkNativeJsEnumTypeVariable(t: T) {
   // assertTrue(t.equals(NativeEnum.ACCEPT))
 }
 
-private fun testWildcardEquals(
+private fun <T> checkJsEnumIntersectionTypeVariable(t: T)
+  where T : PlainJsEnum, T : Comparable<PlainJsEnum> {
+  assertTrue(t === PlainJsEnum.ONE)
+  // TODO(b/576859020): Throw ClassCastException since `t` is cast to Enum to call ordinal and
+  // compareTo().
+  // assertTrue(t.ordinal == 1)
+  // assertTrue(t.compareTo(PlainJsEnum.ZERO) > 0)
+  // TODO(b/576859020): Fails since `t` is boxed.
+  // assertUnderlyingTypeEquals(Double::class.javaObjectType, t)
+}
+
+@Suppress("CAST_NEVER_SUCCEEDS")
+private fun <T : PlainJsEnum> checkJsEnumTypeVariableImpossibleCast(t: T) {
+  assertThrowsClassCastException { t as OtherPlainJsEnum }
+}
+
+private fun <T : PlainJsEnum> checkJsEnumTypeVariableSpread(vararg ts: T) {
+  // TODO(b/577699528): The JsEnum casts and conversions are applied to the spread as a whole
+  // instead of to each of its elements.
+  // assertTrue(countJsEnums(*ts) == 2)
+  // assertTrue(countTypeVariableJsEnums(*ts) == 2)
+  // assertTrue(listOf(*ts).size == 2)
+  // assertTrue(listOf(*ts)[1] === PlainJsEnum.TWO)
+}
+
+private fun countJsEnums(vararg es: PlainJsEnum): Int = es.size
+
+private fun <U : PlainJsEnum> countTypeVariableJsEnums(vararg us: U): Int = us.size
+
+interface JsEnumTypeVariableMapper<A> {
+  fun <T : PlainJsEnum> map(a: A, t: T): T
+}
+
+class StringJsEnumTypeVariableMapper : JsEnumTypeVariableMapper<String> {
+  override fun <T : PlainJsEnum> map(a: String, t: T): T = t
+}
+
+private fun testJsEnumTypeVariableBridges() {
+  // Calls through the bridge `map(Object, T)` that forwards to `map(String, T)`.
+  val mapper: JsEnumTypeVariableMapper<String> = StringJsEnumTypeVariableMapper()
+  val one: PlainJsEnum = mapper.map("a", PlainJsEnum.ONE)
+  assertTrue(one === PlainJsEnum.ONE)
+  val two: PlainJsEnum = mapper.map("a", PlainJsEnum.TWO)
+  assertTrue(two.ordinal == 2)
+
+  val stringMapper = StringJsEnumTypeVariableMapper()
+  val stringMapperOne: PlainJsEnum = stringMapper.map("a", PlainJsEnum.ONE)
+  assertTrue(stringMapperOne === PlainJsEnum.ONE)
+
+  // JsEnums are unboxed. Note that comparisons like `two.ordinal == 2` would still succeed if a
+  // boxed value leaked, since it would be coerced through toString().
+  assertUnderlyingTypeEquals(Double::class.javaObjectType, one)
+  assertUnderlyingTypeEquals(Double::class.javaObjectType, two)
+  assertUnderlyingTypeEquals(Double::class.javaObjectType, stringMapperOne)
+}
+
+private fun testJsEnumCollectionElements() {
+  val nativeList = mutableListOf(NativeEnum.ACCEPT)
+  val plainList = mutableListOf(PlainJsEnum.ONE)
+  // TODO(b/576859020): Throws ClassCastException since the elements are cast to Enum to call
+  // equals().
+  // assertTrue(wildcardElementsEqual(nativeList, plainList))
+  assertTrue(jsEnumTypeVariablePassthrough(plainList[0]) === PlainJsEnum.ONE)
+
+  // TODO(b/576859020): Throw ClassCastException since the elements are captures (e.g. of
+  // `out E` in `List<out E>`) and they are cast to Enum to call ordinal, compareTo(), hashCode()
+  // and toString().
+  val list = listOf(PlainJsEnum.ONE)
+  // assertTrue(list[0].ordinal == 1)
+  // assertTrue(list[0].compareTo(PlainJsEnum.ZERO) > 0)
+  // assertTrue(list[0].hashCode() == PlainJsEnum.ONE.hashCode())
+  // assertTrue(list[0].toString() == PlainJsEnum.ONE.toString())
+  // assertTrue(plainList[0].ordinal == 1)
+  val map = mapOf("one" to PlainJsEnum.ONE)
+  // assertTrue(map["one"]!!.ordinal == 1)
+}
+
+private fun wildcardElementsEqual(
   nativeList: MutableList<out NativeEnum>,
   plainList: MutableList<out PlainJsEnum>,
 ): Boolean = nativeList[0].equals(NativeEnum.ACCEPT) && plainList[0].equals(PlainJsEnum.ONE)
+
+private fun testJsEnumTypeVariableIdentity() {
+  // Kotlin allows comparing values of different JsEnums when they are typed as type variables.
+  // PlainJsEnum.ZERO and OtherPlainJsEnum.NONE are both represented by 0, but they are different
+  // values.
+  assertFalse(isSameJsEnum(PlainJsEnum.ZERO, OtherPlainJsEnum.NONE))
+  assertTrue(isNotSameJsEnum(PlainJsEnum.ZERO, OtherPlainJsEnum.NONE))
+  assertFalse(isSameAsOtherPlainJsEnum(PlainJsEnum.ZERO, OtherPlainJsEnum.NONE))
+}
+
+private fun <T : PlainJsEnum, U : OtherPlainJsEnum> isSameJsEnum(t: T, u: U): Boolean = t === u
+
+private fun <T : PlainJsEnum, U : OtherPlainJsEnum> isNotSameJsEnum(t: T, u: U): Boolean = t !== u
+
+private fun <T : PlainJsEnum> isSameAsOtherPlainJsEnum(t: T, o: OtherPlainJsEnum): Boolean = t === o

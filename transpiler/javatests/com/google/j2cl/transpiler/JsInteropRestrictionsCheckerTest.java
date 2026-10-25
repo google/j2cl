@@ -2834,6 +2834,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.Main",
         """
+        import java.util.Arrays;
+        import java.util.List;
         import jsinterop.annotations.*;
         public class Main {
           @JsEnum enum MyJsEnum {A, B}
@@ -2856,6 +2858,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which is not an
             // Object[].
             Object[] objects = ts;
+            // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which is not an
+            // Object.
+            Object o = ts;
+            // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which cannot be
+            // passed as an array of an unbounded type variable.
+            List<T> list = Arrays.asList(ts);
+            // TODO(b/114468916): Should be rejected; JsEnum arrays do not support member access.
+            T[] clone = ts.clone();
           }
         }
         """);
@@ -2942,6 +2952,38 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private static <T extends MyJsEnum> void acceptsJsEnumTypeVariableVarargs(T... p) {
                 T[] array = p;
               }
+              private static <U extends MyJsEnum> void acceptsJsEnumTypeVariableArray(U[] p) {}
+              private static <T extends MyJsEnum> void forwardsJsEnumTypeVariableArray(T[] p) {
+                acceptsJsEnumTypeVariableArray(p);
+                acceptsJsEnumTypeVariableVarargs(p);
+              }
+              private static <S extends MyJsEnum, T extends S> S[] widensJsEnumTypeVariableArray(
+                  T[] p) {
+                return p;
+              }
+              interface JsEnumTypeVariableArrayConsumer {
+                <T extends MyJsEnum> int consume(T[] p);
+                <T extends MyJsEnum> int consumeVarargs(T... p);
+                <T extends MyJsEnum> T[] produce(T[] p);
+              }
+              static class JsEnumTypeVariableArrayConsumerImpl
+                  implements JsEnumTypeVariableArrayConsumer {
+                public <T extends MyJsEnum> int consume(T[] p) { return 0; }
+                public <T extends MyJsEnum> int consumeVarargs(T... p) { return 0; }
+                public <T extends MyJsEnum> T[] produce(T[] p) { return p; }
+              }
+              // TODO(b/114468916): Should be allowed; `T[]` and `MyJsEnum[]` have the same
+              // representation.
+              // private static <T extends MyJsEnum> MyJsEnum[] toJsEnumArray(T[] p) {
+              //   return p;
+              // }
+              // private static <T extends MyJsEnum> MyJsEnum[][] toJsEnumArrayArray(T[][] p) {
+              //   return p;
+              // }
+              // @SuppressWarnings("unchecked")
+              // private static <T extends MyJsEnum> T[] fromJsEnumArray(MyJsEnum[] p) {
+              //   return (T[]) p;
+              // }
               private static MyJsEnum[] returnsJsEnumArray() { return null; }
               static class ParametricConstructorVarargs<E> {
                 ParametricConstructorVarargs(E... p) {}
@@ -2962,6 +3004,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 // Object[] in a desugaring pass, JsEnums are allowed as elements of Object[]).
                 acceptsTVarargs(MyJsEnum.A, MyJsEnum.B);
                 acceptsJsEnumTypeVariableVarargs(MyJsEnum.A, MyJsEnum.B);
+                // TODO(b/114468916): Should be allowed; `T[]` and `MyJsEnum[]` have the same
+                // representation.
+                // acceptsJsEnumTypeVariableVarargs(new MyJsEnum[0]);
                 new ParametricConstructorVarargs<>(MyJsEnum.A, MyJsEnum.B);
                 MyJsEnum e = returnsJsEnumArray()[0];
               }

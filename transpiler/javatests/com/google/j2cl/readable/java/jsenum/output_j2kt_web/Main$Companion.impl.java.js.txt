@@ -3,6 +3,8 @@ goog.module('jsenum.Main.Companion$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Long = goog.forwardDeclare('goog.math.Long');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let BoxedLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedLightEnum$impl');
@@ -139,6 +141,14 @@ class Companion extends j_l_Object {
  m_testJsEnumPatternMatch__void() {
   Main.m_testJsEnumPatternMatch__void();
  }
+ /** @final @nodts */
+ m_testOptimizedCast__void() {
+  Main.m_testOptimizedCast__void();
+ }
+ /** @final @nodts */
+ m_testSwitchOnIntersection__java_lang_Object__void(/** * */ o) {
+  Main.m_testSwitchOnIntersection__java_lang_Object__void(o);
+ }
  /** @final @nodts @return {number} */
  m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int_$p_jsenum_Main_Companion(/** ?ComparableJsEnum */ e) {
   return Main.m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int(e);
@@ -166,6 +176,10 @@ class Companion extends j_l_Object {
  /** @final @nodts @template I, S */
  m_testCustomValuedJsEnumTypeVariables__jsenum_Main_IntJsEnum__jsenum_Main_StringJsEnum__void_$p_jsenum_Main_Companion(/** I */ i, /** S */ s) {
   Main.m_testCustomValuedJsEnumTypeVariables__jsenum_Main_IntJsEnum__jsenum_Main_StringJsEnum__void(/**@type {?}*/ ($Casts.$to(i, IntJsEnum_$Overlay)), /**@type {?}*/ ($Casts.$to(s, StringJsEnum_$Overlay)));
+ }
+ /** @final @nodts @template T */
+ m_testJsEnumIntersectionTypeVariable__jsenum_Main_ComparableJsEnum__void_$p_jsenum_Main_Companion(/** T */ t) {
+  Main.m_testJsEnumIntersectionTypeVariable__jsenum_Main_ComparableJsEnum__void(/**@type {?}*/ (t));
  }
  /** @nodts @return {!Companion} */
  static get f_Companion__jsenum_Main_Companion() {
