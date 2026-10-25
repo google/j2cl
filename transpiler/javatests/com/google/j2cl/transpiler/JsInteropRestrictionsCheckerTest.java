@@ -4320,18 +4320,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeMethodNotJsMethodFails() {
     newTesterWithDefaults()
-        .addCompilationUnit(
+        .addNativeJsForCompilationUnit("test.Buggy", "// empty")
+        .assertWithInlineMessages(
             "test.Buggy",
             """
             import jsinterop.annotations.*;
             public class Buggy {
               public native void m();
+            > Error: [unusable-by-js] Native 'void Buggy.m()' is exposed to JavaScript without @JsMethod.
             }
-            """)
-        .addNativeJsForCompilationUnit("test.Buggy", "// empty")
-        .assertTranspileFails()
-        .assertErrorsWithoutSourcePosition(
-            "[unusable-by-js] Native 'void Buggy.m()' is exposed to JavaScript without @JsMethod.");
+            """);
   }
 
   public void testNativeJsTypeSucceeds() {
@@ -4864,7 +4862,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUnusableByJsWarns() {
     newTesterWithDefaults()
-        .addCompilationUnit(
+        .addFileToZipFile("native.zip", "test/C.native.js", "// empty")
+        .assertWithInlineMessages(
             "test.Buggy",
             """
             import jsinterop.annotations.*;
@@ -4874,12 +4873,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class C { // non-jstype class
               @JsMethod
               public static void fc1(A a) {} // JsMethod
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but exposed to JavaScript.
               @JsMethod
               public native void fc2(A a); // native method
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'void C.fc2(A a)' is not usable by but exposed to JavaScript.
             }
             class D { // non-jstype class with JsProperty
               @JsProperty
               public static A a; // JsProperty
+            > Warning: [unusable-by-js] Type 'A' of field 'D.a' is not usable by but exposed to JavaScript.
             }
             class E { // non-jstype class with only static JsMembers
               @JsProperty
@@ -4888,6 +4890,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public static void f(I i) {} // JsMethod
             }
             @JsFunction interface FI  { void f(A a); } // JsFunction method is checked.
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'void FI.f(A a)' is not usable by but exposed to JavaScript.
             class List<T> {
               @JsMethod
               public T get() { return null; }
@@ -4895,55 +4898,31 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             @JsEnum enum MyJsEnum { A; }
             @JsType public class Buggy {
               public A f; // exported field
+            > Warning: [unusable-by-js] Type 'A' of field 'Buggy.f' is not usable by but exposed to JavaScript.
               public A f1(A a) { return null; } // regular class fails.
+            > Warning: [unusable-by-js] Return type of 'A Buggy.f1(A a)' is not usable by but exposed to JavaScript.
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'A Buggy.f1(A a)' is not usable by but exposed to JavaScript.
               public A[] f2(A[] a) { return null; } // array of regular class fails.
+            > Warning: [unusable-by-js] Return type of 'A[] Buggy.f2(A[] a)' is not usable by but exposed to JavaScript.
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'A[] Buggy.f2(A[] a)' is not usable by but exposed to JavaScript.
               public Short f3(Short a) { return (short) 1; } // Short fails.
+            > Warning: [unusable-by-js] Return type of 'Short Buggy.f3(Short a)' is not usable by but exposed to JavaScript.
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'Short Buggy.f3(Short a)' is not usable by but exposed to JavaScript.
               // non-JsType class that implements a JsType interface fails.
               public B f4(B a) { return null; }
+            > Warning: [unusable-by-js] Return type of 'B Buggy.f4(B a)' is not usable by but exposed to JavaScript.
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'B Buggy.f4(B a)' is not usable by but exposed to JavaScript.
               public void f5(List<MyJsEnum> l) { } // parameterized by JsEnum fails
+            > Warning: [unusable-by-js] Type of parameter 'l' in 'void Buggy.f5(List<MyJsEnum> l)' is not usable by but exposed to JavaScript.
               public void f6(List<List<MyJsEnum>> l) {} // parameterized by List<JsEnum> fails
+            > Warning: [unusable-by-js] Type of parameter 'l' in 'void Buggy.f6(List<List<MyJsEnum>> l)' is not usable by but exposed to JavaScript.
               public void f7() { new Object() { @JsMethod void b(A a){} }; }
+            > Warning: [unusable-by-js] Type of parameter 'a' in 'void <anonymous> extends Object.b(A a)' is not usable by but exposed to JavaScript.
               public E f8(E e) { return null; } // non-JsType class with only static jsmember fails.
+            > Warning: [unusable-by-js] Return type of 'E Buggy.f8(E e)' is not usable by but exposed to JavaScript.
+            > Warning: [unusable-by-js] Type of parameter 'e' in 'E Buggy.f8(E e)' is not usable by but exposed to JavaScript.
             }
             """)
-        .addFileToZipFile("native.zip", "test/C.native.js", "// empty")
-        .assertTranspileSucceeds()
-        .assertWarningsWithoutSourcePosition(
-            "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "
-                + "exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void C.fc2(A a)' is not usable by but "
-                + "exposed to JavaScript.",
-            "[unusable-by-js] Type 'A' of field 'D.a' is not usable by but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void FI.f(A a)' is not usable by but"
-                + " exposed to JavaScript.",
-            "[unusable-by-js] Type 'A' of field 'Buggy.f' is not usable by but exposed to "
-                + "JavaScript.",
-            "[unusable-by-js] Return type of 'A Buggy.f1(A a)' is not usable by but exposed to "
-                + "JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'A Buggy.f1(A a)' is not usable by but "
-                + "exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'A[] Buggy.f2(A[] a)' is not usable by but exposed to "
-                + "JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'A[] Buggy.f2(A[] a)' is not usable"
-                + " by but exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'Short Buggy.f3(Short a)' is not usable by but"
-                + " exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'Short Buggy.f3(Short a)' is not"
-                + " usable by but exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'B Buggy.f4(B a)' is not usable by but "
-                + "exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'B Buggy.f4(B a)' is not usable by but"
-                + " exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f5(List<MyJsEnum> l)' is not "
-                + "usable by but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f6(List<List<MyJsEnum>> l)' is "
-                + "not usable by but exposed to JavaScript.",
-            "[unusable-by-js] Type of parameter 'a' in 'void <anonymous> extends Object.b(A a)' is"
-                + " not usable by but exposed to JavaScript.",
-            "[unusable-by-js] Return type of 'E Buggy.f8(E e)' is not usable by but exposed to"
-                + " JavaScript.",
-            "[unusable-by-js] Type of parameter 'e' in 'E Buggy.f8(E e)' is not usable by but"
-                + " exposed to JavaScript.")
         .assertLastMessage(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "

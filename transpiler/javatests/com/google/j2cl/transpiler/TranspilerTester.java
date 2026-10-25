@@ -396,7 +396,32 @@ public class TranspilerTester {
     return transpile().assertHasErrors();
   }
 
-  public void assertWithInlineMessages(String... compilationUnitsAndSources) {
+  /**
+   * Transpiles the given Java compilation units and asserts that exactly the errors and warnings
+   * specified inline in the sources are reported.
+   *
+   * <p>The arguments are pairs of qualified compilation unit name and source. Expected messages are
+   * specified in lines starting with {@code > Error:} or {@code > Warning:} and refer to the
+   * preceding source line; lines starting with {@code > } continue the previous message.
+   */
+  @CanIgnoreReturnValue
+  public TranspileResult assertWithInlineMessages(String... compilationUnitsAndSources) {
+    return assertWithInlineMessages(/* isKotlin= */ false, compilationUnitsAndSources);
+  }
+
+  /**
+   * Transpiles the given Kotlin compilation units and asserts that exactly the errors and warnings
+   * specified inline in the sources are reported.
+   *
+   * @see #assertWithInlineMessages(String...)
+   */
+  @CanIgnoreReturnValue
+  public TranspileResult assertKotlinWithInlineMessages(String... compilationUnitsAndSources) {
+    return assertWithInlineMessages(/* isKotlin= */ true, compilationUnitsAndSources);
+  }
+
+  private TranspileResult assertWithInlineMessages(
+      boolean isKotlin, String... compilationUnitsAndSources) {
     List<String> expectedErrors = new ArrayList<>();
     List<String> expectedWarnings = new ArrayList<>();
     TranspilerTester tester = this;
@@ -404,23 +429,34 @@ public class TranspilerTester {
     for (int i = 0; i < compilationUnitsAndSources.length; i += 2) {
       String compilationUnit = compilationUnitsAndSources[i];
       String source = compilationUnitsAndSources[i + 1];
-      String code = parseCompilationUnit(compilationUnit, source, expectedErrors, expectedWarnings);
-      tester = tester.addCompilationUnit(compilationUnit, code);
+      String code =
+          parseCompilationUnit(
+              compilationUnit,
+              isKotlin ? ".kt" : ".java",
+              source,
+              expectedErrors,
+              expectedWarnings);
+      tester =
+          isKotlin
+              ? tester.addKotlinCompilationUnit(compilationUnit, code)
+              : tester.addCompilationUnit(compilationUnit, code);
     }
 
     var result =
         expectedErrors.isEmpty() ? tester.assertTranspileSucceeds() : tester.assertTranspileFails();
-    result
+    return result
         .assertErrorsWithSourcePosition(expectedErrors.toArray(new String[0]))
         .assertWarningsWithSourcePosition(expectedWarnings.toArray(new String[0]));
   }
 
   private static String parseCompilationUnit(
       String compilationUnit,
+      String fileExtension,
       String source,
       List<String> expectedErrors,
       List<String> expectedWarnings) {
-    String fileName = compilationUnit.substring(compilationUnit.lastIndexOf(".") + 1) + ".java";
+    String fileName =
+        compilationUnit.substring(compilationUnit.lastIndexOf(".") + 1) + fileExtension;
 
     int currentLine = 1;
     if (compilationUnit.contains(".")) {
