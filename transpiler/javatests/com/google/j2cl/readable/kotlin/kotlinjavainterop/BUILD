@@ -15,6 +15,7 @@ j2cl_library(
         ["*.java"],
         exclude = ["JavaIntSetExtendingIntermediateKotlinIntSet.java"],
     ),
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
 )
 
 j2cl_library(

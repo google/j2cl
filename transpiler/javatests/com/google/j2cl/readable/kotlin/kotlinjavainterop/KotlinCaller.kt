@@ -27,3 +27,10 @@ fun testMethodAccess() {
   val value = record.value()
   val name = record.name()
 }
+
+// The JsInterop annotations of the entries of a Java enum must be honored.
+fun testJsTypeEnumUsage() {
+  val implicitMember = JavaJsTypeEnum.IMPLICIT_MEMBER
+  val explicitMember = JavaJsTypeEnum.EXPLICIT_MEMBER
+  val ignoredMember = JavaJsTypeEnum.IGNORED_MEMBER
+}

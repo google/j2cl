@@ -3,6 +3,7 @@ goog.module('kotlinjavainterop.KotlinCallerKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let JavaJsTypeEnum = goog.forwardDeclare('kotlinjavainterop.JavaJsTypeEnum$impl');
 let JavaRecord = goog.forwardDeclare('kotlinjavainterop.JavaRecord$impl');
 
 /**
@@ -40,6 +41,13 @@ class KotlinCallerKt extends j_l_Object {
   let name = record.m_name__java_lang_String();
  }
  /** @nodts */
+ static m_testJsTypeEnumUsage__void() {
+  KotlinCallerKt.$clinit();
+  let implicitMember = JavaJsTypeEnum.IMPLICIT_MEMBER;
+  let explicitMember = JavaJsTypeEnum.EXPLICIT_MEMBER;
+  let ignoredMember = JavaJsTypeEnum.f_IGNORED_MEMBER__kotlinjavainterop_JavaJsTypeEnum;
+ }
+ /** @nodts */
  static $clinit() {
   KotlinCallerKt.$clinit = () =>{};
   KotlinCallerKt.$loadModules();
@@ -52,6 +60,7 @@ class KotlinCallerKt extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  JavaJsTypeEnum = goog.module.get('kotlinjavainterop.JavaJsTypeEnum$impl');
   JavaRecord = goog.module.get('kotlinjavainterop.JavaRecord$impl');
  }
 }
