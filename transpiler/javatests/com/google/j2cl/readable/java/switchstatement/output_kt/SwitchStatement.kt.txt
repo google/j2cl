@@ -122,24 +122,14 @@ open class SwitchStatement {
  }
  
  private fun testLabelInSwitchCase(i: Int) {
-  SWITCH@ do {
-   CASE@ do {
-    do {
-     when (i) {
-      1 -> {
-       break
-      }
-      else -> {
-       break@CASE
-      }
-     }
-     break@SWITCH
-    } while (false)
+  when (i) {
+   1 -> {
     do {
      break
     } while (true)
-   } while (false)
-  } while (false)
+   }
+   else -> {}
+  }
  }
  
  private fun testNonFallThroughBreakCase(i: Int) {
@@ -404,6 +394,15 @@ open class SwitchStatement {
    else -> {
     this.foo(2)
    }
+  }
+  when (i) {
+   1 -> {
+    this.foo(1)
+   }
+   2 -> {
+    this.foo(2)
+   }
+   else -> {}
   }
  }
  

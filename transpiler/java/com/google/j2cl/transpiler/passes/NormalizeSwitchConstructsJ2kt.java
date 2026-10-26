@@ -191,9 +191,40 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
           @Override
           public void exitSwitchStatement(SwitchStatement switchStatement) {
             normalizeSwitchCaseTypes(switchStatement);
+            Label switchLabel = ((LabeledStatement) getParent()).getLabel();
+            breakOutOfLastCase(switchStatement, switchLabel);
             ensureExhaustive(switchStatement);
           }
         });
+  }
+
+  /**
+   * Adds an explicit break at the end of the last case if it is the only case that can fall
+   * through.
+   *
+   * <p>Falling through the last case is equivalent to breaking out of the switch, but making it
+   * explicit ensures that the case does not fall through once a default case is added after it,
+   * which allows the switch to be converted directly into a {@code when}.
+   */
+  private static void breakOutOfLastCase(SwitchStatement switchStatement, Label switchLabel) {
+    List<SwitchCase> cases = switchStatement.getCases();
+    if (cases.isEmpty()
+        || !cases.getLast().canFallthrough()
+        || cases.subList(0, cases.size() - 1).stream().anyMatch(SwitchCase::canFallthrough)) {
+      return;
+    }
+
+    SwitchCase lastCase = cases.getLast();
+    cases.set(
+        cases.size() - 1,
+        lastCase.toBuilder()
+            .addStatement(
+                BreakStatement.builder()
+                    .setLabelReference(switchLabel.createReference())
+                    .setSourcePosition(switchStatement.getSourcePosition())
+                    .build())
+            .setCanFallthrough(false)
+            .build());
   }
 
   /** Convert switch case expressions to be of the same type as switch expression. */

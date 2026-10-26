@@ -61,24 +61,12 @@ open class LabeledStatement {
  }
  
  open fun switchStatement() {
-  LABEL@ do {
-   CASE@ do {
-    do {
-     when (0) {
-      0 -> {
-       break
-      }
-      else -> {
-       break@CASE
-      }
-     }
-     break@LABEL
-    } while (false)
-    if (true) {
-     break@LABEL
-    }
-   } while (false)
-  } while (false)
+  when (0) {
+   0 -> {
+    if (true) {}
+   }
+   else -> {}
+  }
  }
  
  open fun nestedScopes() {

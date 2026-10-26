@@ -375,6 +375,15 @@ public class SwitchStatement {
         foo(2);
         // fall through
     }
+
+    switch (i) {
+      case 1:
+        foo(1);
+        break;
+      case 2:
+        foo(2);
+        // fall through
+    }
   }
 
   private void testDefaultIsNotLast_fallThrough(int i) {
