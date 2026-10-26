@@ -108,16 +108,15 @@ class CompileTimeConstant {
     val CHAR_MAX_DOUBLE_VALUE = Char.MAX_VALUE.toDouble()
     val CHAR_MIN_DOUBLE_VALUE = Char.MIN_VALUE.toDouble()
 
-    // TODO(b/378892483): Re-enable this test when the IR deserializer is fixed.
-    // // MAX_VALUE and MIN_VALUE of unsigned types uses contructors which are marked with
-    // // IntrinsicConstEvaluation
-    // val minUByteLimit: UByte = UByte.MIN_VALUE
-    // if (minUByteLimit < UByte.MAX_VALUE) {}
-    // val minUShortLimit: UShort = UShort.MIN_VALUE
-    // if (minUShortLimit < UShort.MAX_VALUE) {}
-    // val minUIntLimit: UInt = UInt.MIN_VALUE
-    // if (minUIntLimit < UInt.MAX_VALUE) {}
-    // val minULongLimit: ULong = ULong.MIN_VALUE
-    // if (minULongLimit < ULong.MAX_VALUE) {}
+    // MAX_VALUE and MIN_VALUE of unsigned types uses contructors which are marked with
+    // IntrinsicConstEvaluation
+    val minUByteLimit: UByte = UByte.MIN_VALUE
+    if (minUByteLimit < UByte.MAX_VALUE) {}
+    val minUShortLimit: UShort = UShort.MIN_VALUE
+    if (minUShortLimit < UShort.MAX_VALUE) {}
+    val minUIntLimit: UInt = UInt.MIN_VALUE
+    if (minUIntLimit < UInt.MAX_VALUE) {}
+    val minULongLimit: ULong = ULong.MIN_VALUE
+    if (minULongLimit < ULong.MAX_VALUE) {}
   }
 }

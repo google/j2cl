@@ -69,11 +69,10 @@ private fun testClinitOrder() {
   val maxULongLimit: ULong = ULong.MAX_VALUE
   assertTrue(maxULongLimit == ULong.MAX_VALUE)
 
-  // TODO(b/378892483): Re-enable this test when the IR deserializer is fixed.
-  // assertTrue(UByte.MIN_VALUE < UByte.MAX_VALUE)
-  // assertTrue(UShort.MIN_VALUE < UShort.MAX_VALUE)
-  // assertTrue(UInt.MIN_VALUE < UInt.MAX_VALUE)
-  // assertTrue(ULong.MIN_VALUE < UInt.MAX_VALUE)
+  assertTrue(UByte.MIN_VALUE < UByte.MAX_VALUE)
+  assertTrue(UShort.MIN_VALUE < UShort.MAX_VALUE)
+  assertTrue(UInt.MIN_VALUE < UInt.MAX_VALUE)
+  assertTrue(ULong.MIN_VALUE < UInt.MAX_VALUE)
 
   assertTrue(ranClinit)
   assertEquals(78, total)
