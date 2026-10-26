@@ -188,9 +188,10 @@ public class OptimizeXplatForEach extends NormalizationPass {
       valueType = valueType.toUnboxedType();
     }
 
-    // TODO(b/118299062): JsEnum arrays are not currently allowed, thankfully the values in the
-    //   originally array will be boxed anyway.
-    if (valueType.isJsEnum() && AstUtils.isNonNativeJsEnum(valueType)) {
+    // The well-known iterables are never backed by a JsEnum array; when they hold non-native JsEnum
+    // values, those values are stored boxed. Therefore, iterate over them as an array of the boxed
+    // type.
+    if (AstUtils.isNonNativeJsEnum(valueType)) {
       valueType = TypeDescriptors.getEnumBoxType(valueType);
     }
 

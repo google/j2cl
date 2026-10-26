@@ -181,7 +181,6 @@ public class ImplementInstanceOfs extends NormalizationPass {
     }
     // Non native JsEnums will always appear as instance of BoxedLightEnum in instanceOf and casts
     // expressions, so delegate the isInstance check to a custom method in the runtime class Enums.
-    // TODO(b/118299062): this needs to be changed for supporting arrays of JsEnums.
     //   $Enums.isInstanceOf(instance, Type)
     return RuntimeMethods.createEnumsMethodCall(
         "isInstanceOf",
