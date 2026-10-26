@@ -23,22 +23,6 @@ import junit.framework.TestCase;
 /** Tests for JsInteropRestrictionsChecker. */
 public class JsInteropRestrictionsCheckerTest extends TestCase {
 
-  public void testSystemGetPropertyFails() {
-    assertWithInlineMessages(
-        "test.Buggy",
-        """
-        import jsinterop.annotations.*;
-        @JsType
-        class Main {
-          public static void main(){
-            String s="property";
-            System.getProperty(s);
-            > Error: Method 'String System.getProperty(String)' can only take a string literal as its first parameter
-          }
-        }
-        """);
-  }
-
   public void testSystemGetPropertySucceeds() {
     assertTranspileSucceeds(
             "test.Buggy",
@@ -57,6 +41,22 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertNoWarnings();
+  }
+
+  public void testSystemGetPropertyFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType
+        class Main {
+          public static void main(){
+            String s="property";
+            System.getProperty(s);
+            > Error: Method 'String System.getProperty(String)' can only take a string literal as its first parameter
+          }
+        }
+        """);
   }
 
   public void testJsIgnoreSucceeds() {
