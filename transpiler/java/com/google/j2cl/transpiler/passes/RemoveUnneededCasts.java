@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkState;
-
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -116,8 +114,9 @@ public class RemoveUnneededCasts extends NormalizationPass {
     var castTypeDescriptor = castExpression.getTypeDescriptor();
     // Only casts that would not trigger conversions (e.g. boxing/unboxing, etc)
     // are eligible for removal.
-    checkState(
-        AstUtils.canBeUncheckedCast(innerExpression.getTypeDescriptor(), castTypeDescriptor));
+    if (!AstUtils.canBeUncheckedCast(innerExpression.getTypeDescriptor(), castTypeDescriptor)) {
+      return null;
+    }
 
     // Replace the Java cast by an unchecked cast to preserve the type of the expression.
     var uncheckedCast =
@@ -191,7 +190,6 @@ public class RemoveUnneededCasts extends NormalizationPass {
 
   // Note: This is not optimal since it continues iterating through all subnodes without stopping
   // after replacement.
-
   @SuppressWarnings("unchecked")
   private static <T extends Node> T replaceIn(T node, Expression oldValue, Expression newValue) {
     return (T)

@@ -21,7 +21,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -78,14 +78,16 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               @Override
               public Expression rewriteCastContext(CastExpression castExpression) {
                 TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-                // Make sure when parameters are specialized to JsEnum they are unboxed.
                 Expression innerExpression = castExpression.getExpression();
                 TypeDescriptor fromTypeDescriptor = innerExpression.getDeclaredTypeDescriptor();
 
                 if (toTypeDescriptor.isJsEnum() && fromTypeDescriptor.isJsEnum()) {
-                  checkState(toTypeDescriptor.isSameBaseType(fromTypeDescriptor));
-                  // This is a redundant cast, remove it.
-                  return innerExpression;
+                  // Casts between different JsEnums are rejected by JsInteropRestrictionsChecker,
+                  // so both types have the same representation and the cast always succeeds. It is
+                  // kept, unchecked, to preserve the type of the expression, e.g. (MyJsEnum) t
+                  // where t is a T extends MyJsEnum.
+                  checkState(toTypeDescriptor.hasSameRawType(fromTypeDescriptor));
+                  return castExpression.toBuilder().setUnchecked(true).build();
                 }
 
                 if (AstUtils.isNonNativeJsEnum(toTypeDescriptor)) {
@@ -110,9 +112,31 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
   }
 
   private static Expression unbox(TypeDescriptor toTypeDescriptor, Expression expression) {
-    return JsDocCastExpression.builder()
+    if (toTypeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
+      // If it is an intersection, perform the cast check on the non-JsEnum types before unboxing.
+      toTypeDescriptor = intersectionTypeDescriptor.getFirstType();
+      checkState(toTypeDescriptor.isJsEnum());
+      var otherTypes =
+          intersectionTypeDescriptor
+              .getIntersectionTypeDescriptors()
+              .subList(1, intersectionTypeDescriptor.getIntersectionTypeDescriptors().size());
+      TypeDescriptor castTypeDescriptor =
+          otherTypes.size() == 1
+              ? otherTypes.getFirst()
+              : IntersectionTypeDescriptor.builder()
+                  .setIntersectionTypeDescriptors(otherTypes)
+                  .build();
+      expression =
+          CastExpression.builder()
+              .setExpression(expression)
+              .setCastTypeDescriptor(castTypeDescriptor)
+              .build();
+    }
+
+    return CastExpression.builder()
         .setExpression(RuntimeMethods.createEnumsUnboxMethodCall(expression, toTypeDescriptor))
         .setCastTypeDescriptor(toTypeDescriptor)
+        .setUnchecked(true)
         .build();
   }
 }

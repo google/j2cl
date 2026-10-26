@@ -158,7 +158,12 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
     TypeDescriptor inferredTypeDescriptor = expression.getTypeDescriptor();
     // TODO(b/121293394): Use the expression inferred type in more cases, e.g. arrays, since it will
     // provide more accurate type information.
-    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor) {
+    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor
+        // Use the inferred descriptor when it is a JsEnum, even if it is not a declared type, and
+        // the value is not already represented as one. This allows adding casts that trigger
+        // JsEnum unboxing when the inferred type is something like T extends JsEnum (e.g. the
+        // result of `List<? extends MyJsEnum>.get()`).
+        || (inferredTypeDescriptor.isJsEnum() && !fromTypeDescriptor.isJsEnum())) {
       // Using the inferred type descriptor, which is either the same or a more precise type,
       // conveys more accurate type information potentially improving the optimizations made by
       // jscompiler. This is a slight, but safe, deviation from Java semantics which requires to

@@ -23,7 +23,7 @@ import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.common.collect.MoreCollectors.toOptional;
-import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
+import static com.google.j2cl.transpiler.ast.AstUtils.isSpecializedToBoxableJsEnum;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
 
@@ -1179,7 +1179,6 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
    * <p>Parameters have to satisfy the overridden method contract; both for the JsEnum boxing and
    * Koltin's non-nullable basic types overrides.
    */
-  @SuppressWarnings("ReferenceEquality")
   private List<ParameterDescriptor> computeParameterDescriptors(
       MethodDescriptor bridgeMethodDescriptor, MethodDescriptor targetMethodDescriptor) {
     List<ParameterDescriptor> parameterDescriptors = new ArrayList<>();
@@ -1194,8 +1193,8 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         // The target specializes to a primitive type (kotlin), so use the type from the bridge
         // which would be the right one that is consistent with the overridden method.
         parameterDescriptors.add(fromBridge);
-      } else if (fromTarget.getTypeDescriptor() != fromBridgeDeclaration.getTypeDescriptor()
-          && isBoxableJsEnumType(fromTarget.getTypeDescriptor())) {
+      } else if (isSpecializedToBoxableJsEnum(
+          fromBridgeDeclaration.getTypeDescriptor(), fromTarget.getTypeDescriptor())) {
         // Type was specialized to a non-native JsEnum, use the boxed type in the bridge
         // parameter.
         parameterDescriptors.add(
@@ -1237,9 +1236,9 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
       // Kotlin bridges to method that specializes the return to primitive.
       return bridgeReturnTypeDescriptor;
     }
-    if (isBoxableJsEnumType(targetReturnTypeDescriptor)
-        && bridgeMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor()
-            != targetReturnTypeDescriptor) {
+    if (isSpecializedToBoxableJsEnum(
+        bridgeMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor(),
+        targetReturnTypeDescriptor)) {
       // Return type descriptor specialized to non native enum, expose it with the proper boxed
       // class.
       return TypeDescriptors.getEnumBoxType(targetReturnTypeDescriptor);

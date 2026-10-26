@@ -316,7 +316,6 @@ public class JsInteropRestrictionsChecker {
 
   private void checkTypeVariables(Type type) {
     if (type.getDeclaration().getTypeParameterDescriptors().stream()
-        .map(TypeDescriptor::toRawTypeDescriptor)
         .anyMatch(AstUtils::isNonNativeJsEnum)) {
       problems.error(
           type.getSourcePosition(),
@@ -764,9 +763,15 @@ public class JsInteropRestrictionsChecker {
 
   private static boolean isDisallowedJsEnumAssignment(
       TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
-    TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
-    if (!expressionTypeDescriptor.isJsEnum() || targetRawTypeDescriptor.isJsEnum()) {
+    if (!expressionTypeDescriptor.isJsEnum()) {
       return false;
+    }
+
+    TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
+    if (targetRawTypeDescriptor.isJsEnum()) {
+      // Conversions between different JsEnums never succeed. They can only be written as casts in
+      // Kotlin, which allows them with a warning.
+      return !targetRawTypeDescriptor.hasSameRawType(expressionTypeDescriptor);
     }
 
     if (TypeDescriptors.isJavaLangObject(targetRawTypeDescriptor)
@@ -803,6 +808,9 @@ public class JsInteropRestrictionsChecker {
 
   private static boolean isDisallowedJsEnumArrayAssignment(
       TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
+    if (haveSameJsEnumArrayRepresentation(toTypeDescriptor, expressionTypeDescriptor)) {
+      return false;
+    }
     return !expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
         && (hasDisallowedType(
                 expressionTypeDescriptor,
@@ -818,6 +826,9 @@ public class JsInteropRestrictionsChecker {
 
   private static boolean isDisallowedJsEnumArrayOverride(
       TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
+    if (haveSameJsEnumArrayRepresentation(toTypeDescriptor, expressionTypeDescriptor)) {
+      return false;
+    }
     // For override checking, We want to check both (base=T, child=MyJsEnum[]) and (base=List<T>,
     // child=List<MyJsEnum[]>), so also perform the check when the parameter types match but the
     // base type has type variables.
@@ -828,6 +839,18 @@ public class JsInteropRestrictionsChecker {
             expressionTypeDescriptor,
             AstUtils::isNonNativeJsEnumArray,
             /* onlyCheckTypeSpecialization= */ false);
+  }
+
+  /**
+   * Returns true if both types are non-native JsEnum arrays that erase to the same type (e.g.
+   * {@code MyJsEnum[]} and {@code T[]} with {@code T extends MyJsEnum}), hence their elements have
+   * the same runtime representation.
+   */
+  private static boolean haveSameJsEnumArrayRepresentation(
+      TypeDescriptor typeDescriptor, TypeDescriptor otherTypeDescriptor) {
+    return AstUtils.isNonNativeJsEnumArray(typeDescriptor)
+        && AstUtils.isNonNativeJsEnumArray(otherTypeDescriptor)
+        && typeDescriptor.hasSameRawType(otherTypeDescriptor);
   }
 
   private void checkJsEnumSwitchUsage(Type type) {
@@ -3035,8 +3058,11 @@ public class JsInteropRestrictionsChecker {
     if (declaredTypeDescriptor.isArray()) {
       ArrayTypeDescriptor declaredArrayTypeDescriptor =
           (ArrayTypeDescriptor) declaredTypeDescriptor;
+      // Only consider it a specialization if the declared type was not already disallowed, e.g.
+      // `T[]` with `T extends MyJsEnum` is a JsEnum array itself.
       if (declaredArrayTypeDescriptor.getLeafTypeDescriptor().isTypeVariable()
-          && isTypeDisallowed.test(inferredTypeDescriptor)) {
+          && isTypeDisallowed.test(inferredTypeDescriptor)
+          && !isTypeDisallowed.test(declaredTypeDescriptor)) {
         return true;
       }
     }

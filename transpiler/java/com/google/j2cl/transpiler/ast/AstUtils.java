@@ -332,11 +332,11 @@ public final class AstUtils {
         binaryExpression.getRightOperand().getDeclaredTypeDescriptor();
 
     return operator.isRelationalOperator()
+        // Values of the same JsEnum are compared unboxed. Otherwise the JsEnum operands are boxed,
+        // so that values of different JsEnums (which Kotlin allows to compare when they are typed
+        // as type variables) are never equal.
         && (isNonNativeJsEnum(lhsTypeDescriptor) || isNonNativeJsEnum(rhsTypeDescriptor))
-        // DO NOT use hasSameRawType, since intersections that have JsEnums have the same raw type
-        // as the JsEnum but behave differently w.r.t JsEnum boxing conversions. Intersection types
-        // are always boxed.
-        && !lhsTypeDescriptor.isSameBaseType(rhsTypeDescriptor);
+        && !lhsTypeDescriptor.hasSameRawType(rhsTypeDescriptor);
   }
 
   /** JsEnum comparison context. */
@@ -346,10 +346,7 @@ public final class AstUtils {
         instanceOfExpression.getExpression().getTypeDescriptor();
     TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     return isNonNativeJsEnum(expressionTypeDescriptor)
-        // DO NOT use hasSameRawType, since intersections that have JsEnums have the same raw type
-        // as the JsEnum but behave differently w.r.t JsEnum boxing conversions. Intersection types
-        // are always boxed.
-        && !expressionTypeDescriptor.isSameBaseType(testTypeDescriptor);
+        && !expressionTypeDescriptor.hasSameRawType(testTypeDescriptor);
   }
 
   /**
@@ -997,9 +994,7 @@ public final class AstUtils {
   }
 
   public static boolean isPrimitiveNonNativeJsEnum(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.isJsEnum()
-        && getJsEnumValueFieldType(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration())
-            .isPrimitive();
+    return typeDescriptor.isJsEnum() && getJsEnumValueFieldType(typeDescriptor).isPrimitive();
   }
 
   public static FieldDescriptor createJsEnumConstantFieldDescriptor(
@@ -1016,7 +1011,8 @@ public final class AstUtils {
 
   public static TypeDescriptor getJsEnumValueFieldType(TypeDescriptor typeDescriptor) {
     checkState(typeDescriptor.isJsEnum());
-    return getJsEnumValueFieldType(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration());
+    return getJsEnumValueFieldType(
+        ((DeclaredTypeDescriptor) typeDescriptor.toRawTypeDescriptor()).getTypeDeclaration());
   }
 
   /** Returns the value field for a JsEnum. */
@@ -1097,6 +1093,16 @@ public final class AstUtils {
   /** Returns true {@code typeDescriptor} requires bridges be generated for boxing/unboxing. */
   public static boolean isBoxableJsEnumType(TypeDescriptor typeDescriptor) {
     return isJsEnumBoxingSupported() && isNonNativeJsEnum(typeDescriptor);
+  }
+
+  /**
+   * Returns true if {@code typeDescriptor} is a boxable JsEnum that specializes {@code
+   * declarationTypeDescriptor}, which is not one, e.g. {@code MyJsEnum} specializing {@code T} in
+   * {@code <T> void m(T t)}. Values are boxed in the declaration but not in the specialization.
+   */
+  public static boolean isSpecializedToBoxableJsEnum(
+      TypeDescriptor declarationTypeDescriptor, TypeDescriptor typeDescriptor) {
+    return isBoxableJsEnumType(typeDescriptor) && !isBoxableJsEnumType(declarationTypeDescriptor);
   }
 
   /** Returns true if JsEnums undergo boxing/unboxing in this backend in general. */

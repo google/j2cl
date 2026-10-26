@@ -10,14 +10,10 @@ let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.Boxe
 let BoxedLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedLightEnum$impl');
 let Main = goog.forwardDeclare('jsenum.Main$impl');
 let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
-let $Overlay = goog.forwardDeclare('jsenum.Main.ComparableJsEnum.$Overlay$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
-let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
 let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NativeStringEnum');
 let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
-let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.StringJsEnum.$Overlay$impl');
 let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @final
@@ -57,7 +53,7 @@ class Companion extends j_l_Object {
  m_testJsEnumListElementEquals__void_$p_jsenum_Main_Companion() {
   Main.m_testJsEnumListElementEquals__void();
  }
- /** @final @nodts @return {List<?>} */
+ /** @final @nodts @return {List<BoxedComparableLightEnum<?>>} */
  m_getComparableJsEnumList__java_util_List_$p_jsenum_Main_Companion() {
   return Main.m_getComparableJsEnumList__java_util_List();
  }
@@ -154,28 +150,28 @@ class Companion extends j_l_Object {
   return Main.m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int(e);
  }
  /** @final @nodts @template T @return {T} */
- m_testJsEnumTypeVariable__jsenum_Main_ComparableJsEnum__java_util_List__java_util_List__java_util_List__jsenum_Main_ComparableJsEnum_$p_jsenum_Main_Companion(/** T */ t, /** List<?> */ listWildCardExtends, /** List<?> */ listWildCardSuper, /** List<?> */ listJsEnum) {
-  return /**@type {T}*/ ($Casts.$to(Main.m_testJsEnumTypeVariable__jsenum_Main_ComparableJsEnum__java_util_List__java_util_List__java_util_List__jsenum_Main_ComparableJsEnum(/**@type {?}*/ ($Casts.$to(t, $Overlay)), listWildCardExtends, listWildCardSuper, listJsEnum), $Overlay));
+ m_testJsEnumTypeVariable__jsenum_Main_ComparableJsEnum__java_util_List__java_util_List__java_util_List__jsenum_Main_ComparableJsEnum_$p_jsenum_Main_Companion(/** T */ t, /** List<BoxedComparableLightEnum<?>> */ listWildCardExtends, /** List<?> */ listWildCardSuper, /** List<BoxedComparableLightEnum<?>> */ listJsEnum) {
+  return /**@type {T}*/ (Main.m_testJsEnumTypeVariable__jsenum_Main_ComparableJsEnum__java_util_List__java_util_List__java_util_List__jsenum_Main_ComparableJsEnum(/**@type {?}*/ (t), listWildCardExtends, listWildCardSuper, listJsEnum));
  }
  /** @final @nodts @template T @return {T} */
  m_jsEnumTypeVariablePassthrough__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum_$p_jsenum_Main_Companion(/** T */ t) {
-  return /**@type {T}*/ ($Casts.$to(Main.m_jsEnumTypeVariablePassthrough__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(/**@type {?}*/ ($Casts.$to(t, $Overlay))), $Overlay));
+  return /**@type {T}*/ (Main.m_jsEnumTypeVariablePassthrough__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(/**@type {?}*/ (t)));
  }
  /** @final @nodts @template T */
  m_testJsEnumTypeVariableInLambdas__jsenum_Main_ComparableJsEnum__void_$p_jsenum_Main_Companion(/** T */ t) {
-  Main.m_testJsEnumTypeVariableInLambdas__jsenum_Main_ComparableJsEnum__void(/**@type {?}*/ ($Casts.$to(t, $Overlay)));
+  Main.m_testJsEnumTypeVariableInLambdas__jsenum_Main_ComparableJsEnum__void(/**@type {?}*/ (t));
  }
  /** @final @nodts @template T */
  m_testJsEnumTypeVariableVarargs__jsenum_Main_ComparableJsEnum__void_$p_jsenum_Main_Companion(/** T */ t) {
-  Main.m_testJsEnumTypeVariableVarargs__jsenum_Main_ComparableJsEnum__void(/**@type {?}*/ ($Casts.$to(t, $Overlay)));
+  Main.m_testJsEnumTypeVariableVarargs__jsenum_Main_ComparableJsEnum__void(/**@type {?}*/ (t));
  }
  /** @final @nodts @template T @return {T} */
  m_jsEnumTypeVariableVarargs__arrayOf_jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum_$p_jsenum_Main_Companion(/** !Array<T> */ ts) {
-  return /**@type {T}*/ ($Casts.$to(Main.m_jsEnumTypeVariableVarargs__arrayOf_jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(ts), $Overlay));
+  return /**@type {T}*/ (Main.m_jsEnumTypeVariableVarargs__arrayOf_jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(ts));
  }
  /** @final @nodts @template I, S */
  m_testCustomValuedJsEnumTypeVariables__jsenum_Main_IntJsEnum__jsenum_Main_StringJsEnum__void_$p_jsenum_Main_Companion(/** I */ i, /** S */ s) {
-  Main.m_testCustomValuedJsEnumTypeVariables__jsenum_Main_IntJsEnum__jsenum_Main_StringJsEnum__void(/**@type {?}*/ ($Casts.$to(i, IntJsEnum_$Overlay)), /**@type {?}*/ ($Casts.$to(s, StringJsEnum_$Overlay)));
+  Main.m_testCustomValuedJsEnumTypeVariables__jsenum_Main_IntJsEnum__jsenum_Main_StringJsEnum__void(/**@type {?}*/ (i), /**@type {?}*/ (s));
  }
  /** @final @nodts @template T */
  m_testJsEnumIntersectionTypeVariable__jsenum_Main_ComparableJsEnum__void_$p_jsenum_Main_Companion(/** T */ t) {
@@ -200,10 +196,6 @@ class Companion extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Main = goog.module.get('jsenum.Main$impl');
-  $Overlay = goog.module.get('jsenum.Main.ComparableJsEnum.$Overlay$impl');
-  IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
-  StringJsEnum_$Overlay = goog.module.get('jsenum.Main.StringJsEnum.$Overlay$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 /**@private {!Companion} @nodts*/

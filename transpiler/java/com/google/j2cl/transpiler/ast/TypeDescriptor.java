@@ -53,16 +53,26 @@ public abstract sealed class TypeDescriptor
     return false;
   }
 
+  /**
+   * Returns whether this type is a {@link jsinterop.annotations.JsEnum}.
+   *
+   * <p>For non-declared types (e.g. type variables, wildcards, captures and intersections) this is
+   * determined by the type they erase to, i.e. {@code toRawTypeDescriptor().isJsEnum()}, since that
+   * is the type that determines their runtime representation.
+   */
   public boolean isJsEnum() {
-    return false;
+    return toRawTypeDescriptor().isJsEnum();
   }
 
   /**
    * Returns the corresponding {@link JsEnumInfo} if the type is a {@link
    * jsinterop.annotations.JsEnum} otherwise {@code null}
+   *
+   * <p>For non-declared types (e.g. type variables, wildcards, captures and intersections) this is
+   * determined by the type they erase to, i.e. {@code toRawTypeDescriptor().getJsEnumInfo()}.
    */
   public JsEnumInfo getJsEnumInfo() {
-    return null;
+    return toRawTypeDescriptor().getJsEnumInfo();
   }
 
   /**

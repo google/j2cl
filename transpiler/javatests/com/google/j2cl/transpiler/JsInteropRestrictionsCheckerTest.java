@@ -2879,26 +2879,22 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             JsEnumWithCustomValue(int value) { this.value = value; }
           }
           private static <T extends MyJsEnum, C extends JsEnumWithCustomValue> void main(T t, C c) {
-            // TODO(b/114468916): Should be rejected; `T` erases to a JsEnum, which is not an Enum.
             Enum e = t;
-            // TODO(b/114468916): Should be rejected; `C` erases to a custom-valued JsEnum, which is
-            // not Comparable.
+        > Error: JsEnum 'T' cannot be assigned to 'Enum'.
             Comparable comparable = c;
-            // TODO(b/114468916): Should be rejected; JsEnums do not support name().
+        > Error: Custom-valued JsEnum 'C' cannot be assigned to 'Comparable'.
             t.name();
+        > Error: JsEnum 'T' does not support 'String Enum.name()'.
           }
           private static <T extends MyJsEnum> void arrays(T[] ts) {
-            // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which is not an
-            // Object[].
             Object[] objects = ts;
-            // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which is not an
-            // Object.
+        > Error: JsEnum array 'T[]' cannot be assigned to 'Object[]'.
             Object o = ts;
-            // TODO(b/114468916): Should be rejected; `T[]` is a JsEnum array, which cannot be
-            // passed as an array of an unbounded type variable.
+        > Error: JsEnum array 'T[]' cannot be assigned to 'Object'.
             List<T> list = Arrays.asList(ts);
-            // TODO(b/114468916): Should be rejected; JsEnum arrays do not support member access.
+        > Error: JsEnum array 'T[]' cannot be assigned to 'T[]'.
             T[] clone = ts.clone();
+        > Error: Cannot access member of 'Object' with JsEnum array 'T[]'.
           }
         }
         """);
@@ -2928,6 +2924,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private static void acceptsSerializable(Serializable s) {}
               private static void acceptsComparable(Comparable c) {}
               private static void acceptsMyJsEnum(MyJsEnum c) {}
+              private static <T extends MyJsEnum> void typeVariableCasts(T t, MyJsEnum e) {
+                // Casts between JsEnums with the same erasure are allowed.
+                e = (MyJsEnum) t;
+                t = (T) e;
+              }
               private static void main() {
                 {
                   Object o = Native.A;
@@ -2954,6 +2955,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                   o = (Comparable<?>) MyJsEnum.A;
                   o = (MyJsEnum) MyJsEnum.A;
                   myJsEnum = (MyJsEnum) o;
+                  myJsEnum = (MyJsEnum & Comparable<MyJsEnum>) myJsEnum;
                   List<MyJsEnum> l1 = null; l1.add(MyJsEnum.A);
                   List<Object> l2 = null; l2.add(MyJsEnum.A);
                   List<? extends Serializable> l3 = new ArrayList<MyJsEnum>();
@@ -3005,18 +3007,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 public <T extends MyJsEnum> int consumeVarargs(T... p) { return 0; }
                 public <T extends MyJsEnum> T[] produce(T[] p) { return p; }
               }
-              // TODO(b/114468916): Should be allowed; `T[]` and `MyJsEnum[]` have the same
-              // representation.
-              // private static <T extends MyJsEnum> MyJsEnum[] toJsEnumArray(T[] p) {
-              //   return p;
-              // }
-              // private static <T extends MyJsEnum> MyJsEnum[][] toJsEnumArrayArray(T[][] p) {
-              //   return p;
-              // }
-              // @SuppressWarnings("unchecked")
-              // private static <T extends MyJsEnum> T[] fromJsEnumArray(MyJsEnum[] p) {
-              //   return (T[]) p;
-              // }
+              private static <T extends MyJsEnum> MyJsEnum[] toJsEnumArray(T[] p) {
+                return p;
+              }
+              private static <T extends MyJsEnum> MyJsEnum[][] toJsEnumArrayArray(T[][] p) {
+                return p;
+              }
+              @SuppressWarnings("unchecked")
+              private static <T extends MyJsEnum> T[] fromJsEnumArray(MyJsEnum[] p) {
+                return (T[]) p;
+              }
               private static MyJsEnum[] returnsJsEnumArray() { return null; }
               static class ParametricConstructorVarargs<E> {
                 ParametricConstructorVarargs(E... p) {}
@@ -3037,9 +3037,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 // Object[] in a desugaring pass, JsEnums are allowed as elements of Object[]).
                 acceptsTVarargs(MyJsEnum.A, MyJsEnum.B);
                 acceptsJsEnumTypeVariableVarargs(MyJsEnum.A, MyJsEnum.B);
-                // TODO(b/114468916): Should be allowed; `T[]` and `MyJsEnum[]` have the same
-                // representation.
-                // acceptsJsEnumTypeVariableVarargs(new MyJsEnum[0]);
+                acceptsJsEnumTypeVariableVarargs(new MyJsEnum[0]);
                 new ParametricConstructorVarargs<>(MyJsEnum.A, MyJsEnum.B);
                 MyJsEnum e = returnsJsEnumArray()[0];
               }

@@ -179,11 +179,21 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             verifyStaticMemberQualifiers(methodCall);
             if (verifyForWasm) {
               checkState(!methodCall.isPolymorphic() || methodCall.getQualifier().isIdempotent());
-            } else if (methodCall.getTarget().isJsFunction()) {
+              return;
+            }
+            if (methodCall.getTarget().isJsFunction()) {
               // There are no calls to the JsFunction implementation method.
               checkState(
                   methodCall.getTarget().getEnclosingTypeDescriptor().isJsFunctionInterface());
             }
+            // JsEnum values are represented by their unboxed values in JS, hence instance methods
+            // can not be called on them; those calls are rewritten into static calls.
+            checkState(
+                methodCall.getTarget().isStatic()
+                    || methodCall.getQualifier() == null
+                    || !methodCall.getQualifier().getTypeDescriptor().isJsEnum(),
+                "Instance method call on a JsEnum value: %s",
+                methodCall.getTarget());
           }
 
           @Override

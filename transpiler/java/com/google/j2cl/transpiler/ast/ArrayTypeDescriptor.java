@@ -84,6 +84,17 @@ public abstract non-sealed class ArrayTypeDescriptor extends TypeDescriptor {
     return isNativeJsArray();
   }
 
+  @Override
+  public boolean isJsEnum() {
+    return false;
+  }
+
+  @Override
+  @Nullable
+  public JsEnumInfo getJsEnumInfo() {
+    return null;
+  }
+
   /**
    * Returns true for arrays where raw wasm array representation is enough. These arrays are located
    * in {@see javaemul.internal.WasmArrays}.

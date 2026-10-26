@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.j2cl.transpiler.ast.AstUtils.isJsEnumBoxingSupported;
 import static com.google.j2cl.transpiler.ast.AstUtils.isNonNativeJsEnum;
+import static com.google.j2cl.transpiler.ast.AstUtils.isSpecializedToBoxableJsEnum;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.getEnumBoxType;
 import static java.util.stream.Collectors.joining;
 
@@ -62,7 +63,6 @@ class ClosureTypesGenerator {
    * annotation.
    */
   public String getClosureTypeString(TypeDescriptor typeDescriptor) {
-    checkArgument(!typeDescriptor.isIntersection());
     return getClosureType(typeDescriptor).render();
   }
 
@@ -76,17 +76,12 @@ class ClosureTypesGenerator {
     TypeDescriptor parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
     TypeDescriptor parameterDeclarationDescriptor =
         methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors().get(index);
-    if (isSpecializedToNonNativeJsEnum(parameterDeclarationDescriptor, parameterTypeDescriptor)) {
+    if (isSpecializedToBoxableJsEnum(parameterDeclarationDescriptor, parameterTypeDescriptor)) {
       // TODO(b/118615488): This should be performed as a transformation in the AST.
       parameterTypeDescriptor = getEnumBoxType(parameterTypeDescriptor);
     }
     return toClosureTypeParameter(methodDescriptor, parameterDescriptor, parameterTypeDescriptor)
         .render();
-  }
-
-  private static boolean isSpecializedToNonNativeJsEnum(
-      TypeDescriptor declarationDescriptor, TypeDescriptor typeDescriptor) {
-    return declarationDescriptor.isTypeVariable() && isNonNativeJsEnum(typeDescriptor);
   }
 
   /**
@@ -128,7 +123,7 @@ class ClosureTypesGenerator {
    * <p>The replacement does not need to be done recursively since it happens at the rendering of
    * the type which will be called recursively to render each type argument. This is only done in
    * declared type descriptors; there is no need to replace in places like bounds in type variables
-   * since those are not currently supported to be JsEnums.
+   * since those are not rendered.
    */
   private DeclaredTypeDescriptor replaceJsEnumArguments(DeclaredTypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isBoxedEnum(typeDescriptor)) {
@@ -254,7 +249,7 @@ class ClosureTypesGenerator {
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
     TypeDescriptor declarationReturnTypeDescriptor =
         methodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor();
-    if (isSpecializedToNonNativeJsEnum(declarationReturnTypeDescriptor, returnTypeDescriptor)) {
+    if (isSpecializedToBoxableJsEnum(declarationReturnTypeDescriptor, returnTypeDescriptor)) {
       // TODO(b/118615488): This should be performed as a transformation in the AST.
       returnTypeDescriptor = getEnumBoxType(returnTypeDescriptor);
     }

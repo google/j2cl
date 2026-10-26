@@ -61,7 +61,7 @@ public class NormalizeNativeJsEnumsWasm extends NormalizationPass {
               return methodCall;
             }
             Expression qualifier = methodCall.getQualifier();
-            if (!AstUtils.isNativeJsEnum(qualifier.getTypeDescriptor().toRawTypeDescriptor())) {
+            if (!AstUtils.isNativeJsEnum(qualifier.getTypeDescriptor())) {
               // Not a native JsEnum receiver, nothing to do.
               return methodCall;
             }

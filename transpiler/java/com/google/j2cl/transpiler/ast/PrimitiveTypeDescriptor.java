@@ -88,6 +88,17 @@ public final class PrimitiveTypeDescriptor extends TypeDescriptor {
     return false;
   }
 
+  @Override
+  public boolean isJsEnum() {
+    return false;
+  }
+
+  @Override
+  @Nullable
+  public JsEnumInfo getJsEnumInfo() {
+    return null;
+  }
+
   /**
    * Returns true if this is wider than {@code thatType} from the arithmetic precision perspective.
    *

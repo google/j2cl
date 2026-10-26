@@ -521,7 +521,7 @@ public class TypeDescriptors {
         boxType.specializeTypeVariables(
             ImmutableMap.of(
                 Iterables.getOnlyElement(boxType.getAllTypeVariables()), typeDescriptor));
-    return typeDescriptor.isNullable() ? specializedType : specializedType.toNonNullable();
+    return typeDescriptor.canBeNull() ? specializedType : specializedType.toNonNullable();
   }
 
   /** Gets the type descriptor representing a native string. */

@@ -59,6 +59,10 @@ public final class NormalizePackagedJsEnumVarargsLiterals extends NormalizationP
    *
    * <p>For example: {@code foo(nonVararg, new SomeJsEnum[] {SomeJsEnum.A, SomeJsEnum.B}} would be
    * rewritten to {@code foo(nonVararg, new Object[] {SomeJsEnum.A, SomeJsEnum.B}}.
+   *
+   * <p>Note that if the type parameter is bounded by a JsEnum, e.g. {@code <T extends SomeJsEnum>
+   * void foo(T... ts)}, its erasure is a JsEnum array and the rewritten literal is still a JsEnum
+   * array.
    */
   public static Invocation maybeNormalizePackagedJsEnumVarargsLiteral(Invocation invocation) {
     if (!invocation.getTarget().isVarargs()) {
