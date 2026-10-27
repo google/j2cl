@@ -32,6 +32,7 @@ public class Main {
     testSwitchSideEffectInExpression();
     testSwitchCaseEvaluationOrder();
     testSwitchReassignedBinding();
+    testSwitchQualifiedEnumConstants();
     // TODO(b/465574821):Add tests for jsenums.
   }
 
@@ -299,4 +300,43 @@ public class Main {
     assertEquals("hello?", result);
     assertEquals("hello", o);
   }
+
+  private static void testSwitchQualifiedEnumConstants() {
+    assertTrue(getQualifiedEnumConstantValue(Numbers.ZERO) == 1);
+    assertTrue(getQualifiedEnumConstantValue(Numbers.ONE) == 2);
+    assertTrue(getQualifiedEnumConstantValue("ZERO") == 3);
+    assertTrue(getQualifiedEnumConstantValue(Numbers.TWO) == 4); // default
+    assertTrue(getQualifiedEnumConstantValue(Numbers.ZERO.ordinal()) == 4); // default
+    assertTrue(getQualifiedEnumConstantValue((double) Numbers.ZERO.ordinal()) == 4); // default
+    assertThrowsNullPointerException(() -> getQualifiedEnumConstantValue(null));
+    assertThrowsNullPointerException(() -> getQualifiedEnumConstantValue(getUndefined()));
+
+    // TODO(b/577118779): Uncomment once switches with only enum constants and no patterns on
+    // non-enum selectors are supported.
+    // assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ZERO) == 1);
+    // assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ONE) == 2); // default
+    // assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ZERO.ordinal()) == 2);
+    // assertTrue(
+    //     getQualifiedEnumConstantsWithoutExplicitPatterns((double) Numbers.ZERO.ordinal()) == 2);
+    // assertThrowsNullPointerException(
+    //     () -> getQualifiedEnumConstantsWithoutExplicitPatterns(null));
+    // assertThrowsNullPointerException(
+    //     () -> getQualifiedEnumConstantsWithoutExplicitPatterns(getUndefined()));
+  }
+
+  private static int getQualifiedEnumConstantValue(Object o) {
+    return switch (o) {
+      case Numbers.ZERO -> 1;
+      case Numbers.ONE -> 2;
+      case String s -> 3;
+      default -> 4;
+    };
+  }
+
+  // private static int getQualifiedEnumConstantsWithoutExplicitPatterns(Object o) {
+  //   return switch (o) {
+  //     case Numbers.ZERO -> 1;
+  //     default -> 2;
+  //   };
+  // }
 }

@@ -211,6 +211,30 @@ class SwitchPatterns extends j_l_Object {
   })();
  }
  /** @nodts */
+ m_testQualifiedEnumConstants__void_$pp_switchpatterns() {
+  let o = Color.f_RED__switchpatterns_SwitchPatterns_Color;
+  {
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o);
+   let /** number */ $caseIndex;
+   let /** ?string */ s;
+   if ($Equality.$same($selector, Color.f_RED__switchpatterns_SwitchPatterns_Color)) {
+    $caseIndex = 0;
+   } else if (j_l_String.$isInstance($selector) && (s = (/**@type {string}*/ ($selector)), true)) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     break;
+    case 1:
+     break;
+    default:
+     break;
+   }
+  }
+ }
+ /** @nodts */
  m_testPatternsWithNull__void_$pp_switchpatterns() {
   let /** Color */ color = null;
   switch ($Equality.$same(color, null) ? -1 : color.ordinal()) {

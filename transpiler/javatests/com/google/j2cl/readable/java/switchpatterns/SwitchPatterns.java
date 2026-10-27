@@ -114,6 +114,22 @@ public class SwitchPatterns {
     THREE
   }
 
+  void testQualifiedEnumConstants() {
+    Object o = Color.RED;
+    switch (o) {
+      case Color.RED -> {}
+      case String s -> {}
+      default -> {}
+    }
+
+    // TODO(b/577118779): Uncomment once switches with only enum constants and no patterns on
+    // non-enum selectors are supported.
+    // switch (o) {
+    //   case Color.RED, Color.BLUE -> {}
+    //   default -> {}
+    // }
+  }
+
   void testPatternsWithNull() {
     Color color = null;
     // Enum switch. Case null that is not a default case.

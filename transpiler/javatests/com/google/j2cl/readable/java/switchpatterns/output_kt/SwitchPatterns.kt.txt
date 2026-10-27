@@ -160,6 +160,18 @@ open class SwitchPatterns {
   }
  }
  
+ internal open fun testQualifiedEnumConstants() {
+  val o: Any = Color.RED
+  when (o) {
+   Color.RED as Any -> {}
+   is String if run {
+    val s: String = o as String
+    true
+   } -> {}
+   else -> {}
+  }
+ }
+ 
  internal open fun testPatternsWithNull() {
   val color: Color? = null
   when (color) {
