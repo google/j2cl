@@ -741,6 +741,7 @@ internal class CompilationUnitBuilder(
       irCall.isArrayGetCall -> convertArrayGetCall(irCall)
       irCall.isArraySetCall -> convertArraySetCall(irCall)
       irCall.isArrayOfCall -> convertArrayOfCall(irCall)
+      irCall.isEmptyArrayCall -> convertEmptyArrayCall(irCall)
       irCall.isArrayOfNullCall -> createNewArray(irCall)
       irCall.isIsArrayOfCall -> convertIsArrayOfCall(irCall)
       irCall.isDataClassArrayMemberHashCode -> convertDataClassArrayMemberCall(irCall, "hashCode")
@@ -870,6 +871,11 @@ internal class CompilationUnitBuilder(
     check(irCall.arguments.size == 1) { "invalid number of arguments" }
     return convertExpression(irCall.arguments[0]!!)
   }
+
+  private fun convertEmptyArrayCall(irCall: IrCall): Expression =
+    ArrayLiteral.builder()
+      .setTypeDescriptor(environment.getTypeDescriptor(irCall.type) as ArrayTypeDescriptor)
+      .build()
 
   private fun convertIsArrayOfCall(irCall: IrCall): Expression =
     // Transforms `array.isArrayOf<String>()` to `array instanceof String[]`
@@ -1539,6 +1545,9 @@ internal class CompilationUnitBuilder(
 
   private val IrCall.isArrayOfCall: Boolean
     get() = intrinsicMethods.isArrayOf(this)
+
+  private val IrCall.isEmptyArrayCall: Boolean
+    get() = intrinsicMethods.isEmptyArray(this)
 
   private val IrCall.isIsArrayOfCall: Boolean
     get() = intrinsicMethods.isIsArrayOf(this)

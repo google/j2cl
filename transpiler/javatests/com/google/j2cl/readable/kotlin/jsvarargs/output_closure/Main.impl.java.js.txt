@@ -73,7 +73,7 @@ class Main extends j_l_Object {
   Main.generics(Integer.valueOf(1), Integer.valueOf(2));
   Main.f2();
   Main.f2();
-  Main.generics(/**@type {!Array<number>}*/ ($Arrays.$create([0], $int)));
+  Main.generics(/**@type {!Array<!Integer>}*/ ($Arrays.$create([0], Integer)));
   let ints = /**@type {!Array<number>}*/ ($Arrays.$stampType([1, 2], $int));
   let integers = /**@type {!Array<!Integer>}*/ ($Arrays.$stampType([Integer.valueOf(1), Integer.valueOf(2)], Integer));
   Main.f2(...ints);

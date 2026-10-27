@@ -52,8 +52,37 @@ private fun testOneDimensionalLiteral() {
 }
 
 private fun testOneDimensionalLiteral_empty() {
-  val empty = arrayOf<Any>()
+  var empty = arrayOf<Any>()
   assertTrue(empty.size == 0)
+  assertTrue(empty::class.java === Array<Any>::class.java)
+
+  empty = emptyArray()
+  assertTrue(empty.size == 0)
+  assertTrue(empty::class.java === Array<Any>::class.java)
+
+  var emptyStrings = arrayOf<String>()
+  assertTrue(emptyStrings.size == 0)
+  assertTrue(emptyStrings::class.java === Array<String>::class.java)
+
+  emptyStrings = emptyArray()
+  assertTrue(emptyStrings.size == 0)
+  assertTrue(emptyStrings::class.java === Array<String>::class.java)
+
+  var emptyInts = arrayOf<Int>()
+  assertTrue(emptyInts.size == 0)
+  assertTrue(emptyInts::class.java === Array<Int>::class.java)
+
+  emptyInts = emptyArray()
+  assertTrue(emptyInts.size == 0)
+  assertTrue(emptyInts::class.java === Array<Int>::class.java)
+
+  var emptyNullableInts = arrayOf<Int?>()
+  assertTrue(emptyNullableInts.size == 0)
+  assertTrue(emptyNullableInts::class.java === Array<Int?>::class.java)
+
+  emptyNullableInts = emptyArray()
+  assertTrue(emptyNullableInts.size == 0)
+  assertTrue(emptyNullableInts::class.java === Array<Int?>::class.java)
 }
 
 private fun testOneDimensionalLiteral_terse() {

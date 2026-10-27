@@ -230,7 +230,10 @@ private fun testVarargs_method() {
   val c = bar(i1, i2) // varargs with one element.
   assertTrue(c == 4)
 
-  val e = bar(i1, *arrayOf()) // empty array for the varargs.
+  var e = bar(i1, *arrayOf()) // empty array for the varargs.
+  assertTrue(e == 2)
+
+  e = bar(i1, *emptyArray())
   assertTrue(e == 2)
 
   // unlike java, you cannot pass null for the vararg array
@@ -297,6 +300,9 @@ private fun testVarargs_spread() {
 
   val k = bar(i1, *inlineCopyArray(arrayOf(i2, i3, i)))
   assertTrue(k == 11)
+
+  val l = bar(i1, *emptyArray<Int>(), i)
+  assertTrue(l == 6)
 }
 
 private inline fun <reified T> inlineCopyArray(array: Array<T>) = Array<T>(array.size) { array[it] }

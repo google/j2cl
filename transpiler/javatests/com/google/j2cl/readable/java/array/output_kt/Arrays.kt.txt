@@ -42,8 +42,9 @@ import kotlin.longArrayOf
 
 open class Arrays {
  open fun testObjectArray() {
-  var objects: Array<Any?> = arrayOfNulls<Any>(100)
+  var objects: Array<Any?> = arrayOf<Any?>()
   objects = arrayOfNulls<Any>(0)
+  objects = arrayOf<Any?>()
   objects = arrayOf<Any?>(null, null)
   var objects2d: Array<Array<Any?>?> = Array<Array<Any?>?>(5) {
    arrayOfNulls<Any>(10)
@@ -119,6 +120,7 @@ open class Arrays {
  internal open fun testDevirtualizedTypeArrays() {
   var booleans: Array<Boolean?> = arrayOfNulls<Boolean>(100)
   booleans = arrayOfNulls<Boolean>(0)
+  booleans = arrayOf<Boolean?>()
   booleans = arrayOf<Boolean?>(true, false)
   var booleans2d: Array<Array<Boolean?>?> = Array<Array<Boolean?>?>(5) {
    arrayOfNulls<Boolean>(10)

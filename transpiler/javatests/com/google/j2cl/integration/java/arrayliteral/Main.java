@@ -49,8 +49,34 @@ public class Main {
   }
 
   private static void testOneDimensionalLiteral_empty() {
-    Object[] empty = new Object[] {};
+    Object[] empty = {};
     assertTrue(empty.length == 0);
+
+    int[] emptyPrimitiveInts = {};
+    assertTrue(emptyPrimitiveInts.length == 0);
+
+    Integer[] emptyInts = {};
+    assertTrue(emptyInts.length == 0);
+
+    String[] emptyStrings = {};
+    assertTrue(emptyStrings.length == 0);
+
+    // The array literals created empty arrays of the correct type.
+    assertTrue(empty.getClass() == Object[].class);
+    assertTrue(new Object[] {}.getClass() == Object[].class);
+
+    assertTrue(emptyPrimitiveInts.getClass() == int[].class);
+    assertTrue(new int[] {}.getClass() == int[].class);
+
+    // TODO(b/184675805): Enable for Wasm when class metadata is implemented for array.
+    // Non-Object array class literals like `String[].class` are rendered as `Array::class` in J2KT.
+    if (!TestUtils.isWasm() && !TestUtils.isJ2Kt()) {
+      assertTrue(emptyInts.getClass() == Integer[].class);
+      assertTrue(new Integer[] {}.getClass() == Integer[].class);
+
+      assertTrue(emptyStrings.getClass() == String[].class);
+      assertTrue(new String[] {}.getClass() == String[].class);
+    }
   }
 
   private static void testOneDimensionalLiteral_terse() {

@@ -23,8 +23,9 @@ import jsinterop.annotations.JsType;
 public class Arrays {
   public void testObjectArray() {
     // Creation
-    Object[] objects = new Object[100];
+    Object[] objects = {};
     objects = new Object[0];
+    objects = new Object[] {};
     objects = new Object[] {null, null};
     Object[][] objects2d = new Object[5][10];
     objects2d = new Object[][] {{null, null}, null};
@@ -118,6 +119,7 @@ public class Arrays {
     // Creation
     Boolean[] booleans = new Boolean[100];
     booleans = new Boolean[0];
+    booleans = new Boolean[] {};
     booleans = new Boolean[] {true, false};
     Boolean[][] booleans2d = new Boolean[5][10];
     booleans2d = new Boolean[][] {{true, false}, null};

@@ -25,6 +25,8 @@ class Arrays {
     // Creation
     var objects = arrayOfNulls<Any>(100)
     objects = arrayOfNulls(0)
+    objects = arrayOf()
+    objects = emptyArray()
     objects = arrayOf(null, null)
     var objects2d = Array<Array<Any?>?>(5) { arrayOfNulls(10) }
     objects2d = arrayOf(arrayOf(null, null), null)
@@ -135,6 +137,8 @@ class Arrays {
     // Creation
     var booleans: Array<Boolean?> = Array(100) { null }
     booleans = Array(0) { null }
+    booleans = arrayOf()
+    booleans = emptyArray()
     booleans = arrayOf(true, false)
     var booleans2d = Array<Array<Boolean?>?>(5) { Array(10) { null } }
     booleans2d = arrayOf(arrayOf(true, false), null)

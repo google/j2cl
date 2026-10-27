@@ -33,8 +33,9 @@ class Arrays extends j_l_Object {
  }
  /** @nodts */
  m_testObjectArray__void() {
-  let objects = new Array(100);
+  let objects = [];
   objects = new Array(0);
+  objects = [];
   objects = [null, null];
   let objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([5, 10], j_l_Object));
   objects2d = (/**@type {!Array<Array<*>>}*/ ($Arrays.$stampType([[null, null], null], j_l_Object, 2)));
@@ -101,6 +102,7 @@ class Arrays extends j_l_Object {
  /** @nodts */
  m_testDevirtualizedTypeArrays__void_$pp_array() {
   let booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([100], Boolean));
+  booleans = (/**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean)));
   booleans = (/**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean)));
   booleans = (/**@type {!Array<?boolean>}*/ ($Arrays.$stampType([true, false], Boolean)));
   let booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$create([5, 10], Boolean));

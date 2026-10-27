@@ -118,8 +118,8 @@ class IntrinsicMethods(
     return symbol.toKey() in arrayOfSymbolKeys
   }
 
-  fun isEmptyArray(symbol: IrFunctionSymbol): Boolean {
-    return symbol.toKey() == Key(FqName("kotlin"), "emptyArray", emptyList())
+  fun isEmptyArray(irCall: IrCall): Boolean {
+    return irCall.symbol.toKey() == Key(kotlinFqn, "emptyArray", emptyList())
   }
 
   fun isIsArrayOf(irCall: IrCall): Boolean {
