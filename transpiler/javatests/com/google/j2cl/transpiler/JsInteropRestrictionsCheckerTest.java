@@ -3083,6 +3083,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         import jsinterop.annotations.*;
         public class Main<T> {
           @JsEnum enum MyJsEnum {A, B}
+          static class GenericCtor {
+            <T> GenericCtor(T t) {}
+          }
           T t;
           T[] tArray;
           T[][] tArrayArray;
@@ -3108,6 +3111,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'R'.
             acceptsT(new MyJsEnum[0]);
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.
+          > Error: Type argument for 'T' of 'void Main.acceptsT(MyJsEnum[])' cannot be of type 'MyJsEnum[]'.
+            Main.<MyJsEnum[]>acceptsT(null);
+          > Error: Type argument for 'T' of 'void Main.acceptsT(MyJsEnum[])' cannot be of type 'MyJsEnum[]'.
+            new <MyJsEnum[]>GenericCtor(null);
+          > Error: Type argument for 'T' of 'GenericCtor(MyJsEnum[])' cannot be of type 'MyJsEnum[]'.
+            Main.<List<MyJsEnum[]>>acceptsT(null);
+          > Error: Type argument for 'T' of 'void Main.acceptsT(List)' cannot be of type 'List<MyJsEnum[]>'.
             acceptsTArray(new MyJsEnum[0]);
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.
             acceptsTArrayArray(new MyJsEnum[0][]);
@@ -3127,7 +3137,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: Returned type in call to method 'List<MyJsEnum[][]> Main.instanceReturnsTArrayList()' cannot be of type 'List<MyJsEnum[][]>'.
             MyJsEnum e;
             e = Main.<MyJsEnum[]>returnsT()[0];
-          > Error: Returned type in call to method 'MyJsEnum[] Main.returnsT()' cannot be of type 'MyJsEnum[]'.
+          > Error: Type argument for 'T' of 'MyJsEnum[] Main.returnsT()' cannot be of type 'MyJsEnum[]'.
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'T'.
             e = new Main<MyJsEnum[]>().t[0];
           > Error: Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'.
@@ -3158,6 +3168,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         }
         class Derived extends Main<Main.MyJsEnum[]> {
         > Error: Supertype of 'Derived' cannot be of type 'Main<MyJsEnum[]>'.
+          // Explicit constructor to test that its implicit `super()` call does not report an
+          // additional error on the super constructor's return type.
+          Derived() {}
           abstract class NestedImplements implements List<Main.MyJsEnum[]> {}
         > Error: Supertype of 'NestedImplements' cannot be of type 'List<MyJsEnum[]>'.
         }

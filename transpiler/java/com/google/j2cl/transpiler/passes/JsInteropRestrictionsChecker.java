@@ -56,6 +56,7 @@ import com.google.j2cl.transpiler.ast.HasJsNameInfo;
 import com.google.j2cl.transpiler.ast.HasReadableDescription;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.JsUtils;
@@ -795,8 +796,9 @@ public class JsInteropRestrictionsChecker {
     // JsEnum arrays are not allowed to be used in most type parameters.
     checkAllowedTypes(
         type,
-        AstUtils::isNonNativeJsEnumArray,
-        /* onlyCheckTypeSpecialization= */ true,
+        (declaredTypeDescriptor, inferredTypeDescriptor) ->
+            !AstUtils.isNonNativeJsEnumArray(declaredTypeDescriptor)
+                && AstUtils.isNonNativeJsEnumArray(inferredTypeDescriptor),
         /* disallowedTypeDescription= */ "JsEnum array type");
 
     checkOverrides(
@@ -812,16 +814,8 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
     return !expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
-        && (hasDisallowedType(
-                expressionTypeDescriptor,
-                expressionTypeDescriptor,
-                AstUtils::isNonNativeJsEnumArray,
-                /* onlyCheckTypeSpecialization= */ false)
-            || hasDisallowedType(
-                toTypeDescriptor,
-                toTypeDescriptor,
-                AstUtils::isNonNativeJsEnumArray,
-                /* onlyCheckTypeSpecialization= */ false));
+        && (hasDisallowedType(expressionTypeDescriptor, AstUtils::isNonNativeJsEnumArray)
+            || hasDisallowedType(toTypeDescriptor, AstUtils::isNonNativeJsEnumArray));
   }
 
   private static boolean isDisallowedJsEnumArrayOverride(
@@ -834,11 +828,7 @@ public class JsInteropRestrictionsChecker {
     // base type has type variables.
     return (!expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
             || !toTypeDescriptor.getAllTypeVariables().isEmpty())
-        && hasDisallowedType(
-            expressionTypeDescriptor,
-            expressionTypeDescriptor,
-            AstUtils::isNonNativeJsEnumArray,
-            /* onlyCheckTypeSpecialization= */ false);
+        && hasDisallowedType(expressionTypeDescriptor, AstUtils::isNonNativeJsEnumArray);
   }
 
   /**
@@ -2839,13 +2829,13 @@ public class JsInteropRestrictionsChecker {
   }
 
   /**
-   * Checks the specified {@link Type} structure for any reference to invalid types as specified by
-   * `isTypeDisallowed`.
+   * Checks the specified {@link Type} structure for any reference to invalid type specializations
+   * as specified by {@code isTypeSpecializationDisallowed} (which takes the declared type and its
+   * specialized type).
    */
   private void checkAllowedTypes(
       Type type,
-      Predicate<TypeDescriptor> isTypeDisallowed,
-      boolean onlyCheckTypeSpecialization,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isTypeSpecializationDisallowed,
       String disallowedTypeDescription) {
     type.accept(
         new AbstractVisitor() {
@@ -2857,9 +2847,6 @@ public class JsInteropRestrictionsChecker {
                     superTypeDescriptor ->
                         errorIfDisallowedType(
                             superTypeDescriptor,
-                            superTypeDescriptor,
-                            isTypeDisallowed,
-                            onlyCheckTypeSpecialization,
                             nestedType.getSourcePosition(),
                             "Supertype of '%s'",
                             nestedType.getReadableDescription()));
@@ -2875,9 +2862,6 @@ public class JsInteropRestrictionsChecker {
             SourcePosition sourcePosition = variable.getSourcePosition();
             errorIfDisallowedType(
                 variableTypeDescriptor,
-                variableTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
                 sourcePosition == SourcePosition.NONE ? getSourcePosition() : sourcePosition,
                 "Variable '%s'",
                 variable.getName());
@@ -2885,18 +2869,12 @@ public class JsInteropRestrictionsChecker {
 
           @Override
           public void exitMethod(Method method) {
-            checkMethodSignature(
-                method,
-                Predicates.not(
-                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)));
+            checkMethodSignature(method, Predicates.not(this::isDisallowed));
           }
 
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
-            checkMethodSignature(
-                functionExpression,
-                Predicates.not(
-                    t -> hasDisallowedType(t, t, isTypeDisallowed, onlyCheckTypeSpecialization)));
+            checkMethodSignature(functionExpression, Predicates.not(this::isDisallowed));
           }
 
           @Override
@@ -2905,9 +2883,6 @@ public class JsInteropRestrictionsChecker {
             TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
             errorIfDisallowedType(
                 fieldTypeDescriptor,
-                fieldTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
                 field.getSourcePosition(),
                 "Field '%s'",
                 field.getReadableDescription());
@@ -2925,8 +2900,6 @@ public class JsInteropRestrictionsChecker {
             errorIfDisallowedType(
                 inferredTypeDescriptor,
                 declaredTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
                 getSourcePosition(),
                 "Reference to field '%s'",
                 fieldAccess.getTarget().getReadableDescription());
@@ -2934,6 +2907,14 @@ public class JsInteropRestrictionsChecker {
 
           @Override
           public void exitMethodCall(MethodCall methodCall) {
+            if (!checkInvocationTypeArguments(methodCall)) {
+              return;
+            }
+            if (methodCall.getTarget().isConstructor()) {
+              // Constructors in MethodCall are `this(...)` or `super(...)` calls where the type is
+              // already checked at the class or supertype declaration.
+              return;
+            }
             TypeDescriptor inferredTypeDescriptor =
                 methodCall.getTarget().getReturnTypeDescriptor();
             TypeDescriptor declaredTypeDescriptor =
@@ -2945,8 +2926,6 @@ public class JsInteropRestrictionsChecker {
             errorIfDisallowedType(
                 inferredTypeDescriptor,
                 declaredTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
                 getSourcePosition(),
                 "Returned type in call to method '%s'",
                 methodCall.getTarget().getReadableDescription());
@@ -2957,9 +2936,6 @@ public class JsInteropRestrictionsChecker {
             ArrayTypeDescriptor newArrayTypeDescriptor = newArray.getTypeDescriptor();
             errorIfDisallowedType(
                 newArrayTypeDescriptor,
-                newArrayTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
                 getSourcePosition(),
                 "Array creation '%s'",
                 // TODO(b/65465035): Emit the expression source position when it is tracked, and
@@ -2969,12 +2945,12 @@ public class JsInteropRestrictionsChecker {
 
           @Override
           public void exitNewInstance(NewInstance newInstance) {
+            if (!checkInvocationTypeArguments(newInstance)) {
+              return;
+            }
             TypeDescriptor instanceTypeDescriptor = newInstance.getTypeDescriptor();
             errorIfDisallowedType(
                 instanceTypeDescriptor,
-                instanceTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization,
                 getSourcePosition(),
                 "Object creation '%s'",
                 // TODO(b/65465035): Emit the expression source position when it is tracked, and
@@ -2982,14 +2958,28 @@ public class JsInteropRestrictionsChecker {
                 newInstance);
           }
 
+          private boolean checkInvocationTypeArguments(Invocation invocation) {
+            boolean hasDisallowedTypeArguments = false;
+            MethodDescriptor target = invocation.getTarget();
+            for (var entry : target.getLocalParameterization().entrySet()) {
+              TypeVariable typeParameter = entry.getKey();
+              TypeDescriptor typeArgument = entry.getValue();
+              hasDisallowedTypeArguments |=
+                  errorIfDisallowedType(
+                      typeArgument,
+                      typeParameter,
+                      getSourcePosition(),
+                      "Type argument for '%s' of '%s'",
+                      typeParameter.getReadableDescription(),
+                      target.getReadableDescription());
+            }
+            return !hasDisallowedTypeArguments;
+          }
+
           @Override
           public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
             TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-            if (hasDisallowedType(
-                testTypeDescriptor,
-                testTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization)) {
+            if (isDisallowed(testTypeDescriptor)) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against %s '%s'.",
@@ -3001,11 +2991,7 @@ public class JsInteropRestrictionsChecker {
           @Override
           public void exitCastExpression(CastExpression castExpression) {
             TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-            if (hasDisallowedType(
-                castTypeDescriptor,
-                castTypeDescriptor,
-                isTypeDisallowed,
-                onlyCheckTypeSpecialization)) {
+            if (isDisallowed(castTypeDescriptor)) {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
                   getSourcePosition(),
@@ -3014,57 +3000,67 @@ public class JsInteropRestrictionsChecker {
                   castTypeDescriptor.getReadableDescription());
             }
           }
+
+          @FormatMethod
+          @CanIgnoreReturnValue
+          private boolean errorIfDisallowedType(
+              TypeDescriptor typeDescriptor,
+              SourcePosition sourcePosition,
+              @FormatString String messagePrefixFormat,
+              Object... messagePrefixArgs) {
+            return errorIfDisallowedType(
+                typeDescriptor,
+                typeDescriptor,
+                sourcePosition,
+                messagePrefixFormat,
+                messagePrefixArgs);
+          }
+
+          @FormatMethod
+          @CanIgnoreReturnValue
+          private boolean errorIfDisallowedType(
+              TypeDescriptor inferredTypeDescriptor,
+              TypeDescriptor declaredTypeDescriptor,
+              SourcePosition sourcePosition,
+              @FormatString String messagePrefixFormat,
+              Object... messagePrefixArgs) {
+            if (hasDisallowedType(
+                inferredTypeDescriptor, declaredTypeDescriptor, isTypeSpecializationDisallowed)) {
+              problems.error(
+                  sourcePosition,
+                  "%s cannot be of type '%s'.",
+                  String.format(messagePrefixFormat, messagePrefixArgs),
+                  inferredTypeDescriptor.getReadableDescription());
+              return true;
+            }
+            return false;
+          }
+
+          private boolean isDisallowed(TypeDescriptor typeDescriptor) {
+            return hasDisallowedType(
+                typeDescriptor, typeDescriptor, isTypeSpecializationDisallowed);
+          }
         });
   }
 
-  @FormatMethod
-  private void errorIfDisallowedType(
-      TypeDescriptor inferredTypeDescriptor,
-      TypeDescriptor declaredTypeDescriptor,
-      Predicate<TypeDescriptor> isTypeDisallowed,
-      boolean onlyCheckTypeSpecialization,
-      SourcePosition sourcePosition,
-      @FormatString String messagePrefixFormat,
-      Object... messagePrefixArgs) {
-    if (hasDisallowedType(
-        inferredTypeDescriptor,
-        declaredTypeDescriptor,
-        isTypeDisallowed,
-        onlyCheckTypeSpecialization)) {
-      problems.error(
-          sourcePosition,
-          "%s cannot be of type '%s'.",
-          String.format(messagePrefixFormat, messagePrefixArgs),
-          inferredTypeDescriptor.getReadableDescription());
-    }
+  private static boolean hasDisallowedType(
+      TypeDescriptor typeDescriptor, Predicate<TypeDescriptor> isTypeDisallowed) {
+    return hasDisallowedType(
+        typeDescriptor,
+        typeDescriptor,
+        (declaredType, inferredType) -> isTypeDisallowed.test(inferredType));
   }
 
   /**
    * Deeply checks the given type against the specified predicate. Returns {@code true} if the
-   * predicate returns true for any type, type argument, or array component.
+   * predicate returns true for any type specialization, type argument, or array component.
    */
   private static boolean hasDisallowedType(
       TypeDescriptor inferredTypeDescriptor,
       TypeDescriptor declaredTypeDescriptor,
-      Predicate<TypeDescriptor> isTypeDisallowed,
-      boolean onlyCheckTypeSpecialization) {
-    if (!onlyCheckTypeSpecialization && isTypeDisallowed.test(inferredTypeDescriptor)) {
+      BiPredicate<TypeDescriptor, TypeDescriptor> isTypeSpecializationDisallowed) {
+    if (isTypeSpecializationDisallowed.test(declaredTypeDescriptor, inferredTypeDescriptor)) {
       return true;
-    }
-    if (declaredTypeDescriptor.isTypeVariable() && isTypeDisallowed.test(inferredTypeDescriptor)) {
-      return true;
-    }
-
-    if (declaredTypeDescriptor.isArray()) {
-      ArrayTypeDescriptor declaredArrayTypeDescriptor =
-          (ArrayTypeDescriptor) declaredTypeDescriptor;
-      // Only consider it a specialization if the declared type was not already disallowed, e.g.
-      // `T[]` with `T extends MyJsEnum` is a JsEnum array itself.
-      if (declaredArrayTypeDescriptor.getLeafTypeDescriptor().isTypeVariable()
-          && isTypeDisallowed.test(inferredTypeDescriptor)
-          && !isTypeDisallowed.test(declaredTypeDescriptor)) {
-        return true;
-      }
     }
 
     if (inferredTypeDescriptor.isArray()) {
@@ -3075,24 +3071,18 @@ public class JsInteropRestrictionsChecker {
           declaredTypeDescriptor.isArray()
               ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getComponentTypeDescriptor()
               : inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
-          isTypeDisallowed,
-          onlyCheckTypeSpecialization);
+          isTypeSpecializationDisallowed);
     }
 
     if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
       List<TypeDescriptor> inferredTypeArguments = descriptor.getTypeArgumentDescriptors();
-      List<TypeDescriptor> declaredTypeArguments =
-          declaredTypeDescriptor instanceof DeclaredTypeDescriptor
-              ? ((DeclaredTypeDescriptor) declaredTypeDescriptor).getTypeArgumentDescriptors()
-              : ImmutableList.of();
+      List<TypeVariable> typeParameters =
+          descriptor.getTypeDeclaration().getTypeParameterDescriptors();
       for (int typeArgIndex = 0; typeArgIndex < inferredTypeArguments.size(); typeArgIndex++) {
         if (hasDisallowedType(
             inferredTypeArguments.get(typeArgIndex),
-            typeArgIndex < declaredTypeArguments.size()
-                ? declaredTypeArguments.get(typeArgIndex)
-                : inferredTypeArguments.get(typeArgIndex),
-            isTypeDisallowed,
-            /* onlyCheckTypeSpecialization= */ false)) {
+            typeParameters.get(typeArgIndex),
+            isTypeSpecializationDisallowed)) {
           return true;
         }
       }
