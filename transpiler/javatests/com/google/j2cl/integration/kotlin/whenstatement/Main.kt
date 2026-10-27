@@ -16,17 +16,28 @@
 package whenstatement
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertThrows
+import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
+import com.google.j2cl.integration.testing.Asserts.assertTrue
 import com.google.j2cl.integration.testing.Asserts.fail
 
 /** Test unary operations. */
 fun main(vararg unused: String) {
+  // Tests in parity with java/switchstatement.
   testSwitchValues()
+  testWhenBranchVariableDeclarations()
+  testWhenNull()
+  testWhenWithErasureCast()
+  testBreaks()
+  testStringWhen()
+  testEmptyWhen()
+
+  // Kotlin specific tests.
   testWhenWithoutElse()
   testWhenWithOperatorIs()
   testWhenNoExpression()
   testWhenVariableDeclaration()
-  testEmptyWhen()
   testOnlyElse()
   testWhenWithOneBranch()
   testWhenExpressionWithStatements()
@@ -39,38 +50,33 @@ private fun testSwitchValues() {
   assertEquals(1, getStringValue("one"))
   assertEquals(2, getStringValue("two"))
   assertEquals(3, getStringValue("three"))
-  assertEquals(3, getStringValue(null))
-  assertEquals(4, getStringValueWithNull(null))
 
   assertEquals(1, getCharValue('0'))
   assertEquals(1, getCharValue('1'))
   assertEquals(2, getCharValue('2'))
   assertEquals(3, getCharValue('3'))
-  assertEquals(3, getCharValue(null))
 
   assertEquals(1, getIntValue(0))
   assertEquals(1, getIntValue(1))
   assertEquals(2, getIntValue(2))
   assertEquals(3, getIntValue(3))
-  assertEquals(3, getIntValue(null))
 
-  assertEquals(1, getBooleanValue(true))
-  assertEquals(2, getBooleanValue(false))
-  assertEquals(2, getBooleanValue(null))
-
-  assertEquals(1, getEnumValueExhaustive(Numbers.ONE))
-  assertEquals(2, getEnumValueExhaustive(Numbers.TWO))
-  assertEquals(3, getEnumValueExhaustive(Numbers.THREE))
+  assertEquals(1, getBoxedIntValue(0))
+  assertEquals(1, getBoxedIntValue(1))
+  assertEquals(2, getBoxedIntValue(2))
+  assertEquals(3, getBoxedIntValue(3))
 
   assertEquals(1, getEnumValue(Numbers.ONE))
   assertEquals(2, getEnumValue(Numbers.TWO))
   assertEquals(3, getEnumValue(Numbers.THREE))
-  assertEquals(4, getEnumValue(null))
-  assertEquals(4, getEnumValueWithNull(null))
 
-  assertEquals(10, testBreakStatementInSwitch(Numbers.ONE))
-  assertEquals(2, testBreakStatementInSwitch(Numbers.TWO))
-  assertEquals(0, testBreakStatementInSwitch(Numbers.THREE))
+  assertEquals(1, getBooleanValue(true))
+  assertEquals(2, getBooleanValue(false))
+
+  assertEquals(0, getEnumValueExhaustive(Numbers.ZERO))
+  assertEquals(1, getEnumValueExhaustive(Numbers.ONE))
+  assertEquals(2, getEnumValueExhaustive(Numbers.TWO))
+  assertEquals(3, getEnumValueExhaustive(Numbers.THREE))
 }
 
 private fun getStringValue(stringValue: String?): Int {
@@ -79,16 +85,6 @@ private fun getStringValue(stringValue: String?): Int {
     "one" -> 1
     "two" -> 2
     else -> 3
-  }
-}
-
-private fun getStringValueWithNull(stringValue: String?): Int {
-  when (stringValue) {
-    "zero",
-    "one" -> return 1
-    "two" -> return 2
-    null -> return 4
-    else -> return 3
   }
 }
 
@@ -101,11 +97,24 @@ private fun getCharValue(charValue: Char?): Int {
   }
 }
 
-private fun getIntValue(intValue: Int?): Int {
+private fun getIntValue(intValue: Int): Int {
   when (intValue) {
     0,
     1 -> return 1
     2 -> return 2
+    else -> return 3
+  }
+}
+
+private fun getBoxedIntValue(i: Int?): Int {
+  when (i) {
+    0,
+    1 -> return 1
+    2 -> {
+      // Keep this assertion to make sure jscompiler does not optimize calls to the method away.
+      assertFalse(i != 2)
+      return 2
+    }
     else -> return 3
   }
 }
@@ -118,30 +127,78 @@ private fun getBooleanValue(booleanValue: Boolean?): Int {
 }
 
 enum class Numbers {
+  ZERO,
   ONE,
   TWO,
   THREE,
 }
 
+private fun getEnumValue(numberValue: Numbers?): Int {
+  when (numberValue) {
+    Numbers.ZERO,
+    Numbers.ONE -> return 1
+    Numbers.TWO -> {
+      // Keep this assertion to make sure jscompiler does not optimize calls to the method away.
+      assertFalse(numberValue != Numbers.TWO)
+      return 2
+    }
+    else -> return 3
+  }
+}
+
 private fun getEnumValueExhaustive(numberValue: Numbers): Int {
   when (numberValue) {
+    Numbers.ZERO -> return 0
     Numbers.ONE -> return 1
     Numbers.TWO -> return 2
     Numbers.THREE -> return 3
   }
 }
 
-private fun getEnumValue(numberValue: Numbers?): Int {
-  when (numberValue) {
-    Numbers.ONE -> return 1
-    Numbers.TWO -> return 2
-    Numbers.THREE -> return 3
-    else -> return 4
+private fun testWhenBranchVariableDeclarations() {
+  val three = 3
+  when (three) {
+    1 -> {
+      val i = 0
+      val j = 2
+      val b = j + i
+      assertEquals(2, b)
+    }
+    3 -> {
+      val i = 3
+      assertEquals(3, i)
+      return
+    }
+  }
+  fail()
+}
+
+private fun testWhenNull() {
+  // Unlike Java switch statements, `when` does not throw on null subjects: null goes to the null
+  // branch if there is one, or to the else branch otherwise.
+  assertEquals(3, getBoxedIntValue(null))
+  assertEquals(3, getEnumValue(null))
+  assertEquals(3, getStringValue(null))
+  assertEquals(3, getCharValue(null))
+  assertEquals(2, getBooleanValue(null))
+
+  assertEquals(4, getStringValueWithNull(null))
+  assertEquals(4, getEnumValueWithNull(null))
+}
+
+private fun getStringValueWithNull(stringValue: String?): Int {
+  when (stringValue) {
+    "zero",
+    "one" -> return 1
+    "two" -> return 2
+    null -> return 4
+    else -> return 3
   }
 }
 
 private fun getEnumValueWithNull(numberValue: Numbers?): Int {
   when (numberValue) {
+    Numbers.ZERO -> return 0
     Numbers.ONE -> return 1
     Numbers.TWO -> return 2
     Numbers.THREE -> return 3
@@ -149,10 +206,50 @@ private fun getEnumValueWithNull(numberValue: Numbers?): Int {
   }
 }
 
-private fun testBreakStatementInSwitch(numberValue: Numbers): Int {
+private fun testWhenWithErasureCast() {
+  val supplier: () -> Numbers = { Numbers.ONE }
+  when (supplier()) {
+    Numbers.ONE -> {}
+    else -> fail()
+  }
+
+  @Suppress("UNCHECKED_CAST") val intSupplier = { 1 } as () -> Numbers
+  assertThrowsClassCastException {
+    when (intSupplier()) {
+      Numbers.ONE -> fail()
+      else -> fail()
+    }
+  }
+}
+
+private fun testBreaks() {
+  assertTrue(testBreakInnerLoopInWhenBranch(1))
+  assertTrue(testBreakInnerLoopInWhenBranch(2))
+
+  assertEquals(10, testBreakOuterLoopInWhenBranch(Numbers.ONE))
+  assertEquals(2, testBreakOuterLoopInWhenBranch(Numbers.TWO))
+  assertEquals(0, testBreakOuterLoopInWhenBranch(Numbers.THREE))
+}
+
+private fun testBreakInnerLoopInWhenBranch(i: Int): Boolean {
+  var result = false
+  when (i) {
+    1 -> {
+      inner@ while (true) {
+        break@inner
+      }
+      result = true
+    }
+    else -> result = true
+  }
+  return result
+}
+
+private fun testBreakOuterLoopInWhenBranch(numberValue: Numbers): Int {
   var value = 0
   for (i in 0..2) {
     when (numberValue) {
+      Numbers.ZERO -> {}
       Numbers.ONE -> value += 5
       Numbers.TWO -> {
         value += 2
@@ -165,6 +262,20 @@ private fun testBreakStatementInSwitch(numberValue: Numbers): Int {
     }
   }
   return value
+}
+
+private fun testStringWhen() {
+  // Test that when on strings uses equals() semantics.
+  assertEquals(1, getStringValue(String(charArrayOf('o', 'n', 'e'))))
+}
+
+private fun testEmptyWhen() {
+  var a = 2
+  when (a++) {}
+  assertEquals(3, a)
+
+  when {}
+  assertEquals(3, a)
 }
 
 private fun testWhenWithoutElse() {
@@ -190,6 +301,7 @@ private fun getStringValueWithoutElse(stringValue: String): Int {
 // that all possible cases are covered with branch conditions
 val num =
   when (getEnumNumber()) {
+    Numbers.ZERO -> 0
     Numbers.ONE -> 1
     Numbers.TWO -> 2
     Numbers.THREE -> 3
@@ -227,16 +339,6 @@ private fun testWhenVariableDeclaration() {
     else -> a = b - 1
   }
   assertEquals(5, a)
-}
-
-private fun testEmptyWhen() {
-  var a = 2
-  when {}
-  assertEquals(2, a)
-
-  // TODO(b/465183958): Uncomment once this bug is fixed.
-  // when (a++) {}
-  // assertEquals(3, a)
 }
 
 private fun testOnlyElse() {
@@ -303,12 +405,16 @@ private fun testWhenWithOneBranch() {
 }
 
 private fun testDataFlowBasedExhaustivenessCheckOnWhenStatement() {
+  assertEquals(0, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.ZERO))
   assertEquals(1, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.ONE))
   assertEquals(2, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.TWO))
   assertEquals(3, dataFlowBasedExhaustivenessCheckOnWhenStatement(Numbers.THREE))
 }
 
 private fun dataFlowBasedExhaustivenessCheckOnWhenStatement(number: Numbers): Int {
+  if (number == Numbers.ZERO) {
+    return 0
+  }
   if (number == Numbers.ONE) {
     return 1
   }
