@@ -456,3 +456,12 @@ fun <T : ComparableJsEnum, I : IntJsEnum> testJsEnumTypeVariableIdentity(t: T, i
   b = t !== i
   b = t === e
 }
+
+// Repro for b/578352461: the JsEnum bound is not the first bound of the intersection.
+fun <T> testJsEnumIntersectionTypeVariable(t: T): T
+  where T : Comparable<ComparableJsEnum>, T : ComparableJsEnum {
+  val ordinal = t.ordinal
+  val o: Any? = t
+  val b = t === o
+  return o as T
+}
