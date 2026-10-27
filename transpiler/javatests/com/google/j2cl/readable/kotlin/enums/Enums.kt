@@ -19,7 +19,7 @@ import java.util.function.Function
 
 enum class Enum1 {
   V1,
-  V2
+  V2,
 }
 
 internal enum class Enum2(foo: Int) {
@@ -49,6 +49,11 @@ internal enum class Enum2(foo: Int) {
 
     internal fun f(o: Any): Enum2? {
       return null
+    }
+
+    fun <T : Enum1> testEnumTypeVariableEquality(t: T) {
+      var b = t == Enum1.V1
+      b = Enum1.V2 != t
     }
   }
 }

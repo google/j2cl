@@ -954,7 +954,7 @@ internal class CompilationUnitBuilder(
   // correct J2CL '==' implementation for their instances.
   // 2. All enums guaranteed to have identity equality based on JLS.
   private fun hasIdentityEquals(type: TypeDescriptor) =
-    TypeDescriptors.isBoxedTypeAsJsPrimitives(type) || type.isEnum
+    TypeDescriptors.isBoxedTypeAsJsPrimitives(type) || type.toRawTypeDescriptor().isEnum
 
   private fun convertIeee754EqualsOperator(irCall: IrCall): Expression {
     require(irCall.arguments.size == 2) { "invalid number of arguments" }

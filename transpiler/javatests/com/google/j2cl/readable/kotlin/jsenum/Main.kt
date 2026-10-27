@@ -440,6 +440,7 @@ fun <T : ComparableJsEnum> jsEnumTypeVariableVarargs(vararg ts: T): T = ts[0]
 fun <I : IntJsEnum, S : StringJsEnum> testCustomValuedJsEnumTypeVariables(i: I, s: S) {
   val intValue = i.getValue()
   var b = i === IntJsEnum.TWENTY
+  b = i == IntJsEnum.TWENTY
   b = i.equals(IntJsEnum.TWENTY)
   var o: Any? = i
   var ii = o as I

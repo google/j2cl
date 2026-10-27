@@ -91,6 +91,12 @@ class Enum2 extends Enum {
   Enum2.$clinit();
   return null;
  }
+ /** @nodts @template T */
+ static m_testEnumTypeVariableEquality__enums_Enum1__void(/** T */ t) {
+  Enum2.$clinit();
+  let b = $Equality.$same(t, Enum1.f_V1__enums_Enum1);
+  b = !$Equality.$same(Enum1.f_V2__enums_Enum1, t);
+ }
  /** @nodts @return {!Enum2} */
  static m_valueOf__java_lang_String__enums_Enum2(/** string */ name) {
   Enum2.$clinit();

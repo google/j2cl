@@ -3,6 +3,7 @@ goog.module('enums.Enum2.Companion$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Enum1 = goog.forwardDeclare('enums.Enum1$impl');
 let Enum2 = goog.forwardDeclare('enums.Enum2$impl');
 
 /**
@@ -34,6 +35,10 @@ class Companion extends j_l_Object {
  /** @final @nodts @return {Enum2} */
  m_f__java_lang_Object__enums_Enum2(/** !* */ o) {
   return Enum2.m_f__java_lang_Object__enums_Enum2(o);
+ }
+ /** @final @nodts @template T */
+ m_testEnumTypeVariableEquality__enums_Enum1__void(/** T */ t) {
+  Enum2.m_testEnumTypeVariableEquality__enums_Enum1__void(t);
  }
  /** @nodts @return {!Companion} */
  static get f_Companion__enums_Enum2_Companion() {
