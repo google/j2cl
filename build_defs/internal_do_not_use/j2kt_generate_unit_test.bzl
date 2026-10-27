@@ -18,8 +18,6 @@ j2kt_jvm_generate_unit_test(
 
 """
 
-load("@rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
-load("@bazel_tools//tools/build_defs/kotlin/native:rules.bzl", "kt_apple_test_library")
 load(":generate_test_input.bzl", "generate_test_input")
 load(":j2kt_library.bzl", "j2kt_jvm_library", "j2kt_native_library")
 
@@ -67,8 +65,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
             exec_properties = exec_properties,
         )
 
-    # The Java annotation processor on the above target generates kotlin srcs code as resource
-    # and then use kt_jvm_library to compile kotlin srcs and finally used it as runtime dependency in kt_jvm_test
+    # The Java annotation processor on the above target generates kotlin srcs code as resource.
     out_jar = ":lib" + name + "_lib.jar"
 
     extract_kotlin_srcjar(
@@ -76,33 +73,6 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
         input_jar = out_jar,
         tags = tags,
     )
-
-    if platform == "J2KT-JVM":
-        kt_jvm_library(
-            name = name,
-            srcs = [":" + name + "_transpile_gen"],
-            deps = [
-                ":" + name + "_lib",
-                "//third_party/kotlin/kotlin:kotlin_test_junit",
-                "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-jvm",
-            ],
-            tags = tags,
-            testonly = 1,
-        )
-
-    else:
-        kt_apple_test_library(
-            name = name,
-            srcs = [":" + name + "_transpile_gen"],
-            target_compatible_with = ["//third_party/bazel_platforms/os:ios"],
-            deps = [
-                ":" + name + "_lib",
-                "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
-            ],
-            tags = tags + ["ide-test-intermediate"],
-            gen_by_xplat = True,
-            exec_properties = exec_properties,
-        )
 
 def _extract_kotlin_srcjar(ctx):
     """Extracts the generated kotlin files from transpiled source jar.
