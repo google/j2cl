@@ -311,17 +311,14 @@ public class Main {
     assertThrowsNullPointerException(() -> getQualifiedEnumConstantValue(null));
     assertThrowsNullPointerException(() -> getQualifiedEnumConstantValue(getUndefined()));
 
-    // TODO(b/577118779): Uncomment once switches with only enum constants and no patterns on
-    // non-enum selectors are supported.
-    // assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ZERO) == 1);
-    // assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ONE) == 2); // default
-    // assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ZERO.ordinal()) == 2);
-    // assertTrue(
-    //     getQualifiedEnumConstantsWithoutExplicitPatterns((double) Numbers.ZERO.ordinal()) == 2);
-    // assertThrowsNullPointerException(
-    //     () -> getQualifiedEnumConstantsWithoutExplicitPatterns(null));
-    // assertThrowsNullPointerException(
-    //     () -> getQualifiedEnumConstantsWithoutExplicitPatterns(getUndefined()));
+    assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ZERO) == 1);
+    assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ONE) == 2); // default
+    assertTrue(getQualifiedEnumConstantsWithoutExplicitPatterns(Numbers.ZERO.ordinal()) == 2);
+    assertTrue(
+        getQualifiedEnumConstantsWithoutExplicitPatterns((double) Numbers.ZERO.ordinal()) == 2);
+    assertThrowsNullPointerException(() -> getQualifiedEnumConstantsWithoutExplicitPatterns(null));
+    assertThrowsNullPointerException(
+        () -> getQualifiedEnumConstantsWithoutExplicitPatterns(getUndefined()));
   }
 
   private static int getQualifiedEnumConstantValue(Object o) {
@@ -333,10 +330,10 @@ public class Main {
     };
   }
 
-  // private static int getQualifiedEnumConstantsWithoutExplicitPatterns(Object o) {
-  //   return switch (o) {
-  //     case Numbers.ZERO -> 1;
-  //     default -> 2;
-  //   };
-  // }
+  private static int getQualifiedEnumConstantsWithoutExplicitPatterns(Object o) {
+    return switch (o) {
+      case Numbers.ZERO -> 1;
+      default -> 2;
+    };
+  }
 }

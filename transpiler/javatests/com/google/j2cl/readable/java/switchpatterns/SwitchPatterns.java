@@ -122,12 +122,11 @@ public class SwitchPatterns {
       default -> {}
     }
 
-    // TODO(b/577118779): Uncomment once switches with only enum constants and no patterns on
-    // non-enum selectors are supported.
-    // switch (o) {
-    //   case Color.RED, Color.BLUE -> {}
-    //   default -> {}
-    // }
+    // Switch with only enum constants and no patterns.
+    switch (o) {
+      case Color.RED, Color.BLUE -> {}
+      default -> {}
+    }
   }
 
   void testPatternsWithNull() {

@@ -19,6 +19,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.isNativeJsEnum;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangByte;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangCharacter;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangInteger;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangShort;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangString;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isNumericPrimitive;
 
@@ -131,6 +135,10 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
             TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
             if (switchStatement.hasPatterns()
+                // A switch on a selector whose type is not valid in a non-enhanced switch, e.g.
+                // `Object`, is an enhanced switch and needs to be rewritten even if all its case
+                // labels are constants, e.g. qualified enum constants.
+                || requiresEnhancedSwitch(expressionTypeDescriptor)
                 || (isBoxedType(expressionTypeDescriptor) && switchStatement.allowsNulls())
                 || (convertNativeJsEnumSwitches && isNativeJsEnum(expressionTypeDescriptor))) {
               return convertToIntegerSwitch(switchStatement);
@@ -168,6 +176,22 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
             return switchStatement;
           }
         });
+  }
+
+  /**
+   * Returns true if a switch on {@code typeDescriptor} is an enhanced switch regardless of its
+   * cases, i.e. the type is not char, byte, short, int, Character, Byte, Short, Integer, String or
+   * an enum type (JLS 14.11.2).
+   */
+  private static boolean requiresEnhancedSwitch(TypeDescriptor typeDescriptor) {
+    var boxedType = typeDescriptor.isPrimitive() ? typeDescriptor.toBoxedType() : typeDescriptor;
+
+    return !(boxedType.isEnum()
+        || isJavaLangString(boxedType)
+        || isJavaLangCharacter(boxedType)
+        || isJavaLangByte(boxedType)
+        || isJavaLangShort(boxedType)
+        || isJavaLangInteger(boxedType));
   }
 
   /**

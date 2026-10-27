@@ -170,6 +170,10 @@ open class SwitchPatterns {
    } -> {}
    else -> {}
   }
+  when (o) {
+   Color.RED as Any, Color.BLUE as Any -> {}
+   else -> {}
+  }
  }
  
  internal open fun testPatternsWithNull() {
