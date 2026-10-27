@@ -125,30 +125,32 @@ class MethodReferences<T> {
 
     acceptProducer(::ObjectCapturingOuter)
 
-    // TODO(b/277785487): Implement intrinsic function references.
-    // acceptArrayProducer(::IntArray)
+    acceptArrayProducer(::IntArray)
 
-    // acceptFunction(::BooleanArray)
-    // acceptFunction(::CharArray)
-    // acceptFunction(::ByteArray)
-    // acceptFunction(::ShortArray)
-    // acceptFunction(::IntArray)
-    // acceptFunction(::LongArray)
-    // acceptFunction(::FloatArray)
-    // acceptFunction(::DoubleArray)
-    // acceptFunction<Int, Array<Any?>>(::arrayOfNulls)
-    // acceptFunction<Int, Array<Any?>>(::arrayOfNulls)
+    acceptFunction(::BooleanArray)
+    acceptFunction(::CharArray)
+    acceptFunction(::ByteArray)
+    acceptFunction(::ShortArray)
+    acceptFunction(::IntArray)
+    acceptFunction(::LongArray)
+    acceptFunction(::FloatArray)
+    acceptFunction(::DoubleArray)
+    acceptFunction<Int, Array<Any?>>(::arrayOfNulls)
+    acceptFunction<Int, Array<Any?>>(::arrayOfNulls)
 
-    // acceptFunction(Function(::BooleanArray))
-    // acceptFunction(Function(::CharArray))
-    // acceptFunction(Function(::ByteArray))
-    // acceptFunction(Function(::ShortArray))
-    // acceptFunction(Function(::IntArray))
-    // acceptFunction(Function(::LongArray))
-    // acceptFunction(Function(::FloatArray))
-    // acceptFunction(Function(::DoubleArray))
-    // acceptFunction(Function<Int, Array<Any?>>(::arrayOfNulls))
-    // acceptFunction(Function<Int, Array<Any?>>(::arrayOfNulls))
+    acceptFunction(Function(::BooleanArray))
+    acceptFunction(Function(::CharArray))
+    acceptFunction(Function(::ByteArray))
+    acceptFunction(Function(::ShortArray))
+    acceptFunction(Function(::IntArray))
+    acceptFunction(Function(::LongArray))
+    acceptFunction(Function(::FloatArray))
+    acceptFunction(Function(::DoubleArray))
+    acceptFunction(Function<Int, Array<Any?>>(::arrayOfNulls))
+    acceptFunction(Function<Int, Array<Any?>>(::arrayOfNulls))
+
+    val intArray = IntArray(1)
+    acceptFunction(intArray::get)
 
     acceptJsProducer(::Any)
     acceptJsProducer(::p)
@@ -171,8 +173,7 @@ class MethodReferences<T> {
     acceptJsFunctionInterface(MethodReferences<T>::self)
     acceptJsBiFunction(MethodReferences<T>::sameAs)
 
-    // TODO(b/277785487): Implement intrinsic function references.
-    // acceptJsFunctionInterface(::IntArray)
+    acceptJsFunctionInterface(::IntArray)
 
     // Type inference for generic functions
     acceptFunction(::getString, "")

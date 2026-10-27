@@ -8,6 +8,14 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let $boolean = goog.forwardDeclare('javaemul.internal.primitives.$boolean$impl');
+let $byte = goog.forwardDeclare('javaemul.internal.primitives.$byte$impl');
+let $char = goog.forwardDeclare('javaemul.internal.primitives.$char$impl');
+let $double = goog.forwardDeclare('javaemul.internal.primitives.$double$impl');
+let $float = goog.forwardDeclare('javaemul.internal.primitives.$float$impl');
+let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
+let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
+let $short = goog.forwardDeclare('javaemul.internal.primitives.$short$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let ArrayProducer = goog.forwardDeclare('methodreferences.MethodReferences.ArrayProducer$impl');
@@ -19,6 +27,7 @@ let Predicate = goog.forwardDeclare('methodreferences.MethodReferences.Predicate
 let Producer = goog.forwardDeclare('methodreferences.MethodReferences.Producer$impl');
 let MethodReferencesKt = goog.forwardDeclare('methodreferences.MethodReferencesKt$impl');
 let Obj = goog.forwardDeclare('methodreferences.Obj$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -178,6 +187,95 @@ class MethodReferences extends j_l_Object {
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {!ObjectCapturingOuter<T>}*/ (() =>{
    return /**@type {!ObjectCapturingOuter<T>}*/ (ObjectCapturingOuter.$create__methodreferences_MethodReferences(tmp0_bound0_18));
   })));
+  this.m_acceptArrayProducer__methodreferences_MethodReferences_ArrayProducer__void(ArrayProducer.$adapt(/**  @return {!Array<number>}*/ ((/** number */ p0_16) =>{
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_16], $int));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<boolean>}*/ ((/** !Integer */ p0_17) =>{
+   let p0_18 = /**@type {!Integer}*/ ($Casts.$to(p0_17, Integer));
+   return /**@type {!Array<boolean>}*/ ($Arrays.$create([p0_18.intValue()], $boolean));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_19) =>{
+   let p0_20 = /**@type {!Integer}*/ ($Casts.$to(p0_19, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_20.intValue()], $char));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_21) =>{
+   let p0_22 = /**@type {!Integer}*/ ($Casts.$to(p0_21, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_22.intValue()], $byte));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_23) =>{
+   let p0_24 = /**@type {!Integer}*/ ($Casts.$to(p0_23, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_24.intValue()], $short));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_25) =>{
+   let p0_26 = /**@type {!Integer}*/ ($Casts.$to(p0_25, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_26.intValue()], $int));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<!Long>}*/ ((/** !Integer */ p0_27) =>{
+   let p0_28 = /**@type {!Integer}*/ ($Casts.$to(p0_27, Integer));
+   return /**@type {!Array<!Long>}*/ ($Arrays.$create([p0_28.intValue()], $long));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_29) =>{
+   let p0_30 = /**@type {!Integer}*/ ($Casts.$to(p0_29, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_30.intValue()], $float));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_31) =>{
+   let p0_32 = /**@type {!Integer}*/ ($Casts.$to(p0_31, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_32.intValue()], $double));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<*>}*/ ((/** !Integer */ p0_33) =>{
+   let p0_34 = /**@type {!Integer}*/ ($Casts.$to(p0_33, Integer));
+   return new Array(p0_34.intValue());
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<*>}*/ ((/** !Integer */ p0_35) =>{
+   let p0_36 = /**@type {!Integer}*/ ($Casts.$to(p0_35, Integer));
+   return new Array(p0_36.intValue());
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<boolean>}*/ ((/** !Integer */ p0_37) =>{
+   let p0_38 = /**@type {!Integer}*/ ($Casts.$to(p0_37, Integer));
+   return /**@type {!Array<boolean>}*/ ($Arrays.$create([p0_38.intValue()], $boolean));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_39) =>{
+   let p0_40 = /**@type {!Integer}*/ ($Casts.$to(p0_39, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_40.intValue()], $char));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_41) =>{
+   let p0_42 = /**@type {!Integer}*/ ($Casts.$to(p0_41, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_42.intValue()], $byte));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_43) =>{
+   let p0_44 = /**@type {!Integer}*/ ($Casts.$to(p0_43, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_44.intValue()], $short));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_45) =>{
+   let p0_46 = /**@type {!Integer}*/ ($Casts.$to(p0_45, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_46.intValue()], $int));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<!Long>}*/ ((/** !Integer */ p0_47) =>{
+   let p0_48 = /**@type {!Integer}*/ ($Casts.$to(p0_47, Integer));
+   return /**@type {!Array<!Long>}*/ ($Arrays.$create([p0_48.intValue()], $long));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_49) =>{
+   let p0_50 = /**@type {!Integer}*/ ($Casts.$to(p0_49, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_50.intValue()], $float));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_51) =>{
+   let p0_52 = /**@type {!Integer}*/ ($Casts.$to(p0_51, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_52.intValue()], $double));
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<*>}*/ ((/** !Integer */ p0_53) =>{
+   let p0_54 = /**@type {!Integer}*/ ($Casts.$to(p0_53, Integer));
+   return new Array(p0_54.intValue());
+  })));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Array<*>}*/ ((/** !Integer */ p0_55) =>{
+   let p0_56 = /**@type {!Integer}*/ ($Casts.$to(p0_55, Integer));
+   return new Array(p0_56.intValue());
+  })));
+  let intArray = /**@type {!Array<number>}*/ ($Arrays.$create([1], $int));
+  let tmp0_bound0_19 = intArray;
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!Integer}*/ ((/** !Integer */ p0_57) =>{
+   let p0_58 = /**@type {!Integer}*/ ($Casts.$to(p0_57, Integer));
+   return Integer.valueOf(tmp0_bound0_19[p0_58.intValue()]);
+  })));
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
    return j_l_Object.$create__();
   }));
@@ -187,89 +285,93 @@ class MethodReferences extends j_l_Object {
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
    return MethodReferencesKt.m_m__java_lang_Object();
   }));
-  let tmp0_bound0_19 = Obj.f_INSTANCE__methodreferences_Obj;
-  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
-   return tmp0_bound0_19.m_getObjectProperty__java_lang_String();
-  }));
   let tmp0_bound0_20 = Obj.f_INSTANCE__methodreferences_Obj;
-  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
-   return tmp0_bound0_20.m_objectMethod__java_lang_Object();
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
+   return tmp0_bound0_20.m_getObjectProperty__java_lang_String();
   }));
-  let tmp0_bound0_21 = Companion.f_Companion__methodreferences_MethodReferences_Companion;
+  let tmp0_bound0_21 = Obj.f_INSTANCE__methodreferences_Obj;
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
+   return tmp0_bound0_21.m_objectMethod__java_lang_Object();
+  }));
+  let tmp0_bound0_22 = Companion.f_Companion__methodreferences_MethodReferences_Companion;
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
    return MethodReferences.f_companionObjectProperty__methodreferences_MethodReferences_;
   }));
-  let tmp0_bound0_22 = Companion.f_Companion__methodreferences_MethodReferences_Companion;
+  let tmp0_bound0_23 = Companion.f_Companion__methodreferences_MethodReferences_Companion;
   this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!*}*/ (() =>{
    return MethodReferences.m_companionObjectMethod__java_lang_Object();
   }));
-  let tmp0_bound0_23 = this;
-  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
-   return tmp0_bound0_23.m_getProperty__java_lang_String();
-  }));
   let tmp0_bound0_24 = this;
-  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!MethodReferences<T>}*/ (() =>{
-   return tmp0_bound0_24.m_self__methodreferences_MethodReferences();
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
+   return tmp0_bound0_24.m_getProperty__java_lang_String();
   }));
   let tmp0_bound0_25 = this;
-  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number|!Long) */ p0_16) =>{
-   let p0_17 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(p0_16, Number));
-   return tmp0_bound0_25.m_sameAs__java_lang_Number__boolean(p0_17);
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!MethodReferences<T>}*/ (() =>{
+   return tmp0_bound0_25.m_self__methodreferences_MethodReferences();
   }));
-  let tmp0_bound0_26 = /**@type {!MethodReferences<T>}*/ (MethodReferences.$create__());
-  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
-   return tmp0_bound0_26.m_getProperty__java_lang_String();
+  let tmp0_bound0_26 = this;
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number|!Long) */ p0_59) =>{
+   let p0_60 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(p0_59, Number));
+   return tmp0_bound0_26.m_sameAs__java_lang_Number__boolean(p0_60);
   }));
   let tmp0_bound0_27 = /**@type {!MethodReferences<T>}*/ (MethodReferences.$create__());
-  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!MethodReferences<T>}*/ (() =>{
-   return tmp0_bound0_27.m_self__methodreferences_MethodReferences();
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {string}*/ (() =>{
+   return tmp0_bound0_27.m_getProperty__java_lang_String();
   }));
   let tmp0_bound0_28 = /**@type {!MethodReferences<T>}*/ (MethodReferences.$create__());
-  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number|!Long) */ p0_18) =>{
-   let p0_19 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(p0_18, Number));
-   return tmp0_bound0_28.m_sameAs__java_lang_Number__boolean(p0_19);
+  this.m_acceptJsProducer__methodreferences_MethodReferences_JsProducer__void(/**  @return {!MethodReferences<T>}*/ (() =>{
+   return tmp0_bound0_28.m_self__methodreferences_MethodReferences();
   }));
-  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {string}*/ ((/** !MethodReferences<T> */ p0_20) =>{
-   let p0_21 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(p0_20, MethodReferences));
-   return p0_21.m_getProperty__java_lang_String();
+  let tmp0_bound0_29 = /**@type {!MethodReferences<T>}*/ (MethodReferences.$create__());
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {boolean}*/ ((/** !(Number|number|!Long) */ p0_61) =>{
+   let p0_62 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(p0_61, Number));
+   return tmp0_bound0_29.m_sameAs__java_lang_Number__boolean(p0_62);
   }));
-  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {!MethodReferences<T>}*/ ((/** !MethodReferences<T> */ p0_22) =>{
-   let p0_23 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(p0_22, MethodReferences));
-   return p0_23.m_self__methodreferences_MethodReferences();
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {string}*/ ((/** !MethodReferences<T> */ p0_63) =>{
+   let p0_64 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(p0_63, MethodReferences));
+   return p0_64.m_getProperty__java_lang_String();
   }));
-  this.m_acceptJsBiFunction__methodreferences_MethodReferences_JsBiFunction__void(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ p0_24, /** !(Number|number|!Long) */ p1_2) =>{
-   let p0_25 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(p0_24, MethodReferences));
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {!MethodReferences<T>}*/ ((/** !MethodReferences<T> */ p0_65) =>{
+   let p0_66 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(p0_65, MethodReferences));
+   return p0_66.m_self__methodreferences_MethodReferences();
+  }));
+  this.m_acceptJsBiFunction__methodreferences_MethodReferences_JsBiFunction__void(/**  @return {boolean}*/ ((/** !MethodReferences<T> */ p0_67, /** !(Number|number|!Long) */ p1_2) =>{
+   let p0_68 = /**@type {!MethodReferences<T>}*/ ($Casts.$to(p0_67, MethodReferences));
    let p1_3 = /**@type {!(Number|number|!Long)}*/ ($Casts.$to(p1_2, Number));
-   return p0_25.m_sameAs__java_lang_Number__boolean(p1_3);
+   return p0_68.m_sameAs__java_lang_Number__boolean(p1_3);
   }));
-  this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** string */ p0_26) =>{
-   let p0_27 = /**@type {string}*/ ($Casts.$to(p0_26, j_l_String));
-   return MethodReferencesKt.m_getString__java_lang_Object__java_lang_String(p0_27);
+  this.m_acceptJsFunctionInterface__methodreferences_MethodReferences_JsFunctionInterface__void(/**  @return {!Array<number>}*/ ((/** !Integer */ p0_69) =>{
+   let p0_70 = /**@type {!Integer}*/ ($Casts.$to(p0_69, Integer));
+   return /**@type {!Array<number>}*/ ($Arrays.$create([p0_70.intValue()], $int));
+  }));
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** string */ p0_71) =>{
+   let p0_72 = /**@type {string}*/ ($Casts.$to(p0_71, j_l_String));
+   return MethodReferencesKt.m_getString__java_lang_Object__java_lang_String(p0_72);
   })), '');
-  this.m_acceptFunction1__kotlin_jvm_functions_Function1__java_lang_Object__java_lang_Object(Function1.$adapt(/**  @return {string}*/ ((/** !Integer */ p0_28) =>{
-   let p0_29 = /**@type {!Integer}*/ ($Casts.$to(p0_28, Integer));
-   return p0_29.toString();
+  this.m_acceptFunction1__kotlin_jvm_functions_Function1__java_lang_Object__java_lang_Object(Function1.$adapt(/**  @return {string}*/ ((/** !Integer */ p0_73) =>{
+   let p0_74 = /**@type {!Integer}*/ ($Casts.$to(p0_73, Integer));
+   return p0_74.toString();
   })), Integer.valueOf(1));
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(/**@type {!Producer<!*>}*/ (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(/**@type {!Producer<*>}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(Function0.$adapt(/**  @return {!*}*/ (() =>{
    return MethodReferencesKt.m_m__java_lang_Object();
   }))), /**@type {Function}*/ (Producer))))));
-  this.m_acceptFunctionInVariance__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!MethodReferences<*>}*/ ((/** !MethodReferences<*> */ p0_30) =>{
-   let p0_31 = /**@type {!MethodReferences<*>}*/ ($Casts.$to(p0_30, MethodReferences));
-   return p0_31.m_self__methodreferences_MethodReferences();
+  this.m_acceptFunctionInVariance__methodreferences_MethodReferences_Function__void(MethodReferences_Function.$adapt(/**  @return {!MethodReferences<*>}*/ ((/** !MethodReferences<*> */ p0_75) =>{
+   let p0_76 = /**@type {!MethodReferences<*>}*/ ($Casts.$to(p0_75, MethodReferences));
+   return p0_76.m_self__methodreferences_MethodReferences();
   })));
   let localFunction = /**  @return {string}*/ ((/** number */ p) =>{
    return '' + 'p' + p;
   });
-  this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** !Integer */ p0_32) =>{
-   let p0_33 = /**@type {!Integer}*/ ($Casts.$to(p0_32, Integer));
-   return localFunction(p0_33.intValue());
+  this.m_acceptFunction__methodreferences_MethodReferences_Function__java_lang_Object__void(MethodReferences_Function.$adapt(/**  @return {string}*/ ((/** !Integer */ p0_77) =>{
+   let p0_78 = /**@type {!Integer}*/ ($Casts.$to(p0_77, Integer));
+   return localFunction(p0_78.intValue());
   })), Integer.valueOf(1));
   let localExtensionFunction = /**  @return {string}*/ ((/** string */ this_1) =>{
    return j_l_String.m_valueOf__java_lang_Object__java_lang_String(this_1) + 'ff';
   });
-  let tmp0_bound0_29 = 'bar';
+  let tmp0_bound0_30 = 'bar';
   this.m_acceptProducer__methodreferences_MethodReferences_Producer__void(Producer.$adapt(/**  @return {string}*/ (() =>{
-   return localExtensionFunction(tmp0_bound0_29);
+   return localExtensionFunction(tmp0_bound0_30);
   })));
  }
  /** @final @nodts @template T_1 */
@@ -329,8 +431,17 @@ class MethodReferences extends j_l_Object {
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  $boolean = goog.module.get('javaemul.internal.primitives.$boolean$impl');
+  $byte = goog.module.get('javaemul.internal.primitives.$byte$impl');
+  $char = goog.module.get('javaemul.internal.primitives.$char$impl');
+  $double = goog.module.get('javaemul.internal.primitives.$double$impl');
+  $float = goog.module.get('javaemul.internal.primitives.$float$impl');
+  $int = goog.module.get('javaemul.internal.primitives.$int$impl');
+  $long = goog.module.get('javaemul.internal.primitives.$long$impl');
+  $short = goog.module.get('javaemul.internal.primitives.$short$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
+  ArrayProducer = goog.module.get('methodreferences.MethodReferences.ArrayProducer$impl');
   BiFunction = goog.module.get('methodreferences.MethodReferences.BiFunction$impl');
   Companion = goog.module.get('methodreferences.MethodReferences.Companion$impl');
   MethodReferences_Function = goog.module.get('methodreferences.MethodReferences.Function$impl');
@@ -339,6 +450,7 @@ class MethodReferences extends j_l_Object {
   Producer = goog.module.get('methodreferences.MethodReferences.Producer$impl');
   MethodReferencesKt = goog.module.get('methodreferences.MethodReferencesKt$impl');
   Obj = goog.module.get('methodreferences.Obj$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }

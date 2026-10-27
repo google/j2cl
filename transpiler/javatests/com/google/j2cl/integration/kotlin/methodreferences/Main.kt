@@ -108,9 +108,15 @@ fun testConstructorReferences() {
     Producer<Outer.ObjectCapturingOuter>(outer::ObjectCapturingOuter)
   assertEquals(outer, objectCapturingOuterProducer.produce().outer)
 
-  // TODO(b/228999962): Implement array constructors/access
-  // val arrayProducer = ArrayProducer(::IntArray)
-  // assertEquals(10, arrayProducer.produce(10).size)
+  val arrayProducer = Function<Int, IntArray>(::IntArray)
+  assertEquals(10, arrayProducer.apply(10).size)
+  val nullArrayProducer = Function<Int, Array<Any?>>(::arrayOfNulls)
+  assertEquals(5, nullArrayProducer.apply(5).size)
+  assertEquals(null, nullArrayProducer.apply(5)[0])
+  val intArray = intArrayOf(1, 2, 3)
+  val arrayElementGetter = Function<Int, Int>(intArray::get)
+  assertTrue(2 == arrayElementGetter.apply(1))
+  assertTrue(3 == intArray::get.invoke(2))
   instanceNumber = 0
   val outer2 = ::Outer.invoke()
   assertTrue(outer2 is Outer)
