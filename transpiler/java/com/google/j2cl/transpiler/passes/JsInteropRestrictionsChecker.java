@@ -587,13 +587,18 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
+    List<Statement> statements = constructor.getBody().getStatements();
+    if (AstUtils.hasSuperCall(constructor)) {
+      // Skip the super call to the java.lang.Enum constructor, which is synthesized by the frontend
+      // as the first statement.
+      statements = statements.subList(1, statements.size());
+    }
+
     // Verify that the body only contains the assignment to the custom value field.
-    // Note that at this stage, we don't have super calls for enums (JLS won't let them to be
-    // explicit and we haven't normalized the AST yet).
-    return constructor.getBody().getStatements().size() == 1
+    return statements.size() == 1
         && checkJsEnumConstructorStatement(
             constructorDescriptor.getEnclosingTypeDescriptor(),
-            constructor.getBody().getStatements().getFirst(),
+            statements.getFirst(),
             constructor.getParameters().getFirst());
   }
 

@@ -21,34 +21,28 @@ import com.google.j2cl.transpiler.frontend.kotlin.ir.isImplicitConstructor
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
 import org.jetbrains.kotlin.ir.IrElement
-import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrClass
-import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.declarations.createBlockBody
-import org.jetbrains.kotlin.ir.expressions.IrEnumConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrSyntheticBody
 import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
-import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.isEnumClass
-import org.jetbrains.kotlin.ir.util.parentAsClass
-import org.jetbrains.kotlin.ir.util.statements
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 /**
- * Removes super enum constructor calls and implicit constructors from enums. This will normalize
- * the AST to better match the Java pattern, where the JLS does not permit an explicit super enum
- * constructor call (it's purely implicit).
+ * Removes implicit constructors from enums. This will normalize the AST to better match the Java
+ * frontend, where implicit constructors are not part of the AST and are synthesized later by a
+ * normalization pass.
  *
  * Remove the <get-entries> special function from Enum classes. All references are rewritten at the
  * call site.
  */
-internal class EnumClassConstructorLowering(private val context: JvmBackendContext) :
-  FileLoweringPass, IrVisitorVoid() {
+internal class EnumClassConstructorLowering(
+  @Suppress("UNUSED_PARAMETER") context: JvmBackendContext
+) : FileLoweringPass, IrVisitorVoid() {
   override fun lower(irFile: IrFile) {
     visitElement(irFile)
   }
@@ -61,7 +55,6 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
     super.visitClass(declaration)
 
     if (declaration.isEnumClass) {
-      declaration.constructors.forEach(this::cleanupSuperEnumConstructorCall)
       // Remove the <get-entries> special function from Enum classes.
       declaration.declarations.removeIf {
         it is IrFunction &&
@@ -71,27 +64,5 @@ internal class EnumClassConstructorLowering(private val context: JvmBackendConte
       // Remove implicit constructors.
       declaration.declarations.removeIf { it.isImplicitConstructor }
     }
-  }
-
-  private fun cleanupSuperEnumConstructorCall(irConstructor: IrConstructor) {
-    val body = irConstructor.body
-    if (
-      body == null ||
-        body.statements.isEmpty() ||
-        !body.statements.first().isSuperEnumConstructorCall()
-    ) {
-      return
-    }
-    irConstructor.body =
-      context.irFactory.createBlockBody(
-        body.startOffset,
-        body.endOffset,
-        body.statements.slice(1..<body.statements.size),
-      )
-  }
-
-  private fun IrStatement.isSuperEnumConstructorCall(): Boolean {
-    return this is IrEnumConstructorCall &&
-      symbol.owner.parentAsClass.symbol == context.irBuiltIns.enumClass
   }
 }

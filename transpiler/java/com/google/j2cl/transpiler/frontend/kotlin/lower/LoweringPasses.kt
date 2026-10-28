@@ -161,7 +161,7 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::TypeOperatorLowering)
   // Rewrites numeric conversion calls (toInt(), toShort(), etc) to be simple casts instead.
   perFileLowering(::NumericConversionLowering)
-  // Removes enum super constructor calls and cleans up effectively empty constructors.
+  // Removes implicit enum constructors and the <get-entries> special function.
   perFileLowering(::EnumClassConstructorLowering)
   // Lowers `IrRichPropertyReference` into instantiations of the corresponding internal `KProperty`
   // implementation

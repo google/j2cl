@@ -8,7 +8,11 @@
 [Enum1] => [$ctor__sourcemap_SourceMap_Enum1__java_lang_String__int__void]
 [Enum1] => [this.f_name__java_lang_Enum_ = $name;] "sourcemap.SourceMap$Enum1.<init>"
 [Enum1] => [this.f_ordinal__java_lang_Enum_ = $ordinal;] "sourcemap.SourceMap$Enum1.<init>"
-[()] => [this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);] "sourcemap.SourceMap$Enum1.<init>"
+[enum class Enum1() {
+    VALUE1,
+...
+    constructor(i: Int) : this()
+  }] => [this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);] "sourcemap.SourceMap$Enum1.<init>"
 [constructor] => [$create__java_lang_String__int__int]
 [i: Int] => [i] "i"
 [constructor] => [let $instance = new Enum1();] "sourcemap.SourceMap$Enum1.<synthetic: ctor_create>"

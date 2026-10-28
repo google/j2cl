@@ -178,6 +178,7 @@ import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
+import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.util.nonDispatchArguments
@@ -1120,14 +1121,14 @@ internal class CompilationUnitBuilder(
 
   private fun convertEnumConstructorCall(irEnumConstructorCall: IrEnumConstructorCall): Expression =
     // IrEnumConstructorCall nodes can represent an instantiation or a super call depending on
-    // whether they appear as the initializer of the enum field or inside the constructor of an
-    // enum subclass.
-    if (currentType.isEnum) {
+    // whether they appear as the initializer of the enum field, or inside the constructor of an
+    // enum class (calling the kotlin.Enum constructor) or of an enum subclass.
+    if (currentType.isEnum && irEnumConstructorCall.symbol.owner.parentAsClass.isEnumClass) {
       // The initializer of the entry is a direct instantiation using the constructor.
       convertConstructorCall(irEnumConstructorCall)
     } else {
-      // This is the super call in the constructor of the anonymous subclass; it needs to be treated
-      // as a call and not an instantiation.
+      // This is the super call in the constructor of the enum class or the anonymous subclass; it
+      // needs to be treated as a call and not an instantiation.
       convertFunctionAccessExpression(irEnumConstructorCall)
     }
 
@@ -1235,21 +1236,20 @@ internal class CompilationUnitBuilder(
     ) {
       return methodDescriptor
     }
+    // TODO(b/491913371): Revisit the modeling of the java.lang.Enum constructor calls.
     // Fix inconsistencies in calls to java.lang.Enum constructor calls. Enum constructor has 2
-    // implicit parameters (name and ordinal) that are added by a normalization pass. This removes
-    // the parameter definition from the descriptor so that they are consistent.
+    // implicit parameters (name and ordinal) that are added by a normalization pass. Also the
+    // constructor of kotlin.Enum is public whereas the one in java.lang.Enum is protected, which
+    // would make it an implicit JsConstructor (java.lang.Enum is a JsType).
     // First check that no argument are passed for the implicit parameters.
     check(
       functionAccess.nonDispatchArguments[0] == null &&
         functionAccess.nonDispatchArguments[1] == null
     )
 
-    return methodDescriptor
-      .toBuilder()
-      // Fix the inconsistency by removing the implicit parameters from the descriptor.
-      .setParameterDescriptors(listOf())
-      .makeDeclaration()
-      .build()
+    // Use the same target as an implicit super call in Java, which has the implicit parameters
+    // removed from the descriptor.
+    return checkNotNull(currentType.implicitSuperCallTarget)
   }
 
   private fun convertGetValue(irGetValue: IrGetValue): Expression =
