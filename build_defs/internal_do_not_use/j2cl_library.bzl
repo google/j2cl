@@ -91,13 +91,14 @@ def j2cl_library(
 
     # TODO(b/36549068): remove this workaround when tree artifacts can be
     # declared as the rule output.
-    _tree_artifact_proxy(
-        name = name + ".js",
-        j2cl_library = ":" + name,
-        visibility = ["//visibility:private"],
-        tags = auto_generated_targets_tags,
-        testonly = args.get("testonly", 0),
-    )
+    if has_srcs:
+        _tree_artifact_proxy(
+            name = name + ".js",
+            j2cl_library = ":" + name,
+            visibility = ["//visibility:private"],
+            tags = auto_generated_targets_tags,
+            testonly = args.get("testonly", 0),
+        )
 
     if has_srcs and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
