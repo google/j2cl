@@ -57,6 +57,16 @@ public abstract class Annotation {
     return value != null ? value : defaultValue;
   }
 
+  @Nullable
+  public <T extends Enum<T>> T getEnumValue(String elementName, Class<T> enumClass) {
+    AnnotationValue value = getValues().get(elementName);
+    if (value instanceof EnumConstant enumConstant) {
+      return Enum.valueOf(enumClass, enumConstant.fieldDescriptor().getName());
+    }
+    checkState(value == null);
+    return null;
+  }
+
   public static Builder builderFrom(String qualifiedName) {
     return builder()
         .setTypeDescriptor(

@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.AnnotationValue
 import com.google.j2cl.transpiler.ast.ArrayConstant
+import com.google.j2cl.transpiler.ast.EnumConstant
 import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberDescriptor
@@ -27,6 +28,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
@@ -65,6 +67,11 @@ internal data class AnnotationSources(val nameSources: NameSources) {
   private fun annotationValueSource(annotationValue: AnnotationValue): Source =
     when (annotationValue) {
       is Literal -> literalSources.literalSource(annotationValue)
+      is EnumConstant ->
+        dotSeparated(
+          nameSources.qualifiedNameSource(annotationValue.fieldDescriptor.enclosingTypeDescriptor),
+          identifierSource(checkNotNull(annotationValue.fieldDescriptor.name)),
+        )
       is ArrayConstant ->
         throw InternalCompilerError("Unexpected ${annotationValue::class.simpleName}")
     }

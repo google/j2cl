@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.AnnotationValue
 import com.google.j2cl.transpiler.ast.ArrayConstant
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.EnumConstant
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Literal
@@ -97,6 +98,7 @@ import org.jetbrains.kotlin.ir.expressions.IrClassReference
 import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.IrConstantArray
 import org.jetbrains.kotlin.ir.expressions.IrExpression
+import org.jetbrains.kotlin.ir.expressions.IrGetEnumValue
 import org.jetbrains.kotlin.ir.expressions.IrVararg
 import org.jetbrains.kotlin.ir.symbols.IrTypeParameterSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
@@ -301,8 +303,8 @@ internal class KotlinEnvironment(
     fun IrExpression?.toAnnotationValue(): AnnotationValue? {
       fun createArrayConstant(type: IrType, values: List<IrExpression>): ArrayConstant? {
         val translatedValues = values.map { it.toAnnotationValue() }
-        // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
-        // types. We don't expect null unless it's an unhandled value type.
+        // TODO(b/395716783): Remove this null check once we handle all member value types. We don't
+        // expect null unless it's an unhandled value type.
         if (translatedValues.contains(null)) {
           return null
         }
@@ -316,6 +318,7 @@ internal class KotlinEnvironment(
         is IrConst -> Literal.fromValue(value, getTypeDescriptor(type))
         is IrClassReference ->
           createTypeLiteral(classType, SourcePosition.NONE, wrapPrimitives = false)
+        is IrGetEnumValue -> EnumConstant(getDeclaredFieldDescriptor(symbol.owner))
         is IrConstantArray -> createArrayConstant(type, elements)
         is IrVararg ->
           createArrayConstant(
@@ -326,8 +329,8 @@ internal class KotlinEnvironment(
               it as IrExpression
             },
           )
-        // TODO(b/397460318, b/395716783): Implement various member value types, then throw an
-        // exception here if unhandled.
+        // TODO(b/395716783): Implement various member value types, then throw an exception here if
+        // unhandled.
         else -> null
       }
     }

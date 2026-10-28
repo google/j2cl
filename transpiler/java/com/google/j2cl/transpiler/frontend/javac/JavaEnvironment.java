@@ -41,6 +41,7 @@ import com.google.j2cl.transpiler.ast.ArrayConstant;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.EnumConstant;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
@@ -1504,8 +1505,8 @@ public class JavaEnvironment {
   /**
    * Creates a literal for the given annotation member value.
    *
-   * <p>If the value type is not supported, returns {@code null}. TODO(b/397460318, b/395716783):
-   * Remove the null return once we handle all member value types.
+   * <p>If the value type is not supported, returns {@code null}. TODO(b/395716783): Remove the null
+   * return once we handle all member value types.
    */
   @Nullable
   private AnnotationValue createAnnotationValue(
@@ -1518,6 +1519,9 @@ public class JavaEnvironment {
       return new TypeLiteral(
           SourcePosition.NONE, createTypeDescriptor((TypeMirror) value, inNullMarkedScope));
     }
+    if (elementType.isEnum()) {
+      return new EnumConstant(createFieldDescriptor((VarSymbol) value));
+    }
     if (elementType.isArray()) {
       List<AnnotationValue> values =
           ((List<?>) value)
@@ -1529,8 +1533,8 @@ public class JavaEnvironment {
                               ((javax.lang.model.element.AnnotationValue) v).getValue(),
                               inNullMarkedScope))
                   .collect(toImmutableList());
-      // TODO(b/397460318, b/395716783): Remove this null check once we handle all member value
-      // types. We don't expect null unless it's an unhandled value type.
+      // TODO(b/395716783): Remove this null check once we handle all member value types. We don't
+      // expect null unless it's an unhandled value type.
       if (values.contains(null)) {
         return null;
       }
@@ -1539,8 +1543,8 @@ public class JavaEnvironment {
           .setValueExpressions(values)
           .build();
     }
-    // TODO(b/397460318, b/395716783): Implement various member value types, then throw an exception
-    // here if unhandled.
+    // TODO(b/395716783): Implement various member value types, then throw an exception here if
+    // unhandled.
     return null;
   }
 
