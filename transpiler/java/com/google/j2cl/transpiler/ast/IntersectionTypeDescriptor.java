@@ -269,7 +269,11 @@ public abstract non-sealed class IntersectionTypeDescriptor extends TypeDescript
 
     public IntersectionTypeDescriptor build() {
       IntersectionTypeDescriptor typeDescriptor = autoBuild();
-      checkState(typeDescriptor.getIntersectionTypeDescriptors().size() > 1);
+      ImmutableList<TypeDescriptor> components = typeDescriptor.getIntersectionTypeDescriptors();
+      checkState(components.size() > 1);
+      // There can be at most one class component and, if present, it must be the first one since
+      // it determines the erasure of the intersection.
+      checkState(components.stream().skip(1).noneMatch(t -> t.isClass() || t.isEnum()), components);
       return interner.intern(typeDescriptor);
     }
   }

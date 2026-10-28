@@ -448,7 +448,12 @@ internal class KotlinEnvironment(
 
   private fun createIntersectionTypeDescriptor(types: List<IrType>): IntersectionTypeDescriptor =
     IntersectionTypeDescriptor.builder()
-      .setIntersectionTypeDescriptors(types.map(::getReferenceTypeDescriptor))
+      .setIntersectionTypeDescriptors(
+        // As in Java, a type variable in Kotlin erases to its class bound if it has one. Unlike
+        // Java, Kotlin allows that bound to appear anywhere in the list of bounds, but
+        // IntersectionTypeDescriptor expects the class component, if any, to be the first one.
+        types.sortedBy { it.isInterface() }.map(::getReferenceTypeDescriptor)
+      )
       .build()
 
   private fun createArrayTypeDescriptor(arrayType: IrType) =

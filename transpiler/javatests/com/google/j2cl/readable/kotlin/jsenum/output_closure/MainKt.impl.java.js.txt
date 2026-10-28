@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('goog.math.Long');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
-let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
@@ -33,7 +32,6 @@ let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -432,12 +430,12 @@ class MainKt extends j_l_Object {
   b = $Equality.$same(/**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(t, $Overlay)), /**@type {BoxedLightEnum<!IntJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(e, IntJsEnum_$Overlay)));
  }
  /** @nodts @template T @return {T} */
- static m_testJsEnumIntersectionTypeVariable__java_lang_Comparable__java_lang_Comparable(/** T */ t) {
+ static m_testJsEnumIntersectionTypeVariable__jsenum_ComparableJsEnum__jsenum_ComparableJsEnum(/** T */ t) {
   MainKt.$clinit();
-  let ordinal = (/**@type {!Enum<!BoxedComparableLightEnum<!ComparableJsEnum>>}*/ ($Casts.$to(t, Enum))).ordinal();
-  let o = t;
-  let b = $Equality.$same(t, o);
-  return /**@type {T}*/ ($Casts.$to($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), /**@type {Function}*/ (Comparable)), $Overlay));
+  let ordinal = /**@type {number}*/ (t);
+  let o = /**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(t, $Overlay));
+  let b = $Equality.$same(/**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(t, $Overlay)), o);
+  return /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), $Overlay));
  }
  /** @nodts */
  static $clinit() {
@@ -454,7 +452,6 @@ class MainKt extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Comparable = goog.module.get('java.lang.Comparable$impl');
-  Enum = goog.module.get('java.lang.Enum$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   Optional = goog.module.get('java.util.Optional$impl');
@@ -479,7 +476,6 @@ class MainKt extends j_l_Object {
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
