@@ -1142,9 +1142,20 @@
 ;;; void DefaultConstructorAutoValue.$ctor()
 (func $$ctor__void_$p_autovalue_DefaultConstructorAutoValue@autovalue.DefaultConstructorAutoValue
  (param $this (ref null $autovalue.DefaultConstructorAutoValue))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:23:2
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:22:2
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:23:32
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:22:32
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void DefaultConstructorAutoValue.$ctor(String... unused)
+(func $$ctor__arrayOf_java_lang_String__void_$p_autovalue_DefaultConstructorAutoValue@autovalue.DefaultConstructorAutoValue
+ (param $this (ref null $autovalue.DefaultConstructorAutoValue))
+ (param $unused (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:24:2
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:24:48
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1152,12 +1163,12 @@
 ;;; DefaultConstructorAutoValue DefaultConstructorAutoValue.create()
 (func $m_create__autovalue_DefaultConstructorAutoValue@autovalue.DefaultConstructorAutoValue
  (result (ref null $autovalue.DefaultConstructorAutoValue))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:37:37
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:40:37
  (local $$qualifier (ref null $autovalue.DefaultConstructorAutoValue.Builder))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:37:37
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:40:37
   (call $$clinit__void_<once>_@autovalue.DefaultConstructorAutoValue )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:38:4
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:41:4
   (return (block (result (ref null $autovalue.DefaultConstructorAutoValue))
    (local.set $$qualifier (call $m_setBooleanField__boolean__autovalue_DefaultConstructorAutoValue_Builder_$pp_autovalue@autovalue.AutoValue_DefaultConstructorAutoValue.Builder (ref.as_non_null (call $$create__@autovalue.AutoValue_DefaultConstructorAutoValue.Builder ))(i32.const 1)))
    (call_ref $function.m_build__autovalue_DefaultConstructorAutoValue (ref.as_non_null (local.get $$qualifier))(struct.get $autovalue.DefaultConstructorAutoValue.Builder.vtable $m_build__autovalue_DefaultConstructorAutoValue (struct.get $autovalue.DefaultConstructorAutoValue.Builder $vtable(local.get $$qualifier))))
@@ -1213,27 +1224,38 @@
 ;;; void Builder.$ctor()
 (func $$ctor__void_$p_autovalue_DefaultConstructorAutoValue_Builder@autovalue.DefaultConstructorAutoValue.Builder
  (param $this (ref null $autovalue.DefaultConstructorAutoValue.Builder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:30:14
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:31:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:30:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:31:24
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Builder.$ctor(String... unused)
+(func $$ctor__arrayOf_java_lang_String__void_$p_autovalue_DefaultConstructorAutoValue_Builder@autovalue.DefaultConstructorAutoValue.Builder
+ (param $this (ref null $autovalue.DefaultConstructorAutoValue.Builder))
+ (param $unused (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:33:14
+ (block
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:33:40
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Builder.$clinit()
 (func $$clinit__void_<once>_@autovalue.DefaultConstructorAutoValue.Builder
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:28:24
+ ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:29:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:28:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:29:24
   (if (global.get $$class-initialized@autovalue.DefaultConstructorAutoValue.Builder)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:28:24
+    ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:29:24
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:28:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:29:24
   (global.set $$class-initialized@autovalue.DefaultConstructorAutoValue.Builder (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:28:24
+  ;;@ transpiler/javatests/com/google/j2cl/readable/java/autovalue/readable-j2wasm.js/autovalue/DefaultConstructorAutoValue.java:29:24
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

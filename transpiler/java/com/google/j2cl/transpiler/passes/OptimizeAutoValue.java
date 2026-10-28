@@ -212,6 +212,11 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   }
 
   private static void inlineMembers(Type from, Type to) {
+    // Delete any extra constructors on the @AutoValue class, keeping only the visible no-arg
+    // constructor. Since @AutoValue classes are abstract and we reject subclasses, these other
+    // constructors are never invoked.
+    removeExtraConstructors(to);
+
     // Move all the members to base class except the java.lang.Object methods.
     // We could also have moved members from all subclasses however @Memoized methods are
     // overridden hence requires more complicated re-writing.
@@ -277,9 +282,20 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           };
         });
 
-    // Note that the adding to end here matters since later preserveFields will assume last
-    // constructor is the one that is coming from AutoValue implementation class.
     to.addMembers(movedMembers);
+  }
+
+  private static void removeExtraConstructors(Type type) {
+    Method defaultCtor = type.getDefaultConstructor();
+    if (defaultCtor == null) {
+      return;
+    }
+
+    checkState(
+        !AstUtils.hasThisCall(defaultCtor),
+        "AutoValue rejects no-arg constructor delegating via this(...).");
+
+    type.getMembers().removeIf(m -> m.isConstructor() && m != defaultCtor);
   }
 
   private static void addThisCallToInlinedConstructors(Type from, Type to) {

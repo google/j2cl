@@ -19,8 +19,9 @@ import com.google.auto.value.AutoValue;
 
 @AutoValue
 public abstract class DefaultConstructorAutoValue {
-
   DefaultConstructorAutoValue() {}
+
+  DefaultConstructorAutoValue(String... unused) {}
 
   public abstract boolean getBooleanField();
 
@@ -28,6 +29,8 @@ public abstract class DefaultConstructorAutoValue {
   abstract static class Builder {
 
     protected Builder() {}
+
+    protected Builder(String... unused) {}
 
     abstract Builder setBooleanField(boolean x);
 

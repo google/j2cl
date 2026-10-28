@@ -20,13 +20,19 @@ package autovalue
 
 import javaemul.lang.*
 import javaemul.lang.annotations.WasAutoValue
+import kotlin.Array
 import kotlin.Boolean
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
 @WasAutoValue
 abstract class DefaultConstructorAutoValue {
  internal constructor()
+ 
+ internal constructor(vararg unused: String?) {
+  val unused_1: Array<String?>? = unused as Array<String?>?
+ }
  
  abstract fun getBooleanField(): Boolean
  
@@ -38,6 +44,10 @@ abstract class DefaultConstructorAutoValue {
  @javaemul.lang.annotations.WasAutoValue.Builder
  abstract class Builder {
   constructor()
+  
+  constructor(vararg unused: String?) {
+   val unused_1: Array<String?>? = unused as Array<String?>?
+  }
   
   internal abstract fun setBooleanField(x: Boolean): Builder?
   

@@ -103,6 +103,8 @@ public class Main {
       // Have an extra constructor to make sure correct constructor is called.
     }
 
+    AutoValueWithCtors(String... unused) {}
+
     AutoValueWithCtors() {
       bar = 42;
     }
