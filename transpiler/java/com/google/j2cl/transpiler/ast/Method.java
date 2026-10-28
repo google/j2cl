@@ -173,8 +173,9 @@ public class Method extends Member implements MethodLike {
 
   /** Returns true if the method is locally empty (allows calls to super constructor). */
   public boolean isEmpty() {
-    // TODO(rluble): to be completely correct the parameters of the implicit supercall need to
-    // be examined.
+    // TODO(b/578549673): For complete correctness, we should verify the arguments passed to the
+    // supercall. We currently omit this check because the restrictions checker relies on this
+    // looser behavior to allow native subtypes to extend superclasses that lack 0-arg constructors.
     List<Statement> statements = getBody().getStatements();
     return statements.isEmpty()
         || (statements.size() == 1 && isConstructor() && AstUtils.hasSuperCall(this));

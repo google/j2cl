@@ -18,6 +18,7 @@ package autovalue;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
 import com.google.auto.value.AutoValue;
@@ -33,6 +34,7 @@ public class Main {
     testComposite();
     testUnreadValue();
     testAutovalueWithCtor();
+    testAutovalueWithNonTrivialSuperCall();
     testExtending();
     testMemoized();
     testAbstractEquals();
@@ -122,6 +124,43 @@ public class Main {
     assertEquals(o1.hashCode(), o2.hashCode());
   }
 
+  abstract static class SuperClassWithCtors {
+    SuperClassWithCtors() {
+      fail();
+    }
+
+    SuperClassWithCtors(int i) {}
+  }
+
+  @AutoValue
+  abstract static class WithNonTrivialSuper extends SuperClassWithCtors {
+    WithNonTrivialSuper() {
+      super(1);
+    }
+
+    abstract int x();
+
+    static Builder builder() {
+      return new AutoValue_Main_WithNonTrivialSuper.Builder();
+    }
+
+    @AutoValue.Builder
+    abstract static class Builder extends SuperClassWithCtors {
+      Builder() {
+        super(1);
+      }
+
+      abstract Builder setX(int x);
+
+      abstract WithNonTrivialSuper build();
+    }
+  }
+
+  private static void testAutovalueWithNonTrivialSuperCall() {
+    WithNonTrivialSuper o2 = WithNonTrivialSuper.builder().setX(2).build();
+    assertEquals(2, o2.x());
+  }
+
   private static class BaseClass {
     int bar;
 
@@ -167,7 +206,6 @@ public class Main {
     assertEquals(o1, o2);
     assertEquals(o1.hashCode(), o2.hashCode());
   }
-
 
   @AutoValue
   abstract static class AbstractEquals {

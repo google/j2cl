@@ -196,7 +196,18 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       // user declared ones but given the practical constraints of AutoValue, checking only this
       // edge case should be good enough.
       Method method = type.getDefaultConstructor();
-      return method == null || method.isEmpty();
+      if (method == null || method.getBody().getStatements().isEmpty()) {
+        return true;
+      }
+
+      // Check that the only call is a super call with no arguments.
+      // Don't use Method.isEmpty() since it allows supercalls with arguments.
+      // TODO(b/578549673): Method.isEmpty() should be updated to check the arguments of the
+      // super call.
+      MethodCall superCall = AstUtils.getConstructorInvocation(method);
+      return AstUtils.hasSuperCall(method)
+          && superCall.getQualifier() == null
+          && superCall.getArguments().isEmpty();
     }
     return isOptimizableAutoValue(type.getDeclaration());
   }
