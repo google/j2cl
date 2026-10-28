@@ -126,7 +126,7 @@ public abstract non-sealed class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   private String synthesizeUnionName(Function<TypeDescriptor, String> nameFunction) {
-    return getUnionTypeDescriptors().stream().map(nameFunction).collect(joining("|", "(", ")"));
+    return getUnionTypeDescriptors().stream().map(nameFunction).collect(joining(" | ", "(", ")"));
   }
 
   @Override

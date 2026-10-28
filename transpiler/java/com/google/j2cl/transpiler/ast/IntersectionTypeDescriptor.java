@@ -123,7 +123,7 @@ public abstract non-sealed class IntersectionTypeDescriptor extends TypeDescript
   private String synthesizeIntersectionName(Function<TypeDescriptor, String> nameFunction) {
     return getIntersectionTypeDescriptors().stream()
         .map(nameFunction)
-        .collect(joining("&", "(", ")"));
+        .collect(joining(" & ", "(", ")"));
   }
 
   @Override
