@@ -1329,6 +1329,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               ? getCurrentType().getTypeDescriptor()
               // super()
               : getCurrentType().getSuperTypeDescriptor();
+
+      if (TypeDescriptors.isJavaLangEnum(enclosingTypeDescriptor)) {
+        // This is the super call to the java.lang.Enum constructor synthesized by javac, which
+        // does not pass the 2 implicit parameters (name and ordinal). Use the canonical target for
+        // implicit super calls, which models the call without the implicit parameters; these are
+        // added later by NormalizeEnumClasses.
+        checkState(methodInvocation.getArguments().isEmpty());
+        return MethodCall.builderFrom(getCurrentType().getImplicitSuperCallTarget())
+            .setSourcePosition(getSourcePosition(methodInvocation))
+            .build();
+      }
     }
 
     // The type arguments for the method itself. For example `String` in `C.<String>m()`.
@@ -1377,20 +1388,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       // enclosing type of the `clone()` method.
       return methodDescriptor.toBuilder()
           .setReturnTypeDescriptor(qualifier.getTypeDescriptor().toNonNullable())
-          .build();
-    }
-
-    // TODO(b/491913371): Cleanup after JDT is gone.
-    if (methodDescriptor.isConstructor()
-        && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum)) {
-      // The constructor for `java.lang.Enum` has two parameters (ordinal and name) but those are
-      // implicit in the method calls. Here the JCMethodInvocation lacks those parameters but the
-      // method descriptor contains them.
-      // In our AST we require that the parameters declared  method descriptor in an `Invocation`
-      // are consistent with the arguments passed.
-      return methodDescriptor.toBuilder()
-          .setParameterDescriptors(ImmutableList.of())
-          .makeDeclaration()
           .build();
     }
     return methodDescriptor;

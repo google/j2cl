@@ -1267,6 +1267,11 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
    *
    * <p>Since the implicit method call has no parameters the only other possible match apart of the
    * 0-parameter constructor is the 1-parameter varargs which could have many overloads.
+   *
+   * <p>The constructor of {@code java.lang.Enum} has 2 implicit parameters (name and ordinal) that
+   * are not passed at the call sites. Until they are made explicit by {@code NormalizeEnumClasses},
+   * calls to that constructor are modeled using the descriptor returned here, which omits the
+   * implicit parameters. Frontends must use this descriptor for those calls.
    */
   @Nullable
   MethodDescriptor getImplicitConstructorTarget(DeclaredTypeDescriptor from) {
