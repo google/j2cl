@@ -18,15 +18,14 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.Annotation
 import com.google.j2cl.transpiler.ast.AnnotationValue
+import com.google.j2cl.transpiler.ast.ArrayConstant
 import com.google.j2cl.transpiler.ast.HasAnnotations
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.classLiteral
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
@@ -46,7 +45,7 @@ internal data class AnnotationSources(val nameSources: NameSources) {
     annotation(
       annotationNameSource(annotation, isProperty),
       annotation.singleValueOrNull().let { singleValue ->
-        if (singleValue is Literal) {
+        if (singleValue != null && singleValue !is ArrayConstant) {
           listOf(annotationValueSource(singleValue))
         } else {
           // TODO(b/444430700): Filter default values when they are supported.
@@ -65,10 +64,9 @@ internal data class AnnotationSources(val nameSources: NameSources) {
 
   private fun annotationValueSource(annotationValue: AnnotationValue): Source =
     when (annotationValue) {
-      is TypeLiteral ->
-        classLiteral(nameSources.qualifiedNameSource(annotationValue.referencedTypeDescriptor))
       is Literal -> literalSources.literalSource(annotationValue)
-      else -> throw InternalCompilerError("Unexpected ${annotationValue::class.simpleName}")
+      is ArrayConstant ->
+        throw InternalCompilerError("Unexpected ${annotationValue::class.simpleName}")
     }
 
   fun volatileAnnotationSource(): Source =
