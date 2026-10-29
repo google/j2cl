@@ -142,6 +142,21 @@ public class Main {
     assertTrue(o.equals(OK_STRING));
     assertTrue(o.equals(StringNativeEnum.OK));
 
+    // Comparable calls.
+    assertTrue(v.compareTo(NativeEnum.ACCEPT) == 0);
+    assertTrue(v.compareTo(NativeEnum.CANCEL) > 0);
+    assertThrowsNullPointerException(
+        () -> {
+          NativeEnum nullJsEnum = null;
+          nullJsEnum.compareTo(NativeEnum.CANCEL);
+        });
+    assertThrowsNullPointerException(() -> v.compareTo(null));
+    assertThrowsClassCastException(
+        () -> {
+          Comparable comparable = NativeEnum.ACCEPT;
+          comparable.compareTo(PlainJsEnum.ONE);
+        });
+
     assertFalse(v instanceof Enum);
     assertTrue((Object) v instanceof String);
     assertTrue(v instanceof Comparable);
@@ -227,6 +242,21 @@ public class Main {
 
     assertTrue(v.getValue().equals(v.toString()));
     assertTrue(v.getValue().equals(OK_STRING));
+
+    // Comparable calls.
+    assertTrue(v.compareTo(StringNativeEnum.OK) == 0);
+    assertTrue(v.compareTo(StringNativeEnum.CANCEL) > 0);
+    assertThrowsNullPointerException(
+        () -> {
+          StringNativeEnum nullJsEnum = null;
+          nullJsEnum.compareTo(StringNativeEnum.CANCEL);
+        });
+    assertThrowsNullPointerException(() -> v.compareTo(null));
+    assertThrowsClassCastException(
+        () -> {
+          Comparable comparable = StringNativeEnum.OK;
+          comparable.compareTo(PlainJsEnum.ONE);
+        });
 
     assertFalse(v instanceof Enum);
     assertTrue((Object) v instanceof String);

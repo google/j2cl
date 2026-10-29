@@ -133,6 +133,22 @@ private fun testNativeJsEnum() {
   assertTrue(o == OK_STRING)
   assertTrue(o == StringNativeEnum.OK)
 
+  // Comparable calls.
+  assertTrue(v.compareTo(NativeEnum.ACCEPT) == 0)
+  assertTrue(v.compareTo(NativeEnum.CANCEL) > 0)
+  assertThrowsNullPointerException {
+    val nullJsEnum: NativeEnum? = null
+    nullJsEnum!!.compareTo(NativeEnum.CANCEL)
+  }
+  assertThrowsNullPointerException {
+    val nullJsEnum: NativeEnum? = null
+    v.compareTo(nullJsEnum!!)
+  }
+  assertThrowsClassCastException {
+    val comparable = NativeEnum.ACCEPT as Comparable<Any?>
+    comparable.compareTo(PlainJsEnum.ONE)
+  }
+
   assertFalse(v is Enum<*>)
   assertTrue((v as Any?) is String)
   assertTrue(v is Comparable<*>)
@@ -239,6 +255,22 @@ private fun testStringNativeJsEnum() {
 
   assertTrue(v.getValue() == v.toString())
   assertTrue(v.getValue() == OK_STRING)
+
+  // Comparable calls.
+  assertTrue(v.compareTo(StringNativeEnum.OK) == 0)
+  assertTrue(v.compareTo(StringNativeEnum.CANCEL) > 0)
+  assertThrowsNullPointerException {
+    val nullJsEnum: StringNativeEnum? = null
+    nullJsEnum!!.compareTo(StringNativeEnum.CANCEL)
+  }
+  assertThrowsNullPointerException {
+    val nullJsEnum: StringNativeEnum? = null
+    v.compareTo(nullJsEnum!!)
+  }
+  assertThrowsClassCastException {
+    val comparable = StringNativeEnum.OK as Comparable<Any?>
+    comparable.compareTo(PlainJsEnum.ONE)
+  }
 
   assertFalse(v is Enum<*>)
   assertTrue((v as Any?) is String)
