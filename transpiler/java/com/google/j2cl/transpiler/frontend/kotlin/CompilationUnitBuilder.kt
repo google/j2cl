@@ -167,16 +167,12 @@ import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.types.IrTypeProjection
 import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.classifierOrNull
-import org.jetbrains.kotlin.ir.types.impl.makeTypeProjection
 import org.jetbrains.kotlin.ir.types.isNullable
-import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.dump
-import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.isEnumClass
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isSuspend
@@ -1192,33 +1188,7 @@ internal class CompilationUnitBuilder(
     functionAccess: IrFunctionAccessExpression
   ): MethodCall {
     val callee = functionAccess.symbol.owner
-    var typeSubstitutionMap = functionAccess.typeSubstitutionMap
-
-    // `JsArrays.create()` is coming from Java code. Any call to this method is seen by the Kotlin
-    // compiler as returning a `JsArray` of nullable type. That brings javascript type mismatch
-    // errors later on.
-    // Normally, J2CL JS is not nullability checked. `JsArray` is special in the sense that it's a
-    // native type targeting JavaScript Array. In this case, it seems JSC does not skip the
-    // nullability check.
-    // This code can be removed if gwt/corp/collection is transpiled to Koltin or if JSC is fixed
-    // to not nullability check this case for J2CL.
-    // TODO(b/316883718): Remove this code when gwt/corp/collection is transpiled to Kotlin.
-    // TODO(b/317390851): Remove this hack if JSC does not trigger nullability check errors on
-    // Array.
-    if (
-      callee.fqNameWhenAvailable?.asString() == "com.google.gwt.corp.collections.JsArrays.create"
-    ) {
-      check(callee.typeParameters.size == 1)
-      val typeParameter = callee.typeParameters[0].symbol
-      val typeArgument = typeSubstitutionMap[typeParameter]
-      if (typeArgument is IrTypeProjection) {
-        typeSubstitutionMap =
-          mapOf(
-            typeParameter to
-              makeTypeProjection(typeArgument.type.makeNotNull(), typeArgument.variance)
-          )
-      }
-    }
+    val typeSubstitutionMap = functionAccess.typeSubstitutionMap
 
     val qualifier = convertQualifier(functionAccess)
     val isStaticDispatch = qualifier !is SuperReference && functionAccess.isSuperCall
