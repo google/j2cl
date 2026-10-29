@@ -67,7 +67,7 @@ class MyClassExportsMethod {
 
     // Deprecated in J2CL, can't export member to different namespace than the class.
     // // There should be no calls to this method from java.
-    // @SuppressWarnings("unusable-by-js")
+    // @Suppress("unusable-by-js")
     // @JsMethod(namespace = JsPackage.GLOBAL)
     // @JvmStatic
     // fun callBar(A a) {
@@ -75,14 +75,14 @@ class MyClassExportsMethod {
     // }
     //
     // // There should be a call to this method from java.
-    // @SuppressWarnings("unusable-by-js")
+    // @Suppress("unusable-by-js")
     // @JsMethod(namespace = JsPackage.GLOBAL)
     // @JvmStatic
     // fun callFoo(A a) {
     //   a.foo();
     // }
     //
-    // @SuppressWarnings("unusable-by-js")
+    // @Suppress("unusable-by-js")
     // @JsMethod(namespace = JsPackage.GLOBAL)
     // @JvmStatic
     // fun newA(): A = A()

@@ -222,7 +222,7 @@ private fun testEnumSubclassEnumeration() {
 @JsMethod(namespace = "jstype.helper") private external fun callPublicMethod(o: Any?): Int
 
 @JsMethod(namespace = "jstype.helper")
-@SuppressWarnings("unusable-by-js")
+@Suppress("unusable-by-js")
 private external fun setTheField(obj: ConcreteJsType?, value: ConcreteJsType.A?)
 
 @JsMethod(namespace = "jstype.helper")

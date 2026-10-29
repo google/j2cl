@@ -15,8 +15,7 @@
 /**
  * @return {string}
  * @public
- * TODO(b/307651466): Reuse the mangle name when JsMethod annotation is removed.
  */
-NativeClassSuper.nativeStaticMethod = function() {
+NativeClassSuper.m_nativeStaticMethod__java_lang_String = function() {
   return 'nativeStaticMethodInSuper';
 };

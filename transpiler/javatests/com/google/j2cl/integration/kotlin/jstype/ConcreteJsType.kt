@@ -51,7 +51,7 @@ open class ConcreteJsType {
     override fun x(): Int = 101
   }
 
-  @SuppressWarnings("unusable-by-js") @JvmField var notTypeTightenedField: A = AImpl1()
+  @Suppress("unusable-by-js") @JvmField var notTypeTightenedField: A = AImpl1()
 
   companion object {
     @JvmStatic fun publicStaticMethod() {}

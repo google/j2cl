@@ -46,6 +46,7 @@ public class SupportedAnnotations {
           .add("jsinterop.annotations.JsProperty")
           .add("jsinterop.annotations.JsType")
           .add("kotlin.Deprecated")
+          .add("kotlin.Suppress")
           // go/keep-sorted end
           .build();
 

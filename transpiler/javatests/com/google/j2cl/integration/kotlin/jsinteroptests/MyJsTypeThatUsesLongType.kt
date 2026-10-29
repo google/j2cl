@@ -21,9 +21,9 @@ import jsinterop.annotations.JsType
 @JsType
 class MyJsTypeThatUsesLongType {
 
-  @SuppressWarnings("unusable-by-js") fun addLong(a: Long, b: Long): Long = a + b
+  @Suppress("unusable-by-js") fun addLong(a: Long, b: Long): Long = a + b
 
   companion object {
-    @SuppressWarnings("unusable-by-js") @JvmStatic fun addLongStatic(a: Long, b: Long): Long = a + b
+    @Suppress("unusable-by-js") @JvmStatic fun addLongStatic(a: Long, b: Long): Long = a + b
   }
 }

@@ -75,9 +75,15 @@ public interface HasAnnotations {
   }
 
   private boolean hasSuppressionAnnotation(String suppression) {
-    Annotation annotation = getAnnotation("java.lang.SuppressWarnings");
+    return hasSuppressionAnnotation("java.lang.SuppressWarnings", "value", suppression)
+        || hasSuppressionAnnotation("kotlin.Suppress", "names", suppression);
+  }
+
+  private boolean hasSuppressionAnnotation(
+      String qualifiedAnnotationName, String valueKey, String suppression) {
+    Annotation annotation = getAnnotation(qualifiedAnnotationName);
     return annotation != null
-        && annotation.getValues().get("value") instanceof ArrayConstant arrayConstant
+        && annotation.getValues().get(valueKey) instanceof ArrayConstant arrayConstant
         && arrayConstant.getValueExpressions().stream()
             .anyMatch(v -> v instanceof StringLiteral s && s.getValue().matches(suppression));
   }
