@@ -441,6 +441,15 @@ fun <T : ComparableJsEnum> testJsEnumTypeVariableVarargs(t: T) {
 
 fun <T : ComparableJsEnum> jsEnumTypeVariableVarargs(vararg ts: T): T = ts[0]
 
+fun <T : ComparableJsEnum> testJsEnumSpread(es: Array<ComparableJsEnum>, ts: Array<T>) {
+  var e = jsEnumVarargs(*es)
+  e = jsEnumVarargs(ComparableJsEnum.ONE, *ts)
+  e = jsEnumTypeVariableVarargs(*es)
+  e = jsEnumTypeVariableVarargs(*ts)
+}
+
+fun jsEnumVarargs(vararg es: ComparableJsEnum): ComparableJsEnum = es[0]
+
 fun <I : IntJsEnum, S : StringJsEnum> testCustomValuedJsEnumTypeVariables(i: I, s: S) {
   val intValue = i.getValue()
   var b = i === IntJsEnum.TWENTY

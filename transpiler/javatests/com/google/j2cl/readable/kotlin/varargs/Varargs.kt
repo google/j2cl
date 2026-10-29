@@ -107,3 +107,7 @@ fun <T> passthrough(o: T) = o
 private fun <T : Comparable<T>> indirectSpread(a: Array<T>) = generics(*a)
 
 private fun <T> generics(vararg element: T) {}
+
+private fun <T : CharSequence> boundedSpread(a: Array<T>) = charSequences(*a)
+
+private fun charSequences(vararg elements: CharSequence) {}

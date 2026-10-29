@@ -1212,17 +1212,20 @@ private fun <T> checkJsEnumIntersectionTypeVariable(t: T)
 }
 
 private fun <T : PlainJsEnum> checkJsEnumTypeVariableSpread(vararg ts: T) {
-  // TODO(b/577699528): The JsEnum casts and conversions are applied to the spread as a whole
-  // instead of to each of its elements.
-  // assertTrue(countJsEnums(*ts) == 2)
-  // assertTrue(countTypeVariableJsEnums(*ts) == 2)
-  // assertTrue(listOf(*ts).size == 2)
-  // assertTrue(listOf(*ts)[1] === PlainJsEnum.TWO)
+  assertTrue(countJsEnums(*ts) == 2)
+  assertTrue(countJsEnums(PlainJsEnum.ZERO, *ts) == 3)
+  assertTrue(countTypeVariableJsEnums(*ts) == 2)
+
+  val e = firstSpreadJsEnum(*ts)
+  assertTrue(e === PlainJsEnum.ONE)
+  assertUnderlyingTypeEquals(Double::class.javaObjectType, e)
 }
 
 private fun countJsEnums(vararg es: PlainJsEnum): Int = es.size
 
 private fun <U : PlainJsEnum> countTypeVariableJsEnums(vararg us: U): Int = us.size
+
+private fun firstSpreadJsEnum(vararg es: PlainJsEnum): PlainJsEnum = es[0]
 
 interface JsEnumTypeVariableMapper<A> {
   fun <T : PlainJsEnum> map(a: A, t: T): T

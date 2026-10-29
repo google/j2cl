@@ -412,6 +412,19 @@ class MainKt extends j_l_Object {
   MainKt.$clinit();
   return /**@type {T}*/ (ts[0]);
  }
+ /** @nodts @template T */
+ static m_testJsEnumSpread__arrayOf_jsenum_ComparableJsEnum__arrayOf_jsenum_ComparableJsEnum__void(/** !Array<!ComparableJsEnum> */ es, /** !Array<T> */ ts) {
+  MainKt.$clinit();
+  let e = MainKt.m_jsEnumVarargs__arrayOf_jsenum_ComparableJsEnum__jsenum_ComparableJsEnum([...es]);
+  e = MainKt.m_jsEnumVarargs__arrayOf_jsenum_ComparableJsEnum__jsenum_ComparableJsEnum([ComparableJsEnum.ONE, ...ts]);
+  e = MainKt.m_jsEnumTypeVariableVarargs__arrayOf_jsenum_ComparableJsEnum__jsenum_ComparableJsEnum([...es]);
+  e = (/**@type {!ComparableJsEnum}*/ (MainKt.m_jsEnumTypeVariableVarargs__arrayOf_jsenum_ComparableJsEnum__jsenum_ComparableJsEnum([...ts])));
+ }
+ /** @nodts @return {!ComparableJsEnum} */
+ static m_jsEnumVarargs__arrayOf_jsenum_ComparableJsEnum__jsenum_ComparableJsEnum(/** !Array<!ComparableJsEnum> */ es) {
+  MainKt.$clinit();
+  return es[0];
+ }
  /** @nodts @template I, S */
  static m_testCustomValuedJsEnumTypeVariables__jsenum_IntJsEnum__jsenum_StringJsEnum__void(/** I */ i, /** S */ s) {
   MainKt.$clinit();

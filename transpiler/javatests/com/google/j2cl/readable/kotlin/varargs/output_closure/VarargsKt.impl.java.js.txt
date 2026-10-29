@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('goog.math.Long');
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -48,6 +49,13 @@ class VarargsKt extends j_l_Object {
  }
  /** @nodts @template T */
  static m_generics__arrayOf_java_lang_Object__void(/** !Array<T> */ element) {}
+ /** @nodts @template T */
+ static m_boundedSpread__arrayOf_java_lang_CharSequence__void(/** !Array<T> */ a) {
+  VarargsKt.m_charSequences__arrayOf_java_lang_CharSequence__void(/**@type {!Array<!(CharSequence|string)>}*/ ($Arrays.$stampType([...a], /**@type {Function}*/ (CharSequence))));
+  return;
+ }
+ /** @nodts */
+ static m_charSequences__arrayOf_java_lang_CharSequence__void(/** !Array<!(CharSequence|string)> */ elements) {}
  /** @nodts */
  static $clinit() {
   VarargsKt.$clinit = () =>{};
@@ -61,6 +69,7 @@ class VarargsKt extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  CharSequence = goog.module.get('java.lang.CharSequence$impl');
   Comparable = goog.module.get('java.lang.Comparable$impl');
   Number = goog.module.get('java.lang.Number$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

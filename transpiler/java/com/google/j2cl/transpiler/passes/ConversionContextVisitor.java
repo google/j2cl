@@ -68,6 +68,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
+import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchConstruct;
@@ -86,6 +87,7 @@ import com.google.j2cl.transpiler.ast.WasmFuncrefCall;
 import com.google.j2cl.transpiler.ast.YieldStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -242,6 +244,28 @@ public final class ConversionContextVisitor extends AbstractRewriter {
           inferredParameterDescriptor, declaredParameterDescriptor, argument);
     }
 
+    /**
+     * A {@code spreadExpression}, e.g. {@code ...array}, that is an element of an array literal of
+     * type {@code inferredTypeDescriptor} (declared as {@code declaredTypeDescriptor}), e.g. of the
+     * array literal holding the vararg arguments of an invocation.
+     *
+     * <p>Note that the spread expression stands for all the elements of the array it spreads, which
+     * are copied into the array literal, and it is typed as the component type of that array. By
+     * default the spread array is processed as if assigned to the type of the array literal.
+     */
+    protected Expression rewriteSpreadContext(
+        ArrayTypeDescriptor inferredTypeDescriptor,
+        ArrayTypeDescriptor declaredTypeDescriptor,
+        PrefixExpression spreadExpression) {
+      Expression array = spreadExpression.getOperand();
+      Expression rewrittenArray =
+          rewriteNonNullTypeConversionContext(
+              inferredTypeDescriptor, declaredTypeDescriptor, array);
+      return rewrittenArray == array
+          ? spreadExpression
+          : spreadExpression.toBuilder().setOperand(rewrittenArray).build();
+    }
+
     /** An {@code expression} that is used as a string. */
     protected Expression rewriteStringContext(Expression expression) {
       return expression;
@@ -321,12 +345,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // assignment context
     ArrayTypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
     ImmutableList<Expression> valueExpressions =
-        arrayLiteral.getValueExpressions().stream()
-            .map(
-                valueExpression ->
-                    rewriteTypeConversionContextWithoutDeclaration(
-                        typeDescriptor.getComponentTypeDescriptor(), valueExpression))
-            .collect(toImmutableList());
+        rewriteArrayLiteralElements(
+            arrayLiteral,
+            e ->
+                rewriteTypeConversionContextWithoutDeclaration(
+                    typeDescriptor.getComponentTypeDescriptor(), e),
+            spread -> contextRewriter.rewriteSpreadContext(typeDescriptor, typeDescriptor, spread));
 
     if (valueExpressions.equals(arrayLiteral.getValueExpressions())) {
       return arrayLiteral;
@@ -878,17 +902,43 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     return arrayLiteral.toBuilder()
         .setValueExpressions(
-            arrayLiteral.getValueExpressions().stream()
-                .map(
-                    // Process each element of the array literal the same way a single argument is
-                    // processed argument.
-                    e ->
-                        contextRewriter.rewriteMethodInvocationContext(
-                            toComponentParameterDescriptor(inferredParameterDescriptor),
-                            toComponentParameterDescriptor(declaredParameterDescriptor),
-                            e))
-                .collect(toImmutableList()))
+            rewriteArrayLiteralElements(
+                arrayLiteral,
+                // Process each element of the array literal the same way a single argument is
+                // processed.
+                e ->
+                    contextRewriter.rewriteMethodInvocationContext(
+                        toComponentParameterDescriptor(inferredParameterDescriptor),
+                        toComponentParameterDescriptor(declaredParameterDescriptor),
+                        e),
+                spread ->
+                    contextRewriter.rewriteSpreadContext(
+                        (ArrayTypeDescriptor) inferredParameterDescriptor.getTypeDescriptor(),
+                        (ArrayTypeDescriptor) declaredParameterDescriptor.getTypeDescriptor(),
+                        spread)))
         .build();
+  }
+
+  /**
+   * Rewrites the elements of {@code arrayLiteral} with {@code elementRewriter}, except for spread
+   * elements, which are rewritten with {@code spreadRewriter}.
+   *
+   * <p>Note that a spread element is typed as the component type of the array it spreads, so
+   * conversions applied to it as an element would wrap the spread as a whole instead of each of its
+   * elements.
+   */
+  private static ImmutableList<Expression> rewriteArrayLiteralElements(
+      ArrayLiteral arrayLiteral,
+      Function<Expression, Expression> elementRewriter,
+      Function<PrefixExpression, Expression> spreadRewriter) {
+    return arrayLiteral.getValueExpressions().stream()
+        .map(
+            e ->
+                e instanceof PrefixExpression prefixExpression
+                        && prefixExpression.getOperator() == PrefixOperator.SPREAD
+                    ? spreadRewriter.apply(prefixExpression)
+                    : elementRewriter.apply(e))
+        .collect(toImmutableList());
   }
 
   /**
