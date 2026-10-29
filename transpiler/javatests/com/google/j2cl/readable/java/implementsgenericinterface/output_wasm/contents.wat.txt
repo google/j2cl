@@ -51,16 +51,12 @@
 
 ;;; void GenericInterface.$clinit()
 (func $$clinit__void_<once>_@implementsgenericinterface.GenericInterface
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:18:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:18:10
   (if (global.get $$class-initialized@implementsgenericinterface.GenericInterface)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:18:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:18:10
   (global.set $$class-initialized@implementsgenericinterface.GenericInterface (i32.const 1))
  )
 )
@@ -81,16 +77,12 @@
 
 ;;; void GenericSubInterface.$clinit()
 (func $$clinit__void_<once>_@implementsgenericinterface.GenericSubInterface
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:20:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:20:10
   (if (global.get $$class-initialized@implementsgenericinterface.GenericSubInterface)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:20:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:20:10
   (global.set $$class-initialized@implementsgenericinterface.GenericSubInterface (i32.const 1))
  )
 )
@@ -112,16 +104,11 @@
 ;;; GenericInterfaceGenericImpl<T> GenericInterfaceGenericImpl.$create()
 (func $$create__@implementsgenericinterface.GenericInterfaceGenericImpl
  (result (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
  (local $$instance (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (call $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceGenericImpl )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (local.set $$instance (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.vtable) (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (call $$ctor__void_$p_implementsgenericinterface_GenericInterfaceGenericImpl@implementsgenericinterface.GenericInterfaceGenericImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (return (local.get $$instance))
  )
 )
@@ -129,27 +116,20 @@
 ;;; void GenericInterfaceGenericImpl.$ctor()
 (func $$ctor__void_$p_implementsgenericinterface_GenericInterfaceGenericImpl@implementsgenericinterface.GenericInterfaceGenericImpl
  (param $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void GenericInterfaceGenericImpl.$clinit()
 (func $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceGenericImpl
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (if (global.get $$class-initialized@implementsgenericinterface.GenericInterfaceGenericImpl)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (global.set $$class-initialized@implementsgenericinterface.GenericInterfaceGenericImpl (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -184,16 +164,11 @@
 ;;; GenericInterfaceImpl GenericInterfaceImpl.$create()
 (func $$create__@implementsgenericinterface.GenericInterfaceImpl
  (result (ref null $implementsgenericinterface.GenericInterfaceImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
  (local $$instance (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (call $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceImpl )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (local.set $$instance (struct.new $implementsgenericinterface.GenericInterfaceImpl (global.get $implementsgenericinterface.GenericInterfaceImpl.vtable) (global.get $implementsgenericinterface.GenericInterfaceImpl.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (call $$ctor__void_$p_implementsgenericinterface_GenericInterfaceImpl@implementsgenericinterface.GenericInterfaceImpl (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (return (local.get $$instance))
  )
 )
@@ -201,27 +176,20 @@
 ;;; void GenericInterfaceImpl.$ctor()
 (func $$ctor__void_$p_implementsgenericinterface_GenericInterfaceImpl@implementsgenericinterface.GenericInterfaceImpl
  (param $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void GenericInterfaceImpl.$clinit()
 (func $$clinit__void_<once>_@implementsgenericinterface.GenericInterfaceImpl
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (if (global.get $$class-initialized@implementsgenericinterface.GenericInterfaceImpl)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (global.set $$class-initialized@implementsgenericinterface.GenericInterfaceImpl (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/implementsgenericinterface/readable-j2wasm.js/implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

@@ -253,16 +253,12 @@
 
 ;;; void A.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.A
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
   (if (global.get $$class-initialized@cast.CastGenerics.A)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
   (global.set $$class-initialized@cast.CastGenerics.A (i32.const 1))
  )
 )
@@ -283,16 +279,12 @@
 
 ;;; void B.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.B
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
   (if (global.get $$class-initialized@cast.CastGenerics.B)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
   (global.set $$class-initialized@cast.CastGenerics.B (i32.const 1))
  )
 )
@@ -313,16 +305,12 @@
 
 ;;; void Empty1.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Empty1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
   (if (global.get $$class-initialized@cast.CastGenerics.Empty1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:165:12
   (global.set $$class-initialized@cast.CastGenerics.Empty1 (i32.const 1))
  )
 )
@@ -343,16 +331,12 @@
 
 ;;; void Empty2.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Empty2
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
   (if (global.get $$class-initialized@cast.CastGenerics.Empty2)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:167:12
   (global.set $$class-initialized@cast.CastGenerics.Empty2 (i32.const 1))
  )
 )
@@ -374,11 +358,8 @@
 ;;; CastGenerics<T, E> CastGenerics.$create()
 (func $$create__@cast.CastGenerics
  (result (ref null $cast.CastGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (call $$clinit__void_<once>_@cast.CastGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (return (call $$create_$private__@cast.CastGenerics ))
  )
 )
@@ -386,14 +367,10 @@
 ;;; CastGenerics<T, E> CastGenerics.$create_$private()
 (func $$create_$private__@cast.CastGenerics
  (result (ref null $cast.CastGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
  (local $$instance (ref null $cast.CastGenerics))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (local.set $$instance (struct.new $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (call $$ctor__void_$p_cast_CastGenerics@cast.CastGenerics (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (return (local.get $$instance))
  )
 )
@@ -401,9 +378,7 @@
 ;;; void CastGenerics.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics@cast.CastGenerics
  (param $this (ref null $cast.CastGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -413,11 +388,9 @@
  (type $function.m_method__java_lang_Object_$pp_cast)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:25:4
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:26:4
   (return (ref.null $java.lang.Object))
  )
 )
@@ -425,7 +398,6 @@
 
 ;;; void CastGenerics.testErasureCast()
 (func $m_testErasureCast__void@cast.CastGenerics
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:64:52
  (local $str (ref null $java.lang.String))
  (local $$qualifier (ref null $cast.CastGenerics))
  (local $containerT (ref null $cast.CastGenerics.Container))
@@ -459,170 +431,108 @@
  (local $extendsString (ref null $cast.CastGenerics.Container))
  (local $superString (ref null $cast.CastGenerics.Container))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:64:52
   (call $$clinit__void_<once>_@cast.CastGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:65:4
   (local.set $str (ref.cast (ref null $java.lang.String) (struct.get $cast.CastGenerics $field@cast.CastGenerics (call $$create_$private__@cast.CastGenerics ))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:66:4
   (local.set $str (ref.cast (ref null $java.lang.String) (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (call $$create_$private__@cast.CastGenerics ))
    (call_ref $function.m_method__java_lang_Object_$pp_cast (ref.as_non_null (local.get $$qualifier))(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
   )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:68:4
   (local.set $containerT (ref.null $cast.CastGenerics.Container))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:69:4
    (local.set $$qualifier_1 (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:69:4
    (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_1))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast (ref $cast.CastGenerics.A.vtable) (call $get.itable.$cast.CastGenerics.A (local.get $$qualifier_1)))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:70:4
    (local.set $$qualifier_2 (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:70:4
    (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_2))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast (ref $cast.CastGenerics.B.vtable) (call $get.itable.$cast.CastGenerics.B (local.get $$qualifier_2)))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:72:4
   (local.set $containerU (ref.null $cast.CastGenerics.Container))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:73:4
    (local.set $$qualifier_3 (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:73:4
    (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_3))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast (ref $cast.CastGenerics.A.vtable) (call $get.itable.$cast.CastGenerics.A (local.get $$qualifier_3)))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:74:4
    (local.set $$qualifier_4 (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:74:4
    (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_4))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast (ref $cast.CastGenerics.B.vtable) (call $get.itable.$cast.CastGenerics.B (local.get $$qualifier_4)))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:76:4
   (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:77:4
   (local.set $arrT (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:78:4
    (local.set $$qualifier_5 (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrT)) (i32.const 0))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:78:4
    (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_5))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast (ref $cast.CastGenerics.A.vtable) (call $get.itable.$cast.CastGenerics.A (local.get $$qualifier_5)))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:79:4
    (local.set $$qualifier_6 (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrT)) (i32.const 0)))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:79:4
    (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_6))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast (ref $cast.CastGenerics.B.vtable) (call $get.itable.$cast.CastGenerics.B (local.get $$qualifier_6)))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:81:4
   (local.set $arrA (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:82:4
   (local.set $arrB (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:84:4
   (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:85:4
   (local.set $arrU (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:86:4
    (local.set $$qualifier_7 (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrU)) (i32.const 0))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:86:4
    (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_7))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast (ref $cast.CastGenerics.A.vtable) (call $get.itable.$cast.CastGenerics.A (local.get $$qualifier_7)))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:87:4
    (local.set $$qualifier_8 (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $arrU)) (i32.const 0)))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:87:4
    (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_8))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast (ref $cast.CastGenerics.B.vtable) (call $get.itable.$cast.CastGenerics.B (local.get $$qualifier_8)))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:89:4
   (local.set $arrA (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:90:4
   (local.set $arrB (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:92:4
   (local.set $containerBase (ref.null $cast.CastGenerics.Container))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:93:4
    (local.set $$qualifier_9 (ref.cast (ref null $cast.CastGenerics.BaseImplementor) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerBase))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:93:4
    (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_9))(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mA__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_9))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:94:4
    (local.set $$qualifier_10 (ref.cast (ref null $cast.CastGenerics.BaseImplementor) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerBase))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:94:4
    (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_10))(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mB__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_10))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:96:4
   (local.set $containerImplementor (ref.null $cast.CastGenerics.Container))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:97:4
    (local.set $$qualifier_11 (ref.cast (ref null $cast.CastGenerics.Implementor) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerImplementor))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:97:4
    (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_11))(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_11))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:98:4
    (local.set $$qualifier_12 (ref.cast (ref null $cast.CastGenerics.Implementor) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerImplementor))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor))))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:98:4
    (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_12))(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_12))))
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:100:4
   (local.set $strictlyA (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:101:4
   (local.set $oA (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $strictlyA))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $strictlyA))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:102:4
   (local.set $a (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $strictlyA))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $strictlyA))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:104:4
   (local.set $extendsA (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:105:4
   (local.set $oA (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $extendsA))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $extendsA)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:106:4
   (local.set $a (ref.cast (ref null $java.lang.Object) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $extendsA))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $extendsA))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:108:4
   (local.set $superA (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:109:4
   (local.set $oA (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $superA))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $superA)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:111:4
   (local.set $strictlyString (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:112:4
   (local.set $str (ref.cast (ref null $java.lang.String) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $strictlyString))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $strictlyString))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:114:4
   (local.set $extendsString (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:115:4
   (local.set $str (ref.cast (ref null $java.lang.String) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $extendsString))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $extendsString))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:117:4
   (local.set $superString (ref.null $cast.CastGenerics.Container))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:118:4
   (local.set $oA (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $superString))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $superString)))))
  )
 )
 
 ;;; void CastGenerics.testErasureCastInNullMarkedCode()
 (func $m_testErasureCastInNullMarkedCode__void@cast.CastGenerics
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:122:21
  (local $container (ref null $cast.CastGenerics.NullMarkedContainer))
  (local $s (ref null $java.lang.String))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:122:21
   (call $$clinit__void_<once>_@cast.CastGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:123:4
   (local.set $container (call $$create__java_lang_Object@cast.CastGenerics.NullMarkedContainer (call $$getString_|abc|__java_lang_String_<once>_@cast.CastGenerics.$StringLiterals )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:124:4
   (local.set $s (ref.cast (ref null $java.lang.String) (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $container))(struct.get $cast.CastGenerics.NullMarkedContainer.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.NullMarkedContainer $vtable(local.get $container))))))
  )
 )
 
 ;;; void CastGenerics.testCastToParamterizedType()
 (func $m_testCastToParamterizedType__void@cast.CastGenerics
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:127:21
  (local $o (ref null $java.lang.Object))
  (local $cc (ref null $cast.CastGenerics))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:127:21
   (call $$clinit__void_<once>_@cast.CastGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:128:4
   (local.set $o (call $$create__int@java.lang.Integer (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:129:4
   (local.set $cc (ref.cast (ref null $cast.CastGenerics) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:130:4
   (local.set $cc (ref.cast (ref null $cast.CastGenerics) (local.get $o)))
  )
 )
@@ -631,7 +541,6 @@
 (func $m_testCastToTypeVariable__void@cast.CastGenerics
  (type $function.m_testCastToTypeVariable__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:133:14
  (local $o (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Number))
  (local $t (ref null $java.lang.Object))
@@ -640,15 +549,10 @@
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:134:4
   (local.set $o (call $$create__int@java.lang.Integer (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:135:4
   (local.set $e (ref.cast (ref null $java.lang.Number) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:136:4
   (local.set $t (ref.cast (ref null $java.lang.Object) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:137:4
   (local.set $es (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:138:4
   (local.set $ts (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $o)))
  )
 )
@@ -658,22 +562,16 @@
 (func $m_testCastToMethodTypeVariable__void@cast.CastGenerics
  (type $function.m_testCastToMethodTypeVariable__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:141:37
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Object))
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:142:4
   (local.set $o (call $$create__int@java.lang.Integer (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:143:4
   (local.set $s (ref.cast (ref null $java.lang.Object) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:144:4
   (local.set $c (ref.cast (ref null $cast.CastGenerics) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:145:4
   (local.set $c (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:146:4
   (local.set $c (ref.cast (ref null $java.lang.Enum) (local.get $o)))
  )
 )
@@ -685,11 +583,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $foo (ref null $cast.CastGenerics.Foo))
  (result (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:149:21
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:150:4
   (return (ref.cast (ref null $cast.CastGenerics.Foo) (ref.cast (ref null $cast.CastGenerics.Foo) (local.get $foo))))
  )
 )
@@ -699,7 +595,6 @@
 (func $m_outerGenericMethod__void@cast.CastGenerics
  (type $function.m_outerGenericMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:157:32
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
@@ -713,11 +608,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:169:45
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (ref $cast.CastGenerics) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:170:4
   (if (if (result i32) (ref.is_null (local.get $o))
     (then (i32.const 0))
     (else 
@@ -726,12 +619,10 @@
    )
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:171:6
      (return (ref.cast (ref null $java.lang.Object) (local.get $o)))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:173:4
   (return (ref.null $java.lang.Object))
  )
 )
@@ -740,29 +631,21 @@
 ;;; Foo<T> CastGenerics.doSomething()
 (func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics
  (result (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:27
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:177:27
   (call $$clinit__void_<once>_@cast.CastGenerics )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:4
   (return (call $$create__@cast.CastGenerics.1 ))
  )
 )
 
 ;;; void CastGenerics.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (if (global.get $$class-initialized@cast.CastGenerics)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (global.set $$class-initialized@cast.CastGenerics (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:21:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -797,27 +680,20 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_A_$LambdaAdaptor@cast.CastGenerics.A.$LambdaAdaptor
  (param $this (ref null $cast.CastGenerics.A.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.A.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
   (if (global.get $$class-initialized@cast.CastGenerics.A.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
   (global.set $$class-initialized@cast.CastGenerics.A.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:29:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -852,27 +728,20 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_B_$LambdaAdaptor@cast.CastGenerics.B.$LambdaAdaptor
  (param $this (ref null $cast.CastGenerics.B.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.B.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
   (if (global.get $$class-initialized@cast.CastGenerics.B.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
   (global.set $$class-initialized@cast.CastGenerics.B.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:33:12
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -907,27 +776,20 @@
 ;;; void BaseImplementor.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor
  (param $this (ref null $cast.CastGenerics.BaseImplementor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BaseImplementor.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.BaseImplementor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
   (if (global.get $$class-initialized@cast.CastGenerics.BaseImplementor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
   (global.set $$class-initialized@cast.CastGenerics.BaseImplementor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:37:32
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -962,14 +824,10 @@
 ;;; Container<T> Container.$create()
 (func $$create__@cast.CastGenerics.Container
  (result (ref null $cast.CastGenerics.Container))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
  (local $$instance (ref null $cast.CastGenerics.Container))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (local.set $$instance (struct.new $cast.CastGenerics.Container (global.get $cast.CastGenerics.Container.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (call $$ctor__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (return (local.get $$instance))
  )
 )
@@ -977,9 +835,7 @@
 ;;; void Container.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container
  (param $this (ref null $cast.CastGenerics.Container))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -989,11 +845,9 @@
  (type $function.m_get__java_lang_Object_$pp_cast)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:46:6
  (local $this (ref null $cast.CastGenerics.Container))
  (local.set $this (ref.cast (ref $cast.CastGenerics.Container) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:47:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -1001,18 +855,13 @@
 
 ;;; void Container.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Container
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (if (global.get $$class-initialized@cast.CastGenerics.Container)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (global.set $$class-initialized@cast.CastGenerics.Container (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:45:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1048,16 +897,11 @@
 (func $$create__java_lang_Object@cast.CastGenerics.NullMarkedContainer
  (param $value (ref null $java.lang.Object))
  (result (ref null $cast.CastGenerics.NullMarkedContainer))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:4
  (local $$instance (ref null $cast.CastGenerics.NullMarkedContainer))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:4
   (call $$clinit__void_<once>_@cast.CastGenerics.NullMarkedContainer )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:4
   (local.set $$instance (struct.new $cast.CastGenerics.NullMarkedContainer (global.get $cast.CastGenerics.NullMarkedContainer.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:4
   (call $$ctor__java_lang_Object__void_$p_cast_CastGenerics_NullMarkedContainer@cast.CastGenerics.NullMarkedContainer (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:4
   (return (local.get $$instance))
  )
 )
@@ -1066,11 +910,8 @@
 (func $$ctor__java_lang_Object__void_$p_cast_CastGenerics_NullMarkedContainer@cast.CastGenerics.NullMarkedContainer
  (param $this (ref null $cast.CastGenerics.NullMarkedContainer))
  (param $value (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:55:33
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:56:6
   (struct.set $cast.CastGenerics.NullMarkedContainer $value@cast.CastGenerics.NullMarkedContainer (local.get $this) (local.get $value))
  )
 )
@@ -1080,11 +921,9 @@
  (type $function.m_get__java_lang_Object_$pp_cast)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:59:6
  (local $this (ref null $cast.CastGenerics.NullMarkedContainer))
  (local.set $this (ref.cast (ref $cast.CastGenerics.NullMarkedContainer) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:60:6
   (return (struct.get $cast.CastGenerics.NullMarkedContainer $value@cast.CastGenerics.NullMarkedContainer (local.get $this)))
  )
 )
@@ -1092,18 +931,13 @@
 
 ;;; void NullMarkedContainer.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.NullMarkedContainer
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:52:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:52:23
   (if (global.get $$class-initialized@cast.CastGenerics.NullMarkedContainer)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:52:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:52:23
   (global.set $$class-initialized@cast.CastGenerics.NullMarkedContainer (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:52:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1138,16 +972,11 @@
 ;;; Foo<V> Foo.$create()
 (func $$create__@cast.CastGenerics.Foo
  (result (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
  (local $$instance (ref null $cast.CastGenerics.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$clinit__void_<once>_@cast.CastGenerics.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (local.set $$instance (struct.new $cast.CastGenerics.Foo (global.get $cast.CastGenerics.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$ctor__void_$p_cast_CastGenerics_Foo@cast.CastGenerics.Foo (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (return (local.get $$instance))
  )
 )
@@ -1155,27 +984,20 @@
 ;;; void Foo.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_Foo@cast.CastGenerics.Foo
  (param $this (ref null $cast.CastGenerics.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (if (global.get $$class-initialized@cast.CastGenerics.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (global.set $$class-initialized@cast.CastGenerics.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:181:22
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1211,16 +1033,11 @@
 (func $$create__cast_CastGenerics@cast.CastGenerics.1Nested
  (param $$outer_this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics.1Nested))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
  (local $$instance (ref null $cast.CastGenerics.1Nested))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$clinit__void_<once>_@cast.CastGenerics.1Nested )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (local.set $$instance (struct.new $cast.CastGenerics.1Nested (global.get $cast.CastGenerics.1Nested.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $cast.CastGenerics)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$ctor__cast_CastGenerics__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (return (local.get $$instance))
  )
 )
@@ -1229,11 +1046,8 @@
 (func $$ctor__cast_CastGenerics__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $$outer_this (ref null $cast.CastGenerics))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (struct.set $cast.CastGenerics.1Nested $$outer_this@cast.CastGenerics.1Nested (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1242,28 +1056,21 @@
 (func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $o (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:159:19
  (local $t (ref null $java.lang.Enum))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:160:8
   (local.set $t (ref.cast (ref null $java.lang.Enum) (local.get $o)))
  )
 )
 
 ;;; void Nested.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.1Nested
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (if (global.get $$class-initialized@cast.CastGenerics.1Nested)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (global.set $$class-initialized@cast.CastGenerics.1Nested (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:158:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -1298,16 +1105,11 @@
 ;;; CastPrimitives CastPrimitives.$create()
 (func $$create__@cast.CastPrimitives
  (result (ref null $cast.CastPrimitives))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
  (local $$instance (ref null $cast.CastPrimitives))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (call $$clinit__void_<once>_@cast.CastPrimitives )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (local.set $$instance (struct.new $cast.CastPrimitives (global.get $cast.CastPrimitives.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (call $$ctor__void_$p_cast_CastPrimitives@cast.CastPrimitives (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -1315,9 +1117,7 @@
 ;;; void CastPrimitives.$ctor()
 (func $$ctor__void_$p_cast_CastPrimitives@cast.CastPrimitives
  (param $this (ref null $cast.CastPrimitives))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1326,7 +1126,6 @@
 (func $m_testPrimitiveCasts__void@cast.CastPrimitives
  (type $function.m_testPrimitiveCasts__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:19:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1337,117 +1136,61 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:20:4
   (local.set $b (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:21:4
   (local.set $c (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:22:4
   (local.set $s (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:23:4
   (local.set $i (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:24:4
   (local.set $l (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:25:4
   (local.set $f (f32.const 1.100000023841858))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:26:4
   (local.set $d (f64.const 1.1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:28:4
   (local.set $b (local.get $b))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:29:4
   (local.set $c (call $m_widenByteToChar__byte__int@javaemul.internal.Primitives (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:30:4
   (local.set $s (local.get $b))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:31:4
   (local.set $i (local.get $b))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:32:4
   (local.set $l (i64.extend_i32_s (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:33:4
   (local.set $f (f32.convert_i32_s (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:34:4
   (local.set $d (f64.convert_i32_s (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:36:4
   (local.set $b (i32.extend8_s (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:37:4
   (local.set $c (local.get $c))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:38:4
   (local.set $s (i32.extend16_s (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:39:4
   (local.set $i (local.get $c))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:40:4
   (local.set $l (i64.extend_i32_u (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:41:4
   (local.set $f (f32.convert_i32_u (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:42:4
   (local.set $d (f64.convert_i32_u (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:44:4
   (local.set $b (i32.extend8_s (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:45:4
   (local.set $c (call $m_narrowShortToChar__short__int@javaemul.internal.Primitives (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:46:4
   (local.set $s (local.get $s))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:47:4
   (local.set $i (local.get $s))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:48:4
   (local.set $l (i64.extend_i32_s (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:49:4
   (local.set $f (f32.convert_i32_s (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:50:4
   (local.set $d (f64.convert_i32_s (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:52:4
   (local.set $b (i32.extend8_s (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:53:4
   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:54:4
   (local.set $s (i32.extend16_s (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:55:4
   (local.set $i (local.get $i))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:56:4
   (local.set $l (i64.extend_i32_s (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:57:4
   (local.set $f (f32.convert_i32_s (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:58:4
   (local.set $d (f64.convert_i32_s (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:60:4
   (local.set $b (call $m_narrowLongToByte__long__int@javaemul.internal.Primitives (local.get $l)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:61:4
   (local.set $c (call $m_narrowLongToChar__long__int@javaemul.internal.Primitives (local.get $l)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:62:4
   (local.set $s (call $m_narrowLongToShort__long__int@javaemul.internal.Primitives (local.get $l)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:63:4
   (local.set $i (i32.wrap_i64 (local.get $l)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:64:4
   (local.set $l (local.get $l))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:65:4
   (local.set $f (f32.convert_i64_s (local.get $l)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:66:4
   (local.set $d (f64.convert_i64_s (local.get $l)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:68:4
   (local.set $b (call $m_narrowFloatToByte__float__int@javaemul.internal.Primitives (local.get $f)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:69:4
   (local.set $c (call $m_narrowFloatToChar__float__int@javaemul.internal.Primitives (local.get $f)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:70:4
   (local.set $s (call $m_narrowFloatToShort__float__int@javaemul.internal.Primitives (local.get $f)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:71:4
   (local.set $i (i32.trunc_sat_f32_s (local.get $f)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:72:4
   (local.set $l (i64.trunc_sat_f32_s (local.get $f)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:73:4
   (local.set $f (local.get $f))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:74:4
   (local.set $d (f64.promote_f32 (local.get $f)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:76:4
   (local.set $b (call $m_narrowDoubleToByte__double__int@javaemul.internal.Primitives (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:77:4
   (local.set $c (call $m_narrowDoubleToChar__double__int@javaemul.internal.Primitives (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:78:4
   (local.set $s (call $m_narrowDoubleToShort__double__int@javaemul.internal.Primitives (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:79:4
   (local.set $i (i32.trunc_sat_f64_s (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:80:4
   (local.set $l (i64.trunc_sat_f64_s (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:81:4
   (local.set $f (f32.demote_f64 (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:82:4
   (local.set $d (local.get $d))
  )
 )
@@ -1457,7 +1200,6 @@
 (func $m_testReferenceToPrimitive__void@cast.CastPrimitives
  (type $function.m_testReferenceToPrimitive__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:85:14
  (local $o (ref null $java.lang.Object))
  (local $bool i32)
  (local $b i32)
@@ -1470,23 +1212,14 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:86:4
   (local.set $o (call $$create__@java.lang.Object ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:87:4
   (local.set $bool (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (ref.cast (ref null $java.lang.Boolean) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:88:4
   (local.set $b (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (ref.cast (ref null $java.lang.Byte) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:89:4
   (local.set $c (call $m_charValue__char@java.lang.Character (ref.as_non_null (ref.cast (ref null $java.lang.Character) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:90:4
   (local.set $s (call $m_shortValue__short@java.lang.Short (ref.as_non_null (ref.cast (ref null $java.lang.Short) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:91:4
   (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:92:4
   (local.set $l (call $m_longValue__long@java.lang.Long (ref.as_non_null (ref.cast (ref null $java.lang.Long) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:93:4
   (local.set $f (call $m_floatValue__float@java.lang.Float (ref.as_non_null (ref.cast (ref null $java.lang.Float) (local.get $o)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:94:4
   (local.set $d (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (ref.cast (ref null $java.lang.Double) (local.get $o)))))
  )
 )
@@ -1496,7 +1229,6 @@
 (func $m_testLiteralToPrimitive__void@cast.CastPrimitives
  (type $function.m_testLiteralToPrimitive__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:97:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1507,89 +1239,47 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:98:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:99:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:100:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:101:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:102:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:103:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:104:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:106:4
   (local.set $b (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:107:4
   (local.set $c (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:108:4
   (local.set $s (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:109:4
   (local.set $i (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:110:4
   (local.set $l (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:111:4
   (local.set $f (f32.const 1.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:112:4
   (local.set $d (f64.const 1.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:114:4
   (local.set $b (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:115:4
   (local.set $c (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:116:4
   (local.set $s (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:117:4
   (local.set $i (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:118:4
   (local.set $l (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:119:4
   (local.set $f (f32.const 1.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:120:4
   (local.set $d (f64.const 1.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:122:4
   (local.set $b (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:123:4
   (local.set $c (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:124:4
   (local.set $s (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:125:4
   (local.set $i (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:126:4
   (local.set $l (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:127:4
   (local.set $f (f32.const 1.2000000476837158))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:128:4
   (local.set $d (f64.const 1.2000000476837158))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:130:4
   (local.set $b (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:131:4
   (local.set $c (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:132:4
   (local.set $s (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:133:4
   (local.set $i (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:134:4
   (local.set $l (i64.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:135:4
   (local.set $f (f32.const 1.2))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:136:4
   (local.set $d (f64.const 1.2))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:138:4
   (local.set $b (i32.const 97))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:139:4
   (local.set $c (i32.const 97))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:140:4
   (local.set $s (i32.const 97))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:141:4
   (local.set $i (i32.const 97))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:142:4
   (local.set $l (i64.const 97))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:143:4
   (local.set $f (f32.const 97.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:144:4
   (local.set $d (f64.const 97.0))
  )
 )
@@ -1599,7 +1289,6 @@
 (func $m_testUnboxAndWiden__void@cast.CastPrimitives
  (type $function.m_testUnboxAndWiden__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:147:14
  (local $boxedByte (ref null $java.lang.Byte))
  (local $s i32)
  (local $i i32)
@@ -1609,17 +1298,11 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:148:4
   (local.set $boxedByte (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:151:4
   (local.set $s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:152:4
   (local.set $i (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:153:4
   (local.set $l (i64.extend_i32_s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:154:4
   (local.set $f (f32.convert_i32_s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:155:4
   (local.set $d (f64.convert_i32_s (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (local.get $boxedByte)))))
  )
 )
@@ -1635,27 +1318,17 @@
  (param $i i32)
  (param $l i64)
  (param $f f32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:158:14
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:160:4
   (local.set $i (i32.wrap_i64 (i64.extend_i32_s (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:161:4
   (local.set $i (i32.trunc_sat_f64_s (f64.convert_i32_s (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:162:4
   (local.set $f (f32.demote_f64 (f64.promote_f32 (local.get $f))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:163:4
   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:164:4
   (local.set $s (i32.extend16_s (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:165:4
   (local.set $l (i64.trunc_sat_f64_s (f64.convert_i32_s (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:167:4
   (local.set $i (i32.trunc_sat_f32_s (f32.convert_i32_s (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:168:4
   (local.set $l (i64.trunc_sat_f32_s (f32.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:169:4
   (local.set $l (i64.trunc_sat_f64_s (f64.convert_i64_s (local.get $l))))
  )
 )
@@ -1669,7 +1342,6 @@
  (param $i i32)
  (param $l i64)
  (param $d f64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:172:14
  (local $quotient f64)
  (local $product f32)
  (local $charQuotient f64)
@@ -1677,13 +1349,9 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:174:4
   (local.set $quotient (f64.div (f64.convert_i32_s (local.get $i)) (f64.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:175:4
   (local.set $product (f32.mul (f32.convert_i32_s (local.get $i)) (f32.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:176:4
   (local.set $charQuotient (f64.div (f64.convert_i32_u (local.get $c)) (f64.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:177:4
   (local.set $sum (f32.add (f32.demote_f64 (local.get $d)) (f32.convert_i64_s (local.get $l))))
  )
 )
@@ -1696,7 +1364,6 @@
  (param $b i32)
  (param $i i32)
  (param $l i64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:180:14
  (local $s i32)
  (local $d f64)
  (local $widenedChar i64)
@@ -1705,21 +1372,13 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:181:4
   (local.set $s (i32.extend8_s (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:182:4
   (local.set $s (i32.extend16_s (i32.extend8_s (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:183:4
   (local.set $d (f64.promote_f32 (f32.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:184:4
   (local.set $d (f64.promote_f32 (f32.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:185:4
   (local.set $d (f64.add (f64.promote_f32 (f32.convert_i64_s (local.get $l))) (local.get $d)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:186:4
   (local.set $widenedChar (i64.extend_i32_s (call $m_widenByteToChar__byte__int@javaemul.internal.Primitives (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:187:4
   (local.set $boxedShort (call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.extend16_s (local.get $i))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:188:4
   (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $b)))
  )
 )
@@ -1730,18 +1389,14 @@
  (type $function.m_testCastsThroughReferenceTypes__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $i i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:191:14
  (local $unboxedObject i32)
  (local $unboxedInteger i32)
  (local $boxedInteger (ref null $java.lang.Integer))
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:192:4
   (local.set $unboxedObject (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $i))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:193:4
   (local.set $unboxedInteger (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $i))))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:194:4
   (local.set $boxedInteger (ref.cast (ref null $java.lang.Integer) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $i))))
  )
 )
@@ -1751,7 +1406,6 @@
 (func $m_testImplicitArgumentCasts__void@cast.CastPrimitives
  (type $function.m_testImplicitArgumentCasts__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:197:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1762,47 +1416,26 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:198:4
   (local.set $b (i32.const 127))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:199:4
   (local.set $c (i32.const 65535))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:200:4
   (local.set $s (i32.const 32767))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:201:4
   (local.set $i (i32.const 2147483647))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:202:4
   (local.set $l (i64.const 9223372036854775807))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:203:4
   (local.set $f (f32.const 3.4028234663852886E38))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:204:4
   (local.set $d (f64.const 1.7976931348623157E308))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:206:4
   (drop (call $m_getShort__short__short@cast.CastPrimitives (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:207:4
   (drop (call $m_getInt__int__int@cast.CastPrimitives (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:208:4
   (drop (call $m_getLong__long__long@cast.CastPrimitives (i64.extend_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:209:4
   (drop (call $m_getFloat__float__float@cast.CastPrimitives (f32.convert_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:210:4
   (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.convert_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:212:4
   (drop (call $m_getFloat__float__float@cast.CastPrimitives (f32.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:213:4
   (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.convert_i64_s (local.get $l))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:214:4
   (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.promote_f32 (local.get $f))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:217:4
   (drop (call $$create__int@cast.CastPrimitives.IntValueHolder (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:218:4
   (drop (call $$create__int@cast.CastPrimitives.IntValueHolder (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:219:4
   (drop (call $$create__int@cast.CastPrimitives.IntValueHolder (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:221:4
   (drop (call $$create__long@cast.CastPrimitives.LongValueHolder (i64.extend_i32_s (local.get $b))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:222:4
   (drop (call $$create__long@cast.CastPrimitives.LongValueHolder (i64.extend_i32_u (local.get $c))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:223:4
   (drop (call $$create__long@cast.CastPrimitives.LongValueHolder (i64.extend_i32_s (local.get $i))))
  )
 )
@@ -1813,7 +1446,6 @@
  (type $function.m_testImplicitArrayIndexCasts__arrayOf_byte__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $array (ref null $javaemul.internal.WasmArray.OfByte))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:226:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1822,27 +1454,16 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:227:4
   (local.set $b (i32.const 127))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:228:4
   (local.set $c (i32.const 65535))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:229:4
   (local.set $s (i32.const 32767))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:230:4
   (local.set $i (i32.const 2147483647))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:232:4
   
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:233:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $b)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:234:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $c)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:235:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $s)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:236:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (local.get $i)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:238:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:239:4
   (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $elements@javaemul.internal.WasmArray.OfByte (local.get $array)) (i32.const 97)))
  )
 )
@@ -1852,9 +1473,7 @@
 (func $m_getShort__short__short@cast.CastPrimitives
  (param $value i32)
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:242:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:243:4
   (return (local.get $value))
  )
 )
@@ -1863,9 +1482,7 @@
 (func $m_getInt__int__int@cast.CastPrimitives
  (param $value i32)
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:246:21
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:247:4
   (return (local.get $value))
  )
 )
@@ -1874,9 +1491,7 @@
 (func $m_getLong__long__long@cast.CastPrimitives
  (param $value i64)
  (result i64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:250:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:251:4
   (return (local.get $value))
  )
 )
@@ -1885,9 +1500,7 @@
 (func $m_getFloat__float__float@cast.CastPrimitives
  (param $value f32)
  (result f32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:254:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:255:4
   (return (local.get $value))
  )
 )
@@ -1896,9 +1509,7 @@
 (func $m_getDouble__double__double@cast.CastPrimitives
  (param $value f64)
  (result f64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:258:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:259:4
   (return (local.get $value))
  )
 )
@@ -1907,7 +1518,6 @@
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
  (type $function.m_testImplicitLongAssignmentCasts__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:270:14
  (local $fbyte i32)
  (local $fchar i32)
  (local $fshort i32)
@@ -1919,64 +1529,41 @@
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast (ref $cast.CastPrimitives) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:271:4
   (local.set $fbyte (i32.const 11))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:272:4
   (local.set $fchar (i32.const 12))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:273:4
   (local.set $fshort (i32.const 13))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:274:4
   (local.set $fint (i32.const 14))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:275:4
   (local.set $flong (i64.const 15))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:276:4
   (local.set $ffloat (f32.const 16.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:277:4
   (local.set $fdouble (f64.const 17.0))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:280:4
   (local.set $tlong (i64.const 0))
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:284:6
    (local.set $tlong (i64.extend_i32_s (local.get $fbyte)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:285:6
    (local.set $tlong (local.get $flong))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:291:6
    (local.set $tlong (i64.extend_i32_s (local.get $fint)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:292:6
    (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:293:6
    (local.set $tlong (i64.shl (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:299:6
    (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_u (local.get $fchar))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:300:6
    (local.set $tlong (i64.add (local.get $tlong) (local.get $flong)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:301:6
    (local.set $tlong (i64.trunc_sat_f32_s (f32.add (f32.convert_i64_s (local.get $tlong)) (local.get $ffloat))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:307:6
    (local.set $tlong (i64.mul (local.get $flong) (i64.extend_i32_s (local.get $fint))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:308:6
    (local.set $tlong (i64.shr_s (local.get $flong) (i64.extend_i32_s (local.get $fint))))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:314:6
    (local.set $tlong (i64.add (local.get $flong) (i64.extend_i32_s (local.get $fshort))))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:315:6
    (local.set $tlong (i64.add (local.get $flong) (local.get $flong)))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:320:6
    (local.set $tlong (i64.shl (local.get $flong) (local.get $tlong)))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:321:6
    (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong)))
   )
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:325:6
    (local.set $tlong (i64.add (i64.extend_i32_s (i32.add (i32.const 0) (i32.const 1))) (i64.const 2)))
   )
  )
@@ -1985,18 +1572,13 @@
 
 ;;; void CastPrimitives.$clinit()
 (func $$clinit__void_<once>_@cast.CastPrimitives
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (if (global.get $$class-initialized@cast.CastPrimitives)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (global.set $$class-initialized@cast.CastPrimitives (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2032,16 +1614,11 @@
 (func $$create__int@cast.CastPrimitives.IntValueHolder
  (param $value i32)
  (result (ref null $cast.CastPrimitives.IntValueHolder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
  (local $$instance (ref null $cast.CastPrimitives.IntValueHolder))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (call $$clinit__void_<once>_@cast.CastPrimitives.IntValueHolder )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (local.set $$instance (struct.new $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (call $$ctor__int__void_$p_cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
   (return (local.get $$instance))
  )
 )
@@ -2050,27 +1627,20 @@
 (func $$ctor__int__void_$p_cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder
  (param $this (ref null $cast.CastPrimitives.IntValueHolder))
  (param $value i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:263:30
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void IntValueHolder.$clinit()
 (func $$clinit__void_<once>_@cast.CastPrimitives.IntValueHolder
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
   (if (global.get $$class-initialized@cast.CastPrimitives.IntValueHolder)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
   (global.set $$class-initialized@cast.CastPrimitives.IntValueHolder (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:262:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2106,16 +1676,11 @@
 (func $$create__long@cast.CastPrimitives.LongValueHolder
  (param $value i64)
  (result (ref null $cast.CastPrimitives.LongValueHolder))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
  (local $$instance (ref null $cast.CastPrimitives.LongValueHolder))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (call $$clinit__void_<once>_@cast.CastPrimitives.LongValueHolder )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (local.set $$instance (struct.new $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (call $$ctor__long__void_$p_cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder (ref.as_non_null (local.get $$instance))(local.get $value))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
   (return (local.get $$instance))
  )
 )
@@ -2124,27 +1689,20 @@
 (func $$ctor__long__void_$p_cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder
  (param $this (ref null $cast.CastPrimitives.LongValueHolder))
  (param $value i64)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:267:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void LongValueHolder.$clinit()
 (func $$clinit__void_<once>_@cast.CastPrimitives.LongValueHolder
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
   (if (global.get $$class-initialized@cast.CastPrimitives.LongValueHolder)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
   (global.set $$class-initialized@cast.CastPrimitives.LongValueHolder (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastPrimitives.java:266:23
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2179,16 +1737,11 @@
 ;;; Casts Casts.$create()
 (func $$create__@cast.Casts
  (result (ref null $cast.Casts))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
  (local $$instance (ref null $cast.Casts))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (call $$clinit__void_<once>_@cast.Casts )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (local.set $$instance (struct.new $cast.Casts (global.get $cast.Casts.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (call $$ctor__void_$p_cast_Casts@cast.Casts (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -2196,9 +1749,7 @@
 ;;; void Casts.$ctor()
 (func $$ctor__void_$p_cast_Casts@cast.Casts
  (param $this (ref null $cast.Casts))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -2207,15 +1758,12 @@
 (func $m_testCastToClass__void@cast.Casts
  (type $function.m_testCastToClass__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:22:14
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:23:4
   (local.set $o (call $$create__@java.lang.Object ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:24:4
   (local.set $c (ref.cast (ref null $cast.Casts) (local.get $o)))
  )
 )
@@ -2225,15 +1773,12 @@
 (func $m_testCasToInterface__void@cast.Casts
  (type $function.m_testCasToInterface__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:27:14
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:28:4
   (local.set $o (call $$create__@java.lang.Object ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:29:4
   (local.set $s (ref.cast (ref null $java.lang.Object) (local.get $o)))
  )
 )
@@ -2243,7 +1788,6 @@
 (func $m_testCastToBoxedType__void@cast.Casts
  (type $function.m_testCastToBoxedType__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:32:14
  (local $o (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Byte))
  (local $d (ref null $java.lang.Double))
@@ -2257,25 +1801,15 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:33:4
   (local.set $o (call $$create__int@java.lang.Integer (i32.const 1)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:34:4
   (local.set $b (ref.cast (ref null $java.lang.Byte) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:35:4
   (local.set $d (ref.cast (ref null $java.lang.Double) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:36:4
   (local.set $f (ref.cast (ref null $java.lang.Float) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:37:4
   (local.set $i (ref.cast (ref null $java.lang.Integer) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:38:4
   (local.set $l (ref.cast (ref null $java.lang.Long) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:39:4
   (local.set $s (ref.cast (ref null $java.lang.Short) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:40:4
   (local.set $n (ref.cast (ref null $java.lang.Number) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:41:4
   (local.set $c (ref.cast (ref null $java.lang.Character) (local.get $o)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:42:4
   (local.set $bool (ref.cast (ref null $java.lang.Boolean) (local.get $o)))
  )
 )
@@ -2285,15 +1819,12 @@
 (func $m_testCastToArray__void@cast.Casts
  (type $function.m_testCastToArray__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:45:14
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:46:4
   (local.set $foo (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:47:4
   (local.set $bar (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
  )
 )
@@ -2302,7 +1833,6 @@
 ;;; void Casts.functionForInstanceofTest()
 (func $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts
  (param $this (ref null $cast.Casts))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:50:15
  (block
  )
 )
@@ -2311,7 +1841,6 @@
 (func $m_testCastVariableAfterInstanceOf__void@cast.Casts
  (type $function.m_testCastVariableAfterInstanceOf__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:52:14
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
  (local $cAvoidsCastsTo (ref null $cast.Casts))
@@ -2326,70 +1855,50 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:53:4
   (local.set $o (call $$create__@java.lang.Object ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:54:4
   (if (ref.test (ref $cast.Casts) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:55:6
      (local.set $c (ref.cast (ref null $cast.Casts) (local.get $o)))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:57:4
   (if (ref.test (ref $cast.Casts) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:58:6
      (local.set $cAvoidsCastsTo (ref.cast (ref null $cast.Casts) (local.get $o)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:59:6
      (local.set $o (call $$create__@java.lang.Object ))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:60:6
      (local.set $cNotAvoidCastsTo (ref.cast (ref null $cast.Casts) (local.get $o)))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:62:4
   (if (ref.test (ref $cast.Casts) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:63:6
      (local.set $cAvoidsCastsTo_1 (ref.cast (ref null $cast.Casts) (local.get $o)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:64:6
      (local.set $o (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:65:6
      (local.set $cNotAvoidCastsTo_1 (ref.cast (ref null $cast.Casts) (local.get $o)))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:67:4
   (if (ref.test (ref $cast.Casts) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:68:6
      (local.set $cAvoidsCastsTo_2 (ref.cast (ref null $cast.Casts) (local.get $o)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:69:6
      (local.set $o (call $$create__@java.lang.Object ))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:70:6
      (local.set $cAvoidCastsTo (ref.cast (ref null $cast.Casts) (local.get $o)))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:72:4
   (if (ref.test (ref $cast.Casts) (local.get $o))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:73:6
      (local.set $cAvoidsCastsTo_3 (ref.cast (ref null $cast.Casts) (local.get $o)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:74:6
      (call $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts (ref.as_non_null (local.get $this)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:75:6
      (local.set $cNotAvoidCastsTo_2 (ref.cast (ref null $cast.Casts) (local.get $o)))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:78:4
   (local.set $c_1 (if (result (ref null $cast.Casts)) (ref.test (ref $cast.Casts) (local.get $o)) (then (ref.cast (ref null $cast.Casts) (local.get $o))) (else (ref.null $cast.Casts))))
  )
 )
@@ -2399,7 +1908,6 @@
 (func $m_testCastFieldAfterInstanceOf__void@cast.Casts
  (type $function.m_testCastFieldAfterInstanceOf__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:90:14
  (local $foo (ref null $cast.Casts.Foo))
  (local $c (ref null $cast.Casts))
  (local $cAvoidsCastsTo (ref null $cast.Casts))
@@ -2412,57 +1920,41 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:91:4
   (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:92:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:93:6
      (local.set $c (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:95:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:96:6
      (local.set $cAvoidsCastsTo (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:97:6
      (struct.set $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo) (call $$create__@java.lang.Object ))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:98:6
      (local.set $cNotAvoidCastsTo (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:100:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:101:6
      (local.set $cAvoidsCastsTo_1 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:102:6
      (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:103:6
      (local.set $cNotAvoidCastsTo_1 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:105:4
   (if (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:106:6
      (local.set $cAvoidsCastsTo_2 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:107:6
      (call $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts (ref.as_non_null (local.get $this)))
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:108:6
      (local.set $cNotAvoidCastsTo_2 (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:111:4
   (local.set $c_1 (if (result (ref null $cast.Casts)) (ref.test (ref $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo))) (then (ref.cast (ref null $cast.Casts) (struct.get $cast.Casts.Foo $field@cast.Casts.Foo (local.get $foo)))) (else (ref.null $cast.Casts))))
  )
 )
@@ -2472,25 +1964,20 @@
 (func $m_testCaseMethodAfterInstanceOf__void@cast.Casts
  (type $function.m_testCaseMethodAfterInstanceOf__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:114:14
  (local $foo (ref null $cast.Casts.Foo))
  (local $cNotAvoidCastsTo (ref null $cast.Casts))
  (local $c (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:115:4
   (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:116:4
   (if (ref.test (ref $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))))
    (then
     (block
-     ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:117:6
      (local.set $cNotAvoidCastsTo (ref.cast (ref null $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo))))))
     )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:120:4
   (local.set $c (if (result (ref null $cast.Casts)) (ref.test (ref $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo))))) (then (ref.cast (ref null $cast.Casts) (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))))) (else (ref.null $cast.Casts))))
  )
 )
@@ -2500,7 +1987,6 @@
 (func $m_testPrecedence__void@cast.Casts
  (type $function.m_testPrecedence__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:123:14
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
  (local $notString (ref null $java.lang.Integer))
@@ -2509,15 +1995,10 @@
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast (ref $cast.Casts) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:124:4
   (local.set $foo (call $$getString_|foo|__java_lang_String_<once>_@cast.Casts.$StringLiterals ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:125:4
   (local.set $bar (call $$getString_|bar|__java_lang_String_<once>_@cast.Casts.$StringLiterals ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:126:4
   (local.set $notString (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 123)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:127:4
   (local.set $s1 (ref.cast (ref null $java.lang.String) (if (result (ref null $java.lang.Object)) (i32.const 0) (then (local.get $foo)) (else (local.get $bar)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:128:4
   (local.set $s2 (ref.cast (ref null $java.lang.String) (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $$getString_|foo|__java_lang_String_<once>_@cast.Casts.$StringLiterals )(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (local.get $notString)))))
  )
 )
@@ -2525,18 +2006,13 @@
 
 ;;; void Casts.$clinit()
 (func $$clinit__void_<once>_@cast.Casts
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (if (global.get $$class-initialized@cast.Casts)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (global.set $$class-initialized@cast.Casts (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2572,16 +2048,11 @@
 (func $$create__cast_Casts@cast.Casts.Foo
  (param $$outer_this (ref null $cast.Casts))
  (result (ref null $cast.Casts.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (local $$instance (ref null $cast.Casts.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$clinit__void_<once>_@cast.Casts.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (local.set $$instance (struct.new $cast.Casts.Foo (global.get $cast.Casts.Foo.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$ctor__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (return (local.get $$instance))
  )
 )
@@ -2590,13 +2061,9 @@
 (func $$ctor__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo
  (param $this (ref null $cast.Casts.Foo))
  (param $$outer_this (ref null $cast.Casts))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (struct.set $cast.Casts.Foo $$outer_this@cast.Casts.Foo (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo (ref.as_non_null (local.get $this)))
  )
 )
@@ -2606,11 +2073,9 @@
  (type $function.m_method__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:85:18
  (local $this (ref null $cast.Casts.Foo))
  (local.set $this (ref.cast (ref $cast.Casts.Foo) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:86:6
   (return (call $$create__@java.lang.Object ))
  )
 )
@@ -2619,27 +2084,20 @@
 ;;; void Foo.$init()
 (func $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo
  (param $this (ref null $cast.Casts.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:83:18
   (struct.set $cast.Casts.Foo $field@cast.Casts.Foo (local.get $this) (call $$create__@java.lang.Object ))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@cast.Casts.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (if (global.get $$class-initialized@cast.Casts.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (global.set $$class-initialized@cast.Casts.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/Casts.java:82:16
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -2674,16 +2132,11 @@
 ;;; <anonymous> extends Foo<T><T> <anonymous> extends Foo<T>.$create()
 (func $$create__@cast.CastGenerics.1
  (result (ref null $cast.CastGenerics.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
  (local $$instance (ref null $cast.CastGenerics.1))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$clinit__void_<once>_@cast.CastGenerics.1 )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (local.set $$instance (struct.new $cast.CastGenerics.1 (global.get $cast.CastGenerics.1.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$ctor__void_$p_cast_CastGenerics_1@cast.CastGenerics.1 (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (return (local.get $$instance))
  )
 )
@@ -2691,27 +2144,20 @@
 ;;; void <anonymous> extends Foo<T>.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_1@cast.CastGenerics.1
  (param $this (ref null $cast.CastGenerics.1))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:24
   (call $$ctor__void_$p_cast_CastGenerics_Foo@cast.CastGenerics.Foo (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void <anonymous> extends Foo<T>.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.1
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:11
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:11
   (if (global.get $$class-initialized@cast.CastGenerics.1)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:11
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:11
   (global.set $$class-initialized@cast.CastGenerics.1 (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:178:11
   (call $$clinit__void_<once>_@cast.CastGenerics.Foo )
  )
 )
@@ -2746,14 +2192,10 @@
 ;;; Implementor Implementor.$create()
 (func $$create__@cast.CastGenerics.Implementor
  (result (ref null $cast.CastGenerics.Implementor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
  (local $$instance (ref null $cast.CastGenerics.Implementor))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (local.set $$instance (struct.new $cast.CastGenerics.Implementor (global.get $cast.CastGenerics.Implementor.vtable) (global.get $cast.CastGenerics.Implementor.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (call $$ctor__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (return (local.get $$instance))
  )
 )
@@ -2761,9 +2203,7 @@
 ;;; void Implementor.$ctor()
 (func $$ctor__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor
  (param $this (ref null $cast.CastGenerics.Implementor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (call $$ctor__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor (ref.as_non_null (local.get $this)))
  )
 )
@@ -2772,7 +2212,6 @@
 (func $m_mA__void@cast.CastGenerics.Implementor
  (type $function.m_mA__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:40:16
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast (ref $cast.CastGenerics.Implementor) (local.get $this.untyped)))
  (block
@@ -2784,7 +2223,6 @@
 (func $m_mB__void@cast.CastGenerics.Implementor
  (type $function.m_mB__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:42:16
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast (ref $cast.CastGenerics.Implementor) (local.get $this.untyped)))
  (block
@@ -2794,18 +2232,13 @@
 
 ;;; void Implementor.$clinit()
 (func $$clinit__void_<once>_@cast.CastGenerics.Implementor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (if (global.get $$class-initialized@cast.CastGenerics.Implementor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (global.set $$class-initialized@cast.CastGenerics.Implementor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/cast/readable-j2wasm.js/cast/CastGenerics.java:39:23
   (call $$clinit__void_<once>_@cast.CastGenerics.BaseImplementor )
  )
 )

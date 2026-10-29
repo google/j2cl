@@ -35,11 +35,8 @@
 ;;; InstanceInnerClass InstanceInnerClass.$create()
 (func $$create__@instanceinnerclass.InstanceInnerClass
  (result (ref null $instanceinnerclass.InstanceInnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$clinit__void_<once>_@instanceinnerclass.InstanceInnerClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (return (call $$create_$private__@instanceinnerclass.InstanceInnerClass ))
  )
 )
@@ -47,14 +44,10 @@
 ;;; InstanceInnerClass InstanceInnerClass.$create_$private()
 (func $$create_$private__@instanceinnerclass.InstanceInnerClass
  (result (ref null $instanceinnerclass.InstanceInnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (global.get $instanceinnerclass.InstanceInnerClass.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -62,9 +55,7 @@
 ;;; void InstanceInnerClass.$ctor()
 (func $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -73,7 +64,6 @@
 (func $m_funOuter__void@instanceinnerclass.InstanceInnerClass
  (type $function.m_funOuter__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:21:14
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast (ref $instanceinnerclass.InstanceInnerClass) (local.get $this.untyped)))
  (block
@@ -85,11 +75,9 @@
 (func $m_test__void@instanceinnerclass.InstanceInnerClass
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:33:14
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast (ref $instanceinnerclass.InstanceInnerClass) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:34:4
   (drop (call $$create__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (call $$create_$private__@instanceinnerclass.InstanceInnerClass )))
  )
 )
@@ -97,18 +85,13 @@
 
 ;;; void InstanceInnerClass.$clinit()
 (func $$clinit__void_<once>_@instanceinnerclass.InstanceInnerClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (if (global.get $$class-initialized@instanceinnerclass.InstanceInnerClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (global.set $$class-initialized@instanceinnerclass.InstanceInnerClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -144,16 +127,11 @@
 (func $$create__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $$outer_this (ref null $instanceinnerclass.InstanceInnerClass))
  (result (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
  (local $$instance (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$clinit__void_<once>_@instanceinnerclass.InstanceInnerClass.InnerClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (return (local.get $$instance))
  )
 )
@@ -162,13 +140,9 @@
 (func $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (param $$outer_this (ref null $instanceinnerclass.InstanceInnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $this)))
  )
 )
@@ -177,13 +151,10 @@
 (func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass
  (type $function.m_funInner__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:27:16
  (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (local.set $this (ref.cast (ref $instanceinnerclass.InstanceInnerClass.InnerClass) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:28:6
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this)))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:29:6
   (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this)))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this)))))
  )
 )
@@ -192,29 +163,21 @@
 ;;; void InnerClass.$init()
 (func $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:24:15
   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $field@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this) (i32.add (struct.get $instanceinnerclass.InstanceInnerClass $instanceField@instanceinnerclass.InstanceInnerClass (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this))) (struct.get $instanceinnerclass.InstanceInnerClass $instanceField@instanceinnerclass.InstanceInnerClass (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this)))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:25:30
   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this) (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this)))
  )
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void_<once>_@instanceinnerclass.InstanceInnerClass.InnerClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (if (global.get $$class-initialized@instanceinnerclass.InstanceInnerClass.InnerClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (global.set $$class-initialized@instanceinnerclass.InstanceInnerClass.InnerClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinnerclass/readable-j2wasm.js/instanceinnerclass/InstanceInnerClass.java:23:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

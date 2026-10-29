@@ -116,16 +116,12 @@
 
 ;;; void Callable.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.Callable
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
   (if (global.get $$class-initialized@simplebridgemethods.Callable)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
   (global.set $$class-initialized@simplebridgemethods.Callable (i32.const 1))
  )
 )
@@ -147,16 +143,11 @@
 ;;; Superclass<T> Superclass.$create()
 (func $$create__@simplebridgemethods.Superclass
  (result (ref null $simplebridgemethods.Superclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
  (local $$instance (ref null $simplebridgemethods.Superclass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$clinit__void_<once>_@simplebridgemethods.Superclass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (local.set $$instance (struct.new $simplebridgemethods.Superclass (global.get $simplebridgemethods.Superclass.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (return (local.get $$instance))
  )
 )
@@ -164,9 +155,7 @@
 ;;; void Superclass.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass
  (param $this (ref null $simplebridgemethods.Superclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -176,7 +165,6 @@
  (type $function.m_m1__java_lang_Error__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Error))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:19:14
  (local $this (ref null $simplebridgemethods.Superclass))
  (local.set $this (ref.cast (ref $simplebridgemethods.Superclass) (local.get $this.untyped)))
  (block
@@ -186,18 +174,13 @@
 
 ;;; void Superclass.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.Superclass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (if (global.get $$class-initialized@simplebridgemethods.Superclass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (global.set $$class-initialized@simplebridgemethods.Superclass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -232,16 +215,11 @@
 ;;; Task<T> Task.$create()
 (func $$create__@simplebridgemethods.Task
  (result (ref null $simplebridgemethods.Task))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
  (local $$instance (ref null $simplebridgemethods.Task))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$clinit__void_<once>_@simplebridgemethods.Task )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (local.set $$instance (struct.new $simplebridgemethods.Task (global.get $simplebridgemethods.Task.vtable) (global.get $simplebridgemethods.Task.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$ctor__void_$p_simplebridgemethods_Task@simplebridgemethods.Task (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (return (local.get $$instance))
  )
 )
@@ -249,9 +227,7 @@
 ;;; void Task.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_Task@simplebridgemethods.Task
  (param $this (ref null $simplebridgemethods.Task))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -261,7 +237,6 @@
  (type $function.m_call__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:42:14
  (local $this (ref null $simplebridgemethods.Task))
  (local.set $this (ref.cast (ref $simplebridgemethods.Task) (local.get $this.untyped)))
  (block
@@ -271,18 +246,13 @@
 
 ;;; void Task.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.Task
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (if (global.get $$class-initialized@simplebridgemethods.Task)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (global.set $$class-initialized@simplebridgemethods.Task (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -317,16 +287,11 @@
 ;;; AnotherTask<T> AnotherTask.$create()
 (func $$create__@simplebridgemethods.AnotherTask
  (result (ref null $simplebridgemethods.AnotherTask))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
  (local $$instance (ref null $simplebridgemethods.AnotherTask))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$clinit__void_<once>_@simplebridgemethods.AnotherTask )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (local.set $$instance (struct.new $simplebridgemethods.AnotherTask (global.get $simplebridgemethods.AnotherTask.vtable) (global.get $simplebridgemethods.AnotherTask.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$ctor__void_$p_simplebridgemethods_AnotherTask@simplebridgemethods.AnotherTask (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (return (local.get $$instance))
  )
 )
@@ -334,9 +299,7 @@
 ;;; void AnotherTask.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_AnotherTask@simplebridgemethods.AnotherTask
  (param $this (ref null $simplebridgemethods.AnotherTask))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -346,7 +309,6 @@
  (type $function.m_call__simplebridgemethods_Superclass__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $simplebridgemethods.Superclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:50:14
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast (ref $simplebridgemethods.AnotherTask) (local.get $this.untyped)))
  (block
@@ -359,11 +321,9 @@
  (type $function.m_call__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $v (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast (ref $simplebridgemethods.AnotherTask) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call_ref $function.m_call__simplebridgemethods_Superclass__void (ref.as_non_null (local.get $this))(ref.cast (ref null $simplebridgemethods.Superclass) (local.get $v))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
 )
@@ -371,18 +331,13 @@
 
 ;;; void AnotherTask.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.AnotherTask
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (if (global.get $$class-initialized@simplebridgemethods.AnotherTask)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (global.set $$class-initialized@simplebridgemethods.AnotherTask (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -417,16 +372,11 @@
 ;;; SimpleBridgeMethods SimpleBridgeMethods.$create()
 (func $$create__@simplebridgemethods.SimpleBridgeMethods
  (result (ref null $simplebridgemethods.SimpleBridgeMethods))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
  (local $$instance (ref null $simplebridgemethods.SimpleBridgeMethods))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$clinit__void_<once>_@simplebridgemethods.SimpleBridgeMethods )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (local.set $$instance (struct.new $simplebridgemethods.SimpleBridgeMethods (global.get $simplebridgemethods.SimpleBridgeMethods.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$ctor__void_$p_simplebridgemethods_SimpleBridgeMethods@simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (return (local.get $$instance))
  )
 )
@@ -434,27 +384,20 @@
 ;;; void SimpleBridgeMethods.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_SimpleBridgeMethods@simplebridgemethods.SimpleBridgeMethods
  (param $this (ref null $simplebridgemethods.SimpleBridgeMethods))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SimpleBridgeMethods.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.SimpleBridgeMethods
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (if (global.get $$class-initialized@simplebridgemethods.SimpleBridgeMethods)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (global.set $$class-initialized@simplebridgemethods.SimpleBridgeMethods (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -489,27 +432,20 @@
 ;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_Callable_$LambdaAdaptor@simplebridgemethods.Callable.$LambdaAdaptor
  (param $this (ref null $simplebridgemethods.Callable.$LambdaAdaptor))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.Callable.$LambdaAdaptor
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
   (if (global.get $$class-initialized@simplebridgemethods.Callable.$LambdaAdaptor)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
   (global.set $$class-initialized@simplebridgemethods.Callable.$LambdaAdaptor (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:34:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -544,16 +480,11 @@
 ;;; Subclass Subclass.$create()
 (func $$create__@simplebridgemethods.Subclass
  (result (ref null $simplebridgemethods.Subclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
  (local $$instance (ref null $simplebridgemethods.Subclass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$clinit__void_<once>_@simplebridgemethods.Subclass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (local.set $$instance (struct.new $simplebridgemethods.Subclass (global.get $simplebridgemethods.Subclass.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$ctor__void_$p_simplebridgemethods_Subclass@simplebridgemethods.Subclass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (return (local.get $$instance))
  )
 )
@@ -561,9 +492,7 @@
 ;;; void Subclass.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_Subclass@simplebridgemethods.Subclass
  (param $this (ref null $simplebridgemethods.Subclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $this)))
  )
 )
@@ -573,7 +502,6 @@
  (type $function.m_m1__java_lang_AssertionError__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $a (ref null $java.lang.AssertionError))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:26:14
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast (ref $simplebridgemethods.Subclass) (local.get $this.untyped)))
  (block
@@ -586,11 +514,9 @@
  (type $function.m_m1__java_lang_Error__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Error))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast (ref $simplebridgemethods.Subclass) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call_ref $function.m_m1__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.AssertionError) (local.get $t))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
 )
@@ -598,18 +524,13 @@
 
 ;;; void Subclass.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.Subclass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (if (global.get $$class-initialized@simplebridgemethods.Subclass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (global.set $$class-initialized@simplebridgemethods.Subclass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$clinit__void_<once>_@simplebridgemethods.Superclass )
  )
 )
@@ -644,16 +565,11 @@
 ;;; AnotherSubclass AnotherSubclass.$create()
 (func $$create__@simplebridgemethods.AnotherSubclass
  (result (ref null $simplebridgemethods.AnotherSubclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
  (local $$instance (ref null $simplebridgemethods.AnotherSubclass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$clinit__void_<once>_@simplebridgemethods.AnotherSubclass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (local.set $$instance (struct.new $simplebridgemethods.AnotherSubclass (global.get $simplebridgemethods.AnotherSubclass.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$ctor__void_$p_simplebridgemethods_AnotherSubclass@simplebridgemethods.AnotherSubclass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (return (local.get $$instance))
  )
 )
@@ -661,27 +577,20 @@
 ;;; void AnotherSubclass.$ctor()
 (func $$ctor__void_$p_simplebridgemethods_AnotherSubclass@simplebridgemethods.AnotherSubclass
  (param $this (ref null $simplebridgemethods.AnotherSubclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void AnotherSubclass.$clinit()
 (func $$clinit__void_<once>_@simplebridgemethods.AnotherSubclass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (if (global.get $$class-initialized@simplebridgemethods.AnotherSubclass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (global.set $$class-initialized@simplebridgemethods.AnotherSubclass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/simplebridgemethods/readable-j2wasm.js/simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$clinit__void_<once>_@simplebridgemethods.Superclass )
  )
 )

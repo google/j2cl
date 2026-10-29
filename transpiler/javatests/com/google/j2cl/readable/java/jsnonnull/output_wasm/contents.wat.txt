@@ -148,27 +148,20 @@
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $a (ref null string))
  (result (ref null string))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:63:11
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:63:11
   (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:63:11
   (return (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $a)) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
  )
 )
 
 ;;; void MyFunction.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main.MyFunction
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
   (if (global.get $$class-initialized@jsnonnull.Main.MyFunction)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
   (global.set $$class-initialized@jsnonnull.Main.MyFunction (i32.const 1))
  )
 )
@@ -192,15 +185,11 @@
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $a (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
   (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
     (return (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (local.get $a) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:61:12
     (return (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (local.get $a))))))
    )
   )
@@ -209,16 +198,12 @@
 
 ;;; void NonNullableTemplatedReturn.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main.NonNullableTemplatedReturn
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:90:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:90:12
   (if (global.get $$class-initialized@jsnonnull.Main.NonNullableTemplatedReturn)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:90:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:90:12
   (global.set $$class-initialized@jsnonnull.Main.NonNullableTemplatedReturn (i32.const 1))
  )
 )
@@ -239,16 +224,12 @@
 
 ;;; void NonNullableTemplate.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main.NonNullableTemplate
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:98:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:98:12
   (if (global.get $$class-initialized@jsnonnull.Main.NonNullableTemplate)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:98:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:98:12
   (global.set $$class-initialized@jsnonnull.Main.NonNullableTemplate (i32.const 1))
  )
 )
@@ -271,16 +252,11 @@
 (func $$create__java_lang_String@jsnonnull.Main
  (param $a (ref null $java.lang.String))
  (result (ref null $jsnonnull.Main))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:9
  (local $$instance (ref null $jsnonnull.Main))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:9
   (call $$clinit__void_<once>_@jsnonnull.Main )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:9
   (local.set $$instance (struct.new $jsnonnull.Main (global.get $jsnonnull.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:9
   (call $$ctor__java_lang_String__void_$p_jsnonnull_Main@jsnonnull.Main (ref.as_non_null (local.get $$instance))(local.get $a))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:9
   (return (local.get $$instance))
  )
 )
@@ -289,11 +265,8 @@
 (func $$ctor__java_lang_String__void_$p_jsnonnull_Main@jsnonnull.Main
  (param $this (ref null $jsnonnull.Main))
  (param $a (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:9
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:35
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:42:35
   (call $$init__void_$p_jsnonnull_Main@jsnonnull.Main (ref.as_non_null (local.get $this)))
  )
 )
@@ -306,11 +279,9 @@
  (param $b (ref null $java.lang.Object))
  (param $c (ref null $java.lang.String))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:45:16
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:46:4
   (return (call $$getString_||__java_lang_String_<once>_@jsnonnull.Main.$StringLiterals ))
  )
 )
@@ -323,11 +294,9 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:49:16
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:50:4
   (return (call $$getString_||__java_lang_String_<once>_@jsnonnull.Main.$StringLiterals ))
  )
 )
@@ -340,11 +309,9 @@
  (param $a (ref null $java.lang.String))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:54:16
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:55:4
   (return (ref.null $java.lang.String))
  )
 )
@@ -355,7 +322,6 @@
  (type $function.m_m4__jsnonnull_Main_MyFunction__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $f (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:58:14
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (ref $jsnonnull.Main) (local.get $this.untyped)))
  (block
@@ -366,45 +332,29 @@
 ;;; void Main.$init()
 (func $$init__void_$p_jsnonnull_Main@jsnonnull.Main
  (param $this (ref null $jsnonnull.Main))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:26:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:27:28
   (struct.set $jsnonnull.Main $f1@jsnonnull.Main (local.get $this) (call $$getString_|Hello|__java_lang_String_<once>_@jsnonnull.Main.$StringLiterals ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:28:17
   (struct.set $jsnonnull.Main $f2@jsnonnull.Main (local.get $this) (ref.null $java.lang.String))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:29:45
   (struct.set $jsnonnull.Main $f4@jsnonnull.Main (local.get $this) (call $$create__@java.util.ArrayList ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:30:34
   (struct.set $jsnonnull.Main $f5@jsnonnull.Main (local.get $this) (call $$create__@java.util.ArrayList ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:31:34
   (struct.set $jsnonnull.Main $f6@jsnonnull.Main (local.get $this) (call $$create__@java.util.ArrayList ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:32:23
   (struct.set $jsnonnull.Main $f7@jsnonnull.Main (local.get $this) (ref.null $java.lang.Object))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:33:42
   (struct.set $jsnonnull.Main $f8@jsnonnull.Main (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:35:31
   (struct.set $jsnonnull.Main $f9@jsnonnull.Main (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:37:30
   (struct.set $jsnonnull.Main $f10@jsnonnull.Main (local.get $this) (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:39:23
   (struct.set $jsnonnull.Main $f12@jsnonnull.Main (local.get $this) (call $$create__@java.util.ArrayList ))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:26:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:26:13
   (if (global.get $$class-initialized@jsnonnull.Main)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:26:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:26:13
   (global.set $$class-initialized@jsnonnull.Main (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:26:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -439,16 +389,11 @@
 ;;; StringComparator StringComparator.$create()
 (func $$create__@jsnonnull.Main.StringComparator
  (result (ref null $jsnonnull.Main.StringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $$instance (ref null $jsnonnull.Main.StringComparator))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (call $$clinit__void_<once>_@jsnonnull.Main.StringComparator )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (local.set $$instance (struct.new $jsnonnull.Main.StringComparator (global.get $jsnonnull.Main.StringComparator.vtable) (global.get $jsnonnull.Main.StringComparator.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (call $$ctor__void_$p_jsnonnull_Main_StringComparator@jsnonnull.Main.StringComparator (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (local.get $$instance))
  )
 )
@@ -456,9 +401,7 @@
 ;;; void StringComparator.$ctor()
 (func $$ctor__void_$p_jsnonnull_Main_StringComparator@jsnonnull.Main.StringComparator
  (param $this (ref null $jsnonnull.Main.StringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -470,11 +413,9 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:68:15
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:69:6
   (return (i32.const 0))
  )
 )
@@ -487,11 +428,9 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call_ref $function.m_compare__java_lang_String__java_lang_String__int (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(ref.cast (ref null $java.lang.String) (local.get $arg1))(struct.get $jsnonnull.Main.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.StringComparator $vtable(local.get $this)))))
  )
 )
@@ -502,11 +441,9 @@
  (type $function.m_reversed__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_reversed__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))))
  )
 )
@@ -518,11 +455,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -535,11 +470,9 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)))
  )
 )
@@ -551,11 +484,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -567,11 +498,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -583,11 +512,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -599,11 +526,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.StringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -611,20 +536,14 @@
 
 ;;; void StringComparator.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main.StringComparator
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (if (global.get $$class-initialized@jsnonnull.Main.StringComparator)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (global.set $$class-initialized@jsnonnull.Main.StringComparator (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:66:22
   (call $$clinit__void_<once>_@java.util.Comparator )
  )
 )
@@ -659,16 +578,11 @@
 ;;; NullableStringComparator NullableStringComparator.$create()
 (func $$create__@jsnonnull.Main.NullableStringComparator
  (result (ref null $jsnonnull.Main.NullableStringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $$instance (ref null $jsnonnull.Main.NullableStringComparator))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (call $$clinit__void_<once>_@jsnonnull.Main.NullableStringComparator )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (local.set $$instance (struct.new $jsnonnull.Main.NullableStringComparator (global.get $jsnonnull.Main.NullableStringComparator.vtable) (global.get $jsnonnull.Main.NullableStringComparator.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (call $$ctor__void_$p_jsnonnull_Main_NullableStringComparator@jsnonnull.Main.NullableStringComparator (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (local.get $$instance))
  )
 )
@@ -676,9 +590,7 @@
 ;;; void NullableStringComparator.$ctor()
 (func $$ctor__void_$p_jsnonnull_Main_NullableStringComparator@jsnonnull.Main.NullableStringComparator
  (param $this (ref null $jsnonnull.Main.NullableStringComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -690,11 +602,9 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:76:15
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:77:6
   (return (i32.const 0))
  )
 )
@@ -707,11 +617,9 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call_ref $function.m_compare__java_lang_String__java_lang_String__int (ref.as_non_null (local.get $this))(ref.cast (ref null $java.lang.String) (local.get $arg0))(ref.cast (ref null $java.lang.String) (local.get $arg1))(struct.get $jsnonnull.Main.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.NullableStringComparator $vtable(local.get $this)))))
  )
 )
@@ -722,11 +630,9 @@
  (type $function.m_reversed__java_util_Comparator)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_reversed__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))))
  )
 )
@@ -738,11 +644,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -755,11 +659,9 @@
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)))
  )
 )
@@ -771,11 +673,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -787,11 +687,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -803,11 +701,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -819,11 +715,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NullableStringComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (return (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
@@ -831,20 +725,14 @@
 
 ;;; void NullableStringComparator.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main.NullableStringComparator
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (if (global.get $$class-initialized@jsnonnull.Main.NullableStringComparator)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (global.set $$class-initialized@jsnonnull.Main.NullableStringComparator (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:74:22
   (call $$clinit__void_<once>_@java.util.Comparator )
  )
 )
@@ -879,16 +767,11 @@
 ;;; NonNullableStringSubNullableComparator NonNullableStringSubNullableComparator.$create()
 (func $$create__@jsnonnull.Main.NonNullableStringSubNullableComparator
  (result (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
  (local $$instance (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (call $$clinit__void_<once>_@jsnonnull.Main.NonNullableStringSubNullableComparator )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (local.set $$instance (struct.new $jsnonnull.Main.NonNullableStringSubNullableComparator (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable) (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (call $$ctor__void_$p_jsnonnull_Main_NonNullableStringSubNullableComparator@jsnonnull.Main.NonNullableStringSubNullableComparator (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (return (local.get $$instance))
  )
 )
@@ -896,9 +779,7 @@
 ;;; void NonNullableStringSubNullableComparator.$ctor()
 (func $$ctor__void_$p_jsnonnull_Main_NonNullableStringSubNullableComparator@jsnonnull.Main.NonNullableStringSubNullableComparator
  (param $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (call $$ctor__void_$p_jsnonnull_Main_NullableStringComparator@jsnonnull.Main.NullableStringComparator (ref.as_non_null (local.get $this)))
  )
 )
@@ -910,11 +791,9 @@
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
  (result i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:85:15
  (local $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (local.set $this (ref.cast (ref $jsnonnull.Main.NonNullableStringSubNullableComparator) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:86:6
   (return (i32.const 0))
  )
 )
@@ -922,18 +801,13 @@
 
 ;;; void NonNullableStringSubNullableComparator.$clinit()
 (func $$clinit__void_<once>_@jsnonnull.Main.NonNullableStringSubNullableComparator
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (if (global.get $$class-initialized@jsnonnull.Main.NonNullableStringSubNullableComparator)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (global.set $$class-initialized@jsnonnull.Main.NonNullableStringSubNullableComparator (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jsnonnull/readable-j2wasm.js/jsnonnull/Main.java:81:22
   (call $$clinit__void_<once>_@jsnonnull.Main.NullableStringComparator )
  )
 )

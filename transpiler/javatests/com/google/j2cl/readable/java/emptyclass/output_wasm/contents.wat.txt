@@ -18,16 +18,11 @@
 ;;; EmptyClass EmptyClass.$create()
 (func $$create__@emptyclass.EmptyClass
  (result (ref null $emptyclass.EmptyClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
  (local $$instance (ref null $emptyclass.EmptyClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (call $$clinit__void_<once>_@emptyclass.EmptyClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (local.set $$instance (struct.new $emptyclass.EmptyClass (global.get $emptyclass.EmptyClass.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (call $$ctor__void_$p_emptyclass_EmptyClass@emptyclass.EmptyClass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -35,27 +30,20 @@
 ;;; void EmptyClass.$ctor()
 (func $$ctor__void_$p_emptyclass_EmptyClass@emptyclass.EmptyClass
  (param $this (ref null $emptyclass.EmptyClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void EmptyClass.$clinit()
 (func $$clinit__void_<once>_@emptyclass.EmptyClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (if (global.get $$class-initialized@emptyclass.EmptyClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (global.set $$class-initialized@emptyclass.EmptyClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptyclass/readable-j2wasm.js/emptyclass/EmptyClass.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

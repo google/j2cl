@@ -30,7 +30,6 @@
 ;;; void Interface.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.Interface
  (param $this (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:24:15
  (block
  )
 )
@@ -38,16 +37,12 @@
 
 ;;; void Interface.$clinit()
 (func $$clinit__void_<once>_@jstypewithdefault.Interface
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:23:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:23:10
   (if (global.get $$class-initialized@jstypewithdefault.Interface)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:23:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:23:10
   (global.set $$class-initialized@jstypewithdefault.Interface (i32.const 1))
  )
 )
@@ -69,16 +64,11 @@
 ;;; SomeJsType SomeJsType.$create()
 (func $$create__@jstypewithdefault.SomeJsType
  (result (ref null $jstypewithdefault.SomeJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
  (local $$instance (ref null $jstypewithdefault.SomeJsType))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void_<once>_@jstypewithdefault.SomeJsType )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (local.set $$instance (struct.new $jstypewithdefault.SomeJsType (global.get $jstypewithdefault.SomeJsType.vtable) (global.get $jstypewithdefault.SomeJsType.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (call $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (return (local.get $$instance))
  )
 )
@@ -86,9 +76,7 @@
 ;;; void SomeJsType.$ctor()
 (func $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType
  (param $this (ref null $jstypewithdefault.SomeJsType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -97,11 +85,9 @@
 (func $m_defaultMethod__void@jstypewithdefault.SomeJsType
  (type $function.m_defaultMethod__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast (ref $jstypewithdefault.SomeJsType) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (call $m_defaultMethod__void@jstypewithdefault.Interface (ref.as_non_null (local.get $this)))
  )
 )
@@ -109,20 +95,14 @@
 
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void_<once>_@jstypewithdefault.SomeJsType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (if (global.get $$class-initialized@jstypewithdefault.SomeJsType)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (global.set $$class-initialized@jstypewithdefault.SomeJsType (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/jstypewithdefault/readable-j2wasm.js/jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void_<once>_@jstypewithdefault.Interface )
  )
 )

@@ -18,16 +18,11 @@
 ;;; AssertSimple AssertSimple.$create()
 (func $$create__@assertsimple.AssertSimple
  (result (ref null $assertsimple.AssertSimple))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
  (local $$instance (ref null $assertsimple.AssertSimple))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (call $$clinit__void_<once>_@assertsimple.AssertSimple )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (local.set $$instance (struct.new $assertsimple.AssertSimple (global.get $assertsimple.AssertSimple.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -35,9 +30,7 @@
 ;;; void AssertSimple.$ctor()
 (func $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple
  (param $this (ref null $assertsimple.AssertSimple))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -45,49 +38,35 @@
 ;;; void AssertSimple.main(String[] args)
 (func $m_main__arrayOf_java_lang_String__void@assertsimple.AssertSimple
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:19:21
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:19:21
   (call $$clinit__void_<once>_@assertsimple.AssertSimple )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:20:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:20:4
     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)))
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:21:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:21:4
     (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(call $$getString_|Error_|__java_lang_String_<once>_@assertsimple.AssertSimple.$StringLiterals ))
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:22:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:22:4
     (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(ref.null $java.lang.Object))
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:23:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:23:4
     (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(local.get $args))
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:24:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:24:4
     (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(ref.cast (ref null $java.lang.String) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $args)) (i32.const 0))))
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:25:4
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:25:4
     (call $$assertWithMessage__boolean__java_lang_Object__void@javaemul.internal.Asserts (i32.eq (i32.add (i32.const 1) (i32.const 2)) (i32.const 3))(call $$create__@java.lang.Object ))
    )
   )
@@ -96,18 +75,13 @@
 
 ;;; void AssertSimple.$clinit()
 (func $$clinit__void_<once>_@assertsimple.AssertSimple
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (if (global.get $$class-initialized@assertsimple.AssertSimple)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (global.set $$class-initialized@assertsimple.AssertSimple (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/assertsimple/readable-j2wasm.js/assertsimple/AssertSimple.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

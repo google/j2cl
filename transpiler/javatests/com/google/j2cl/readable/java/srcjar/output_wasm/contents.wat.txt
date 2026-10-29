@@ -32,16 +32,11 @@
 ;;; Foo Foo.$create()
 (func $$create__@srcjar.Foo
  (result (ref null $srcjar.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
  (local $$instance (ref null $srcjar.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (call $$clinit__void_<once>_@srcjar.Foo )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (local.set $$instance (struct.new $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (return (local.get $$instance))
  )
 )
@@ -49,27 +44,20 @@
 ;;; void Foo.$ctor()
 (func $$ctor__void_$p_srcjar_Foo@srcjar.Foo
  (param $this (ref null $srcjar.Foo))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@srcjar.Foo
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (if (global.get $$class-initialized@srcjar.Foo)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (global.set $$class-initialized@srcjar.Foo (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Foo.java:21:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -104,16 +92,11 @@
 ;;; Srcjar Srcjar.$create()
 (func $$create__@srcjar.Srcjar
  (result (ref null $srcjar.Srcjar))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
  (local $$instance (ref null $srcjar.Srcjar))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (call $$clinit__void_<once>_@srcjar.Srcjar )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (local.set $$instance (struct.new $srcjar.Srcjar (global.get $srcjar.Srcjar.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -121,39 +104,29 @@
 ;;; void Srcjar.$ctor()
 (func $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar
  (param $this (ref null $srcjar.Srcjar))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Srcjar.test()
 (func $m_test__void@srcjar.Srcjar
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:20:21
  (local $foo (ref null $srcjar.Foo))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:20:21
   (call $$clinit__void_<once>_@srcjar.Srcjar )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:21:4
   (local.set $foo (call $$create__@srcjar.Foo ))
  )
 )
 
 ;;; void Srcjar.$clinit()
 (func $$clinit__void_<once>_@srcjar.Srcjar
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (if (global.get $$class-initialized@srcjar.Srcjar)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (global.set $$class-initialized@srcjar.Srcjar (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/srcjar/readable-j2wasm.js/srcjar/Srcjar.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

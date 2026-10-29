@@ -18,16 +18,11 @@
 ;;; EmptyMethod EmptyMethod.$create()
 (func $$create__@emptymethod.EmptyMethod
  (result (ref null $emptymethod.EmptyMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
  (local $$instance (ref null $emptymethod.EmptyMethod))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (call $$clinit__void_<once>_@emptymethod.EmptyMethod )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (local.set $$instance (struct.new $emptymethod.EmptyMethod (global.get $emptymethod.EmptyMethod.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (call $$ctor__void_$p_emptymethod_EmptyMethod@emptymethod.EmptyMethod (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -35,9 +30,7 @@
 ;;; void EmptyMethod.$ctor()
 (func $$ctor__void_$p_emptymethod_EmptyMethod@emptymethod.EmptyMethod
  (param $this (ref null $emptymethod.EmptyMethod))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -45,27 +38,20 @@
 ;;; void EmptyMethod.main(String[] args)
 (func $m_main__arrayOf_java_lang_String__void@emptymethod.EmptyMethod
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:19:21
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:19:21
   (call $$clinit__void_<once>_@emptymethod.EmptyMethod )
  )
 )
 
 ;;; void EmptyMethod.$clinit()
 (func $$clinit__void_<once>_@emptymethod.EmptyMethod
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (if (global.get $$class-initialized@emptymethod.EmptyMethod)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (global.set $$class-initialized@emptymethod.EmptyMethod (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/emptymethod/readable-j2wasm.js/emptymethod/EmptyMethod.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

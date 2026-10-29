@@ -50,16 +50,12 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@externs.Main.TopLevelExtern.InnerExtern.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
   (if (global.get $$class-initialized@externs.Main.TopLevelExtern.InnerExtern.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:25:24
   (global.set $$class-initialized@externs.Main.TopLevelExtern.InnerExtern.$Overlay (i32.const 1))
  )
 )
@@ -93,16 +89,12 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@externs.Main.TopLevelExtern.Inner.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
   (if (global.get $$class-initialized@externs.Main.TopLevelExtern.Inner.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:28:24
   (global.set $$class-initialized@externs.Main.TopLevelExtern.Inner.$Overlay (i32.const 1))
  )
 )
@@ -136,16 +128,12 @@
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@externs.Main.TopLevelExtern.$Overlay
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
   (if (global.get $$class-initialized@externs.Main.TopLevelExtern.$Overlay)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:23:22
   (global.set $$class-initialized@externs.Main.TopLevelExtern.$Overlay (i32.const 1))
  )
 )
@@ -180,16 +168,11 @@
 ;;; Main Main.$create()
 (func $$create__@externs.Main
  (result (ref null $externs.Main))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
  (local $$instance (ref null $externs.Main))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (call $$clinit__void_<once>_@externs.Main )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (local.set $$instance (struct.new $externs.Main (global.get $externs.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null extern) (ref.null extern)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (call $$ctor__void_$p_externs_Main@externs.Main (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (return (local.get $$instance))
  )
 )
@@ -197,9 +180,7 @@
 ;;; void Main.$ctor()
 (func $$ctor__void_$p_externs_Main@externs.Main
  (param $this (ref null $externs.Main))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -207,34 +188,24 @@
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@externs.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:44:21
  (local $inner (ref null extern))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:44:21
   (call $$clinit__void_<once>_@externs.Main )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:45:4
   (local.set $inner (call $m_<init>__java_lang_String@externs.Main.TopLevelExtern.Inner (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|Hello|__java_lang_String_<once>_@externs.Main.$StringLiterals )))))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:46:4
   (call $m_staticField__int__void@externs.Main.TopLevelExtern.Inner (call $m_staticMethod__int@externs.Main.TopLevelExtern.Inner ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:47:4
   (call $m_foo__java_lang_String__void@externs.Main.TopLevelExtern.Inner (ref.as_non_null (local.get $inner))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_instanceMethod__java_lang_String@externs.Main.TopLevelExtern.Inner (ref.as_non_null (local.get $inner)))))))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@externs.Main
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (if (global.get $$class-initialized@externs.Main)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (global.set $$class-initialized@externs.Main (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/externs/readable-j2wasm.js/externs/Main.java:21:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

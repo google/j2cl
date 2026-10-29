@@ -131,7 +131,6 @@
 (func $m_f__rawtype_RawType__void@rawtype.RawType.GenericSuperclass
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:48:17
  (block
  )
 )
@@ -139,16 +138,12 @@
 
 ;;; void GenericSuperclass.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.GenericSuperclass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:47:12
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:47:12
   (if (global.get $$class-initialized@rawtype.RawType.GenericSuperclass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:47:12
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:47:12
   (global.set $$class-initialized@rawtype.RawType.GenericSuperclass (i32.const 1))
  )
 )
@@ -170,16 +165,11 @@
 ;;; RawType RawType.$create()
 (func $$create__@rawtype.RawType
  (result (ref null $rawtype.RawType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
  (local $$instance (ref null $rawtype.RawType))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (call $$clinit__void_<once>_@rawtype.RawType )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (local.set $$instance (struct.new $rawtype.RawType (global.get $rawtype.RawType.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $rawtype.RawType.BoundDependentDirect) (ref.null $rawtype.RawType.BoundDependentIndirect) (ref.null $rawtype.RawType.BoundRecursively) (ref.null $rawtype.RawType.Bound) (ref.null $rawtype.RawType.Unbound)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (call $$ctor__void_$p_rawtype_RawType@rawtype.RawType (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (return (local.get $$instance))
  )
 )
@@ -187,11 +177,8 @@
 ;;; void RawType.$ctor()
 (func $$ctor__void_$p_rawtype_RawType@rawtype.RawType
  (param $this (ref null $rawtype.RawType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (call $$init__void_$p_rawtype_RawType@rawtype.RawType (ref.as_non_null (local.get $this)))
  )
 )
@@ -199,35 +186,24 @@
 ;;; void RawType.$init()
 (func $$init__void_$p_rawtype_RawType@rawtype.RawType
  (param $this (ref null $rawtype.RawType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:20:10
   (struct.set $rawtype.RawType $rawUnbound@rawtype.RawType (local.get $this) (call $$create__@rawtype.RawType.Unbound ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:21:8
   (struct.set $rawtype.RawType $rawBound@rawtype.RawType (local.get $this) (call $$create__@rawtype.RawType.Bound ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:22:19
   (struct.set $rawtype.RawType $rawBoundRecursively@rawtype.RawType (local.get $this) (call $$create__@rawtype.RawType.BoundRecursively ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:23:23
   (struct.set $rawtype.RawType $rawBoundDependentDirect@rawtype.RawType (local.get $this) (call $$create__@rawtype.RawType.BoundDependentDirect ))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:24:25
   (struct.set $rawtype.RawType $rawBoundDependentIndirect@rawtype.RawType (local.get $this) (call $$create__@rawtype.RawType.BoundDependentIndirect ))
  )
 )
 
 ;;; void RawType.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (if (global.get $$class-initialized@rawtype.RawType)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (global.set $$class-initialized@rawtype.RawType (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:19:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -262,16 +238,11 @@
 ;;; Unbound<T> Unbound.$create()
 (func $$create__@rawtype.RawType.Unbound
  (result (ref null $rawtype.RawType.Unbound))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
  (local $$instance (ref null $rawtype.RawType.Unbound))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (call $$clinit__void_<once>_@rawtype.RawType.Unbound )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (local.set $$instance (struct.new $rawtype.RawType.Unbound (global.get $rawtype.RawType.Unbound.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (call $$ctor__void_$p_rawtype_RawType_Unbound@rawtype.RawType.Unbound (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (return (local.get $$instance))
  )
 )
@@ -279,9 +250,7 @@
 ;;; void Unbound.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_Unbound@rawtype.RawType.Unbound
  (param $this (ref null $rawtype.RawType.Unbound))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -292,11 +261,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:27:6
  (local $this (ref null $rawtype.RawType.Unbound))
  (local.set $this (ref.cast (ref $rawtype.RawType.Unbound) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:28:6
   (return (local.get $t))
  )
 )
@@ -304,18 +271,13 @@
 
 ;;; void Unbound.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.Unbound
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (if (global.get $$class-initialized@rawtype.RawType.Unbound)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (global.set $$class-initialized@rawtype.RawType.Unbound (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:26:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -350,16 +312,11 @@
 ;;; Bound<T> Bound.$create()
 (func $$create__@rawtype.RawType.Bound
  (result (ref null $rawtype.RawType.Bound))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
  (local $$instance (ref null $rawtype.RawType.Bound))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (call $$clinit__void_<once>_@rawtype.RawType.Bound )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (local.set $$instance (struct.new $rawtype.RawType.Bound (global.get $rawtype.RawType.Bound.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (call $$ctor__void_$p_rawtype_RawType_Bound@rawtype.RawType.Bound (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (return (local.get $$instance))
  )
 )
@@ -367,27 +324,20 @@
 ;;; void Bound.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_Bound@rawtype.RawType.Bound
  (param $this (ref null $rawtype.RawType.Bound))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Bound.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.Bound
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (if (global.get $$class-initialized@rawtype.RawType.Bound)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (global.set $$class-initialized@rawtype.RawType.Bound (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:32:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -422,16 +372,11 @@
 ;;; BoundRecursively<T> BoundRecursively.$create()
 (func $$create__@rawtype.RawType.BoundRecursively
  (result (ref null $rawtype.RawType.BoundRecursively))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
  (local $$instance (ref null $rawtype.RawType.BoundRecursively))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (call $$clinit__void_<once>_@rawtype.RawType.BoundRecursively )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundRecursively (global.get $rawtype.RawType.BoundRecursively.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (call $$ctor__void_$p_rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (return (local.get $$instance))
  )
 )
@@ -439,27 +384,20 @@
 ;;; void BoundRecursively.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively
  (param $this (ref null $rawtype.RawType.BoundRecursively))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BoundRecursively.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.BoundRecursively
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (if (global.get $$class-initialized@rawtype.RawType.BoundRecursively)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (global.set $$class-initialized@rawtype.RawType.BoundRecursively (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:34:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -494,16 +432,11 @@
 ;;; BoundDependentDirect<A, B> BoundDependentDirect.$create()
 (func $$create__@rawtype.RawType.BoundDependentDirect
  (result (ref null $rawtype.RawType.BoundDependentDirect))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
  (local $$instance (ref null $rawtype.RawType.BoundDependentDirect))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (call $$clinit__void_<once>_@rawtype.RawType.BoundDependentDirect )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundDependentDirect (global.get $rawtype.RawType.BoundDependentDirect.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (call $$ctor__void_$p_rawtype_RawType_BoundDependentDirect@rawtype.RawType.BoundDependentDirect (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (return (local.get $$instance))
  )
 )
@@ -511,27 +444,20 @@
 ;;; void BoundDependentDirect.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_BoundDependentDirect@rawtype.RawType.BoundDependentDirect
  (param $this (ref null $rawtype.RawType.BoundDependentDirect))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BoundDependentDirect.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.BoundDependentDirect
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (if (global.get $$class-initialized@rawtype.RawType.BoundDependentDirect)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (global.set $$class-initialized@rawtype.RawType.BoundDependentDirect (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:36:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -566,16 +492,11 @@
 ;;; BoundDependentIndirect<A, B> BoundDependentIndirect.$create()
 (func $$create__@rawtype.RawType.BoundDependentIndirect
  (result (ref null $rawtype.RawType.BoundDependentIndirect))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
  (local $$instance (ref null $rawtype.RawType.BoundDependentIndirect))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (call $$clinit__void_<once>_@rawtype.RawType.BoundDependentIndirect )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundDependentIndirect (global.get $rawtype.RawType.BoundDependentIndirect.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (call $$ctor__void_$p_rawtype_RawType_BoundDependentIndirect@rawtype.RawType.BoundDependentIndirect (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (return (local.get $$instance))
  )
 )
@@ -583,27 +504,20 @@
 ;;; void BoundDependentIndirect.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_BoundDependentIndirect@rawtype.RawType.BoundDependentIndirect
  (param $this (ref null $rawtype.RawType.BoundDependentIndirect))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BoundDependentIndirect.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.BoundDependentIndirect
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (if (global.get $$class-initialized@rawtype.RawType.BoundDependentIndirect)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (global.set $$class-initialized@rawtype.RawType.BoundDependentIndirect (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:38:15
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -638,16 +552,11 @@
 ;;; RawSubclass RawSubclass.$create()
 (func $$create__@rawtype.RawType.RawSubclass
  (result (ref null $rawtype.RawType.RawSubclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
  (local $$instance (ref null $rawtype.RawType.RawSubclass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (call $$clinit__void_<once>_@rawtype.RawType.RawSubclass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (local.set $$instance (struct.new $rawtype.RawType.RawSubclass (global.get $rawtype.RawType.RawSubclass.vtable) (global.get $rawtype.RawType.RawSubclass.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (call $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (return (local.get $$instance))
  )
 )
@@ -655,9 +564,7 @@
 ;;; void RawSubclass.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass
  (param $this (ref null $rawtype.RawType.RawSubclass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -667,7 +574,6 @@
  (type $function.m_f__rawtype_RawType__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:53:16
  (local $this (ref null $rawtype.RawType.RawSubclass))
  (local.set $this (ref.cast (ref $rawtype.RawType.RawSubclass) (local.get $this.untyped)))
  (block
@@ -677,20 +583,14 @@
 
 ;;; void RawSubclass.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.RawSubclass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (if (global.get $$class-initialized@rawtype.RawType.RawSubclass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (global.set $$class-initialized@rawtype.RawType.RawSubclass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (call $$clinit__void_<once>_@java.lang.Object )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:51:15
   (call $$clinit__void_<once>_@rawtype.RawType.GenericSuperclass )
  )
 )
@@ -725,16 +625,11 @@
 ;;; RawUnboundChild RawUnboundChild.$create()
 (func $$create__@rawtype.RawType.RawUnboundChild
  (result (ref null $rawtype.RawType.RawUnboundChild))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
  (local $$instance (ref null $rawtype.RawType.RawUnboundChild))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (call $$clinit__void_<once>_@rawtype.RawType.RawUnboundChild )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (local.set $$instance (struct.new $rawtype.RawType.RawUnboundChild (global.get $rawtype.RawType.RawUnboundChild.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (call $$ctor__void_$p_rawtype_RawType_RawUnboundChild@rawtype.RawType.RawUnboundChild (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (return (local.get $$instance))
  )
 )
@@ -742,9 +637,7 @@
 ;;; void RawUnboundChild.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_RawUnboundChild@rawtype.RawType.RawUnboundChild
  (param $this (ref null $rawtype.RawType.RawUnboundChild))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (call $$ctor__void_$p_rawtype_RawType_Unbound@rawtype.RawType.Unbound (ref.as_non_null (local.get $this)))
  )
 )
@@ -755,11 +648,9 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:42:11
  (local $this (ref null $rawtype.RawType.RawUnboundChild))
  (local.set $this (ref.cast (ref $rawtype.RawType.RawUnboundChild) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:43:6
   (return (call $m_method__java_lang_Object__java_lang_Object_$pp_rawtype@rawtype.RawType.Unbound (ref.as_non_null (local.get $this))(local.get $o)))
  )
 )
@@ -767,18 +658,13 @@
 
 ;;; void RawUnboundChild.$clinit()
 (func $$clinit__void_<once>_@rawtype.RawType.RawUnboundChild
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (if (global.get $$class-initialized@rawtype.RawType.RawUnboundChild)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (global.set $$class-initialized@rawtype.RawType.RawUnboundChild (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/rawtype/readable-j2wasm.js/rawtype/RawType.java:40:15
   (call $$clinit__void_<once>_@rawtype.RawType.Unbound )
  )
 )

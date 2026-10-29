@@ -18,16 +18,11 @@
 ;;; InstanceInitializers InstanceInitializers.$create()
 (func $$create__@instanceinitializers.InstanceInitializers
  (result (ref null $instanceinitializers.InstanceInitializers))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
  (local $$instance (ref null $instanceinitializers.InstanceInitializers))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (call $$clinit__void_<once>_@instanceinitializers.InstanceInitializers )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (local.set $$instance (struct.new $instanceinitializers.InstanceInitializers (global.get $instanceinitializers.InstanceInitializers.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (call $$ctor__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -35,11 +30,8 @@
 ;;; void InstanceInitializers.$ctor()
 (func $$ctor__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers
  (param $this (ref null $instanceinitializers.InstanceInitializers))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (call $$init__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers (ref.as_non_null (local.get $this)))
  )
 )
@@ -47,29 +39,21 @@
 ;;; void InstanceInitializers.$init()
 (func $$init__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers
  (param $this (ref null $instanceinitializers.InstanceInitializers))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:19:13
   (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers (local.get $this) (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:22:4
   (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers (local.get $this) (i32.const 2))
  )
 )
 
 ;;; void InstanceInitializers.$clinit()
 (func $$clinit__void_<once>_@instanceinitializers.InstanceInitializers
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (if (global.get $$class-initialized@instanceinitializers.InstanceInitializers)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (global.set $$class-initialized@instanceinitializers.InstanceInitializers (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/instanceinitializers/readable-j2wasm.js/instanceinitializers/InstanceInitializers.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

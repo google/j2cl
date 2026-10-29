@@ -18,16 +18,11 @@
 ;;; SuperCallDefault SuperCallDefault.$create()
 (func $$create__@supercalldefault.SuperCallDefault
  (result (ref null $supercalldefault.SuperCallDefault))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
  (local $$instance (ref null $supercalldefault.SuperCallDefault))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
   (call $$clinit__void_<once>_@supercalldefault.SuperCallDefault )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
   (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (global.get $supercalldefault.SuperCallDefault.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
   (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
   (return (local.get $$instance))
  )
 )
@@ -35,27 +30,20 @@
 ;;; void SuperCallDefault.$ctor()
 (func $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault
  (param $this (ref null $supercalldefault.SuperCallDefault))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:19:9
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:20:4
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SuperCallDefault.$clinit()
 (func $$clinit__void_<once>_@supercalldefault.SuperCallDefault
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
   (if (global.get $$class-initialized@supercalldefault.SuperCallDefault)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
   (global.set $$class-initialized@supercalldefault.SuperCallDefault (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/supercalldefault/readable-j2wasm.js/supercalldefault/SuperCallDefault.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )

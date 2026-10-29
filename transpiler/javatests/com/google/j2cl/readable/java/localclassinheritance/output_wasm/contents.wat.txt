@@ -95,16 +95,11 @@
 ;;; LocalClassInheritance LocalClassInheritance.$create()
 (func $$create__@localclassinheritance.LocalClassInheritance
  (result (ref null $localclassinheritance.LocalClassInheritance))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
  (local $$instance (ref null $localclassinheritance.LocalClassInheritance))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (local.set $$instance (struct.new $localclassinheritance.LocalClassInheritance (global.get $localclassinheritance.LocalClassInheritance.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (call $$ctor__void_$p_localclassinheritance_LocalClassInheritance@localclassinheritance.LocalClassInheritance (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (return (local.get $$instance))
  )
 )
@@ -112,9 +107,7 @@
 ;;; void LocalClassInheritance.$ctor()
 (func $$ctor__void_$p_localclassinheritance_LocalClassInheritance@localclassinheritance.LocalClassInheritance
  (param $this (ref null $localclassinheritance.LocalClassInheritance))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -123,12 +116,10 @@
 (func $m_test__void@localclassinheritance.LocalClassInheritance
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:19:14
  (local $f i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:20:4
   (local.set $f (i32.const 1))
  )
 )
@@ -139,7 +130,6 @@
  (type $function.m_testCapturesWithTheSameName__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:33:14
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance) (local.get $this.untyped)))
  (block
@@ -149,18 +139,13 @@
 
 ;;; void LocalClassInheritance.$clinit()
 (func $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (if (global.get $$class-initialized@localclassinheritance.LocalClassInheritance)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (global.set $$class-initialized@localclassinheritance.LocalClassInheritance (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:18:13
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -197,16 +182,11 @@
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_f i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.1Parent))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
  (local $$instance (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Parent )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (local.set $$instance (struct.new $localclassinheritance.LocalClassInheritance.1Parent (global.get $localclassinheritance.LocalClassInheritance.1Parent.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_1Parent@localclassinheritance.LocalClassInheritance.1Parent (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_f))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (return (local.get $$instance))
  )
 )
@@ -216,13 +196,9 @@
  (param $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_f i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$outer_this@localclassinheritance.LocalClassInheritance.1Parent (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:20:14
   (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$captured_f@localclassinheritance.LocalClassInheritance.1Parent (local.get $this) (local.get $$captured_f))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -231,12 +207,10 @@
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent
  (type $function.m_n__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:22:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Parent) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:23:8
   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $$captured_f@localclassinheritance.LocalClassInheritance.1Parent (local.get $this)))
  )
 )
@@ -244,18 +218,13 @@
 
 ;;; void Parent.$clinit()
 (func $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Parent
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (if (global.get $$class-initialized@localclassinheritance.LocalClassInheritance.1Parent)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (global.set $$class-initialized@localclassinheritance.LocalClassInheritance.1Parent (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:21:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -292,16 +261,11 @@
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_x i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.2Parent))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
  (local $$instance (ref null $localclassinheritance.LocalClassInheritance.2Parent))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.2Parent )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (local.set $$instance (struct.new $localclassinheritance.LocalClassInheritance.2Parent (global.get $localclassinheritance.LocalClassInheritance.2Parent.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_2Parent@localclassinheritance.LocalClassInheritance.2Parent (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_x))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (return (local.get $$instance))
  )
 )
@@ -311,13 +275,9 @@
  (param $this (ref null $localclassinheritance.LocalClassInheritance.2Parent))
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (struct.set $localclassinheritance.LocalClassInheritance.2Parent $$outer_this@localclassinheritance.LocalClassInheritance.2Parent (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:33:46
   (struct.set $localclassinheritance.LocalClassInheritance.2Parent $$captured_x@localclassinheritance.LocalClassInheritance.2Parent (local.get $this) (local.get $$captured_x))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -326,12 +286,10 @@
 (func $m_n__void@localclassinheritance.LocalClassInheritance.2Parent
  (type $function.m_n__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:35:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.2Parent))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.2Parent) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:36:8
   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.2Parent $$captured_x@localclassinheritance.LocalClassInheritance.2Parent (local.get $this)))
  )
 )
@@ -339,18 +297,13 @@
 
 ;;; void Parent.$clinit()
 (func $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.2Parent
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (if (global.get $$class-initialized@localclassinheritance.LocalClassInheritance.2Parent)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (global.set $$class-initialized@localclassinheritance.LocalClassInheritance.2Parent (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:34:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -387,16 +340,11 @@
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_x i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.1Outer))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
  (local $$instance (ref null $localclassinheritance.LocalClassInheritance.1Outer))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Outer )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (local.set $$instance (struct.new $localclassinheritance.LocalClassInheritance.1Outer (global.get $localclassinheritance.LocalClassInheritance.1Outer.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_1Outer@localclassinheritance.LocalClassInheritance.1Outer (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_x))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (return (local.get $$instance))
  )
 )
@@ -406,13 +354,9 @@
  (param $this (ref null $localclassinheritance.LocalClassInheritance.1Outer))
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (struct.set $localclassinheritance.LocalClassInheritance.1Outer $$outer_this@localclassinheritance.LocalClassInheritance.1Outer (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:33:46
   (struct.set $localclassinheritance.LocalClassInheritance.1Outer $$captured_x@localclassinheritance.LocalClassInheritance.1Outer (local.get $this) (local.get $$captured_x))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -422,7 +366,6 @@
  (type $function.m_m__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $x i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:40:18
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Outer))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Outer) (local.get $this.untyped)))
  (block
@@ -432,18 +375,13 @@
 
 ;;; void Outer.$clinit()
 (func $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Outer
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (if (global.get $$class-initialized@localclassinheritance.LocalClassInheritance.1Outer)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (global.set $$class-initialized@localclassinheritance.LocalClassInheritance.1Outer (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:39:10
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -480,16 +418,11 @@
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_f i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.1Child))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
  (local $$instance (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Child )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (local.set $$instance (struct.new $localclassinheritance.LocalClassInheritance.1Child (global.get $localclassinheritance.LocalClassInheritance.1Child.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_1Child@localclassinheritance.LocalClassInheritance.1Child (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_f))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (return (local.get $$instance))
  )
 )
@@ -499,13 +432,9 @@
  (param $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_f i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (struct.set $localclassinheritance.LocalClassInheritance.1Child $$outer_this@localclassinheritance.LocalClassInheritance.1Child (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:20:14
   (struct.set $localclassinheritance.LocalClassInheritance.1Child $$captured_f@localclassinheritance.LocalClassInheritance.1Child (local.get $this) (local.get $$captured_f))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_1Parent@localclassinheritance.LocalClassInheritance.1Parent (ref.as_non_null (local.get $this))(local.get $$outer_this)(local.get $$captured_f))
  )
 )
@@ -514,12 +443,10 @@
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Child
  (type $function.m_n__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:27:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Child) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:28:8
   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $$captured_f@localclassinheritance.LocalClassInheritance.1Child (local.get $this)))
  )
 )
@@ -527,18 +454,13 @@
 
 ;;; void Child.$clinit()
 (func $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Child
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (if (global.get $$class-initialized@localclassinheritance.LocalClassInheritance.1Child)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (global.set $$class-initialized@localclassinheritance.LocalClassInheritance.1Child (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:26:10
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Parent )
  )
 )
@@ -576,16 +498,11 @@
  (param $$captured_x i32)
  (param $$captured_x$1 i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.1Outer.1Child))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
  (local $$instance (ref null $localclassinheritance.LocalClassInheritance.1Outer.1Child))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Outer.1Child )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (local.set $$instance (struct.new $localclassinheritance.LocalClassInheritance.1Outer.1Child (global.get $localclassinheritance.LocalClassInheritance.1Outer.1Child.vtable) (global.get $itable.empty) (i32.const 0) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance.1Outer)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (call $$ctor__localclassinheritance_LocalClassInheritance_1Outer__int__int__void_$p_localclassinheritance_LocalClassInheritance_1Outer_1Child@localclassinheritance.LocalClassInheritance.1Outer.1Child (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_x)(local.get $$captured_x$1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (return (local.get $$instance))
  )
 )
@@ -596,15 +513,10 @@
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance.1Outer))
  (param $$captured_x i32)
  (param $$captured_x$1 i32)
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (struct.set $localclassinheritance.LocalClassInheritance.1Outer.1Child $$outer_this@localclassinheritance.LocalClassInheritance.1Outer.1Child (local.get $this) (local.get $$outer_this))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:40:24
   (struct.set $localclassinheritance.LocalClassInheritance.1Outer.1Child $$captured_x@localclassinheritance.LocalClassInheritance.1Outer.1Child (local.get $this) (local.get $$captured_x))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:33:46
   (struct.set $localclassinheritance.LocalClassInheritance.1Outer.1Child $$captured_x$1@localclassinheritance.LocalClassInheritance.1Outer.1Child (local.get $this) (local.get $$captured_x$1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_2Parent@localclassinheritance.LocalClassInheritance.2Parent (ref.as_non_null (local.get $this))(struct.get $localclassinheritance.LocalClassInheritance.1Outer $$outer_this@localclassinheritance.LocalClassInheritance.1Outer (local.get $$outer_this))(local.get $$captured_x$1))
  )
 )
@@ -613,12 +525,10 @@
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Outer.1Child
  (type $function.m_n__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:44:22
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Outer.1Child))
  (local.set $this (ref.cast (ref $localclassinheritance.LocalClassInheritance.1Outer.1Child) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:45:12
   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Outer.1Child $$captured_x@localclassinheritance.LocalClassInheritance.1Outer.1Child (local.get $this)))
  )
 )
@@ -626,18 +536,13 @@
 
 ;;; void Child.$clinit()
 (func $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.1Outer.1Child
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (if (global.get $$class-initialized@localclassinheritance.LocalClassInheritance.1Outer.1Child)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (global.set $$class-initialized@localclassinheritance.LocalClassInheritance.1Outer.1Child (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/localclassinheritance/readable-j2wasm.js/localclassinheritance/LocalClassInheritance.java:43:14
   (call $$clinit__void_<once>_@localclassinheritance.LocalClassInheritance.2Parent )
  )
 )

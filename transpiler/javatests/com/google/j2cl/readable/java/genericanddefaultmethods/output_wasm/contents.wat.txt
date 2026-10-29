@@ -47,16 +47,13 @@
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.InterfaceWithDefault
  (param $this (ref null $java.lang.Object))
  (param $value (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:19:15
  (local $$qualifier (ref null $java.io.PrintStream))
  (block
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:20:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
     (call $$clinit__void_<once>_@java.lang.System )
     (global.get $out@java.lang.System)
    ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:20:4
    (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $$getString_|in_Interface...|__java_lang_String_<once>_@genericanddefaultmethods.InterfaceWithDefault.$StringLiterals )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
@@ -65,16 +62,12 @@
 
 ;;; void InterfaceWithDefault.$clinit()
 (func $$clinit__void_<once>_@genericanddefaultmethods.InterfaceWithDefault
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:18:10
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:18:10
   (if (global.get $$class-initialized@genericanddefaultmethods.InterfaceWithDefault)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:18:10
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:18:10
   (global.set $$class-initialized@genericanddefaultmethods.InterfaceWithDefault (i32.const 1))
  )
 )
@@ -96,16 +89,11 @@
 ;;; GenericClass<T> GenericClass.$create()
 (func $$create__@genericanddefaultmethods.GenericClass
  (result (ref null $genericanddefaultmethods.GenericClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
  (local $$instance (ref null $genericanddefaultmethods.GenericClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void_<once>_@genericanddefaultmethods.GenericClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (global.get $genericanddefaultmethods.GenericClass.vtable) (global.get $itable.empty) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (return (local.get $$instance))
  )
 )
@@ -113,9 +101,7 @@
 ;;; void GenericClass.$ctor()
 (func $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass
  (param $this (ref null $genericanddefaultmethods.GenericClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -125,18 +111,15 @@
  (type $function.m_foo__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $value (ref null $java.lang.Object))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:25:14
  (local $$qualifier (ref null $java.io.PrintStream))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
  (local.set $this (ref.cast (ref $genericanddefaultmethods.GenericClass) (local.get $this.untyped)))
  (block
   (block
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:26:4
    (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
     (call $$clinit__void_<once>_@java.lang.System )
     (global.get $out@java.lang.System)
    ))
-   ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:26:4
    (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $$getString_|in_GenericClass|__java_lang_String_<once>_@genericanddefaultmethods.GenericClass.$StringLiterals )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
@@ -145,18 +128,13 @@
 
 ;;; void GenericClass.$clinit()
 (func $$clinit__void_<once>_@genericanddefaultmethods.GenericClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (if (global.get $$class-initialized@genericanddefaultmethods.GenericClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (global.set $$class-initialized@genericanddefaultmethods.GenericClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void_<once>_@java.lang.Object )
  )
 )
@@ -191,16 +169,11 @@
 ;;; ConcreteClass ConcreteClass.$create()
 (func $$create__@genericanddefaultmethods.ConcreteClass
  (result (ref null $genericanddefaultmethods.ConcreteClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
  (local $$instance (ref null $genericanddefaultmethods.ConcreteClass))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void_<once>_@genericanddefaultmethods.ConcreteClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (global.get $genericanddefaultmethods.ConcreteClass.vtable) (global.get $genericanddefaultmethods.ConcreteClass.itable) (i32.const 0)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (ref.as_non_null (local.get $$instance)))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (return (local.get $$instance))
  )
 )
@@ -208,9 +181,7 @@
 ;;; void ConcreteClass.$ctor()
 (func $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass
  (param $this (ref null $genericanddefaultmethods.ConcreteClass))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this)))
  )
 )
@@ -220,11 +191,9 @@
  (type $function.m_foo__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $value (ref null $java.lang.String))
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast (ref $genericanddefaultmethods.ConcreteClass) (local.get $this.untyped)))
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this))(local.get $value))
  )
 )
@@ -232,20 +201,14 @@
 
 ;;; void ConcreteClass.$clinit()
 (func $$clinit__void_<once>_@genericanddefaultmethods.ConcreteClass
- ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (if (global.get $$class-initialized@genericanddefaultmethods.ConcreteClass)
    (then
-    ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
     (return )
    )
   )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (global.set $$class-initialized@genericanddefaultmethods.ConcreteClass (i32.const 1))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void_<once>_@genericanddefaultmethods.GenericClass )
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/genericanddefaultmethods/readable-j2wasm.js/genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void_<once>_@genericanddefaultmethods.InterfaceWithDefault )
  )
 )

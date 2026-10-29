@@ -316,6 +316,8 @@ def _golden_output_impl(ctx):
             "cd ${OUTPUT}",
             # We don't want to copy .java/.kt and .map files to the final output.
             "find \\( %s \\) -exec rm {} \\;" % exclusion_filter,
+            # Strip source mapping comments from .wat files.
+            "find -name '*.wat' -exec sed -i '/^[[:space:]]*;;@/d' {} +",
             # Rename files without .txt extension to => {file}.txt
             "find -type f -not -name '*.txt' -exec mv {} {}.txt \\;",
             # Normalize the path relative to readable_name to avoid extra dirs.
