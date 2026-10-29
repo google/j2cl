@@ -27,8 +27,10 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotationName
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.assignment
+import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.emptyIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.source
 
@@ -78,6 +80,27 @@ internal data class AnnotationSources(val nameSources: NameSources) {
 
   fun volatileAnnotationSource(): Source =
     annotation(nameSources.topLevelQualifiedNameSource("kotlin.concurrent.Volatile"))
+
+  fun suppressAnnotationSource(
+    hasAnnotations: HasAnnotations,
+    additionalSuppressions: List<String> = emptyList(),
+  ): Source =
+    suppressAnnotationSource(
+      buildList {
+        addAll(additionalSuppressions)
+        if (hasAnnotations.hasSuppressionAnnotation("unusable-by-js")) {
+          add("unusable-by-js")
+        }
+      }
+    )
+
+  private fun suppressAnnotationSource(suppressions: List<String>): Source =
+    emptyIf(suppressions.isEmpty()) {
+      annotation(
+        nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
+        suppressions.map { literal(it) },
+      )
+    }
 
   // TODO(b/444430700): Filter default values when they are supported.
   private fun Annotation.singleValueOrNull(): AnnotationValue? =

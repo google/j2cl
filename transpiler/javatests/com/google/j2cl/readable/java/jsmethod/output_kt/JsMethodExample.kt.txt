@@ -137,15 +137,17 @@ open class JsMethodExample {
  }
  
  @JsType(namespace = "jsmethod")
+ @Suppress("unusable-by-js")
  internal open class Foo internal constructor() {
   open fun takesAndReturnsPrimitiveLong(l: Long): Long = l
  }
  
  internal open class ExposesMethodWithDifferentTypes<T> internal constructor() {
   @JsMethod
-  open fun m(s: String?, d: Double?, l: Long?, pl: Long, c: Comparable<Any>?, o: Any?, t: T, nf: NativeFoo?, e: ExposesMethodWithDifferentTypes<T>?) {}
+  open fun m(s: String?, d: Double?, l: Long?, pl: Long, @Suppress("unusable-by-js") c: Comparable<Any>?, o: Any?, t: T, nf: NativeFoo?, e: ExposesMethodWithDifferentTypes<T>?) {}
   
   @JsMethod
+  @Suppress("unusable-by-js")
   open fun roundtripLong(l: Long): Long = l
   
   @JsMethod

@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.MethodLike
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.backend.kotlin.AnnotationSources.Companion.annotationTargetSource
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.COMPANION_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.CONST_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.GET_KEYWORD
@@ -179,6 +178,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
         ),
         objCNameSources.objCAnnotationSource(actualMemberDescriptor),
         jsInteropAnnotationSources.jsInteropAnnotationsSource(fieldDescriptor),
+        annotationSources.suppressAnnotationSource(fieldDescriptor),
         spaceSeparated(
           memberDescriptorSources.visibilityModifierSource(actualMemberDescriptor),
           Source.emptyUnless(isConst) { CONST_KEYWORD },
@@ -307,19 +307,19 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
       jsInteropAnnotationSources.jsInteropAnnotationsSource(method.descriptor),
       memberDescriptorSources.jvmThrowsAnnotationSource(method.descriptor),
       memberDescriptorSources.nativeThrowsAnnotationSource(method.descriptor),
-      suppressNothingToOverrideSource(method),
+      suppressAnnotationSource(method),
     )
 
-  private fun suppressNothingToOverrideSource(method: Method): Source =
-    Source.emptyUnless(method.hasSuppressNothingToOverrideAnnotation()) {
-      return annotation(
-        annotationName(
-          annotationTargetSource(method.descriptor),
-          memberDescriptorSources.nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
-        ),
-        KotlinSource.literal("NOTHING_TO_OVERRIDE"),
-      )
-    }
+  private fun suppressAnnotationSource(method: Method): Source =
+    annotationSources.suppressAnnotationSource(
+      method.descriptor,
+      additionalSuppressions =
+        buildList {
+          if (method.hasSuppressNothingToOverrideAnnotation()) {
+            add("NOTHING_TO_OVERRIDE")
+          }
+        },
+    )
 
   fun methodParametersSource(method: MethodLike): Source {
     val methodDescriptor = method.descriptor
@@ -355,6 +355,7 @@ internal data class MemberSources(val nameSources: NameSources, val enclosingTyp
           nameSources.topLevelQualifiedNameSource("javaemul.internal.annotations.DoNotAutobox")
         )
       },
+      annotationSources.suppressAnnotationSource(parameterDescriptor),
       Source.emptyUnless(parameterDescriptor.isVarargs) { VARARG_KEYWORD },
       colonSeparated(nameSource, nameSources.typeDescriptorSource(typeDescriptor)),
     )

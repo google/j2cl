@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangRecord
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.INTERFACE_KEYWORD
 import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.annotation
-import com.google.j2cl.transpiler.backend.kotlin.KotlinSource.literal
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.Source.Companion.afterSpace
@@ -61,6 +60,9 @@ internal data class TypeSources(val nameSources: NameSources) {
   private fun expressionSources(type: Type): ExpressionSources =
     ExpressionSources(nameSources.plusLocalNames(type), type)
 
+  private val annotationSources: AnnotationSources
+    get() = AnnotationSources(nameSources)
+
   private val jsInteropAnnotationSources: JsInteropAnnotationSources
     get() = JsInteropAnnotationSources(nameSources)
 
@@ -80,7 +82,7 @@ internal data class TypeSources(val nameSources: NameSources) {
             jsInteropAnnotationSources.jsInteropAnnotationsSource(typeDeclaration),
             autoValueAnnotationsSource(typeDeclaration),
             jvmRecordAnnotationSource(typeDeclaration),
-            suppressIncompatibleObjCNameOverrideSource(type),
+            suppressAnnotationSource(type),
             spaceSeparated(
               visibilityModifierSource(typeDeclaration),
               inheritanceModifierSource(typeDeclaration),
@@ -216,13 +218,16 @@ internal data class TypeSources(val nameSources: NameSources) {
       else -> Source.EMPTY
     }
 
-  private fun suppressIncompatibleObjCNameOverrideSource(type: Type): Source =
-    Source.emptyUnless(type.needsIncompatibleObjCNameOverrideSuppression) {
-      annotation(
-        nameSources.topLevelQualifiedNameSource("kotlin.Suppress"),
-        literal("INCOMPATIBLE_OBJC_NAME_OVERRIDE"),
-      )
-    }
+  private fun suppressAnnotationSource(type: Type): Source =
+    annotationSources.suppressAnnotationSource(
+      type.declaration,
+      additionalSuppressions =
+        buildList {
+          if (type.needsIncompatibleObjCNameOverrideSuppression) {
+            add("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+          }
+        },
+    )
 
   private fun jvmRecordAnnotationSource(typeDeclaration: TypeDeclaration): Source =
     Source.emptyUnless(typeDeclaration.isJvmRecord) {

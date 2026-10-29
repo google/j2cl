@@ -74,7 +74,11 @@ public interface HasAnnotations {
     };
   }
 
-  private boolean hasSuppressionAnnotation(String suppression) {
+  /**
+   * Returns whether this declaration is directly annotated with a suppression annotation for the
+   * given warning.
+   */
+  default boolean hasSuppressionAnnotation(String suppression) {
     return hasSuppressionAnnotation("java.lang.SuppressWarnings", "value", suppression)
         || hasSuppressionAnnotation("kotlin.Suppress", "names", suppression);
   }

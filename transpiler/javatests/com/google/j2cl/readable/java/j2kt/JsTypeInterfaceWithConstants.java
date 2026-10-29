@@ -22,5 +22,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public interface JsTypeInterfaceWithConstants {
   String compileTimeConstant = "constant";
+
+  @SuppressWarnings("unusable-by-js")
   Object nonCompileTimeConstant = "non-constant";
 }

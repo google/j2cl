@@ -32,6 +32,7 @@ interface JsTypeInterfaceWithConstants {
   val compileTimeConstant: String = "constant"
   
   @JvmField
+  @Suppress("unusable-by-js")
   val nonCompileTimeConstant: Any = "non-constant"
  }
 }

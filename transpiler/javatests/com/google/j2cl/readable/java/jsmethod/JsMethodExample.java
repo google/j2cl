@@ -130,6 +130,7 @@ public class JsMethodExample {
   }
 
   @JsType(namespace = "jsmethod")
+  @SuppressWarnings("unusable-by-js")
   static class Foo {
     public long takesAndReturnsPrimitiveLong(long l) {
       return l;
@@ -143,13 +144,14 @@ public class JsMethodExample {
         Double d,
         Long l,
         long pl,
-        Comparable c,
+        @SuppressWarnings("unusable-by-js") Comparable c,
         Object o,
         T t,
         NativeFoo nf,
         ExposesMethodWithDifferentTypes<T> e) {}
 
     @JsMethod
+    @SuppressWarnings("unusable-by-js")
     public long roundtripLong(long l) {
       return l;
     }
