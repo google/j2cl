@@ -143,9 +143,13 @@ public class Main {
 
     Object o = intJsEnum;
     intJsEnum = (IntJsEnum) o;
+    intJsEnum = (IntJsEnum) null;
+    o = (IntJsEnum) null;
 
     // No boxing here.
     boolean equal = intJsEnum == IntJsEnum.TWENTY;
+    equal = intJsEnum == null;
+    equal = null != intJsEnum;
     boolean isInstance = intJsEnum instanceof IntJsEnum;
 
     isInstance = intJsEnum instanceof Comparable;

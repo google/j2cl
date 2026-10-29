@@ -164,7 +164,7 @@ public class SwitchPatterns {
     }
 
     // JsEnum switch. Case null that is not a default case.
-    Digit digit = null;
+    Digit digit = Digit.ZERO;
     switch (digit) {
       case ZERO:
         fail();

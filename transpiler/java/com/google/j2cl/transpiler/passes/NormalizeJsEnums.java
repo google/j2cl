@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -159,14 +160,14 @@ public class NormalizeJsEnums extends NormalizationPass {
             String targetSignature = methodDescriptor.getDeclarationDescriptor().getSignature();
             if (targetSignature.equals("equals(java.lang.Object)")) {
               Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
-              if (canAvoidBoxing(qualifierTypeDescriptor, argument.getTypeDescriptor())) {
+              if (canAvoidBoxing(qualifierTypeDescriptor, argument)) {
                 return RuntimeMethods.createEnumsEqualsMethodCall(qualifier, argument);
               }
             }
 
             if (targetSignature.equals("compareTo(java.lang.Enum)")) {
               Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
-              if (canAvoidBoxing(qualifierTypeDescriptor, argument.getTypeDescriptor())) {
+              if (canAvoidBoxing(qualifierTypeDescriptor, argument)) {
                 return RuntimeMethods.createEnumsCompareToMethodCall(qualifier, argument);
               }
 
@@ -203,13 +204,14 @@ public class NormalizeJsEnums extends NormalizationPass {
   }
 
   private static boolean canAvoidBoxing(
-      TypeDescriptor qualifierTypeDescriptor, TypeDescriptor argumentTypeDescriptor) {
+      TypeDescriptor qualifierTypeDescriptor, Expression argument) {
     // Use a non boxing version of equals, compareTo when comparing two non-native JsEnums of the
-    // same type.
+    // same type, or a non-native JsEnum with null.
     // We don't do this for native JsEnums because they are generally not boxed here and this allows
     // us to specialize the code for non-native JsEnums to avoid a trampoline.
     return AstUtils.isNonNativeJsEnum(qualifierTypeDescriptor)
-        && argumentTypeDescriptor.hasSameRawType(qualifierTypeDescriptor);
+        && (argument instanceof NullLiteral
+            || argument.getTypeDescriptor().hasSameRawType(qualifierTypeDescriptor));
   }
 
   private static MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {

@@ -8,14 +8,11 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
-let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
-let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $1R = goog.forwardDeclare('switchpatterns.SwitchPatterns.$1R$impl');
 let Color = goog.forwardDeclare('switchpatterns.SwitchPatterns.Color$impl');
 let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
-let $Overlay = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
 let Sealed = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed$impl');
 let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
 let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
@@ -279,7 +276,7 @@ class SwitchPatterns extends j_l_Object {
    default:
     break;
   }
-  let digit = /**@type {?Digit}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, $Overlay));
+  let digit = Digit.ZERO;
   switch ($Util.$coerceToNull(digit)) {
    case Digit.ZERO:
     SwitchPatterns.m_fail__void();
@@ -328,13 +325,11 @@ class SwitchPatterns extends j_l_Object {
   Number = goog.module.get('java.lang.Number$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   Objects = goog.module.get('java.util.Objects$impl');
-  Enums = goog.module.get('javaemul.internal.Enums$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $1R = goog.module.get('switchpatterns.SwitchPatterns.$1R$impl');
   Color = goog.module.get('switchpatterns.SwitchPatterns.Color$impl');
   Digit = goog.module.get('switchpatterns.SwitchPatterns.Digit$impl');
-  $Overlay = goog.module.get('switchpatterns.SwitchPatterns.Digit.$Overlay$impl');
   A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
   B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
  }

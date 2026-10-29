@@ -65,7 +65,7 @@ class MainKt extends j_l_Object {
  /** @nodts */
  static m_testJsEnumSwitch__void() {
   MainKt.$clinit();
-  let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_ComparableJsEnum__int(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, $Overlay));
+  let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_ComparableJsEnum__int(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : null;
   let tmp0_subject = comparableJsEnum;
   switch (tmp0_subject) {
    case ComparableJsEnum.TWO:
@@ -79,7 +79,7 @@ class MainKt extends j_l_Object {
   }
   let comparable = /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(comparableJsEnum, $Overlay));
   comparableJsEnum = (/**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(comparable), $Overlay)));
-  let intJsEnum = IntJsEnum_$Overlay.m_getValue__$devirt__jsenum_IntJsEnum__int(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : /**@type {?IntJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, IntJsEnum_$Overlay));
+  let intJsEnum = IntJsEnum_$Overlay.m_getValue__$devirt__jsenum_IntJsEnum__int(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : null;
   let tmp1_subject = intJsEnum;
   switch (tmp1_subject) {
    case IntJsEnum.TWENTY:
@@ -93,10 +93,14 @@ class MainKt extends j_l_Object {
   }
   let o = /**@type {BoxedLightEnum<?IntJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(intJsEnum, IntJsEnum_$Overlay));
   intJsEnum = (/**@type {!IntJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), IntJsEnum_$Overlay)));
+  let /** ?IntJsEnum */ nullableIntJsEnum = null;
+  let /** * */ nullableAny = null;
   let equal = $Equality.$same(intJsEnum, IntJsEnum.TWENTY);
-  let isInstance = !$Equality.$same(/**@type {BoxedLightEnum<?IntJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(intJsEnum, IntJsEnum_$Overlay)), null);
+  let isInstance = !$Equality.$same(intJsEnum, null);
   isInstance = Comparable.$isInstance(/**@type {BoxedLightEnum<?IntJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(intJsEnum, IntJsEnum_$Overlay)));
-  let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_StringJsEnum__java_lang_String(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, StringJsEnum_$Overlay));
+  let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_StringJsEnum__java_lang_String(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : null;
+  let isNull = $Equality.$same(stringJsEnum, null);
+  isNull = !$Equality.$same(null, stringJsEnum);
   let tmp2_subject = stringJsEnum;
   switch (tmp2_subject) {
    case StringJsEnum.ONE:
@@ -158,14 +162,14 @@ class MainKt extends j_l_Object {
  static m_testJsEnumAutoboxingSpecialMethods__void() {
   MainKt.$clinit();
   let stringJsEnum = StringJsEnum.ONE;
-  let nullStringJsEnum = /**@type {?StringJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, StringJsEnum_$Overlay));
+  let /** ?StringJsEnum */ nullStringJsEnum = null;
   let jsEnum = ComparableJsEnum.ONE;
-  let nullJsEnum = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, $Overlay));
+  let /** ?ComparableJsEnum */ nullJsEnum = null;
   let o = /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay));
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(StringJsEnum.ONE, StringJsEnum.THREE);
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(StringJsEnum.ONE, stringJsEnum);
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(StringJsEnum.ONE, nullStringJsEnum);
-  $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {BoxedLightEnum<!StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(StringJsEnum.ONE, StringJsEnum_$Overlay)), null);
+  Enums.m_equals__java_lang_Object__java_lang_Object__boolean(StringJsEnum.ONE, null);
   $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {BoxedLightEnum<!StringJsEnum>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(StringJsEnum.ONE, StringJsEnum_$Overlay)), o);
   let tmp0_safe_receiver = o;
   if ($Equality.$same(tmp0_safe_receiver, null)) {} else {
@@ -175,7 +179,7 @@ class MainKt extends j_l_Object {
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(ComparableJsEnum.ONE, ComparableJsEnum.ZERO);
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(ComparableJsEnum.ONE, jsEnum);
   Enums.m_equals__java_lang_Object__java_lang_Object__boolean(ComparableJsEnum.ONE, nullJsEnum);
-  $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay)), null);
+  Enums.m_equals__java_lang_Object__java_lang_Object__boolean(ComparableJsEnum.ONE, null);
   $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay)), o);
   let tmp1_safe_receiver = o;
   if ($Equality.$same(tmp1_safe_receiver, null)) {} else {
@@ -219,7 +223,7 @@ class MainKt extends j_l_Object {
  /** @nodts @return {?ComparableJsEnum} */
  static m_returnsNullJsEnum__jsenum_ComparableJsEnum() {
   MainKt.$clinit();
-  return /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, $Overlay));
+  return null;
  }
  /** @nodts */
  static m_takesJsEnum__jsenum_ComparableJsEnum__void(/** !ComparableJsEnum */ value) {
@@ -265,8 +269,8 @@ class MainKt extends j_l_Object {
   $Arrays.$set(arr2, 1, IntJsEnum.TWENTY);
   let nestedArr = [[IntJsEnum.MINUSONE]];
   $Arrays.$set(nestedArr, 0, [IntJsEnum.TWENTY]);
-  let arrayWithNull = [/**@type {?IntJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, IntJsEnum_$Overlay))];
-  $Arrays.$set(arrayWithNull, 0, /**@type {?IntJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, IntJsEnum_$Overlay)));
+  let arrayWithNull = [null];
+  $Arrays.$set(arrayWithNull, 0, null);
   let list = /**@type {!ArrayList<!BoxedLightEnum<!IntJsEnum>>}*/ (ArrayList.$create__());
   obj = list.m_toArray__arrayOf_java_lang_Object();
   MainKt.m_nonNativeJsEnumVarargs__arrayOf_jsenum_IntJsEnum__void([IntJsEnum.MINUSONE, IntJsEnum.TWENTY]);
@@ -298,8 +302,8 @@ class MainKt extends j_l_Object {
   let arr2 = new Array(2);
   $Arrays.$set(arr2, 0, StringJsEnum.ONE);
   let nestedArr = [[StringJsEnum.ONE]];
-  let arrayWithNull = [/**@type {?StringJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, StringJsEnum_$Overlay))];
-  $Arrays.$set(arrayWithNull, 0, /**@type {?StringJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(null, StringJsEnum_$Overlay)));
+  let arrayWithNull = [null];
+  $Arrays.$set(arrayWithNull, 0, null);
  }
  /** @nodts */
  static m_testNativeJsEnumArrays__void() {

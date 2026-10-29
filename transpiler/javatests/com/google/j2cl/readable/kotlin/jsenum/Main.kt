@@ -108,6 +108,8 @@ fun testJsEnumSwitch() {
 
   val o: Any? = intJsEnum
   intJsEnum = o as IntJsEnum
+  var nullableIntJsEnum = null as IntJsEnum?
+  var nullableAny: Any? = null as IntJsEnum?
 
   // No boxing here.
   val equal = intJsEnum == IntJsEnum.TWENTY
@@ -116,6 +118,8 @@ fun testJsEnumSwitch() {
   isInstance = intJsEnum is Comparable<*>
 
   val stringJsEnum = if (StringJsEnum.ONE.getValue() == "10") StringJsEnum.THREE else null
+  var isNull = stringJsEnum == null
+  isNull = null != stringJsEnum
   when (stringJsEnum) {
     StringJsEnum.ONE -> {}
     else -> {}

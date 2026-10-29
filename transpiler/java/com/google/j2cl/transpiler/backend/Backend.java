@@ -340,6 +340,11 @@ public enum Backend {
           AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
 
+          // Make null literals have the type required by their use before coercions and
+          // conversions, so that they do not trigger unnecessary conversions, e.g. JsEnum
+          // unboxing.
+          NormalizeNullLiterals::new,
+
           // Runs before unboxing conversion.
           InsertStringConversions::new,
           InsertNarrowingReferenceConversions::new,

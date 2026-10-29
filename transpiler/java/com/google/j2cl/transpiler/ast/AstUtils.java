@@ -324,14 +324,17 @@ public final class AstUtils {
   /** JsEnum comparison context. */
   public static boolean matchesJsEnumBoxingConversionContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
+    Expression leftOperand = binaryExpression.getLeftOperand();
+    Expression rightOperand = binaryExpression.getRightOperand();
     // Use the declaration descriptor to ignore the specialization of type variables to JsEnums
     // to understand whether the (returned) enum was boxed or unboxed.
-    TypeDescriptor lhsTypeDescriptor =
-        binaryExpression.getLeftOperand().getDeclaredTypeDescriptor();
-    TypeDescriptor rhsTypeDescriptor =
-        binaryExpression.getRightOperand().getDeclaredTypeDescriptor();
+    TypeDescriptor lhsTypeDescriptor = leftOperand.getDeclaredTypeDescriptor();
+    TypeDescriptor rhsTypeDescriptor = rightOperand.getDeclaredTypeDescriptor();
 
     return operator.isRelationalOperator()
+        // Comparisons with null do not require boxing since null is the same boxed or unboxed.
+        && !(leftOperand instanceof NullLiteral)
+        && !(rightOperand instanceof NullLiteral)
         // Values of the same JsEnum are compared unboxed. Otherwise the JsEnum operands are boxed,
         // so that values of different JsEnums (which Kotlin allows to compare when they are typed
         // as type variables) are never equal.

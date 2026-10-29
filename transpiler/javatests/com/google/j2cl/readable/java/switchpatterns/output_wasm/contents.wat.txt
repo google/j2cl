@@ -1001,7 +1001,10 @@
    )
   )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:167:4
-  (local.set $digit (ref.null $switchpatterns.SwitchPatterns.Digit))
+  (local.set $digit (block (result (ref null $switchpatterns.SwitchPatterns.Digit))
+   (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Digit )
+   (global.get $ZERO@switchpatterns.SwitchPatterns.Digit)
+  ))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/switchpatterns/readable-j2wasm.js/switchpatterns/SwitchPatterns.java:168:4
   (block $SWITCH_3.BREAK
    (block

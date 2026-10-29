@@ -68,9 +68,13 @@ open class Main {
     IntJsEnum.TWENTY -> {}
     else -> {}
    }
-   val o: Any? = intJsEnum
+   var o: Any? = intJsEnum
    intJsEnum = o as IntJsEnum?
-   val equal: Boolean = intJsEnum === IntJsEnum.TWENTY
+   intJsEnum = null as IntJsEnum?
+   o = null as IntJsEnum?
+   var equal: Boolean = intJsEnum === IntJsEnum.TWENTY
+   equal = intJsEnum == null
+   equal = null != intJsEnum
    var isInstance: Boolean = intJsEnum is IntJsEnum
    isInstance = intJsEnum is Comparable<*>
    val stringJsEnum: StringJsEnum? = if (StringJsEnum.ONE.getValue() === "10") StringJsEnum.THREE else null

@@ -382,6 +382,12 @@ public class Main {
           PlainJsEnum nullJsEnum = null;
           nullJsEnum.compareTo(PlainJsEnum.ZERO);
         });
+    assertThrowsNullPointerException(
+        () -> {
+          PlainJsEnum nullJsEnum = null;
+          PlainJsEnum.ONE.compareTo(nullJsEnum);
+        });
+    assertThrowsNullPointerException(() -> PlainJsEnum.ONE.compareTo(null));
     assertThrowsClassCastException(
         () -> {
           Comparable comparable = PlainJsEnum.ONE;

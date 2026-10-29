@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
 
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NullLiteral;
@@ -41,17 +42,31 @@ public class NormalizeNullLiterals extends NormalizationPass {
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
                 if (expression instanceof NullLiteral) {
-                  if (isBoxableJsEnumType(inferredTypeDescriptor)) {
-                    // JsEnums types are removed, so this should be the boxed type. j.l.Object also
-                    // works because boxed js enum types are never explicitly referred to in method
-                    // signatures, and the only other types they can be passed as is Comparable and
-                    // Serializable which are interfaces and modeled in the backend as
-                    // java.lang.Object.
-                    return TypeDescriptors.get().javaLangObject.getDefaultValue();
+                  if (isBoxableJsEnumType(inferredTypeDescriptor)
+                      && !isBoxableJsEnumType(declaredTypeDescriptor)) {
+                    // If the declared type is not a JsEnum but the inferred type is, as in
+                    // listOfEnums.add(null), type it as j.l.Object (the direct superclass for a
+                    // boxed enum) to avoid inserting a redundant boxing conversion.
+                    return TypeDescriptors.get().javaLangObject.getNullValue();
                   }
-                  return inferredTypeDescriptor.getDefaultValue();
+                  // Declare the null literal to be the inferred type.
+                  // Note that it is typed as JsEnum if the declared type is a JsEnum to avoid
+                  // inserting a redundant unboxing conversion.
+                  return inferredTypeDescriptor.getNullValue();
                 }
                 return expression;
+              }
+
+              @Override
+              public Expression rewriteCastContext(CastExpression castExpression) {
+                TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+                if (castExpression.getExpression() instanceof NullLiteral
+                    && isBoxableJsEnumType(castTypeDescriptor)) {
+                  // Casting null always succeeds, replace the cast with a null literal of the
+                  // JsEnum type to avoid inserting a redundant unboxing conversion.
+                  return castTypeDescriptor.getNullValue();
+                }
+                return castExpression;
               }
             }));
   }
