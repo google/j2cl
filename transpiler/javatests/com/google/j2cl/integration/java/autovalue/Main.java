@@ -167,6 +167,8 @@ public class Main {
     BaseClass() {
       bar = 42;
     }
+
+    BaseClass(String... unused) {}
   }
 
   @AutoValue

@@ -1001,9 +1001,10 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@autovalue.AutoValueWithGenerics)
 
-;;; void BaseClass.$ctor()
-(func $$ctor__void_$p_autovalue_BaseClass@autovalue.BaseClass
+;;; void BaseClass.$ctor(String... unused)
+(func $$ctor__arrayOf_java_lang_String__void_$p_autovalue_BaseClass@autovalue.BaseClass
  (param $this (ref null $autovalue.BaseClass))
+ (param $unused (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
@@ -1620,7 +1621,7 @@
 (func $$ctor__void_$p_autovalue_AutoValueWithOverrides@autovalue.AutoValueWithOverrides
  (param $this (ref null $autovalue.AutoValueWithOverrides))
  (block
-  (call $$ctor__void_$p_autovalue_BaseClass@autovalue.BaseClass (ref.as_non_null (local.get $this)))
+  (call $$ctor__arrayOf_java_lang_String__void_$p_autovalue_BaseClass@autovalue.BaseClass (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
  )
 )
 
@@ -1708,7 +1709,7 @@
 (func $$ctor__void_$p_autovalue_ExtendingAutoValue@autovalue.ExtendingAutoValue
  (param $this (ref null $autovalue.ExtendingAutoValue))
  (block
-  (call $$ctor__void_$p_autovalue_BaseClass@autovalue.BaseClass (ref.as_non_null (local.get $this)))
+  (call $$ctor__arrayOf_java_lang_String__void_$p_autovalue_BaseClass@autovalue.BaseClass (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 0 )))
  )
 )
 

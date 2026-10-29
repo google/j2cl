@@ -16,5 +16,7 @@
 package autovalue;
 
 public abstract class BaseClass {
+  BaseClass(String... unused) {}
+
   public abstract int getBaseField();
 }

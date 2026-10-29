@@ -19,9 +19,15 @@
 package autovalue
 
 import javaemul.lang.*
+import kotlin.Array
 import kotlin.Int
+import kotlin.String
 import kotlin.Suppress
 
 abstract class BaseClass {
+ internal constructor(vararg unused: String?) {
+  val unused_1: Array<String?>? = unused as Array<String?>?
+ }
+ 
  abstract fun getBaseField(): Int
 }

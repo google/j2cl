@@ -22,6 +22,7 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescriptors;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -45,6 +46,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -74,10 +76,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       return;
     }
 
-    // Remove implicit super constructor calls to guarantee a consistent initial state across the
-    // different frontends.
-    removeImplicitSuperConstructorCalls(library);
-
     Set<TypeDeclaration> inlinableTypes =
         library
             .streamTypes()
@@ -91,46 +89,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
     inlineImplementationTypes(library, inlinableTypes);
     optimizeAsValueTypes(library);
-  }
-
-  private static void removeImplicitSuperConstructorCalls(Library library) {
-    library
-        .streamTypes()
-        .forEach(
-            type -> {
-              if (!isAutoValueOrBuilderSubclass(type.getDeclaration())) {
-                return;
-              }
-
-              for (Method ctor : type.getConstructors()) {
-                if (!AstUtils.hasSuperCall(ctor)) {
-                  continue;
-                }
-
-                ExpressionStatement constructorInvocationStatement =
-                    AstUtils.getConstructorInvocationStatement(ctor);
-                // The super call for AutoValue should always be the first statement. Captures, for
-                // example, are not possible. AutoValue does not support inner nor local classes.
-                checkState(
-                    ctor.getBody().getStatements().indexOf(constructorInvocationStatement) == 0);
-
-                MethodCall superConstructorCall =
-                    (MethodCall) constructorInvocationStatement.getExpression();
-                if (!superConstructorCall.getArguments().isEmpty()
-                    || superConstructorCall.getQualifier() != null) {
-                  continue;
-                }
-
-                ctor.getBody().getStatements().remove(constructorInvocationStatement);
-              }
-            });
-  }
-
-  private static boolean isAutoValueOrBuilderSubclass(TypeDeclaration type) {
-    return type != null
-        && (AstUtils.isAnnotatedWithAutoValue(type)
-            || AstUtils.isAnnotatedWithAutoValueBuilder(type)
-            || isAutoValueOrBuilderSubclass(type.getSuperTypeDeclaration()));
   }
 
   private static void inlineImplementationTypes(
@@ -205,7 +163,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       // TODO(b/578549673): Method.isEmpty() should be updated to check the arguments of the
       // super call.
       MethodCall superCall = AstUtils.getConstructorInvocation(method);
-      return AstUtils.hasSuperCall(method)
+      return method.getBody().getStatements().size() == 1
+          && AstUtils.hasSuperCall(method)
           && superCall.getQualifier() == null
           && superCall.getArguments().isEmpty();
     }
@@ -232,15 +191,24 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     // We could also have moved members from all subclasses however @Memoized methods are
     // overridden hence requires more complicated re-writing.
 
-    // Validate our assumption that AutoValue only generates single non-default constructor.
-    checkState(
-        !AstUtils.isAnnotatedWithAutoValue(to.getDeclaration())
-            || (from.getConstructors().size() == 1 && from.getDefaultConstructor() == null));
+    if (!AstUtils.isAnnotatedWithAutoValue(to.getDeclaration())) {
+      // In @AutoValue.Builder, 'from' has a default constructor and optionally copy constructors
+      // (when toBuilder() is present). All of them call super() and must be retargeted to the
+      // builder's superclass directly.
+      checkState(from.getDefaultConstructor() != null);
+      for (Method constructor : from.getConstructors()) {
+        updateSuperCall(constructor, to.getImplicitSuperCallTarget());
+      }
+    } else {
+      // The generated AutoValue implementation class only ever has a single constructor.
+      checkState(from.getConstructors().size() == 1 && from.getDefaultConstructor() == null);
 
-    // We need to make sure inlined constructors explicitly call this() otherwise they would
-    // implicitly call super() and change the behavior from the original code (since existing
-    // implicit super() call was targeting the parent default constructor).
-    addThisCallToInlinedConstructors(from, to);
+      // If the @AutoValue class has no explicit constructor (CreateImplicitConstructors hasn't
+      // run yet), retarget the constructor to the superclass directly.
+      if (to.getDefaultConstructor() == null) {
+        updateSuperCall(from.getConstructors().getFirst(), to.getImplicitSuperCallTarget());
+      }
+    }
 
     List<Member> movedMembers = from.getMembers();
 
@@ -309,30 +277,20 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     type.getMembers().removeIf(m -> m.isConstructor() && m != defaultCtor);
   }
 
-  private static void addThisCallToInlinedConstructors(Type from, Type to) {
-    if (from.getDefaultConstructor() != null) {
-      // If there is new default constructor being inlined then there is nothing to worry about
-      // since either default doesn't exist or it is empty. Hence the implicit behavior is correct.
-      return;
-    }
-
-    Method defaultCtor = to.getDefaultConstructor();
-    if (defaultCtor == null) {
-      // If there are no default constructors in the parent, there is nothing to update since
-      // implicit behavior is still correct.
-      return;
-    }
-
-    for (Method fromCtor : from.getConstructors()) {
-      checkState(!AstUtils.hasThisCall(fromCtor) && !AstUtils.hasSuperCall(fromCtor));
-      fromCtor
-          .getBody()
-          .getStatements()
-          .addFirst(
-              MethodCall.builderFrom(defaultCtor.getDescriptor())
-                  .build()
-                  .makeStatement(fromCtor.getBody().getSourcePosition()));
-    }
+  /** Updates {@code constructor}'s super() call to target {@code superConstructor}. */
+  private static void updateSuperCall(Method constructor, MethodDescriptor superConstructor) {
+    ExpressionStatement statement = AstUtils.getConstructorInvocationStatement(constructor);
+    // We only inline classes with trivial constructors.
+    checkState(
+        statement.getExpression() instanceof MethodCall methodCall
+            && methodCall.getArguments().isEmpty());
+    MethodCall superCall =
+        MethodCall.builderFrom(superConstructor)
+            .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
+            .build();
+    List<Statement> statements = constructor.getBody().getStatements();
+    statements.set(
+        statements.indexOf(statement), superCall.makeStatement(statement.getSourcePosition()));
   }
 
   private static void inlineNestedTypes(Type from, Type to) {
@@ -452,6 +410,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
               if (TypeDescriptors.isJavaLangObject(autoValue.getSuperTypeDescriptor())) {
                 // Change the parent type of AutoValue class to ValueType.
                 autoValue.setSuperTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType);
+                updateSuperCall(
+                    autoValue.getPrimaryConstructor(), autoValue.getImplicitSuperCallTarget());
                 // Recorded excluded fields if there are any.
                 if (!excludedFields.isEmpty()) {
                   addExcludedFieldsDeclaration(autoValue, excludedFields);

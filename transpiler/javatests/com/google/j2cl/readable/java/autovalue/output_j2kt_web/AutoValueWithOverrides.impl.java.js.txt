@@ -3,6 +3,9 @@ goog.module('autovalue.AutoValueWithOverrides$impl');
 const BaseClass = goog.require('autovalue.BaseClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
 class AutoValueWithOverrides extends BaseClass {
  /** @protected @nodts */
  constructor() {
@@ -21,7 +24,7 @@ class AutoValueWithOverrides extends BaseClass {
  }
  /** @nodts */
  $ctor__autovalue_AutoValueWithOverrides__void() {
-  this.$ctor__autovalue_BaseClass__void();
+  this.$ctor__autovalue_BaseClass__arrayOf_java_lang_String__void(/**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String)));
  }
  /** @override @return {boolean} */
  equals(/** * */ o) {
@@ -68,7 +71,10 @@ class AutoValueWithOverrides extends BaseClass {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
 }
 $Util.$setClassMetadata(AutoValueWithOverrides, 'autovalue.AutoValueWithOverrides');
 

@@ -4,7 +4,9 @@ const BaseClass = goog.require('autovalue.BaseClass$impl');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class ExtendingAutoValue extends BaseClass {
  /** @protected @nodts */
@@ -26,7 +28,7 @@ class ExtendingAutoValue extends BaseClass {
  }
  /** @nodts */
  $ctor__autovalue_ExtendingAutoValue__void() {
-  this.$ctor__autovalue_BaseClass__void();
+  this.$ctor__autovalue_BaseClass__arrayOf_java_lang_String__void(/**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String)));
   $J2CL_PRESERVE$(this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_, this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_, this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_);
  }
  /** @nodts @return {!ExtendingAutoValue} */
@@ -69,7 +71,9 @@ class ExtendingAutoValue extends BaseClass {
  
  /** @nodts */
  static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
   Objects = goog.module.get('java.util.Objects$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
  }
 }
 ValueType.mixin(ExtendingAutoValue, ValueType, 7);
