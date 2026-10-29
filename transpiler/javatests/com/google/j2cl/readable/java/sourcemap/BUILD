@@ -11,6 +11,5 @@ package(
 readable_example(
     srcs = glob(["*.java"]),
     generate_readable_source_maps = True,
-    generate_wasm_readables = False,
     deps = ["//third_party:jsinterop-annotations-j2cl"],
 )

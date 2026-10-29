@@ -114,6 +114,7 @@ def readable_example(
             feature_set = J2WASM_FEATURE_SET.DEFAULT,
             entry_points = wasm_entry_points,
             generate_imports = generate_wasm_imports,
+            strip_source_info = not generate_readable_source_maps,
         )
     else:
         _empty_readable_targets("output_wasm")
@@ -125,6 +126,7 @@ def readable_example(
             feature_set = J2WASM_FEATURE_SET.CUSTOM_DESCRIPTORS_JSINTEROP,
             entry_points = wasm_entry_points,
             generate_imports = generate_wasm_imports,
+            strip_source_info = not generate_readable_source_maps,
         )
     else:
         _empty_readable_targets("output_wasm_jsinterop")
@@ -208,7 +210,13 @@ def _js_readable_targets(readable_target, dir_out, defs):
         tags = ["j2cl"],
     )
 
-def _wasm_readable_targets(name, dir_out, feature_set, entry_points, generate_imports):
+def _wasm_readable_targets(
+        name,
+        dir_out,
+        feature_set,
+        entry_points,
+        generate_imports,
+        strip_source_info):
     j2wasm_target = "%s-j2wasm" % name
     _feature_set_enabled_j2wasm_library(
         name = j2wasm_target,
@@ -245,6 +253,7 @@ def _wasm_readable_targets(name, dir_out, feature_set, entry_points, generate_im
         target_files = ["readable-j2wasm.js"],
         extra_targets = extra_targets,
         dir_out = dir_out,
+        strip_wat_source_info = strip_source_info,
         tags = ["j2wasm"],
     )
 
@@ -254,13 +263,21 @@ def _wasm_readable_targets(name, dir_out, feature_set, entry_points, generate_im
         tags = ["j2wasm"],
     )
 
-def _readable_diff_test(name, target, dir_out, tags, target_files = [], extra_targets = []):
+def _readable_diff_test(
+        name,
+        target,
+        dir_out,
+        tags,
+        target_files = [],
+        extra_targets = [],
+        strip_wat_source_info = False):
     _golden_output(
         testonly = 1,
         name = name,
         target = target,
         target_files = target_files,
         extra_targets = extra_targets,
+        strip_wat_source_info = strip_wat_source_info,
     )
 
     sh_test(
@@ -326,8 +343,8 @@ def _golden_output_impl(ctx):
             "cd ${OUTPUT}",
             # We don't want to copy .java/.kt and .map files to the final output.
             "find \\( %s \\) -exec rm {} \\;" % exclusion_filter,
-            # Strip source mapping comments from .wat files.
-            "find -name '*.wat' -exec sed -i '/^[[:space:]]*;;@/d' {} +",
+            # Strip source mapping comments from .wat files if requested.
+            "find -name '*.wat' -exec sed -i '/^[[:space:]]*;;@/d' {} +" if ctx.attr.strip_wat_source_info else "",
             # Rename files without .txt extension to => {file}.txt
             "find -type f -not -name '*.txt' -exec mv {} {}.txt \\;",
             # Normalize the path relative to readable_name to avoid extra dirs.
@@ -353,6 +370,10 @@ _golden_output = rule(
         "extra_targets": attr.label_list(
             allow_files = True,
             doc = "If non-empty, additional targets whose output to copy.",
+        ),
+        "strip_wat_source_info": attr.bool(
+            default = False,
+            doc = "Whether to strip inline source mapping comments from .wat files.",
         ),
     },
 )
