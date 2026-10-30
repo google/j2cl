@@ -131,11 +131,15 @@ internal class ObjCNameSources(val nameSources: NameSources) {
       fieldDescriptor.isEnumConstant -> {
         val name = fieldDescriptor.name!!
         val swiftName = name.lowerCamelCased
+        val isForbiddenSwiftName = swiftName in forbiddenSwiftEnumNames
         Source.newLineSeparated(
-          objCEnumEntryNameAnnotationSource(name = "_$name", swiftName = swiftName),
+          objCEnumEntryNameAnnotationSource(
+            name = "_$name",
+            swiftName = if (isForbiddenSwiftName) "${swiftName}_" else swiftName,
+          ),
           Source.emptyUnless(needsObjCNameAnnotation(fieldDescriptor)) {
             // TODO(b/525357348): Investigate
-            if (swiftName in forbiddenSwiftEnumNames) {
+            if (isForbiddenSwiftName) {
               objCNameAnnotationSource(fieldDescriptor.objCName)
             } else {
               objCNameAnnotationSource(fieldDescriptor.objCName, swiftName)
