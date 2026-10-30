@@ -16,9 +16,11 @@
 package companion
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertNotNull
 import com.google.j2cl.integration.testing.Asserts.assertNull
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isJvm
 
 fun main(vararg unused: String) {
   testCompanionReferences()
@@ -28,6 +30,7 @@ fun main(vararg unused: String) {
   testEnumWithCompanion()
   testCompanionFieldInitCycle()
   testCompanionWithLambdas()
+  testCompanionInstanceAccessInitializesEnclosingClass()
 }
 
 private open class A(x: Int) {
@@ -270,4 +273,30 @@ private fun testCompanionWithLambdas() {
     CompanionWithLambdas.lambdaWithLocalClassAndThisAndSuperReferences().apply(1) ==
       (CompanionWithLambdas.hashCode() + 11)
   )
+}
+
+private var isEnclosingClassInitialized = false
+
+@SuppressWarnings("ClassShouldBeObject")
+private class ClassWithCompanionInitializer {
+  companion object {
+    // This init block is transpiled as the static initializer of the enclosing class.
+    init {
+      isEnclosingClassInitialized = true
+    }
+  }
+}
+
+private fun testCompanionInstanceAccessInitializesEnclosingClass() {
+  val companion: Any = ClassWithCompanionInitializer.Companion
+  assertNotNull(companion)
+  if (isJvm()) {
+    // On the JVM, the companion instance is a static field of the enclosing class, so reading it
+    // runs the static initializer of the enclosing class.
+    assertTrue(isEnclosingClassInitialized)
+  } else {
+    // TODO(b/339299332): Reading the companion instance should initialize the enclosing class like
+    // on the JVM.
+    assertFalse(isEnclosingClassInitialized)
+  }
 }
