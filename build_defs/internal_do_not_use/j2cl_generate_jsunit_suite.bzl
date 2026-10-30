@@ -27,6 +27,7 @@ jsunit_test(
 
 load(":generate_test_input.bzl", "generate_test_input")
 load(":j2cl_library.bzl", "j2cl_library")
+load(":j2cl_test_suite.bzl", "j2cl_test_suite_archive")
 
 visibility(["//build_defs/..."])
 
@@ -81,31 +82,17 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
 
     # The Java annotation processor on the above target generates jsunit suites
     # (.testsuite files), but the same jar file also contains unrelated things
-    # (e.g. class files), this genrules takes the jar file as input and creates
-    # a new zip file that only contains the generated javascript (.testsuite
-    # renamed to .js) and the test_summary.json file.
+    # (e.g. class files). This action creates a new zip file that only contains
+    # the generated javascript (.testsuite renamed to .js) and the
+    # test_summary.json file.
     # This is the format that jsunit_test will later expect.
     # TODO(goktug): use j2cl_library directly from jsunit_test instead of
     # extracting files from jar (output js zip can include all the required
     # files.)
-    native.genrule(
+    j2cl_test_suite_archive(
         name = name,
-        srcs = [":%s_test_artifacts" % name],
-        outs = [name + ".js.zip"],
-        cmd = """
-            set -u
-            TMP=$$(mktemp -d)
-            OUTPUT_ZIP="$$(pwd)/$@"
-            unzip -q $< "*.testsuite" "*.json" -d $$TMP
-            (
-              cd $$TMP
-              for f in $$(find . -name "*.testsuite"); do
-                mv $$f $${f/.testsuite/.js}
-              done
-              zip -q -r "$$OUTPUT_ZIP" .
-            )
-            rm -rf $$TMP
-        """,
+        src = ":%s_test_artifacts" % name,
+        out = name + ".js.zip",
         testonly = 1,
         tags = ["manual", "notap"],
     )
