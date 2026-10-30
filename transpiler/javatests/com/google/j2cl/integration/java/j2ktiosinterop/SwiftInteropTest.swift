@@ -64,12 +64,13 @@ final class SwiftInteropTest: XCTestCase {
 
     DefaultNames.companion.staticMethod()
 
-    // @Throws-annotated methods can throw in Swift and need to be wrapped in `try`
-    // in J2kt. This causes a warning in J2Objc, where the annotation is not supported.
+    // @Throws-annotated methods can throw in Swift and need to be wrapped in `try`.
     try! obj.throwsMethod()
     try! obj.throwsMethod(s: "")
+    let _: Any? = try! obj.genericThrowsMethod(t: "")
     try! DefaultNames.companion.staticThrowsMethod()
     try! DefaultNames.companion.staticThrowsMethod(s: "")
+    try! DefaultNames.Nested().throwsMethod()
 
     #if J2KT
       var i: Int32
@@ -285,5 +286,16 @@ final class SwiftInteropTest: XCTestCase {
 
     let _: JavaLangIllegalArgumentException =
       create_JavaLangIllegalArgumentException_initWithNSString_("bar")
+  }
+
+  func testInterfaceThrows() {
+    let service: any TransitiveThrowsSubInterface = TransitiveThrowsImpl()
+    #if J2KT
+      try! service.superThrowsMethod()
+      try! service.superThrowsMethod(s: "test")
+    #else
+      service.superThrowsMethod()
+      service.superThrowsMethod(s: "test")
+    #endif
   }
 }

@@ -131,9 +131,19 @@ public final class DefaultNames {
   public void throwsMethod(String s) {}
 
   @Throws
+  public <T> T genericThrowsMethod(T t) {
+    return t;
+  }
+
+  @Throws
   public static void staticThrowsMethod() {}
 
   @Throws
   public static void staticThrowsMethod(String s) {}
+
+  public static class Nested {
+    @Throws
+    public void throwsMethod() {}
+  }
 }
 

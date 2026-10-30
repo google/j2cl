@@ -155,6 +155,7 @@
   // For methods that throw, J2ObjC generates variants with and without `error:` parameter
   [obj throwsMethod];
   [obj throwsMethodWithNSString:@""];
+  [obj genericThrowsMethodWithId:@""];
   [J2ktiosinteropDefaultNames staticThrowsMethod];
   [J2ktiosinteropDefaultNames staticThrowsMethodWithNSString:@""];
 #endif
@@ -162,6 +163,8 @@
   // For methods that throw, J2KT generates `error:` parameter.
   [obj throwsMethodAndReturnError:nil];
   [obj throwsMethodWithNSString:@"" error:nil];
+  [obj genericThrowsMethodWithId:@"" error:nil];
+  [create_J2ktiosinteropDefaultNames_Nested_init() throwsMethodAndReturnError:nil];
 #if J2KT
   [J2ktiosinteropDefaultNamesCompanion.shared staticThrowsMethodAndReturnError:nil];
   [J2ktiosinteropDefaultNamesCompanion.shared staticThrowsMethodWithNSString:@"" error:nil];
