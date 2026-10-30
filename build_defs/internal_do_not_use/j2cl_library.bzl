@@ -119,6 +119,7 @@ def j2cl_library(
 
         j2wasm_library(
             name = j2wasm_library_name,
+            generate_build_test = generate_build_test,
             tags = auto_generated_targets_tags + ["j2wasm"],
             **j2wasm_args
         )

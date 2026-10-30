@@ -73,6 +73,7 @@ def j2wasm_generate_jsunit_suite(
         testonly = 1,
         javacopts = ["-AtestPlatform=WASM"],
         tags = tags,
+        generate_build_test = False,
     )
 
     # The Java annotation processor on the above target generates jsunit suites

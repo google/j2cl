@@ -28,7 +28,10 @@ j2wasm_library(
     ),
     # TODO(b/499050043): This is a workaround to avoid errors with `build :all` but must be
     # revisited once we have a final solution for different srcs according to feature set.
-    tags = ["manual"],
+    tags = [
+        "manual",
+        "notap",
+    ],
     deps = [
         ":MyNativeType",
         "//jre/java:javaemul_internal_annotations-j2wasm",

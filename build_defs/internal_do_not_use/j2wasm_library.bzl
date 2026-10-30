@@ -7,6 +7,7 @@ This is an experimental tool and should not be used.
 load("@rules_java//java:defs.bzl", "JavaPluginInfo")
 load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "JsInfo")
+load(":j2cl_library_build_test.bzl", "build_test")
 load(":j2wasm_common.bzl", "J2WASM_FEATURE_SET", "J2WASM_TOOLCHAIN_ATTRS", "j2wasm_common")
 
 visibility(["//build_defs/..."])
@@ -41,7 +42,9 @@ def _impl_j2wasm_library_rule(ctx):
 
     # Declare default outputs so that bazel build <wasm_target> triggers the compiler and outputs
     # the artifact.
-    outputs = [ctx.outputs.jar]
+    outputs = [
+        ctx.outputs.jar,
+    ]
     default_feature_output = j2wasm_provider._private_.feature_set_map[J2WASM_FEATURE_SET.DEFAULT]._private_.output
     if default_feature_output:
         outputs.append(default_feature_output)
@@ -66,12 +69,16 @@ _j2wasm_library_rule = rule(
 )
 
 # buildifier: disable=function-docstring-args
-def j2wasm_library(name, **kwargs):
+def j2wasm_library(name, generate_build_test = None, **kwargs):
     args = dict(kwargs)
     target_name = "//" + native.package_name() + ":" + name
+    has_srcs = args.get("srcs")
 
     # If this is JRE itself, don't synthesize the JRE dep.
-    if args.get("srcs") and target_name != "//jre/java:jre-j2wasm":
+    if has_srcs and target_name != "//jre/java:jre-j2wasm":
         args["deps"] = args.get("deps", []) + [Label("//:jre-j2wasm")]
 
     _j2wasm_library_rule(name = name, **args)
+
+    if has_srcs and (generate_build_test == None or generate_build_test):
+        build_test(name, kwargs.get("tags", []))
