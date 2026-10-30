@@ -2912,6 +2912,9 @@ public class JsInteropRestrictionsChecker {
 
           @Override
           public void exitMethodCall(MethodCall methodCall) {
+            if (isTruthComparableAssertionOnJsEnum(methodCall.getTarget())) {
+              return;
+            }
             if (!checkInvocationTypeArguments(methodCall)) {
               return;
             }
@@ -3093,5 +3096,19 @@ public class JsInteropRestrictionsChecker {
       }
     }
     return false;
+  }
+
+  // TODO(b/577834252): Remove once Truth or callers are migrated.
+  private static boolean isTruthComparableAssertionOnJsEnum(MethodDescriptor target) {
+    MethodDescriptor declaration = target.getDeclarationDescriptor();
+    return switch (declaration.getQualifiedBinaryName()) {
+          case "com.google.common.truth.Truth.assertThat" ->
+              declaration.getSignature().equals("assertThat(java.lang.Comparable)");
+          case "com.google.common.truth.StandardSubjectBuilder.that" ->
+              declaration.getSignature().equals("that(java.lang.Comparable)");
+          default -> false;
+        }
+        && !target.getTypeArgumentTypeDescriptors().isEmpty()
+        && target.getTypeArgumentTypeDescriptors().getFirst().isJsEnum();
   }
 }

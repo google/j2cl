@@ -2970,6 +2970,80 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  // TODO(b/577834252): Remove once Truth or callers are migrated.
+  public void testCustomValuedJsEnumTruth() {
+    assertWithInlineMessages(
+        "com.google.common.truth.Subject",
+        """
+        public class Subject {
+          public void isEqualTo(Object other) {}
+        }
+        """,
+        "com.google.common.truth.ComparableSubject",
+        """
+        public class ComparableSubject<T extends Comparable<?>> extends Subject {}
+        """,
+        "com.google.common.truth.StandardSubjectBuilder",
+        """
+        public class StandardSubjectBuilder {
+          public final <ComparableT extends Comparable<?>>
+              ComparableSubject<ComparableT> that(ComparableT actual) {
+            return null;
+          }
+          public final Subject that(Object actual) {
+            return null;
+          }
+        }
+        """,
+        "com.google.common.truth.Truth",
+        """
+        public final class Truth {
+          public static <ComparableT extends Comparable<?>>
+              ComparableSubject<ComparableT> assertThat(ComparableT actual) {
+            return null;
+          }
+          public static Subject assertThat(Object actual) {
+            return null;
+          }
+          public static <T> Subject assertThat(T[] actual) {
+            return null;
+          }
+          public static StandardSubjectBuilder assertWithMessage(String message) {
+            return null;
+          }
+        }
+        """,
+        "test.Main",
+        """
+        import com.google.common.truth.Truth;
+        import jsinterop.annotations.JsEnum;
+        public class Main {
+          @JsEnum(hasCustomValue = true)
+          enum CustomValued {
+            A(1),
+            B(2);
+            int value;
+            CustomValued(int value) {
+              this.value = value;
+            }
+          }
+          @SuppressWarnings({"rawtypes", "unchecked"})
+          private static <C extends CustomValued> void main(C c, Comparable rawComparable) {
+            Truth.assertThat(CustomValued.A).isEqualTo(CustomValued.B);
+            Truth.assertThat(c).isEqualTo(CustomValued.A);
+            Truth.assertWithMessage("msg").that(CustomValued.A).isEqualTo(CustomValued.B);
+
+            Truth.assertThat(new CustomValued[0]);
+        > Error: JsEnum array 'CustomValued[]' cannot be assigned to 'T[]'.
+            Truth.<Comparable<CustomValued>>assertThat(CustomValued.A);
+        > Error: Custom-valued JsEnum 'CustomValued' cannot be assigned to 'Comparable<CustomValued>'.
+            Truth.<Comparable<CustomValued[]>>assertThat(rawComparable);
+        > Error: Type argument for 'ComparableT' of 'ComparableSubject Truth.assertThat(Comparable)' cannot be of type 'Comparable<CustomValued[]>'.
+          }
+        }
+        """);
+  }
+
   public void testJsEnumArraysSucceeds() {
     assertTranspileSucceeds(
             "Main",
