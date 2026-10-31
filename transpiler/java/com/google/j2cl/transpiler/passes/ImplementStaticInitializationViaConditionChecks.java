@@ -162,7 +162,7 @@ public class ImplementStaticInitializationViaConditionChecks
 
     // Code from static initializer blocks.
     List<Statement> clinitStatements =
-        type.getStaticInitializerBlocks().stream()
+        type.streamStaticInitializerBlocks()
             .flatMap(initializerBlock -> initializerBlock.getBody().getStatements().stream())
             .collect(toImmutableList());
 

@@ -355,7 +355,7 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
     // Find it and move it to the companion.
     List<Statement> initializers = new ArrayList<>();
     enclosingType
-        .getStaticInitializerBlocks()
+        .streamStaticInitializerBlocks()
         .forEach(
             si ->
                 si.accept(

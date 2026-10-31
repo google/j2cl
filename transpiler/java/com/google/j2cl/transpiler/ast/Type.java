@@ -208,9 +208,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean hasInstanceInitializerBlocks() {
-    return members.stream()
-        .filter(Predicates.not(Member::isStatic))
-        .anyMatch(Member::isInitializerBlock);
+    return streamInstanceInitializerBlocks().findAny().isPresent();
   }
 
   public void addInstanceInitializerBlock(Block instanceInitializer) {
@@ -306,20 +304,18 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .collect(toImmutableList());
   }
 
-  public ImmutableList<InitializerBlock> getStaticInitializerBlocks() {
+  public Stream<InitializerBlock> streamStaticInitializerBlocks() {
     return members.stream()
         .filter(Member::isStatic)
         .filter(Member::isInitializerBlock)
-        .map(InitializerBlock.class::cast)
-        .collect(toImmutableList());
+        .map(InitializerBlock.class::cast);
   }
 
-  public ImmutableList<InitializerBlock> getInstanceInitializerBlocks() {
+  public Stream<InitializerBlock> streamInstanceInitializerBlocks() {
     return members.stream()
-        .filter(Predicates.not(Member::isStatic))
+        .filter(not(Member::isStatic))
         .filter(Member::isInitializerBlock)
-        .map(InitializerBlock.class::cast)
-        .collect(toImmutableList());
+        .map(InitializerBlock.class::cast);
   }
 
   public ImmutableList<Method> getConstructors() {

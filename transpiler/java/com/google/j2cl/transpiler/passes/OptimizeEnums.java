@@ -123,7 +123,7 @@ public class OptimizeEnums extends NormalizationPass {
   private static boolean hasTrivialInitialization(Type type) {
     // Initializer blocks are mostly used to introduce logic for initializing fields. If they are
     // present, we don't optimize the enum.
-    if (!type.getInstanceInitializerBlocks().isEmpty()) {
+    if (type.hasInstanceInitializerBlocks()) {
       return false;
     }
 

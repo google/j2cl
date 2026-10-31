@@ -32,7 +32,7 @@ import java.util.List;
 public class ImplementInstanceInitialization extends NormalizationPass {
   @Override
   public void applyTo(Type type) {
-    if (type.getInstanceInitializerBlocks().isEmpty()) {
+    if (!type.hasInstanceInitializerBlocks()) {
       return;
     }
     implementInitMethod(type);
@@ -43,7 +43,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
   private void implementInitMethod(Type type) {
     checkArgument(!type.isInterface());
     List<Statement> statements =
-        type.getInstanceInitializerBlocks().stream()
+        type.streamInstanceInitializerBlocks()
             .flatMap(initializerBlock -> initializerBlock.getBody().getStatements().stream())
             .collect(toImmutableList());
 
