@@ -20,6 +20,7 @@ import javaemul.internal.annotations.HasNoSideEffects
 
 fun main(vararg unused: String) {
   testSideEffectInQualifier()
+  testSideEffectInArguments()
 }
 
 private class ClassWithMethodWithoutSideEffects {
@@ -31,6 +32,13 @@ private class ClassWithMethodWithoutSideEffects {
   }
 
   internal fun staticMethod() {}
+
+  companion object {
+    @HasNoSideEffects
+    internal fun staticMethodWithoutSideEffects(arg: Any?): Int {
+      return 0
+    }
+  }
 }
 
 private var sideEffects = 0
@@ -50,4 +58,10 @@ private fun testSideEffectInQualifier() {
   assertEquals(2, sideEffects)
   getInstanceWithSideEffect().unusedField++
   assertEquals(3, sideEffects)
+}
+
+private fun testSideEffectInArguments() {
+  sideEffects = 0
+  ClassWithMethodWithoutSideEffects.staticMethodWithoutSideEffects(getInstanceWithSideEffect())
+  assertEquals(1, sideEffects)
 }

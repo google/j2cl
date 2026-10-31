@@ -22,6 +22,7 @@ import javaemul.internal.annotations.HasNoSideEffects;
 public class Main {
   public static void main(String... args) {
     testSideEffectInQualifier();
+    testSideEffectInArguments();
   }
 
   private static class ClassWithMethodWithoutSideEffects {
@@ -30,6 +31,11 @@ public class Main {
     @HasNoSideEffects
     private ClassWithMethodWithoutSideEffects methodWithoutSideEffects() {
       return this;
+    }
+
+    @HasNoSideEffects
+    private static int staticMethodWithoutSideEffects(Object arg) {
+      return 0;
     }
 
     private static void staticMethod() {}
@@ -53,5 +59,11 @@ public class Main {
     assertEquals(2, sideEffects);
     getInstanceWithSideEffect().unusedField++;
     assertEquals(3, sideEffects);
+  }
+
+  private static void testSideEffectInArguments() {
+    sideEffects = 0;
+    ClassWithMethodWithoutSideEffects.staticMethodWithoutSideEffects(getInstanceWithSideEffect());
+    assertEquals(1, sideEffects);
   }
 }
