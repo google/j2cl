@@ -112,6 +112,7 @@ private fun testNativeJsEnum() {
   assertTrue(v.equals(NativeEnum.ACCEPT))
   assertTrue(v.equals(OK_STRING))
   assertTrue(v.equals(StringNativeEnum.OK))
+  assertFalse(v.equals(null))
 
   // Kotlin equality on a variable of JsEnum type.
   assertTrue(v == NativeEnum.ACCEPT)
@@ -232,6 +233,7 @@ private fun testStringNativeJsEnum() {
   assertTrue(v.equals(StringNativeEnum.OK))
   assertTrue(v.equals(NativeEnum.ACCEPT))
   assertTrue(v.equals(OK_STRING))
+  assertFalse(v.equals(null))
 
   // Kotlin equality on a variable of JsEnum type.
   assertTrue(v == StringNativeEnum.OK)

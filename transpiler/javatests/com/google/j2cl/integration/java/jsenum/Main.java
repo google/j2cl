@@ -132,6 +132,17 @@ public class Main {
     assertTrue(v.equals(NativeEnum.ACCEPT));
     assertTrue(v.equals(OK_STRING));
     assertTrue(v.equals(StringNativeEnum.OK));
+    assertFalse(v.equals(null));
+    assertThrowsNullPointerException(
+        () -> {
+          NativeEnum nullJsEnum = null;
+          nullJsEnum.equals(NativeEnum.ACCEPT);
+        });
+    assertThrowsNullPointerException(
+        () -> {
+          NativeEnum nullJsEnum = null;
+          nullJsEnum.equals(null);
+        });
 
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == NativeEnum.ACCEPT.hashCode());
@@ -231,6 +242,17 @@ public class Main {
     assertTrue(v.equals(StringNativeEnum.OK));
     assertTrue(v.equals(NativeEnum.ACCEPT));
     assertTrue(v.equals(OK_STRING));
+    assertFalse(v.equals(null));
+    assertThrowsNullPointerException(
+        () -> {
+          StringNativeEnum nullJsEnum = null;
+          nullJsEnum.equals(StringNativeEnum.OK);
+        });
+    assertThrowsNullPointerException(
+        () -> {
+          StringNativeEnum nullJsEnum = null;
+          nullJsEnum.equals(null);
+        });
 
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
@@ -1282,6 +1304,23 @@ public class Main {
 
   private static <T extends NativeEnum> void checkNativeJsEnumTypeVariable(T t) {
     assertTrue(t.equals(NativeEnum.ACCEPT));
+    assertTrue(NativeEnum.ACCEPT.equals(t));
+    assertTrue(checkBothNativeJsEnumTypeVariablesEqual(t, NativeEnum.ACCEPT));
+    assertTrue(checkNativeJsEnumTypeVariableEquals(t, OK_STRING));
+    assertFalse(checkNativeJsEnumTypeVariableEquals(t, null));
+    assertThrowsNullPointerException(
+        () ->
+            Main.<NativeEnum, NativeEnum>checkNativeJsEnumTypeVariableEquals(
+                null, NativeEnum.ACCEPT));
+  }
+
+  private static <T extends NativeEnum, U extends NativeEnum>
+      boolean checkBothNativeJsEnumTypeVariablesEqual(T t, U u) {
+    return t.equals(u);
+  }
+
+  private static <T extends NativeEnum, U> boolean checkNativeJsEnumTypeVariableEquals(T t, U u) {
+    return t.equals(u);
   }
 
   private static <T extends PlainJsEnum & Comparable<PlainJsEnum>>

@@ -553,4 +553,10 @@ public class Main {
     boolean b = t.equals(e);
     int c = t.compareTo(e);
   }
+
+  private static <T extends NativeStringEnum> void testNativeJsEnumTypeVariable(T t, Object o) {
+    boolean b = t.equals(NativeStringEnum.ONE);
+    b = NativeStringEnum.ONE.equals(t);
+    b = t.equals(o);
+  }
 }

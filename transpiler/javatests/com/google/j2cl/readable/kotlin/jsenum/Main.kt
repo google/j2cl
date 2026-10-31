@@ -478,3 +478,9 @@ fun <T> testJsEnumIntersectionTypeVariable(t: T): T
   val b = t === o
   return o as T
 }
+
+fun <T : NativeStringEnum> testNativeJsEnumTypeVariable(t: T, o: Any?) {
+  var b = t.equals(NativeStringEnum.ONE)
+  b = NativeStringEnum.ONE.equals(t)
+  b = t.equals(o)
+}
