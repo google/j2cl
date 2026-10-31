@@ -296,10 +296,7 @@ public final class J2ktRestrictionsChecker {
 
           private void checkSynchronizedMethods(Type type) {
             boolean hasSynchronizedMethods =
-                type.getMethods().stream()
-                    .anyMatch(
-                        it ->
-                            it.getDescriptor().isSynchronized() && !isWebAsync(it.getDescriptor()));
+                type.containsMethod(it -> it.isSynchronized() && !isWebAsync(it));
             if (!hasSynchronizedMethods) {
               return;
             }
@@ -394,8 +391,7 @@ public final class J2ktRestrictionsChecker {
                 }
               }
 
-              if (type.getMethods().stream()
-                  .anyMatch(it -> it.getDescriptor().isRecordComponentAccessor())) {
+              if (type.containsMethod(MethodDescriptor::isRecordComponentAccessor)) {
                 problems.error(
                     type.getSourcePosition(),
                     "Record class '%s' with explicit accessors cannot be translated to a Kotlin"

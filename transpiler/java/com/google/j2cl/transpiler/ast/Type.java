@@ -20,6 +20,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.toOptional;
+import static java.util.function.Predicate.isEqual;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -86,6 +88,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean containsMethod(Predicate<MethodDescriptor> methodPredicate) {
     return streamMethods().map(Method::getDescriptor).anyMatch(methodPredicate);
+  }
+
+  @Nullable
+  public Method getMethod(Predicate<MethodDescriptor> methodPredicate) {
+    return streamMethods()
+        .filter(m -> methodPredicate.test(m.getDescriptor()))
+        .collect(toOptional())
+        .orElse(null);
   }
 
   public void setAbstract(boolean isAbstract) {
@@ -330,12 +340,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   @Nullable
   public Method getDefaultConstructor() {
-    MethodDescriptor defaultConstructorDescriptor =
-        getTypeDescriptor().getDefaultConstructorMethodDescriptor();
-    return streamMethods()
-        .filter(m -> m.getDescriptor().equals(defaultConstructorDescriptor))
-        .findFirst()
-        .orElse(null);
+    return getMethod(isEqual(getTypeDescriptor().getDefaultConstructorMethodDescriptor()));
   }
 
   /**
@@ -367,12 +372,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    */
   @Nullable
   public Method getRecordCanonicalConstructor() {
-    MethodDescriptor canonicalConstructorDescriptor =
-        getTypeDescriptor().getRecordCanonicalConstructorDescriptor();
-    return streamConstructors()
-        .filter(m -> m.getDescriptor().isSameSignature(canonicalConstructorDescriptor))
-        .findFirst()
-        .orElse(null);
+    return getMethod(
+        getTypeDescriptor().getRecordCanonicalConstructorDescriptor()::isSameSignature);
   }
 
   @Override

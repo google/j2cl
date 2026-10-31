@@ -2347,7 +2347,7 @@ public class JsInteropRestrictionsChecker {
     List<MethodDescriptor> superJsConstructorMethodDescriptors =
         type.getSuperTypeDescriptor().getTypeDeclaration().getJsConstructorMethodDescriptors();
 
-    Method jsConstructor = getJsConstructor(type);
+    Method jsConstructor = type.getMethod(MethodDescriptor::isJsConstructor);
     if (jsConstructor == null) {
       // The JsConstructor is the implicit constructor and delegates to the target of the implicit
       // super() call.
@@ -2375,14 +2375,6 @@ public class JsInteropRestrictionsChecker {
           jsConstructor.getDescriptor().getReadableDescription(),
           superJsConstructorMethodDescriptors.getFirst().getReadableDescription());
     }
-  }
-
-  @Nullable
-  private static Method getJsConstructor(Type type) {
-    return type.streamConstructors()
-        .filter(constructor -> constructor.getDescriptor().isJsConstructor())
-        .findFirst()
-        .orElse(null);
   }
 
   private boolean checkJsPropertyAccessor(Method method) {

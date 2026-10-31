@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.MoreCollectors.toOptional;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
 import static java.util.stream.Collectors.joining;
 
@@ -129,14 +128,10 @@ final class JsExternsGenerator {
     // Retrieve the synthetic factory method for the constructor, if it exists, since the
     // normalization removes the original constructor.
     Method factoryMethod =
-        type.getMethods().stream()
-            .filter(
-                m ->
-                    m.getDescriptor().getOrigin()
-                            == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
-                        && m.getDescriptor().canBeReferencedExternallyForWasm())
-            .collect(toOptional())
-            .orElse(null);
+        type.getMethod(
+            m ->
+                m.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
+                    && m.canBeReferencedExternallyForWasm());
 
     String jsDoc =
         closureEnvironment.getJsDocForType(
