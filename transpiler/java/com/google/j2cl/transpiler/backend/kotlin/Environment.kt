@@ -139,7 +139,7 @@ internal data class Environment(
    * visibility of the constructor needs to be explicitly set in the source code.
    */
   internal fun needExplicitPrimaryConstructor(type: Type): Boolean =
-    type.isClass && !type.hasConstructors && !type.declaration.visibility.isPublic
+    type.isClass && !type.hasConstructors() && !type.declaration.visibility.isPublic
 
   /**
    * Inferred visibility, which does not require explicit visibility modifier in the source code.

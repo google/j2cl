@@ -127,7 +127,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static void rewriteConstructors(Type type) {
-    if (type.getConstructors().isEmpty()) {
+    if (!type.hasConstructors()) {
       // No constructors => no normalization.
       return;
     }
@@ -563,7 +563,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method getJsConstructor(Type type) {
-    return type.getConstructors().stream()
+    return type.streamConstructors()
         .filter(ctor -> ctor.getDescriptor().isJsConstructor())
         .collect(onlyElement());
   }

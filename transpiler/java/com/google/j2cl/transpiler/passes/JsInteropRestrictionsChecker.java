@@ -384,7 +384,7 @@ public class JsInteropRestrictionsChecker {
           type.getReadableDescription());
     }
 
-    if (type.getConstructors().isEmpty() && requiresConstructor(type.getDeclaration())) {
+    if (!type.hasConstructors() && requiresConstructor(type.getDeclaration())) {
       problems.error(
           type.getSourcePosition(),
           "Custom-valued JsEnum '%s' should have a constructor.",
@@ -2317,7 +2317,7 @@ public class JsInteropRestrictionsChecker {
 
   @Nullable
   private static MethodDescriptor getPrimaryConstructorDescriptor(final Type type) {
-    if (type.getConstructors().isEmpty()) {
+    if (!type.hasConstructors()) {
       return type.getDeclaration().getDeclaredMethodDescriptors().stream()
           .filter(MethodDescriptor::isConstructor)
           .collect(onlyElement());
@@ -2379,7 +2379,7 @@ public class JsInteropRestrictionsChecker {
 
   @Nullable
   private static Method getJsConstructor(Type type) {
-    return type.getConstructors().stream()
+    return type.streamConstructors()
         .filter(constructor -> constructor.getDescriptor().isJsConstructor())
         .findFirst()
         .orElse(null);

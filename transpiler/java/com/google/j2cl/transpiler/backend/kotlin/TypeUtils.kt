@@ -31,14 +31,10 @@ import kotlin.streams.asSequence
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
   get() = listOfNotNull(superTypeDescriptor).plus(superInterfaceTypeDescriptors)
 
-/** Returns whether this type has any constructors. */
-internal val Type.hasConstructors: Boolean
-  get() = constructors.isNotEmpty()
-
 /** Returns the constructor to translate as primary in Kotlin. */
 internal val Type.ktPrimaryConstructor: Method?
   get() =
-    constructors.singleOrNull()?.takeIf {
+    streamConstructors().asSequence().singleOrNull()?.takeIf {
       // Include primary constructors for inner classes only, where it's necessary for visibility.
       // Don't do it all classes, because Kotlin does not allow using `return` inside `init {}`.
       // It's also necessary because of: https://youtrack.jetbrains.com/issue/KT-65299

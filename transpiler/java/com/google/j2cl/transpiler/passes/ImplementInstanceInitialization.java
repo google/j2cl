@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.common.SourcePosition;
@@ -59,13 +60,10 @@ public class ImplementInstanceInitialization extends NormalizationPass {
 
   /** Inserts init calls in each constructor */
   private void insertInitCalls(Type type) {
-    for (Method constructor : type.getConstructors()) {
-      if (AstUtils.hasThisCall(constructor)) {
-        // A constructor with this() call does not need $init call.
-        continue;
-      }
-      synthesizeInstanceInitCall(constructor);
-    }
+    // A constructor with this() call does not need $init call.
+    type.streamConstructors()
+        .filter(not(AstUtils::hasThisCall))
+        .forEach(ImplementInstanceInitialization::synthesizeInstanceInitCall);
   }
 
   private static void synthesizeInstanceInitCall(Method constructor) {

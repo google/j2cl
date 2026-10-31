@@ -26,11 +26,9 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.JsDocExpression;
-import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -153,22 +151,16 @@ public class OptimizeEnums extends NormalizationPass {
   }
 
   private static boolean hasTrivialConstructors(Type type) {
-    for (Method ctor : type.getConstructors()) {
-      // As constructors will be invoked at load time, we need to check if ctors contains statements
-      // that are safe to be executed at load time. The only load time safe statements we accept is
-      // this() or super() calls and instance fields assignments.
-
-      for (Statement s : ctor.getBody().getStatements()) {
-        if (s instanceof ExpressionStatement expressionStatement) {
-          Expression expression = expressionStatement.getExpression();
-          if (isTrivialThisCall(expression) || isTrivialFieldAssignment(expression)) {
-            continue;
-          }
-        }
-        return false;
-      }
-    }
-    return true;
+    // As constructors will be invoked at load time, we need to check if ctors contains statements
+    // that are safe to be executed at load time. The only load time safe statements we accept is
+    // this() or super() calls and instance fields assignments.
+    return type.streamConstructors()
+        .flatMap(ctor -> ctor.getBody().getStatements().stream())
+        .allMatch(
+            s ->
+                s instanceof ExpressionStatement expressionStatement
+                    && (isTrivialThisCall(expressionStatement.getExpression())
+                        || isTrivialFieldAssignment(expressionStatement.getExpression())));
   }
 
   private static boolean isTrivialThisCall(Expression expression) {

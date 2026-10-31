@@ -55,7 +55,7 @@ public class AddJsFunctionCommonAdaptorSuperType extends NormalizationPass {
 
     // Make constructors defer to the JsFunctionAdaptor constructor passing the function
     // references to the implementing function and bridge.
-    if (type.getConstructors().isEmpty()) {
+    if (!type.hasConstructors()) {
       type.addMember(
           0,
           Method.builder()
@@ -63,7 +63,7 @@ public class AddJsFunctionCommonAdaptorSuperType extends NormalizationPass {
               .setSourcePosition(type.getSourcePosition())
               .build());
     }
-    type.getConstructors()
+    type.streamConstructors()
         .forEach(
             constructor ->
                 insertWasmFuncrefSuperconstructorCall(constructor, jsFunctionTypeDescriptor));

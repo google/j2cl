@@ -17,10 +17,10 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.toOptional;
 import static com.google.j2cl.transpiler.ast.NullabilityPropagationUtils.propagateNullabilityTo;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -52,11 +52,15 @@ public class FixAnonymousClassInstantiations extends NormalizationPass {
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
             Type anonymousInnerClass = newInstance.getAnonymousInnerClass();
-            if (anonymousInnerClass == null || anonymousInnerClass.getConstructors().isEmpty()) {
+            if (anonymousInnerClass == null) {
               return newInstance;
             }
 
-            var constructor = Iterables.getOnlyElement(anonymousInnerClass.getConstructors());
+            var constructor =
+                anonymousInnerClass.streamConstructors().collect(toOptional()).orElse(null);
+            if (constructor == null) {
+              return newInstance;
+            }
             var superConstructorCall = checkNotNull(AstUtils.getConstructorInvocation(constructor));
 
             var constructorParameterMapping =

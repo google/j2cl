@@ -72,7 +72,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
   }
 
   private void rewriteConstructors(Type type) {
-    if (type.isNative() || type.getConstructors().isEmpty()) {
+    if (type.isNative() || !type.hasConstructors()) {
       return;
     }
     insertFactoryMethods(type);

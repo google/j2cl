@@ -47,7 +47,7 @@ public class ResolveImplicitInstanceQualifiers extends NormalizationPass {
     // happens before the super/this constructor call.
     compilationUnit
         .streamTypes()
-        .flatMap(t -> t.getConstructors().stream())
+        .flatMap(Type::streamConstructors)
         .forEach(
             c -> {
               MethodCall delegatedConstructorCall = AstUtils.getConstructorInvocation(c);

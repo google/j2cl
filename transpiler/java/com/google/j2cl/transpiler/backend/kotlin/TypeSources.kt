@@ -194,7 +194,7 @@ internal data class TypeSources(val nameSources: NameSources) {
 
   private fun superTypeInvocationSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
     Source.emptyUnless(superTypeDescriptor.isClass) {
-      if (!type.hasConstructors) {
+      if (!type.hasConstructors()) {
         inParentheses(Source.EMPTY)
       } else {
         type.ktPrimaryConstructor?.let { constructorInvocationSource(type, it) }.orEmpty()

@@ -316,8 +316,16 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .map(InitializerBlock.class::cast);
   }
 
+  public boolean hasConstructors() {
+    return streamConstructors().findAny().isPresent();
+  }
+
   public ImmutableList<Method> getConstructors() {
-    return streamMethods().filter(Member::isConstructor).collect(toImmutableList());
+    return streamConstructors().collect(toImmutableList());
+  }
+
+  public Stream<Method> streamConstructors() {
+    return streamMethods().filter(Member::isConstructor);
   }
 
   @Nullable
@@ -349,7 +357,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   @Nullable
   public Method getPrimaryConstructor() {
     var superDelegatingConstructors =
-        getConstructors().stream().filter(not(AstUtils::hasThisCall)).collect(toImmutableList());
+        streamConstructors().filter(not(AstUtils::hasThisCall)).limit(2).collect(toImmutableList());
     return superDelegatingConstructors.size() != 1 ? null : superDelegatingConstructors.getFirst();
   }
 
@@ -361,7 +369,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   public Method getRecordCanonicalConstructor() {
     MethodDescriptor canonicalConstructorDescriptor =
         getTypeDescriptor().getRecordCanonicalConstructorDescriptor();
-    return getConstructors().stream()
+    return streamConstructors()
         .filter(m -> m.getDescriptor().isSameSignature(canonicalConstructorDescriptor))
         .findFirst()
         .orElse(null);
