@@ -1449,9 +1449,9 @@ public final class AstUtils {
         TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("preserve");
 
     ImmutableList<Expression> fieldReferences =
-        type.getFields().stream()
+        type.streamInstanceFields()
             .map(Field::getDescriptor)
-            .filter(f -> f.isInstanceMember() && !excludedFields.contains(f))
+            .filter(not(excludedFields::contains))
             .map(
                 f ->
                     FieldAccess.builderFrom(f)

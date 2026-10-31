@@ -370,13 +370,14 @@ public class JsInteropRestrictionsChecker {
           type.getReadableDescription());
     }
 
-    Field valueField = getJsEnumValueField(type);
-    if (valueField == null && jsEnumInfo.hasCustomValue()) {
+    boolean hasValueField =
+        type.streamFields().map(Field::getDescriptor).anyMatch(AstUtils::isJsEnumCustomValueField);
+    if (!hasValueField && jsEnumInfo.hasCustomValue()) {
       problems.error(
           type.getSourcePosition(),
           "Custom-valued JsEnum '%s' does not have a field named 'value'.",
           type.getReadableDescription());
-    } else if (valueField != null && !jsEnumInfo.hasCustomValue()) {
+    } else if (hasValueField && !jsEnumInfo.hasCustomValue()) {
       problems.error(
           type.getSourcePosition(),
           "Non-custom-valued JsEnum '%s' cannot have a field named 'value'.",
@@ -404,15 +405,6 @@ public class JsInteropRestrictionsChecker {
       }
       checkMemberOfJsEnum(type, member);
     }
-  }
-
-  @Nullable
-  private static Field getJsEnumValueField(Type type) {
-    checkState(type.isJsEnum());
-    return type.getFields().stream()
-        .filter(member -> AstUtils.isJsEnumCustomValueField(member.getDescriptor()))
-        .findFirst()
-        .orElse(null);
   }
 
   private static boolean requiresConstructor(TypeDeclaration typeDeclaration) {

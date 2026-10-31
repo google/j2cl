@@ -153,7 +153,8 @@ public class OptimizeKotlinCompanions extends NormalizationPass {
             if (type.getTypeDescriptor().isOptimizableKotlinCompanion()) {
               Type enclosingType = (Type) getParent();
               Field companionInstanceField =
-                  enclosingType.getStaticFields().stream()
+                  enclosingType
+                      .streamStaticFields()
                       .filter(f -> isCompanionInstanceField(f.getDescriptor()))
                       .collect(onlyElement());
 

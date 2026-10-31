@@ -211,7 +211,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     }
 
     // Do not optimize if the class declares fields.
-    if (!type.getFields().isEmpty()) {
+    if (type.streamFields().findAny().isPresent()) {
       return false;
     }
     Method lambdaMethod = getSingleDeclaredMethod(type);

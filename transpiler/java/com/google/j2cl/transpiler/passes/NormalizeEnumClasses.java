@@ -166,7 +166,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
     // directly in the initializer of the field or in a synthetic method if the initialization was
     // decomposed by the Kotlin frontend.
     Map<MemberDescriptor, FieldDescriptor> enclosingInitializingMemberDescriptorByEnumField =
-        type.getEnumFields().stream()
+        type.streamEnumFields()
             .collect(
                 toMap(
                     (Field e) -> {

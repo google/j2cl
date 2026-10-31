@@ -174,7 +174,8 @@ public class AddEnumImplicitMethods extends NormalizationPass {
 
     // Create method body.
     ImmutableList<Expression> values =
-        enumType.getEnumFields().stream()
+        enumType
+            .streamEnumFields()
             .map(enumField -> FieldAccess.builderFrom(enumField.getDescriptor()).build())
             .collect(toImmutableList());
 

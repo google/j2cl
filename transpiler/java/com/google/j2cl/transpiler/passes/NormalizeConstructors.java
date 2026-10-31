@@ -655,7 +655,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
   private static List<Statement> generateInstanceFieldDeclarationStatements(
       Type type, SourcePosition sourcePosition) {
-    return type.getInstanceFields().stream()
+    return type.streamInstanceFields()
         .map(field -> AstUtils.declarationStatement(field, sourcePosition))
         .collect(toList());
   }

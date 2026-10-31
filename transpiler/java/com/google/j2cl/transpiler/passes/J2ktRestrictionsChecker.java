@@ -356,7 +356,7 @@ public final class J2ktRestrictionsChecker {
 
           private void checkRecordDataClass(Type type) {
             if (type.getDeclaration().isJavaRecord()) {
-              if (type.getFields().stream()
+              if (type.streamFields()
                   .noneMatch(it -> it.getDescriptor().isRecordComponentField())) {
                 problems.error(
                     type.getSourcePosition(),

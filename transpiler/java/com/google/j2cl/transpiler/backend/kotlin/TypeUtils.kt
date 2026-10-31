@@ -64,7 +64,12 @@ internal val Type.ktMembers: List<KtMember>
       .toList()
 
 internal val Type.javaRecordKtMembers: List<KtMember>
-  get() = javaRecordFields.map { KtMember.WithJavaMember(it) }.toList()
+  get() =
+    streamFields()
+      .asSequence()
+      .filter { it.descriptor.isRecordComponentField }
+      .map { KtMember.WithJavaMember(it) }
+      .toList()
 
 private fun Sequence<Member>.moveAfterFields(member: Member): Sequence<Member> =
   toMutableList()
@@ -129,9 +134,3 @@ private fun Type.overridesFromMultipleIndependentPaths(
     }
     .drop(1)
     .any()
-
-internal val Type.javaRecordFields: List<Field>
-  get() = fields.filter { field -> field.descriptor.isRecordComponentField }
-
-internal val Type.isEmptyRecord: Boolean
-  get() = declaration.isJavaRecord && javaRecordFields.isEmpty()

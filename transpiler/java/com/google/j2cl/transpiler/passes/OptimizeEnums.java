@@ -128,7 +128,7 @@ public class OptimizeEnums extends NormalizationPass {
     }
 
     // check that if instance fields are initialized, they are initialized to constants.
-    if (!type.getInstanceFields().stream()
+    if (!type.streamInstanceFields()
         .filter(Field::hasInitializer)
         .map(Field::getInitializer)
         .allMatch(Expression::isCompileTimeConstant)) {
@@ -137,14 +137,14 @@ public class OptimizeEnums extends NormalizationPass {
 
     // Only optimize the cases where the instantiation appears directly in the initializer. Do not
     // optimize if the initialization was extracted into a method by the Kotlin frontend.
-    if (!type.getEnumFields().stream()
+    if (!type.streamEnumFields()
         .map(Field::getInitializer)
         .allMatch(NewInstance.class::isInstance)) {
       return false;
     }
 
     // We can only optimize enums where compile time constants are used to initialize enum fields.
-    return type.getEnumFields().stream()
+    return type.streamEnumFields()
         .map(Field::getInitializer)
         // We only expect ctor calls at this point.
         .map(NewInstance.class::cast)
@@ -204,7 +204,7 @@ public class OptimizeEnums extends NormalizationPass {
   private static boolean hasSubclasses(Type type) {
     // if one enum initializer is not type of the enum, it means the enum is extended (one of the
     // enum constant has a class body) and we cannot optimize it.
-    return type.getEnumFields().stream()
+    return type.streamEnumFields()
         .map(e -> checkNotNull(e.getInitializer()).getTypeDescriptor())
         .anyMatch(t -> !t.hasSameRawType(type.getTypeDescriptor()));
   }

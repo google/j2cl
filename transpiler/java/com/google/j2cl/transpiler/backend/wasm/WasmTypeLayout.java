@@ -105,7 +105,7 @@ abstract class WasmTypeLayout {
       // If the type is in the library, just look at the field instances in the AST of the Type.
       // In this scenario we will see exactly the instance fields even the ones that are synthesized
       // for captures.
-      declaredFieldDescriptors = type.getInstanceFields().stream().map(Field::getDescriptor);
+      declaredFieldDescriptors = type.streamInstanceFields().map(Field::getDescriptor);
     } else {
       // If the type is not in the library, look at the declared fields for the type in the type
       // model; in this case we will only see the instance fields that were declared on the type,

@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Library;
@@ -239,37 +238,37 @@ public class WasmConstructsGenerator {
   }
 
   private void emitStaticFieldGlobals(Type type) {
-    var fields = type.getStaticFields();
-    if (fields.isEmpty()) {
-      return;
-    }
-    for (Field field : fields) {
-      builder.newLine();
-      builder.append("(global " + environment.getFieldName(field));
+    type.streamStaticFields()
+        .forEach(
+            field -> {
+              builder.newLine();
+              builder.append("(global " + environment.getFieldName(field));
 
-      if (field.isCompileTimeConstant()) {
-        builder.append(
-            format(" %s", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
-        builder.indent();
-        builder.newLine();
-        ExpressionTranspiler.render(field.getInitializer(), builder, environment);
-        builder.unindent();
-      } else {
-        builder.append(
-            format(
-                " (mut %s)", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
-        builder.indent();
-        builder.newLine();
-        ExpressionTranspiler.render(
-            AstUtils.getInitialValue(field.getDescriptor().getTypeDescriptor()),
-            builder,
-            environment);
-        builder.unindent();
-      }
+              if (field.isCompileTimeConstant()) {
+                builder.append(
+                    format(
+                        " %s", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+                builder.indent();
+                builder.newLine();
+                ExpressionTranspiler.render(field.getInitializer(), builder, environment);
+                builder.unindent();
+              } else {
+                builder.append(
+                    format(
+                        " (mut %s)",
+                        environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+                builder.indent();
+                builder.newLine();
+                ExpressionTranspiler.render(
+                    AstUtils.getInitialValue(field.getDescriptor().getTypeDescriptor()),
+                    builder,
+                    environment);
+                builder.unindent();
+              }
 
-      builder.newLine();
-      builder.append(")");
-    }
+              builder.newLine();
+              builder.append(")");
+            });
   }
 
   void renderJsPrototypeImport(Type type) {
