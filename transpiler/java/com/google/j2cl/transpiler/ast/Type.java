@@ -84,12 +84,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getDeclaration().toDescriptor();
   }
 
-  public boolean containsMethod(String mangledName) {
-    return containsMethod(method -> method.getMangledName().equals(mangledName));
-  }
-
   public boolean containsMethod(Predicate<MethodDescriptor> methodPredicate) {
-    return getMethods().stream().map(Method::getDescriptor).anyMatch(methodPredicate);
+    return streamMethods().map(Method::getDescriptor).anyMatch(methodPredicate);
   }
 
   public void setAbstract(boolean isAbstract) {
@@ -206,10 +202,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public ImmutableList<Method> getMethods() {
-    return members.stream()
-        .filter(Member::isMethod)
-        .map(Method.class::cast)
-        .collect(toImmutableList());
+    return streamMethods().collect(toImmutableList());
+  }
+
+  public Stream<Method> streamMethods() {
+    return members.stream().filter(Member::isMethod).map(Method.class::cast);
   }
 
   public boolean hasInstanceInitializerBlocks() {
@@ -320,14 +317,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public ImmutableList<Method> getConstructors() {
-    return getMethods().stream().filter(Member::isConstructor).collect(toImmutableList());
+    return streamMethods().filter(Member::isConstructor).collect(toImmutableList());
   }
 
   @Nullable
   public Method getDefaultConstructor() {
     MethodDescriptor defaultConstructorDescriptor =
         getTypeDescriptor().getDefaultConstructorMethodDescriptor();
-    return getMethods().stream()
+    return streamMethods()
         .filter(m -> m.getDescriptor().equals(defaultConstructorDescriptor))
         .findFirst()
         .orElse(null);

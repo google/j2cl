@@ -13,6 +13,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -235,17 +237,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
 
   @Nullable
   private static Method getSingleDeclaredMethod(Type type) {
-    Method singleDeclaredMethod = null;
-    for (Method method : type.getMethods()) {
-      if (method.isBridge() || method.isConstructor()) {
-        continue;
-      }
-      if (singleDeclaredMethod != null) {
-        return null;
-      }
-      singleDeclaredMethod = method;
-    }
-    return singleDeclaredMethod;
+    var declaredMethods =
+        type.streamMethods()
+            .filter(m -> !m.isBridge() && !m.isConstructor())
+            .limit(2)
+            .collect(toImmutableList());
+    return declaredMethods.size() == 1 ? declaredMethods.getFirst() : null;
   }
 
   public static boolean hasThisOrSuperReference(final Type type) {

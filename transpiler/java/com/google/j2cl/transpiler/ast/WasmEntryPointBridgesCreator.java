@@ -52,13 +52,12 @@ public class WasmEntryPointBridgesCreator {
   public void validateEntryPoints(Library library) {
     library
         .streamTypes()
+        .flatMap(Type::streamMethods)
         .forEach(
-            type -> {
-              for (Method method : type.getMethods()) {
-                // isEntryPoint also checks that the regular expressions used to select entrypoints
-                // are consistent.
-                var unused = isEntryPoint(method.getDescriptor());
-              }
+            method -> {
+              // isEntryPoint also checks that the regular expressions used to select entrypoints
+              // are consistent.
+              var unused = isEntryPoint(method.getDescriptor());
             });
 
     checkForUnusedPatterns();

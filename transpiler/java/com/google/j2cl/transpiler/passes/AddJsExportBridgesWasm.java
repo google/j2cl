@@ -108,9 +108,7 @@ public class AddJsExportBridgesWasm extends LibraryNormalizationPass {
     }
 
     Method jsFunctionMethod =
-        type.getMethods().stream()
-            .filter(m -> m.getDescriptor().isJsFunction())
-            .collect(onlyElement());
+        type.streamMethods().filter(m -> m.getDescriptor().isJsFunction()).collect(onlyElement());
     type.addMember(
         WasmJsBoundaryUtils.generateJsFunctionBridge(
             type.getTypeDescriptor(), jsFunctionMethod.getSourcePosition()));

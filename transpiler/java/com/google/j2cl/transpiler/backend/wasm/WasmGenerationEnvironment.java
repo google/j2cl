@@ -317,7 +317,7 @@ public class WasmGenerationEnvironment {
   ImmutableMap<String, MethodDescriptor> collectMethodsNeedingIntrinsicDeclarations() {
     return library
         .streamTypes()
-        .flatMap(t -> t.getMethods().stream())
+        .flatMap(Type::streamMethods)
         .map(Method::getDescriptor)
         .filter(MethodDescriptor::isSideEffectFree)
         .collect(
@@ -329,7 +329,7 @@ public class WasmGenerationEnvironment {
   ImmutableMap<String, MethodDescriptor> collectMethodsThatNeedTypeDeclarations() {
     return library
         .streamTypes()
-        .flatMap(t -> t.getMethods().stream())
+        .flatMap(Type::streamMethods)
         .map(Method::getDescriptor)
         .filter(MethodDescriptor::isPolymorphic)
         // Native methods are never polymorphic and their parameter types do not correspond to

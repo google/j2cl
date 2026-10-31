@@ -281,7 +281,7 @@ public class WasmConstructsGenerator {
   }
 
   void renderImportedMethods(Type type) {
-    type.getMethods()
+    type.streamMethods()
         .forEach(
             method -> {
               var jsMethodImport = environment.getJsMethodImport(method.getDescriptor());
@@ -293,7 +293,7 @@ public class WasmConstructsGenerator {
   }
 
   public void renderImplementedMethods(Type type) {
-    type.getMethods().stream()
+    type.streamMethods()
         .filter(
             method -> {
               MethodDescriptor methodDescriptor = method.getDescriptor();

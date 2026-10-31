@@ -894,26 +894,21 @@ public class JsInteropRestrictionsChecker {
       BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
       BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
       String checkedTypeMessage) {
-    type.getMembers()
+    type.streamMethods()
         .forEach(
-            member ->
+            method ->
                 checkOverrides(
-                    member,
+                    method,
                     isDisallowedParameterOverride,
                     isDisallowedReturnTypeOverride,
                     checkedTypeMessage));
   }
 
   private void checkOverrides(
-      Member member,
+      Method method,
       BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
       BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
       String checkedTypeMessage) {
-    if (!member.isMethod()) {
-      return;
-    }
-
-    Method method = (Method) member;
     MethodDescriptor methodDescriptor = method.getDescriptor();
     for (MethodDescriptor m : methodDescriptor.getJavaOverriddenMethodDescriptors()) {
       MethodDescriptor overriddenMethodDescriptor = m.getDeclarationDescriptor();
@@ -928,7 +923,7 @@ public class JsInteropRestrictionsChecker {
         if (isDisallowedParameterOverride.test(
             overriddenParameterDescriptor, parameterDescriptor)) {
           problems.error(
-              member.getSourcePosition(),
+              method.getSourcePosition(),
               "Method '%s' cannot override method '%s' with a %s parameter.",
               methodDescriptor.getReadableDescription(),
               overriddenMethodDescriptor.getReadableDescription(),
@@ -940,7 +935,7 @@ public class JsInteropRestrictionsChecker {
           overriddenMethodDescriptor.getReturnTypeDescriptor(),
           methodDescriptor.getReturnTypeDescriptor())) {
         problems.error(
-            member.getSourcePosition(),
+            method.getSourcePosition(),
             "Method '%s' cannot override method '%s' with a %s return type.",
             methodDescriptor.getReadableDescription(),
             overriddenMethodDescriptor.getReadableDescription(),

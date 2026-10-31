@@ -15,11 +15,17 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
+
+import com.google.common.base.Suppliers;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import java.util.function.Supplier;
 
 /**
  * Adds abstract method stubs for all methods that are abstract at a particular type.
@@ -62,26 +68,27 @@ public class AddAbstractMethodStubs extends NormalizationPass {
 
       return;
     }
+    // Avoid building the set of declared method names unless there are abstract interface methods.
+    Supplier<ImmutableSet<String>> declaredMethodMangledNames =
+        Suppliers.memoize(
+            () -> type.streamMethods().map(Member::getMangledName).collect(toImmutableSet()));
     type.getTypeDescriptor().getPolymorphicMethods().stream()
         .filter(MethodDescriptor::isAbstract)
         .filter(m -> !m.isMemberOf(type.getDeclaration()))
         .filter(m -> m.getEnclosingTypeDescriptor().isInterface())
+        .filter(m -> !declaredMethodMangledNames.get().contains(m.getMangledName()))
         .forEach(
-            m -> {
-              if (type.containsMethod(m.getMangledName())) {
-                // The method is already defined in the type; nothing to do.
-                return;
-              }
-              type.addMember(
-                  Method.builder()
-                      .setMethodDescriptor(
-                          m.toBuilder()
-                              .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                              .makeAbstractStub(m)
-                              .build())
-                      .setParameters(AstUtils.createParameterVariables(m.getParameterDescriptors()))
-                      .setSourcePosition(SourcePosition.NONE)
-                      .build());
-            });
+            m ->
+                type.addMember(
+                    Method.builder()
+                        .setMethodDescriptor(
+                            m.toBuilder()
+                                .setEnclosingTypeDescriptor(type.getTypeDescriptor())
+                                .makeAbstractStub(m)
+                                .build())
+                        .setParameters(
+                            AstUtils.createParameterVariables(m.getParameterDescriptors()))
+                        .setSourcePosition(SourcePosition.NONE)
+                        .build()));
   }
 }
