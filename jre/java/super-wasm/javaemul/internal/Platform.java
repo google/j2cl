@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.HasNoSideEffects;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
@@ -93,6 +94,7 @@ public final class Platform {
    * identity for values that have a JS representation (e.g. a Java `String` compares equal to a JS
    * string with the same contents).
    */
+  @HasNoSideEffects
   @JsMethod(namespace = "j2wasm.EqualityUtils")
   public static native boolean isSame(WasmExtern left, WasmExtern right);
 

@@ -5594,7 +5594,7 @@
  (local $this (ref null $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18))
  (local.set $this (ref.cast (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18) (local.get $this.untyped)))
  (block
-  (return (if (result i32) (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (struct.get $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18 $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18 (local.get $this))(ref.null extern)) (then (i32.const 0)) (else (i32.const 1))))
+  (return (if (result i32) (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (struct.get $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18 $$outer_this@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18 (local.get $this))(ref.null extern)(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ) (then (i32.const 0)) (else (i32.const 1))))
  )
 )
 (elem declare func $m_foo__int__int@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$LambdaImplementor$18)

@@ -1012,17 +1012,17 @@
   (local.set $nativeStringEnum (call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
   (block
    (local.set $$selector (block (result (ref null extern))
-    (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $nativeStringEnum)(ref.null extern))))
+    (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $nativeStringEnum)(ref.null extern)(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
     (local.get $nativeStringEnum)
    ))
    
-   (if (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $$selector)(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
+   (if (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $$selector)(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )
     (then
      (block
       (local.set $$caseIndex (i32.const 0))
      )
     )(else
-     (if (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $$selector)(call $m_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
+     (if (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $$selector)(call $m_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )
       (then
        (block
         (local.set $$caseIndex (i32.const 1))
@@ -1056,7 +1056,7 @@
    (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))))
    (drop (call_ref $function.m_compareTo__java_lang_Object__int (ref.as_non_null (local.get $$qualifier))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $m_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (ref $java.lang.Comparable.vtable) (call $get.itable.$java.lang.Comparable (local.get $$qualifier))))))
   )
-  (drop (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(call $m_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )))
+  (drop (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(call $m_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
   (local.set $supplier (call $$create__@jsenum.Main.$LambdaImplementor$1 ))
   (local.set $consummer (call $$create__@jsenum.Main.$LambdaImplementor$2 ))
   (call $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$3 ))
@@ -1230,10 +1230,10 @@
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   )))
-  (drop (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (block (result (ref null $java.lang.Object))
+  (drop (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (block (result (ref null $java.lang.Object))
    (local.set $$qualifier_1 (call $m_getNativeStringEnumList__java_util_List@jsenum.Main ))
    (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $$qualifier_1))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $$qualifier_1)))))
-  ))(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )))
+  ))(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
  )
 )
 
@@ -1556,7 +1556,7 @@
    (call $m_setArrayAt__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__void@javaemul.internal.WasmExtern (local.get $nativeArray)(i32.const 1)(call $m_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
    (local.get $nativeArray)
   ))
-  (local.set $b1 (call $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (ref.cast (ref null extern) (call $m_getArrayAt__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern@javaemul.internal.WasmExtern (local.get $arr)(i32.const 0)))(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )))
+  (local.set $b1 (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (ref.cast (ref null extern) (call $m_getArrayAt__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern@javaemul.internal.WasmExtern (local.get $arr)(i32.const 0)))(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
   (local.set $arr2 (call $m_createArray__int__javaemul_internal_WasmExtern@javaemul.internal.WasmExtern (i32.const 2)))
   (call $m_setArrayAt__javaemul_internal_WasmExtern__int__javaemul_internal_WasmExtern__void@javaemul.internal.WasmExtern (local.get $arr2)(i32.const 0)(call $m_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
   (local.set $nestedArr (block (result (ref null extern))
