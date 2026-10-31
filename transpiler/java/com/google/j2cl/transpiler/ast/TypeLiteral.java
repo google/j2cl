@@ -69,7 +69,9 @@ public final class TypeLiteral extends Literal implements HasSourcePosition {
 
   @Override
   public boolean equals(Object o) {
-    return this == o;
+    return this == o
+        || (o instanceof TypeLiteral other
+            && referencedTypeDescriptor.equals(other.referencedTypeDescriptor));
   }
 
   @Override
