@@ -283,6 +283,10 @@
  (local $n (ref null $java.lang.Number))
  (local $$caseIndex_2 i32)
  (local $j_1 (ref null $java.lang.Integer))
+ (local $condition (ref null $java.lang.Boolean))
+ (local $$selector_2 (ref null $java.lang.Object))
+ (local $$caseIndex_3 i32)
+ (local $s_2 (ref null $java.lang.String))
  (local $this (ref null $switchpatterns.SwitchPatterns))
  (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
  (block
@@ -439,6 +443,38 @@
      )
      ;; default:
      (br $SWITCH_2.BREAK)
+    )
+   )
+  )
+  (local.set $condition (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
+  (block
+   (local.set $$selector_2 (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $o)))
+   
+   (if (if (result i32) (ref.test (ref $java.lang.String) (local.get $$selector_2)) (then (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (block (result (ref null $java.lang.Boolean))
+     (local.set $s_2 (ref.cast (ref null $java.lang.String) (local.get $$selector_2)))
+     (local.get $condition)
+    )))) (else (i32.const 0)))
+    (then
+     (block
+      (local.set $$caseIndex_3 (i32.const 0))
+     )
+    )(else
+     (block
+      (local.set $$caseIndex_3 (i32.const 1))
+     )
+    )
+   )
+   (block $SWITCH_3.BREAK
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 1 (local.get $$caseIndex_3))
+      )
+      ;; case 0:
+      (br $SWITCH_3.BREAK)
+     )
+     ;; default:
+     (br $SWITCH_3.BREAK)
     )
    )
   )

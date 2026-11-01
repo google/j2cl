@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SwitchCasePattern;
 import com.google.j2cl.transpiler.ast.SwitchConstruct;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
@@ -799,6 +800,24 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     return switchConstruct.toBuilder().setExpression(expression).build();
+  }
+
+  @Override
+  public SwitchCasePattern rewriteSwitchCasePattern(SwitchCasePattern switchCasePattern) {
+    if (switchCasePattern.getGuard() == null) {
+      // Nothing to rewrite.
+      return switchCasePattern;
+    }
+
+    // boolean context
+    Expression guard =
+        contextRewriter.rewriteBooleanConversionContext(switchCasePattern.getGuard());
+
+    if (guard == switchCasePattern.getGuard()) {
+      return switchCasePattern;
+    }
+
+    return switchCasePattern.toBuilder().setGuard(guard).build();
   }
 
   @Override

@@ -22,6 +22,7 @@ import javaemul.lang.*
 import java.lang.AssertionError
 import jsinterop.annotations.JsEnum
 import kotlin.Any
+import kotlin.Boolean
 import kotlin.Int
 import kotlin.Number
 import kotlin.String
@@ -65,6 +66,14 @@ open class SwitchPatterns {
     j_1!!.toInt() > 2
    } -> {}
    null -> {}
+   else -> {}
+  }
+  val condition: Boolean? = true
+  when (o) {
+   is String if run {
+    val s_2: String = o as String
+    condition
+   } as Boolean -> {}
    else -> {}
   }
  }

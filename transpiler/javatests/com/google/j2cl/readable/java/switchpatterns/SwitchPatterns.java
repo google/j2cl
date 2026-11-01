@@ -45,6 +45,13 @@ public class SwitchPatterns {
       case null -> {}
       default -> {}
     }
+
+    // Guard of boxed Boolean type.
+    Boolean condition = true;
+    switch (o) {
+      case String s when condition -> {}
+      default -> {}
+    }
   }
 
   void testRecordPatterns() {
