@@ -10,6 +10,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $1GenericRecord = goog.forwardDeclare('switchpatterns.SwitchPatterns.$1GenericRecord$impl');
 let $1R = goog.forwardDeclare('switchpatterns.SwitchPatterns.$1R$impl');
 let Color = goog.forwardDeclare('switchpatterns.SwitchPatterns.Color$impl');
 let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
@@ -135,6 +136,33 @@ class SwitchPatterns extends j_l_Object {
     case 1:
      break;
     default:
+     break;
+   }
+  }
+ }
+ /** @nodts */
+ static m_testGenericRecordPatterns__void() {
+  SwitchPatterns.$clinit();
+  let genericRecord = /**@type {!$1GenericRecord<?string>}*/ ($1GenericRecord.$create__java_lang_Object('Hello'));
+  {
+   let $selector = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(genericRecord);
+   let /** number */ $caseIndex;
+   let /** $1GenericRecord<?string> */ pattern$1GenericRecord;
+   let /** ?string */ s;
+   let /** $1GenericRecord<?string> */ pattern$1GenericRecord_1;
+   let /** ?string */ s_1;
+   if ($1GenericRecord.$isInstance($selector) && (pattern$1GenericRecord = (/**@type {!$1GenericRecord<?string>}*/ ($selector)), s = pattern$1GenericRecord.m_value__java_lang_Object(), j_l_String.m_isEmpty__java_lang_String__boolean(s))) {
+    $caseIndex = 0;
+   } else if ($1GenericRecord.$isInstance($selector) && (pattern$1GenericRecord_1 = (/**@type {!$1GenericRecord<?string>}*/ ($selector)), s_1 = pattern$1GenericRecord_1.m_value__java_lang_Object(), true)) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     break;
+    case 1:
+     j_l_String.m_length__java_lang_String__int(s_1);
      break;
    }
   }
@@ -327,6 +355,7 @@ class SwitchPatterns extends j_l_Object {
   Objects = goog.module.get('java.util.Objects$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $1GenericRecord = goog.module.get('switchpatterns.SwitchPatterns.$1GenericRecord$impl');
   $1R = goog.module.get('switchpatterns.SwitchPatterns.$1R$impl');
   Color = goog.module.get('switchpatterns.SwitchPatterns.Color$impl');
   Digit = goog.module.get('switchpatterns.SwitchPatterns.Digit$impl');

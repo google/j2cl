@@ -231,6 +231,30 @@ open class SwitchPatterns {
  
  companion object {
   @JvmStatic
+  internal fun testGenericRecordPatterns() {
+   data class GenericRecord<T>(
+    val value: T,
+   )
+   val genericRecord: GenericRecord<String?> = GenericRecord<String?>("Hello")
+   var s: String? = null
+   when (genericRecord) {
+    is GenericRecord<String?> if run {
+     val pattern___1GenericRecord: GenericRecord<String?> = genericRecord as GenericRecord<String?>
+     val s_1: String? = pattern___1GenericRecord.value
+     s_1!!.isEmpty()
+    } -> {}
+    is GenericRecord<String?> if run {
+     val pattern___1GenericRecord_1: GenericRecord<String?> = genericRecord as GenericRecord<String?>
+     s = pattern___1GenericRecord_1.value
+     true
+    } -> {
+     s!!.length
+    }
+    else -> {}
+   }
+  }
+  
+  @JvmStatic
   internal fun fail() {}
  }
  
