@@ -219,6 +219,7 @@ internal class KotlinEnvironment(
         .setPackage(createPackageDeclaration(irClass.packageFqName!!.asString()))
         .setVisibility(irClass.j2clVisibility)
         .setEnclosingTypeDeclaration(getDeclarationForType(irClass.parentClassOrNull))
+        .setEnclosingMethodDescriptorFactory { getEnclosingMethodDescriptor(irClass) }
         .setDeclaredMethodDescriptorsFactory { _ ->
           ImmutableList.copyOf(irClass.methods.map(::getDeclaredMethodDescriptor))
         }
@@ -744,6 +745,9 @@ internal class KotlinEnvironment(
         .build()
     }
   }
+
+  private fun getEnclosingMethodDescriptor(irClass: IrClass): MethodDescriptor? =
+    (irClass.parent as? IrFunction)?.let(::getDeclaredMethodDescriptor)
 
   fun getFieldDescriptor(
     field: IrField,

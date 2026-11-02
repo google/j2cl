@@ -65,6 +65,9 @@ public interface HasAnnotations {
       case TypeDeclaration typeDeclaration
           when typeDeclaration.getEnclosingTypeDeclaration() != null ->
           typeDeclaration.getEnclosingTypeDeclaration().isWarningSuppressed(suppression);
+      case MethodDescriptor methodDescriptor
+          when methodDescriptor.getEnclosingMethodDescriptor() != null ->
+          methodDescriptor.getEnclosingMethodDescriptor().isWarningSuppressed(suppression);
       case MemberDescriptor memberDescriptor ->
           memberDescriptor
               .getEnclosingTypeDescriptor()
