@@ -90,17 +90,33 @@ final class JsExternsGenerator {
     if (!environment.isCustomDescriptorsJsInteropEnabled()) {
       return;
     }
-    library
-        .streamTypes()
-        .filter(t -> shouldGenerateExtern(t.getTypeDescriptor()))
-        .forEach(t -> generateExterns(output, t));
+
+    var exportedTypes =
+        library
+            .streamTypes()
+            .filter(t -> shouldGenerateExtern(t.getTypeDescriptor()))
+            .collect(toImmutableList());
+    if (exportedTypes.isEmpty()) {
+      return;
+    }
+
+    // For exported types, generate:
+    //
+    // 1. Externs: Declares exposed methods and fields of the type and records the native modules
+    // that need to be required in the wiring. These are all combined into a single externs file.
+    //
+    // 2. Wiring code: Exposes the type as a goog.module.
+    SourceBuilder externsBuilder = new SourceBuilder();
+    externsBuilder.appendln("/** @externs */");
+
+    exportedTypes.forEach(t -> generateExterns(output, externsBuilder, t));
+
+    output.write(Path.of(OUTPUT_PATH, "externs.java.js").toString(), externsBuilder.build());
   }
 
-  private static void generateExterns(Output output, Type type) {
+  private static void generateExterns(Output output, SourceBuilder externsBuilder, Type type) {
     var externsGenerator = new JsExternsGenerator(output, type);
-    // Generate the extern first since it records the native modules that need to be required in
-    // the wiring.
-    externsGenerator.generateExtern();
+    externsGenerator.appendExtern(externsBuilder);
     externsGenerator.generateExternsWiring();
   }
 
@@ -109,18 +125,9 @@ final class JsExternsGenerator {
     return isWasmJsExportedType(typeDescriptor);
   }
 
-  private void generateExtern() {
-    SourceBuilder sb = new SourceBuilder();
-    sb.appendln("/** @externs */");
-
+  private void appendExtern(SourceBuilder sb) {
     appendConstructor(sb);
     appendMembers(sb);
-
-    // Output to externs/my.package.MyClass.externs.java.js
-    output.write(
-        Path.of(OUTPUT_PATH, type.getDeclaration().getQualifiedJsName() + ".externs.java.js")
-            .toString(),
-        sb.build());
   }
 
   /** Appends the constructor extern for the type. */
