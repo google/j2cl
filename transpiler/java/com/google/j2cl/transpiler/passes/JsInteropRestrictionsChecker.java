@@ -458,6 +458,15 @@ public class JsInteropRestrictionsChecker {
     }
 
     Expression enumFieldValue = getEnumConstantValue(field);
+    if (enumFieldValue != null && enumFieldValue.isAlwaysNull()) {
+      // JsEnum values are represented by their underlying value at runtime, so a null constant
+      // would be indistinguishable from a null reference.
+      problems.error(
+          field.getSourcePosition(),
+          "Custom-valued JsEnum constant '%s' cannot have a null value.",
+          field.getReadableDescription());
+      return;
+    }
     if (enumFieldValue == null || enumFieldValue.isCompileTimeConstant()) {
       // Integer.MIN_VALUE is considered null in Wasm for int-valued JsEnums.
       // We can check for NumberLiteral here because constant expressions are folded in the

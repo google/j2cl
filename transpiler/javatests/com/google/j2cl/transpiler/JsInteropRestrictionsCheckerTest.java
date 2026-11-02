@@ -2587,6 +2587,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           int value;
           CustomValueWithIntegerMinValue(int value) { this.value = value; }
         }
+        @JsEnum(hasCustomValue = true)
+        enum CustomValueWithNull {
+          A(null),
+        > Error: Custom-valued JsEnum constant 'CustomValueWithNull.A' cannot have a null value.
+          B((String) null);
+        > Error: Custom-valued JsEnum constant 'CustomValueWithNull.B' cannot have a null value.
+          String value;
+          CustomValueWithNull(String value) { this.value = value; }
+        }
         """);
   }
 
