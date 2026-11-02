@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -469,7 +468,6 @@ public class Main {
     }
   }
 
-  @Wasm("nop") // TODO(b/577118779): Remove once switching on intersection types is supported.
   public static void testSwitchOnIntersection(Object o) {
     switch ((ComparableJsEnum & Comparable<ComparableJsEnum>) o) {
       case ComparableJsEnum.ZERO:

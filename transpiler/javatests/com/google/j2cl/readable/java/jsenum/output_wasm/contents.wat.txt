@@ -1631,6 +1631,51 @@
  )
 )
 
+;;; void Main.testSwitchOnIntersection(Object o)
+(func $m_testSwitchOnIntersection__java_lang_Object__void@jsenum.Main
+ (param $o (ref null $java.lang.Object))
+ (local $$selector (ref null $jsenum.Main.ComparableJsEnum))
+ (local $$arg (ref null $jsenum.Main.ComparableJsEnum))
+ (local $$caseIndex i32)
+ (block
+  (call $$clinit__void_<once>_@jsenum.Main )
+  (block
+   (local.set $$selector (block (result (ref null $jsenum.Main.ComparableJsEnum))
+    (local.set $$arg (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o))))
+    (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (ref.is_null (local.get $$arg))))
+    (local.get $$arg)
+   ))
+   
+   (if (ref.eq (local.get $$selector) (block (result (ref null $jsenum.Main.ComparableJsEnum))
+     (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+     (global.get $ZERO@jsenum.Main.ComparableJsEnum)
+    ))
+    (then
+     (block
+      (local.set $$caseIndex (i32.const 0))
+     )
+    )(else
+     (block
+      (local.set $$caseIndex (i32.const 1))
+     )
+    )
+   )
+   (block $SWITCH.BREAK
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 1 (local.get $$caseIndex))
+      )
+      ;; case 0:
+      (br $SWITCH.BREAK)
+     )
+     ;; default:
+    )
+   )
+  )
+ )
+)
+
 ;;; int Main.testShiftByJsEnumOrdinal(ComparableJsEnum e)
 (func $m_testShiftByJsEnumOrdinal__jsenum_Main_ComparableJsEnum__int@jsenum.Main
  (param $e (ref null $jsenum.Main.ComparableJsEnum))

@@ -515,9 +515,6 @@ public class Main {
     assertUnderlyingTypeEquals(Double.class, otherPe);
   }
 
-  // TODO(b/577118779): Switching on an intersection type is not normalized into a switch on the
-  // ordinal in Wasm.
-  @Wasm("nop")
   private static void testComparableJsEnumIntersectionSwitch() {
     Object o = PlainJsEnum.ONE;
     switch ((PlainJsEnum & Comparable<PlainJsEnum>) o) {
