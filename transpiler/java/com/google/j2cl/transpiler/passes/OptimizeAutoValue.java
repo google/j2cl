@@ -22,37 +22,24 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescriptors;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.JsConstructorReference;
-import com.google.j2cl.transpiler.ast.JsDocExpression;
-import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor.TypeReplacer;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -99,7 +86,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .streamTypes()
             .filter(t -> optimizableTypes.contains(t.getDeclaration().getSuperTypeDeclaration()))
             // Filter the unlikely empty AutoValue case to avoid handling edge cases.
-            .filter(t -> !Iterables.isEmpty(getInstanceFields(t.getDeclaration())))
+            .filter(
+                t -> !Iterables.isEmpty(ValueTypeOptimizer.getInstanceFields(t.getDeclaration())))
             .collect(
                 toImmutableMap(
                     t -> t.getSuperTypeDescriptor().getTypeDeclaration(), Function.identity()));
@@ -197,7 +185,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       // builder's superclass directly.
       checkState(from.getDefaultConstructor() != null);
       for (Method constructor : from.getConstructors()) {
-        updateSuperCall(constructor, to.getImplicitSuperCallTarget());
+        ValueTypeOptimizer.updateSuperCall(constructor, to.getImplicitSuperCallTarget());
       }
     } else {
       // The generated AutoValue implementation class only ever has a single constructor.
@@ -206,7 +194,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       // If the @AutoValue class has no explicit constructor (CreateImplicitConstructors hasn't
       // run yet), retarget the constructor to the superclass directly.
       if (to.getDefaultConstructor() == null) {
-        updateSuperCall(from.getConstructors().getFirst(), to.getImplicitSuperCallTarget());
+        ValueTypeOptimizer.updateSuperCall(
+            from.getConstructors().getFirst(), to.getImplicitSuperCallTarget());
       }
     }
 
@@ -275,22 +264,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         "AutoValue rejects no-arg constructor delegating via this(...).");
 
     type.getMembers().removeIf(m -> m.isConstructor() && m != defaultCtor);
-  }
-
-  /** Updates {@code constructor}'s super() call to target {@code superConstructor}. */
-  private static void updateSuperCall(Method constructor, MethodDescriptor superConstructor) {
-    ExpressionStatement statement = AstUtils.getConstructorInvocationStatement(constructor);
-    // We only inline classes with trivial constructors.
-    checkState(
-        statement.getExpression() instanceof MethodCall methodCall
-            && methodCall.getArguments().isEmpty());
-    MethodCall superCall =
-        MethodCall.builderFrom(superConstructor)
-            .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
-            .build();
-    List<Statement> statements = constructor.getBody().getStatements();
-    statements.set(
-        statements.indexOf(statement), superCall.makeStatement(statement.getSourcePosition()));
   }
 
   private static void inlineNestedTypes(Type from, Type to) {
@@ -395,38 +368,11 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         .streamTypes()
         .filter(t -> AstUtils.isAnnotatedWithAutoValue(t.getDeclaration()))
         .forEach(
-            autoValue -> {
-              int mask = removeJavaLangObjectMethods(autoValue);
-              if (mask == 0) {
-                // No method removed/needs optimization. Leave the type alone.
-                // Note that this also applies when the type can not be inlined to as it wouldn't
-                // have any of the generated `j.l.Object` methods.
-                return;
-              }
-
-              Collection<FieldDescriptor> excludedFields =
-                  autoValueToExcludedFields.get(autoValue.getDeclaration());
-
-              if (TypeDescriptors.isJavaLangObject(autoValue.getSuperTypeDescriptor())) {
-                // Change the parent type of AutoValue class to ValueType.
-                autoValue.setSuperTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType);
-                updateSuperCall(
-                    autoValue.getPrimaryConstructor(), autoValue.getImplicitSuperCallTarget());
-                // Recorded excluded fields if there are any.
-                if (!excludedFields.isEmpty()) {
-                  addExcludedFieldsDeclaration(autoValue, excludedFields);
-                }
-              } else {
-                // Add mixin that will provide the implementation for java.lang.Object.
-                addValueTypeMixin(autoValue, mask, excludedFields);
-              }
-
-              // Prevent JsCompiler from optimizing the fields to not break the semantics.
-              // If we don't take any special precautions, if a field is never read explicitly (even
-              // it is set), JsCompiler can optimize them away. As a result they won't be seen
-              // reflectively and they won't contribute to equals/hashcode/toString.
-              AstUtils.preserveFields(autoValue, excludedFields);
-            });
+            autoValue ->
+                ValueTypeOptimizer.optimizeAsValueType(
+                    autoValue,
+                    removeJavaLangObjectMethods(autoValue),
+                    autoValueToExcludedFields.get(autoValue.getDeclaration())));
   }
 
   @Nullable
@@ -445,11 +391,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     // None of the user declared fields in AutoValue and its parents are included in AutoValue
     // generated equals/hashCode/toString.
     if (AstUtils.isAnnotatedWithAutoValue(type)) {
-      for (TypeDeclaration t = type;
-          !TypeDescriptors.isJavaLangObject(t.toRawTypeDescriptor());
-          t = t.getSuperTypeDeclaration()) {
-        excludedFields.putAll(type, getInstanceFields(t));
-      }
+      excludedFields.putAll(type, ValueTypeOptimizer.getAllInstanceFields(type));
     }
 
     // Fields declared in subclasses of AutoValue impl (i.e. code generated by extensions) are also
@@ -458,13 +400,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         .map(Type::getDeclaration)
         // Skip the AutoValue impl.
         .filter(t -> !AstUtils.isAnnotatedWithAutoValue(t.getSuperTypeDeclaration()))
-        .forEach(t -> excludedFields.putAll(type, getInstanceFields(t)));
+        .forEach(t -> excludedFields.putAll(type, ValueTypeOptimizer.getInstanceFields(t)));
 
     return excludedFields;
-  }
-
-  private static Iterable<FieldDescriptor> getInstanceFields(TypeDeclaration t) {
-    return Iterables.filter(t.getDeclaredFieldDescriptors(), FieldDescriptor::isInstanceMember);
   }
 
   /**
@@ -486,13 +424,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         continue;
       }
 
-      mask |=
-          switch (method.getDescriptor().getName()) {
-            case "equals" -> 1;
-            case "hashCode" -> 2;
-            case "toString" -> 4;
-            default -> throw new AssertionError(method.getDescriptor());
-          };
+      mask |= ValueTypeOptimizer.getMethodMask(method.getDescriptor());
 
       generatedObjectMethods.add(method);
     }
@@ -500,85 +432,5 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     type.getMembers().removeAll(generatedObjectMethods);
 
     return mask;
-  }
-
-  private static void addValueTypeMixin(
-      Type autoValue, int mask, Collection<FieldDescriptor> excludedFields) {
-    MethodDescriptor mixinMethodDescriptor =
-        TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("mixin");
-
-    MethodCall mixinCall =
-        MethodCall.builderFrom(mixinMethodDescriptor)
-            .setArguments(
-                new JsConstructorReference(autoValue.getDeclaration()),
-                new JsConstructorReference(
-                    TypeDescriptors.get().javaemulInternalValueType.getTypeDeclaration()),
-                NumberLiteral.fromInt(mask),
-                getPropertyNameExpressions(autoValue.getDeclaration(), excludedFields))
-            .build();
-    autoValue.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
-  }
-
-  private static void addExcludedFieldsDeclaration(
-      Type autoValue, Collection<FieldDescriptor> excludedFields) {
-    FieldDescriptor excludedFieldDescriptor =
-        FieldDescriptor.builder()
-            .setOriginalJsInfo(JsInfo.RAW_FIELD)
-            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
-            .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
-            .setName("$excluded_fields")
-            .build();
-    Expression excludedFieldAccess = createPrototypeFieldAccess(autoValue, excludedFieldDescriptor);
-
-    // Property name expression is guarded by @pureOrBreakMyCode to make it movable by JsCompiler's
-    // cross chunk code motion. Note that ValueType.mixin doesn't need this since JsCompiler is
-    // treating class definition helpers separately.
-    // TODO(b/435019132): Remove this annotation once the the JsCompiler handles the pattern.
-    Expression propertyNameExpressions =
-        JsDocExpression.builder()
-            .setAnnotation("pureOrBreakMyCode")
-            .setExpression(getPropertyNameExpressions(autoValue.getDeclaration(), excludedFields))
-            .build();
-
-    // Adds load time statement MyFoo.prototype.$excluded_fields = [ ... ]
-    autoValue.addLoadTimeStatement(
-        excludedFieldAccess
-            .infixAssign(propertyNameExpressions)
-            .makeStatement(SourcePosition.NONE));
-  }
-
-  private static ArrayLiteral getPropertyNameExpressions(
-      TypeDeclaration type, Collection<FieldDescriptor> fields) {
-    // Note that ValueType.objectProperty is just a native proxy for goog.reflect.objectProperty.
-    MethodCall.Builder objectPropertyCallBuilder =
-        MethodCall.builderFrom(
-            TypeDescriptors.get()
-                .javaemulInternalValueType
-                .getMethodDescriptorByName("objectProperty"));
-    // Generates an array literal in the form of:
-    // [
-    //   ValueType.objectProperty("<property1>", MyType),
-    //   ValueType.objectProperty("<property2>", MyType),
-    //   ...
-    // ]
-    return ArrayLiteral.builder()
-        .setTypeDescriptor(TypeDescriptors.get().javaLangObjectArray)
-        .setValueExpressions(
-            fields.stream()
-                .map(FieldDescriptor::getMangledName)
-                .map(StringLiteral::new)
-                .map(
-                    name ->
-                        objectPropertyCallBuilder
-                            .setArguments(name, new JsConstructorReference(type))
-                            .build())
-                .toArray(Expression[]::new))
-        .build();
-  }
-
-  private static Expression createPrototypeFieldAccess(Type type, FieldDescriptor field) {
-    return FieldAccess.builderFrom(field)
-        .setQualifier(new JsConstructorReference(type.getDeclaration()).getPrototypeFieldAccess())
-        .build();
   }
 }
