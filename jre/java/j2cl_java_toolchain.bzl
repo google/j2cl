@@ -24,6 +24,9 @@ def j2cl_java_toolchain(name, bootclasspath, visibility = None, **kwargs):
         bootclasspath = bootclasspath,
     )
 
+    # Honor --tool_java_runtime_version while retaining explicit caller overrides.
+    kwargs.setdefault("java_runtime", Label("@rules_java//toolchains:current_host_java_runtime"))
+
     default_java_toolchain(
         name = name,
         bootclasspath = [jdk_system_name],

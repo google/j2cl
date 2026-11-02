@@ -35,7 +35,6 @@ public final class JsUnitHelpers {
   public static native void await(IThenable<?> thenable);
 
   @JsAsync
-  @Wasm("nop") // Cannot be used in WASM.
   public static IThenable<?> withTimeout(Object thenable, double timeout) {
     if (thenable == null) {
       throw new IllegalStateException("Test returned null as its promise");

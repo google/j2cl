@@ -23,7 +23,12 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.passes.LibraryNormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /** Translation tool for generating JavaScript source files from Java sources. */
 class J2clTranspiler {
@@ -58,11 +63,26 @@ class J2clTranspiler {
             ? Library.newEmpty()
             : options.getFrontend().parse(options, problems)) {
 
-      // TODO(b/506284703): Reconsider refactoring how sourcefiles are handled in general.
-      // Copy generated JS files from the APT directory to the output directory.
-      SourceUtils.getAllSources(options.getSourceGenPath())
-          .filter(f -> f.sourcePath().endsWith(".js") && !f.sourcePath().endsWith(".native.js"))
-          .forEach(f -> options.getOutput().copyFile(f.sourcePath(), f.targetPath()));
+      // SOURCE_OUTPUT JavaScript is executable; native bindings are consumed by the backend.
+      // CLASS_OUTPUT JavaScript is a resource, so leave it in the Java output archive.
+      Set<String> resourcePaths = new HashSet<>();
+      Stream.concat(
+              SourceUtils.getAllSources(options.getSourceGenPath())
+                  .filter(f -> !f.targetPath().endsWith(".native.js")),
+              SourceUtils.getAllSources(options.getClassGenPath())
+                  .filter(f -> !f.targetPath().endsWith(".js")))
+          .filter(f -> Files.isRegularFile(Path.of(f.sourcePath())))
+          .filter(f -> !f.targetPath().endsWith(".java") && !f.targetPath().endsWith(".class"))
+          .forEach(
+              f -> {
+                if (!resourcePaths.add(f.targetPath())) {
+                  problems.error(
+                      "Generated resource '%s' exists in both source and class output.",
+                      f.targetPath());
+                  return;
+                }
+                options.getOutput().copyFile(f.sourcePath(), f.targetPath());
+              });
 
       problems.abortIfHasErrors();
       if (!library.isEmpty()) {

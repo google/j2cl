@@ -73,6 +73,17 @@ java_test(
 )
 
 java_test(
+    name = "GeneratedResourcesTest",
+    srcs = ["GeneratedResourcesTest.java"],
+    deps = [
+        "//third_party:junit",
+        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/transpiler:transpiler_lib",
+        "//transpiler/java/com/google/j2cl/transpiler/backend",
+    ],
+)
+
+java_test(
     name = "SourceMapsIntegrationTest",
     srcs = ["SourceMapsIntegrationTest.java"],
     data = [":jre_bundle_files"],
