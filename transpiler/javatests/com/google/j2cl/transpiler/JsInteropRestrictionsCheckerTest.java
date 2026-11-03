@@ -3072,6 +3072,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: 'List<?>' cannot be assigned to 'List<?>'.
             Object o = (List<? extends Enum<?>>) myJsEnumList;
         > Error: 'List<MyJsEnum>' cannot be cast to 'List<?>'.
+            record Box<T>(T value) {}
+            Box<MyJsEnum> myJsEnumBox = new Box<>(MyJsEnum.A);
+            if (myJsEnumBox instanceof Box<? extends Enum<?>>(var unused)) {}
+        > Error: 'Box<MyJsEnum>' cannot be cast to 'Box<?>'.
             Class<? extends Enum<?>> clazz = MyJsEnum.class;
         > Error: 'Class<MyJsEnum>' cannot be assigned to 'Class<?>'.
             List<? extends Comparable<?>> l3 = customValuedList;

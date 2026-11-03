@@ -740,6 +740,11 @@ public class JsInteropRestrictionsChecker {
               }
 
               @Override
+              public Expression rewriteUncheckedCastContext(CastExpression castExpression) {
+                return rewriteCastContext(castExpression);
+              }
+
+              @Override
               public Expression rewriteMemberQualifierContext(
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
@@ -2865,6 +2870,11 @@ public class JsInteropRestrictionsChecker {
                     castExpression.getExpression(),
                     "cast to");
                 return castExpression;
+              }
+
+              @Override
+              public Expression rewriteUncheckedCastContext(CastExpression castExpression) {
+                return rewriteCastContext(castExpression);
               }
 
               private void checkTypeAssignment(
