@@ -133,4 +133,8 @@ fun compareTo() {
 
   // Boolean can only compare to Boolean.
   x = false.compareTo(true)
+
+  // Intrinsic calls nested in the arguments of other intrinsic calls.
+  x = i.compareTo(l.compareTo(d))
+  val iterator = intArrayOf(i.compareTo(l)).iterator()
 }

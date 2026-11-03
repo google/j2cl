@@ -61,13 +61,14 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
   }
 
   override fun visitCall(expression: IrCall): IrExpression {
+    expression.transformChildrenVoid()
     return when {
       expression.isEnumEntries || expression.isEnumGetEntries -> lowerEnumEntries(expression)
       expression.isRangeUntilCall -> lowerRangeUntilCall(expression)
       expression.isArrayIteratorCall -> lowerArrayIteratorCall(expression)
       expression.isNoWhenBranchMatchedException -> lowerNoWhenBranchMatchedException(expression)
       expression.isCompareTo -> lowerCompareToCall(expression)
-      else -> super.visitCall(expression)
+      else -> expression
     }
   }
 

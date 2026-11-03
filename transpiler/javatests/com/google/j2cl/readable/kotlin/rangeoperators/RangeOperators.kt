@@ -58,6 +58,9 @@ fun main() {
   for (i in 1L..<b) {}
   for (i in b..<1L) {}
 
+  // rangeUntil call nested in the argument of another rangeUntil call.
+  val nestedRangeUntil = 0..<(0..<5).last
+
   for (i in 1..5 step 3) {}
   for (i in 1..<5 step 3) {}
   for (i in 1 until 5) {}
