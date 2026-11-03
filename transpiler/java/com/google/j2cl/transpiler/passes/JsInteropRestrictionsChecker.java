@@ -636,6 +636,7 @@ public class JsInteropRestrictionsChecker {
   private void checkJsEnumUsages(Type type) {
     checkJsEnumMethodCalls(type);
     checkJsEnumAssignments(type);
+    checkJsEnumParameterizations(type);
     checkJsEnumArrays(type);
     checkJsEnumValueFieldAssignment(type);
     checkJsEnumSwitchUsage(type);
@@ -768,17 +769,45 @@ public class JsInteropRestrictionsChecker {
             }));
   }
 
+  private void checkJsEnumParameterizations(Type type) {
+    // JsEnums are not Enums at runtime (and not Comparable if they are not comparable), so type
+    // parameters bounded by those types cannot be specialized to JsEnums, e.g. `EnumSet<MyJsEnum>`
+    // or `<T extends Enum<T>> T valueOf(Class<T>, String)`.
+    checkAllowedTypes(
+        type,
+        (declaredTypeDescriptor, inferredTypeDescriptor) ->
+            declaredTypeDescriptor.isTypeVariable()
+                && isDisallowedJsEnumAssignment(declaredTypeDescriptor, inferredTypeDescriptor),
+        /* disallowedTypeDescription= */ "type");
+  }
+
   private static boolean isDisallowedJsEnumAssignment(
-      TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
-    if (!expressionTypeDescriptor.isJsEnum()) {
+      TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
+    if (!fromTypeDescriptor.isJsEnum()) {
       return false;
+    }
+
+    if (toTypeDescriptor instanceof TypeVariable typeVariable) {
+      // The value needs to be assignable to both the lower bound if there is one (e.g. `? super T`)
+      // and the upper bound.
+      TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
+      return (lowerBound != null && isDisallowedJsEnumAssignment(lowerBound, fromTypeDescriptor))
+          || isDisallowedJsEnumAssignment(
+              typeVariable.getUpperBoundTypeDescriptor(), fromTypeDescriptor);
+    }
+
+    if (toTypeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
+      // The value will be used as each of the types in the intersection, e.g. the bound in
+      // `<T extends Object & Comparable<? super T>> T max(Collection<? extends T>)`.
+      return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+          .anyMatch(t -> isDisallowedJsEnumAssignment(t, fromTypeDescriptor));
     }
 
     TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
     if (targetRawTypeDescriptor.isJsEnum()) {
       // Conversions between different JsEnums never succeed. They can only be written as casts in
       // Kotlin, which allows them with a warning.
-      return !targetRawTypeDescriptor.hasSameRawType(expressionTypeDescriptor);
+      return !targetRawTypeDescriptor.hasSameRawType(fromTypeDescriptor);
     }
 
     if (TypeDescriptors.isJavaLangObject(targetRawTypeDescriptor)
@@ -788,7 +817,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (TypeDescriptors.isJavaLangComparable(targetRawTypeDescriptor)
-        && expressionTypeDescriptor.getJsEnumInfo().supportsComparable()) {
+        && fromTypeDescriptor.getJsEnumInfo().supportsComparable()) {
       return false;
     }
 
@@ -2836,6 +2865,10 @@ public class JsInteropRestrictionsChecker {
           public void exitType(Type nestedType) {
             nestedType
                 .getSuperTypesStream()
+                // Ignore the implicit `j.l.Enum` supertype of enums which is itself parameterized
+                // by Enum and checking it here would reject every JsEnum declaration as an invalid
+                // `Enum` parameterization.
+                .filter(Predicates.not(TypeDescriptors::isJavaLangEnum))
                 .forEach(
                     superTypeDescriptor ->
                         errorIfDisallowedType(
@@ -3068,6 +3101,16 @@ public class JsInteropRestrictionsChecker {
               ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getComponentTypeDescriptor()
               : inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
           isTypeSpecializationDisallowed);
+    }
+
+    if (inferredTypeDescriptor instanceof TypeVariable wildcard
+        && wildcard.isWildcard()
+        && !wildcard.isUnbound()) {
+      TypeDescriptor bound =
+          wildcard.getLowerBoundTypeDescriptor() != null
+              ? wildcard.getLowerBoundTypeDescriptor()
+              : wildcard.getUpperBoundTypeDescriptor();
+      return hasDisallowedType(bound, declaredTypeDescriptor, isTypeSpecializationDisallowed);
     }
 
     if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor descriptor) {

@@ -2816,24 +2816,102 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
-  public void testJsEnumParameterizationFails() {
-    // TODO(b/114468916): Replace with assertTranspileFails when the checks are improved..
+  public void testJsEnumParameterizationSucceeds() {
     assertTranspileSucceeds(
             "test.MyJsEnum",
             """
+            import java.io.Serializable;
             import java.util.*;
             import jsinterop.annotations.*;
-            interface EnumList<E extends Enum<E>> {}
+            interface ComparableList<C extends Comparable<C>> {}
+            interface AnyComparableList<C extends Comparable<?>> {}
+            interface SerializableList<S extends Serializable> {}
             @JsEnum enum MyJsEnum { A }
-            class Main {
-              // TODO(b/132736149): make sure the parameterization are rejected.
-              EnumList<MyJsEnum> myJsEnumList = null;
-              // TODO(b/114468916): The following should have failed. But for now they will be caught
-              // by runtime checks when the erasure cast to Enum occurs.
-              List<? extends Enum> l2 = new ArrayList<MyJsEnum>();
+            @JsEnum(isNative = true) enum Native { A }
+            @JsEnum(hasCustomValue = true) enum CustomValued {
+              A(1);
+              int value;
+              CustomValued(int value) { this.value = value; }
             }
+            class Main {
+              List<MyJsEnum> myJsEnumList = null;
+              List<? extends MyJsEnum> wildcardList = null;
+              Map<MyJsEnum, List<Native>> map = null;
+              ComparableList<MyJsEnum> comparableList = null;
+              ComparableList<? extends MyJsEnum> wildcardComparableList = null;
+              ComparableList<? super MyJsEnum> superComparableList = null;
+              ComparableList<Native> nativeComparableList = null;
+              SerializableList<CustomValued> serializableList = null;
+              Class<MyJsEnum> clazz = MyJsEnum.class;
+              Comparator<MyJsEnum> comparator = (a, b) -> a.compareTo(b);
+              <J extends MyJsEnum> void acceptsJsEnumBoundedComparableList(
+                  AnyComparableList<J> p) {}
+            }
+            class ImplementsComparableList implements ComparableList<MyJsEnum> {}
             """)
         .assertNoWarnings();
+  }
+
+  public void testJsEnumParameterizationFails() {
+    assertWithInlineMessages(
+        "test.MyJsEnum",
+        """
+        import java.util.*;
+        import jsinterop.annotations.*;
+        interface EnumList<E extends Enum<E>> {}
+        interface ComparableList<C extends Comparable<C>> {}
+        interface AnyEnumList<E extends Enum<?>> {}
+        class EnumHolder<E extends Enum<E>> {
+          E e;
+          static <E extends Enum<E>> EnumHolder<E> create() { return null; }
+        }
+        @JsEnum enum MyJsEnum { A }
+        @JsEnum(hasCustomValue = true) enum CustomValued {
+          A(1);
+          int value;
+          CustomValued(int value) { this.value = value; }
+        }
+        class Main {
+          EnumList<MyJsEnum> myJsEnumList = null;
+        > Error: Field 'Main.myJsEnumList' cannot be of type 'EnumList<MyJsEnum>'.
+          EnumList<? extends MyJsEnum> wildcardList = null;
+        > Error: Field 'Main.wildcardList' cannot be of type 'EnumList<?>'.
+          EnumList<? super MyJsEnum> superWildcardList = null;
+        > Error: Field 'Main.superWildcardList' cannot be of type 'EnumList<?>'.
+          List<EnumList<MyJsEnum>> nestedList = null;
+        > Error: Field 'Main.nestedList' cannot be of type 'List<EnumList<MyJsEnum>>'.
+          List<? extends EnumList<MyJsEnum>> wildcardNestedList = null;
+        > Error: Field 'Main.wildcardNestedList' cannot be of type 'List<?>'.
+          ComparableList<CustomValued> customValuedList = null;
+        > Error: Field 'Main.customValuedList' cannot be of type 'ComparableList<CustomValued>'.
+          ComparableList<? extends CustomValued> wildcardCustomValuedList = null;
+        > Error: Field 'Main.wildcardCustomValuedList' cannot be of type 'ComparableList<?>'.
+          ComparableList<? super CustomValued> superCustomValuedList = null;
+        > Error: Field 'Main.superCustomValuedList' cannot be of type 'ComparableList<?>'.
+          void acceptsEnumList(EnumList<MyJsEnum> p) {}
+        > Error: Parameter 'p' in 'void Main.acceptsEnumList(EnumList<MyJsEnum> p)' cannot be of type 'EnumList<MyJsEnum>'.
+          <J extends MyJsEnum> void acceptsJsEnumBoundedList(AnyEnumList<J> p) {}
+        > Error: Parameter 'p' in 'void Main.acceptsJsEnumBoundedList(AnyEnumList<J> p)' cannot be of type 'AnyEnumList<J>'.
+          void m() {
+            EnumHolder<MyJsEnum> holder = new EnumHolder<>();
+        > Error: Variable 'holder' cannot be of type 'EnumHolder<MyJsEnum>'.
+        > Error: Object creation 'new EnumHolder.<init>()' cannot be of type 'EnumHolder<MyJsEnum>'.
+            holder.e = MyJsEnum.A;
+        > Error: Reference to field 'EnumHolder<MyJsEnum>.e' cannot be of type 'MyJsEnum'.
+            Object o = EnumHolder.<MyJsEnum>create();
+        > Error: Type argument for 'E' of 'EnumHolder<MyJsEnum> EnumHolder.create()' cannot be of type 'MyJsEnum'.
+            o = (EnumHolder<MyJsEnum>) o;
+        > Error: Cannot cast to type 'EnumHolder<MyJsEnum>'.
+            o = new EnumHolder<MyJsEnum>() {};
+        > Error: Supertype of '<anonymous> extends EnumHolder<MyJsEnum>' cannot be of type 'EnumHolder<MyJsEnum>'.
+          }
+          // TODO(b/114468916): The following should have failed. But for now they will be caught
+          // by runtime checks when the erasure cast to Enum occurs.
+          List<? extends Enum> l2 = new ArrayList<MyJsEnum>();
+        }
+        class SubHolder extends EnumHolder<MyJsEnum> {}
+        > Error: Supertype of 'SubHolder' cannot be of type 'EnumHolder<MyJsEnum>'.
+        """);
   }
 
   public void testJsEnumParameterAssignmentFails() {
@@ -2842,7 +2920,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """
         import java.io.Serializable;
         import java.util.ArrayList;
+        import java.util.Collections;
         import java.util.List;
+        import java.util.function.Supplier;
         import jsinterop.annotations.*;
         public class Main {
           @JsEnum(isNative = true) enum Native {A, B}
@@ -2853,9 +2933,20 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             int value;
             JsEnumWithCustomValue(int value) { this.value = value; }
           }
+          interface Holder<U, T extends U> {
+            void accept(T t);
+          }
           private static void acceptsEnum(Enum e) {}
           private static void acceptsComparable(Comparable c) {}
           private static void acceptsSerializable(Serializable s) {}
+          private static <T extends Enum<?>> void acceptsEnumBoundedT(T t) {}
+          private static <T extends Enum<T>> void acceptsEnumBoundedTVarargs(T... t) {}
+          private static <T extends Comparable<T>> void acceptsComparableBoundedT(T t) {}
+          private static <T extends Serializable & Comparable<T>> void acceptsIntersectionBoundedT(
+              T t) {}
+          private static <T extends Enum<T>> T returnsEnumBoundedT() {
+            return null;
+          }
           private static void main() {
             acceptsEnum(Native.A);
         > Error: JsEnum 'Native' cannot be assigned to 'Enum'.
@@ -2867,6 +2958,37 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Comparable'.
             List<Enum> l1 = null; l1.add(MyJsEnum.A);
         > Error: JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.
+            acceptsEnumBoundedT(Native.A);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBoundedT(Native)' cannot be of type 'Native'.
+            acceptsEnumBoundedT(MyJsEnum.A);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBoundedT(MyJsEnum)' cannot be of type 'MyJsEnum'.
+            acceptsEnumBoundedT(JsEnumWithCustomValue.A);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBoundedT(JsEnumWithCustomValue)' cannot be of type 'JsEnumWithCustomValue'.
+            acceptsEnumBoundedTVarargs(MyJsEnum.A);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBoundedTVarargs(MyJsEnum...)' cannot be of type 'MyJsEnum'.
+            acceptsComparableBoundedT(JsEnumWithCustomValue.A);
+        > Error: Type argument for 'T' of 'void Main.acceptsComparableBoundedT(JsEnumWithCustomValue)' cannot be of type 'JsEnumWithCustomValue'.
+            acceptsIntersectionBoundedT(JsEnumWithCustomValue.A);
+        > Error: Type argument for 'T' of 'void Main.acceptsIntersectionBoundedT(JsEnumWithCustomValue)' cannot be of type 'JsEnumWithCustomValue'.
+            List<JsEnumWithCustomValue> customValuedList = new ArrayList<>();
+            Collections.max(customValuedList);
+        > Error: Type argument for 'T' of 'JsEnumWithCustomValue Collections.max(Collection)' cannot be of type 'JsEnumWithCustomValue'.
+            MyJsEnum e = Main.<MyJsEnum>returnsEnumBoundedT();
+        > Error: Type argument for 'T' of 'MyJsEnum Main.returnsEnumBoundedT()' cannot be of type 'MyJsEnum'.
+            Supplier<MyJsEnum> supplier = Main::returnsEnumBoundedT;
+        > Error: Type argument for 'T' of 'MyJsEnum Main.returnsEnumBoundedT()' cannot be of type 'MyJsEnum'.
+            Enum.valueOf(MyJsEnum.class, "A");
+        > Error: Type argument for 'T' of 'MyJsEnum Enum.valueOf(Class, String)' cannot be of type 'MyJsEnum'.
+            List<? super Enum<?>> superEnumList = new ArrayList<Enum<?>>();
+            superEnumList.add(MyJsEnum.A);
+        > Error: JsEnum 'MyJsEnum' cannot be assigned to '<captured wildcard>'.
+            Holder<Enum<?>, ? super MyJsEnum> superEnumBoundedHolder = null;
+            superEnumBoundedHolder.accept(MyJsEnum.A);
+        > Error: JsEnum 'MyJsEnum' cannot be assigned to '<captured wildcard>'.
+          }
+          private static <J extends MyJsEnum> void passesJsEnumBoundedT(J j) {
+            acceptsEnumBoundedT(j);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBoundedT(MyJsEnum)' cannot be of type 'J'.
           }
         }
         """);
@@ -2915,6 +3037,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             """
             import java.io.Serializable;
             import java.util.ArrayList;
+            import java.util.Collections;
             import java.util.List;
             import jsinterop.annotations.*;
             public class Main {
@@ -2933,6 +3056,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               private static void acceptsSerializable(Serializable s) {}
               private static void acceptsComparable(Comparable c) {}
               private static void acceptsMyJsEnum(MyJsEnum c) {}
+              private static <T> void acceptsT(T t) {}
+              private static <T extends Serializable> void acceptsSerializableBoundedT(T t) {}
+              private static <T extends Comparable<T>> void acceptsComparableBoundedT(T t) {}
+              private static <T extends Serializable & Comparable<T>>
+                  void acceptsIntersectionBoundedT(T t) {}
               private static <T extends MyJsEnum> void typeVariableCasts(T t, MyJsEnum e) {
                 // Casts between JsEnums with the same erasure are allowed.
                 e = (MyJsEnum) t;
@@ -2968,6 +3096,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                   List<MyJsEnum> l1 = null; l1.add(MyJsEnum.A);
                   List<Object> l2 = null; l2.add(MyJsEnum.A);
                   List<? extends Serializable> l3 = new ArrayList<MyJsEnum>();
+                  acceptsT(MyJsEnum.A);
+                  acceptsSerializableBoundedT(MyJsEnum.A);
+                  acceptsComparableBoundedT(MyJsEnum.A);
+                  acceptsIntersectionBoundedT(MyJsEnum.A);
+                  Collections.max(new ArrayList<MyJsEnum>());
+                  List<? super MyJsEnum> superMyJsEnumList = new ArrayList<Object>();
+                  superMyJsEnumList.add(MyJsEnum.A);
                 }
                 {
                   Object o = JsEnumWithCustomValue.A;
@@ -3024,6 +3159,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """,
         "test.Main",
         """
+        import com.google.common.truth.ComparableSubject;
         import com.google.common.truth.Truth;
         import jsinterop.annotations.JsEnum;
         public class Main {
@@ -3036,18 +3172,24 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               this.value = value;
             }
           }
+          abstract class EnumHolder<E extends Enum<E>> implements Comparable<EnumHolder<E>> {}
           @SuppressWarnings({"rawtypes", "unchecked"})
-          private static <C extends CustomValued> void main(C c, Comparable rawComparable) {
+          private static <C extends CustomValued> void main(
+              C c, Comparable rawComparable, EnumHolder rawHolder) {
             Truth.assertThat(CustomValued.A).isEqualTo(CustomValued.B);
             Truth.assertThat(c).isEqualTo(CustomValued.A);
             Truth.assertWithMessage("msg").that(CustomValued.A).isEqualTo(CustomValued.B);
 
+            ComparableSubject<CustomValued> s = Truth.assertThat(CustomValued.A);
+        > Error: Variable 's' cannot be of type 'ComparableSubject<CustomValued>'.
             Truth.assertThat(new CustomValued[0]);
         > Error: JsEnum array 'CustomValued[]' cannot be assigned to 'T[]'.
             Truth.<Comparable<CustomValued>>assertThat(CustomValued.A);
         > Error: Custom-valued JsEnum 'CustomValued' cannot be assigned to 'Comparable<CustomValued>'.
             Truth.<Comparable<CustomValued[]>>assertThat(rawComparable);
         > Error: Type argument for 'ComparableT' of 'ComparableSubject Truth.assertThat(Comparable)' cannot be of type 'Comparable<CustomValued[]>'.
+            Truth.<EnumHolder<CustomValued>>assertThat(rawHolder);
+        > Error: Type argument for 'ComparableT' of 'ComparableSubject Truth.assertThat(EnumHolder)' cannot be of type 'EnumHolder<CustomValued>'.
           }
         }
         """);
@@ -3243,6 +3385,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'E'.
             List<MyJsEnum[]> list = null;
           > Error: Variable 'list' cannot be of type 'List<MyJsEnum[]>'.
+            List<? extends MyJsEnum[]> wildcardList = null;
+          > Error: Variable 'wildcardList' cannot be of type 'List<?>'.
             DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();
             e = buggy.arr[0];
           > Error: Reference to field 'BaseWithTArrayField<MyJsEnum>.arr' cannot be of type 'MyJsEnum[]'.
