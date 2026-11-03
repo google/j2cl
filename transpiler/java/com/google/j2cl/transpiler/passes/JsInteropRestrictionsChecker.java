@@ -1008,46 +1008,59 @@ public class JsInteropRestrictionsChecker {
         .forEach(
             method ->
                 checkOverrides(
-                    method,
+                    method.getDescriptor(),
+                    method.getSourcePosition(),
                     isDisallowedParameterOverride,
                     isDisallowedReturnTypeOverride,
                     checkedTypeMessage));
+    for (MethodDescriptor methodDescriptor : type.getTypeDescriptor().getAccidentalOverrides()) {
+      checkOverrides(
+          methodDescriptor,
+          type.getSourcePosition(),
+          isDisallowedParameterOverride,
+          isDisallowedReturnTypeOverride,
+          checkedTypeMessage);
+    }
   }
 
   private void checkOverrides(
-      Method method,
+      MethodDescriptor methodDescriptor,
+      SourcePosition sourcePosition,
       BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
       BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
       String checkedTypeMessage) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
+    MethodDescriptor targetMethodDescriptor =
+        methodDescriptor.isBridge() ? methodDescriptor.getBridgeTarget() : methodDescriptor;
     for (MethodDescriptor m : methodDescriptor.getJavaOverriddenMethodDescriptors()) {
       MethodDescriptor overriddenMethodDescriptor = m.getDeclarationDescriptor();
       for (int argIndex = 0;
-          argIndex < methodDescriptor.getParameterDescriptors().size();
+          argIndex < targetMethodDescriptor.getParameterDescriptors().size();
           argIndex++) {
         TypeDescriptor parameterDescriptor =
-            methodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
+            targetMethodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
         TypeDescriptor overriddenParameterDescriptor =
             overriddenMethodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
 
         if (isDisallowedParameterOverride.test(
             overriddenParameterDescriptor, parameterDescriptor)) {
           problems.error(
-              method.getSourcePosition(),
+              sourcePosition,
               "Method '%s' cannot override method '%s' with a %s parameter.",
-              methodDescriptor.getReadableDescription(),
+              targetMethodDescriptor.getReadableDescription(),
               overriddenMethodDescriptor.getReadableDescription(),
               checkedTypeMessage);
         }
       }
 
       if (isDisallowedReturnTypeOverride.test(
-          overriddenMethodDescriptor.getReturnTypeDescriptor(),
-          methodDescriptor.getReturnTypeDescriptor())) {
+              overriddenMethodDescriptor.getReturnTypeDescriptor(),
+              targetMethodDescriptor.getReturnTypeDescriptor())
+          || isDisallowedReturnTypeOverride.test(
+              m.getReturnTypeDescriptor(), targetMethodDescriptor.getReturnTypeDescriptor())) {
         problems.error(
-            method.getSourcePosition(),
+            sourcePosition,
             "Method '%s' cannot override method '%s' with a %s return type.",
-            methodDescriptor.getReadableDescription(),
+            targetMethodDescriptor.getReadableDescription(),
             overriddenMethodDescriptor.getReadableDescription(),
             checkedTypeMessage);
       }

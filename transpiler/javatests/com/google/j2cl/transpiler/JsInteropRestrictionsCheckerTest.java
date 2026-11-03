@@ -2423,6 +2423,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """
         import jsinterop.annotations.*;
         @JsEnum enum MyJsEnum { A }
+        @JsEnum(hasCustomValue = true) enum CustomValued {
+          A(1);
+          int value;
+          CustomValued(int value) { this.value = value; }
+        }
         class AListSubclass<T extends MyJsEnum> {}
         > Error: Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.
         abstract class WithFunctionReturningEnum {
@@ -2432,6 +2437,40 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           abstract MyJsEnum f();
         > Error: Method 'MyJsEnum SpecializingEnumToJsEnum.f()' cannot override method 'Enum WithFunctionReturningEnum.f()' with a JsEnum return type.
         }
+        abstract class WithFunctionReturningComparable {
+          abstract Comparable f();
+        }
+        abstract class SpecializingComparableToCustomValuedJsEnum
+            extends WithFunctionReturningComparable {
+          abstract CustomValued f();
+        > Error: Method 'CustomValued SpecializingComparableToCustomValuedJsEnum.f()' cannot override method 'Comparable WithFunctionReturningComparable.f()' with a JsEnum return type.
+        }
+        interface Supplier<T> {
+          T get();
+        }
+        class SpecializingSupplierToJsEnum implements Supplier<Enum<?>> {
+          public MyJsEnum get() { return MyJsEnum.A; }
+        > Error: Method 'MyJsEnum SpecializingSupplierToJsEnum.get()' cannot override method 'T Supplier.get()' with a JsEnum return type.
+        }
+        class SpecializingSupplierToCustomValuedJsEnum implements Supplier<Comparable<?>> {
+          public CustomValued get() { return CustomValued.A; }
+        > Error: Method 'CustomValued SpecializingSupplierToCustomValuedJsEnum.get()' cannot override method 'T Supplier.get()' with a JsEnum return type.
+        }
+        interface EnumGetter {
+          Enum<?> get();
+        }
+        class BaseReturningJsEnum {
+          public MyJsEnum get() { return MyJsEnum.A; }
+        }
+        class AccidentalSpecializingEnumToJsEnum
+        > Error: Method 'MyJsEnum BaseReturningJsEnum.get()' cannot override method 'Enum<?> EnumGetter.get()' with a JsEnum return type.
+            extends BaseReturningJsEnum implements EnumGetter {}
+        class GenericBase<T> {
+          public T get() { return null; }
+        }
+        class AccidentalSpecializingSupplierToJsEnum
+        > Error: Method 'MyJsEnum GenericBase.get()' cannot override method 'T Supplier.get()' with a JsEnum return type.
+            extends GenericBase<MyJsEnum> implements Supplier<Enum<?>> {}
         """);
   }
 
@@ -2478,6 +2517,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             class AListSubclass extends AList<MyJsEnum> implements List<MyJsEnum> {
                 public MyJsEnum getObject() { return null; }
             }
+            class MyJsEnumSupplier implements Supplier<MyJsEnum> {
+              public MyJsEnum get() { return MyJsEnum.A; }
+            }
+            class MyJsEnumComparableSupplier implements Supplier<Comparable<?>> {
+              public MyJsEnum get() { return MyJsEnum.A; }
+            }
+            class BaseSupplier<T> {
+              public T get() { return null; }
+            }
+            class AccidentalMyJsEnumSupplier
+                extends BaseSupplier<MyJsEnum> implements Supplier<MyJsEnum> {}
             """)
         .assertNoWarnings();
   }
@@ -2974,6 +3024,19 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             public List<MyJsEnum> get() { return null; }
         > Error: Method 'List<MyJsEnum> JsEnumGetter.get()' cannot override method 'List<?> Getter.get()' with a JsEnum return type.
           }
+          interface Supplier<T> {
+            T get();
+          }
+          static class JsEnumListSupplier implements Supplier<List<? extends Enum<?>>> {
+            @Override
+            public List<MyJsEnum> get() { return null; }
+        > Error: Method 'List<MyJsEnum> JsEnumListSupplier.get()' cannot override method 'T Supplier.get()' with a JsEnum return type.
+          }
+          static class JsEnumListBase {
+            public List<MyJsEnum> get() { return null; }
+          }
+          static class AccidentalJsEnumGetter extends JsEnumListBase implements Getter {}
+        > Error: Method 'List<MyJsEnum> JsEnumListBase.get()' cannot override method 'List<?> Getter.get()' with a JsEnum return type.
           private static <T extends Enum<T>> void acceptsEnumBoundedList(List<T> l) {}
           private static <L1 extends List<? extends Enum<?>>, L2 extends L1>
               void acceptsEnumWildcardBoundedList(L2 l) {}
@@ -3580,6 +3643,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           T[] arr;
         }
         class DerivedWithJsEnumArrayField extends BaseWithTArrayField<Main.MyJsEnum> {}
+        interface ObjectArrayGetter {
+          Object[] get();
+        }
+        class BaseReturningJsEnumArray {
+          public Main.MyJsEnum[] get() { return null; }
+        }
+        class AccidentalJsEnumArrayGetter
+        > Error: Method 'MyJsEnum[] BaseReturningJsEnumArray.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
+            extends BaseReturningJsEnumArray implements ObjectArrayGetter {}
         """);
   }
 
