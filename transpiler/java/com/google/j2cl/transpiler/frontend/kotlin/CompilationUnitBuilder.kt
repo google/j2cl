@@ -748,7 +748,6 @@ internal class CompilationUnitBuilder(
         convertKClassJavaPropertyReference(irCall, wrapPrimitives = false)
       irCall.isKClassJavaObjectTypePropertyReference ->
         convertKClassJavaPropertyReference(irCall, wrapPrimitives = true)
-      irCall.isRangeToCall -> convertRangeToCall(irCall)
       irCall.isBinaryOperation -> convertBinaryOperation(irCall)
       irCall.isPrefixOperation -> convertPrefixOperation(irCall)
       irCall.isEqualsOperator -> convertEqualsOperator(irCall)
@@ -910,22 +909,6 @@ internal class CompilationUnitBuilder(
       .setArguments(convertExpression(irCall.extensionReceiverOrFail))
       .setSourcePosition(getSourcePosition(irCall))
       .build()
-
-  /** Converts a `a.rangeTo(b)` or `a..b` call. */
-  private fun convertRangeToCall(irCall: IrCall): Expression {
-    require(irCall.arguments.size == 2) { "invalid number of arguments" }
-    val constructorSymbol = intrinsicMethods.getRangeToConstructor(irCall)
-    val methodDescriptor =
-      environment.getMethodDescriptor(constructorSymbol.owner, irCall.typeSubstitutionMap)
-    return NewInstance.builderFrom(methodDescriptor)
-      .setArguments(
-        listOf(
-          checkNotNull(convertQualifier(irCall)),
-          convertExpression(checkNotNull(irCall.arguments[1]!!)),
-        )
-      )
-      .build()
-  }
 
   private fun convertEqualsOperator(irCall: IrCall): Expression {
     require(irCall.arguments.size == 2) { "invalid number of arguments" }
@@ -1508,9 +1491,6 @@ internal class CompilationUnitBuilder(
 
   private val IrCall.isAnyToString: Boolean
     get() = intrinsicMethods.isAnyToString(this)
-
-  private val IrCall.isRangeToCall: Boolean
-    get() = intrinsicMethods.isRangeTo(this)
 
   private val IrCall.isEqualsOperator: Boolean
     get() = intrinsicMethods.isEqualsOperator(this)

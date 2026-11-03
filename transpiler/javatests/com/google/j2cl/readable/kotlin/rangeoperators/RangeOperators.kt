@@ -61,6 +61,11 @@ fun main() {
   // rangeUntil call nested in the argument of another rangeUntil call.
   val nestedRangeUntil = 0..<(0..<5).last
 
+  // Ranges not used in a for loop with different operand types.
+  val intToLongRange = 1..2L
+  val longToIntRange = 1L..2
+  val byteToShortRange = b..s
+
   for (i in 1..5 step 3) {}
   for (i in 1..<5 step 3) {}
   for (i in 1 until 5) {}

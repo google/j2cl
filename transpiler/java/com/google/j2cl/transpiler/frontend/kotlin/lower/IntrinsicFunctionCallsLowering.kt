@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.backend.jvm.ir.createJvmIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.findEnumValuesFunction
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.ir.builders.irCall
+import org.jetbrains.kotlin.ir.builders.irCallConstructor
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -30,6 +31,7 @@ import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
+import org.jetbrains.kotlin.ir.types.classFqName
 import org.jetbrains.kotlin.ir.types.classOrFail
 import org.jetbrains.kotlin.ir.types.getPrimitiveType
 import org.jetbrains.kotlin.ir.types.isArray
@@ -44,6 +46,7 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.parentAsClass
+import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
@@ -64,6 +67,7 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
     expression.transformChildrenVoid()
     return when {
       expression.isEnumEntries || expression.isEnumGetEntries -> lowerEnumEntries(expression)
+      expression.isRangeToCall -> lowerRangeToCall(expression)
       expression.isRangeUntilCall -> lowerRangeUntilCall(expression)
       expression.isArrayIteratorCall -> lowerArrayIteratorCall(expression)
       expression.isNoWhenBranchMatchedException -> lowerNoWhenBranchMatchedException(expression)
@@ -93,6 +97,32 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
       irCall(createEnumEntriesSymbol, returnType).apply {
         typeArguments[0] = enumType
         arguments[0] = irCall(enumValuesFun)
+      }
+    }
+  }
+
+  /**
+   * Rewrites a call to the rangeTo operator to an instantiation of the returned range type.
+   *
+   * `a..b` is represented in the IR as `a.rangeTo(b)`. It is rewritten to a direct instantiation of
+   * the returned range type (e.g. `IntRange(a, b)`) through its primary constructor whose
+   * parameters are `start` and `endInclusive`.
+   *
+   * When the operands have different types, the operands are widened to the type of the constructor
+   * parameters, e.g. `Int.rangeTo(Long)` returns a `LongRange` and is rewritten to
+   * `LongRange(a.toLong(), b)`. The widening conversion is implicit at this point and is inserted
+   * later by J2CL.
+   */
+  private fun lowerRangeToCall(irCall: IrCall): IrExpression {
+    require(irCall.arguments.size == 2) { "invalid number of arguments" }
+    val constructor = checkNotNull(irCall.type.classOrFail.owner.primaryConstructor).symbol
+    check(constructor.owner.hasShape(regularParameters = 2)) {
+      "Unexpected primary constructor for ${irCall.type.classFqName}"
+    }
+    return context.createJvmIrBuilder(constructor, irCall).run {
+      irCallConstructor(constructor, typeArguments = emptyList()).apply {
+        arguments[0] = irCall.arguments[0]
+        arguments[1] = irCall.arguments[1]
       }
     }
   }
@@ -270,6 +300,9 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   private val IrCall.isArrayIteratorCall: Boolean
     get() = intrinsics.isArrayIterator(this)
+
+  private val IrCall.isRangeToCall: Boolean
+    get() = intrinsics.isRangeTo(this)
 
   private val IrCall.isRangeUntilCall: Boolean
     get() = intrinsics.isRangeUntil(this)

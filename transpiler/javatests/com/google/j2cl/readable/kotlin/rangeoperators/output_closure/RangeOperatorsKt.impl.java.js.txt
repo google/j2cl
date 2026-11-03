@@ -9,6 +9,8 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let ProgressionUtilKt = goog.forwardDeclare('kotlin.internal.ProgressionUtilKt$impl');
 let CharRange = goog.forwardDeclare('kotlin.ranges.CharRange$impl');
+let IntRange = goog.forwardDeclare('kotlin.ranges.IntRange$impl');
+let LongRange = goog.forwardDeclare('kotlin.ranges.LongRange$impl');
 let RangesKt = goog.forwardDeclare('kotlin.ranges.RangesKt$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
@@ -162,6 +164,9 @@ class RangeOperatorsKt extends j_l_Object {
    let i_25 = inductionVariable_25;
   }
   let nestedRangeUntil = RangesKt.m_until__int__int__kotlin_ranges_IntRange(0, RangesKt.m_until__int__int__kotlin_ranges_IntRange(0, 5).m_getLast__int());
+  let intToLongRange = LongRange.$create__long__long(Long.fromInt(1), Long.fromInt(2));
+  let longToIntRange = LongRange.$create__long__long(Long.fromInt(1), Long.fromInt(2));
+  let byteToShortRange = IntRange.$create__int__int(b, s);
   let inductionVariable_26 = 1;
   let last_8 = ProgressionUtilKt.m_getProgressionLastElement__int__int__int__int(1, 5, 3);
   if (inductionVariable_26 <= last_8) {
@@ -270,6 +275,8 @@ class RangeOperatorsKt extends j_l_Object {
   Primitives = goog.module.get('javaemul.internal.Primitives$impl');
   ProgressionUtilKt = goog.module.get('kotlin.internal.ProgressionUtilKt$impl');
   CharRange = goog.module.get('kotlin.ranges.CharRange$impl');
+  IntRange = goog.module.get('kotlin.ranges.IntRange$impl');
+  LongRange = goog.module.get('kotlin.ranges.LongRange$impl');
   RangesKt = goog.module.get('kotlin.ranges.RangesKt$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');

@@ -35,12 +35,9 @@ import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
-import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
-import org.jetbrains.kotlin.ir.types.classFqName
-import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isEnumClass
@@ -195,13 +192,6 @@ class IntrinsicMethods(
 
   fun isBinaryOperation(irCall: IrCall): Boolean =
     irCall.symbol.toKey() in binaryOperatorByIntrinsicSymbolKey
-
-  @OptIn(InternalSymbolFinderAPI::class)
-  fun getRangeToConstructor(irCall: IrCall): IrConstructorSymbol {
-    val fqName = irCall.type.classFqName!!
-    val classSymbol = irBuiltIns.symbolFinder.findClass(ClassId.topLevel(fqName))!!
-    return classSymbol.constructors.single { it.owner.hasShape(regularParameters = 2) }
-  }
 
   fun isRangeTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in rangeToCallByIntrinsicSymbolKey
 
