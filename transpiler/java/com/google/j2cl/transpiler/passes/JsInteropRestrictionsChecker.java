@@ -753,14 +753,19 @@ public class JsInteropRestrictionsChecker {
                 TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
                 if (isDisallowedJsEnumAssignment(toTypeDescriptor, expressionTypeDescriptor)) {
+                  String prefix = "";
+                  if (expressionTypeDescriptor.isJsEnum()) {
+                    prefix =
+                        TypeDescriptors.isJavaLangComparable(toTypeDescriptor.toRawTypeDescriptor())
+                            ? getTypeKindPrefix(expressionTypeDescriptor)
+                            : "JsEnum ";
+                  }
                   // TODO(b/65465035): When source position is tracked at the expression level,
                   // the error reporting here should include source position.
                   problems.error(
                       getSourcePosition(),
                       "%s'%s' cannot be %s '%s'.",
-                      TypeDescriptors.isJavaLangComparable(toTypeDescriptor.toRawTypeDescriptor())
-                          ? getTypeKindPrefix(expressionTypeDescriptor)
-                          : "JsEnum ",
+                      prefix,
                       expressionTypeDescriptor.getReadableDescription(),
                       conversion,
                       toTypeDescriptor.getReadableDescription());
@@ -783,24 +788,44 @@ public class JsInteropRestrictionsChecker {
 
   private static boolean isDisallowedJsEnumAssignment(
       TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
-    if (!fromTypeDescriptor.isJsEnum()) {
-      return false;
-    }
+    return isDisallowedJsEnumAssignment(
+        toTypeDescriptor, fromTypeDescriptor, /* seenTypeVariables= */ ImmutableSet.of());
+  }
 
+  private static boolean isDisallowedJsEnumAssignment(
+      TypeDescriptor toTypeDescriptor,
+      TypeDescriptor fromTypeDescriptor,
+      ImmutableSet<TypeVariable> seenTypeVariables) {
     if (toTypeDescriptor instanceof TypeVariable typeVariable) {
+      if (seenTypeVariables.contains(typeVariable.toDeclaration())) {
+        return false;
+      }
+      // Track seen type variables since bounds can be recursive (e.g. `T extends Comparable<? super
+      // T>`).
+      ImmutableSet<TypeVariable> newSeenTypeVariables =
+          ImmutableSet.<TypeVariable>builder()
+              .addAll(seenTypeVariables)
+              .add(typeVariable.toDeclaration())
+              .build();
       // The value needs to be assignable to both the lower bound if there is one (e.g. `? super T`)
       // and the upper bound.
       TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
-      return (lowerBound != null && isDisallowedJsEnumAssignment(lowerBound, fromTypeDescriptor))
+      return (lowerBound != null
+              && isDisallowedJsEnumAssignment(lowerBound, fromTypeDescriptor, newSeenTypeVariables))
           || isDisallowedJsEnumAssignment(
-              typeVariable.getUpperBoundTypeDescriptor(), fromTypeDescriptor);
+              typeVariable.getUpperBoundTypeDescriptor(), fromTypeDescriptor, newSeenTypeVariables);
     }
 
     if (toTypeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
       // The value will be used as each of the types in the intersection, e.g. the bound in
       // `<T extends Object & Comparable<? super T>> T max(Collection<? extends T>)`.
       return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-          .anyMatch(t -> isDisallowedJsEnumAssignment(t, fromTypeDescriptor));
+          .anyMatch(t -> isDisallowedJsEnumAssignment(t, fromTypeDescriptor, seenTypeVariables));
+    }
+
+    if (!fromTypeDescriptor.isJsEnum()) {
+      return hasDisallowedJsEnumTypeArgument(
+          toTypeDescriptor, fromTypeDescriptor, seenTypeVariables);
     }
 
     TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
@@ -822,6 +847,53 @@ public class JsInteropRestrictionsChecker {
     }
 
     return true;
+  }
+
+  /**
+   * Returns true if assigning a value of type {@code fromTypeDescriptor} to {@code
+   * toTypeDescriptor} would let JsEnums flow through wildcards into types they cannot be assigned
+   * to, e.g. assigning {@code ArrayList<MyJsEnum>} to {@code List<? extends Enum<?>>} or {@code
+   * Comparator<Enum<?>>} to {@code Comparator<? super MyJsEnum>}.
+   */
+  private static boolean hasDisallowedJsEnumTypeArgument(
+      TypeDescriptor toTypeDescriptor,
+      TypeDescriptor fromTypeDescriptor,
+      ImmutableSet<TypeVariable> seenTypeVariables) {
+    if (!(toTypeDescriptor instanceof DeclaredTypeDescriptor toDeclaredTypeDescriptor)
+        || !toDeclaredTypeDescriptor.hasTypeArguments()) {
+      return false;
+    }
+    DeclaredTypeDescriptor fromSupertype =
+        fromTypeDescriptor.findSupertype(toDeclaredTypeDescriptor.getTypeDeclaration());
+    return fromSupertype != null
+        && Streams.zip(
+                toDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
+                fromSupertype.getTypeArgumentDescriptors().stream(),
+                (toArg, fromArg) ->
+                    isDisallowedJsEnumTypeArgument(toArg, fromArg, seenTypeVariables))
+            .anyMatch(Boolean::booleanValue);
+  }
+
+  private static boolean isDisallowedJsEnumTypeArgument(
+      TypeDescriptor toTypeArgument,
+      TypeDescriptor fromTypeArgument,
+      ImmutableSet<TypeVariable> seenTypeVariables) {
+    // Values only flow between different type arguments through wildcards. Unbounded wildcards are
+    // skipped since they only imply the bound of the type parameter, which is checked where the
+    // type is parameterized.
+    if (!(toTypeArgument instanceof TypeVariable wildcard)
+        || !wildcard.isWildcard()
+        || wildcard.isUnbound()) {
+      return false;
+    }
+    TypeDescriptor lowerBound = wildcard.getLowerBoundTypeDescriptor();
+    if (lowerBound != null) {
+      // `? super L`: values of type L flow into the type argument.
+      return isDisallowedJsEnumAssignment(fromTypeArgument, lowerBound, seenTypeVariables);
+    }
+    // `? extends U`: values of the type argument flow into U.
+    return isDisallowedJsEnumAssignment(
+        wildcard.getUpperBoundTypeDescriptor(), fromTypeArgument, seenTypeVariables);
   }
 
   private void checkJsEnumArrays(Type type) {

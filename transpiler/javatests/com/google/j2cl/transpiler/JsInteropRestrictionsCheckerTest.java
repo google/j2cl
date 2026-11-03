@@ -2905,12 +2905,146 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             o = new EnumHolder<MyJsEnum>() {};
         > Error: Supertype of '<anonymous> extends EnumHolder<MyJsEnum>' cannot be of type 'EnumHolder<MyJsEnum>'.
           }
-          // TODO(b/114468916): The following should have failed. But for now they will be caught
-          // by runtime checks when the erasure cast to Enum occurs.
-          List<? extends Enum> l2 = new ArrayList<MyJsEnum>();
         }
         class SubHolder extends EnumHolder<MyJsEnum> {}
         > Error: Supertype of 'SubHolder' cannot be of type 'EnumHolder<MyJsEnum>'.
+        """);
+  }
+
+  public void testJsEnumTypeArgumentAssignmentSucceeds() {
+    assertTranspileSucceeds(
+            "test.Main",
+            """
+            import java.io.Serializable;
+            import java.util.*;
+            import jsinterop.annotations.*;
+            public class Main {
+              @JsEnum enum MyJsEnum { A }
+              @JsEnum(isNative = true) enum Native { A }
+              @JsEnum(hasCustomValue = true) enum CustomValued {
+                A(1);
+                int value;
+                CustomValued(int value) { this.value = value; }
+              }
+              private static <T> void acceptsList(List<T> l) {}
+              private static <T extends Comparable<T>> void acceptsComparableBoundedList(List<T> l) {}
+              private static void main() {
+                List<MyJsEnum> myJsEnumList = new ArrayList<>();
+                List<?> l1 = myJsEnumList;
+                List<? extends Object> l2 = myJsEnumList;
+                List<? extends Serializable> l3 = new ArrayList<CustomValued>();
+                List<? extends Comparable<?>> l4 = myJsEnumList;
+                l4 = new ArrayList<Native>();
+                List<? super MyJsEnum> l5 = new ArrayList<Object>();
+                Collection<? extends MyJsEnum> l6 = myJsEnumList;
+                Map<String, ? extends List<? extends Comparable<?>>> m =
+                    new HashMap<String, List<MyJsEnum>>();
+                acceptsList(myJsEnumList);
+                acceptsComparableBoundedList(myJsEnumList);
+                Comparator<Object> byObject = null;
+                myJsEnumList.sort(byObject);
+                Comparator<Comparable<?>> byComparable = null;
+                myJsEnumList.sort(byComparable);
+                Comparator<? super MyJsEnum> c = byObject;
+              }
+            }
+            """)
+        .assertNoWarnings();
+  }
+
+  public void testJsEnumTypeArgumentAssignmentFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import java.util.*;
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum { A }
+          @JsEnum(isNative = true) enum Native { A }
+          @JsEnum(hasCustomValue = true) enum CustomValued {
+            A(1);
+            int value;
+            CustomValued(int value) { this.value = value; }
+          }
+          interface Getter {
+            List<? extends Enum<?>> get();
+          }
+          static class JsEnumGetter implements Getter {
+            @Override
+            public List<MyJsEnum> get() { return null; }
+        > Error: Method 'List<MyJsEnum> JsEnumGetter.get()' cannot override method 'List<?> Getter.get()' with a JsEnum return type.
+          }
+          private static <T extends Enum<T>> void acceptsEnumBoundedList(List<T> l) {}
+          private static <L1 extends List<? extends Enum<?>>, L2 extends L1>
+              void acceptsEnumWildcardBoundedList(L2 l) {}
+          private static void acceptsEnumWildcardList(List<? extends Enum<?>> l) {}
+          private static List<? extends Enum<?>> returnsEnumWildcardList() {
+        > Error: 'ArrayList<MyJsEnum>' cannot be assigned to 'List<?>'.
+            return new ArrayList<MyJsEnum>();
+          }
+          private static <J extends MyJsEnum> void passesJsEnumBoundedList(List<J> l) {
+            acceptsEnumWildcardList(l);
+        > Error: 'List<J>' cannot be assigned to 'List<?>'.
+          }
+          private static <L extends List<MyJsEnum>> void passesJsEnumListBoundedT(L l) {
+            acceptsEnumWildcardList(l);
+        > Error: 'L' cannot be assigned to 'List<?>'.
+          }
+          private static <L1 extends List<? extends Enum<?>>, L2 extends L1>
+              void castsToEnumWildcardListBoundedT(List<MyJsEnum> myJsEnumList) {
+            Object o = (L2) myJsEnumList;
+        > Error: 'List<MyJsEnum>' cannot be cast to 'L2'.
+          }
+          private static void main() {
+            List<MyJsEnum> myJsEnumList = new ArrayList<>();
+            List<CustomValued> customValuedList = new ArrayList<>();
+            List<? extends Enum> l1 = new ArrayList<MyJsEnum>();
+        > Error: 'ArrayList<MyJsEnum>' cannot be assigned to 'List<?>'.
+            List<? extends Enum<?>> l2 = myJsEnumList;
+        > Error: 'List<MyJsEnum>' cannot be assigned to 'List<?>'.
+            l2 = new ArrayList<Native>();
+        > Error: 'ArrayList<Native>' cannot be assigned to 'List<?>'.
+            List<? extends MyJsEnum> wildcardList = myJsEnumList;
+            l2 = wildcardList;
+        > Error: 'List<?>' cannot be assigned to 'List<?>'.
+            Object o = (List<? extends Enum<?>>) myJsEnumList;
+        > Error: 'List<MyJsEnum>' cannot be cast to 'List<?>'.
+            Class<? extends Enum<?>> clazz = MyJsEnum.class;
+        > Error: 'Class<MyJsEnum>' cannot be assigned to 'Class<?>'.
+            List<? extends Comparable<?>> l3 = customValuedList;
+        > Error: 'List<CustomValued>' cannot be assigned to 'List<?>'.
+            Map<String, ? extends List<? extends Enum<?>>> m = new HashMap<String, List<MyJsEnum>>();
+        > Error: 'HashMap<String, List<MyJsEnum>>' cannot be assigned to 'Map<String, ?>'.
+            acceptsEnumWildcardList(myJsEnumList);
+        > Error: 'List<MyJsEnum>' cannot be assigned to 'List<?>'.
+            acceptsEnumBoundedList(myJsEnumList);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBoundedList(List)' cannot be of type 'MyJsEnum'.
+            acceptsEnumWildcardBoundedList(myJsEnumList);
+        > Error: Type argument for 'L1' of 'void Main.acceptsEnumWildcardBoundedList(List)' cannot be of type 'List<MyJsEnum>'.
+        > Error: Type argument for 'L2' of 'void Main.acceptsEnumWildcardBoundedList(List)' cannot be of type 'List<MyJsEnum>'.
+            Comparator<Enum<?>> byOrdinal = (a, b) -> a.ordinal() - b.ordinal();
+            myJsEnumList.sort(byOrdinal);
+        > Error: 'Comparator<Enum<?>>' cannot be assigned to 'Comparator<?>'.
+            Comparator<? super MyJsEnum> c1 = byOrdinal;
+        > Error: 'Comparator<Enum<?>>' cannot be assigned to 'Comparator<?>'.
+            Comparator<? super Enum<?>> superEnumComparator = byOrdinal;
+            Comparator<? super MyJsEnum> c2 = superEnumComparator;
+        > Error: 'Comparator<?>' cannot be assigned to 'Comparator<?>'.
+            Comparator<List<? extends Enum<?>>> byFirstOrdinal =
+                (a, b) -> a.get(0).ordinal() - b.get(0).ordinal();
+            Comparator<? super List<MyJsEnum>> c3 = byFirstOrdinal;
+        > Error: 'Comparator<List<?>>' cannot be assigned to 'Comparator<?>'.
+            Comparator<? super List<? extends Enum<?>>> superListComparator = byFirstOrdinal;
+            Comparator<? super List<MyJsEnum>> c4 = superListComparator;
+        > Error: 'Comparator<?>' cannot be assigned to 'Comparator<?>'.
+            List<? super List<? extends Enum<?>>> superEnumListList = new ArrayList<>();
+            superEnumListList.add(myJsEnumList);
+        > Error: 'List<MyJsEnum>' cannot be assigned to '<captured wildcard>'.
+            Comparator<Comparable<?>> byComparable = null;
+            customValuedList.sort(byComparable);
+        > Error: 'Comparator<Comparable<?>>' cannot be assigned to 'Comparator<?>'.
+          }
+        }
         """);
   }
 
