@@ -1,5 +1,6 @@
 """j2cl_test util to help generate test input"""
 
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(":j2cl_util.bzl", "get_java_package")
 
 visibility(["//build_defs/..."])
@@ -36,10 +37,10 @@ def generate_test_input(name, test_class):
     java_class = name.replace("-", "_").title() + "J2clTestInput"
     java_code = _TEMPLATE % (native.package_name(), name, java_package, test_class, java_class)
 
-    native.genrule(
+    write_file(
         name = java_class,
-        outs = [java_class + ".java"],
-        cmd = "echo \"%s\" > $@" % java_code,
+        out = java_class + ".java",
+        content = [java_code],
         tags = ["manual", "notap"],
         testonly = 1,
     )
