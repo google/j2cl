@@ -17,3 +17,8 @@ package staticfieldinitializer
 
 var a = 2
 var b = a * 4
+var c = 0
+var d =
+  object {
+    var e = 0
+  }

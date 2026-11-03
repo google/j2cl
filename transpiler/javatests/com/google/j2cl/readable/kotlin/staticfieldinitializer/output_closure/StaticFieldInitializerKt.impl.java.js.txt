@@ -3,6 +3,8 @@ goog.module('staticfieldinitializer.StaticFieldInitializerKt$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1 = goog.forwardDeclare('staticfieldinitializer.StaticFieldInitializerKt.$1$impl');
+
 /**
  * @final
  */
@@ -42,6 +44,26 @@ class StaticFieldInitializerKt extends j_l_Object {
   StaticFieldInitializerKt.$clinit();
   StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_ = set__;
  }
+ /** @nodts @return {number} */
+ static m_getC__int() {
+  StaticFieldInitializerKt.$clinit();
+  return StaticFieldInitializerKt.f_c__staticfieldinitializer_StaticFieldInitializerKt_;
+ }
+ /** @nodts */
+ static m_setC__int__void(/** number */ set__) {
+  StaticFieldInitializerKt.$clinit();
+  StaticFieldInitializerKt.f_c__staticfieldinitializer_StaticFieldInitializerKt_ = set__;
+ }
+ /** @nodts @return {!*} */
+ static m_getD__java_lang_Object() {
+  StaticFieldInitializerKt.$clinit();
+  return StaticFieldInitializerKt.f_d__staticfieldinitializer_StaticFieldInitializerKt_;
+ }
+ /** @nodts */
+ static m_setD__java_lang_Object__void(/** !* */ set__) {
+  StaticFieldInitializerKt.$clinit();
+  StaticFieldInitializerKt.f_d__staticfieldinitializer_StaticFieldInitializerKt_ = set__;
+ }
  /** @nodts */
  static $clinit() {
   StaticFieldInitializerKt.$clinit = () =>{};
@@ -49,6 +71,7 @@ class StaticFieldInitializerKt extends j_l_Object {
   j_l_Object.$clinit();
   StaticFieldInitializerKt.f_a__staticfieldinitializer_StaticFieldInitializerKt_ = 2;
   StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_ = Math.imul(StaticFieldInitializerKt.m_getA__int(), 4);
+  StaticFieldInitializerKt.f_d__staticfieldinitializer_StaticFieldInitializerKt_ = $1.$create__();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -56,12 +79,18 @@ class StaticFieldInitializerKt extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  $1 = goog.module.get('staticfieldinitializer.StaticFieldInitializerKt.$1$impl');
+ }
 }
 /**@type {number} @nodts*/
 StaticFieldInitializerKt.f_a__staticfieldinitializer_StaticFieldInitializerKt_ = 0;
 /**@type {number} @nodts*/
 StaticFieldInitializerKt.f_b__staticfieldinitializer_StaticFieldInitializerKt_ = 0;
+/**@type {number} @nodts*/
+StaticFieldInitializerKt.f_c__staticfieldinitializer_StaticFieldInitializerKt_ = 0;
+/**@type {!*} @nodts*/
+StaticFieldInitializerKt.f_d__staticfieldinitializer_StaticFieldInitializerKt_;
 $Util.$setClassMetadata(StaticFieldInitializerKt, 'staticfieldinitializer.StaticFieldInitializerKt');
 
 exports = StaticFieldInitializerKt;
