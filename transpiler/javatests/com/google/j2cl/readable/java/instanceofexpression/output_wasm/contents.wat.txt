@@ -264,7 +264,7 @@
      (ref.test (ref $java.lang.Appendable.vtable) (call $get.itable.$java.lang.Appendable (local.get $serializable) ))
     )
    ) (then (block (result i32)
-    (local.set $_ (ref.cast (ref null $java.lang.Object) (local.get $serializable)))
+    (local.set $_ (local.get $serializable))
     (i32.const 1)
    )) (else (i32.const 0)))
    (then

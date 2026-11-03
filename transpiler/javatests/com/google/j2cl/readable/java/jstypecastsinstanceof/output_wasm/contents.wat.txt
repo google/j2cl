@@ -139,7 +139,7 @@
   (call $$clinit__void_<once>_@jstypecastsinstanceof.CastToTypeVariable.$Overlay )
   (local.set $o (call $$create__@java.lang.Object ))
   (local.set $a (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $o)))
-  (return (ref.cast (ref null extern) (local.get $$thisArg)))
+  (return (local.get $$thisArg))
  )
 )
 
@@ -251,7 +251,7 @@
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (block
-  (return (ref.cast (ref null $java.lang.Object) (local.get $o)))
+  (return (local.get $o))
  )
 )
 
@@ -274,7 +274,7 @@
     )
    )
   ) (then (block (result i32)
-   (local.set $i (ref.cast (ref null $java.lang.Object) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $b))))
+   (local.set $i (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $b)))
    (i32.const 1)
   )) (else (i32.const 0))))
  )

@@ -520,7 +520,7 @@
  (block
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
   (block
-   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $object)))
+   (local.set $$qualifier (local.get $object))
    (call_ref $function.m_set__int__void (ref.as_non_null (local.get $$qualifier))(i32.const 1)(struct.get $intersectiontype.Setable.vtable $m_set__int__void (ref.cast (ref $intersectiontype.Setable.vtable) (call $get.itable.$intersectiontype.Setable (local.get $$qualifier)))))
   )
   (drop (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $object))(struct.get $intersectiontype.Getable.vtable $m_get__java_lang_Object (ref.cast (ref $intersectiontype.Getable.vtable) (call $get.itable.$intersectiontype.Getable (local.get $object))))))
@@ -536,11 +536,11 @@
   (if (ref.is_null (local.get $o))
    (then
     (block
-     (return (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (local.get $o))))
+     (return (local.get $o))
     )
    )
   )
-  (return (ref.cast (ref null $java.lang.Object) (local.get $o)))
+  (return (local.get $o))
  )
 )
 
@@ -550,7 +550,7 @@
  (result (ref null $java.lang.Object))
  (block
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
-  (return (ref.cast (ref null $java.lang.Object) (local.get $s)))
+  (return (local.get $s))
  )
 )
 
@@ -560,7 +560,7 @@
  (result (ref null $java.lang.Object))
  (block
   (call $$clinit__void_<once>_@intersectiontype.IntersectionTypeTest )
-  (return (ref.cast (ref null $java.lang.Object) (local.get $s)))
+  (return (local.get $s))
  )
 )
 
@@ -670,7 +670,7 @@
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest) (local.get $this.untyped)))
  (block
   (block
-   (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (local.get $o))))
+   (local.set $$qualifier (local.get $o))
    (drop (call_ref $function.m_defaultM__int (ref.as_non_null (local.get $$qualifier))(struct.get $intersectiontype.Cmp.vtable $m_defaultM__int (ref.cast (ref $intersectiontype.Cmp.vtable) (call $get.itable.$intersectiontype.Cmp (local.get $$qualifier))))))
   )
   (block
@@ -716,7 +716,7 @@
  (local $t (ref null $intersectiontype.IntersectionTypeTest.GenericType))
  (local $$qualifier (ref null $java.lang.Object))
  (block
-  (local.set $t (ref.cast (ref null $intersectiontype.IntersectionTypeTest.GenericType) (call $$create__@intersectiontype.IntersectionTypeTest.GenericType )))
+  (local.set $t (call $$create__@intersectiontype.IntersectionTypeTest.GenericType ))
   (call_ref $function.m_doSomething__java_lang_Object__void_$pp_intersectiontype (ref.as_non_null (local.get $t))(call $$getString_||__java_lang_String_<once>_@intersectiontype.IntersectionTypeTest.$StringLiterals )(struct.get $intersectiontype.IntersectionTypeTest.GenericType.vtable $m_doSomething__java_lang_Object__void_$pp_intersectiontype (struct.get $intersectiontype.IntersectionTypeTest.GenericType $vtable(local.get $t))))
   (block
    (local.set $$qualifier (ref.cast (ref null $java.lang.Object) (local.get $t)))
@@ -1003,7 +1003,7 @@
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (local.set $this (ref.cast (ref $intersectiontype.IntersectionTypeTest.MapEntry) (local.get $this.untyped)))
  (block
-  (return (ref.cast (ref null $java.lang.Object) (local.get $o)))
+  (return (local.get $o))
  )
 )
 (elem declare func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry)

@@ -1310,7 +1310,7 @@
  (block
   (call $$clinit__void_<once>_@nativejstypes.IntersectionTypes )
   (local.set $b (ref.eq (local.get $t) (local.get $o)))
-  (local.set $b (ref.eq (local.get $o) (ref.cast (ref null $java.lang.Object) (local.get $o))))
+  (local.set $b (ref.eq (local.get $o) (local.get $o)))
  )
 )
 
@@ -1442,7 +1442,7 @@
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
   (local.set $header (call $m_<init>__@nativejstypes.Headers ))
-  (call $m_append__java_lang_String__java_lang_String__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals )))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals ))))
+  (call $m_append__java_lang_String__java_lang_String__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals ))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals )))
  )
 )
 

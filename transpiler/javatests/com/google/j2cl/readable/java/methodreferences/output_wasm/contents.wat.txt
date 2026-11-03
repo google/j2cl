@@ -953,7 +953,7 @@
  (result (ref null extern))
  (block
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsProducer )
-  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.java_lang_Object (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))))
  )
 )
 
@@ -1006,7 +1006,7 @@
  (result (ref null extern))
  (block
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsFunctionInterface )
-  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))))
  )
 )
 
@@ -1046,7 +1046,7 @@
    (then
     (return (call_ref $function.java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $t) (ref.cast (ref $function.java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
-    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsFunctionInterface (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $t))))))
+    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsFunctionInterface (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $t)))))
    )
   )
  )
@@ -1061,7 +1061,7 @@
  (result (ref null extern))
  (block
   (call $$clinit__void_<once>_@methodreferences.MethodReferences.JsBiFunction )
-  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call_ref $function.java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $u)) (ref.cast (ref $function.java_lang_Object__java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $u)) (ref.cast (ref $function.java_lang_Object__java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))))
  )
 )
 
@@ -1102,7 +1102,7 @@
    (then
     (return (call_ref $function.java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $$instance)) (local.get $t) (local.get $u) (ref.cast (ref $function.java_lang_Object__java_lang_Object__java_lang_Object) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
-    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsBiFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $t)))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (local.get $u))))))
+    (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.JsBiFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $t))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $u)))))
    )
   )
  )
@@ -1293,7 +1293,7 @@
   (local.set $jsSuperToStringProducer (call $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$31 (local.get $this)))
   (local.set $jsbiFunction (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$32 ))
   (local.set $jsFunctionWithParameters (call $$create__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$33 (local.get $this)))
-  (local.set $objectFactory (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (ref.cast (ref null $java.lang.Object) (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$34 )))))
+  (local.set $objectFactory (ref.cast (ref null $java.lang.Object) (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$34 )))
   (call $m_acceptFunctionSuperVariance__methodreferences_MethodReferences_Function__void@methodreferences.MethodReferences (call $$create__@methodreferences.MethodReferences.$LambdaImplementor$35 ))
  )
 )

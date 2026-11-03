@@ -360,7 +360,7 @@
          (block
           (local.set $__$exc (call $m_toJava__javaemul_internal_ThrowableUtils_JsObject__java_lang_Throwable@javaemul.internal.Exceptions (local.get $__$jsexc)))
           (block
-           (local.set $$exceptionFromTry (ref.cast (ref null $java.lang.Throwable) (local.get $__$exc)))
+           (local.set $$exceptionFromTry (local.get $__$exc))
            (local.set $$primaryExc (local.get $$exceptionFromTry))
            (throw $exception.event (call $m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject@javaemul.internal.Exceptions (local.get $$exceptionFromTry)))
           )

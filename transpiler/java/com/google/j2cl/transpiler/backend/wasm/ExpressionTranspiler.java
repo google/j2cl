@@ -193,12 +193,22 @@ final class ExpressionTranspiler {
       public boolean enterCastExpression(CastExpression castExpression) {
         TypeDescriptor castTypeDescriptor =
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
+        Expression expression = castExpression.getExpression();
+        String wasmTypeName = environment.getWasmTypeName(castTypeDescriptor);
+
+        // Omit the cast if the expression is already of the target wasm type, e.g. casts to
+        // interfaces, which are represented as java.lang.Object, from java.lang.Object.
+        if (wasmTypeName.equals(
+            environment.getWasmTypeName(
+                expression.getDeclaredTypeDescriptor().toRawTypeDescriptor()))) {
+          render(expression);
+          return false;
+        }
 
         // TODO(b/184675805): implement array cast expressions beyond this nominal
         // implementation.
-        sourceBuilder.append(
-            format("(ref.cast (ref null %s) ", environment.getWasmTypeName(castTypeDescriptor)));
-        render(castExpression.getExpression());
+        sourceBuilder.append(format("(ref.cast (ref null %s) ", wasmTypeName));
+        render(expression);
         sourceBuilder.append(")");
         return false;
       }

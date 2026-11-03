@@ -423,7 +423,7 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array))))))
     (block $LOOP.CONTINUE
      (block
-      (local.set $number (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index))))
+      (local.set $number (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index)))
       (block
        (local.set $sum (f64.add (local.get $sum) (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (ref.cast (ref null $java.lang.Double) (local.get $number))))))
       )
@@ -459,7 +459,7 @@
     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array))))))
     (block $LOOP.CONTINUE
      (block
-      (local.set $number (ref.cast (ref null $java.lang.Object) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index))))
+      (local.set $number (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $elements@javaemul.internal.WasmArray.OfObject (local.get $$array)) (local.get $$index)))
       (block
        (local.set $sum (f64.add (local.get $sum) (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (ref.cast (ref null $java.lang.Double) (local.get $number))))))
       )
@@ -1018,22 +1018,22 @@
  (local $$qualifier (ref null $autoboxing.AutoBoxing.1Local))
  (block
   (call $$clinit__void_<once>_@autoboxing.AutoBoxing )
-  (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10))))
+  (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10)))
   (local.set $l (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))))
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
     (call $$assert__boolean__void@javaemul.internal.Asserts (i64.eq (local.get $l) (i64.const 10)))
    )
   )
-  (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
-  (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
+  (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
+  (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
   (local.set $n (block (result (ref null $java.lang.Long))
    (local.set $$value (local.get $n))
-   (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
+   (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
    (local.get $$value)
   ))
   (local.set $n (block (result (ref null $java.lang.Long))
-   (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
+   (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
    (local.get $n)
   ))
   (local.set $l (block (result i64)
@@ -1057,22 +1057,22 @@
  (local $i i32)
  (block
   (call $$clinit__void_<once>_@autoboxing.AutoBoxing )
-  (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10))))
+  (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10)))
   (local.set $l (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))))
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
     (call $$assert__boolean__void@javaemul.internal.Asserts (i64.eq (local.get $l) (i64.const 10)))
    )
   )
-  (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
-  (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
+  (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
+  (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
   (local.set $n (block (result (ref null $java.lang.Long))
    (local.set $$value (local.get $n))
-   (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
+   (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
    (local.get $$value)
   ))
   (local.set $n (block (result (ref null $java.lang.Long))
-   (local.set $n (ref.cast (ref null $java.lang.Long) (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1)))))
+   (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $n))) (i64.const 1))))
    (local.get $n)
   ))
   (local.set $l (block (result i64)

@@ -150,7 +150,7 @@
  (result (ref null string))
  (block
   (call $$clinit__void_<once>_@jsnonnull.Main.MyFunction )
-  (return (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $a)) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))))
+  (return (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $a)) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))))
  )
 )
 
@@ -190,7 +190,7 @@
    (then
     (return (call_ref $function.java_lang_String__java_lang_String (ref.as_non_null (local.get $$instance)) (local.get $a) (ref.cast (ref $function.java_lang_String__java_lang_String) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
    )(else
-    (return (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (local.get $a))))))
+    (return (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_String__java_lang_String@jsnonnull.Main.MyFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (local.get $a)))))
    )
   )
  )

@@ -401,7 +401,7 @@
      )
     )(else
      (if (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $i)) (then (block (result i32)
-       (local.set $j_1 (ref.cast (ref null $java.lang.Integer) (local.get $i)))
+       (local.set $j_1 (local.get $i))
        (i32.gt_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $j_1))) (i32.const 2))
       )) (else (i32.const 0)))
       (then
