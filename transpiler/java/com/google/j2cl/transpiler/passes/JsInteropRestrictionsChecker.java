@@ -864,19 +864,27 @@ public class JsInteropRestrictionsChecker {
       TypeDescriptor toTypeDescriptor,
       TypeDescriptor fromTypeDescriptor,
       ImmutableSet<TypeVariable> seenTypeVariables) {
-    if (!(toTypeDescriptor instanceof DeclaredTypeDescriptor toDeclaredTypeDescriptor)
-        || !toDeclaredTypeDescriptor.hasTypeArguments()) {
+    if (!(toTypeDescriptor instanceof DeclaredTypeDescriptor toDeclaredTypeDescriptor)) {
       return false;
     }
-    DeclaredTypeDescriptor fromSupertype =
-        fromTypeDescriptor.findSupertype(toDeclaredTypeDescriptor.getTypeDeclaration());
-    return fromSupertype != null
-        && Streams.zip(
-                toDeclaredTypeDescriptor.getTypeArgumentDescriptors().stream(),
-                fromSupertype.getTypeArgumentDescriptors().stream(),
-                (toArg, fromArg) ->
-                    isDisallowedJsEnumTypeArgument(toArg, fromArg, seenTypeVariables))
-            .anyMatch(Boolean::booleanValue);
+    for (DeclaredTypeDescriptor toSupertype :
+        toDeclaredTypeDescriptor.getAllSuperTypesIncludingSelf()) {
+      if (!toSupertype.hasTypeArguments()) {
+        continue;
+      }
+      DeclaredTypeDescriptor fromSupertype =
+          fromTypeDescriptor.findSupertype(toSupertype.getTypeDeclaration());
+      if (fromSupertype != null
+          && Streams.zip(
+                  toSupertype.getTypeArgumentDescriptors().stream(),
+                  fromSupertype.getTypeArgumentDescriptors().stream(),
+                  (toArg, fromArg) ->
+                      isDisallowedJsEnumTypeArgument(toArg, fromArg, seenTypeVariables))
+              .anyMatch(Boolean::booleanValue)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private static boolean isDisallowedJsEnumTypeArgument(

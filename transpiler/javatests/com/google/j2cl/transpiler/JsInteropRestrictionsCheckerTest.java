@@ -2987,6 +2987,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 l4 = new ArrayList<Native>();
                 List<? super MyJsEnum> l5 = new ArrayList<Object>();
                 Collection<? extends MyJsEnum> l6 = myJsEnumList;
+                Collection<MyJsEnum> myJsEnumCollection = myJsEnumList;
+                l4 = (List<? extends Comparable<?>>) myJsEnumCollection;
                 Map<String, ? extends List<? extends Comparable<?>>> m =
                     new HashMap<String, List<MyJsEnum>>();
                 acceptsList(myJsEnumList);
@@ -3016,6 +3018,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             int value;
             CustomValued(int value) { this.value = value; }
           }
+          interface SubComparator<T> extends Comparator<T> {}
           interface Getter {
             List<? extends Enum<?>> get();
           }
@@ -3072,6 +3075,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: 'List<?>' cannot be assigned to 'List<?>'.
             Object o = (List<? extends Enum<?>>) myJsEnumList;
         > Error: 'List<MyJsEnum>' cannot be cast to 'List<?>'.
+            Collection<MyJsEnum> myJsEnumCollection = myJsEnumList;
+            o = (List<? extends Enum<?>>) myJsEnumCollection;
+        > Error: 'Collection<MyJsEnum>' cannot be cast to 'List<?>'.
+            Queue<MyJsEnum> myJsEnumQueue = null;
+            o = (List<? extends Enum<?>>) myJsEnumQueue;
+        > Error: 'Queue<MyJsEnum>' cannot be cast to 'List<?>'.
             record Box<T>(T value) {}
             Box<MyJsEnum> myJsEnumBox = new Box<>(MyJsEnum.A);
             if (myJsEnumBox instanceof Box<? extends Enum<?>>(var unused)) {}
@@ -3097,6 +3106,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             Comparator<? super Enum<?>> superEnumComparator = byOrdinal;
             Comparator<? super MyJsEnum> c2 = superEnumComparator;
         > Error: 'Comparator<?>' cannot be assigned to 'Comparator<?>'.
+            o = (SubComparator<? super MyJsEnum>) byOrdinal;
+        > Error: 'Comparator<Enum<?>>' cannot be cast to 'SubComparator<?>'.
             Comparator<List<? extends Enum<?>>> byFirstOrdinal =
                 (a, b) -> a.get(0).ordinal() - b.get(0).ordinal();
             Comparator<? super List<MyJsEnum>> c3 = byFirstOrdinal;
