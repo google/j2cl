@@ -114,7 +114,7 @@ exports = {compile, compileStreaming, instantiate, instantiateStreaming, instant
 def _impl_j2wasm_application(ctx):
     feature_set = ctx.attr.feature_set
     if feature_set == J2WASM_FEATURE_SET.DEFAULT:
-        feature_set = ctx.attr._feature_set[BuildSettingInfo].value
+        feature_set = ctx.attr._j2wasm_feature_set[BuildSettingInfo].value
 
     deps = _get_j2cl_infos_for_feature_set(ctx.attr.deps, feature_set)
     classpath = _get_all_classjars(deps).to_list()

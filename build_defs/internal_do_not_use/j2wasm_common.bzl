@@ -31,7 +31,7 @@ def _compile(
       for that compilation.
     """
 
-    build_setting_feature_set = ctx.attr._feature_set[BuildSettingInfo].value
+    build_setting_feature_set = ctx.attr._j2wasm_feature_set[BuildSettingInfo].value
 
     def _compile_for_feature_set(feature_set):
         # Reduce redundancy by returning the identical compilation info if the requested feature set
@@ -164,7 +164,7 @@ J2WASM_TOOLCHAIN_ATTRS.update({
     "_j2cl_java_toolchain": attr.label(
         default = Label("//jre/java:j2wasm_java_toolchain"),
     ),
-    "_feature_set": attr.label(
+    "_j2wasm_feature_set": attr.label(
         providers = [BuildSettingInfo],
         default = "//build_defs/internal_do_not_use:j2wasm_feature_set",
     ),
