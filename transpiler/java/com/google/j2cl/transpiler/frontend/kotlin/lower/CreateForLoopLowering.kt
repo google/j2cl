@@ -181,10 +181,9 @@ private class LoopTransformer(
 
     // Extract the different component of the for loop. If we are unable to extract one of the
     // component, it means that the current loop is not supported.
-    val initializers = extractInitializers(expression) ?: return super.visitBlock(expression)
-    val condition = extractCondition(expression) ?: return super.visitBlock(expression)
-    val innerLoopBody =
-      extractAndSplitInnerLoopBody(expression) ?: return super.visitBlock(expression)
+    val initializers = extractInitializers(expression) ?: return expression
+    val condition = extractCondition(expression) ?: return expression
+    val innerLoopBody = extractAndSplitInnerLoopBody(expression) ?: return expression
     val oldLoop = getInnerLoop(expression)
 
     val extraTempVariables = mutableListOf<IrVariable>()
@@ -197,10 +196,9 @@ private class LoopTransformer(
           initializers.filter { it.origin != IrDeclarationOrigin.FOR_LOOP_ITERATOR }
         )
         createForInLoop(expression, initializers, condition, innerLoopBody, oldLoop)
-          ?: return super.visitBlock(expression)
+          ?: return expression
       } else {
-        val inductionVariableUpdate =
-          innerLoopBody.inductionVariableUpdate ?: return super.visitBlock(expression)
+        val inductionVariableUpdate = innerLoopBody.inductionVariableUpdate ?: return expression
         IrForLoop.from(oldLoop).apply {
           this.condition = condition
           this.initializers = initializers
