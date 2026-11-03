@@ -457,7 +457,7 @@ public class Main {
         });
     assertThrowsClassCastException(
         () -> {
-          Object unused = (Enum<PlainJsEnum> & Comparable<PlainJsEnum>) (Object) PlainJsEnum.ONE;
+          Object unused = (Enum & Comparable) (Object) PlainJsEnum.ONE;
         },
         Enum.class);
 

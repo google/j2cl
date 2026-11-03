@@ -3185,7 +3185,8 @@ public class JsInteropRestrictionsChecker {
 
   /**
    * Deeply checks the given type against the specified predicate. Returns {@code true} if the
-   * predicate returns true for any type specialization, type argument, or array component.
+   * predicate returns true for any type specialization, type argument, intersection component, or
+   * array component.
    */
   private static boolean hasDisallowedType(
       TypeDescriptor inferredTypeDescriptor,
@@ -3193,6 +3194,12 @@ public class JsInteropRestrictionsChecker {
       BiPredicate<TypeDescriptor, TypeDescriptor> isTypeSpecializationDisallowed) {
     if (isTypeSpecializationDisallowed.test(declaredTypeDescriptor, inferredTypeDescriptor)) {
       return true;
+    }
+
+    if (inferredTypeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
+      return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+          .anyMatch(
+              component -> hasDisallowedType(component, component, isTypeSpecializationDisallowed));
     }
 
     if (inferredTypeDescriptor.isArray()) {

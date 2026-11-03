@@ -450,7 +450,7 @@ private fun testComparableJsEnum() {
   // Kotlin doesn't support intersection casts
   // assertThrowsClassCastException(
   //   {
-  //     val unused = PlainJsEnum.ONE as (Enum<PlainJsEnum> & Comparable<PlainJsEnum>)
+  //     val unused = PlainJsEnum.ONE as (Enum<*> & Comparable<*>)
   //   },
   //   Enum::class.java)
 

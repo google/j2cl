@@ -2906,6 +2906,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.MyJsEnum",
         """
+        import java.io.Serializable;
         import java.util.*;
         import jsinterop.annotations.*;
         interface EnumList<E extends Enum<E>> {}
@@ -2942,6 +2943,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Parameter 'p' in 'void Main.acceptsEnumList(EnumList<MyJsEnum> p)' cannot be of type 'EnumList<MyJsEnum>'.
           <J extends MyJsEnum> void acceptsJsEnumBoundedList(AnyEnumList<J> p) {}
         > Error: Parameter 'p' in 'void Main.acceptsJsEnumBoundedList(AnyEnumList<J> p)' cannot be of type 'AnyEnumList<J>'.
+          <T> void acceptsGeneric(T p) {}
+          <T extends Enum<?>> void acceptsEnumBounded(T p) {}
           void m() {
             EnumHolder<MyJsEnum> holder = new EnumHolder<>();
         > Error: Variable 'holder' cannot be of type 'EnumHolder<MyJsEnum>'.
@@ -2952,6 +2955,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Type argument for 'E' of 'EnumHolder<MyJsEnum> EnumHolder.create()' cannot be of type 'MyJsEnum'.
             o = (EnumHolder<MyJsEnum>) o;
         > Error: Cannot cast to type 'EnumHolder<MyJsEnum>'.
+            o = (Enum<MyJsEnum> & Comparable<MyJsEnum>) o;
+        > Error: Cannot cast to type '(Enum<MyJsEnum> & Comparable<MyJsEnum>)'.
+            o = (ComparableList<CustomValued> & Serializable) o;
+        > Error: Cannot cast to type '(ComparableList<CustomValued> & Serializable)'.
+            var interHolder = (Serializable & EnumList<MyJsEnum>) o;
+        > Error: Variable 'interHolder' cannot be of type '(Serializable & EnumList<MyJsEnum>)'.
+        > Error: Cannot cast to type '(Serializable & EnumList<MyJsEnum>)'.
+            acceptsGeneric(interHolder);
+        > Error: Type argument for 'T' of 'void Main.acceptsGeneric(Serializable)' cannot be of type '(Serializable & EnumList<MyJsEnum>)'.
+            acceptsEnumBounded((MyJsEnum & Serializable) o);
+        > Error: Type argument for 'T' of 'void Main.acceptsEnumBounded(MyJsEnum)' cannot be of type '(MyJsEnum & Serializable)'.
             o = new EnumHolder<MyJsEnum>() {};
         > Error: Supertype of '<anonymous> extends EnumHolder<MyJsEnum>' cannot be of type 'EnumHolder<MyJsEnum>'.
           }
@@ -3515,6 +3529,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "Main",
         """
+        import java.io.Serializable;
         import java.util.List;
         import java.util.function.Function;
         import jsinterop.annotations.*;
@@ -3599,6 +3614,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: Variable 'list' cannot be of type 'List<MyJsEnum[]>'.
             List<? extends MyJsEnum[]> wildcardList = null;
           > Error: Variable 'wildcardList' cannot be of type 'List<?>'.
+            var interList = (Serializable & List<MyJsEnum[]>) null;
+          > Error: Variable 'interList' cannot be of type '(Serializable & List<MyJsEnum[]>)'.
+          > Error: Cannot cast to JsEnum array type '(Serializable & List<MyJsEnum[]>)'.
             DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();
             e = buggy.arr[0];
           > Error: Reference to field 'BaseWithTArrayField<MyJsEnum>.arr' cannot be of type 'MyJsEnum[]'.
