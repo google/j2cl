@@ -28,7 +28,8 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
   public static final String FILE_SUFFIX = ".java.js";
 
   public JavaScriptHeaderGenerator(Problems problems, Type type, List<Import> imports) {
-    super(problems, type, imports);
+    // The header does not refer to any variables, hence there is no need to compute their names.
+    super(problems, type, imports, /* needsUniqueVariableNames= */ false);
   }
 
   @Override

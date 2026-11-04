@@ -782,6 +782,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .build();
   }
 
+  // Memoized since it is relatively expensive to compute and some passes look it up for every
+  // method call, e.g. to find the calls to `await` and `yield`.
+  @Override
+  @Memoized
+  public String getQualifiedJsName() {
+    return HasJsNameInfo.buildQualifiedJsName(getJsNamespace(), getSimpleJsName());
+  }
+
   /**
    * Returns the JsInfo of the method if it is a record component accessor. Otherwise returns null.
    */

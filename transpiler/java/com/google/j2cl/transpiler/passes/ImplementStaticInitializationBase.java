@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Method;
@@ -88,6 +89,13 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   public void synthesizeClinitCallsInMethods(Type type) {
     type.accept(
         new AbstractRewriter() {
+          @Override
+          public boolean shouldProcessMember(Member member) {
+            // Only the methods themselves are rewritten and, since nested classes have already
+            // been moved to the top level, there is nothing to rewrite inside the members.
+            return false;
+          }
+
           @Override
           public Method rewriteMethod(Method method) {
             if (triggersClinit(method.getDescriptor(), type)) {

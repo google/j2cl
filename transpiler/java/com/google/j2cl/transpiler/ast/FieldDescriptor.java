@@ -186,6 +186,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
+  @Memoized
+  public String getQualifiedJsName() {
+    return HasJsNameInfo.buildQualifiedJsName(getJsNamespace(), getSimpleJsName());
+  }
+
+  @Override
   public J2ktInfo getJ2ktInfo() {
     return getOriginalJ2ktInfo();
   }

@@ -88,6 +88,11 @@ public abstract class Member extends Node
   }
 
   @Override
+  public final String getQualifiedJsName() {
+    return getDescriptor().getQualifiedJsName();
+  }
+
+  @Override
   public String getReadableDescription() {
     return getDescriptor().getReadableDescription();
   }

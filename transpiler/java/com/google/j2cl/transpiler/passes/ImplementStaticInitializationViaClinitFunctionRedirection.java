@@ -66,6 +66,13 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     type.accept(
         new AbstractRewriter() {
           @Override
+          public boolean shouldProcessMember(Member member) {
+            // Only the fields themselves are rewritten and, since nested classes have already been
+            // moved to the top level, there is nothing to rewrite inside the members.
+            return false;
+          }
+
+          @Override
           public Field rewriteField(Field field) {
             if (!field.isStatic()) {
               return field;
@@ -98,6 +105,13 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     // Replace the actual static fields with their backing fields.
     type.accept(
         new AbstractRewriter() {
+          @Override
+          public boolean shouldProcessMember(Member member) {
+            // Only the fields themselves are rewritten and, since nested classes have already been
+            // moved to the top level, there is nothing to rewrite inside the members.
+            return false;
+          }
+
           @Override
           public Member rewriteField(Field field) {
             if (!triggersClinit(field.getDescriptor(), type)) {

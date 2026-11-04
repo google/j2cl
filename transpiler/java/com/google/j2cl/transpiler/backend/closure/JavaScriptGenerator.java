@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -45,9 +46,20 @@ public abstract class JavaScriptGenerator {
   protected final Problems problems;
 
   public JavaScriptGenerator(Problems problems, Type type, List<Import> imports) {
+    this(problems, type, imports, /* needsUniqueVariableNames= */ true);
+  }
+
+  protected JavaScriptGenerator(
+      Problems problems, Type type, List<Import> imports, boolean needsUniqueVariableNames) {
     this.problems = problems;
     this.type = type;
     this.imports = imports;
+    Map<HasName, String> uniqueNameByVariable =
+        needsUniqueVariableNames ? computeUniqueVariableNames(type, imports) : ImmutableMap.of();
+    environment = new ClosureGenerationEnvironment(imports, uniqueNameByVariable);
+  }
+
+  private static Map<HasName, String> computeUniqueVariableNames(Type type, List<Import> imports) {
     ImmutableSet<String> namesUsedInAliases =
         imports.stream()
             // Take the first component of the alias. Most aliases are not qualified names, but
@@ -57,10 +69,8 @@ public abstract class JavaScriptGenerator {
                 anImport ->
                     Iterables.get(Splitter.onPattern("\\\\.").split(anImport.getAlias()), 0))
             .collect(toImmutableSet());
-    Map<HasName, String> uniqueNameByVariable =
-        UniqueNamesResolver.computeUniqueNames(
-            Sets.union(namesUsedInAliases, JsKeywords.getKeywords()), type);
-    environment = new ClosureGenerationEnvironment(imports, uniqueNameByVariable);
+    return UniqueNamesResolver.computeUniqueNames(
+        Sets.union(namesUsedInAliases, JsKeywords.getKeywords()), type);
   }
 
   public Map<SourcePosition, SourcePosition> getSourceMappings() {

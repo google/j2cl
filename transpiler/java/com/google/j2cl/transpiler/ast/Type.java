@@ -387,6 +387,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   @Override
+  public String getQualifiedJsName() {
+    return typeDeclaration.getQualifiedJsName();
+  }
+
+  @Override
   public boolean isNative() {
     return typeDeclaration.isNative();
   }

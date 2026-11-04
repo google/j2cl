@@ -27,10 +27,13 @@ public interface HasJsNameInfo {
   boolean isNative();
 
   /** Returns the qualified JavaScript name of a type, method or field. */
-  default String getQualifiedJsName() {
-    if (JsUtils.isGlobal(getJsNamespace())) {
-      return getSimpleJsName();
+  String getQualifiedJsName();
+
+  /** Returns the qualified JavaScript name for a name in a namespace. */
+  static String buildQualifiedJsName(String jsNamespace, String jsName) {
+    if (JsUtils.isGlobal(jsNamespace)) {
+      return jsName;
     }
-    return AstUtils.buildQualifiedName(getJsNamespace(), getSimpleJsName());
+    return AstUtils.buildQualifiedName(jsNamespace, jsName);
   }
 }

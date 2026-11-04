@@ -508,10 +508,7 @@ public abstract class TypeDeclaration
   @Override
   @Memoized
   public String getQualifiedJsName() {
-    if (JsUtils.isGlobal(getJsNamespace())) {
-      return getModuleRelativeJsName();
-    }
-    return AstUtils.buildQualifiedName(getJsNamespace(), getModuleRelativeJsName());
+    return HasJsNameInfo.buildQualifiedJsName(getJsNamespace(), getModuleRelativeJsName());
   }
 
   public abstract boolean isNullMarked();
