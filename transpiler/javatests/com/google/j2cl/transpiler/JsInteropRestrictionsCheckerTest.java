@@ -2428,8 +2428,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           int value;
           CustomValued(int value) { this.value = value; }
         }
-        class AListSubclass<T extends MyJsEnum> {}
+        class AListSubclass<T extends MyJsEnum> {
         > Error: Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.
+          class Inner {} // Should not re-report enclosing type parameter.
+        }
         abstract class WithFunctionReturningEnum {
           abstract Enum f();
         }
@@ -2981,6 +2983,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Parameter 'p' in 'void Main.acceptsEnumList(EnumList<MyJsEnum> p)' cannot be of type 'EnumList<MyJsEnum>'.
           <J extends MyJsEnum> void acceptsJsEnumBoundedList(AnyEnumList<J> p) {}
         > Error: Parameter 'p' in 'void Main.acceptsJsEnumBoundedList(AnyEnumList<J> p)' cannot be of type 'AnyEnumList<J>'.
+          <T extends EnumHolder<MyJsEnum>> void boundedMethod() {
+        > Error: Bound of type parameter 'T' of 'void Main.boundedMethod()' cannot be of type 'EnumHolder<MyJsEnum>'.
+            class Local {} // Should not re-report enclosing type parameter.
+          }
+          <T extends Serializable & EnumList<MyJsEnum>> void intersectionBoundedMethod() {}
+        > Error: Bound of type parameter 'T' of 'void Main.intersectionBoundedMethod()' cannot be of type '(Serializable & EnumList<MyJsEnum>)'.
           <T> void acceptsGeneric(T p) {}
           <T extends Enum<?>> void acceptsEnumBounded(T p) {}
           void m() {
@@ -3019,6 +3027,20 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Supertype of 'SubHolder' cannot be of type 'EnumHolder<MyJsEnum>'.
         class Sub extends Super<Enum<?>, MyJsEnum> {}
         > Error: Supertype of 'Sub' cannot be of type 'Super<Enum<?>, MyJsEnum>'.
+        class BoundedHolder<T extends EnumHolder<MyJsEnum>> {
+        > Error: Bound of type parameter 'T' of 'BoundedHolder' cannot be of type 'EnumHolder<MyJsEnum>'.
+          class Inner {} // Should not re-report enclosing type parameter.
+          <T2 extends EnumHolder<MyJsEnum>> void m() {
+        > Error: Bound of type parameter 'T2' of 'void BoundedHolder.m()' cannot be of type 'EnumHolder<MyJsEnum>'.
+            class Local<T3 extends EnumHolder<MyJsEnum>> {
+        > Error: Bound of type parameter 'T3' of 'Local' cannot be of type 'EnumHolder<MyJsEnum>'.
+              <T4 extends EnumHolder<MyJsEnum>> void n() {
+        > Error: Bound of type parameter 'T4' of 'void Local.n()' cannot be of type 'EnumHolder<MyJsEnum>'.
+                class NestedLocal<T5> {} // Should not re-report enclosing type parameters.
+              }
+            }
+          }
+        }
         """);
   }
 
@@ -3039,6 +3061,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               }
               private static <T> void acceptsList(List<T> l) {}
               private static <T extends Comparable<T>> void acceptsComparableBoundedList(List<T> l) {}
+              private static <T extends MyJsEnum> void jsEnumBoundedMethod() {
+                Object anon = new Object() {}; // Should not check enclosing type parameter.
+              }
               private static void main() {
                 List<MyJsEnum> myJsEnumList = new ArrayList<>();
                 List<?> l1 = myJsEnumList;
@@ -3688,6 +3713,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           Derived() {}
           abstract class NestedImplements implements List<Main.MyJsEnum[]> {}
         > Error: Supertype of 'NestedImplements' cannot be of type 'List<MyJsEnum[]>'.
+        }
+        class BoundedByJsEnumArrayList<T extends List<Main.MyJsEnum[]>> {
+        > Error: Bound of type parameter 'T' of 'BoundedByJsEnumArrayList' cannot be of type 'List<MyJsEnum[]>'.
+          <U extends List<Main.MyJsEnum[]>> void boundedMethod() {}
+        > Error: Bound of type parameter 'U' of 'void BoundedByJsEnumArrayList.boundedMethod()' cannot be of type 'List<MyJsEnum[]>'.
         }
         class BaseWithTArrayParams<T>{
           void acceptsTVarargs(T... p) {}

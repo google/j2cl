@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.j2cl.common.StringUtils.startsWithCamelCase;
 import static com.google.j2cl.transpiler.ast.AstUtils.isWasmJsExportedType;
@@ -61,6 +62,7 @@ import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.JsUtils;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
@@ -102,6 +104,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -300,13 +303,10 @@ public class JsInteropRestrictionsChecker {
         new AbstractVisitor() {
           @Override
           public void exitFunctionExpression(FunctionExpression functionExpression) {
-            if (!functionExpression.getTypeDescriptor().isIntersection()) {
-              return;
-            }
-            IntersectionTypeDescriptor intersectionTypeDescriptor =
-                (IntersectionTypeDescriptor) functionExpression.getTypeDescriptor();
-            if (intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-                .anyMatch(TypeDescriptor::isJsFunctionInterface)) {
+            if (functionExpression.getTypeDescriptor()
+                    instanceof IntersectionTypeDescriptor intersectionTypeDescriptor
+                && intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+                    .anyMatch(TypeDescriptor::isJsFunctionInterface)) {
               problems.error(
                   functionExpression.getSourcePosition(),
                   "JsFunction lambda can only implement the JsFunction interface.");
@@ -316,7 +316,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkTypeVariables(Type type) {
-    if (type.getDeclaration().getTypeParameterDescriptors().stream()
+    if (getDirectlyDeclaredTypeParameters(type.getDeclaration()).stream()
         .anyMatch(AstUtils::isNonNativeJsEnum)) {
       problems.error(
           type.getSourcePosition(),
@@ -2979,6 +2979,10 @@ public class JsInteropRestrictionsChecker {
                             nestedType.getSourcePosition(),
                             "Supertype of '%s'",
                             nestedType.getReadableDescription()));
+            checkTypeParameters(
+                getDirectlyDeclaredTypeParameters(nestedType.getDeclaration()),
+                nestedType.getSourcePosition(),
+                nestedType.getReadableDescription());
           }
 
           @Override
@@ -2999,6 +3003,20 @@ public class JsInteropRestrictionsChecker {
           @Override
           public void exitMethod(Method method) {
             checkMethodSignature(method, Predicates.not(this::isDisallowed));
+            checkTypeParameters(
+                method.getDescriptor().getTypeParameterTypeDescriptors(),
+                method.getSourcePosition(),
+                method.getReadableDescription());
+          }
+
+          @Override
+          public void exitLocalFunctionDeclarationStatement(
+              LocalFunctionDeclarationStatement localFunction) {
+            checkMethodSignature(localFunction, Predicates.not(this::isDisallowed));
+            checkTypeParameters(
+                localFunction.getDescriptor().getTypeParameterTypeDescriptors(),
+                localFunction.getSourcePosition(),
+                localFunction.getReadableDescription());
           }
 
           @Override
@@ -3137,6 +3155,20 @@ public class JsInteropRestrictionsChecker {
             }
           }
 
+          private void checkTypeParameters(
+              List<TypeVariable> typeParameters,
+              SourcePosition sourcePosition,
+              String declarationDescription) {
+            for (TypeVariable typeParameter : typeParameters) {
+              errorIfDisallowedType(
+                  typeParameter.getUpperBoundTypeDescriptor(),
+                  sourcePosition,
+                  "Bound of type parameter '%s' of '%s'",
+                  typeParameter.getReadableDescription(),
+                  declarationDescription);
+            }
+          }
+
           @FormatMethod
           @CanIgnoreReturnValue
           private boolean errorIfDisallowedType(
@@ -3182,6 +3214,26 @@ public class JsInteropRestrictionsChecker {
                 typeDescriptor, typeDescriptor, isTypeSpecializationDisallowed);
           }
         });
+  }
+
+  private static ImmutableList<TypeVariable> getDirectlyDeclaredTypeParameters(
+      TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.getTypeParameterDescriptors().isEmpty()) {
+      return ImmutableList.of();
+    }
+    ImmutableSet<TypeVariable> enclosingTypeParameters =
+        Streams.concat(
+                Stream.ofNullable(typeDeclaration.getEnclosingTypeDeclaration())
+                    .flatMap(t -> t.getTypeParameterDescriptors().stream()),
+                Stream.iterate(
+                        typeDeclaration.getEnclosingMethodDescriptor(),
+                        Predicates.notNull(),
+                        MethodDescriptor::getEnclosingMethodDescriptor)
+                    .flatMap(m -> m.getTypeParameterTypeDescriptors().stream()))
+            .collect(toImmutableSet());
+    return typeDeclaration.getTypeParameterDescriptors().stream()
+        .filter(Predicates.not(enclosingTypeParameters::contains))
+        .collect(toImmutableList());
   }
 
   private static boolean hasDisallowedType(
