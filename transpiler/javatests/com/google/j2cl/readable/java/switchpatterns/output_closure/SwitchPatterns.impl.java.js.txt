@@ -18,6 +18,7 @@ let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
 let Sealed = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed$impl');
 let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
 let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class SwitchPatterns extends j_l_Object {
  /** @protected @nodts */
@@ -169,9 +170,9 @@ class SwitchPatterns extends j_l_Object {
    let /** ?string */ s;
    let /** $1GenericRecord<?string> */ pattern$1GenericRecord_1;
    let /** ?string */ s_1;
-   if ($1GenericRecord.$isInstance($selector) && (pattern$1GenericRecord = (/**@type {!$1GenericRecord<?string>}*/ ($selector)), s = pattern$1GenericRecord.m_value__java_lang_Object(), j_l_String.m_isEmpty__java_lang_String__boolean(s))) {
+   if ($1GenericRecord.$isInstance($selector) && (pattern$1GenericRecord = (/**@type {!$1GenericRecord<?string>}*/ ($selector)), s = (/**@type {?string}*/ ($Casts.$to(pattern$1GenericRecord.m_value__java_lang_Object(), j_l_String))), j_l_String.m_isEmpty__java_lang_String__boolean(s))) {
     $caseIndex = 0;
-   } else if ($1GenericRecord.$isInstance($selector) && (pattern$1GenericRecord_1 = (/**@type {!$1GenericRecord<?string>}*/ ($selector)), s_1 = pattern$1GenericRecord_1.m_value__java_lang_Object(), true)) {
+   } else if ($1GenericRecord.$isInstance($selector) && (pattern$1GenericRecord_1 = (/**@type {!$1GenericRecord<?string>}*/ ($selector)), s_1 = (/**@type {?string}*/ ($Casts.$to(pattern$1GenericRecord_1.m_value__java_lang_Object(), j_l_String))), true)) {
     $caseIndex = 1;
    } else {
     $caseIndex = 2;
@@ -380,6 +381,7 @@ class SwitchPatterns extends j_l_Object {
   Digit = goog.module.get('switchpatterns.SwitchPatterns.Digit$impl');
   A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
   B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }
 $Util.$setClassMetadata(SwitchPatterns, 'switchpatterns.SwitchPatterns');

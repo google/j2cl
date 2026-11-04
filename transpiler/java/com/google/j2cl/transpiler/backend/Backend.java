@@ -334,11 +334,12 @@ public enum Backend {
           NormalizeMultiExpressions::new,
           // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
           ExpandCompoundAssignments::new,
-          InsertErasureTypeSafetyCasts::new,
 
           // Normalize switch constructs before coersions and conversions.
           AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
+          // Must run after passes that might introduce calls to generic methods.
+          InsertErasureTypeSafetyCasts::new,
 
           // Make null literals have the type required by their use before coercions and
           // conversions, so that they do not trigger unnecessary conversions, e.g. JsEnum
@@ -534,10 +535,11 @@ public enum Backend {
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
-          InsertErasureTypeSafetyCasts::new,
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           () -> new NormalizeSwitchConstructs(/* convertNativeJsEnumSwitches= */ true),
+          // Must run after passes that might introduce calls to generic methods.
+          InsertErasureTypeSafetyCasts::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
           // field references to constant fields.
           // It must also run after AddJsExportBridgesWasm so we don't remove fields for which it
