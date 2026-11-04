@@ -20,17 +20,12 @@ package com.google.j2cl.transpiler.frontend.kotlin.ir
 
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.PrefixOperator
-import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.ir.BackendSymbols
-import org.jetbrains.kotlin.backend.jvm.functionByName
-import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.ir.InternalSymbolFinderAPI
-import org.jetbrains.kotlin.ir.declarations.IrClass
-import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.declarations.IrPackageFragment
+import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrParameterKind
-import org.jetbrains.kotlin.ir.declarations.IrValueParameter
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
@@ -38,15 +33,18 @@ import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.symbols.IrFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
-import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.types.classOrNull
+import org.jetbrains.kotlin.ir.util.classId
+import org.jetbrains.kotlin.ir.util.constructors
+import org.jetbrains.kotlin.ir.util.functions
+import org.jetbrains.kotlin.ir.util.getPropertyGetter
 import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isEnumClass
-import org.jetbrains.kotlin.ir.util.isFileClass
-import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.JvmStandardClassIds
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 
@@ -60,150 +58,184 @@ import org.jetbrains.kotlin.name.StandardClassIds
  *
  * <p> The list on intrinsic methods in KoltinC can be found in http://shortn/_7YGQ0Kch3v
  */
-class IntrinsicMethods(
-  private val pluginContext: IrPluginContext,
-  private val symbols: BackendSymbols,
-) {
-  private val irBuiltIns = pluginContext.irBuiltIns
+class IntrinsicMethods(private val irBuiltIns: IrBuiltIns, private val symbols: BackendSymbols) {
   private val kotlinFqn = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
-  private val intFqn = StandardNames.FqNames._int.toSafe()
-  private val arrayFqn = StandardNames.FqNames.array.toSafe()
+  private val kotlinJvmFqn = JvmStandardClassIds.BASE_JVM_PACKAGE
+
+  private fun topLevelGetterSymbol(
+    packageName: FqName,
+    propertyName: String,
+  ): IrSimpleFunctionSymbol =
+    irBuiltIns.symbolFinder
+      .findProperties(CallableId(packageName, Name.identifier(propertyName)))
+      .single()
+      .owner
+      .getter!!
+      .symbol
+
+  private fun getterSymbol(classId: ClassId, propertyName: String): IrSimpleFunctionSymbol =
+    checkNotNull(classSymbol(classId).getPropertyGetter(propertyName)) {
+      "Property $propertyName not found in $classId"
+    }
+
+  private fun topLevelFunctionSymbol(packageFqName: FqName, name: String): IrSimpleFunctionSymbol =
+    irBuiltIns.symbolFinder.findFunctions(CallableId(packageFqName, Name.identifier(name))).single()
+
+  private fun functionSymbol(
+    classId: ClassId,
+    name: String,
+    condition: (IrSimpleFunction) -> Boolean = { true },
+  ): IrSimpleFunctionSymbol = functionSymbols(classId, name).single { condition(it.owner) }
+
+  private fun functionSymbols(classId: ClassId, name: String): List<IrSimpleFunctionSymbol> =
+    classSymbol(classId).functions.filter { it.owner.name.asString() == name }.toList()
+
+  private fun classSymbol(classId: ClassId): IrClassSymbol =
+    checkNotNull(irBuiltIns.symbolFinder.findClass(classId)) { "Class $classId not found" }
+
+  /** The class ids of `Array` and of the primitive arrays (e.g. `IntArray`). */
+  private val arrayClassIds =
+    StandardClassIds.primitiveArrayTypeByElementType.values + StandardClassIds.Array
+
+  private val arraySizeGetterSymbols: Set<IrFunctionSymbol> by lazy {
+    arrayClassIds.mapTo(HashSet()) { getterSymbol(it, "size") }
+  }
+
+  private fun arrayMemberFunctionSymbols(name: String): Set<IrFunctionSymbol> =
+    arrayClassIds.mapTo(HashSet()) { functionSymbol(it, name) }
+
+  private val arrayGetSymbols by lazy { arrayMemberFunctionSymbols("get") }
+  private val arraySetSymbols by lazy { arrayMemberFunctionSymbols("set") }
+  private val arrayIteratorSymbols by lazy { arrayMemberFunctionSymbols("iterator") }
+
+  /**
+   * The constructors of the array classes. Note that `Array` has no primary constructor and that
+   * the primitive arrays have two constructors (`IntArray(size)` and `IntArray(size, init)`).
+   */
+  private val arrayConstructorSymbols: Set<IrFunctionSymbol> by lazy {
+    arrayClassIds.flatMapTo(HashSet()) { classSymbol(it).constructors }
+  }
 
   fun isNewArray(irConstructorCall: IrConstructorCall): Boolean =
-    irConstructorCall.symbol.owner.parentClassOrNull?.defaultType?.isArrayType() ?: false
+    irConstructorCall.symbol in arrayConstructorSymbols
 
-  fun isArraySize(irCall: IrCall): Boolean = irCall.isArrayMethodCall("<get-size>")
+  fun isArraySize(irCall: IrCall): Boolean = irCall.symbol in arraySizeGetterSymbols
 
-  fun isArrayGet(irCall: IrCall): Boolean = irCall.isArrayMethodCall("get")
+  fun isArrayGet(irCall: IrCall): Boolean = irCall.symbol in arrayGetSymbols
 
-  fun isArraySet(irCall: IrCall): Boolean = irCall.isArrayMethodCall("set")
+  fun isArraySet(irCall: IrCall): Boolean = irCall.symbol in arraySetSymbols
 
-  fun isArrayOfNull(irCall: IrCall): Boolean {
-    return irCall.symbol.toKey() == Key(kotlinFqn, "arrayOfNulls", listOf(intFqn))
-  }
+  fun isArrayOfNull(irCall: IrCall): Boolean = irCall.symbol == irBuiltIns.arrayOfNulls
 
-  fun isCheckNotNull(irCall: IrCall): Boolean {
-    return irCall.symbol.toKey() == irBuiltIns.checkNotNullSymbol.toKey()
-  }
+  fun isCheckNotNull(irCall: IrCall): Boolean = irCall.symbol == irBuiltIns.checkNotNullSymbol
 
   fun isNoWhenBranchMatchedException(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == irBuiltIns.noWhenBranchMatchedExceptionSymbol.toKey()
+    irCall.symbol == irBuiltIns.noWhenBranchMatchedExceptionSymbol
 
-  fun isJavaClassProperty(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == Key(FqName("kotlin.jvm"), "<get-javaClass>")
+  private val javaClassPropertyGetter by lazy { topLevelGetterSymbol(kotlinJvmFqn, "javaClass") }
 
-  fun isKClassJavaProperty(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == Key(FqName("kotlin.jvm"), "<get-java>")
+  fun isJavaClassProperty(irCall: IrCall): Boolean = irCall.symbol == javaClassPropertyGetter
+
+  private val kClassJavaPropertyGetter by lazy { topLevelGetterSymbol(kotlinJvmFqn, "java") }
+
+  fun isKClassJavaProperty(irCall: IrCall): Boolean = irCall.symbol == kClassJavaPropertyGetter
+
+  private val kClassJavaObjectTypePropertyGetter by lazy {
+    topLevelGetterSymbol(kotlinJvmFqn, "javaObjectType")
+  }
 
   fun isKClassJavaObjectTypeProperty(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == Key(FqName("kotlin.jvm"), "<get-javaObjectType>")
+    irCall.symbol == kClassJavaObjectTypePropertyGetter
 
   // Contains the set of all symbols corresponding to the different arrayOf functions.
   // e.g. [arrayOf, intArrayOf, booleanArrayOf...]
-  private val arrayOfSymbolKeys = buildSet {
-    add(Key(kotlinFqn, "arrayOf", listOf(arrayFqn)))
-    irBuiltIns.primitiveTypesToPrimitiveArrays.forEach { (primitive, primitiveArray) ->
-      add(Key(kotlinFqn, "${primitive.name.lowercase()}ArrayOf", listOf(primitiveArray.fqnOrFail)))
+  private val arrayOfSymbols: Set<IrFunctionSymbol> by lazy {
+    buildSet {
+      add(irBuiltIns.arrayOf)
+      for (primitive in irBuiltIns.primitiveTypesToPrimitiveArrays.keys) {
+        add(topLevelFunctionSymbol(kotlinFqn, "${primitive.name.lowercase()}ArrayOf"))
+      }
     }
   }
 
-  fun isArrayOf(irCall: IrCall): Boolean {
-    return isArrayOf(irCall.symbol)
-  }
+  fun isArrayOf(irCall: IrCall): Boolean = irCall.symbol in arrayOfSymbols
 
-  fun isArrayOf(symbol: IrFunctionSymbol): Boolean {
-    return symbol.toKey() in arrayOfSymbolKeys
-  }
+  private val emptyArraySymbol by lazy { topLevelFunctionSymbol(kotlinFqn, "emptyArray") }
 
-  fun isEmptyArray(irCall: IrCall): Boolean {
-    return irCall.symbol.toKey() == Key(kotlinFqn, "emptyArray", emptyList())
-  }
+  fun isEmptyArray(irCall: IrCall): Boolean = irCall.symbol == emptyArraySymbol
 
-  fun isIsArrayOf(irCall: IrCall): Boolean {
-    return irCall.symbol.toKey() == Key(FqName("kotlin.jvm"), "isArrayOf", emptyList())
-  }
+  private val isArrayOfSymbol by lazy { topLevelFunctionSymbol(kotlinJvmFqn, "isArrayOf") }
 
-  fun isArrayIterator(irCall: IrCall): Boolean = irCall.isArrayMethodCall("iterator")
+  fun isIsArrayOf(irCall: IrCall): Boolean = irCall.symbol == isArrayOfSymbol
+
+  fun isArrayIterator(irCall: IrCall): Boolean = irCall.symbol in arrayIteratorSymbols
 
   fun isDataClassArrayMemberToString(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == irBuiltIns.dataClassArrayMemberToStringSymbol.toKey()
+    irCall.symbol == irBuiltIns.dataClassArrayMemberToStringSymbol
 
   fun isDataClassArrayMemberHashCode(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == irBuiltIns.dataClassArrayMemberHashCodeSymbol.toKey()
+    irCall.symbol == irBuiltIns.dataClassArrayMemberHashCodeSymbol
 
-  val extensionToStringSymbol: IrSimpleFunctionSymbol
-    get() = symbols.extensionToString
+  fun isAnyToString(irCall: IrCall): Boolean = irCall.symbol == symbols.extensionToString
 
-  val extensionStringPlus: IrSimpleFunctionSymbol
-    get() = symbols.extensionStringPlus
+  fun isEqualsOperator(irCall: IrCall): Boolean = irCall.symbol == irBuiltIns.eqeqSymbol
 
-  val memberStringPlus: IrSimpleFunctionSymbol
-    get() = symbols.memberStringPlus
+  fun isReferenceEqualsOperator(irCall: IrCall): Boolean = irCall.symbol == irBuiltIns.eqeqeqSymbol
 
-  fun isAnyToString(irCall: IrCall) = irCall.symbol.toKey() == extensionToStringSymbol.toKey()
-
-  fun isEqualsOperator(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == irBuiltIns.eqeqSymbol.toKey()
-
-  fun isReferenceEqualsOperator(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == irBuiltIns.eqeqeqSymbol.toKey()
-
-  private val ieee754EqualsSymbolKeys =
-    irBuiltIns.ieee754equalsFunByOperandType.values.map { it.toKey() }.toSet()
-
-  fun isIeee754EqualsOperator(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() in ieee754EqualsSymbolKeys
-
-  private val compareToSymbolKeys by lazy {
-    PrimitiveType.entries
-      .flatMap { parameter ->
-        PrimitiveType.entries.map { Key(it.typeFqName, "compareTo", listOf(parameter.typeFqName)) }
-      }
-      .toSet()
+  private val ieee754EqualsSymbols: Set<IrFunctionSymbol> by lazy {
+    irBuiltIns.ieee754equalsFunByOperandType.values.toSet()
   }
 
-  fun isCompareTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in compareToSymbolKeys
+  fun isIeee754EqualsOperator(irCall: IrCall): Boolean = irCall.symbol in ieee754EqualsSymbols
 
-  private val jsUtilsClass: IrClassSymbol by lazy {
-    pluginContext.referenceClass(ClassId(FqName("javaemul.internal"), Name.identifier("JsUtils")))!!
+  private val compareToSymbols: Set<IrFunctionSymbol> by lazy {
+    binaryFunctionSymbols(StandardClassIds.primitiveTypes, "compareTo").toSet()
   }
 
-  val jsUndefinedSymbol: IrSimpleFunctionSymbol by lazy { jsUtilsClass.functionByName("undefined") }
+  fun isCompareTo(irCall: IrCall): Boolean = irCall.symbol in compareToSymbols
 
-  fun isGetJsUndefinedCall(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() == jsUndefinedSymbol.toKey()
+  private val jsUtilsClassId = ClassId(FqName("javaemul.internal"), Name.identifier("JsUtils"))
+
+  val jsUndefinedSymbol: IrSimpleFunctionSymbol by lazy {
+    functionSymbol(jsUtilsClassId, "undefined")
+  }
+
+  fun isGetJsUndefinedCall(irCall: IrCall): Boolean = irCall.symbol == jsUndefinedSymbol
 
   val jsIsUndefinedFunctionSymbol: IrSimpleFunctionSymbol by lazy {
-    jsUtilsClass.functionByName("isUndefined")
+    functionSymbol(jsUtilsClassId, "isUndefined")
   }
 
   val jsCoerceToNullSymbol: IrSimpleFunctionSymbol by lazy {
-    jsUtilsClass.functionByName("coerceToNull")
+    functionSymbol(jsUtilsClassId, "coerceToNull")
   }
 
   fun getPrefixOperator(symbol: IrFunctionSymbol): PrefixOperator? =
-    prefixOperatorByIntrinsicSymbolKey[symbol.toKey()]
+    prefixOperatorByIntrinsicSymbol[symbol]
 
-  fun isPrefixOperation(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() in prefixOperatorByIntrinsicSymbolKey
+  fun isPrefixOperation(irCall: IrCall): Boolean = irCall.symbol in prefixOperatorByIntrinsicSymbol
 
   fun getBinaryOperator(symbol: IrFunctionSymbol): BinaryOperator? =
-    binaryOperatorByIntrinsicSymbolKey[symbol.toKey()]
+    binaryOperatorByIntrinsicSymbol[symbol]
 
-  fun isBinaryOperation(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() in binaryOperatorByIntrinsicSymbolKey
+  fun isBinaryOperation(irCall: IrCall): Boolean = irCall.symbol in binaryOperatorByIntrinsicSymbol
 
-  fun isRangeTo(irCall: IrCall): Boolean = irCall.symbol.toKey() in rangeToCallByIntrinsicSymbolKey
+  fun isRangeTo(irCall: IrCall): Boolean = irCall.symbol in rangeToSymbols
 
-  fun isRangeUntil(irCall: IrCall): Boolean =
-    irCall.symbol.toKey() in rangeUntilCallByIntrinsicSymbolKey
+  fun isRangeUntil(irCall: IrCall): Boolean = irCall.symbol in rangeUntilSymbols
 
-  private val enumEntriesKey = Key(FqName("kotlin.enums"), "enumEntriesIntrinsic")
+  private val enumEntriesSymbol by lazy {
+    topLevelFunctionSymbol(FqName("kotlin.enums"), "enumEntriesIntrinsic")
+  }
 
-  fun isEnumEntries(irCall: IrCall): Boolean = irCall.symbol.toKey() == enumEntriesKey
+  fun isEnumEntries(irCall: IrCall): Boolean = irCall.symbol == enumEntriesSymbol
 
   private val enumGetEntriesName = Name.special("<get-entries>")
 
+  /**
+   * Returns whether the call is to the `entries` getter of an enum class. Symbol identity cannot be
+   * used here: `entries` is not declared by `kotlin.Enum` but synthesized in every enum class.
+   */
   fun isEnumGetEntries(irCall: IrCall): Boolean =
     with(irCall.symbol.owner) {
       name == enumGetEntriesName &&
@@ -212,41 +244,41 @@ class IntrinsicMethods(
     }
 
   private val coroutineContextGetterSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findProperties(
-        CallableId(StandardClassIds.BASE_COROUTINES_PACKAGE, Name.identifier("coroutineContext"))
-      )
-      .single()
-      .owner
-      .getter!!
-      .symbol
+    topLevelGetterSymbol(StandardClassIds.BASE_COROUTINES_PACKAGE, "coroutineContext")
   }
 
   fun isCoroutineContextGetterCall(symbol: IrFunctionSymbol): Boolean =
-    symbol.toKey() == coroutineContextGetterSymbol.toKey()
+    symbol == coroutineContextGetterSymbol
 
   val getContinuationSymbol: IrSimpleFunctionSymbol by lazy {
-    irBuiltIns.symbolFinder
-      .findFunctions(
-        CallableId(
-          StandardClassIds.BASE_COROUTINES_INTRINSICS_PACKAGE,
-          Name.identifier("getContinuation"),
-        )
-      )
-      .single()
+    topLevelFunctionSymbol(StandardClassIds.BASE_COROUTINES_INTRINSICS_PACKAGE, "getContinuation")
   }
 
-  private val prefixOperatorByIntrinsicSymbolKey =
-    (mapPrefixOperation("not", PrefixOperator.COMPLEMENT) +
-        mapPrefixOperation("inc", PrefixOperator.INCREMENT) +
-        mapPrefixOperation("dec", PrefixOperator.DECREMENT) +
-        mapPrefixOperation("unaryMinus", PrefixOperator.MINUS) +
-        mapPrefixOperation("unaryPlus", PrefixOperator.PLUS) +
-        mapPrefixOperation("inv", PrefixOperator.COMPLEMENT) +
-        listOf(irBuiltIns.booleanNotSymbol.toKey() to PrefixOperator.NOT))
+  private val prefixOperatorByIntrinsicSymbol: Map<IrFunctionSymbol, PrefixOperator> by lazy {
+    val numericClasses =
+      listOf(
+        StandardClassIds.Byte,
+        StandardClassIds.Short,
+        StandardClassIds.Int,
+        StandardClassIds.Long,
+        StandardClassIds.Float,
+        StandardClassIds.Double,
+      )
+    val numericAndCharClasses = numericClasses + StandardClassIds.Char
+    (mapPrefixOperation("inc", PrefixOperator.INCREMENT, numericAndCharClasses) +
+        mapPrefixOperation("dec", PrefixOperator.DECREMENT, numericAndCharClasses) +
+        mapPrefixOperation("unaryMinus", PrefixOperator.MINUS, numericClasses) +
+        mapPrefixOperation("unaryPlus", PrefixOperator.PLUS, numericClasses) +
+        mapPrefixOperation(
+          "inv",
+          PrefixOperator.COMPLEMENT,
+          listOf(StandardClassIds.Int, StandardClassIds.Long),
+        ) +
+        listOf(irBuiltIns.booleanNotSymbol to PrefixOperator.NOT))
       .toMap()
+  }
 
-  private val binaryOperatorByIntrinsicSymbolKey =
+  private val binaryOperatorByIntrinsicSymbol: Map<IrFunctionSymbol, BinaryOperator> by lazy {
     (mapBinaryOperation("plus", BinaryOperator.PLUS) +
         mapBinaryOperation("minus", BinaryOperator.MINUS) +
         mapBinaryOperation("div", BinaryOperator.DIVIDE) +
@@ -269,10 +301,11 @@ class IntrinsicMethods(
           BinaryOperator.GREATER_EQUALS,
         ) +
         listOf(
-          extensionStringPlus.toKey() to BinaryOperator.PLUS,
-          memberStringPlus.toKey() to BinaryOperator.PLUS,
+          symbols.extensionStringPlus to BinaryOperator.PLUS,
+          symbols.memberStringPlus to BinaryOperator.PLUS,
         ))
       .toMap()
+  }
 
   /**
    * Create a mapping between all definitions of a method that exists on primitives and the
@@ -281,55 +314,61 @@ class IntrinsicMethods(
   private fun mapBinaryOperation(
     methodName: String,
     binaryOperator: BinaryOperator,
-  ): List<Pair<Key, BinaryOperator>> {
+  ): List<Pair<IrFunctionSymbol, BinaryOperator>> {
     val applicableClasses =
       mutableListOf(
-        irBuiltIns.charClass,
-        irBuiltIns.byteClass,
-        irBuiltIns.shortClass,
-        irBuiltIns.intClass,
-        irBuiltIns.longClass,
+        StandardClassIds.Char,
+        StandardClassIds.Byte,
+        StandardClassIds.Short,
+        StandardClassIds.Int,
+        StandardClassIds.Long,
       )
     if (binaryOperator.isBitwiseOperator) {
-      applicableClasses.add(irBuiltIns.booleanClass)
+      applicableClasses.add(StandardClassIds.Boolean)
     } else if (!binaryOperator.isShiftOperator) {
-      applicableClasses.addAll(listOf(irBuiltIns.floatClass, irBuiltIns.doubleClass))
+      applicableClasses.addAll(listOf(StandardClassIds.Float, StandardClassIds.Double))
     }
 
     // The method we want to map is defined on each class of {@code applicableClasses} and they are
     // overloaded for accepting as single parameter each class of {@code applicableClasses}.
     // The code below creates the mappings for the methods and all possible overloads.
-    return applicableClasses.flatMap { leftSide ->
-      applicableClasses.map { rightSide ->
-        Key(leftSide.fqnOrFail, methodName, listOf(rightSide.fqnOrFail)) to binaryOperator
-      }
-    }
+    return binaryFunctionSymbols(applicableClasses, methodName).map { it to binaryOperator }
   }
 
   /**
-   * Create a mapping between all definitions of a method that exists on primitives and the
-   * equivalent unary operator in J2CL.
+   * Returns the overloads of the member function [name] of the classes [classIds] that take a
+   * single parameter whose type is also one of [classIds].
+   */
+  private fun binaryFunctionSymbols(
+    classIds: Collection<ClassId>,
+    name: String,
+  ): List<IrSimpleFunctionSymbol> = classIds.flatMap { classId ->
+    functionSymbols(classId, name).filter { it.singleParameterClassIdOrNull() in classIds }
+  }
+
+  /** Returns the class id of the type of the single regular parameter of the function, if any. */
+  private fun IrSimpleFunctionSymbol.singleParameterClassIdOrNull(): ClassId? =
+    owner.parameters
+      .singleOrNull { it.kind == IrParameterKind.Regular }
+      ?.type
+      ?.classOrNull
+      ?.owner
+      ?.classId
+
+  /**
+   * Create a mapping between the parameterless member function [methodName] of each class of
+   * [classIds] and the equivalent unary operator in J2CL.
    */
   private fun mapPrefixOperation(
     methodName: String,
     prefixOperator: PrefixOperator,
-  ): List<Pair<Key, PrefixOperator>> {
-    val applicableClasses =
-      mutableListOf(
-        irBuiltIns.charClass,
-        irBuiltIns.byteClass,
-        irBuiltIns.shortClass,
-        irBuiltIns.intClass,
-        irBuiltIns.longClass,
-        irBuiltIns.floatClass,
-        irBuiltIns.doubleClass,
-      )
-
-    // The method we want to map is defined on each class of {@code applicableClasses}, hence
-    // create a map for each of the variants.
-    return applicableClasses.map { operand ->
-      Key(operand.fqnOrFail, methodName, listOf()) to prefixOperator
-    }
+    classIds: List<ClassId>,
+  ): List<Pair<IrFunctionSymbol, PrefixOperator>> = classIds.map { classId ->
+    val symbol =
+      functionSymbol(classId, methodName) { function ->
+        function.parameters.none { it.kind == IrParameterKind.Regular }
+      }
+    symbol to prefixOperator
   }
 
   /**
@@ -339,89 +378,21 @@ class IntrinsicMethods(
   private fun mapComparisonBinaryOperation(
     intrinsicComparisonFunctionByPrimitiveClass: Map<IrClassifierSymbol, IrSimpleFunctionSymbol>,
     binaryOperator: BinaryOperator,
-  ) = intrinsicComparisonFunctionByPrimitiveClass.map { it.value.toKey() to binaryOperator }
+  ) = intrinsicComparisonFunctionByPrimitiveClass.values.map { it to binaryOperator }
 
-  private val rangeToCallByIntrinsicSymbolKey =
-    buildRangeOperatorCallByIntrinsicSymbolKey("rangeTo")
-  private val rangeUntilCallByIntrinsicSymbolKey =
-    buildRangeOperatorCallByIntrinsicSymbolKey("rangeUntil")
+  private val rangeToSymbols by lazy { buildRangeOperatorSymbols("rangeTo") }
+  private val rangeUntilSymbols by lazy { buildRangeOperatorSymbols("rangeUntil") }
 
-  private fun buildRangeOperatorCallByIntrinsicSymbolKey(methodName: String) =
-    buildSet() {
-      addAll(
-        mapRangeOperatorCall(listOf(irBuiltIns.charClass), listOf(irBuiltIns.charClass), methodName)
-      )
-
-      val numericRangeToTypes =
-        listOf(
-          irBuiltIns.byteClass,
-          irBuiltIns.shortClass,
-          irBuiltIns.intClass,
-          irBuiltIns.longClass,
-        )
-      addAll(mapRangeOperatorCall(numericRangeToTypes, numericRangeToTypes, methodName))
-    }
-
-  /** Creates a mapping between the specified types for the `rangeTo` call. */
-  private fun mapRangeOperatorCall(
-    leftSide: List<IrClassifierSymbol>,
-    rightSide: List<IrClassifierSymbol>,
-    methodName: String,
-  ): List<Key> = leftSide.flatMap { left ->
-    rightSide.map { right -> Key(left.fqnOrFail, methodName, listOf(right.fqnOrFail)) }
-  }
-
-  /**
-   * A unique key for an `IrFunction` to be used for identification. The key is composed of the
-   * fully-qualified name of the owner, the name of the function, and the fully-qualified names of
-   * its value parameters. This allows for precise lookup of intrinsic functions.
-   */
-  private data class Key(
-    val owner: FqName,
-    val name: String,
-    val valueParameterTypeFqNames: List<FqName?> = emptyList(),
-  ) {
-    fun toFqName(): FqName =
-      // add the name of the element to the fqn of the parent.
-      FqName.fromSegments(owner.pathSegments().map { it.toString() } + listOf(name))
-  }
-
-  private fun IrFunctionSymbol.toKey(): Key {
-    val parent = owner.parent
-    val parentFqn =
-      when {
-        // For top level members, we use the fqn of the package defined in the file without
-        // including the file name so, we are consistent with kotlin method fqn used in imports.
-        parent is IrClass && parent.isFileClass ->
-          (parent.parent as IrPackageFragment).packageFqName
-        // For instance method, use the fqn of the enclosing class.
-        parent is IrClass -> parent.symbol.fqnOrFail
-        // Some intrinsic methods are not defined in a file and their direct parent is the package
-        // they belong to.
-        parent is IrPackageFragment -> parent.packageFqName
-        // For local functions, use the fqn of the enclosing function.
-        parent is IrFunction -> parent.symbol.toKey().toFqName()
-        else -> throw IllegalStateException("Parent not supported $parent: ${parent.kotlinFqName}")
-      }
-
-    return toKey(parentFqn)
-  }
-
-  private fun IrFunctionSymbol.toKey(receiver: FqName): Key {
-    return Key(
-      receiver,
-      owner.name.asString(),
-      owner.parameters.filter { it.kind == IrParameterKind.Regular }.map(::getParameterTypeFqName),
-    )
-  }
-}
-
-private fun getParameterTypeFqName(irValueParameter: IrValueParameter): FqName =
-  irValueParameter.type.fqnOrFail
-
-private fun IrCall.isArrayMethodCall(methodName: String): Boolean {
-  val callee = symbol.owner
-  val calleeEnclosingType = callee.parentClassOrNull?.defaultType ?: return false
-
-  return calleeEnclosingType.isArrayType() && callee.name.asString() == methodName
+  private fun buildRangeOperatorSymbols(methodName: String): Set<IrFunctionSymbol> =
+    (binaryFunctionSymbols(listOf(StandardClassIds.Char), methodName) +
+        binaryFunctionSymbols(
+          listOf(
+            StandardClassIds.Byte,
+            StandardClassIds.Short,
+            StandardClassIds.Int,
+            StandardClassIds.Long,
+          ),
+          methodName,
+        ))
+      .toSet()
 }

@@ -26,7 +26,6 @@ import com.google.j2cl.common.SourceUtils.FileInfo
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.frontend.common.FrontendOptions
-import com.google.j2cl.transpiler.frontend.kotlin.ir.IntrinsicMethods
 import com.google.j2cl.transpiler.frontend.kotlin.lower.LoweringPasses
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
@@ -140,7 +139,7 @@ class KotlinParser(private val problems: Problems) {
             lowerings.jvmBackendContext,
             supportedAnnotationFilter,
           ),
-          IntrinsicMethods(pluginContext, lowerings.jvmBackendContext.symbols),
+          lowerings.intrinsics,
           fileInfoByAbsoluteSourcePath,
         )
         .convert(moduleFragment)
