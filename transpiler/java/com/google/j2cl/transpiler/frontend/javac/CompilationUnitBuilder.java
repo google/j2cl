@@ -78,7 +78,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RecordPattern;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
-import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
@@ -1638,8 +1637,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       default -> {
         if (jcExpression.hasTag(Tag.NULLCHK)) {
           // This is an expression with an implicit null check.
-          yield RuntimeMethods.createCheckNotNullCall(
-              convertExpression(((JCUnary) jcExpression).arg));
+          yield convertExpression(((JCUnary) jcExpression).arg).postfixNotNullAssertion();
         }
         throw new AssertionError(
             "Unknown expression " + jcExpression + " (node type: " + jcExpression.getKind() + ")");

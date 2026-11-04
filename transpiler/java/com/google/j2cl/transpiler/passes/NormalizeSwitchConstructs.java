@@ -162,7 +162,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
                               .setCastTypeDescriptor(PrimitiveTypes.INT)
                               .setExpression(expression)
                               .build()
-                          : RuntimeMethods.createCheckNotNullCall(switchStatement.getExpression()))
+                          : switchStatement.getExpression().postfixNotNullAssertion())
                   .build();
             }
 
@@ -205,7 +205,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
     var selector = switchStatement.getExpression();
     if (!switchStatement.allowsNulls()) {
       // If the switch does not allow nulls perform the null check.
-      selector = RuntimeMethods.createCheckNotNullCall(selector);
+      selector = selector.postfixNotNullAssertion();
     }
     SourcePosition sourcePosition = switchStatement.getSourcePosition();
     if (!selector.isIdempotent()) {

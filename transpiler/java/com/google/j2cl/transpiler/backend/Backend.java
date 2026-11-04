@@ -538,6 +538,10 @@ public enum Backend {
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           () -> new NormalizeSwitchConstructs(/* convertNativeJsEnumSwitches= */ true),
+          // Must run after all passes that introduce not-null assertions and before
+          // RewriteReferenceEqualityOperations, which rewrites the null comparisons it introduces
+          // for native JsEnums.
+          ImplementNotNullOperator::new,
           // Must run after passes that might introduce calls to generic methods.
           InsertErasureTypeSafetyCasts::new,
           // Propagate constants needs to run after NormalizeSwitchStatements since it introduces

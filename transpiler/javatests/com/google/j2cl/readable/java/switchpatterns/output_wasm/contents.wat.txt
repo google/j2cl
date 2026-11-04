@@ -277,7 +277,7 @@
  (local $s (ref null $java.lang.String))
  (local $s_1 (ref null $java.lang.String))
  (local $i (ref null $java.lang.Integer))
- (local $$selector_1 (ref null $java.lang.Object))
+ (local $$selector_1 (ref null $java.lang.Integer))
  (local $$caseIndex_1 i32)
  (local $j (ref null $java.lang.Integer))
  (local $n (ref null $java.lang.Number))
@@ -339,7 +339,7 @@
   )
   (local.set $i (ref.null $java.lang.Integer))
   (block
-   (local.set $$selector_1 (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $i)))
+   (local.set $$selector_1 (ref.cast (ref null $java.lang.Integer) (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $i))))
    
    (if (if (result i32) (call $m_equals__java_lang_Object__java_lang_Object__boolean@java.util.Objects (local.get $$selector_1)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 23))) (then (i32.const 1)) (else (call $m_equals__java_lang_Object__java_lang_Object__boolean@java.util.Objects (local.get $$selector_1)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 32)))))
     (then
@@ -348,7 +348,7 @@
      )
     )(else
      (if (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $$selector_1)) (then (block (result i32)
-       (local.set $j (ref.cast (ref null $java.lang.Integer) (local.get $$selector_1)))
+       (local.set $j (local.get $$selector_1))
        (i32.gt_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $j))) (i32.const 2))
       )) (else (i32.const 0)))
       (then

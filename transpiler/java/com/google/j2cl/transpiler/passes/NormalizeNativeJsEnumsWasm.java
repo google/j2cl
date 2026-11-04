@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -72,7 +71,7 @@ public class NormalizeNativeJsEnumsWasm extends NormalizationPass {
               Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
               // Use == for comparison instead of equals() to avoid crossing the boundary, but
               // preserve the NullPointerException on a null receiver.
-              return RuntimeMethods.createCheckNotNullCall(qualifier).infixEquals(argument);
+              return qualifier.postfixNotNullAssertion().infixEquals(argument);
             }
 
             if (targetSignature.equals("compareTo(java.lang.Enum)")) {
