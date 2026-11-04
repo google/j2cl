@@ -33,6 +33,7 @@ internal class RemoveFieldInitializerToDefault : IrVisitorVoid(), FileLoweringPa
   override fun visitElement(element: IrElement) = element.acceptChildrenVoid(this)
 
   override fun visitField(declaration: IrField) {
+    super.visitField(declaration)
     if (declaration.isInitializedToDefaultValue()) {
       declaration.initializer = null
     }
