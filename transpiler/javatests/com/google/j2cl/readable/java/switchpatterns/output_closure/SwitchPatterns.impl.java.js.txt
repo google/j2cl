@@ -352,6 +352,60 @@ class SwitchPatterns extends j_l_Object {
   }
  }
  /** @nodts */
+ m_testDefaultNotLast__void_$pp_switchpatterns() {
+  let i = Integer.valueOf(2);
+  {
+   let /** number */ $caseIndex;
+   if ($Equality.$same(i, null)) {
+    $caseIndex = 0;
+   } else {
+    $caseIndex = 1;
+   }
+   switch ($caseIndex) {
+    case 0:
+     SwitchPatterns.m_fail__void();
+     break;
+    default:
+     SwitchPatterns.m_fail__void();
+    case 2:
+     break;
+   }
+  }
+  let color = Color.f_BLUE__switchpatterns_SwitchPatterns_Color;
+  let unused = (() =>{
+   switch ($Equality.$same(color, null) ? -1 : color.ordinal()) {
+    case -1:
+     return 0;
+    default:
+     return 1;
+    case Color.$ordinal_BLUE__switchpatterns_SwitchPatterns_Color:
+     return 2;
+   }
+  })();
+ }
+ /** @nodts */
+ m_testCaseNullWithFallthrough__void_$pp_switchpatterns() {
+  let i = Integer.valueOf(2);
+  {
+   let /** number */ $caseIndex;
+   if ($Equality.$same(i, null)) {
+    $caseIndex = 0;
+   } else if (Objects.m_equals__java_lang_Object__java_lang_Object__boolean(i, Integer.valueOf(1))) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 2;
+   }
+   switch ($caseIndex) {
+    case 0:
+     SwitchPatterns.m_fail__void();
+    case 1:
+     SwitchPatterns.m_fail__void();
+     break;
+    default:
+   }
+  }
+ }
+ /** @nodts */
  static m_fail__void() {
   SwitchPatterns.$clinit();
  }

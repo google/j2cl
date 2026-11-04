@@ -238,6 +238,74 @@ open class SwitchPatterns {
   }
  }
  
+ internal open fun testDefaultNotLast() {
+  val i: Int? = 2
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     do {
+      when (i!!) {
+       null -> {
+        break
+       }
+       2 -> {
+        break@CASE
+       }
+       else -> {
+        break@CASE_1
+       }
+      }
+      break@SWITCH
+     } while (false)
+     SwitchPatterns.fail()
+     break@SWITCH
+    } while (false)
+    SwitchPatterns.fail()
+   } while (false)
+  } while (false)
+  val color: Color = Color.BLUE
+  val unused: Int = run {
+   when (color) {
+    null -> {
+     return@run 0
+    }
+    Color.BLUE -> {
+     return@run 2
+    }
+    else -> {
+     return@run 1
+    }
+   }
+  }
+ }
+ 
+ internal open fun testCaseNullWithFallthrough() {
+  val i: Int? = 2
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     do {
+      when (i!!) {
+       null -> {
+        break
+       }
+       1 -> {
+        break@CASE_1
+       }
+       else -> {
+        break@CASE
+       }
+      }
+      break@SWITCH
+     } while (false)
+     SwitchPatterns.fail()
+    } while (false)
+    SwitchPatterns.fail()
+    break@SWITCH
+   } while (false)
+  } while (false)
+ }
+ 
  companion object {
   @JvmStatic
   internal fun testGenericRecordPatterns() {

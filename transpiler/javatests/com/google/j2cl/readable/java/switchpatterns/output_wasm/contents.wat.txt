@@ -78,6 +78,8 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getSealed__switchpatterns_SwitchPatterns_Sealed_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+  (ref.func $m_testCaseNullWithFallthrough__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+  (ref.func $m_testDefaultNotLast__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testExhaustivePatternsWithNoDefault__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testPatternsWithGuards__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testPatternsWithNull__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
@@ -1056,6 +1058,137 @@
  )
 )
 (elem declare func $m_testPatternsWithNull__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+
+;;; void SwitchPatterns.testDefaultNotLast()
+(func $m_testDefaultNotLast__void_$pp_switchpatterns@switchpatterns.SwitchPatterns
+ (type $function.m_testDefaultNotLast__void_$pp_switchpatterns)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $i (ref null $java.lang.Integer))
+ (local $$caseIndex i32)
+ (local $color (ref null $switchpatterns.SwitchPatterns.Color))
+ (local $unused i32)
+ (local $$expression i32)
+ (local $this (ref null $switchpatterns.SwitchPatterns))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
+ (block
+  (local.set $i (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
+  (block
+   
+   (if (ref.is_null (local.get $i))
+    (then
+     (block
+      (local.set $$caseIndex (i32.const 0))
+     )
+    )(else
+     (block
+      (local.set $$caseIndex (i32.const 1))
+     )
+    )
+   )
+   (block $SWITCH.BREAK
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 1 2 1 (local.get $$caseIndex))
+       )
+       ;; case 0:
+       (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
+       (br $SWITCH.BREAK)
+      )
+      ;; default:
+      (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
+     )
+     ;; case 2:
+     (br $SWITCH.BREAK)
+    )
+   )
+  )
+  (local.set $color (block (result (ref null $switchpatterns.SwitchPatterns.Color))
+   (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Color )
+   (global.get $BLUE@switchpatterns.SwitchPatterns.Color)
+  ))
+  (local.set $unused 
+  (block $SWITCH_1 (result i32)
+   (block
+    (local.set $$expression (if (result i32) (ref.is_null (local.get $color)) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $color))))))
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 1 2 1 (i32.sub (local.get $$expression) (i32.const -1)))
+       )
+       ;; case -1:
+       (i32.const 0)
+       (br $SWITCH_1)
+      )
+      ;; default:
+      (i32.const 1)
+      (br $SWITCH_1)
+     )
+     ;; case 1:
+     (i32.const 2)
+     (br $SWITCH_1)
+    )
+   )
+   (unreachable)
+  ))
+ )
+)
+(elem declare func $m_testDefaultNotLast__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+
+;;; void SwitchPatterns.testCaseNullWithFallthrough()
+(func $m_testCaseNullWithFallthrough__void_$pp_switchpatterns@switchpatterns.SwitchPatterns
+ (type $function.m_testCaseNullWithFallthrough__void_$pp_switchpatterns)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $i (ref null $java.lang.Integer))
+ (local $$caseIndex i32)
+ (local $this (ref null $switchpatterns.SwitchPatterns))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
+ (block
+  (local.set $i (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
+  (block
+   
+   (if (ref.is_null (local.get $i))
+    (then
+     (block
+      (local.set $$caseIndex (i32.const 0))
+     )
+    )(else
+     (if (call $m_equals__java_lang_Object__java_lang_Object__boolean@java.util.Objects (local.get $i)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+      (then
+       (block
+        (local.set $$caseIndex (i32.const 1))
+       )
+      )(else
+       (block
+        (local.set $$caseIndex (i32.const 2))
+       )
+      )
+     )
+    )
+   )
+   (block $SWITCH.BREAK
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 1 2 (local.get $$caseIndex))
+       )
+       ;; case 0:
+       (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
+      )
+      ;; case 1:
+      (call $m_fail_$private__void@switchpatterns.SwitchPatterns )
+      (br $SWITCH.BREAK)
+     )
+     ;; default:
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testCaseNullWithFallthrough__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
 
 ;;; void SwitchPatterns.fail()
 (func $m_fail__void@switchpatterns.SwitchPatterns

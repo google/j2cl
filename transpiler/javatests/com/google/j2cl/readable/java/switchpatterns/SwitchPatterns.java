@@ -214,5 +214,39 @@ public class SwitchPatterns {
     }
   }
 
+  void testDefaultNotLast() {
+    Integer i = 2;
+    // Default case that is not the last case; the cases after it still need to be tested.
+    switch (i) {
+      case null:
+        fail();
+        break;
+      default:
+        fail();
+      case 2:
+        break;
+    }
+
+    Color color = Color.BLUE;
+    int unused =
+        switch (color) {
+          case null -> 0;
+          default -> 1;
+          case BLUE -> 2;
+        };
+  }
+
+  void testCaseNullWithFallthrough() {
+    Integer i = 2;
+    switch (i) {
+      case null:
+        fail();
+      case 1:
+        fail();
+        break;
+      default:
+    }
+  }
+
   static void fail() {}
 }
