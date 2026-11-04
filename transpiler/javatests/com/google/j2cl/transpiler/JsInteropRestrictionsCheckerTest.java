@@ -2876,6 +2876,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             interface ComparableList<C extends Comparable<C>> {}
             interface AnyComparableList<C extends Comparable<?>> {}
             interface SerializableList<S extends Serializable> {}
+            class Upcaster<A, B extends A, C extends B> {
+              A cast(C c) { return c; }
+            }
+            class Box<U> {
+              <T extends U> U convert(T t) { return t; }
+            }
             @JsEnum enum MyJsEnum { A }
             @JsEnum(isNative = true) enum Native { A }
             @JsEnum(hasCustomValue = true) enum CustomValued {
@@ -2884,6 +2890,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               CustomValued(int value) { this.value = value; }
             }
             class Main {
+              static <A, B extends A, C extends B> A upcast(C c) { return c; }
               List<MyJsEnum> myJsEnumList = null;
               List<? extends MyJsEnum> wildcardList = null;
               Map<MyJsEnum, List<Native>> map = null;
@@ -2892,10 +2899,18 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               ComparableList<? super MyJsEnum> superComparableList = null;
               ComparableList<Native> nativeComparableList = null;
               SerializableList<CustomValued> serializableList = null;
+              Upcaster<Comparable<?>, Comparable<?>, MyJsEnum> comparableUpcaster =
+                  new Upcaster<>();
+              Upcaster<Comparable<?>, MyJsEnum, MyJsEnum> chainedComparableUpcaster =
+                  new Upcaster<>();
               Class<MyJsEnum> clazz = MyJsEnum.class;
               Comparator<MyJsEnum> comparator = (a, b) -> a.compareTo(b);
               <J extends MyJsEnum> void acceptsJsEnumBoundedComparableList(
                   AnyComparableList<J> p) {}
+              void dependentCalls() {
+                Comparable<?> c = Main.<Comparable<?>, Comparable<?>, MyJsEnum>upcast(MyJsEnum.A);
+                Comparable<?> c2 = new Box<Comparable<?>>().convert(MyJsEnum.A);
+              }
             }
             class ImplementsComparableList implements ComparableList<MyJsEnum> {}
             """)
@@ -2916,6 +2931,21 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           E e;
           static <E extends Enum<E>> EnumHolder<E> create() { return null; }
         }
+        class Upcaster<A, B extends A, C extends B> {
+          B b;
+          B getB() { return b; }
+        }
+        class CollectionBound<A, B extends Collection<? extends A>> {}
+        class Outer<U> {
+          class Inner<T extends U> {}
+        }
+        interface Supplier<T> {
+          T get();
+        }
+        class GenericBase<T> {
+          public T get() { return null; }
+        }
+        class Super<U, T extends U> extends GenericBase<T> implements Supplier<U> {}
         @JsEnum enum MyJsEnum { A }
         @JsEnum(hasCustomValue = true) enum CustomValued {
           A(1);
@@ -2939,6 +2969,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Field 'Main.wildcardCustomValuedList' cannot be of type 'ComparableList<?>'.
           ComparableList<? super CustomValued> superCustomValuedList = null;
         > Error: Field 'Main.superCustomValuedList' cannot be of type 'ComparableList<?>'.
+          Upcaster<Enum<?>, Enum<?>, MyJsEnum> upcasterField = null;
+        > Error: Field 'Main.upcasterField' cannot be of type 'Upcaster<Enum<?>, Enum<?>, MyJsEnum>'.
+          Upcaster<? super Enum<?>, ? super Enum<?>, ? super MyJsEnum> wildcardUpcasterField = null;
+        > Error: Field 'Main.wildcardUpcasterField' cannot be of type 'Upcaster<?, ?, ?>'.
+          CollectionBound<Enum<?>, List<MyJsEnum>> collectionBoundField = null;
+        > Error: Field 'Main.collectionBoundField' cannot be of type 'CollectionBound<Enum<?>, List<MyJsEnum>>'.
+          Outer<Enum<?>>.Inner<MyJsEnum> innerField = null;
+        > Error: Field 'Main.innerField' cannot be of type 'Inner<MyJsEnum, Enum<?>>'.
           void acceptsEnumList(EnumList<MyJsEnum> p) {}
         > Error: Parameter 'p' in 'void Main.acceptsEnumList(EnumList<MyJsEnum> p)' cannot be of type 'EnumList<MyJsEnum>'.
           <J extends MyJsEnum> void acceptsJsEnumBoundedList(AnyEnumList<J> p) {}
@@ -2968,10 +3006,19 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Type argument for 'T' of 'void Main.acceptsEnumBounded(MyJsEnum)' cannot be of type '(MyJsEnum & Serializable)'.
             o = new EnumHolder<MyJsEnum>() {};
         > Error: Supertype of '<anonymous> extends EnumHolder<MyJsEnum>' cannot be of type 'EnumHolder<MyJsEnum>'.
+            Upcaster<Enum<?>, MyJsEnum, MyJsEnum> upcaster = new Upcaster<>();
+        > Error: Variable 'upcaster' cannot be of type 'Upcaster<Enum<?>, MyJsEnum, MyJsEnum>'.
+        > Error: Object creation 'new Upcaster.<init>()' cannot be of type 'Upcaster<Enum<?>, MyJsEnum, MyJsEnum>'.
+            upcaster.b = MyJsEnum.A;
+        > Error: Reference to field 'Upcaster<Enum<?>, MyJsEnum, MyJsEnum>.b' cannot be of type 'MyJsEnum'.
+            upcaster.getB();
+        > Error: Returned type in call to method 'MyJsEnum Upcaster.getB()' cannot be of type 'MyJsEnum'.
           }
         }
         class SubHolder extends EnumHolder<MyJsEnum> {}
         > Error: Supertype of 'SubHolder' cannot be of type 'EnumHolder<MyJsEnum>'.
+        class Sub extends Super<Enum<?>, MyJsEnum> {}
+        > Error: Supertype of 'Sub' cannot be of type 'Super<Enum<?>, MyJsEnum>'.
         """);
   }
 
@@ -3162,6 +3209,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           interface Holder<U, T extends U> {
             void accept(T t);
           }
+          static class Box<U> {
+            <T extends U> U convert(T t) { return t; }
+          }
+          private static <A, B extends A, C extends B> A upcast(C c) { return c; }
           private static void acceptsEnum(Enum e) {}
           private static void acceptsComparable(Comparable c) {}
           private static void acceptsSerializable(Serializable s) {}
@@ -3209,8 +3260,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             superEnumList.add(MyJsEnum.A);
         > Error: JsEnum 'MyJsEnum' cannot be assigned to '<captured wildcard>'.
             Holder<Enum<?>, ? super MyJsEnum> superEnumBoundedHolder = null;
+        > Error: Variable 'superEnumBoundedHolder' cannot be of type 'Holder<Enum<?>, ?>'.
             superEnumBoundedHolder.accept(MyJsEnum.A);
         > Error: JsEnum 'MyJsEnum' cannot be assigned to '<captured wildcard>'.
+            Main.<Enum<?>, Enum<?>, MyJsEnum>upcast(MyJsEnum.A);
+        > Error: Type argument for 'C' of 'Enum<?> Main.upcast(MyJsEnum)' cannot be of type 'MyJsEnum'.
+            Main.<Enum<?>, MyJsEnum, MyJsEnum>upcast(MyJsEnum.A);
+        > Error: Type argument for 'B' of 'Enum<?> Main.upcast(MyJsEnum)' cannot be of type 'MyJsEnum'.
+            new Box<Enum<?>>().convert(MyJsEnum.A);
+        > Error: Type argument for 'T' of 'Enum<?> Box.convert(MyJsEnum)' cannot be of type 'MyJsEnum'.
           }
           private static <J extends MyJsEnum> void passesJsEnumBoundedT(J j) {
             acceptsEnumBoundedT(j);

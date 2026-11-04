@@ -3029,6 +3029,7 @@ public class JsInteropRestrictionsChecker {
             errorIfDisallowedType(
                 inferredTypeDescriptor,
                 declaredTypeDescriptor,
+                fieldAccess.getTarget().getEnclosingTypeDescriptor().getParameterization(),
                 getSourcePosition(),
                 "Reference to field '%s'",
                 fieldAccess.getTarget().getReadableDescription());
@@ -3058,6 +3059,7 @@ public class JsInteropRestrictionsChecker {
             errorIfDisallowedType(
                 inferredTypeDescriptor,
                 declaredTypeDescriptor,
+                methodCall.getTarget().getParameterization(),
                 getSourcePosition(),
                 "Returned type in call to method '%s'",
                 methodCall.getTarget().getReadableDescription());
@@ -3093,6 +3095,7 @@ public class JsInteropRestrictionsChecker {
           private boolean checkInvocationTypeArguments(Invocation invocation) {
             boolean hasDisallowedTypeArguments = false;
             MethodDescriptor target = invocation.getTarget();
+            Map<TypeVariable, TypeDescriptor> parameterization = target.getParameterization();
             for (var entry : target.getLocalParameterization().entrySet()) {
               TypeVariable typeParameter = entry.getKey();
               TypeDescriptor typeArgument = entry.getValue();
@@ -3100,6 +3103,7 @@ public class JsInteropRestrictionsChecker {
                   errorIfDisallowedType(
                       typeArgument,
                       typeParameter,
+                      parameterization,
                       getSourcePosition(),
                       "Type argument for '%s' of '%s'",
                       typeParameter.getReadableDescription(),
@@ -3143,6 +3147,7 @@ public class JsInteropRestrictionsChecker {
             return errorIfDisallowedType(
                 typeDescriptor,
                 typeDescriptor,
+                ImmutableMap.of(),
                 sourcePosition,
                 messagePrefixFormat,
                 messagePrefixArgs);
@@ -3153,11 +3158,15 @@ public class JsInteropRestrictionsChecker {
           private boolean errorIfDisallowedType(
               TypeDescriptor inferredTypeDescriptor,
               TypeDescriptor declaredTypeDescriptor,
+              Map<TypeVariable, TypeDescriptor> parameterization,
               SourcePosition sourcePosition,
               @FormatString String messagePrefixFormat,
               Object... messagePrefixArgs) {
             if (hasDisallowedType(
-                inferredTypeDescriptor, declaredTypeDescriptor, isTypeSpecializationDisallowed)) {
+                inferredTypeDescriptor,
+                declaredTypeDescriptor,
+                parameterization,
+                isTypeSpecializationDisallowed)) {
               problems.error(
                   sourcePosition,
                   "%s cannot be of type '%s'.",
@@ -3192,6 +3201,32 @@ public class JsInteropRestrictionsChecker {
       TypeDescriptor inferredTypeDescriptor,
       TypeDescriptor declaredTypeDescriptor,
       BiPredicate<TypeDescriptor, TypeDescriptor> isTypeSpecializationDisallowed) {
+    return hasDisallowedType(
+        inferredTypeDescriptor,
+        declaredTypeDescriptor,
+        ImmutableMap.of(),
+        isTypeSpecializationDisallowed);
+  }
+
+  private static boolean hasDisallowedType(
+      TypeDescriptor inferredTypeDescriptor,
+      TypeDescriptor declaredTypeDescriptor,
+      Map<TypeVariable, TypeDescriptor> parameterization,
+      BiPredicate<TypeDescriptor, TypeDescriptor> isTypeSpecializationDisallowed) {
+    if (declaredTypeDescriptor instanceof TypeVariable typeParameter
+        && !typeParameter.isWildcardOrCapture()
+        && !parameterization.isEmpty()) {
+      TypeDescriptor upperBound = typeParameter.getUpperBoundTypeDescriptor();
+      TypeDescriptor specializedUpperBound = upperBound.specializeTypeVariables(parameterization);
+      if (!upperBound.equals(specializedUpperBound)
+          && hasDisallowedType(
+              inferredTypeDescriptor,
+              TypeVariable.createWildcardWithUpperBound(specializedUpperBound),
+              isTypeSpecializationDisallowed)) {
+        return true;
+      }
+    }
+
     if (isTypeSpecializationDisallowed.test(declaredTypeDescriptor, inferredTypeDescriptor)) {
       return true;
     }
@@ -3210,6 +3245,7 @@ public class JsInteropRestrictionsChecker {
           declaredTypeDescriptor.isArray()
               ? ((ArrayTypeDescriptor) declaredTypeDescriptor).getComponentTypeDescriptor()
               : inferredArrayTypeDescriptor.getComponentTypeDescriptor(),
+          parameterization,
           isTypeSpecializationDisallowed);
     }
 
@@ -3220,17 +3256,22 @@ public class JsInteropRestrictionsChecker {
           wildcard.getLowerBoundTypeDescriptor() != null
               ? wildcard.getLowerBoundTypeDescriptor()
               : wildcard.getUpperBoundTypeDescriptor();
-      return hasDisallowedType(bound, declaredTypeDescriptor, isTypeSpecializationDisallowed);
+      return hasDisallowedType(
+          bound, declaredTypeDescriptor, parameterization, isTypeSpecializationDisallowed);
     }
 
-    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor descriptor) {
+    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor descriptor
+        && descriptor.hasTypeArguments()) {
       List<TypeDescriptor> inferredTypeArguments = descriptor.getTypeArgumentDescriptors();
       List<TypeVariable> typeParameters =
           descriptor.getTypeDeclaration().getTypeParameterDescriptors();
+      Map<TypeVariable, TypeDescriptor> typeArgumentParameterization =
+          descriptor.getParameterization();
       for (int typeArgIndex = 0; typeArgIndex < inferredTypeArguments.size(); typeArgIndex++) {
         if (hasDisallowedType(
             inferredTypeArguments.get(typeArgIndex),
             typeParameters.get(typeArgIndex),
+            typeArgumentParameterization,
             isTypeSpecializationDisallowed)) {
           return true;
         }
