@@ -33,7 +33,7 @@ public class Main {
     testSwitchCaseEvaluationOrder();
     testSwitchReassignedBinding();
     testSwitchQualifiedEnumConstants();
-    // TODO(b/465574821):Add tests for jsenums.
+    testSwitchDefaultNotLast();
   }
 
   private static void testSwitchPatterns() {
@@ -334,6 +334,45 @@ public class Main {
     return switch (o) {
       case Numbers.ZERO -> 1;
       default -> 2;
+    };
+  }
+
+  private static void testSwitchDefaultNotLast() {
+    assertEquals("one", getDefaultNotLastStatementGroups(1));
+    assertEquals("two", getDefaultNotLastStatementGroups(2));
+    assertEquals("default,two", getDefaultNotLastStatementGroups(3));
+
+    assertEquals("null", getDefaultNotLastSwitchExpression(null));
+    assertEquals("two", getDefaultNotLastSwitchExpression(2));
+    assertEquals("default", getDefaultNotLastSwitchExpression(3));
+  }
+
+  private static String getDefaultNotLastStatementGroups(Integer i) {
+    String result = "";
+    switch (i) {
+      case null:
+        result += "null";
+        break;
+      case 1:
+        result += "one";
+        break;
+      default:
+        result += "default,";
+      // fall through
+      case 2:
+        result += "two";
+    }
+    return result;
+  }
+
+  private static String getDefaultNotLastSwitchExpression(Integer i) {
+    return switch (i) {
+      case null:
+        yield "null";
+      default:
+        yield "default";
+      case 2:
+        yield "two";
     };
   }
 }

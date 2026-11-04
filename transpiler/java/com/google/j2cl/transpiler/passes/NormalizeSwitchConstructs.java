@@ -309,7 +309,12 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
    *     $caseIndex = caseNumber;
    * else  <next case condition>
    *     ...
+   * else
+   *     $caseIndex = defaultCaseNumber;
    * }</pre>
+   *
+   * <p>The default case is selected only when no other case matches, even if it is not the last
+   * case.
    */
   private Statement createCaseSelectorLogic(
       List<SwitchCase> cases, Expression selector, Variable caseIndexVariable, int currentIndex) {
@@ -320,8 +325,15 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
             .makeStatement(SourcePosition.NONE)
             .ensureBlock();
 
-    if (currentIndex == cases.size() || cases.get(currentIndex).isDefault()) {
+    if (currentIndex == cases.size()) {
+      // No more cases to check, return the case index assignment for the default case.
       return caseIndexAssignment;
+    }
+
+    if (cases.get(currentIndex).isDefault()) {
+      // Proceed to the next case without a branch; the default case will be selected in the
+      // final else branch.
+      return createCaseSelectorLogic(cases, selector, caseIndexVariable, currentIndex + 1);
     }
 
     SwitchCase switchCase = cases.get(currentIndex);
