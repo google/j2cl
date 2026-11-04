@@ -1,0 +1,50 @@
+goog.module('inlinefunction.OuterOfJsInnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class OuterOfJsInnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_outerValue__inlinefunction_OuterOfJsInnerClass_ = 0;
+ }
+ /** @nodts @return {!OuterOfJsInnerClass} */
+ static $create__int(/** number */ outerValue) {
+  OuterOfJsInnerClass.$clinit();
+  let $instance = new OuterOfJsInnerClass();
+  $instance.$ctor__inlinefunction_OuterOfJsInnerClass__int__void(outerValue);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_OuterOfJsInnerClass__int__void(/** number */ outerValue) {
+  this.$ctor__java_lang_Object__void();
+  this.f_outerValue__inlinefunction_OuterOfJsInnerClass_ = outerValue;
+ }
+ /** @final @nodts @return {number} */
+ m_getOuterValue__int() {
+  return this.f_outerValue__inlinefunction_OuterOfJsInnerClass_;
+ }
+ /** @nodts */
+ static $clinit() {
+  OuterOfJsInnerClass.$clinit = () =>{};
+  OuterOfJsInnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterOfJsInnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(OuterOfJsInnerClass, 'inlinefunction.OuterOfJsInnerClass');
+
+exports = OuterOfJsInnerClass;
+
+//# sourceMappingURL=OuterOfJsInnerClass.js.map

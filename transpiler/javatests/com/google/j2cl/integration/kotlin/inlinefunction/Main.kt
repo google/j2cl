@@ -57,6 +57,7 @@ fun main(vararg unused: String) {
   testInlineWithVararg()
   testProjectedReceiverTypeArgument()
   testInlineFunctionWithArrayInitializer()
+  testInlineFunctionInSuperAndThisCallArguments()
 }
 
 class MyClass(var f: Int) {

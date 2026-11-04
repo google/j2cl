@@ -1,0 +1,47 @@
+goog.module('inlinefunction.OuterOfJsInnerClass.JsInnerClass$impl');
+
+const JsParentWithInlinedArgument = goog.require('inlinefunction.JsParentWithInlinedArgument$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InlineFunctionInSuperAndThisCallArgumentsKt = goog.forwardDeclare('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+let OuterOfJsInnerClass = goog.forwardDeclare('inlinefunction.OuterOfJsInnerClass$impl');
+
+/**
+ * @final
+ */
+class JsInnerClass extends JsParentWithInlinedArgument {
+ 
+ constructor(/** !OuterOfJsInnerClass */ $outer_this) {
+  JsInnerClass.$clinit();
+  let r = $outer_this.m_getOuterValue__int();
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(InlineFunctionInSuperAndThisCallArgumentsKt.m_getSideEffect__int() + r | 0);
+  super(r);
+  /**@type {!OuterOfJsInnerClass} @nodts*/
+  this.$outer_this__inlinefunction_OuterOfJsInnerClass_JsInnerClass;
+  this.$ctor__inlinefunction_OuterOfJsInnerClass_JsInnerClass__inlinefunction_OuterOfJsInnerClass__void($outer_this);
+ }
+ /** @nodts */
+ $ctor__inlinefunction_OuterOfJsInnerClass_JsInnerClass__inlinefunction_OuterOfJsInnerClass__void(/** !OuterOfJsInnerClass */ $outer_this) {
+  this.$outer_this__inlinefunction_OuterOfJsInnerClass_JsInnerClass = $outer_this;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsInnerClass.$clinit = () =>{};
+  JsInnerClass.$loadModules();
+  JsParentWithInlinedArgument.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InlineFunctionInSuperAndThisCallArgumentsKt = goog.module.get('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+ }
+}
+$Util.$setClassMetadata(JsInnerClass, 'inlinefunction.OuterOfJsInnerClass$JsInnerClass');
+
+exports = JsInnerClass;
+
+//# sourceMappingURL=OuterOfJsInnerClass$JsInnerClass.js.map

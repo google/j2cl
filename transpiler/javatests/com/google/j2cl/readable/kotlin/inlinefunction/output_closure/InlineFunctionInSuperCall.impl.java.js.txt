@@ -1,0 +1,49 @@
+goog.module('inlinefunction.InlineFunctionInSuperCall$impl');
+
+const ParentWithInlinedArgument = goog.require('inlinefunction.ParentWithInlinedArgument$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InlineFunctionInSuperAndThisCallArgumentsKt = goog.forwardDeclare('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+
+/**
+ * @final
+ */
+class InlineFunctionInSuperCall extends ParentWithInlinedArgument {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InlineFunctionInSuperCall} */
+ static $create__() {
+  InlineFunctionInSuperCall.$clinit();
+  let $instance = new InlineFunctionInSuperCall();
+  $instance.$ctor__inlinefunction_InlineFunctionInSuperCall__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionInSuperCall__void() {
+  let y = 1 + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(y);
+  this.$ctor__inlinefunction_ParentWithInlinedArgument__int__void(Math.imul(y, 2));
+ }
+ /** @nodts */
+ static $clinit() {
+  InlineFunctionInSuperCall.$clinit = () =>{};
+  InlineFunctionInSuperCall.$loadModules();
+  ParentWithInlinedArgument.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InlineFunctionInSuperCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InlineFunctionInSuperAndThisCallArgumentsKt = goog.module.get('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+ }
+}
+$Util.$setClassMetadata(InlineFunctionInSuperCall, 'inlinefunction.InlineFunctionInSuperCall');
+
+exports = InlineFunctionInSuperCall;
+
+//# sourceMappingURL=InlineFunctionInSuperCall.js.map

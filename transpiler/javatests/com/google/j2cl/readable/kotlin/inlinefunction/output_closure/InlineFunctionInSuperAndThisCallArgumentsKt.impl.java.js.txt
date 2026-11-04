@@ -1,0 +1,84 @@
+goog.module('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1JsLocalClass = goog.forwardDeclare('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt.$1JsLocalClass$impl');
+let JsParentWithInlinedArgument = goog.forwardDeclare('inlinefunction.JsParentWithInlinedArgument$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class InlineFunctionInSuperAndThisCallArgumentsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!InlineFunctionInSuperAndThisCallArgumentsKt} */
+ static $create__() {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit();
+  let $instance = new InlineFunctionInSuperAndThisCallArgumentsKt();
+  $instance.$ctor__inlinefunction_InlineFunctionInSuperAndThisCallArgumentsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionInSuperAndThisCallArgumentsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_getSideEffect__int() {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit();
+  return InlineFunctionInSuperAndThisCallArgumentsKt.f_sideEffect__inlinefunction_InlineFunctionInSuperAndThisCallArgumentsKt_;
+ }
+ /** @nodts */
+ static m_setSideEffect__int__void(/** number */ set__) {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit();
+  InlineFunctionInSuperAndThisCallArgumentsKt.f_sideEffect__inlinefunction_InlineFunctionInSuperAndThisCallArgumentsKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_computeWithSideEffect__int__int(/** number */ x) {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit();
+  let y = x + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(y);
+  return Math.imul(y, 2);
+ }
+ /** @nodts @return {number} */
+ static m_computeLambdaWithSideEffect__kotlin_jvm_functions_Function0__int(/** !Function0<?> */ f) {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit();
+  let r = (/**@type {!Integer}*/ ($Casts.$to(f.m_invoke__java_lang_Object(), Integer))).intValue();
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(InlineFunctionInSuperAndThisCallArgumentsKt.m_getSideEffect__int() + r | 0);
+  return r;
+ }
+ /** @nodts @return {!JsParentWithInlinedArgument} */
+ static m_createJsLocalClass__int__inlinefunction_JsParentWithInlinedArgument(/** number */ capturedValue) {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit();
+  return new $1JsLocalClass(capturedValue);
+ }
+ /** @nodts */
+ static $clinit() {
+  InlineFunctionInSuperAndThisCallArgumentsKt.$clinit = () =>{};
+  InlineFunctionInSuperAndThisCallArgumentsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InlineFunctionInSuperAndThisCallArgumentsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1JsLocalClass = goog.module.get('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt.$1JsLocalClass$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+/**@type {number} @nodts*/
+InlineFunctionInSuperAndThisCallArgumentsKt.f_sideEffect__inlinefunction_InlineFunctionInSuperAndThisCallArgumentsKt_ = 0;
+$Util.$setClassMetadata(InlineFunctionInSuperAndThisCallArgumentsKt, 'inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt');
+
+exports = InlineFunctionInSuperAndThisCallArgumentsKt;
+
+//# sourceMappingURL=InlineFunctionInSuperAndThisCallArgumentsKt.js.map

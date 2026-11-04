@@ -27,5 +27,8 @@ readable_example(
             "OnlyReferencedInOtherLib.kt",
         ],
     ),
-    deps = [":otherlib"],
+    deps = [
+        ":otherlib",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
 )

@@ -1,0 +1,66 @@
+goog.module('inlinefunction.InlineFunctionInSuperAndThisCalls$impl');
+
+const ParentWithInlinedArgument = goog.require('inlinefunction.ParentWithInlinedArgument$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InlineFunctionInSuperAndThisCallArgumentsKt = goog.forwardDeclare('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+
+/**
+ * @final
+ */
+class InlineFunctionInSuperAndThisCalls extends ParentWithInlinedArgument {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'InlineFunctionInSuperAndThisCalls(int)'.
+ /** @nodts @return {!InlineFunctionInSuperAndThisCalls} */
+ static $create__int(/** number */ x) {
+  InlineFunctionInSuperAndThisCalls.$clinit();
+  let $instance = new InlineFunctionInSuperAndThisCalls();
+  $instance.$ctor__inlinefunction_InlineFunctionInSuperAndThisCalls__int__void(x);
+  return $instance;
+ }
+ //Initialization from constructor 'InlineFunctionInSuperAndThisCalls(int)'.
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionInSuperAndThisCalls__int__void(/** number */ x) {
+  let r = x + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(InlineFunctionInSuperAndThisCallArgumentsKt.m_getSideEffect__int() + r | 0);
+  this.$ctor__inlinefunction_ParentWithInlinedArgument__int__void(r);
+ }
+ //Factory method corresponding to constructor 'InlineFunctionInSuperAndThisCalls()'.
+ /** @nodts @return {!InlineFunctionInSuperAndThisCalls} */
+ static $create__() {
+  InlineFunctionInSuperAndThisCalls.$clinit();
+  let $instance = new InlineFunctionInSuperAndThisCalls();
+  $instance.$ctor__inlinefunction_InlineFunctionInSuperAndThisCalls__void();
+  return $instance;
+ }
+ //Initialization from constructor 'InlineFunctionInSuperAndThisCalls()'.
+ /** @nodts */
+ $ctor__inlinefunction_InlineFunctionInSuperAndThisCalls__void() {
+  let y = 2 + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(y);
+  this.$ctor__inlinefunction_InlineFunctionInSuperAndThisCalls__int__void(Math.imul(y, 2));
+ }
+ /** @nodts */
+ static $clinit() {
+  InlineFunctionInSuperAndThisCalls.$clinit = () =>{};
+  InlineFunctionInSuperAndThisCalls.$loadModules();
+  ParentWithInlinedArgument.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InlineFunctionInSuperAndThisCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InlineFunctionInSuperAndThisCallArgumentsKt = goog.module.get('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+ }
+}
+$Util.$setClassMetadata(InlineFunctionInSuperAndThisCalls, 'inlinefunction.InlineFunctionInSuperAndThisCalls');
+
+exports = InlineFunctionInSuperAndThisCalls;
+
+//# sourceMappingURL=InlineFunctionInSuperAndThisCalls.js.map

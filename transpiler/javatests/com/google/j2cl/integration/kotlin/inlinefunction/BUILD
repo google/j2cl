@@ -26,6 +26,7 @@ integration_library(
 integration_test(
     srcs = [
         "ClassWithInlineFunc.kt",
+        "InlineFunctionInSuperAndThisCallArguments.kt",
         "Main.kt",
     ],
     deps = [":externalinlinefunction"],

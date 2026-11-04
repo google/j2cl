@@ -1,0 +1,47 @@
+goog.module('inlinefunction.ParentWithInlinedArgument$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ParentWithInlinedArgument extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__inlinefunction_ParentWithInlinedArgument_ = 0;
+ }
+ /** @nodts @return {!ParentWithInlinedArgument} */
+ static $create__int(/** number */ a) {
+  ParentWithInlinedArgument.$clinit();
+  let $instance = new ParentWithInlinedArgument();
+  $instance.$ctor__inlinefunction_ParentWithInlinedArgument__int__void(a);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_ParentWithInlinedArgument__int__void(/** number */ a) {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__inlinefunction_ParentWithInlinedArgument_ = a;
+ }
+ /** @final @nodts @return {number} */
+ m_getA__int() {
+  return this.f_a__inlinefunction_ParentWithInlinedArgument_;
+ }
+ /** @nodts */
+ static $clinit() {
+  ParentWithInlinedArgument.$clinit = () =>{};
+  ParentWithInlinedArgument.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParentWithInlinedArgument;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ParentWithInlinedArgument, 'inlinefunction.ParentWithInlinedArgument');
+
+exports = ParentWithInlinedArgument;
+
+//# sourceMappingURL=ParentWithInlinedArgument.js.map

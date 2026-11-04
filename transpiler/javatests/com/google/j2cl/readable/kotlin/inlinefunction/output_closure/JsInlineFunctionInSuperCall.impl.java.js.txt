@@ -1,0 +1,42 @@
+goog.module('inlinefunction.JsInlineFunctionInSuperCall$impl');
+
+const JsParentWithInlinedArgument = goog.require('inlinefunction.JsParentWithInlinedArgument$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InlineFunctionInSuperAndThisCallArgumentsKt = goog.forwardDeclare('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+
+/**
+ * @final
+ */
+class JsInlineFunctionInSuperCall extends JsParentWithInlinedArgument {
+ 
+ constructor() {
+  JsInlineFunctionInSuperCall.$clinit();
+  let y = 1 + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(y);
+  super(Math.imul(y, 2));
+  this.$ctor__inlinefunction_JsInlineFunctionInSuperCall__void();
+ }
+ /** @nodts */
+ $ctor__inlinefunction_JsInlineFunctionInSuperCall__void() {}
+ /** @nodts */
+ static $clinit() {
+  JsInlineFunctionInSuperCall.$clinit = () =>{};
+  JsInlineFunctionInSuperCall.$loadModules();
+  JsParentWithInlinedArgument.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInlineFunctionInSuperCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InlineFunctionInSuperAndThisCallArgumentsKt = goog.module.get('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+ }
+}
+$Util.$setClassMetadata(JsInlineFunctionInSuperCall, 'inlinefunction.JsInlineFunctionInSuperCall');
+
+exports = JsInlineFunctionInSuperCall;
+
+//# sourceMappingURL=JsInlineFunctionInSuperCall.js.map

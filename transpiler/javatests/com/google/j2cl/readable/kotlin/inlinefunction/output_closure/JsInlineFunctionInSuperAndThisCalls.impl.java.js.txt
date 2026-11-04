@@ -1,0 +1,57 @@
+goog.module('inlinefunction.JsInlineFunctionInSuperAndThisCalls$impl');
+
+const JsParentWithInlinedArgument = goog.require('inlinefunction.JsParentWithInlinedArgument$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InlineFunctionInSuperAndThisCallArgumentsKt = goog.forwardDeclare('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+
+/**
+ * @final
+ */
+class JsInlineFunctionInSuperAndThisCalls extends JsParentWithInlinedArgument {
+ //JsConstructor 'JsInlineFunctionInSuperAndThisCalls(int)'.
+ 
+ constructor(/** number */ x) {
+  JsInlineFunctionInSuperAndThisCalls.$clinit();
+  let r = x + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(InlineFunctionInSuperAndThisCallArgumentsKt.m_getSideEffect__int() + r | 0);
+  super(r);
+  this.$ctor__inlinefunction_JsInlineFunctionInSuperAndThisCalls__int__void(x);
+ }
+ //Initialization from constructor 'JsInlineFunctionInSuperAndThisCalls(int)'.
+ /** @nodts */
+ $ctor__inlinefunction_JsInlineFunctionInSuperAndThisCalls__int__void(/** number */ x) {}
+ //Factory method corresponding to constructor 'JsInlineFunctionInSuperAndThisCalls()'.
+ /** @nodts @return {!JsInlineFunctionInSuperAndThisCalls} */
+ static $create__() {
+  JsInlineFunctionInSuperAndThisCalls.$clinit();
+  let y = 2 + 1 | 0;
+  InlineFunctionInSuperAndThisCallArgumentsKt.m_setSideEffect__int__void(y);
+  let $instance = new JsInlineFunctionInSuperAndThisCalls(Math.imul(y, 2));
+  $instance.$ctor__inlinefunction_JsInlineFunctionInSuperAndThisCalls__void();
+  return $instance;
+ }
+ //Initialization from constructor 'JsInlineFunctionInSuperAndThisCalls()'.
+ /** @nodts */
+ $ctor__inlinefunction_JsInlineFunctionInSuperAndThisCalls__void() {}
+ /** @nodts */
+ static $clinit() {
+  JsInlineFunctionInSuperAndThisCalls.$clinit = () =>{};
+  JsInlineFunctionInSuperAndThisCalls.$loadModules();
+  JsParentWithInlinedArgument.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsInlineFunctionInSuperAndThisCalls;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  InlineFunctionInSuperAndThisCallArgumentsKt = goog.module.get('inlinefunction.InlineFunctionInSuperAndThisCallArgumentsKt$impl');
+ }
+}
+$Util.$setClassMetadata(JsInlineFunctionInSuperAndThisCalls, 'inlinefunction.JsInlineFunctionInSuperAndThisCalls');
+
+exports = JsInlineFunctionInSuperAndThisCalls;
+
+//# sourceMappingURL=JsInlineFunctionInSuperAndThisCalls.js.map
