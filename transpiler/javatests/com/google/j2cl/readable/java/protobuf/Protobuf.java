@@ -71,6 +71,10 @@ public class Protobuf {
 
     MyEnum enumOne = MyEnum.ONE;
     int enumOneNumber = MyEnum.ONE.getNumber();
+
+    MyLargeEnum largeEnumOne = MyLargeEnum.ONE;
+    int largeEnumOneNumber = MyLargeEnum.ONE.getNumber();
+    int largeEnumOneValue = MyLargeEnum.ONE_VALUE;
   }
 
   public <T> void testExtension(ExtensionLite<T> extension) {

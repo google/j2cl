@@ -21,4 +21,6 @@ import java.lang.annotation.Target;
 public class Internal {
   @Target(ElementType.TYPE)
   public @interface ProtoNonnullApi {}
+
+  public interface EnumLite extends com.google.protobuf.EnumLite {}
 }

@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ExtensionLite = goog.forwardDeclare('com.google.protobuf.ExtensionLite$impl');
 let GeneratedMessage = goog.forwardDeclare('com.google.protobuf.GeneratedMessage$impl');
 let MyEnum = goog.forwardDeclare('protobuf.MyEnum$impl');
+let MyLargeEnum0 = goog.forwardDeclare('protobuf.MyLargeEnum0$impl');
 let MyMessage = goog.forwardDeclare('protobuf.MyMessage$impl');
 
 class Protobuf extends j_l_Object {
@@ -53,6 +54,9 @@ class Protobuf extends j_l_Object {
   let generatedMessageParser = (/**@type {GeneratedMessage}*/ (message)).m_getParserForType__com_google_protobuf_Parser();
   let enumOne = MyEnum.f_ONE__protobuf_MyEnum;
   let enumOneNumber = MyEnum.f_ONE__protobuf_MyEnum.m_getNumber__int();
+  let largeEnumOne = MyLargeEnum0.f_ONE__protobuf_MyLargeEnum0;
+  let largeEnumOneNumber = MyLargeEnum0.f_ONE__protobuf_MyLargeEnum0.m_getNumber__int();
+  let largeEnumOneValue = MyLargeEnum0.f_ONE_VALUE__protobuf_MyLargeEnum0;
  }
  /** @nodts @template T */
  m_testExtension__com_google_protobuf_ExtensionLite__void(/** !ExtensionLite<T> */ extension) {
@@ -72,6 +76,7 @@ class Protobuf extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   MyEnum = goog.module.get('protobuf.MyEnum$impl');
+  MyLargeEnum0 = goog.module.get('protobuf.MyLargeEnum0$impl');
   MyMessage = goog.module.get('protobuf.MyMessage$impl');
  }
 }
