@@ -1151,6 +1151,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (thisVisibility.isPrivate() || thatVisibility.isPrivate()) {
       return false;
     }
+    // Methods can only have the same signature if they have the same number of parameters and
+    // name. Since this is called for all the methods of all the supertypes (e.g. to compute the
+    // overridden methods), check that first to avoid building the signatures, which is relatively
+    // expensive.
+    if (getParameterDescriptors().size() != that.getParameterDescriptors().size()
+        || !getNameApplyingKotlinRenames().equals(that.getNameApplyingKotlinRenames())) {
+      return false;
+    }
 
     SourceLanguage overrideSemanticsLanguages = getOverrideSemanticsLanguage(this, that);
     return getSignature(overrideSemanticsLanguages)
