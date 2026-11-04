@@ -16,7 +16,6 @@
 
 package switchpatterns;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 
 public class SwitchPatterns {
@@ -65,7 +64,6 @@ public class SwitchPatterns {
     }
   }
 
-  @Wasm("nop") // TODO(b/580405953): Remove once switch patterns get erasure casts.
   static void testGenericRecordPatterns() {
     // Switch with record patterns on generic records, where the components need erasure casts.
     record GenericRecord<T>(T value) {}

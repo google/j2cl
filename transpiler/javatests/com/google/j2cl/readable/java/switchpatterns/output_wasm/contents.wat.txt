@@ -65,6 +65,12 @@
 (global $$class@switchpatterns.SwitchPatterns.1R (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@switchpatterns.SwitchPatterns.1GenericRecord (mut i32)
+ (i32.const 0)
+)
+(global $$class@switchpatterns.SwitchPatterns.1GenericRecord (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $switchpatterns.SwitchPatterns.vtable (ref $switchpatterns.SwitchPatterns.vtable)
  (struct.new $switchpatterns.SwitchPatterns.vtable
   (ref.func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns)
@@ -152,6 +158,14 @@
   (ref.func $m_equals__java_lang_Object__boolean@switchpatterns.SwitchPatterns.1R)
   (ref.func $m_hashCode__int@switchpatterns.SwitchPatterns.1R)
   (ref.func $m_toString__java_lang_String@switchpatterns.SwitchPatterns.1R)
+ )
+)
+(global $switchpatterns.SwitchPatterns.1GenericRecord.vtable (ref $switchpatterns.SwitchPatterns.1GenericRecord.vtable)
+ (struct.new $switchpatterns.SwitchPatterns.1GenericRecord.vtable
+  (ref.func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.1GenericRecord)
+  (ref.func $m_equals__java_lang_Object__boolean@switchpatterns.SwitchPatterns.1GenericRecord)
+  (ref.func $m_hashCode__int@switchpatterns.SwitchPatterns.1GenericRecord)
+  (ref.func $m_toString__java_lang_String@switchpatterns.SwitchPatterns.1GenericRecord)
  )
 )
 
@@ -565,6 +579,66 @@
  )
 )
 (elem declare func $m_testRecordPatterns__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+
+;;; void SwitchPatterns.testGenericRecordPatterns()
+(func $m_testGenericRecordPatterns__void@switchpatterns.SwitchPatterns
+ (local $genericRecord (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local $$selector (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local $$caseIndex i32)
+ (local $pattern$1GenericRecord (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local $s (ref null $java.lang.String))
+ (local $pattern$1GenericRecord_1 (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local $s_1 (ref null $java.lang.String))
+ (block
+  (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns )
+  (local.set $genericRecord (call $$create__java_lang_Object@switchpatterns.SwitchPatterns.1GenericRecord (call $$getString_|Hello|__java_lang_String_<once>_@switchpatterns.SwitchPatterns.$StringLiterals )))
+  (block
+   (local.set $$selector (ref.cast (ref null $switchpatterns.SwitchPatterns.1GenericRecord) (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $genericRecord))))
+   
+   (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $$selector)) (then (block (result i32)
+     (local.set $pattern$1GenericRecord (local.get $$selector))
+     (local.set $s (ref.cast (ref null $java.lang.String) (call $m_value__java_lang_Object@switchpatterns.SwitchPatterns.1GenericRecord (ref.as_non_null (local.get $pattern$1GenericRecord)))))
+     (call $m_isEmpty__boolean@java.lang.String (ref.as_non_null (local.get $s)))
+    )) (else (i32.const 0)))
+    (then
+     (block
+      (local.set $$caseIndex (i32.const 0))
+     )
+    )(else
+     (if (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $$selector)) (then (block (result i32)
+       (local.set $pattern$1GenericRecord_1 (local.get $$selector))
+       (local.set $s_1 (ref.cast (ref null $java.lang.String) (call $m_value__java_lang_Object@switchpatterns.SwitchPatterns.1GenericRecord (ref.as_non_null (local.get $pattern$1GenericRecord_1)))))
+       (i32.const 1)
+      )) (else (i32.const 0)))
+      (then
+       (block
+        (local.set $$caseIndex (i32.const 1))
+       )
+      )(else
+       (block
+        (local.set $$caseIndex (i32.const 2))
+       )
+      )
+     )
+    )
+   )
+   (block $SWITCH.BREAK
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 1 2 (local.get $$caseIndex))
+      )
+      ;; case 0:
+      (br $SWITCH.BREAK)
+     )
+     ;; case 1:
+     (drop (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s_1))))
+     (br $SWITCH.BREAK)
+    )
+   )
+  )
+ )
+)
 
 ;;; void SwitchPatterns.testReassignedBindings()
 (func $m_testReassignedBindings__void_$pp_switchpatterns@switchpatterns.SwitchPatterns
@@ -1494,3 +1568,128 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.1R)
+
+;;; GenericRecord<T> GenericRecord.$create(T value)
+(func $$create__java_lang_Object@switchpatterns.SwitchPatterns.1GenericRecord
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local $$instance (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (block
+  (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.1GenericRecord )
+  (local.set $$instance (struct.new $switchpatterns.SwitchPatterns.1GenericRecord (global.get $switchpatterns.SwitchPatterns.1GenericRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
+  (call $$ctor__java_lang_Object__void_$p_switchpatterns_SwitchPatterns_1GenericRecord@switchpatterns.SwitchPatterns.1GenericRecord (ref.as_non_null (local.get $$instance))(local.get $value))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericRecord.$ctor(T value)
+(func $$ctor__java_lang_Object__void_$p_switchpatterns_SwitchPatterns_1GenericRecord@switchpatterns.SwitchPatterns.1GenericRecord
+ (param $this (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (param $value (ref null $java.lang.Object))
+ (block
+  (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
+  (struct.set $switchpatterns.SwitchPatterns.1GenericRecord $value@switchpatterns.SwitchPatterns.1GenericRecord (local.get $this) (local.get $value))
+ )
+)
+
+;;; T GenericRecord.value()
+(func $m_value__java_lang_Object@switchpatterns.SwitchPatterns.1GenericRecord
+ (type $function.m_value__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $this (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (struct.get $switchpatterns.SwitchPatterns.1GenericRecord $value@switchpatterns.SwitchPatterns.1GenericRecord (local.get $this)))
+ )
+)
+(elem declare func $m_value__java_lang_Object@switchpatterns.SwitchPatterns.1GenericRecord)
+
+;;; boolean GenericRecord.equals(Object arg0)
+(func $m_equals__java_lang_Object__boolean@switchpatterns.SwitchPatterns.1GenericRecord
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result i32)
+ (local $$other (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local $this (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (if (i32.eqz (if (result i32) (ref.test (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
+   (then
+    (return (i32.const 0))
+   )
+  )
+  (return (call $m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $switchpatterns.SwitchPatterns.1GenericRecord $value@switchpatterns.SwitchPatterns.1GenericRecord (local.get $this))))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $switchpatterns.SwitchPatterns.1GenericRecord $value@switchpatterns.SwitchPatterns.1GenericRecord (local.get $$other))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@switchpatterns.SwitchPatterns.1GenericRecord)
+
+;;; int GenericRecord.hashCode()
+(func $m_hashCode__int@switchpatterns.SwitchPatterns.1GenericRecord
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ (local $this (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_hashCode__arrayOf_java_lang_Object__int@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $switchpatterns.SwitchPatterns.1GenericRecord $value@switchpatterns.SwitchPatterns.1GenericRecord (local.get $this))))))
+ )
+)
+(elem declare func $m_hashCode__int@switchpatterns.SwitchPatterns.1GenericRecord)
+
+;;; String GenericRecord.toString()
+(func $m_toString__java_lang_String@switchpatterns.SwitchPatterns.1GenericRecord
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $this (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (struct.get $switchpatterns.SwitchPatterns.1GenericRecord $value@switchpatterns.SwitchPatterns.1GenericRecord (local.get $this))))))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@switchpatterns.SwitchPatterns.1GenericRecord)
+
+;;; void GenericRecord.$clinit()
+(func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.1GenericRecord
+ (block
+  (if (global.get $$class-initialized@switchpatterns.SwitchPatterns.1GenericRecord)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@switchpatterns.SwitchPatterns.1GenericRecord (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Record )
+ )
+)
+
+;;; Class<T> GenericRecord.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@switchpatterns.SwitchPatterns.1GenericRecord
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@switchpatterns.SwitchPatterns.1GenericRecord)))
+   (then
+    (return (global.get $$class@switchpatterns.SwitchPatterns.1GenericRecord))
+   )
+  )
+  (global.set $$class@switchpatterns.SwitchPatterns.1GenericRecord (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|switchpatter...|__java_lang_String_<once>_@switchpatterns.SwitchPatterns.1GenericRecord.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Record )))
+  (return (global.get $$class@switchpatterns.SwitchPatterns.1GenericRecord))
+ )
+)
+
+;;; Class<?> GenericRecord.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.1GenericRecord
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $switchpatterns.SwitchPatterns.1GenericRecord))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.1GenericRecord) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@switchpatterns.SwitchPatterns.1GenericRecord ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.1GenericRecord)
