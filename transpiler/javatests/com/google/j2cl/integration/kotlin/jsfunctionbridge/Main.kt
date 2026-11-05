@@ -22,6 +22,8 @@ import com.google.j2cl.integration.testing.TestUtils.isJavaScript
 import javaemul.internal.annotations.DoNotAutobox
 import jsinterop.annotations.JsEnum
 import jsinterop.annotations.JsFunction
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
   testBridge()
@@ -109,6 +111,16 @@ private fun testBridge_nativeReturnType() {
   val nativeJsEnumFunction =
     ApplyFunction<NativeEnum> { e -> if (e === NativeEnum.ACCEPT) NativeEnum.CANCEL else e }
   assertTrue(nativeJsEnumFunction.apply(NativeEnum.ACCEPT) === NativeEnum.CANCEL)
+
+  // Lambda implementing a parametric @JsFunction specialized to a native type.
+  val o = NativeObject()
+  val identity = ApplyFunction<NativeObject> { x -> x }
+  assertTrue(identity.apply(o) === o)
+  assertTrue(callGeneric(identity, o) === o)
+
+  // Class implementing an Any?-returning @JsFunction with return type specialized to a native type.
+  val supplier: ObjectSupplier = NativeObjectSupplier(o)
+  assertTrue(supplier.get() === o)
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -164,4 +176,10 @@ private fun assertBoxedPlainJsEnum(@DoNotAutobox o: Any?) {
     // JsEnums are only boxed in JavaScript.
     assertUnderlyingTypeEquals(PlainJsEnum::class.java, o)
   }
+}
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object") private class NativeObject
+
+private class NativeObjectSupplier(private val value: NativeObject) : ObjectSupplier {
+  override fun get(): NativeObject = value
 }

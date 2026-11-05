@@ -55,6 +55,7 @@ fun main(vararg unused: String) {
 
   // Minimal versions of existing tests.
   BridgeJsMethodMain.test()
+  BridgeNativeReturnMain.test()
   BridgeMethodsMain.test()
   MultipleAbstractParentsMain.test()
   DefaultMethodsMain.test()

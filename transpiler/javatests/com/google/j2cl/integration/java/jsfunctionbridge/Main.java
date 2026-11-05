@@ -23,6 +23,8 @@ import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
@@ -117,10 +119,20 @@ public class Main {
 
   private static void testBridge_nativeReturnType() {
     // Lambda implementing a parametric @JsFunction specialized to a native JsEnum.
-    // TODO(b/578707648): Uncomment when the Wasm bridge return conversion is fixed.
-    // ApplyFunction<NativeEnum> nativeJsEnumFunction =
-    //     e -> e == NativeEnum.ACCEPT ? NativeEnum.CANCEL : e;
-    // assertTrue(nativeJsEnumFunction.apply(NativeEnum.ACCEPT) == NativeEnum.CANCEL);
+    ApplyFunction<NativeEnum> nativeJsEnumFunction =
+        e -> e == NativeEnum.ACCEPT ? NativeEnum.CANCEL : e;
+    assertTrue(nativeJsEnumFunction.apply(NativeEnum.ACCEPT) == NativeEnum.CANCEL);
+
+    // Lambda implementing a parametric @JsFunction specialized to a native type.
+    NativeObject o = new NativeObject();
+    ApplyFunction<NativeObject> identity = x -> x;
+    assertTrue(identity.apply(o) == o);
+    assertTrue(callGeneric(identity, o) == o);
+
+    // Class implementing an Object-returning @JsFunction with return type specialized to a native
+    // type.
+    ObjectSupplier supplier = new NativeObjectSupplier(o);
+    assertTrue(supplier.get() == o);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -182,6 +194,22 @@ public class Main {
     if (isJavaScript()) {
       // JsEnums are only boxed in JavaScript.
       assertUnderlyingTypeEquals(PlainJsEnum.class, o);
+    }
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class NativeObject {}
+
+  private static final class NativeObjectSupplier implements ObjectSupplier {
+    private final NativeObject value;
+
+    NativeObjectSupplier(NativeObject value) {
+      this.value = value;
+    }
+
+    @Override
+    public NativeObject get() {
+      return value;
     }
   }
 }
