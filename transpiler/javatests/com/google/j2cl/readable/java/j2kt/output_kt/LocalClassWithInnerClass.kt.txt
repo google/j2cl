@@ -1,0 +1,181 @@
+// Generated from "j2kt/LocalClassWithInnerClass.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+
+open class LocalClassWithInnerClass {
+ companion object {
+  @JvmStatic
+  fun testOutsideReferencesAndSiblings(): Int {
+   open class Local1 internal constructor() {
+    internal open inner class Inner internal constructor() {
+     internal open fun value(): Int = 1
+    }
+   }
+   open class Local2 internal constructor() {
+    internal open inner class Inner internal constructor() {
+     internal open fun value(): Int = 2
+    }
+   }
+   val first: Local1.Inner = Local1().Inner()
+   val second: Local2.Inner = Local2().Inner()
+   return first.value() + second.value()
+  }
+  
+  @JvmStatic
+  fun testNestedShadowing(): Int {
+   open class Local internal constructor() {
+    internal open inner class A internal constructor() {
+     internal open fun tag(): Int = 10
+    }
+    
+    internal open inner class Sub internal constructor() {
+     @JvmField
+     internal var outerA: Local.A = this@Local.A()
+     
+     @JvmField
+     internal var innerA: Local.Sub.A = A()
+     
+     internal open inner class A internal constructor() {
+      internal open fun tag(): Int = 20
+     }
+    }
+   }
+   val sub: Local.Sub = Local().Sub()
+   return sub.outerA.tag() + sub.innerA.tag()
+  }
+  
+  @JvmStatic
+  fun <M: Any> testInheritedInnerInGenericMethod(m: M): Int {
+   open class Local internal constructor() {
+    internal open inner class LInner internal constructor() {
+     internal open fun get(): M = m
+     
+     internal open fun tag(): Int = 7
+    }
+   }
+   open class Local2 internal constructor(): Local() {
+    @JvmField
+    internal var unqualifiedInherited: Local.LInner = LInner()
+    
+    @JvmField
+    internal var qualifiedInherited: Local.LInner = LInner()
+   }
+   val fromOutside: Local.LInner = Local2().unqualifiedInherited
+   return fromOutside.tag() + Local2().qualifiedInherited.tag()
+  }
+ }
+ 
+ open class Inner {
+  internal open fun unrelatedOuterValue(): Int = 100
+ }
+ 
+ open class GenericOuter<T: Any> {
+  open fun <M: Any> testInGenericContext(t: T, m: M): Any {
+   open class Local internal constructor() {
+    @JvmField
+    internal var field: Local.Inner? = Inner()
+    
+    internal open fun id(p: Local.Inner): Local.Inner = p
+    
+    internal open inner class Inner internal constructor() {
+     internal open fun getT(): T = t
+     
+     internal open fun getM(): M = m
+    }
+   }
+   open class GenericLocal<L: Any> {
+    @JvmField
+    internal val l: L
+    
+    @JvmField
+    internal var field: GenericLocal<L>.GenericInner<M>? = null
+    
+    internal constructor(l: L) {
+     this.l = l
+    }
+    
+    internal open inner class GenericInner<I: Any> constructor(i: I) {
+     @JvmField
+     internal val i: I
+     
+     init {
+      this.i = i
+     }
+     
+     internal open fun getT(): T = t
+     
+     internal open fun getL(): L = this@GenericLocal.l
+     
+     internal open fun getI(): I = this.i
+     
+     internal open inner class DeepNested<D: Any> constructor(d: D) {
+      @JvmField
+      internal val d: D
+      
+      init {
+       this.d = d
+      }
+     }
+    }
+   }
+   val local: Local = Local()
+   val outside: Local.Inner = local.id(
+    local.Inner(),
+   )
+   val outsideGeneric: GenericLocal<String>.GenericInner<M> = GenericLocal<String>("a").GenericInner<M>(m)
+   val outsideDeep: GenericLocal<String>.GenericInner<M>.DeepNested<T> = outsideGeneric.DeepNested<T>(t)
+   return (if (outsideDeep.d.equals(t) && outsideGeneric.getI().equals(
+    outside.getM(),
+   )) outside else outsideGeneric) as Any
+  }
+  
+  companion object {
+   @JvmStatic
+   fun <S: Any> testInStaticGenericContext(s: S): Any {
+    open class Local<L: Any> {
+     @JvmField
+     internal val l: L
+     
+     internal constructor(l: L) {
+      this.l = l
+     }
+     
+     internal open inner class Inner<I: Any> constructor(i: I) {
+      @JvmField
+      internal val i: I
+      
+      init {
+       this.i = i
+      }
+     }
+    }
+    val instance: Local<S>.Inner<String> = Local<S>(s).Inner<String>("ok")
+    return instance
+   }
+  }
+ }
+}
