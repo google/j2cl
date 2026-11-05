@@ -47,11 +47,14 @@ class JUnit4Validator extends BaseValidator {
 
   private final Types typeUtils;
   private final Elements elementUtils;
+  private final String testPlatform;
 
-  public JUnit4Validator(ErrorReporter errorReporter, Types typeUtils, Elements elementUtils) {
+  public JUnit4Validator(
+      ErrorReporter errorReporter, Types typeUtils, Elements elementUtils, String testPlatform) {
     super(errorReporter);
     this.typeUtils = typeUtils;
     this.elementUtils = elementUtils;
+    this.testPlatform = testPlatform;
   }
 
   public boolean validateJUnit4MethodAndClass(TypeElement typeElement) {
@@ -163,10 +166,14 @@ class JUnit4Validator extends BaseValidator {
     }
 
     if (TestingPredicates.IS_RETURNTYPE_A_THENABLE.test(executableElement)) {
+      if (testPlatform.equals("WASM")) {
+        errorReporter.report(ErrorMessage.ASYNC_NOT_SUPPORTED_IN_WASM, executableElement);
+        return false;
+      }
       // if we are an async test, we need the timeout attribute.
       // Tests in `kotlinx.coroutines.*` use the common declaration of `kotlin.Test`, which does not
       // support timeouts. Therefore, these tests are exempt from timeout validation.
-      // The default timeout for async tests is set to 5s (see `JsUnitHelpers.java`). If in the
+      // The default timeout for async tests is set to 5s (see `JsUnitAsyncHelpers.java`). If in the
       // future, other packages need exemptions, we should consider allowing per-package timeout
       // specifications.
       boolean isKotlinCoroutineTest =
@@ -191,7 +198,11 @@ class JUnit4Validator extends BaseValidator {
       }
 
       if (!TestingPredicates.RETURN_TYPE_VOID_PREDICATE.test(executableElement)) {
-        errorReporter.report(ErrorMessage.NON_PROMISE_RETURN, executableElement);
+        errorReporter.report(
+            testPlatform.equals("WASM")
+                ? ErrorMessage.NON_VOID_RETURN
+                : ErrorMessage.NON_PROMISE_RETURN,
+            executableElement);
         isValid = false;
       }
     }

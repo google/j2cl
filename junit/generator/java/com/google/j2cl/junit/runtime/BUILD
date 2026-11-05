@@ -41,7 +41,6 @@ j2wasm_library(
     deps = [
         ":internal_assumption_violated_exception-j2wasm",
         "//:jsinterop-annotations-j2wasm",
-        "//jre/java:javaemul_internal_annotations-j2wasm",
         "//third_party:closure_testcase",
     ],
 )
@@ -49,12 +48,14 @@ j2wasm_library(
 j2cl_library(
     name = "jsunit_helpers-j2cl",
     testonly = 1,
-    srcs = ["JsUnitHelpers.java"],
+    srcs = [
+        "JsUnitAsyncHelpers.java",
+        "JsUnitHelpers.java",
+    ],
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     deps = [
         ":internal_assumption_violated_exception-j2cl",
         "//:jsinterop-annotations-j2cl",
-        "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:closure_testcase",
     ],
 )

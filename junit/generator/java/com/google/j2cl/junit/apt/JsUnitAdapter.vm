@@ -16,12 +16,12 @@ actualTest.${testMethod.javaMethodName()}();
  */
 package ${testClass.jsUnitPackageName()};
 
-import static com.google.j2cl.junit.runtime.JsUnitHelpers.await;
+import static com.google.j2cl.junit.runtime.JsUnitAsyncHelpers.await;
+import static com.google.j2cl.junit.runtime.JsUnitAsyncHelpers.withTimeout;
 import static com.google.j2cl.junit.runtime.JsUnitHelpers.handleAssumptionFailure;
-import static com.google.j2cl.junit.runtime.JsUnitHelpers.withTimeout;
 
 import com.google.j2cl.junit.runtime.InternalAssumptionViolatedException;
-import com.google.j2cl.junit.runtime.JsUnitHelpers.IThenable;
+import com.google.j2cl.junit.runtime.JsUnitAsyncHelpers.IThenable;
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;

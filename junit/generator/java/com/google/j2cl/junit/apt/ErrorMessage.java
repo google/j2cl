@@ -36,6 +36,7 @@ enum ErrorMessage {
   ASYNC_HAS_EXPECTED_EXCEPTION(
       "Method %s has expectedException attribute but returns a promise-like type."),
   ASYNC_HAS_NO_TIMEOUT("Method %s is missing timeout but returns a promise-like type."),
+  ASYNC_NOT_SUPPORTED_IN_WASM("Async method %s is not supported in Wasm."),
   TEST_HAS_TIMEOUT_ANNOTATION(
       "Method %s has @Timeout annotation. @Timeout can only be used with @Before/@After. "
           + "Test methods should use @Test(timeout=x) instead."),

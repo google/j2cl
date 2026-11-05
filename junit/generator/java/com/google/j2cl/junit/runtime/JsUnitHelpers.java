@@ -17,36 +17,11 @@ package com.google.j2cl.junit.runtime;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import javaemul.internal.annotations.Wasm;
-import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /** Internal helpers intended to be called by the JsUnit adapter gencode. */
 public final class JsUnitHelpers {
-
-  /** The marker type of a JS thenable. */
-  @JsType(isNative = true, name = "IThenable", namespace = JsPackage.GLOBAL)
-  public interface IThenable<T> {}
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  @Wasm("nop") // Cannot be used in WASM.
-  public static native void await(IThenable<?> thenable);
-
-  @JsAsync
-  @Wasm("nop") // Cannot be used in WASM.
-  public static IThenable<?> withTimeout(Object thenable, double timeout) {
-    if (thenable == null) {
-      throw new IllegalStateException("Test returned null as its promise");
-    }
-    if (timeout == 0) {
-      // Default timeout for async tests that are allowed to not specify timeout.
-      timeout = 5000;
-    }
-    GoogTestCase.getActiveTestCase().promiseTimeout = timeout;
-    return ((IThenable<?>) thenable);
-  }
 
   public static void handleAssumptionFailure(InternalAssumptionViolatedException e) {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -58,7 +33,7 @@ public final class JsUnitHelpers {
   }
 
   @JsType(isNative = true, name = "TestCase", namespace = "goog.testing")
-  private static class GoogTestCase {
+  static class GoogTestCase {
     public static native GoogTestCase getActiveTestCase();
 
     public double promiseTimeout;

@@ -11,6 +11,8 @@ java_library(
     srcs = glob(["*.java"]),
     deps = [
         "//junit/generator/java/com/google/j2cl/junit/apt:junit_processor",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestListenableFuture-lib",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestMethodOrder-lib",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnTypeNotStructuralPromise-lib",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnTypeNotStructuralPromiseThenNameRedefined-lib",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnTypeNotStructuralPromiseThenParameterCount-lib",

@@ -23,6 +23,8 @@ import static org.mockito.Mockito.when;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.junit.integration.async.data.TestListenableFuture;
+import com.google.j2cl.junit.integration.async.data.TestMethodOrder;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromise;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromiseThenNameRedefined;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromiseThenParameterCount;
@@ -298,12 +300,41 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
+  public void testAsyncTestNotSupportedInWasm() {
+    assertError(
+        "WASM",
+        ErrorMessage.ASYNC_NOT_SUPPORTED_IN_WASM,
+        TestMethodOrder.class,
+        "before1",
+        "before3",
+        "after1",
+        "after3",
+        "test");
+    assertError(
+        "WASM",
+        ErrorMessage.ASYNC_NOT_SUPPORTED_IN_WASM,
+        TestListenableFuture.class,
+        "testListenableFuture",
+        "testListenableFuture_fail");
+    assertError(
+        "WASM",
+        ErrorMessage.NON_VOID_RETURN,
+        JUnit4TestCaseNonVoidReturnTypeClassMethod.class,
+        "beforeClass");
+  }
+
+  @Test
   public void testClassLevelIgnore() {
     assertError(ErrorMessage.IGNORE_ON_TYPE, JUnit4ClassLevelIgnoreTestCase.class);
   }
 
   private void assertError(ErrorMessage expectedError, Class<?> testClass, String... methodNames) {
-    assertThat(executeProcessorOnTest(testClass)).isNull();
+    assertError("CLOSURE", expectedError, testClass, methodNames);
+  }
+
+  private void assertError(
+      String testPlatform, ErrorMessage expectedError, Class<?> testClass, String... methodNames) {
+    assertThat(executeProcessorOnTest(testClass, testPlatform)).isNull();
     if (methodNames.length == 0) {
       verifyPrintMessage(expectedError, testClass.getCanonicalName());
     } else {
@@ -329,18 +360,26 @@ public class J2clTestingProcessingStepTest {
   }
 
   private TestClass executeProcessorOnTest(Class<?> test) {
-    J2clTestingProcessingStep step = createProcessor();
+    return executeProcessorOnTest(test, "CLOSURE");
+  }
+
+  private TestClass executeProcessorOnTest(Class<?> test, String testPlatform) {
+    J2clTestingProcessingStep step = createProcessor(testPlatform);
     step.handleClass(test.getCanonicalName());
     return Iterables.getOnlyElement(step.getTestClasses(), null);
   }
 
   private J2clTestingProcessingStep createProcessor() {
+    return createProcessor("CLOSURE");
+  }
+
+  private J2clTestingProcessingStep createProcessor(String testPlatform) {
     ProcessingEnvironment processingEnv = mock(ProcessingEnvironment.class);
     when(processingEnv.getTypeUtils()).thenReturn(compilation.getTypes());
     when(processingEnv.getElementUtils()).thenReturn(compilation.getElements());
     when(processingEnv.getMessager()).thenReturn(messager);
     when(processingEnv.getFiler()).thenReturn(mock(Filer.class));
-    when(processingEnv.getOptions()).thenReturn(ImmutableMap.of("testPlatform", "CLOSURE"));
+    when(processingEnv.getOptions()).thenReturn(ImmutableMap.of("testPlatform", testPlatform));
     return new J2clTestingProcessingStep(processingEnv);
   }
 

@@ -50,13 +50,16 @@ public class J2clTestingProcessingStep implements ProcessingStep {
   public J2clTestingProcessingStep(ProcessingEnvironment processingEnv) {
     this.processingEnv = processingEnv;
     this.errorReporter = new ErrorReporter(processingEnv.getMessager());
-    this.junit3Validator = new JUnit3Validator(errorReporter);
-    this.junit4Validator =
-        new JUnit4Validator(
-            errorReporter, processingEnv.getTypeUtils(), processingEnv.getElementUtils());
     Map<String, String> options = processingEnv.getOptions();
     this.testPlatform =
         options.getOrDefault(J2clTestingProcessor.JAVAC_OPTS_FLAG_TEST_PLATFORM, "UNKNOWN");
+    this.junit3Validator = new JUnit3Validator(errorReporter);
+    this.junit4Validator =
+        new JUnit4Validator(
+            errorReporter,
+            processingEnv.getTypeUtils(),
+            processingEnv.getElementUtils(),
+            testPlatform);
     this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler(), testPlatform);
   }
 
