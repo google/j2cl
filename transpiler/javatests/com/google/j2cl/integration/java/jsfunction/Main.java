@@ -35,6 +35,7 @@ import jsinterop.annotations.JsType;
 public class Main {
   public static void main(String... args) {
     testJsFunctionOverlay();
+    testJsFunctionWithOnlyStaticOverlayField();
     testSpecializedJsFunction();
     testParameterizedJsFunctionMethod();
     testJsFunctionWithObject();
@@ -102,6 +103,19 @@ public class Main {
     assertTrue(((Function) (t -> t)).overlay(null) == 3);
     assertTrue(Function.staticOverlay() == 4);
     assertTrue(Function.f == 1);
+  }
+
+  @JsFunction
+  interface FunctionWithOnlyStaticOverlayField {
+    int call();
+
+    // Not a compile-time constant, so that the field is read from the overlay class.
+    @JsOverlay Integer f = 1;
+  }
+
+  private static void testJsFunctionWithOnlyStaticOverlayField() {
+    assertTrue(((FunctionWithOnlyStaticOverlayField) () -> 2).call() == 2);
+    assertTrue(FunctionWithOnlyStaticOverlayField.f == 1);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})

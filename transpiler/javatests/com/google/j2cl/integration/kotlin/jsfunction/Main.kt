@@ -33,6 +33,7 @@ import kotlin.random.Random
 
 fun main(vararg unused: String) {
   testJsFunctionOverlay()
+  testJsFunctionWithOnlyStaticOverlayField()
   testSpecializedJsFunction()
   testParameterizedJsFunctionMethod()
   testJsFunctionWithObject()
@@ -105,6 +106,22 @@ private fun testJsFunctionOverlay() {
   assertTrue(Function<Any?> { t -> t }.overlay(null) == 3)
   assertTrue(Function.staticOverlay() == 4)
   assertTrue(Function.f == 1)
+}
+
+// Regression test for b/303321920: keep a static @JvmField overlay field as the only overlay
+// member. Adding any overlay method would hide the bug.
+@JsFunction
+internal fun interface FunctionWithOnlyStaticOverlayField {
+  fun call(): Int
+
+  companion object {
+    @JvmField @JsOverlay val f = 1
+  }
+}
+
+private fun testJsFunctionWithOnlyStaticOverlayField() {
+  assertTrue(FunctionWithOnlyStaticOverlayField { 2 }.call() == 2)
+  assertTrue(FunctionWithOnlyStaticOverlayField.f == 1)
 }
 
 private fun testSpecializedJsFunction() {

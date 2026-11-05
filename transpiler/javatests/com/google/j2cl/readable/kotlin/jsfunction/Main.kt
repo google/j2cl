@@ -54,6 +54,19 @@ fun interface JsFunctionInterface {
   }
 }
 
+// Regression test for b/303321920: keep a static @JvmField overlay field as the only overlay
+// member. Adding any overlay method would hide the bug.
+@JsFunction
+fun interface JsFunctionWithOnlyStaticOverlayField {
+  fun call(): Int
+
+  companion object {
+    @JsOverlay @JvmField val field = 1
+  }
+}
+
+fun testJsFunctionWithOnlyStaticOverlayField(): Int = JsFunctionWithOnlyStaticOverlayField.field
+
 class JsFunctionImplementation : JsFunctionInterface {
   var field = 0
   var storedThis: JsFunctionImplementation?

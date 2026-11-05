@@ -197,6 +197,12 @@
 (global $$class@jsfunction.Main.JsFunctionInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsfunction.Main.JsFunctionImplementation (mut i32)
  (i32.const 0)
 )
@@ -354,6 +360,15 @@
  (i32.const 0)
 )
 (global $$class@jsfunction.Main.JsFunctionInterface.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $FIELD@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $$class-initialized@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay (mut i32)
@@ -1097,6 +1112,58 @@
  )
 )
 
+;;; int JsFunctionWithOnlyStaticOverlayField.call(JsFunctionAdaptor $instance)
+(@binaryen.js.called)
+(func $js_export_call__int@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
+ (result i32)
+ (block
+  (call $$clinit__void_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField )
+  (return (call_ref $function.int (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+ )
+)
+
+;;; void JsFunctionWithOnlyStaticOverlayField.$clinit()
+(func $$clinit__void_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField
+ (block
+  (if (global.get $$class-initialized@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField (i32.const 1))
+ )
+)
+
+;;; Class<T> JsFunctionWithOnlyStaticOverlayField.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField)))
+   (then
+    (return (global.get $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField))
+   )
+  )
+  (global.set $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsfunction.M...|__java_lang_String_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$StringLiterals )))
+  (return (global.get $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField))
+ )
+)
+
+;;; int JsFunctionWithOnlyStaticOverlayField.call$jsFunction(JsFunctionAdaptor $instance)
+(func $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__int@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField
+ (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
+ (result i32)
+ (block
+  (if (i32.eqz (ref.is_null (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   (then
+    (return (call_ref $function.int (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.int) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance)))))
+   )(else
+    (return (call $$invokeJsFunction__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
+   )
+  )
+ )
+)
+
 ;;; WasmExtern IntegerJsFunction.apply(JsFunctionAdaptor $instance, WasmExtern i)
 (@binaryen.js.called)
 (func $js_export_apply__java_lang_Integer__java_lang_Integer@jsfunction.Main.IntegerJsFunction
@@ -1815,6 +1882,33 @@
  )
 )
 
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay
+ (block
+  (if (global.get $$class-initialized@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay (i32.const 1))
+  (global.set $FIELD@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay (call $$create__@java.lang.Object ))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay)))
+   (then
+    (return (global.get $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay))
+   )
+  )
+  (global.set $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsfunction.M...|__java_lang_String_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay.$StringLiterals )))
+  (return (global.get $$class@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay))
+ )
+)
+
 ;;; void $Overlay.test__$devirt(TestJsFunctionInJsOverlayCapturingOuter $thisArg)
 (func $m_test__$devirt__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay
  (param $$thisArg (ref null extern))
@@ -2351,6 +2445,18 @@
  (block
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   (call $$init__void_$p_jsfunction_Main@jsfunction.Main (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Object Main.testJsFunctionWithOnlyStaticOverlayField()
+(func $m_testJsFunctionWithOnlyStaticOverlayField__java_lang_Object@jsfunction.Main
+ (result (ref null $java.lang.Object))
+ (block
+  (call $$clinit__void_<once>_@jsfunction.Main )
+  (return (block (result (ref null $java.lang.Object))
+   (call $$clinit__void_<once>_@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay )
+   (global.get $FIELD@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField.$Overlay)
+  ))
  )
 )
 

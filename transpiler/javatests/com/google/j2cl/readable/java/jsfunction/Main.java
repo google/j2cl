@@ -59,6 +59,17 @@ public class Main {
     }
   }
 
+  @JsFunction
+  interface JsFunctionWithOnlyStaticOverlayField {
+    int call();
+
+    @JsOverlay Object FIELD = new Object();
+  }
+
+  static Object testJsFunctionWithOnlyStaticOverlayField() {
+    return JsFunctionWithOnlyStaticOverlayField.FIELD;
+  }
+
   private static final class JsFunctionImplementation implements JsFunctionInterface {
     public int field;
     public JsFunctionImplementation storedThis;

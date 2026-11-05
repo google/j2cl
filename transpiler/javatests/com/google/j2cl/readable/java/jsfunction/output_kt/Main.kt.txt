@@ -198,6 +198,9 @@ open class Main {
  
  companion object {
   @JvmStatic
+  internal fun testJsFunctionWithOnlyStaticOverlayField(): Any? = JsFunctionWithOnlyStaticOverlayField.FIELD
+  
+  @JvmStatic
   @JsMethod(namespace = "jsfunction.helper")
   internal external fun createNativeFunction(): JsFunctionInterface?
   
@@ -327,6 +330,17 @@ open class Main {
    @JvmStatic
    @JsOverlay
    fun staticOverlayMethod(): Int = 42
+  }
+ }
+ 
+ @JsFunction
+ internal fun interface JsFunctionWithOnlyStaticOverlayField {
+  fun call(): Int
+  
+  companion object {
+   @JvmField
+   @JsOverlay
+   val FIELD: Any? = Any()
   }
  }
  

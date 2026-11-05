@@ -16,6 +16,7 @@ let ClassWithJsFunctionProperty = goog.forwardDeclare('jsfunction.ClassWithJsFun
 let ContainerImpl = goog.forwardDeclare('jsfunction.ContainerImpl$impl');
 let DoubleDoubleJsBiFunction = goog.forwardDeclare('jsfunction.DoubleDoubleJsBiFunction$impl');
 let JsFunctionImplementation = goog.forwardDeclare('jsfunction.JsFunctionImplementation$impl');
+let $Overlay = goog.forwardDeclare('jsfunction.JsFunctionWithOnlyStaticOverlayField.$Overlay$impl');
 let TIntegerJsBiFunction = goog.forwardDeclare('jsfunction.TIntegerJsBiFunction$impl');
 let helper = goog.forwardDeclare('jsfunction.helper');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -42,6 +43,11 @@ class MainKt extends j_l_Object {
  /** @nodts */
  $ctor__jsfunction_MainKt__void() {
   this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_testJsFunctionWithOnlyStaticOverlayField__int() {
+  MainKt.$clinit();
+  return $Overlay.f_field__jsfunction_JsFunctionWithOnlyStaticOverlayField_$Overlay;
  }
  /** @nodts @return {number} */
  static m_callFn__jsfunction_JsFunctionInterface__int__int(/** function(number):number */ fn, /** number */ a) {
@@ -354,6 +360,7 @@ class MainKt extends j_l_Object {
   ContainerImpl = goog.module.get('jsfunction.ContainerImpl$impl');
   DoubleDoubleJsBiFunction = goog.module.get('jsfunction.DoubleDoubleJsBiFunction$impl');
   JsFunctionImplementation = goog.module.get('jsfunction.JsFunctionImplementation$impl');
+  $Overlay = goog.module.get('jsfunction.JsFunctionWithOnlyStaticOverlayField.$Overlay$impl');
   TIntegerJsBiFunction = goog.module.get('jsfunction.TIntegerJsBiFunction$impl');
   helper = goog.module.get('jsfunction.helper');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');

@@ -21,6 +21,12 @@
  (result i32)
 )
 
+;;; int JsFunctionWithOnlyStaticOverlayField.$invokeJsFunction(WasmExtern $jsFuncref)
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__int@jsfunction.Main.JsFunctionWithOnlyStaticOverlayField (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+ (param $$jsFuncref (ref null extern))
+ (result i32)
+)
+
 ;;; WasmExtern IntegerJsFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern i)
 (func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Integer__java_lang_Integer@jsfunction.Main.IntegerJsFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))
