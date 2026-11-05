@@ -321,7 +321,7 @@ class Main extends j_l_Object {
   Main.$clinit();
   {
    let /** ?ComparableJsEnum */ $arg;
-   let $selector = /**@type {!ComparableJsEnum}*/ (($arg = (/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(/**@type {(Comparable<BoxedComparableLightEnum<?ComparableJsEnum>>|boolean|number|string|!Long)}*/ ($Casts.$to(o, /**@type {Function}*/ (Comparable))), $Overlay))), InternalPreconditions.m_checkNotNull__boolean__void($arg != null), $arg));
+   let $selector = ($arg = (/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(/**@type {(Comparable<BoxedComparableLightEnum<?ComparableJsEnum>>|boolean|number|string|!Long)}*/ ($Casts.$to(o, /**@type {Function}*/ (Comparable))), $Overlay))), InternalPreconditions.m_checkNotNull__boolean__void($arg != null), $arg);
    let /** number */ $caseIndex;
    if ($Equality.$same($selector, ComparableJsEnum.ZERO)) {
     $caseIndex = 0;
@@ -348,8 +348,8 @@ class Main extends j_l_Object {
   o = (/**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {?}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(listWildCardExtends.getAtIndex(0), $Overlay)), $Overlay)));
   o = listWildCardSuper.getAtIndex(0);
   o = (/**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(listJsEnum.getAtIndex(0), $Overlay)), $Overlay)));
-  t = (/**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay)));
-  t = (/**@type {T}*/ (e));
+  t = (/**@type {?T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay)));
+  t = (/**@type {?T}*/ (e));
   let b = $Equality.$same(t, e);
   b = $Equality.$same(/**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(t, $Overlay)), o);
   b = !$Equality.$same(t, null);
@@ -358,16 +358,16 @@ class Main extends j_l_Object {
   b = Enums.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {?}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(listWildCardExtends.getAtIndex(0), $Overlay)), e);
   b = $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(listWildCardSuper.getAtIndex(0), /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(e, $Overlay)));
   b = Enums.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(listJsEnum.getAtIndex(0), $Overlay)), e);
-  return /**@type {T}*/ (Main.m_jsEnumTypeVariablePassthrough__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(/**@type {T}*/ (t)));
+  return Main.m_jsEnumTypeVariablePassthrough__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(t);
  }
  /** @nodts @template T @return {T} */
  static m_jsEnumTypeVariablePassthrough__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(/** T */ t) {
-  return /**@type {T}*/ (t);
+  return t;
  }
  /** @nodts @template T */
  static m_testJsEnumTypeVariableInLambdas__jsenum_Main_ComparableJsEnum__void(/** T */ t) {
   let supplier = Supplier.$adapt(/**  @return {BoxedComparableLightEnum<T>}*/ (() =>{
-   return /**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {T}*/ (t), $Overlay));
+   return /**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(t, $Overlay));
   }));
   let ordinal = j_u_function_Function.$adapt(/**  @return {Integer}*/ ((/** BoxedComparableLightEnum<T> */ x) =>{
    let x_1 = /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(x, $Overlay));
@@ -379,9 +379,9 @@ class Main extends j_l_Object {
   }));
   let jsFunction = /**  @return {BoxedComparableLightEnum<T>}*/ ((/** BoxedComparableLightEnum<T> */ x_2) =>{
    let x_3 = /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(x_2, $Overlay));
-   return /**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {T}*/ (x_3), $Overlay));
+   return /**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(x_3, $Overlay));
   });
-  let e = /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(jsFunction(/**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {T}*/ (t), $Overlay))), $Overlay));
+  let e = /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(jsFunction(/**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(t, $Overlay))), $Overlay));
  }
  /** @nodts @template T */
  static m_testJsEnumTypeVariableVarargs__jsenum_Main_ComparableJsEnum__void(/** T */ t) {
@@ -390,7 +390,7 @@ class Main extends j_l_Object {
  }
  /** @nodts @template T @return {T} */
  static m_jsEnumTypeVariableVarargs__arrayOf_jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(/** Array<T> */ ts) {
-  return /**@type {T}*/ (ts[0]);
+  return ts[0];
  }
  /** @nodts @template I, S */
  static m_testCustomValuedJsEnumTypeVariables__jsenum_Main_IntJsEnum__jsenum_Main_StringJsEnum__void(/** I */ i, /** S */ s) {
@@ -398,11 +398,11 @@ class Main extends j_l_Object {
   let b = $Equality.$same(i, IntJsEnum.TWENTY);
   b = Enums.m_equals__java_lang_Object__java_lang_Object__boolean(i, IntJsEnum.TWENTY);
   let o = /**@type {BoxedLightEnum<I>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(i, IntJsEnum_$Overlay));
-  i = (/**@type {I}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, IntJsEnum_$Overlay)));
+  i = (/**@type {?I}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, IntJsEnum_$Overlay)));
   let stringValue = StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum__java_lang_String(/**@type {!StringJsEnum}*/ (s));
   b = Enums.m_equals__java_lang_Object__java_lang_Object__boolean(s, StringJsEnum.ONE);
   o = (/**@type {BoxedLightEnum<S>}*/ (Enums.m_box__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedLightEnum(s, StringJsEnum_$Overlay)));
-  s = (/**@type {S}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, StringJsEnum_$Overlay)));
+  s = (/**@type {?S}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, StringJsEnum_$Overlay)));
  }
  /** @nodts @template T */
  static m_testJsEnumIntersectionTypeVariable__jsenum_Main_ComparableJsEnum__void(/** T */ t) {

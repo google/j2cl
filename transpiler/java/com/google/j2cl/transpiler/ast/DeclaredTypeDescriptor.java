@@ -283,13 +283,15 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
 
   @Override
   public boolean isAssignableTo(TypeDescriptor that) {
+    TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();
     if (isJsEnum()) {
-      return TypeDescriptors.isJavaLangObject(that)
-          || isSameBaseType(that)
-          || (getJsEnumInfo().supportsComparable() && TypeDescriptors.isJavaLangComparable(that));
+      return TypeDescriptors.isJavaLangObject(thatRawTypeDescriptor)
+          || isSameBaseType(thatRawTypeDescriptor)
+          || (getJsEnumInfo().supportsComparable()
+              && TypeDescriptors.isJavaLangComparable(thatRawTypeDescriptor));
     }
-    return that.toRawTypeDescriptor() instanceof DeclaredTypeDescriptor thatRawTypeDescriptor
-        && isSubtypeOf(thatRawTypeDescriptor);
+    return thatRawTypeDescriptor instanceof DeclaredTypeDescriptor thatRawDeclaredTypeDescriptor
+        && isSubtypeOf(thatRawDeclaredTypeDescriptor);
   }
 
   @Override

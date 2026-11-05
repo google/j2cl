@@ -413,9 +413,7 @@ open class Main {
    b = listWildCardExtends!!.get(0)!!.equals(e)
    b = listWildCardSuper!!.get(0)!!.equals(e)
    b = listJsEnum!!.get(0)!!.equals(e)
-   return Main.jsEnumTypeVariablePassthrough<T>(
-    t_1 as T,
-   )
+   return Main.jsEnumTypeVariablePassthrough<T?>(t_1) as T
   }
   
   @JvmStatic
