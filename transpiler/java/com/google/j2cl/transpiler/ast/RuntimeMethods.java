@@ -565,17 +565,11 @@ public final class RuntimeMethods {
         .build();
   }
 
-  /** Create a call to InternalPreconditions.checkNotNull method. */
-  public static Expression createCheckNotNullCall(Expression argument) {
-    return createCheckNotNullCall(argument, false);
-  }
-
   /**
    * Create a call to InternalPreconditions.checkNotNull method with specialization of the type
    * parameter.
    */
-  public static Expression createCheckNotNullCall(
-      Expression argument, boolean specializeTypeParameter) {
+  public static Expression createCheckNotNullCall(Expression argument) {
     checkArgument(!argument.getTypeDescriptor().isPrimitive());
 
     if (argument.getTypeDescriptor().isJsEnum()) {
@@ -589,12 +583,8 @@ public final class RuntimeMethods {
     MethodDescriptor checkNotNull =
         TypeDescriptors.get()
             .javaemulInternalPreconditions
-            .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject);
-    if (specializeTypeParameter) {
-      checkNotNull =
-          checkNotNull.specializeTypeVariables(
-              (TypeVariable unused) -> argument.getTypeDescriptor());
-    }
+            .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject)
+            .specializeTypeVariables((TypeVariable unused) -> argument.getTypeDescriptor());
     return MethodCall.builderFrom(checkNotNull).setArguments(argument).build();
   }
 

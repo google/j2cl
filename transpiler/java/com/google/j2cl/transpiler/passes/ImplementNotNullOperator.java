@@ -39,8 +39,7 @@ public final class ImplementNotNullOperator extends NormalizationPass {
             if (postfixExpression.getOperator() != PostfixOperator.NOT_NULL_ASSERTION) {
               return postfixExpression;
             }
-            return RuntimeMethods.createCheckNotNullCall(
-                postfixExpression.getOperand(), /* specializeTypeParameter= */ true);
+            return RuntimeMethods.createCheckNotNullCall(postfixExpression.getOperand());
           }
         });
   }

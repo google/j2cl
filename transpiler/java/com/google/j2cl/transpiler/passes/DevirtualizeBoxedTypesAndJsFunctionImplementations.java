@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -26,7 +27,6 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -95,8 +95,16 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               // devirtualization to add checkNotNull on 'thisArg' however that would result in lots
               // of redundant checks.
               if (AstUtils.isExpressionResultUsed(fieldAccess, getParent())) {
-                // Note that checkNotNull also avoids auto-unboxing.
-                thisReference = RuntimeMethods.createCheckNotNullCall(thisReference);
+                if (!TypeDescriptors.isBoxedType(thisReference.getTypeDescriptor())) {
+                  return thisReference.postfixNotNullAssertion();
+                }
+                // The value is already represented as the JS primitive, so use an unchecked cast to
+                // the type of the field to avoid triggering auto-unboxing.
+                return CastExpression.builder()
+                    .setExpression(thisReference.postfixNotNullAssertion())
+                    .setCastTypeDescriptor(fieldAccess.getTypeDescriptor())
+                    .setUnchecked(true)
+                    .build();
               }
               return thisReference;
             }
