@@ -427,7 +427,7 @@
 
 ;;; void InterfaceWithStaticMethod.s()
 (@binaryen.js.called)
-(func $js_export_s__void@jsmethod.JsMethodExample.InterfaceWithStaticMethod
+(func $js_export_m_s__void@jsmethod.JsMethodExample.InterfaceWithStaticMethod
  (block
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceWithStaticMethod )
   (call $m_s_$private__void@jsmethod.JsMethodExample.InterfaceWithStaticMethod )
@@ -657,8 +657,8 @@
 
 ;;; void $LambdaAdaptor.m(NativeString s)
 (@binaryen.js.called)
-(func $js_export_m__java_lang_String__void@jsmethod.JsMethodExample.I.$LambdaAdaptor
- (type $function.js_export_m__java_lang_String__void)
+(func $js_export_m_m__java_lang_String__void@jsmethod.JsMethodExample.I.$LambdaAdaptor
+ (type $function.js_export_m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.I.$LambdaAdaptor))
@@ -667,7 +667,7 @@
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.I.vtable $m_m__java_lang_String__void (ref.cast (ref $jsmethod.JsMethodExample.I.vtable) (call $get.itable.$jsmethod.JsMethodExample.I (local.get $this)))))
  )
 )
-(elem declare func $js_export_m__java_lang_String__void@jsmethod.JsMethodExample.I.$LambdaAdaptor)
+(elem declare func $js_export_m_m__java_lang_String__void@jsmethod.JsMethodExample.I.$LambdaAdaptor)
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.I.$LambdaAdaptor
@@ -719,8 +719,8 @@
 
 ;;; void $LambdaAdaptor.m()
 (@binaryen.js.called)
-(func $js_export_m__void@jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor
- (type $function.js_export_m__void)
+(func $js_export_m_m__void@jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor
+ (type $function.js_export_m_m__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor) (local.get $this.untyped)))
@@ -728,7 +728,7 @@
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable $m_m__void (ref.cast (ref $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable) (call $get.itable.$jsmethod.JsMethodExample.InterfaceWithJsMethod (local.get $this)))))
  )
 )
-(elem declare func $js_export_m__void@jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor)
+(elem declare func $js_export_m_m__void@jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor)
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceWithJsMethod.$LambdaAdaptor
@@ -804,8 +804,8 @@
 
 ;;; void Base.m(WasmExtern t)
 (@binaryen.js.called)
-(func $js_export_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
- (type $function.js_export_m__java_lang_Object__void_$pp_jsmethod)
+(func $js_export_m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
+ (type $function.js_export_m_m__java_lang_Object__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null extern))
  (local $this (ref null $jsmethod.JsMethodExample.Base))
@@ -814,7 +814,7 @@
   (call_ref $function.m_m__java_lang_Object__void_$pp_jsmethod (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(struct.get $jsmethod.JsMethodExample.Base.vtable $m_m__java_lang_Object__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Base(local.get $this))))
  )
 )
-(elem declare func $js_export_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
+(elem declare func $js_export_m_m__java_lang_Object__void_$pp_jsmethod@jsmethod.JsMethodExample.Base)
 
 ;;; void Base.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.Base
@@ -971,8 +971,8 @@
 
 ;;; void AbstractTypeExposingJsMethod.abstractJsMethod(NativeString s)
 (@binaryen.js.called)
-(func $js_export_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
- (type $function.js_export_abstractJsMethod__java_lang_String__void)
+(func $js_export_m_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
+ (type $function.js_export_m_abstractJsMethod__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod))
@@ -981,7 +981,7 @@
   (call_ref $function.m_abstractJsMethod__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod.vtable $m_abstractJsMethod__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.AbstractTypeExposingJsMethod(local.get $this))))
  )
 )
-(elem declare func $js_export_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
+(elem declare func $js_export_m_abstractJsMethod__java_lang_String__void@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod)
 
 ;;; void AbstractTypeExposingJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractTypeExposingJsMethod
@@ -1071,8 +1071,8 @@
 
 ;;; NativeString ParameterizedInterfaceImpl.m()
 (@binaryen.js.called)
-(func $js_export_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
- (type $function.js_export_m__java_lang_Object)
+(func $js_export_m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
+ (type $function.js_export_m_m__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.ParameterizedInterfaceImpl))
@@ -1081,7 +1081,7 @@
   (return (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (ref.cast (ref null $java.lang.String) (call_ref $function.m_m__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.ParameterizedInterface.vtable $m_m__java_lang_Object (ref.cast (ref $jsmethod.JsMethodExample.ParameterizedInterface.vtable) (call $get.itable.$jsmethod.JsMethodExample.ParameterizedInterface (local.get $this))))))))
  )
 )
-(elem declare func $js_export_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
+(elem declare func $js_export_m_m__java_lang_Object@jsmethod.JsMethodExample.ParameterizedInterfaceImpl)
 
 ;;; void ParameterizedInterfaceImpl.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.ParameterizedInterfaceImpl
@@ -1160,8 +1160,8 @@
 
 ;;; WasmExtern Foo.takesAndReturnsPrimitiveLong(WasmExtern l)
 (@binaryen.js.called)
-(func $js_export_takesAndReturnsPrimitiveLong__long__long@jsmethod.JsMethodExample.Foo
- (type $function.js_export_takesAndReturnsPrimitiveLong__long__long)
+(func $js_export_m_takesAndReturnsPrimitiveLong__long__long@jsmethod.JsMethodExample.Foo
+ (type $function.js_export_m_takesAndReturnsPrimitiveLong__long__long)
  (param $this.untyped (ref $java.lang.Object))
  (param $l (ref null extern))
  (result (ref null extern))
@@ -1171,7 +1171,7 @@
   (return (call $m_toJs__long__java_lang_Long_NativeLong@java.lang.Long (call_ref $function.m_takesAndReturnsPrimitiveLong__long__long (ref.as_non_null (local.get $this))(call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (local.get $l))(struct.get $jsmethod.JsMethodExample.Foo.vtable $m_takesAndReturnsPrimitiveLong__long__long (ref.get_desc $jsmethod.JsMethodExample.Foo(local.get $this))))))
  )
 )
-(elem declare func $js_export_takesAndReturnsPrimitiveLong__long__long@jsmethod.JsMethodExample.Foo)
+(elem declare func $js_export_m_takesAndReturnsPrimitiveLong__long__long@jsmethod.JsMethodExample.Foo)
 
 ;;; void Foo.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.Foo
@@ -1277,15 +1277,15 @@
  (local $this (ref null $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes) (local.get $this.untyped)))
  (block
-  (return (call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (call $m_takesAndReturnsPrimitiveLong__long__long@jsmethod.JsMethodExample.NativeFoo (ref.as_non_null (local.get $nf))(call $m_toJs__long__java_lang_Long_NativeLong@java.lang.Long (local.get $l)))))
+  (return (call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (call $js_import_m_takesAndReturnsPrimitiveLong__long__long@jsmethod.JsMethodExample.NativeFoo (ref.as_non_null (local.get $nf))(call $m_toJs__long__java_lang_Long_NativeLong@java.lang.Long (local.get $l)))))
  )
 )
 (elem declare func $m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
 
 ;;; void ExposesMethodWithDifferentTypes.m(NativeString s, WasmExtern d, WasmExtern l, WasmExtern pl, WasmExtern c, WasmExtern o, WasmExtern t, NativeFoo nf, ExposesMethodWithDifferentTypes e)
 (@binaryen.js.called)
-(func $js_export_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
- (type $function.js_export_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void)
+(func $js_export_m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
+ (type $function.js_export_m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (param $d (ref null extern))
@@ -1302,12 +1302,12 @@
   (call_ref $function.m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(call $m_fromJs__java_lang_Double_NativeNumber__java_lang_Double@java.lang.Double (local.get $d))(call $m_fromJs__java_lang_Long_NativeLong__java_lang_Long@java.lang.Long (local.get $l))(call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (local.get $pl))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $c))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $o))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(local.get $nf)(local.get $e)(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))
  )
 )
-(elem declare func $js_export_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
+(elem declare func $js_export_m_m__java_lang_String__java_lang_Double__java_lang_Long__long__java_lang_Comparable__java_lang_Object__java_lang_Object__jsmethod_JsMethodExample_NativeFoo__jsmethod_JsMethodExample_ExposesMethodWithDifferentTypes__void@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
 
 ;;; WasmExtern ExposesMethodWithDifferentTypes.roundtripLong(WasmExtern l)
 (@binaryen.js.called)
-(func $js_export_roundtripLong__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
- (type $function.js_export_roundtripLong__long__long)
+(func $js_export_m_roundtripLong__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
+ (type $function.js_export_m_roundtripLong__long__long)
  (param $this.untyped (ref $java.lang.Object))
  (param $l (ref null extern))
  (result (ref null extern))
@@ -1317,12 +1317,12 @@
   (return (call $m_toJs__long__java_lang_Long_NativeLong@java.lang.Long (call_ref $function.m_roundtripLong__long__long (ref.as_non_null (local.get $this))(call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (local.get $l))(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_roundtripLong__long__long (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))))
  )
 )
-(elem declare func $js_export_roundtripLong__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
+(elem declare func $js_export_m_roundtripLong__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
 
 ;;; WasmExtern ExposesMethodWithDifferentTypes.callNative(NativeFoo nf, WasmExtern l)
 (@binaryen.js.called)
-(func $js_export_callNative__jsmethod_JsMethodExample_NativeFoo__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
- (type $function.js_export_callNative__jsmethod_JsMethodExample_NativeFoo__long__long)
+(func $js_export_m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
+ (type $function.js_export_m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long)
  (param $this.untyped (ref $java.lang.Object))
  (param $nf (ref null extern))
  (param $l (ref null extern))
@@ -1333,7 +1333,7 @@
   (return (call $m_toJs__long__java_lang_Long_NativeLong@java.lang.Long (call_ref $function.m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long (ref.as_non_null (local.get $this))(local.get $nf)(call $m_toPrimitiveLong__java_lang_Long_NativeLong__long@java.lang.Long (local.get $l))(struct.get $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes.vtable $m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long (ref.get_desc $jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes(local.get $this))))))
  )
 )
-(elem declare func $js_export_callNative__jsmethod_JsMethodExample_NativeFoo__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
+(elem declare func $js_export_m_callNative__jsmethod_JsMethodExample_NativeFoo__long__long@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes)
 
 ;;; void ExposesMethodWithDifferentTypes.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.ExposesMethodWithDifferentTypes
@@ -1385,8 +1385,8 @@
 
 ;;; void AbstractClassExposingJsMethodM.m()
 (@binaryen.js.called)
-(func $js_export_m__void@jsmethod.JsMethodExample.AbstractClassExposingJsMethodM
- (type $function.js_export_m__void)
+(func $js_export_m_m__void@jsmethod.JsMethodExample.AbstractClassExposingJsMethodM
+ (type $function.js_export_m_m__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.AbstractClassExposingJsMethodM) (local.get $this.untyped)))
@@ -1394,7 +1394,7 @@
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable $m_m__void (ref.cast (ref $jsmethod.JsMethodExample.InterfaceWithJsMethod.vtable) (call $get.itable.$jsmethod.JsMethodExample.InterfaceWithJsMethod (local.get $this)))))
  )
 )
-(elem declare func $js_export_m__void@jsmethod.JsMethodExample.AbstractClassExposingJsMethodM)
+(elem declare func $js_export_m_m__void@jsmethod.JsMethodExample.AbstractClassExposingJsMethodM)
 
 ;;; void AbstractClassExposingJsMethodM.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.AbstractClassExposingJsMethodM
@@ -1471,8 +1471,8 @@
 
 ;;; void JsKeywords.test(int in, int let)
 (@binaryen.js.called)
-(func $js_export_test__int__int__void@jsmethod.JsMethodExample.JsKeywords
- (type $function.js_export_test__int__int__void)
+(func $js_export_m_test__int__int__void@jsmethod.JsMethodExample.JsKeywords
+ (type $function.js_export_m_test__int__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $in i32)
  (param $let i32)
@@ -1482,7 +1482,7 @@
   (call_ref $function.m_test__int__int__void (ref.as_non_null (local.get $this))(local.get $in)(local.get $let)(struct.get $jsmethod.JsMethodExample.JsKeywords.vtable $m_test__int__int__void (ref.get_desc $jsmethod.JsMethodExample.JsKeywords(local.get $this))))
  )
 )
-(elem declare func $js_export_test__int__int__void@jsmethod.JsMethodExample.JsKeywords)
+(elem declare func $js_export_m_test__int__int__void@jsmethod.JsMethodExample.JsKeywords)
 
 ;;; void JsKeywords.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.JsKeywords
@@ -1546,8 +1546,8 @@
 
 ;;; void $LambdaAdaptor.m()
 (@binaryen.js.called)
-(func $js_export_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
- (type $function.js_export_m__void)
+(func $js_export_m_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
+ (type $function.js_export_m_m__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor) (local.get $this.untyped)))
@@ -1555,12 +1555,12 @@
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable $m_m__void (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable) (call $get.itable.$jsmethod.JsMethodExample.InterfaceExposingJsMethods (local.get $this)))))
  )
 )
-(elem declare func $js_export_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor)
+(elem declare func $js_export_m_m__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor)
 
 ;;; void $LambdaAdaptor.n()
 (@binaryen.js.called)
-(func $js_export_n__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
- (type $function.js_export_n__void)
+(func $js_export_m_n__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
+ (type $function.js_export_m_n__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor) (local.get $this.untyped)))
@@ -1568,7 +1568,7 @@
   (call_ref $function.m_n__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable $m_n__void (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable) (call $get.itable.$jsmethod.JsMethodExample.InterfaceExposingJsMethods (local.get $this)))))
  )
 )
-(elem declare func $js_export_n__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor)
+(elem declare func $js_export_m_n__void@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor)
 
 ;;; void $LambdaAdaptor.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.InterfaceExposingJsMethods.$LambdaAdaptor
@@ -1670,8 +1670,8 @@
 
 ;;; void Sub.m(NativeString s)
 (@binaryen.js.called)
-(func $js_export_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
- (type $function.js_export_m__java_lang_String__void)
+(func $js_export_m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
+ (type $function.js_export_m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
@@ -1680,12 +1680,12 @@
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
-(elem declare func $js_export_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
+(elem declare func $js_export_m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
 
 ;;; void Sub.o(NativeString s)
 (@binaryen.js.called)
-(func $js_export_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
- (type $function.js_export_o__java_lang_String__void_$pp_jsmethod)
+(func $js_export_m_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
+ (type $function.js_export_m_o__java_lang_String__void_$pp_jsmethod)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
@@ -1694,7 +1694,7 @@
   (call_ref $function.m_o__java_lang_String__void_$pp_jsmethod (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_o__java_lang_String__void_$pp_jsmethod (ref.get_desc $jsmethod.JsMethodExample.Sub(local.get $this))))
  )
 )
-(elem declare func $js_export_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub)
+(elem declare func $js_export_m_o__java_lang_String__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub)
 
 ;;; void Sub.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.Sub
@@ -1960,8 +1960,8 @@
 
 ;;; void SubJsTypeWithRenamedJsMethod.m(NativeString s)
 (@binaryen.js.called)
-(func $js_export_m__java_lang_String__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
- (type $function.js_export_m__java_lang_String__void)
+(func $js_export_m_m__java_lang_String__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
+ (type $function.js_export_m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod))
@@ -1970,7 +1970,7 @@
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod.vtable $m_m__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod(local.get $this))))
  )
 )
-(elem declare func $js_export_m__java_lang_String__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod)
+(elem declare func $js_export_m_m__java_lang_String__void@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod)
 
 ;;; void SubJsTypeWithRenamedJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod
@@ -2046,8 +2046,8 @@
 
 ;;; void ExposesOverrideableJsMethod.m()
 (@binaryen.js.called)
-(func $js_export_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
- (type $function.js_export_m__void)
+(func $js_export_m_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
+ (type $function.js_export_m_m__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesOverrideableJsMethod) (local.get $this.untyped)))
@@ -2055,12 +2055,12 @@
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable $m_m__void (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable) (call $get.itable.$jsmethod.JsMethodExample.InterfaceExposingJsMethods (local.get $this)))))
  )
 )
-(elem declare func $js_export_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
+(elem declare func $js_export_m_m__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
 
 ;;; void ExposesOverrideableJsMethod.n()
 (@binaryen.js.called)
-(func $js_export_n__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
- (type $function.js_export_n__void)
+(func $js_export_m_n__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
+ (type $function.js_export_m_n__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.ExposesOverrideableJsMethod))
  (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.ExposesOverrideableJsMethod) (local.get $this.untyped)))
@@ -2068,7 +2068,7 @@
   (call_ref $function.m_n__void (ref.as_non_null (local.get $this))(struct.get $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable $m_n__void (ref.cast (ref $jsmethod.JsMethodExample.InterfaceExposingJsMethods.vtable) (call $get.itable.$jsmethod.JsMethodExample.InterfaceExposingJsMethods (local.get $this)))))
  )
 )
-(elem declare func $js_export_n__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
+(elem declare func $js_export_m_n__void@jsmethod.JsMethodExample.ExposesOverrideableJsMethod)
 
 ;;; void ExposesOverrideableJsMethod.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.ExposesOverrideableJsMethod
@@ -2450,7 +2450,7 @@
 
 ;;; ConcreteSubclassWithJsConstructor ConcreteSubclassWithJsConstructor.<init>()
 (@binaryen.js.called)
-(func $js_export_<init>__@jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor
+(func $js_export_m_<init>__@jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor
  (result (ref null $jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor))
  (block
   (call $$clinit__void_<once>_@jsmethod.JsMethodExample.ConcreteSubclassWithJsConstructor )
@@ -2532,8 +2532,8 @@
 
 ;;; void ConcreteGreatGrandChildTypeWithNewJsMembers.r(NativeString s)
 (@binaryen.js.called)
-(func $js_export_r__java_lang_String__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers
- (type $function.js_export_r__java_lang_String__void)
+(func $js_export_m_r__java_lang_String__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers
+ (type $function.js_export_m_r__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null string))
  (local $this (ref null $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers))
@@ -2542,7 +2542,7 @@
   (call_ref $function.m_r__java_lang_String__void (ref.as_non_null (local.get $this))(call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (local.get $s))(struct.get $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers.vtable $m_r__java_lang_String__void (ref.get_desc $jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers(local.get $this))))
  )
 )
-(elem declare func $js_export_r__java_lang_String__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers)
+(elem declare func $js_export_m_r__java_lang_String__void@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers)
 
 ;;; void ConcreteGreatGrandChildTypeWithNewJsMembers.$clinit()
 (func $$clinit__void_<once>_@jsmethod.JsMethodExample.ConcreteGreatGrandChildTypeWithNewJsMembers

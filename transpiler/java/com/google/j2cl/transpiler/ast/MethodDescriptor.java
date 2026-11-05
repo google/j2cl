@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
@@ -197,8 +198,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             GENERALIZING_BRIDGE,
             SPECIALIZING_BRIDGE,
             DEFAULT_METHOD_BRIDGE,
-            ABSTRACT_STUB,
-            WASM_JS_NATIVE_IMPORT_REDECLARATION ->
+            ABSTRACT_STUB ->
             "m_";
 
         // Getters and setters need to be mangled as fields.
@@ -210,6 +210,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         case SYNTHETIC_PROPERTY_SETTER, SYNTHETIC_PROPERTY_GETTER -> FieldOrigin.SOURCE.getPrefix();
 
         case WASM_ENTRY_POINT_BRIDGE -> "entry_point_";
+
+        case WASM_JS_NATIVE_IMPORT_REDECLARATION -> "js_import_";
 
         case WASM_JS_METHOD_EXPORT_BRIDGE,
             WASM_JS_CONSTRUCTOR_EXPORT_BRIDGE,
@@ -290,20 +292,25 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     /**
-     * Returns true if the mangled name should use the original method signature
+     * Returns true if the method is a Wasm JsInterop boundary method created for a method (its
+     * bridge target) to cross the Wasm/JS boundary, i.e. an entry point or export bridge that
+     * forwards to it or the import redeclaration that calls the JavaScript member described by a
+     * native method. Field getter and setter export bridges have the synthetic property accessor of
+     * the field as their bridge target.
      *
-     * <p>In some cases we only need to to use the mangled name from the origin but keep the
-     * parameters/return type of the bridges. For example in the wasm js export bridges, the
-     * parameter and return type might be replaced by WasmExtern for overloads with different
-     * signatures, requiring to use the origin signature for mangling to avoid collisions.
+     * <p>Boundary methods do not take the place of their bridge target and have no bridge origin.
+     *
+     * <p>The parameter and return types of boundary methods might be replaced by WasmExtern, which
+     * could make the signatures of different boundary methods collide, so their names are derived
+     * from the name of their bridge target instead.
      */
-    // TODO(b/563104753): Review and see if we can have a cleaner way express the different
-    // behaviors needed by different origins.
-    public boolean useOriginalMethodSignatureInMangling() {
+    public boolean isWasmBoundaryMethod() {
       return switch (this) {
         case WASM_ENTRY_POINT_BRIDGE,
             WASM_JS_METHOD_EXPORT_BRIDGE,
             WASM_JS_CONSTRUCTOR_EXPORT_BRIDGE,
+            WASM_JS_GETTER_EXPORT_BRIDGE,
+            WASM_JS_SETTER_EXPORT_BRIDGE,
             WASM_JS_FUNCTION_EXPORT_BRIDGE,
             WASM_JS_NATIVE_IMPORT_REDECLARATION ->
             true;
@@ -524,7 +531,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /**
    * The actual source method that will be overriding this bridge.
    *
-   * <p>This is the method that bridge will be forwarding to.
+   * <p>This is the method that bridge will be forwarding to. For Wasm JsInterop boundary methods it
+   * is the method they were created for (see MethodOrigin#isWasmBoundaryMethod).
    */
   @Nullable
   public abstract MethodDescriptor getBridgeTarget();
@@ -660,8 +668,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   @Memoized
   public J2ktInfo getJ2ktInfo() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getJ2ktInfo();
+    if (getAbiDescriptor() != this) {
+      return getAbiDescriptor().getJ2ktInfo();
     }
 
     J2ktInfo j2ktInfo = getDeclarationDescriptor().getOriginalJ2ktInfo();
@@ -693,13 +701,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   @Memoized
   public JsInfo getJsInfo() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getJsInfo();
-    }
-
-    // TODO(b/541381846): Revisit how to propagate JsInfo for exported methods in Wasm.
-    if (getOrigin().useOriginalMethodSignatureInMangling()) {
-      return getBridgeOrigin().getJsInfo();
+    if (getAbiDescriptor() != this) {
+      return getAbiDescriptor().getJsInfo();
     }
 
     checkState(isDeclaration());
@@ -837,8 +840,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Memoized
   String getJsMemberCompatibilitySignature() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getJsMemberCompatibilitySignature();
+    if (getAbiDescriptor() != this) {
+      return getAbiDescriptor().getJsMemberCompatibilitySignature();
     }
     String returnType =
         getReturnTypeDescriptor().isPrimitive()
@@ -973,8 +976,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Memoized
   public String getClosureMangledName() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getClosureMangledName();
+    // Methods that share the ABI of another method (e.g. generalizing bridges) are the same slot
+    // and share its name.
+    if (getAbiDescriptor() != this) {
+      return getAbiDescriptor().getClosureMangledName();
     }
 
     if (isJsConstructor() || getOrigin() == MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR) {
@@ -1005,8 +1010,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Memoized
   String getStandardMangledName() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getStandardMangledName();
+    // Methods that share the ABI of another method (e.g. generalizing bridges) are the same slot
+    // and share its name.
+    if (getAbiDescriptor() != this) {
+      return getAbiDescriptor().getStandardMangledName();
+    }
+
+    if (getOrigin().isWasmBoundaryMethod()) {
+      // The ABI of boundary methods does not determine a distinct name (see
+      // MethodOrigin#isWasmBoundaryMethod), so their name is derived from the method they were
+      // created for, made distinct by their own prefix.
+      return getManglingPrefix() + getBridgeTarget().getStandardMangledName();
     }
 
     String suffix = "";
@@ -1038,25 +1052,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       suffix += "_$s_";
     }
 
-    return buildMangledName(computeManglingSignature() + suffix);
+    return buildMangledName(getAbiSignature() + suffix);
   }
 
-  @SuppressWarnings("ReferenceEquality")
+  /**
+   * Returns a string that identifies the parameter and return types of the ABI of the method (see
+   * {@link #getAbiDescriptor}).
+   *
+   * <p>Constructors and constructor factories omit the return type.
+   */
   @Memoized
-  public String getManglingSignature() {
-    if (getManglingDescriptor() != this) {
-      return getManglingDescriptor().getManglingSignature();
-    }
-
-    return computeManglingSignature();
-  }
-
-  private String computeManglingSignature() {
-    if (getOrigin().useOriginalMethodSignatureInMangling()) {
-      // Wasm jsinterop bridges might replace the original parameter/return types with WasmExtern
-      // creating colliding signatures in the bridge. For this reason we use the original
-      // parameter/return types to compute the mangling signature.
-      return getBridgeOrigin().getManglingSignature();
+  public String getAbiSignature() {
+    if (getAbiDescriptor() != this) {
+      return getAbiDescriptor().getAbiSignature();
     }
 
     Stream<TypeDescriptor> signatureDescriptors = getParameterTypeDescriptors().stream();
@@ -1075,22 +1083,24 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns the type descriptor that is needed to determine the actual types for the method
-   * parameters used for determining the method mangled name and the types that can actually flow to
-   * the method.
+   * Returns the descriptor whose parameter and return types define the signature of the compiled
+   * method, i.e. the types of the values that actually flow in and out of it at runtime.
+   *
+   * <p>For generalizing bridges and abstract stubs those are the types of the method they override,
+   * which might be more general than the declared ones. The bridge method is responsible for
+   * casting the parameters to the appropriate type before forwarding to the actual implementation.
    */
   @Memoized
-  MethodDescriptor getManglingDescriptor() {
+  public MethodDescriptor getAbiDescriptor() {
     if (!isDeclaration()) {
-      return getDeclarationDescriptor().getManglingDescriptor();
+      return getDeclarationDescriptor().getAbiDescriptor();
     }
     if (isGeneralizingBridge() || isAbstractStub()) {
       // Generalizing bridges are methods that fill the gap between the overridden parent method and
-      // a specialized override. Abstract stubs override a parent method that has a given mangled
-      // name. In both cases, the parameter/return types for these methods do not determine the
-      // actual method name, since the mangling needs to match the method that they are actually
-      // overriding.
-      return getBridgeOrigin().getManglingDescriptor();
+      // a specialized override. Abstract stubs override a parent method with a given signature. In
+      // both cases, the parameter/return types for these methods do not determine the signature,
+      // since it needs to match the method that they are actually overriding.
+      return getBridgeOrigin().getAbiDescriptor();
     }
     return this;
   }
@@ -1105,21 +1115,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // behaviour.
     boolean isInternal = name.startsWith("$") && !getOrigin().isSynthetic();
     return isInternal ? "" : getOrigin().getPrefix();
-  }
-
-  /**
-   * Returns the parameter descriptors of the objects that can arrive at runtime as parameters.
-   *
-   * <p>For bridge methods those will be the parameters of the method they are bridging from. The
-   * bridge method is responsible for casting these parameters to the appropriate type before
-   * forwarding to the actual implementation.
-   */
-  public ImmutableList<ParameterDescriptor> getDispatchParameterDescriptors() {
-    return getManglingDescriptor().getParameterDescriptors();
-  }
-
-  public TypeDescriptor getDispatchReturnTypeDescriptor() {
-    return getManglingDescriptor().getReturnTypeDescriptor();
   }
 
   /**
@@ -1715,8 +1710,23 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setNative(false);
     }
 
-    public Builder makeNativeImport(MethodDescriptor originDescriptor) {
-      return setBridgeOrigin(originDescriptor)
+    /** Makes a Wasm JsInterop boundary method (see MethodOrigin#isWasmBoundaryMethod). */
+    public Builder makeWasmBoundaryMethod(
+        MethodOrigin methodOrigin, MethodDescriptor targetDescriptor) {
+      checkArgument(methodOrigin.isWasmBoundaryMethod());
+      return setBridgeOrigin(null)
+          .setOrigin(methodOrigin)
+          .setBridgeTarget(targetDescriptor)
+          .makeDeclaration()
+          // Clear properties that might have been carried over when creating this
+          // descriptor from an existing one.
+          .setDefaultMethod(false)
+          .setAbstract(false)
+          .setNative(false);
+    }
+
+    public Builder makeNativeImport(MethodDescriptor nativeMethodDescriptor) {
+      return setBridgeTarget(nativeMethodDescriptor)
           .setOrigin(MethodOrigin.WASM_JS_NATIVE_IMPORT_REDECLARATION);
     }
 

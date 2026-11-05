@@ -46,7 +46,7 @@ open class NullabilityInferenceProblem11 {
   @JvmStatic
   fun <T: Any> workaround2(): MyNode<T?> = NullabilityInferenceProblem11.call<MyNode<T?>>(
    Callback { node: MyNode<T?> ->
-    val child: MyNode<T?>? = node.getChild() as MyNode<T?>?
+    val child: MyNode<T?>? = node.getChild()
     return@Callback NullabilityInferenceProblem11.assertNotNull<MyNode<T?>>(child)
    },
   )
