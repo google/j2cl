@@ -77,6 +77,12 @@
 (global $$class@jsenum.Main.$LambdaImplementor$10 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsenum.Main.$LambdaImplementor$11 (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsenum.Main.$LambdaImplementor$11 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsenum.Main.Supplier (mut i32)
  (i32.const 0)
 )
@@ -156,6 +162,12 @@
  (i32.const 0)
 )
 (global $$class@jsenum.Main.SpecializedJsFunction (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jsenum.Main.SpecializedJsFunctionImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsenum.Main.SpecializedJsFunctionImpl (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@jsenum.Main.TemplatedField (mut i32)
@@ -412,6 +424,21 @@
   (ref.func $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function.$LambdaAdaptor)
  )
 )
+(global $jsenum.Main.$LambdaImplementor$11.vtable (ref (exact $jsenum.Main.$LambdaImplementor$11.vtable))
+ (struct.new $jsenum.Main.$LambdaImplementor$11.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@javaemul.internal.JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$11)
+ )
+)
+(global $jsenum.Main.SpecializedJsFunction.vtable@$jsenum.Main.$LambdaImplementor$11 (ref $jsenum.Main.SpecializedJsFunction.vtable)
+ (struct.new $jsenum.Main.SpecializedJsFunction.vtable
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$11)
+ )
+)
 (global $jsenum.Main.ComparableJsEnum.vtable (ref (exact $jsenum.Main.ComparableJsEnum.vtable))
  (struct.new $jsenum.Main.ComparableJsEnum.vtable
   (global.get $jsenum.Main.ComparableJsEnum.proto)
@@ -490,6 +517,21 @@
 )
 (global $java.io.Serializable.vtable@$jsenum.Main.NonNullableStringJsEnum (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
+ )
+)
+(global $jsenum.Main.SpecializedJsFunctionImpl.vtable (ref (exact $jsenum.Main.SpecializedJsFunctionImpl.vtable))
+ (struct.new $jsenum.Main.SpecializedJsFunctionImpl.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunctionImpl)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunctionImpl)
+ )
+)
+(global $jsenum.Main.SpecializedJsFunction.vtable@$jsenum.Main.SpecializedJsFunctionImpl (ref $jsenum.Main.SpecializedJsFunction.vtable)
+ (struct.new $jsenum.Main.SpecializedJsFunction.vtable
+  (ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunctionImpl)
  )
 )
 (global $jsenum.Main.TemplatedField.vtable (ref (exact $jsenum.Main.TemplatedField.vtable))
@@ -922,6 +964,8 @@
  (local $$qualifier (ref null $java.lang.Object))
  (local $supplier (ref null $java.lang.Object))
  (local $consummer (ref null $java.lang.Object))
+ (local $impl (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (local $implResult (ref null $jsenum.Main.ComparableJsEnum))
  (block
   (call $$clinit__void_<once>_@jsenum.Main )
   (local.set $comparableJsEnum (if (result (ref null $jsenum.Main.ComparableJsEnum)) (i32.eq (call $m_getValue__int@jsenum.Main.ComparableJsEnum (ref.as_non_null (block (result (ref null $jsenum.Main.ComparableJsEnum))
@@ -1065,6 +1109,12 @@
   (call $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$3 ))
   (call $m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$5 ))
   (call $m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$6 ))
+  (local.set $impl (call $$create__@jsenum.Main.SpecializedJsFunctionImpl ))
+  (local.set $implResult (call $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.SpecializedJsFunctionImpl (ref.as_non_null (local.get $impl))(block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  )))
+  (call $m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void@jsenum.Main (local.get $impl))
  )
 )
 
@@ -1264,21 +1314,34 @@
 ;;; void Main.acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier)
 (func $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
+ (local $e (ref null $jsenum.Main.ComparableJsEnum))
  (block
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsenum.Main.JsFunctionSuppiler (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $supplier)))))
  )
 )
 
 ;;; void Main.acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier)
 (func $m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
+ (local $e (ref null $jsenum.Main.ComparableJsEnum))
+ (local $$qualifier (ref null $java.lang.Object))
  (block
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $supplier))(struct.get $jsenum.Main.Supplier.vtable $m_get__java_lang_Object (ref.cast (ref $jsenum.Main.Supplier.vtable) (call $get.itable.$jsenum.Main.Supplier (local.get $supplier))))))
+   (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $$qualifier))(struct.get $jsenum.Main.Supplier.vtable $m_get__java_lang_Object (ref.cast (ref $jsenum.Main.Supplier.vtable) (call $get.itable.$jsenum.Main.Supplier (local.get $$qualifier)))))
+  )))
  )
 )
 
 ;;; void Main.acceptsJsFunctionParameterizedByJsEnum(SpecializedJsFunction<ComparableJsEnum> supplier)
 (func $m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void@jsenum.Main
  (param $supplier (ref null $java.lang.Object))
+ (local $e (ref null $jsenum.Main.ComparableJsEnum))
  (block
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $supplier))(block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  ))))
  )
 )
 
@@ -1763,10 +1826,14 @@
  (local $supplier (ref null $java.lang.Object))
  (local $ordinal (ref null $java.lang.Object))
  (local $ordinalReference (ref null $java.lang.Object))
+ (local $jsFunction (ref null $java.lang.Object))
+ (local $e (ref null $jsenum.Main.ComparableJsEnum))
  (block
   (local.set $supplier (call $$create__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$8 (local.get $t)))
   (local.set $ordinal (call $$create__@jsenum.Main.$LambdaImplementor$9 ))
   (local.set $ordinalReference (call $$create__@jsenum.Main.$LambdaImplementor$10 ))
+  (local.set $jsFunction (call $$create__@jsenum.Main.$LambdaImplementor$11 ))
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $jsFunction))(local.get $t))))
  )
 )
 
@@ -3344,6 +3411,94 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.NonNullableStringJsEnum)
 
+;;; SpecializedJsFunctionImpl SpecializedJsFunctionImpl.$create()
+(func $$create__@jsenum.Main.SpecializedJsFunctionImpl
+ (result (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (local $$instance (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (block
+  (call $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunctionImpl )
+  (local.set $$instance (struct.new_desc $jsenum.Main.SpecializedJsFunctionImpl (global.get $jsenum.Main.SpecializedJsFunctionImpl.itable) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func) (global.get $jsenum.Main.SpecializedJsFunctionImpl.vtable)))
+  (call $$ctor__void_$p_jsenum_Main_SpecializedJsFunctionImpl@jsenum.Main.SpecializedJsFunctionImpl (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SpecializedJsFunctionImpl.$ctor()
+(func $$ctor__void_$p_jsenum_Main_SpecializedJsFunctionImpl@jsenum.Main.SpecializedJsFunctionImpl
+ (param $this (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (block
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunctionImpl) (ref.func $js_export_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction) )
+ )
+)
+
+;;; ComparableJsEnum SpecializedJsFunctionImpl.get(ComparableJsEnum value)
+(func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.SpecializedJsFunctionImpl
+ (type $function.m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $value (ref null $jsenum.Main.ComparableJsEnum))
+ (result (ref null $jsenum.Main.ComparableJsEnum))
+ (local $this (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunctionImpl) (local.get $this.untyped)))
+ (block
+  (return (local.get $value))
+ )
+)
+(elem declare func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.SpecializedJsFunctionImpl)
+
+;;; ComparableJsEnum SpecializedJsFunctionImpl.get(T value)
+(func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunctionImpl
+ (type $function.java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $this (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunctionImpl) (local.get $this.untyped)))
+ (block
+  (return (call $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.SpecializedJsFunctionImpl (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $value))))
+ )
+)
+(elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunctionImpl)
+
+;;; void SpecializedJsFunctionImpl.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.SpecializedJsFunctionImpl
+ (block
+  (if (global.get $$class-initialized@jsenum.Main.SpecializedJsFunctionImpl)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsenum.Main.SpecializedJsFunctionImpl (i32.const 1))
+  (call $$clinit__void_<once>_@javaemul.internal.JsFunctionAdaptor )
+ )
+)
+
+;;; Class<T> SpecializedJsFunctionImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunctionImpl
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.SpecializedJsFunctionImpl)))
+   (then
+    (return (global.get $$class@jsenum.Main.SpecializedJsFunctionImpl))
+   )
+  )
+  (global.set $$class@jsenum.Main.SpecializedJsFunctionImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.SpecializedJsFunctionImpl.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsenum.Main.SpecializedJsFunctionImpl))
+ )
+)
+
+;;; Class<?> SpecializedJsFunctionImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunctionImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsenum.Main.SpecializedJsFunctionImpl))
+ (local.set $this (ref.cast (ref $jsenum.Main.SpecializedJsFunctionImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.SpecializedJsFunctionImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.SpecializedJsFunctionImpl)
+
 ;;; JsEnumWithRenamedProperties JsEnumWithRenamedProperties.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@jsenum.Main.JsEnumWithRenamedProperties
  (param $$name (ref null $java.lang.String))
@@ -4028,5 +4183,80 @@
   )
   (global.set $$class@jsenum.Main.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$6.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@javaemul.internal.JsFunctionAdaptor )))
   (return (global.get $$class@jsenum.Main.$LambdaImplementor$6))
+ )
+)
+
+;;; <anonymous> implements SpecializedJsFunction<T><T> <anonymous> implements SpecializedJsFunction<T>.$create()
+(func $$create__@jsenum.Main.$LambdaImplementor$11
+ (result (ref null $jsenum.Main.$LambdaImplementor$11))
+ (local $$instance (ref null $jsenum.Main.$LambdaImplementor$11))
+ (block
+  (call $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$11 )
+  (local.set $$instance (struct.new_desc $jsenum.Main.$LambdaImplementor$11 (global.get $jsenum.Main.$LambdaImplementor$11.itable) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func) (global.get $jsenum.Main.$LambdaImplementor$11.vtable)))
+  (call $$ctor__void_$p_jsenum_Main_$LambdaImplementor$11@jsenum.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements SpecializedJsFunction<T>.$ctor()
+(func $$ctor__void_$p_jsenum_Main_$LambdaImplementor$11@jsenum.Main.$LambdaImplementor$11
+ (param $this (ref null $jsenum.Main.$LambdaImplementor$11))
+ (block
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$11) (ref.func $js_export_get__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction) )
+ )
+)
+
+;;; T <anonymous> implements SpecializedJsFunction<T>.get(T x)
+(func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$11
+ (type $function.m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x (ref null $jsenum.Main.ComparableJsEnum))
+ (result (ref null $jsenum.Main.ComparableJsEnum))
+ (local $this (ref null $jsenum.Main.$LambdaImplementor$11))
+ (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$11) (local.get $this.untyped)))
+ (block
+  (return (local.get $x))
+ )
+)
+(elem declare func $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$11)
+
+;;; T <anonymous> implements SpecializedJsFunction<T>.get(T value)
+(func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$11
+ (type $function.java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $this (ref null $jsenum.Main.$LambdaImplementor$11))
+ (local.set $this (ref.cast (ref $jsenum.Main.$LambdaImplementor$11) (local.get $this.untyped)))
+ (block
+  (return (call $m_get__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $this))(ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $value))))
+ )
+)
+(elem declare func $m_get__java_lang_Object__java_lang_Object@jsenum.Main.$LambdaImplementor$11)
+
+;;; void <anonymous> implements SpecializedJsFunction<T>.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.$LambdaImplementor$11
+ (block
+  (if (global.get $$class-initialized@jsenum.Main.$LambdaImplementor$11)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsenum.Main.$LambdaImplementor$11 (i32.const 1))
+  (call $$clinit__void_<once>_@javaemul.internal.JsFunctionAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements SpecializedJsFunction<T>.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.$LambdaImplementor$11
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.$LambdaImplementor$11)))
+   (then
+    (return (global.get $$class@jsenum.Main.$LambdaImplementor$11))
+   )
+  )
+  (global.set $$class@jsenum.Main.$LambdaImplementor$11 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.$LambdaImplementor$11.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@javaemul.internal.JsFunctionAdaptor )))
+  (return (global.get $$class@jsenum.Main.$LambdaImplementor$11))
  )
 )

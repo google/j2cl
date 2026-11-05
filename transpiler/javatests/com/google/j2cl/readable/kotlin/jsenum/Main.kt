@@ -143,6 +143,9 @@ fun testJsEnumSwitch() {
   acceptsJsFunctionSupplier { ComparableJsEnum.ONE }
   acceptsSupplierOfSupplier { { ComparableJsEnum.ONE } }
   acceptsJsFunctionParameterizedByJsEnum { e: ComparableJsEnum -> e }
+  val impl = SpecializedJsFunctionImpl()
+  val implResult = impl.get(ComparableJsEnum.ONE)
+  acceptsJsFunctionParameterizedByJsEnum(impl)
 }
 
 private fun testExhaustiveJsEnumSwitchExpression() {
@@ -203,13 +206,23 @@ fun interface SpecializedJsFunction<T> {
   fun get(value: T): T
 }
 
-private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum>) {}
+class SpecializedJsFunctionImpl : SpecializedJsFunction<ComparableJsEnum> {
+  override fun get(value: ComparableJsEnum): ComparableJsEnum = value
+}
 
-private fun acceptsSupplierOfSupplier(supplier: () -> (() -> ComparableJsEnum)) {}
+private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum>) {
+  val e = supplier.get()
+}
+
+private fun acceptsSupplierOfSupplier(supplier: () -> (() -> ComparableJsEnum)) {
+  val e = supplier()()
+}
 
 private fun acceptsJsFunctionParameterizedByJsEnum(
   supplier: SpecializedJsFunction<ComparableJsEnum>
-) {}
+) {
+  val e = supplier.get(ComparableJsEnum.ONE)
+}
 
 fun testReturnsAndParameters() {
   val returnedValue = returnsJsEnum()
@@ -432,6 +445,8 @@ fun <T : ComparableJsEnum> testJsEnumTypeVariableInLambdas(t: T) {
   val supplier: () -> T = { t }
   val ordinal: (T) -> Int = { x -> x.ordinal }
   val valueReference: (T) -> Int = ComparableJsEnum::getValue
+  val jsFunction = SpecializedJsFunction<T> { x -> x }
+  val e: T = jsFunction.get(t)
 }
 
 fun <T : ComparableJsEnum> testJsEnumTypeVariableVarargs(t: T) {

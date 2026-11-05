@@ -178,6 +178,9 @@ public class Main {
     acceptsJsFunctionSupplier(() -> ComparableJsEnum.ONE);
     acceptsSupplierOfSupplier(() -> (() -> ComparableJsEnum.ONE));
     acceptsJsFunctionParameterizedByJsEnum(e -> e);
+    SpecializedJsFunctionImpl impl = new SpecializedJsFunctionImpl();
+    ComparableJsEnum implResult = impl.get(ComparableJsEnum.ONE);
+    acceptsJsFunctionParameterizedByJsEnum(impl);
   }
 
   private static void testExhaustiveJsEnumSwitchExpression() {
@@ -243,12 +246,25 @@ public class Main {
     T get(T value);
   }
 
-  private static void acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier) {}
+  static final class SpecializedJsFunctionImpl implements SpecializedJsFunction<ComparableJsEnum> {
+    @Override
+    public ComparableJsEnum get(ComparableJsEnum value) {
+      return value;
+    }
+  }
 
-  private static void acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier) {}
+  private static void acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier) {
+    ComparableJsEnum e = supplier.get();
+  }
+
+  private static void acceptsSupplierOfSupplier(Supplier<Supplier<ComparableJsEnum>> supplier) {
+    ComparableJsEnum e = supplier.get().get();
+  }
 
   private static void acceptsJsFunctionParameterizedByJsEnum(
-      SpecializedJsFunction<ComparableJsEnum> supplier) {}
+      SpecializedJsFunction<ComparableJsEnum> supplier) {
+    ComparableJsEnum e = supplier.get(ComparableJsEnum.ONE);
+  }
 
   private static void testReturnsAndParameters() {
     ComparableJsEnum returnedValue = returnsJsEnum();
@@ -517,6 +533,8 @@ public class Main {
     Supplier<T> supplier = () -> t;
     Function<T, Integer> ordinal = x -> x.ordinal();
     Function<T, Integer> ordinalReference = ComparableJsEnum::ordinal;
+    SpecializedJsFunction<T> jsFunction = x -> x;
+    T e = jsFunction.get(t);
   }
 
   private static <T extends ComparableJsEnum> void testJsEnumTypeVariableVarargs(T t) {

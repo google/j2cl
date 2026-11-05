@@ -9,7 +9,12 @@ package(
 )
 
 integration_test(
-    srcs = glob(["*.java"]),
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
+    # Contains JsInterop features which are only applicable for J2CL.
+    enable_jvm_test = False,
     enable_kt_native = False,
     suppress = ["JSC_TYPE_MISMATCH"],
 )

@@ -1,0 +1,67 @@
+goog.module('jsenum.Main.SpecializedJsFunctionImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
+let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
+let $Overlay = goog.forwardDeclare('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+
+/**
+ * @final
+ */
+class SpecializedJsFunctionImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {?function(BoxedComparableLightEnum<?ComparableJsEnum>):BoxedComparableLightEnum<?ComparableJsEnum>} */
+ static $create__() {
+  SpecializedJsFunctionImpl.$clinit();
+  let $instance = new SpecializedJsFunctionImpl();
+  $instance.$ctor__jsenum_Main_SpecializedJsFunctionImpl__void();
+  return $Util.$makeLambdaFunction(SpecializedJsFunctionImpl.prototype.m_get__java_lang_Object__java_lang_Object, $instance, SpecializedJsFunctionImpl.$copy);
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_SpecializedJsFunctionImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {?ComparableJsEnum} */
+ static m_get__jsenum_Main_SpecializedJsFunctionImpl__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(/** !SpecializedJsFunctionImpl */ $thisArg, /** ?ComparableJsEnum */ value) {
+  SpecializedJsFunctionImpl.$clinit();
+  return value;
+ }
+ //Bridge method.
+ /** @final @suppress{visibility} @return {BoxedComparableLightEnum<?ComparableJsEnum>} */
+ m_get__java_lang_Object__java_lang_Object(/** BoxedComparableLightEnum<?ComparableJsEnum> */ value) {
+  return /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(SpecializedJsFunctionImpl.m_get__jsenum_Main_SpecializedJsFunctionImpl__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(this, /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(value, $Overlay))), $Overlay));
+ }
+ /** @nodts */
+ static $clinit() {
+  SpecializedJsFunctionImpl.$clinit = () =>{};
+  SpecializedJsFunctionImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsenum_Main_SpecializedJsFunctionImpl;
+ }
+ /** @nodts */
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsenum_Main_SpecializedJsFunctionImpl = true;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Enums = goog.module.get('javaemul.internal.Enums$impl');
+  $Overlay = goog.module.get('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+ }
+}
+$JavaScriptFunction.$markImplementor(SpecializedJsFunctionImpl);
+$Util.$setClassMetadata(SpecializedJsFunctionImpl, 'jsenum.Main$SpecializedJsFunctionImpl');
+
+exports = SpecializedJsFunctionImpl;
+
+//# sourceMappingURL=Main$SpecializedJsFunctionImpl.js.map

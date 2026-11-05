@@ -22,6 +22,7 @@ let NativeStringEnum = goog.forwardDeclare('jsenum.NativeStringEnum');
 let NativeStringEnum_$Overlay = goog.forwardDeclare('jsenum.NativeStringEnum.$Overlay$impl');
 let SomeJsEnum = goog.forwardDeclare('jsenum.SomeJsEnum$impl');
 let SomeJsEnum_$Overlay = goog.forwardDeclare('jsenum.SomeJsEnum.$Overlay$impl');
+let SpecializedJsFunctionImpl = goog.forwardDeclare('jsenum.SpecializedJsFunctionImpl$impl');
 let StringJsEnum = goog.forwardDeclare('jsenum.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.StringJsEnum.$Overlay$impl');
 let TemplatedField = goog.forwardDeclare('jsenum.TemplatedField$impl');
@@ -32,6 +33,7 @@ let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let Intrinsics = goog.forwardDeclare('kotlin.jvm.internal.Intrinsics$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -151,6 +153,9 @@ class MainKt extends j_l_Object {
    let e_3 = /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(e_2, $Overlay));
    return /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(e_3, $Overlay));
   }));
+  let impl = /**@type {!SpecializedJsFunctionImpl}*/ (SpecializedJsFunctionImpl.$create__());
+  let implResult = SpecializedJsFunctionImpl.m_get__jsenum_SpecializedJsFunctionImpl__jsenum_ComparableJsEnum__jsenum_ComparableJsEnum(impl, ComparableJsEnum.ONE);
+  MainKt.m_acceptsJsFunctionParameterizedByJsEnum__jsenum_SpecializedJsFunction__void(/**@type {?function(!BoxedComparableLightEnum<!ComparableJsEnum>):!BoxedComparableLightEnum<!ComparableJsEnum>}*/ (impl));
  }
  /** @nodts */
  static m_testExhaustiveJsEnumSwitchExpression__void() {
@@ -203,11 +208,17 @@ class MainKt extends j_l_Object {
   return CollectionsKt.m_emptyList__java_util_List();
  }
  /** @nodts */
- static m_acceptsJsFunctionSupplier__jsenum_JsFunctionSuppiler__void(/** ?function():!BoxedComparableLightEnum<!ComparableJsEnum> */ supplier) {}
+ static m_acceptsJsFunctionSupplier__jsenum_JsFunctionSuppiler__void(/** ?function():!BoxedComparableLightEnum<!ComparableJsEnum> */ supplier) {
+  let e = /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(supplier(), $Overlay));
+ }
  /** @nodts */
- static m_acceptsSupplierOfSupplier__kotlin_jvm_functions_Function0__void(/** !Function0<?> */ supplier) {}
+ static m_acceptsSupplierOfSupplier__kotlin_jvm_functions_Function0__void(/** !Function0<?> */ supplier) {
+  let e = /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object((/**@type {!Function0<BoxedComparableLightEnum<?ComparableJsEnum>>}*/ ($Casts.$to(supplier.m_invoke__java_lang_Object(), /**@type {Function}*/ (Function0)))).m_invoke__java_lang_Object(), $Overlay));
+ }
  /** @nodts */
- static m_acceptsJsFunctionParameterizedByJsEnum__jsenum_SpecializedJsFunction__void(/** ?function(!BoxedComparableLightEnum<!ComparableJsEnum>):!BoxedComparableLightEnum<!ComparableJsEnum> */ supplier) {}
+ static m_acceptsJsFunctionParameterizedByJsEnum__jsenum_SpecializedJsFunction__void(/** ?function(!BoxedComparableLightEnum<!ComparableJsEnum>):!BoxedComparableLightEnum<!ComparableJsEnum> */ supplier) {
+  let e = /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(supplier(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay))), $Overlay));
+ }
  /** @nodts */
  static m_testReturnsAndParameters__void() {
   MainKt.$clinit();
@@ -400,6 +411,11 @@ class MainKt extends j_l_Object {
    let p0_1 = /**@type {!ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(p0, $Overlay));
    return Integer.valueOf($Overlay.m_getValue__$devirt__jsenum_ComparableJsEnum__int(p0_1));
   }));
+  let jsFunction = /**  @return {!BoxedComparableLightEnum<T>}*/ ((/** !BoxedComparableLightEnum<T> */ x_2) =>{
+   let x_3 = /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(x_2, $Overlay));
+   return /**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {T}*/ (x_3), $Overlay));
+  });
+  let e = /**@type {T}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(jsFunction(/**@type {BoxedComparableLightEnum<T>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {T}*/ (t), $Overlay))), $Overlay));
  }
  /** @nodts @template T */
  static m_testJsEnumTypeVariableVarargs__jsenum_ComparableJsEnum__void(/** T */ t) {
@@ -490,6 +506,7 @@ class MainKt extends j_l_Object {
   NativeStringEnum_$Overlay = goog.module.get('jsenum.NativeStringEnum.$Overlay$impl');
   SomeJsEnum = goog.module.get('jsenum.SomeJsEnum$impl');
   SomeJsEnum_$Overlay = goog.module.get('jsenum.SomeJsEnum.$Overlay$impl');
+  SpecializedJsFunctionImpl = goog.module.get('jsenum.SpecializedJsFunctionImpl$impl');
   StringJsEnum = goog.module.get('jsenum.StringJsEnum$impl');
   StringJsEnum_$Overlay = goog.module.get('jsenum.StringJsEnum.$Overlay$impl');
   TemplatedField = goog.module.get('jsenum.TemplatedField$impl');
@@ -500,6 +517,7 @@ class MainKt extends j_l_Object {
   Intrinsics = goog.module.get('kotlin.jvm.internal.Intrinsics$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }

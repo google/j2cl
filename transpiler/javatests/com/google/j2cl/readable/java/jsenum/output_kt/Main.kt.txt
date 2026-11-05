@@ -107,6 +107,11 @@ open class Main {
    Main.acceptsJsFunctionParameterizedByJsEnum(
     SpecializedJsFunction { e_1: ComparableJsEnum? -> e_1 },
    )
+   val impl: SpecializedJsFunctionImpl = SpecializedJsFunctionImpl()
+   val implResult: ComparableJsEnum? = impl.get(
+    ComparableJsEnum.ONE,
+   )
+   Main.acceptsJsFunctionParameterizedByJsEnum(impl)
   }
   
   @JvmStatic
@@ -194,13 +199,21 @@ open class Main {
   private fun getNativeStringEnumList(): List<NativeStringEnum?>? = null
   
   @JvmStatic
-  private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum?>?) {}
+  private fun acceptsJsFunctionSupplier(supplier: JsFunctionSuppiler<ComparableJsEnum?>?) {
+   val e: ComparableJsEnum? = supplier!!.get()
+  }
   
   @JvmStatic
-  private fun acceptsSupplierOfSupplier(supplier: Supplier<Supplier<ComparableJsEnum?>?>?) {}
+  private fun acceptsSupplierOfSupplier(supplier: Supplier<Supplier<ComparableJsEnum?>?>?) {
+   val e: ComparableJsEnum? = supplier!!.get()!!.get()
+  }
   
   @JvmStatic
-  private fun acceptsJsFunctionParameterizedByJsEnum(supplier: SpecializedJsFunction<ComparableJsEnum?>?) {}
+  private fun acceptsJsFunctionParameterizedByJsEnum(supplier: SpecializedJsFunction<ComparableJsEnum?>?) {
+   val e: ComparableJsEnum? = supplier!!.get(
+    ComparableJsEnum.ONE,
+   )
+  }
   
   @JvmStatic
   private fun testReturnsAndParameters() {
@@ -413,6 +426,8 @@ open class Main {
    val supplier: Supplier<T> = Supplier { t }
    val ordinal: Function<T, Int?> = Function { x: T -> x!!.ordinal }
    val ordinalReference: Function<T, Int?> = Function { arg0: T -> arg0!!.ordinal }
+   val jsFunction: SpecializedJsFunction<T> = SpecializedJsFunction { x_1: T -> x_1 }
+   val e: T? = jsFunction.get(t)
   }
   
   @JvmStatic
@@ -563,6 +578,10 @@ open class Main {
  @JsFunction
  internal fun interface SpecializedJsFunction<T> {
   fun get(value: T): T
+ }
+ 
+ internal class SpecializedJsFunctionImpl internal constructor(): SpecializedJsFunction<ComparableJsEnum?> {
+  override fun get(value: ComparableJsEnum?): ComparableJsEnum? = value
  }
  
  private open class TemplatedField<T> {

@@ -27,6 +27,7 @@ let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NativeStringEnum');
 let NativeStringEnum_$Overlay = goog.forwardDeclare('jsenum.Main.NativeStringEnum.$Overlay$impl');
 let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
 let SomeJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.SomeJsEnum.$Overlay$impl');
+let SpecializedJsFunctionImpl = goog.forwardDeclare('jsenum.Main.SpecializedJsFunctionImpl$impl');
 let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.StringJsEnum.$Overlay$impl');
 let Supplier = goog.forwardDeclare('jsenum.Main.Supplier$impl');
@@ -150,6 +151,9 @@ class Main extends j_l_Object {
    let e_1_2 = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(e_1_1, $Overlay));
    return /**@type {BoxedComparableLightEnum<?ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(e_1_2, $Overlay));
   }));
+  let impl = /**@type {!SpecializedJsFunctionImpl}*/ (SpecializedJsFunctionImpl.$create__());
+  let implResult = SpecializedJsFunctionImpl.m_get__jsenum_Main_SpecializedJsFunctionImpl__jsenum_Main_ComparableJsEnum__jsenum_Main_ComparableJsEnum(impl, ComparableJsEnum.ONE);
+  Main.m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void(/**@type {?function(BoxedComparableLightEnum<?ComparableJsEnum>):BoxedComparableLightEnum<?ComparableJsEnum>}*/ (impl));
  }
  /** @nodts */
  static m_testExhaustiveJsEnumSwitchExpression__void() {
@@ -227,14 +231,17 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void(/** ?function():BoxedComparableLightEnum<?ComparableJsEnum> */ supplier) {
   Main.$clinit();
+  let e = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(supplier(), $Overlay));
  }
  /** @nodts */
  static m_acceptsSupplierOfSupplier__jsenum_Main_Supplier__void(/** Supplier<Supplier<BoxedComparableLightEnum<?ComparableJsEnum>>> */ supplier) {
   Main.$clinit();
+  let e = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object((/**@type {Supplier<BoxedComparableLightEnum<?ComparableJsEnum>>}*/ ($Casts.$to(supplier.m_get__java_lang_Object(), /**@type {Function}*/ (Supplier)))).m_get__java_lang_Object(), $Overlay));
  }
  /** @nodts */
  static m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void(/** ?function(BoxedComparableLightEnum<?ComparableJsEnum>):BoxedComparableLightEnum<?ComparableJsEnum> */ supplier) {
   Main.$clinit();
+  let e = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(supplier(/**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay))), $Overlay));
  }
  /** @nodts */
  static m_testReturnsAndParameters__void() {
@@ -450,6 +457,11 @@ class Main extends j_l_Object {
    let arg0_1 = /**@type {?}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(arg0, $Overlay));
    return Integer.valueOf(/**@type {number}*/ (arg0_1));
   }));
+  let jsFunction = /**  @return {BoxedComparableLightEnum<T>}*/ ((/** BoxedComparableLightEnum<T> */ x_1_1) =>{
+   let x_1_2 = /**@type {?}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(x_1_1, $Overlay));
+   return /**@type {BoxedComparableLightEnum<?>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {?}*/ (x_1_2), $Overlay));
+  });
+  let e = /**@type {?}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(jsFunction(/**@type {BoxedComparableLightEnum<?>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(/**@type {?}*/ (t), $Overlay))), $Overlay));
  }
  /** @nodts @template T */
  static m_testJsEnumTypeVariableVarargs__jsenum_Main_ComparableJsEnum__void(/** T */ t) {
@@ -527,6 +539,7 @@ class Main extends j_l_Object {
   NativeStringEnum_$Overlay = goog.module.get('jsenum.Main.NativeStringEnum.$Overlay$impl');
   SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');
   SomeJsEnum_$Overlay = goog.module.get('jsenum.Main.SomeJsEnum.$Overlay$impl');
+  SpecializedJsFunctionImpl = goog.module.get('jsenum.Main.SpecializedJsFunctionImpl$impl');
   StringJsEnum = goog.module.get('jsenum.Main.StringJsEnum$impl');
   StringJsEnum_$Overlay = goog.module.get('jsenum.Main.StringJsEnum.$Overlay$impl');
   Supplier = goog.module.get('jsenum.Main.Supplier$impl');
