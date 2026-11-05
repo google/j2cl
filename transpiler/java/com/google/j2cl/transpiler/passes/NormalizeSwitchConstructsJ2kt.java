@@ -287,11 +287,7 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
 
             Label switchLabel = ((LabeledStatement) getParent()).getLabel();
             Statement dispatchStatement =
-                createDispatchStatement(
-                    switchLabel,
-                    switchStatement.getExpression(),
-                    switchCasesAndLabels,
-                    switchStatement.getSourcePosition());
+                createDispatchStatement(switchLabel, switchStatement, switchCasesAndLabels);
 
             return createNestedCaseHandlingBlocks(
                 dispatchStatement, switchCasesAndLabels, switchStatement.getSourcePosition());
@@ -326,9 +322,9 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
    */
   private static Statement createDispatchStatement(
       Label switchLabel,
-      Expression expression,
-      List<SwitchCaseWithLabel> switchCasesWithLabels,
-      SourcePosition sourcePosition) {
+      SwitchStatement switchStatement,
+      List<SwitchCaseWithLabel> switchCasesWithLabels) {
+    SourcePosition sourcePosition = switchStatement.getSourcePosition();
     ImmutableList<SwitchCase> cases =
         switchCasesWithLabels.stream()
             .map(
@@ -340,11 +336,9 @@ public class NormalizeSwitchConstructsJ2kt extends NormalizationPass {
             .collect(toImmutableList());
 
     Expression whenExpression =
-        SwitchExpression.builder()
+        SwitchExpression.builderFrom(switchStatement)
             .setTypeDescriptor(PrimitiveTypes.VOID)
-            .setExpression(expression)
             .setCases(cases)
-            .setSourcePosition(sourcePosition)
             .build();
 
     return Block.builder()

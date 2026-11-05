@@ -338,6 +338,7 @@ public class Main {
   }
 
   private static void testSwitchDefaultNotLast() {
+    assertEquals("null", getDefaultNotLastStatementGroups(null));
     assertEquals("one", getDefaultNotLastStatementGroups(1));
     assertEquals("two", getDefaultNotLastStatementGroups(2));
     assertEquals("default,two", getDefaultNotLastStatementGroups(3));
