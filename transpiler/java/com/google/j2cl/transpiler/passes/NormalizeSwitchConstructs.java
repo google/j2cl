@@ -208,9 +208,11 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
       selector = selector.postfixNotNullAssertion();
     }
     SourcePosition sourcePosition = switchStatement.getSourcePosition();
-    if (!selector.isIdempotent()) {
-      // This is the temporary variable to avoid repeated evaluation of the original selector
-      // expression.
+    if (!selector.isEffectivelyInvariant()) {
+      // Store the selector in a temporary variable so that it is evaluated only once, before any
+      // guard runs, and in a context that applies the conversions it might need, e.g. erasure
+      // casts. Only effectively invariant expressions, e.g. references to final variables, can be
+      // reused as is.
       selector =
           createTemporaryVariable(
                   sourcePosition,
@@ -402,7 +404,7 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
     var switchExpression = MultiExpression.builder();
 
     Expression expression = switchStatement.getExpression();
-    if (hasCaseNull && !expression.isIdempotent()) {
+    if (hasCaseNull && !expression.isEffectivelyInvariant()) {
       // Avoid evaluating the switch expression twice.
       //
       // ($switchExpr = expression, ...)

@@ -16,10 +16,12 @@
 package switchpatterns;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 
 import jsinterop.annotations.JsEnum;
 
@@ -33,6 +35,8 @@ public class Main {
     testSwitchCaseEvaluationOrder();
     testSwitchReassignedBinding();
     testSwitchQualifiedEnumConstants();
+    testSwitchOnGenericField();
+    testSwitchSelectorModifiedByGuard();
     testSwitchDefaultNotLast();
   }
 
@@ -375,5 +379,75 @@ public class Main {
       case 2:
         yield "two";
     };
+  }
+
+  static class Holder<T> {
+    T value;
+
+    Holder(T value) {
+      this.value = value;
+    }
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static void testSwitchOnGenericField() {
+    Holder<Integer> integerHolder = new Holder<>(1);
+    assertTrue(
+        switch (integerHolder.value) {
+          case null -> false;
+          case 1 -> true;
+          default -> false;
+        });
+
+    // Switch statements in Kotlin/Native do not throw erasure casts, instead they would flow to the
+    // default case.
+    if (isJ2KtNative()) {
+      return;
+    }
+
+    // The selector of the switch is cast to the type of the field at the access, which needs to
+    // throw ClassCastException on heap pollution even if no case performs a cast.
+    Holder<Integer> stringHolder = (Holder) new Holder<>("not an Integer");
+    // Here the test cases do not force a particular type on the selector, however the selector
+    // inferred type is Integer and should have an erasure cast that throws.
+    assertThrowsClassCastException(
+        () -> {
+          switch (stringHolder.value) {
+            case null -> fail();
+            default -> {}
+          }
+        });
+
+    // The same is true for a switch with a case that matches the type of the field using a
+    // constant case, where the selector has to agree with the type in the case.
+    assertThrowsClassCastException(
+        () -> {
+          switch (stringHolder.value) {
+            case null -> fail();
+            case 1 -> fail();
+            default -> {}
+          }
+        });
+  }
+
+  private static Integer selector;
+
+  private static boolean incrementSelector() {
+    selector++;
+    return false;
+  }
+
+  private static void testSwitchSelectorModifiedByGuard() {
+    selector = 1;
+    String result =
+        switch (selector) {
+          case null -> "null";
+          case Integer i when incrementSelector() -> "modified";
+          case Integer i when i == 1 -> "correct";
+          default -> "other";
+        };
+    // The selector is evaluated only once, even if a guard modifies the field it was read from.
+    assertEquals("correct", result);
+    assertEquals(2, (int) selector);
   }
 }

@@ -1218,30 +1218,29 @@
  (type $function.m_testSwitchOnGenericField__void_$pp_switchpatterns)
  (param $this.untyped (ref $java.lang.Object))
  (local $integerHolder (ref null $switchpatterns.SwitchPatterns.Holder))
+ (local $$selector (ref null $java.lang.Integer))
  (local $$caseIndex i32)
- (local $exp (ref null $java.lang.Integer))
  (local $i (ref null $java.lang.Integer))
  (local $colorHolder (ref null $switchpatterns.SwitchPatterns.Holder))
  (local $$expression i32)
+ (local $$switchExpression (ref null $switchpatterns.SwitchPatterns.Color))
  (local $this (ref null $switchpatterns.SwitchPatterns))
  (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
  (block
   (local.set $integerHolder (call $$create__java_lang_Object@switchpatterns.SwitchPatterns.Holder (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))))
   (block
+   (local.set $$selector (ref.cast (ref null $java.lang.Integer) (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $integerHolder))))
    
-   (if (ref.is_null (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $integerHolder)))
+   (if (ref.is_null (local.get $$selector))
     (then
      (block
       (local.set $$caseIndex (i32.const 0))
      )
     )(else
-     (if (block (result i32)
-       (local.set $exp (ref.cast (ref null $java.lang.Integer) (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $integerHolder))))
-       (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $exp)) (then (block (result i32)
-        (local.set $i (local.get $exp))
-        (call $m_guard_$private__boolean@switchpatterns.SwitchPatterns )
-       )) (else (i32.const 0)))
-      )
+     (if (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $$selector)) (then (block (result i32)
+       (local.set $i (local.get $$selector))
+       (call $m_guard_$private__boolean@switchpatterns.SwitchPatterns )
+      )) (else (i32.const 0)))
       (then
        (block
         (local.set $$caseIndex (i32.const 1))
@@ -1278,7 +1277,10 @@
   )))
   (block $SWITCH_1.BREAK
    (block
-    (local.set $$expression (if (result i32) (ref.is_null (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $colorHolder))) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (ref.cast (ref null $switchpatterns.SwitchPatterns.Color) (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $colorHolder))))))))
+    (local.set $$expression (block (result i32)
+     (local.set $$switchExpression (ref.cast (ref null $switchpatterns.SwitchPatterns.Color) (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $colorHolder))))
+     (if (result i32) (ref.is_null (local.get $$switchExpression)) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (local.get $$switchExpression)))))
+    ))
     (block
      (block
       (block

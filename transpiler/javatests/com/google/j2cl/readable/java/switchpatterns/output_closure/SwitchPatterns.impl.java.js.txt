@@ -412,12 +412,12 @@ class SwitchPatterns extends j_l_Object {
  m_testSwitchOnGenericField__void_$pp_switchpatterns() {
   let integerHolder = /**@type {!Holder<Integer>}*/ (Holder.$create__java_lang_Object(Integer.valueOf(1)));
   {
+   let $selector = /**@type {Integer}*/ ($Casts.$to(integerHolder.f_value__switchpatterns_SwitchPatterns_Holder, Integer));
    let /** number */ $caseIndex;
-   let /** Integer */ exp;
    let /** Integer */ i;
-   if ($Equality.$same(integerHolder.f_value__switchpatterns_SwitchPatterns_Holder, null)) {
+   if ($Equality.$same($selector, null)) {
     $caseIndex = 0;
-   } else if ((exp = (/**@type {Integer}*/ ($Casts.$to(integerHolder.f_value__switchpatterns_SwitchPatterns_Holder, Integer))), !$Equality.$same(exp, null) && (i = (/**@type {!Integer}*/ (exp)), SwitchPatterns.m_guard__boolean()))) {
+   } else if (!$Equality.$same($selector, null) && (i = (/**@type {!Integer}*/ ($selector)), SwitchPatterns.m_guard__boolean())) {
     $caseIndex = 1;
    } else {
     $caseIndex = 3;
@@ -432,7 +432,8 @@ class SwitchPatterns extends j_l_Object {
    }
   }
   let colorHolder = /**@type {!Holder<Color>}*/ (Holder.$create__java_lang_Object(Color.f_RED__switchpatterns_SwitchPatterns_Color));
-  switch ($Equality.$same(colorHolder.f_value__switchpatterns_SwitchPatterns_Holder, null) ? -1 : (/**@type {Color}*/ ($Casts.$to(colorHolder.f_value__switchpatterns_SwitchPatterns_Holder, Color))).ordinal()) {
+  let /** Color */ $switchExpression;
+  switch (($switchExpression = (/**@type {Color}*/ ($Casts.$to(colorHolder.f_value__switchpatterns_SwitchPatterns_Holder, Color))), $Equality.$same($switchExpression, null) ? -1 : $switchExpression.ordinal())) {
    case -1:
     break;
    case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
