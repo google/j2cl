@@ -248,5 +248,34 @@ public class SwitchPatterns {
     }
   }
 
+  static class Holder<T> {
+    T value;
+
+    Holder(T value) {
+      this.value = value;
+    }
+  }
+
+  void testSwitchOnGenericField() {
+    // The selector needs an erasure cast and must be evaluated only once, before any guard runs.
+    Holder<Integer> integerHolder = new Holder<>(1);
+    switch (integerHolder.value) {
+      case null -> {}
+      case Integer i when guard() -> {}
+      default -> {}
+    }
+
+    Holder<Color> colorHolder = new Holder<>(Color.RED);
+    switch (colorHolder.value) {
+      case null -> {}
+      case Color.RED -> {}
+      default -> {}
+    }
+  }
+
+  static boolean guard() {
+    return false;
+  }
+
   static void fail() {}
 }

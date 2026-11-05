@@ -27,6 +27,7 @@ import kotlin.Int
 import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
 import switchpatterns.SwitchPatterns.Sealed.A
@@ -306,6 +307,30 @@ open class SwitchPatterns {
   } while (false)
  }
  
+ internal open fun testSwitchOnGenericField() {
+  val integerHolder: Holder<Int?> = Holder<Int?>(1)
+  var ___selector: Int? = null
+  when (run {
+   ___selector = integerHolder.value
+   ___selector
+  }) {
+   null -> {}
+   is Int if run {
+    val i: Int? = ___selector as Int
+    SwitchPatterns.guard()
+   } -> {}
+   else -> {}
+  }
+  val colorHolder: Holder<Color?> = Holder<Color?>(
+   Color.RED,
+  )
+  when (colorHolder.value) {
+   null -> {}
+   Color.RED -> {}
+   else -> {}
+  }
+ }
+ 
  companion object {
   @JvmStatic
   internal fun testGenericRecordPatterns() {
@@ -330,6 +355,9 @@ open class SwitchPatterns {
     else -> {}
    }
   }
+  
+  @JvmStatic
+  internal fun guard(): Boolean = false
   
   @JvmStatic
   internal fun fail() {}
@@ -379,5 +407,14 @@ open class SwitchPatterns {
   ONE,
   TWO,
   THREE;
+ }
+ 
+ internal open class Holder<T> {
+  @JvmField
+  internal var value: T
+  
+  internal constructor(value: T) {
+   this.value = value
+  }
  }
 }

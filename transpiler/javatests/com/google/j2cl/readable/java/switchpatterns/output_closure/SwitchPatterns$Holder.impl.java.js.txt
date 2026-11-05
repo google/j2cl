@@ -1,0 +1,46 @@
+goog.module('switchpatterns.SwitchPatterns.Holder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class Holder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {T} @nodts*/
+  this.f_value__switchpatterns_SwitchPatterns_Holder;
+ }
+ /** @nodts @template T @return {!Holder<T>} */
+ static $create__java_lang_Object(/** T */ value) {
+  Holder.$clinit();
+  let $instance = new Holder();
+  $instance.$ctor__switchpatterns_SwitchPatterns_Holder__java_lang_Object__void(value);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__switchpatterns_SwitchPatterns_Holder__java_lang_Object__void(/** T */ value) {
+  this.$ctor__java_lang_Object__void();
+  this.f_value__switchpatterns_SwitchPatterns_Holder = value;
+ }
+ /** @nodts */
+ static $clinit() {
+  Holder.$clinit = () =>{};
+  Holder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Holder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Holder, 'switchpatterns.SwitchPatterns$Holder');
+
+exports = Holder;
+
+//# sourceMappingURL=SwitchPatterns$Holder.js.map

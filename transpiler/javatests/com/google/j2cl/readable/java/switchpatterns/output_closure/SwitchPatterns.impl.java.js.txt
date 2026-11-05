@@ -15,6 +15,7 @@ let $1GenericRecord = goog.forwardDeclare('switchpatterns.SwitchPatterns.$1Gener
 let $1R = goog.forwardDeclare('switchpatterns.SwitchPatterns.$1R$impl');
 let Color = goog.forwardDeclare('switchpatterns.SwitchPatterns.Color$impl');
 let Digit = goog.forwardDeclare('switchpatterns.SwitchPatterns.Digit$impl');
+let Holder = goog.forwardDeclare('switchpatterns.SwitchPatterns.Holder$impl');
 let Sealed = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed$impl');
 let A = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.A$impl');
 let B = goog.forwardDeclare('switchpatterns.SwitchPatterns.Sealed.B$impl');
@@ -408,6 +409,44 @@ class SwitchPatterns extends j_l_Object {
   }
  }
  /** @nodts */
+ m_testSwitchOnGenericField__void_$pp_switchpatterns() {
+  let integerHolder = /**@type {!Holder<Integer>}*/ (Holder.$create__java_lang_Object(Integer.valueOf(1)));
+  {
+   let /** number */ $caseIndex;
+   let /** Integer */ exp;
+   let /** Integer */ i;
+   if ($Equality.$same(integerHolder.f_value__switchpatterns_SwitchPatterns_Holder, null)) {
+    $caseIndex = 0;
+   } else if ((exp = (/**@type {Integer}*/ ($Casts.$to(integerHolder.f_value__switchpatterns_SwitchPatterns_Holder, Integer))), !$Equality.$same(exp, null) && (i = (/**@type {!Integer}*/ (exp)), SwitchPatterns.m_guard__boolean()))) {
+    $caseIndex = 1;
+   } else {
+    $caseIndex = 3;
+   }
+   switch ($caseIndex) {
+    case 0:
+     break;
+    case 1:
+     break;
+    default:
+     break;
+   }
+  }
+  let colorHolder = /**@type {!Holder<Color>}*/ (Holder.$create__java_lang_Object(Color.f_RED__switchpatterns_SwitchPatterns_Color));
+  switch ($Equality.$same(colorHolder.f_value__switchpatterns_SwitchPatterns_Holder, null) ? -1 : (/**@type {Color}*/ ($Casts.$to(colorHolder.f_value__switchpatterns_SwitchPatterns_Holder, Color))).ordinal()) {
+   case -1:
+    break;
+   case Color.$ordinal_RED__switchpatterns_SwitchPatterns_Color:
+    break;
+   default:
+    break;
+  }
+ }
+ /** @nodts @return {boolean} */
+ static m_guard__boolean() {
+  SwitchPatterns.$clinit();
+  return false;
+ }
+ /** @nodts */
  static m_fail__void() {
   SwitchPatterns.$clinit();
  }
@@ -434,6 +473,7 @@ class SwitchPatterns extends j_l_Object {
   $1R = goog.module.get('switchpatterns.SwitchPatterns.$1R$impl');
   Color = goog.module.get('switchpatterns.SwitchPatterns.Color$impl');
   Digit = goog.module.get('switchpatterns.SwitchPatterns.Digit$impl');
+  Holder = goog.module.get('switchpatterns.SwitchPatterns.Holder$impl');
   A = goog.module.get('switchpatterns.SwitchPatterns.Sealed.A$impl');
   B = goog.module.get('switchpatterns.SwitchPatterns.Sealed.B$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

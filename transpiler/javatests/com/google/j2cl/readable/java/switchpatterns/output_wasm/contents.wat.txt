@@ -59,6 +59,12 @@
 (global $$class@switchpatterns.SwitchPatterns.Digit (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@switchpatterns.SwitchPatterns.Holder (mut i32)
+ (i32.const 0)
+)
+(global $$class@switchpatterns.SwitchPatterns.Holder (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@switchpatterns.SwitchPatterns.1R (mut i32)
  (i32.const 0)
 )
@@ -86,6 +92,7 @@
   (ref.func $m_testQualifiedEnumConstants__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testReassignedBindings__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
   (ref.func $m_testRecordPatterns__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+  (ref.func $m_testSwitchOnGenericField__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
  )
 )
 (global $switchpatterns.SwitchPatterns.Sealed.A.vtable (ref $switchpatterns.SwitchPatterns.Sealed.A.vtable)
@@ -152,6 +159,14 @@
 )
 (global $java.io.Serializable.vtable@$switchpatterns.SwitchPatterns.Digit (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
+ )
+)
+(global $switchpatterns.SwitchPatterns.Holder.vtable (ref $switchpatterns.SwitchPatterns.Holder.vtable)
+ (struct.new $switchpatterns.SwitchPatterns.Holder.vtable
+  (ref.func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.Holder)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 (global $switchpatterns.SwitchPatterns.1R.vtable (ref $switchpatterns.SwitchPatterns.1R.vtable)
@@ -1198,6 +1213,110 @@
 )
 (elem declare func $m_testCaseNullWithFallthrough__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
 
+;;; void SwitchPatterns.testSwitchOnGenericField()
+(func $m_testSwitchOnGenericField__void_$pp_switchpatterns@switchpatterns.SwitchPatterns
+ (type $function.m_testSwitchOnGenericField__void_$pp_switchpatterns)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $integerHolder (ref null $switchpatterns.SwitchPatterns.Holder))
+ (local $$caseIndex i32)
+ (local $exp (ref null $java.lang.Integer))
+ (local $i (ref null $java.lang.Integer))
+ (local $colorHolder (ref null $switchpatterns.SwitchPatterns.Holder))
+ (local $$expression i32)
+ (local $this (ref null $switchpatterns.SwitchPatterns))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns) (local.get $this.untyped)))
+ (block
+  (local.set $integerHolder (call $$create__java_lang_Object@switchpatterns.SwitchPatterns.Holder (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))))
+  (block
+   
+   (if (ref.is_null (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $integerHolder)))
+    (then
+     (block
+      (local.set $$caseIndex (i32.const 0))
+     )
+    )(else
+     (if (block (result i32)
+       (local.set $exp (ref.cast (ref null $java.lang.Integer) (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $integerHolder))))
+       (if (result i32) (ref.test (ref $java.lang.Integer) (local.get $exp)) (then (block (result i32)
+        (local.set $i (local.get $exp))
+        (call $m_guard_$private__boolean@switchpatterns.SwitchPatterns )
+       )) (else (i32.const 0)))
+      )
+      (then
+       (block
+        (local.set $$caseIndex (i32.const 1))
+       )
+      )(else
+       (block
+        (local.set $$caseIndex (i32.const 3))
+       )
+      )
+     )
+    )
+   )
+   (block $SWITCH.BREAK
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 1 2 (local.get $$caseIndex))
+       )
+       ;; case 0:
+       (br $SWITCH.BREAK)
+      )
+      ;; case 1:
+      (br $SWITCH.BREAK)
+     )
+     ;; default:
+     (br $SWITCH.BREAK)
+    )
+   )
+  )
+  (local.set $colorHolder (call $$create__java_lang_Object@switchpatterns.SwitchPatterns.Holder (block (result (ref null $switchpatterns.SwitchPatterns.Color))
+   (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Color )
+   (global.get $RED@switchpatterns.SwitchPatterns.Color)
+  )))
+  (block $SWITCH_1.BREAK
+   (block
+    (local.set $$expression (if (result i32) (ref.is_null (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $colorHolder))) (then (i32.const -1)) (else (call $m_ordinal__int@java.lang.Enum (ref.as_non_null (ref.cast (ref null $switchpatterns.SwitchPatterns.Color) (struct.get $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $colorHolder))))))))
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 1 2 (i32.sub (local.get $$expression) (i32.const -1)))
+       )
+       ;; case -1:
+       (br $SWITCH_1.BREAK)
+      )
+      ;; case 0:
+      (br $SWITCH_1.BREAK)
+     )
+     ;; default:
+     (br $SWITCH_1.BREAK)
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testSwitchOnGenericField__void_$pp_switchpatterns@switchpatterns.SwitchPatterns)
+
+;;; boolean SwitchPatterns.guard()
+(func $m_guard__boolean@switchpatterns.SwitchPatterns
+ (result i32)
+ (block
+  (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns )
+  (return (call $m_guard_$private__boolean@switchpatterns.SwitchPatterns ))
+ )
+)
+
+;;; boolean SwitchPatterns.guard_$private()
+(func $m_guard_$private__boolean@switchpatterns.SwitchPatterns
+ (result i32)
+ (block
+  (return (i32.const 0))
+ )
+)
+
 ;;; void SwitchPatterns.fail()
 (func $m_fail__void@switchpatterns.SwitchPatterns
  (block
@@ -1397,6 +1516,69 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.Sealed.B)
+
+;;; Holder<T> Holder.$create(T value)
+(func $$create__java_lang_Object@switchpatterns.SwitchPatterns.Holder
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $switchpatterns.SwitchPatterns.Holder))
+ (local $$instance (ref null $switchpatterns.SwitchPatterns.Holder))
+ (block
+  (call $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Holder )
+  (local.set $$instance (struct.new $switchpatterns.SwitchPatterns.Holder (global.get $switchpatterns.SwitchPatterns.Holder.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
+  (call $$ctor__java_lang_Object__void_$p_switchpatterns_SwitchPatterns_Holder@switchpatterns.SwitchPatterns.Holder (ref.as_non_null (local.get $$instance))(local.get $value))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Holder.$ctor(T value)
+(func $$ctor__java_lang_Object__void_$p_switchpatterns_SwitchPatterns_Holder@switchpatterns.SwitchPatterns.Holder
+ (param $this (ref null $switchpatterns.SwitchPatterns.Holder))
+ (param $value (ref null $java.lang.Object))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  (struct.set $switchpatterns.SwitchPatterns.Holder $value@switchpatterns.SwitchPatterns.Holder (local.get $this) (local.get $value))
+ )
+)
+
+;;; void Holder.$clinit()
+(func $$clinit__void_<once>_@switchpatterns.SwitchPatterns.Holder
+ (block
+  (if (global.get $$class-initialized@switchpatterns.SwitchPatterns.Holder)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@switchpatterns.SwitchPatterns.Holder (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Holder.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@switchpatterns.SwitchPatterns.Holder
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@switchpatterns.SwitchPatterns.Holder)))
+   (then
+    (return (global.get $$class@switchpatterns.SwitchPatterns.Holder))
+   )
+  )
+  (global.set $$class@switchpatterns.SwitchPatterns.Holder (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|switchpatter...|__java_lang_String_<once>_@switchpatterns.SwitchPatterns.Holder.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@switchpatterns.SwitchPatterns.Holder))
+ )
+)
+
+;;; Class<?> Holder.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.Holder
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $switchpatterns.SwitchPatterns.Holder))
+ (local.set $this (ref.cast (ref $switchpatterns.SwitchPatterns.Holder) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@switchpatterns.SwitchPatterns.Holder ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@switchpatterns.SwitchPatterns.Holder)
 
 ;;; Color Color.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@switchpatterns.SwitchPatterns.Color
