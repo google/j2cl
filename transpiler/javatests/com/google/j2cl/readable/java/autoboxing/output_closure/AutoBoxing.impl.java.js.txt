@@ -214,6 +214,15 @@ class AutoBoxing extends j_l_Object {
   o = Integer.valueOf(15);
  }
  /** @nodts */
+ static m_testBoxing_constantsOfDifferentType__void() {
+  AutoBoxing.$clinit();
+  let localConstant = 66;
+  let boxC = Integer.valueOf(AutoBoxing.f_INT_CONSTANT__autoboxing_AutoBoxing_);
+  boxC = Integer.valueOf(localConstant);
+  boxC = Integer.valueOf(65 /* 'A' */ + 3 | 0);
+  boxC = Byte.m_valueOf__byte__java_lang_Byte(65);
+ }
+ /** @nodts */
  m_testUnboxing__void() {
   let boxBool = Boolean.$create__boolean(true);
   let boxD = Double.$create__double(2.2);
@@ -454,6 +463,8 @@ class AutoBoxing extends j_l_Object {
 }
 /**@const {number} @nodts*/
 AutoBoxing.f_COMPILE_TIME_CONSTANT__autoboxing_AutoBoxing = 1.100000023841858;
+/**@const {number} @nodts*/
+AutoBoxing.f_INT_CONSTANT__autoboxing_AutoBoxing_ = 65;
 $Util.$setClassMetadata(AutoBoxing, 'autoboxing.AutoBoxing');
 
 exports = AutoBoxing;

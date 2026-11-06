@@ -15,7 +15,9 @@
  */
 package autoboxing;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import javaemul.internal.annotations.DoNotAutobox;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
 @SuppressWarnings({
@@ -201,6 +203,24 @@ public class AutoBoxing {
 
     // auto-boxing by intersection cast.
     o = (Integer & Comparable<Integer>) 15;
+  }
+
+  private static final int INT_CONSTANT = 65;
+
+  // TODO(b/582756197): Move to testBoxing when fixed. Constants that are not number literals are
+  // boxed with the type of the constant instead of the type of the variable.
+  @Wasm("nop") // Produces an invalid module.
+  @J2ktIncompatible // Produces Kotlin that does not compile.
+  @SuppressWarnings("unused")
+  public static void testBoxing_constantsOfDifferentType() {
+    final int localConstant = 66;
+
+    // auto-boxing by assignment with constant expressions
+    Character boxC = INT_CONSTANT;
+    boxC = localConstant;
+    boxC = 'A' + 3;
+    // javac also accepts constants of a narrower type
+    boxC = (byte) 65;
   }
 
   @SuppressWarnings("unused")
