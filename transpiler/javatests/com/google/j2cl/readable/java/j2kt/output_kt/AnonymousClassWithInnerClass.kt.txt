@@ -19,15 +19,21 @@
 package j2kt
 
 import javaemul.lang.*
+import java.lang.IllegalStateException
+import java.lang.Runnable
 import javaemul.lang.MutableIteratorJvm
 import kotlin.Any
+import kotlin.Array
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.Iterator
+import kotlin.collections.List
+import kotlin.collections.MutableList
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class AnonymousClassWithInnerClass {
  @JvmField
@@ -36,6 +42,9 @@ open class AnonymousClassWithInnerClass {
  open fun <ConflictWithTypeParam: Any> testNameCollisions(ConflictWithParam: Int, unused: ConflictWithTypeParam?): Any {
   val ConflictWithLocal: Int = this.OuterFieldCollision
   val shadowSuper: OuterShadowTarget = object : OuterShadowTarget() {
+   @JvmField
+   internal var selfShadowed: OuterShadowTarget = OuterShadowTarget()
+   
    internal fun createSelfShadowed(): Any {
     val local = OuterShadowTarget()
     return local
@@ -46,6 +55,30 @@ open class AnonymousClassWithInnerClass {
   return object : Any() {
    @JvmField
    internal var ConflictWithField: Int = ConflictWithParam + ConflictWithLocal + shadowSuper.hashCode()
+   
+   @JvmField
+   internal var companionField: Companion? = Companion()
+   
+   @JvmField
+   internal var fieldCollision: ConflictWithField? = ConflictWithField()
+   
+   @JvmField
+   internal var outerFieldCollision: OuterFieldCollision? = OuterFieldCollision()
+   
+   @JvmField
+   internal var paramCollision: ConflictWithParam? = ConflictWithParam()
+   
+   @JvmField
+   internal var localCollision: ConflictWithLocal? = ConflictWithLocal()
+   
+   @JvmField
+   internal var typeParamCollision: ConflictWithTypeParam? = ConflictWithTypeParam()
+   
+   @JvmField
+   internal var anonA: A = A()
+   
+   @JvmField
+   internal var qualifiedNestedA: NestedShadow.A = NestedShadow().A()
    
    internal fun instantiateAllAsLocals(): Int {
     val c = Companion()
@@ -74,6 +107,9 @@ open class AnonymousClassWithInnerClass {
    internal open inner class A internal constructor()
    
    internal open inner class NestedShadow internal constructor() {
+    @JvmField
+    internal var nestedA: NestedShadow.A = A()
+    
     internal open fun createNestedA(): Any {
      val localNestedA = A()
      return localNestedA
@@ -87,6 +123,24 @@ open class AnonymousClassWithInnerClass {
  companion object {
   @JvmStatic
   fun testBasicTypePositions(unknown: Any): Any = object : Any() {
+   @JvmField
+   internal var nullableField: Inner? = null
+   
+   @JvmField
+   internal var initializedField: Inner = Inner(1)
+   
+   @JvmField
+   internal var listField: List<Inner>? = null
+   
+   @JvmField
+   internal var covariantListField: List<Inner>? = null
+   
+   @JvmField
+   internal var contravariantListField: MutableList<in Inner>? = null
+   
+   @JvmField
+   internal var arrayField: Array<Inner>? = null
+   
    internal fun anonHelper(): Int = 10
    
    internal fun localVariablesAndInlineAccess(): Int {
@@ -94,9 +148,29 @@ open class AnonymousClassWithInnerClass {
     return local.selfValueViaThis() + local.valuePlusAnonHelper() + Inner(6).value
    }
    
+   internal fun acceptAndReturn(param: Inner): Inner {
+    val nonNullLocal = initializedField
+    val nullableLocal = nullableField
+    nullableField = param
+    if (unknown is Inner && run {
+     val patterned = unknown as Inner
+     patterned.selfViaThis() === patterned
+    }) {
+     val casted = unknown as Inner
+     return casted.selfViaThis()
+    }
+    return (if (nullableLocal != null) nullableLocal else nonNullLocal)!!
+   }
+   
+   internal fun <U> acceptIntersection(param: U): U where U: Inner, U: Runnable {
+    param.run()
+    return param
+   }
+   
    internal fun <Inner: Any> shadowWithMethodTypeParam(param: Inner): Int {
     val inferredLocal = Inner(1)
-    return inferredLocal.valuePlusAnonHelper() + param.hashCode()
+    val inferredFromField = initializedField
+    return inferredLocal.valuePlusAnonHelper() + inferredFromField.valuePlusAnonHelper() + param.hashCode()
    }
    
    internal open inner class Inner constructor(value: Int) {
@@ -109,6 +183,8 @@ open class AnonymousClassWithInnerClass {
     
     internal open fun selfValueViaThis(): Int = this@Inner.value
     
+    internal open fun selfViaThis(): Inner = this@Inner
+    
     internal open fun valuePlusAnonHelper(): Int = this.value + anonHelper()
    }
   }
@@ -117,15 +193,24 @@ open class AnonymousClassWithInnerClass {
   fun testStatefulIteratorPattern(item: String): Iterator<String> = object : MutableIteratorJvm<String> {
    private var yielded: Boolean = false
    
+   private var toRemove: EntryHolder? = null
+   
    override fun hasNext(): Boolean = !yielded
    
    override fun next(): String {
     yielded = true
     val entry = EntryHolder(item)
+    toRemove = entry
     return entry.value
    }
    
-   override fun remove() {}
+   override fun remove() {
+    val e = toRemove
+    toRemove = null
+    if (e != null && e!!.value.isEmpty()) {
+     throw IllegalStateException()
+    }
+   }
    
    internal open inner class EntryHolder constructor(value: String) {
     @JvmField
@@ -139,6 +224,22 @@ open class AnonymousClassWithInnerClass {
   
   @JvmStatic
   fun testVisibilityModifiers(): Any = object : Any() {
+   @JvmField
+   var publicField: PublicInner = PublicInner()
+   
+   @JvmField
+   protected var protectedField: ProtectedInner = ProtectedInner()
+   
+   @JvmField
+   internal var packageField: PackagePrivateInner = PackagePrivateInner()
+   
+   private var privateField: PrivateInner = PrivateInner()
+   
+   @JvmField
+   var publicExposingPackagePrivate: PackagePrivateInner = PackagePrivateInner()
+   
+   internal fun packageExposingPrivate(): PrivateInner = privateField
+   
    internal fun instantiateAllVisibilities(): Int {
     val pub = PublicInner()
     val prot = ProtectedInner()
@@ -165,12 +266,47 @@ open class AnonymousClassWithInnerClass {
      internal open fun value(): Int = 10
     }
    }.computeInline()
-   return directInline
+   val anon = object : Any() {
+    internal fun get(): EscapingInner = EscapingInner()
+    
+    internal open inner class EscapingInner internal constructor() {
+     internal open fun value(): Int = 30
+    }
+   }
+   val escaped = anon.get()
+   val inlineResult: Int = object : Any() {
+    internal fun get(): InlineInner = InlineInner()
+    
+    internal open inner class InlineInner internal constructor() {
+     internal open fun value(): Int = 2
+    }
+   }.get().value()
+   return directInline + escaped.value() + inlineResult
   }
  }
  
  open class GenericOuter<T: Any> {
   open fun <M: Any> testGenericsAndNesting(t: T, m: M): Any = object : Any() {
+   @JvmField
+   internal var innerField: Inner? = Inner()
+   
+   @JvmField
+   internal var genericString: GenericInner<String> = GenericInner<String>("ok")
+   
+   @JvmField
+   internal var genericM: GenericInner<M> = GenericInner<M>(m)
+   
+   @JvmField
+   internal var baseField: Base<T> = Base<T>(t)
+   
+   @JvmField
+   internal var nestedField: Base<T>.Nested<M> = baseField.Nested<M>(m)
+   
+   @JvmField
+   internal var concreteNestedField: Base<String>.Nested<Int> = Base<String>("s").Nested<Int>(1)
+   
+   internal fun <N: Any> box(n: N): GenericInner<N> = GenericInner<N>(n)
+   
    internal fun localGenericAndNestedAccess(): Boolean {
     val localInner = Inner()
     val localGeneric = GenericInner<M>(m)
@@ -184,18 +320,32 @@ open class AnonymousClassWithInnerClass {
    
    internal fun fromNestedScopes(): Any {
     open class LocalInsideAnon internal constructor() {
+     @JvmField
+     internal var captured: Inner? = innerField
+     
+     @JvmField
+     internal var created: GenericInner<T> = GenericInner<T>(t)
+     
      internal open fun captureViaLocal(): T {
       val localCreated = GenericInner<T>(t)
       return localCreated.u
      }
     }
     return object : Any() {
+     @JvmField
+     internal var outerInner: Inner? = LocalInsideAnon().captured
+     
+     @JvmField
+     internal var deeper: DeeperInner = DeeperInner()
+     
      internal fun runDeeper(): T {
       val localDeeper = DeeperInner()
       return localDeeper.getCapturedT()
      }
      
      internal open inner class DeeperInner internal constructor() {
+      internal open fun getOuterInner(): Inner? = outerInner
+      
       internal open fun getCapturedT(): T = LocalInsideAnon().captureViaLocal()
      }
     }
@@ -228,6 +378,8 @@ open class AnonymousClassWithInnerClass {
      this.a = a
     }
     
+    internal open fun createNested(b: M): Base<A>.Nested<M> = Nested<M>(b)
+    
     internal open inner class Nested<B: Any> constructor(b: B) {
      @JvmField
      internal val b: B
@@ -237,10 +389,18 @@ open class AnonymousClassWithInnerClass {
      }
      
      internal open fun outerA(): A = this@Base.a
+     
+     internal open fun self(): Base<A>.Nested<B> = this
     }
    }
    
    internal open inner class Sibling internal constructor() {
+    @JvmField
+    internal var fromAnonField: Inner? = innerField
+    
+    @JvmField
+    internal var fromNested: Base<T>.Nested<M> = nestedField
+    
     internal open fun fromLocalInner(): T {
      val local = Inner()
      return local.getT()
@@ -251,6 +411,9 @@ open class AnonymousClassWithInnerClass {
   companion object {
    @JvmStatic
    fun <S: Any> testStaticGeneric(s: S): Any = object : Any() {
+    @JvmField
+    internal var field: StaticContextInner<S> = StaticContextInner<S>(s)
+    
     internal fun viaLocal(): S {
      val local = StaticContextInner<S>(s)
      return local.u

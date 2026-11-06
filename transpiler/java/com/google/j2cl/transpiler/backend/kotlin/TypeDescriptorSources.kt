@@ -141,7 +141,9 @@ internal data class TypeDescriptorSources(
         )
       } else {
         dotSeparated(
-          child.declaredSource(enclosingTypeDescriptor.toNonNullable()),
+          Source.emptyIf(enclosingTypeDescriptor.typeDeclaration.isAnonymous) {
+            child.declaredSource(enclosingTypeDescriptor.toNonNullable())
+          },
           identifierSource(typeDeclaration.ktSimpleName(asSuperType)),
         )
       },

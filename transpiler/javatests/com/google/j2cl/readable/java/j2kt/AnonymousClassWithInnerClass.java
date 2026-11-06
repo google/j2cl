@@ -16,6 +16,7 @@
 package j2kt;
 
 import java.util.Iterator;
+import java.util.List;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -25,13 +26,12 @@ public class AnonymousClassWithInnerClass {
 
   public static Object testBasicTypePositions(Object unknown) {
     return new Object() {
-      // TODO(b/579115873): Uncomment once fixed.
-      // @Nullable Inner nullableField;
-      // Inner initializedField = new Inner(1);
-      // @Nullable List<Inner> listField;
-      // @Nullable List<? extends Inner> covariantListField;
-      // @Nullable List<? super Inner> contravariantListField;
-      // Inner @Nullable [] arrayField;
+      @Nullable Inner nullableField;
+      Inner initializedField = new Inner(1);
+      @Nullable List<Inner> listField;
+      @Nullable List<? extends Inner> covariantListField;
+      @Nullable List<? super Inner> contravariantListField;
+      Inner @Nullable [] arrayField;
 
       int anonHelper() {
         return 10;
@@ -48,10 +48,9 @@ public class AnonymousClassWithInnerClass {
           return Inner.this.value;
         }
 
-        // TODO(b/579115873): Uncomment once fixed.
-        // Inner selfViaThis() {
-        //   return Inner.this;
-        // }
+        Inner selfViaThis() {
+          return Inner.this;
+        }
 
         int valuePlusAnonHelper() {
           return value + anonHelper();
@@ -63,27 +62,28 @@ public class AnonymousClassWithInnerClass {
         return local.selfValueViaThis() + local.valuePlusAnonHelper() + new Inner(6).value;
       }
 
-      // TODO(b/579115873): Uncomment once fixed.
-      // Inner acceptAndReturn(Inner param) {
-      //   final Inner nonNullLocal = initializedField;
-      //   final @Nullable Inner nullableLocal = nullableField;
-      //   nullableField = param;
-      //   if (unknown instanceof Inner patterned && patterned.selfViaThis() == patterned) {
-      //     Inner casted = (Inner) unknown;
-      //     return casted.selfViaThis();
-      //   }
-      //   return nullableLocal != null ? nullableLocal : nonNullLocal;
-      // }
+      Inner acceptAndReturn(Inner param) {
+        final Inner nonNullLocal = initializedField;
+        final @Nullable Inner nullableLocal = nullableField;
+        nullableField = param;
+        if (unknown instanceof Inner patterned && patterned.selfViaThis() == patterned) {
+          Inner casted = (Inner) unknown;
+          return casted.selfViaThis();
+        }
+        return nullableLocal != null ? nullableLocal : nonNullLocal;
+      }
 
-      // TODO(b/579115873): Uncomment once fixed.
-      // <U extends Inner & Runnable> U acceptIntersection(U param) {
-      //   param.run();
-      //   return param;
-      // }
+      <U extends Inner & Runnable> U acceptIntersection(U param) {
+        param.run();
+        return param;
+      }
 
       <Inner> int shadowWithMethodTypeParam(Inner param) {
         var inferredLocal = this.new Inner(1);
-        return inferredLocal.valuePlusAnonHelper() + param.hashCode();
+        var inferredFromField = initializedField;
+        return inferredLocal.valuePlusAnonHelper()
+            + inferredFromField.valuePlusAnonHelper()
+            + param.hashCode();
       }
     };
   }
@@ -91,9 +91,7 @@ public class AnonymousClassWithInnerClass {
   public static Iterator<String> testStatefulIteratorPattern(String item) {
     return new Iterator<String>() {
       private boolean yielded;
-
-      // TODO(b/579115873): Uncomment once fixed.
-      // private @Nullable EntryHolder toRemove;
+      private @Nullable EntryHolder toRemove;
 
       class EntryHolder {
         final String value;
@@ -112,19 +110,17 @@ public class AnonymousClassWithInnerClass {
       public String next() {
         yielded = true;
         EntryHolder entry = new EntryHolder(item);
-        // TODO(b/579115873): Uncomment once fixed.
-        // toRemove = entry;
+        toRemove = entry;
         return entry.value;
       }
 
       @Override
       public void remove() {
-        // TODO(b/579115873): Uncomment once fixed.
-        // final @Nullable EntryHolder e = toRemove;
-        // toRemove = null;
-        // if (e != null && e.value.isEmpty()) {
-        //   throw new IllegalStateException();
-        // }
+        final @Nullable EntryHolder e = toRemove;
+        toRemove = null;
+        if (e != null && e.value.isEmpty()) {
+          throw new IllegalStateException();
+        }
       }
     };
   }
@@ -132,13 +128,12 @@ public class AnonymousClassWithInnerClass {
   public static class GenericOuter<T> {
     public <M> Object testGenericsAndNesting(T t, M m) {
       return new Object() {
-        // TODO(b/579115873): Uncomment once fixed.
-        // @Nullable Inner innerField = new Inner();
-        // GenericInner<String> genericString = new GenericInner<>("ok");
-        // GenericInner<M> genericM = new GenericInner<>(m);
-        // Base<T> baseField = new Base<>(t);
-        // Base<T>.Nested<M> nestedField = baseField.new Nested<>(m);
-        // Base<String>.Nested<Integer> concreteNestedField = new Base<>("s").new Nested<>(1);
+        @Nullable Inner innerField = new Inner();
+        GenericInner<String> genericString = new GenericInner<>("ok");
+        GenericInner<M> genericM = new GenericInner<>(m);
+        Base<T> baseField = new Base<>(t);
+        Base<T>.Nested<M> nestedField = baseField.new Nested<>(m);
+        Base<String>.Nested<Integer> concreteNestedField = new Base<>("s").new Nested<>(1);
 
         class Inner {
           T getT() {
@@ -166,10 +161,9 @@ public class AnonymousClassWithInnerClass {
           }
         }
 
-        // TODO(b/579115873): Uncomment once fixed.
-        // <N> GenericInner<N> box(N n) {
-        //   return new GenericInner<>(n);
-        // }
+        <N> GenericInner<N> box(N n) {
+          return new GenericInner<>(n);
+        }
 
         class Base<A> {
           final A a;
@@ -189,16 +183,14 @@ public class AnonymousClassWithInnerClass {
               return a;
             }
 
-            // TODO(b/579115873): Uncomment once fixed.
-            // Nested<B> self() {
-            //   return this;
-            // }
+            Nested<B> self() {
+              return this;
+            }
           }
 
-          // TODO(b/579115873): Uncomment once fixed.
-          // Nested<M> createNested(M b) {
-          //   return new Nested<>(b);
-          // }
+          Nested<M> createNested(M b) {
+            return new Nested<>(b);
+          }
         }
 
         boolean localGenericAndNestedAccess() {
@@ -210,9 +202,8 @@ public class AnonymousClassWithInnerClass {
         }
 
         class Sibling {
-          // TODO(b/579115873): Uncomment once fixed.
-          // @Nullable Inner fromAnonField = innerField;
-          // Base<T>.Nested<M> fromNested = nestedField;
+          @Nullable Inner fromAnonField = innerField;
+          Base<T>.Nested<M> fromNested = nestedField;
 
           T fromLocalInner() {
             Inner local = new Inner();
@@ -222,9 +213,8 @@ public class AnonymousClassWithInnerClass {
 
         Object fromNestedScopes() {
           class LocalInsideAnon {
-            // TODO(b/579115873): Uncomment once fixed.
-            // @Nullable Inner captured = innerField;
-            // GenericInner<T> created = new GenericInner<>(t);
+            @Nullable Inner captured = innerField;
+            GenericInner<T> created = new GenericInner<>(t);
 
             T captureViaLocal() {
               GenericInner<T> localCreated = new GenericInner<>(t);
@@ -232,22 +222,19 @@ public class AnonymousClassWithInnerClass {
             }
           }
           return new Object() {
-            // TODO(b/579115873): Uncomment once fixed.
-            // @Nullable Inner outerInner = new LocalInsideAnon().captured;
+            @Nullable Inner outerInner = new LocalInsideAnon().captured;
 
             class DeeperInner {
-              // TODO(b/579115873): Uncomment once fixed.
-              // @Nullable Inner getOuterInner() {
-              //   return outerInner;
-              // }
+              @Nullable Inner getOuterInner() {
+                return outerInner;
+              }
 
               T getCapturedT() {
                 return new LocalInsideAnon().captureViaLocal();
               }
             }
 
-            // TODO(b/579115873): Uncomment once fixed.
-            // DeeperInner deeper = new DeeperInner();
+            DeeperInner deeper = new DeeperInner();
 
             T runDeeper() {
               DeeperInner localDeeper = new DeeperInner();
@@ -260,8 +247,7 @@ public class AnonymousClassWithInnerClass {
 
     public static <S> Object testStaticGeneric(S s) {
       return new Object() {
-        // TODO(b/579115873): Uncomment once fixed.
-        // StaticContextInner<S> field = new StaticContextInner<>(s);
+        StaticContextInner<S> field = new StaticContextInner<>(s);
 
         S viaLocal() {
           StaticContextInner<S> local = new StaticContextInner<>(s);
@@ -286,8 +272,7 @@ public class AnonymousClassWithInnerClass {
     int ConflictWithLocal = OuterFieldCollision;
     OuterShadowTarget shadowSuper =
         new OuterShadowTarget() {
-          // TODO(b/579115873): Uncomment once fixed.
-          // OuterShadowTarget selfShadowed = new OuterShadowTarget();
+          OuterShadowTarget selfShadowed = new OuterShadowTarget();
 
           Object createSelfShadowed() {
             OuterShadowTarget local = new OuterShadowTarget();
@@ -299,15 +284,14 @@ public class AnonymousClassWithInnerClass {
     return new Object() {
       int ConflictWithField = ConflictWithParam + ConflictWithLocal + shadowSuper.hashCode();
 
-      // TODO(b/579115873): Uncomment once fixed.
-      // @Nullable Companion companionField = new Companion();
-      // @Nullable ConflictWithField fieldCollision = new ConflictWithField();
-      // @Nullable OuterFieldCollision outerFieldCollision = new OuterFieldCollision();
-      // @Nullable ConflictWithParam paramCollision = new ConflictWithParam();
-      // @Nullable ConflictWithLocal localCollision = new ConflictWithLocal();
-      // @Nullable ConflictWithTypeParam typeParamCollision = new ConflictWithTypeParam();
-      // A anonA = new A();
-      // NestedShadow.A qualifiedNestedA = new NestedShadow().new A();
+      @Nullable Companion companionField = new Companion();
+      @Nullable ConflictWithField fieldCollision = new ConflictWithField();
+      @Nullable OuterFieldCollision outerFieldCollision = new OuterFieldCollision();
+      @Nullable ConflictWithParam paramCollision = new ConflictWithParam();
+      @Nullable ConflictWithLocal localCollision = new ConflictWithLocal();
+      @Nullable ConflictWithTypeParam typeParamCollision = new ConflictWithTypeParam();
+      A anonA = new A();
+      NestedShadow.A qualifiedNestedA = new NestedShadow().new A();
 
       int instantiateAllAsLocals() {
         Companion c = new Companion();
@@ -344,8 +328,7 @@ public class AnonymousClassWithInnerClass {
       class A {}
 
       class NestedShadow {
-        // TODO(b/579115873): Uncomment once fixed.
-        // A nestedA = new A();
+        A nestedA = new A();
 
         Object createNestedA() {
           A localNestedA = new A();
@@ -359,17 +342,15 @@ public class AnonymousClassWithInnerClass {
 
   public static Object testVisibilityModifiers() {
     return new Object() {
-      // TODO(b/579115873): Uncomment once fixed.
-      // public PublicInner publicField = new PublicInner();
-      // protected ProtectedInner protectedField = new ProtectedInner();
-      // PackagePrivateInner packageField = new PackagePrivateInner();
-      // private PrivateInner privateField = new PrivateInner();
-      // public PackagePrivateInner publicExposingPackagePrivate = new PackagePrivateInner();
+      public PublicInner publicField = new PublicInner();
+      protected ProtectedInner protectedField = new ProtectedInner();
+      PackagePrivateInner packageField = new PackagePrivateInner();
+      private PrivateInner privateField = new PrivateInner();
+      public PackagePrivateInner publicExposingPackagePrivate = new PackagePrivateInner();
 
-      // TODO(b/579115873): Uncomment once fixed.
-      // PrivateInner packageExposingPrivate() {
-      //   return privateField;
-      // }
+      PrivateInner packageExposingPrivate() {
+        return privateField;
+      }
 
       int instantiateAllVisibilities() {
         PublicInner pub = new PublicInner();
@@ -404,33 +385,31 @@ public class AnonymousClassWithInnerClass {
             return new DirectInner().value();
           }
         }.computeInline();
-    // TODO(b/579115873): Uncomment once fixed.
-    // var anon =
-    //     new Object() {
-    //       class EscapingInner {
-    //         int value() {
-    //           return 30;
-    //         }
-    //       }
-    //
-    //       EscapingInner get() {
-    //         return new EscapingInner();
-    //       }
-    //     };
-    // var escaped = anon.get();
-    // int inlineResult =
-    //     new Object() {
-    //       class InlineInner {
-    //         int value() {
-    //           return 2;
-    //         }
-    //       }
-    //
-    //       InlineInner get() {
-    //         return new InlineInner();
-    //       }
-    //     }.get().value();
-    // return directInline + escaped.value() + inlineResult;
-    return directInline;
+    var anon =
+        new Object() {
+          class EscapingInner {
+            int value() {
+              return 30;
+            }
+          }
+
+          EscapingInner get() {
+            return new EscapingInner();
+          }
+        };
+    var escaped = anon.get();
+    int inlineResult =
+        new Object() {
+          class InlineInner {
+            int value() {
+              return 2;
+            }
+          }
+
+          InlineInner get() {
+            return new InlineInner();
+          }
+        }.get().value();
+    return directInline + escaped.value() + inlineResult;
   }
 }
