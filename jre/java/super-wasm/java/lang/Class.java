@@ -149,11 +149,6 @@ public final class Class<T> implements Type, Serializable {
     return !isArray() && isPrimitive;
   }
 
-  public T[] getEnumConstants() {
-    // TODO(b/30745420): implement
-    throw new UnsupportedOperationException();
-  }
-
   public Class<? super T> getSuperclass() {
     return superClass;
   }

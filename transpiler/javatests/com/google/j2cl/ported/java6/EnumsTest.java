@@ -33,12 +33,6 @@ public class EnumsTest {
     C
   }
 
-  enum BarelyReferenced2 {
-    A,
-    B,
-    C
-  }
-
   enum Basic {
     A,
     B,
@@ -259,12 +253,6 @@ public class EnumsTest {
     } catch (IllegalArgumentException expected) {
       // expected
     }
-  }
-
-  // TODO(b/30745420): Enable this test once Class.getEnumConstants() is implemented.
-  // @Test
-  public void testBarelyReferencedGetEnumConstants() {
-    assertThat(BarelyReferenced2.class.getEnumConstants()).isNotNull();
   }
 
   @SuppressWarnings("unchecked")

@@ -100,8 +100,4 @@ fun testValueOf_exceptions() {
   } catch (expected: IllegalArgumentException) {
     // JVM throws IllegalArgumentException
   }
-
-  try {
-    Planet::class.java.enumConstants
-  } catch (expected: UnsupportedOperationException) {}
 }

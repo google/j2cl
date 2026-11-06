@@ -108,11 +108,6 @@ public final class Class<T> implements Type, Serializable {
     return !isArray() && ctor.isPrimitive();
   }
 
-  public T[] getEnumConstants() {
-    // TODO(b/30745420): implement
-    throw new UnsupportedOperationException();
-  }
-
   @SuppressWarnings("unchecked")
   public Class<? super T> getSuperclass() {
     Constructor superCtor = ctor.getSuperConstructor();
