@@ -18,7 +18,11 @@ package bridgemethods;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
+
+import java.util.function.Supplier;
 
 /** Tests for bridge methods with accidental overriding. */
 public class Main {
@@ -31,6 +35,7 @@ public class Main {
     testAbstractHidesSuperGenericMethod();
     testBridgesMultipleOverloads();
     testParameterizedMethodBridge();
+    testCovariantReturn();
   }
 
   private static void testSimpleBridges() {
@@ -249,6 +254,47 @@ public class Main {
     assertEquals("child", new Child().m(""));
     Parent<String> p = new Child();
     assertEquals("child", p.m(""));
+  }
+
+  private static void testCovariantReturn() {
+    Supplier<Object> byteSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Byte get() {
+            return 1;
+          }
+        };
+    // TODO(b/285228969): Remove the guard when anonymous classes with covariant return types are
+    // handled correctly.
+    if (!isJavaScript() && !isWasm()) {
+      assertTrue(byteSupplier.get() instanceof Byte);
+    }
+
+    // TODO(b/285228969): Uncomment when anonymous classes with covariant return types are handled
+    // correctly. Calls are retargeted to Supplier.get() and the result is not unboxed, which
+    // produces an invalid Wasm module.
+    // var integerSupplier =
+    //     new Supplier<Object>() {
+    //       @Override
+    //       public Integer get() {
+    //         return 42;
+    //       }
+    //     };
+    // int i = integerSupplier.get();
+    // assertTrue(i == 42);
+    //
+    // var nullSupplier =
+    //     new Supplier<Object>() {
+    //       @Override
+    //       public Integer get() {
+    //         return null;
+    //       }
+    //     };
+    // assertThrowsNullPointerException(
+    //     () -> {
+    //       int unused = nullSupplier.get();
+    //       throw new AssertionError(unused);
+    //     });
   }
 
   interface SomeInterface<T> {

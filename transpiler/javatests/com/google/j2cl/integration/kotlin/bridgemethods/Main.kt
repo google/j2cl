@@ -19,6 +19,7 @@ import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import com.google.j2cl.integration.testing.TestUtils.isJvm
+import java.util.function.Supplier
 
 /** Tests for bridge methods with accidental overriding. */
 fun main(vararg unused: String) {
@@ -29,6 +30,7 @@ fun main(vararg unused: String) {
   testAbstractHidesSuperGenericMethod()
   testBridgesMultipleOverloads()
   testParameterizedMethodBridge()
+  testCovariantReturn()
 }
 
 private fun testSimpleBridges() {
@@ -239,6 +241,28 @@ private fun testParameterizedMethodBridge() {
   assertEquals("child", Child().m(""))
   val p: Parent<String> = Child()
   assertEquals("child", p.m(""))
+}
+
+private fun testCovariantReturn() {
+  val byteSupplier: Supplier<Any?> =
+    object : Supplier<Any?> {
+      override fun get(): Byte {
+        return 1
+      }
+    }
+  assertTrue(byteSupplier.get() is Byte)
+
+  // TODO(b/285228969): Uncomment when anonymous classes with covariant return types are handled
+  // correctly. Calls are retargeted to Supplier.get() and the result is not unboxed, which fails
+  // JavaScript type checking.
+  // val intSupplier =
+  //   object : Supplier<Any?> {
+  //     override fun get(): Int {
+  //       return 42
+  //     }
+  //   }
+  // val i: Int = intSupplier.get()
+  // assertTrue(i + 1 == 43)
 }
 
 interface SomeInterface<T> {

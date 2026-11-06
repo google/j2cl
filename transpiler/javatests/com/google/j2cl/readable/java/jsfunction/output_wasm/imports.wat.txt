@@ -7,6 +7,12 @@
  (result (ref null string))
 )
 
+;;; WasmExtern ObjectSupplier.$invokeJsFunction(WasmExtern $jsFuncref)
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object@jsfunction.JsFunctionOptimization.ObjectSupplier (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+ (param $$jsFuncref (ref null extern))
+ (result (ref null extern))
+)
+
 ;;; WasmExtern Function.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern u)
 (func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__java_lang_Object@jsfunction.Main.Function (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
  (param $$jsFuncref (ref null extern))

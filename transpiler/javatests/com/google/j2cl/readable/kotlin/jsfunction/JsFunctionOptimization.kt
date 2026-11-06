@@ -22,6 +22,11 @@ internal fun interface F {
   fun m(s: String): String
 }
 
+@JsFunction
+internal fun interface ObjectSupplier {
+  fun get(): Any?
+}
+
 fun main(r: Int) {
   object {
     fun m() {
@@ -119,6 +124,23 @@ fun main(r: Int) {
       }
     },
   )
+
+  // Anonymous classes whose method has a covariant return type need the method's return type as
+  // the return context.
+  val byteSupplier: ObjectSupplier =
+    object : ObjectSupplier {
+      override fun get(): Byte {
+        return 1
+      }
+    }
+
+  val intSupplier =
+    object : ObjectSupplier {
+      override fun get(): Int {
+        return 42
+      }
+    }
+  val i: Int = intSupplier.get()
 }
 
 internal class Holder<T> {

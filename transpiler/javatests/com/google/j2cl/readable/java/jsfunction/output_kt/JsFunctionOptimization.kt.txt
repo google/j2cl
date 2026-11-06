@@ -22,6 +22,7 @@ import javaemul.lang.*
 import jsinterop.annotations.JsFunction
 import kotlin.Any
 import kotlin.Array
+import kotlin.Byte
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
@@ -76,11 +77,19 @@ open class JsFunctionOptimization {
     override fun m(s: String?): String? = ""
    },
   )
+  val byteSupplier: ObjectSupplier = object : ObjectSupplier {
+   override fun get(): Byte? = 1.toByte()
+  }
  }
  
  @JsFunction
  internal fun interface F {
   fun m(s: String?): String?
+ }
+ 
+ @JsFunction
+ internal fun interface ObjectSupplier {
+  fun get(): Any?
  }
  
  internal open inner class Holder<T> {
