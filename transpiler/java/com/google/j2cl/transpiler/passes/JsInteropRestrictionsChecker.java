@@ -41,6 +41,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -753,6 +754,32 @@ public class JsInteropRestrictionsChecker {
                 return qualifierExpression;
               }
 
+              @Override
+              public Expression rewriteVarargsParameterContext(
+                  ParameterDescriptor inferredParameterDescriptor,
+                  ParameterDescriptor declaredParameterDescriptor,
+                  Expression argument) {
+                // TODO(b/582202056): Remove once varargs packaging is fixed.
+                // Varargs packaging is decided by runtime assignability, so an array passed as the
+                // varargs array, e.g. `NativeEnum[]` passed to `Enum<?>...`, is wrongly packaged as
+                // the only vararg. An array that is not assignable to the component type cannot be
+                // a vararg, so check it only as passed directly and not also as a vararg.
+                if (argument instanceof ArrayLiteral arrayLiteral
+                    && arrayLiteral.getValueExpressions().size() == 1) {
+                  Expression vararg = arrayLiteral.getValueExpressions().getFirst();
+                  TypeDescriptor varargTypeDescriptor = vararg.getTypeDescriptor();
+                  if (varargTypeDescriptor.isArray()
+                      && !varargTypeDescriptor.isAssignableTo(
+                          arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor())) {
+                    checkJsEnumAssignment(
+                        inferredParameterDescriptor.getTypeDescriptor(), vararg, "assigned to");
+                    return argument;
+                  }
+                }
+                return super.rewriteVarargsParameterContext(
+                    inferredParameterDescriptor, declaredParameterDescriptor, argument);
+              }
+
               private void checkJsEnumAssignment(
                   TypeDescriptor toTypeDescriptor, Expression expression, String conversion) {
                 TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
@@ -826,6 +853,26 @@ public class JsInteropRestrictionsChecker {
       // `<T extends Object & Comparable<? super T>> T max(Collection<? extends T>)`.
       return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
           .anyMatch(t -> isDisallowedJsEnumAssignment(t, fromTypeDescriptor, seenTypeVariables));
+    }
+
+    if (toTypeDescriptor instanceof ArrayTypeDescriptor toArrayTypeDescriptor
+        && !AstUtils.isNonNativeJsEnumArray(toArrayTypeDescriptor)) {
+      // Arrays are covariant, so the values in the array flow into the component type, e.g.
+      // `NativeEnum[]` to `Enum<?>[]`. Non-native JsEnum arrays are checked separately since they
+      // can't be assigned to arrays of other types.
+      TypeDescriptor fromArrayTypeDescriptor =
+          fromTypeDescriptor instanceof TypeVariable fromTypeVariable
+              // A value of a type variable is used as its upper bound, which can be an array for
+              // captures, e.g. the type of `l.get(0)` with `l` of type
+              // `List<? extends NativeEnum[]>`.
+              ? fromTypeVariable.getUpperBoundTypeDescriptor()
+              : fromTypeDescriptor;
+      return fromArrayTypeDescriptor instanceof ArrayTypeDescriptor fromArray
+          && !AstUtils.isNonNativeJsEnumArray(fromArray)
+          && isDisallowedJsEnumAssignment(
+              toArrayTypeDescriptor.getComponentTypeDescriptor(),
+              fromArray.getComponentTypeDescriptor(),
+              seenTypeVariables);
     }
 
     if (!fromTypeDescriptor.isJsEnum()) {

@@ -3560,6 +3560,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 array[0] = MyJsEnum.A;
                 List<MyJsEnum> l = null;
                 List<MyJsEnum>[] ll = null;
+                List<? extends Comparable<?>>[] comparableLists = ll;
                 Object[] oarr = l.toArray();
                 MyJsEnum[] arr = null;
                 MyJsEnum[][] arr2 = null;
@@ -3811,6 +3812,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 Object[] oarr = l.toArray();
                 Object o = new NativeEnum[1];
                 NativeEnum[] arr = null;
+                Comparable<?>[] ca = arr;
                 List<NativeEnum[]> list = null;
                 o = (Function<? extends Object, ? extends Object>) (NativeEnum[] p1) -> p1;
                 o = (Function<? extends Object, ? extends Object>) (NativeEnum... p2) -> p2;
@@ -3820,6 +3822,75 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             }
             """)
         .assertNoWarnings();
+  }
+
+  public void testJsEnumCovariantArrayAssignmentFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import java.util.*;
+        import java.util.function.*;
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum { A, B }
+          @JsEnum(hasCustomValue = true)
+          enum CustomJsEnum {
+            A(1);
+            int value;
+            CustomJsEnum(int value) { this.value = value; }
+          }
+          @JsEnum(isNative = true) enum NativeEnum { A, B }
+          interface EnumArrayGetter {
+            Enum<?>[] get();
+          }
+          static class NativeEnumArrayGetter implements EnumArrayGetter {
+            @Override
+            public NativeEnum[] get() { return null; }
+        > Error: Method 'NativeEnum[] NativeEnumArrayGetter.get()' cannot override method 'Enum<?>[] EnumArrayGetter.get()' with a JsEnum return type.
+          }
+          private static void acceptsEnumVarargs(Enum<?>... es) {}
+          static class EnumVarargsBox {
+            EnumVarargsBox(Enum<?>... es) {}
+          }
+          private static void tests(
+              NativeEnum[] nativeArr,
+              NativeEnum[][] nativeArr2d,
+              List<NativeEnum[]> nativeArrList,
+              List<? extends NativeEnum[]> wildcardNativeArrList,
+              List<MyJsEnum>[] jsEnumListArr,
+              List<CustomJsEnum>[] customJsEnumListArr,
+              Comparator<Enum<?>>[] byOrdinalArr) {
+            Enum<?>[] ea1 = nativeArr;
+        > Error: 'NativeEnum[]' cannot be assigned to 'Enum<?>[]'.
+            Object o = (Enum<?>[]) nativeArr;
+        > Error: 'NativeEnum[]' cannot be cast to 'Enum<?>[]'.
+            Enum<?>[][] ea2d = nativeArr2d;
+        > Error: 'NativeEnum[][]' cannot be assigned to 'Enum<?>[][]'.
+            Enum<?>[] ea2 = wildcardNativeArrList.get(0);
+        > Error: '<captured wildcard>' cannot be assigned to 'Enum<?>[]'.
+            List<? extends Enum<?>[]> enumArrList = nativeArrList;
+        > Error: 'List<NativeEnum[]>' cannot be assigned to 'List<?>'.
+            List<? extends Enum<?>>[] ela = jsEnumListArr;
+        > Error: 'List<MyJsEnum>[]' cannot be assigned to 'List<?>[]'.
+            List<? extends Comparable<?>>[] cla = customJsEnumListArr;
+        > Error: 'List<CustomJsEnum>[]' cannot be assigned to 'List<?>[]'.
+            Comparator<? super MyJsEnum>[] compArr = byOrdinalArr;
+        > Error: 'Comparator<Enum<?>>[]' cannot be assigned to 'Comparator<?>[]'.
+            acceptsEnumVarargs(nativeArr);
+        > Error: 'NativeEnum[]' cannot be assigned to 'Enum<?>[]'.
+            acceptsEnumVarargs(NativeEnum.A);
+        > Error: JsEnum 'NativeEnum' cannot be assigned to 'Enum<?>'.
+            acceptsEnumVarargs(NativeEnum.A, NativeEnum.B);
+        > Error: JsEnum 'NativeEnum' cannot be assigned to 'Enum<?>'.
+            new EnumVarargsBox(nativeArr);
+        > Error: 'NativeEnum[]' cannot be assigned to 'Enum<?>[]'.
+            Consumer<NativeEnum[]> enumVarargsRef = Main::acceptsEnumVarargs;
+        > Error: 'NativeEnum[]' cannot be assigned to 'Enum<?>[]'.
+            Function<NativeEnum[], EnumVarargsBox> enumVarargsCtorRef = EnumVarargsBox::new;
+        > Error: 'NativeEnum[]' cannot be assigned to 'Enum<?>[]'.
+          }
+        }
+        """);
   }
 
   public void testJsEnumSwitchStatementSucceeds() {
