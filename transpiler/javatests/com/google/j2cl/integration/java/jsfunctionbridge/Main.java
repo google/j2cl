@@ -84,6 +84,22 @@ public class Main {
           }
         });
 
+    // Anonymous class implementing an Object-returning @JsFunction returning a non-native JsEnum,
+    // called through its own type so that the result is a JsEnum.
+    var jsEnumSupplier =
+        new ObjectSupplier() {
+          @Override
+          public PlainJsEnum get() {
+            return PlainJsEnum.ONE;
+          }
+        };
+    assertTrue(jsEnumSupplier.get() == PlainJsEnum.ONE);
+    // TODO(b/285228969): Remove the guard when anonymous classes with covariant return types are
+    // handled correctly.
+    if (!isJavaScript()) {
+      assertUnboxedPlainJsEnum(jsEnumSupplier.get());
+    }
+
     checkBridge_jsEnumTypeVariable(PlainJsEnum.ONE);
   }
 

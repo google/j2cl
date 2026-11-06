@@ -73,6 +73,19 @@ private fun testBridge_jsEnumBoxing() {
     }
   )
 
+  // Anonymous object implementing an Any?-returning @JsFunction returning a non-native JsEnum,
+  // called through its own type so that the result is a JsEnum.
+  val jsEnumSupplier =
+    object : ObjectSupplier {
+      override fun get(): PlainJsEnum = PlainJsEnum.ONE
+    }
+  assertTrue(jsEnumSupplier.get() == PlainJsEnum.ONE)
+  // TODO(b/285228969): Remove the guard when anonymous objects with covariant return types are
+  // handled correctly.
+  if (!isJavaScript()) {
+    assertUnboxedPlainJsEnum(jsEnumSupplier.get())
+  }
+
   checkBridge_jsEnumTypeVariable(PlainJsEnum.ONE)
 }
 
