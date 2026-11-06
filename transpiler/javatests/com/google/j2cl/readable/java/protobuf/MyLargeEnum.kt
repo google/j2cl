@@ -29,11 +29,3 @@ enum class MyLargeEnum : EnumLite {
     const val ONE_VALUE: Int = 1
   }
 }
-
-// TODO(b/193694103): Remove once J2KT rewrites large_enum shard interface references.
-interface MyLargeEnum0 {
-  companion object {
-    val ONE: MyLargeEnum? = MyLargeEnum.ONE
-    const val ONE_VALUE: Int = 1
-  }
-}

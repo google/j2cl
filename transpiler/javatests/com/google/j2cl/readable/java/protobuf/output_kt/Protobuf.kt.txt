@@ -30,7 +30,6 @@ import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 import protobuf.MyEnum
 import protobuf.MyLargeEnum
-import protobuf.MyLargeEnum0
 import protobuf.MyMessage
 import protobuf.MyMessage.Builder
 
@@ -63,9 +62,9 @@ open class Protobuf {
   val generatedMessageParser: Parser<out GeneratedMessage> = (message as GeneratedMessage?)!!.parserForType
   val enumOne: MyEnum = MyEnum.ONE
   val enumOneNumber: Int = MyEnum.ONE.number
-  val largeEnumOne: MyLargeEnum? = MyLargeEnum0.ONE
-  val largeEnumOneNumber: Int = MyLargeEnum0.ONE!!.number
-  val largeEnumOneValue: Int = MyLargeEnum0.ONE_VALUE
+  val largeEnumOne: MyLargeEnum = MyLargeEnum.ONE
+  val largeEnumOneNumber: Int = MyLargeEnum.ONE.number
+  val largeEnumOneValue: Int = MyLargeEnum.ONE_VALUE
  }
  
  open fun <T: Any> testExtension(extension: ExtensionLite<T>) {

@@ -208,6 +208,7 @@ import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
 import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
 import com.google.j2cl.transpiler.passes.RewriteAnnotationTypesJ2kt;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
+import com.google.j2cl.transpiler.passes.RewriteProtobufFieldReferencesJ2kt;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteTypeLiteralsJ2kt;
@@ -668,6 +669,7 @@ public enum Backend {
           DesugarInstanceOfPatterns::new,
           NormalizeNullLiterals::new,
           MakeVariablesFinal::new,
+          RewriteProtobufFieldReferencesJ2kt::new,
           MakeVariablesNonNull::new,
           ConvertMethodReferencesToLambdas::new,
           PropagateNullability::new,
