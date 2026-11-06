@@ -242,6 +242,8 @@ public class Main {
     assertTrue(v.equals(StringNativeEnum.OK));
     assertTrue(v.equals(NativeEnum.ACCEPT));
     assertTrue(v.equals(OK_STRING));
+    assertFalse(v.equals(1));
+    assertFalse(NumberNativeEnum.ONE.equals(1));
     assertFalse(v.equals(null));
     assertThrowsNullPointerException(
         () -> {
@@ -839,6 +841,9 @@ public class Main {
     assertTrue(jsEnum.equals(objectJsEnum));
     assertFalse(jsEnum.equals(nullJsEnum));
     assertFalse(jsEnum.equals(null));
+    assertFalse(jsEnum.equals(1));
+    assertFalse(jsEnum.equals(1.0));
+    assertThrowsNullPointerException(() -> nullJsEnum.equals(objectJsEnum));
 
     assertFalse(stringJsEnum.equals(StringJsEnum.GOODBYE));
     assertTrue(stringJsEnum.equals(objectStringJsEnum));
@@ -846,6 +851,15 @@ public class Main {
     assertFalse(stringJsEnum.equals(null));
 
     assertFalse(jsEnum.equals(stringJsEnum));
+
+    // The receiver is checked against the specialized type even if it is declared as a type
+    // variable.
+    TemplatedField<PlainJsEnum> templatedField = new TemplatedField<>(PlainJsEnum.ONE);
+    assertTrue(templatedField.value.equals(PlainJsEnum.ONE));
+    assertFalse(templatedField.value.equals(PlainJsEnum.TWO));
+    @SuppressWarnings("unchecked")
+    TemplatedField<PlainJsEnum> pollutedField = (TemplatedField) new TemplatedField<>(OK_STRING);
+    assertThrowsClassCastException(() -> pollutedField.value.equals(OK_STRING));
   }
 
   @Wasm("nop") // In Wasm, there is no boxing logic for JsEnums.

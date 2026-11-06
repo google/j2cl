@@ -233,6 +233,8 @@ private fun testStringNativeJsEnum() {
   assertTrue(v.equals(StringNativeEnum.OK))
   assertTrue(v.equals(NativeEnum.ACCEPT))
   assertTrue(v.equals(OK_STRING))
+  assertFalse(v.equals(1))
+  assertFalse(NumberNativeEnum.ONE.equals(1))
   assertFalse(v.equals(null))
 
   // Kotlin equality on a variable of JsEnum type.
@@ -790,6 +792,9 @@ private fun testAutoBoxing_specialMethods() {
   assertTrue(jsEnum == objectJsEnum)
   assertFalse(jsEnum == nullJsEnum)
   assertFalse(jsEnum == null)
+  assertFalse(jsEnum.equals(1))
+  assertFalse(jsEnum.equals(1.0))
+  assertThrowsNullPointerException { uncheckedCast<PlainJsEnum>(null).equals(objectJsEnum) }
 
   assertFalse(stringJsEnum == StringJsEnum.GOODBYE)
   assertTrue(stringJsEnum == objectStringJsEnum)
@@ -797,6 +802,15 @@ private fun testAutoBoxing_specialMethods() {
   assertFalse(stringJsEnum == null)
 
   assertFalse(jsEnum.equals(stringJsEnum))
+
+  // The receiver is checked against the specialized type even if it is declared as a type
+  // variable.
+  val templatedField = TemplatedField(PlainJsEnum.ONE)
+  assertTrue(templatedField.value.equals(PlainJsEnum.ONE))
+  assertFalse(templatedField.value.equals(PlainJsEnum.TWO))
+  @Suppress("UNCHECKED_CAST")
+  val pollutedField = TemplatedField<Any?>(OK_STRING) as TemplatedField<PlainJsEnum>
+  assertThrowsClassCastException { pollutedField.value.equals(OK_STRING) }
 }
 
 // Kotlin doesn't support intersection casts

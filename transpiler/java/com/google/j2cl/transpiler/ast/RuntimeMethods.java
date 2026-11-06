@@ -377,15 +377,6 @@ public final class RuntimeMethods {
     return createEnumsMethodCall(unboxingMethod, expression, toTypeDescriptor);
   }
 
-  public static Expression createEnumsEqualsMethodCall(Expression instance, Expression other) {
-    checkArgument(
-        instance.getTypeDescriptor().isJsEnum()
-            && (other instanceof NullLiteral
-                || instance.getTypeDescriptor().hasSameRawType(other.getTypeDescriptor())));
-    return createEnumsMethodCallCastIfNeeded(
-        "equals", instance.getTypeDescriptor(), instance, other);
-  }
-
   public static Expression createEnumsCompareToMethodCall(Expression instance, Expression other) {
     checkArgument(
         AstUtils.isNonNativeJsEnum(instance.getTypeDescriptor())

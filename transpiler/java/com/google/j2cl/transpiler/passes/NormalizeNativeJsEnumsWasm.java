@@ -69,6 +69,13 @@ public class NormalizeNativeJsEnumsWasm extends NormalizationPass {
             String targetSignature = methodDescriptor.getDeclarationDescriptor().getSignature();
             if (targetSignature.equals("equals(java.lang.Object)")) {
               Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
+              if (argument.getTypeDescriptor().isPrimitive()) {
+                argument =
+                    CastExpression.builder()
+                        .setExpression(argument)
+                        .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
+                        .build();
+              }
               // Use == for comparison instead of equals() to avoid crossing the boundary, but
               // preserve the NullPointerException on a null receiver.
               return qualifier.postfixNotNullAssertion().infixEquals(argument);

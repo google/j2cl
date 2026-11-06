@@ -17,7 +17,6 @@ package javaemul.internal;
 
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
-import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 import javaemul.internal.annotations.DoNotAutobox;
@@ -126,11 +125,6 @@ class Enums {
 
   public static boolean isInstanceOf(Object instance, Constructor ctor) {
     return instance instanceof BoxedLightEnum && ((BoxedLightEnum) instance).constructor == ctor;
-  }
-
-  public static boolean equals(@DoNotAutobox Object instance, @DoNotAutobox Object other) {
-    checkNotNull(instance);
-    return instance == other;
   }
 
   public static int compareTo(@DoNotAutobox Object instance, @DoNotAutobox Object other) {

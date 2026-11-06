@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -160,9 +161,14 @@ public class NormalizeJsEnums extends NormalizationPass {
             String targetSignature = methodDescriptor.getDeclarationDescriptor().getSignature();
             if (targetSignature.equals("equals(java.lang.Object)")) {
               Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
-              if (canAvoidBoxing(qualifierTypeDescriptor, argument)) {
-                return RuntimeMethods.createEnumsEqualsMethodCall(qualifier, argument);
+              if (argument.getTypeDescriptor().isPrimitive()) {
+                argument =
+                    CastExpression.builder()
+                        .setExpression(argument)
+                        .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
+                        .build();
               }
+              return qualifier.postfixNotNullAssertion().infixEquals(argument);
             }
 
             if (targetSignature.equals("compareTo(java.lang.Enum)")) {
@@ -205,8 +211,8 @@ public class NormalizeJsEnums extends NormalizationPass {
 
   private static boolean canAvoidBoxing(
       TypeDescriptor qualifierTypeDescriptor, Expression argument) {
-    // Use a non boxing version of equals, compareTo when comparing two non-native JsEnums of the
-    // same type, or a non-native JsEnum with null.
+    // Use a non boxing version of compareTo when comparing two non-native JsEnums of the same type,
+    // or a non-native JsEnum with null.
     // We don't do this for native JsEnums because they are generally not boxed here and this allows
     // us to specialize the code for non-native JsEnums to avoid a trampoline.
     return AstUtils.isNonNativeJsEnum(qualifierTypeDescriptor)
