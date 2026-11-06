@@ -116,8 +116,8 @@ public class JsFunctionOptimization {
           }
         });
 
-    // Anonymous classes whose method has a covariant return type need the method's return type
-    // as the return context.
+    // Primitive values returned by anonymous classes with covariant return types are converted to
+    // the more specific type.
     ObjectSupplier byteSupplier =
         new ObjectSupplier() {
           @Override
@@ -126,17 +126,15 @@ public class JsFunctionOptimization {
           }
         };
 
-    // TODO(b/285228969): Uncomment when anonymous classes with covariant return types are handled
-    // correctly. Calls are retargeted to ObjectSupplier.get() and the result is not unboxed, which
-    // produces an invalid Wasm module.
-    // var integerSupplier =
-    //     new ObjectSupplier() {
-    //       @Override
-    //       public Integer get() {
-    //         return 42;
-    //       }
-    //     };
-    // int i = integerSupplier.get();
+    // Calls to anonymous classes with covariant return types are cast to the more specific type.
+    var integerSupplier =
+        new ObjectSupplier() {
+          @Override
+          public Integer get() {
+            return 42;
+          }
+        };
+    int i = integerSupplier.get();
   }
 
   class Holder<T> {

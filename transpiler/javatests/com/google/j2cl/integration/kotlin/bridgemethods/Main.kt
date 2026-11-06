@@ -252,17 +252,14 @@ private fun testCovariantReturn() {
     }
   assertTrue(byteSupplier.get() is Byte)
 
-  // TODO(b/285228969): Uncomment when anonymous classes with covariant return types are handled
-  // correctly. Calls are retargeted to Supplier.get() and the result is not unboxed, which fails
-  // JavaScript type checking.
-  // val intSupplier =
-  //   object : Supplier<Any?> {
-  //     override fun get(): Int {
-  //       return 42
-  //     }
-  //   }
-  // val i: Int = intSupplier.get()
-  // assertTrue(i + 1 == 43)
+  val intSupplier =
+    object : Supplier<Any?> {
+      override fun get(): Int {
+        return 42
+      }
+    }
+  val i: Int = intSupplier.get()
+  assertTrue(i + 1 == 43)
 }
 
 interface SomeInterface<T> {

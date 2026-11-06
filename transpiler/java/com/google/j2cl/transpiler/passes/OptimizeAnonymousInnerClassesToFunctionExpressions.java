@@ -19,15 +19,20 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -129,11 +134,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           public Node rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor target = methodCall.getTarget();
             DeclaredTypeDescriptor targetTypeDescriptor = target.getEnclosingTypeDescriptor();
-            if (optimizedClasses.contains(targetTypeDescriptor.getTypeDeclaration())
-                && target.isOverride(
-                    targetTypeDescriptor
-                        .getFunctionalInterface()
-                        .getSingleAbstractMethodDescriptor())) {
+            if (!optimizedClasses.contains(targetTypeDescriptor.getTypeDeclaration())) {
+              return methodCall;
+            }
+            MethodDescriptor functionalInterfaceMethod =
+                targetTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
+            if (target.isOverride(functionalInterfaceMethod)) {
               // The calls that are typed as directly to the anonymous inner class are redirected
               // to be calls though the interface type, e.g.
               //
@@ -141,11 +147,22 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //
               //  gets transformed so that it is JsFunctionInterface.apply instead.
               //
-              return methodCall.toBuilder()
-                  .setTarget(
-                      targetTypeDescriptor
-                          .getFunctionalInterface()
-                          .getSingleAbstractMethodDescriptor())
+              Expression redirectedCall =
+                  methodCall.toBuilder().setTarget(functionalInterfaceMethod).build();
+              if (!hasCovariantReturnType(target, functionalInterfaceMethod)) {
+                return redirectedCall;
+              }
+              // The method has a covariant return type, cast the result back to it so that the
+              // conversions implied by the more specific type are preserved, e.g.
+              //
+              //  var s = new Supplier<Object>() { Integer get() {...} };
+              //  int i = s.get();
+              //
+              //  gets transformed to `int i = (Integer) s.get()` which is then unboxed.
+              //
+              return CastExpression.builder()
+                  .setExpression(redirectedCall)
+                  .setCastTypeDescriptor(target.getReturnTypeDescriptor())
                   .build();
             }
             return methodCall;
@@ -179,13 +196,16 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         type.getTypeDescriptor().getFunctionalInterface();
+    MethodDescriptor functionalInterfaceMethod =
+        jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor();
+    insertPrimitiveConversionsOnReturns(jsFunctionMethodImplementation, functionalInterfaceMethod);
     return FunctionExpression.builder()
         .setTypeDescriptor(jsFunctionTypeDescriptor)
         .setParameters(jsFunctionMethodImplementation.getParameters())
         .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
         .setJsAsync(
             jsFunctionMethodImplementation.getDescriptor().isJsAsync()
-                || jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor().isJsAsync())
+                || functionalInterfaceMethod.isJsAsync())
         .setSourcePosition(
             SourcePosition.Builder.from(jsFunctionMethodImplementation.getSourcePosition())
                 .setName(jsFunctionMethodImplementation.getQualifiedBinaryName())
@@ -233,6 +253,64 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
       return false;
     }
     return true;
+  }
+
+  /**
+   * Makes the conversion of primitive return values to the covariant boxed return type of {@code
+   * method} explicit, e.g. {@code return 1;} in {@code Byte get()} becomes {@code return (byte)
+   * 1;}, since the function expression will have the return type of the functional interface
+   * method, which would box the value differently.
+   */
+  private static void insertPrimitiveConversionsOnReturns(
+      Method method, MethodDescriptor functionalInterfaceMethod) {
+    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
+    if (!TypeDescriptors.isBoxedType(returnTypeDescriptor)
+        || !hasCovariantReturnType(method.getDescriptor(), functionalInterfaceMethod)) {
+      return;
+    }
+    PrimitiveTypeDescriptor unboxedReturnTypeDescriptor = returnTypeDescriptor.toUnboxedType();
+    method.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteReturnStatement(ReturnStatement returnStatement) {
+            if (getParent(MethodLike.class::isInstance) != method) {
+              // Ignore returns in nested lambdas.
+              return returnStatement;
+            }
+            Expression expression = returnStatement.getExpression();
+            TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
+            // Only primitive values whose type differs from the unboxed return type rely on the
+            // return context to be converted, e.g. the constant `1` (an int) returned from
+            // `Byte get()` is narrowed to byte before boxing. Values that already have the unboxed
+            // type, or are references, are boxed the same way in either context.
+            if (!expressionTypeDescriptor.isPrimitive()
+                || expressionTypeDescriptor.isSameBaseType(unboxedReturnTypeDescriptor)) {
+              return returnStatement;
+            }
+            // Per JLS 5.2, a primitive can only be converted to a boxed type other than its own if
+            // it is a constant representable in the corresponding Byte, Short or Character type.
+            // (The JLS only allows a narrowing conversion here, but javac also accepts conversions
+            // that are not narrowing, e.g. `Character get() { return (byte) 65; }`.)
+            return returnStatement.toBuilder()
+                .setExpression(
+                    CastExpression.builder()
+                        .setExpression(expression)
+                        .setCastTypeDescriptor(unboxedReturnTypeDescriptor)
+                        .build())
+                .build();
+          }
+        });
+  }
+
+  /**
+   * Returns whether {@code method} has a more specific return type than the functional interface
+   * method it implements.
+   */
+  private static boolean hasCovariantReturnType(
+      MethodDescriptor method, MethodDescriptor functionalInterfaceMethod) {
+    return !method
+        .getReturnTypeDescriptor()
+        .hasSameRawType(functionalInterfaceMethod.getReturnTypeDescriptor());
   }
 
   @Nullable

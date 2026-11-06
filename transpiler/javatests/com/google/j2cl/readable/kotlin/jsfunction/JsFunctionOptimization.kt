@@ -125,8 +125,8 @@ fun main(r: Int) {
     },
   )
 
-  // Anonymous classes whose method has a covariant return type need the method's return type as
-  // the return context.
+  // Anonymous classes whose method has a covariant return type are optimized; calls are cast to the
+  // more specific type.
   val byteSupplier: ObjectSupplier =
     object : ObjectSupplier {
       override fun get(): Byte {

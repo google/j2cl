@@ -71,6 +71,12 @@
 (global $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$5 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsfunction.JsFunctionOptimization.F (mut i32)
  (i32.const 0)
 )
@@ -538,6 +544,20 @@
 (global $jsfunction.JsFunctionOptimization.ObjectSupplier.vtable@$jsfunction.JsFunctionOptimization.$LambdaImplementor$5 (ref $jsfunction.JsFunctionOptimization.ObjectSupplier.vtable)
  (struct.new $jsfunction.JsFunctionOptimization.ObjectSupplier.vtable
   (ref.func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$5)
+ )
+)
+(global $jsfunction.JsFunctionOptimization.$LambdaImplementor$6.vtable (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$6.vtable)
+ (struct.new $jsfunction.JsFunctionOptimization.$LambdaImplementor$6.vtable
+  (ref.func $$getClassImpl__java_lang_Class@javaemul.internal.JsFunctionAdaptor)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$6)
+ )
+)
+(global $jsfunction.JsFunctionOptimization.ObjectSupplier.vtable@$jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (ref $jsfunction.JsFunctionOptimization.ObjectSupplier.vtable)
+ (struct.new $jsfunction.JsFunctionOptimization.ObjectSupplier.vtable
+  (ref.func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$6)
  )
 )
 (global $jsfunction.JsFunctionOptimization.Holder.vtable (ref $jsfunction.JsFunctionOptimization.Holder.vtable)
@@ -2120,6 +2140,8 @@
  (local $f (ref null $java.lang.Object))
  (local $array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $byteSupplier (ref null $java.lang.Object))
+ (local $integerSupplier (ref null $java.lang.Object))
+ (local $i i32)
  (local $this (ref null $jsfunction.JsFunctionOptimization))
  (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization) (local.get $this.untyped)))
  (block
@@ -2129,6 +2151,8 @@
   (drop (call $$create__jsfunction_JsFunctionOptimization__java_lang_Object@jsfunction.JsFunctionOptimization.Holder (local.get $this)(call $$create__jsfunction_JsFunctionOptimization@jsfunction.JsFunctionOptimization.4 (local.get $this))))
   (drop (call $$create__jsfunction_JsFunctionOptimization__int__arrayOf_java_lang_Object@jsfunction.JsFunctionOptimization.Holder (local.get $this)(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $$create__jsfunction_JsFunctionOptimization@jsfunction.JsFunctionOptimization.5 (local.get $this))))))
   (local.set $byteSupplier (call $$create__@jsfunction.JsFunctionOptimization.$LambdaImplementor$5 ))
+  (local.set $integerSupplier (call $$create__@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 ))
+  (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsfunction.JsFunctionOptimization.ObjectSupplier (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $integerSupplier)))))))
  )
 )
 (elem declare func $m_main__int__void@jsfunction.JsFunctionOptimization)
@@ -4512,7 +4536,7 @@
  (local $this (ref null $jsfunction.JsFunctionOptimization.$LambdaImplementor$5))
  (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$5) (local.get $this.untyped)))
  (block
-  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+  (return (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
  )
 )
 (elem declare func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$5)
@@ -4541,6 +4565,66 @@
   )
   (global.set $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$5 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsfunction.J...|__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.$LambdaImplementor$5.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@javaemul.internal.JsFunctionAdaptor )))
   (return (global.get $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$5))
+ )
+)
+
+;;; <anonymous> implements ObjectSupplier <anonymous> implements ObjectSupplier.$create()
+(func $$create__@jsfunction.JsFunctionOptimization.$LambdaImplementor$6
+ (result (ref null $jsfunction.JsFunctionOptimization.$LambdaImplementor$6))
+ (local $$instance (ref null $jsfunction.JsFunctionOptimization.$LambdaImplementor$6))
+ (block
+  (call $$clinit__void_<once>_@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 )
+  (local.set $$instance (struct.new $jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (global.get $jsfunction.JsFunctionOptimization.$LambdaImplementor$6.vtable) (global.get $jsfunction.JsFunctionOptimization.$LambdaImplementor$6.itable) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func)))
+  (call $$ctor__void_$p_jsfunction_JsFunctionOptimization_$LambdaImplementor$6@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements ObjectSupplier.$ctor()
+(func $$ctor__void_$p_jsfunction_JsFunctionOptimization_$LambdaImplementor$6@jsfunction.JsFunctionOptimization.$LambdaImplementor$6
+ (param $this (ref null $jsfunction.JsFunctionOptimization.$LambdaImplementor$6))
+ (block
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$6) (ref.func $js_export_get__java_lang_Object@jsfunction.JsFunctionOptimization.ObjectSupplier) )
+ )
+)
+
+;;; Object <anonymous> implements ObjectSupplier.get()
+(func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$6
+ (type $function.java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $this (ref null $jsfunction.JsFunctionOptimization.$LambdaImplementor$6))
+ (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization.$LambdaImplementor$6) (local.get $this.untyped)))
+ (block
+  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 42)))
+ )
+)
+(elem declare func $m_get__java_lang_Object@jsfunction.JsFunctionOptimization.$LambdaImplementor$6)
+
+;;; void <anonymous> implements ObjectSupplier.$clinit()
+(func $$clinit__void_<once>_@jsfunction.JsFunctionOptimization.$LambdaImplementor$6
+ (block
+  (if (global.get $$class-initialized@jsfunction.JsFunctionOptimization.$LambdaImplementor$6)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (i32.const 1))
+  (call $$clinit__void_<once>_@javaemul.internal.JsFunctionAdaptor )
+ )
+)
+
+;;; Class<T> <anonymous> implements ObjectSupplier.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsfunction.JsFunctionOptimization.$LambdaImplementor$6
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$6)))
+   (then
+    (return (global.get $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$6))
+   )
+  )
+  (global.set $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsfunction.J...|__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.$LambdaImplementor$6.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@javaemul.internal.JsFunctionAdaptor )))
+  (return (global.get $$class@jsfunction.JsFunctionOptimization.$LambdaImplementor$6))
  )
 )
 

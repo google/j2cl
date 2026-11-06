@@ -94,11 +94,7 @@ public class Main {
           }
         };
     assertTrue(jsEnumSupplier.get() == PlainJsEnum.ONE);
-    // TODO(b/285228969): Remove the guard when anonymous classes with covariant return types are
-    // handled correctly.
-    if (!isJavaScript()) {
-      assertUnboxedPlainJsEnum(jsEnumSupplier.get());
-    }
+    assertUnboxedPlainJsEnum(jsEnumSupplier.get());
 
     checkBridge_jsEnumTypeVariable(PlainJsEnum.ONE);
   }

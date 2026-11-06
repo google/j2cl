@@ -80,11 +80,7 @@ private fun testBridge_jsEnumBoxing() {
       override fun get(): PlainJsEnum = PlainJsEnum.ONE
     }
   assertTrue(jsEnumSupplier.get() == PlainJsEnum.ONE)
-  // TODO(b/285228969): Remove the guard when anonymous objects with covariant return types are
-  // handled correctly.
-  if (!isJavaScript()) {
-    assertUnboxedPlainJsEnum(jsEnumSupplier.get())
-  }
+  assertUnboxedPlainJsEnum(jsEnumSupplier.get())
 
   checkBridge_jsEnumTypeVariable(PlainJsEnum.ONE)
 }

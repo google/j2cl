@@ -80,6 +80,10 @@ open class JsFunctionOptimization {
   val byteSupplier: ObjectSupplier = object : ObjectSupplier {
    override fun get(): Byte? = 1.toByte()
   }
+  val integerSupplier = object : ObjectSupplier {
+   override fun get(): Int? = 42
+  }
+  val i: Int = integerSupplier.get()!!.toInt()
  }
  
  @JsFunction

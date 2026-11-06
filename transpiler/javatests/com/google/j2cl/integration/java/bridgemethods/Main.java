@@ -17,11 +17,11 @@ package bridgemethods;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
-import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
+import com.google.j2cl.integration.testing.J2ktIncompatible;
 import java.util.function.Supplier;
 
 /** Tests for bridge methods with accidental overriding. */
@@ -264,38 +264,80 @@ public class Main {
             return 1;
           }
         };
-    // TODO(b/285228969): Remove the guard when anonymous classes with covariant return types are
-    // handled correctly.
-    if (!isJavaScript() && !isWasm()) {
-      assertTrue(byteSupplier.get() instanceof Byte);
-    }
+    assertTrue(byteSupplier.get() instanceof Byte);
 
-    // TODO(b/285228969): Uncomment when anonymous classes with covariant return types are handled
-    // correctly. Calls are retargeted to Supplier.get() and the result is not unboxed, which
-    // produces an invalid Wasm module.
-    // var integerSupplier =
-    //     new Supplier<Object>() {
-    //       @Override
-    //       public Integer get() {
-    //         return 42;
-    //       }
-    //     };
-    // int i = integerSupplier.get();
-    // assertTrue(i == 42);
-    //
-    // var nullSupplier =
-    //     new Supplier<Object>() {
-    //       @Override
-    //       public Integer get() {
-    //         return null;
-    //       }
-    //     };
-    // assertThrowsNullPointerException(
-    //     () -> {
-    //       int unused = nullSupplier.get();
-    //       throw new AssertionError(unused);
-    //     });
+    Supplier<Object> shortSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Short get() {
+            return 1;
+          }
+        };
+    assertTrue(shortSupplier.get() instanceof Short);
+
+    Supplier<Object> characterSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Character get() {
+            return 65;
+          }
+        };
+    assertTrue(characterSupplier.get() instanceof Character);
+    assertTrue(characterSupplier.get().equals('A'));
+
+    testCovariantReturn_widenedConstant();
+
+    var integerSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Integer get() {
+            return 42;
+          }
+        };
+    int i = integerSupplier.get();
+    assertTrue(i == 42);
+
+    var nullSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Integer get() {
+            return null;
+          }
+        };
+    assertThrowsNullPointerException(
+        () -> {
+          int unused = nullSupplier.get();
+          throw new AssertionError(unused);
+        });
   }
+
+  // javac is more permissive than JLS 5.2 and accepts constants of a narrower type that fit in the
+  // unboxed return type.
+  // TODO(b/582756197): Enable for J2KT when fixed.
+  @J2ktIncompatible
+  private static void testCovariantReturn_widenedConstant() {
+    Supplier<Object> byteToCharacterSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Character get() {
+            return (byte) 65;
+          }
+        };
+    assertTrue(byteToCharacterSupplier.get() instanceof Character);
+    assertTrue(byteToCharacterSupplier.get().equals('A'));
+
+    Supplier<Object> byteToShortSupplier =
+        new Supplier<Object>() {
+          @Override
+          public Short get() {
+            return (byte) 1;
+          }
+        };
+    assertTrue(byteToShortSupplier.get() instanceof Short);
+  }
+
+  @SuppressWarnings("unused") // Alternative implementation for J2KT (@J2ktIncompatible).
+  private static void testCovariantReturn_widenedConstant(Object... unused) {}
 
   interface SomeInterface<T> {
     String foo(T t);
