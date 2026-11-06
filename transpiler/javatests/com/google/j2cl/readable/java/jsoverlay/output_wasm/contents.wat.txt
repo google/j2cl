@@ -100,7 +100,7 @@
 
 ;;; void Intf.run(JsFunctionAdaptor $instance)
 (@binaryen.js.called)
-(func $js_export_m_run__void@jsoverlay.Main.Intf
+(func $js_export_run__void@jsoverlay.Main.Intf
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call_ref $function.void (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
@@ -224,7 +224,7 @@
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay )
-  (return (call $js_import_m_m__int@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay (ref.as_non_null (local.get $$thisArg))))
+  (return (call $m_m__int@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay (ref.as_non_null (local.get $$thisArg))))
  )
 )
 
@@ -261,7 +261,7 @@
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay )
-  (return (call $js_import_m_m__int@jsoverlay.Main.NativeJsTypeWithOverlay (ref.as_non_null (local.get $$thisArg))))
+  (return (call $m_m__int@jsoverlay.Main.NativeJsTypeWithOverlay (ref.as_non_null (local.get $$thisArg))))
  )
 )
 
@@ -447,13 +447,13 @@
  (local $this (ref null $jsoverlay.Main))
  (local.set $this (ref.cast (ref $jsoverlay.Main) (local.get $this.untyped)))
  (block
-  (local.set $n (call $js_import_m_<init>__@jsoverlay.Main.NativeJsTypeWithOverlay ))
+  (local.set $n (call $m_<init>__@jsoverlay.Main.NativeJsTypeWithOverlay ))
   (drop (call $m_callM__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (local.get $n)))
   (drop (call $m_fun__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay ))
-  (call $js_import_m_n__void@jsoverlay.Main.NativeJsTypeWithOverlay )
+  (call $m_n__void@jsoverlay.Main.NativeJsTypeWithOverlay )
   (drop (call $m_bar__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay ))
   (drop (call $m_foo__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (local.get $n)))
-  (local.set $a (i32.add (i32.const 10) (call $js_import_f_nonJsOverlayField__int@jsoverlay.Main.NativeJsTypeWithOverlay )))
+  (local.set $a (i32.add (i32.const 10) (call $m_nonJsOverlayField__int@jsoverlay.Main.NativeJsTypeWithOverlay )))
   (block
    (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay )
    (global.set $staticField@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (ref.null $java.lang.Object))
@@ -476,7 +476,7 @@
  (local $this (ref null $jsoverlay.Main))
  (local.set $this (ref.cast (ref $jsoverlay.Main) (local.get $this.untyped)))
  (block
-  (drop (call $js_import_m_m__int@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay (ref.as_non_null (local.get $foo))))
+  (drop (call $m_m__int@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay (ref.as_non_null (local.get $foo))))
   (drop (call $m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__int@jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay (local.get $foo)))
  )
 )
@@ -598,7 +598,7 @@
 (func $$ctor__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_$LambdaImplementor$1@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1
  (param $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
  (block
-  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1) (ref.func $js_export_m_run__void@jsoverlay.Main.Intf) )
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1) (ref.func $js_export_run__void@jsoverlay.Main.Intf) )
  )
 )
 

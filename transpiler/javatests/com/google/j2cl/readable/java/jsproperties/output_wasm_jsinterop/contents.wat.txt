@@ -226,7 +226,7 @@
 
 ;;; int InterfaceWithStaticJsProperties.A()
 (@binaryen.js.called)
-(func $js_export_get_f_A__int@jsproperties.InterfaceWithStaticJsProperties
+(func $js_export_get_A__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
@@ -236,7 +236,7 @@
 
 ;;; int InterfaceWithStaticJsProperties.getB()
 (@binaryen.js.called)
-(func $js_export_get_m_getB__int@jsproperties.InterfaceWithStaticJsProperties
+(func $js_export_get_getB__int@jsproperties.InterfaceWithStaticJsProperties
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
@@ -246,7 +246,7 @@
 
 ;;; void InterfaceWithStaticJsProperties.setB(int x)
 (@binaryen.js.called)
-(func $js_export_set_m_setB__int__void@jsproperties.InterfaceWithStaticJsProperties
+(func $js_export_set_setB__int__void@jsproperties.InterfaceWithStaticJsProperties
  (param $x i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.InterfaceWithStaticJsProperties )
@@ -370,7 +370,7 @@
 
 ;;; int Foo.getA()
 (@binaryen.js.called)
-(func $js_export_get_m_getA__int@jsproperties.Foo
+(func $js_export_get_getA__int@jsproperties.Foo
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Foo )
@@ -380,7 +380,7 @@
 
 ;;; void Foo.setA(int x)
 (@binaryen.js.called)
-(func $js_export_set_m_setA__int__void@jsproperties.Foo
+(func $js_export_set_setA__int__void@jsproperties.Foo
  (param $x i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Foo )
@@ -390,7 +390,7 @@
 
 ;;; int Foo.getB()
 (@binaryen.js.called)
-(func $js_export_get_m_getB__int@jsproperties.Foo
+(func $js_export_get_getB__int@jsproperties.Foo
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Foo )
@@ -400,7 +400,7 @@
 
 ;;; void Foo.setB(int x)
 (@binaryen.js.called)
-(func $js_export_set_m_setB__int__void@jsproperties.Foo
+(func $js_export_set_setB__int__void@jsproperties.Foo
  (param $x i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Foo )
@@ -540,7 +540,7 @@
 
 ;;; int Bar.privateField()
 (@binaryen.js.called)
-(func $js_export_get_f_privateField__int_$p_jsproperties_Bar@jsproperties.Bar
+(func $js_export_get_privateField__int_$p_jsproperties_Bar@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (result i32)
  (block
@@ -550,7 +550,7 @@
 
 ;;; void Bar.privateField(int value)
 (@binaryen.js.called)
-(func $js_export_set_f_privateField__int__void_$p_jsproperties_Bar@jsproperties.Bar
+(func $js_export_set_privateField__int__void_$p_jsproperties_Bar@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (param $value i32)
  (block
@@ -560,8 +560,8 @@
 
 ;;; int Bar.instanceField()
 (@binaryen.js.called)
-(func $js_export_get_f_instanceField__int@jsproperties.Bar
- (type $function.js_export_get_f_instanceField__int)
+(func $js_export_get_instanceField__int@jsproperties.Bar
+ (type $function.js_export_get_instanceField__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.Bar))
@@ -570,12 +570,12 @@
   (return (struct.get $jsproperties.Bar $instanceField@jsproperties.Bar (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_instanceField__int@jsproperties.Bar)
+(elem declare func $js_export_get_instanceField__int@jsproperties.Bar)
 
 ;;; void Bar.instanceField(int value)
 (@binaryen.js.called)
-(func $js_export_set_f_instanceField__int__void@jsproperties.Bar
- (type $function.js_export_set_f_instanceField__int__void)
+(func $js_export_set_instanceField__int__void@jsproperties.Bar
+ (type $function.js_export_set_instanceField__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.Bar))
@@ -584,11 +584,11 @@
   (struct.set $jsproperties.Bar $instanceField@jsproperties.Bar (local.get $this) (local.get $value))
  )
 )
-(elem declare func $js_export_set_f_instanceField__int__void@jsproperties.Bar)
+(elem declare func $js_export_set_instanceField__int__void@jsproperties.Bar)
 
 ;;; int Bar.staticFieldSameJsNameAsInstanceField()
 (@binaryen.js.called)
-(func $js_export_get_f_staticFieldSameJsNameAsInstanceField__int@jsproperties.Bar
+(func $js_export_get_staticFieldSameJsNameAsInstanceField__int@jsproperties.Bar
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Bar )
@@ -598,7 +598,7 @@
 
 ;;; void Bar.staticFieldSameJsNameAsInstanceField(int value)
 (@binaryen.js.called)
-(func $js_export_set_f_staticFieldSameJsNameAsInstanceField__int__void@jsproperties.Bar
+(func $js_export_set_staticFieldSameJsNameAsInstanceField__int__void@jsproperties.Bar
  (param $value i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Bar )
@@ -608,7 +608,7 @@
 
 ;;; int Bar.getStaticPropertySameJsNameAsInstanceProperty()
 (@binaryen.js.called)
-(func $js_export_get_m_getStaticPropertySameJsNameAsInstanceProperty__int@jsproperties.Bar
+(func $js_export_get_getStaticPropertySameJsNameAsInstanceProperty__int@jsproperties.Bar
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.Bar )
@@ -618,8 +618,8 @@
 
 ;;; int Bar.getA()
 (@binaryen.js.called)
-(func $js_export_get_m_getA__int@jsproperties.Bar
- (type $function.js_export_get_m_getA__int)
+(func $js_export_get_getA__int@jsproperties.Bar
+ (type $function.js_export_get_getA__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.Bar))
@@ -628,12 +628,12 @@
   (return (call_ref $function.m_getA__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.Bar.vtable $m_getA__int (ref.get_desc $jsproperties.Bar(local.get $this)))))
  )
 )
-(elem declare func $js_export_get_m_getA__int@jsproperties.Bar)
+(elem declare func $js_export_get_getA__int@jsproperties.Bar)
 
 ;;; void Bar.setA(int x)
 (@binaryen.js.called)
-(func $js_export_set_m_setA__int__void@jsproperties.Bar
- (type $function.js_export_set_m_setA__int__void)
+(func $js_export_set_setA__int__void@jsproperties.Bar
+ (type $function.js_export_set_setA__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $x i32)
  (local $this (ref null $jsproperties.Bar))
@@ -642,12 +642,12 @@
   (call_ref $function.m_setA__int__void (ref.as_non_null (local.get $this))(local.get $x)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (ref.get_desc $jsproperties.Bar(local.get $this))))
  )
 )
-(elem declare func $js_export_set_m_setA__int__void@jsproperties.Bar)
+(elem declare func $js_export_set_setA__int__void@jsproperties.Bar)
 
 ;;; int Bar.getB()
 (@binaryen.js.called)
-(func $js_export_get_m_getB__int@jsproperties.Bar
- (type $function.js_export_get_m_getB__int)
+(func $js_export_get_getB__int@jsproperties.Bar
+ (type $function.js_export_get_getB__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.Bar))
@@ -656,12 +656,12 @@
   (return (call_ref $function.m_getB__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.Bar.vtable $m_getB__int (ref.get_desc $jsproperties.Bar(local.get $this)))))
  )
 )
-(elem declare func $js_export_get_m_getB__int@jsproperties.Bar)
+(elem declare func $js_export_get_getB__int@jsproperties.Bar)
 
 ;;; void Bar.setB(int x)
 (@binaryen.js.called)
-(func $js_export_set_m_setB__int__void@jsproperties.Bar
- (type $function.js_export_set_m_setB__int__void)
+(func $js_export_set_setB__int__void@jsproperties.Bar
+ (type $function.js_export_set_setB__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $x i32)
  (local $this (ref null $jsproperties.Bar))
@@ -670,7 +670,7 @@
   (call_ref $function.m_setB__int__void (ref.as_non_null (local.get $this))(local.get $x)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (ref.get_desc $jsproperties.Bar(local.get $this))))
  )
 )
-(elem declare func $js_export_set_m_setB__int__void@jsproperties.Bar)
+(elem declare func $js_export_set_setB__int__void@jsproperties.Bar)
 
 ;;; void Bar.$init()
 (func $$init__void_$p_jsproperties_Bar@jsproperties.Bar
@@ -775,8 +775,8 @@
 
 ;;; int ReadOnlyJsProperty.a()
 (@binaryen.js.called)
-(func $js_export_get_f_a__int@jsproperties.ReadOnlyJsProperty
- (type $function.js_export_get_f_a__int)
+(func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_get_a__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.ReadOnlyJsProperty))
@@ -785,11 +785,11 @@
   (return (i32.const 1))
  )
 )
-(elem declare func $js_export_get_f_a__int@jsproperties.ReadOnlyJsProperty)
+(elem declare func $js_export_get_a__int@jsproperties.ReadOnlyJsProperty)
 
 ;;; int ReadOnlyJsProperty.b()
 (@binaryen.js.called)
-(func $js_export_get_f_b__int@jsproperties.ReadOnlyJsProperty
+(func $js_export_get_b__int@jsproperties.ReadOnlyJsProperty
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
@@ -799,8 +799,8 @@
 
 ;;; int ReadOnlyJsProperty.instanceFinalField()
 (@binaryen.js.called)
-(func $js_export_get_f_instanceFinalField__int@jsproperties.ReadOnlyJsProperty
- (type $function.js_export_get_f_instanceFinalField__int)
+(func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_get_instanceFinalField__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.ReadOnlyJsProperty))
@@ -809,11 +809,11 @@
   (return (struct.get $jsproperties.ReadOnlyJsProperty $instanceFinalField@jsproperties.ReadOnlyJsProperty (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_instanceFinalField__int@jsproperties.ReadOnlyJsProperty)
+(elem declare func $js_export_get_instanceFinalField__int@jsproperties.ReadOnlyJsProperty)
 
 ;;; int ReadOnlyJsProperty.staticFinalField()
 (@binaryen.js.called)
-(func $js_export_get_f_staticFinalField__int@jsproperties.ReadOnlyJsProperty
+(func $js_export_get_staticFinalField__int@jsproperties.ReadOnlyJsProperty
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
@@ -823,7 +823,7 @@
 
 ;;; int ReadOnlyJsProperty.getD()
 (@binaryen.js.called)
-(func $js_export_get_m_getD__int@jsproperties.ReadOnlyJsProperty
+(func $js_export_get_getD__int@jsproperties.ReadOnlyJsProperty
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty )
@@ -833,8 +833,8 @@
 
 ;;; int ReadOnlyJsProperty.getC()
 (@binaryen.js.called)
-(func $js_export_get_m_getC__int@jsproperties.ReadOnlyJsProperty
- (type $function.js_export_get_m_getC__int)
+(func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty
+ (type $function.js_export_get_getC__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.ReadOnlyJsProperty))
@@ -843,7 +843,7 @@
   (return (call_ref $function.m_getC__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.ReadOnlyJsProperty.vtable $m_getC__int (ref.get_desc $jsproperties.ReadOnlyJsProperty(local.get $this)))))
  )
 )
-(elem declare func $js_export_get_m_getC__int@jsproperties.ReadOnlyJsProperty)
+(elem declare func $js_export_get_getC__int@jsproperties.ReadOnlyJsProperty)
 
 ;;; void ReadOnlyJsProperty.$clinit()
 (func $$clinit__void_<once>_@jsproperties.ReadOnlyJsProperty
@@ -934,8 +934,8 @@
 
 ;;; int ImplementsInterfaceWithDefaultJsProperties.getM()
 (@binaryen.js.called)
-(func $js_export_get_m_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties
- (type $function.js_export_get_m_getM__int)
+(func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties
+ (type $function.js_export_get_getM__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
@@ -944,12 +944,12 @@
   (return (call_ref $function.m_getM__int (ref.as_non_null (local.get $this))(struct.get $jsproperties.InterfaceWithDefaultJsProperties.vtable $m_getM__int (ref.cast (ref $jsproperties.InterfaceWithDefaultJsProperties.vtable) (call $get.itable.$jsproperties.InterfaceWithDefaultJsProperties (local.get $this))))))
  )
 )
-(elem declare func $js_export_get_m_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
+(elem declare func $js_export_get_getM__int@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
 
 ;;; void ImplementsInterfaceWithDefaultJsProperties.setM(int value)
 (@binaryen.js.called)
-(func $js_export_set_m_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties
- (type $function.js_export_set_m_setM__int__void)
+(func $js_export_set_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties
+ (type $function.js_export_set_setM__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.ImplementsInterfaceWithDefaultJsProperties))
@@ -958,7 +958,7 @@
   (call_ref $function.m_setM__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $jsproperties.InterfaceWithDefaultJsProperties.vtable $m_setM__int__void (ref.cast (ref $jsproperties.InterfaceWithDefaultJsProperties.vtable) (call $get.itable.$jsproperties.InterfaceWithDefaultJsProperties (local.get $this)))))
  )
 )
-(elem declare func $js_export_set_m_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
+(elem declare func $js_export_set_setM__int__void@jsproperties.ImplementsInterfaceWithDefaultJsProperties)
 
 ;;; void ImplementsInterfaceWithDefaultJsProperties.$clinit()
 (func $$clinit__void_<once>_@jsproperties.ImplementsInterfaceWithDefaultJsProperties
@@ -1033,7 +1033,7 @@
    (local.set $$qualifier (call $$create__@jsproperties.FooWithNativeProperty ))
    (drop (call_ref $function.m_getA__java_lang_Object (ref.as_non_null (local.get $$qualifier))(struct.get $jsproperties.FooWithNativeProperty.vtable $m_getA__java_lang_Object (ref.get_desc $jsproperties.FooWithNativeProperty(local.get $$qualifier)))))
   )
-  (drop (call $js_import_m_getB__double@jsproperties.FooWithNativeProperty ))
+  (drop (call $m_getB__double@jsproperties.FooWithNativeProperty ))
  )
 )
 (elem declare func $m_testNativeJsProperty__void@jsproperties.Main)
@@ -1193,8 +1193,8 @@
 
 ;;; int JavaBeanConventions.xCoord()
 (@binaryen.js.called)
-(func $js_export_get_f_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_get_f_xCoord__int_$pp_jsproperties)
+(func $js_export_get_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_xCoord__int_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1203,12 +1203,12 @@
   (return (struct.get $jsproperties.JavaBeanConventions $xCoord@jsproperties.JavaBeanConventions (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_get_xCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.xCoord(int value)
 (@binaryen.js.called)
-(func $js_export_set_f_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_set_f_xCoord__int__void_$pp_jsproperties)
+(func $js_export_set_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_xCoord__int__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1217,12 +1217,12 @@
   (struct.set $jsproperties.JavaBeanConventions $xCoord@jsproperties.JavaBeanConventions (local.get $this) (local.get $value))
  )
 )
-(elem declare func $js_export_set_f_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_set_xCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; int JavaBeanConventions.yCoord()
 (@binaryen.js.called)
-(func $js_export_get_f_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_get_f_yCoord__int_$pp_jsproperties)
+(func $js_export_get_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_yCoord__int_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1231,12 +1231,12 @@
   (return (struct.get $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_get_yCoord__int_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.yCoord(int value)
 (@binaryen.js.called)
-(func $js_export_set_f_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_set_f_yCoord__int__void_$pp_jsproperties)
+(func $js_export_set_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_yCoord__int__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1245,12 +1245,12 @@
   (struct.set $jsproperties.JavaBeanConventions $yCoord@jsproperties.JavaBeanConventions (local.get $this) (local.get $value))
  )
 )
-(elem declare func $js_export_set_f_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_set_yCoord__int__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; boolean JavaBeanConventions.isReady()
 (@binaryen.js.called)
-(func $js_export_get_f_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_get_f_isReady__boolean_$pp_jsproperties)
+(func $js_export_get_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_isReady__boolean_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1259,12 +1259,12 @@
   (return (struct.get_s $jsproperties.JavaBeanConventions $isReady@jsproperties.JavaBeanConventions (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_get_isReady__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.isReady(boolean value)
 (@binaryen.js.called)
-(func $js_export_set_f_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_set_f_isReady__boolean__void_$pp_jsproperties)
+(func $js_export_set_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_isReady__boolean__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1273,12 +1273,12 @@
   (struct.set $jsproperties.JavaBeanConventions $isReady@jsproperties.JavaBeanConventions (local.get $this) (local.get $value))
  )
 )
-(elem declare func $js_export_set_f_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_set_isReady__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; boolean JavaBeanConventions.isValid()
 (@binaryen.js.called)
-(func $js_export_get_f_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_get_f_isValid__boolean_$pp_jsproperties)
+(func $js_export_get_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_isValid__boolean_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1287,12 +1287,12 @@
   (return (struct.get_s $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_get_isValid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.isValid(boolean value)
 (@binaryen.js.called)
-(func $js_export_set_f_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_set_f_isValid__boolean__void_$pp_jsproperties)
+(func $js_export_set_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_isValid__boolean__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1301,12 +1301,12 @@
   (struct.set $jsproperties.JavaBeanConventions $isValid@jsproperties.JavaBeanConventions (local.get $this) (local.get $value))
  )
 )
-(elem declare func $js_export_set_f_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_set_isValid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; boolean JavaBeanConventions.valid()
 (@binaryen.js.called)
-(func $js_export_get_f_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_get_f_valid__boolean_$pp_jsproperties)
+(func $js_export_get_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_valid__boolean_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1315,12 +1315,12 @@
   (return (struct.get_s $jsproperties.JavaBeanConventions $valid@jsproperties.JavaBeanConventions (local.get $this)))
  )
 )
-(elem declare func $js_export_get_f_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_get_valid__boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.valid(boolean value)
 (@binaryen.js.called)
-(func $js_export_set_f_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_set_f_valid__boolean__void_$pp_jsproperties)
+(func $js_export_set_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_valid__boolean__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (param $value i32)
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1329,12 +1329,12 @@
   (struct.set $jsproperties.JavaBeanConventions $valid@jsproperties.JavaBeanConventions (local.get $this) (local.get $value))
  )
 )
-(elem declare func $js_export_set_f_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_set_valid__boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; WasmExtern JavaBeanConventions.isFoo()
 (@binaryen.js.called)
-(func $js_export_get_f_isFoo__java_lang_Boolean_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_get_f_isFoo__java_lang_Boolean_$pp_jsproperties)
+(func $js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null extern))
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1343,12 +1343,12 @@
   (return (call $m_toJs__java_lang_Boolean__java_lang_Boolean_NativeBoolean@java.lang.Boolean (struct.get $jsproperties.JavaBeanConventions $isFoo@jsproperties.JavaBeanConventions (local.get $this))))
  )
 )
-(elem declare func $js_export_get_f_isFoo__java_lang_Boolean_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_get_isFoo__javaemul_internal_WasmExtern_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.isFoo(WasmExtern value)
 (@binaryen.js.called)
-(func $js_export_set_f_isFoo__java_lang_Boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions
- (type $function.js_export_set_f_isFoo__java_lang_Boolean__void_$pp_jsproperties)
+(func $js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties@jsproperties.JavaBeanConventions
+ (type $function.js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties)
  (param $this.untyped (ref $java.lang.Object))
  (param $value (ref null extern))
  (local $this (ref null $jsproperties.JavaBeanConventions))
@@ -1357,7 +1357,7 @@
   (struct.set $jsproperties.JavaBeanConventions $isFoo@jsproperties.JavaBeanConventions (local.get $this) (call $m_fromJs__java_lang_Boolean_NativeBoolean__java_lang_Boolean@java.lang.Boolean (local.get $value)))
  )
 )
-(elem declare func $js_export_set_f_isFoo__java_lang_Boolean__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
+(elem declare func $js_export_set_isFoo__javaemul_internal_WasmExtern__void_$pp_jsproperties@jsproperties.JavaBeanConventions)
 
 ;;; void JavaBeanConventions.$init()
 (func $$init__void_$p_jsproperties_JavaBeanConventions@jsproperties.JavaBeanConventions

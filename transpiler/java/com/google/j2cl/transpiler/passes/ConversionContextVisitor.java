@@ -735,10 +735,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression =
         contextRewriter.rewriteTypeConversionContext(
             getEnclosingMethodLike().getDescriptor().getReturnTypeDescriptor(),
-            // The ABI return type is the actual return type of the method in the output. For
+            // The dispatch return type is the actual return type of the method in the output. For
             // bridges it can be more general than the declared (covariant) return type of their
             // target. Parameters don't need this since they are already typed as in the output.
-            getEnclosingMethodLike().getDescriptor().getAbiDescriptor().getReturnTypeDescriptor(),
+            getEnclosingMethodLike().getDescriptor().getDispatchReturnTypeDescriptor(),
             returnStatement.getExpression());
 
     if (expression == returnStatement.getExpression()) {

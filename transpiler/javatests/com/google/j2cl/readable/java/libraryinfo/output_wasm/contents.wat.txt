@@ -315,7 +315,7 @@
 
 ;;; void Function.apply(JsFunctionAdaptor $instance, NativeString s)
 (@binaryen.js.called)
-(func $js_export_m_apply__java_lang_String__void@libraryinfo.Main.Function
+(func $js_export_apply__java_lang_String__void@libraryinfo.Main.Function
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $s (ref null string))
  (block
@@ -553,7 +553,7 @@
 (func $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main
  (param $this (ref null $libraryinfo.Main))
  (block
-  (call $js_import_m_log__int__void@libraryinfo.Main (i32.const 42))
+  (call $m_log__int__void@libraryinfo.Main (i32.const 42))
  )
 )
 
@@ -941,7 +941,7 @@
 (func $$ctor__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl
  (param $this (ref null $libraryinfo.Main.FunctionImpl))
  (block
-  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl) (ref.func $js_export_m_apply__java_lang_String__void@libraryinfo.Main.Function) )
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl) (ref.func $js_export_apply__java_lang_String__void@libraryinfo.Main.Function) )
  )
 )
 
@@ -1182,7 +1182,7 @@
 (func $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
  (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (block
-  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1) (ref.func $js_export_m_apply__java_lang_String__void@libraryinfo.Main.Function) )
+  (call $$ctor__javaemul_internal_WasmFuncref__javaemul_internal_WasmFuncref__void_$p_javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (ref.as_non_null (local.get $this))(ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1) (ref.func $js_export_apply__java_lang_String__void@libraryinfo.Main.Function) )
  )
 )
 
@@ -1194,7 +1194,7 @@
  (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (ref $libraryinfo.Main.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
-  (call $js_import_m_log__int__void@libraryinfo.Main (i32.const 42))
+  (call $m_log__int__void@libraryinfo.Main (i32.const 42))
  )
 )
 (elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)

@@ -1206,7 +1206,7 @@
 
 ;;; GenericRegularClass<T> GenericRegularClass.<init>(Foo t)
 (@binaryen.js.called)
-(func $js_export_m_<init>__nativejstypes_Foo@nativejstypes.GenericRegularClass
+(func $js_export_<init>__nativejstypes_Foo@nativejstypes.GenericRegularClass
  (param $t (ref null extern))
  (result (ref null $nativejstypes.GenericRegularClass))
  (block
@@ -1217,8 +1217,8 @@
 
 ;;; Foo GenericRegularClass.apply(Foo t)
 (@binaryen.js.called)
-(func $js_export_m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass
- (type $function.js_export_m_apply__nativejstypes_Foo__nativejstypes_Foo)
+(func $js_export_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass
+ (type $function.js_export_apply__nativejstypes_Foo__nativejstypes_Foo)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null extern))
  (result (ref null extern))
@@ -1228,7 +1228,7 @@
   (return (call_ref $function.m_apply__nativejstypes_Foo__nativejstypes_Foo (ref.as_non_null (local.get $this))(local.get $t)(struct.get $nativejstypes.GenericRegularClass.vtable $m_apply__nativejstypes_Foo__nativejstypes_Foo (ref.get_desc $nativejstypes.GenericRegularClass(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass)
+(elem declare func $js_export_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass)
 
 ;;; void GenericRegularClass.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.GenericRegularClass
@@ -1380,8 +1380,8 @@
  (local $foo (ref null extern))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $foo (call $js_import_m_<init>__@nativejstypes.Foo ))
-  (return (call $js_import_m_sum__int@nativejstypes.Foo (ref.as_non_null (local.get $foo))))
+  (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
+  (return (call $m_sum__int@nativejstypes.Foo (ref.as_non_null (local.get $foo))))
  )
 )
 
@@ -1390,9 +1390,9 @@
  (local $foo (ref null extern))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $foo (call $js_import_m_<init>__@nativejstypes.Foo ))
-  (call $js_import_f_x__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 50))
-  (call $js_import_f_y__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 5))
+  (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
+  (call $m_x__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 50))
+  (call $m_y__int__void@nativejstypes.Foo (ref.as_non_null (local.get $foo))(i32.const 5))
  )
 )
 
@@ -1403,9 +1403,9 @@
  (local $unused i32)
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $bar (call $js_import_m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
-  (local.set $unused (call $js_import_m_getStatic__int@nativejstypes.Bar ))
-  (return (call $js_import_m_product__int@nativejstypes.Bar (ref.as_non_null (local.get $bar))))
+  (local.set $bar (call $m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
+  (local.set $unused (call $m_getStatic__int@nativejstypes.Bar ))
+  (return (call $m_product__int@nativejstypes.Bar (ref.as_non_null (local.get $bar))))
  )
 )
 
@@ -1414,10 +1414,10 @@
  (local $bar (ref null extern))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $bar (call $js_import_m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
-  (call $js_import_f_x__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 50))
-  (call $js_import_f_y__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 5))
-  (call $js_import_f_f__int__void@nativejstypes.Bar (i32.const 10))
+  (local.set $bar (call $m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
+  (call $m_x__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 50))
+  (call $m_y__int__void@nativejstypes.Bar (ref.as_non_null (local.get $bar))(i32.const 5))
+  (call $m_f__int__void@nativejstypes.Bar (i32.const 10))
  )
 )
 
@@ -1427,12 +1427,12 @@
  (local $barInnerWithDotInName (ref null extern))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $barInner (call $js_import_m_<init>__int@nativejstypes.Bar.Inner (i32.const 1)))
-  (local.set $barInnerWithDotInName (call $js_import_m_<init>__int@nativejstypes.BarInnerWithDotInName (i32.const 2)))
-  (drop (call $js_import_m_square__int@nativejstypes.Bar.Inner (ref.as_non_null (local.get $barInner))))
-  (drop (call $js_import_m_square__int@nativejstypes.BarInnerWithDotInName (ref.as_non_null (local.get $barInnerWithDotInName))))
-  (drop (call $js_import_m_getInnerStatic__int@nativejstypes.Bar.Inner ))
-  (drop (call $js_import_m_getInnerStatic__int@nativejstypes.BarInnerWithDotInName ))
+  (local.set $barInner (call $m_<init>__int@nativejstypes.Bar.Inner (i32.const 1)))
+  (local.set $barInnerWithDotInName (call $m_<init>__int@nativejstypes.BarInnerWithDotInName (i32.const 2)))
+  (drop (call $m_square__int@nativejstypes.Bar.Inner (ref.as_non_null (local.get $barInner))))
+  (drop (call $m_square__int@nativejstypes.BarInnerWithDotInName (ref.as_non_null (local.get $barInnerWithDotInName))))
+  (drop (call $m_getInnerStatic__int@nativejstypes.Bar.Inner ))
+  (drop (call $m_getInnerStatic__int@nativejstypes.BarInnerWithDotInName ))
  )
 )
 
@@ -1441,8 +1441,8 @@
  (local $header (ref null extern))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $header (call $js_import_m_<init>__@nativejstypes.Headers ))
-  (call $js_import_m_append__java_lang_String__java_lang_String__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals ))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals )))
+  (local.set $header (call $m_<init>__@nativejstypes.Headers ))
+  (call $m_append__java_lang_String__java_lang_String__void@nativejstypes.Headers (ref.as_non_null (local.get $header))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|Content_Type|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals ))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|text_xml|__java_lang_String_<once>_@nativejstypes.Main.$StringLiterals )))
  )
 )
 
@@ -1467,7 +1467,7 @@
  (local $$qualifier_2 (ref null $java.lang.Object))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $bar (call $js_import_m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
+  (local.set $bar (call $m_<init>__int__int@nativejstypes.Bar (i32.const 6)(i32.const 7)))
   (local.set $unusedStr (block (result (ref null $java.lang.String))
    (local.set $$qualifier (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $bar)))
    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (ref.get_desc $java.lang.Object(local.get $$qualifier))))
@@ -1489,11 +1489,11 @@
  (local $topLevelNestedReference (ref null extern))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (call $js_import_f_x__int__void@nativejstypes.TopLevel (i32.const 2))
-  (local.set $nested (call $js_import_m_<init>__@nativejstypes.TopLevel.Nested ))
-  (call $js_import_f_x__int__void@nativejstypes.TopLevel.Nested (ref.as_non_null (local.get $nested))(i32.const 3))
-  (local.set $topLevelNestedReference (call $js_import_m_<init>__@nativejstypes.TopLevelNestedReference ))
-  (call $js_import_f_x__int__void@nativejstypes.TopLevelNestedReference (ref.as_non_null (local.get $topLevelNestedReference))(i32.const 4))
+  (call $m_x__int__void@nativejstypes.TopLevel (i32.const 2))
+  (local.set $nested (call $m_<init>__@nativejstypes.TopLevel.Nested ))
+  (call $m_x__int__void@nativejstypes.TopLevel.Nested (ref.as_non_null (local.get $nested))(i32.const 3))
+  (local.set $topLevelNestedReference (call $m_<init>__@nativejstypes.TopLevelNestedReference ))
+  (call $m_x__int__void@nativejstypes.TopLevelNestedReference (ref.as_non_null (local.get $topLevelNestedReference))(i32.const 4))
  )
 )
 
@@ -1502,8 +1502,8 @@
  (local $genericRegularClass (ref null $nativejstypes.GenericRegularClass))
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $genericRegularClass (call $$create__nativejstypes_Foo@nativejstypes.GenericRegularClass (call $js_import_m_<init>__@nativejstypes.Foo )))
-  (struct.set $nativejstypes.GenericRegularClass $field@nativejstypes.GenericRegularClass (local.get $genericRegularClass) (call $js_import_m_<init>__@nativejstypes.Foo ))
+  (local.set $genericRegularClass (call $$create__nativejstypes_Foo@nativejstypes.GenericRegularClass (call $m_<init>__@nativejstypes.Foo )))
+  (struct.set $nativejstypes.GenericRegularClass $field@nativejstypes.GenericRegularClass (local.get $genericRegularClass) (call $m_<init>__@nativejstypes.Foo ))
  )
 )
 
@@ -1514,14 +1514,14 @@
  (local $b i32)
  (block
   (call $$clinit__void_<once>_@nativejstypes.Main )
-  (local.set $foo (call $js_import_m_<init>__@nativejstypes.Foo ))
+  (local.set $foo (call $m_<init>__@nativejstypes.Foo ))
   (local.set $o (call $$create__@java.lang.Object ))
   (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__java_lang_Object__boolean@javaemul.internal.Platform (local.get $foo)(local.get $o)))
   (local.set $b (i32.eqz (call $m_isSame__java_lang_Object__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform (local.get $o)(local.get $foo))))
-  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $foo)(call $js_import_m_<init>__@nativejstypes.Foo )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
-  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $foo)(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
-  (local.set $b (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (ref.null extern)(local.get $foo)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_identity__java_lang_Object__java_lang_Object@nativejstypes.Main (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $foo))))(local.get $foo)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (local.set $b (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $foo)(call $m_<init>__@nativejstypes.Foo )(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (local.set $b (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $foo)(ref.null extern)(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (local.set $b (i32.eqz (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (ref.null extern)(local.get $foo)(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
+  (local.set $b (call $function.no.side.effects.m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_identity__java_lang_Object__java_lang_Object@nativejstypes.Main (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $foo))))(local.get $foo)(ref.func $m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
  )
 )
 
@@ -1602,9 +1602,9 @@
  (local $this (ref null $nativejstypes.NativeOverNonNative))
  (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative) (local.get $this.untyped)))
  (block
-  (local.set $exposesNonNative (call $js_import_m_<init>__int@nativejstypes.NativeOverNonNative.ExposesNonNative (i32.const 1)))
-  (call $js_import_m_m__void@nativejstypes.NativeOverNonNative.ExposesNonNative (ref.as_non_null (local.get $exposesNonNative)))
-  (call $js_import_m_n__void@nativejstypes.NativeOverNonNative.ExposesNonNative )
+  (local.set $exposesNonNative (call $m_<init>__int@nativejstypes.NativeOverNonNative.ExposesNonNative (i32.const 1)))
+  (call $m_m__void@nativejstypes.NativeOverNonNative.ExposesNonNative (ref.as_non_null (local.get $exposesNonNative)))
+  (call $m_n__void@nativejstypes.NativeOverNonNative.ExposesNonNative )
  )
 )
 (elem declare func $m_main__void_$pp_nativejstypes@nativejstypes.NativeOverNonNative)
@@ -1707,7 +1707,7 @@
 
 ;;; NonNative NonNative.<init>(int x)
 (@binaryen.js.called)
-(func $js_export_m_<init>__int@nativejstypes.NativeOverNonNative.NonNative
+(func $js_export_<init>__int@nativejstypes.NativeOverNonNative.NonNative
  (param $x i32)
  (result (ref null $nativejstypes.NativeOverNonNative.NonNative))
  (block
@@ -1718,7 +1718,7 @@
 
 ;;; void NonNative.n()
 (@binaryen.js.called)
-(func $js_export_m_n__void@nativejstypes.NativeOverNonNative.NonNative
+(func $js_export_n__void@nativejstypes.NativeOverNonNative.NonNative
  (block
   (call $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.NonNative )
   (call $m_n_$private__void@nativejstypes.NativeOverNonNative.NonNative )
@@ -1727,8 +1727,8 @@
 
 ;;; void NonNative.m()
 (@binaryen.js.called)
-(func $js_export_m_m__void@nativejstypes.NativeOverNonNative.NonNative
- (type $function.js_export_m_m__void)
+(func $js_export_m__void@nativejstypes.NativeOverNonNative.NonNative
+ (type $function.js_export_m__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $this (ref null $nativejstypes.NativeOverNonNative.NonNative))
  (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative.NonNative) (local.get $this.untyped)))
@@ -1736,7 +1736,7 @@
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $nativejstypes.NativeOverNonNative.NonNative.vtable $m_m__void (ref.get_desc $nativejstypes.NativeOverNonNative.NonNative(local.get $this))))
  )
 )
-(elem declare func $js_export_m_m__void@nativejstypes.NativeOverNonNative.NonNative)
+(elem declare func $js_export_m__void@nativejstypes.NativeOverNonNative.NonNative)
 
 ;;; void NonNative.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.NonNative
@@ -1928,9 +1928,9 @@
  (local $this (ref null $nativejstypes.ReferencedPrivateMethods.Inner))
  (local.set $this (ref.cast (ref $nativejstypes.ReferencedPrivateMethods.Inner) (local.get $this.untyped)))
  (block
-  (local.set $t (call $js_import_m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods ))
-  (local.set $t2 (call $js_import_m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor ))
-  (return (i32.add (i32.add (i32.add (i32.add (call $js_import_f_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $js_import_f_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $js_import_m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $js_import_m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $js_import_m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor (ref.as_non_null (local.get $t2)))))
+  (local.set $t (call $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods ))
+  (local.set $t2 (call $m_<init>__@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor ))
+  (return (i32.add (i32.add (i32.add (i32.add (call $m_x__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t))) (call $m_s__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateMethods@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods (ref.as_non_null (local.get $t)))) (call $m_getStatic__int@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateMethods )) (call $m_getInstance__int_$p_nativejstypes_ReferencedPrivateMethods_NativeReferencedPrivateWithImplicitConstructor@nativejstypes.ReferencedPrivateMethods.NativeReferencedPrivateWithImplicitConstructor (ref.as_non_null (local.get $t2)))))
  )
 )
 (elem declare func $m_getInstance__int@nativejstypes.ReferencedPrivateMethods.Inner)

@@ -76,7 +76,7 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
   }
 
   private static MethodDescriptor createNativeImportMethodDescriptor(MethodDescriptor descriptor) {
-    checkState(descriptor.getBridgeTarget() == null);
+    checkState(descriptor.getBridgeOrigin() == null);
     return descriptor.transform(
         builder ->
             builder

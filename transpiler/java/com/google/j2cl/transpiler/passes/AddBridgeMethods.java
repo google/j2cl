@@ -57,11 +57,8 @@ public class AddBridgeMethods extends NormalizationPass {
   private static Method createBridgeMethod(Type type, MethodDescriptor bridgeMethodDescriptor) {
     MethodDescriptor targetMethod = bridgeMethodDescriptor.getBridgeTarget();
 
-    // Callers pass values typed as in the bridge's ABI, which for generalizing bridges is the
-    // overridden method's signature; they are cast to the target's parameter types below.
     List<Variable> parameters =
-        AstUtils.createParameterVariables(
-            bridgeMethodDescriptor.getAbiDescriptor().getParameterDescriptors());
+        AstUtils.createParameterVariables(bridgeMethodDescriptor.getDispatchParameterDescriptors());
 
     List<Expression> arguments =
         Streams.zip(

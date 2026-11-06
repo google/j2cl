@@ -160,7 +160,8 @@ public class WasmJsBoundaryUtils {
         descriptor.toBuilder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
             .setDeclarationDescriptor(null)
-            .makeWasmBoundaryMethod(origin, /* targetDescriptor= */ descriptor)
+            .makeBridge(
+                origin, /* originDescriptor= */ descriptor, /* targetDescriptor= */ descriptor)
             .setReturnTypeDescriptor(
                 descriptor.isConstructor()
                     ? descriptor.getReturnTypeDescriptor()
@@ -186,12 +187,8 @@ public class WasmJsBoundaryUtils {
 
   private static MethodDescriptor createGetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
     var origin = MethodDescriptor.MethodOrigin.WASM_JS_GETTER_EXPORT_BRIDGE;
-    MethodDescriptor getterDescriptor = AstUtils.getGetterMethodDescriptor(fieldDescriptor);
-    // The synthetic getter of the field is the bridge target, so that the bridge is named and
-    // exported after the field, like other boundary methods are after the member they bridge.
-    return getterDescriptor.toBuilder()
+    return AstUtils.getGetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(origin)
-        .setBridgeTarget(getterDescriptor)
         .setReturnTypeDescriptor(
             getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();
@@ -199,12 +196,8 @@ public class WasmJsBoundaryUtils {
 
   private static MethodDescriptor createSetterBridgeDescriptor(FieldDescriptor fieldDescriptor) {
     var origin = MethodDescriptor.MethodOrigin.WASM_JS_SETTER_EXPORT_BRIDGE;
-    MethodDescriptor setterDescriptor = AstUtils.getSetterMethodDescriptor(fieldDescriptor);
-    // The synthetic setter of the field is the bridge target, so that the bridge is named and
-    // exported after the field, like other boundary methods are after the member they bridge.
-    return setterDescriptor.toBuilder()
+    return AstUtils.getSetterMethodDescriptor(fieldDescriptor).toBuilder()
         .setOrigin(origin)
-        .setBridgeTarget(setterDescriptor)
         .updateParameterTypeDescriptors(
             getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();

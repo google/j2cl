@@ -158,8 +158,7 @@ public final class SummaryBuilder {
                             "Unexpected method origin: " + methodDescriptor.getOrigin());
                   })
               .setWasmName(environment.getMethodImplementationName(methodDescriptor))
-              // Export bridges are exported under the JavaScript name of the member they export.
-              .setJsName(methodDescriptor.getBridgeTarget().getSimpleJsName())
+              .setJsName(methodDescriptor.getSimpleJsName())
               .setIsStatic(methodDescriptor.isStatic()));
     }
 

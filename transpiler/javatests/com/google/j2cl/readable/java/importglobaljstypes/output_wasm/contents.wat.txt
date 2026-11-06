@@ -235,7 +235,7 @@
  (result f64)
  (block
   (call $$clinit__void_<once>_@importglobaljstypes.Date )
-  (return (call $js_import_m_now__double@importglobaljstypes.Date.NativeDate ))
+  (return (call $m_now__double@importglobaljstypes.Date.NativeDate ))
  )
 )
 
@@ -319,7 +319,7 @@
  (result i32)
  (block
   (call $$clinit__void_<once>_@importglobaljstypes.Number )
-  (return (call $js_import_m_f__double__boolean@importglobaljstypes.Number (local.get $x)))
+  (return (call $m_f__double__boolean@importglobaljstypes.Number (local.get $x)))
  )
 )
 
@@ -330,8 +330,8 @@
  (local $$qualifier (ref null extern))
  (block
   (return (ref.cast (ref null $java.lang.String) (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (block (result (ref null extern))
-   (local.set $$qualifier (call $js_import_m_createArray__importglobaljstypes_Number_NativeArray@importglobaljstypes.Number ))
-   (call $js_import_m_at__int__java_lang_Object@importglobaljstypes.Number.NativeArray (ref.as_non_null (local.get $$qualifier))(local.get $index))
+   (local.set $$qualifier (call $m_createArray__importglobaljstypes_Number_NativeArray@importglobaljstypes.Number ))
+   (call $m_at__int__java_lang_Object@importglobaljstypes.Number.NativeArray (ref.as_non_null (local.get $$qualifier))(local.get $index))
   ))))
  )
 )
@@ -341,7 +341,7 @@
  (param $array (ref null extern))
  (result i32)
  (block
-  (return (call $js_import_m_getLength__int@importglobaljstypes.Number.NativeArray (ref.as_non_null (local.get $array))))
+  (return (call $m_getLength__int@importglobaljstypes.Number.NativeArray (ref.as_non_null (local.get $array))))
  )
 )
 
@@ -425,9 +425,9 @@
  (local $str (ref null $java.lang.String))
  (block
   (call $$clinit__void_<once>_@importglobaljstypes.RegExp )
-  (local.set $regExp (call $js_import_m_<init>__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|teststring|__java_lang_String_<once>_@importglobaljstypes.RegExp.$StringLiterals ))))
-  (drop (call $js_import_m_test__java_lang_String__boolean@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|restString|__java_lang_String_<once>_@importglobaljstypes.RegExp.$StringLiterals ))))
-  (local.set $str (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $js_import_m_toString__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp)))))
+  (local.set $regExp (call $m_<init>__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|teststring|__java_lang_String_<once>_@importglobaljstypes.RegExp.$StringLiterals ))))
+  (drop (call $m_test__java_lang_String__boolean@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp))(call $m_toJs__java_lang_String__java_lang_String_NativeString@java.lang.String (call $$getString_|restString|__java_lang_String_<once>_@importglobaljstypes.RegExp.$StringLiterals ))))
+  (local.set $str (call $m_fromJs__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_toString__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp)))))
  )
 )
 
