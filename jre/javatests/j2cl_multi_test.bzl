@@ -37,6 +37,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
         runtime_deps = j2cl_deps,
         browsers = [
             "//build_defs/internal_do_not_use/browser:chrome-linux",
+            # TODO(goktug): Re-enable once macOS tests are healthy again.
         ],
         browser_overrides = {
         },
@@ -71,6 +72,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
             wasm_defs = j2wasm_defines,
             browsers = [
                 "//build_defs/internal_do_not_use/browser:chrome-linux",
+                # TODO(goktug): Re-enable once macOS tests are healthy again.
             ],
             **kwargs
         )
