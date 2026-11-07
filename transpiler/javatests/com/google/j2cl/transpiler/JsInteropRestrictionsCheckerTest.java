@@ -3604,6 +3604,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             o = (MyJsEnum[]) o;
         > Error: 'Object' cannot be cast to JsEnum array 'MyJsEnum[]'.
         > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.
+            String s = "" + new MyJsEnum[1];
+        > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object'.
           }
         }
         """);
@@ -3632,6 +3634,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           private static <T> T[][] returnsTArrayArray(T t) { return null; }
           private static <T> List<T[]> returnsTArrayList(T t) { return null; }
           private static <T> List<T[][]> returnsTArrayArrayList(T t) { return null; }
+          private static <E extends Enum<E>> List<E[]> returnsEnumBoundedTArrayList() {
+            return null;
+          }
           private List<T[]> instanceReturnsTArrayList() { return null; }
           private static <T> void acceptsT(T t) {}
           private static <T> void acceptsTArray(T[] t) {}
@@ -3668,6 +3673,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: Returned type in call to method 'List<MyJsEnum[]> Main.returnsTArrayList(MyJsEnum)' cannot be of type 'List<MyJsEnum[]>'.
             returnsTArrayArrayList(MyJsEnum.A);
           > Error: Returned type in call to method 'List<MyJsEnum[][]> Main.returnsTArrayArrayList(MyJsEnum)' cannot be of type 'List<MyJsEnum[][]>'.
+            // The disallowed type argument is reported instead of the disallowed return type.
+            Main.<MyJsEnum>returnsEnumBoundedTArrayList();
+          > Error: Type argument for 'E' of 'List<MyJsEnum[]> Main.returnsEnumBoundedTArrayList()' cannot be of type 'MyJsEnum'.
             new Main<MyJsEnum[]>().instanceReturnsTArrayList();
           > Error: Object creation 'new Main.<init>()' cannot be of type 'Main<MyJsEnum[]>'.
           > Error: Returned type in call to method 'List<MyJsEnum[][]> Main.instanceReturnsTArrayList()' cannot be of type 'List<MyJsEnum[][]>'.
@@ -3700,7 +3708,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           > Error: Variable 'wildcardList' cannot be of type 'List<?>'.
             var interList = (Serializable & List<MyJsEnum[]>) null;
           > Error: Variable 'interList' cannot be of type '(Serializable & List<MyJsEnum[]>)'.
-          > Error: Cannot cast to JsEnum array type '(Serializable & List<MyJsEnum[]>)'.
+          > Error: Cannot cast to type '(Serializable & List<MyJsEnum[]>)'.
             DerivedWithJsEnumArrayField buggy = new DerivedWithJsEnumArrayField();
             e = buggy.arr[0];
           > Error: Reference to field 'BaseWithTArrayField<MyJsEnum>.arr' cannot be of type 'MyJsEnum[]'.
