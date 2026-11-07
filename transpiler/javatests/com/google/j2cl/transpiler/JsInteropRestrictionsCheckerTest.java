@@ -3748,20 +3748,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Method 'void DerivedWithJsEnumArrayParams.acceptsTArrayArray(MyJsEnum[][])' cannot override method 'void BaseWithTArrayParams.acceptsTArrayArray(Object[][])' with a JsEnum array parameter.
           @Override void acceptsTArrayList(List<Main.MyJsEnum[]> p) {}
         > Error: Parameter 'p' in 'void DerivedWithJsEnumArrayParams.acceptsTArrayList(List<MyJsEnum[]> p)' cannot be of type 'List<MyJsEnum[]>'.
-        > Error: Method 'void DerivedWithJsEnumArrayParams.acceptsTArrayList(List)' cannot override method 'void BaseWithTArrayParams.acceptsTArrayList(List)' with a JsEnum array parameter.
           @Override void acceptsTArrayListArray(List<Main.MyJsEnum[]>[] p) {}
         > Error: Parameter 'p' in 'void DerivedWithJsEnumArrayParams.acceptsTArrayListArray(List<MyJsEnum[]>[] p)' cannot be of type 'List<MyJsEnum[]>[]'.
-        > Error: Method 'void DerivedWithJsEnumArrayParams.acceptsTArrayListArray(List[])' cannot override method 'void BaseWithTArrayParams.acceptsTArrayListArray(List[])' with a JsEnum array parameter.
           @Override Main.MyJsEnum[] returnsTArray() { return null; }
         > Error: Method 'MyJsEnum[] DerivedWithJsEnumArrayParams.returnsTArray()' cannot override method 'T[] BaseWithTArrayParams.returnsTArray()' with a JsEnum array return type.
           @Override Main.MyJsEnum[][] returnsTArrayArray() { return null; }
         > Error: Method 'MyJsEnum[][] DerivedWithJsEnumArrayParams.returnsTArrayArray()' cannot override method 'T[][] BaseWithTArrayParams.returnsTArrayArray()' with a JsEnum array return type.
           @Override List<Main.MyJsEnum[]> returnsTArrayList() { return null; }
         > Error: Return type of 'List<MyJsEnum[]> DerivedWithJsEnumArrayParams.returnsTArrayList()' cannot be of type 'List<MyJsEnum[]>'.
-        > Error: Method 'List<MyJsEnum[]> DerivedWithJsEnumArrayParams.returnsTArrayList()' cannot override method 'List<T[]> BaseWithTArrayParams.returnsTArrayList()' with a JsEnum array return type.
           @Override List<Main.MyJsEnum[]>[] returnsTArrayListArray() { return null; }
         > Error: Return type of 'List<MyJsEnum[]>[] DerivedWithJsEnumArrayParams.returnsTArrayListArray()' cannot be of type 'List<MyJsEnum[]>[]'.
-        > Error: Method 'List<MyJsEnum[]>[] DerivedWithJsEnumArrayParams.returnsTArrayListArray()' cannot override method 'List<T[]>[] BaseWithTArrayParams.returnsTArrayListArray()' with a JsEnum array return type.
         }
         class DerivedCallingSuperJsEnumVararg extends BaseWithTArrayParams<Main.MyJsEnum> {
           void callsSuperAcceptsTVarargs(Main.MyJsEnum... p) {
@@ -3782,6 +3778,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         class AccidentalJsEnumArrayGetter
         > Error: Method 'MyJsEnum[] BaseReturningJsEnumArray.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
             extends BaseReturningJsEnumArray implements ObjectArrayGetter {}
+        interface JsEnumArrayGetter {
+          Main.MyJsEnum[] get();
+        }
+        class GenericArrayBase<T> {
+          public T[] get() { return null; }
+        }
+        class AccidentalGenericAsJsEnumArrayGetter
+        > Error: Method 'MyJsEnum[] GenericArrayBase.get()' cannot override method 'MyJsEnum[] JsEnumArrayGetter.get()' with a JsEnum array return type.
+            extends GenericArrayBase<Main.MyJsEnum> implements JsEnumArrayGetter {}
         """);
   }
 

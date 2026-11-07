@@ -636,22 +636,11 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsEnumUsages(Type type) {
     checkJsEnumMethodCalls(type);
-    checkJsEnumAssignments(type);
+    checkJsEnumConversions(type);
     checkJsEnumParameterizations(type);
     checkJsEnumValueFieldAssignment(type);
     checkJsEnumSwitchUsage(type);
-
-    checkOverrides(
-        type,
-        // Not checking parameters.
-        (a, b) -> false,
-        JsInteropRestrictionsChecker::isDisallowedJsEnumAssignment,
-        /* checkedTypeMessage= */ "JsEnum");
-    checkOverrides(
-        type,
-        JsInteropRestrictionsChecker::isDisallowedJsEnumArrayOverride,
-        JsInteropRestrictionsChecker::isDisallowedJsEnumArrayOverride,
-        /* checkedTypeMessage= */ "JsEnum array");
+    checkJsEnumOverrides(type);
   }
 
   private void checkJsEnumMethodCalls(Type type) {
@@ -728,12 +717,8 @@ public class JsInteropRestrictionsChecker {
    *       runtime representation, it is checked against the declared types.
    * </ul>
    */
-  private void checkJsEnumAssignments(Type type) {
-    type.getMembers().forEach(this::checkJsEnumAssignments);
-  }
-
-  private void checkJsEnumAssignments(Member member) {
-    member.accept(
+  private void checkJsEnumConversions(Type type) {
+    type.accept(
         new ConversionContextVisitor(
             new ContextRewriter() {
               @Override
@@ -741,7 +726,7 @@ public class JsInteropRestrictionsChecker {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                checkJsEnumAssignment(
+                checkJsEnumConversion(
                     inferredTypeDescriptor, declaredTypeDescriptor, expression, "assigned to");
                 return expression;
               }
@@ -749,7 +734,7 @@ public class JsInteropRestrictionsChecker {
               @Override
               public Expression rewriteStringContext(Expression expression) {
                 TypeDescriptor javaLangObject = TypeDescriptors.get().javaLangObject;
-                checkJsEnumAssignment(javaLangObject, javaLangObject, expression, "assigned to");
+                checkJsEnumConversion(javaLangObject, javaLangObject, expression, "assigned to");
                 return expression;
               }
 
@@ -758,7 +743,7 @@ public class JsInteropRestrictionsChecker {
                 // Casts to supertypes are always allowed, so they need to be checked as well, e.g.
                 // `(Enum<?>) MyJsEnum.A`.
                 TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-                checkJsEnumAssignment(
+                checkJsEnumConversion(
                     castTypeDescriptor,
                     castTypeDescriptor,
                     castExpression.getExpression(),
@@ -777,8 +762,9 @@ public class JsInteropRestrictionsChecker {
                   TypeDescriptor declaredTypeDescriptor,
                   Expression qualifierExpression) {
                 // Members accessed on JsEnum values are checked in checkJsEnumMethodCalls.
-                if (isDisallowedJsEnumArrayAssignment(
-                    declaredTypeDescriptor, qualifierExpression)) {
+                if (!(qualifierExpression instanceof NullLiteral)
+                    && isDisallowedJsEnumArrayConversion(
+                        declaredTypeDescriptor, qualifierExpression.getTypeDescriptor())) {
                   problems.error(
                       getSourcePosition(),
                       "Cannot access member of %s with %s.",
@@ -805,7 +791,7 @@ public class JsInteropRestrictionsChecker {
                   if (varargTypeDescriptor.isArray()
                       && !varargTypeDescriptor.isAssignableTo(
                           arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor())) {
-                    checkJsEnumAssignment(
+                    checkJsEnumConversion(
                         inferredParameterDescriptor.getTypeDescriptor(),
                         declaredParameterDescriptor.getTypeDescriptor(),
                         vararg,
@@ -817,14 +803,18 @@ public class JsInteropRestrictionsChecker {
                     inferredParameterDescriptor, declaredParameterDescriptor, argument);
               }
 
-              private void checkJsEnumAssignment(
+              private void checkJsEnumConversion(
                   TypeDescriptor inferredToTypeDescriptor,
                   TypeDescriptor declaredToTypeDescriptor,
                   Expression expression,
                   String conversion) {
+                if (expression instanceof NullLiteral) {
+                  // NullLiteral is typed as Object until a later normalization pass.
+                  return;
+                }
                 TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
 
-                if (isDisallowedJsEnumAssignment(
+                if (isDisallowedJsEnumConversion(
                     inferredToTypeDescriptor, expressionTypeDescriptor)) {
                   String prefix = "";
                   if (expressionTypeDescriptor.isJsEnum()) {
@@ -843,9 +833,8 @@ public class JsInteropRestrictionsChecker {
                       expressionTypeDescriptor.getReadableDescription(),
                       conversion,
                       inferredToTypeDescriptor.getReadableDescription());
-                }
-
-                if (isDisallowedJsEnumArrayAssignment(declaredToTypeDescriptor, expression)) {
+                } else if (isDisallowedJsEnumArrayConversion(
+                    declaredToTypeDescriptor, expressionTypeDescriptor)) {
                   problems.error(
                       getSourcePosition(),
                       "%s cannot be %s %s.",
@@ -865,7 +854,7 @@ public class JsInteropRestrictionsChecker {
             // type parameters bounded by those types cannot be specialized to JsEnums, e.g.
             // `EnumSet<MyJsEnum>` or `<T extends Enum<T>> T valueOf(Class<T>, String)`.
             (declaredTypeDescriptor.isTypeVariable()
-                    && isDisallowedJsEnumAssignment(declaredTypeDescriptor, inferredTypeDescriptor))
+                    && isDisallowedJsEnumConversion(declaredTypeDescriptor, inferredTypeDescriptor))
                 // JsEnum arrays cannot be used in most type parameters since generic code would
                 // see their unboxed values, e.g. `List<MyJsEnum[]>`.
                 || (!AstUtils.isNonNativeJsEnumArray(declaredTypeDescriptor)
@@ -873,13 +862,13 @@ public class JsInteropRestrictionsChecker {
         /* disallowedTypeDescription= */ "type");
   }
 
-  private static boolean isDisallowedJsEnumAssignment(
+  private static boolean isDisallowedJsEnumConversion(
       TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
-    return isDisallowedJsEnumAssignment(
+    return isDisallowedJsEnumConversion(
         toTypeDescriptor, fromTypeDescriptor, /* seenTypeVariables= */ ImmutableSet.of());
   }
 
-  private static boolean isDisallowedJsEnumAssignment(
+  private static boolean isDisallowedJsEnumConversion(
       TypeDescriptor toTypeDescriptor,
       TypeDescriptor fromTypeDescriptor,
       ImmutableSet<TypeVariable> seenTypeVariables) {
@@ -898,8 +887,8 @@ public class JsInteropRestrictionsChecker {
       // and the upper bound.
       TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
       return (lowerBound != null
-              && isDisallowedJsEnumAssignment(lowerBound, fromTypeDescriptor, newSeenTypeVariables))
-          || isDisallowedJsEnumAssignment(
+              && isDisallowedJsEnumConversion(lowerBound, fromTypeDescriptor, newSeenTypeVariables))
+          || isDisallowedJsEnumConversion(
               typeVariable.getUpperBoundTypeDescriptor(), fromTypeDescriptor, newSeenTypeVariables);
     }
 
@@ -907,7 +896,7 @@ public class JsInteropRestrictionsChecker {
       // The value will be used as each of the types in the intersection, e.g. the bound in
       // `<T extends Object & Comparable<? super T>> T max(Collection<? extends T>)`.
       return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-          .anyMatch(t -> isDisallowedJsEnumAssignment(t, fromTypeDescriptor, seenTypeVariables));
+          .anyMatch(t -> isDisallowedJsEnumConversion(t, fromTypeDescriptor, seenTypeVariables));
     }
 
     if (toTypeDescriptor instanceof ArrayTypeDescriptor toArrayTypeDescriptor
@@ -924,7 +913,7 @@ public class JsInteropRestrictionsChecker {
               : fromTypeDescriptor;
       return fromArrayTypeDescriptor instanceof ArrayTypeDescriptor fromArray
           && !AstUtils.isNonNativeJsEnumArray(fromArray)
-          && isDisallowedJsEnumAssignment(
+          && isDisallowedJsEnumConversion(
               toArrayTypeDescriptor.getComponentTypeDescriptor(),
               fromArray.getComponentTypeDescriptor(),
               seenTypeVariables);
@@ -1004,41 +993,20 @@ public class JsInteropRestrictionsChecker {
     TypeDescriptor lowerBound = wildcard.getLowerBoundTypeDescriptor();
     if (lowerBound != null) {
       // `? super L`: values of type L flow into the type argument.
-      return isDisallowedJsEnumAssignment(fromTypeArgument, lowerBound, seenTypeVariables);
+      return isDisallowedJsEnumConversion(fromTypeArgument, lowerBound, seenTypeVariables);
     }
     // `? extends U`: values of the type argument flow into U.
-    return isDisallowedJsEnumAssignment(
+    return isDisallowedJsEnumConversion(
         wildcard.getUpperBoundTypeDescriptor(), fromTypeArgument, seenTypeVariables);
   }
 
-  private static boolean isDisallowedJsEnumArrayAssignment(
-      TypeDescriptor toTypeDescriptor, Expression expression) {
-    // Allow NullLiteral to be assigned. NullLiteral is typed as Object until a later normalization
-    // pass.
-    if (expression instanceof NullLiteral) {
-      return false;
-    }
-    TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-    if (haveSameJsEnumArrayRepresentation(toTypeDescriptor, expressionTypeDescriptor)) {
-      return false;
-    }
-    // JsEnum arrays cannot be assigned to Object[], T[], T..., and so on.
-    return !expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
-        && (hasDisallowedType(expressionTypeDescriptor, AstUtils::isNonNativeJsEnumArray)
-            || hasDisallowedType(toTypeDescriptor, AstUtils::isNonNativeJsEnumArray));
-  }
-
-  private static boolean isDisallowedJsEnumArrayOverride(
-      TypeDescriptor toTypeDescriptor, TypeDescriptor expressionTypeDescriptor) {
-    if (haveSameJsEnumArrayRepresentation(toTypeDescriptor, expressionTypeDescriptor)) {
-      return false;
-    }
-    // For override checking, We want to check both (base=T, child=MyJsEnum[]) and (base=List<T>,
-    // child=List<MyJsEnum[]>), so also perform the check when the parameter types match but the
-    // base type has type variables.
-    return (!expressionTypeDescriptor.isSameBaseType(toTypeDescriptor)
-            || !toTypeDescriptor.getAllTypeVariables().isEmpty())
-        && hasDisallowedType(expressionTypeDescriptor, AstUtils::isNonNativeJsEnumArray);
+  private static boolean isDisallowedJsEnumArrayConversion(
+      TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
+    // JsEnum arrays cannot be converted to or from Object, Object[], T[], etc.; only arrays with
+    // the same runtime representation are compatible.
+    return (AstUtils.isNonNativeJsEnumArray(fromTypeDescriptor)
+            || AstUtils.isNonNativeJsEnumArray(toTypeDescriptor))
+        && !haveSameJsEnumArrayRepresentation(toTypeDescriptor, fromTypeDescriptor);
   }
 
   /**
@@ -1102,71 +1070,72 @@ public class JsInteropRestrictionsChecker {
         });
   }
 
-  private void checkOverrides(
-      Type type,
-      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
-      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
-      String checkedTypeMessage) {
+  private void checkJsEnumOverrides(Type type) {
     type.streamMethods()
         .forEach(
-            method ->
-                checkOverrides(
-                    method.getDescriptor(),
-                    method.getSourcePosition(),
-                    isDisallowedParameterOverride,
-                    isDisallowedReturnTypeOverride,
-                    checkedTypeMessage));
+            method -> checkJsEnumOverrides(method.getDescriptor(), method.getSourcePosition()));
     for (MethodDescriptor methodDescriptor : type.getTypeDescriptor().getAccidentalOverrides()) {
-      checkOverrides(
-          methodDescriptor,
-          type.getSourcePosition(),
-          isDisallowedParameterOverride,
-          isDisallowedReturnTypeOverride,
-          checkedTypeMessage);
+      checkJsEnumOverrides(methodDescriptor, type.getSourcePosition());
     }
   }
 
-  private void checkOverrides(
-      MethodDescriptor methodDescriptor,
-      SourcePosition sourcePosition,
-      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedParameterOverride,
-      BiPredicate<TypeDescriptor, TypeDescriptor> isDisallowedReturnTypeOverride,
-      String checkedTypeMessage) {
+  private void checkJsEnumOverrides(
+      MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
     MethodDescriptor targetMethodDescriptor =
         methodDescriptor.isBridge() ? methodDescriptor.getBridgeTarget() : methodDescriptor;
-    for (MethodDescriptor m : methodDescriptor.getJavaOverriddenMethodDescriptors()) {
-      MethodDescriptor overriddenMethodDescriptor = m.getDeclarationDescriptor();
-      for (int argIndex = 0;
-          argIndex < targetMethodDescriptor.getParameterDescriptors().size();
-          argIndex++) {
-        TypeDescriptor parameterDescriptor =
-            targetMethodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
-        TypeDescriptor overriddenParameterDescriptor =
-            overriddenMethodDescriptor.getParameterDescriptors().get(argIndex).getTypeDescriptor();
-
-        if (isDisallowedParameterOverride.test(
-            overriddenParameterDescriptor, parameterDescriptor)) {
-          problems.error(
-              sourcePosition,
-              "Method '%s' cannot override method '%s' with a %s parameter.",
-              targetMethodDescriptor.getReadableDescription(),
-              overriddenMethodDescriptor.getReadableDescription(),
-              checkedTypeMessage);
-        }
-      }
-
-      if (isDisallowedReturnTypeOverride.test(
-              overriddenMethodDescriptor.getReturnTypeDescriptor(),
-              targetMethodDescriptor.getReturnTypeDescriptor())
-          || isDisallowedReturnTypeOverride.test(
-              m.getReturnTypeDescriptor(), targetMethodDescriptor.getReturnTypeDescriptor())) {
-        problems.error(
+    MethodDescriptor targetDeclarationDescriptor =
+        targetMethodDescriptor.getDeclarationDescriptor();
+    for (MethodDescriptor overriddenMethodDescriptor :
+        methodDescriptor.getJavaOverriddenMethodDescriptors()) {
+      MethodDescriptor overriddenDeclarationDescriptor =
+          overriddenMethodDescriptor.getDeclarationDescriptor();
+      for (int i = 0; i < targetMethodDescriptor.getParameterDescriptors().size(); i++) {
+        checkJsEnumOverrideType(
+            /* inferredTo= */ targetMethodDescriptor.getParameterTypeDescriptors().get(i),
+            /* declaredTo= */ targetDeclarationDescriptor.getParameterTypeDescriptors().get(i),
+            /* inferredFrom= */ overriddenMethodDescriptor.getParameterTypeDescriptors().get(i),
+            /* declaredFrom= */ overriddenDeclarationDescriptor
+                .getParameterTypeDescriptors()
+                .get(i),
+            targetMethodDescriptor,
+            overriddenDeclarationDescriptor,
             sourcePosition,
-            "Method '%s' cannot override method '%s' with a %s return type.",
-            targetMethodDescriptor.getReadableDescription(),
-            overriddenMethodDescriptor.getReadableDescription(),
-            checkedTypeMessage);
+            "parameter");
       }
+
+      checkJsEnumOverrideType(
+          /* inferredTo= */ overriddenMethodDescriptor.getReturnTypeDescriptor(),
+          /* declaredTo= */ overriddenDeclarationDescriptor.getReturnTypeDescriptor(),
+          /* inferredFrom= */ targetMethodDescriptor.getReturnTypeDescriptor(),
+          /* declaredFrom= */ targetDeclarationDescriptor.getReturnTypeDescriptor(),
+          targetMethodDescriptor,
+          overriddenDeclarationDescriptor,
+          sourcePosition,
+          "return type");
+    }
+  }
+
+  private void checkJsEnumOverrideType(
+      TypeDescriptor inferredTo,
+      TypeDescriptor declaredTo,
+      TypeDescriptor inferredFrom,
+      TypeDescriptor declaredFrom,
+      MethodDescriptor targetMethodDescriptor,
+      MethodDescriptor overriddenDeclarationDescriptor,
+      SourcePosition sourcePosition,
+      String location) {
+    String disallowedType =
+        isDisallowedJsEnumConversion(inferredTo, inferredFrom)
+            ? "JsEnum"
+            : isDisallowedJsEnumArrayConversion(declaredTo, declaredFrom) ? "JsEnum array" : null;
+    if (disallowedType != null) {
+      problems.error(
+          sourcePosition,
+          "Method '%s' cannot override method '%s' with a %s %s.",
+          targetMethodDescriptor.getReadableDescription(),
+          overriddenDeclarationDescriptor.getReadableDescription(),
+          disallowedType,
+          location);
     }
   }
 
@@ -3247,14 +3216,6 @@ public class JsInteropRestrictionsChecker {
     return typeDeclaration.getTypeParameterDescriptors().stream()
         .filter(Predicates.not(enclosingTypeParameters::contains))
         .collect(toImmutableList());
-  }
-
-  private static boolean hasDisallowedType(
-      TypeDescriptor typeDescriptor, Predicate<TypeDescriptor> isTypeDisallowed) {
-    return hasDisallowedType(
-        typeDescriptor,
-        typeDescriptor,
-        (declaredType, inferredType) -> isTypeDisallowed.test(inferredType));
   }
 
   /**
