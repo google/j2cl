@@ -640,6 +640,7 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumParameterizations(type);
     checkJsEnumValueFieldAssignment(type);
     checkJsEnumSwitchUsage(type);
+    checkJsEnumLambdas(type);
     checkJsEnumOverrides(type);
   }
 
@@ -1070,6 +1071,65 @@ public class JsInteropRestrictionsChecker {
         });
   }
 
+  private void checkJsEnumLambdas(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            SourcePosition sourcePosition = functionExpression.getSourcePosition();
+            if (sourcePosition == SourcePosition.NONE) {
+              sourcePosition = getSourcePosition();
+            }
+            MethodDescriptor functionalMethod = functionExpression.getDescriptor();
+            switch (functionExpression.getTypeDescriptor()) {
+              case IntersectionTypeDescriptor intersectionTypeDescriptor -> {
+                if (hasJsEnumInAbstractMethods(intersectionTypeDescriptor)) {
+                  // Lambdas with intersection types are lowered through the first functional
+                  // interface (b/360407114), which gets the JsEnum boxing wrong when the methods of
+                  // the other interfaces use JsEnums. JsEnums nested in other types, e.g. in
+                  // `List<MyJsEnum>`, are not affected since they are always boxed, and their
+                  // conversions are checked as in other lambdas.
+                  problems.error(sourcePosition, "JsEnum lambda cannot have an intersection type.");
+                } else {
+                  for (TypeDescriptor typeDescriptor :
+                      intersectionTypeDescriptor.getIntersectionTypeDescriptors()) {
+                    checkFunctionalMethodOverrides(
+                        functionalMethod, (DeclaredTypeDescriptor) typeDescriptor, sourcePosition);
+                  }
+                }
+              }
+              case DeclaredTypeDescriptor declaredTypeDescriptor -> {
+                if (declaredTypeDescriptor.hasTypeArguments()) {
+                  checkFunctionalMethodOverrides(
+                      functionalMethod, declaredTypeDescriptor, sourcePosition);
+                }
+              }
+              default -> {}
+            }
+          }
+        });
+  }
+
+  /**
+   * Returns true if a JsEnum or a JsEnum array is a parameter or return type of an abstract method
+   * of {@code intersectionTypeDescriptor}.
+   */
+  private static boolean hasJsEnumInAbstractMethods(
+      IntersectionTypeDescriptor intersectionTypeDescriptor) {
+    return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+        .flatMap(t -> ((DeclaredTypeDescriptor) t).getPolymorphicMethods().stream())
+        .filter(MethodDescriptor::isAbstract)
+        .flatMap(
+            m ->
+                Stream.concat(
+                    Stream.of(m.getReturnTypeDescriptor()),
+                    m.getParameterTypeDescriptors().stream()))
+        .anyMatch(
+            t ->
+                (t instanceof ArrayTypeDescriptor array ? array.getLeafTypeDescriptor() : t)
+                    .isJsEnum());
+  }
+
   private void checkJsEnumOverrides(Type type) {
     type.streamMethods()
         .forEach(
@@ -1077,42 +1137,73 @@ public class JsInteropRestrictionsChecker {
     for (MethodDescriptor methodDescriptor : type.getTypeDescriptor().getAccidentalOverrides()) {
       checkJsEnumOverrides(methodDescriptor, type.getSourcePosition());
     }
+    DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
+    if (typeDescriptor.isFunctionalInterface()) {
+      checkFunctionalMethodOverrides(
+          typeDescriptor.getSingleAbstractMethodDescriptor(),
+          typeDescriptor,
+          type.getSourcePosition());
+    }
+  }
+
+  /**
+   * Checks {@code functionalMethod}, the method implemented by a lambda or the single abstract
+   * method of a functional interface, against the methods it overrides in {@code typeDescriptor}.
+   */
+  private void checkFunctionalMethodOverrides(
+      MethodDescriptor functionalMethod,
+      DeclaredTypeDescriptor typeDescriptor,
+      SourcePosition sourcePosition) {
+    for (DeclaredTypeDescriptor supertype : typeDescriptor.getAllSuperTypesIncludingSelf()) {
+      for (MethodDescriptor method : supertype.getDeclaredMethodDescriptors()) {
+        if (method.isPolymorphic()
+            && !functionalMethod.isSameMethod(method)
+            && functionalMethod.isOverride(method)) {
+          checkJsEnumOverride(functionalMethod, method, sourcePosition);
+        }
+      }
+    }
   }
 
   private void checkJsEnumOverrides(
       MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
     MethodDescriptor targetMethodDescriptor =
         methodDescriptor.isBridge() ? methodDescriptor.getBridgeTarget() : methodDescriptor;
-    MethodDescriptor targetDeclarationDescriptor =
-        targetMethodDescriptor.getDeclarationDescriptor();
     for (MethodDescriptor overriddenMethodDescriptor :
         methodDescriptor.getJavaOverriddenMethodDescriptors()) {
-      MethodDescriptor overriddenDeclarationDescriptor =
-          overriddenMethodDescriptor.getDeclarationDescriptor();
-      for (int i = 0; i < targetMethodDescriptor.getParameterDescriptors().size(); i++) {
-        checkJsEnumOverrideType(
-            /* inferredTo= */ targetMethodDescriptor.getParameterTypeDescriptors().get(i),
-            /* declaredTo= */ targetDeclarationDescriptor.getParameterTypeDescriptors().get(i),
-            /* inferredFrom= */ overriddenMethodDescriptor.getParameterTypeDescriptors().get(i),
-            /* declaredFrom= */ overriddenDeclarationDescriptor
-                .getParameterTypeDescriptors()
-                .get(i),
-            targetMethodDescriptor,
-            overriddenDeclarationDescriptor,
-            sourcePosition,
-            "parameter");
-      }
+      checkJsEnumOverride(targetMethodDescriptor, overriddenMethodDescriptor, sourcePosition);
+    }
+  }
 
+  private void checkJsEnumOverride(
+      MethodDescriptor targetMethodDescriptor,
+      MethodDescriptor overriddenMethodDescriptor,
+      SourcePosition sourcePosition) {
+    MethodDescriptor targetDeclarationDescriptor =
+        targetMethodDescriptor.getDeclarationDescriptor();
+    MethodDescriptor overriddenDeclarationDescriptor =
+        overriddenMethodDescriptor.getDeclarationDescriptor();
+    for (int i = 0; i < targetMethodDescriptor.getParameterDescriptors().size(); i++) {
       checkJsEnumOverrideType(
-          /* inferredTo= */ overriddenMethodDescriptor.getReturnTypeDescriptor(),
-          /* declaredTo= */ overriddenDeclarationDescriptor.getReturnTypeDescriptor(),
-          /* inferredFrom= */ targetMethodDescriptor.getReturnTypeDescriptor(),
-          /* declaredFrom= */ targetDeclarationDescriptor.getReturnTypeDescriptor(),
+          /* inferredTo= */ targetMethodDescriptor.getParameterTypeDescriptors().get(i),
+          /* declaredTo= */ targetDeclarationDescriptor.getParameterTypeDescriptors().get(i),
+          /* inferredFrom= */ overriddenMethodDescriptor.getParameterTypeDescriptors().get(i),
+          /* declaredFrom= */ overriddenDeclarationDescriptor.getParameterTypeDescriptors().get(i),
           targetMethodDescriptor,
           overriddenDeclarationDescriptor,
           sourcePosition,
-          "return type");
+          "parameter");
     }
+
+    checkJsEnumOverrideType(
+        /* inferredTo= */ overriddenMethodDescriptor.getReturnTypeDescriptor(),
+        /* declaredTo= */ overriddenDeclarationDescriptor.getReturnTypeDescriptor(),
+        /* inferredFrom= */ targetMethodDescriptor.getReturnTypeDescriptor(),
+        /* declaredFrom= */ targetDeclarationDescriptor.getReturnTypeDescriptor(),
+        targetMethodDescriptor,
+        overriddenDeclarationDescriptor,
+        sourcePosition,
+        "return type");
   }
 
   private void checkJsEnumOverrideType(
@@ -1127,7 +1218,10 @@ public class JsInteropRestrictionsChecker {
     String disallowedType =
         isDisallowedJsEnumConversion(inferredTo, inferredFrom)
             ? "JsEnum"
-            : isDisallowedJsEnumArrayConversion(declaredTo, declaredFrom) ? "JsEnum array" : null;
+            : (isDisallowedJsEnumArrayConversion(declaredTo, declaredFrom)
+                    || isDisallowedJsEnumArrayConversion(inferredTo, inferredFrom))
+                ? "JsEnum array"
+                : null;
     if (disallowedType != null) {
       problems.error(
           sourcePosition,

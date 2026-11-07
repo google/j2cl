@@ -28,6 +28,7 @@ import static jsenum.NativeEnums.nativeClinitCalled;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,7 @@ public class Main {
     testJsEnumTypeVariableBridges();
     testJsEnumErasureOverrides();
     testJsEnumCollectionElements();
+    testIntersectionLambdasWithNestedJsEnums();
   }
 
   private static void testNativeJsEnum() {
@@ -1451,5 +1453,59 @@ public class Main {
   private static boolean wildcardElementsEqual(
       List<? extends NativeEnum> nativeList, List<? extends PlainJsEnum> plainList) {
     return nativeList.get(0).equals(NativeEnum.ACCEPT) && plainList.get(0).equals(PlainJsEnum.ONE);
+  }
+
+  interface PlainJsEnumListGetter {
+    List<PlainJsEnum> get();
+  }
+
+  interface PlainJsEnumCollectionGetter {
+    Collection<PlainJsEnum> get();
+  }
+
+  interface WildcardListGetter {
+    List<?> get();
+  }
+
+  interface PlainJsEnumListConsumer {
+    int accept(List<PlainJsEnum> list);
+  }
+
+  @SuppressWarnings("unchecked")
+  private static void testIntersectionLambdasWithNestedJsEnums() {
+    // JsEnums nested in type arguments are always boxed, so they are read correctly through each of
+    // the interfaces.
+    List<PlainJsEnum> list = new ArrayList<>();
+    list.add(PlainJsEnum.ONE);
+
+    // The more specific interface is listed first since lambdas with intersection types are lowered
+    // through the first functional interface (b/360407114).
+    Object listGetter = (PlainJsEnumListGetter & PlainJsEnumCollectionGetter) () -> list;
+    PlainJsEnum fromList = ((PlainJsEnumListGetter) listGetter).get().get(0);
+    PlainJsEnum fromCollection = ((PlainJsEnumCollectionGetter) listGetter).get().iterator().next();
+    assertTrue(fromList == PlainJsEnum.ONE);
+    assertTrue(fromCollection == PlainJsEnum.ONE);
+
+    Object wildcardListGetter = (WildcardListGetter & PlainJsEnumListGetter) () -> list;
+    Object fromWildcardList = ((WildcardListGetter) wildcardListGetter).get().get(0);
+    PlainJsEnum fromJsEnumList = ((PlainJsEnumListGetter) wildcardListGetter).get().get(0);
+    assertTrue(fromWildcardList == PlainJsEnum.ONE);
+    assertTrue(fromJsEnumList == PlainJsEnum.ONE);
+
+    Object consumer = (PlainJsEnumListConsumer & Serializable) l -> l.get(0).ordinal();
+    assertTrue(((PlainJsEnumListConsumer) consumer).accept(list) == 1);
+
+    Object supplier = (Supplier<List<PlainJsEnum>> & Serializable) () -> list;
+    PlainJsEnum fromSupplier = ((Supplier<List<PlainJsEnum>>) supplier).get().get(0);
+    assertTrue(fromSupplier == PlainJsEnum.ONE);
+
+    if (!isWasm()) {
+      // JsEnums are only unboxed in JS.
+      assertUnderlyingTypeEquals(Double.class, fromList);
+      assertUnderlyingTypeEquals(Double.class, fromCollection);
+      assertUnderlyingTypeEquals(PlainJsEnum.class, fromWildcardList);
+      assertUnderlyingTypeEquals(Double.class, fromJsEnumList);
+      assertUnderlyingTypeEquals(Double.class, fromSupplier);
+    }
   }
 }

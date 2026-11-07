@@ -2473,6 +2473,82 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         class AccidentalSpecializingSupplierToJsEnum
         > Error: Method 'MyJsEnum GenericBase.get()' cannot override method 'T Supplier.get()' with a JsEnum return type.
             extends GenericBase<MyJsEnum> implements Supplier<Enum<?>> {}
+        interface JsEnumGetter {
+          MyJsEnum get();
+        }
+        interface CombinedEnumGetter extends EnumGetter, JsEnumGetter {}
+        > Error: Method 'MyJsEnum JsEnumGetter.get()' cannot override method 'Enum<?> EnumGetter.get()' with a JsEnum return type.
+        interface CombinedEnumGetterReversed extends JsEnumGetter, EnumGetter {}
+        > Error: Method 'MyJsEnum JsEnumGetter.get()' cannot override method 'Enum<?> EnumGetter.get()' with a JsEnum return type.
+        interface EnumListGetter {
+          java.util.List<? extends Enum<?>> get();
+        }
+        interface JsEnumListGetter {
+          java.util.List<MyJsEnum> get();
+        }
+        interface CombinedEnumListGetter extends EnumListGetter, JsEnumListGetter {}
+        > Error: Method 'List<MyJsEnum> JsEnumListGetter.get()' cannot override method 'List<?> EnumListGetter.get()' with a JsEnum return type.
+        """);
+  }
+
+  public void testJsEnumIntersectionLambdaFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import java.io.Serializable;
+        import java.util.List;
+        import java.util.function.Consumer;
+        import java.util.function.Supplier;
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum
+          enum MyJsEnum {
+            A;
+            static MyJsEnum getA() { return A; }
+          }
+          @JsEnum(isNative = true)
+          enum NativeEnum {
+            A
+          }
+          interface ObjectGetter { Object get(); }
+          interface EnumGetter { Enum<?> get(); }
+          interface JsEnumGetter { MyJsEnum get(); }
+          interface NativeEnumGetter { NativeEnum get(); }
+          interface SubJsEnumConsumer extends Consumer<MyJsEnum> {
+            @Override
+            void accept(MyJsEnum e);
+          }
+          interface ListGetter { List<? extends Enum<?>> get(); }
+          interface JsEnumListGetter { List<MyJsEnum> get(); }
+          interface ObjectArrayGetter { Object[] get(); }
+          interface JsEnumArrayGetter { MyJsEnum[] get(); }
+          static void test(List<MyJsEnum> jsEnumList) {
+            Object o1 = (ObjectGetter & JsEnumGetter) () -> MyJsEnum.A;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o2 = (JsEnumGetter & ObjectGetter) () -> MyJsEnum.A;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o3 = (ObjectGetter & Supplier<MyJsEnum>) () -> MyJsEnum.A;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o4 = (ObjectGetter & JsEnumGetter) MyJsEnum::getA;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o5 = (EnumGetter & JsEnumGetter) () -> null;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o6 = (JsEnumGetter & Serializable) () -> MyJsEnum.A;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o7 = (SubJsEnumConsumer & Consumer<MyJsEnum>) x -> {};
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o8 = (ObjectGetter & NativeEnumGetter) () -> NativeEnum.A;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o9 = (JsEnumListGetter & ListGetter) () -> null;
+        > Error: Method 'List<MyJsEnum> JsEnumListGetter.get()' cannot override method 'List<?> ListGetter.get()' with a JsEnum return type.
+            Object o10 = (ListGetter & JsEnumListGetter) () -> jsEnumList;
+        > Error: 'List<MyJsEnum>' cannot be assigned to 'List<?>'.
+            Object o11 = (ObjectArrayGetter & JsEnumArrayGetter) () -> null;
+        > Error: JsEnum lambda cannot have an intersection type.
+            Object o12 = (JsEnumArrayGetter & Serializable) () -> new MyJsEnum[0];
+        > Error: JsEnum lambda cannot have an intersection type.
+          }
+        }
         """);
   }
 
@@ -2494,6 +2570,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "test.MyJsEnum",
             """
             import jsinterop.annotations.*;
+            import java.io.Serializable;
+            import java.util.Comparator;
             import java.util.function.*;
             @JsEnum
             public enum MyJsEnum {
@@ -2507,6 +2585,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 Consumer<MyJsEnum> consumer = c -> c.ordinal();
                 Consumer<? super MyJsEnum> consumer2 = c -> c.ordinal();
                 Supplier<? extends MyJsEnum> supplier = () -> MyJsEnum.A;
+                ValidCombinedGetter combinedGetter = () -> MyJsEnum.A;
+                Object nonJsEnumIntersection = (ObjectGetter & StringGetter) () -> "ok";
+                Object serializableStringComparator =
+                    (Comparator<String> & Serializable) (a, b) -> a.compareTo(b);
+                Object defaultedSuperJsEnumIntersection =
+                    (ObjectGetter & SubStringGetterWithDefaultJsEnum) () -> "ok";
               }
               static int field = 5;
               static { }
@@ -2514,6 +2598,18 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               public void anInstanceMethod() { }
               public static void aStaticMethod() { }
             }
+            interface ObjectGetter { Object get(); }
+            interface StringGetter { String get(); }
+            interface SuperWithJsEnumDefaulted {
+              void unused(MyJsEnum e);
+              String get();
+            }
+            interface SubStringGetterWithDefaultJsEnum extends SuperWithJsEnumDefaulted {
+              @Override
+              default void unused(MyJsEnum e) {}
+            }
+            interface JsEnumGetter { MyJsEnum get(); }
+            interface ValidCombinedGetter extends ObjectGetter, JsEnumGetter {}
             interface List<T> { Object getObject(); }
             class AList<T> { }
             class AListSubclass extends AList<MyJsEnum> implements List<MyJsEnum> {
@@ -3126,6 +3222,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           }
           static class AccidentalJsEnumGetter extends JsEnumListBase implements Getter {}
         > Error: Method 'List<MyJsEnum> JsEnumListBase.get()' cannot override method 'List<?> Getter.get()' with a JsEnum return type.
+          interface JsEnumListGetter {
+            List<MyJsEnum> get();
+          }
+          interface CombinedJsEnumListGetter extends Getter, JsEnumListGetter {}
+        > Error: Method 'List<MyJsEnum> JsEnumListGetter.get()' cannot override method 'List<?> Getter.get()' with a JsEnum return type.
           private static <T extends Enum<T>> void acceptsEnumBoundedList(List<T> l) {}
           private static <L1 extends List<? extends Enum<?>>, L2 extends L1>
               void acceptsEnumWildcardBoundedList(L2 l) {}
@@ -3555,6 +3656,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               static class ParametricConstructorVarargs<E> {
                 ParametricConstructorVarargs(E... p) {}
               }
+              interface JsEnumArrayGetter {
+                MyJsEnum[] get();
+              }
               private static void arrays() {
                 Object[] array = null;
                 array[0] = MyJsEnum.A;
@@ -3575,6 +3679,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 acceptsJsEnumTypeVariableVarargs(new MyJsEnum[0]);
                 new ParametricConstructorVarargs<>(MyJsEnum.A, MyJsEnum.B);
                 MyJsEnum e = returnsJsEnumArray()[0];
+                JsEnumArrayGetter arrayGetter = () -> new MyJsEnum[0];
               }
             }
             """)
@@ -3713,6 +3818,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             e = buggy.arr[0];
           > Error: Reference to field 'BaseWithTArrayField<MyJsEnum>.arr' cannot be of type 'MyJsEnum[]'.
           > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'T[]'.
+            CombinedGenericArrayGetter<MyJsEnum> combinedArrayGetter = () -> null;
+          > Error: Method 'MyJsEnum[] GenericArrayGetter.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
+            CombinedGenericArrayGetter<? extends MyJsEnum> wildcardArrayGetter = () -> null;
+          > Error: Method 'MyJsEnum[] GenericArrayGetter.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
           }
         }
         class Derived extends Main<Main.MyJsEnum[]> {
@@ -3772,6 +3881,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         interface ObjectArrayGetter {
           Object[] get();
         }
+        interface GenericArrayGetter<T> {
+          T[] get();
+        }
+        interface CombinedGenericArrayGetter<T>
+            extends ObjectArrayGetter, GenericArrayGetter<T> {}
+        interface SubCombinedGenericArrayGetter
+        > Error: Method 'MyJsEnum[] GenericArrayGetter.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
+            extends CombinedGenericArrayGetter<Main.MyJsEnum> {}
         class BaseReturningJsEnumArray {
           public Main.MyJsEnum[] get() { return null; }
         }
@@ -3781,12 +3898,31 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         interface JsEnumArrayGetter {
           Main.MyJsEnum[] get();
         }
+        interface CombinedArrayGetter extends ObjectArrayGetter, JsEnumArrayGetter {}
+        > Error: Method 'MyJsEnum[] JsEnumArrayGetter.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
+        interface CombinedArrayGetterReversed extends JsEnumArrayGetter, ObjectArrayGetter {}
+        > Error: Method 'MyJsEnum[] JsEnumArrayGetter.get()' cannot override method 'Object[] ObjectArrayGetter.get()' with a JsEnum array return type.
         class GenericArrayBase<T> {
           public T[] get() { return null; }
         }
         class AccidentalGenericAsJsEnumArrayGetter
         > Error: Method 'MyJsEnum[] GenericArrayBase.get()' cannot override method 'MyJsEnum[] JsEnumArrayGetter.get()' with a JsEnum array return type.
             extends GenericArrayBase<Main.MyJsEnum> implements JsEnumArrayGetter {}
+        interface JsEnumArrayConsumer {
+          void accept(Main.MyJsEnum[] p);
+        }
+        interface GenericArrayConsumer<T> {
+          void accept(T[] p);
+        }
+        interface CombinedArrayConsumer
+        > Error: Method 'void JsEnumArrayConsumer.accept(MyJsEnum[])' cannot override method 'void GenericArrayConsumer.accept(Object[])' with a JsEnum array parameter.
+            extends GenericArrayConsumer<Main.MyJsEnum>, JsEnumArrayConsumer {}
+        class PublicGenericArrayBase<T> {
+          public void accept(T[] p) {}
+        }
+        class AccidentalJsEnumArrayConsumer
+        > Error: Method 'void PublicGenericArrayBase.accept(MyJsEnum[])' cannot override method 'void JsEnumArrayConsumer.accept(MyJsEnum[])' with a JsEnum array parameter.
+            extends PublicGenericArrayBase<Main.MyJsEnum> implements JsEnumArrayConsumer {}
         """);
   }
 
