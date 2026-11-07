@@ -15,12 +15,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
 /** Inserts casts where Java would normally autobox but Kotlin does not. */
@@ -35,13 +34,9 @@ public final class InsertNumericCoercionsForAutoboxing extends NormalizationPass
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                // Java can implicitly narrow numeric literals even when also performing boxing.
-                // Kotlin cannot so, we'll just statically convert the literal.
-                if (TypeDescriptors.isBoxedType(inferredTypeDescriptor)
-                    && expression instanceof NumberLiteral literal) {
-                  return new NumberLiteral(
-                      inferredTypeDescriptor.toUnboxedType(), literal.getValue());
-                }
+                // Kotlin requires the primitive conversion that may precede boxing a constant to be
+                // explicit, e.g. `Character c = 65;`.
+                expression = AstUtils.maybeConvertBeforeBoxing(inferredTypeDescriptor, expression);
 
                 // Java allows for autoboxing to a type variable with a boxed type bound; for
                 // example, <T extends Long>. In this case T n = 1L; would be permitted in Java,

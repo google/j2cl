@@ -208,6 +208,8 @@ public class Main {
     return o;
   }
 
+  private static final int INT_CONSTANT = 65;
+
   private static void testBox_byAssignment() {
     byte b = (byte) 100;
     double d = 1111.0;
@@ -250,6 +252,19 @@ public class Main {
     assertTrue(o instanceof Boolean);
     o = 'a';
     assertTrue(o instanceof Character);
+
+    // Constants of a different primitive type are converted to the type of the variable before
+    // boxing.
+    final int localConstant = 66;
+    boxC = INT_CONSTANT;
+    assertTrue(boxC.equals('A'));
+    boxC = localConstant;
+    assertTrue(boxC.equals('B'));
+    boxC = 'A' + 2;
+    assertTrue(boxC.equals('C'));
+    // javac also accepts constants of a narrower type.
+    boxC = (byte) 68;
+    assertTrue(boxC.equals('D'));
   }
 
   private static void testBox_byCompoundAssignment() {

@@ -394,6 +394,30 @@ public final class AstUtils {
   }
 
   /**
+   * Returns {@code expression} with the primitive conversion that precedes boxing it to {@code
+   * toTypeDescriptor} made explicit, e.g. the constant {@code 65} is converted to {@code char} in
+   * {@code Character c = 65;}.
+   *
+   * <p>Per JLS 5.2, a primitive can only be boxed to a type other than its own boxed type if it is
+   * a constant representable in the corresponding {@code Byte}, {@code Short} or {@code Character}
+   * type. (The JLS only allows a narrowing conversion here, but javac also accepts conversions that
+   * are not narrowing, e.g. {@code Character c = (byte) 65;}.)
+   */
+  public static Expression maybeConvertBeforeBoxing(
+      TypeDescriptor toTypeDescriptor, Expression expression) {
+    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+    if (!fromTypeDescriptor.isPrimitive()
+        || !TypeDescriptors.isBoxedType(toTypeDescriptor)
+        || fromTypeDescriptor.isSameBaseType(toTypeDescriptor.toUnboxedType())) {
+      return expression;
+    }
+    return CastExpression.builder()
+        .setExpression(expression)
+        .setCastTypeDescriptor(toTypeDescriptor.toUnboxedType())
+        .build();
+  }
+
+  /**
    * Generates the following code:
    *
    * <p>$Util.$makeLambdaFunction(Type.prototype.m_equal, $instance, Type.$copy);

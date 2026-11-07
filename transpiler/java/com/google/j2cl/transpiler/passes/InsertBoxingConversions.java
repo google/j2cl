@@ -17,12 +17,12 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.j2cl.transpiler.ast.AstUtils.isAnnotatedWithDoNotAutobox;
 import static com.google.j2cl.transpiler.ast.AstUtils.isBoxableJsEnumType;
+import static com.google.j2cl.transpiler.ast.AstUtils.maybeConvertBeforeBoxing;
 
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
-import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -51,13 +51,9 @@ public class InsertBoxingConversions extends NormalizationPass {
           TypeDescriptor inferredTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {
-        // A narrowing primitive conversion may precede boxing a number or character literal.
-        // (See JLS 5.2).
-        if (expression instanceof NumberLiteral literal
-            && TypeDescriptors.isBoxedType(inferredTypeDescriptor)) {
-          expression =
-              new NumberLiteral(inferredTypeDescriptor.toUnboxedType(), literal.getValue());
-        }
+        // Make the primitive conversion that may precede boxing a constant explicit, to box to the
+        // right type. Casts of literals are folded by the primitive conversion passes.
+        expression = maybeConvertBeforeBoxing(inferredTypeDescriptor, expression);
         // There should be a following 'widening reference conversion' if the targeting type
         // is not the boxed type, but as widening reference conversion is always NOOP, and it
         // is mostly impossible to be optimized by JSCompiler, just avoid the insertion of the

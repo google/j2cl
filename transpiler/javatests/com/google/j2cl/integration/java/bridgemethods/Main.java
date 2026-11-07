@@ -21,7 +21,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
-import com.google.j2cl.integration.testing.J2ktIncompatible;
 import java.util.function.Supplier;
 
 /** Tests for bridge methods with accidental overriding. */
@@ -313,8 +312,6 @@ public class Main {
 
   // javac is more permissive than JLS 5.2 and accepts constants of a narrower type that fit in the
   // unboxed return type.
-  // TODO(b/582756197): Enable for J2KT when fixed.
-  @J2ktIncompatible
   private static void testCovariantReturn_widenedConstant() {
     Supplier<Object> byteToCharacterSupplier =
         new Supplier<Object>() {
@@ -335,9 +332,6 @@ public class Main {
         };
     assertTrue(byteToShortSupplier.get() instanceof Short);
   }
-
-  @SuppressWarnings("unused") // Alternative implementation for J2KT (@J2ktIncompatible).
-  private static void testCovariantReturn_widenedConstant(Object... unused) {}
 
   interface SomeInterface<T> {
     String foo(T t);

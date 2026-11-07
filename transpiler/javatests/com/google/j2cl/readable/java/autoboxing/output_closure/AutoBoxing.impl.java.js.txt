@@ -182,6 +182,11 @@ class AutoBoxing extends j_l_Object {
   boxS = Short.m_valueOf__short__java_lang_Short(1);
   boxC = Character.m_valueOf__char__java_lang_Character(1 /* '\u0001' */);
   boxC = Character.m_valueOf__char__java_lang_Character(97 /* 'a' */);
+  let localConstant = 66;
+  boxC = Character.m_valueOf__char__java_lang_Character(Primitives.m_narrowIntToChar__int__int(AutoBoxing.f_INT_CONSTANT__autoboxing_AutoBoxing_));
+  boxC = Character.m_valueOf__char__java_lang_Character(Primitives.m_narrowIntToChar__int__int(localConstant));
+  boxC = Character.m_valueOf__char__java_lang_Character(Primitives.m_narrowIntToChar__int__int(65 /* 'A' */ + 3 | 0));
+  boxC = Character.m_valueOf__char__java_lang_Character(65 /* 'A' */);
   bool = this.m_unbox__java_lang_Boolean__boolean(bool);
   d = this.m_unbox__java_lang_Double__double(d);
   b = this.m_unbox__java_lang_Byte__byte(Byte.m_valueOf__byte__java_lang_Byte(b));
@@ -212,15 +217,6 @@ class AutoBoxing extends j_l_Object {
   boxL = $LongUtils.leftShift(j_l_Long.m_longValue__java_lang_Long__long(boxL), boxI.intValue());
   boxL = $LongUtils.leftShift(j_l_Long.m_longValue__java_lang_Long__long(boxL), Primitives.m_narrowLongToInt__long__int(j_l_Long.m_longValue__java_lang_Long__long(boxL)));
   o = Integer.valueOf(15);
- }
- /** @nodts */
- static m_testBoxing_constantsOfDifferentType__void() {
-  AutoBoxing.$clinit();
-  let localConstant = 66;
-  let boxC = Integer.valueOf(AutoBoxing.f_INT_CONSTANT__autoboxing_AutoBoxing_);
-  boxC = Integer.valueOf(localConstant);
-  boxC = Integer.valueOf(65 /* 'A' */ + 3 | 0);
-  boxC = Byte.m_valueOf__byte__java_lang_Byte(65);
  }
  /** @nodts */
  m_testUnboxing__void() {

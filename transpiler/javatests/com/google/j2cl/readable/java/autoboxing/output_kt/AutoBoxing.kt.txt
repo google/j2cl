@@ -139,8 +139,13 @@ open class AutoBoxing {
   boxI = 1
   boxL = 2L
   boxS = 1.toShort()
-  boxC = '\u0001'
+  boxC = 1.toChar()
   boxC = 'a'
+  val localConstant: Int = 66
+  boxC = AutoBoxing.INT_CONSTANT.toChar()
+  boxC = localConstant.toChar()
+  boxC = (65 + 3).toChar()
+  boxC = 65.toByte().toInt().toChar()
   bool = this.unbox(bool)
   d = this.unbox(d)
   b = this.unbox(b)

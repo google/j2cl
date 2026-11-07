@@ -19,6 +19,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -31,7 +32,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.Type;
@@ -263,12 +263,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
    */
   private static void insertPrimitiveConversionsOnReturns(
       Method method, MethodDescriptor functionalInterfaceMethod) {
-    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
-    if (!TypeDescriptors.isBoxedType(returnTypeDescriptor)
-        || !hasCovariantReturnType(method.getDescriptor(), functionalInterfaceMethod)) {
+    if (!hasCovariantReturnType(method.getDescriptor(), functionalInterfaceMethod)) {
       return;
     }
-    PrimitiveTypeDescriptor unboxedReturnTypeDescriptor = returnTypeDescriptor.toUnboxedType();
+    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     method.accept(
         new AbstractRewriter() {
           @Override
@@ -277,26 +275,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // Ignore returns in nested lambdas.
               return returnStatement;
             }
-            Expression expression = returnStatement.getExpression();
-            TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-            // Only primitive values whose type differs from the unboxed return type rely on the
-            // return context to be converted, e.g. the constant `1` (an int) returned from
-            // `Byte get()` is narrowed to byte before boxing. Values that already have the unboxed
-            // type, or are references, are boxed the same way in either context.
-            if (!expressionTypeDescriptor.isPrimitive()
-                || expressionTypeDescriptor.isSameBaseType(unboxedReturnTypeDescriptor)) {
-              return returnStatement;
-            }
-            // Per JLS 5.2, a primitive can only be converted to a boxed type other than its own if
-            // it is a constant representable in the corresponding Byte, Short or Character type.
-            // (The JLS only allows a narrowing conversion here, but javac also accepts conversions
-            // that are not narrowing, e.g. `Character get() { return (byte) 65; }`.)
             return returnStatement.toBuilder()
                 .setExpression(
-                    CastExpression.builder()
-                        .setExpression(expression)
-                        .setCastTypeDescriptor(unboxedReturnTypeDescriptor)
-                        .build())
+                    AstUtils.maybeConvertBeforeBoxing(
+                        returnTypeDescriptor, returnStatement.getExpression()))
                 .build();
           }
         });
