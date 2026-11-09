@@ -230,6 +230,7 @@ open class Lambdas {
    var o: Any = (ObjectGetter { "hi" }).let { it as ObjectGetter; it as StringGetter; it }
    o = (ObjectGetter { "lambda" }).let { it as ObjectGetter; it as SubWithDefault; it }
    o = (ObjectGetter { "lambda" }).let { it as ObjectGetter; it as Named; it as DefaultGet; it }
+   o = (ReabstractedGet { "lambda" }).let { it as DefaultGet; it as ReabstractedGet; it as StringGetter; it }
   }
   
   @JvmStatic
@@ -356,6 +357,10 @@ open class Lambdas {
  
  internal interface DefaultGet: ObjectGetter {
   override fun get(): Any? = "default"
+ }
+ 
+ internal fun interface ReabstractedGet: DefaultGet {
+  override fun get(): Any?
  }
  
  internal interface MarkerWithDefaultMethod {

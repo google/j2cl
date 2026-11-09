@@ -22,8 +22,10 @@ let $LambdaAdaptor$5 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$5$imp
 let $LambdaAdaptor$6 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$6$impl');
 let $LambdaAdaptor$7 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$7$impl');
 let $LambdaAdaptor$8 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$8$impl');
+let $LambdaAdaptor$9 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$9$impl');
 let $Overlay = goog.forwardDeclare('lambdas.Lambdas.AnotherThenable.$Overlay$impl');
 let BiFunction = goog.forwardDeclare('lambdas.Lambdas.BiFunction$impl');
+let DefaultGet = goog.forwardDeclare('lambdas.Lambdas.DefaultGet$impl');
 let Equals = goog.forwardDeclare('lambdas.Lambdas.Equals$impl');
 let Lambdas_Function = goog.forwardDeclare('lambdas.Lambdas.Function$impl');
 let Functional = goog.forwardDeclare('lambdas.Lambdas.Functional$impl');
@@ -269,10 +271,13 @@ class Lambdas extends j_l_Object {
   o = (/**@type {!ObjectGetter}*/ (new $LambdaAdaptor$7(/**  @return {*}*/ (() =>{
    return 'lambda';
   }))));
+  o = (/**@type {!DefaultGet}*/ (new $LambdaAdaptor$8(/**  @return {*}*/ (() =>{
+   return 'lambda';
+  }))));
  }
  /** @nodts */
  m_testDefaultMethodsInIntersectionAdaptor__void() {
-  let o = /**@type {!BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$8(/**  @return {?string}*/ ((/** ?string */ t, /** ?string */ u) =>{
+  let o = /**@type {!BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$9(/**  @return {?string}*/ ((/** ?string */ t, /** ?string */ u) =>{
    let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
    let u_1 = /**@type {?string}*/ ($Casts.$to(u, j_l_String));
    return null;
@@ -329,6 +334,7 @@ class Lambdas extends j_l_Object {
   $LambdaAdaptor$6 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$6$impl');
   $LambdaAdaptor$7 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$7$impl');
   $LambdaAdaptor$8 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$8$impl');
+  $LambdaAdaptor$9 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$9$impl');
   $Overlay = goog.module.get('lambdas.Lambdas.AnotherThenable.$Overlay$impl');
   BiFunction = goog.module.get('lambdas.Lambdas.BiFunction$impl');
   Lambdas_Function = goog.module.get('lambdas.Lambdas.Function$impl');

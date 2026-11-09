@@ -334,6 +334,11 @@ public class Lambdas {
     }
   }
 
+  interface ReabstractedGet extends DefaultGet {
+    @Override
+    Object get();
+  }
+
   // Lambdas whose target is an intersection of functional interfaces implement the function type of
   // the intersection (JLS 9.9), which is not necessarily the abstract method of the first
   // functional interface.
@@ -350,6 +355,9 @@ public class Lambdas {
     // functional interface, so the function type of `ObjectGetter & Named & DefaultGet` is
     // `String name()`.
     o = (ObjectGetter & Named & DefaultGet) () -> "lambda";
+    // `ReabstractedGet.get()` makes `DefaultGet.get()` abstract again, so the function type of
+    // `DefaultGet & ReabstractedGet & StringGetter` is `String get()`.
+    o = (DefaultGet & ReabstractedGet & StringGetter) () -> "lambda";
   }
 
   interface MarkerWithDefaultMethod {

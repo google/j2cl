@@ -1,0 +1,46 @@
+goog.module('lambdas.Lambdas.ReabstractedGet$impl');
+
+const DefaultGet = goog.require('lambdas.Lambdas.DefaultGet$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.ReabstractedGet.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {DefaultGet}
+ */
+class ReabstractedGet {
+ /** @abstract @override @nodts @return {*} */
+ m_get__java_lang_Object() {}
+ /** @nodts @return {!ReabstractedGet} */
+ static $adapt(/** ?function():* */ fn) {
+  ReabstractedGet.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  ReabstractedGet.$clinit = () =>{};
+  ReabstractedGet.$loadModules();
+  DefaultGet.$clinit();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  DefaultGet.$markImplementor(ctor);
+  ctor.prototype.$implements__lambdas_Lambdas_ReabstractedGet = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_ReabstractedGet;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.ReabstractedGet.$LambdaAdaptor$impl');
+ }
+}
+ReabstractedGet.$markImplementor(/**@type {Function}*/ (ReabstractedGet));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ReabstractedGet), 'lambdas.Lambdas$ReabstractedGet');
+
+exports = ReabstractedGet;
+
+//# sourceMappingURL=Lambdas$ReabstractedGet.js.map
