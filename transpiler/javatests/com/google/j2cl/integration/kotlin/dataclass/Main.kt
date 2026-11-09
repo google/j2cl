@@ -308,6 +308,8 @@ fun testFloatingPoint() {
   assertEquals("FloatData(f=NaN, d=NaN)", nan.toString())
 
   if (isJavaScript()) {
+    // TODO(b/582675720): Data class equals should use the same total-order semantics for
+    // floating point properties as Kotlin/JVM.
     // In JS, NaN !== NaN and 0.0 === -0.0
     assertNotEquals(nan, FloatData(Float.NaN, Double.NaN))
     assertEquals(posZero, negZero)

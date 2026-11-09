@@ -18,6 +18,7 @@ package inlineclass
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isJavaScript
 
 private interface I {
   val i: Int
@@ -35,6 +36,7 @@ fun main(vararg unused: String) {
   testOperatorAndMethodCalls()
   testReturnTypeResolution()
   testEquality()
+  testFloatingPointEquality()
 }
 
 private fun testParameterTypeResolution() {
@@ -109,4 +111,35 @@ private fun testEquality() {
   assertFalse(f == other)
   // Ensure it property compares the underlying field for the correct type.
   assertFalse(f == other2)
+}
+
+@JvmInline private value class DoubleValue(val d: Double)
+
+@JvmInline private value class FloatValue(val f: Float)
+
+private fun testFloatingPointEquality() {
+  val nan = DoubleValue(Double.NaN)
+  val nanF = FloatValue(Float.NaN)
+
+  // Self-comparisons call `equals` directly because `==` short-circuits on identity and would not
+  // exercise the generated `equals`.
+  if (isJavaScript()) {
+    // TODO(b/582675720): Value class equals should use the same total-order semantics for
+    // floating point properties as Kotlin/JVM.
+    // In JS, NaN !== NaN and 0.0 === -0.0
+    assertFalse(nan.equals(nan))
+    assertFalse(nan == DoubleValue(Double.NaN))
+    assertTrue(DoubleValue(0.0) == DoubleValue(-0.0))
+    assertFalse(nanF.equals(nanF))
+    assertFalse(nanF == FloatValue(Float.NaN))
+    assertTrue(FloatValue(0.0f) == FloatValue(-0.0f))
+  } else {
+    // In JVM, NaN == NaN and 0.0 != -0.0
+    assertTrue(nan.equals(nan))
+    assertTrue(nan == DoubleValue(Double.NaN))
+    assertFalse(DoubleValue(0.0) == DoubleValue(-0.0))
+    assertTrue(nanF.equals(nanF))
+    assertTrue(nanF == FloatValue(Float.NaN))
+    assertFalse(FloatValue(0.0f) == FloatValue(-0.0f))
+  }
 }
