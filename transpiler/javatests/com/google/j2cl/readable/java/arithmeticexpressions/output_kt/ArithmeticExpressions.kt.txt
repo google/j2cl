@@ -41,18 +41,18 @@ import kotlin.run
 
 open class ArithmeticExpressions {
  open fun testCoercions() {
-  var b: Byte = 1L.toByte()
-  var c: Char = 1L.toInt().toChar()
-  var s: Short = 1L.toShort()
-  var i: Int = 1L.toInt()
+  var b: Byte = 1.toByte()
+  var c: Char = '\u0001'
+  var s: Short = 1.toShort()
+  var i: Int = 1
   var f: Float = 1L.toFloat()
-  var d: Double = 1L.toDouble()
-  b = 9223372036854775807L.toByte()
-  c = 9223372036854775807L.toInt().toChar()
-  s = 9223372036854775807L.toShort()
-  i = 9223372036854775807L.toInt()
+  var d: Double = 1.0
+  b = (-1).toByte()
+  c = '\uFFFF'
+  s = (-1).toShort()
+  i = -1
   f = 9223372036854775807L.toFloat()
-  d = 9223372036854775807L.toDouble()
+  d = 9.223372036854776E18
   val o: Any = c
   s = (o as Char).code.toShort()
  }
@@ -92,12 +92,8 @@ open class ArithmeticExpressions {
   val l: Boolean = 1 + 2 != 4
   val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
   val o: Double = ((5 + 1) / 2).toDouble() - 0.0
-  a = a.shl(
-   31L.toInt(),
-  )
-  a = a.shl(
-   1L.toInt(),
-  )
+  a = a.shl(31)
+  a = a.shl(1)
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + java.lang.Double.MAX_VALUE).toInt()

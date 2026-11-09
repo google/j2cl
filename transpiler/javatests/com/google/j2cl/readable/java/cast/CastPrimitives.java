@@ -142,6 +142,11 @@ public class CastPrimitives {
     l = (long) 'a';
     f = (float) 'a';
     d = (double) 'a';
+
+    // Chained conversions.
+    s = (short) (int) (short) 1;
+    c = (char) (byte) 65;
+    b = (byte) (short) 200;
   }
 
   public void testUnboxAndWiden() {

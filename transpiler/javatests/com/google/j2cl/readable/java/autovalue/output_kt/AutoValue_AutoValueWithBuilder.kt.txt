@@ -90,9 +90,7 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   
   override fun setBooleanField(booleanField: Boolean): autovalue.AutoValueWithBuilder.Builder? {
    this.booleanField = booleanField
-   this.set___0 = this.set___0.toInt().or(
-    1.toByte().toInt(),
-   ).toByte()
+   this.set___0 = this.set___0.toInt().or(1).toByte()
    return this
   }
   

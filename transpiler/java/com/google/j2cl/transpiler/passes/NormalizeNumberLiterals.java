@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveByte;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloat;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveShort;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -24,15 +25,35 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /**
- * Normalizes number literals by converting {@code byte} and {@code short} literals to {@code int}
- * with a cast.
+ * Normalizes number literals by evaluating conversions of literals at compile time and then
+ * converting {@code byte} and {@code short} literals to {@code int} with a cast.
  */
 public class NormalizeNumberLiterals extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteCastExpression(CastExpression castExpression) {
+            // Conversions involving float are not evaluated since NumberLiteral stores float values
+            // as doubles without rounding them to float precision.
+            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+            if (castExpression.getExpression() instanceof NumberLiteral literal
+                && TypeDescriptors.isNumericPrimitive(toTypeDescriptor)
+                && !isPrimitiveFloat(literal.getTypeDescriptor())
+                && !isPrimitiveFloat(toTypeDescriptor)) {
+              return new NumberLiteral(
+                  (PrimitiveTypeDescriptor) toTypeDescriptor, literal.getValue());
+            }
+            return castExpression;
+          }
+        });
+
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
