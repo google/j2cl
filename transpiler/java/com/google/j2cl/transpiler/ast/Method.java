@@ -20,15 +20,12 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
-import com.google.common.collect.Lists;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -36,7 +33,7 @@ import javax.annotation.Nullable;
 @Visitable
 public class Method extends Member implements MethodLike {
   @Visitable MethodDescriptor methodDescriptor;
-  @Visitable List<Variable> parameters = new ArrayList<>();
+  @Visitable final List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
   @Nullable @Visitable Expression defaultValue;
   private final String jsDocDescription;
@@ -56,8 +53,8 @@ public class Method extends Member implements MethodLike {
     super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
-    this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
+    this.jsDocDescription = jsDocDescription;
     this.defaultValue = defaultValue;
     this.isForcedJavaOverride = isForcedJavaOverride;
     this.hasSuppressNothingToOverrideAnnotation = hasSuppressNothingToOverrideAnnotation;
@@ -76,10 +73,6 @@ public class Method extends Member implements MethodLike {
   @Override
   public Block getBody() {
     return body;
-  }
-
-  public void setBody(Block body) {
-    this.body = checkNotNull(body);
   }
 
   @Nullable
@@ -182,16 +175,7 @@ public class Method extends Member implements MethodLike {
   }
 
   public Builder toBuilder() {
-    return builder()
-        .setMethodDescriptor(this.getDescriptor())
-        .setParameters(Lists.newArrayList(this.getParameters()))
-        .setStatements(Lists.newArrayList(this.getBody().getStatements()))
-        .setJsDocDescription(this.getJsDocDescription())
-        .setBodySourcePosition(this.getBody().getSourcePosition())
-        .setDefaultValue(this.getDefaultValue())
-        .setSourcePosition(this.getSourcePosition())
-        .setForcedJavaOverride(this.isForcedJavaOverride())
-        .setSuppressNothingToOverrideAnnotation(this.hasSuppressNothingToOverrideAnnotation());
+    return new Builder(this);
   }
 
   public static Builder builder() {
@@ -204,16 +188,23 @@ public class Method extends Member implements MethodLike {
    * <p>Takes care of the busy work of keeping parameter list and method descriptor parameter type
    * list in sync.
    */
-  public static class Builder {
+  public static class Builder extends MethodLike.Builder<Builder, Method> {
     private MethodDescriptor methodDescriptor;
-    private List<Variable> parameters = new ArrayList<>();
-    private List<Statement> statements = new ArrayList<>();
     @Nullable private Expression defaultValue;
     private String jsDocDescription;
-    private SourcePosition bodySourcePosition;
-    private SourcePosition sourcePosition;
     @Nullable private Boolean isForcedJavaOverride;
     private boolean hasSuppressNothingToOverrideAnnotation;
+
+    private Builder() {}
+
+    private Builder(Method method) {
+      super(method);
+      this.methodDescriptor = method.getDescriptor();
+      this.defaultValue = method.getDefaultValue();
+      this.jsDocDescription = method.getJsDocDescription();
+      this.isForcedJavaOverride = method.isForcedJavaOverride();
+      this.hasSuppressNothingToOverrideAnnotation = method.hasSuppressNothingToOverrideAnnotation();
+    }
 
     @CanIgnoreReturnValue
     public Builder setDefaultValue(@Nullable Expression defaultValue) {
@@ -221,14 +212,16 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
+    /**
+     * Inserts {@code parameters} at {@code index}.
+     *
+     * <p>Note that unlike {@code setParameters}, this also changes the method descriptor by
+     * inserting the corresponding parameter descriptors at the same position.
+     */
     @CanIgnoreReturnValue
-    public Builder addParameters(int index, Variable... parameters) {
-      return addParameters(index, Arrays.asList(parameters));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addParameters(int index, Collection<Variable> newParameters) {
-      parameters.addAll(index, newParameters);
+    public Builder addParametersAndUpdateDescriptor(int index, Variable... parameters) {
+      var newParameters = Arrays.asList(parameters);
+      this.parameters.addAll(index, newParameters);
       methodDescriptor =
           methodDescriptor.toBuilder()
               .addParameterDescriptors(
@@ -237,53 +230,6 @@ public class Method extends Member implements MethodLike {
                       .map(Variable::toParameterDescriptor)
                       .collect(toImmutableList()))
               .build();
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setBody(Block body) {
-      setBodySourcePosition(body.getSourcePosition());
-      return setStatements(body.getStatements());
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setStatements(List<Statement> statements) {
-      this.statements = new ArrayList<>(statements);
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setStatements(Statement... statements) {
-      return setStatements(Arrays.asList(statements));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addStatements(Statement... statements) {
-      Collections.addAll(this.statements, statements);
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addStatements(List<Statement> statements) {
-      this.statements.addAll(statements);
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder addStatement(int index, Statement statement) {
-      this.statements.add(index, statement);
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setParameters(Variable... parameters) {
-      return setParameters(Arrays.asList(parameters));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setParameters(Collection<Variable> parameters) {
-      this.parameters = new ArrayList<>(parameters);
-      checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       return this;
     }
 
@@ -300,18 +246,6 @@ public class Method extends Member implements MethodLike {
     }
 
     @CanIgnoreReturnValue
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
-      return this;
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setBodySourcePosition(SourcePosition sourcePosition) {
-      this.bodySourcePosition = sourcePosition;
-      return this;
-    }
-
-    @CanIgnoreReturnValue
     public Builder setForcedJavaOverride(@Nullable Boolean isForcedJavaOverride) {
       this.isForcedJavaOverride = isForcedJavaOverride;
       return this;
@@ -324,12 +258,8 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
+    @Override
     public Method build() {
-      Block body =
-          Block.builder()
-              .setSourcePosition(bodySourcePosition != null ? bodySourcePosition : sourcePosition)
-              .setStatements(statements)
-              .build();
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       checkState(methodDescriptor.isDeclaration());
       if (defaultValue != null) {
@@ -341,7 +271,7 @@ public class Method extends Member implements MethodLike {
           sourcePosition,
           methodDescriptor,
           parameters,
-          body,
+          buildBody(),
           defaultValue,
           jsDocDescription,
           isForcedJavaOverride,

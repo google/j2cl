@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -97,11 +96,8 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
     }
     return functionExpression.toBuilder()
         .setParameters(newParameters)
-        .setStatements(
-            ImmutableList.<Statement>builder()
-                .addAll(prologue)
-                .addAll(functionExpression.getBody().getStatements())
-                .build())
+        .setStatements(prologue)
+        .addStatements(functionExpression.getBody().getStatements())
         .build();
   }
 }

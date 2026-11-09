@@ -294,20 +294,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Method convertMethodDeclaration(JCMethodDecl methodDeclaration) {
-    // If a method has no body, initialize the body with an empty list of statements.
     List<Variable> parameters = new ArrayList<>();
     for (JCVariableDecl parameter : methodDeclaration.getParameters()) {
       parameters.add(createVariable(parameter, true));
     }
 
+    JCBlock body = methodDeclaration.getBody();
     Method.Builder builder =
         newMethodBuilder(methodDeclaration.sym)
             .setSourcePosition(getNamePosition(methodDeclaration))
-            .setParameters(parameters);
+            .setParameters(parameters)
+            // Methods without a body (e.g. abstract or native methods) get an empty body.
+            .setBody(body == null ? null : convertBlock(body));
 
-    if (methodDeclaration.getBody() != null) {
-      builder.setBody(convertBlock(methodDeclaration.getBody()));
-    }
     // TODO(b/465873786): Support nested annotation default values.
     if (methodDeclaration.getDefaultValue() != null
         && isSupportedAnnotationDefaultValue((JCExpression) methodDeclaration.getDefaultValue())) {

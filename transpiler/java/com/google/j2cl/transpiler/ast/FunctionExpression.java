@@ -17,11 +17,11 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -30,7 +30,7 @@ import java.util.function.Predicate;
 public class FunctionExpression extends Expression implements MethodLike {
   // The visitors traverse the @Visitable members of the class in the order they appear.
   // The parameter declarations need to be traversed before the body.
-  @Visitable final List<Variable> parameters;
+  @Visitable final List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
   @Visitable TypeDescriptor typeDescriptor;
   private final SourcePosition sourcePosition;
@@ -42,7 +42,7 @@ public class FunctionExpression extends Expression implements MethodLike {
       List<Variable> parameters,
       Block body,
       boolean isJsAsync) {
-    this.parameters = checkNotNull(parameters);
+    this.parameters.addAll(checkNotNull(parameters));
     this.body = checkNotNull(body);
     this.typeDescriptor = typeDescriptor.toNonNullable();
     this.sourcePosition = checkNotNull(sourcePosition);
@@ -140,13 +140,7 @@ public class FunctionExpression extends Expression implements MethodLike {
     List<Variable> clonedParameters = AstUtils.clone(parameters);
     Block clonedBody = AstUtils.replaceDeclarations(parameters, clonedParameters, body.clone());
 
-    return FunctionExpression.builder()
-        .setTypeDescriptor(typeDescriptor)
-        .setParameters(clonedParameters)
-        .setStatements(clonedBody.getStatements())
-        .setJsAsync(isJsAsync)
-        .setSourcePosition(sourcePosition)
-        .build();
+    return toBuilder().setParameters(clonedParameters).setBody(clonedBody).build();
   }
 
   @Override
@@ -155,12 +149,7 @@ public class FunctionExpression extends Expression implements MethodLike {
   }
 
   public Builder toBuilder() {
-    return new Builder()
-        .setTypeDescriptor(this.getTypeDescriptor())
-        .setParameters(this.getParameters())
-        .setStatements(this.getBody().getStatements())
-        .setJsAsync(this.isJsAsync)
-        .setSourcePosition(this.getSourcePosition());
+    return new Builder(this);
   }
 
   public static Builder builder() {
@@ -168,54 +157,34 @@ public class FunctionExpression extends Expression implements MethodLike {
   }
 
   /** A Builder for FunctionExpression. */
-  public static class Builder {
-    private List<Variable> parameters = new ArrayList<>();
-    private List<Statement> statements = new ArrayList<>();
+  public static class Builder extends MethodLike.Builder<Builder, FunctionExpression> {
     private TypeDescriptor typeDescriptor;
     private boolean isJsAsync;
-    private SourcePosition sourcePosition;
 
-    public Builder setStatements(List<Statement> statements) {
-      this.statements = new ArrayList<>(statements);
-      return this;
+    private Builder() {}
+
+    private Builder(FunctionExpression functionExpression) {
+      super(functionExpression);
+      this.typeDescriptor = functionExpression.getTypeDescriptor();
+      this.isJsAsync = functionExpression.isJsAsync();
     }
 
-    public Builder setStatements(Statement... statements) {
-      this.statements = Arrays.asList(statements);
-      return this;
-    }
-
-    public Builder setParameters(Variable... parameters) {
-      return setParameters(Arrays.asList(parameters));
-    }
-
-    public Builder setParameters(List<Variable> parameters) {
-      this.parameters = new ArrayList<>(parameters);
-      return this;
-    }
-
+    @CanIgnoreReturnValue
     public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
       this.typeDescriptor = typeDescriptor;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setJsAsync(boolean isJsAsync) {
       this.isJsAsync = isJsAsync;
       return this;
     }
 
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
-      return this;
-    }
-
+    @Override
     public FunctionExpression build() {
       return new FunctionExpression(
-          sourcePosition,
-          typeDescriptor,
-          parameters,
-          Block.builder().setSourcePosition(sourcePosition).setStatements(statements).build(),
-          isJsAsync);
+          sourcePosition, typeDescriptor, parameters, buildBody(), isJsAsync);
     }
   }
 }

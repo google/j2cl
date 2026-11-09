@@ -413,7 +413,7 @@ public class ResolveCaptures extends NormalizationPass {
     Variable parameter = createParameterMatchingField(captureBackingField);
 
     // Add the parameter.
-    methodBuilder.addParameters(position, parameter);
+    methodBuilder.addParametersAndUpdateDescriptor(position, parameter);
     if (!isDelegatingConstructor) {
       // Assign the parameter to the backing field.
       methodBuilder.addStatement(

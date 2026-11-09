@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -92,11 +91,7 @@ public class InsertUnreachableAssertionErrors extends NormalizationPass {
             }
 
             return functionExpression.toBuilder()
-                .setStatements(
-                    new ImmutableList.Builder<Statement>()
-                        .addAll(functionExpression.getBody().getStatements())
-                        .add(createThrowStatement(functionExpression.getSourcePosition()))
-                        .build())
+                .addStatements(createThrowStatement(functionExpression.getSourcePosition()))
                 .build();
           }
 

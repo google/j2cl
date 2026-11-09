@@ -354,11 +354,10 @@ internal class CompilationUnitBuilder(
       .setMethodDescriptor(methodDescriptor)
       .setSourcePosition(getNameSourcePosition(irFunction))
       .setParameters(parameters)
-      .apply {
-        if (irFunction.body != null && !irFunction.isExternal) {
-          setBody(convertBody(irFunction.body!!))
-        }
-      }
+      // Functions without a body (e.g. abstract or external functions) get an empty body. Note that
+      // external property accessors (e.g. `val x: T external get`) are given a default body by
+      // kotlinc, which needs to be ignored.
+      .setBody(if (irFunction.isExternal) null else irFunction.body?.let { convertBody(it) })
       .build()
   }
 

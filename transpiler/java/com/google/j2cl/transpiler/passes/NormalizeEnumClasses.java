@@ -114,7 +114,9 @@ public class NormalizeEnumClasses extends NormalizationPass {
               initJavaLangEnumField(method, "name", nameParameter.createReference());
             }
 
-            return method.toBuilder().addParameters(0, nameParameter, ordinalParameter).build();
+            return method.toBuilder()
+                .addParametersAndUpdateDescriptor(0, nameParameter, ordinalParameter)
+                .build();
           }
         });
   }

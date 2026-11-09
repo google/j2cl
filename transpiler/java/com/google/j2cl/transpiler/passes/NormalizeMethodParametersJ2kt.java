@@ -76,40 +76,30 @@ public class NormalizeMethodParametersJ2kt extends NormalizationPass {
               return method;
             }
 
-            // Redeclare vararg parameter if needed.
-            RewriteItem varargRewriteItem = getVarargRewriteItem(method);
-            if (varargRewriteItem != null) {
-              method.setBody(redeclareItems(method.getBody(), ImmutableList.of(varargRewriteItem)));
-            }
-
-            // Redeclare non-final parameters.
-            method.setBody(redeclareItems(method.getBody(), getNonFinalRewriteItems(method)));
-
-            return method;
+            Block body = redeclareParameters(method);
+            return body == method.getBody() ? method : method.toBuilder().setBody(body).build();
           }
 
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
+            Block body = redeclareParameters(functionExpression);
+            return body == functionExpression.getBody()
+                ? functionExpression
+                : functionExpression.toBuilder().setBody(body).build();
+          }
+
+          /** Returns the body of {@code methodLike} with the parameters redeclared if needed. */
+          private Block redeclareParameters(MethodLike methodLike) {
+            Block body = methodLike.getBody();
+
             // Redeclare vararg parameter if needed.
-            RewriteItem varargRewriteItem = getVarargRewriteItem(functionExpression);
+            RewriteItem varargRewriteItem = getVarargRewriteItem(methodLike);
             if (varargRewriteItem != null) {
-              functionExpression =
-                  functionExpression.toBuilder()
-                      .setStatements(
-                          redeclareItems(
-                                  functionExpression.getBody(), ImmutableList.of(varargRewriteItem))
-                              .getStatements())
-                      .build();
+              body = redeclareItems(body, ImmutableList.of(varargRewriteItem));
             }
 
             // Redeclare non-final parameters.
-            return functionExpression.toBuilder()
-                .setStatements(
-                    redeclareItems(
-                            functionExpression.getBody(),
-                            getNonFinalRewriteItems(functionExpression))
-                        .getStatements())
-                .build();
+            return redeclareItems(body, getNonFinalRewriteItems(methodLike));
           }
 
           @Override

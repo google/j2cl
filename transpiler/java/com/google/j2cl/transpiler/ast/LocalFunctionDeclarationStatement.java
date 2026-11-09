@@ -23,14 +23,13 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /** Class for local function definitions. */
 @Visitable
 public class LocalFunctionDeclarationStatement extends Statement implements MethodLike {
   @Visitable MethodDescriptor methodDescriptor;
-  @Visitable List<Variable> parameters;
+  @Visitable final List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
 
   private LocalFunctionDeclarationStatement(
@@ -39,9 +38,9 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
       List<Variable> parameters,
       Block body) {
     super(sourcePosition);
-    this.parameters = checkNotNull(parameters);
-    this.body = checkNotNull(body);
     this.methodDescriptor = checkNotNull(methodDescriptor);
+    this.parameters.addAll(checkNotNull(parameters));
+    this.body = checkNotNull(body);
   }
 
   @Override
@@ -66,14 +65,10 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
 
   @Override
   public LocalFunctionDeclarationStatement clone() {
-    var clonedParameters = AstUtils.clone(parameters);
+    List<Variable> clonedParameters = AstUtils.clone(parameters);
     Block clonedBody = AstUtils.replaceDeclarations(parameters, clonedParameters, body.clone());
 
-    return LocalFunctionDeclarationStatement.builder()
-        .setMethodDescriptor(methodDescriptor)
-        .setParameters(clonedParameters)
-        .setBody(clonedBody)
-        .build();
+    return toBuilder().setParameters(clonedParameters).setBody(clonedBody).build();
   }
 
   @Override
@@ -82,11 +77,7 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
   }
 
   public Builder toBuilder() {
-    return builder()
-        .setMethodDescriptor(this.getDescriptor())
-        .setParameters(this.getParameters())
-        .setBody(this.getBody())
-        .setSourcePosition(this.getSourcePosition());
+    return new Builder(this);
   }
 
   public static Builder builder() {
@@ -94,27 +85,15 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
   }
 
   /** A Builder for LocalFunctionDeclarationStatement. */
-  public static class Builder {
-    private List<Variable> parameters = new ArrayList<>();
-    private Block body;
+  public static class Builder
+      extends MethodLike.Builder<Builder, LocalFunctionDeclarationStatement> {
     private MethodDescriptor methodDescriptor;
-    private SourcePosition sourcePosition;
 
-    @CanIgnoreReturnValue
-    public Builder setBody(Block body) {
-      this.body = body;
-      return this;
-    }
+    private Builder() {}
 
-    @CanIgnoreReturnValue
-    public Builder setParameters(Variable... parameters) {
-      return setParameters(Arrays.asList(parameters));
-    }
-
-    @CanIgnoreReturnValue
-    public Builder setParameters(List<Variable> parameters) {
-      this.parameters = new ArrayList<>(parameters);
-      return this;
+    private Builder(LocalFunctionDeclarationStatement localFunctionDeclarationStatement) {
+      super(localFunctionDeclarationStatement);
+      this.methodDescriptor = localFunctionDeclarationStatement.getDescriptor();
     }
 
     @CanIgnoreReturnValue
@@ -123,18 +102,13 @@ public class LocalFunctionDeclarationStatement extends Statement implements Meth
       return this;
     }
 
-    @CanIgnoreReturnValue
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
-      return this;
-    }
-
+    @Override
     public LocalFunctionDeclarationStatement build() {
       checkNotNull(methodDescriptor);
       checkState(methodDescriptor.isLocalFunction());
 
       return new LocalFunctionDeclarationStatement(
-          sourcePosition, methodDescriptor, parameters, body);
+          sourcePosition, methodDescriptor, parameters, buildBody());
     }
   }
 }
