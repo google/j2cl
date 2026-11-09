@@ -22,5 +22,8 @@ readable_example(
         ["*.kt"],
         exclude = ["DefaultParamInterface.kt"],
     ),
-    deps = [":third_party_lib-j2cl"],
+    deps = [
+        ":third_party_lib-j2cl",
+        "//third_party:jsinterop-annotations-j2cl",
+    ],
 )

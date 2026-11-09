@@ -170,6 +170,14 @@ class LocalFunctionKt extends j_l_Object {
    return local_2();
   }));
  }
+ /** @nodts @return {number} */
+ static m_testLocalFunctionWithDefaultArgument__int() {
+  let localFunction = /**  @return {number}*/ ((/** number */ i, /** number= */ j) =>{
+   let j$defaulted = $Util.$isUndefined(j) ? 0 : j;
+   return i + j$defaulted | 0;
+  });
+  return localFunction(1, /**@type {number}*/ (undefined)) + localFunction(1, 2) | 0;
+ }
  /** @nodts */
  static $clinit() {
   LocalFunctionKt.$clinit = () =>{};

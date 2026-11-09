@@ -1,0 +1,41 @@
+goog.module('defaultparams.NativeObjectSubclass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class NativeObjectSubclass extends Object {
+ 
+ constructor() {
+  NativeObjectSubclass.$clinit();
+  super();
+  this.$ctor__defaultparams_NativeObjectSubclass__void();
+ }
+ /** @nodts */
+ $ctor__defaultparams_NativeObjectSubclass__void() {}
+ /** @override @return {string} */
+ toLocaleString() {
+  let localFun = /**  @return {string}*/ ((/** string */ s) =>{
+   return s;
+  });
+  return this.m_localFun$default__java_lang_String__java_lang_String(/**@type {string}*/ (undefined));
+ }
+ /** @nodts */
+ static $clinit() {
+  NativeObjectSubclass.$clinit = () =>{};
+  NativeObjectSubclass.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeObjectSubclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NativeObjectSubclass, 'defaultparams.NativeObjectSubclass');
+
+exports = NativeObjectSubclass;
+
+//# sourceMappingURL=NativeObjectSubclass.js.map

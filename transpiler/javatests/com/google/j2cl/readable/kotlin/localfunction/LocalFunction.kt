@@ -170,10 +170,9 @@ private fun testSameNameLocalFunctions() {
   }
 }
 
-// TODO(b/428046269): Re-enable when default arguments are supported for local functions.
-// private fun testLocalFunctionWithDefaultArgument(): Int {
-//   fun localFunction(i: Int, j: Int = 0): Int {
-//     return i + j
-//   }
-//   return localFunction(1) + localFunction(1, 2)
-// }
+private fun testLocalFunctionWithDefaultArgument(): Int {
+  fun localFunction(i: Int, j: Int = 0): Int {
+    return i + j
+  }
+  return localFunction(1) + localFunction(1, 2)
+}

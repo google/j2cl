@@ -1,0 +1,55 @@
+goog.module('defaultparams.LocalFunctionsKt$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class LocalFunctionsKt extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!LocalFunctionsKt} */
+ static $create__() {
+  LocalFunctionsKt.$clinit();
+  let $instance = new LocalFunctionsKt();
+  $instance.$ctor__defaultparams_LocalFunctionsKt__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_LocalFunctionsKt__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ static m_evaluate__kotlin_jvm_functions_Function0__int(/** !Function0<?> */ f) {
+  LocalFunctionsKt.$clinit();
+  return (/**@type {!Integer}*/ ($Casts.$to(f.m_invoke__java_lang_Object(), Integer))).intValue();
+ }
+ /** @nodts */
+ static $clinit() {
+  LocalFunctionsKt.$clinit = () =>{};
+  LocalFunctionsKt.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalFunctionsKt;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(LocalFunctionsKt, 'defaultparams.LocalFunctionsKt');
+
+exports = LocalFunctionsKt;
+
+//# sourceMappingURL=LocalFunctionsKt.js.map
