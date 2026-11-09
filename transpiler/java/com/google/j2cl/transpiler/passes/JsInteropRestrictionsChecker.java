@@ -83,6 +83,7 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchConstruct;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -2357,10 +2358,32 @@ public class JsInteropRestrictionsChecker {
         return;
       }
 
+      DeclaredTypeDescriptor enclosingTypeDescriptor =
+          method.getDescriptor().getEnclosingTypeDescriptor();
       method.accept(
           new AbstractVisitor() {
             @Override
             public void exitSuperReference(SuperReference superReference) {
+              // Only report super references that refer to the enclosing type, i.e. not the ones
+              // that appear in local or anonymous classes and refer to their own supertypes.
+              if (superReference.getTypeDescriptor().isSameBaseType(enclosingTypeDescriptor)) {
+                reportError();
+              }
+            }
+
+            @Override
+            public void exitMethodCall(MethodCall methodCall) {
+              // Super method references and qualified super calls (e.g. `super::m` and
+              // `Outer.super.m()`) are normalized to statically dispatched calls qualified by a
+              // ThisReference.
+              if (methodCall.isStaticDispatch()
+                  && methodCall.getQualifier() instanceof ThisOrSuperReference qualifier
+                  && qualifier.getTypeDescriptor().isSameBaseType(enclosingTypeDescriptor)) {
+                reportError();
+              }
+            }
+
+            private void reportError() {
               problems.error(
                   getSourcePosition(),
                   "Cannot use 'super' in %s method '%s'.",

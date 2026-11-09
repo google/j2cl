@@ -2399,6 +2399,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertWithInlineMessages(
         "test.MyJsEnum",
         """
+        import java.util.function.*;
         import jsinterop.annotations.*;
         @JsEnum
         public enum MyJsEnum {
@@ -2412,6 +2413,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             super.name();
         > Error: Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.
         > Error: JsEnum 'MyJsEnum' does not support 'String Enum.name()'.
+            Supplier<String> l = () -> super.toString();
+        > Error: Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.
+            Supplier<String> s = super::toString;
+        > Error: Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.
+            class LocalClass {
+              void localMethod() {
+                MyJsEnum.super.toString();
+        > Error: Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.
+              }
+            }
           }
         }
         """);
@@ -2595,7 +2606,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               static int field = 5;
               static { }
               public static int aStaticField;
-              public void anInstanceMethod() { }
+              public void anInstanceMethod() {
+                class LocalClass {
+                  void localMethod() {
+                    // Refers to the super class of LocalClass, not MyJsEnum.
+                    super.toString();
+                  }
+                }
+              }
               public static void aStaticMethod() { }
             }
             interface ObjectGetter { Object get(); }
