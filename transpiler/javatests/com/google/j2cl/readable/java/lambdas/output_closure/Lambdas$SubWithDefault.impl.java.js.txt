@@ -1,0 +1,52 @@
+goog.module('lambdas.Lambdas.SubWithDefault$impl');
+
+const ObjectGetter = goog.require('lambdas.Lambdas.ObjectGetter$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.SubWithDefault.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {ObjectGetter}
+ */
+class SubWithDefault {
+ /** @abstract @override @nodts @return {*} */
+ m_get__java_lang_Object() {}
+ /** @abstract @nodts @return {?string} */
+ m_name__java_lang_String() {}
+ /** @nodts @return {!SubWithDefault} */
+ static $adapt(/** ?function():?string */ fn) {
+  SubWithDefault.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts @return {*} */
+ static m_get__$default__lambdas_Lambdas_SubWithDefault__java_lang_Object(/** !SubWithDefault */ $thisArg) {
+  SubWithDefault.$clinit();
+  return 'default';
+ }
+ /** @nodts */
+ static $clinit() {
+  SubWithDefault.$clinit = () =>{};
+  SubWithDefault.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ObjectGetter.$markImplementor(ctor);
+  ctor.prototype.$implements__lambdas_Lambdas_SubWithDefault = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_SubWithDefault;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.SubWithDefault.$LambdaAdaptor$impl');
+ }
+}
+SubWithDefault.$markImplementor(/**@type {Function}*/ (SubWithDefault));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SubWithDefault), 'lambdas.Lambdas$SubWithDefault');
+
+exports = SubWithDefault;
+
+//# sourceMappingURL=Lambdas$SubWithDefault.js.map

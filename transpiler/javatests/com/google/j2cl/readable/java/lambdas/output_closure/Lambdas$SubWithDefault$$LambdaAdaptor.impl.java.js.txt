@@ -1,0 +1,54 @@
+goog.module('lambdas.Lambdas.SubWithDefault.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const SubWithDefault = goog.require('lambdas.Lambdas.SubWithDefault$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {SubWithDefault}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():?string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():?string} @nodts*/
+  this.f_fn__lambdas_Lambdas_SubWithDefault_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_SubWithDefault_$LambdaAdaptor__lambdas_Lambdas_SubWithDefault_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_SubWithDefault_$LambdaAdaptor__lambdas_Lambdas_SubWithDefault_$JsFunction__void(/** ?function():?string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_SubWithDefault_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {?string} */
+ m_name__java_lang_String() {
+  let /** ?function():?string */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_SubWithDefault_$LambdaAdaptor, $function());
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {*} */
+ m_get__java_lang_Object() {
+  return SubWithDefault.m_get__$default__lambdas_Lambdas_SubWithDefault__java_lang_Object(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  SubWithDefault.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SubWithDefault.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$SubWithDefault$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$SubWithDefault$$LambdaAdaptor.js.map

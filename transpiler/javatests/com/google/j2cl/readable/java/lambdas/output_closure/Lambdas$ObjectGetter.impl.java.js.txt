@@ -1,0 +1,42 @@
+goog.module('lambdas.Lambdas.ObjectGetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.ObjectGetter.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class ObjectGetter {
+ /** @abstract @nodts @return {*} */
+ m_get__java_lang_Object() {}
+ /** @nodts @return {!ObjectGetter} */
+ static $adapt(/** ?function():* */ fn) {
+  ObjectGetter.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  ObjectGetter.$clinit = () =>{};
+  ObjectGetter.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_ObjectGetter = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_ObjectGetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.ObjectGetter.$LambdaAdaptor$impl');
+ }
+}
+ObjectGetter.$markImplementor(/**@type {Function}*/ (ObjectGetter));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (ObjectGetter), 'lambdas.Lambdas$ObjectGetter');
+
+exports = ObjectGetter;
+
+//# sourceMappingURL=Lambdas$ObjectGetter.js.map

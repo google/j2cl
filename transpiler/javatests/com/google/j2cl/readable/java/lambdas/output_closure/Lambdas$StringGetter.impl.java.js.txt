@@ -1,0 +1,42 @@
+goog.module('lambdas.Lambdas.StringGetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.StringGetter.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class StringGetter {
+ /** @abstract @nodts @return {?string} */
+ m_get__java_lang_String() {}
+ /** @nodts @return {!StringGetter} */
+ static $adapt(/** ?function():?string */ fn) {
+  StringGetter.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  StringGetter.$clinit = () =>{};
+  StringGetter.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_StringGetter = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_StringGetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.StringGetter.$LambdaAdaptor$impl');
+ }
+}
+StringGetter.$markImplementor(/**@type {Function}*/ (StringGetter));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (StringGetter), 'lambdas.Lambdas$StringGetter');
+
+exports = StringGetter;
+
+//# sourceMappingURL=Lambdas$StringGetter.js.map

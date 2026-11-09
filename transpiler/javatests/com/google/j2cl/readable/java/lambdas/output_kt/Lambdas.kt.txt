@@ -226,6 +226,13 @@ open class Lambdas {
   }
   
   @JvmStatic
+  fun testIntersectionTypingNotFirst() {
+   var o: Any = (ObjectGetter { "hi" }).let { it as ObjectGetter; it as StringGetter; it }
+   o = (ObjectGetter { "lambda" }).let { it as ObjectGetter; it as SubWithDefault; it }
+   o = (ObjectGetter { "lambda" }).let { it as ObjectGetter; it as Named; it as DefaultGet; it }
+  }
+  
+  @JvmStatic
   fun <T> testIterable(iterable: Iterable<T>?) {
    val lambda: Iterable<T> = MutableIterableJvm { iterable!!.iterator().asMutableIterator() }
   }
@@ -327,6 +334,28 @@ open class Lambdas {
  
  internal interface JustADefaultS<S> {
   fun method(t: S) {}
+ }
+ 
+ internal fun interface ObjectGetter {
+  fun get(): Any?
+ }
+ 
+ internal fun interface StringGetter {
+  fun get(): String?
+ }
+ 
+ internal fun interface SubWithDefault: ObjectGetter {
+  override fun get(): Any? = "default"
+  
+  fun name(): String?
+ }
+ 
+ internal fun interface Named {
+  fun name(): String?
+ }
+ 
+ internal interface DefaultGet: ObjectGetter {
+  override fun get(): Any? = "default"
  }
  
  internal interface MarkerWithDefaultMethod {

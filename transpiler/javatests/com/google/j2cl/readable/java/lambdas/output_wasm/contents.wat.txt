@@ -50,6 +50,30 @@
 (global $$class@lambdas.Lambdas.JsSupplier.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.StringGetter.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.StringGetter.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.Named.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.Named.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@lambdas.Lambdas.Runnable.$LambdaAdaptor (mut i32)
  (i32.const 0)
 )
@@ -366,6 +390,36 @@
  (i32.const 0)
 )
 (global $$class@lambdas.Lambdas.JustADefaultS (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.ObjectGetter (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.ObjectGetter (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.StringGetter (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.StringGetter (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.SubWithDefault (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.SubWithDefault (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.Named (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.Named (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@lambdas.Lambdas.DefaultGet (mut i32)
+ (i32.const 0)
+)
+(global $$class@lambdas.Lambdas.DefaultGet (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@lambdas.Lambdas.MarkerWithDefaultMethod (mut i32)
@@ -1552,6 +1606,84 @@
  )
 )
 
+;;; void ObjectGetter.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.ObjectGetter
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.ObjectGetter)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.ObjectGetter (i32.const 1))
+ )
+)
+
+;;; Class<T> ObjectGetter.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.ObjectGetter
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.ObjectGetter)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.ObjectGetter))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.ObjectGetter (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.ObjectGetter.$StringLiterals )))
+  (return (global.get $$class@lambdas.Lambdas.ObjectGetter))
+ )
+)
+
+;;; void StringGetter.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.StringGetter
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.StringGetter)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.StringGetter (i32.const 1))
+ )
+)
+
+;;; Class<T> StringGetter.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.StringGetter
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.StringGetter)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.StringGetter))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.StringGetter (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.StringGetter.$StringLiterals )))
+  (return (global.get $$class@lambdas.Lambdas.StringGetter))
+ )
+)
+
+;;; void Named.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.Named
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.Named)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.Named (i32.const 1))
+ )
+)
+
+;;; Class<T> Named.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Named
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Named)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.Named))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.Named (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Named.$StringLiterals )))
+  (return (global.get $$class@lambdas.Lambdas.Named))
+ )
+)
+
 ;;; void MarkerWithDefaultMethod.defaultMethod()
 (func $m_defaultMethod__void@lambdas.Lambdas.MarkerWithDefaultMethod
  (param $this (ref null $java.lang.Object))
@@ -2471,6 +2603,150 @@
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor)
 
 ;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_ObjectGetter_$LambdaAdaptor@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor
+ (param $this (ref null $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.ObjectGetter.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_StringGetter_$LambdaAdaptor@lambdas.Lambdas.StringGetter.$LambdaAdaptor
+ (param $this (ref null $lambdas.Lambdas.StringGetter.$LambdaAdaptor))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.StringGetter.$LambdaAdaptor
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.StringGetter.$LambdaAdaptor)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.StringGetter.$LambdaAdaptor (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.StringGetter.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.StringGetter.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.StringGetter.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.StringGetter.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.StringGetter.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.StringGetter.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.StringGetter.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.StringGetter.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.StringGetter.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.StringGetter.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.StringGetter.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_Named_$LambdaAdaptor@lambdas.Lambdas.Named.$LambdaAdaptor
+ (param $this (ref null $lambdas.Lambdas.Named.$LambdaAdaptor))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.Named.$LambdaAdaptor
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.Named.$LambdaAdaptor)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.Named.$LambdaAdaptor (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Named.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.Named.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.Named.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.Named.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.Named.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.Named.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Named.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.Named.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.Named.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.Named.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Named.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$ctor()
 (func $$ctor__void_$p_lambdas_Lambdas_Runnable_$LambdaAdaptor@lambdas.Lambdas.Runnable.$LambdaAdaptor
  (param $this (ref null $lambdas.Lambdas.Runnable.$LambdaAdaptor))
  (block
@@ -2905,6 +3181,78 @@
  )
 )
 
+;;; Object SubWithDefault.get()
+(func $m_get__java_lang_Object@lambdas.Lambdas.SubWithDefault
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (block
+  (return (call $$getString_|default|__java_lang_String_<once>_@lambdas.Lambdas.SubWithDefault.$StringLiterals ))
+ )
+)
+(elem declare func $m_get__java_lang_Object@lambdas.Lambdas.SubWithDefault)
+
+;;; void SubWithDefault.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.SubWithDefault
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.SubWithDefault)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.SubWithDefault (i32.const 1))
+ )
+)
+
+;;; Class<T> SubWithDefault.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithDefault
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithDefault)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.SubWithDefault))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.SubWithDefault (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithDefault.$StringLiterals )))
+  (return (global.get $$class@lambdas.Lambdas.SubWithDefault))
+ )
+)
+
+;;; Object DefaultGet.get()
+(func $m_get__java_lang_Object@lambdas.Lambdas.DefaultGet
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (block
+  (return (call $$getString_|default|__java_lang_String_<once>_@lambdas.Lambdas.SubWithDefault.$StringLiterals ))
+ )
+)
+(elem declare func $m_get__java_lang_Object@lambdas.Lambdas.DefaultGet)
+
+;;; void DefaultGet.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.DefaultGet
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.DefaultGet)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.DefaultGet (i32.const 1))
+ )
+)
+
+;;; Class<T> DefaultGet.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.DefaultGet
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.DefaultGet)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.DefaultGet))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.DefaultGet (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.DefaultGet.$StringLiterals )))
+  (return (global.get $$class@lambdas.Lambdas.DefaultGet))
+ )
+)
+
 ;;; Outer Outer.$create(Lambdas $outer_this)
 (func $$create__lambdas_Lambdas@lambdas.Lambdas.Outer
  (param $$outer_this (ref null $lambdas.Lambdas))
@@ -3310,6 +3658,68 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.JsSupplier.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_SubWithDefault_$LambdaAdaptor@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor
+ (param $this (ref null $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Object $LambdaAdaptor.get()
+(func $m_get__java_lang_Object@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor
+ (type $function.m_get__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $this (ref null $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $m_get__java_lang_Object@lambdas.Lambdas.SubWithDefault (ref.as_non_null (local.get $this))))
+ )
+)
+(elem declare func $m_get__java_lang_Object@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor
+ (block
+  (if (global.get $$class-initialized@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+  (call $$clinit__void_<once>_@lambdas.Lambdas.SubWithDefault )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|lambdas.Lamb...|__java_lang_String_<once>_@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@lambdas.Lambdas.SubWithDefault.$LambdaAdaptor)
 
 ;;; <anonymous> implements FunctionalInterface <anonymous> implements FunctionalInterface.$create()
 (func $$create__@lambdas.Lambdas.$LambdaImplementor$1

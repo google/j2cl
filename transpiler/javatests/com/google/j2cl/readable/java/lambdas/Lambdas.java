@@ -306,6 +306,52 @@ public class Lambdas {
     o = (GenericFunctionalInterface<U> & JustADefaultS<V>) x -> x;
   }
 
+  interface ObjectGetter {
+    Object get();
+  }
+
+  interface StringGetter {
+    String get();
+  }
+
+  interface SubWithDefault extends ObjectGetter {
+    @Override
+    default Object get() {
+      return "default";
+    }
+
+    String name();
+  }
+
+  interface Named {
+    String name();
+  }
+
+  interface DefaultGet extends ObjectGetter {
+    @Override
+    default Object get() {
+      return "default";
+    }
+  }
+
+  // Lambdas whose target is an intersection of functional interfaces implement the function type of
+  // the intersection (JLS 9.9), which is not necessarily the abstract method of the first
+  // functional interface.
+  // TODO(b/360407114): The lambdas are incorrectly lowered as `Object get()`, which produces
+  // invalid Wasm modules.
+  @Wasm("nop")
+  public static void testIntersectionTypingNotFirst() {
+    // The function type of `ObjectGetter & StringGetter` is `String get()`.
+    Object o = (ObjectGetter & StringGetter) () -> "hi";
+    // `SubWithDefault.get()` implements `ObjectGetter.get()`, so the function type of
+    // `ObjectGetter & SubWithDefault` is `String name()`.
+    o = (ObjectGetter & SubWithDefault) () -> "lambda";
+    // `DefaultGet.get()` implements `ObjectGetter.get()` even though `DefaultGet` is not a
+    // functional interface, so the function type of `ObjectGetter & Named & DefaultGet` is
+    // `String name()`.
+    o = (ObjectGetter & Named & DefaultGet) () -> "lambda";
+  }
+
   interface MarkerWithDefaultMethod {
     default void defaultMethod() {}
   }

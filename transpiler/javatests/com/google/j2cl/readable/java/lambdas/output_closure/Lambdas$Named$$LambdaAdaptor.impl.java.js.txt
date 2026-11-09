@@ -1,0 +1,48 @@
+goog.module('lambdas.Lambdas.Named.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Named = goog.require('lambdas.Lambdas.Named$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {Named}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():?string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():?string} @nodts*/
+  this.f_fn__lambdas_Lambdas_Named_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_Named_$LambdaAdaptor__lambdas_Lambdas_Named_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_Named_$LambdaAdaptor__lambdas_Lambdas_Named_$JsFunction__void(/** ?function():?string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_Named_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {?string} */
+ m_name__java_lang_String() {
+  let /** ?function():?string */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_Named_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Named.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$Named$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$Named$$LambdaAdaptor.js.map

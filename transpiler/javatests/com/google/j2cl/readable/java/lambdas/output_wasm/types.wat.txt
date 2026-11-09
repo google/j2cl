@@ -40,6 +40,18 @@
  (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
  ))
 )
+(type $lambdas.Lambdas.ObjectGetter.vtable (sub (struct
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
+(type $lambdas.Lambdas.StringGetter.vtable (sub (struct
+ (field $m_get__java_lang_String (ref $function.m_get__java_lang_String))
+ ))
+)
+(type $lambdas.Lambdas.Named.vtable (sub (struct
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ ))
+)
 (type $lambdas.Lambdas.MarkerWithDefaultMethod.vtable (sub (struct
  (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
  ))
@@ -183,6 +195,48 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
+(type $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.ObjectGetter.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
+(type $lambdas.Lambdas.StringGetter.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.StringGetter.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.StringGetter.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.StringGetter.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_String (ref $function.m_get__java_lang_String))
+ ))
+)
+(type $lambdas.Lambdas.Named.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.Named.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.Named.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.Named.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ ))
+)
 (type $lambdas.Lambdas.Runnable.$LambdaAdaptor (sub $java.lang.Object (struct
  (field $vtable (ref $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable))
  (field $itable (ref $lambdas.Lambdas.Runnable.$LambdaAdaptor.itable))
@@ -287,6 +341,15 @@
  (field $m_get__java_lang_Number (ref $function.m_get__java_lang_Number))
  ))
 )
+(type $lambdas.Lambdas.SubWithDefault.vtable (sub $lambdas.Lambdas.ObjectGetter.vtable (struct
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ ))
+)
+(type $lambdas.Lambdas.DefaultGet.vtable (sub $lambdas.Lambdas.ObjectGetter.vtable (struct
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
 (type $lambdas.Lambdas.Outer (sub $java.lang.Object (struct
  (field $vtable (ref $lambdas.Lambdas.Outer.vtable))
  (field $itable (ref $itable))
@@ -370,6 +433,21 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_get__java_lang_Number (ref $function.m_get__java_lang_Number))
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ ))
+)
+(type $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.SubWithDefault.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
  ))
 )
 (type $lambdas.Lambdas.$LambdaImplementor$1 (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor (struct

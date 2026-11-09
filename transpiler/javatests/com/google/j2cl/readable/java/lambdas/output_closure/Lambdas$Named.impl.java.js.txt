@@ -1,0 +1,42 @@
+goog.module('lambdas.Lambdas.Named$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.Named.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class Named {
+ /** @abstract @nodts @return {?string} */
+ m_name__java_lang_String() {}
+ /** @nodts @return {!Named} */
+ static $adapt(/** ?function():?string */ fn) {
+  Named.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  Named.$clinit = () =>{};
+  Named.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_Named = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_Named;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.Named.$LambdaAdaptor$impl');
+ }
+}
+Named.$markImplementor(/**@type {Function}*/ (Named));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Named), 'lambdas.Lambdas$Named');
+
+exports = Named;
+
+//# sourceMappingURL=Lambdas$Named.js.map

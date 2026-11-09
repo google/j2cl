@@ -1,0 +1,41 @@
+goog.module('lambdas.Lambdas.DefaultGet$impl');
+
+const ObjectGetter = goog.require('lambdas.Lambdas.ObjectGetter$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {ObjectGetter}
+ */
+class DefaultGet {
+ /** @abstract @override @nodts @return {*} */
+ m_get__java_lang_Object() {}
+ /** @nodts @return {*} */
+ static m_get__$default__lambdas_Lambdas_DefaultGet__java_lang_Object(/** !DefaultGet */ $thisArg) {
+  DefaultGet.$clinit();
+  return 'default';
+ }
+ /** @nodts */
+ static $clinit() {
+  DefaultGet.$clinit = () =>{};
+  DefaultGet.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ObjectGetter.$markImplementor(ctor);
+  ctor.prototype.$implements__lambdas_Lambdas_DefaultGet = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_DefaultGet;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+DefaultGet.$markImplementor(/**@type {Function}*/ (DefaultGet));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (DefaultGet), 'lambdas.Lambdas$DefaultGet');
+
+exports = DefaultGet;
+
+//# sourceMappingURL=Lambdas$DefaultGet.js.map
