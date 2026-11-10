@@ -224,7 +224,10 @@ internal class KotlinEnvironment(
           ImmutableList.copyOf(irClass.methods.map(::getDeclaredMethodDescriptor))
         }
         .setSingleAbstractMethodDescriptorFactory { _ ->
-          irClass.singleAbstractMethod?.let(::getDeclaredMethodDescriptor)
+          // The single abstract method might be a fake override of a method inherited from a
+          // superinterface, which is resolved to the inherited method as seen from this interface,
+          // as for method calls.
+          irClass.singleAbstractMethod?.let { getMethodDescriptor(it, emptyMap()) }
         }
         .setDeclaredFieldDescriptorsFactory { _ ->
           ImmutableList.copyOf(
