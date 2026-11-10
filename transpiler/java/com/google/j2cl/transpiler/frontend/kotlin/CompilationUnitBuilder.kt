@@ -435,7 +435,7 @@ internal class CompilationUnitBuilder(
       .setMethodDescriptor(environment.getDeclaredMethodDescriptor(irFunction))
       .setSourcePosition(getSourcePosition(irFunction))
       .setParameters(convertParameters(irFunction))
-      .setBody(convertBody(irFunction.body!!))
+      .setBody(irFunction.body?.let { convertBody(it) })
       .build()
 
   private fun convertContainer(irBlock: IrContainerExpression): Block =

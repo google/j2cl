@@ -223,6 +223,7 @@ public class JsInteropRestrictionsChecker {
     checkTypeLiteralsAndInstanceOfs(type);
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
+    checkLocalFunctions(type);
     checkSystemProperties(type);
   }
 
@@ -312,6 +313,22 @@ public class JsInteropRestrictionsChecker {
               problems.error(
                   functionExpression.getSourcePosition(),
                   "JsFunction lambda can only implement the JsFunction interface.");
+            }
+          }
+        });
+  }
+
+  private void checkLocalFunctions(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitLocalFunctionDeclarationStatement(
+              LocalFunctionDeclarationStatement localFunction) {
+            if (localFunction.getDescriptor().isNative()) {
+              problems.error(
+                  localFunction.getSourcePosition(),
+                  "Local function '%s' cannot be external.",
+                  localFunction.getReadableDescription());
             }
           }
         });
