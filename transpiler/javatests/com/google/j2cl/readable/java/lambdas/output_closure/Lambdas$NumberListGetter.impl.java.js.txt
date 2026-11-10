@@ -1,0 +1,45 @@
+goog.module('lambdas.Lambdas.NumberListGetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('goog.math.Long');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.NumberListGetter.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class NumberListGetter {
+ /** @abstract @nodts @return {List<?>} */
+ m_get__java_util_List() {}
+ /** @nodts @return {!NumberListGetter} */
+ static $adapt(/** ?function():List<?> */ fn) {
+  NumberListGetter.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  NumberListGetter.$clinit = () =>{};
+  NumberListGetter.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_NumberListGetter = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_NumberListGetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.NumberListGetter.$LambdaAdaptor$impl');
+ }
+}
+NumberListGetter.$markImplementor(/**@type {Function}*/ (NumberListGetter));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (NumberListGetter), 'lambdas.Lambdas$NumberListGetter');
+
+exports = NumberListGetter;
+
+//# sourceMappingURL=Lambdas$NumberListGetter.js.map

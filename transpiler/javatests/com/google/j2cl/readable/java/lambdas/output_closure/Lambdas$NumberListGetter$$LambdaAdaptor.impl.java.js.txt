@@ -1,0 +1,52 @@
+goog.module('lambdas.Lambdas.NumberListGetter.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const NumberListGetter = goog.require('lambdas.Lambdas.NumberListGetter$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('goog.math.Long');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+
+/**
+ * @implements {NumberListGetter}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():List<?> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():List<?>} @nodts*/
+  this.f_fn__lambdas_Lambdas_NumberListGetter_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_NumberListGetter_$LambdaAdaptor__lambdas_Lambdas_NumberListGetter_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_NumberListGetter_$LambdaAdaptor__lambdas_Lambdas_NumberListGetter_$JsFunction__void(/** ?function():List<?> */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_NumberListGetter_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {List<?>} */
+ m_get__java_util_List() {
+  let /** ?function():List<?> */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_NumberListGetter_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NumberListGetter.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'lambdas.Lambdas$NumberListGetter$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Lambdas$NumberListGetter$$LambdaAdaptor.js.map

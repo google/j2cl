@@ -8,14 +8,17 @@ let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $3 = goog.forwardDeclare('lambdas.Lambdas.$3$impl');
 let $4 = goog.forwardDeclare('lambdas.Lambdas.$4$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
 let $LambdaAdaptor$10 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$10$impl');
+let $LambdaAdaptor$11 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$11$impl');
 let $LambdaAdaptor$2 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$2$impl');
 let $LambdaAdaptor$3 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$3$impl');
 let $LambdaAdaptor$4 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$4$impl');
@@ -34,7 +37,9 @@ let FunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterfa
 let FunctionalInterfaceWithMethodReturningVoid = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
 let GenericFunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.GenericFunctionalInterface$impl');
 let IdentityFunction = goog.forwardDeclare('lambdas.Lambdas.IdentityFunction$impl');
+let IntegerListGetter = goog.forwardDeclare('lambdas.Lambdas.IntegerListGetter$impl');
 let JsSupplier = goog.forwardDeclare('lambdas.Lambdas.JsSupplier$impl');
+let NumberListGetter = goog.forwardDeclare('lambdas.Lambdas.NumberListGetter$impl');
 let ObjectGetter = goog.forwardDeclare('lambdas.Lambdas.ObjectGetter$impl');
 let Supplier = goog.forwardDeclare('lambdas.Lambdas.Supplier$impl');
 let Wrapper = goog.forwardDeclare('lambdas.Lambdas.Wrapper$impl');
@@ -278,10 +283,14 @@ class Lambdas extends j_l_Object {
   o = new $LambdaAdaptor$9(/**  @return {?string}*/ (() =>{
    return 'lambda';
   }));
+  let f = /**@type {!NumberListGetter}*/ (new $LambdaAdaptor$10(/**  @return {List<?>}*/ (() =>{
+   return null;
+  })));
+  let l = (/**@type {!IntegerListGetter}*/ ($Casts.$to(f, /**@type {Function}*/ (IntegerListGetter)))).m_get__java_util_List();
  }
  /** @nodts */
  m_testDefaultMethodsInIntersectionAdaptor__void() {
-  let o = /**@type {!BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$10(/**  @return {?string}*/ ((/** ?string */ t, /** ?string */ u) =>{
+  let o = /**@type {!BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$11(/**  @return {?string}*/ ((/** ?string */ t, /** ?string */ u) =>{
    let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
    let u_1 = /**@type {?string}*/ ($Casts.$to(u, j_l_String));
    return null;
@@ -332,6 +341,7 @@ class Lambdas extends j_l_Object {
   $4 = goog.module.get('lambdas.Lambdas.$4$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$10 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$10$impl');
+  $LambdaAdaptor$11 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$11$impl');
   $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');
   $LambdaAdaptor$3 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$3$impl');
   $LambdaAdaptor$4 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$4$impl');
@@ -348,6 +358,7 @@ class Lambdas extends j_l_Object {
   FunctionalInterfaceWithMethodReturningVoid = goog.module.get('lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
   GenericFunctionalInterface = goog.module.get('lambdas.Lambdas.GenericFunctionalInterface$impl');
   IdentityFunction = goog.module.get('lambdas.Lambdas.IdentityFunction$impl');
+  IntegerListGetter = goog.module.get('lambdas.Lambdas.IntegerListGetter$impl');
   JsSupplier = goog.module.get('lambdas.Lambdas.JsSupplier$impl');
   Supplier = goog.module.get('lambdas.Lambdas.Supplier$impl');
   Wrapper = goog.module.get('lambdas.Lambdas.Wrapper$impl');

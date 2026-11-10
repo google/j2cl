@@ -1,0 +1,66 @@
+goog.module('lambdas.Lambdas.$LambdaAdaptor$11$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const BiFunction = goog.require('lambdas.Lambdas.BiFunction$impl');
+const MarkerWithDefaultMethod = goog.require('lambdas.Lambdas.MarkerWithDefaultMethod$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Lambdas_Function = goog.forwardDeclare('lambdas.Lambdas.Function$impl');
+
+/**
+ * @template T, U, R
+ * @implements {BiFunction<T, U, R>}
+ * @implements {MarkerWithDefaultMethod}
+ */
+class $LambdaAdaptor$11 extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T, U):R */ fn) {
+  $LambdaAdaptor$11.$clinit();
+  super();
+  /**@type {?function(T, U):R} @nodts*/
+  this.f_fn__lambdas_Lambdas_$LambdaAdaptor$11;
+  this.$ctor__lambdas_Lambdas_$LambdaAdaptor$11__lambdas_Lambdas_BiFunction_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__lambdas_Lambdas_$LambdaAdaptor$11__lambdas_Lambdas_BiFunction_$JsFunction__void(/** ?function(T, U):R */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__lambdas_Lambdas_$LambdaAdaptor$11 = fn;
+ }
+ /** @override @nodts @return {R} */
+ m_apply__java_lang_Object__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {
+  let /** ?function(T, U):R */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_$LambdaAdaptor$11, $function(t, u));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @template V @return {BiFunction<T, U, V>} */
+ m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction(/** Lambdas_Function<?, ?> */ after) {
+  return BiFunction.m_andThen__$default__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction(this, after);
+ }
+ //Default method forwarding stub.
+ /** @override @nodts */
+ m_defaultMethod__void() {
+  MarkerWithDefaultMethod.m_defaultMethod__$default__lambdas_Lambdas_MarkerWithDefaultMethod__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor$11.$clinit = () =>{};
+  $LambdaAdaptor$11.$loadModules();
+  j_l_Object.$clinit();
+  BiFunction.$clinit();
+  MarkerWithDefaultMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor$11;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+BiFunction.$markImplementor($LambdaAdaptor$11);
+MarkerWithDefaultMethod.$markImplementor($LambdaAdaptor$11);
+$Util.$setClassMetadata($LambdaAdaptor$11, 'lambdas.Lambdas$$LambdaAdaptor$11');
+
+exports = $LambdaAdaptor$11;
+
+//# sourceMappingURL=Lambdas$$LambdaAdaptor$11.js.map

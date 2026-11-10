@@ -52,6 +52,14 @@
  (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
  ))
 )
+(type $lambdas.Lambdas.NumberListGetter.vtable (sub (struct
+ (field $m_get__java_util_List (ref $function.m_get__java_util_List))
+ ))
+)
+(type $lambdas.Lambdas.IntegerListGetter.vtable (sub (struct
+ (field $m_get__java_util_List (ref $function.m_get__java_util_List))
+ ))
+)
 (type $lambdas.Lambdas.MarkerWithDefaultMethod.vtable (sub (struct
  (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
  ))
@@ -235,6 +243,34 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ ))
+)
+(type $lambdas.Lambdas.NumberListGetter.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.NumberListGetter.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.NumberListGetter.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.NumberListGetter.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_util_List (ref $function.m_get__java_util_List))
+ ))
+)
+(type $lambdas.Lambdas.IntegerListGetter.$LambdaAdaptor (sub $java.lang.Object (struct
+ (field $vtable (ref $lambdas.Lambdas.IntegerListGetter.$LambdaAdaptor.vtable))
+ (field $itable (ref $lambdas.Lambdas.IntegerListGetter.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.IntegerListGetter.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_util_List (ref $function.m_get__java_util_List))
  ))
 )
 (type $lambdas.Lambdas.Runnable.$LambdaAdaptor (sub $java.lang.Object (struct
@@ -885,13 +921,27 @@
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.$LambdaImplementor$33 (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor (struct
+(type $lambdas.Lambdas.$LambdaImplementor$33 (sub $lambdas.Lambdas.NumberListGetter.$LambdaAdaptor (struct
  (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$33.vtable))
  (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$33.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-(type $lambdas.Lambdas.$LambdaImplementor$33.vtable (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.$LambdaImplementor$33.vtable (sub $lambdas.Lambdas.NumberListGetter.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_get__java_util_List (ref $function.m_get__java_util_List))
+ ))
+)
+(type $lambdas.Lambdas.$LambdaImplementor$34 (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$34.vtable))
+ (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$34.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.$LambdaImplementor$34.vtable (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -901,14 +951,14 @@
  (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
  ))
 )
-(type $lambdas.Lambdas.$LambdaImplementor$34 (sub $java.lang.Iterable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$34.vtable))
- (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$34.itable))
+(type $lambdas.Lambdas.$LambdaImplementor$35 (sub $java.lang.Iterable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$35.vtable))
+ (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$35.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_iterable@lambdas.Lambdas.$LambdaImplementor$34 (mut (ref null $java.lang.Object)))
+ (field $$captured_iterable@lambdas.Lambdas.$LambdaImplementor$35 (mut (ref null $java.lang.Object)))
  ))
 )
-(type $lambdas.Lambdas.$LambdaImplementor$34.vtable (sub $java.lang.Iterable.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.$LambdaImplementor$35.vtable (sub $java.lang.Iterable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -918,14 +968,14 @@
  (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
  ))
 )
-(type $lambdas.Lambdas.$LambdaImplementor$35 (sub $lambdas.Lambdas.Supplier.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$35.vtable))
- (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$35.itable))
+(type $lambdas.Lambdas.$LambdaImplementor$36 (sub $lambdas.Lambdas.Supplier.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.$LambdaImplementor$36.vtable))
+ (field $itable (ref $lambdas.Lambdas.$LambdaImplementor$36.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.$LambdaImplementor$35 (mut (ref null $lambdas.Lambdas)))
+ (field $$outer_this@lambdas.Lambdas.$LambdaImplementor$36 (mut (ref null $lambdas.Lambdas)))
  ))
 )
-(type $lambdas.Lambdas.$LambdaImplementor$35.vtable (sub $lambdas.Lambdas.Supplier.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.$LambdaImplementor$36.vtable (sub $lambdas.Lambdas.Supplier.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -933,15 +983,15 @@
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$36 (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$36.vtable))
- (field $itable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$36.itable))
+(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$37 (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$37.vtable))
+ (field $itable (ref $lambdas.Lambdas.BiFunction.$LambdaImplementor$37.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$36 (mut (ref null $java.lang.Object)))
- (field $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$36 (mut (ref null $java.lang.Object)))
+ (field $$captured_after@lambdas.Lambdas.BiFunction.$LambdaImplementor$37 (mut (ref null $java.lang.Object)))
+ (field $$outer_this@lambdas.Lambdas.BiFunction.$LambdaImplementor$37 (mut (ref null $java.lang.Object)))
  ))
 )
-(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$36.vtable (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.BiFunction.$LambdaImplementor$37.vtable (sub $lambdas.Lambdas.BiFunction.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -950,13 +1000,13 @@
  (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.Function.$LambdaImplementor$37 (sub $lambdas.Lambdas.Function.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.Function.$LambdaImplementor$37.vtable))
- (field $itable (ref $lambdas.Lambdas.Function.$LambdaImplementor$37.itable))
+(type $lambdas.Lambdas.Function.$LambdaImplementor$38 (sub $lambdas.Lambdas.Function.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.Function.$LambdaImplementor$38.vtable))
+ (field $itable (ref $lambdas.Lambdas.Function.$LambdaImplementor$38.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  ))
 )
-(type $lambdas.Lambdas.Function.$LambdaImplementor$37.vtable (sub $lambdas.Lambdas.Function.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.Function.$LambdaImplementor$38.vtable (sub $lambdas.Lambdas.Function.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -964,14 +1014,14 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$38 (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$38.vtable))
- (field $itable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$38.itable))
+(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$39 (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$39.vtable))
+ (field $itable (ref $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$39.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$38 (mut (ref null $lambdas.Lambdas.LambdaInSubClass)))
+ (field $$outer_this@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$39 (mut (ref null $lambdas.Lambdas.LambdaInSubClass)))
  ))
 )
-(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$38.vtable (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$39.vtable (sub $lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1016,14 +1066,14 @@
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
  ))
 )
-(type $lambdas.Lambdas.Outer.$LambdaImplementor$39 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$39.vtable))
- (field $itable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$39.itable))
+(type $lambdas.Lambdas.Outer.$LambdaImplementor$40 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$40.vtable))
+ (field $itable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$40.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$39 (mut (ref null $lambdas.Lambdas.Outer)))
+ (field $$outer_this@lambdas.Lambdas.Outer.$LambdaImplementor$40 (mut (ref null $lambdas.Lambdas.Outer)))
  ))
 )
-(type $lambdas.Lambdas.Outer.$LambdaImplementor$39.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.Outer.$LambdaImplementor$40.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1031,14 +1081,14 @@
  (field $m_run__void (ref $function.m_run__void))
  ))
 )
-(type $lambdas.Lambdas.Sub.$LambdaImplementor$40 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$40.vtable))
- (field $itable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$40.itable))
+(type $lambdas.Lambdas.Sub.$LambdaImplementor$41 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$41.vtable))
+ (field $itable (ref $lambdas.Lambdas.Sub.$LambdaImplementor$41.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$40 (mut (ref null $lambdas.Lambdas.Sub)))
+ (field $$outer_this@lambdas.Lambdas.Sub.$LambdaImplementor$41 (mut (ref null $lambdas.Lambdas.Sub)))
  ))
 )
-(type $lambdas.Lambdas.Sub.$LambdaImplementor$40.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.Sub.$LambdaImplementor$41.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1063,14 +1113,14 @@
  (field $m_n__void_$pp_lambdas (ref $function.m_n__void_$pp_lambdas))
  ))
 )
-(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$41 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$41.vtable))
- (field $itable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$41.itable))
+(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$42 (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$42.vtable))
+ (field $itable (ref $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$42.itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$41 (mut (ref null $lambdas.Lambdas.SubWithLambda)))
+ (field $$outer_this@lambdas.Lambdas.SubWithLambda.$LambdaImplementor$42 (mut (ref null $lambdas.Lambdas.SubWithLambda)))
  ))
 )
-(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$41.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
+(type $lambdas.Lambdas.SubWithLambda.$LambdaImplementor$42.vtable (sub $lambdas.Lambdas.Runnable.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))
@@ -1095,20 +1145,6 @@
  (field $m_n__void_$pp_lambdas (ref $function.m_n__void_$pp_lambdas))
  ))
 )
-(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$42 (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (struct
- (field $vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$42.vtable))
- (field $itable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$42.itable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- ))
-)
-(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$42.vtable (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor.vtable (struct
- (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_provide__lambdas_Lambdas_EmptyInterface (ref $function.m_provide__lambdas_Lambdas_EmptyInterface))
- ))
-)
 (type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$43 (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (struct
  (field $vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$43.vtable))
  (field $itable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$43.itable))
@@ -1116,6 +1152,20 @@
  ))
 )
 (type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$43.vtable (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor.vtable (struct
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_provide__lambdas_Lambdas_EmptyInterface (ref $function.m_provide__lambdas_Lambdas_EmptyInterface))
+ ))
+)
+(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$44 (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor (struct
+ (field $vtable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$44.vtable))
+ (field $itable (ref $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$44.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $lambdas.Lambdas.ProviderHolder.$LambdaImplementor$44.vtable (sub $lambdas.Lambdas.EmptyInterfaceProvider.$LambdaAdaptor.vtable (struct
  (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
  (field $m_hashCode__int (ref $function.m_hashCode__int))

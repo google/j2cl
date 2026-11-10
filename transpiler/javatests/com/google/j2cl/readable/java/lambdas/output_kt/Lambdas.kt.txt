@@ -35,6 +35,7 @@ import kotlin.Number
 import kotlin.String
 import kotlin.Suppress
 import kotlin.collections.Iterable
+import kotlin.collections.List
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.let
@@ -232,6 +233,8 @@ open class Lambdas {
    o = (Named { "lambda" }).let { it as ObjectGetter; it as Named; it as DefaultGet; it }
    o = (StringGetter { "lambda" }).let { it as DefaultGet; it as ReabstractedGet; it as StringGetter; it }
    o = (StringGetter { "lambda" }).let { it as Any; it as ObjectGetter; it as StringGetter; it }
+   val f = (NumberListGetter { null }).let { it as NumberListGetter; it as IntegerListGetter; it }
+   val l: List<Int?>? = f.get()
   }
   
   @JvmStatic
@@ -362,6 +365,14 @@ open class Lambdas {
  
  internal fun interface ReabstractedGet: DefaultGet {
   override fun get(): Any?
+ }
+ 
+ internal fun interface NumberListGetter {
+  fun get(): List<Number?>?
+ }
+ 
+ internal fun interface IntegerListGetter {
+  fun get(): List<Int?>?
  }
  
  internal interface MarkerWithDefaultMethod {

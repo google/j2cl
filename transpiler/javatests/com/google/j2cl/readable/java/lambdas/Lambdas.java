@@ -16,6 +16,7 @@
 package lambdas;
 
 import com.google.j2cl.readable.java.common.J2ktIncompatible;
+import java.util.List;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -339,6 +340,14 @@ public class Lambdas {
     Object get();
   }
 
+  interface NumberListGetter {
+    List<? extends Number> get();
+  }
+
+  interface IntegerListGetter {
+    List<Integer> get();
+  }
+
   // Lambdas whose target is an intersection of functional interfaces implement the function type of
   // the intersection (JLS 9.9), which is not necessarily the abstract method of the first
   // functional interface.
@@ -358,6 +367,11 @@ public class Lambdas {
     // `Object` as the class component does not prevent the intersection from being a functional
     // interface, and the function type of `Object & ObjectGetter & StringGetter` is `String get()`.
     o = (Object & ObjectGetter & StringGetter) () -> "lambda";
+    // The function type of `NumberListGetter & IntegerListGetter` is `List<Integer> get()`.
+    // TODO(b/360407114): The lambda is incorrectly lowered as `List<? extends Number> get()`, since
+    // return types with the same erasure are not compared by their type arguments.
+    var f = (NumberListGetter & IntegerListGetter) () -> null;
+    List<Integer> l = f.get();
   }
 
   interface MarkerWithDefaultMethod {
