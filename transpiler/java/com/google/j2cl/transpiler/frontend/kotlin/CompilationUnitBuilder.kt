@@ -915,6 +915,28 @@ internal class CompilationUnitBuilder(
     val lhs = convertExpression(irCall.arguments[0]!!)
     val rhs = convertExpression(irCall.arguments[1]!!)
 
+    // Unlike `ieee754equals`, `==` on floating point primitives has `equals` semantics: it is
+    // reflexive (NaN == NaN) and distinguishes -0.0 from 0.0.
+    // Numeric `==` written by users is emitted by the frontend as `ieee754equals` and handled by
+    // `convertIeee754EqualsOperator`. This case only arises from compiler-generated code (e.g. data
+    // and value class `equals`, built with `irEquals`).
+    // Mirror the Kotlin/JVM backend, which emits `Float.compare(a, b) == 0` or
+    // `Double.compare(a, b) == 0`. Floats are widened to doubles, which preserves NaN and the sign
+    // of zero (J2CL's `Float.compare` does the same).
+    if (
+      TypeDescriptors.isPrimitiveFloatOrDouble(lhs.typeDescriptor) &&
+        TypeDescriptors.isPrimitiveFloatOrDouble(rhs.typeDescriptor)
+    ) {
+      val compareMethodDescriptor =
+        TypeDescriptors.get()
+          .javaLangDouble
+          .getMethodDescriptor("compare", PrimitiveTypes.DOUBLE, PrimitiveTypes.DOUBLE)
+      return MethodCall.builderFrom(compareMethodDescriptor)
+        .setArguments(convertToDouble(lhs), convertToDouble(rhs))
+        .build()
+        .infixEquals(NumberLiteral.fromInt(0))
+    }
+
     // Kotlin .equals() operator (==) is a null-safe comparison based on "Object.equals". It has the
     // same semantics as the j.u.Objects.equals which we can delegate to. However if we know the
     // "equals" of the compared type has identity semantics, we can short circuit this and use

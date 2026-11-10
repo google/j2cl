@@ -153,6 +153,8 @@ inline fun <reified T> instanceOf(obj: Any): Boolean = obj is T
 // Overload Int so that we have a variant that takes a primitive.
 inline fun <reified T> instanceOf(i: Int): Boolean = i is T
 
+inline fun <reified T> areEqual(a: T, b: T): Boolean = a == b
+
 fun testReifiedParameter() {
   var aStringAsAny: Any = "foo"
   var nullAny: Any? = null
@@ -181,6 +183,11 @@ fun testReifiedParameter() {
   assertTrue(instanceOf<Int>(++someInt))
   assertFalse(instanceOf<Double>(++someInt))
   assertEquals(3, someInt)
+
+  // `==` on values of a reified type parameter has `equals` semantics even when the type argument
+  // is a primitive type, so NaN == NaN and 0.0 != -0.0.
+  assertTrue(areEqual(Float.NaN, Float.NaN))
+  assertFalse(areEqual(0.0f, -0.0f))
 }
 
 private inline fun inlineFunWithAnonymousObject(captureParam: Int): Int {
