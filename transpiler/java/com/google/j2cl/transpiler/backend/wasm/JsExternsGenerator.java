@@ -72,7 +72,7 @@ final class JsExternsGenerator {
           }
           // Wasm types, on the other hand, need a different alias to be used in their externs
           // definitions.
-          return "$j2wasm$externs_" + super.aliasForType(typeDeclaration);
+          return "$j2wasm$externs." + super.aliasForType(typeDeclaration);
         }
       };
 
@@ -135,10 +135,9 @@ final class JsExternsGenerator {
     // Retrieve the synthetic factory method for the constructor, if it exists, since the
     // normalization removes the original constructor.
     Method factoryMethod =
-        type.getMethod(
-            m ->
-                m.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
-                    && m.canBeReferencedExternallyForWasm());
+        type.getMethod(m ->
+            m.getOrigin() == MethodDescriptor.MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR
+                && m.canBeReferencedExternallyForWasm());
 
     String jsDoc =
         closureEnvironment.getJsDocForType(
@@ -155,15 +154,14 @@ final class JsExternsGenerator {
       sb.appendln(" */");
       sb.appendln(
           String.format(
-              "var %s = function() {};",
-              closureEnvironment.getJsEnumValueType(type.getDeclaration())));
+              "%s = function() {};", closureEnvironment.getJsEnumValueType(type.getDeclaration())));
 
       sb.appendln("");
       sb.appendln("/**");
       appendJsDoc(sb, jsDoc);
       sb.appendln(" */");
       sb.appendln(
-          String.format("var %s = {};", closureEnvironment.aliasForType(type.getDeclaration())));
+          String.format("%s = {};", closureEnvironment.aliasForType(type.getDeclaration())));
       return;
     }
     sb.appendln("/**");
@@ -173,7 +171,7 @@ final class JsExternsGenerator {
     }
     sb.appendln(" */");
     sb.append(
-        String.format("var %s = function", closureEnvironment.aliasForType(type.getDeclaration())));
+        String.format("%s = function", closureEnvironment.aliasForType(type.getDeclaration())));
 
     closureEnvironment.emitParameters(
         sb, factoryMethod != null ? factoryMethod : getEmptyConstructorStub(type));
@@ -190,16 +188,15 @@ final class JsExternsGenerator {
 
   private void appendMembers(SourceBuilder sb) {
     Stream.concat(streamExportedMembers(type), streamGetterSetterPairsAsFields(type))
-        .forEach(
-            member -> {
-              switch (member) {
-                case FieldDescriptor f -> appendField(sb, f);
-                // Skip JsProperty methods since they are handled as fields above and skip
-                // JsConstructor methods since they have special handling.
-                case MethodDescriptor m when m.isJsMethod() -> appendMethod(sb, m);
-                default -> {}
-              }
-            });
+        .forEach(member -> {
+          switch (member) {
+            case FieldDescriptor f -> appendField(sb, f);
+            // Skip JsProperty methods since they are handled as fields above and skip
+            // JsConstructor methods since they have special handling.
+            case MethodDescriptor m when m.isJsMethod() -> appendMethod(sb, m);
+            default -> {}
+          }
+        });
   }
 
   private void appendField(SourceBuilder sb, FieldDescriptor fieldDescriptor) {
@@ -246,18 +243,16 @@ final class JsExternsGenerator {
         .filter(MemberDescriptor::isJsProperty)
         .filter(MethodDescriptor.class::isInstance)
         .map(MethodDescriptor.class::cast)
-        .forEach(
-            m -> {
-              GetterSetterPair getterSetterPair =
-                  getterSetters.computeIfAbsent(
-                      new PropertyKey(m.getSimpleJsName(), m.isStatic()),
-                      k -> new GetterSetterPair());
-              if (m.isJsPropertyGetter()) {
-                getterSetterPair.getter = m;
-              } else if (m.isJsPropertySetter()) {
-                getterSetterPair.setter = m;
-              }
-            });
+        .forEach(m -> {
+          GetterSetterPair getterSetterPair =
+              getterSetters.computeIfAbsent(
+                  new PropertyKey(m.getSimpleJsName(), m.isStatic()), k -> new GetterSetterPair());
+          if (m.isJsPropertyGetter()) {
+            getterSetterPair.getter = m;
+          } else if (m.isJsPropertySetter()) {
+            getterSetterPair.setter = m;
+          }
+        });
     return getterSetters.values().stream().map(GetterSetterPair::asFieldDescriptor);
   }
 

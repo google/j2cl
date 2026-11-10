@@ -16,3 +16,6 @@
 
 /** @type {!Object<string, !Function>} */
 var j2wasmJsConstructors;
+
+/** @const */
+var $j2wasm$externs = {};
