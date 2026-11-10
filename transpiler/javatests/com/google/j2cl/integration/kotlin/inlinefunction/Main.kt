@@ -58,6 +58,7 @@ fun main(vararg unused: String) {
   testProjectedReceiverTypeArgument()
   testInlineFunctionWithArrayInitializer()
   testInlineFunctionInSuperAndThisCallArguments()
+  testReifiedEqualityOfDifferentTypes()
 }
 
 class MyClass(var f: Int) {
@@ -715,4 +716,23 @@ private fun testInlineFunctionWithArrayInitializer() {
   //   inlineFunctionFromDepsWithArrayInitializer<Int>(1) { continue }
   //   fail()
   // }
+}
+
+inline fun <reified A, reified B> areEqualMixed(a: A, b: B): Boolean = a == b
+
+fun testReifiedEqualityOfDifferentTypes() {
+  // `==` on values of reified type parameters has boxed `equals` semantics even when the type
+  // arguments are primitive types, so values of different types are never equal.
+  if (isJvm()) {
+    assertFalse(areEqualMixed(1.0, 1))
+    assertFalse(areEqualMixed(1.0f, 1.0))
+    assertFalse(areEqualMixed(1, 1L))
+    assertFalse(areEqualMixed('a', 97))
+  } else {
+    // TODO(b/584222109): J2CL compares the primitive values instead of using boxed `equals`.
+    assertTrue(areEqualMixed(1.0, 1))
+    assertTrue(areEqualMixed(1.0f, 1.0))
+    assertTrue(areEqualMixed(1, 1L))
+    assertTrue(areEqualMixed('a', 97))
+  }
 }
