@@ -25,15 +25,54 @@ import jsinterop.annotations.JsMethod;
  */
 public class Main {
   public static void main(String... args) {
-    assertTrue(NativeClass.nativeStaticMethod().equals("nativeStaticMethod"));
+    testNativeMethods();
+    testNativeProperties();
+    testNativeCodeRunsOnce();
+    testMatchInJavaPackage();
+    testMatchInSuperSourceRoot();
+    testMatchByQualifiedName();
+    testNativeCodeCallingMembers();
+    testLongAlias();
+  }
+
+  private static void testNativeMethods() {
+    assertTrue(NativeClass.nativeStaticMethod(2, 3).equals("nativeStaticMethod5"));
+
     NativeClass instance = new NativeClass();
-    assertTrue(instance.nativeInstanceMethod().equals("nativeInstanceMethod"));
+    assertTrue(instance.nativeInstanceMethod(1, 2).equals("nativeInstanceMethod3"));
+  }
 
+  private static void testNativeProperties() {
+    assertEquals(42, NativeClass.getNativeStaticProperty());
+    assertEquals("nativeInstanceProperty", new NativeClass().getNativeInstanceProperty());
+  }
+
+  private static void testNativeCodeRunsOnce() {
+    assertEquals(1, NativeClass.getNativeInitializationCount());
+  }
+
+  private static void testMatchInJavaPackage() {
     assertTrue(NativeClassSuper.nativeStaticMethod().equals("nativeStaticMethodInSuper"));
-    assertTrue(NativeClassSuperJ2CL.nativeStaticMethod().equals("nativeStaticMethodInSuperJ2CL"));
+  }
 
+  private static void testMatchInSuperSourceRoot() {
+    assertTrue(NativeClassSuperJ2CL.nativeStaticMethod().equals("nativeStaticMethodInSuperJ2CL"));
+  }
+
+  private static void testMatchByQualifiedName() {
     assertEquals(1, QualifiedNativeMatch.getValue());
     assertEquals(1, QualifiedNativeMatch.InnerClass.getOtherValue());
+  }
+
+  private static void testNativeCodeCallingMembers() {
+    assertEquals(11, new NativeClass().callsInstanceMember());
+    assertEquals(30, NativeClass.callsStaticMember(15));
+    assertEquals(10, NativeClass.callsConstructor());
+  }
+
+  private static void testLongAlias() {
+    assertEquals(
+        "nativeStaticMethodUsingLongAlias", NativeClass.nativeStaticMethodUsingLongAlias());
   }
 
   /**

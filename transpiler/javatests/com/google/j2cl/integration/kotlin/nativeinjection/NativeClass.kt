@@ -15,13 +15,33 @@
  */
 package nativeinjection
 
+import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsProperty
 
 @Suppress("unusable-by-js")
-class NativeClass {
-  @JsMethod external fun nativeInstanceMethod(): String
+class NativeClass @JsConstructor constructor() {
+  @JsMethod external fun nativeInstanceMethod(a: Int, b: Int): String
+
+  @JsProperty external fun getNativeInstanceProperty(): String
+
+  @JsMethod fun instanceMember(): Int = 10
+
+  @JsMethod external fun callsInstanceMember(): Int
 
   companion object {
-    @JsMethod @JvmStatic external fun nativeStaticMethod(): String
+    @JsMethod @JvmStatic external fun nativeStaticMethod(a: Int, b: Int): String
+
+    @JsMethod @JvmStatic external fun nativeStaticMethodUsingLongAlias(): String
+
+    @JsProperty @JvmStatic external fun getNativeStaticProperty(): Int
+
+    @JsMethod @JvmStatic fun staticMember(value: Int): Int = 2 * value
+
+    @JsMethod @JvmStatic external fun callsStaticMember(value: Int): Int
+
+    @JsProperty @JvmStatic external fun getNativeInitializationCount(): Int
+
+    @JsMethod @JvmStatic external fun callsConstructor(): Int
   }
 }

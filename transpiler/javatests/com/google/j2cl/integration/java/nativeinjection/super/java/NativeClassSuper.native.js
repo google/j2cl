@@ -2,6 +2,6 @@
  * @return {string}
  * @public
  */
-NativeClassSuper.m_nativeStaticMethod__java_lang_String = function() {
+NativeClassSuper.nativeStaticMethod = function() {
   return 'nativeStaticMethodInSuper';
 };

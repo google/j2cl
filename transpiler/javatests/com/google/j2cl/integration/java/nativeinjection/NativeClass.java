@@ -15,13 +15,49 @@
  */
 package nativeinjection;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 
 @SuppressWarnings("unusable-by-js")
 public class NativeClass {
-  @JsMethod
-  public native String nativeInstanceMethod();
+  @JsConstructor
+  public NativeClass() {}
 
   @JsMethod
-  public static native String nativeStaticMethod();
+  public native String nativeInstanceMethod(int a, int b);
+
+  @JsProperty
+  public native String getNativeInstanceProperty();
+
+  @JsMethod
+  public int instanceMember() {
+    return 10;
+  }
+
+  @JsMethod
+  public native int callsInstanceMember();
+
+  @JsMethod
+  public static native String nativeStaticMethod(int a, int b);
+
+  @JsMethod
+  public static native String nativeStaticMethodUsingLongAlias();
+
+  @JsProperty
+  public static native int getNativeStaticProperty();
+
+  @JsMethod
+  public static int staticMember(int value) {
+    return 2 * value;
+  }
+
+  @JsMethod
+  public static native int callsStaticMember(int value);
+
+  @JsProperty
+  public static native int getNativeInitializationCount();
+
+  @JsMethod
+  public static native int callsConstructor();
 }

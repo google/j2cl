@@ -15,12 +15,14 @@
  */
 package nativeinjection;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * The class has several special properties; directory doesn't follow package name and also
  * directory has java in directy name. It should still match with file put next to it (i.e. via
  * physical location).
  */
 public class NativeClassSuper {
-  @SuppressWarnings("unusable-by-js")
+  @JsMethod
   public static native String nativeStaticMethod();
 }

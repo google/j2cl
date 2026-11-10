@@ -14,18 +14,64 @@
 
 /**
  * Replaces the native instance method 'nativeInstanceMethod' in NativeClass.
+ * @param {number} a
+ * @param {number} b
  * @return {string}
  * @public
  */
-NativeClass.prototype.nativeInstanceMethod = function() {
-  return 'nativeInstanceMethod';
+NativeClass.prototype.nativeInstanceMethod = function(a, b) {
+  return 'nativeInstanceMethod' + (a + b);
+};
+
+/** @public {string} */
+NativeClass.prototype.nativeInstanceProperty = 'nativeInstanceProperty';
+
+/**
+ * @return {number}
+ * @public
+ */
+NativeClass.prototype.callsInstanceMember = function() {
+  return this.instanceMember() + 1;
 };
 
 /**
  * Replaces the native static method 'nativeStaticMethod' in NativeClass.
+ * @param {number} a
+ * @param {number} b
  * @return {string}
  * @public
  */
-NativeClass.nativeStaticMethod = function() {
-  return 'nativeStaticMethod';
+NativeClass.nativeStaticMethod = function(a, b) {
+  return 'nativeStaticMethod' + (a + b);
+};
+
+/**
+ * @return {string}
+ * @public
+ */
+nativeinjection_NativeClass.nativeStaticMethodUsingLongAlias = function() {
+  return 'nativeStaticMethodUsingLongAlias';
+};
+
+/** @public {number} */
+NativeClass.nativeStaticProperty = 42;
+
+/**
+ * @param {number} value
+ * @return {number}
+ * @public
+ */
+NativeClass.callsStaticMember = function(value) {
+  return NativeClass.staticMember(value);
+};
+
+/** @public {number} */
+NativeClass.nativeInitializationCount = (NativeClass.nativeInitializationCount || 0) + 1;
+
+/**
+ * @return {number}
+ * @public
+ */
+NativeClass.callsConstructor = function() {
+  return new NativeClass().instanceMember();
 };

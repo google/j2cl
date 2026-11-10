@@ -20,15 +20,53 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 import jsinterop.annotations.JsMethod
 
 fun main(vararg unused: String) {
-  assertTrue(NativeClass.nativeStaticMethod() == "nativeStaticMethod")
+  testNativeMethods()
+  testNativeProperties()
+  testNativeCodeRunsOnce()
+  testMatchInJavaPackage()
+  testMatchInSuperSourceRoot()
+  testMatchByQualifiedName()
+  testNativeCodeCallingMembers()
+  testLongAlias()
+}
+
+private fun testNativeMethods() {
+  assertTrue(NativeClass.nativeStaticMethod(2, 3) == "nativeStaticMethod5")
+
   val instance = NativeClass()
-  assertTrue(instance.nativeInstanceMethod() == "nativeInstanceMethod")
+  assertTrue(instance.nativeInstanceMethod(1, 2) == "nativeInstanceMethod3")
+}
 
+private fun testNativeProperties() {
+  assertEquals(42, NativeClass.getNativeStaticProperty())
+  assertEquals("nativeInstanceProperty", NativeClass().getNativeInstanceProperty())
+}
+
+private fun testNativeCodeRunsOnce() {
+  assertEquals(1, NativeClass.getNativeInitializationCount())
+}
+
+private fun testMatchInJavaPackage() {
   assertTrue(NativeClassSuper.nativeStaticMethod() == "nativeStaticMethodInSuper")
-  assertTrue(NativeClassSuperJ2CL.nativeStaticMethod() == "nativeStaticMethodInSuperJ2CL")
+}
 
+private fun testMatchInSuperSourceRoot() {
+  assertTrue(NativeClassSuperJ2CL.nativeStaticMethod() == "nativeStaticMethodInSuperJ2CL")
+}
+
+private fun testMatchByQualifiedName() {
   assertEquals(1, QualifiedNativeMatch.getValue())
   assertEquals(1, QualifiedNativeMatch.InnerClass.getOtherValue())
+}
+
+private fun testNativeCodeCallingMembers() {
+  assertEquals(11, NativeClass().callsInstanceMember())
+  assertEquals(30, NativeClass.callsStaticMember(15))
+  assertEquals(10, NativeClass.callsConstructor())
+}
+
+private fun testLongAlias() {
+  assertEquals("nativeStaticMethodUsingLongAlias", NativeClass.nativeStaticMethodUsingLongAlias())
 }
 
 /** Integration tests for native methods. */

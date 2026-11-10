@@ -15,6 +15,8 @@
  */
 package nativeinjection
 
+import jsinterop.annotations.JsMethod
+
 /**
  * The class has several special properties; directory doesn't follow package name and also
  * directory has java in directy name. The Kotlin compiler will package the class file in a
@@ -22,5 +24,5 @@ package nativeinjection
  * next to this file and it needs to use fqn in order to match.
  */
 object NativeClassSuper {
-  @JvmStatic @Suppress("unusable-by-js") external fun nativeStaticMethod(): String
+  @JvmStatic @JsMethod external fun nativeStaticMethod(): String
 }
