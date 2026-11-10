@@ -13,22 +13,27 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  */
 class $LambdaAdaptor$7 extends j_l_Object {
  /** @nodts */
- constructor(/** ?function():* */ fn) {
+ constructor(/** ?function():?string */ fn) {
   $LambdaAdaptor$7.$clinit();
   super();
-  /**@type {?function():*} @nodts*/
+  /**@type {?function():?string} @nodts*/
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$7;
-  this.$ctor__lambdas_Lambdas_$LambdaAdaptor$7__lambdas_Lambdas_ObjectGetter_$JsFunction__void(fn);
+  this.$ctor__lambdas_Lambdas_$LambdaAdaptor$7__lambdas_Lambdas_Named_$JsFunction__void(fn);
  }
  /** @nodts */
- $ctor__lambdas_Lambdas_$LambdaAdaptor$7__lambdas_Lambdas_ObjectGetter_$JsFunction__void(/** ?function():* */ fn) {
+ $ctor__lambdas_Lambdas_$LambdaAdaptor$7__lambdas_Lambdas_Named_$JsFunction__void(/** ?function():?string */ fn) {
   this.$ctor__java_lang_Object__void();
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$7 = fn;
  }
+ /** @override @nodts @return {?string} */
+ m_name__java_lang_String() {
+  let /** ?function():?string */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_$LambdaAdaptor$7, $function());
+ }
+ //Default method forwarding stub.
  /** @override @nodts @return {*} */
  m_get__java_lang_Object() {
-  let /** ?function():* */ $function;
-  return ($function = this.f_fn__lambdas_Lambdas_$LambdaAdaptor$7, $function());
+  return DefaultGet.m_get__$default__lambdas_Lambdas_DefaultGet__java_lang_Object(this);
  }
  /** @nodts */
  static $clinit() {

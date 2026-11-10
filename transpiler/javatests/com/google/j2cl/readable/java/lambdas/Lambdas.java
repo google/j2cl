@@ -342,9 +342,6 @@ public class Lambdas {
   // Lambdas whose target is an intersection of functional interfaces implement the function type of
   // the intersection (JLS 9.9), which is not necessarily the abstract method of the first
   // functional interface.
-  // TODO(b/360407114): The lambdas are incorrectly lowered as `Object get()`, which produces
-  // invalid Wasm modules.
-  @Wasm("nop")
   public static void testIntersectionTypingNotFirst() {
     // The function type of `ObjectGetter & StringGetter` is `String get()`.
     Object o = (ObjectGetter & StringGetter) () -> "hi";
@@ -358,6 +355,9 @@ public class Lambdas {
     // `ReabstractedGet.get()` makes `DefaultGet.get()` abstract again, so the function type of
     // `DefaultGet & ReabstractedGet & StringGetter` is `String get()`.
     o = (DefaultGet & ReabstractedGet & StringGetter) () -> "lambda";
+    // `Object` as the class component does not prevent the intersection from being a functional
+    // interface, and the function type of `Object & ObjectGetter & StringGetter` is `String get()`.
+    o = (Object & ObjectGetter & StringGetter) () -> "lambda";
   }
 
   interface MarkerWithDefaultMethod {

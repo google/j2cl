@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -42,11 +43,14 @@ public final class LambdaImplementorTypeDescriptors {
       boolean extendsCommonAdaptor) {
 
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
-    // those types be declared type descriptors.
+    // those types be declared type descriptors. `Object`, which can be the class component of an
+    // intersection that is a functional interface, is not implemented.
     Stream<DeclaredTypeDescriptor> interfaceDescriptorsStream =
         typeDescriptor.isIntersection()
             ? ((IntersectionTypeDescriptor) typeDescriptor)
-                .getIntersectionTypeDescriptors().stream().map(DeclaredTypeDescriptor.class::cast)
+                .getIntersectionTypeDescriptors().stream()
+                    .filter(not(TypeDescriptors::isJavaLangObject))
+                    .map(DeclaredTypeDescriptor.class::cast)
             : Stream.of((DeclaredTypeDescriptor) typeDescriptor);
 
     ImmutableList<DeclaredTypeDescriptor> interfaceTypeDescriptors =
@@ -122,14 +126,14 @@ public final class LambdaImplementorTypeDescriptors {
 
     return TypeDeclaration.builder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
-        .setSuperTypeDescriptorFactory(
-            () -> getImplementorSupertype(interfaceTypeDescriptors, extendsCommonAdaptor))
+        .setSuperTypeDescriptorFactory(implementorTypeDeclaration ->
+            getImplementorSupertype(
+                implementorTypeDeclaration.toDescriptor(), extendsCommonAdaptor))
         .setClassComponents(classComponents)
-        .setDeclaredMethodDescriptorsFactory(
-            implementorTypeDeclaration ->
-                ImmutableList.of(
-                    LambdaAdaptorTypeDescriptors.getFunctionalMethodImplementation(
-                        implementorTypeDeclaration.toDescriptor())))
+        .setDeclaredMethodDescriptorsFactory(implementorTypeDeclaration ->
+            ImmutableList.of(
+                LambdaAdaptorTypeDescriptors.getFunctionalMethodImplementation(
+                    implementorTypeDeclaration.toDescriptor())))
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameters)
         .setVisibility(Visibility.PUBLIC)
@@ -141,20 +145,13 @@ public final class LambdaImplementorTypeDescriptors {
   }
 
   private static DeclaredTypeDescriptor getImplementorSupertype(
-      List<DeclaredTypeDescriptor> interfaceTypeDescriptors, boolean extendsCommonAdaptor) {
+      DeclaredTypeDescriptor implementorTypeDescriptor, boolean extendsCommonAdaptor) {
     if (!extendsCommonAdaptor) {
       return TypeDescriptors.get().javaLangObject;
     }
-    // It is ok to choose any of its functional interfaces to create a supertype.
-    // This accomplishes the main goal of inheriting class metadata. However the choice of
-    // interface might have optimization implications that should be further explored.
-    // TODO(b/360407114): See the effect of choosing a different one. In particular if
-    // the interfaces are related it will be beneficial to choose the subtype.
-    DeclaredTypeDescriptor functionalInterface =
-        interfaceTypeDescriptors.stream()
-            .filter(DeclaredTypeDescriptor::isFunctionalInterface)
-            .findFirst()
-            .get();
+    // Extend the adaptor of the functional interface implemented by the lambda implementor. This
+    // accomplishes the main goal of inheriting class metadata.
+    DeclaredTypeDescriptor functionalInterface = implementorTypeDescriptor.getFunctionalInterface();
 
     if (functionalInterface.isJsFunctionInterface()) {
       return TypeDescriptors.get().javaemulInternalJsFunctionAdaptor;

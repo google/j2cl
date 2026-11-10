@@ -418,6 +418,59 @@ public final class AstUtils {
   }
 
   /**
+   * Returns the functional interface in {@code interfaces} whose single abstract method is the
+   * function type of their intersection (JLS 9.9), or {@code null} if the intersection is not a
+   * functional interface.
+   *
+   * <p>The function type of an intersection is not necessarily the single abstract method of its
+   * first functional interface: another functional interface might declare the same method with a
+   * more specific return type, or implement it with a default method.
+   */
+  @Nullable
+  public static DeclaredTypeDescriptor getFunctionalInterface(
+      List<DeclaredTypeDescriptor> interfaces) {
+    if (interfaces.isEmpty()) {
+      return null;
+    }
+    if (interfaces.size() == 1) {
+      DeclaredTypeDescriptor onlyInterface = interfaces.getFirst();
+      return onlyInterface.isFunctionalInterface() ? onlyInterface : null;
+    }
+
+    // Default methods from any of the interfaces, including those that are not functional,
+    // implement the abstract methods they override.
+    ImmutableList<MethodDescriptor> defaultMethods =
+        interfaces.stream()
+            .flatMap(i -> i.getPolymorphicMethods().stream())
+            .filter(MethodDescriptor::isDefaultMethod)
+            .collect(toImmutableList());
+
+    // The single abstract methods that are not implemented by default methods are all
+    // override-equivalent in an intersection that is a functional interface (JLS 9.9), and the
+    // function type is the one with the most specific return type.
+    Function<DeclaredTypeDescriptor, TypeDescriptor> returnType =
+        i -> i.getSingleAbstractMethodDescriptor().getReturnTypeDescriptor();
+    return interfaces.stream()
+        .filter(DeclaredTypeDescriptor::isFunctionalInterface)
+        .filter(i ->
+            !isImplementedByDefaultMethod(i.getSingleAbstractMethodDescriptor(), defaultMethods))
+        .reduce((a, b) -> returnType.apply(a).isAssignableTo(returnType.apply(b)) ? a : b)
+        .orElse(null);
+  }
+
+  private static boolean isImplementedByDefaultMethod(
+      MethodDescriptor methodDescriptor, List<MethodDescriptor> defaultMethods) {
+    // A default method only implements the methods it actually overrides, i.e. not those that a
+    // subinterface makes abstract again, e.g. `ReabstractedGet.get()` in
+    // `DefaultGet & ReabstractedGet & StringGetter`.
+    return defaultMethods.stream()
+        .anyMatch(m ->
+            m.isOverride(methodDescriptor)
+                && m.getEnclosingTypeDescriptor()
+                    .isSubtypeOf(methodDescriptor.getEnclosingTypeDescriptor()));
+  }
+
+  /**
    * Generates the following code:
    *
    * <p>$Util.$makeLambdaFunction(Type.prototype.m_equal, $instance, Type.$copy);

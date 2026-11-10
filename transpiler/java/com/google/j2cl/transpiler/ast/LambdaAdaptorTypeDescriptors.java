@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
@@ -81,11 +82,13 @@ public final class LambdaAdaptorTypeDescriptors {
         createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
     // Lambdas that implement several types, e.g. from an intersection cast, require that all
-    // those types be declared type descriptors.
+    // those types be declared type descriptors. `Object`, which can be the class component of an
+    // intersection that is a functional interface, is not implemented.
     List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
         typeDescriptor.isIntersection()
             ? ((IntersectionTypeDescriptor) typeDescriptor)
                 .getIntersectionTypeDescriptors().stream()
+                    .filter(not(TypeDescriptors::isJavaLangObject))
                     .map(DeclaredTypeDescriptor.class::cast)
                     .collect(toImmutableList())
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);

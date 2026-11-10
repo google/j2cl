@@ -238,12 +238,12 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   @Override
   @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {
+    // TODO(b/583973374): Separate the functional interface implemented by a class from the
+    // function type of an interface; this computes the former as if the class were the
+    // intersection of its direct superinterfaces.
     return isFunctionalInterface()
         ? this
-        : getInterfaceTypeDescriptors().stream()
-            .filter(DeclaredTypeDescriptor::isFunctionalInterface)
-            .findFirst()
-            .orElse(null);
+        : AstUtils.getFunctionalInterface(getInterfaceTypeDescriptors());
   }
 
   @Override
@@ -1400,7 +1400,7 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
       }
       if (typeArgument instanceof DeclaredTypeDescriptor declaredTypeDescriptor
           && declaredTypeDescriptor.isParameterizedByNonNativeJsEnum()) {
-          return true;
+        return true;
       }
     }
     return false;

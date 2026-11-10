@@ -15,6 +15,7 @@ let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let $3 = goog.forwardDeclare('lambdas.Lambdas.$3$impl');
 let $4 = goog.forwardDeclare('lambdas.Lambdas.$4$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$1$impl');
+let $LambdaAdaptor$10 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$10$impl');
 let $LambdaAdaptor$2 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$2$impl');
 let $LambdaAdaptor$3 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$3$impl');
 let $LambdaAdaptor$4 = goog.forwardDeclare('lambdas.Lambdas.$LambdaAdaptor$4$impl');
@@ -262,22 +263,25 @@ class Lambdas extends j_l_Object {
  /** @nodts */
  static m_testIntersectionTypingNotFirst__void() {
   Lambdas.$clinit();
-  let o = /**@type {!ObjectGetter}*/ (new $LambdaAdaptor$5(/**  @return {*}*/ (() =>{
+  let o = /**@type {!ObjectGetter}*/ (new $LambdaAdaptor$5(/**  @return {?string}*/ (() =>{
    return 'hi';
   })));
-  o = (/**@type {!ObjectGetter}*/ (new $LambdaAdaptor$6(/**  @return {*}*/ (() =>{
+  o = (/**@type {!ObjectGetter}*/ (new $LambdaAdaptor$6(/**  @return {?string}*/ (() =>{
    return 'lambda';
   }))));
-  o = (/**@type {!ObjectGetter}*/ (new $LambdaAdaptor$7(/**  @return {*}*/ (() =>{
+  o = (/**@type {!ObjectGetter}*/ (new $LambdaAdaptor$7(/**  @return {?string}*/ (() =>{
    return 'lambda';
   }))));
-  o = (/**@type {!DefaultGet}*/ (new $LambdaAdaptor$8(/**  @return {*}*/ (() =>{
+  o = (/**@type {!DefaultGet}*/ (new $LambdaAdaptor$8(/**  @return {?string}*/ (() =>{
    return 'lambda';
   }))));
+  o = new $LambdaAdaptor$9(/**  @return {?string}*/ (() =>{
+   return 'lambda';
+  }));
  }
  /** @nodts */
  m_testDefaultMethodsInIntersectionAdaptor__void() {
-  let o = /**@type {!BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$9(/**  @return {?string}*/ ((/** ?string */ t, /** ?string */ u) =>{
+  let o = /**@type {!BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$10(/**  @return {?string}*/ ((/** ?string */ t, /** ?string */ u) =>{
    let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
    let u_1 = /**@type {?string}*/ ($Casts.$to(u, j_l_String));
    return null;
@@ -327,6 +331,7 @@ class Lambdas extends j_l_Object {
   $3 = goog.module.get('lambdas.Lambdas.$3$impl');
   $4 = goog.module.get('lambdas.Lambdas.$4$impl');
   $LambdaAdaptor$1 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$1$impl');
+  $LambdaAdaptor$10 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$10$impl');
   $LambdaAdaptor$2 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$2$impl');
   $LambdaAdaptor$3 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$3$impl');
   $LambdaAdaptor$4 = goog.module.get('lambdas.Lambdas.$LambdaAdaptor$4$impl');

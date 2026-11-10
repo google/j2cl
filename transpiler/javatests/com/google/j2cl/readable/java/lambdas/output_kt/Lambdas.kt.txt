@@ -227,10 +227,11 @@ open class Lambdas {
   
   @JvmStatic
   fun testIntersectionTypingNotFirst() {
-   var o: Any = (ObjectGetter { "hi" }).let { it as ObjectGetter; it as StringGetter; it }
-   o = (ObjectGetter { "lambda" }).let { it as ObjectGetter; it as SubWithDefault; it }
-   o = (ObjectGetter { "lambda" }).let { it as ObjectGetter; it as Named; it as DefaultGet; it }
-   o = (ReabstractedGet { "lambda" }).let { it as DefaultGet; it as ReabstractedGet; it as StringGetter; it }
+   var o: Any = (StringGetter { "hi" }).let { it as ObjectGetter; it as StringGetter; it }
+   o = (SubWithDefault { "lambda" }).let { it as ObjectGetter; it as SubWithDefault; it }
+   o = (Named { "lambda" }).let { it as ObjectGetter; it as Named; it as DefaultGet; it }
+   o = (StringGetter { "lambda" }).let { it as DefaultGet; it as ReabstractedGet; it as StringGetter; it }
+   o = (StringGetter { "lambda" }).let { it as Any; it as ObjectGetter; it as StringGetter; it }
   }
   
   @JvmStatic

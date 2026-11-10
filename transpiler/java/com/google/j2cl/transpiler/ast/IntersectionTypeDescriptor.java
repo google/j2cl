@@ -79,11 +79,17 @@ public abstract non-sealed class IntersectionTypeDescriptor extends TypeDescript
   @Override
   @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {
-    return getIntersectionTypeDescriptors().stream()
-        .filter(TypeDescriptor::isFunctionalInterface)
-        .map(DeclaredTypeDescriptor.class::cast)
-        .findFirst()
-        .orElse(null);
+    // Only intersections of interfaces, possibly with Object as the class component, can be
+    // functional interfaces (JLS 4.9, 9.9).
+    ImmutableList<TypeDescriptor> components =
+        TypeDescriptors.isJavaLangObject(getFirstType())
+            ? getIntersectionTypeDescriptors().subList(1, getIntersectionTypeDescriptors().size())
+            : getIntersectionTypeDescriptors();
+    if (!components.stream().allMatch(TypeDescriptor::isInterface)) {
+      return null;
+    }
+    return AstUtils.getFunctionalInterface(
+        components.stream().map(DeclaredTypeDescriptor.class::cast).collect(toImmutableList()));
   }
 
   @Override

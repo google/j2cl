@@ -259,17 +259,91 @@ public class Main {
     }
   }
 
+  private interface ObjectGetter {
+    Object get();
+  }
+
+  private interface StringGetter {
+    String get();
+  }
+
+  private interface SubWithDefault extends ObjectGetter {
+    @Override
+    default Object get() {
+      return "default";
+    }
+
+    String name();
+  }
+
+  private interface InheritsGet extends ObjectGetter {}
+
+  private interface DefaultGet extends ObjectGetter {
+    @Override
+    default Object get() {
+      return "default";
+    }
+  }
+
+  private interface Named {
+    String name();
+  }
+
+  private interface ReabstractedGet extends DefaultGet {
+    @Override
+    Object get();
+  }
+
+  private static String hi() {
+    return "hi";
+  }
+
   private static void testIntersectionTypeLambdas() {
     // Kotlin does not support intersection type lambdas.
     if (isJ2Kt()) {
       return;
     }
-    Object obj = (IdentityWithDefault<String> & InterfaceWithDefaultMethod) o -> o;
-    assertTrue(obj instanceof IdentityWithDefault);
-    assertTrue(obj instanceof InterfaceWithDefaultMethod);
-    assertEquals(obj, ((IdentityWithDefault<String>) obj).self());
+    Object o = (IdentityWithDefault<String> & InterfaceWithDefaultMethod) p -> p;
+    assertTrue(o instanceof IdentityWithDefault);
+    assertTrue(o instanceof InterfaceWithDefaultMethod);
+    assertEquals(o, ((IdentityWithDefault<String>) o).self());
     assertEquals(
-        InterfaceWithDefaultMethod.MY_TEXT, ((InterfaceWithDefaultMethod) obj).defaultMethod());
+        InterfaceWithDefaultMethod.MY_TEXT, ((InterfaceWithDefaultMethod) o).defaultMethod());
+
+    // The function type of `ObjectGetter & StringGetter` is `String get()`.
+    o = (ObjectGetter & StringGetter) () -> "hi";
+    assertEquals("hi", ((StringGetter) o).get());
+    assertEquals("hi", ((ObjectGetter) o).get());
+
+    o = (ObjectGetter & StringGetter) Main::hi;
+    assertEquals("hi", ((StringGetter) o).get());
+    assertEquals("hi", ((ObjectGetter) o).get());
+
+    // `SubWithDefault.get()` implements `ObjectGetter.get()`, so the function type of
+    // `ObjectGetter & SubWithDefault` is `String name()`.
+    o = (ObjectGetter & SubWithDefault) () -> "lambda";
+    assertEquals("lambda", ((SubWithDefault) o).name());
+    assertEquals("default", ((ObjectGetter) o).get());
+
+    // The default method can come from a component that is not a subtype of the other.
+    o = (InheritsGet & SubWithDefault) () -> "lambda";
+    assertEquals("lambda", ((SubWithDefault) o).name());
+    assertEquals("default", ((InheritsGet) o).get());
+
+    // The default method can also come from an interface that is not functional.
+    o = (ObjectGetter & Named & DefaultGet) () -> "lambda";
+    assertEquals("lambda", ((Named) o).name());
+    assertEquals("default", ((ObjectGetter) o).get());
+
+    // A default method made abstract again by a subinterface does not implement anything.
+    o = (DefaultGet & ReabstractedGet & StringGetter) () -> "lambda";
+    assertEquals("lambda", ((StringGetter) o).get());
+    assertEquals("lambda", ((DefaultGet) o).get());
+
+    // `Object` as the class component does not prevent the intersection from being functional.
+    o = (Object & ObjectGetter & StringGetter) () -> "lambda";
+    assertEquals("lambda", ((StringGetter) o).get());
+    assertEquals("lambda", ((ObjectGetter) o).get());
   }
 
   private static void testInStaticContextWithInnerClasses() {
