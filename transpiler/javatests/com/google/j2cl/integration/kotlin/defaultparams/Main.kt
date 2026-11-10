@@ -20,6 +20,8 @@ import com.google.j2cl.integration.testing.Asserts.assertNull
 import com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException
 import com.google.j2cl.integration.testing.TestUtils.getUndefined
 import jsinterop.annotations.JsConstructor
+import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsType
 
 /** Test for default params. */
 fun main(vararg unused: String) {
@@ -28,6 +30,8 @@ fun main(vararg unused: String) {
   testMethods()
   testExtFun()
   testLocalFun()
+  testLocalFunInEnumEntryArgument()
+  testLocalFunInOverrideOfExternalFun()
   testComplexDefault()
   testCapturedDefault()
   testDefaultInitializerCallsWithDefaults()
@@ -127,6 +131,77 @@ fun testLocalFun() {
       }
     }
     .testInNestedObj()
+
+  // Members of local classes are called through a stub unlike local functions.
+  class LocalClass(val a: Int) {
+    fun memberFun(b: Int = 1): Int {
+      fun localFun(c: Int = b) = a + c
+      return localFun()
+    }
+  }
+  assertEquals(11, LocalClass(10).memberFun())
+  assertEquals(30, LocalClass(10).memberFun(20))
+}
+
+// Enum entry arguments are not within any function when the default parameters are lowered.
+enum class LocalFunInEnumEntryArgument(val value: Int) {
+  LOCAL_FUN(
+    run {
+      fun localFun(a: Int = 1) = a
+      localFun()
+    }
+  ),
+  NESTED_LOCAL_FUN(
+    run {
+      fun localFun(a: Int = 1): Int {
+        fun nestedLocalFun(b: Int = 2) = b
+        return a + nestedLocalFun()
+      }
+      localFun()
+    }
+  ),
+  LOCAL_FUN_IN_LAMBDA(
+    evaluate {
+      fun localFun(a: Int = 4) = a
+      localFun()
+    }
+  ),
+  LOCAL_FUN_IN_ANONYMOUS_OBJECT(
+    object {
+        // A member of a local class, which is called through a stub unlike local functions.
+        fun compute(a: Int = 5): Int {
+          fun localFun(b: Int = a) = b
+          return localFun()
+        }
+      }
+      .compute()
+  ),
+}
+
+fun evaluate(f: () -> Int) = f()
+
+private fun testLocalFunInEnumEntryArgument() {
+  assertEquals(1, LocalFunInEnumEntryArgument.LOCAL_FUN.value)
+  assertEquals(3, LocalFunInEnumEntryArgument.NESTED_LOCAL_FUN.value)
+  assertEquals(4, LocalFunInEnumEntryArgument.LOCAL_FUN_IN_LAMBDA.value)
+  assertEquals(5, LocalFunInEnumEntryArgument.LOCAL_FUN_IN_ANONYMOUS_OBJECT.value)
+}
+
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+open class NativeObject {
+  open external fun toLocaleString(): String
+}
+
+class NativeObjectSubclass @JsConstructor constructor() : NativeObject() {
+  // Overrides of external functions don't have default argument stubs.
+  override fun toLocaleString(): String {
+    fun localFun(s: String = "defaulted") = s
+    return localFun()
+  }
+}
+
+private fun testLocalFunInOverrideOfExternalFun() {
+  assertEquals("defaulted", NativeObjectSubclass().toLocaleString())
 }
 
 fun complexDefault(

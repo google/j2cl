@@ -28,6 +28,7 @@ import org.jetbrains.kotlin.backend.common.lower.DefaultParameterInjector
 import org.jetbrains.kotlin.backend.common.lower.VariableRemapper
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.jvm.ir.getJvmVisibilityOfDefaultArgumentStub
+import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.builders.*
@@ -70,20 +71,33 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
     skipExternalMethods = true,
   ) {
 
-  private val localFunctionTransformer =
+  /**
+   * Resolves the default parameters of all local functions in the file, then generates the stubs.
+   *
+   * Local functions are emitted as JS arrow functions and resolve their own default parameters
+   * instead of being called through a stub. They are resolved in a traversal of their own since
+   * they can be declared outside of the members that are passed to [transformFlat], e.g. in enum
+   * entry arguments, which are not within any function yet, or in overrides of external functions,
+   * which [transformFlat] skips.
+   */
+  override fun lower(irFile: IrFile) {
+    irFile.acceptChildrenVoid(localFunctionDefaultResolver)
+    super.lower(irFile)
+  }
+
+  private val localFunctionDefaultResolver =
     object : IrVisitorVoid() {
       override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
       }
 
-      // Don't traverse into nested classes as those will be covered by the DeclarationTransformer
-      // traversal.
-      override fun visitClass(declaration: IrClass) {}
-
       override fun visitFunction(declaration: IrFunction) {
         super.visitFunction(declaration)
 
-        if (declaration.isLocal && declaration.hasDefaultParameters) {
+        // Only actual local functions; members of local classes get stubs like any other member.
+        if (
+          declaration.visibility == DescriptorVisibilities.LOCAL && declaration.hasDefaultParameters
+        ) {
           declaration.introduceDefaultResolution()
         }
       }
@@ -95,9 +109,6 @@ internal class J2clDefaultArgumentStubGenerator(context: J2clBackendContext) :
     if (declaration !is IrFunction || declaration.isExternalOrInheritedFromExternal()) {
       return null
     }
-
-    // Traverse into local functions transforming them as well.
-    declaration.acceptChildrenVoid(localFunctionTransformer)
 
     return super.transformFlat(declaration)
   }

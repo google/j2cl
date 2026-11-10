@@ -42,6 +42,27 @@ enum class LocalFunInEnumEntryArgument(val value: Int) {
       localFun()
     }
   ),
+  LOCAL_FUN_IN_ANONYMOUS_OBJECT(
+    object {
+        // A member of a local class, which is called through a stub unlike local functions.
+        fun compute(a: Int = 5): Int {
+          fun localFun(b: Int = a) = b
+          return localFun()
+        }
+      }
+      .compute()
+  ),
+}
+
+fun localClassWithDefaultParameters(): Int {
+  // Members of local classes are called through a stub unlike local functions.
+  class LocalClass(val a: Int) {
+    fun memberFun(b: Int = 1): Int {
+      fun localFun(c: Int = b) = a + c
+      return localFun()
+    }
+  }
+  return LocalClass(10).memberFun()
 }
 
 fun evaluate(f: () -> Int) = f()

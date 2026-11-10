@@ -3,6 +3,7 @@ goog.module('defaultparams.LocalFunInEnumEntryArgument$impl');
 const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1 = goog.forwardDeclare('defaultparams.LocalFunInEnumEntryArgument.$1$impl');
 let LocalFunctionsKt = goog.forwardDeclare('defaultparams.LocalFunctionsKt$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Enums = goog.forwardDeclare('javaemul.internal.Enums$impl');
@@ -41,24 +42,27 @@ class LocalFunInEnumEntryArgument extends Enum {
  }
  /** @nodts @return {!LocalFunInEnumEntryArgument} */
  static m_LOCAL_FUN$init$__defaultparams_LocalFunInEnumEntryArgument() {
-  let localFun = /**  @return {number}*/ ((/** number */ a) =>{
-   return a;
+  let localFun = /**  @return {number}*/ ((/** number= */ a) =>{
+   let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
+   return a$defaulted;
   });
   let tmp0 = EnumCompanionObject.f_INSTANCE__kotlin_jvm_internal_EnumCompanionObject;
   let this_1 = tmp0;
-  return LocalFunInEnumEntryArgument.$create__java_lang_String__int__int($Util.$makeEnumName('LOCAL_FUN'), LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, (/**@type {!Integer}*/ (Integer.valueOf(LocalFunInEnumEntryArgument.m_localFun$default__int__int(/**@type {number}*/ (undefined))))).intValue());
+  return LocalFunInEnumEntryArgument.$create__java_lang_String__int__int($Util.$makeEnumName('LOCAL_FUN'), LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, (/**@type {!Integer}*/ (Integer.valueOf(localFun(/**@type {number}*/ (undefined))))).intValue());
  }
  /** @nodts @return {!LocalFunInEnumEntryArgument} */
  static m_NESTED_LOCAL_FUN$init$__defaultparams_LocalFunInEnumEntryArgument() {
-  let localFun = /**  @return {number}*/ ((/** number */ a) =>{
-   let nestedLocalFun = /**  @return {number}*/ ((/** number */ b) =>{
-    return b;
+  let localFun = /**  @return {number}*/ ((/** number= */ a) =>{
+   let a$defaulted = $Util.$isUndefined(a) ? 1 : a;
+   let nestedLocalFun = /**  @return {number}*/ ((/** number= */ b) =>{
+    let b$defaulted = $Util.$isUndefined(b) ? 2 : b;
+    return b$defaulted;
    });
-   return a + this.m_nestedLocalFun$default__int__int(/**@type {number}*/ (undefined)) | 0;
+   return a$defaulted + nestedLocalFun(/**@type {number}*/ (undefined)) | 0;
   });
   let tmp0 = EnumCompanionObject.f_INSTANCE__kotlin_jvm_internal_EnumCompanionObject;
   let this_1 = tmp0;
-  return LocalFunInEnumEntryArgument.$create__java_lang_String__int__int($Util.$makeEnumName('NESTED_LOCAL_FUN'), LocalFunInEnumEntryArgument.$ordinal_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, (/**@type {!Integer}*/ (Integer.valueOf(LocalFunInEnumEntryArgument.m_localFun$default__int__int(/**@type {number}*/ (undefined))))).intValue());
+  return LocalFunInEnumEntryArgument.$create__java_lang_String__int__int($Util.$makeEnumName('NESTED_LOCAL_FUN'), LocalFunInEnumEntryArgument.$ordinal_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, (/**@type {!Integer}*/ (Integer.valueOf(localFun(/**@type {number}*/ (undefined))))).intValue());
  }
  /** @nodts @return {!LocalFunInEnumEntryArgument} */
  static m_valueOf__java_lang_String__defaultparams_LocalFunInEnumEntryArgument(/** string */ name) {
@@ -71,7 +75,7 @@ class LocalFunInEnumEntryArgument extends Enum {
  /** @nodts @return {!Array<!LocalFunInEnumEntryArgument>} */
  static m_values__arrayOf_defaultparams_LocalFunInEnumEntryArgument() {
   LocalFunInEnumEntryArgument.$clinit();
-  return /**@type {!Array<!LocalFunInEnumEntryArgument>}*/ ($Arrays.$stampType([LocalFunInEnumEntryArgument.$static_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, LocalFunInEnumEntryArgument.$static_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument], LocalFunInEnumEntryArgument));
+  return /**@type {!Array<!LocalFunInEnumEntryArgument>}*/ ($Arrays.$stampType([LocalFunInEnumEntryArgument.$static_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, LocalFunInEnumEntryArgument.$static_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument, LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument, LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument], LocalFunInEnumEntryArgument));
  }
  /** @nodts @return {!LocalFunInEnumEntryArgument} */
  static get f_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument() {
@@ -85,6 +89,10 @@ class LocalFunInEnumEntryArgument extends Enum {
  static get f_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument() {
   return (LocalFunInEnumEntryArgument.$clinit(), LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument);
  }
+ /** @nodts @return {!LocalFunInEnumEntryArgument} */
+ static get f_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument() {
+  return (LocalFunInEnumEntryArgument.$clinit(), LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument);
+ }
  /** @nodts */
  static $clinit() {
   LocalFunInEnumEntryArgument.$clinit = () =>{};
@@ -93,11 +101,13 @@ class LocalFunInEnumEntryArgument extends Enum {
   LocalFunInEnumEntryArgument.$static_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument = LocalFunInEnumEntryArgument.m_LOCAL_FUN$init$__defaultparams_LocalFunInEnumEntryArgument();
   LocalFunInEnumEntryArgument.$static_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument = LocalFunInEnumEntryArgument.m_NESTED_LOCAL_FUN$init$__defaultparams_LocalFunInEnumEntryArgument();
   LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument = LocalFunInEnumEntryArgument.$create__java_lang_String__int__int($Util.$makeEnumName('LOCAL_FUN_IN_LAMBDA'), LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument, LocalFunctionsKt.m_evaluate__kotlin_jvm_functions_Function0__int(Function0.$adapt(/**  @return {!Integer}*/ (() =>{
-   let localFun = /**  @return {number}*/ ((/** number */ a) =>{
-    return a;
+   let localFun = /**  @return {number}*/ ((/** number= */ a) =>{
+    let a$defaulted = $Util.$isUndefined(a) ? 4 : a;
+    return a$defaulted;
    });
-   return Integer.valueOf(this.m_localFun$default__int__int(/**@type {number}*/ (undefined)));
+   return Integer.valueOf(localFun(/**@type {number}*/ (undefined)));
   }))));
+  LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument = LocalFunInEnumEntryArgument.$create__java_lang_String__int__int($Util.$makeEnumName('LOCAL_FUN_IN_ANONYMOUS_OBJECT'), LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument, $1.m_compute$default__defaultparams_LocalFunInEnumEntryArgument_1__int__int($1.$create__(), /**@type {number}*/ (undefined)));
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -106,6 +116,7 @@ class LocalFunInEnumEntryArgument extends Enum {
  
  /** @nodts */
  static $loadModules() {
+  $1 = goog.module.get('defaultparams.LocalFunInEnumEntryArgument.$1$impl');
   LocalFunctionsKt = goog.module.get('defaultparams.LocalFunctionsKt$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   Enums = goog.module.get('javaemul.internal.Enums$impl');
@@ -121,12 +132,16 @@ LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN__defaultparams_LocalFunInEnumEntr
 LocalFunInEnumEntryArgument.$ordinal_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument = 1;
 /**@const {number} @nodts*/
 LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument = 2;
+/**@const {number} @nodts*/
+LocalFunInEnumEntryArgument.$ordinal_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument = 3;
 /**@private {!LocalFunInEnumEntryArgument} @nodts*/
 LocalFunInEnumEntryArgument.$static_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument;
 /**@private {!LocalFunInEnumEntryArgument} @nodts*/
 LocalFunInEnumEntryArgument.$static_NESTED_LOCAL_FUN__defaultparams_LocalFunInEnumEntryArgument;
 /**@private {!LocalFunInEnumEntryArgument} @nodts*/
 LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_LAMBDA__defaultparams_LocalFunInEnumEntryArgument;
+/**@private {!LocalFunInEnumEntryArgument} @nodts*/
+LocalFunInEnumEntryArgument.$static_LOCAL_FUN_IN_ANONYMOUS_OBJECT__defaultparams_LocalFunInEnumEntryArgument;
 /**@type {Map<?string, !LocalFunInEnumEntryArgument>} @nodts*/
 LocalFunInEnumEntryArgument.f_namesToValuesMap__defaultparams_LocalFunInEnumEntryArgument_;
 $Util.$setClassMetadataForEnum(LocalFunInEnumEntryArgument, 'defaultparams.LocalFunInEnumEntryArgument');

@@ -1,0 +1,64 @@
+goog.module('defaultparams.LocalFunctionsKt.$2LocalClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $2LocalClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__defaultparams_LocalFunctionsKt_2LocalClass_ = 0;
+ }
+ /** @nodts @return {!$2LocalClass} */
+ static $create__int(/** number */ a) {
+  $2LocalClass.$clinit();
+  let $instance = new $2LocalClass();
+  $instance.$ctor__defaultparams_LocalFunctionsKt_2LocalClass__int__void(a);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_LocalFunctionsKt_2LocalClass__int__void(/** number */ a) {
+  this.$ctor__java_lang_Object__void();
+  this.f_a__defaultparams_LocalFunctionsKt_2LocalClass_ = a;
+ }
+ /** @final @nodts @return {number} */
+ m_getA__int() {
+  return this.f_a__defaultparams_LocalFunctionsKt_2LocalClass_;
+ }
+ /** @final @nodts @return {number} */
+ m_memberFun__int__int(/** number */ b) {
+  let localFun = /**  @return {number}*/ ((/** number= */ c) =>{
+   let c$defaulted = $Util.$isUndefined(c) ? b : c;
+   return this.m_getA__int() + c$defaulted | 0;
+  });
+  return localFun(/**@type {number}*/ (undefined));
+ }
+ /** @nodts @return {number} */
+ static m_memberFun$default__defaultparams_LocalFunctionsKt_2LocalClass__int__int(/** !$2LocalClass */ $this, /** number= */ b) {
+  $2LocalClass.$clinit();
+  let b$defaulted = $Util.$isUndefined(b) ? 1 : b;
+  return $this.m_memberFun__int__int(b$defaulted);
+ }
+ /** @nodts */
+ static $clinit() {
+  $2LocalClass.$clinit = () =>{};
+  $2LocalClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2LocalClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2LocalClass, 'defaultparams.LocalFunctionsKt$2LocalClass');
+
+exports = $2LocalClass;
+
+//# sourceMappingURL=LocalFunctionsKt$2LocalClass.js.map

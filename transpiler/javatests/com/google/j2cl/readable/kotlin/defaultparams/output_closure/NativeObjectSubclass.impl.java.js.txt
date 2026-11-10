@@ -16,10 +16,11 @@ class NativeObjectSubclass extends Object {
  $ctor__defaultparams_NativeObjectSubclass__void() {}
  /** @override @return {string} */
  toLocaleString() {
-  let localFun = /**  @return {string}*/ ((/** string */ s) =>{
-   return s;
+  let localFun = /**  @return {string}*/ ((/** string= */ s) =>{
+   let s$defaulted = $Util.$isUndefined(s) ? 'defaulted' : s;
+   return s$defaulted;
   });
-  return this.m_localFun$default__java_lang_String__java_lang_String(/**@type {string}*/ (undefined));
+  return localFun(/**@type {string}*/ (undefined));
  }
  /** @nodts */
  static $clinit() {
