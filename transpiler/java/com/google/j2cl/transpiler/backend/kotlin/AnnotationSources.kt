@@ -109,6 +109,7 @@ internal data class AnnotationSources(val nameSources: NameSources) {
   companion object {
     private val SUPPORTED_ANNOTATIONS =
       setOf(
+        "com.google.calendar.v2a.shared.async.DbAsync",
         "com.google.errorprone.annotations.CanIgnoreReturnValue",
         "com.google.errorprone.annotations.ResultIgnorabilityUnspecified",
         "com.google.j2objc.annotations.ObjectiveCKmpMethod",
@@ -118,6 +119,7 @@ internal data class AnnotationSources(val nameSources: NameSources) {
 
     private val PROPERTY_GET_ANNOTATIONS =
       setOf(
+        "com.google.calendar.v2a.shared.async.DbAsync",
         "com.google.j2objc.annotations.ObjectiveCName",
         "com.google.j2objc.annotations.SwiftName",
         "com.google.j2objc.annotations.ObjectiveCKmpMethod",

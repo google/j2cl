@@ -15,6 +15,7 @@
  */
 package j2ktwebasync;
 
+import com.google.calendar.v2a.shared.async.DbAsync;
 import com.google.calendar.v2a.shared.async.WebAsync;
 
 /**
@@ -38,6 +39,11 @@ public class WebAsyncExample {
 
   @WebAsync
   public int getFive() {
+    return 5;
+  }
+
+  @DbAsync
+  public int getDbFive() {
     return 5;
   }
 

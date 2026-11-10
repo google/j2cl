@@ -19,6 +19,7 @@
 package j2ktwebasync
 
 import javaemul.lang.*
+import com.google.calendar.v2a.shared.async.DbAsync
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
@@ -34,6 +35,9 @@ open class WebAsyncExample {
  open suspend fun method2(a: A?): A? = a
  
  open suspend fun getFive(): Int = 5
+ 
+ @DbAsync()
+ open suspend fun getDbFive(): Int = 5
  
  open suspend fun varargs(a: Int, vararg more: Int) {}
  
