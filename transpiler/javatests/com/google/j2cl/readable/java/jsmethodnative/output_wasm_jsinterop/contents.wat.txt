@@ -1,0 +1,236 @@
+
+(global $$class-initialized@jsmethodnative.Main (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethodnative.Main (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jsmethodnative.Main.SomeJsType (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethodnative.Main.SomeJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@jsmethodnative.Main.NativeClass.$Overlay (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsmethodnative.Main.NativeClass.$Overlay (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $jsmethodnative.Main.vtable (ref (exact $jsmethodnative.Main.vtable))
+ (struct.new $jsmethodnative.Main.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@jsmethodnative.Main)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $jsmethodnative.Main.SomeJsType.vtable (ref (exact $jsmethodnative.Main.SomeJsType.vtable))
+ (struct.new $jsmethodnative.Main.SomeJsType.vtable
+  (global.get $jsmethodnative.Main.SomeJsType.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsmethodnative.Main.SomeJsType)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $jsmethodnative.Main.NativeClass.$Overlay.vtable (ref (exact $jsmethodnative.Main.NativeClass.$Overlay.vtable))
+ (struct.new $jsmethodnative.Main.NativeClass.$Overlay.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@jsmethodnative.Main.NativeClass.$Overlay)
+ )
+)
+
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void_<once>_@jsmethodnative.Main.NativeClass.$Overlay
+ (block
+  (if (global.get $$class-initialized@jsmethodnative.Main.NativeClass.$Overlay)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsmethodnative.Main.NativeClass.$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<T> $Overlay.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethodnative.Main.NativeClass.$Overlay
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethodnative.Main.NativeClass.$Overlay)))
+   (then
+    (return (global.get $$class@jsmethodnative.Main.NativeClass.$Overlay))
+   )
+  )
+  (global.set $$class@jsmethodnative.Main.NativeClass.$Overlay (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethodnati...|__java_lang_String_<once>_@jsmethodnative.Main.NativeClass.$Overlay.$StringLiterals )(ref.null $java.lang.Class)))
+  (return (global.get $$class@jsmethodnative.Main.NativeClass.$Overlay))
+ )
+)
+
+;;; Class<?> $Overlay.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethodnative.Main.NativeClass.$Overlay
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethodnative.Main.NativeClass.$Overlay))
+ (local.set $this (ref.cast (ref $jsmethodnative.Main.NativeClass.$Overlay) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethodnative.Main.NativeClass.$Overlay ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethodnative.Main.NativeClass.$Overlay)
+
+;;; Main Main.$create()
+(func $$create__@jsmethodnative.Main
+ (result (ref null $jsmethodnative.Main))
+ (local $$instance (ref null $jsmethodnative.Main))
+ (block
+  (call $$clinit__void_<once>_@jsmethodnative.Main )
+  (local.set $$instance (struct.new_desc $jsmethodnative.Main (global.get $itable.empty) (i32.const 0) (global.get $jsmethodnative.Main.vtable)))
+  (call $$ctor__void_$p_jsmethodnative_Main@jsmethodnative.Main (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_jsmethodnative_Main@jsmethodnative.Main
+ (param $this (ref null $jsmethodnative.Main))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.test()
+(func $m_test__void@jsmethodnative.Main
+ (local $o (ref null $jsmethodnative.Main.SomeJsType))
+ (local $$qualifier (ref null extern))
+ (block
+  (call $$clinit__void_<once>_@jsmethodnative.Main )
+  (local.set $o (call $$create__@jsmethodnative.Main.SomeJsType ))
+  (call $m_staticMethodReferencingNonNativeJsType__jsmethodnative_Main_SomeJsType__void@jsmethodnative.Main.NativeClass (extern.convert_any (local.get $o)))
+  (block
+   (local.set $$qualifier (call $m_<init>__@jsmethodnative.Main.NativeClass ))
+   (call $m_instanceMethodReferencingNonNativeJsType__jsmethodnative_Main_SomeJsType__void@jsmethodnative.Main.NativeClass (ref.as_non_null (local.get $$qualifier))(extern.convert_any (local.get $o)))
+  )
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void_<once>_@jsmethodnative.Main
+ (block
+  (if (global.get $$class-initialized@jsmethodnative.Main)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsmethodnative.Main (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Main.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethodnative.Main
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethodnative.Main)))
+   (then
+    (return (global.get $$class@jsmethodnative.Main))
+   )
+  )
+  (global.set $$class@jsmethodnative.Main (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethodnati...|__java_lang_String_<once>_@jsmethodnative.Main.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsmethodnative.Main))
+ )
+)
+
+;;; Class<?> Main.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethodnative.Main
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethodnative.Main))
+ (local.set $this (ref.cast (ref $jsmethodnative.Main) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethodnative.Main ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethodnative.Main)
+
+;;; SomeJsType SomeJsType.$create()
+(func $$create__@jsmethodnative.Main.SomeJsType
+ (result (ref null $jsmethodnative.Main.SomeJsType))
+ (block
+  (call $$clinit__void_<once>_@jsmethodnative.Main.SomeJsType )
+  (return (call $$create_$private__@jsmethodnative.Main.SomeJsType ))
+ )
+)
+
+;;; SomeJsType SomeJsType.$create_$private()
+(func $$create_$private__@jsmethodnative.Main.SomeJsType
+ (result (ref null $jsmethodnative.Main.SomeJsType))
+ (local $$instance (ref null $jsmethodnative.Main.SomeJsType))
+ (block
+  (local.set $$instance (struct.new_desc $jsmethodnative.Main.SomeJsType (global.get $itable.empty) (i32.const 0) (global.get $jsmethodnative.Main.SomeJsType.vtable)))
+  (call $$ctor__void_$p_jsmethodnative_Main_SomeJsType@jsmethodnative.Main.SomeJsType (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeJsType.$ctor()
+(func $$ctor__void_$p_jsmethodnative_Main_SomeJsType@jsmethodnative.Main.SomeJsType
+ (param $this (ref null $jsmethodnative.Main.SomeJsType))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; SomeJsType SomeJsType.<init>()
+(@binaryen.js.called)
+(func $js_export_<init>__@jsmethodnative.Main.SomeJsType
+ (result (ref null $jsmethodnative.Main.SomeJsType))
+ (block
+  (call $$clinit__void_<once>_@jsmethodnative.Main.SomeJsType )
+  (return (call $$create_$private__@jsmethodnative.Main.SomeJsType ))
+ )
+)
+
+;;; void SomeJsType.$clinit()
+(func $$clinit__void_<once>_@jsmethodnative.Main.SomeJsType
+ (block
+  (if (global.get $$class-initialized@jsmethodnative.Main.SomeJsType)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsmethodnative.Main.SomeJsType (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> SomeJsType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsmethodnative.Main.SomeJsType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsmethodnative.Main.SomeJsType)))
+   (then
+    (return (global.get $$class@jsmethodnative.Main.SomeJsType))
+   )
+  )
+  (global.set $$class@jsmethodnative.Main.SomeJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsmethodnati...|__java_lang_String_<once>_@jsmethodnative.Main.SomeJsType.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsmethodnative.Main.SomeJsType))
+ )
+)
+
+;;; Class<?> SomeJsType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsmethodnative.Main.SomeJsType
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethodnative.Main.SomeJsType))
+ (local.set $this (ref.cast (ref $jsmethodnative.Main.SomeJsType) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethodnative.Main.SomeJsType ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsmethodnative.Main.SomeJsType)

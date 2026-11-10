@@ -1,0 +1,8 @@
+goog.module('jsmethodnative.Main.SomeJsType');
+
+const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+
+/** @const {typeof $j2wasm$externs_jsmethodnative_Main_SomeJsType} */
+const SomeJsType = constructorProxy('jsmethodnative.Main.SomeJsType');
+
+exports = SomeJsType;

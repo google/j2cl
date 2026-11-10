@@ -1,0 +1,56 @@
+goog.module('jsmethodnative.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SomeJsType = goog.forwardDeclare('jsmethodnative.Main.SomeJsType$impl');
+let NativeClass = goog.forwardDeclare('jsmethodnative.NativeClass');
+
+/**
+ * @final
+ */
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsmethodnative_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethodnative_Main__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_test__void() {
+  Main.$clinit();
+  let o = new SomeJsType();
+  NativeClass.staticMethodReferencingNonNativeJsType(o);
+  new NativeClass().instanceMethodReferencingNonNativeJsType(o);
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SomeJsType = goog.module.get('jsmethodnative.Main.SomeJsType$impl');
+  NativeClass = goog.module.get('jsmethodnative.NativeClass');
+ }
+}
+$Util.$setClassMetadata(Main, 'jsmethodnative.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

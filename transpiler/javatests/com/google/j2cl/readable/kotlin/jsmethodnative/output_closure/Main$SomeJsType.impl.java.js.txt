@@ -1,0 +1,38 @@
+goog.module('jsmethodnative.Main.SomeJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class SomeJsType extends j_l_Object {
+ 
+ constructor() {
+  SomeJsType.$clinit();
+  super();
+  this.$ctor__jsmethodnative_Main_SomeJsType__void();
+ }
+ /** @nodts */
+ $ctor__jsmethodnative_Main_SomeJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeJsType.$clinit = () =>{};
+  SomeJsType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeJsType, 'jsmethodnative.Main$SomeJsType');
+
+exports = SomeJsType;
+
+//# sourceMappingURL=Main$SomeJsType.js.map

@@ -1,0 +1,25 @@
+goog.module('jsmethodnative.Main.NativeClass.$Overlay$impl');
+
+const NativeClass = goog.require('jsmethodnative.NativeClass');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/** @nodts */
+class $Overlay {
+ /** @nodts */
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'jsmethodnative.NativeClass');
+
+exports = $Overlay;
+
+//# sourceMappingURL=Main$NativeClass$$Overlay.js.map
