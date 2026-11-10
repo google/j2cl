@@ -31,7 +31,6 @@ import org.jetbrains.kotlin.builtins.StandardNames.DATA_CLASS_COPY
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.descriptors.Modality
-import org.jetbrains.kotlin.descriptors.SourceFile
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.java.JavaVisibilities
 import org.jetbrains.kotlin.ir.IrBuiltIns
@@ -63,11 +62,9 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
-import org.jetbrains.kotlin.ir.expressions.IrGetField
 import org.jetbrains.kotlin.ir.expressions.IrLocalDelegatedPropertyReference
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
-import org.jetbrains.kotlin.ir.expressions.IrStatementOrigin
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
 import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
@@ -95,14 +92,12 @@ import org.jetbrains.kotlin.ir.util.allOverridden
 import org.jetbrains.kotlin.ir.util.allTypeParameters
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
-import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.util.isClass
 import org.jetbrains.kotlin.ir.util.isFakeOverride
 import org.jetbrains.kotlin.ir.util.isFileClass
 import org.jetbrains.kotlin.ir.util.isFromJava
-import org.jetbrains.kotlin.ir.util.isFunction
 import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.ir.util.isKFunction
 import org.jetbrains.kotlin.ir.util.isKSuspendFunction
@@ -111,7 +106,6 @@ import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.ir.util.isOverridableOrOverrides
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.isStatic
-import org.jetbrains.kotlin.ir.util.isSuspendFunction
 import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.ir.util.isTypeParameter
 import org.jetbrains.kotlin.ir.util.nonDispatchArguments
@@ -504,12 +498,8 @@ fun IrType.isClassType(fqName: FqNameUnsafe): Boolean =
 
 fun IrClassifierSymbol.isKFunctionOrKSuspendFunction() = isKFunction() || isKSuspendFunction()
 
-fun IrType.isFunctionOrSuspendFunction() = isFunction() || isSuspendFunction()
-
 val IrClass.simpleSourceName: String?
   get() = if (NameUtils.hasName(name)) name.toString() else null
-
-fun IrClass.findFunctionByName(name: String) = functions.single { it.name.asString() == name }
 
 val IrClass.isCapturingEnclosingInstance: Boolean
   get() {
@@ -563,9 +553,6 @@ val IrClass.isSealed: Boolean
 val IrClass.isKotlinDataClass: Boolean
   // isClass is needed to exclude types declared as `data object`.
   get() = isData && isClass
-
-val IrClass.isFromSource: Boolean
-  get() = source.containingFile != SourceFile.NO_SOURCE_FILE
 
 fun IrDeclaration.getTopLevelEnclosingClass(): IrClass {
   if (this is IrClass && isTopLevel) {
@@ -774,22 +761,6 @@ val IrDeclarationWithName.sanitizedName: String
   }
 
 fun Name.sanitizeName() = JsUtils.sanitizeJsIdentifier(this.asStringStripSpecialMarkers())
-
-/**
- * Returns `true` if the function reference is a reference to a synthetic adapter function created
- * by Kotlin compiler. E.g: function with varargs can be used in a context of a function type
- * without varargs. In this case, Kotlin compiler creates an extra function adapter and reference to
- * the original function in that context is seen as a reference to the adapter function.
- */
-val IrFunctionReference.isAdaptedFunctionReference: Boolean
-  get() = origin == IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE
-
-val IrExpression.isUnitInstanceReference: Boolean
-  // There is only one object instance field of type Unit, it's the unique instance of Unit.
-  get() =
-    type.isUnit() &&
-      this is IrGetField &&
-      symbol.owner.origin == IrDeclarationOrigin.FIELD_FOR_OBJECT_INSTANCE
 
 val IrSimpleFunction.signatureRequiresMangling
   get() =
