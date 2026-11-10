@@ -25,6 +25,7 @@ public class Main {
   public static void main(String... args) {
     testOrdinal();
     testName();
+    testMembersThroughCastToEnum();
     testInstanceMethod();
     testStaticFields();
     testEnumInitializedWithLambdas();
@@ -50,6 +51,12 @@ public class Main {
     assertTrue(Bar.BAR.name().equals("BAR"));
     assertTrue(Bar.BAZ.name().equals("BAZ"));
     assertTrue(Bar.BANG.name().equals("BANG"));
+  }
+
+  private static void testMembersThroughCastToEnum() {
+    Object o = Bar.BAZ;
+    assertEquals("BAZ", ((Enum<?>) o).name());
+    assertEquals(2, ((Enum<?>) o).ordinal());
   }
 
   private static void testInstanceMethod() {

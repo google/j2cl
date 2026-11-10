@@ -23,6 +23,7 @@ import java.util.function.Function
 fun main(vararg unused: String) {
   testOrdinal()
   testName()
+  testMembersThroughCastToEnum()
   testInstanceMethod()
   testEnumInCompanionObject()
   testEnumInitializedWithLambdas()
@@ -46,6 +47,16 @@ private fun testName() {
   assertTrue(Bar.BAZ.name == "BAZ")
   assertTrue(Bar.BANG.name == "BANG")
 }
+
+private fun testMembersThroughCastToEnum() {
+  val o: Any = Bar.BAZ
+  assertEquals("BAZ", nameThroughCast(o))
+  assertEquals(2, ordinalThroughCast(o))
+}
+
+private fun nameThroughCast(o: Any) = (o as Enum<*>).name
+
+private fun ordinalThroughCast(o: Any) = (o as Enum<*>).ordinal
 
 private fun testInstanceMethod() {
   assertTrue(Bar.FOO.getFMethod() == -1)
