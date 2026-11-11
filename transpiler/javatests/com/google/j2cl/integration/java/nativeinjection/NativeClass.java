@@ -17,7 +17,9 @@ package nativeinjection;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 @SuppressWarnings("unusable-by-js")
 public class NativeClass {
@@ -54,6 +56,18 @@ public class NativeClass {
 
   @JsMethod
   public static native int callsStaticMember(int value);
+
+  @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
+  public interface JsAny {}
+
+  // Implemented by the exposed overload below.
+  @JsMethod
+  public static native String implementedByExposedMember(Object value);
+
+  @JsMethod
+  public static String implementedByExposedMember(JsAny value) {
+    return "implementedByExposedMember:" + value;
+  }
 
   @JsProperty
   public static native int getNativeInitializationCount();

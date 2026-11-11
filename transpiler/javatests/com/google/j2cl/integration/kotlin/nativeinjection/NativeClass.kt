@@ -17,7 +17,9 @@ package nativeinjection
 
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
 
 @Suppress("unusable-by-js")
 class NativeClass @JsConstructor constructor() {
@@ -29,6 +31,8 @@ class NativeClass @JsConstructor constructor() {
 
   @JsMethod external fun callsInstanceMember(): Int
 
+  @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL) interface JsAny
+
   companion object {
     @JsMethod @JvmStatic external fun nativeStaticMethod(a: Int, b: Int): String
 
@@ -39,6 +43,13 @@ class NativeClass @JsConstructor constructor() {
     @JsMethod @JvmStatic fun staticMember(value: Int): Int = 2 * value
 
     @JsMethod @JvmStatic external fun callsStaticMember(value: Int): Int
+
+    // Implemented by the exposed overload below.
+    @JsMethod @JvmStatic external fun implementedByExposedMember(value: Any): String
+
+    @JsMethod
+    @JvmStatic
+    fun implementedByExposedMember(value: JsAny): String = "implementedByExposedMember:$value"
 
     @JsProperty @JvmStatic external fun getNativeInitializationCount(): Int
 

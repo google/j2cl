@@ -32,6 +32,7 @@ public class Main {
     testMatchInSuperSourceRoot();
     testMatchByQualifiedName();
     testNativeCodeCallingMembers();
+    testNativeMemberImplementedByExposedMember();
     testLongAlias();
   }
 
@@ -68,6 +69,11 @@ public class Main {
     assertEquals(11, new NativeClass().callsInstanceMember());
     assertEquals(30, NativeClass.callsStaticMember(15));
     assertEquals(10, NativeClass.callsConstructor());
+  }
+
+  private static void testNativeMemberImplementedByExposedMember() {
+    Object value = "value";
+    assertEquals("implementedByExposedMember:value", NativeClass.implementedByExposedMember(value));
   }
 
   private static void testLongAlias() {

@@ -27,6 +27,7 @@ fun main(vararg unused: String) {
   testMatchInSuperSourceRoot()
   testMatchByQualifiedName()
   testNativeCodeCallingMembers()
+  testNativeMemberImplementedByExposedMember()
   testLongAlias()
 }
 
@@ -63,6 +64,11 @@ private fun testNativeCodeCallingMembers() {
   assertEquals(11, NativeClass().callsInstanceMember())
   assertEquals(30, NativeClass.callsStaticMember(15))
   assertEquals(10, NativeClass.callsConstructor())
+}
+
+private fun testNativeMemberImplementedByExposedMember() {
+  val value: Any = "value"
+  assertEquals("implementedByExposedMember:value", NativeClass.implementedByExposedMember(value))
 }
 
 private fun testLongAlias() {
