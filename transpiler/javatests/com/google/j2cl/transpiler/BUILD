@@ -126,6 +126,19 @@ java_test(
 )
 
 java_test(
+    name = "NotEmulatedRestrictionsCheckerTest",
+    srcs = ["NotEmulatedRestrictionsCheckerTest.java"],
+    data = [
+        ":jre_bundle-j2wasm_files",
+        ":jre_bundle_files",
+    ],
+    deps = [
+        ":tester_lib",
+        "//third_party:junit",
+    ],
+)
+
+java_test(
     name = "J2wasmTranspilerTest",
     srcs = ["J2wasmTranspilerTest.java"],
     data = [":jre_bundle-j2wasm_files"],

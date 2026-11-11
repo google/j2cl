@@ -170,6 +170,7 @@ import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.NormalizeVarargInvocationsJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeVarargParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
+import com.google.j2cl.transpiler.passes.NotEmulatedRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeBoxedTypeFields;
@@ -275,6 +276,7 @@ public enum Backend {
           /* checkWasmCustomDescriptorsJsInterop= */ false,
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
+      NotEmulatedRestrictionsChecker.check(library, problems);
     }
 
     @Override
@@ -484,6 +486,7 @@ public enum Backend {
               .getEnableWasmCustomDescriptorsJsInterop(),
           /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
           /* optimizeAutoValue= */ options.getOptimizeAutoValue());
+      NotEmulatedRestrictionsChecker.check(library, problems);
     }
 
     @Override

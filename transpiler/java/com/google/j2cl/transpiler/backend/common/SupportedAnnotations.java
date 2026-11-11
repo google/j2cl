@@ -30,6 +30,7 @@ public class SupportedAnnotations {
           .add("java.lang.SuppressWarnings")
           .add("javaemul.internal.annotations.DoNotAutobox")
           .add("javaemul.internal.annotations.HasNoSideEffects")
+          .add("javaemul.internal.annotations.NotEmulated")
           .add("javaemul.internal.annotations.UncheckedCast")
           .add("javaemul.internal.annotations.Wasm")
           .add("javaemul.lang.annotations.WasAutoValue")
