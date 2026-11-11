@@ -16,18 +16,14 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Streams;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
@@ -81,15 +77,8 @@ public class OutputGeneratorStage {
 
   public void generateOutputs(Library library) {
 
-    ImmutableList<FileInfo> allNativeFiles =
-        Streams.concat(
-                nativeJavaScriptFiles.stream(),
-                SourceUtils.getAllSources(sourceGenPath)
-                    .filter(f -> f.sourcePath().endsWith(".native.js")))
-            .collect(toImmutableList());
-
     NativeJavaScriptFileResolver nativeJavaScriptFileResolver =
-        NativeJavaScriptFileResolver.create(allNativeFiles, problems);
+        NativeJavaScriptFileResolver.create(nativeJavaScriptFiles, sourceGenPath, problems);
     LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
     for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
@@ -103,25 +92,10 @@ public class OutputGeneratorStage {
         String typeRelativePath = getPackageRelativePath(type.getDeclaration());
 
         NativeJavaScriptFile matchingNativeFile =
-            compilationUnit.isSynthetic()
-                ? null
-                : nativeJavaScriptFileResolver.getMatchingNativeFile(compilationUnit, type);
+            nativeJavaScriptFileResolver.getMatchingNativeFile(compilationUnit, type);
 
         if (matchingNativeFile != null) {
           jsImplGenerator.setNativeSource(matchingNativeFile);
-
-          // Native JsTypes are mere references to external JavaScript types, adding native code
-          // through native.js files does not make sense. Non-native JsEnums on the other hand are
-          // emitted by J2CL but are not JavaScript classes, "native.js" files are not allowed in
-          // this case to avoid surprises.
-          TypeDeclaration typeDeclaration = type.getUnderlyingTypeDeclaration();
-          if (typeDeclaration.isNative() || typeDeclaration.isJsEnum()) {
-            problems.error(
-                "%s '%s' does not support having a '.native.js' file.",
-                typeDeclaration.isJsEnum() ? "JsEnum" : "Native JsType",
-                typeDeclaration.getReadableDescription());
-            continue;
-          }
 
           // Copy native js file to output.
           output.write(
@@ -216,8 +190,8 @@ public class OutputGeneratorStage {
       OutputUtils.writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray(), problems);
     }
 
-    // Error if any of the native implementation files were not used.
-    nativeJavaScriptFileResolver.checkAllFilesUsed();
+    // Error if any of the native implementation files were not used or are not supported.
+    nativeJavaScriptFileResolver.validate(problems);
   }
 
   private static final String SOURCE_MAP_SUFFIX = ".js.map";

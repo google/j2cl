@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.collect.ImmutableMap;
@@ -37,10 +38,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
-final class NativeJavaScriptFileResolver {
+/** Resolves the '.native.js' file associated with a type. */
+public final class NativeJavaScriptFileResolver {
 
-  public static NativeJavaScriptFileResolver create(List<FileInfo> files, Problems problems) {
+  /**
+   * Creates a resolver for the given '.native.js' files and the ones generated into {@code
+   * sourceGenPath} (e.g. by annotation processors).
+   */
+  public static NativeJavaScriptFileResolver create(
+      List<FileInfo> nativeJavaScriptFiles, Path sourceGenPath, Problems problems) {
+    List<FileInfo> files =
+        Stream.concat(
+                nativeJavaScriptFiles.stream(),
+                SourceUtils.getAllSources(sourceGenPath)
+                    .filter(f -> f.sourcePath().endsWith(NativeJavaScriptFile.NATIVE_EXTENSION)))
+            .collect(toImmutableList());
+
     ImmutableMap.Builder<String, NativeJavaScriptFile> byRelativePath = ImmutableMap.builder();
     ImmutableMap.Builder<String, NativeJavaScriptFile> byFullyQualifiedName =
         ImmutableMap.builder();
@@ -70,28 +86,32 @@ final class NativeJavaScriptFileResolver {
     }
 
     return new NativeJavaScriptFileResolver(
-        byRelativePath.buildOrThrow(), byFullyQualifiedName.buildOrThrow(), problems);
+        byRelativePath.buildOrThrow(), byFullyQualifiedName.buildOrThrow());
   }
 
   private final Map<String, NativeJavaScriptFile> byRelativePath;
   private final Map<String, NativeJavaScriptFile> byFullyQualifiedName;
-  private final Problems problems;
   private final Set<NativeJavaScriptFile> usedFiles = new HashSet<>();
+  private final Set<TypeDeclaration> unsupportedTypes = new HashSet<>();
 
   private NativeJavaScriptFileResolver(
       Map<String, NativeJavaScriptFile> byRelativePath,
-      Map<String, NativeJavaScriptFile> byFullyQualifiedName,
-      Problems problems) {
+      Map<String, NativeJavaScriptFile> byFullyQualifiedName) {
     this.byRelativePath = byRelativePath;
     this.byFullyQualifiedName = byFullyQualifiedName;
-    this.problems = problems;
   }
 
+  /**
+   * Returns the '.native.js' file for the type, or {@code null} if there is none or the type cannot
+   * have one.
+   */
+  @Nullable
   public NativeJavaScriptFile getMatchingNativeFile(
       CompilationUnit j2clCompilationUnit, Type type) {
-    checkArgument(
-        !j2clCompilationUnit.isSynthetic(),
-        "Synthetic CompilationUnit cannot have a corresponding .native.js file.");
+    if (j2clCompilationUnit.isSynthetic()) {
+      // Synthetic compilation units cannot have a corresponding .native.js file.
+      return null;
+    }
 
     TypeDeclaration typeDeclaration = type.getUnderlyingTypeDeclaration();
 
@@ -126,20 +146,38 @@ final class NativeJavaScriptFileResolver {
                             getAbsolutePath(j2clCompilationUnit, typeDeclaration))))
             .orElse(null);
 
-    if (matchedFile != null) {
-      usedFiles.add(matchedFile);
+    if (matchedFile == null) {
+      return null;
+    }
+
+    usedFiles.add(matchedFile);
+
+    // Native JsTypes are mere references to external JavaScript types, adding native code
+    // through native.js files does not make sense. Non-native JsEnums on the other hand are
+    // emitted by J2CL but are not JavaScript classes, "native.js" files are not allowed in
+    // this case to avoid surprises.
+    if (typeDeclaration.isNative() || typeDeclaration.isJsEnum()) {
+      unsupportedTypes.add(typeDeclaration);
+      return null;
     }
 
     return matchedFile;
   }
 
-  public void checkAllFilesUsed() {
+  /** Reports any errors found during {@link #getMatchingNativeFile}. */
+  public void validate(Problems problems) {
     // We're relying on the fact that we populate all files in the byRelativePath map here. If this
     // no longer holds true we should use the union of all the map values.
     Set<NativeJavaScriptFile> allPotentialFiles = new HashSet<>(byRelativePath.values());
     Set<NativeJavaScriptFile> unusedFiles = Sets.difference(allPotentialFiles, usedFiles);
     unusedFiles.forEach(
         file -> problems.error("Unused native file '%s'.", file.getFileInfo().originalPath()));
+
+    unsupportedTypes.forEach(typeDeclaration ->
+        problems.error(
+            "%s '%s' does not support having a '.native.js' file.",
+            typeDeclaration.isJsEnum() ? "JsEnum" : "Native JsType",
+            typeDeclaration.getReadableDescription()));
   }
 
   private Optional<NativeJavaScriptFile> resolveByRelativePath(String relativePath) {

@@ -90,6 +90,14 @@ public class ClosureGenerationEnvironment {
     return innerTypeQualifier.isEmpty() ? moduleAlias : moduleAlias + "." + innerTypeQualifier;
   }
 
+  /**
+   * Returns a predictable unique alias for the type so that native.js files can reference it
+   * safely.
+   */
+  public String longAliasForType(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.getQualifiedSourceName().replace("_", "__").replace('.', '_');
+  }
+
   public String getClosureTypeString(TypeDescriptor typeDescriptor) {
     return closureTypesGenerator.getClosureTypeString(typeDescriptor);
   }

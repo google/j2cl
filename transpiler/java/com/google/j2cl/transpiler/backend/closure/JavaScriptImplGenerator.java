@@ -309,8 +309,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
 
     // A predictable unique alias to current type so native.js could reference it safely.
-    String longAliasName =
-        type.getDeclaration().getQualifiedSourceName().replace("_", "__").replace('.', '_');
+    String longAliasName = environment.longAliasForType(type.getDeclaration());
     if (!className.equals(longAliasName)) {
       sourceBuilder.appendln("const " + longAliasName + " = " + className + ";");
       sourceBuilder.newLine();
