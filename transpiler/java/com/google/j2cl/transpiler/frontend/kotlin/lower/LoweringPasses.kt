@@ -45,6 +45,7 @@ import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.backend.js.lower.cleanup.CleanupLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsWithReifiedTypeParametersLowering
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
@@ -265,3 +266,23 @@ private fun BodyLoweringPass.asPostfix(): FileLoweringPass =
       this@asPostfix.runOnFilePostfix(irFile, withLocalDeclarations = true)
     }
   }
+
+/**
+ * Visits top-level and nested non-local [IrClass] declarations in postfix order without descending
+ * into method or initializer bodies.
+ */
+internal fun IrFile.forEachNonLocalClass(action: (IrClass) -> Unit) {
+  for (irClass in declarations.filterIsInstance<IrClass>()) {
+    irClass.forEachNonLocalClass(action)
+  }
+}
+
+private fun IrClass.forEachNonLocalClass(action: (IrClass) -> Unit) {
+  for (child in declarations) {
+    when (child) {
+      is IrClass -> child.forEachNonLocalClass(action)
+      is IrEnumEntry -> child.correspondingClass?.forEachNonLocalClass(action)
+    }
+  }
+  action(this)
+}

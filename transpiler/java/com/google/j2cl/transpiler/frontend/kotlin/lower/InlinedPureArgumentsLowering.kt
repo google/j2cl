@@ -84,6 +84,7 @@ internal class InlinedPureArgumentsLowering : FileLoweringPass {
   override fun lower(irFile: IrFile) {
     val pureExpressionByVariable =
       PureVariableCollector().also { irFile.acceptVoid(it) }.pureExpressionByVariable
+    if (pureExpressionByVariable.isEmpty()) return
     irFile.transformChildrenVoid(PureVariableSubstitutor(pureExpressionByVariable))
   }
 }

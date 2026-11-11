@@ -20,7 +20,6 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 import com.google.j2cl.transpiler.frontend.kotlin.ir.isImplicitConstructor
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.backend.jvm.JvmBackendContext
-import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrFile
@@ -29,8 +28,6 @@ import org.jetbrains.kotlin.ir.expressions.IrSyntheticBody
 import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.isEnumClass
-import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
-import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 /**
  * Removes implicit constructors from enums. This will normalize the AST to better match the Java
@@ -42,18 +39,10 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
  */
 internal class EnumClassConstructorLowering(
   @Suppress("UNUSED_PARAMETER") context: JvmBackendContext
-) : FileLoweringPass, IrVisitorVoid() {
-  override fun lower(irFile: IrFile) {
-    visitElement(irFile)
-  }
+) : FileLoweringPass {
+  override fun lower(irFile: IrFile) = irFile.forEachNonLocalClass(::visitClass)
 
-  override fun visitElement(element: IrElement) {
-    return element.acceptChildrenVoid(this)
-  }
-
-  override fun visitClass(declaration: IrClass) {
-    super.visitClass(declaration)
-
+  private fun visitClass(declaration: IrClass) {
     if (declaration.isEnumClass) {
       // Remove the <get-entries> special function from Enum classes.
       declaration.declarations.removeIf {

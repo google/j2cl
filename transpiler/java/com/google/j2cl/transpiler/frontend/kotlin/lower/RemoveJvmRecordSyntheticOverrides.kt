@@ -18,7 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
-import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrFile
@@ -27,9 +26,6 @@ import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.isInterface
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
-import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
-import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
-import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_RECORD_ANNOTATION_FQ_NAME
 
 /**
@@ -38,12 +34,10 @@ import org.jetbrains.kotlin.name.JvmStandardClassIds.JVM_RECORD_ANNOTATION_FQ_NA
  * The regular pipeline for Java record classes is responsible for the implementation of these, in
  * this case via the ValueType optimization.
  */
-internal class RemoveJvmRecordSyntheticOverrides : IrVisitorVoid(), FileLoweringPass {
-  override fun lower(irFile: IrFile) = irFile.acceptVoid(this)
+internal class RemoveJvmRecordSyntheticOverrides : FileLoweringPass {
+  override fun lower(irFile: IrFile) = irFile.forEachNonLocalClass(::visitClass)
 
-  override fun visitElement(element: IrElement) = element.acceptChildrenVoid(this)
-
-  override fun visitClass(declaration: IrClass) {
+  private fun visitClass(declaration: IrClass) {
     if (declaration.isData && declaration.hasAnnotation(JVM_RECORD_ANNOTATION_FQ_NAME)) {
       declaration.declarations.removeIf {
         it.origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER &&
@@ -51,11 +45,10 @@ internal class RemoveJvmRecordSyntheticOverrides : IrVisitorVoid(), FileLowering
           // The only supertypes that are classes are `java.lang.Object` and `java.lang.Record`.
           // The only methods that would override a method in a super class are `equals`, `hashCode`
           // and `toString`.
-          it.overriddenSymbols
-            .filter { it.owner.parentClassOrNull?.isInterface == false }
-            .isNotEmpty()
+          it.overriddenSymbols.any { symbol ->
+            symbol.owner.parentClassOrNull?.isInterface == false
+          }
       }
     }
-    super.visitClass(declaration)
   }
 }

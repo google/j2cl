@@ -59,11 +59,19 @@ private fun IrDeclaration.isJvmStaticDeclaration(): Boolean =
       ?.hasAnnotation(JvmStandardClassIds.Annotations.JvmStatic) == true ||
     (this as? IrProperty)?.getter?.hasAnnotation(JvmStandardClassIds.Annotations.JvmStatic) == true
 
+// MODIFIED BY GOOGLE.
+// Check the enclosing class kind before scanning annotations on every declaration and call site.
 private fun IrDeclaration.isJvmStaticInCompanion(): Boolean =
-  isJvmStaticDeclaration() && (parent as? IrClass)?.isCompanion == true
+  // original code:
+  //   isJvmStaticDeclaration() && (parent as? IrClass)?.isCompanion == true
+  (parent as? IrClass)?.isCompanion == true && isJvmStaticDeclaration()
 
 internal fun IrDeclaration.isJvmStaticInObject(): Boolean =
-  isJvmStaticDeclaration() && (parent as? IrClass)?.isNonCompanionObject == true
+  // original code:
+  //   isJvmStaticDeclaration() && (parent as? IrClass)?.isNonCompanionObject == true
+  (parent as? IrClass)?.isNonCompanionObject == true && isJvmStaticDeclaration()
+
+// END OF MODIFICATIONS.
 
 // `coerceToUnit()` is private in InsertImplicitCasts, have to reproduce it here
 private fun IrExpression.coerceToUnit(irBuiltIns: IrBuiltIns) =
@@ -124,7 +132,15 @@ class SingletonObjectJvmStaticTransformer(
   override fun visitMemberAccess(expression: IrMemberAccessExpression<*>): IrExpression {
     expression.transformChildrenVoid(this)
 
-    val callee = expression.symbol.owner
+    // MODIFIED BY GOOGLE.
+    // Skip non-object callees upfront instead of checking each callee and its accessors.
+    // original code:
+    //   val callee = expression.symbol.owner
+    val callee = expression.symbol.owner as? IrDeclaration ?: return expression
+    if ((callee.parent as? IrClass)?.isNonCompanionObject != true) {
+      return expression
+    }
+    // END OF MODIFICATIONS.
     if (callee is IrFunction) {
       transformFunction(callee)
     }
@@ -133,7 +149,11 @@ class SingletonObjectJvmStaticTransformer(
       callee.setter?.let { transformFunction(it) }
     }
 
-    if (callee is IrDeclaration && callee.isJvmStaticInObject()) {
+    // MODIFIED BY GOOGLE.
+    // Original code:
+    // if (callee is IrDeclaration && callee.isJvmStaticInObject()) {
+    if (callee.isJvmStaticInObject()) {
+      // END OF MODIFICATIONS.
       return expression.makeStatic(irBuiltIns, replaceCallee = null)
     }
     return expression

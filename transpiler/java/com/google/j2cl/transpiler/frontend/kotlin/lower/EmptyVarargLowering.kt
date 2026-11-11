@@ -33,17 +33,17 @@ internal class EmptyVarargLowering(val context: JvmBackendContext) :
 
   override fun visitFunctionAccess(expression: IrFunctionAccessExpression): IrExpression {
     expression.transformChildrenVoid()
-    val function = expression.symbol
 
-    // Replace empty varargs with empty arrays
-    val irFunction = function.owner
-    for ((parameter, argument) in irFunction.parameters zip expression.arguments) {
-      if (argument != null) continue
-
+    // Replace empty varargs with empty arrays. Check for a null argument first to avoid allocating
+    // a zipped list and resolving `function.owner.parameters` on ordinary calls.
+    val arguments = expression.arguments
+    for (i in arguments.indices) {
+      if (arguments[i] != null) continue
+      val parameter = expression.symbol.owner.parameters[i]
       if (parameter.varargElementType != null && !parameter.hasDefaultValue()) {
         // Compute the correct type for the array argument.
         val arrayType = parameter.type.substitute(expression.typeSubstitutionMap).makeNotNull()
-        expression.arguments[parameter.indexInParameters] = createBuilder().irArrayOf(arrayType)
+        arguments[i] = createBuilder().irArrayOf(arrayType)
       }
     }
 

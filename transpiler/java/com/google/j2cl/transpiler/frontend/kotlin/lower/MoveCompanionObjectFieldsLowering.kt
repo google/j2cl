@@ -35,6 +35,12 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 internal class MoveOrCopyCompanionObjectFieldsLowering(val context: J2clBackendContext) :
   // END OF MODIFICATIONS
   ClassLoweringPass {
+  // MODIFIED BY GOOGLE
+  // Named objects and companion objects cannot be declared in local scopes, so avoid traversing
+  // method and initializer bodies.
+  override fun lower(irFile: IrFile) = irFile.forEachNonLocalClass(::lower)
+
+  // END OF MODIFICATIONS
   override fun lower(irClass: IrClass) {
     if (irClass.isNonCompanionObject) {
       irClass.handle()

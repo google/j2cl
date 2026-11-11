@@ -47,14 +47,6 @@ import org.jetbrains.kotlin.name.NameUtils
  */
 internal class MangleWellKnownShadowingFunctionsLowering :
   FileLoweringPass, IrElementTransformerVoid() {
-  private val wellKnownShadowingFunctions =
-    setOf(
-      FqName(
-        "kotlin.collections.RingBuffer.add"
-      ), // See: https://youtrack.jetbrains.com/issue/KT-55562
-      FqName("shadowing.Foo.add"), // See: b/262794329
-    )
-
   override fun lower(irFile: IrFile) {
     irFile.transformChildrenVoid(this)
   }
@@ -70,6 +62,7 @@ internal class MangleWellKnownShadowingFunctionsLowering :
   }
 
   private fun IrFunction.mangleIfShadowing() {
+    if (name !in wellKnownShadowingFunctionNames) return
     val isAlreadyMangled = name.asString().contains('$')
     if (isAlreadyMangled) return
 
@@ -79,5 +72,18 @@ internal class MangleWellKnownShadowingFunctionsLowering :
           name.asString() + "$" + NameUtils.sanitizeAsJavaIdentifier(kotlinFqName.asString())
         )
     }
+  }
+
+  companion object {
+    private val wellKnownShadowingFunctions =
+      setOf(
+        FqName(
+          "kotlin.collections.RingBuffer.add"
+        ), // See: https://youtrack.jetbrains.com/issue/KT-55562
+        FqName("shadowing.Foo.add"), // See: b/262794329
+      )
+
+    private val wellKnownShadowingFunctionNames =
+      wellKnownShadowingFunctions.map { it.shortName() }.toSet()
   }
 }

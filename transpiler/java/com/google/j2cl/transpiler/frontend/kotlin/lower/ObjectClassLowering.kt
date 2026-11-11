@@ -36,7 +36,13 @@ internal class ObjectClassLowering(val context: JvmBackendContext) : ClassLoweri
   private val pendingTransformations = mutableListOf<Function0<Unit>>()
 
   override fun lower(irFile: IrFile) {
-    super.lower(irFile)
+    // MODIFIED BY GOOGLE
+    // Named objects and companion objects cannot be declared in local scopes, so avoid traversing
+    // method and initializer bodies.
+    // Original code:
+    // super.lower(irFile)
+    irFile.forEachNonLocalClass(::lower)
+    // END OF MODIFICATIONS
     for (transformation in pendingTransformations) {
       transformation.invoke()
     }

@@ -18,7 +18,6 @@
 package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.BodyLoweringPass
-import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
@@ -139,10 +138,17 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * will skip unexpected IR structure.
  */
 internal class CreateForLoopLowering(private val context: J2clBackendContext) : BodyLoweringPass {
+  private val iterableIteratorFunction =
+    context.irBuiltIns.iterableClass.getSimpleFunction("iterator")!!.owner
+  private val iteratorHasNextFunction =
+    context.irBuiltIns.iteratorClass.getSimpleFunction("hasNext")!!.owner
+
   override fun lower(irBody: IrBody, container: IrDeclaration) {
     val oldLoopToNewLoop = mutableMapOf<IrLoop, IrLoop>()
-    val transformer = LoopTransformer(context, oldLoopToNewLoop)
+    val transformer =
+      LoopTransformer(context, iterableIteratorFunction, iteratorHasNextFunction, oldLoopToNewLoop)
     irBody.transformChildrenVoid(transformer)
+    if (oldLoopToNewLoop.isEmpty()) return
 
     // Update references in break/continue.
     irBody.transformChildrenVoid(
@@ -158,16 +164,10 @@ internal class CreateForLoopLowering(private val context: J2clBackendContext) : 
 
 private class LoopTransformer(
   private val context: J2clBackendContext,
-  val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>,
-) : IrElementTransformerVoidWithContext() {
-
-  private val iterableIteratorFunction: IrSimpleFunction by lazy {
-    context.irBuiltIns.iterableClass.getSimpleFunction("iterator")!!.owner
-  }
-
-  private val iteratorHasNextFunction: IrSimpleFunction by lazy {
-    context.irBuiltIns.iteratorClass.getSimpleFunction("hasNext")!!.owner
-  }
+  private val iterableIteratorFunction: IrSimpleFunction,
+  private val iteratorHasNextFunction: IrSimpleFunction,
+  private val oldLoopToNewLoop: MutableMap<IrLoop, IrLoop>,
+) : IrElementTransformerVoid() {
 
   override fun visitBlock(expression: IrBlock): IrExpression {
     expression.transformChildrenVoid(this)
