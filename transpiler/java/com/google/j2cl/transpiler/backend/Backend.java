@@ -516,7 +516,6 @@ public enum Backend {
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
-          NormalizeJsEnumsWasm::new,
           NormalizeArrayCreationsWasm::new,
           ImplementNativeJsTypeArrayOperationsWasm::new,
           NormalizeOverlayMembers::new,
@@ -536,6 +535,9 @@ public enum Backend {
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           () -> new NormalizeSwitchConstructs(/* convertNativeJsEnumSwitches= */ true),
+          // Must run after all passes that rely on JsEnums extending java.lang.Enum and before
+          // ImplementNotNullOperator, which lowers the not-null assertions it introduces.
+          NormalizeJsEnumsWasm::new,
           // Must run after all passes that introduce not-null assertions and before
           // RewriteReferenceEqualityOperations, which rewrites the null comparisons it introduces
           // for native JsEnums.

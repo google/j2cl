@@ -112,13 +112,9 @@ abstract class NormalizeJsEnumsBase extends NormalizationPass {
     // superclass for JsEnums.
     DeclaredTypeDescriptor implementationType = getImplementationType(type.getTypeDescriptor());
     type.setSuperTypeDescriptor(implementationType);
-    if (isJavaLangEnumWorkaround(implementationType)) {
-      // The custom value field stays in the JsEnum.
-    } else {
-      // Remove the custom value field, which doesn't exist at runtime since the value is either
-      // the JsEnum itself or a field of the implementation class.
-      type.getMembers().removeIf(m -> AstUtils.isJsEnumCustomValueField(m.getDescriptor()));
-    }
+    // Remove the custom value field, which doesn't exist at runtime since the value is either the
+    // JsEnum itself or a field of the implementation class.
+    type.getMembers().removeIf(m -> AstUtils.isJsEnumCustomValueField(m.getDescriptor()));
     if (implementationType != null) {
       redirectSuperConstructorCalls(type, implementationType);
     } else if (!type.isNative()) {
@@ -229,8 +225,8 @@ abstract class NormalizeJsEnumsBase extends NormalizationPass {
               return methodCall;
             }
             Expression qualifier = methodCall.getQualifier();
-            // JsEnums can't be cast to java.lang.Enum, and erasure casts are inserted after this pass,
-            // so casts to java.lang.Enum don't hide JsEnum receivers.
+            // JsEnums can't be cast to java.lang.Enum, and erasure casts are inserted after this
+            // pass, so casts to java.lang.Enum don't hide JsEnum receivers.
             checkState(
                 !(qualifier instanceof CastExpression castExpression
                     && TypeDescriptors.isJavaLangEnum(castExpression.getCastTypeDescriptor())
@@ -269,10 +265,7 @@ abstract class NormalizeJsEnumsBase extends NormalizationPass {
             }
             DeclaredTypeDescriptor implementationType =
                 getImplementationType(fieldDescriptor.getEnclosingTypeDescriptor());
-            if (isJavaLangEnumWorkaround(implementationType)) {
-              // The value is a field of the JsEnum itself.
-              return fieldAccess;
-            } else if (implementationType != null) {
+            if (implementationType != null) {
               // The value is a field of the implementation class.
               return fieldAccess.toBuilder()
                   .setTarget(implementationType.getFieldDescriptor(fieldDescriptor.getName()))
@@ -308,15 +301,5 @@ abstract class NormalizeJsEnumsBase extends NormalizationPass {
       throw new InternalCompilerError("Unexpected Enum method: %s.", methodCall.getTarget());
     }
     return methodCall.toBuilder().setTarget(redirectedMethodDescriptor).build();
-  }
-
-  /**
-   * Returns true if {@code implementationType} is {@code java.lang.Enum}, which unlike the other
-   * implementation classes does not hold the custom value of the JsEnum.
-   */
-  // TODO(goktug): Remove once non-native JsEnums in Wasm no longer extend java.lang.Enum.
-  private static boolean isJavaLangEnumWorkaround(
-      @Nullable DeclaredTypeDescriptor implementationType) {
-    return implementationType != null && TypeDescriptors.isJavaLangEnum(implementationType);
   }
 }

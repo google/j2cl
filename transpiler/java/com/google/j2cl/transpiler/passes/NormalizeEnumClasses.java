@@ -106,8 +106,9 @@ public class NormalizeEnumClasses extends NormalizationPass {
                       }
                     });
 
-            if (type.isEnum()) {
-              // Initialize name and ordinal fields.
+            if (type.isEnum() && !type.isJsEnum()) {
+              // Initialize name and ordinal fields. JsEnums are not represented as java.lang.Enum
+              // at runtime, see NormalizeJsEnumsBase.
               // TODO(b/74986525): revert to initialization of these fields in superclass
               // once removal of unused values is guaranteed or more stable.
               initJavaLangEnumField(method, "ordinal", ordinalParameter.createReference());

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -35,6 +36,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -163,6 +165,15 @@ abstract class WasmTypeLayout {
     }
     DeclaredTypeDescriptor typeDescriptor = getTypeDescriptor();
     typeDescriptor.getPolymorphicMethods().stream()
+        // WARNING: The polymorphic methods are computed from the immutable type model, which does
+        // not reflect passes that replace the superclass of a type (see
+        // `Type.setSuperTypeDescriptor`), e.g. JsEnums whose superclass is replaced by a light enum
+        // class. Such types would otherwise get vtable entries for the methods of the original
+        // superclass, which is not part of their Wasm superclass chain. Filtering them out is only
+        // correct because such types are leaves whose replacement superclass declares or inherits
+        // all the methods that can be called on them; computing the polymorphic methods from the
+        // actual hierarchy would be needed to support anything more general.
+        .filter(this::isDeclaredInHierarchy)
         .filter(this::needsVtableEntry)
         .sorted(Comparator.comparing(MethodDescriptor::getMangledName))
         .forEach(md -> instanceMethodsByMangledName.put(md.getMangledName(), md));
@@ -180,6 +191,60 @@ abstract class WasmTypeLayout {
           getClassMethodDescriptor.getMangledName(), getClassMethodDescriptor);
     }
     return instanceMethodsByMangledName;
+  }
+
+  /**
+   * Returns all the interfaces implemented by the Java class, i.e. the interfaces implemented by
+   * its Wasm supertype and the ones declared in the class.
+   *
+   * <p>Interfaces do not have their own layouts, so their super interfaces always come from the
+   * type model; passes must not customize them in Wasm (see {@code VerifyNormalizedUnits}).
+   */
+  @Memoized
+  Set<TypeDeclaration> getAllSuperInterfaces() {
+    TypeDeclaration typeDeclaration = getTypeDeclaration();
+    if (typeDeclaration.isInterface()) {
+      return typeDeclaration.getAllSuperInterfaces();
+    }
+    List<DeclaredTypeDescriptor> declaredInterfaces =
+        getJavaType() != null
+            ? getJavaType().getSuperInterfaceTypeDescriptors()
+            : getTypeDescriptor().getInterfaceTypeDescriptors();
+    // Follows the same order as TypeDeclaration.getAllSuperInterfaces().
+    WasmTypeLayout wasmSupertypeLayout = getWasmSupertypeLayout();
+    return Stream.concat(
+            declaredInterfaces.stream()
+                .map(DeclaredTypeDescriptor::getTypeDeclaration)
+                .flatMap(i -> Stream.concat(Stream.of(i), i.getAllSuperInterfaces().stream())),
+            wasmSupertypeLayout == null
+                ? Stream.empty()
+                : wasmSupertypeLayout.getAllSuperInterfaces().stream())
+        .collect(toImmutableSet());
+  }
+
+  /**
+   * Returns true if the method is declared in an interface or in a class that is part of the
+   * superclass chain of this layout.
+   *
+   * <p>Methods inherited from classes that are not part of the chain arise when a pass replaces the
+   * superclass of a type (see {@code Type.setSuperTypeDescriptor}).
+   */
+  private boolean isDeclaredInHierarchy(MethodDescriptor methodDescriptor) {
+    TypeDeclaration enclosingTypeDeclaration =
+        methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration();
+    return getTypeDeclaration().isInterface()
+        || enclosingTypeDeclaration.isInterface()
+        || isInSuperclassChain(enclosingTypeDeclaration);
+  }
+
+  /** Returns true if {@code typeDeclaration} is this class or any of its superclasses. */
+  private boolean isInSuperclassChain(TypeDeclaration typeDeclaration) {
+    for (WasmTypeLayout layout = this; layout != null; layout = layout.getWasmSupertypeLayout()) {
+      if (layout.getTypeDeclaration().equals(typeDeclaration)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private boolean needsVtableEntry(MethodDescriptor methodDescriptor) {

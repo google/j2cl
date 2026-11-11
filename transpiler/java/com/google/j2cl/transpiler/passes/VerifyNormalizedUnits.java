@@ -89,6 +89,12 @@ public class VerifyNormalizedUnits extends NormalizationPass {
               // Native and JsFunction types should have been removed from the AST.
               checkState(!type.isNative());
               checkState(!type.isJsFunctionInterface());
+            } else if (type.isInterface()) {
+              // Interfaces do not have Wasm type layouts and their super interfaces are always
+              // taken from the type model, so passes must not customize them.
+              checkState(
+                  type.getSuperInterfaceTypeDescriptors()
+                      .equals(type.getTypeDescriptor().getInterfaceTypeDescriptors()));
             }
           }
 

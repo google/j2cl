@@ -157,6 +157,18 @@ public class TypeDescriptors {
   @QualifiedBinaryName("javaemul.internal.Enums$BoxedComparableLightEnum")
   public DeclaredTypeDescriptor javaemulInternalBoxedComparableLightEnum;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$OrdinalLightEnum")
+  public DeclaredTypeDescriptor javaemulInternalOrdinalLightEnum;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$IntLightEnum")
+  public DeclaredTypeDescriptor javaemulInternalIntLightEnum;
+
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.Enums$StringLightEnum")
+  public DeclaredTypeDescriptor javaemulInternalStringLightEnum;
+
   @Nullable public DeclaredTypeDescriptor javaemulInternalConstructor;
   @Nullable public DeclaredTypeDescriptor javaemulInternalPlatform;
   @Nullable public DeclaredTypeDescriptor javaemulInternalExceptions;

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -25,8 +26,12 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import javax.annotation.Nullable;
 
 /**
- * Normalizes JsEnums for Wasm, where non-native JsEnums extend {@code java.lang.Enum} and native
- * JsEnums are represented by their JS values.
+ * Normalizes JsEnums for Wasm, where non-native JsEnums extend the light enum classes in {@code
+ * javaemul.internal.Enums} instead of {@code java.lang.Enum}, and native JsEnums are represented by
+ * their JS values.
+ *
+ * <p>This pass needs to run after all the passes that rely on {@code java.lang.Enum} members, e.g.
+ * {@code NormalizeEnumClasses} and {@code NormalizeSwitchConstructs}.
  */
 public class NormalizeJsEnumsWasm extends NormalizeJsEnumsBase {
   @Nullable
@@ -36,11 +41,12 @@ public class NormalizeJsEnumsWasm extends NormalizeJsEnumsBase {
       // Native JsEnums are represented by their JS values.
       return null;
     }
-    // TODO(goktug): Make non-native JsEnums extend lighter classes instead of java.lang.Enum.
-    // Non-native JsEnums keep extending java.lang.Enum, i.e. Enum<MyJsEnum>.
-    return ((DeclaredTypeDescriptor) jsEnum.toRawTypeDescriptor())
-        .getDeclarationDescriptor()
-        .getSuperTypeDescriptor();
+    if (!jsEnum.getJsEnumInfo().hasCustomValue()) {
+      return TypeDescriptors.get().javaemulInternalOrdinalLightEnum;
+    }
+    return TypeDescriptors.isJavaLangString(AstUtils.getJsEnumValueFieldType(jsEnum))
+        ? TypeDescriptors.get().javaemulInternalStringLightEnum
+        : TypeDescriptors.get().javaemulInternalIntLightEnum;
   }
 
   @Override

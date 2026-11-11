@@ -17,6 +17,7 @@ package javaemul.internal;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,5 +43,67 @@ public final class Enums {
       throw new IllegalArgumentException();
     }
     return enumValue;
+  }
+
+  /** Superclass of non-native JsEnums that don't have custom values. */
+  public abstract static class OrdinalLightEnum
+      implements Comparable<OrdinalLightEnum>, Serializable {
+    private final int ordinal;
+
+    protected OrdinalLightEnum(String name, int ordinal) {
+      this.ordinal = ordinal;
+    }
+
+    public final int ordinal() {
+      return ordinal;
+    }
+
+    @Override
+    public final int compareTo(OrdinalLightEnum other) {
+      return ordinal - other.ordinal;
+    }
+
+    @Override
+    public final String toString() {
+      return String.valueOf(ordinal);
+    }
+  }
+
+  /** Superclass of non-native int-valued JsEnums. */
+  public abstract static class IntLightEnum implements Serializable {
+    private final int ordinal;
+    public int value;
+
+    protected IntLightEnum(String name, int ordinal) {
+      this.ordinal = ordinal;
+    }
+
+    public final int ordinal() {
+      return ordinal;
+    }
+
+    @Override
+    public final String toString() {
+      return String.valueOf(value);
+    }
+  }
+
+  /** Superclass of non-native String-valued JsEnums. */
+  public abstract static class StringLightEnum implements Serializable {
+    private final int ordinal;
+    public String value;
+
+    protected StringLightEnum(String name, int ordinal) {
+      this.ordinal = ordinal;
+    }
+
+    public final int ordinal() {
+      return ordinal;
+    }
+
+    @Override
+    public final String toString() {
+      return String.valueOf(value);
+    }
   }
 }

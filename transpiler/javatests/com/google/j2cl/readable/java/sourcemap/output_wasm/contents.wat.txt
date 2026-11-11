@@ -237,16 +237,15 @@
 (global $sourcemap.SourceMap.FooJsEnum.vtable (ref $sourcemap.SourceMap.FooJsEnum.vtable)
  (struct.new $sourcemap.SourceMap.FooJsEnum.vtable
   (ref.func $$getClassImpl__java_lang_Class@sourcemap.SourceMap.FooJsEnum)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
-  (ref.func $m_hashCode__int@java.lang.Enum)
-  (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@javaemul.internal.Enums.OrdinalLightEnum)
+  (ref.func $m_compareTo__java_lang_Object__int@javaemul.internal.Enums.OrdinalLightEnum)
  )
 )
 (global $java.lang.Comparable.vtable@$sourcemap.SourceMap.FooJsEnum (ref $java.lang.Comparable.vtable)
  (struct.new $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@javaemul.internal.Enums.OrdinalLightEnum)
  )
 )
 (global $java.io.Serializable.vtable@$sourcemap.SourceMap.FooJsEnum (ref $java.io.Serializable.vtable)
@@ -256,16 +255,9 @@
 (global $sourcemap.SourceMap.StringJsEnum.vtable (ref $sourcemap.SourceMap.StringJsEnum.vtable)
  (struct.new $sourcemap.SourceMap.StringJsEnum.vtable
   (ref.func $$getClassImpl__java_lang_Class@sourcemap.SourceMap.StringJsEnum)
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Enum)
-  (ref.func $m_hashCode__int@java.lang.Enum)
-  (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
- )
-)
-(global $java.lang.Comparable.vtable@$sourcemap.SourceMap.StringJsEnum (ref $java.lang.Comparable.vtable)
- (struct.new $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@javaemul.internal.Enums.StringLightEnum)
  )
 )
 (global $java.io.Serializable.vtable@$sourcemap.SourceMap.StringJsEnum (ref $java.io.Serializable.vtable)
@@ -2157,7 +2149,7 @@
  (local $$instance (ref null $sourcemap.SourceMap.FooJsEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
-  (local.set $$instance (struct.new $sourcemap.SourceMap.FooJsEnum (global.get $sourcemap.SourceMap.FooJsEnum.vtable) (global.get $sourcemap.SourceMap.FooJsEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
+  (local.set $$instance (struct.new $sourcemap.SourceMap.FooJsEnum (global.get $sourcemap.SourceMap.FooJsEnum.vtable) (global.get $sourcemap.SourceMap.FooJsEnum.itable) (i32.const 0) (i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
   (call $$ctor__java_lang_String__int__void_$p_sourcemap_SourceMap_FooJsEnum@sourcemap.SourceMap.FooJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
@@ -2173,11 +2165,7 @@
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
-  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
-  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_javaemul_internal_Enums_OrdinalLightEnum@javaemul.internal.Enums.OrdinalLightEnum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
@@ -2195,7 +2183,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
   (global.set $$class-initialized@sourcemap.SourceMap.FooJsEnum (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:217:14
-  (call $$clinit__void_<once>_@java.lang.Enum )
+  (call $$clinit__void_<once>_@javaemul.internal.Enums.OrdinalLightEnum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:218:4
   (global.set $A@sourcemap.SourceMap.FooJsEnum (call $$create__java_lang_String__int@sourcemap.SourceMap.FooJsEnum (ref.null $java.lang.String)(i32.const 0)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:219:4
@@ -2242,7 +2230,7 @@
  (local $$instance (ref null $sourcemap.SourceMap.StringJsEnum))
  (block
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:4
-  (local.set $$instance (struct.new $sourcemap.SourceMap.StringJsEnum (global.get $sourcemap.SourceMap.StringJsEnum.vtable) (global.get $sourcemap.SourceMap.StringJsEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $sourcemap.SourceMap.StringJsEnum (global.get $sourcemap.SourceMap.StringJsEnum.vtable) (global.get $sourcemap.SourceMap.StringJsEnum.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.String)))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:4
   (call $$ctor__java_lang_String__int__java_lang_String__void_$p_sourcemap_SourceMap_StringJsEnum@sourcemap.SourceMap.StringJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $value))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:4
@@ -2258,14 +2246,10 @@
  (param $value (ref null $java.lang.String))
  ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:4
  (block
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:4
-  (struct.set $java.lang.Enum $name@java.lang.Enum (local.get $this) (local.get $$name))
-  ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:4
-  (struct.set $java.lang.Enum $ordinal@java.lang.Enum (local.get $this) (local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:231:31
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_javaemul_internal_Enums_StringLightEnum@javaemul.internal.Enums.StringLightEnum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:232:6
-  (struct.set $sourcemap.SourceMap.StringJsEnum $value@sourcemap.SourceMap.StringJsEnum (local.get $this) (local.get $value))
+  (struct.set $javaemul.internal.Enums.StringLightEnum $value@javaemul.internal.Enums.StringLightEnum (local.get $this) (local.get $value))
  )
 )
 
@@ -2283,7 +2267,7 @@
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:224:14
   (global.set $$class-initialized@sourcemap.SourceMap.StringJsEnum (i32.const 1))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:224:14
-  (call $$clinit__void_<once>_@java.lang.Enum )
+  (call $$clinit__void_<once>_@javaemul.internal.Enums.StringLightEnum )
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:225:4
   (global.set $A@sourcemap.SourceMap.StringJsEnum (call $$create__java_lang_String__int__java_lang_String@sourcemap.SourceMap.StringJsEnum (ref.null $java.lang.String)(i32.const 0)(call $$getString_|FOO|__java_lang_String_<once>_@sourcemap.SourceMap.StringJsEnum.$StringLiterals )))
   ;;@ transpiler/javatests/com/google/j2cl/readable/java/sourcemap/readable-j2wasm.js/sourcemap/SourceMap.java:226:4

@@ -469,10 +469,7 @@ public class Main {
     Integer i = v.ordinal();
     assertTrue(i.intValue() == 1);
 
-    if (!isWasm()) {
-      // JsEnums are still instance of Enum in Wasm.
-      assertFalse(v instanceof Enum);
-    }
+    assertFalse(v instanceof Enum);
     assertTrue(v instanceof PlainJsEnum);
     assertFalse((Object) v instanceof Double);
     assertTrue(v instanceof Comparable);
@@ -608,16 +605,10 @@ public class Main {
 
     assertTrue(v.value.equals(HELLO_STRING));
 
-    if (!isWasm()) {
-      // non-native JsEnums are not subclasses of Enum only in JS.
-      assertFalse(v instanceof Enum);
-    }
+    assertFalse(v instanceof Enum);
     assertTrue(v instanceof StringJsEnum);
     assertFalse((Object) v instanceof String);
-    if (!isWasm()) {
-      // non-native JsEnums with custom values do not implement Comparable in JS.
-      assertFalse(v instanceof Comparable);
-    }
+    assertFalse(v instanceof Comparable);
     assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
 
@@ -647,11 +638,8 @@ public class Main {
         },
         Comparable.class);
 
-    if (!isWasm()) {
-      // TODO(b/353352388): The value field is not used in toString in Wasm.
-      assertTrue(v.toString().equals(HELLO_STRING));
-      assertTrue(o.toString().equals(HELLO_STRING));
-    }
+    assertTrue(v.toString().equals(HELLO_STRING));
+    assertTrue(o.toString().equals(HELLO_STRING));
   }
 
   @Wasm("nop") // Non-native JsEnums are only boxed in JS.

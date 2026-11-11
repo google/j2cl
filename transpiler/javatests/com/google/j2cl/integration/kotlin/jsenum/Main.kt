@@ -25,7 +25,6 @@ import com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerExcept
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 import com.google.j2cl.integration.testing.Asserts.assertUnderlyingTypeEquals
 import com.google.j2cl.integration.testing.Asserts.fail
-import com.google.j2cl.integration.testing.TestUtils
 import java.io.Serializable
 import java.util.TreeSet
 import java.util.function.Function
@@ -460,10 +459,7 @@ private fun testComparableJsEnum() {
   val i: Int? = v.ordinal
   assertTrue(i?.toInt() == 1)
 
-  if (!TestUtils.isWasm()) {
-    // JsEnums are still instance of Enum in Wasm.
-    assertFalse(v is Enum<*>)
-  }
+  assertFalse(v is Enum<*>)
   assertTrue(v is PlainJsEnum)
   assertFalse(v as Any? is Double)
   assertTrue(v is Comparable<*>)
@@ -561,16 +557,10 @@ private fun testStringJsEnum() {
 
   assertTrue(v.value == HELLO_STRING)
 
-  if (!TestUtils.isWasm()) {
-    // JsEnums are still instance of Enum in Wasm.
-    assertFalse(v is Enum<*>)
-  }
+  assertFalse(v is Enum<*>)
   assertTrue(v is StringJsEnum)
   assertFalse(v as Any? is String)
-  if (!TestUtils.isWasm()) {
-    // JsEnums are still instance of Enum in Wasm.
-    assertFalse(v is Comparable<*>)
-  }
+  assertFalse(v is Comparable<*>)
   assertTrue(v is Serializable)
   assertFalse(v as Any? is PlainJsEnum)
 
@@ -605,13 +595,8 @@ private fun testStringJsEnum() {
   //       },
   //       Comparable::class.java)
 
-  if (!TestUtils.isWasm()) {
-    // TODO(b/353352388): The value field is not used in toString in Wasm.
-    val v: StringJsEnum = StringJsEnum.HELLO
-    assertTrue(v.toString() == HELLO_STRING)
-    val o: Any? = StringJsEnum.HELLO
-    assertTrue(o.toString() == HELLO_STRING)
-  }
+  assertTrue(v.toString() == HELLO_STRING)
+  assertTrue(o.toString() == HELLO_STRING)
 }
 
 private fun testStringJsEnumAsSeenFromJs() {

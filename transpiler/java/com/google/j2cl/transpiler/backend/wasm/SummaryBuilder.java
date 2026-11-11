@@ -120,7 +120,7 @@ public final class SummaryBuilder {
     if (type.isInterface()) {
       summary.addInterfaces(typeHierarchyInfoBuilder.build());
     } else {
-      type.getDeclaration().getAllSuperInterfaces().stream()
+      environment.getWasmTypeLayout(type.getDeclaration()).getAllSuperInterfaces().stream()
           .filter(not(TypeDeclaration::isNative))
           .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t.toDescriptor())));
 

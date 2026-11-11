@@ -573,36 +573,34 @@ public class WasmConstructsGenerator {
     builder.append(")");
 
     Set<TypeDeclaration> emittedInterfaces = new HashSet<>();
-    typeDeclaration.getAllSuperInterfaces().stream()
+    wasmTypeLayout.getAllSuperInterfaces().stream()
         // Ordered by greatest hierarchy depth to ensure that leaf interfaces are emitted first.
         // Subinterface vtables implement the superinterface vtable, making the superinterface
         // vtable redundant and can just reference the previously generated vtable.
         .sorted(Comparator.comparingInt(TypeDeclaration::getTypeHierarchyDepth).reversed())
-        .forEach(
-            i -> {
-              if (!emittedInterfaces.add(i)) {
-                // A vtable instance for this interface was already emitted.
-                return;
-              }
+        .forEach(i -> {
+          if (!emittedInterfaces.add(i)) {
+            // A vtable instance for this interface was already emitted.
+            return;
+          }
 
-              builder.newLine();
-              builder.append(
-                  format(
-                      "(global %s (ref %s)",
-                      environment.getWasmInterfaceVtableGlobalName(i, typeDeclaration),
-                      environment.getWasmVtableTypeName(i)));
-              builder.indent();
-              WasmTypeLayout interfaceTypeLayout = environment.getWasmTypeLayout(i);
-              initializeInterfaceVtable(wasmTypeLayout, interfaceTypeLayout);
-              builder.unindent();
-              builder.newLine();
-              builder.append(")");
+          builder.newLine();
+          builder.append(
+              format(
+                  "(global %s (ref %s)",
+                  environment.getWasmInterfaceVtableGlobalName(i, typeDeclaration),
+                  environment.getWasmVtableTypeName(i)));
+          builder.indent();
+          WasmTypeLayout interfaceTypeLayout = environment.getWasmTypeLayout(i);
+          initializeInterfaceVtable(wasmTypeLayout, interfaceTypeLayout);
+          builder.unindent();
+          builder.newLine();
+          builder.append(")");
 
-              // Also emit a reference to this vtable for all superinterfaces that have not already
-              // been handled.
-              initializeSuperInterfaceVtables(
-                  wasmTypeLayout, interfaceTypeLayout, emittedInterfaces);
-            });
+          // Also emit a reference to this vtable for all superinterfaces that have not already
+          // been handled.
+          initializeSuperInterfaceVtables(wasmTypeLayout, interfaceTypeLayout, emittedInterfaces);
+        });
   }
 
   private void initializeInterfaceVtable(

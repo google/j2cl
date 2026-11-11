@@ -16,6 +16,7 @@
 package wasmcustomdescriptorsjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
@@ -754,7 +755,7 @@ public final class Main {
     assertTrue(SimpleJsEnum.TWO.compareTo(SimpleJsEnum.ONE) > 0);
     assertTrue(SimpleJsEnum.ONE.compareTo(SimpleJsEnum.ONE) == 0);
 
-    assertTrue(SimpleJsEnum.ONE instanceof Enum);
+    assertFalse(SimpleJsEnum.ONE instanceof Enum);
     assertTrue(SimpleJsEnum.ONE instanceof SimpleJsEnum);
 
     assertTrue(SimpleJsEnum.ONE.getNumber() == 100);
