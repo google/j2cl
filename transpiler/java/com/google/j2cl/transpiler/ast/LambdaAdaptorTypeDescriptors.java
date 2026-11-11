@@ -145,14 +145,13 @@ public final class LambdaAdaptorTypeDescriptors {
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setClassComponents(classComponents)
-        .setDeclaredMethodDescriptorsFactory(
-            adaptorTypeDeclaration ->
-                switch (adaptorKind) {
-                  case CONCRETE ->
-                      getLambdaAdaptorMethodDescriptors(
-                          jsFunctionInterface, adaptorTypeDeclaration.toDescriptor());
-                  case ABSTRACT -> ImmutableList.of();
-                })
+        .setDeclaredMethodDescriptorsFactory(adaptorTypeDeclaration ->
+            switch (adaptorKind) {
+              case CONCRETE ->
+                  getLambdaAdaptorMethodDescriptors(
+                      jsFunctionInterface, adaptorTypeDeclaration.toDescriptor());
+              case ABSTRACT -> ImmutableList.of();
+            })
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
         .setHasAbstractModifier(adaptorKind == AdaptorKind.ABSTRACT)
@@ -217,12 +216,11 @@ public final class LambdaAdaptorTypeDescriptors {
         .setTypeParameterDescriptors(typeDeclaration.getTypeParameterDescriptors())
         .setClassComponents(classComponents)
         .setJsFunctionInterface()
-        .setDeclaredMethodDescriptorsFactory(
-            jsfunctionTypeDeclaration ->
-                ImmutableList.of(
-                    createJsFunctionMethodDescriptor(
-                        jsfunctionTypeDeclaration.toDescriptor(),
-                        typeDeclaration.getSingleAbstractMethodDescriptor())))
+        .setDeclaredMethodDescriptorsFactory(jsfunctionTypeDeclaration ->
+            ImmutableList.of(
+                createJsFunctionMethodDescriptor(
+                    jsfunctionTypeDeclaration.toDescriptor(),
+                    typeDeclaration.getSingleAbstractMethodDescriptor())))
         .setSingleAbstractMethodDescriptorFactory(t -> t.getDeclaredMethodDescriptors().getFirst())
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.INTERFACE)
@@ -243,20 +241,15 @@ public final class LambdaAdaptorTypeDescriptors {
         singleAbstractMethod.isJsMethod()
             ? singleAbstractMethod.getParameterDescriptors()
             : singleAbstractMethod.getParameterDescriptors().stream()
-                .map(
-                    parameterDescriptor ->
-                        parameterDescriptor.toBuilder().setVarargs(false).build())
+                .map(parameterDescriptor ->
+                    parameterDescriptor.toBuilder().setVarargs(false).build())
                 .collect(toImmutableList());
 
     return singleAbstractMethod.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setParameterDescriptors(parameterDescriptors)
-        .setOriginalJsInfo(
-            JsInfo.builder()
-                .setJsMemberType(JsMemberType.NONE)
-                .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
-                .build())
+        .setOriginalJsInfo(JsInfo.NONE)
         .setNative(false)
         .build();
   }

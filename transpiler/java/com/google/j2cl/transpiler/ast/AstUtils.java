@@ -752,12 +752,11 @@ public final class AstUtils {
       MethodDescriptor methodDescriptor, TypeDeclaration overlayTypeDeclaration) {
     checkArgument(methodDescriptor.isStatic());
 
-    return methodDescriptor.transform(
-        builder ->
-            builder
-                .setOriginalJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
-                .setEnclosingTypeDescriptor(overlayTypeDeclaration.toDescriptor())
-                .removeParameterOptionality());
+    return methodDescriptor.transform(builder ->
+        builder
+            .setOriginalJsInfo(JsInfo.NONE)
+            .setEnclosingTypeDescriptor(overlayTypeDeclaration.toDescriptor())
+            .removeParameterOptionality());
   }
 
   /**
@@ -889,32 +888,29 @@ public final class AstUtils {
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     String devirtualizedMethodName = methodDescriptor.getName() + postfix.orElse("");
-    return methodDescriptor.transform(
-        builder ->
-            builder
-                .setName(devirtualizedMethodName)
-                .setEnclosingTypeDescriptor(targetTypeDescriptor)
-                // The instance ($thisArg) parameter is assumed non nullable for
-                // the typing perspective.
-                .addParameterDescriptors(
-                    0,
-                    ParameterDescriptor.create(
-                        "$thisArg",
-                        enclosingTypeDescriptor.getDeclarationDescriptor().toNonNullable()))
-                .addTypeParameterTypeDescriptors(
-                    0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
-                .addTypeArgumentTypeDescriptors(
-                    0, enclosingTypeDescriptor.getTypeArgumentDescriptors())
-                .setStatic(true)
-                .setOrigin(
-                    methodDescriptor.isSynthetic()
-                        ? methodDescriptor.getOrigin()
-                        : MethodOrigin.SYNTHETIC_METHOD)
-                .setConstructor(false)
-                .setAbstract(false)
-                .setDefaultMethod(false)
-                .setOriginalJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
-                .removeParameterOptionality());
+    return methodDescriptor.transform(builder ->
+        builder
+            .setName(devirtualizedMethodName)
+            .setEnclosingTypeDescriptor(targetTypeDescriptor)
+            // The instance ($thisArg) parameter is assumed non nullable for
+            // the typing perspective.
+            .addParameterDescriptors(
+                0,
+                ParameterDescriptor.create(
+                    "$thisArg", enclosingTypeDescriptor.getDeclarationDescriptor().toNonNullable()))
+            .addTypeParameterTypeDescriptors(
+                0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
+            .addTypeArgumentTypeDescriptors(0, enclosingTypeDescriptor.getTypeArgumentDescriptors())
+            .setStatic(true)
+            .setOrigin(
+                methodDescriptor.isSynthetic()
+                    ? methodDescriptor.getOrigin()
+                    : MethodOrigin.SYNTHETIC_METHOD)
+            .setConstructor(false)
+            .setAbstract(false)
+            .setDefaultMethod(false)
+            .setOriginalJsInfo(JsInfo.NONE)
+            .removeParameterOptionality());
   }
 
   /** Returns an Optional.empty() if optionalSourcePosition is empty or unnamed */
@@ -1393,10 +1389,9 @@ public final class AstUtils {
     // @J2ktPublic or shadows a package-private method from a different package).
     return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
         .filter(md -> md.getVisibility().isPackagePrivate())
-        .anyMatch(
-            md ->
-                md.hasAnnotation("com.google.common.annotations.J2ktPublic")
-                    || needsPackagePrivateMangling(md));
+        .anyMatch(md ->
+            md.hasAnnotation("com.google.common.annotations.J2ktPublic")
+                || needsPackagePrivateMangling(md));
   }
 
   /**
@@ -1529,11 +1524,10 @@ public final class AstUtils {
         type.streamInstanceFields()
             .map(Field::getDescriptor)
             .filter(not(excludedFields::contains))
-            .map(
-                f ->
-                    FieldAccess.builderFrom(f)
-                        .setQualifier(new ThisReference(type.getTypeDescriptor()))
-                        .build())
+            .map(f ->
+                FieldAccess.builderFrom(f)
+                    .setQualifier(new ThisReference(type.getTypeDescriptor()))
+                    .build())
             .collect(toImmutableList());
 
     // This special call will make JsCompiler think that all these fields are used. There is a

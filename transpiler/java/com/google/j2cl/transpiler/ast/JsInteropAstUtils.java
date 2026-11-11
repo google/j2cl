@@ -71,6 +71,10 @@ public final class JsInteropAstUtils {
     return jsType != null ? jsType : typeDeclaration.getAnnotation("jsinterop.annotations.JsEnum");
   }
 
+  static boolean isJsAsync(MethodDescriptor method) {
+    return method.hasAnnotation("jsinterop.annotations.JsAsync");
+  }
+
   static boolean isJsOptional(ParameterDescriptor parameterDescriptor) {
     return parameterDescriptor.hasAnnotation("jsinterop.annotations.JsOptional");
   }
@@ -82,11 +86,10 @@ public final class JsInteropAstUtils {
     return parameterDescriptor.toBuilder()
         .setAnnotations(
             parameterDescriptor.getAnnotations().stream()
-                .filter(
-                    a ->
-                        !a.getTypeDescriptor()
-                            .getQualifiedSourceName()
-                            .equals("jsinterop.annotations.JsOptional"))
+                .filter(a ->
+                    !a.getTypeDescriptor()
+                        .getQualifiedSourceName()
+                        .equals("jsinterop.annotations.JsOptional"))
                 .collect(toImmutableList()))
         .build();
   }
@@ -117,7 +120,6 @@ public final class JsInteropAstUtils {
         .setJsName(getJsName(memberAnnotation))
         .setJsNamespace(getJsNamespace(memberAnnotation))
         .setJsOverlay(isJsOverlay(member))
-        .setJsAsync(member.hasAnnotation("jsinterop.annotations.JsAsync"))
         .setHasJsMemberAnnotation(memberAnnotation != null)
         .build();
   }

@@ -70,7 +70,6 @@ public abstract class MemberDescriptor
 
   public abstract boolean isKtProperty();
 
-
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
   public abstract MemberDescriptor getDeclarationDescriptor();
@@ -164,7 +163,7 @@ public abstract class MemberDescriptor
   }
 
   public boolean isJsAsync() {
-    return getJsInfo().isJsAsync();
+    return false;
   }
 
   public boolean isJsConstructor() {

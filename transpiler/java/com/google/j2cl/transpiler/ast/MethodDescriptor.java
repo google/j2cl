@@ -596,17 +596,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public MethodDescriptor withoutTypeParameters() {
 
     Set<TypeVariable> typeParameters = new HashSet<>(getTypeParameterTypeDescriptors());
-    return specializeTypeVariables(
-            p ->
-                typeParameters.contains(p)
-                    ? TypeVariable.createWildcardWithUpperBound(p.getUpperBoundTypeDescriptor())
-                    : p)
+    return specializeTypeVariables(p ->
+            typeParameters.contains(p)
+                ? TypeVariable.createWildcardWithUpperBound(p.getUpperBoundTypeDescriptor())
+                : p)
         .toBuilder()
         .setDeclarationDescriptor(
             isDeclaration() ? null : getDeclarationDescriptor().withoutTypeParameters())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .build();
+  }
+
+  @Override
+  @Memoized
+  public boolean isJsAsync() {
+    return JsInteropAstUtils.isJsAsync(this);
   }
 
   @Override
@@ -756,7 +761,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Found an overridden method of the same JsMember type one that customizes the name, done.
         // If there are any conflicts with other overrides they will be reported by
         // JsInteropRestrictionsChecker.
-        return inheritedJsInfo.toBuilder().setJsAsync(declarationJsInfo.isJsAsync()).build();
+        return inheritedJsInfo;
       }
 
       if (defaultJsInfo == declarationJsInfo && !hasExplicitJsMemberAnnotation) {
@@ -775,12 +780,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       // This is a Java override of a method that does not have the same signature and its
       // JsMethod annotation does not specify a name; in this case the method will not be considered
       // a JsMethod but instead it will be the target of a JsMethod bridge.
-      return JsInfo.NONE.toBuilder().setJsAsync(declarationJsInfo.isJsAsync()).build();
+      return JsInfo.NONE;
     }
 
-    // Don't inherit @JsAsync annotation from overridden methods.
     return defaultJsInfo.toBuilder()
-        .setJsAsync(declarationJsInfo.isJsAsync())
         .setHasJsMemberAnnotation(hasExplicitJsMemberAnnotation)
         .build();
   }
@@ -1220,12 +1223,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   private ImmutableList<TypeDescriptor> convertNonNullableBoxedTypesToPrimitives(
       ImmutableList<TypeDescriptor> parameterTypeDescriptors) {
     return parameterTypeDescriptors.stream()
-        .map(
-            typeDescriptor ->
-                TypeDescriptors.isBoxedType(typeDescriptor.toRawTypeDescriptor())
-                        && !typeDescriptor.isNullable()
-                    ? typeDescriptor.toRawTypeDescriptor().toUnboxedType()
-                    : typeDescriptor)
+        .map(typeDescriptor ->
+            TypeDescriptors.isBoxedType(typeDescriptor.toRawTypeDescriptor())
+                    && !typeDescriptor.isNullable()
+                ? typeDescriptor.toRawTypeDescriptor().toUnboxedType()
+                : typeDescriptor)
         .collect(toImmutableList());
   }
 
@@ -1453,10 +1455,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // Specialize the type arguments using the updated mapping.
     ImmutableList<TypeDescriptor> specializedTypeArgumentDescriptors =
         typeArgumentTypeDescriptors.stream()
-            .map(
-                typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(
-                        updatedReplacingTypeDescriptorByTypeVariable))
+            .map(typeDescriptor ->
+                typeDescriptor.specializeTypeVariables(
+                    updatedReplacingTypeDescriptorByTypeVariable))
             .collect(toImmutableList());
 
     // Specialize the return type using the updated mapping.
@@ -1468,10 +1469,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
     ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
         parameterTypeDescriptors.stream()
-            .map(
-                typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(
-                        updatedReplacingTypeDescriptorByTypeVariable))
+            .map(typeDescriptor ->
+                typeDescriptor.specializeTypeVariables(
+                    updatedReplacingTypeDescriptorByTypeVariable))
             .collect(toImmutableList());
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
@@ -1565,17 +1565,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                 typeVariable.getUniqueKey()
                     + "#SpecializedBound#"
                     + specializedBoundTypeDescriptor.getUniqueId())
-            .setUpperBoundTypeDescriptorFactory(
-                self ->
-                    // The bound might also refer to the variable that is being replaced, e.g. in
-                    //
-                    //   T extends X<T, U>
-                    //
-                    // if there is a replacement U -> V, the declaration needs to be
-                    //
-                    //  T1 extends X<T1, V>.
-                    specializedBoundTypeDescriptor.specializeTypeVariables(
-                        ImmutableMap.of(typeVariable, self)))
+            .setUpperBoundTypeDescriptorFactory(self ->
+                // The bound might also refer to the variable that is being replaced, e.g. in
+                //
+                //   T extends X<T, U>
+                //
+                // if there is a replacement U -> V, the declaration needs to be
+                //
+                //  T1 extends X<T1, V>.
+                specializedBoundTypeDescriptor.specializeTypeVariables(
+                    ImmutableMap.of(typeVariable, self)))
             .build();
 
     return tv ->

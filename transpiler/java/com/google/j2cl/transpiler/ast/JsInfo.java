@@ -19,28 +19,20 @@ import com.google.auto.value.AutoValue;
 import com.google.j2cl.common.ThreadLocalInterner;
 import javax.annotation.Nullable;
 
-/**
- * Encapsulates JsInterop information.
- */
+/** Encapsulates JsInterop information. */
 @AutoValue
 public abstract class JsInfo {
   public abstract JsMemberType getJsMemberType();
 
-  /**
-   * The name specified directly on a type, method or field.
-   */
+  /** The name specified directly on a type, method or field. */
   @Nullable
   public abstract String getJsName();
 
-  /**
-   * The namespace specified on a package, type, method or field.
-   */
+  /** The namespace specified on a package, type, method or field. */
   @Nullable
   public abstract String getJsNamespace();
 
   public abstract boolean isJsOverlay();
-
-  public abstract boolean isJsAsync();
 
   /**
    * Returns true if the JsInfo where computed from a JsInterop annotation defined explicitly on the
@@ -51,9 +43,6 @@ public abstract class JsInfo {
 
   /** Not a JS member. */
   public static final JsInfo NONE = builder().setJsMemberType(JsMemberType.NONE).build();
-
-  public static final JsInfo NONE_ASYNC =
-      builder().setJsMemberType(JsMemberType.NONE).setJsAsync(true).build();
 
   public static final JsInfo OVERLAY =
       builder().setJsMemberType(JsMemberType.NONE).setJsOverlay(true).build();
@@ -68,7 +57,6 @@ public abstract class JsInfo {
     return new AutoValue_JsInfo.Builder()
         // Default values.
         .setJsOverlay(false)
-        .setJsAsync(false)
         .setHasJsMemberAnnotation(false);
   }
 
@@ -83,8 +71,6 @@ public abstract class JsInfo {
     public abstract Builder setJsNamespace(String jsNamespace);
 
     public abstract Builder setJsOverlay(boolean isJsOverlay);
-
-    public abstract Builder setJsAsync(boolean isJsAsync);
 
     public abstract Builder setHasJsMemberAnnotation(boolean hasJsMemberAnnotation);
 

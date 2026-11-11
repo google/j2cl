@@ -24,7 +24,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.LocalFunctionDeclarationStatement;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -92,7 +91,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
                     .setStatements(localFunctionDeclarationStatement.getBody().getStatements())
                     .setTypeDescriptor(jsFunctionTypeDescriptor)
                     .setSourcePosition(localFunctionDeclarationStatement.getSourcePosition())
-                    .setJsAsync(localFunctionMethodDescriptor.getJsInfo().isJsAsync())
+                    .setJsAsync(localFunctionMethodDescriptor.isJsAsync())
                     .build();
 
             Variable variable =
@@ -155,11 +154,9 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
             localFunctionMethodDescriptor.getTypeParameterTypeDescriptors())
         .setClassComponents(classComponents)
         .setJsFunctionInterface()
-        .setDeclaredMethodDescriptorsFactory(
-            td ->
-                ImmutableList.of(
-                    createJsFunctionMethodDescriptor(
-                        td.toDescriptor(), localFunctionMethodDescriptor)))
+        .setDeclaredMethodDescriptorsFactory(td ->
+            ImmutableList.of(
+                createJsFunctionMethodDescriptor(td.toDescriptor(), localFunctionMethodDescriptor)))
         .setSingleAbstractMethodDescriptorFactory(
             td -> Iterables.getOnlyElement(td.getDeclaredMethodDescriptors()))
         .setVisibility(Visibility.PUBLIC)
@@ -174,11 +171,7 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setEnclosingMethodDescriptor(null)
         .setVisibility(Visibility.PUBLIC)
-        .setOriginalJsInfo(
-            JsInfo.builder()
-                .setJsMemberType(JsMemberType.NONE)
-                .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())
-                .build())
+        .setOriginalJsInfo(JsInfo.NONE)
         .setNative(false)
         .build();
   }
