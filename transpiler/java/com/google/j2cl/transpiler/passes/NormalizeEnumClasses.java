@@ -209,11 +209,14 @@ public class NormalizeEnumClasses extends NormalizationPass {
                 AstUtils.getEnumOrdinalConstantFieldDescriptor(enumFieldDescriptor);
 
             // Add the name and ordinal as first and second parameters when instantiating
-            // the enum value.
+            // the enum value. JsEnums don't have names.
             return newInstance.toBuilder()
                 .addArgumentAndUpdateDescriptor(
                     0,
-                    enumReplaceStringMethodCall(new StringLiteral(enumFieldDescriptor.getName())),
+                    type.isJsEnum()
+                        ? TypeDescriptors.get().javaLangString.getNullValue()
+                        : enumReplaceStringMethodCall(
+                            new StringLiteral(enumFieldDescriptor.getName())),
                     VALUE_NAME_PARAMETER_NAME,
                     TypeDescriptors.get().javaLangString)
                 .addArgumentAndUpdateDescriptor(

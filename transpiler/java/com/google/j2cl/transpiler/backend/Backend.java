@@ -138,6 +138,7 @@ import com.google.j2cl.transpiler.passes.NormalizeInterfaces;
 import com.google.j2cl.transpiler.passes.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
+import com.google.j2cl.transpiler.passes.NormalizeJsEnumsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
 import com.google.j2cl.transpiler.passes.NormalizeJsYieldMethodInvocations;
@@ -149,7 +150,6 @@ import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMethodParametersJ2kt;
 import com.google.j2cl.transpiler.passes.NormalizeMinValueIntegralLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
-import com.google.j2cl.transpiler.passes.NormalizeNativeJsEnumsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeNumberLiterals;
@@ -190,7 +190,6 @@ import com.google.j2cl.transpiler.passes.RecoverShortcutBooleanOperator;
 import com.google.j2cl.transpiler.passes.RemoveAbstractNativeConstructors;
 import com.google.j2cl.transpiler.passes.RemoveCustomIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveEmptyFallthroughSwitchCases;
-import com.google.j2cl.transpiler.passes.RemoveNameFromJsEnums;
 import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNonreferencedNativeMethods;
@@ -517,9 +516,7 @@ public enum Backend {
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
-          NormalizeNativeJsEnumsWasm::new,
-          // Must run after NormalizeEnumClasses
-          RemoveNameFromJsEnums::new,
+          NormalizeJsEnumsWasm::new,
           NormalizeArrayCreationsWasm::new,
           ImplementNativeJsTypeArrayOperationsWasm::new,
           NormalizeOverlayMembers::new,

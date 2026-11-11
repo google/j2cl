@@ -15,198 +15,40 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
-
-import com.google.common.collect.Iterables;
-import com.google.j2cl.common.InternalCompilerError;
-import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
-import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
-import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.NewInstance;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import java.util.List;
 import javax.annotation.Nullable;
 
 /**
- * Normalizes JsEnum classes into a native JsEnum with overlays and a JsEnum that represents the
- * closure enum directly.
+ * Normalizes JsEnums for Closure, where they are represented by their values, i.e. non-native
+ * JsEnums become Closure enums.
  */
-public class NormalizeJsEnums extends NormalizationPass {
+public class NormalizeJsEnums extends NormalizeJsEnumsBase {
+  @Nullable
   @Override
-  public void applyTo(Type type) {
-    if (type.isJsEnum()) {
-      // TODO(b/116751296): Once the type model is refactored it should reflect the correct
-      // superclass for JsEnums.
-      type.setSuperTypeDescriptor(null);
+  DeclaredTypeDescriptor getImplementationType(TypeDescriptor jsEnum) {
+    // JsEnums are represented by their values.
+    return null;
+  }
+
+  @Override
+  Expression extractValue(Expression jsEnum, TypeDescriptor valueTypeDescriptor) {
+    return AstUtils.castJsEnumToValue(jsEnum, valueTypeDescriptor);
+  }
+
+  @Override
+  Expression rewriteCompareTo(MethodCall methodCall) {
+    Expression qualifier = methodCall.getQualifier();
+    Expression argument = methodCall.getArguments().getFirst();
+    if (canAvoidBoxing(qualifier.getTypeDescriptor(), argument)) {
+      return RuntimeMethods.createEnumsCompareToMethodCall(qualifier, argument);
     }
-    normalizeNonNativeJsEnums(type);
-    fixEnumMethodCalls(type);
-  }
-
-  /**
-   * Normalizes non native JsEnums into a Native JsEnum with JsOverlay members and an non native
-   * JsEnum with only the Enum constants.
-   */
-  private static void normalizeNonNativeJsEnums(Type type) {
-    if (!AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
-      return;
-    }
-    type.accept(
-        new AbstractRewriter() {
-          @Nullable
-          @Override
-          public Node rewriteField(Field field) {
-            if (AstUtils.isJsEnumCustomValueField(field.getDescriptor())) {
-              // remove value field which are only needed for definition.
-              return null;
-            }
-
-            if (field.getDescriptor().getOrigin() == FieldOrigin.SYNTHETIC_ORDINAL_FIELD) {
-              // remove synthesized ordinal constants since there are not needed for JsEnum.
-              return null;
-            }
-
-            if (field.isEnumField()) {
-              return createJsEnumConstant(field);
-            }
-
-            checkArgument(field.isStatic());
-            return field;
-          }
-
-          @Nullable
-          @Override
-          public Node rewriteMethod(Method method) {
-            if (method.isConstructor()) {
-              // remove constructor since it is only needed for definition.
-              return null;
-            }
-
-            return method;
-          }
-        });
-  }
-
-  /**
-   * Rewrites the initializer enum constants by extracting the literal for the constructor
-   * invocation.
-   */
-  private static Field createJsEnumConstant(Field field) {
-    return field.toBuilder()
-        .setDescriptor(AstUtils.createJsEnumConstantFieldDescriptor(field.getDescriptor()))
-        .setInitializer(getJsEnumConstantValue(field))
-        .build();
-  }
-
-  /** Returns the initialization value for a JsEnum constant. */
-  private static Expression getJsEnumConstantValue(Field field) {
-    checkState(field.isEnumField());
-
-    List<Expression> arguments = ((NewInstance) field.getInitializer()).getArguments();
-    FieldDescriptor fieldDescriptor = field.getDescriptor();
-    if (fieldDescriptor.getEnclosingTypeDescriptor().getJsEnumInfo().hasCustomValue()) {
-      checkState(arguments.size() == 3);
-      Expression constantValue = arguments.get(2);
-      checkState(constantValue.isCompileTimeConstant());
-      return constantValue;
-    } else {
-      checkState(arguments.size() == 2);
-      return fieldDescriptor.getEnumOrdinalValue();
-    }
-  }
-
-  /**
-   * Rewrite method calls to Enum methods on JsEnum instances to preserve the AST consistent.
-   *
-   * <p>Many passes rely on the enclosing type of the method to make decisions such as
-   * devirtualizing, conversion, etc. But since JsEnums do not really extend Enum this prevents
-   * those passes from taking decisions based on incorrect information.
-   */
-  private static void fixEnumMethodCalls(Type type) {
-    type.accept(
-        new AbstractRewriter() {
-          @Override
-          public Expression rewriteMethodCall(MethodCall methodCall) {
-            MethodDescriptor methodDescriptor = methodCall.getTarget();
-
-            if (!methodDescriptor.isInstanceMember()) {
-              // Only rewrite instance methods.
-              return methodCall;
-            }
-            if (!TypeDescriptors.isJavaLangEnum(methodDescriptor.getEnclosingTypeDescriptor())) {
-              // Not a java.lang.Enum method, nothing to do.
-              return methodCall;
-            }
-            Expression qualifier = methodCall.getQualifier();
-            TypeDescriptor qualifierTypeDescriptor = qualifier.getTypeDescriptor();
-            if (!qualifierTypeDescriptor.isJsEnum()) {
-              // Not a JsEnum receiver, nothing to do.
-              return methodCall;
-            }
-
-            String targetSignature = methodDescriptor.getDeclarationDescriptor().getSignature();
-            if (targetSignature.equals("equals(java.lang.Object)")) {
-              Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
-              if (argument.getTypeDescriptor().isPrimitive()) {
-                argument =
-                    CastExpression.builder()
-                        .setExpression(argument)
-                        .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
-                        .build();
-              }
-              return qualifier.postfixNotNullAssertion().infixEquals(argument);
-            }
-
-            if (targetSignature.equals("compareTo(java.lang.Enum)")) {
-              Expression argument = Iterables.getOnlyElement(methodCall.getArguments());
-              if (canAvoidBoxing(qualifierTypeDescriptor, argument)) {
-                return RuntimeMethods.createEnumsCompareToMethodCall(qualifier, argument);
-              }
-
-              // Redirect the call to Comparable.compareTo(Object) since JsEnums don't actually
-              // extend Enum.
-              return methodCall.toBuilder()
-                  .setTarget(
-                      TypeDescriptors.get()
-                          .javaLangComparable
-                          .getMethodDescriptor("compareTo", TypeDescriptors.get().javaLangObject))
-                  .build();
-            }
-
-            if (targetSignature.equals("ordinal()")) {
-              return AstUtils.castJsEnumToValue(
-                  methodCall.getQualifier(), methodCall.getTypeDescriptor());
-            }
-
-            return methodCall.toBuilder()
-                .setTarget(fixEnumMethodDescriptor(methodDescriptor))
-                .build();
-          }
-
-          @Override
-          public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
-            if (AstUtils.isJsEnumCustomValueField(fieldAccess.getTarget())) {
-              return AstUtils.castJsEnumToValue(
-                  fieldAccess.getQualifier(), fieldAccess.getTypeDescriptor());
-            }
-
-            return fieldAccess;
-          }
-        });
+    return super.rewriteCompareTo(methodCall);
   }
 
   private static boolean canAvoidBoxing(
@@ -218,18 +60,5 @@ public class NormalizeJsEnums extends NormalizationPass {
     return AstUtils.isNonNativeJsEnum(qualifierTypeDescriptor)
         && (argument instanceof NullLiteral
             || argument.getTypeDescriptor().hasSameRawType(qualifierTypeDescriptor));
-  }
-
-  private static MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {
-    MethodDescriptor declarationMethodDescriptor = methodDescriptor.getDeclarationDescriptor();
-
-    // Reroute overridden methods to the super method they override.
-    if (declarationMethodDescriptor.isOrOverridesJavaLangObjectMethod()) {
-      return declarationMethodDescriptor.toBuilder()
-          .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
-          .build();
-    }
-
-    throw new InternalCompilerError("Unexpected Enum method: %s.", methodDescriptor);
   }
 }
