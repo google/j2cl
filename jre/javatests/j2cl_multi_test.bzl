@@ -15,6 +15,15 @@ j2cl_multi_test(
 load("@rules_java//java:defs.bzl", "java_test")
 load("//build_defs:rules.bzl", "j2cl_test", "j2kt_native_test", "j2wasm_test")
 
+def _browser_attrs(platform_tag):
+    return {
+        "browsers": [
+            "//build_defs/internal_do_not_use/browser:chrome-linux",
+        ],
+        "browser_overrides": {
+        },
+    }
+
 def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_native = True, enable_wasm = True, **kwargs):
     tests = [name + "-j2cl", name + "-j2cl_compiled"]
 
@@ -35,12 +44,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
         compile = 1,
         generate_build_test = False,
         runtime_deps = j2cl_deps,
-        browsers = [
-            "//build_defs/internal_do_not_use/browser:chrome-linux",
-        ],
-        browser_overrides = {
-        },
-        **kwargs
+        **(_browser_attrs("j2cl") | kwargs)
     )
 
     if enable_jvm:
@@ -69,10 +73,7 @@ def j2cl_multi_test(name, test_class, deps, enable_jvm = True, enable_j2kt_nativ
             runtime_deps = j2wasm_deps,
             optimize = 1,
             wasm_defs = j2wasm_defines,
-            browsers = [
-                "//build_defs/internal_do_not_use/browser:chrome-linux",
-            ],
-            **kwargs
+            **(_browser_attrs("j2wasm") | kwargs)
         )
 
     native.test_suite(name = name, tests = tests, tags = ["manual"] + kwargs.get("tags", []))
