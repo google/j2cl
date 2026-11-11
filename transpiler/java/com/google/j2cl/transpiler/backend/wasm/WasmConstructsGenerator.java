@@ -158,13 +158,14 @@ public class WasmConstructsGenerator {
               " (param (ref %s))",
               environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
     }
-    methodDescriptor.getDispatchParameterDescriptors().stream()
+    methodDescriptor.getAbiDescriptor().getParameterDescriptors().stream()
         .map(ParameterDescriptor::getTypeDescriptor)
         .forEach(t -> builder.append(format(" (param %s)", environment.getWasmType(t))));
   }
 
   private void emitFunctionResultType(MethodDescriptor methodDescriptor) {
-    TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
+    TypeDescriptor returnTypeDescriptor =
+        methodDescriptor.getAbiDescriptor().getReturnTypeDescriptor();
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.append(format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
     }
@@ -396,7 +397,8 @@ public class WasmConstructsGenerator {
               + ")");
     }
 
-    TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
+    TypeDescriptor returnTypeDescriptor =
+        methodDescriptor.getAbiDescriptor().getReturnTypeDescriptor();
 
     // Emit return type.
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
@@ -440,7 +442,8 @@ public class WasmConstructsGenerator {
 
     StatementTranspiler.render(method.getBody(), builder, environment);
 
-    TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
+    TypeDescriptor returnTypeDescriptor =
+        methodDescriptor.getAbiDescriptor().getReturnTypeDescriptor();
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)
         && !endsWithReturnOrThrow(method.getBody())) {
       // A method that returns a value will never flow out of the end and will always have an

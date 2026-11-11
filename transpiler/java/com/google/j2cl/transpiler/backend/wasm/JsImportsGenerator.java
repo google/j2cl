@@ -209,7 +209,7 @@ public final class JsImportsGenerator {
 
   private String createLambdaExpressionCode(JsMethodImport methodImport) {
     StringBuilder sb = new StringBuilder();
-    MethodDescriptor methodDescriptor = methodImport.getMethod().getDescriptor();
+    MethodDescriptor methodDescriptor = methodImport.getMethodDescriptor();
     List<TypeVariable> templateVariables = getTemplateVariables(methodImport);
     if (!templateVariables.isEmpty()) {
       sb.append(
@@ -273,7 +273,7 @@ public final class JsImportsGenerator {
    * any unspecialized parameter types).
    */
   private static ImmutableList<TypeVariable> getTemplateVariables(JsMethodImport methodImport) {
-    MethodDescriptor methodDescriptor = methodImport.getMethod().getDescriptor();
+    MethodDescriptor methodDescriptor = methodImport.getMethodDescriptor();
     return Stream.concat(
             methodImport.isInstance() || methodImport.isConstructor()
                 // For instance methods and constructors, we need to declare both the enclosing
@@ -320,19 +320,14 @@ public final class JsImportsGenerator {
         return;
       }
 
-      addMethodImport(
-          JsMethodImport.newBuilder()
-              .setBaseImportKey(JsMethodImport.getJsImportName(methodDescriptor))
-              .setSignature(JsMethodImport.computeSignature(methodDescriptor, closureEnvironment))
-              .setMethod(method)
-              .build());
+      JsMethodImport methodImport = JsMethodImport.create(method, closureEnvironment);
+      addMethodImport(methodDescriptor, methodImport);
 
       // Collect imports for JsDoc.
-      moduleImports.addAll(
-          WasmJsInteropClosureGenerationEnvironment.getJsModuleDependencies(methodDescriptor));
+      moduleImports.addAll(methodImport.getModuleDependencies());
     }
 
-    private void addMethodImport(JsMethodImport newImport) {
+    private void addMethodImport(MethodDescriptor methodDescriptor, JsMethodImport newImport) {
       JsMethodImport newOrExistingImport =
           methodImportsByName.compute(
               newImport.getImportKey(),
@@ -344,7 +339,7 @@ public final class JsImportsGenerator {
                 checkForConflicts(newImport, existingImport, problems);
                 return existingImport;
               });
-      methodImports.put(newImport.getMethod().getDescriptor(), newOrExistingImport);
+      methodImports.put(methodDescriptor, newOrExistingImport);
     }
   }
 
@@ -352,12 +347,12 @@ public final class JsImportsGenerator {
       JsMethodImport newImport, JsMethodImport existingImport, Problems problems) {
     if (!JsMethodImport.isCompatible(existingImport, newImport)) {
       problems.error(
-          newImport.getMethod().getSourcePosition(),
+          newImport.getSourcePosition(),
           "Native methods '%s' and '%s', importing JavaScript method '%s', do not"
               + " match. Both or neither must be constructors, static, or JS"
               + " properties (b/283986050).",
-          existingImport.getMethod().getReadableDescription(),
-          newImport.getMethod().getReadableDescription(),
+          existingImport.getMethodDescriptor().getReadableDescription(),
+          newImport.getMethodDescriptor().getReadableDescription(),
           existingImport.getImportKey());
     }
 
@@ -366,12 +361,12 @@ public final class JsImportsGenerator {
         // reference. Exclude these in this check.
         && !(newImport.emitAsMethodReference() && existingImport.emitAsMethodReference())) {
       problems.error(
-          newImport.getMethod().getSourcePosition(),
+          newImport.getSourcePosition(),
           "Native methods '%s' and '%s', importing JavaScript method '%s', have"
               + " different parameter types ('%s' vs '%s'), currently disallowed"
               + " due to performance concerns (b/371225463).",
-          existingImport.getMethod().getReadableDescription(),
-          newImport.getMethod().getReadableDescription(),
+          existingImport.getMethodDescriptor().getReadableDescription(),
+          newImport.getMethodDescriptor().getReadableDescription(),
           existingImport.getImportKey(),
           existingImport.getSignature(),
           newImport.getSignature());

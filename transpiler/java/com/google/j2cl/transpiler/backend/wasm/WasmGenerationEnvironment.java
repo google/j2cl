@@ -308,7 +308,9 @@ public class WasmGenerationEnvironment {
   private String generateFunctionTypeName(String prefix, MethodDescriptor methodDescriptor) {
     String typeName =
         methodDescriptor.isJsFunction()
-            ? methodDescriptor.getManglingSignature()
+            // To make JsFunctions with same signature interchangeable regardless of the interface
+            // they implement, their function type is determined by the ABI signature.
+            ? methodDescriptor.getAbiSignature()
             : methodDescriptor.getMangledName();
     return prefix + "." + typeName;
   }
