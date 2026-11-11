@@ -76,6 +76,7 @@ internal class GenerateMultifileFacades(private val context: JvmBackendContext) 
   ModuleLoweringPass {
   override fun lower(irModule: IrModuleFragment) {
     // MODIFIED BY GOOGLE.
+    // TODO(dramaix): Remove this patch once JetBrains/kotlin#9733 is in J2CL's Kotlin version.
     // Avoid two full-module IR traversals when there are no multifile facades to generate.
     if (context.multifileFacadesToAdd.isEmpty()) return
     // END OF MODIFICATIONS.
