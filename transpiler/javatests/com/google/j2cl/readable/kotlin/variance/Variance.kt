@@ -146,3 +146,14 @@ fun testDeclarationVariancePropagation() {
   val outException: Iterable<Exception>? = getIterableOfException()
   acceptsOutThrowable(outException)
 }
+
+interface Producer<T> {
+  fun get(): T
+}
+
+fun testUseSiteVariancePropagationToMembers(c: Container<in String>, p: Producer<in String>) {
+  // The type of the member accesses below is `Any?` since `T` is contravariant at the use site.
+  val fromProperty = c.t
+  val fromMethod = p.get()
+  val fromMethodReference = p::get.invoke()
+}

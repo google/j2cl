@@ -11,11 +11,13 @@ let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
 let Bounded = goog.forwardDeclare('variance.Bounded$impl');
 let Constrained = goog.forwardDeclare('variance.Constrained$impl');
 let Container = goog.forwardDeclare('variance.Container$impl');
 let In = goog.forwardDeclare('variance.In$impl');
 let Out = goog.forwardDeclare('variance.Out$impl');
+let Producer = goog.forwardDeclare('variance.Producer$impl');
 let $1 = goog.forwardDeclare('variance.VarianceKt.$1$impl');
 let $2 = goog.forwardDeclare('variance.VarianceKt.$2$impl');
 let $3 = goog.forwardDeclare('variance.VarianceKt.$3$impl');
@@ -102,6 +104,16 @@ class VarianceKt extends j_l_Object {
   VarianceKt.m_acceptsOutThrowable__java_lang_Iterable__void(outException);
  }
  /** @nodts */
+ static m_testUseSiteVariancePropagationToMembers__variance_Container__variance_Producer__void(/** !Container<?> */ c, /** !Producer<?> */ p) {
+  VarianceKt.$clinit();
+  let fromProperty = c.m_getT__java_lang_Object();
+  let fromMethod = p.m_get__java_lang_Object();
+  let tmp0_bound0 = p;
+  let fromMethodReference = Function0.$adapt(/**  @return {*}*/ (() =>{
+   return tmp0_bound0.m_get__java_lang_Object();
+  })).m_invoke__java_lang_Object();
+ }
+ /** @nodts */
  static $clinit() {
   VarianceKt.$clinit = () =>{};
   VarianceKt.$loadModules();
@@ -117,6 +129,7 @@ class VarianceKt extends j_l_Object {
   CharSequence = goog.module.get('java.lang.CharSequence$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
   Bounded = goog.module.get('variance.Bounded$impl');
   Constrained = goog.module.get('variance.Constrained$impl');
   Container = goog.module.get('variance.Container$impl');
