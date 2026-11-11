@@ -49,6 +49,26 @@ class SubNumberHolder : NumberHolder<Int>(2)
 // by IntSetter.set(int).
 class IntHolderExtendsGetter : Holder<Int>(1), IntGetter, IntSetter
 
+interface UnitGetter {
+  fun get()
+}
+
+// This has an accidental override for UnitGetter.get() by Holder.get(), which needs a bridge from
+// void get() to Object get().
+class UnitHolderExtendsGetter : Holder<Unit>(Unit), UnitGetter
+
+interface Getter<T> {
+  fun get(): T
+}
+
+open class UnitHolder {
+  fun get() {}
+}
+
+// This has an accidental override for Getter.get() by UnitHolder.get(), which needs a bridge from
+// Object get() to void get().
+class UnitHolderImplementsGetter : UnitHolder(), Getter<Unit>
+
 open class Overloads {
   open fun set(i: Int) {}
 

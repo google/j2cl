@@ -1,0 +1,42 @@
+goog.module('primitivespecialization.UnitHolder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class UnitHolder extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!UnitHolder} */
+ static $create__() {
+  UnitHolder.$clinit();
+  let $instance = new UnitHolder();
+  $instance.$ctor__primitivespecialization_UnitHolder__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_UnitHolder__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts */
+ m_get__void() {}
+ /** @nodts */
+ static $clinit() {
+  UnitHolder.$clinit = () =>{};
+  UnitHolder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnitHolder;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(UnitHolder, 'primitivespecialization.UnitHolder');
+
+exports = UnitHolder;
+
+//# sourceMappingURL=UnitHolder.js.map

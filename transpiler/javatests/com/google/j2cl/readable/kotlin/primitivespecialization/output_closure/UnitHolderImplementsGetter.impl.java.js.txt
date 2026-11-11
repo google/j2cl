@@ -1,0 +1,55 @@
+goog.module('primitivespecialization.UnitHolderImplementsGetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Getter = goog.require('primitivespecialization.Getter$impl');
+const UnitHolder = goog.require('primitivespecialization.UnitHolder$impl');
+
+let Unit = goog.forwardDeclare('kotlin.Unit$impl');
+
+/**
+ * @final
+ * @implements {Getter<!Unit>}
+ */
+class UnitHolderImplementsGetter extends UnitHolder {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!UnitHolderImplementsGetter} */
+ static $create__() {
+  UnitHolderImplementsGetter.$clinit();
+  let $instance = new UnitHolderImplementsGetter();
+  $instance.$ctor__primitivespecialization_UnitHolderImplementsGetter__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__primitivespecialization_UnitHolderImplementsGetter__void() {
+  this.$ctor__primitivespecialization_UnitHolder__void();
+ }
+ //Bridge method.
+ /** @final @override @nodts @suppress{visibility} @return {!Unit} */
+ m_get__java_lang_Object() {
+  return (this.m_get__void(), Unit.f_INSTANCE__kotlin_Unit);
+ }
+ /** @nodts */
+ static $clinit() {
+  UnitHolderImplementsGetter.$clinit = () =>{};
+  UnitHolderImplementsGetter.$loadModules();
+  UnitHolder.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof UnitHolderImplementsGetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Unit = goog.module.get('kotlin.Unit$impl');
+ }
+}
+Getter.$markImplementor(UnitHolderImplementsGetter);
+$Util.$setClassMetadata(UnitHolderImplementsGetter, 'primitivespecialization.UnitHolderImplementsGetter');
+
+exports = UnitHolderImplementsGetter;
+
+//# sourceMappingURL=UnitHolderImplementsGetter.js.map

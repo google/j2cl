@@ -17,6 +17,7 @@ package primitivespecialization
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertFalse
+import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 
@@ -26,6 +27,7 @@ fun main(vararg unused: String) {
   testSpecialization_parameterType_fromGeneralizedSupertype()
   testSpecialization_parameterType_fromSpecializedSupertype()
   testSpeciialization_specialOverrides()
+  testSpecialization_unitReturnType()
 }
 
 fun testSpecialization_returnType_fromGeneralizedSupertype() {
@@ -172,6 +174,47 @@ interface IntSetter {
 
 interface IntGetter {
   fun get(): Int
+}
+
+interface UnitGetter {
+  fun get()
+}
+
+fun testSpecialization_unitReturnType() {
+  var calls = 0
+
+  // Bridge for the override of "T Getter.get()" by "void get()".
+  class UnitGetterImpl : Getter<Unit> {
+    override fun get() {
+      calls++
+    }
+  }
+  val getter: Getter<Unit> = UnitGetterImpl()
+  assertSame(Unit, getter.get())
+  assertEquals(1, calls)
+
+  // Bridge for the accidental override of "T Getter.get()" by "void UnitHolder.get()".
+  open class UnitHolder {
+    fun get() {
+      calls++
+    }
+  }
+  class UnitHolderImplementsGetter : UnitHolder(), Getter<Unit>
+  val accidentalGetter: Getter<Unit> = UnitHolderImplementsGetter()
+  assertSame(Unit, accidentalGetter.get())
+  assertEquals(2, calls)
+
+  // Bridge for the accidental override of "void UnitGetter.get()" by "T Holder.get()".
+  open class Holder<T>(val content: T) {
+    fun get(): T {
+      calls++
+      return content
+    }
+  }
+  class HolderImplementsUnitGetter : Holder<Unit>(Unit), UnitGetter
+  val unitGetter: UnitGetter = HolderImplementsUnitGetter()
+  assertSame(Unit, unitGetter.get())
+  assertEquals(3, calls)
 }
 
 fun assertIsIntOne(i: Int) {

@@ -1,0 +1,33 @@
+goog.module('primitivespecialization.UnitGetter$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class UnitGetter {
+ /** @abstract @nodts */
+ m_get__void() {}
+ /** @nodts */
+ static $clinit() {
+  UnitGetter.$clinit = () =>{};
+  UnitGetter.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__primitivespecialization_UnitGetter = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__primitivespecialization_UnitGetter;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+UnitGetter.$markImplementor(/**@type {Function}*/ (UnitGetter));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (UnitGetter), 'primitivespecialization.UnitGetter');
+
+exports = UnitGetter;
+
+//# sourceMappingURL=UnitGetter.js.map
