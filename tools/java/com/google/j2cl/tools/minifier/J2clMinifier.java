@@ -242,7 +242,12 @@ public class J2clMinifier {
   }
 
   public static boolean isJ2clFile(String filePath) {
-    return filePath.endsWith(".java.js");
+    // TODO(b/576806521): Remove the pre-transpiled path exclusions once all targets are on modern
+    // browsers / modern_dev. Pre-transpiled TranspileJs outputs (.js2016/ and .es5/) must never
+    // be passed to J2clMinifier.
+    return filePath.endsWith(".java.js")
+        && !filePath.contains(".js2016/")
+        && !filePath.contains(".es5/");
   }
 
   private static String computePrettyIdentifier(String identifier) {
