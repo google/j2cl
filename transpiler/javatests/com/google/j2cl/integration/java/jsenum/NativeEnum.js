@@ -13,7 +13,7 @@
 // limitations under the License.
 goog.module('test.NativeEnum');
 
-/** @enum {?string} */
+/** @enum {string} */
 const NativeEnum = {
   OK: 'Ok',
   CANCEL: 'Cancel'

@@ -158,7 +158,7 @@ public class ClosureGenerationEnvironment {
 
   protected String getJsEnumValueType(TypeDeclaration typeDeclaration) {
     return closureTypesGenerator.getClosureTypeString(
-        AstUtils.getJsEnumValueFieldType(typeDeclaration));
+        AstUtils.getJsEnumValueFieldType(typeDeclaration).toNonNullable());
   }
 
   /** Returns the JsDoc declaration clause for a collection of type variables. */

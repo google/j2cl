@@ -424,7 +424,7 @@ enum ExposedEnum {
 
 ```javascript
 // ExposedEnum.impl.java.js (transpiled from ExposedEnum.java)
-/** @enum {?string} */
+/** @enum {string} */
 const ExposedEnum = {
   VALUE1 : 'Value1',
   VALUE2 : 'Value2'
