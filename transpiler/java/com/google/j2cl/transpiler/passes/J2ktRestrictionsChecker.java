@@ -26,10 +26,8 @@ import static java.lang.Boolean.getBoolean;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.common.HasSourcePosition;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.Severity;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -61,14 +59,6 @@ public final class J2ktRestrictionsChecker {
   public static void check(Library library, Problems problems) {
     library.accept(
         new AbstractVisitor() {
-          private SourcePosition getClosestSourcePosition() {
-            HasSourcePosition hasSourcePosition =
-                (HasSourcePosition) getParent(HasSourcePosition.class::isInstance);
-            return hasSourcePosition != null
-                ? hasSourcePosition.getSourcePosition()
-                : SourcePosition.NONE;
-          }
-
           @Override
           public void exitMethod(Method method) {
             checkNotGenericConstructor(method);
@@ -346,7 +336,7 @@ public final class J2ktRestrictionsChecker {
                 && methodCall.getQualifier() != null
                 && !(methodCall.getQualifier() instanceof ThisReference)) {
               problems.error(
-                  getClosestSourcePosition(),
+                  methodCall.getSourcePosition(),
                   "Explicit qualifier in constructor call is not supported.");
             }
           }
@@ -400,10 +390,9 @@ public final class J2ktRestrictionsChecker {
               }
 
               if (!type.getDeclaration().getRecordComponentAccessorDescriptors().stream()
-                  .allMatch(
-                      accessor ->
-                          accessor.getJavaOverriddenMethodDescriptors().stream()
-                              .allMatch(it -> it.isKtProperty()))) {
+                  .allMatch(accessor ->
+                      accessor.getJavaOverriddenMethodDescriptors().stream()
+                          .allMatch(it -> it.isKtProperty()))) {
                 problems.error(
                     type.getSourcePosition(),
                     "Record class '%s' with accessors overriding methods which are not translated"
