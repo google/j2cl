@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 
 /**
  * Convert lambda expressions to implementor classes for interfaces which are not functional in
@@ -30,9 +31,8 @@ public class NormalizeLambdaExpressionsJ2kt
 
   @Override
   protected boolean shouldRewrite(FunctionExpression functionExpression) {
-    return !functionExpression
-        .getTypeDescriptor()
-        .getFunctionalInterface()
+    return !LambdaAdaptorTypeDescriptors.findFunctionalInterface(
+            functionExpression.getTypeDescriptor())
         .getTypeDeclaration()
         .isKtFunctionalInterface();
   }

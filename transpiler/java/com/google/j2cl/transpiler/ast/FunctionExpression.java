@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -47,12 +48,12 @@ public class FunctionExpression extends Expression implements MethodLike {
     this.typeDescriptor = typeDescriptor.toNonNullable();
     this.sourcePosition = checkNotNull(sourcePosition);
     this.isJsAsync = isJsAsync;
-    checkNotNull(typeDescriptor.getFunctionalInterface());
+    checkArgument(typeDescriptor.isFunctionalInterface());
   }
 
   @Override
   public MethodDescriptor getDescriptor() {
-    return typeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
+    return typeDescriptor.getFunctionalMethodDescriptor();
   }
 
   @Override

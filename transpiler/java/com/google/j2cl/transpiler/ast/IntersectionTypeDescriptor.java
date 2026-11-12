@@ -78,7 +78,7 @@ public abstract non-sealed class IntersectionTypeDescriptor extends TypeDescript
   @Nullable
   @Override
   @Memoized
-  public DeclaredTypeDescriptor getFunctionalInterface() {
+  public MethodDescriptor getFunctionalMethodDescriptor() {
     // Only intersections of interfaces, possibly with Object as the class component, can be
     // functional interfaces (JLS 4.9, 9.9).
     ImmutableList<TypeDescriptor> components =
@@ -88,7 +88,7 @@ public abstract non-sealed class IntersectionTypeDescriptor extends TypeDescript
     if (!components.stream().allMatch(TypeDescriptor::isInterface)) {
       return null;
     }
-    return AstUtils.getFunctionalInterface(
+    return AstUtils.getFunctionalMethodDescriptor(
         components.stream().map(DeclaredTypeDescriptor.class::cast).collect(toImmutableList()));
   }
 

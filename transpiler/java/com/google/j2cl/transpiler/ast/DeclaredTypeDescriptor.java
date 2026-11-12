@@ -89,11 +89,6 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public boolean isFunctionalInterface() {
-    return getTypeDeclaration().isFunctionalInterface();
-  }
-
-  @Override
   public boolean isJsType() {
     return getTypeDeclaration().isJsType();
   }
@@ -222,28 +217,47 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   }
 
   /**
+   * Returns the JsFunction interface for JsFunction interfaces and implementations, otherwise
+   * {@code null}.
+   */
+  @Memoized
+  @Nullable
+  public DeclaredTypeDescriptor getJsFunctionInterface() {
+    if (isJsFunctionInterface()) {
+      return this;
+    }
+    if (!isClass()) {
+      // Only classes implement JsFunction interfaces; interfaces can't extend them.
+      return null;
+    }
+    // JsFunction implementations can only implement the JsFunction interface, which is enforced by
+    // JsInteropRestrictionsChecker.
+    return getInterfaceTypeDescriptors().stream()
+        .filter(TypeDescriptor::isJsFunctionInterface)
+        .findFirst()
+        .orElse(null);
+  }
+
+  /**
    * Returns the functional method of the JsFunction interface for JsFunction interfaces and
    * implementations, otherwise {@code null},
    */
   @Memoized
   @Nullable
   public MethodDescriptor getJsFunctionMethodDescriptor() {
-    DeclaredTypeDescriptor functionalInterface = getFunctionalInterface();
-    return functionalInterface.isJsFunctionInterface()
-        ? functionalInterface.getSingleAbstractMethodDescriptor()
+    DeclaredTypeDescriptor jsFunctionInterface = getJsFunctionInterface();
+    return jsFunctionInterface != null
+        ? jsFunctionInterface.getSingleAbstractMethodDescriptor()
         : null;
   }
 
   @Nullable
   @Override
-  @Memoized
-  public DeclaredTypeDescriptor getFunctionalInterface() {
-    // TODO(b/583973374): Separate the functional interface implemented by a class from the
-    // function type of an interface; this computes the former as if the class were the
-    // intersection of its direct superinterfaces.
-    return isFunctionalInterface()
-        ? this
-        : AstUtils.getFunctionalInterface(getInterfaceTypeDescriptors());
+  public MethodDescriptor getFunctionalMethodDescriptor() {
+    // Only functional interfaces can be implemented by lambdas.
+    return getTypeDeclaration().isFunctionalInterface()
+        ? getSingleAbstractMethodDescriptor()
+        : null;
   }
 
   @Override

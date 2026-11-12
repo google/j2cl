@@ -148,13 +148,12 @@ public class NewArray extends Expression {
       return literal.getTypeDescriptor().hasSameRawType(typeDescriptor);
     }
 
-    DeclaredTypeDescriptor functionalInterface =
-        checkNotNull(
-            initializer.getTypeDescriptor().getFunctionalInterface(),
-            "Array initializer type should be a functional interface");
-    checkState(functionalInterface.isJsFunctionInterface());
+    TypeDescriptor initializerTypeDescriptor = initializer.getTypeDescriptor();
+    checkState(initializerTypeDescriptor.isJsFunctionInterface());
     MethodDescriptor methodDescriptor =
-        checkNotNull(functionalInterface.getSingleAbstractMethodDescriptor());
+        checkNotNull(
+            initializerTypeDescriptor.getFunctionalMethodDescriptor(),
+            "Array initializer type should be a functional interface");
     // A valid initializer SAM type:
     //  - should have a return type that matches the component type of the array
     //  - should only accept a single int parameter (the index)

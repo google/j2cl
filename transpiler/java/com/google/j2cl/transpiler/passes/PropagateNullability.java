@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
+import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.NewArray;
@@ -318,7 +319,8 @@ public class PropagateNullability extends AbstractJ2ktNormalizationPass {
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
             DeclaredTypeDescriptor functionalInterface =
-                functionExpression.getTypeDescriptor().getFunctionalInterface();
+                LambdaAdaptorTypeDescriptors.findFunctionalInterface(
+                    functionExpression.getTypeDescriptor());
             ImmutableList<TypeVariable> typeParameterDescriptors =
                 functionalInterface.getTypeDeclaration().getTypeParameterDescriptors();
             ImmutableList<TypeDescriptor> typeArgumentDescriptors =

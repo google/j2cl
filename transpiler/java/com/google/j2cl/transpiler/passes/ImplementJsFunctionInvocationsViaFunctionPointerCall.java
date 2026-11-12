@@ -109,7 +109,7 @@ public class ImplementJsFunctionInvocationsViaFunctionPointerCall extends Normal
             }
 
             DeclaredTypeDescriptor jsFunctionInterface =
-                methodCall.getTarget().getEnclosingTypeDescriptor().getFunctionalInterface();
+                methodCall.getTarget().getEnclosingTypeDescriptor().getJsFunctionInterface();
 
             return MethodCall.builderFrom(getStaticForwardingMethodDescriptor(jsFunctionInterface))
                 .setArguments(

@@ -39,7 +39,7 @@ public class AddJsFunctionCommonAdaptorSuperType extends NormalizationPass {
     }
 
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        type.getTypeDescriptor().getFunctionalInterface();
+        type.getTypeDescriptor().getJsFunctionInterface();
     checkState(functionalInterfaceTypeDescriptor.isJsFunctionInterface());
 
     // Inject the JsFunctionAdaptor supertype for types who implement a JsFunction

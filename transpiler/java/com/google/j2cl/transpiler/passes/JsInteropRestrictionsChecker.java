@@ -1185,9 +1185,7 @@ public class JsInteropRestrictionsChecker {
     DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
     if (typeDescriptor.isFunctionalInterface()) {
       checkFunctionalMethodOverrides(
-          typeDescriptor.getSingleAbstractMethodDescriptor(),
-          typeDescriptor,
-          type.getSourcePosition());
+          typeDescriptor.getFunctionalMethodDescriptor(), typeDescriptor, type.getSourcePosition());
     }
   }
 

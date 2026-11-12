@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -26,7 +25,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 /** Utility TypeDescriptors methods used to synthesize lambda implementors. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -42,23 +40,14 @@ public final class LambdaImplementorTypeDescriptors {
       List<TypeVariable> typeParameters,
       boolean extendsCommonAdaptor) {
 
-    // Lambdas that implement several types, e.g. from an intersection cast, require that all
-    // those types be declared type descriptors. `Object`, which can be the class component of an
-    // intersection that is a functional interface, is not implemented.
-    Stream<DeclaredTypeDescriptor> interfaceDescriptorsStream =
-        typeDescriptor.isIntersection()
-            ? ((IntersectionTypeDescriptor) typeDescriptor)
-                .getIntersectionTypeDescriptors().stream()
-                    .filter(not(TypeDescriptors::isJavaLangObject))
-                    .map(DeclaredTypeDescriptor.class::cast)
-            : Stream.of((DeclaredTypeDescriptor) typeDescriptor);
-
     ImmutableList<DeclaredTypeDescriptor> interfaceTypeDescriptors =
-        extendsCommonAdaptor
-            ? interfaceDescriptorsStream.collect(toImmutableList())
-            : interfaceDescriptorsStream
-                .map(LambdaImplementorTypeDescriptors::sanitizeDescriptor)
-                .collect(toImmutableList());
+        LambdaAdaptorTypeDescriptors.getImplementedInterfaceTypeDescriptors(typeDescriptor);
+    if (!extendsCommonAdaptor) {
+      interfaceTypeDescriptors =
+          interfaceTypeDescriptors.stream()
+              .map(LambdaImplementorTypeDescriptors::sanitizeDescriptor)
+              .collect(toImmutableList());
+    }
 
     TypeDeclaration implementorTypeDeclaration =
         createLambdaImplementorTypeDeclaration(
@@ -149,9 +138,11 @@ public final class LambdaImplementorTypeDescriptors {
     if (!extendsCommonAdaptor) {
       return TypeDescriptors.get().javaLangObject;
     }
-    // Extend the adaptor of the functional interface implemented by the lambda implementor. This
+    // Extend the adaptor of the functional interface that declares the function type, if any. This
     // accomplishes the main goal of inheriting class metadata.
-    DeclaredTypeDescriptor functionalInterface = implementorTypeDescriptor.getFunctionalInterface();
+    DeclaredTypeDescriptor functionalInterface =
+        LambdaAdaptorTypeDescriptors.findFunctionalInterface(
+            implementorTypeDescriptor.getInterfaceTypeDescriptors());
 
     if (functionalInterface.isJsFunctionInterface()) {
       return TypeDescriptors.get().javaemulInternalJsFunctionAdaptor;

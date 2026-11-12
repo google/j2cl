@@ -1373,7 +1373,7 @@ internal class CompilationUnitBuilder(
     val typeDescriptor =
       environment.getReferenceTypeDescriptorForFunctionReference(irExpression.type as IrSimpleType)
 
-    if (typeDescriptor.functionalInterface == null) {
+    if (!typeDescriptor.isFunctionalInterface) {
       throw IllegalStateException("The type is not a functional interface: ${irExpression.dump()}")
     }
 
@@ -1396,7 +1396,7 @@ internal class CompilationUnitBuilder(
 
     return FunctionExpression.builder()
       .setTypeDescriptor(typeDescriptor)
-      .setJsAsync(typeDescriptor.functionalInterface!!.singleAbstractMethodDescriptor!!.isJsAsync)
+      .setJsAsync(typeDescriptor.functionalMethodDescriptor!!.isJsAsync)
       .setParameters(parameters)
       .setStatements(body.statements)
       .setSourcePosition(getSourcePosition(irExpression))

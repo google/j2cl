@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.function.Predicate.not;
 
@@ -27,6 +26,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Origin;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.Nullable;
 
 /** Utility TypeDescriptors methods related to lambda synthesis. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -73,25 +73,9 @@ public final class LambdaAdaptorTypeDescriptors {
       AdaptorKind adaptorKind,
       Optional<Integer> uniqueId) {
 
-    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        typeDescriptor.getFunctionalInterface();
-
-    checkArgument(!functionalInterfaceTypeDescriptor.isJsFunctionInterface());
-
-    DeclaredTypeDescriptor jsFunctionInterface =
-        createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
-
-    // Lambdas that implement several types, e.g. from an intersection cast, require that all
-    // those types be declared type descriptors. `Object`, which can be the class component of an
-    // intersection that is a functional interface, is not implemented.
+    DeclaredTypeDescriptor jsFunctionInterface = createJsFunctionTypeDescriptor(typeDescriptor);
     List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
-        typeDescriptor.isIntersection()
-            ? ((IntersectionTypeDescriptor) typeDescriptor)
-                .getIntersectionTypeDescriptors().stream()
-                    .filter(not(TypeDescriptors::isJavaLangObject))
-                    .map(DeclaredTypeDescriptor.class::cast)
-                    .collect(toImmutableList())
-            : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
+        getImplementedInterfaceTypeDescriptors(typeDescriptor);
 
     ImmutableList<TypeDescriptor> typeArgumentDescriptors =
         interfaceTypeDescriptors.stream()
@@ -107,6 +91,54 @@ public final class LambdaAdaptorTypeDescriptors {
             uniqueId);
 
     return adaptorDeclaration.toDescriptor(typeArgumentDescriptors);
+  }
+
+  /**
+   * Returns the interfaces implemented by lambdas that target {@code typeDescriptor}, i.e. the type
+   * itself or the components of an intersection, excluding {@code Object} which can be the class
+   * component of an intersection that is functional.
+   */
+  static ImmutableList<DeclaredTypeDescriptor> getImplementedInterfaceTypeDescriptors(
+      TypeDescriptor typeDescriptor) {
+    return typeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor
+        ? intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+            .filter(not(TypeDescriptors::isJavaLangObject))
+            .map(DeclaredTypeDescriptor.class::cast)
+            .collect(toImmutableList())
+        : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
+  }
+
+  /**
+   * Returns the functional interface implemented by lambdas that target {@code typeDescriptor}
+   * whose single abstract method is the function type, or {@code null} if there is none.
+   */
+  @Nullable
+  public static DeclaredTypeDescriptor findFunctionalInterface(TypeDescriptor typeDescriptor) {
+    return findFunctionalInterface(getImplementedInterfaceTypeDescriptors(typeDescriptor));
+  }
+
+  /**
+   * Returns the functional interface in {@code interfaceTypeDescriptors} whose single abstract
+   * method is the function type of their intersection, or {@code null} if there is none.
+   *
+   * <p>Lambdas that target such an interface can share its adaptor and synthetic JsFunction type.
+   */
+  @Nullable
+  @SuppressWarnings("ReferenceEquality")
+  static DeclaredTypeDescriptor findFunctionalInterface(
+      List<DeclaredTypeDescriptor> interfaceTypeDescriptors) {
+    MethodDescriptor functionalMethod =
+        AstUtils.getFunctionalMethodDescriptor(interfaceTypeDescriptors);
+    if (functionalMethod == null) {
+      return null;
+    }
+    return interfaceTypeDescriptors.stream()
+        .filter(i ->
+            i.isFunctionalInterface()
+                && i.getFunctionalMethodDescriptor().getDeclarationDescriptor()
+                    == functionalMethod.getDeclarationDescriptor())
+        .findFirst()
+        .orElse(null);
   }
 
   /**
@@ -173,19 +205,15 @@ public final class LambdaAdaptorTypeDescriptors {
         .build();
   }
 
-  /** Returns the MethodDescriptor for the functional method implementation in the given type. */
-  @SuppressWarnings("ReferenceEquality")
+  /**
+   * Returns the MethodDescriptor for the implementation of the functional method in a synthetic
+   * lambda class, i.e. an adaptor or implementor, whose interfaces are those of the lambda target.
+   */
   public static MethodDescriptor getFunctionalMethodImplementation(
       DeclaredTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
-        typeDescriptor.getFunctionalInterface();
-    checkState(
-        functionalInterfaceTypeDescriptor.getFunctionalInterface()
-            == functionalInterfaceTypeDescriptor);
-
-    MethodDescriptor functionalInterfaceMethodDescriptor =
-        functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
-    return functionalInterfaceMethodDescriptor.toBuilder()
+    MethodDescriptor functionalMethodDescriptor =
+        AstUtils.getFunctionalMethodDescriptor(typeDescriptor.getInterfaceTypeDescriptors());
+    return functionalMethodDescriptor.toBuilder()
         .setDeclarationDescriptor(null)
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setOrigin(MethodOrigin.SYNTHETIC_METHOD)
@@ -194,13 +222,15 @@ public final class LambdaAdaptorTypeDescriptors {
         .build();
   }
 
-  /** Returns the TypeDescriptor for lambda instances of the functional interface. */
+  /** Returns the synthetic JsFunction interface for the function type of {@code typeDescriptor}. */
   public static DeclaredTypeDescriptor createJsFunctionTypeDescriptor(
-      DeclaredTypeDescriptor functionalTypeDescriptor) {
-    checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
+      TypeDescriptor typeDescriptor) {
+    DeclaredTypeDescriptor functionalInterface =
+        findFunctionalInterface(getImplementedInterfaceTypeDescriptors(typeDescriptor));
+    checkArgument(!functionalInterface.isJsFunctionInterface());
 
-    return createJsFunctionTypeDeclaration(functionalTypeDescriptor)
-        .toDescriptor(functionalTypeDescriptor.getTypeArgumentDescriptors());
+    return createJsFunctionTypeDeclaration(functionalInterface)
+        .toDescriptor(functionalInterface.getTypeArgumentDescriptors());
   }
 
   /** Returns the TypeDeclaration for the JsFunction class. */

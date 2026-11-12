@@ -19,6 +19,7 @@ import com.google.j2cl.common.OutputUtils
 import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.AbstractVisitor
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Library
@@ -164,7 +165,9 @@ private fun CompilationUnit.buildForbiddenIdentifierSet(): Set<String> = buildSe
       override fun enterFunctionExpression(functionExpression: FunctionExpression): Boolean {
         // Functional interface names are forbidden because they are included in return statement
         // labels.
-        add(functionExpression.typeDescriptor.functionalInterface!!.typeDeclaration.ktSimpleName)
+        add(
+          (functionExpression.typeDescriptor as DeclaredTypeDescriptor).typeDeclaration.ktSimpleName
+        )
         return true
       }
     }

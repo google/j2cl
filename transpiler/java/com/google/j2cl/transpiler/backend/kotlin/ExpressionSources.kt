@@ -331,7 +331,7 @@ internal data class ExpressionSources(
   private fun functionExpressionLambdaSource(functionExpression: FunctionExpression): Source =
     spaceSeparated(
       newInstanceTypeDescriptorSource(
-        functionExpression.typeDescriptor.functionalInterface!!,
+        functionExpression.typeDescriptor as DeclaredTypeDescriptor,
         omitTypeArguments = true,
       ),
       functionExpression.singleExpressionOrNull.let { singleExpression ->
@@ -349,7 +349,7 @@ internal data class ExpressionSources(
     statementSources
       .copy(
         currentReturnLabelIdentifier =
-          functionExpression.typeDescriptor.functionalInterface!!
+          (functionExpression.typeDescriptor as DeclaredTypeDescriptor)
             .typeDeclaration
             .returnLabelIdentifier
       )

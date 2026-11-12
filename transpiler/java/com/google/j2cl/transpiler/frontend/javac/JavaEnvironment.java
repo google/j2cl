@@ -1319,14 +1319,10 @@ public class JavaEnvironment {
   @Nullable
   private MethodSymbol getFunctionalInterfaceMethod(TypeMirror typeMirror) {
     Type type = (Type) typeMirror;
+    // Only called for type declarations; the function type of intersections is computed in the AST.
+    checkState(!(type instanceof IntersectionType));
     if (!internalTypes.isFunctionalInterface(type)) {
       return null;
-    }
-    if (type instanceof IntersectionType intersectionType) {
-      return intersectionType.getBounds().stream()
-          .filter(this::isFunctionalInterface)
-          .map(this::getFunctionalInterfaceMethod)
-          .collect(onlyElement());
     }
     try {
       // Request the method symbol associated with this functional interface type.

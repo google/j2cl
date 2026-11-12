@@ -596,30 +596,26 @@ public class NormalizeConstructors extends NormalizationPass {
   /** Method descriptor for $create methods. */
   private static MethodDescriptor factoryDescriptorForConstructor(MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
-    return constructor.transform(
-        builder ->
-            builder
-                .setStatic(true)
-                .setName(MethodDescriptor.CREATE_METHOD_NAME)
-                .setConstructor(false)
-                .setReturnTypeDescriptor(
-                    // JsFunction implementation constructors actually return a function, not an
-                    // object of the class.
-                    builder.getEnclosingTypeDescriptor().isJsFunctionImplementation()
-                        ? builder
-                            .getEnclosingTypeDescriptor()
-                            .getFunctionalInterface()
-                            .toNonNullable()
-                        : builder.getEnclosingTypeDescriptor().toNonNullable())
-                .addTypeParameterTypeDescriptors(
-                    0,
-                    builder
-                        .getEnclosingTypeDescriptor()
-                        .getTypeDeclaration()
-                        .getTypeParameterDescriptors())
-                .addTypeArgumentTypeDescriptors(
-                    0, builder.getEnclosingTypeDescriptor().getTypeArgumentDescriptors())
-                .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR));
+    return constructor.transform(builder ->
+        builder
+            .setStatic(true)
+            .setName(MethodDescriptor.CREATE_METHOD_NAME)
+            .setConstructor(false)
+            .setReturnTypeDescriptor(
+                // JsFunction implementation constructors actually return a function, not an
+                // object of the class.
+                builder.getEnclosingTypeDescriptor().isJsFunctionImplementation()
+                    ? builder.getEnclosingTypeDescriptor().getJsFunctionInterface().toNonNullable()
+                    : builder.getEnclosingTypeDescriptor().toNonNullable())
+            .addTypeParameterTypeDescriptors(
+                0,
+                builder
+                    .getEnclosingTypeDescriptor()
+                    .getTypeDeclaration()
+                    .getTypeParameterDescriptors())
+            .addTypeArgumentTypeDescriptors(
+                0, builder.getEnclosingTypeDescriptor().getTypeArgumentDescriptors())
+            .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR));
   }
 
   /** Method descriptor for the implicit (parameterless) ES6 constructor */

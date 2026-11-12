@@ -15,6 +15,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -138,7 +139,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               return methodCall;
             }
             MethodDescriptor functionalInterfaceMethod =
-                targetTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
+                getImplementedInterface(targetTypeDescriptor).getSingleAbstractMethodDescriptor();
             if (target.isOverride(functionalInterfaceMethod)) {
               // The calls that are typed as directly to the anonymous inner class are redirected
               // to be calls though the interface type, e.g.
@@ -173,7 +174,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               DeclaredTypeDescriptor declaredTypeDescriptor) {
             TypeDeclaration typeDeclaration = declaredTypeDescriptor.getTypeDeclaration();
             if (optimizedClasses.contains(typeDeclaration)) {
-              return declaredTypeDescriptor.getFunctionalInterface();
+              return getImplementedInterface(declaredTypeDescriptor);
             }
             return declaredTypeDescriptor;
           }
@@ -181,7 +182,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           @Override
           public TypeDeclaration rewriteTypeDeclaration(TypeDeclaration typeDeclaration) {
             if (optimizedClasses.contains(typeDeclaration)) {
-              return typeDeclaration.toDescriptor().getFunctionalInterface().getTypeDeclaration();
+              return getImplementedInterface(typeDeclaration.toDescriptor()).getTypeDeclaration();
             }
             return typeDeclaration;
           }
@@ -195,7 +196,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
   private static FunctionExpression optimizeToFunctionExpression(final Type type) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-        type.getTypeDescriptor().getFunctionalInterface();
+        getImplementedInterface(type.getTypeDescriptor());
     MethodDescriptor functionalInterfaceMethod =
         jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor();
     insertPrimitiveConversionsOnReturns(jsFunctionMethodImplementation, functionalInterfaceMethod);
@@ -211,6 +212,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                 .setName(jsFunctionMethodImplementation.getQualifiedBinaryName())
                 .build())
         .build();
+  }
+
+  /** Returns the single interface implemented by an optimizable anonymous class. */
+  private static DeclaredTypeDescriptor getImplementedInterface(
+      DeclaredTypeDescriptor typeDescriptor) {
+    return Iterables.getOnlyElement(typeDescriptor.getInterfaceTypeDescriptors());
   }
 
   /**

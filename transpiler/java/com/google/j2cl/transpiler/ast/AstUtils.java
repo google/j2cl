@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -416,23 +417,22 @@ public final class AstUtils {
   }
 
   /**
-   * Returns the functional interface in {@code interfaces} whose single abstract method is the
-   * function type of their intersection (JLS 9.9), or {@code null} if the intersection is not a
-   * functional interface.
+   * Returns the function type (JLS 9.9) of the intersection of {@code interfaces}, i.e. the method
+   * that a lambda targeting the intersection implements, or {@code null} if the intersection is not
+   * a functional interface.
    *
    * <p>The function type of an intersection is not necessarily the single abstract method of its
    * first functional interface: another functional interface might declare the same method with a
    * more specific return type, or implement it with a default method.
    */
   @Nullable
-  public static DeclaredTypeDescriptor getFunctionalInterface(
+  public static MethodDescriptor getFunctionalMethodDescriptor(
       List<DeclaredTypeDescriptor> interfaces) {
     if (interfaces.isEmpty()) {
       return null;
     }
     if (interfaces.size() == 1) {
-      DeclaredTypeDescriptor onlyInterface = interfaces.getFirst();
-      return onlyInterface.isFunctionalInterface() ? onlyInterface : null;
+      return interfaces.getFirst().getFunctionalMethodDescriptor();
     }
 
     // Default methods from any of the interfaces, including those that are not functional,
@@ -446,13 +446,12 @@ public final class AstUtils {
     // The single abstract methods that are not implemented by default methods are all
     // override-equivalent in an intersection that is a functional interface (JLS 9.9), and the
     // function type is the one with the most specific return type.
-    Function<DeclaredTypeDescriptor, TypeDescriptor> returnType =
-        i -> i.getSingleAbstractMethodDescriptor().getReturnTypeDescriptor();
     return interfaces.stream()
-        .filter(DeclaredTypeDescriptor::isFunctionalInterface)
-        .filter(i ->
-            !isImplementedByDefaultMethod(i.getSingleAbstractMethodDescriptor(), defaultMethods))
-        .reduce((a, b) -> returnType.apply(a).isAssignableTo(returnType.apply(b)) ? a : b)
+        .map(DeclaredTypeDescriptor::getFunctionalMethodDescriptor)
+        .filter(Objects::nonNull)
+        .filter(m -> !isImplementedByDefaultMethod(m, defaultMethods))
+        .reduce((a, b) ->
+            a.getReturnTypeDescriptor().isAssignableTo(b.getReturnTypeDescriptor()) ? a : b)
         .orElse(null);
   }
 

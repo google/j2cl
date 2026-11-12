@@ -974,7 +974,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     TypeDescriptor expressionTypeDescriptor =
         environment.createTypeDescriptor(expression.type, inNullMarkedScope());
     MethodDescriptor functionalMethodDescriptor =
-        expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
+        expressionTypeDescriptor.getFunctionalMethodDescriptor();
 
     return FunctionExpression.builder()
         .setTypeDescriptor(expressionTypeDescriptor)
@@ -1029,8 +1029,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     var expressionTypeDescriptor =
         environment.createTypeDescriptor(memberReference.type, inNullMarkedScope());
-    var functionalMethodDescriptor =
-        expressionTypeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
+    var functionalMethodDescriptor = expressionTypeDescriptor.getFunctionalMethodDescriptor();
 
     if (memberReference.kind == ReferenceKind.ARRAY_CTOR) {
       return ArrayCreationReference.builder()

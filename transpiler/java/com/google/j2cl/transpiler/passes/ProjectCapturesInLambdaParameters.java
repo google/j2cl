@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Node;
 
 /** Projects captures in method descriptors and variables. */
@@ -33,7 +34,8 @@ public class ProjectCapturesInLambdaParameters extends AbstractJ2ktNormalization
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
             DeclaredTypeDescriptor declaredTypeDescriptor =
-                functionExpression.getTypeDescriptor().getFunctionalInterface();
+                LambdaAdaptorTypeDescriptors.findFunctionalInterface(
+                    functionExpression.getTypeDescriptor());
             functionExpression =
                 functionExpression.toBuilder()
                     .setTypeDescriptor(

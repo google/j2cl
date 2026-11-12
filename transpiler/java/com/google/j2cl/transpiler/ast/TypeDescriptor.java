@@ -148,9 +148,13 @@ public abstract sealed class TypeDescriptor
     return false;
   }
 
-  /** Returns whether the described type is a functional interface (JLS 9.8). */
-  public boolean isFunctionalInterface() {
-    return false;
+  /**
+   * Returns whether the type is a functional interface type (JLS 9.9), i.e. a functional interface
+   * or an intersection that induces a notional functional interface, which can be implemented by
+   * lambdas and method references.
+   */
+  public final boolean isFunctionalInterface() {
+    return getFunctionalMethodDescriptor() != null;
   }
 
   /** Returns whether the described type is a wasm native array. */
@@ -174,9 +178,12 @@ public abstract sealed class TypeDescriptor
   @Nullable
   public abstract TypeDeclaration getMetadataTypeDeclaration();
 
-  /** Returns the functional interface implemented by the type */
+  /**
+   * Returns the method implemented by lambdas and method references that target this type, i.e. its
+   * function type (JLS 9.9), or {@code null} if the type can not be implemented by a lambda.
+   */
   @Nullable
-  public DeclaredTypeDescriptor getFunctionalInterface() {
+  public MethodDescriptor getFunctionalMethodDescriptor() {
     return null;
   }
 
