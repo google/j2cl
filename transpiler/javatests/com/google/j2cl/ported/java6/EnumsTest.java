@@ -27,12 +27,6 @@ import org.junit.runners.JUnit4;
 @SuppressWarnings({"BoxedPrimitiveConstructor", "MethodCanBeStatic"})
 public class EnumsTest {
 
-  enum BarelyReferenced {
-    A,
-    B,
-    C
-  }
-
   enum Basic {
     A,
     B,
@@ -242,19 +236,6 @@ public class EnumsTest {
     }
   }
 
-  // TODO(b/36863439): Uncomment when Enum.valueOf is implemented.
-  // @Test
-  public void testBarelyReferencedValueOf() {
-    try {
-      Enum.valueOf(BarelyReferenced.class, "foo");
-      fail(
-          "Passed an invalid enum constant name to Enum.valueOf; expected "
-              + "IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-      // expected
-    }
-  }
-
   @SuppressWarnings("unchecked")
   @Test
   public void testValueOf() {
@@ -289,45 +270,10 @@ public class EnumsTest {
     // enumValuesTest(Basic.class);
     // enumValuesTest(Complex.class);
     // enumValuesTest(Subclassing.class);
-
-    // TODO(b/36863439): Uncomment when Enum.valueOf is implemented.
-    // try {
-    // Enum.valueOf(Basic.class, "foo");
-    //   fail(
-    //       "Passed an invalid enum constant name to Enum.valueOf; expected "
-    //           + "IllegalArgumentException");
-    // } catch (IllegalArgumentException expected) {
-    // }
-
-    // try {
-    //   @SuppressWarnings("all")
-    //   Class fakeEnumClass = String.class;
-    //   Enum.valueOf(fakeEnumClass, "foo");
-    //   fail("Passed a non enum class to Enum.valueOf; expected IllegalArgumentException");
-    // } catch (IllegalArgumentException expected) {
-    // }
-
-    // try {
-    //   Class<Basic> nullEnumClass = null;
-    //   Enum.valueOf(nullEnumClass, "foo");
-    //   fail("Passed a null enum class to Enum.valueOf; expected NullPointerException");
-    // } catch (NullPointerException expected) {
-    // }
-
-    // try {
-    //   Enum.valueOf(Basic.class, null);
-    //   fail("Passed a null enum constant to Enum.valueOf; expected NullPointerException");
-    // } catch (NullPointerException expected) {
-    // }
   }
 
   @Test
   public void testValueOfOverload() {
-    // TODO(b/36863439): Uncomment when Enum.valueOf is implemented.
-    // BasicWithOverloadedValueOf val1 = Enum.valueOf(BasicWithOverloadedValueOf.class, "A");
-    // BasicWithOverloadedValueOf valById1 = BasicWithOverloadedValueOf.valueOf(1);
-    // assertThat(valById1).isEqualTo(val1);
-
     BasicWithOverloadedValueOf val2 = BasicWithOverloadedValueOf.valueOf("B");
     BasicWithOverloadedValueOf valById2 = BasicWithOverloadedValueOf.valueOf(2);
     assertThat(valById2).isEqualTo(val2);

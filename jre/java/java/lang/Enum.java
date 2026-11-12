@@ -14,6 +14,7 @@
 package java.lang;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.NotEmulated;
 import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsType;
 
@@ -73,6 +74,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
   }
 
   @JsIgnore
+  @NotEmulated
   public static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) {
     throw new UnsupportedOperationException();
   }

@@ -57,6 +57,29 @@ public class NotEmulatedRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testEnumValueOfFails() {
+    assertWithInlineMessages(
+        "test.MyEnum",
+        """
+        import java.util.function.BiFunction;
+        enum MyEnum {
+          A;
+          static MyEnum valueOfName(String name) {
+            return MyEnum.valueOf(name);
+          }
+          static MyEnum lookup(String name) {
+            return Enum.valueOf(MyEnum.class, name);
+        > Error: 'T Enum.valueOf(Class, String)' is not emulated.
+          }
+          static Object methodReference() {
+            BiFunction<Class<MyEnum>, String, MyEnum> f = Enum::valueOf;
+        > Error: 'T Enum.valueOf(Class, String)' is not emulated.
+            return f;
+          }
+        }
+        """);
+  }
+
   private void assertWithInlineMessages(String... compilationUnitsAndSources) {
     newTesterWithDefaults().assertWithInlineMessages(compilationUnitsAndSources);
     newTesterWithWasmDefaults().assertWithInlineMessages(compilationUnitsAndSources);

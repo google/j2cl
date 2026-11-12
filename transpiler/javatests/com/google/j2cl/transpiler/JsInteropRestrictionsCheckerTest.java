@@ -3338,6 +3338,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         import java.io.Serializable;
         import java.util.ArrayList;
         import java.util.Collections;
+        import java.util.EnumSet;
         import java.util.List;
         import java.util.function.Supplier;
         import jsinterop.annotations.*;
@@ -3398,8 +3399,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Type argument for 'T' of 'MyJsEnum Main.returnsEnumBoundedT()' cannot be of type 'MyJsEnum'.
             Supplier<MyJsEnum> supplier = Main::returnsEnumBoundedT;
         > Error: Type argument for 'T' of 'MyJsEnum Main.returnsEnumBoundedT()' cannot be of type 'MyJsEnum'.
-            Enum.valueOf(MyJsEnum.class, "A");
-        > Error: Type argument for 'T' of 'MyJsEnum Enum.valueOf(Class, String)' cannot be of type 'MyJsEnum'.
+            EnumSet.noneOf(MyJsEnum.class);
+        > Error: Type argument for 'E' of 'EnumSet<MyJsEnum> EnumSet.noneOf(Class)' cannot be of type 'MyJsEnum'.
             List<? super Enum<?>> superEnumList = new ArrayList<Enum<?>>();
             superEnumList.add(MyJsEnum.A);
         > Error: JsEnum 'MyJsEnum' cannot be assigned to '<captured wildcard>'.

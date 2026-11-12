@@ -82,22 +82,4 @@ fun testValueOf_exceptions() {
   } catch (e: IllegalArgumentException) {
     // do nothing.
   }
-
-  try {
-    java.lang.Enum.valueOf(Planet::class.java, null)
-    fail("Should have thrown NullPointerException")
-  } catch (expected: UnsupportedOperationException) {
-    // J2CL throws UnsupportedOperationException
-  } catch (expected: NullPointerException) {
-    // JVM throws NullPointerException
-  }
-
-  try {
-    java.lang.Enum.valueOf(Planet::class.java, "NOTHING")
-    fail("Should have thrown UnsupportedOperationException")
-  } catch (expected: UnsupportedOperationException) {
-    // J2CL throws UnsupportedOperationException
-  } catch (expected: IllegalArgumentException) {
-    // JVM throws IllegalArgumentException
-  }
 }

@@ -50,8 +50,6 @@ public class Main {
   }
 
   private static void testValueOf() {
-    // TODO(b/36863439): Uncomment the following line once Enum.valueOf is implemented.
-    // assertTrue(Enum.valueOf(Planet.class, "SATURN")
     assertTrue(Planet.valueOf("MERCURY") == Planet.MERCURY);
     assertTrue(Planet.valueOf("VENUS") == Planet.VENUS);
     assertTrue(Planet.valueOf("EARTH") == Planet.EARTH);
@@ -89,30 +87,6 @@ public class Main {
       fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
-    }
-
-    // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
-    // implemented.
-    try {
-      Object unused = Enum.valueOf(Planet.class, null);
-      // fail( "Should have thrown NullPointerException");
-      // } catch (NullPointerException expected) {
-    } catch (UnsupportedOperationException expected) {
-      // Thrown by J2CL
-    } catch (NullPointerException expected) {
-      // Thrown by J2KT
-    }
-
-    // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
-    // implemented.
-    try {
-      Object unused = Enum.valueOf(Planet.class, "NOTHING");
-      fail("Should have thrown IllegalArgumentException");
-    } catch (IllegalArgumentException expected) {
-      // Thrown by Java
-    } catch (UnsupportedOperationException expected) {
-      // TODO(b/36863439): Remove this catch statement once Enum.valueOf is implemented.
-      // Thrown by J2CL and J2KT
     }
   }
 }
