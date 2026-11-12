@@ -180,7 +180,7 @@ abstract class NormalizeJsEnumsBase extends NormalizationPass {
    */
   private static Field createJsEnumConstant(Field field) {
     return field.toBuilder()
-        .setDescriptor(AstUtils.createJsEnumConstantFieldDescriptor(field.getDescriptor()))
+        .setDescriptor(createJsEnumConstantFieldDescriptor(field.getDescriptor()))
         .setInitializer(getJsEnumConstantValue(field))
         .build();
   }
@@ -200,6 +200,20 @@ abstract class NormalizeJsEnumsBase extends NormalizationPass {
       checkState(arguments.size() == 2);
       return fieldDescriptor.getEnumOrdinalValue();
     }
+  }
+
+  /** Returns the descriptor of a JsEnum constant field that holds the value of the constant. */
+  private static FieldDescriptor createJsEnumConstantFieldDescriptor(
+      FieldDescriptor fieldDescriptor) {
+    TypeDescriptor enumValueType =
+        AstUtils.getJsEnumValueFieldType(
+            fieldDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
+    return fieldDescriptor.toBuilder()
+        .setTypeDescriptor(enumValueType)
+        .setFinal(true)
+        .setCompileTimeConstant(true)
+        .setEnumConstant(true)
+        .build();
   }
 
   /**

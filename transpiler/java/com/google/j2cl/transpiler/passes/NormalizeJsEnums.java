@@ -15,9 +15,13 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
@@ -36,9 +40,32 @@ public class NormalizeJsEnums extends NormalizeJsEnumsBase {
     return null;
   }
 
+  /** Inserts type-consistency casts for JsEnum values when used as their value type. */
   @Override
   Expression extractValue(Expression jsEnum, TypeDescriptor valueTypeDescriptor) {
-    return AstUtils.castJsEnumToValue(jsEnum, valueTypeDescriptor);
+    checkArgument(jsEnum.getTypeDescriptor().isJsEnum());
+    // In order to preserve type consistency, expressions like
+    //
+    //     getEnum()  // where getEnum() returns MyJsEnum.
+    //
+    // will be rewritten as
+    //
+    //     /** @type {int} */ ((MyJsEnum) getEnum())
+    //
+    // The inner Java cast to MyJsEnum guarantees that any conversion for getEnum() is preserved
+    // (e.g. erasure casts if getEnum() returned T and was specialized to MyJsEnum in the calling
+    // context; this allows the expression to be unboxed if needed).
+    // The outer JsDoc cast guarantees that the expression is treated as of being the type of value
+    // and conversions such as boxing are correctly preserved (e.g. if the expression was assigned
+    // to an Integer variable).
+    return JsDocCastExpression.builder()
+        .setCastTypeDescriptor(valueTypeDescriptor)
+        .setExpression(
+            CastExpression.builder()
+                .setCastTypeDescriptor(jsEnum.getTypeDescriptor())
+                .setExpression(jsEnum)
+                .build())
+        .build();
   }
 
   @Override
@@ -46,7 +73,7 @@ public class NormalizeJsEnums extends NormalizeJsEnumsBase {
     Expression qualifier = methodCall.getQualifier();
     Expression argument = methodCall.getArguments().getFirst();
     if (canAvoidBoxing(qualifier.getTypeDescriptor(), argument)) {
-      return RuntimeMethods.createEnumsCompareToMethodCall(qualifier, argument);
+      return RuntimeMethods.createEnumsMethodCall("compareTo", qualifier, argument);
     }
     return super.rewriteCompareTo(methodCall);
   }

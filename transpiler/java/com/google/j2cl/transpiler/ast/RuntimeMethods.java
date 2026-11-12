@@ -377,15 +377,6 @@ public final class RuntimeMethods {
     return createEnumsMethodCall(unboxingMethod, expression, toTypeDescriptor);
   }
 
-  public static Expression createEnumsCompareToMethodCall(Expression instance, Expression other) {
-    checkArgument(
-        AstUtils.isNonNativeJsEnum(instance.getTypeDescriptor())
-            && (other instanceof NullLiteral
-                || instance.getTypeDescriptor().hasSameRawType(other.getTypeDescriptor())));
-    return createEnumsMethodCallCastIfNeeded(
-        "compareTo", instance.getTypeDescriptor(), instance, other);
-  }
-
   public static Expression createEnumsMethodCall(String methodName, Expression... arguments) {
     MethodDescriptor methodDescriptor =
         TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(methodName);
@@ -412,31 +403,6 @@ public final class RuntimeMethods {
             ? new TypeLiteral(SourcePosition.NONE, valueTypeDescriptor)
             : valueTypeDescriptor.getMetadataConstructorReference();
     return MethodCall.builderFrom(methodDescriptor).setArguments(value, typeLiteral).build();
-  }
-
-  private static Expression createEnumsMethodCallCastIfNeeded(
-      String methodName, TypeDescriptor enumTypeDescriptor, Expression... arguments) {
-    MethodDescriptor methodDescriptor =
-        TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(methodName);
-
-    if (methodDescriptor == null) {
-      // If the method isn't found, try to find the method with type-specific suffix. This method
-      // takes the value types as arguments and will need the enum value to be cast to the enum
-      // value type to preserve correct boxing/unboxing behavior.
-      methodDescriptor =
-          TypeDescriptors.get()
-              .javaemulInternalEnums
-              .getMethodDescriptorByName(methodName + getEnumsMethodSuffix(enumTypeDescriptor));
-      arguments =
-          stream(arguments)
-              .map(
-                  arg ->
-                      AstUtils.castJsEnumToValue(
-                          arg, AstUtils.getJsEnumValueFieldType(arg.getTypeDescriptor())))
-              .toArray(Expression[]::new);
-    }
-
-    return MethodCall.builderFrom(methodDescriptor).setArguments(arguments).build();
   }
 
   private static String getEnumsMethodSuffix(TypeDescriptor toTypeDescriptor) {
@@ -805,17 +771,6 @@ public final class RuntimeMethods {
             capitalize(toTypeDescriptor.getSimpleSourceName()));
 
     return createPrimitivesMethodCall(methodName, expression);
-  }
-
-  public static Expression createEnumsIsNullCall(Expression reference) {
-    TypeDescriptor valueTypeDescriptor =
-        AstUtils.getJsEnumValueFieldType(reference.getTypeDescriptor());
-    return MethodCall.builderFrom(
-            TypeDescriptors.get()
-                .javaemulInternalEnums
-                .getMethodDescriptor("isNull", valueTypeDescriptor))
-        .setArguments(reference)
-        .build();
   }
 
   public static Expression createPlatformIsNullCall(Expression reference) {

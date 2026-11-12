@@ -1073,18 +1073,6 @@ public final class AstUtils {
     return typeDescriptor.isJsEnum() && getJsEnumValueFieldType(typeDescriptor).isPrimitive();
   }
 
-  public static FieldDescriptor createJsEnumConstantFieldDescriptor(
-      FieldDescriptor fieldDescriptor) {
-    TypeDescriptor enumValueType =
-        getJsEnumValueFieldType(fieldDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
-    return fieldDescriptor.toBuilder()
-        .setTypeDescriptor(enumValueType)
-        .setFinal(true)
-        .setCompileTimeConstant(true)
-        .setEnumConstant(true)
-        .build();
-  }
-
   public static TypeDescriptor getJsEnumValueFieldType(TypeDescriptor typeDescriptor) {
     checkState(typeDescriptor.isJsEnum());
     return getJsEnumValueFieldType(
@@ -1212,34 +1200,6 @@ public final class AstUtils {
   /** Gets the initial value for a field or variable for the be assigned to a Wasm variable. */
   public static Expression getInitialValue(TypeDescriptor typeDescriptor) {
     return typeDescriptor.getDefaultValue();
-  }
-
-  /** Inserts type-consistency casts for JsEnum values when used as their value type. */
-  public static Expression castJsEnumToValue(
-      Expression jsEnumExpression, TypeDescriptor valueTypeDescriptor) {
-    checkArgument(jsEnumExpression.getTypeDescriptor().isJsEnum());
-    // In order to preserve type consistency, expressions like
-    //
-    //     getEnum()  // where getEnum() returns MyJsEnum.
-    //
-    // will be rewritten as
-    //
-    //     /** @type {int} */ ((MyJsEnum) getEnum())
-    //
-    // The inner Java cast to MyJsEnum guarantees that any conversion for getEnum() is preserved
-    // (e.g. erasure casts if getEnum() returned T and was specialized to MyJsEnum in the calling
-    // context; this allows the expression to be unboxed if needed).
-    // The outer JsDoc cast guarantees that the expression is treated as of being the type of value
-    // and conversions such as boxing are correctly preserved (e.g. if the expression was assigned
-    // to an Integer variable).
-    return JsDocCastExpression.builder()
-        .setCastTypeDescriptor(valueTypeDescriptor)
-        .setExpression(
-            CastExpression.builder()
-                .setCastTypeDescriptor(jsEnumExpression.getTypeDescriptor())
-                .setExpression(jsEnumExpression)
-                .build())
-        .build();
   }
 
   /**
