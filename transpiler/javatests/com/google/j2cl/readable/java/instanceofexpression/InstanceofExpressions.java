@@ -15,6 +15,7 @@
  */
 package instanceofexpression;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import java.io.Serializable;
 
 public class InstanceofExpressions {
@@ -129,6 +130,27 @@ public class InstanceofExpressions {
     Object o = new Object();
     if (o instanceof String s) {
       s = s + "!";
+    }
+  }
+
+  // Repro for b/584219461. Pattern variables referenced outside of the instanceof expression are
+  // hoisted to the enclosing block, but field initializers have no enclosing block.
+  // TODO(b/584219461): Enable for J2KT when hoisting is fixed.
+  @J2ktIncompatible
+  private static class InstanceofInFieldInitializer {
+    static Object o = "";
+    static int f = o instanceof String s ? s.length() : 0;
+  }
+
+  // Repro for b/584219461. Pattern variables referenced outside of the instanceof expression are
+  // hoisted to the enclosing block, but in Kotlin the this() call precedes the constructor body.
+  // TODO(b/584219461): Enable for J2KT when hoisting is fixed.
+  @J2ktIncompatible
+  private static class InstanceofInThisCall {
+    InstanceofInThisCall(int i) {}
+
+    InstanceofInThisCall(Object o) {
+      this(o instanceof String s ? s.length() : 0);
     }
   }
 }

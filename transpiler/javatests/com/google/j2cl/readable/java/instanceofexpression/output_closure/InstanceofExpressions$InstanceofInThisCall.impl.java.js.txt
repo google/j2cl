@@ -1,0 +1,58 @@
+goog.module('instanceofexpression.InstanceofExpressions.InstanceofInThisCall$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+class InstanceofInThisCall extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'InstanceofInThisCall(int)'.
+ /** @nodts @return {!InstanceofInThisCall} */
+ static $create__int(/** number */ i) {
+  let $instance = new InstanceofInThisCall();
+  $instance.$ctor__instanceofexpression_InstanceofExpressions_InstanceofInThisCall__int__void(i);
+  return $instance;
+ }
+ //Initialization from constructor 'InstanceofInThisCall(int)'.
+ /** @nodts */
+ $ctor__instanceofexpression_InstanceofExpressions_InstanceofInThisCall__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Factory method corresponding to constructor 'InstanceofInThisCall(Object)'.
+ /** @nodts @return {!InstanceofInThisCall} */
+ static $create__java_lang_Object(/** * */ o) {
+  let $instance = new InstanceofInThisCall();
+  $instance.$ctor__instanceofexpression_InstanceofExpressions_InstanceofInThisCall__java_lang_Object__void(o);
+  return $instance;
+ }
+ //Initialization from constructor 'InstanceofInThisCall(Object)'.
+ /** @nodts */
+ $ctor__instanceofexpression_InstanceofExpressions_InstanceofInThisCall__java_lang_Object__void(/** * */ o) {
+  let /** ?string */ s;
+  this.$ctor__instanceofexpression_InstanceofExpressions_InstanceofInThisCall__int__void(j_l_String.$isInstance(o) && (s = (/**@type {string}*/ (o)), true) ? j_l_String.m_length__java_lang_String__int(s) : 0);
+ }
+ /** @nodts */
+ static $clinit() {
+  InstanceofInThisCall.$clinit = () =>{};
+  InstanceofInThisCall.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceofInThisCall;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
+}
+$Util.$setClassMetadata(InstanceofInThisCall, 'instanceofexpression.InstanceofExpressions$InstanceofInThisCall');
+
+exports = InstanceofInThisCall;
+
+//# sourceMappingURL=InstanceofExpressions$InstanceofInThisCall.js.map

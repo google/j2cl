@@ -12,6 +12,24 @@
 (global $$class@instanceofexpression.InstanceofExpressions.1 (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $o@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (mut (ref null $java.lang.Object))
+ (ref.null $java.lang.Object)
+)
+(global $f@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (mut i32)
+ (i32.const 0)
+)
+(global $$class-initialized@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (mut i32)
+ (i32.const 0)
+)
+(global $$class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (mut i32)
+ (i32.const 0)
+)
+(global $$class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $instanceofexpression.InstanceofExpressions.vtable (ref $instanceofexpression.InstanceofExpressions.vtable)
  (struct.new $instanceofexpression.InstanceofExpressions.vtable
   (ref.func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions)
@@ -35,6 +53,22 @@
 )
 (global $java.io.Serializable.vtable@$instanceofexpression.InstanceofExpressions.1 (ref $java.io.Serializable.vtable)
  (struct.new $java.io.Serializable.vtable
+ )
+)
+(global $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer.vtable (ref $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer.vtable)
+ (struct.new $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $instanceofexpression.InstanceofExpressions.InstanceofInThisCall.vtable (ref $instanceofexpression.InstanceofExpressions.InstanceofInThisCall.vtable)
+ (struct.new $instanceofexpression.InstanceofExpressions.InstanceofInThisCall.vtable
+  (ref.func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 
@@ -408,3 +442,158 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
+
+;;; InstanceofInFieldInitializer InstanceofInFieldInitializer.$create()
+(func $$create__@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer
+ (result (ref null $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+ (local $$instance (ref null $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+ (block
+  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (global.get $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer.vtable) (global.get $itable.empty) (i32.const 0)))
+  (call $$ctor__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInFieldInitializer@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceofInFieldInitializer.$ctor()
+(func $$ctor__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInFieldInitializer@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer
+ (param $this (ref null $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void InstanceofInFieldInitializer.$clinit()
+(func $$clinit__void_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer
+ (local $exp (ref null $java.lang.Object))
+ (local $s (ref null $java.lang.String))
+ (block
+  (if (global.get $$class-initialized@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+  (global.set $o@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (call $$getString_||__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer.$StringLiterals ))
+  (global.set $f@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (if (result i32) (block (result i32)
+   (local.set $exp (global.get $o@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+   (if (result i32) (ref.test (ref $java.lang.String) (local.get $exp)) (then (block (result i32)
+    (local.set $s (ref.cast (ref null $java.lang.String) (local.get $exp)))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+  ) (then (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s)))) (else (i32.const 0))))
+ )
+)
+
+;;; Class<T> InstanceofInFieldInitializer.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer)))
+   (then
+    (return (global.get $$class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+   )
+  )
+  (global.set $$class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+ )
+)
+
+;;; Class<?> InstanceofInFieldInitializer.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer))
+ (local.set $this (ref.cast (ref $instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.InstanceofInFieldInitializer)
+
+;;; InstanceofInThisCall InstanceofInThisCall.$create(int i)
+(func $$create__int@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (param $i i32)
+ (result (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (local $$instance (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (block
+  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions.InstanceofInThisCall (global.get $instanceofexpression.InstanceofExpressions.InstanceofInThisCall.vtable) (global.get $itable.empty) (i32.const 0)))
+  (call $$ctor__int__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInThisCall@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (ref.as_non_null (local.get $$instance))(local.get $i))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceofInThisCall.$ctor(int i)
+(func $$ctor__int__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInThisCall@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (param $this (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (param $i i32)
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; InstanceofInThisCall InstanceofInThisCall.$create(Object o)
+(func $$create__java_lang_Object@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (param $o (ref null $java.lang.Object))
+ (result (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (local $$instance (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (block
+  (local.set $$instance (struct.new $instanceofexpression.InstanceofExpressions.InstanceofInThisCall (global.get $instanceofexpression.InstanceofExpressions.InstanceofInThisCall.vtable) (global.get $itable.empty) (i32.const 0)))
+  (call $$ctor__java_lang_Object__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInThisCall@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (ref.as_non_null (local.get $$instance))(local.get $o))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceofInThisCall.$ctor(Object o)
+(func $$ctor__java_lang_Object__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInThisCall@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (param $this (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (param $o (ref null $java.lang.Object))
+ (local $s (ref null $java.lang.String))
+ (block
+  (call $$ctor__int__void_$p_instanceofexpression_InstanceofExpressions_InstanceofInThisCall@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (ref.as_non_null (local.get $this))(if (result i32) (if (result i32) (ref.test (ref $java.lang.String) (local.get $o)) (then (block (result i32)
+   (local.set $s (ref.cast (ref null $java.lang.String) (local.get $o)))
+   (i32.const 1)
+  )) (else (i32.const 0))) (then (call $m_length__int@java.lang.String (ref.as_non_null (local.get $s)))) (else (i32.const 0))))
+ )
+)
+
+;;; void InstanceofInThisCall.$clinit()
+(func $$clinit__void_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (block
+  (if (global.get $$class-initialized@instanceofexpression.InstanceofExpressions.InstanceofInThisCall)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> InstanceofInThisCall.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall)))
+   (then
+    (return (global.get $$class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+   )
+  )
+  (global.set $$class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|instanceofex...|__java_lang_String_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInThisCall.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ )
+)
+
+;;; Class<?> InstanceofInThisCall.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $instanceofexpression.InstanceofExpressions.InstanceofInThisCall))
+ (local.set $this (ref.cast (ref $instanceofexpression.InstanceofExpressions.InstanceofInThisCall) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@instanceofexpression.InstanceofExpressions.InstanceofInThisCall ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@instanceofexpression.InstanceofExpressions.InstanceofInThisCall)
