@@ -31,6 +31,7 @@ import com.google.j2cl.common.Problems.Severity;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
@@ -40,6 +41,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
@@ -48,6 +50,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Visibility;
+import java.util.List;
 
 /** Checks and throws errors for constructs which can not be transpiled to Kotlin. */
 public final class J2ktRestrictionsChecker {
@@ -62,6 +65,7 @@ public final class J2ktRestrictionsChecker {
           @Override
           public void exitMethod(Method method) {
             checkNotGenericConstructor(method);
+            checkNotFlexibleConstructorBody(method);
             checkReferencedTypeVisibilities(method);
             checkKtProperty(method);
             checkJ2ObjCProperty(method);
@@ -100,6 +104,24 @@ public final class J2ktRestrictionsChecker {
               problems.error(
                   method.getSourcePosition(),
                   "Constructor '%s' cannot declare type variables.",
+                  method.getReadableDescription());
+            }
+          }
+
+          private void checkNotFlexibleConstructorBody(Method method) {
+            if (!method.isConstructor()) {
+              return;
+            }
+
+            ExpressionStatement constructorInvocationStatement =
+                AstUtils.getConstructorInvocationStatement(method);
+            List<Statement> statements = method.getBody().getStatements();
+            if (constructorInvocationStatement != null
+                && statements.indexOf(constructorInvocationStatement) > 0) {
+              problems.error(
+                  statements.getFirst().getSourcePosition(),
+                  "Constructor '%s' cannot have statements before the explicit constructor"
+                      + " invocation.",
                   method.getReadableDescription());
             }
           }

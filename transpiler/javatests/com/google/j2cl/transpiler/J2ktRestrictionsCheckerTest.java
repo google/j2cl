@@ -247,6 +247,38 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testFlexibleConstructorBodyFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Main {
+          int field;
+
+          Main() {
+            super();
+            field = 1;
+          }
+
+          Main(int i) {
+            field = i;
+        > Error: Constructor 'Main(int i)' cannot have statements before the explicit constructor invocation.
+            super();
+          }
+
+          Main(String s) {
+            int i = s.length();
+        > Error: Constructor 'Main(String s)' cannot have statements before the explicit constructor invocation.
+            this(i);
+          }
+
+          Main(long l) {
+            this((int) l);
+            field++;
+          }
+        }
+        """);
+  }
+
   public void testFieldShadowingFails() {
     assertWithInlineMessages(
         "test.Parent",
