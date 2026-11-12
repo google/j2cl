@@ -15,13 +15,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.Math.min;
 import static java.util.Collections.reverse;
 import static java.util.stream.Collectors.toCollection;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
@@ -40,7 +38,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Moves variable declarations to enclosing blocks to restore proper scoping.
@@ -50,10 +47,10 @@ import java.util.Set;
  * would have out of scope references or are defined in places that are not valid.
  */
 public class VariableDeclarationHoister extends NormalizationPass {
-  // The idea is to collect the definition scopes for all variable declarations, and check that the
-  // references are all within the scope. If a variable is accessed out of scope, or declared in a
-  // scope that is not supported by the target language, the variable is removed from the tracking
-  // map; the absence of a variable from the map denotes that it needs to be hoisted.
+  // The idea is to collect, for each variable, the scopes that enclose its declaration and all its
+  // references. If a variable is accessed out of the scope of its declaration, or declared in a
+  // scope that is not supported by the target language, its declaration is moved to the innermost
+  // enclosing scope that can hold declarations, i.e. a block.
   //
   // To simplify the implementation declarations of multiple variables are moved all together to
   // the right scope.
@@ -111,10 +108,10 @@ public class VariableDeclarationHoister extends NormalizationPass {
           }
         });
 
-    // Keeps track of the block that will have the declarations for the variables that need
-    // to be hoisted.
-    SetMultimap<Block, Variable> variableByTargetScopeBlock = LinkedHashMultimap.create();
-    Map<Block, Integer> declarationPointByTargetScopeBlock = new HashMap<>();
+    // Keeps track of the scope that will have the declarations for the variables that need to be
+    // hoisted.
+    SetMultimap<Scope, Variable> variableByTargetScope = LinkedHashMultimap.create();
+    Map<Scope, Integer> declarationPointByTargetScope = new HashMap<>();
 
     // Transform declarations into assignments, so that the effects of the expressions are kept
     // in the original location.
@@ -135,29 +132,24 @@ public class VariableDeclarationHoister extends NormalizationPass {
               return variableDeclarationExpression;
             }
 
-            // Get the block where the variable declarations will be moved to.
-            Block block = getLastBlock(enclosingScopes);
+            // Get the scope where the variable declarations will be moved to.
+            Scope scope = getTargetScope(enclosingScopes);
 
-            // Get the full list of parents for the declaration (these are innermost first). Find
-            // the node immediately inside the target block to determine the latest valid insertion
-            // point for the declaration.
-            ImmutableList<Object> declarationSiteParents = getParents().collect(toImmutableList());
-            Object statementContainingDeclaration =
-                declarationSiteParents.get(declarationSiteParents.indexOf(block) - 1);
+            // The variable can be inserted before the statement of the scope that contains the
+            // current declaration.
+            int insertionPoint =
+                scope.indexOfStatementContaining(getParents().collect(toImmutableList()));
 
-            // The variable can be inserted before statement that contains the current declaration.
-            int insertionPoint = block.getStatements().indexOf(statementContainingDeclaration);
-
-            // Since all the variables that are moved to a block are declared together, the
-            // insertion point will be the closest to the top of the block.
-            declarationPointByTargetScopeBlock.merge(
-                block,
+            // Since all the variables that are moved to a scope are declared together, the
+            // insertion point will be the closest to the top of the scope.
+            declarationPointByTargetScope.merge(
+                scope,
                 insertionPoint,
                 (Integer lastInsertionPoint, Integer newValue) ->
                     min(newValue, lastInsertionPoint.intValue()));
 
-            // Collect the variables that need to be moved and the target block.
-            variableByTargetScopeBlock.put(checkNotNull(block), variable);
+            // Collect the variables that need to be moved and the target scope.
+            variableByTargetScope.put(scope, variable);
 
             // Replace the declaration by assignment if initialized.
             if (variableDeclarationExpression.getInitializer() != null) {
@@ -167,46 +159,50 @@ public class VariableDeclarationHoister extends NormalizationPass {
           }
         });
 
-    // Insert declarations into corresponding blocks, just before where the first moved declaration
+    // Insert declarations into corresponding scopes, just before where the first moved declaration
     // was.
-    for (Block block : variableByTargetScopeBlock.keySet()) {
-      Set<Variable> variablesToRelocate = variableByTargetScopeBlock.get(block);
-      int insertionPointInBlock = declarationPointByTargetScopeBlock.get(block);
+    variableByTargetScope
+        .asMap()
+        .forEach((scope, variablesToRelocate) -> {
+          // Make the variables nullable since the declaration will assign the default value.
+          variablesToRelocate.forEach(v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
 
-      // Make the variables nullable since the declaration will assign the default value.
-      variablesToRelocate.forEach(v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
+          scope.insertDeclarations(
+              declarationPointByTargetScope.get(scope),
+              variablesToRelocate.stream()
+                  .map(v -> VariableDeclarationExpression.builder().setVariable(v).build())
+                  .collect(toImmutableList()));
+        });
+  }
 
-      var variableDeclarationStatements =
-          variablesToRelocate.stream()
-              .map(
-                  v ->
-                      VariableDeclarationExpression.builder()
-                          .setVariable(v)
-                          .build()
-                          .makeStatement(block.getSourcePosition()))
-              .collect(toImmutableList());
-      block.getStatements().addAll(insertionPointInBlock, variableDeclarationStatements);
+  /** A block where hoisted variable declarations are inserted. */
+  private record Scope(Block block) {
+    /**
+     * Returns the index of the statement of the block that contains the node whose parents,
+     * innermost first, are {@code parents}.
+     */
+    int indexOfStatementContaining(List<Object> parents) {
+      return block.getStatements().indexOf(parents.get(parents.indexOf(block) - 1));
+    }
+
+    /** Inserts {@code declarations} at {@code index}. */
+    void insertDeclarations(int index, List<VariableDeclarationExpression> declarations) {
+      block
+          .getStatements()
+          .addAll(
+              index,
+              declarations.stream()
+                  .map(d -> d.makeStatement(block.getSourcePosition()))
+                  .collect(toImmutableList()));
     }
   }
 
-  /** Returns the Block that is closer to the end of the list. */
-  private static Block getLastBlock(List<Object> enclosingScopes) {
-    // Find the deeper enclosing block to declare the variable there.
-    return Streams.findLast(
-            enclosingScopes.stream().filter(Block.class::isInstance).map(Block.class::cast))
-        .get();
-  }
-
-  /** Trims {@code toTrim} to only contain the common prefix. */
-  private static void trimToCommonPrefix(List<Object> toTrim, List<Object> other) {
-    int i = 0;
-    while (i < other.size() && i < toTrim.size() && other.get(i) == toTrim.get(i)) {
-      i++;
-    }
-
-    if (toTrim.size() > i) {
-      toTrim.subList(i, toTrim.size()).clear();
-    }
+  /** Returns the innermost block in {@code enclosingScopes}, where declarations are hoisted to. */
+  private static Scope getTargetScope(List<Object> enclosingScopes) {
+    return new Scope(
+        Streams.findLast(
+                enclosingScopes.stream().filter(Block.class::isInstance).map(Block.class::cast))
+            .get());
   }
 
   /**
@@ -225,5 +221,17 @@ public class VariableDeclarationHoister extends NormalizationPass {
       return true;
     }
     return !(scope instanceof Expression);
+  }
+
+  /** Trims {@code toTrim} to only contain the common prefix. */
+  private static void trimToCommonPrefix(List<Object> toTrim, List<Object> other) {
+    int i = 0;
+    while (i < other.size() && i < toTrim.size() && other.get(i) == toTrim.get(i)) {
+      i++;
+    }
+
+    if (toTrim.size() > i) {
+      toTrim.subList(i, toTrim.size()).clear();
+    }
   }
 }
