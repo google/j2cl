@@ -41,6 +41,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Annotation;
+import com.google.j2cl.transpiler.ast.AnyPattern;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -77,9 +78,12 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Pattern;
+import com.google.j2cl.transpiler.ast.PatternMatchExpression;
+import com.google.j2cl.transpiler.ast.RecordPattern;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.SwitchCasePattern;
 import com.google.j2cl.transpiler.ast.SwitchConstruct;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
@@ -831,38 +835,64 @@ public class JsInteropRestrictionsChecker {
                   // NullLiteral is typed as Object until a later normalization pass.
                   return;
                 }
-                TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-
-                if (isDisallowedJsEnumConversion(
-                    inferredToTypeDescriptor, expressionTypeDescriptor)) {
-                  String prefix = "";
-                  if (expressionTypeDescriptor.isJsEnum()) {
-                    prefix =
-                        TypeDescriptors.isJavaLangComparable(
-                                inferredToTypeDescriptor.toRawTypeDescriptor())
-                            ? getTypeKindPrefix(expressionTypeDescriptor)
-                            : "JsEnum ";
-                  }
-                  // TODO(b/65465035): When source position is tracked at the expression level,
-                  // the error reporting here should include source position.
-                  problems.error(
-                      getSourcePosition(),
-                      "%s'%s' cannot be %s '%s'.",
-                      prefix,
-                      expressionTypeDescriptor.getReadableDescription(),
-                      conversion,
-                      inferredToTypeDescriptor.getReadableDescription());
-                } else if (isDisallowedJsEnumArrayConversion(
-                    declaredToTypeDescriptor, expressionTypeDescriptor)) {
-                  problems.error(
-                      getSourcePosition(),
-                      "%s cannot be %s %s.",
-                      getReadableDescriptionWithPrefix(expressionTypeDescriptor),
-                      conversion,
-                      getReadableDescriptionWithPrefix(declaredToTypeDescriptor));
-                }
+                // TODO(b/65465035): When source position is tracked at the expression level,
+                // the error reporting here should include source position.
+                checkJsEnumTypeConversion(
+                    inferredToTypeDescriptor,
+                    declaredToTypeDescriptor,
+                    expression.getTypeDescriptor(),
+                    conversion,
+                    getSourcePosition());
               }
             }));
+
+    checkPatternMatching(
+        type,
+        (toTypeDescriptor, fromTypeDescriptor, sourcePosition) -> {
+          if (AstUtils.isNonNativeJsEnumArray(toTypeDescriptor)) {
+            // Pattern matching against JsEnum arrays is already rejected, no need to check for more
+            // errors.
+            return;
+          }
+          // The type of the pattern is both the inferred and the declared target of the conversion.
+          checkJsEnumTypeConversion(
+              toTypeDescriptor,
+              toTypeDescriptor,
+              fromTypeDescriptor,
+              "pattern matched against",
+              sourcePosition);
+        });
+  }
+
+  private void checkJsEnumTypeConversion(
+      TypeDescriptor inferredToTypeDescriptor,
+      TypeDescriptor declaredToTypeDescriptor,
+      TypeDescriptor fromTypeDescriptor,
+      String conversion,
+      SourcePosition sourcePosition) {
+    if (isDisallowedJsEnumConversion(inferredToTypeDescriptor, fromTypeDescriptor)) {
+      String prefix = "";
+      if (fromTypeDescriptor.isJsEnum()) {
+        prefix =
+            TypeDescriptors.isJavaLangComparable(inferredToTypeDescriptor.toRawTypeDescriptor())
+                ? getTypeKindPrefix(fromTypeDescriptor)
+                : "JsEnum ";
+      }
+      problems.error(
+          sourcePosition,
+          "%s'%s' cannot be %s '%s'.",
+          prefix,
+          fromTypeDescriptor.getReadableDescription(),
+          conversion,
+          inferredToTypeDescriptor.getReadableDescription());
+    } else if (isDisallowedJsEnumArrayConversion(declaredToTypeDescriptor, fromTypeDescriptor)) {
+      problems.error(
+          sourcePosition,
+          "%s cannot be %s %s.",
+          getReadableDescriptionWithPrefix(fromTypeDescriptor),
+          conversion,
+          getReadableDescriptionWithPrefix(declaredToTypeDescriptor));
+    }
   }
 
   private void checkJsEnumParameterizations(Type type) {
@@ -3255,6 +3285,13 @@ public class JsInteropRestrictionsChecker {
           }
 
           @Override
+          public void exitRecordPattern(RecordPattern recordPattern) {
+            // The types of the variables in binding patterns are checked as all other variables.
+            errorIfDisallowedType(
+                recordPattern.getTypeDescriptor(), getSourcePosition(), "Record pattern");
+          }
+
+          @Override
           public void exitCastExpression(CastExpression castExpression) {
             TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
             if (isDisallowed(castTypeDescriptor)) {
@@ -3448,5 +3485,60 @@ public class JsInteropRestrictionsChecker {
         }
         && !target.getTypeArgumentTypeDescriptors().isEmpty()
         && target.getTypeArgumentTypeDescriptors().getFirst().isJsEnum();
+  }
+
+  /**
+   * Checks the type conversions implied by pattern matching.
+   *
+   * <p>Pattern matching, in both {@code instanceof} expressions and switch cases, is desugared
+   * after the checks are performed, hence the conversions that the desugared code would perform,
+   * i.e. converting the matched value, or the record component, to the type of the pattern, are
+   * checked here explicitly (see {@link DesugarInstanceOfPatterns}).
+   */
+  private static void checkPatternMatching(Type type, PatternConversionChecker checker) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitPattern(Pattern pattern) {
+            if (pattern instanceof AnyPattern) {
+              // `_` matches any value without converting it.
+              return;
+            }
+            HasSourcePosition hasSourcePosition =
+                (HasSourcePosition) getParent(HasSourcePosition.class::isInstance);
+            checker.check(
+                pattern.getTypeDescriptor(),
+                getMatchedTypeDescriptor(pattern),
+                hasSourcePosition.getSourcePosition());
+          }
+
+          /** Returns the type of the value that is matched against {@code pattern}. */
+          private TypeDescriptor getMatchedTypeDescriptor(Pattern pattern) {
+            return switch (getParent()) {
+              case PatternMatchExpression patternMatchExpression ->
+                  patternMatchExpression.getExpression().getTypeDescriptor();
+              case RecordPattern recordPattern ->
+                  recordPattern
+                      .getTypeDescriptor()
+                      .getRecordComponentAccessors()
+                      .get(recordPattern.getNestedPatterns().indexOf(pattern))
+                      .getReturnTypeDescriptor();
+              case SwitchCasePattern unused ->
+                  ((SwitchConstruct<?>) getParent(SwitchConstruct.class::isInstance))
+                      .getExpression()
+                      .getTypeDescriptor();
+              default ->
+                  throw new IllegalStateException("Unexpected pattern parent " + getParent());
+            };
+          }
+        });
+  }
+
+  /** Checks the type conversions implied by pattern matching. */
+  private interface PatternConversionChecker {
+    void check(
+        TypeDescriptor toTypeDescriptor,
+        TypeDescriptor fromTypeDescriptor,
+        SourcePosition sourcePosition);
   }
 }

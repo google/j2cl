@@ -40,6 +40,7 @@ import kotlin.arrayOfNulls
 import kotlin.collections.List
 import kotlin.collections.MutableList
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmRecord
 import kotlin.jvm.JvmStatic
 import kotlin.let
 import kotlin.run
@@ -369,6 +370,58 @@ open class Main {
   }
   
   @JvmStatic
+  fun testJsEnumRecordPatterns() {
+   val o: Any = JsEnumRecord(
+    ComparableJsEnum.ONE,
+    StringJsEnum.ONE,
+   )
+   if (o is JsEnumRecord && run {
+    val patternJsEnumRecord: JsEnumRecord = o as JsEnumRecord
+    val `_`: ComparableJsEnum? = patternJsEnumRecord.comparable
+    val __1: StringJsEnum? = patternJsEnumRecord.string
+    true
+   }) {}
+   var c: ComparableJsEnum? = null
+   var s: StringJsEnum? = null
+   if (o is JsEnumRecord && run {
+    val patternJsEnumRecord_1: JsEnumRecord = o as JsEnumRecord
+    c = patternJsEnumRecord_1.comparable
+    s = patternJsEnumRecord_1.string
+    true
+   }) {
+    val v: Int = c!!.getValue()
+    val value: String? = s!!.getValue()
+   }
+   if (o is JsEnumRecord && run {
+    val patternJsEnumRecord_2: JsEnumRecord = o as JsEnumRecord
+    val c_1: ComparableJsEnum? = patternJsEnumRecord_2.comparable
+    val s_1: StringJsEnum? = patternJsEnumRecord_2.string
+    c_1 === ComparableJsEnum.ONE
+   }) {}
+   when (o) {
+    is JsEnumRecord if run {
+     val patternJsEnumRecord_3: JsEnumRecord = o as JsEnumRecord
+     val c_2: ComparableJsEnum? = patternJsEnumRecord_3.comparable
+     val __3: StringJsEnum? = patternJsEnumRecord_3.string
+     c_2 === ComparableJsEnum.ZERO
+    } -> {}
+    is JsEnumRecord if run {
+     val patternJsEnumRecord_4: JsEnumRecord = o as JsEnumRecord
+     val __5: ComparableJsEnum? = patternJsEnumRecord_4.comparable
+     val s_2: StringJsEnum? = patternJsEnumRecord_4.string
+     s_2 === StringJsEnum.THREE
+    } -> {}
+    is JsEnumRecord if run {
+     val patternJsEnumRecord_5: JsEnumRecord = o as JsEnumRecord
+     val __7: ComparableJsEnum? = patternJsEnumRecord_5.comparable
+     val __8: StringJsEnum? = patternJsEnumRecord_5.string
+     true
+    } -> {}
+    else -> {}
+   }
+  }
+  
+  @JvmStatic
   fun testOptimizedCast() {
    val o: Any = ComparableJsEnum.ONE
    if (o is ComparableJsEnum) {
@@ -647,4 +700,10 @@ open class Main {
    SomeJsEnum.A,
   )
  }
+ 
+ @JvmRecord
+ internal data class JsEnumRecord(
+  val comparable: ComparableJsEnum?,
+  val string: StringJsEnum?,
+ )
 }

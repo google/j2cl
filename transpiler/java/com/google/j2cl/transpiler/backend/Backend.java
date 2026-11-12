@@ -250,9 +250,7 @@ public enum Backend {
           // Early run of determining whether variables are effectively final so that passes that
           // depend on Expression.isEffectivelyInvariant it can take advantage.
           MakeVariablesFinal::new,
-          // Must run before DesugarInstanceOfPatterns.
           ImplementRecordClasses::new,
-          DesugarInstanceOfPatterns::new,
           NormalizeSuspendFunctionCalls::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,
@@ -340,6 +338,9 @@ public enum Backend {
           // Normalize switch constructs before coersions and conversions.
           AddSwitchExpressionsExhaustivenessCheck::new,
           NormalizeSwitchConstructs::new,
+          // Must run after NormalizeSwitchConstructs, which rewrites switch patterns using
+          // instanceof patterns.
+          DesugarInstanceOfPatterns::new,
           // Must run after passes that might introduce calls to generic methods.
           InsertErasureTypeSafetyCasts::new,
 
@@ -463,9 +464,7 @@ public enum Backend {
           // TODO(b/277799806): Consider removing this pass if the immutable field optimization is
           // removed.
           MakeVariablesFinal::new,
-          // Must run before DesugarInstanceOfPatterns.
           ImplementRecordClasses::new,
-          DesugarInstanceOfPatterns::new,
           ConvertMethodReferencesToLambdas::new,
           NormalizePackagedJsEnumVarargsLiterals::new,
           ResolveImplicitInstanceQualifiers::new,
@@ -538,6 +537,9 @@ public enum Backend {
           RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           () -> new NormalizeSwitchConstructs(/* convertNativeJsEnumSwitches= */ true),
+          // Must run after NormalizeSwitchConstructs, which rewrites switch patterns using
+          // instanceof patterns.
+          DesugarInstanceOfPatterns::new,
           // Must run after all passes that rely on JsEnums extending java.lang.Enum and before
           // ImplementNotNullOperator, which lowers the not-null assertions it introduces.
           NormalizeJsEnumsWasm::new,

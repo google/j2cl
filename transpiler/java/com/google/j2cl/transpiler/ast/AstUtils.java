@@ -344,10 +344,8 @@ public final class AstUtils {
 
   /** JsEnum comparison context. */
   public static boolean matchesJsEnumBoxingConversionContext(
-      InstanceOfExpression instanceOfExpression) {
-    TypeDescriptor expressionTypeDescriptor =
-        instanceOfExpression.getExpression().getTypeDescriptor();
-    TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
+      Expression expression, TypeDescriptor testTypeDescriptor) {
+    TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
     return isNonNativeJsEnum(expressionTypeDescriptor)
         && !expressionTypeDescriptor.hasSameRawType(testTypeDescriptor);
   }

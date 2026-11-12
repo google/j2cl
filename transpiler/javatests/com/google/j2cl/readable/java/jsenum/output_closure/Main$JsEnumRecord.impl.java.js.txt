@@ -1,0 +1,63 @@
+goog.module('jsenum.Main.JsEnumRecord$impl');
+
+const Record = goog.require('java.lang.Record$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let BoxedComparableLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedComparableLightEnum$impl');
+let BoxedLightEnum = goog.forwardDeclare('javaemul.internal.Enums.BoxedLightEnum$impl');
+let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
+let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
+
+/**
+ * @final
+ */
+class JsEnumRecord extends Record {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {?ComparableJsEnum} @nodts*/
+  this.f_comparable__jsenum_Main_JsEnumRecord_;
+  /**@type {?StringJsEnum} @nodts*/
+  this.f_string__jsenum_Main_JsEnumRecord_;
+ }
+ /** @nodts @return {!JsEnumRecord} */
+ static $create__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum(/** ?ComparableJsEnum */ comparable, /** ?StringJsEnum */ string_1) {
+  JsEnumRecord.$clinit();
+  let $instance = new JsEnumRecord();
+  $instance.$ctor__jsenum_Main_JsEnumRecord__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum__void(comparable, string_1);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsenum_Main_JsEnumRecord__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum__void(/** ?ComparableJsEnum */ comparable, /** ?StringJsEnum */ string_1) {
+  this.$ctor__java_lang_Record__void();
+  this.f_comparable__jsenum_Main_JsEnumRecord_ = comparable;
+  this.f_string__jsenum_Main_JsEnumRecord_ = string_1;
+  $J2CL_PRESERVE$(this.f_comparable__jsenum_Main_JsEnumRecord_, this.f_string__jsenum_Main_JsEnumRecord_);
+ }
+ /** @nodts @return {?ComparableJsEnum} */
+ m_comparable__jsenum_Main_ComparableJsEnum() {
+  return this.f_comparable__jsenum_Main_JsEnumRecord_;
+ }
+ /** @nodts @return {?StringJsEnum} */
+ m_string__jsenum_Main_StringJsEnum() {
+  return this.f_string__jsenum_Main_JsEnumRecord_;
+ }
+ /** @nodts */
+ static $clinit() {
+  JsEnumRecord.$clinit = () =>{};
+  JsEnumRecord.$loadModules();
+  Record.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsEnumRecord;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsEnumRecord, 'jsenum.Main$JsEnumRecord');
+
+exports = JsEnumRecord;
+
+//# sourceMappingURL=Main$JsEnumRecord.js.map

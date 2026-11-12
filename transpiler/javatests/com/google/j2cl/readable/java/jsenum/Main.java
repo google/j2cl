@@ -472,6 +472,25 @@ public class Main {
     }
   }
 
+  record JsEnumRecord(ComparableJsEnum comparable, StringJsEnum string) {}
+
+  public static void testJsEnumRecordPatterns() {
+    Object o = new JsEnumRecord(ComparableJsEnum.ONE, StringJsEnum.ONE);
+    if (o instanceof JsEnumRecord(_, _)) {}
+    if (o instanceof JsEnumRecord(ComparableJsEnum c, StringJsEnum s)) {
+      int v = c.getValue();
+      String value = s.getValue();
+    }
+    if (o instanceof JsEnumRecord(var c, var s) && c == ComparableJsEnum.ONE) {}
+
+    switch (o) {
+      case JsEnumRecord(ComparableJsEnum c, _) when c == ComparableJsEnum.ZERO -> {}
+      case JsEnumRecord(_, var s) when s == StringJsEnum.THREE -> {}
+      case JsEnumRecord(_, _) -> {}
+      default -> {}
+    }
+  }
+
   public static void testOptimizedCast() {
     Object o = ComparableJsEnum.ONE;
     if (o instanceof ComparableJsEnum) {

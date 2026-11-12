@@ -248,6 +248,12 @@
 (global $$class@jsenum.Main.SubtypeImplicitVarargs (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsenum.Main.JsEnumRecord (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsenum.Main.JsEnumRecord (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $staticOverlayField@jsenum.Main.NativeStringEnum.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -642,6 +648,14 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
+ )
+)
+(global $jsenum.Main.JsEnumRecord.vtable (ref $jsenum.Main.JsEnumRecord.vtable)
+ (struct.new $jsenum.Main.JsEnumRecord.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.JsEnumRecord)
+  (ref.func $m_equals__java_lang_Object__boolean@jsenum.Main.JsEnumRecord)
+  (ref.func $m_hashCode__int@jsenum.Main.JsEnumRecord)
+  (ref.func $m_toString__java_lang_String@jsenum.Main.JsEnumRecord)
  )
 )
 (global $jsenum.Main.NativeStringEnum.$Overlay.vtable (ref $jsenum.Main.NativeStringEnum.$Overlay.vtable)
@@ -1685,6 +1699,154 @@
     (block
      (local.set $e_1 (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o)))
      (local.set $v_1 (call $m_getValue__int@jsenum.Main.ComparableJsEnum (ref.as_non_null (local.get $e_1))))
+    )
+   )
+  )
+ )
+)
+
+;;; void Main.testJsEnumRecordPatterns()
+(func $m_testJsEnumRecordPatterns__void@jsenum.Main
+ (local $o (ref null $java.lang.Object))
+ (local $patternJsEnumRecord (ref null $jsenum.Main.JsEnumRecord))
+ (local $_ (ref null $jsenum.Main.ComparableJsEnum))
+ (local $__1 (ref null $jsenum.Main.StringJsEnum))
+ (local $patternJsEnumRecord_1 (ref null $jsenum.Main.JsEnumRecord))
+ (local $c (ref null $jsenum.Main.ComparableJsEnum))
+ (local $s (ref null $jsenum.Main.StringJsEnum))
+ (local $v i32)
+ (local $value (ref null $java.lang.String))
+ (local $patternJsEnumRecord_2 (ref null $jsenum.Main.JsEnumRecord))
+ (local $c_1 (ref null $jsenum.Main.ComparableJsEnum))
+ (local $s_1 (ref null $jsenum.Main.StringJsEnum))
+ (local $$selector (ref null $java.lang.Object))
+ (local $$caseIndex i32)
+ (local $patternJsEnumRecord_3 (ref null $jsenum.Main.JsEnumRecord))
+ (local $c_2 (ref null $jsenum.Main.ComparableJsEnum))
+ (local $__2 (ref null $jsenum.Main.StringJsEnum))
+ (local $patternJsEnumRecord_4 (ref null $jsenum.Main.JsEnumRecord))
+ (local $__3 (ref null $jsenum.Main.ComparableJsEnum))
+ (local $s_2 (ref null $jsenum.Main.StringJsEnum))
+ (local $patternJsEnumRecord_5 (ref null $jsenum.Main.JsEnumRecord))
+ (local $__4 (ref null $jsenum.Main.ComparableJsEnum))
+ (local $__5 (ref null $jsenum.Main.StringJsEnum))
+ (block
+  (call $$clinit__void_<once>_@jsenum.Main )
+  (local.set $o (call $$create__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (block (result (ref null $jsenum.Main.ComparableJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+   (global.get $ONE@jsenum.Main.ComparableJsEnum)
+  )(block (result (ref null $jsenum.Main.StringJsEnum))
+   (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+   (global.get $ONE@jsenum.Main.StringJsEnum)
+  )))
+  (if (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $o)) (then (block (result i32)
+    (local.set $patternJsEnumRecord (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $o)))
+    (local.set $_ (call $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord))))
+    (local.set $__1 (call $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord))))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+   (then
+    (block
+    )
+   )
+  )
+  (if (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $o)) (then (block (result i32)
+    (local.set $patternJsEnumRecord_1 (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $o)))
+    (local.set $c (call $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_1))))
+    (local.set $s (call $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_1))))
+    (i32.const 1)
+   )) (else (i32.const 0)))
+   (then
+    (block
+     (local.set $v (call $m_getValue__int@jsenum.Main.ComparableJsEnum (ref.as_non_null (local.get $c))))
+     (local.set $value (call $m_getValue__java_lang_String@jsenum.Main.StringJsEnum (ref.as_non_null (local.get $s))))
+    )
+   )
+  )
+  (if (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $o)) (then (block (result i32)
+    (local.set $patternJsEnumRecord_2 (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $o)))
+    (local.set $c_1 (call $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_2))))
+    (local.set $s_1 (call $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_2))))
+    (ref.eq (local.get $c_1) (block (result (ref null $jsenum.Main.ComparableJsEnum))
+     (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+     (global.get $ONE@jsenum.Main.ComparableJsEnum)
+    ))
+   )) (else (i32.const 0)))
+   (then
+    (block
+    )
+   )
+  )
+  (block
+   (local.set $$selector (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (local.get $o)))
+   
+   (if (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $$selector)) (then (block (result i32)
+     (local.set $patternJsEnumRecord_3 (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $$selector)))
+     (local.set $c_2 (call $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_3))))
+     (local.set $__2 (call $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_3))))
+     (ref.eq (local.get $c_2) (block (result (ref null $jsenum.Main.ComparableJsEnum))
+      (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
+      (global.get $ZERO@jsenum.Main.ComparableJsEnum)
+     ))
+    )) (else (i32.const 0)))
+    (then
+     (block
+      (local.set $$caseIndex (i32.const 0))
+     )
+    )(else
+     (if (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $$selector)) (then (block (result i32)
+       (local.set $patternJsEnumRecord_4 (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $$selector)))
+       (local.set $__3 (call $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_4))))
+       (local.set $s_2 (call $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_4))))
+       (ref.eq (local.get $s_2) (block (result (ref null $jsenum.Main.StringJsEnum))
+        (call $$clinit__void_<once>_@jsenum.Main.StringJsEnum )
+        (global.get $THREE@jsenum.Main.StringJsEnum)
+       ))
+      )) (else (i32.const 0)))
+      (then
+       (block
+        (local.set $$caseIndex (i32.const 1))
+       )
+      )(else
+       (if (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $$selector)) (then (block (result i32)
+         (local.set $patternJsEnumRecord_5 (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $$selector)))
+         (local.set $__4 (call $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_5))))
+         (local.set $__5 (call $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $patternJsEnumRecord_5))))
+         (i32.const 1)
+        )) (else (i32.const 0)))
+        (then
+         (block
+          (local.set $$caseIndex (i32.const 2))
+         )
+        )(else
+         (block
+          (local.set $$caseIndex (i32.const 4))
+         )
+        )
+       )
+      )
+     )
+    )
+   )
+   (block $SWITCH.BREAK
+    (block
+     (block
+      (block
+       (block
+        (block ;; evaluate expression and jump
+         (br_table 0 1 2 3 (local.get $$caseIndex))
+        )
+        ;; case 0:
+        (br $SWITCH.BREAK)
+       )
+       ;; case 1:
+       (br $SWITCH.BREAK)
+      )
+      ;; case 2:
+      (br $SWITCH.BREAK)
+     )
+     ;; default:
+     (br $SWITCH.BREAK)
     )
    )
   )
@@ -3866,6 +4028,147 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.SubtypeImplicitVarargs)
+
+;;; JsEnumRecord JsEnumRecord.$create(ComparableJsEnum comparable, StringJsEnum string)
+(func $$create__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord
+ (param $comparable (ref null $jsenum.Main.ComparableJsEnum))
+ (param $string (ref null $jsenum.Main.StringJsEnum))
+ (result (ref null $jsenum.Main.JsEnumRecord))
+ (local $$instance (ref null $jsenum.Main.JsEnumRecord))
+ (block
+  (call $$clinit__void_<once>_@jsenum.Main.JsEnumRecord )
+  (local.set $$instance (struct.new $jsenum.Main.JsEnumRecord (global.get $jsenum.Main.JsEnumRecord.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $jsenum.Main.ComparableJsEnum) (ref.null $jsenum.Main.StringJsEnum)))
+  (call $$ctor__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum__void_$p_jsenum_Main_JsEnumRecord@jsenum.Main.JsEnumRecord (ref.as_non_null (local.get $$instance))(local.get $comparable)(local.get $string))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsEnumRecord.$ctor(ComparableJsEnum comparable, StringJsEnum string)
+(func $$ctor__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum__void_$p_jsenum_Main_JsEnumRecord@jsenum.Main.JsEnumRecord
+ (param $this (ref null $jsenum.Main.JsEnumRecord))
+ (param $comparable (ref null $jsenum.Main.ComparableJsEnum))
+ (param $string (ref null $jsenum.Main.StringJsEnum))
+ (block
+  (call $$ctor__void_$p_java_lang_Record@java.lang.Record (ref.as_non_null (local.get $this)))
+  (struct.set $jsenum.Main.JsEnumRecord $comparable@jsenum.Main.JsEnumRecord (local.get $this) (local.get $comparable))
+  (struct.set $jsenum.Main.JsEnumRecord $string@jsenum.Main.JsEnumRecord (local.get $this) (local.get $string))
+ )
+)
+
+;;; ComparableJsEnum JsEnumRecord.comparable()
+(func $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord
+ (type $function.m_comparable__jsenum_Main_ComparableJsEnum)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $jsenum.Main.ComparableJsEnum))
+ (local $this (ref null $jsenum.Main.JsEnumRecord))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsEnumRecord) (local.get $this.untyped)))
+ (block
+  (return (struct.get $jsenum.Main.JsEnumRecord $comparable@jsenum.Main.JsEnumRecord (local.get $this)))
+ )
+)
+(elem declare func $m_comparable__jsenum_Main_ComparableJsEnum@jsenum.Main.JsEnumRecord)
+
+;;; StringJsEnum JsEnumRecord.string()
+(func $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord
+ (type $function.m_string__jsenum_Main_StringJsEnum)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $jsenum.Main.StringJsEnum))
+ (local $this (ref null $jsenum.Main.JsEnumRecord))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsEnumRecord) (local.get $this.untyped)))
+ (block
+  (return (struct.get $jsenum.Main.JsEnumRecord $string@jsenum.Main.JsEnumRecord (local.get $this)))
+ )
+)
+(elem declare func $m_string__jsenum_Main_StringJsEnum@jsenum.Main.JsEnumRecord)
+
+;;; boolean JsEnumRecord.equals(Object arg0)
+(func $m_equals__java_lang_Object__boolean@jsenum.Main.JsEnumRecord
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result i32)
+ (local $$other (ref null $jsenum.Main.JsEnumRecord))
+ (local $this (ref null $jsenum.Main.JsEnumRecord))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsEnumRecord) (local.get $this.untyped)))
+ (block
+  (if (i32.eqz (if (result i32) (ref.test (ref $jsenum.Main.JsEnumRecord) (local.get $arg0)) (then (block (result i32)
+    (local.set $$other (ref.cast (ref null $jsenum.Main.JsEnumRecord) (local.get $arg0)))
+    (i32.const 1)
+   )) (else (i32.const 0))))
+   (then
+    (return (i32.const 0))
+   )
+  )
+  (return (call $m_equals__arrayOf_java_lang_Object__arrayOf_java_lang_Object__boolean@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $jsenum.Main.JsEnumRecord $comparable@jsenum.Main.JsEnumRecord (local.get $this))(struct.get $jsenum.Main.JsEnumRecord $string@jsenum.Main.JsEnumRecord (local.get $this))))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $jsenum.Main.JsEnumRecord $comparable@jsenum.Main.JsEnumRecord (local.get $$other))(struct.get $jsenum.Main.JsEnumRecord $string@jsenum.Main.JsEnumRecord (local.get $$other))))))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@jsenum.Main.JsEnumRecord)
+
+;;; int JsEnumRecord.hashCode()
+(func $m_hashCode__int@jsenum.Main.JsEnumRecord
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ (local $this (ref null $jsenum.Main.JsEnumRecord))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsEnumRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_hashCode__arrayOf_java_lang_Object__int@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $jsenum.Main.JsEnumRecord $comparable@jsenum.Main.JsEnumRecord (local.get $this))(struct.get $jsenum.Main.JsEnumRecord $string@jsenum.Main.JsEnumRecord (local.get $this))))))
+ )
+)
+(elem declare func $m_hashCode__int@jsenum.Main.JsEnumRecord)
+
+;;; String JsEnumRecord.toString()
+(func $m_toString__java_lang_String@jsenum.Main.JsEnumRecord
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $this (ref null $jsenum.Main.JsEnumRecord))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsEnumRecord) (local.get $this.untyped)))
+ (block
+  (return (call $m_concat__java_lang_String__java_lang_String__java_lang_String@java.lang.String (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $function.no.side.effects.m_getName__java_lang_String (ref.as_non_null (call $m_getClass__java_lang_Class@java.lang.Object (ref.as_non_null (local.get $this))))(ref.func $m_getName__java_lang_String@java.lang.Class) ))(call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (call $m_toString__arrayOf_java_lang_Object__java_lang_String@java.util.Arrays (call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (struct.get $jsenum.Main.JsEnumRecord $comparable@jsenum.Main.JsEnumRecord (local.get $this))(struct.get $jsenum.Main.JsEnumRecord $string@jsenum.Main.JsEnumRecord (local.get $this))))))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@jsenum.Main.JsEnumRecord)
+
+;;; void JsEnumRecord.$clinit()
+(func $$clinit__void_<once>_@jsenum.Main.JsEnumRecord
+ (block
+  (if (global.get $$class-initialized@jsenum.Main.JsEnumRecord)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsenum.Main.JsEnumRecord (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Record )
+ )
+)
+
+;;; Class<T> JsEnumRecord.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsEnumRecord
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsenum.Main.JsEnumRecord)))
+   (then
+    (return (global.get $$class@jsenum.Main.JsEnumRecord))
+   )
+  )
+  (global.set $$class@jsenum.Main.JsEnumRecord (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsenum.Main_...|__java_lang_String_<once>_@jsenum.Main.JsEnumRecord.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Record )))
+  (return (global.get $$class@jsenum.Main.JsEnumRecord))
+ )
+)
+
+;;; Class<?> JsEnumRecord.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsenum.Main.JsEnumRecord
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsenum.Main.JsEnumRecord))
+ (local.set $this (ref.cast (ref $jsenum.Main.JsEnumRecord) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.JsEnumRecord ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.JsEnumRecord)
 
 ;;; <anonymous> implements JsFunctionSuppiler<ComparableJsEnum> <anonymous> implements JsFunctionSuppiler<ComparableJsEnum>.$create()
 (func $$create__@jsenum.Main.$LambdaImplementor$3

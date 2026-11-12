@@ -23,6 +23,7 @@ let Consumer = goog.forwardDeclare('jsenum.Main.Consumer$impl');
 let Foo = goog.forwardDeclare('jsenum.Main.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
+let JsEnumRecord = goog.forwardDeclare('jsenum.Main.JsEnumRecord$impl');
 let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NativeStringEnum');
 let NativeStringEnum_$Overlay = goog.forwardDeclare('jsenum.Main.NativeStringEnum.$Overlay$impl');
 let SomeJsEnum = goog.forwardDeclare('jsenum.Main.SomeJsEnum$impl');
@@ -390,6 +391,79 @@ class Main extends j_l_Object {
   }
  }
  /** @nodts */
+ static m_testJsEnumRecordPatterns__void() {
+  Main.$clinit();
+  let o = JsEnumRecord.$create__jsenum_Main_ComparableJsEnum__jsenum_Main_StringJsEnum(ComparableJsEnum.ONE, StringJsEnum.ONE);
+  let /** boolean */ tmp;
+  if (JsEnumRecord.$isInstance(o)) {
+   let patternJsEnumRecord = /**@type {!JsEnumRecord}*/ ($Casts.$to(o, JsEnumRecord));
+   let _ = patternJsEnumRecord.m_comparable__jsenum_Main_ComparableJsEnum();
+   let __1 = patternJsEnumRecord.m_string__jsenum_Main_StringJsEnum();
+   tmp = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ (true));
+  } else {
+   tmp = false;
+  }
+  if (tmp) {}
+  let /** ?ComparableJsEnum */ c = null;
+  let /** ?StringJsEnum */ s = null;
+  let /** boolean */ tmp_1;
+  if (JsEnumRecord.$isInstance(o)) {
+   let patternJsEnumRecord_1 = /**@type {!JsEnumRecord}*/ ($Casts.$to(o, JsEnumRecord));
+   c = patternJsEnumRecord_1.m_comparable__jsenum_Main_ComparableJsEnum();
+   s = patternJsEnumRecord_1.m_string__jsenum_Main_StringJsEnum();
+   tmp_1 = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ (true));
+  } else {
+   tmp_1 = false;
+  }
+  if (tmp_1) {
+   let v = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(c);
+   let value = StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum__java_lang_String(s);
+  }
+  let /** boolean */ tmp_2;
+  if (JsEnumRecord.$isInstance(o)) {
+   let patternJsEnumRecord_2 = /**@type {!JsEnumRecord}*/ ($Casts.$to(o, JsEnumRecord));
+   let c_1 = patternJsEnumRecord_2.m_comparable__jsenum_Main_ComparableJsEnum();
+   let s_1 = patternJsEnumRecord_2.m_string__jsenum_Main_StringJsEnum();
+   tmp_2 = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Equality.$same(c_1, ComparableJsEnum.ONE)));
+  } else {
+   tmp_2 = false;
+  }
+  if (tmp_2) {}
+  let tmp0_subject = o;
+  let /** boolean */ tmp_3;
+  if (JsEnumRecord.$isInstance(tmp0_subject)) {
+   let patternJsEnumRecord_3 = /**@type {!JsEnumRecord}*/ ($Casts.$to(o, JsEnumRecord));
+   let c_2 = patternJsEnumRecord_3.m_comparable__jsenum_Main_ComparableJsEnum();
+   let __3 = patternJsEnumRecord_3.m_string__jsenum_Main_StringJsEnum();
+   tmp_3 = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Equality.$same(c_2, ComparableJsEnum.ZERO)));
+  } else {
+   tmp_3 = false;
+  }
+  if (tmp_3) {} else {
+   let /** boolean */ tmp_4;
+   if (JsEnumRecord.$isInstance(tmp0_subject)) {
+    let patternJsEnumRecord_4 = /**@type {!JsEnumRecord}*/ ($Casts.$to(o, JsEnumRecord));
+    let __5 = patternJsEnumRecord_4.m_comparable__jsenum_Main_ComparableJsEnum();
+    let s_2 = patternJsEnumRecord_4.m_string__jsenum_Main_StringJsEnum();
+    tmp_4 = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Equality.$same(s_2, StringJsEnum.THREE)));
+   } else {
+    tmp_4 = false;
+   }
+   if (tmp_4) {} else {
+    let /** boolean */ tmp_5;
+    if (JsEnumRecord.$isInstance(tmp0_subject)) {
+     let patternJsEnumRecord_5 = /**@type {!JsEnumRecord}*/ ($Casts.$to(o, JsEnumRecord));
+     let __7 = patternJsEnumRecord_5.m_comparable__jsenum_Main_ComparableJsEnum();
+     let __8 = patternJsEnumRecord_5.m_string__jsenum_Main_StringJsEnum();
+     tmp_5 = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ (true));
+    } else {
+     tmp_5 = false;
+    }
+    if (tmp_5) {} else {}
+   }
+  }
+ }
+ /** @nodts */
  static m_testOptimizedCast__void() {
   Main.$clinit();
   let o = /**@type {BoxedComparableLightEnum<!ComparableJsEnum>}*/ (Enums.m_boxComparable__java_lang_Object__javaemul_internal_Constructor__javaemul_internal_Enums_BoxedComparableLightEnum(ComparableJsEnum.ONE, $Overlay));
@@ -541,6 +615,7 @@ class Main extends j_l_Object {
   Foo = goog.module.get('jsenum.Main.Foo$impl');
   IntJsEnum = goog.module.get('jsenum.Main.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
+  JsEnumRecord = goog.module.get('jsenum.Main.JsEnumRecord$impl');
   NativeStringEnum = goog.module.get('jsenum.Main.NativeStringEnum');
   NativeStringEnum_$Overlay = goog.module.get('jsenum.Main.NativeStringEnum.$Overlay$impl');
   SomeJsEnum = goog.module.get('jsenum.Main.SomeJsEnum$impl');

@@ -2982,6 +2982,180 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testJsEnumInstanceofPatternFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum {A, B}
+          @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
+            A(1),
+            B(2);
+            int value;
+            JsEnumWithCustomValue(int value) { this.value = value; }
+          }
+          record Box(MyJsEnum e) {}
+          record CustomBox(JsEnumWithCustomValue e) {}
+          record Pair(Object first, Box second) {}
+          record GenericBox<T>(T value) {}
+          private static void main(
+              MyJsEnum m, JsEnumWithCustomValue c, Box b, GenericBox<MyJsEnum> g, Object o) {
+            if (m instanceof Enum<?> e) {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            if (c instanceof Comparable<?> comparable) {}
+        > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be pattern matched against 'Comparable<?>'.
+            if (b instanceof Box(Enum<?> e)) {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            if (g instanceof GenericBox<MyJsEnum>(Enum<?> e)) {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            if (g instanceof GenericBox(Enum<?> e)) {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            if (o instanceof CustomBox(Comparable<?> comparable)) {}
+        > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be pattern matched against 'Comparable<?>'.
+            if (o instanceof Pair(Box(Enum<?> e), Box(var unused)) && e.ordinal() == 0) {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            switch (o) {
+              case Box x when x.e() instanceof Enum<?> e -> {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+              default -> {}
+            }
+          }
+        }
+        """);
+  }
+
+  public void testJsEnumInstanceofPatternSucceeds() {
+    assertTranspileSucceeds(
+            "test.Main",
+            """
+            import java.io.Serializable;
+            import jsinterop.annotations.*;
+            public class Main {
+              @JsEnum enum MyJsEnum {A, B}
+              @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
+                A(1),
+                B(2);
+                int value;
+                JsEnumWithCustomValue(int value) { this.value = value; }
+              }
+              record Box(MyJsEnum e) {}
+              record CustomBox(JsEnumWithCustomValue e) {}
+              private static void main(MyJsEnum m, JsEnumWithCustomValue c, Box b, Object o) {
+                if (m instanceof MyJsEnum e) {}
+                if (m instanceof Comparable<?> comparable) {}
+                if (m instanceof Object object) {}
+                if (c instanceof Serializable serializable) {}
+                if (b instanceof Box(MyJsEnum e)) {}
+                if (b instanceof Box(var e)) {}
+                if (b instanceof Box(Object e)) {}
+                if (o instanceof Box(Comparable<?> comparable)) {}
+                if (o instanceof CustomBox(Object object)) {}
+              }
+            }
+            """)
+        .assertNoWarnings();
+  }
+
+  public void testJsEnumSwitchPatternFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum {A, B}
+          @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
+            A(1),
+            B(2);
+            int value;
+            JsEnumWithCustomValue(int value) { this.value = value; }
+          }
+          record Box(MyJsEnum e) {}
+          record CustomBox(JsEnumWithCustomValue e) {}
+          record Pair(Object first, Box second) {}
+          record GenericBox<T>(T value) {}
+          private static String main(
+              MyJsEnum m, JsEnumWithCustomValue c, Box b, GenericBox<MyJsEnum> g, Object o) {
+            String s =
+                switch (m) {
+                  case Enum<?> e -> e.name();
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+                };
+            switch (c) {
+              case Comparable<?> comparable -> {}
+        > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be pattern matched against 'Comparable<?>'.
+            }
+            switch (b) {
+              case Box(Enum<?> e) -> {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            }
+            switch (g) {
+              case GenericBox<MyJsEnum>(Enum<?> e) -> {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            }
+            switch (g) {
+              case GenericBox(Enum<?> e) -> {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+            }
+            int i =
+                switch (new CustomBox(c)) {
+                  case CustomBox(Comparable<JsEnumWithCustomValue> comparable) ->
+        > Error: Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be pattern matched against 'Comparable<JsEnumWithCustomValue>'.
+                      comparable.compareTo(c);
+                };
+            switch (o) {
+              case Pair(Box(Enum<?> e), var unused) when e.ordinal() == 0 -> {}
+        > Error: JsEnum 'MyJsEnum' cannot be pattern matched against 'Enum<?>'.
+              default -> {}
+            }
+            return s;
+          }
+        }
+        """);
+  }
+
+  public void testJsEnumSwitchPatternSucceeds() {
+    assertTranspileSucceeds(
+            "test.Main",
+            """
+            import java.io.Serializable;
+            import jsinterop.annotations.*;
+            public class Main {
+              @JsEnum enum MyJsEnum {A, B}
+              @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {
+                A(1),
+                B(2);
+                int value;
+                JsEnumWithCustomValue(int value) { this.value = value; }
+              }
+              record Box(MyJsEnum e) {}
+              record CustomBox(JsEnumWithCustomValue e) {}
+              record Pair(Object first, Box second) {}
+              private static void main(MyJsEnum m, JsEnumWithCustomValue c, Box b, Object o) {
+                switch (m) {
+                  case Comparable<?> comparable -> {}
+                }
+                switch (m) {
+                  case Object object -> {}
+                }
+                switch (c) {
+                  case Serializable serializable -> {}
+                }
+                switch (b) {
+                  case Box(var e) -> {}
+                }
+                switch (o) {
+                  case Pair(Box(MyJsEnum e), var unused) -> {}
+                  case Box(Object e) -> {}
+                  case CustomBox(Object e) -> {}
+                  default -> {}
+                }
+              }
+            }
+            """)
+        .assertNoWarnings();
+  }
+
   public void testJsEnumParameterizationSucceeds() {
     assertTranspileSucceeds(
             "test.MyJsEnum",
@@ -3289,7 +3463,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             record Box<T>(T value) {}
             Box<MyJsEnum> myJsEnumBox = new Box<>(MyJsEnum.A);
             if (myJsEnumBox instanceof Box<? extends Enum<?>>(var unused)) {}
-        > Error: 'Box<MyJsEnum>' cannot be cast to 'Box<?>'.
+        > Error: 'Box<MyJsEnum>' cannot be pattern matched against 'Box<?>'.
             Class<? extends Enum<?>> clazz = MyJsEnum.class;
         > Error: 'Class<MyJsEnum>' cannot be assigned to 'Class<?>'.
             List<? extends Comparable<?>> l3 = customValuedList;
@@ -3958,6 +4132,72 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             MyJsEnum[] arr = new MyJsEnum[0];
             arr.getClass();
         > Error: Cannot access member of 'Object' with JsEnum array 'MyJsEnum[]'.
+          }
+        }
+        """);
+  }
+
+  public void testJsEnumArrayInstanceofPatternFails() {
+    assertWithInlineMessages(
+        "Main",
+        """
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum {A, B}
+          record ArrayBox(MyJsEnum[] arr) {}
+        > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.
+          private static void tests(Object o, ArrayBox ab) {
+            if (o instanceof MyJsEnum[] arr) { }
+        > Error: Cannot pattern match against JsEnum array 'MyJsEnum[]'.
+            if (ab instanceof ArrayBox(Object[] objects)) { }
+        > Error: JsEnum array 'MyJsEnum[]' cannot be pattern matched against 'Object[]'.
+            if (ab instanceof ArrayBox(Object object)) { }
+        > Error: JsEnum array 'MyJsEnum[]' cannot be pattern matched against 'Object'.
+          }
+        }
+        """);
+  }
+
+  public void testJsEnumArrayRecordPatternSpecializationFails() {
+    assertWithInlineMessages(
+        "Main",
+        """
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum {A, B}
+          record Box<T>(T value) {}
+          private static void tests(Box<MyJsEnum[]> b) {
+        > Error: Parameter 'b' in 'void Main.tests(Box<MyJsEnum[]> b)' cannot be of type 'Box<MyJsEnum[]>'.
+            if (b instanceof Box(_)) { }
+        > Error: Record pattern cannot be of type 'Box<MyJsEnum[]>'.
+          }
+        }
+        """);
+  }
+
+  public void testJsEnumArraySwitchPatternFails() {
+    assertWithInlineMessages(
+        "Main",
+        """
+        import jsinterop.annotations.*;
+        public class Main {
+          @JsEnum enum MyJsEnum {A, B}
+          record ArrayBox(MyJsEnum[] arr) {}
+        > Error: JsEnum array 'MyJsEnum[]' cannot be assigned to 'Object[]'.
+          private static void tests(Object o, ArrayBox ab, MyJsEnum[] arr) {
+            switch (ab) {
+              case ArrayBox(Object[] objects) -> { }
+        > Error: JsEnum array 'MyJsEnum[]' cannot be pattern matched against 'Object[]'.
+            }
+            switch (o) {
+              case ArrayBox(Object object) -> { }
+        > Error: JsEnum array 'MyJsEnum[]' cannot be pattern matched against 'Object'.
+              default -> { }
+            }
+            switch (arr) {
+              case Object[] objects -> { }
+        > Error: JsEnum array 'MyJsEnum[]' cannot be pattern matched against 'Object[]'.
+            }
           }
         }
         """);

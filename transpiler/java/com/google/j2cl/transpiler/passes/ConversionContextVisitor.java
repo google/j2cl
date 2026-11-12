@@ -65,6 +65,7 @@ import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.PatternMatchExpression;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
@@ -659,18 +660,40 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public InstanceOfExpression rewriteInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
-    Expression expression = instanceOfExpression.getExpression();
-    if (AstUtils.matchesJsEnumBoxingConversionContext(instanceOfExpression)) {
-      expression = contextRewriter.rewriteJsEnumBoxingConversionContext(expression);
-    } else {
-      expression = contextRewriter.rewriteInstanceOfContext(expression);
-    }
+    Expression expression =
+        rewriteInstanceOfOperand(
+            instanceOfExpression.getExpression(), instanceOfExpression.getTestTypeDescriptor());
 
     if (expression != instanceOfExpression.getExpression()) {
       return instanceOfExpression.toBuilder().setExpression(expression).build();
     }
 
     return instanceOfExpression;
+  }
+
+  @Override
+  public PatternMatchExpression rewritePatternMatchExpression(
+      PatternMatchExpression patternMatchExpression) {
+    // A pattern matching expression is an `instanceof` with a pattern on the right hand side, so
+    // its left hand side is rewritten the same way as in `instanceof` expressions.
+    Expression expression =
+        rewriteInstanceOfOperand(
+            patternMatchExpression.getExpression(),
+            patternMatchExpression.getPattern().getTypeDescriptor());
+
+    if (expression != patternMatchExpression.getExpression()) {
+      return patternMatchExpression.toBuilder().setExpression(expression).build();
+    }
+
+    return patternMatchExpression;
+  }
+
+  private Expression rewriteInstanceOfOperand(
+      Expression expression, TypeDescriptor testTypeDescriptor) {
+    if (AstUtils.matchesJsEnumBoxingConversionContext(expression, testTypeDescriptor)) {
+      return contextRewriter.rewriteJsEnumBoxingConversionContext(expression);
+    }
+    return contextRewriter.rewriteInstanceOfContext(expression);
   }
 
   @Override

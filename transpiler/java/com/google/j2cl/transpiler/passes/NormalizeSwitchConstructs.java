@@ -65,7 +65,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Makes switch statements to comply with Java semantics. */
+/**
+ * Makes switch statements to comply with Java semantics.
+ *
+ * <p>Switches with patterns are rewritten in terms of pattern matching expressions, which need to
+ * be desugared later by {@link DesugarInstanceOfPatterns}.
+ */
 public class NormalizeSwitchConstructs extends NormalizationPass {
   private final boolean convertNativeJsEnumSwitches;
 
@@ -81,8 +86,6 @@ public class NormalizeSwitchConstructs extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     removeSwitchExpressions(compilationUnit);
     normalizeSwitchStatements(compilationUnit);
-    // Switch with patterns are rewritten using instanceof patterns that need to be desugared.
-    new DesugarInstanceOfPatterns().applyTo(compilationUnit);
   }
 
   /** Transform switch expressions into switch statements that are embedded in expressions. */

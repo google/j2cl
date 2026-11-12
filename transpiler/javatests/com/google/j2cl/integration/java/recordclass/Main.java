@@ -564,11 +564,11 @@ public class Main {
 
   @J2ktIncompatible
   record ExceptionInPatternRecord(Object a) {
-      @Override
-      public Object a() {
-        throw new AccessorException();
-      }
+    @Override
+    public Object a() {
+      throw new AccessorException();
     }
+  }
 
   @J2ktIncompatible
   private static void testExceptionInPattern() {
@@ -587,19 +587,19 @@ public class Main {
           () -> {
             var unused = CompactConstructorWithComponentReferencesRecord.this.s;
           };
-        class Class {
-          void m() {
+      class Class {
+        void m() {
           var unused = CompactConstructorWithComponentReferencesRecord.this.s;
-          }
         }
+      }
       var unused =
           new Object() {
             void m() {
               var unused2 = CompactConstructorWithComponentReferencesRecord.this.s;
             }
           };
-      }
     }
+  }
 
   @J2ktIncompatible
   private static void testCompactConstructorWithComponentReferences() {
@@ -644,6 +644,13 @@ public class Main {
             // `Integer` that throws.
             var unused = unsafeCastRecord instanceof ParametericRecord(Integer i);
           });
+      assertThrowsClassCastException(() -> {
+        // Same as above, but in a switch pattern.
+        var unused =
+            switch (unsafeCastRecord) {
+              case ParametericRecord(Integer i) -> i;
+            };
+      });
     }
   }
 
