@@ -43,6 +43,7 @@ import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.typeOrFail
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.defaultType
+import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.hasShape
 import org.jetbrains.kotlin.ir.util.isPrimitiveArray
 import org.jetbrains.kotlin.ir.util.parentAsClass
@@ -67,6 +68,8 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
     expression.transformChildrenVoid()
     return when {
       expression.isEnumEntries || expression.isEnumGetEntries -> lowerEnumEntries(expression)
+      expression.isEnumValues -> lowerEnumValues(expression)
+      expression.isEnumValueOf -> lowerEnumValueOf(expression)
       expression.isRangeToCall -> lowerRangeToCall(expression)
       expression.isRangeUntilCall -> lowerRangeUntilCall(expression)
       expression.isArrayIteratorCall -> lowerArrayIteratorCall(expression)
@@ -98,6 +101,31 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
         typeArguments[0] = enumType
         arguments[0] = irCall(enumValuesFun)
       }
+    }
+  }
+
+  /** Rewrites `enumValues<SomeEnum>()` to `SomeEnum.values()`. */
+  private fun lowerEnumValues(expression: IrCall): IrExpression {
+    val enumType = requireNotNull(expression.typeArguments[0])
+    val enumValuesFun = enumType.classOrFail.owner.findEnumValuesFunction(context).symbol
+    return context.createJvmIrBuilder(enumValuesFun, expression).run { irCall(enumValuesFun) }
+  }
+
+  /** Rewrites `enumValueOf<SomeEnum>(name)` to `SomeEnum.valueOf(name)`. */
+  private fun lowerEnumValueOf(expression: IrCall): IrExpression {
+    val enumType = requireNotNull(expression.typeArguments[0])
+    val enumValueOfFun =
+      enumType.classOrFail.owner.functions
+        .single {
+          it.name.asString() == "valueOf" &&
+            it.hasShape(
+              regularParameters = 1,
+              parameterTypes = listOf(context.irBuiltIns.stringType),
+            )
+        }
+        .symbol
+    return context.createJvmIrBuilder(enumValueOfFun, expression).run {
+      irCall(enumValueOfFun).apply { arguments[0] = expression.arguments[0] }
     }
   }
 
@@ -297,6 +325,12 @@ class IntrinsicFunctionCallsLowering(j2clBackendContext: J2clBackendContext) :
 
   private val IrCall.isEnumEntries: Boolean
     get() = intrinsics.isEnumEntries(this)
+
+  private val IrCall.isEnumValues: Boolean
+    get() = intrinsics.isEnumValues(this)
+
+  private val IrCall.isEnumValueOf: Boolean
+    get() = intrinsics.isEnumValueOf(this)
 
   private val IrCall.isArrayIteratorCall: Boolean
     get() = intrinsics.isArrayIterator(this)

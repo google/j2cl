@@ -36,7 +36,14 @@ fun testValues() {
   assertTrue(arrayContains(Planet.SATURN, Planet.values()))
   assertTrue(arrayContains(Planet.URANUS, Planet.values()))
   assertTrue(arrayContains(Planet.NEPTUNE, Planet.values()))
+
+  assertTrue(enumValues<Planet>().contentEquals(Planet.values()))
+  assertTrue(enumValuesProxy<Planet>().contentEquals(Planet.values()))
 }
+
+inline fun <reified T : Enum<T>> enumValuesProxy(): Array<T> = enumValues<T>()
+
+inline fun <reified T : Enum<T>> enumValueOfProxy(name: String): T = enumValueOf<T>(name)
 
 fun arrayContains(obj: Planet, array: Array<Planet>): Boolean {
   return Arrays.binarySearch(array, obj) > -1
@@ -51,6 +58,9 @@ fun testValueOf() {
   assertTrue(Planet.valueOf("SATURN") == Planet.SATURN)
   assertTrue(Planet.valueOf("URANUS") == Planet.URANUS)
   assertTrue(Planet.valueOf("NEPTUNE") == Planet.NEPTUNE)
+
+  assertTrue(enumValueOf<Planet>("MERCURY") == Planet.MERCURY)
+  assertTrue(enumValueOfProxy<Planet>("VENUS") == Planet.VENUS)
 }
 
 fun testValueOf_exceptions() {
@@ -78,6 +88,20 @@ fun testValueOf_exceptions() {
 
   try {
     Planet.valueOf("__proto__")
+    fail("Should have thrown IllegalArgumentException.")
+  } catch (e: IllegalArgumentException) {
+    // do nothing.
+  }
+
+  try {
+    enumValueOf<Planet>("NOTHING")
+    fail("Should have thrown IllegalArgumentException.")
+  } catch (e: IllegalArgumentException) {
+    // do nothing.
+  }
+
+  try {
+    enumValueOfProxy<Planet>("NOTHING")
     fail("Should have thrown IllegalArgumentException.")
   } catch (e: IllegalArgumentException) {
     // do nothing.

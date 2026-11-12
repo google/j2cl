@@ -230,6 +230,14 @@ class IntrinsicMethods(private val irBuiltIns: IrBuiltIns, private val symbols: 
 
   fun isEnumEntries(irCall: IrCall): Boolean = irCall.symbol == enumEntriesSymbol
 
+  private val enumValuesSymbol by lazy { topLevelFunctionSymbol(kotlinFqn, "enumValues") }
+
+  fun isEnumValues(irCall: IrCall): Boolean = irCall.symbol == enumValuesSymbol
+
+  private val enumValueOfSymbol by lazy { topLevelFunctionSymbol(kotlinFqn, "enumValueOf") }
+
+  fun isEnumValueOf(irCall: IrCall): Boolean = irCall.symbol == enumValueOfSymbol
+
   private val enumGetEntriesName = Name.special("<get-entries>")
 
   /**
