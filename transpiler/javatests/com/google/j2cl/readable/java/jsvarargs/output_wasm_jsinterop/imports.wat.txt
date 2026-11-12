@@ -1,0 +1,23 @@
+
+(import "prototypes" "$jsvarargs.Main.StaticInterfaceMethodWithVarargs.proto" (global $jsvarargs.Main.StaticInterfaceMethodWithVarargs.proto (ref extern)))
+(import "prototypes" "$jsvarargs.Main.proto" (global $jsvarargs.Main.proto (ref extern)))
+(import "prototypes" "$jsvarargs.Main.AbstractMethodWithVarargs.proto" (global $jsvarargs.Main.AbstractMethodWithVarargs.proto (ref extern)))
+(import "prototypes" "$jsvarargs.Main.Varargs.proto" (global $jsvarargs.Main.Varargs.proto (ref extern)))
+(import "prototypes" "$jsvarargs.Main.InstanceVarargs.proto" (global $jsvarargs.Main.InstanceVarargs.proto (ref extern)))
+(import "prototypes" "$jsvarargs.Main.SubVarargs.proto" (global $jsvarargs.Main.SubVarargs.proto (ref extern)))
+
+;;; WasmExtern Function.$invokeJsFunction(WasmExtern $jsFuncref, int i, WasmExtern args)
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.Function (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+ (param $$jsFuncref (ref null extern))
+ (param $i i32)
+ (param $args (ref null extern))
+ (result (ref null extern))
+)
+
+;;; WasmExtern GenericFunction.$invokeJsFunction(WasmExtern $jsFuncref, WasmExtern i, WasmExtern args)
+(func $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.GenericFunction (import "imports" "j2wasm.JsInteropRuntime.invokeJsFunction")
+ (param $$jsFuncref (ref null extern))
+ (param $i (ref null extern))
+ (param $args (ref null extern))
+ (result (ref null extern))
+)

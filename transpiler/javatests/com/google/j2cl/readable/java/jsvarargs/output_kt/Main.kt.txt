@@ -22,7 +22,6 @@ import javaemul.lang.*
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
-import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
@@ -235,20 +234,6 @@ open class Main {
   fun <T> parameterizedByT(vararg elements: List<T>?): T {
    val elements_1: Array<List<T>?>? = elements as Array<List<T>?>?
    return elements_1!![0]!!.get(0)
-  }
- }
- 
- @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)
- internal open class NativeObject {
-  constructor(vararg pars: Any?)
- }
- 
- internal open class SubVarargsConstructorClass: NativeObject {
-  @JsConstructor
-  constructor(i: Int, vararg args: Any?): super(
-   *(args as Array<Any?>?)!!,
-  ) {
-   val args_1: Array<Any?>? = args as Array<Any?>?
   }
  }
  

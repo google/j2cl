@@ -18,18 +18,11 @@ package jsvarargs
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
-import jsinterop.annotations.JsPackage
 import jsinterop.annotations.JsType
 import jsvarargs.Main.GenericFunction
 
 open class Main(f: Int) {
   val field = f
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  internal open class NativeObject internal constructor(vararg pars: Any?)
-
-  internal class SubVarargsConstructorClass @JsConstructor constructor(i: Int, vararg args: Any?) :
-    NativeObject(args)
 
   open class A(x: Int)
 

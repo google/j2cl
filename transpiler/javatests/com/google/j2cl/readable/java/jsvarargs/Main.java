@@ -19,23 +19,9 @@ import java.util.List;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class Main {
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeObject {
-    public NativeObject(Object... pars) {}
-  }
-
-  static class SubVarargsConstructorClass extends NativeObject {
-    @JsConstructor
-    public SubVarargsConstructorClass(int i, Object... args) {
-      super(args);
-    }
-  }
-
   public static class A {
     public A(int x) {}
   }
