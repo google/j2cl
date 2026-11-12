@@ -471,6 +471,11 @@ class Main extends j_l_Object {
   let b = $Equality.$same((InternalPreconditions.m_checkNotNull__boolean__void(t != null), t), e);
   let c = Enums.m_compareTo__java_lang_Object__java_lang_Object__int(t, e);
  }
+ /** @nodts */
+ static m_testJsEnumIntersectionVariable__java_lang_Object__void(/** * */ o) {
+  let intersection = /**@type {?ComparableJsEnum}*/ (Enums.m_unbox__java_lang_Object__javaemul_internal_Constructor__java_lang_Object(o, $Overlay));
+  let other = intersection;
+ }
  /** @nodts @template T */
  static m_testNativeJsEnumTypeVariable__jsenum_Main_NativeStringEnum__java_lang_Object__void(/** T */ t, /** * */ o) {
   let b = $Equality.$same((InternalPreconditions.m_checkNotNull__boolean__void(t != null), t), NativeStringEnum.ONE);

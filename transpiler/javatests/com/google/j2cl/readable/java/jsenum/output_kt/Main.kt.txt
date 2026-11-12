@@ -526,6 +526,12 @@ open class Main {
   }
   
   @JvmStatic
+  private fun testJsEnumIntersectionVariable(o: Any?) {
+   val intersection = o.let { it as ComparableJsEnum?; it as Comparable<ComparableJsEnum>?; it }
+   val other = intersection
+  }
+  
+  @JvmStatic
   private fun <T: NativeStringEnum?> testNativeJsEnumTypeVariable(t: T, o: Any?) {
    var b: Boolean = t!!.equals(
     NativeStringEnum.ONE,

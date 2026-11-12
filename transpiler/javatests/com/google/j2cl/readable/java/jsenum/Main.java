@@ -589,6 +589,11 @@ public class Main {
     int c = t.compareTo(e);
   }
 
+  private static void testJsEnumIntersectionVariable(Object o) {
+    var intersection = (ComparableJsEnum & Comparable<ComparableJsEnum>) o;
+    var other = intersection;
+  }
+
   private static <T extends NativeStringEnum> void testNativeJsEnumTypeVariable(T t, Object o) {
     boolean b = t.equals(NativeStringEnum.ONE);
     b = NativeStringEnum.ONE.equals(t);

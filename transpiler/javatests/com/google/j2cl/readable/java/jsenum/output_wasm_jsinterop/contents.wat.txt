@@ -2109,6 +2109,17 @@
  )
 )
 
+;;; void Main.testJsEnumIntersectionVariable(Object o)
+(func $m_testJsEnumIntersectionVariable__java_lang_Object__void@jsenum.Main
+ (param $o (ref null $java.lang.Object))
+ (local $intersection (ref null $jsenum.Main.ComparableJsEnum))
+ (local $other (ref null $jsenum.Main.ComparableJsEnum))
+ (block
+  (local.set $intersection (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o)))
+  (local.set $other (local.get $intersection))
+ )
+)
+
 ;;; void Main.testNativeJsEnumTypeVariable(T t, Object o)
 (func $m_testNativeJsEnumTypeVariable__jsenum_Main_NativeStringEnum__java_lang_Object__void@jsenum.Main
  (param $t (ref null extern))
