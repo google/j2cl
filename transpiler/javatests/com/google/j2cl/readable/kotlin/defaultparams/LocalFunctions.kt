@@ -65,6 +65,18 @@ fun localClassWithDefaultParameters(): Int {
   return LocalClass(10).memberFun()
 }
 
+fun localFunInConstructorOfLocalClass(): Int {
+  class LocalClass {
+    val value: Int
+
+    constructor(a: Int) {
+      fun localFun(b: Int = a) = a + b
+      value = localFun()
+    }
+  }
+  return LocalClass(10).value
+}
+
 fun evaluate(f: () -> Int) = f()
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")

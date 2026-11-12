@@ -141,6 +141,19 @@ fun testLocalFun() {
   }
   assertEquals(11, LocalClass(10).memberFun())
   assertEquals(30, LocalClass(10).memberFun(20))
+
+  class LocalClassWithLocalFunInConstructor {
+    val defaulted: Int
+    val explicit: Int
+
+    constructor(a: Int) {
+      fun localFun(b: Int = a) = a + b
+      defaulted = localFun()
+      explicit = localFun(5)
+    }
+  }
+  assertEquals(20, LocalClassWithLocalFunInConstructor(10).defaulted)
+  assertEquals(15, LocalClassWithLocalFunInConstructor(10).explicit)
 }
 
 // Enum entry arguments are not within any function when the default parameters are lowered.

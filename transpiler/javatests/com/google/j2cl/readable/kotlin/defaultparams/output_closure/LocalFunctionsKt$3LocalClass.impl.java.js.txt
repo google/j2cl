@@ -1,0 +1,54 @@
+goog.module('defaultparams.LocalFunctionsKt.$3LocalClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class $3LocalClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_value__defaultparams_LocalFunctionsKt_3LocalClass_ = 0;
+ }
+ /** @final @nodts @return {number} */
+ m_getValue__int() {
+  return this.f_value__defaultparams_LocalFunctionsKt_3LocalClass_;
+ }
+ /** @nodts @return {!$3LocalClass} */
+ static $create__int(/** number */ a) {
+  $3LocalClass.$clinit();
+  let $instance = new $3LocalClass();
+  $instance.$ctor__defaultparams_LocalFunctionsKt_3LocalClass__int__void(a);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__defaultparams_LocalFunctionsKt_3LocalClass__int__void(/** number */ a) {
+  this.$ctor__java_lang_Object__void();
+  let localFun = /**  @return {number}*/ ((/** number= */ b) =>{
+   let b$defaulted = $Util.$isUndefined(b) ? a : b;
+   return a + b$defaulted | 0;
+  });
+  this.f_value__defaultparams_LocalFunctionsKt_3LocalClass_ = localFun(/**@type {number}*/ (undefined));
+ }
+ /** @nodts */
+ static $clinit() {
+  $3LocalClass.$clinit = () =>{};
+  $3LocalClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $3LocalClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($3LocalClass, 'defaultparams.LocalFunctionsKt$3LocalClass');
+
+exports = $3LocalClass;
+
+//# sourceMappingURL=LocalFunctionsKt$3LocalClass.js.map
