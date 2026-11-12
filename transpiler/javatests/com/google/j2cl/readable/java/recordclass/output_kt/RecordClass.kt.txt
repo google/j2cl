@@ -70,11 +70,11 @@ open class RecordClass {
     val pattern___1RecordOuter: RecordOuter = r as RecordOuter
     val exp: Any? = pattern___1RecordOuter.o
     exp is RecordInner && run {
-     val pattern___1RecordInner: RecordInner? = exp as RecordInner?
-     val i1: Int = pattern___1RecordInner!!.i
-     val exp_1: Any? = pattern___1RecordInner!!.o
+     val pattern___1RecordInner: RecordInner = exp as RecordInner
+     val i1: Int = pattern___1RecordInner.i
+     val exp_1: Any? = pattern___1RecordInner.o
      exp_1 is String && run {
-      s1 = exp_1 as String?
+      s1 = exp_1 as String
       s2 = pattern___1RecordOuter.s
       n = pattern___1RecordOuter.n
       i1 == 1
@@ -90,11 +90,11 @@ open class RecordClass {
     val pattern___1RecordOuter_1: RecordOuter = o as RecordOuter
     val exp_2: Any? = pattern___1RecordOuter_1.o
     exp_2 is RecordInner && run {
-     val pattern___1RecordInner_1: RecordInner? = exp_2 as RecordInner?
-     val i1_1: Int = pattern___1RecordInner_1!!.i
-     val exp_3: Any? = pattern___1RecordInner_1!!.o
+     val pattern___1RecordInner_1: RecordInner = exp_2 as RecordInner
+     val i1_1: Int = pattern___1RecordInner_1.i
+     val exp_3: Any? = pattern___1RecordInner_1.o
      exp_3 is String && run {
-      val s1_1: String? = exp_3 as String?
+      val s1_1: String = exp_3 as String
       val s2_1: Any? = pattern___1RecordOuter_1.s
       val n_1: RecordInner? = pattern___1RecordOuter_1.n
       true
@@ -109,8 +109,8 @@ open class RecordClass {
     val pattern___1RecursiveRecord: RecursiveRecord = o as RecursiveRecord
     val exp_4: RecursiveRecord? = pattern___1RecursiveRecord.r
     exp_4 is RecursiveRecord && run {
-     val pattern___1RecursiveRecord_1: RecursiveRecord? = exp_4 as RecursiveRecord?
-     val r1: RecursiveRecord? = pattern___1RecursiveRecord_1!!.r
+     val pattern___1RecursiveRecord_1: RecursiveRecord = exp_4 as RecursiveRecord
+     val r1: RecursiveRecord? = pattern___1RecursiveRecord_1.r
      true
     }
    }

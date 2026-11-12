@@ -668,9 +668,6 @@ public enum Backend {
       return ImmutableList.of(
           FixAnonymousClassInstantiations::new,
           RemoveReturnValuesFromVoidMethods::new,
-          // Desugar instanceof patterns needs to run before any pass that uses
-          // ConversionContextVisitor, like NormalizeNullLiterals below.
-          DesugarInstanceOfPatterns::new,
           NormalizeNullLiterals::new,
           MakeVariablesFinal::new,
           RewriteProtobufFieldReferencesJ2kt::new,
@@ -718,6 +715,9 @@ public enum Backend {
           // Must run after NormalizeForEachIterable and benefits from running
           // after MakeVariablesFinal.
           NormalizeForEachStatementJ2kt::new,
+          // Runs after PropagateNullability so that the casts introduced by the desugaring are not
+          // made nullable.
+          DesugarInstanceOfPatterns::new,
           // Must run before VariableDeclarationHoister since it produces variable declarations
           // that need rescoping.
           NormalizeSwitchPatternsJ2kt::new,

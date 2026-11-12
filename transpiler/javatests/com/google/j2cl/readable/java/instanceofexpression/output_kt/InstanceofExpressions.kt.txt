@@ -146,7 +146,7 @@ open class InstanceofExpressions {
   }
   val serializable: Serializable? = null
   if (serializable is Appendable && run {
-   val `_`: Appendable? = serializable as Appendable?
+   val `_`: Appendable = serializable as Appendable
    true
   }) {
    return
