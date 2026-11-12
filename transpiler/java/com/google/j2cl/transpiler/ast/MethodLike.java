@@ -63,10 +63,6 @@ public interface MethodLike extends HasSourcePosition, HasReadableDescription {
   abstract class Builder<B extends Builder<B, M>, M extends MethodLike> {
     protected final List<Variable> parameters = new ArrayList<>();
     private final List<Statement> statements = new ArrayList<>();
-    // The source position of the block passed to `setBody`. It is considered part of the body and
-    // is only ever set together with it; when there is no body (e.g. abstract or native methods)
-    // it is null and the body is given the source position of the construct instead.
-    @Nullable private SourcePosition bodySourcePosition;
     protected SourcePosition sourcePosition;
 
     protected Builder() {}
@@ -90,18 +86,14 @@ public interface MethodLike extends HasSourcePosition, HasReadableDescription {
     }
 
     /**
-     * Sets the statements and the source position of the body from {@code body}.
+     * Sets the statements of the body from {@code body}.
      *
-     * <p>A {@code null} body (e.g. for abstract or native methods) results in an empty body.
+     * <p>A {@code null} body (e.g. for abstract or native methods) results in an empty body. Note
+     * that the body always takes the source position of the construct.
      */
     @CanIgnoreReturnValue
     public final B setBody(@Nullable Block body) {
-      if (body == null) {
-        this.bodySourcePosition = null;
-        return setStatements(ImmutableList.of());
-      }
-      this.bodySourcePosition = body.getSourcePosition();
-      return setStatements(body.getStatements());
+      return setStatements(body == null ? ImmutableList.of() : body.getStatements());
     }
 
     @CanIgnoreReturnValue
@@ -139,10 +131,7 @@ public interface MethodLike extends HasSourcePosition, HasReadableDescription {
     }
 
     protected final Block buildBody() {
-      return Block.builder()
-          .setSourcePosition(bodySourcePosition != null ? bodySourcePosition : sourcePosition)
-          .setStatements(statements)
-          .build();
+      return Block.builder().setSourcePosition(sourcePosition).setStatements(statements).build();
     }
 
     @SuppressWarnings("unchecked")

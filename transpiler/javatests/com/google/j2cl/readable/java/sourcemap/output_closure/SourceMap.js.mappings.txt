@@ -16,7 +16,7 @@
 [SourceMap] => [$ctor__sourcemap_SourceMap__int__void]
 [i] => [i] "i"
 [{] => [this.$ctor__java_lang_Object__void();] "sourcemap.SourceMap.<init>"
-[{}] => [this.$init__void_$p_sourcemap_SourceMap();] "sourcemap.SourceMap.<init>"
+[SourceMap] => [this.$init__void_$p_sourcemap_SourceMap();] "sourcemap.SourceMap.<init>"
 [SourceMap] => [$ctor__sourcemap_SourceMap__int__java_lang_String__void]
 [uninitializedInstanceField] => [uninitializedInstanceField] "uninitializedInstanceField"
 [uninitializedInstanceField2] => [uninitializedInstanceField2] "uninitializedInstanceField2"
@@ -117,11 +117,7 @@
 [i -> i + 1] => [let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
 [i] => [i_1] "i"
 [i + 1] => [return Integer.valueOf(i_1.intValue() + 1 | 0);] "sourcemap.SourceMap.<lambda in testLambdaAndMethodReference>"
-[{
-    Function<Integer, Integer> f = i -> i + 1;
-...
-    Supplier<Integer> f3 = this::simpleMethod;
-  }] => [let /** ArrayList */ $$q;] "sourcemap.SourceMap.testLambdaAndMethodReference"
+[testLambdaAndMethodReference] => [let /** ArrayList */ $$q;] "sourcemap.SourceMap.testLambdaAndMethodReference"
 [Supplier<Integer> f2 = new ArrayList()::size;] => [let f2 = ($$q = (/**@type {!ArrayList}*/ (ArrayList.$create__())), Supplier.$adapt(/**  @return {Integer}*/ (() =>{
    return Integer.valueOf($$q.size());
   })));] "sourcemap.SourceMap.testLambdaAndMethodReference"
