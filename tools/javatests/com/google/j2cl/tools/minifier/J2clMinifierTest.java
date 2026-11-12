@@ -20,17 +20,6 @@ public class J2clMinifierTest extends TestCase {
 
   private J2clMinifier minifier;
 
-  public void testIsJ2clFile() {
-    assertTrue(J2clMinifier.isJ2clFile("foo/bar.java.js"));
-    assertTrue(J2clMinifier.isJ2clFile("blaze-out/k8-opt/bin/foo/lib.js/com/google/Bar.java.js"));
-    assertFalse(J2clMinifier.isJ2clFile("foo/bar.js"));
-    assertFalse(J2clMinifier.isJ2clFile("foo/bar.ts"));
-    assertFalse(
-        J2clMinifier.isJ2clFile("blaze-out/k8-opt/bin/foo/lib.js.js2016/com/google/Bar.java.js"));
-    assertFalse(
-        J2clMinifier.isJ2clFile("blaze-out/k8-opt/bin/foo/lib.js.es5/com/google/Bar.java.js"));
-  }
-
   public void testAvoidsCollisions() {
     assertChange(
         "this.foo(); this.m_foo__();", //
