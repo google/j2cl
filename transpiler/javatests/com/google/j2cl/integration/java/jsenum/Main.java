@@ -632,11 +632,6 @@ public class Main {
           Object unused = (String) o;
         },
         String.class);
-    assertThrowsClassCastException(
-        () -> {
-          Object unused = (StringJsEnum & Comparable<StringJsEnum>) o;
-        },
-        Comparable.class);
 
     assertTrue(v.toString().equals(HELLO_STRING));
     assertTrue(o.toString().equals(HELLO_STRING));

@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -112,27 +111,6 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
   }
 
   private static Expression unbox(TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (toTypeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
-      // If it is an intersection, perform the cast check on the non-JsEnum types before unboxing.
-      toTypeDescriptor = intersectionTypeDescriptor.getFirstType();
-      checkState(toTypeDescriptor.isJsEnum());
-      var otherTypes =
-          intersectionTypeDescriptor
-              .getIntersectionTypeDescriptors()
-              .subList(1, intersectionTypeDescriptor.getIntersectionTypeDescriptors().size());
-      TypeDescriptor castTypeDescriptor =
-          otherTypes.size() == 1
-              ? otherTypes.getFirst()
-              : IntersectionTypeDescriptor.builder()
-                  .setIntersectionTypeDescriptors(otherTypes)
-                  .build();
-      expression =
-          CastExpression.builder()
-              .setExpression(expression)
-              .setCastTypeDescriptor(castTypeDescriptor)
-              .build();
-    }
-
     return CastExpression.builder()
         .setExpression(RuntimeMethods.createEnumsUnboxMethodCall(expression, toTypeDescriptor))
         .setCastTypeDescriptor(toTypeDescriptor)

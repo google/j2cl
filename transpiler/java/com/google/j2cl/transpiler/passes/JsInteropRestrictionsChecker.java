@@ -902,7 +902,7 @@ public class JsInteropRestrictionsChecker {
             // JsEnums are not Enums at runtime (and not Comparable if they are not comparable), so
             // type parameters bounded by those types cannot be specialized to JsEnums, e.g.
             // `EnumSet<MyJsEnum>` or `<T extends Enum<T>> T valueOf(Class<T>, String)`.
-            (declaredTypeDescriptor.isTypeVariable()
+            ((declaredTypeDescriptor.isTypeVariable() || declaredTypeDescriptor.isIntersection())
                     && isDisallowedJsEnumConversion(declaredTypeDescriptor, inferredTypeDescriptor))
                 // JsEnum arrays cannot be used in most type parameters since generic code would
                 // see their unboxed values, e.g. `List<MyJsEnum[]>`.

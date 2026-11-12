@@ -3197,6 +3197,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               Comparator<MyJsEnum> comparator = (a, b) -> a.compareTo(b);
               <J extends MyJsEnum> void acceptsJsEnumBoundedComparableList(
                   AnyComparableList<J> p) {}
+              <T extends MyJsEnum & Comparable<MyJsEnum>> void comparableJsEnumIntersection() {}
+              <T extends CustomValued & Serializable> void serializableCustomValuedIntersection() {}
+              Object intersectionCasts(Object o) {
+                o = (MyJsEnum & Comparable<MyJsEnum>) o;
+                return (CustomValued & Serializable) o;
+              }
               void dependentCalls() {
                 Comparable<?> c = Main.<Comparable<?>, Comparable<?>, MyJsEnum>upcast(MyJsEnum.A);
                 Comparable<?> c2 = new Box<Comparable<?>>().convert(MyJsEnum.A);
@@ -3277,6 +3283,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           }
           <T extends Serializable & EnumList<MyJsEnum>> void intersectionBoundedMethod() {}
         > Error: Bound of type parameter 'T' of 'void Main.intersectionBoundedMethod()' cannot be of type '(Serializable & EnumList<MyJsEnum>)'.
+          <T extends CustomValued & Comparable<CustomValued>>
+              void customValuedComparableIntersectionBoundedMethod() {}
+        > Error: Bound of type parameter 'T' of 'void Main.customValuedComparableIntersectionBoundedMethod()' cannot be of type '(CustomValued & Comparable<CustomValued>)'.
           <T> void acceptsGeneric(T p) {}
           <T extends Enum<?>> void acceptsEnumBounded(T p) {}
           void m() {
@@ -3291,6 +3300,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Cannot cast to type 'EnumHolder<MyJsEnum>'.
             o = (Enum<MyJsEnum> & Comparable<MyJsEnum>) o;
         > Error: Cannot cast to type '(Enum<MyJsEnum> & Comparable<MyJsEnum>)'.
+            o = (CustomValued & Comparable<CustomValued>) o;
+        > Error: Cannot cast to type '(CustomValued & Comparable<CustomValued>)'.
             o = (ComparableList<CustomValued> & Serializable) o;
         > Error: Cannot cast to type '(ComparableList<CustomValued> & Serializable)'.
             var interHolder = (Serializable & EnumList<MyJsEnum>) o;

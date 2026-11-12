@@ -588,13 +588,6 @@ private fun testStringJsEnum() {
     String::class.java,
   )
 
-  // Kotlin doesn't support intersection casts
-  // assertThrowsClassCastException(
-  //       {
-  //         val unused: Any? = o as (StringJsEnum & Comparable<StringJsEnum>)
-  //       },
-  //       Comparable::class.java)
-
   assertTrue(v.toString() == HELLO_STRING)
   assertTrue(o.toString() == HELLO_STRING)
 }
