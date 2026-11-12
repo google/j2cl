@@ -23,7 +23,6 @@ import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
-import com.google.j2cl.integration.testing.J2ktIncompatible;
 import java.io.Serializable;
 import java.util.function.Supplier;
 import jsinterop.annotations.JsMethod;
@@ -526,14 +525,10 @@ public class Main {
 
   private static final Object HELLO = "hello";
 
-  // TODO(b/584219461): Enable for J2KT when hoisting is fixed.
-  @J2ktIncompatible
   private static final int HELLO_LENGTH = HELLO instanceof String s ? s.length() : 0;
 
   // Repro for b/584219461. Pattern variables referenced outside of the instanceof expression are
   // hoisted to the enclosing block, but in Kotlin the this() call precedes the constructor body.
-  // TODO(b/584219461): Enable for J2KT when hoisting is fixed.
-  @J2ktIncompatible
   private static class InstanceofInThisCall {
     final int value;
 
@@ -546,12 +541,8 @@ public class Main {
     }
   }
 
-  @J2ktIncompatible
   private static void testInstanceOf_patternsInThisCall() {
     assertEquals(5, HELLO_LENGTH);
     assertEquals(5, new InstanceofInThisCall(HELLO).value);
   }
-
-  @SuppressWarnings("unused") // Alternative implementation for J2KT (@J2ktIncompatible).
-  private static void testInstanceOf_patternsInThisCall(Object... unused) {}
 }

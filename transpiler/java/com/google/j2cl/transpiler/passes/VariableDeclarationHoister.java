@@ -30,6 +30,11 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -50,7 +55,8 @@ public class VariableDeclarationHoister extends NormalizationPass {
   // The idea is to collect, for each variable, the scopes that enclose its declaration and all its
   // references. If a variable is accessed out of the scope of its declaration, or declared in a
   // scope that is not supported by the target language, its declaration is moved to the innermost
-  // enclosing scope that can hold declarations, i.e. a block.
+  // enclosing scope that can hold declarations: a block or, if declarations are allowed in
+  // expressions, a multi-expression.
   //
   // To simplify the implementation declarations of multiple variables are moved all together to
   // the right scope.
@@ -64,6 +70,12 @@ public class VariableDeclarationHoister extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    if (allowDeclarationsInExpressions) {
+      // Arguments of this() and super() calls and field initializers have no valid enclosing block
+      // to hoist declarations to, provide multi-expression scopes for them.
+      createPlaceHolderScopes(compilationUnit);
+    }
+
     // Keeps track of whether all references to the variable and the outermost scope where a
     // variable is accessed if not in scope of its definition.
     Map<Variable, List<Object>> enclosingScopesByVariable = new HashMap<>();
@@ -108,10 +120,10 @@ public class VariableDeclarationHoister extends NormalizationPass {
           }
         });
 
-    // Keeps track of the scope that will have the declarations for the variables that need to be
-    // hoisted.
-    SetMultimap<Scope, Variable> variableByTargetScope = LinkedHashMultimap.create();
-    Map<Scope, Integer> declarationPointByTargetScope = new HashMap<>();
+    // Keeps track of the scope (block or multi-expression) that will have the declarations for the
+    // variables that need to be hoisted.
+    SetMultimap<Scope<?>, Variable> variableByTargetScope = LinkedHashMultimap.create();
+    Map<Scope<?>, Integer> declarationPointByTargetScope = new HashMap<>();
 
     // Transform declarations into assignments, so that the effects of the expressions are kept
     // in the original location.
@@ -133,12 +145,12 @@ public class VariableDeclarationHoister extends NormalizationPass {
             }
 
             // Get the scope where the variable declarations will be moved to.
-            Scope scope = getTargetScope(enclosingScopes);
+            Scope<?> scope = getTargetScope(enclosingScopes);
 
-            // The variable can be inserted before the statement of the scope that contains the
+            // The variable can be inserted before the element of the scope that contains the
             // current declaration.
             int insertionPoint =
-                scope.indexOfStatementContaining(getParents().collect(toImmutableList()));
+                scope.indexOfElementContaining(getParents().collect(toImmutableList()));
 
             // Since all the variables that are moved to a scope are declared together, the
             // insertion point will be the closest to the top of the scope.
@@ -175,34 +187,113 @@ public class VariableDeclarationHoister extends NormalizationPass {
         });
   }
 
-  /** A block where hoisted variable declarations are inserted. */
-  private record Scope(Block block) {
+  /** A scope where hoisted variable declarations can be inserted. */
+  private sealed interface Scope<T extends Node> {
+    /** Returns the node that defines the scope. */
+    Node node();
+
+    /** Returns the elements of the scope, where the declarations are inserted. */
+    List<T> elements();
+
+    /** Returns the element of the scope that holds {@code declaration}. */
+    T toElement(VariableDeclarationExpression declaration);
+
     /**
-     * Returns the index of the statement of the block that contains the node whose parents,
-     * innermost first, are {@code parents}.
+     * Returns the index of the element of the scope that contains the node whose parents, innermost
+     * first, are {@code parents}.
      */
-    int indexOfStatementContaining(List<Object> parents) {
-      return block.getStatements().indexOf(parents.get(parents.indexOf(block) - 1));
+    default int indexOfElementContaining(List<Object> parents) {
+      return elements().indexOf(parents.get(parents.indexOf(node()) - 1));
     }
 
     /** Inserts {@code declarations} at {@code index}. */
-    void insertDeclarations(int index, List<VariableDeclarationExpression> declarations) {
-      block
-          .getStatements()
-          .addAll(
-              index,
-              declarations.stream()
-                  .map(d -> d.makeStatement(block.getSourcePosition()))
-                  .collect(toImmutableList()));
+    default void insertDeclarations(int index, List<VariableDeclarationExpression> declarations) {
+      elements()
+          .addAll(index, declarations.stream().map(this::toElement).collect(toImmutableList()));
     }
   }
 
-  /** Returns the innermost block in {@code enclosingScopes}, where declarations are hoisted to. */
-  private static Scope getTargetScope(List<Object> enclosingScopes) {
-    return new Scope(
-        Streams.findLast(
-                enclosingScopes.stream().filter(Block.class::isInstance).map(Block.class::cast))
-            .get());
+  /** A block scope, where declarations are inserted as statements. */
+  private record BlockScope(Block node) implements Scope<Statement> {
+    @Override
+    public List<Statement> elements() {
+      return node.getStatements();
+    }
+
+    @Override
+    public Statement toElement(VariableDeclarationExpression declaration) {
+      return declaration.makeStatement(node.getSourcePosition());
+    }
+  }
+
+  /** A multi-expression scope, where declarations are inserted as expressions. */
+  private record MultiExpressionScope(MultiExpression node) implements Scope<Expression> {
+    @Override
+    public List<Expression> elements() {
+      return node.getExpressions();
+    }
+
+    @Override
+    public Expression toElement(VariableDeclarationExpression declaration) {
+      return declaration;
+    }
+  }
+
+  /**
+   * Encloses the arguments of {@code this()} and {@code super()} calls and the field initializers
+   * in a multi-expression, to provide a scope to hoist declarations to.
+   *
+   * <p>In Kotlin, declarations in these expressions cannot be hoisted to an enclosing block, since
+   * {@code this()} and {@code super()} calls are emitted in the constructor header, outside of the
+   * constructor body, and field initializers are not inside any block.
+   */
+  private static void createPlaceHolderScopes(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteField(Field field) {
+            if (!field.hasInitializer()) {
+              return field;
+            }
+            return field.toBuilder().setInitializer(createScope(field.getInitializer())).build();
+          }
+
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            if (!methodCall.getTarget().isConstructor()) {
+              return methodCall;
+            }
+            return methodCall.toBuilder()
+                .setArguments(
+                    methodCall.getArguments().stream()
+                        .map(this::createScope)
+                        .collect(toImmutableList()))
+                .build();
+          }
+
+          private Expression createScope(Expression expression) {
+            // The multi-expression is the scope for the hoisted declarations. The null placeholder
+            // is needed since a multi-expression with a single expression collapses into it; it has
+            // no side effects, so NormalizeMultiExpressions removes it, together with the
+            // multi-expression if no declarations were hoisted into it.
+            return MultiExpression.builder()
+                .addExpressions(TypeDescriptors.get().javaLangObject.getNullValue(), expression)
+                .build();
+          }
+        });
+  }
+
+  /**
+   * Returns the innermost scope in {@code enclosingScopes} where declarations can be hoisted to,
+   * i.e. a block or, if declarations are allowed in expressions, a multi-expression.
+   */
+  private Scope<?> getTargetScope(List<Object> enclosingScopes) {
+    var node = Streams.findLast(enclosingScopes.stream().filter(this::isValidTargetScope)).get();
+    return switch (node) {
+      case Block block -> new BlockScope(block);
+      case MultiExpression multiExpression -> new MultiExpressionScope(multiExpression);
+      default -> throw new IllegalStateException();
+    };
   }
 
   /**
@@ -221,6 +312,12 @@ public class VariableDeclarationHoister extends NormalizationPass {
       return true;
     }
     return !(scope instanceof Expression);
+  }
+
+  /** Returns true if hoisted declarations can be inserted into {@code node}. */
+  private boolean isValidTargetScope(Object node) {
+    return node instanceof Block
+        || (allowDeclarationsInExpressions && node instanceof MultiExpression);
   }
 
   /** Trims {@code toTrim} to only contain the common prefix. */

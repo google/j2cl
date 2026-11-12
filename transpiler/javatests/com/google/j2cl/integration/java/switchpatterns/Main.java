@@ -23,7 +23,6 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2KtNative;
 
-import com.google.j2cl.integration.testing.J2ktIncompatible;
 import jsinterop.annotations.JsEnum;
 
 // TODO(b/465572498): Move the tests to the corresponding integration once javac is enabled for all
@@ -455,8 +454,6 @@ public class Main {
 
   // Repro for b/584219461. Pattern variables referenced outside of the switch case are hoisted to
   // the enclosing block, but in Kotlin the this() call precedes the constructor body.
-  // TODO(b/584219461): Enable for J2KT when hoisting is fixed.
-  @J2ktIncompatible
   private static class SwitchInThisCall {
     final int value;
 
@@ -473,11 +470,7 @@ public class Main {
     }
   }
 
-  @J2ktIncompatible
   private static void testSwitchInThisCall() {
     assertEquals(5, new SwitchInThisCall("hello").value);
   }
-
-  @SuppressWarnings("unused") // Alternative implementation for J2KT (@J2ktIncompatible).
-  private static void testSwitchInThisCall(Object... unused) {}
 }

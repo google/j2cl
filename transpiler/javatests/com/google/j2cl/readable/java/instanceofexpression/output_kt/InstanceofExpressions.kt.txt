@@ -42,6 +42,7 @@ import kotlin.ShortArray
 import kotlin.String
 import kotlin.Suppress
 import kotlin.arrayOfNulls
+import kotlin.jvm.JvmField
 import kotlin.run
 import kotlin.text.Appendable
 
@@ -169,5 +170,38 @@ open class InstanceofExpressions {
   }) {
    s = "" + s + "!"
   }
+ }
+ 
+ private open class InstanceofInFieldInitializer private constructor() {
+  companion object {
+   @JvmField
+   internal var o: Any? = ""
+   
+   @JvmField
+   internal var f: Int = run {
+    var s: String? = null
+    if (run {
+     val exp: Any? = InstanceofInFieldInitializer.o
+     exp is String && run {
+      s = exp as String
+      true
+     }
+    }) s!!.length else 0
+   }
+  }
+ }
+ 
+ private open class InstanceofInThisCall {
+  internal constructor(i: Int)
+  
+  internal constructor(o: Any?): this(
+   run {
+    var s: String? = null
+    if (o is String && run {
+     s = o as String
+     true
+    }) s!!.length else 0
+   },
+  )
  }
 }
