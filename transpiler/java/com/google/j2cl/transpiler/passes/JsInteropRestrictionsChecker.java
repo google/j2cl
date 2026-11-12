@@ -1137,15 +1137,12 @@ public class JsInteropRestrictionsChecker {
     return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
         .flatMap(t -> ((DeclaredTypeDescriptor) t).getPolymorphicMethods().stream())
         .filter(MethodDescriptor::isAbstract)
-        .flatMap(
-            m ->
-                Stream.concat(
-                    Stream.of(m.getReturnTypeDescriptor()),
-                    m.getParameterTypeDescriptors().stream()))
-        .anyMatch(
-            t ->
-                (t instanceof ArrayTypeDescriptor array ? array.getLeafTypeDescriptor() : t)
-                    .isJsEnum());
+        .flatMap(m ->
+            Stream.concat(
+                Stream.of(m.getReturnTypeDescriptor()), m.getParameterTypeDescriptors().stream()))
+        .anyMatch(t ->
+            (t instanceof ArrayTypeDescriptor array ? array.getLeafTypeDescriptor() : t)
+                .isJsEnum());
   }
 
   private void checkJsEnumOverrides(Type type) {
@@ -1542,6 +1539,13 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsAsyncMethod(Method method) {
+    if (checkWasmRestrictions) {
+      problems.error(
+          method.getSourcePosition(),
+          "JsAsync method '%s' is not supported in Wasm.",
+          method.getReadableDescription());
+      return;
+    }
     TypeDescriptor returnType = method.getDescriptor().getReturnTypeDescriptor();
     if (returnType instanceof DeclaredTypeDescriptor returnTypeDescriptor) {
       String qualifiedJsName = returnTypeDescriptor.getQualifiedJsName();
@@ -1722,11 +1726,9 @@ public class JsInteropRestrictionsChecker {
     return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
         .filter(m -> matchOverrideBy.apply(m).equals(matchOverrideBy.apply(methodDescriptor)))
         .findFirst()
-        .map(
-            m ->
-                String.format(
-                    " (inherited from %s)",
-                    m.getEnclosingTypeDescriptor().getQualifiedSourceName()))
+        .map(m ->
+            String.format(
+                " (inherited from %s)", m.getEnclosingTypeDescriptor().getQualifiedSourceName()))
         // The condition to enter this method ensures that we should always have a value here.
         .get();
   }
@@ -1977,28 +1979,26 @@ public class JsInteropRestrictionsChecker {
 
     type.getSuperTypesStream()
         .filter(typeDescriptor -> typeDescriptor.getTypeDeclaration().isSealed())
-        .forEach(
-            superType ->
-                problems.error(
-                    type.getSourcePosition(),
-                    "Native JsType '%s' cannot %s sealed %s '%s'.",
-                    readableDescription,
-                    type.isInterface() || superType.isClass() ? "extend" : "implement",
-                    superType.isInterface() ? "interface" : "class",
-                    superType.getReadableDescription()));
+        .forEach(superType ->
+            problems.error(
+                type.getSourcePosition(),
+                "Native JsType '%s' cannot %s sealed %s '%s'.",
+                readableDescription,
+                type.isInterface() || superType.isClass() ? "extend" : "implement",
+                superType.isInterface() ? "interface" : "class",
+                superType.getReadableDescription()));
 
     type.getSuperTypesStream()
         .filter(Predicates.not(TypeDescriptors::isJavaLangObject))
         .filter(Predicates.not(TypeDescriptor::isNative))
         .findFirst()
-        .ifPresent(
-            t ->
-                problems.error(
-                    type.getSourcePosition(),
-                    "Native JsType '%s' can only %s native JsType %s.",
-                    readableDescription,
-                    type.isInterface() || t.isClass() ? "extend" : "implement",
-                    t.isClass() ? "classes" : "interfaces"));
+        .ifPresent(t ->
+            problems.error(
+                type.getSourcePosition(),
+                "Native JsType '%s' can only %s native JsType %s.",
+                readableDescription,
+                type.isInterface() || t.isClass() ? "extend" : "implement",
+                t.isClass() ? "classes" : "interfaces"));
 
     if (type.hasInstanceInitializerBlocks()) {
       problems.error(
@@ -2225,17 +2225,16 @@ public class JsInteropRestrictionsChecker {
       addReferencedTypes(jsFunctionMethod.getReturnTypeDescriptor(), referencedTypes);
 
       // only explore further the newly found jsfunctions.
-      referencedTypes.forEach(
-          t -> {
-            if (!t.isJsFunctionInterface()) {
-              return;
-            }
-            DeclaredTypeDescriptor jsFunctionType = (DeclaredTypeDescriptor) t;
-            if (foundJsFunctions.add(jsFunctionType.getTypeDeclaration())) {
-              unexploredJsFunctionMethods.offer(
-                  jsFunctionType.getDeclarationDescriptor().getJsFunctionMethodDescriptor());
-            }
-          });
+      referencedTypes.forEach(t -> {
+        if (!t.isJsFunctionInterface()) {
+          return;
+        }
+        DeclaredTypeDescriptor jsFunctionType = (DeclaredTypeDescriptor) t;
+        if (foundJsFunctions.add(jsFunctionType.getTypeDeclaration())) {
+          unexploredJsFunctionMethods.offer(
+              jsFunctionType.getDeclarationDescriptor().getJsFunctionMethodDescriptor());
+        }
+      });
 
       if (foundJsFunctions.contains(type.getDeclaration())) {
         problems.error(
@@ -2429,13 +2428,12 @@ public class JsInteropRestrictionsChecker {
     type.getSuperTypesStream()
         .filter(DeclaredTypeDescriptor::isJsFunctionInterface)
         .findFirst()
-        .ifPresent(
-            superInterface ->
-                problems.error(
-                    type.getSourcePosition(),
-                    "'%s' cannot extend JsFunction '%s'.",
-                    type.getDeclaration().getReadableDescription(),
-                    superInterface.getReadableDescription()));
+        .ifPresent(superInterface ->
+            problems.error(
+                type.getSourcePosition(),
+                "'%s' cannot extend JsFunction '%s'.",
+                type.getDeclaration().getReadableDescription(),
+                superInterface.getReadableDescription()));
   }
 
   private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>
@@ -2936,10 +2934,9 @@ public class JsInteropRestrictionsChecker {
       // Match also the declaration to allow for the cases in which the types in kotlin and
       // Java disagree. For example MyList<String>.contains(String) needs to be considered an
       // override of List<String>.contains(Object).
-      members.removeIf(
-          m ->
-              isCompatibleOverride(member, m)
-                  || isCompatibleOverride(member.getDeclarationDescriptor(), m));
+      members.removeIf(m ->
+          isCompatibleOverride(member, m)
+              || isCompatibleOverride(member.getDeclarationDescriptor(), m));
     }
 
     // Don't collect native members since those are never involved in collisions.
@@ -3088,13 +3085,12 @@ public class JsInteropRestrictionsChecker {
                 // by Enum and checking it here would reject every JsEnum declaration as an invalid
                 // `Enum` parameterization.
                 .filter(Predicates.not(TypeDescriptors::isJavaLangEnum))
-                .forEach(
-                    superTypeDescriptor ->
-                        errorIfDisallowedType(
-                            superTypeDescriptor,
-                            nestedType.getSourcePosition(),
-                            "Supertype of '%s'",
-                            nestedType.getReadableDescription()));
+                .forEach(superTypeDescriptor ->
+                    errorIfDisallowedType(
+                        superTypeDescriptor,
+                        nestedType.getSourcePosition(),
+                        "Supertype of '%s'",
+                        nestedType.getReadableDescription()));
             checkTypeParameters(
                 getDirectlyDeclaredTypeParameters(nestedType.getDeclaration()),
                 nestedType.getSourcePosition(),

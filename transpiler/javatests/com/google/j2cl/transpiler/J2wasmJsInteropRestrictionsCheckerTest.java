@@ -434,6 +434,32 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         .assertTranspileSucceeds();
   }
 
+  public void testJsAsyncFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+        interface IThenable<T> {}
+        @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+        class Promise<T> {}
+        @JsFunction
+        interface AsyncJsFunction {
+          @JsAsync
+          IThenable<?> apply();
+        > Error: JsAsync method 'IThenable<?> AsyncJsFunction.apply()' is not supported in Wasm.
+        }
+        class Main {
+          @JsAsync
+          IThenable<?> returnsIThenable() { return null; }
+        > Error: JsAsync method 'IThenable<?> Main.returnsIThenable()' is not supported in Wasm.
+          @JsAsync
+          Promise<?> returnsPromise() { return null; }
+        > Error: JsAsync method 'Promise<?> Main.returnsPromise()' is not supported in Wasm.
+        }
+        """);
+  }
+
   private void assertWithInlineMessages(String... compilationUnitsAndSources) {
     newTesterWithWasmDefaults().assertWithInlineMessages(compilationUnitsAndSources);
   }
