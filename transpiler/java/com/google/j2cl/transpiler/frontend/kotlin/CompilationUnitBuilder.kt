@@ -956,10 +956,12 @@ internal class CompilationUnitBuilder(
 
   // There are couple of known types that has equals based on identity equality (==) in J2CL.
   // 1. Any isBoxedTypeAsJsPrimitives cannot override "equals" so they are guaranteed to have
-  // correct J2CL '==' implementation for their instances.
+  // correct J2CL '==' implementation for their instances. Except for `Long` which is represented
+  // by `goog.math.Long` objects, hence `==` is not value equality.
   // 2. All enums guaranteed to have identity equality based on JLS.
   private fun hasIdentityEquals(type: TypeDescriptor) =
-    TypeDescriptors.isBoxedTypeAsJsPrimitives(type) || type.toRawTypeDescriptor().isEnum
+    (TypeDescriptors.isBoxedTypeAsJsPrimitives(type) && !TypeDescriptors.isJavaLangLong(type)) ||
+      type.toRawTypeDescriptor().isEnum
 
   private fun convertIeee754EqualsOperator(irCall: IrCall): Expression {
     require(irCall.arguments.size == 2) { "invalid number of arguments" }

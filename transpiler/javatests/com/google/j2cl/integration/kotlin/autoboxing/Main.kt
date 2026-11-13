@@ -642,12 +642,7 @@ private fun testAutoboxing_equals() {
   assertTrue(nullLong == nullLong)
   assertFalse(nullLong == long5000)
   assertFalse(long5000 == nullLong)
-  if (isJvm()) {
-    assertTrue(boxedLong5000 == boxedLong5000_2)
-  } else {
-    // TODO(b/584414917): `==` on `Long?` compares the `goog.math.Long` references.
-    assertFalse(boxedLong5000 == boxedLong5000_2)
-  }
+  assertTrue(boxedLong5000 == boxedLong5000_2)
 }
 
 var TRUE: Boolean = false
