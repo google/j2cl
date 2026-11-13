@@ -526,57 +526,20 @@ public final class RuntimeMethods {
    * Create a call to InternalPreconditions.checkNotNull method with specialization of the type
    * parameter.
    */
-  public static Expression createCheckNotNullCall(Expression argument) {
+  public static MethodCall createCheckNotNullCall(Expression argument) {
     checkArgument(!argument.getTypeDescriptor().isPrimitive());
 
-    if (argument.getTypeDescriptor().isJsEnum()) {
-      // Expose the null comparison explicitly in the AST so that other normalizations can operate
-      // on them. In particular unboxed enums in Wasm might be represented as primitives and null
-      // comparisons need to be rewritten.
-      return createCheckNotNullBooleanCall(argument);
-    }
-
+    DeclaredTypeDescriptor parameterType =
+        argument.getTypeDescriptor().isNative()
+            ? TypeDescriptors.get().javaemulInternalPreconditionsNativeType
+            : TypeDescriptors.get().javaLangObject;
     // TODO(b/68726480): checkNotNull should return a non-nullable T.
     MethodDescriptor checkNotNull =
         TypeDescriptors.get()
             .javaemulInternalPreconditions
-            .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject)
+            .getMethodDescriptor("checkNotNull", parameterType)
             .specializeTypeVariables((TypeVariable unused) -> argument.getTypeDescriptor());
     return MethodCall.builderFrom(checkNotNull).setArguments(argument).build();
-  }
-
-  /** Create a call to InternalPreconditions.checkNotNull(boolean) method. */
-  private static Expression createCheckNotNullBooleanCall(Expression argument) {
-    MethodDescriptor checkNotNull =
-        TypeDescriptors.get()
-            .javaemulInternalPreconditions
-            .getMethodDescriptor("checkNotNull", PrimitiveTypes.BOOLEAN);
-    if (argument.isIdempotent()) {
-      return MultiExpression.builder()
-          .addExpressions(
-              MethodCall.builderFrom(checkNotNull)
-                  .setArguments(argument.infixNotEqualsNull())
-                  .build(),
-              argument.clone())
-          .build();
-    }
-    Variable tempVariable =
-        Variable.builder()
-            .setName("$arg")
-            .setFinal(true)
-            .setTypeDescriptor(argument.getTypeDescriptor())
-            .build();
-    return MultiExpression.builder()
-        .addExpressions(
-            VariableDeclarationExpression.builder()
-                .setVariable(tempVariable)
-                .setInitializer(argument)
-                .build(),
-            MethodCall.builderFrom(checkNotNull)
-                .setArguments(tempVariable.createReference().infixNotEqualsNull())
-                .build(),
-            tempVariable.createReference())
-        .build();
   }
 
   /** Creates a call to handling of unexpected values on exhaustive switch expressions. */

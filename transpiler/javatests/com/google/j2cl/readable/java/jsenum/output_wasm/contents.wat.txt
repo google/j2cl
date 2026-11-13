@@ -1017,10 +1017,7 @@
   )
   (local.set $nativeStringEnum (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))
   (block
-   (local.set $$selector (block (result (ref null extern))
-    (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $nativeStringEnum)(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-    (local.get $nativeStringEnum)
-   ))
+   (local.set $$selector (call $m_checkNotNull__javaemul_internal_InternalPreconditions_NativeType__javaemul_internal_InternalPreconditions_NativeType@javaemul.internal.InternalPreconditions (local.get $nativeStringEnum)))
    
    (if (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $$selector)(call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )
     (then
@@ -1062,10 +1059,7 @@
    (local.set $$qualifier (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )))
    (drop (call_ref $function.m_compareTo__java_lang_Object__int (ref.as_non_null (local.get $$qualifier))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $js_import_f_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (ref $java.lang.Comparable.vtable) (call $get.itable.$java.lang.Comparable (local.get $$qualifier))))))
   )
-  (drop (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (block (result (ref null extern))
-   (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-   (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )
-  )(call $js_import_f_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (drop (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_checkNotNull__javaemul_internal_InternalPreconditions_NativeType__javaemul_internal_InternalPreconditions_NativeType@javaemul.internal.InternalPreconditions (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))(call $js_import_f_THREE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
   (local.set $supplier (call $$create__@jsenum.Main.$LambdaImplementor$1 ))
   (local.set $consummer (call $$create__@jsenum.Main.$LambdaImplementor$2 ))
   (call $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main (call $$create__@jsenum.Main.$LambdaImplementor$3 ))
@@ -1289,7 +1283,6 @@
 (func $m_testJsEnumListElementEquals__void@jsenum.Main
  (local $$qualifier (ref null $jsenum.Main.ComparableJsEnum))
  (local $$qualifier_1 (ref null $java.lang.Object))
- (local $$arg (ref null extern))
  (local $$qualifier_2 (ref null $java.lang.Object))
  (block
   (block
@@ -1302,14 +1295,10 @@
     (global.get $ONE@jsenum.Main.ComparableJsEnum)
    )(struct.get $jsenum.Main.ComparableJsEnum.vtable $m_equals__java_lang_Object__boolean (struct.get $jsenum.Main.ComparableJsEnum $vtable(local.get $$qualifier)))))
   )
-  (drop (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (block (result (ref null extern))
-   (local.set $$arg (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (block (result (ref null $java.lang.Object))
-    (local.set $$qualifier_2 (call $m_getNativeStringEnumList__java_util_List@jsenum.Main ))
-    (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $$qualifier_2))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $$qualifier_2)))))
-   )))
-   (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $$arg)(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-   (local.get $$arg)
-  )(call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (drop (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_checkNotNull__javaemul_internal_InternalPreconditions_NativeType__javaemul_internal_InternalPreconditions_NativeType@javaemul.internal.InternalPreconditions (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier_2 (call $m_getNativeStringEnumList__java_util_List@jsenum.Main ))
+   (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $$qualifier_2))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $$qualifier_2)))))
+  )))(call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
  )
 )
 
@@ -1890,16 +1879,11 @@
 (func $m_testSwitchOnIntersection__java_lang_Object__void@jsenum.Main
  (param $o (ref null $java.lang.Object))
  (local $$selector (ref null $jsenum.Main.ComparableJsEnum))
- (local $$arg (ref null $jsenum.Main.ComparableJsEnum))
  (local $$caseIndex i32)
  (block
   (call $$clinit__void_<once>_@jsenum.Main )
   (block
-   (local.set $$selector (block (result (ref null $jsenum.Main.ComparableJsEnum))
-    (local.set $$arg (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o)))
-    (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (ref.is_null (local.get $$arg))))
-    (local.get $$arg)
-   ))
+   (local.set $$selector (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (local.get $o)))))
    
    (if (ref.eq (local.get $$selector) (block (result (ref null $jsenum.Main.ComparableJsEnum))
      (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
@@ -2097,18 +2081,9 @@
  (param $o (ref null $java.lang.Object))
  (local $b i32)
  (block
-  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (block (result (ref null extern))
-   (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $t)(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-   (local.get $t)
-  )(call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
-  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (block (result (ref null extern))
-   (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-   (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )
-  )(local.get $t)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
-  (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__java_lang_Object__boolean@javaemul.internal.Platform (block (result (ref null extern))
-   (call $m_checkNotNull__boolean__void@javaemul.internal.InternalPreconditions (i32.eqz (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (local.get $t)(ref.null extern)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) )))
-   (local.get $t)
-  )(local.get $o)))
+  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_checkNotNull__javaemul_internal_InternalPreconditions_NativeType__javaemul_internal_InternalPreconditions_NativeType@javaemul.internal.InternalPreconditions (local.get $t))(call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum )(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (local.set $b (call $function.no.side.effects.js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean (call $m_checkNotNull__javaemul_internal_InternalPreconditions_NativeType__javaemul_internal_InternalPreconditions_NativeType@javaemul.internal.InternalPreconditions (call $js_import_f_ONE__jsenum_Main_NativeStringEnum@jsenum.Main.NativeStringEnum ))(local.get $t)(ref.func $js_import_m_isSame__javaemul_internal_WasmExtern__javaemul_internal_WasmExtern__boolean@javaemul.internal.Platform) ))
+  (local.set $b (call $m_isSame__javaemul_internal_WasmExtern__java_lang_Object__boolean@javaemul.internal.Platform (call $m_checkNotNull__javaemul_internal_InternalPreconditions_NativeType__javaemul_internal_InternalPreconditions_NativeType@javaemul.internal.InternalPreconditions (local.get $t))(local.get $o)))
  )
 )
 

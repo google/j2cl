@@ -146,6 +146,10 @@ public class TypeDescriptors {
   @QualifiedBinaryName("javaemul.internal.InternalPreconditions")
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
 
+  @Nullable
+  @QualifiedBinaryName("javaemul.internal.InternalPreconditions$NativeType")
+  public DeclaredTypeDescriptor javaemulInternalPreconditionsNativeType;
+
   @Nullable public DeclaredTypeDescriptor javaemulInternalPrimitives;
   @Nullable public DeclaredTypeDescriptor javaemulInternalEnums;
 

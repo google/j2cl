@@ -19,6 +19,8 @@ import static java.lang.System.getProperty;
 
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * A utility class that provides utility functions to do precondition checks inside GWT-SDK.
@@ -412,26 +414,38 @@ public final class InternalPreconditions {
     }
   }
 
+  /** Marker interface representing native JS values for null-checking without Wasm conversions. */
+  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
+  public interface NativeType {}
+
   /**
-   * Ensures the truth of an expression. Throws a {@link NullPointerException} if the expression is
-   * not true.
+   * Ensures that a native JS reference passed as a parameter to the calling method is not null or
+   * undefined.
+   *
+   * <p>Not-null assertions on expressions of any native type (including native JsEnums and native
+   * arrays) are synthesized by the transpiler as calls to this overload. This avoids the {@code
+   * Object.fromJs}/{@code Object.toJs} conversions that passing the value through the {@code
+   * Object} overload would require in Wasm.
    */
-  public static void checkNotNull(boolean expression) {
+  public static <T extends NativeType> T checkNotNull(T reference) {
     if (IS_API_CHECKED) {
-      checkCriticalNotNull(expression);
+      checkCriticalNotNull(reference);
     } else if (IS_ASSERTED) {
       try {
-        checkCriticalNotNull(expression);
+        checkCriticalNotNull(reference);
       } catch (Exception e) {
         throw new AssertionError(e);
       }
     }
+
+    return reference;
   }
 
-  public static void checkCriticalNotNull(boolean expression) {
-    if (!expression) {
+  public static <T extends NativeType> T checkCriticalNotNull(T reference) {
+    if (reference == null) {
       throw new NullPointerException();
     }
+    return reference;
   }
 
   /** Ensures that {@code size} specifies a valid array size (i.e. non-negative). */
