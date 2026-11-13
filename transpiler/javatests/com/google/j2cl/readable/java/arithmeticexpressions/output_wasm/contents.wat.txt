@@ -31,6 +31,7 @@
   (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testDoubleAssignments__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void@arithmeticexpressions.ArithmeticExpressions)
+  (ref.func $m_testEquals__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions)
  )
@@ -463,6 +464,25 @@
  )
 )
 (elem declare func $m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void@arithmeticexpressions.ArithmeticExpressions)
+
+;;; void ArithmeticExpressions.testEquals()
+(func $m_testEquals__void@arithmeticexpressions.ArithmeticExpressions
+ (type $function.m_testEquals__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $boxedLong (ref null $java.lang.Long))
+ (local $l i64)
+ (local $b i32)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
+ (block
+  (local.set $boxedLong (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 1)))
+  (local.set $l (i64.const 1))
+  (local.set $b (i64.eq (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxedLong))) (local.get $l)))
+  (local.set $b (i64.eq (local.get $l) (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxedLong)))))
+  (local.set $b (ref.eq (local.get $boxedLong) (local.get $boxedLong)))
+ )
+)
+(elem declare func $m_testEquals__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; long ArithmeticExpressions.incrementCounter()
 (func $m_incrementCounter__long@arithmeticexpressions.ArithmeticExpressions

@@ -166,6 +166,8 @@ fun testEquals() {
   val double = 1.0
   val nullableFloat: Float? = 1.0f
   val float = 1.0f
+  val nullableLong: Long? = 1L
+  val long = 1L
 
   // These are ieee754 semantics
   var b = nullableDouble == double
@@ -187,6 +189,10 @@ fun testEquals() {
   b = nullableFloat == null
   b = null == float
   b = null == nullableFloat
+
+  b = nullableLong == long
+  b = long == nullableLong
+  b = nullableLong == nullableLong
 
   val o1: Any? = Any()
   val o2: Any? = "Hello"

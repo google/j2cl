@@ -288,6 +288,14 @@ open class ArithmeticExpressions {
   }
  }
  
+ open fun testEquals() {
+  val boxedLong: kotlin.Long? = 1L
+  val l: kotlin.Long = 1L
+  var b: Boolean = boxedLong!!.toLong() == l
+  b = l == boxedLong!!.toLong()
+  b = boxedLong === boxedLong
+ }
+ 
  companion object {
   private const val FLOAT_CONSTANT: Float = 1.1f
   

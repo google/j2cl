@@ -631,6 +631,23 @@ private fun testAutoboxing_equals() {
   assertTrue(nullInt == nullInt)
   assertFalse(nullInt == int5000)
   assertFalse(int5000 == nullInt)
+
+  val long5000: Long = 5000
+  val boxedLong5000: Long? = 5000
+  val boxedLong5000_2: Long? = 5000
+  val nullLong: Long? = null
+
+  assertTrue(long5000 == boxedLong5000)
+  assertTrue(boxedLong5000 == long5000)
+  assertTrue(nullLong == nullLong)
+  assertFalse(nullLong == long5000)
+  assertFalse(long5000 == nullLong)
+  if (isJvm()) {
+    assertTrue(boxedLong5000 == boxedLong5000_2)
+  } else {
+    // TODO(b/584414917): `==` on `Long?` compares the `goog.math.Long` references.
+    assertFalse(boxedLong5000 == boxedLong5000_2)
+  }
 }
 
 var TRUE: Boolean = false

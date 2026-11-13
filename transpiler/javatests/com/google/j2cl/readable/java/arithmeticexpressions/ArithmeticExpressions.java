@@ -213,6 +213,15 @@ public class ArithmeticExpressions {
     }
   }
 
+  public void testEquals() {
+    Long boxedLong = 1L;
+    long l = 1L;
+
+    boolean b = boxedLong == l;
+    b = l == boxedLong;
+    b = boxedLong == boxedLong;
+  }
+
   private static long counter = 0;
 
   private static long incrementCounter() {

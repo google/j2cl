@@ -264,6 +264,8 @@ class ArithmeticExpressionsKt extends j_l_Object {
   let double_1 = 1;
   let nullableFloat = Float.m_valueOf__float__java_lang_Float(1);
   let float_1 = 1;
+  let nullableLong = Long.fromInt(1);
+  let long_1 = Long.fromInt(1);
   let b = $Equality.$sameNumber(nullableDouble, double_1);
   b = $Equality.$sameNumber(double_1, nullableDouble);
   b = $Equality.$sameNumber(double_1, double_1);
@@ -280,6 +282,9 @@ class ArithmeticExpressionsKt extends j_l_Object {
   b = $Equality.$same(nullableFloat, null);
   b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(null, Float.m_valueOf__float__java_lang_Float(float_1));
   b = $Equality.$same(null, nullableFloat);
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(nullableLong, long_1);
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(long_1, nullableLong);
+  b = $Equality.$same(nullableLong, nullableLong);
   let o1 = j_l_Object.$create__();
   let o2 = 'Hello';
   b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(o1, o2);

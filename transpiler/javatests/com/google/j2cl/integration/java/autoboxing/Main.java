@@ -640,6 +640,23 @@ public class Main {
         () -> {
           boolean unused = undefinedDouble == zero;
         });
+
+    long long5000 = 5000L;
+    Long boxedLong5000 = Long.valueOf(5000L);
+    Long nullLong = null;
+
+    // Unboxing semantics.
+    assertTrue(long5000 == boxedLong5000);
+    assertTrue(boxedLong5000 == long5000);
+
+    assertThrowsNullPointerException(() -> {
+      boolean unused = long5000 == nullLong;
+    });
+    assertThrowsNullPointerException(() -> {
+      boolean unused = nullLong == long5000;
+    });
+
+    assertTrue(boxedLong5000 != Long.valueOf(5000L));
   }
 
   private static void testAutoboxing_ternary() {
