@@ -37,6 +37,8 @@ public class CastToNativeType {
     NativeObject<String, Object> f = (NativeObject<String, Object>) a;
     NativeObject[] g = (NativeObject[]) a;
     NativeObject<String, Object>[] h = (NativeObject<String, Object>[]) a;
+
+    NativeJsType i = (NativeJsType) null;
   }
 
   @SuppressWarnings({"unused", "rawtypes"})

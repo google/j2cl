@@ -347,7 +347,7 @@ public enum Backend {
           // Make null literals have the type required by their use before coercions and
           // conversions, so that they do not trigger unnecessary conversions, e.g. JsEnum
           // unboxing.
-          NormalizeNullLiterals::new,
+          () -> new NormalizeNullLiterals(/* removeCastsOfNullLiterals= */ true),
 
           // Runs before unboxing conversion.
           InsertStringConversions::new,
@@ -605,7 +605,7 @@ public enum Backend {
           RemoveNoopStatements::new,
 
           // Make null literals to have the type required by their use.
-          NormalizeNullLiterals::new,
+          () -> new NormalizeNullLiterals(/* removeCastsOfNullLiterals= */ true),
 
           // Post-verifications
           VerifySingleAstReference::new,
@@ -666,7 +666,9 @@ public enum Backend {
       return ImmutableList.of(
           FixAnonymousClassInstantiations::new,
           RemoveReturnValuesFromVoidMethods::new,
-          NormalizeNullLiterals::new,
+          // Kotlin prints null literals without their type, so the casts are needed to keep it
+          // (e.g. to select an overload).
+          () -> new NormalizeNullLiterals(/* removeCastsOfNullLiterals= */ false),
           MakeVariablesFinal::new,
           RewriteProtobufFieldReferencesJ2kt::new,
           MakeVariablesNonNull::new,

@@ -31,6 +31,12 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
  */
 public class NormalizeNullLiterals extends NormalizationPass {
 
+  private final boolean removeCastsOfNullLiterals;
+
+  public NormalizeNullLiterals(boolean removeCastsOfNullLiterals) {
+    this.removeCastsOfNullLiterals = removeCastsOfNullLiterals;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -59,12 +65,13 @@ public class NormalizeNullLiterals extends NormalizationPass {
 
               @Override
               public Expression rewriteCastContext(CastExpression castExpression) {
-                TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-                if (castExpression.getExpression() instanceof NullLiteral
-                    && isBoxableJsEnumType(castTypeDescriptor)) {
+                if (removeCastsOfNullLiterals
+                    && castExpression.getExpression() instanceof NullLiteral) {
                   // Casting null always succeeds, replace the cast with a null literal of the
-                  // JsEnum type to avoid inserting a redundant unboxing conversion.
-                  return castTypeDescriptor.getNullValue();
+                  // cast type. Besides removing the redundant cast, this avoids a redundant
+                  // unboxing conversion for JsEnums and gives the null the representation of the
+                  // target type (e.g. `extern` for native JS types in Wasm).
+                  return castExpression.getCastTypeDescriptor().getNullValue();
                 }
                 return castExpression;
               }

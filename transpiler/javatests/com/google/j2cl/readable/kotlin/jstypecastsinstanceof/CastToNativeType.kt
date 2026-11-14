@@ -42,6 +42,8 @@ class CastToNativeType {
     val hh = h as Array<NativeObject<*, *>>
     val i: Any = NativeJsType()
     val ii = i as Array<NativeObject<String, Any?>>
+
+    val j = null as NativeJsType?
   }
 
   private fun testUncheckedCast() {
