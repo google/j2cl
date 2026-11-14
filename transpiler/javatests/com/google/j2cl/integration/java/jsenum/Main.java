@@ -17,6 +17,7 @@ package jsenum;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertThrows;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
@@ -135,12 +136,14 @@ public class Main {
     assertTrue(v.equals(OK_STRING));
     assertTrue(v.equals(StringNativeEnum.OK));
     assertFalse(v.equals(null));
-    assertThrowsNullPointerException(
+    assertThrows(
+        NullPointerException.class,
         () -> {
           NativeEnum nullJsEnum = null;
           nullJsEnum.equals(NativeEnum.ACCEPT);
         });
-    assertThrowsNullPointerException(
+    assertThrows(
+        NullPointerException.class,
         () -> {
           NativeEnum nullJsEnum = null;
           nullJsEnum.equals(null);
@@ -247,12 +250,14 @@ public class Main {
     assertFalse(v.equals(1));
     assertFalse(NumberNativeEnum.ONE.equals(1));
     assertFalse(v.equals(null));
-    assertThrowsNullPointerException(
+    assertThrows(
+        NullPointerException.class,
         () -> {
           StringNativeEnum nullJsEnum = null;
           nullJsEnum.equals(StringNativeEnum.OK);
         });
-    assertThrowsNullPointerException(
+    assertThrows(
+        NullPointerException.class,
         () -> {
           StringNativeEnum nullJsEnum = null;
           nullJsEnum.equals(null);
