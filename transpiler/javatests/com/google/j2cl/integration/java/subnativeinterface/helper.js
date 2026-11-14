@@ -12,27 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('subnativejstype.JsPropertyTest.MyNativeJsTypeInterface');
+goog.module('subnativeinterface.helper');
 
-/** @interface */
-class MyNativeJsTypeInterface {
-  /**
-   * @param {number} value
-   * @returns {void}
-   */
-  set x(value) {}
+/**
+ * @return {*}
+ */
+exports.nativeObjectImplementingM = function() {
+  return {m: function() { return 3; }};
+};
 
-  /**
-   * @returns {number}
-   */
-  get x() {}
+/**
+ * @param {?} object
+ * @param {string} name
+ * @return {number}
+ * @public
+ */
+exports.getProperty = function(object, name) {
+  return object[name];
+};
 
-  /**
-   * @param {number} bias
-   * @return {number}
-   * @public
-   */
-  sum(bias) {}
-}
-
-exports = MyNativeJsTypeInterface;
+/**
+ * @param {?} object
+ * @param {string} name
+ * @param {?} value
+ * @public
+ */
+exports.setProperty = function(object, name, value) {
+  object[name] = value;
+};
