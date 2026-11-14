@@ -18,7 +18,6 @@ package intersectiontype;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
-import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import com.google.j2cl.integration.testing.J2ktIncompatible;
@@ -77,11 +76,6 @@ public class Main {
   }
 
   private static void testIntersectionCastFromFirstComponentType() {
-    // TODO(b/580978314): Remove once J2CL checks all the components of intersection casts.
-    if (isJavaScript() && !isJ2Kt()) {
-      return;
-    }
-
     // The expression is already of the type of the first component of the intersection, but the
     // cast still needs to check the remaining components.
     EmptyB b = new EmptyB();

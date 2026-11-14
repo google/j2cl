@@ -102,6 +102,19 @@ public class NormalizeCasts extends NormalizationPass {
    *  </code></pre>
    */
   private boolean isRedundantCast(TypeDescriptor typeDescriptor, Expression expression) {
+    if (typeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor) {
+      // A cast to an intersection type is redundant only if the casts to all of its components
+      // are.
+      // TODO(b/585762411): Remove once there is a variant of isAssignableTo with the right
+      // semantics.
+      for (TypeDescriptor componentTypeDescriptor :
+          intersectionTypeDescriptor.getIntersectionTypeDescriptors()) {
+        if (!isRedundantCast(componentTypeDescriptor, expression)) {
+          return false;
+        }
+      }
+      return true;
+    }
     if (isAssignableTo(typeDescriptor, expression)) {
       return true;
     }

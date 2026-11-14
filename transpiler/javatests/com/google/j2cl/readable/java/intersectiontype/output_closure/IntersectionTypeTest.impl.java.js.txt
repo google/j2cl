@@ -127,7 +127,7 @@ class IntersectionTypeTest extends j_l_Object {
  }
  /** @nodts */
  static m_callOnIntersectionTypeWithRawType__void() {
-  let t = /**@type {!GenericType}*/ (GenericType.$create__());
+  let t = /**@type {!GenericType}*/ ($Casts.$to(/**@type {!GenericType<?string>}*/ (GenericType.$create__()), /**@type {Function}*/ (Getable)));
   t.m_doSomething__java_lang_Object__void_$pp_intersectiontype('');
   (/**@type {!Getable}*/ ($Casts.$to(t, /**@type {Function}*/ (Getable)))).m_get__java_lang_Object();
  }
