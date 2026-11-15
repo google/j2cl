@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.ast.NullLiteral
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Reference
 import com.google.j2cl.transpiler.ast.ReturnStatement
@@ -912,43 +913,48 @@ internal class CompilationUnitBuilder(
   private fun convertEqualsOperator(irCall: IrCall): Expression {
     require(irCall.arguments.size == 2) { "invalid number of arguments" }
 
-    val lhs = convertExpression(irCall.arguments[0]!!)
-    val rhs = convertExpression(irCall.arguments[1]!!)
+    var lhs = convertExpression(irCall.arguments[0]!!)
+    var rhs = convertExpression(irCall.arguments[1]!!)
 
-    // Unlike `ieee754equals`, `==` on floating point primitives has `equals` semantics: it is
-    // reflexive (NaN == NaN) and distinguishes -0.0 from 0.0.
-    // Numeric `==` written by users is emitted by the frontend as `ieee754equals` and handled by
-    // `convertIeee754EqualsOperator`. This case only arises from compiler-generated code (e.g. data
-    // and value class `equals`, built with `irEquals`).
-    // Mirror the Kotlin/JVM backend, which emits `Float.compare(a, b) == 0` or
-    // `Double.compare(a, b) == 0`. Floats are widened to doubles, which preserves NaN and the sign
-    // of zero (J2CL's `Float.compare` does the same).
+    // Kotlin `==` (EQEQ) is a null-safe comparison based on "Object.equals", i.e. it has the
+    // semantics of `j.u.Objects.equals` on the (boxed) operands, even when they are primitives
+    // (e.g. in data and value class `equals` or after inlining reified type parameters). User
+    // written `==` on floating point types is represented by `ieee754equals` instead.
+    //
+    // `Objects.equals` is always correct; delegate to a cheaper equivalent comparison when one
+    // exists.
+    // TODO(b/235278098): handle primitive == null scenarios.
+
+    // Compare floats as doubles, which preserves NaN and signed zeros. Unlike `Float`, boxed
+    // `Double`s are JS numbers with identity `equals` (see `hasIdentityEquals`), so they are
+    // compared below with `Object.is` (`$Equality.$same`) instead of being boxed as `Float`
+    // objects and compared with `Objects.equals`.
     if (
-      TypeDescriptors.isPrimitiveFloatOrDouble(lhs.typeDescriptor) &&
-        TypeDescriptors.isPrimitiveFloatOrDouble(rhs.typeDescriptor)
+      TypeDescriptors.isPrimitiveFloat(lhs.typeDescriptor) &&
+        TypeDescriptors.isPrimitiveFloat(rhs.typeDescriptor)
     ) {
-      val compareMethodDescriptor =
-        TypeDescriptors.get()
-          .javaLangDouble
-          .getMethodDescriptor("compare", PrimitiveTypes.DOUBLE, PrimitiveTypes.DOUBLE)
-      return MethodCall.builderFrom(compareMethodDescriptor)
-        .setArguments(convertToDouble(lhs), convertToDouble(rhs))
-        .build()
-        .infixEquals(NumberLiteral.fromInt(0))
+      lhs = convertToDouble(lhs)
+      rhs = convertToDouble(rhs)
     }
 
-    // Kotlin .equals() operator (==) is a null-safe comparison based on "Object.equals". It has the
-    // same semantics as the j.u.Objects.equals which we can delegate to. However if we know the
-    // "equals" of the compared type has identity semantics, we can short circuit this and use
-    // J2CL's `==` directly which is more efficient.
-    // TODO(b/235278098): handle primitive == object and primitive == null scenarios.
+    // `equals` on boxed values of the same non floating point primitive type is primitive equality.
+    // (Floating point differs for NaN and signed zeros.)
     if (
-      (lhs.typeDescriptor.isPrimitive && rhs.typeDescriptor.isPrimitive) ||
-        (!lhs.typeDescriptor.isPrimitive && rhs is NullLiteral) ||
+      lhs.typeDescriptor.isPrimitive &&
+        lhs.typeDescriptor == rhs.typeDescriptor &&
+        !TypeDescriptors.isPrimitiveFloatOrDouble(lhs.typeDescriptor)
+    ) {
+      return lhs.infixEquals(rhs)
+    }
+
+    // `equals` is identity when comparing a reference to `null` or when both (boxed) types have
+    // identity `equals`.
+    if (
+      (!lhs.typeDescriptor.isPrimitive && rhs is NullLiteral) ||
         (!rhs.typeDescriptor.isPrimitive && lhs is NullLiteral) ||
         (hasIdentityEquals(lhs.typeDescriptor) && hasIdentityEquals(rhs.typeDescriptor))
     ) {
-      return lhs.infixEquals(rhs)
+      return createReferenceEquals(lhs, rhs)
     }
 
     return RuntimeMethods.createObjectsEqualsMethodCall(lhs, rhs)
@@ -959,9 +965,12 @@ internal class CompilationUnitBuilder(
   // correct J2CL '==' implementation for their instances. Except for `Long` which is represented
   // by `goog.math.Long` objects, hence `==` is not value equality.
   // 2. All enums guaranteed to have identity equality based on JLS.
-  private fun hasIdentityEquals(type: TypeDescriptor) =
-    (TypeDescriptors.isBoxedTypeAsJsPrimitives(type) && !TypeDescriptors.isJavaLangLong(type)) ||
-      type.toRawTypeDescriptor().isEnum
+  // Primitive types are considered by their boxed type.
+  private fun hasIdentityEquals(type: TypeDescriptor): Boolean {
+    val boxedType = if (type is PrimitiveTypeDescriptor) type.toBoxedType() else type
+    return (TypeDescriptors.isBoxedTypeAsJsPrimitives(boxedType) &&
+      !TypeDescriptors.isJavaLangLong(boxedType)) || boxedType.toRawTypeDescriptor().isEnum
+  }
 
   private fun convertIeee754EqualsOperator(irCall: IrCall): Expression {
     require(irCall.arguments.size == 2) { "invalid number of arguments" }
@@ -1006,27 +1015,29 @@ internal class CompilationUnitBuilder(
   private fun convertReferenceEqualsOperator(irCall: IrCall): Expression {
     require(irCall.arguments.size == 2) { "invalid number of arguments" }
 
-    var lhs = convertExpression(irCall.arguments[0]!!)
-    var rhs = convertExpression(irCall.arguments[1]!!)
+    val lhs = convertExpression(irCall.arguments[0]!!)
+    val rhs = convertExpression(irCall.arguments[1]!!)
 
     // Kotlin leaves the semantics of reference equality between boxed and unboxed types as
     // unspecified (KLS §8.9.1), but in practice will box primitive types if the LHS xor RHS side is
     // a primitive. It will only compare primitives if both sides are primitive.
-    if (lhs.typeDescriptor.isPrimitive && !rhs.typeDescriptor.isPrimitive) {
-      lhs =
-        CastExpression.builder()
-          .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
-          .setExpression(lhs)
-          .build()
-    } else if (rhs.typeDescriptor.isPrimitive && !lhs.typeDescriptor.isPrimitive) {
-      rhs =
-        CastExpression.builder()
-          .setCastTypeDescriptor(TypeDescriptors.get().javaLangObject)
-          .setExpression(rhs)
-          .build()
+    if (lhs.typeDescriptor.isPrimitive && rhs.typeDescriptor.isPrimitive) {
+      return lhs.infixEquals(rhs)
     }
+    return createReferenceEquals(lhs, rhs)
+  }
 
-    return lhs.infixEquals(rhs)
+  /** Creates an identity comparison of the operands, boxing the primitive ones. */
+  private fun createReferenceEquals(lhs: Expression, rhs: Expression): Expression =
+    boxIfPrimitive(lhs).infixEquals(boxIfPrimitive(rhs))
+
+  private fun boxIfPrimitive(expression: Expression): Expression {
+    val typeDescriptor = expression.typeDescriptor
+    if (typeDescriptor !is PrimitiveTypeDescriptor) return expression
+    return CastExpression.builder()
+      .setCastTypeDescriptor(typeDescriptor.toBoxedType())
+      .setExpression(expression)
+      .build()
   }
 
   private fun convertCheckNotNullCall(irCall: IrCall): Expression {

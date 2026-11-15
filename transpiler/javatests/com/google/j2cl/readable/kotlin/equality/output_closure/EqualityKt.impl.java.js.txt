@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 /**
  * @final
@@ -28,7 +29,7 @@ class EqualityKt extends j_l_Object {
  /** @nodts */
  static m_testEquals__java_lang_Boolean__java_lang_Integer__void(/** ?boolean */ nullableBoolean, /** Integer */ nullableInt) {
   EqualityKt.$clinit();
-  let b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(nullableBoolean, true);
+  let b = $Equality.$same(nullableBoolean, /**@type {boolean}*/ (true));
   b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(nullableInt, Integer.valueOf(1));
   b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Integer.valueOf(1), nullableInt);
  }
@@ -47,6 +48,7 @@ class EqualityKt extends j_l_Object {
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   Objects = goog.module.get('java.util.Objects$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }
 $Util.$setClassMetadata(EqualityKt, 'equality.EqualityKt');

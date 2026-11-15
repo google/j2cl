@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Float = goog.forwardDeclare('java.lang.Float$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
@@ -78,10 +79,10 @@ class FloatData extends j_l_Object {
    return false;
   }
   let tmp0_other_with_cast = /**@type {!FloatData}*/ (other);
-  if (Double.m_compare__double__double__int(this.f_f__dataclass_FloatData_, tmp0_other_with_cast.f_f__dataclass_FloatData_) != 0) {
+  if (!$Equality.$same(/**@type {number}*/ ($Casts.$to(this.f_f__dataclass_FloatData_, Double)), /**@type {number}*/ ($Casts.$to(tmp0_other_with_cast.f_f__dataclass_FloatData_, Double)))) {
    return false;
   }
-  if (Double.m_compare__double__double__int(this.f_d__dataclass_FloatData_, tmp0_other_with_cast.f_d__dataclass_FloatData_) != 0) {
+  if (!$Equality.$same(/**@type {number}*/ (this.f_d__dataclass_FloatData_), /**@type {number}*/ (tmp0_other_with_cast.f_d__dataclass_FloatData_))) {
    return false;
   }
   return true;
@@ -102,6 +103,7 @@ class FloatData extends j_l_Object {
   Double = goog.module.get('java.lang.Double$impl');
   Float = goog.module.get('java.lang.Float$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }
