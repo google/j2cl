@@ -1,0 +1,112 @@
+goog.module('dataclass.FloatData$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class FloatData extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__dataclass_FloatData_ = 0;
+  /**@type {number} @nodts*/
+  this.f_d__dataclass_FloatData_ = 0;
+ }
+ /** @nodts @return {!FloatData} */
+ static $create__float__double(/** number */ f, /** number */ d) {
+  FloatData.$clinit();
+  let $instance = new FloatData();
+  $instance.$ctor__dataclass_FloatData__float__double__void(f, d);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__dataclass_FloatData__float__double__void(/** number */ f, /** number */ d) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__dataclass_FloatData_ = f;
+  this.f_d__dataclass_FloatData_ = d;
+ }
+ /** @final @nodts @return {number} */
+ m_getF__float() {
+  return this.f_f__dataclass_FloatData_;
+ }
+ /** @final @nodts @return {number} */
+ m_getD__double() {
+  return this.f_d__dataclass_FloatData_;
+ }
+ /** @final @nodts @return {number} */
+ m_component1__float() {
+  return this.f_f__dataclass_FloatData_;
+ }
+ /** @final @nodts @return {number} */
+ m_component2__double() {
+  return this.f_d__dataclass_FloatData_;
+ }
+ /** @final @nodts @return {!FloatData} */
+ m_copy__float__double__dataclass_FloatData(/** number */ f, /** number */ d) {
+  return FloatData.$create__float__double(f, d);
+ }
+ /** @nodts @return {!FloatData} */
+ static m_copy$default__dataclass_FloatData__float__double__dataclass_FloatData(/** !FloatData */ $this, /** number= */ f, /** number= */ d) {
+  let f$defaulted = $Util.$isUndefined(f) ? $this.f_f__dataclass_FloatData_ : f;
+  let d$defaulted = $Util.$isUndefined(d) ? $this.f_d__dataclass_FloatData_ : d;
+  return $this.m_copy__float__double__dataclass_FloatData(f$defaulted, d$defaulted);
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'FloatData(' + 'f=' + this.f_f__dataclass_FloatData_ + ', ' + 'd=' + this.f_d__dataclass_FloatData_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let result = $Objects.m_hashCode__java_lang_Object__int(Float.m_valueOf__float__java_lang_Float(this.f_f__dataclass_FloatData_));
+  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(this.f_d__dataclass_FloatData_) | 0;
+  return result;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if ($Equality.$same(this, other)) {
+   return true;
+  }
+  if (!FloatData.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!FloatData}*/ (other);
+  if (Double.m_compare__double__double__int(this.f_f__dataclass_FloatData_, tmp0_other_with_cast.f_f__dataclass_FloatData_) != 0) {
+   return false;
+  }
+  if (Double.m_compare__double__double__int(this.f_d__dataclass_FloatData_, tmp0_other_with_cast.f_d__dataclass_FloatData_) != 0) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  FloatData.$clinit = () =>{};
+  FloatData.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FloatData;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(FloatData, 'dataclass.FloatData');
+
+exports = FloatData;
+
+//# sourceMappingURL=FloatData.js.map

@@ -397,3 +397,16 @@ class StringBox(s: String) : GenericBox<String>(s)
 
 fun testInlineFunctionCalledOnSmartCastReceiver(x: Any): String =
   if (x is StringBox) x.get() else ""
+
+inline fun <reified A, reified B> areEqual(a: A, b: B) = a == b
+
+fun testEquals(nullableFloat: Float?, nullableDouble: Double?) {
+  // Same floating point type after inlining.
+  var b = areEqual(1.0f, 2.0f)
+  b = areEqual(nullableFloat, 2.0f)
+  b = areEqual(nullableDouble, 2.0)
+  b = areEqual(nullableFloat, nullableFloat)
+  // Different primitive types after inlining.
+  b = areEqual(1.0, 1)
+  b = areEqual(1, 1L)
+}

@@ -35,6 +35,10 @@ value class Foo(override val i: Int) : I {
 
 @JvmInline value class FooReferenceNullable(val s: String?)
 
+// Only declared for its generated `equals`, which compares the underlying primitive `Float`
+// (`NaN` is equal to `NaN` and `0.0` is not equal to `-0.0`).
+@JvmInline value class FloatValue(val f: Float)
+
 fun <T> asGeneric(x: T) {
   if (x is Foo) {
     val r = x.i + 1

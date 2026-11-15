@@ -36,3 +36,11 @@ class Equality {
     val h = null !== IntArray(0)
   }
 }
+
+fun testEquals(nullableBoolean: Boolean?, nullableInt: Int?) {
+  // Primitive compared with a boxed type with identity `equals`.
+  var b = nullableBoolean == true
+  // Primitive compared with a boxed type without identity `equals`.
+  b = nullableInt == 1
+  b = 1 == nullableInt
+}

@@ -41,12 +41,14 @@ let StringReproChild = goog.forwardDeclare('inlinefunction.StringReproChild$impl
 let WithInlineFunction = goog.forwardDeclare('inlinefunction.WithInlineFunction$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let StringBuilder = goog.forwardDeclare('java.lang.StringBuilder$impl');
 let System = goog.forwardDeclare('java.lang.System$impl');
 let Date = goog.forwardDeclare('java.util.Date$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
 let Exceptions = goog.forwardDeclare('javaemul.internal.Exceptions$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
@@ -59,6 +61,7 @@ let Sequence = goog.forwardDeclare('kotlin.sequences.Sequence$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 
 /**
  * @final
@@ -677,6 +680,16 @@ class InlineFunctionKt extends j_l_Object {
   return tmp;
  }
  /** @nodts */
+ static m_testEquals__java_lang_Float__java_lang_Double__void(/** Float */ nullableFloat, /** ?number */ nullableDouble) {
+  InlineFunctionKt.$clinit();
+  let b = Double.m_compare__double__double__int(1, 2) == 0;
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(nullableFloat, Float.m_valueOf__float__java_lang_Float(2));
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(nullableDouble, 2);
+  b = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(nullableFloat, nullableFloat);
+  b = 1 == 1;
+  b = $LongUtils.equals(Long.fromInt(1), Long.fromInt(1));
+ }
+ /** @nodts */
  static $clinit() {
   InlineFunctionKt.$clinit = () =>{};
   InlineFunctionKt.$loadModules();
@@ -717,12 +730,14 @@ class InlineFunctionKt extends j_l_Object {
   WithInlineFunction = goog.module.get('inlinefunction.WithInlineFunction$impl');
   Double = goog.module.get('java.lang.Double$impl');
   Error = goog.module.get('java.lang.Error$impl');
+  Float = goog.module.get('java.lang.Float$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
   StringBuilder = goog.module.get('java.lang.StringBuilder$impl');
   System = goog.module.get('java.lang.System$impl');
   Date = goog.module.get('java.util.Date$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
   Exceptions = goog.module.get('javaemul.internal.Exceptions$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Ref = goog.module.get('javaemul.internal.Ref$impl');
@@ -733,6 +748,7 @@ class InlineFunctionKt extends j_l_Object {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
  }
 }
 $Util.$setClassMetadata(InlineFunctionKt, 'inlinefunction.InlineFunctionKt');

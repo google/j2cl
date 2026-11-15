@@ -190,3 +190,7 @@ fun testDataClass() {
   IntValueHolder(10).backingValue
   val (f, z) = JvmRecordDataClass(1, "a")
 }
+
+// Only declared for its generated `equals`, which compares primitive floating point properties
+// (`NaN` is equal to `NaN` and `0.0` is not equal to `-0.0`).
+data class FloatData(val f: Float, val d: Double)

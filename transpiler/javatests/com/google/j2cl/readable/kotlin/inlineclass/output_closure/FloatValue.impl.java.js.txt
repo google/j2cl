@@ -1,0 +1,77 @@
+goog.module('inlineclass.FloatValue$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+/**
+ * @final
+ */
+class FloatValue extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_f__inlineclass_FloatValue_ = 0;
+ }
+ /** @nodts @return {!FloatValue} */
+ static $create__float(/** number */ f) {
+  FloatValue.$clinit();
+  let $instance = new FloatValue();
+  $instance.$ctor__inlineclass_FloatValue__float__void(f);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlineclass_FloatValue__float__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
+  this.f_f__inlineclass_FloatValue_ = f;
+ }
+ /** @final @nodts @return {number} */
+ m_getF__float() {
+  return this.f_f__inlineclass_FloatValue_;
+ }
+ /** @override @return {string} */
+ toString() {
+  return '' + 'FloatValue(' + 'f=' + this.f_f__inlineclass_FloatValue_ + ')';
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object__int(Float.m_valueOf__float__java_lang_Float(this.f_f__inlineclass_FloatValue_));
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ other) {
+  if (!FloatValue.$isInstance(other)) {
+   return false;
+  }
+  let tmp0_other_with_cast = /**@type {!FloatValue}*/ (other);
+  if (Double.m_compare__double__double__int(this.f_f__inlineclass_FloatValue_, tmp0_other_with_cast.f_f__inlineclass_FloatValue_) != 0) {
+   return false;
+  }
+  return true;
+ }
+ /** @nodts */
+ static $clinit() {
+  FloatValue.$clinit = () =>{};
+  FloatValue.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FloatValue;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
+}
+$Util.$setClassMetadata(FloatValue, 'inlineclass.FloatValue');
+
+exports = FloatValue;
+
+//# sourceMappingURL=FloatValue.js.map
