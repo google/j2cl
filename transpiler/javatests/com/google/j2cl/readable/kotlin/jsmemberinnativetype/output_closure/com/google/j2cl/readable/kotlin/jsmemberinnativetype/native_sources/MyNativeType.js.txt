@@ -25,6 +25,10 @@ class MyNativeType {
     this.packageField = 0;
     /** @public {number} */
     this.protectedField = 0;
+    /** @public {number} */
+    this.readOnlyProperty = 0;
+    /** @public {number} */
+    this.mutableProperty = 0;
   }
 
   /**

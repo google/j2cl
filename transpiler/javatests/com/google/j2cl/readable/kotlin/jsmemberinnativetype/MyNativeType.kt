@@ -46,6 +46,13 @@ class MyNativeType {
 
   @JsProperty external fun setPublicField(value: Int)
 
+  val readOnlyProperty: Int
+    external get
+
+  var mutableProperty: Int
+    external get
+    external set
+
   external fun publicMethod()
 
   private external fun privateMethod()
@@ -68,6 +75,8 @@ class MyNativeType {
     val jsPropertyMethods = getPublicField() + getStaticField()
     setPublicField(1)
     setStaticField(2)
+
+    mutableProperty = readOnlyProperty
 
     publicMethod()
     privateMethod()

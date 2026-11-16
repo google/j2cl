@@ -12,6 +12,7 @@ class $Overlay {
   let jsPropertyMethods = $thisArg.publicField + MyNativeType.staticField | 0;
   $thisArg.publicField = 1;
   MyNativeType.staticField = 2;
+  $thisArg.mutableProperty = $thisArg.readOnlyProperty;
   $thisArg.publicMethod();
   $thisArg.privateMethod();
   $thisArg.packageMethod();

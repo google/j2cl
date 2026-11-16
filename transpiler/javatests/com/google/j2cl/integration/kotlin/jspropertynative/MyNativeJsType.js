@@ -23,6 +23,10 @@ class MyNativeJsType {
     this.y = 0;
     /** @public {boolean} */
     this.ctorExecuted = true;
+    /** @public {number} */
+    this.readOnlyProperty = 42;
+    /** @public {number} */
+    this.mutableProperty = 7;
   }
 
   /**

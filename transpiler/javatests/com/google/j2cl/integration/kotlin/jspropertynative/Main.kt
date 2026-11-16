@@ -31,6 +31,7 @@ fun main(vararg args: String) {
   testJsPropertyIsX()
   testNativeJsType()
   testNativeJsTypeWithConstructor()
+  testNativeJsTypeWithKotlinProperties()
   testStaticNativeJsProperty()
   testInstanceNativeJsPropertyOnNonNativeType()
 }
@@ -82,6 +83,25 @@ private fun testNativeJsTypeWithConstructor() {
   val obj = MyNativeJsTypeWithConstructor(12)
   assertTrue(obj.ctorExecuted)
   assertEquals(12, obj.x)
+}
+
+@JsType(isNative = true, namespace = "jspropertynative", name = "MyNativeJsType")
+internal class MyNativeJsTypeWithKotlinProperties {
+  val readOnlyProperty: Int
+    external get
+
+  var mutableProperty: Int
+    external get
+    external set
+}
+
+private fun testNativeJsTypeWithKotlinProperties() {
+  val obj = MyNativeJsTypeWithKotlinProperties()
+  // The values are initialized in MyNativeJsType.js.
+  assertEquals(42, obj.readOnlyProperty)
+  assertEquals(7, obj.mutableProperty)
+  obj.mutableProperty = 91
+  assertEquals(91, obj.mutableProperty)
 }
 
 @JsProperty(namespace = GLOBAL, name = "NaN") private external fun getNaN(): Double
