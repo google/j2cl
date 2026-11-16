@@ -284,6 +284,8 @@ public class AutoBoxing {
     i <<= boxL;
     l <<= boxI;
     l <<= boxL;
+
+    int unusedInt = (Integer) null;
   }
 
   @SuppressWarnings("unused")

@@ -619,6 +619,7 @@
  (local $c i32)
  (local $v (ref null $java.lang.Void))
  (local $$expression i32)
+ (local $unusedInt i32)
  (local $this (ref null $autoboxing.AutoBoxing))
  (local.set $this (ref.cast (ref $autoboxing.AutoBoxing) (local.get $this.untyped)))
  (block
@@ -692,6 +693,7 @@
   (local.set $i (i32.shl (local.get $i) (i32.wrap_i64 (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxL))))))
   (local.set $l (i64.shl (local.get $l) (i64.extend_i32_s (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))))))
   (local.set $l (i64.shl (local.get $l) (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxL)))))
+  (local.set $unusedInt (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.null $java.lang.Integer))))
  )
 )
 (elem declare func $m_testUnboxing__void@autoboxing.AutoBoxing)

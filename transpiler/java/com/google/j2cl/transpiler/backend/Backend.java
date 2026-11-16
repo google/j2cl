@@ -344,11 +344,6 @@ public enum Backend {
           // Must run after passes that might introduce calls to generic methods.
           InsertErasureTypeSafetyCasts::new,
 
-          // Make null literals have the type required by their use before coercions and
-          // conversions, so that they do not trigger unnecessary conversions, e.g. JsEnum
-          // unboxing.
-          () -> new NormalizeNullLiterals(/* removeCastsOfNullLiterals= */ true),
-
           // Runs before unboxing conversion.
           InsertStringConversions::new,
           InsertNarrowingReferenceConversions::new,
@@ -360,6 +355,10 @@ public enum Backend {
           InsertIntegerCoercions::new,
           InsertBitwiseOperatorBooleanCoercions::new,
           NormalizeJsFunctionPropertyInvocations::new,
+
+          // Make null literals have the type required by their use before JsEnum conversions, so
+          // that they do not trigger unnecessary conversions, e.g. JsEnum unboxing.
+          () -> new NormalizeNullLiterals(/* removeCastsOfNullLiterals= */ true),
           // Run before other passes that normalize JsEnum expressions, but after all the normal
           // Java semantic conversions.
           InsertJsEnumBoxingAndUnboxingConversions::new,
