@@ -16,6 +16,7 @@
 package localfunction
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 
 fun main(vararg unused: String) {
@@ -88,6 +89,21 @@ class ParametrizedClass<T>(val classT: T) {
 
 private fun testLocalFunction_parameterizedType() {
   assertEquals("s111", ParametrizedClass<Int>(1).outerfunction("s"))
+
+  fun <T> T.orDefault(fallback: T = this): T {
+    fun <U> nested(u: U): T = if (u != null) fallback else this
+    return nested("")
+  }
+  assertEquals(42, 41.orDefault() + 1)
+  assertEquals(11, 41.orDefault(10) + 1)
+  assertEquals(3, "abc".orDefault().length)
+
+  @Suppress("UNCHECKED_CAST") fun <T> erasureCast(o: Any?): T = o as T
+  val castToInt: (Any?) -> Int = ::erasureCast
+  assertEquals(42, castToInt(41) + 1)
+  assertThrowsClassCastException {
+    val unused: Int = erasureCast("bad")
+  }
 }
 
 var topLevelProperty = "topLevelProperty init"

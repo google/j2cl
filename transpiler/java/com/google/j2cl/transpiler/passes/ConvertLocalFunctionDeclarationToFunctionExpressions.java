@@ -128,8 +128,9 @@ public class ConvertLocalFunctionDeclarationToFunctionExpressions extends Normal
 
             MethodDescriptor newTarget =
                 checkNotNull(
-                    ((DeclaredTypeDescriptor) variable.getTypeDescriptor())
-                        .getJsFunctionMethodDescriptor());
+                        ((DeclaredTypeDescriptor) variable.getTypeDescriptor())
+                            .getJsFunctionMethodDescriptor())
+                    .specializeTypeVariables(target.getLocalParameterization());
 
             return methodCall.toBuilder()
                 .setQualifier(variable.createReference())

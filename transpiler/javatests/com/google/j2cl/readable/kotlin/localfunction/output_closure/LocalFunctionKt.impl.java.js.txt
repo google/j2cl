@@ -185,7 +185,7 @@ class LocalFunctionKt extends j_l_Object {
    return t;
   });
   let s = /**@type {string}*/ ($Casts.$to(id('foo'), j_l_String));
-  return id(/**@type {?}*/ (Integer.valueOf(41)));
+  return (/**@type {!Integer}*/ ($Casts.$to(id(Integer.valueOf(41)), Integer))).intValue();
  }
  /** @nodts */
  static $clinit() {
