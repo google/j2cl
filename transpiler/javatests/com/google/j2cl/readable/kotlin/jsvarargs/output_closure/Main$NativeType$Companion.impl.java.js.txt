@@ -1,0 +1,57 @@
+goog.module('jsvarargs.Main.NativeType.Companion$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativeType = goog.forwardDeclare('test.foo.NativeType');
+
+/**
+ * @final
+ */
+class Companion extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Companion} */
+ static $create__() {
+  let $instance = new Companion();
+  $instance.$ctor__jsvarargs_Main_NativeType_Companion__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_NativeType_Companion__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {NativeType} */
+ m_of__arrayOf_jsvarargs_Main_NativeType__jsvarargs_Main_NativeType(/** !Array<NativeType> */ items) {
+  return NativeType.of(...items);
+ }
+ /** @nodts @return {!Companion} */
+ static get f_Companion__jsvarargs_Main_NativeType_Companion() {
+  return (Companion.$clinit(), Companion.$static_Companion__jsvarargs_Main_NativeType_Companion);
+ }
+ /** @nodts */
+ static $clinit() {
+  Companion.$clinit = () =>{};
+  Companion.$loadModules();
+  j_l_Object.$clinit();
+  Companion.$static_Companion__jsvarargs_Main_NativeType_Companion = Companion.$create__();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Companion;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  NativeType = goog.module.get('test.foo.NativeType');
+ }
+}
+/**@private {!Companion} @nodts*/
+Companion.$static_Companion__jsvarargs_Main_NativeType_Companion;
+$Util.$setClassMetadata(Companion, 'jsvarargs.Main$NativeType$Companion');
+
+exports = Companion;
+
+//# sourceMappingURL=Main$NativeType$Companion.js.map

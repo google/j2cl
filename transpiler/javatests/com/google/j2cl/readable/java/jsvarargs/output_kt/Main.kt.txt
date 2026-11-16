@@ -206,6 +206,17 @@ open class Main {
   }
  }
  
+ open fun testJsImportGenerationForNativeVarargs() {
+  val n1: NativeType = NativeType()
+  val n2: NativeType = NativeType(n1, null)
+  n1.accept()
+  n1.acceptWithPrefix(1, n1, n2)
+  val items: Array<NativeType?> = arrayOf<NativeType?>(n1, n2)
+  val unused: NativeType? = NativeType.of(
+   *items,
+  )
+ }
+ 
  companion object {
   @JvmStatic
   @JsMethod
@@ -330,5 +341,21 @@ open class Main {
  @JsFunction
  internal fun interface GenericFunction<T> {
   fun m(i: T, vararg args: T): Any?
+ }
+ 
+ @JsType(namespace = "test.foo", isNative = true)
+ open class NativeType {
+  constructor()
+  
+  constructor(vararg items: NativeType?)
+  
+  external open fun accept(vararg items: NativeType?)
+  
+  external open fun acceptWithPrefix(prefix: Int, vararg items: NativeType?)
+  
+  companion object {
+   @JvmStatic
+   external fun of(vararg items: NativeType?): NativeType?
+  }
  }
 }

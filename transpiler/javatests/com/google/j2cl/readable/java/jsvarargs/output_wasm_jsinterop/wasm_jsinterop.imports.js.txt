@@ -7,6 +7,7 @@ const j2wasm_EqualityUtils = goog.require('j2wasm.EqualityUtils');
 const j2wasm_ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
 const j2wasm_JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
 const j2wasm_StringUtils = goog.require('j2wasm.StringUtils');
+const test_foo_NativeType = goog.require('test.foo.NativeType');
 
 /** @return {!Object<string, *>} Wasm import object */
 function getImports() {
@@ -138,6 +139,11 @@ function getImports() {
    'string.toLocaleUpperCase': (/** string */ $instance, ) => $instance.toLocaleUpperCase(),
    'string.toLowerCase': (/** string */ $instance, ) => $instance.toLowerCase(),
    'string.toUpperCase': (/** string */ $instance, ) => $instance.toUpperCase(),
+   'test.foo.NativeType.accept$1': (/** !test_foo_NativeType */ $instance, /** !Array<test_foo_NativeType> */ items, ) => $instance.accept(items, ),
+   'test.foo.NativeType.acceptWithPrefix$2': (/** !test_foo_NativeType */ $instance, /** number */ prefix, /** !Array<test_foo_NativeType> */ items, ) => $instance.acceptWithPrefix(prefix, items, ),
+   'test.foo.NativeType.constructor': () => new test_foo_NativeType(),
+   'test.foo.NativeType.constructor$1': (/** !Array<test_foo_NativeType> */ items, ) => new test_foo_NativeType(items, ),
+   'test.foo.NativeType.of': test_foo_NativeType.of,
   }
  };
 }

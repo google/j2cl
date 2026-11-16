@@ -261,4 +261,28 @@ public class Main {
   public <U> void testGenericJsFunctionWithVarags() {
     GenericFunction<U> function = (n, param) -> param;
   }
+
+  @JsType(isNative = true, namespace = "test.foo", name = "NativeType")
+  public static class NativeType {
+    public NativeType() {}
+
+    public NativeType(NativeType... items) {}
+
+    public native void accept(NativeType... items);
+
+    public native void acceptWithPrefix(int prefix, NativeType... items);
+
+    public static native NativeType of(NativeType... items);
+  }
+
+  // This test covers Wasm JS import generation for native varargs methods.
+  // Call-site varargs shapes are already covered above.
+  public void testJsImportGenerationForNativeVarargs() {
+    NativeType n1 = new NativeType();
+    NativeType n2 = new NativeType(n1, null);
+    n1.accept();
+    n1.acceptWithPrefix(1, n1, n2);
+    NativeType[] items = new NativeType[] {n1, n2};
+    NativeType unused = NativeType.of(items);
+  }
 }
