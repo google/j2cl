@@ -12,6 +12,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let StringBuilder = goog.forwardDeclare('java.lang.StringBuilder$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let Function0 = goog.forwardDeclare('kotlin.jvm.functions.Function0$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -178,6 +179,14 @@ class LocalFunctionKt extends j_l_Object {
   });
   return localFunction(1, /**@type {number}*/ (undefined)) + localFunction(1, 2) | 0;
  }
+ /** @nodts @return {number} */
+ static m_testGenericLocalFunction__int() {
+  let id = /**  @template T @return {T}*/ ((/** T */ t) =>{
+   return t;
+  });
+  let s = /**@type {string}*/ ($Casts.$to(id('foo'), j_l_String));
+  return id(/**@type {?}*/ (Integer.valueOf(41)));
+ }
  /** @nodts */
  static $clinit() {
   LocalFunctionKt.$clinit = () =>{};
@@ -196,6 +205,7 @@ class LocalFunctionKt extends j_l_Object {
   StringBuilder = goog.module.get('java.lang.StringBuilder$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Function0 = goog.module.get('kotlin.jvm.functions.Function0$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }

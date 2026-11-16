@@ -176,3 +176,9 @@ private fun testLocalFunctionWithDefaultArgument(): Int {
   }
   return localFunction(1) + localFunction(1, 2)
 }
+
+private fun testGenericLocalFunction(): Int {
+  fun <T> id(t: T): T = t
+  val s: String = id("foo")
+  return id(41)
+}
