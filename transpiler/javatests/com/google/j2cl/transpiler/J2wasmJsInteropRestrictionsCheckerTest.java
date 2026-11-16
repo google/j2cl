@@ -264,6 +264,40 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testCustomInstanceOfSucceeds() {
+    newTesterWithWasmDefaults()
+        .addCompilationUnit(
+            "test.Main",
+            """
+            class Main {
+              static boolean $isInstance(String o) { return true; }
+            }
+            """)
+        .assertTranspileSucceeds()
+        .assertNoWarnings();
+  }
+
+  public void testCustomInstanceOfFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        class NativeWithObjectParameter {
+          @JsOverlay
+          static boolean $isInstance(Object o) { return true; }
+          > Error: Custom '$isInstance' method 'boolean NativeWithObjectParameter.$isInstance(Object o)' has to take a parameter of a native JsType.
+        }
+        @JsType(isNative = true)
+        class NativeWithNativeArrayParameter {
+          @JsOverlay
+          static boolean $isInstance(NativeWithNativeArrayParameter[] o) { return true; }
+          > Error: Custom '$isInstance' method 'boolean NativeWithNativeArrayParameter.$isInstance(NativeWithNativeArrayParameter[] o)' has to take a parameter of a native JsType.
+        }
+        class Main {}
+        """);
+  }
+
   public void testNativeJsTypePatternMatchFails() {
     assertWithInlineMessages(
         "test.Buggy",
