@@ -184,6 +184,7 @@ class ArithmeticExpressions extends j_l_Object {
   let /** $1Ref<Byte> */ ref = null;
   ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte__java_lang_Byte(Primitives.m_narrowIntToByte__int__int((/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte))).m_byteValue__byte() + 1 | 0));
   let n = 1 + (/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte))).m_byteValue__byte() | 0;
+  let s = '' + + (/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte))).m_byteValue__byte();
  }
  /** @nodts @return {Integer} */
  static m_getInteger__java_lang_Integer() {
@@ -233,6 +234,14 @@ class ArithmeticExpressions extends j_l_Object {
  /** @nodts @return {!Long} */
  static m_incrementCounter__long() {
   return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, Long.fromInt(1));
+ }
+ /** @nodts */
+ m_testUnaryNumericPromotion__void() {
+  let c = 97 /* 'a' */;
+  let boxedChar = Character.m_valueOf__char__java_lang_Character(97 /* 'a' */);
+  let s = '' + + c;
+  let o = Integer.valueOf(+ c);
+  o = Integer.valueOf(+ boxedChar.m_charValue__char());
  }
  /** @private @nodts */
  $init__void_$p_arithmeticexpressions_ArithmeticExpressions() {

@@ -130,6 +130,7 @@ fun testCompoundBoxedTypes() {
   ref.field++
   ++ref.field
   val n = 1 + ref.field
+  val s = "" + +ref.field
 
   var longRef = Ref(1L)
   longRef.field += 1
@@ -227,4 +228,12 @@ fun testTripleEquals() {
   val o1: Any? = Any()
   val o2: Any? = "Hello"
   b = o1 === o2
+}
+
+fun testUnaryNumericPromotion() {
+  val b: Byte = 1
+  val boxedByte: Byte? = 1
+  val s = "" + +b
+  var o: Any = +b
+  o = +boxedByte!!
 }

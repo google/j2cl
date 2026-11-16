@@ -244,6 +244,7 @@ open class ArithmeticExpressions {
   val ref: Ref<Byte?>? = null
   ref!!.field = (ref!!.field!!.toByte().toInt() + 1).toByte()
   val n: Int = 1 + ref!!.field!!.toByte().toInt()
+  val s: String = "" + + ref!!.field!!.toByte().toInt()
  }
  
  @JvmField
@@ -294,6 +295,14 @@ open class ArithmeticExpressions {
   var b: Boolean = boxedLong!!.toLong() == l
   b = l == boxedLong!!.toLong()
   b = boxedLong === boxedLong
+ }
+ 
+ open fun testUnaryNumericPromotion() {
+  val c: Char = 'a'
+  val boxedChar: Char? = 'a'
+  val s: String = "" + + c.code
+  var o: Any = + c.code
+  o = + boxedChar!!.toChar().code
  }
  
  companion object {

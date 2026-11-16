@@ -34,6 +34,7 @@
   (ref.func $m_testEquals__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions)
   (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions)
+  (ref.func $m_testUnaryNumericPromotion__void@arithmeticexpressions.ArithmeticExpressions)
  )
 )
 (global $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)
@@ -324,6 +325,7 @@
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (local $n i32)
+ (local $s (ref null $java.lang.String))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
  (block
@@ -370,6 +372,7 @@
   (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.add (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (ref.cast (ref null $java.lang.Byte) (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref))))) (i32.const 1)))))
   (local.set $n (i32.add (i32.const 1) (call $m_byteValue__byte@java.lang.Byte (ref.as_non_null (ref.cast (ref null $java.lang.Byte) (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref)))))))
+  (local.set $s (call $m_valueOf__java_lang_Object__java_lang_String@java.lang.String (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $ref))))
  )
 )
 (elem declare func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions)
@@ -496,6 +499,26 @@
   ))
  )
 )
+
+;;; void ArithmeticExpressions.testUnaryNumericPromotion()
+(func $m_testUnaryNumericPromotion__void@arithmeticexpressions.ArithmeticExpressions
+ (type $function.m_testUnaryNumericPromotion__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $c i32)
+ (local $boxedChar (ref null $java.lang.Character))
+ (local $s (ref null $java.lang.String))
+ (local $o (ref null $java.lang.Object))
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast (ref $arithmeticexpressions.ArithmeticExpressions) (local.get $this.untyped)))
+ (block
+  (local.set $c (i32.const 97))
+  (local.set $boxedChar (call $m_valueOf__char__java_lang_Character@java.lang.Character (i32.const 97)))
+  (local.set $s (call $m_valueOf__char__java_lang_String@java.lang.String (local.get $c)))
+  (local.set $o (call $m_valueOf__char__java_lang_Character@java.lang.Character (local.get $c)))
+  (local.set $o (local.get $boxedChar))
+ )
+)
+(elem declare func $m_testUnaryNumericPromotion__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; void ArithmeticExpressions.$init()
 (func $$init__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions

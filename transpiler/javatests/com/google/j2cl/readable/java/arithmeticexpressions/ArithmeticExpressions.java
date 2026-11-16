@@ -171,6 +171,7 @@ public class ArithmeticExpressions {
     Ref<Byte> ref = null;
     ref.field++;
     int n = 1 + ref.field;
+    String s = "" + +ref.field;
   }
 
   private static Integer getInteger() {
@@ -226,5 +227,13 @@ public class ArithmeticExpressions {
 
   private static long incrementCounter() {
     return ++counter;
+  }
+
+  public void testUnaryNumericPromotion() {
+    char c = 'a';
+    Character boxedChar = 'a';
+    String s = "" + +c;
+    Object o = +c;
+    o = +boxedChar;
   }
 }
