@@ -131,11 +131,11 @@ function getImports() {
    'string.toLocaleUpperCase': (/** string */ $instance, ) => $instance.toLocaleUpperCase(),
    'string.toLowerCase': (/** string */ $instance, ) => $instance.toLowerCase(),
    'string.toUpperCase': (/** string */ $instance, ) => $instance.toUpperCase(),
-   'test.foo.NativeType.accept$1': (/** !test_foo_NativeType */ $instance, /** !Array<test_foo_NativeType> */ items, ) => $instance.accept(items, ),
-   'test.foo.NativeType.acceptWithPrefix$2': (/** !test_foo_NativeType */ $instance, /** number */ prefix, /** !Array<test_foo_NativeType> */ items, ) => $instance.acceptWithPrefix(prefix, items, ),
+   'test.foo.NativeType.accept$1': (/** !test_foo_NativeType */ $instance, /** !Array<test_foo_NativeType> */ items, ) => $instance.accept(...items, ),
+   'test.foo.NativeType.acceptWithPrefix$2': (/** !test_foo_NativeType */ $instance, /** number */ prefix, /** !Array<test_foo_NativeType> */ items, ) => $instance.acceptWithPrefix(prefix, ...items, ),
    'test.foo.NativeType.constructor': () => new test_foo_NativeType(),
-   'test.foo.NativeType.constructor$1': (/** !Array<test_foo_NativeType> */ items, ) => new test_foo_NativeType(items, ),
-   'test.foo.NativeType.of': test_foo_NativeType.of,
+   'test.foo.NativeType.constructor$1': (/** !Array<test_foo_NativeType> */ items, ) => new test_foo_NativeType(...items, ),
+   'test.foo.NativeType.of$1': (/** !Array<test_foo_NativeType> */ items, ) => test_foo_NativeType.of(...items, ),
   }
  };
 }

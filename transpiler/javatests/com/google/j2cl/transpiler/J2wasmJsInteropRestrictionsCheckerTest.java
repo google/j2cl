@@ -132,6 +132,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         > Error: Return type of 'C Buggy.getField()' cannot be of type 'C'.
           @JsProperty native void setField(C c);
         > Error: Parameter 'c' in 'void Buggy.setField(C c)' cannot be of type 'C'.
+          native void testVarargs(C... c);
+        > Error: Parameter 'c' in 'void Buggy.testVarargs(C... c)' cannot be of type 'C[]'.
         }
         class C {}
         """);
@@ -152,6 +154,9 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           @JsMethod
           static native C test4();
         > Error: Return type of 'C Main.test4()' cannot be of type 'C'.
+          @JsMethod
+          static native void test5(C... c);
+        > Error: Parameter 'c' in 'void Main.test5(C... c)' cannot be of type 'C[]'.
         }
         class C {}
         """);
@@ -348,6 +353,8 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
           private static MyNativeType[] returnsNativeTypeArray() { return null; }
           @JsMethod
           private static native MyNativeType[][] nativeBoundary(MyNativeType[] p);
+          @JsMethod
+          private static native void nativeVarargs(MyNativeType... p);
           private static void arrays() {
             MyNativeType[] arr = new MyNativeType[1];
             MyNativeType[][] arr2d = new MyNativeType[1][1];

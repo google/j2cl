@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
@@ -243,7 +244,19 @@ public final class JsImportsGenerator {
       sb.append(String.format("%s = %s", target, value));
     } else {
       String arguments =
-          methodImport.getParameters().stream().map(p -> p.getName() + ", ").collect(joining());
+          methodImport.getParameters().stream()
+              .map(p -> {
+                if (p.isVarargs()) {
+                  checkState(
+                      p.getTypeDescriptor().isNativeJsArray(),
+                      "Varargs parameter %s must be a native JS array to spread.",
+                      p.getName());
+                  // If the parameter is a varargs, emit spread operator as a prefix.
+                  return "..." + p.getName() + ", ";
+                }
+                return p.getName() + ", ";
+              })
+              .collect(joining());
       sb.append(String.format("%s(%s)", target, arguments));
     }
     return sb.toString();

@@ -37,6 +37,7 @@ public final class Main {
     testGlobalJsType();
     testNonglobalJsType();
     testJsTypeInterface();
+    testNativeVarargs();
   }
 
   private static void testJsString() {
@@ -212,6 +213,17 @@ public final class Main {
     assertEquals(false, regExp.test("rest"));
   }
 
+  private static void testNativeVarargs() {
+    NativeVarargs n1 = new NativeVarargs();
+    assertEquals(0, n1.getLength());
+    n1.accept(n1, n1);
+    assertEquals(2, n1.getLength());
+    n1.acceptWithPrefix(100, n1, n1, n1);
+    assertEquals(105, n1.getLength());
+    NativeVarargs n2 = NativeVarargs.of(n1, n1, n1);
+    assertEquals(3, n2.getLength());
+  }
+
   private static void testNonglobalJsType() {
     Foo f = new Foo(1);
     assertEquals(1, f.getValue());
@@ -241,6 +253,21 @@ public final class Main {
 
     @JsProperty
     public native void setLastIndex(int value);
+  }
+
+  @JsType(isNative = true, name = "NativeVarargs", namespace = "test")
+  public static class NativeVarargs {
+    public NativeVarargs() {}
+
+    public NativeVarargs(NativeVarargs... items) {}
+
+    public native void accept(NativeVarargs... items);
+
+    public native void acceptWithPrefix(int prefix, NativeVarargs... items);
+
+    public native int getLength();
+
+    public static native NativeVarargs of(NativeVarargs... items);
   }
 
   @JsType(isNative = true, name = "Foo", namespace = "test")

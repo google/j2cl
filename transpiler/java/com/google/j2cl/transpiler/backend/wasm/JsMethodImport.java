@@ -114,6 +114,7 @@ abstract class JsMethodImport {
         emitAsMethodReference() || isPropertyGetter() || isPropertySetter()
             ? 0
             : getParameters().size();
+    // TODO(b/371225463): Import number is based on parameter count, which may cause collisions.
     return importNumber == 0 ? getBaseImportKey() : getBaseImportKey() + "$" + importNumber;
   }
 
@@ -182,6 +183,11 @@ abstract class JsMethodImport {
     return getMethodDescriptor().getParameterDescriptors();
   }
 
+  /** Returns true if the method has a varargs parameter. */
+  public boolean isVarargs() {
+    return getMethodDescriptor().isVarargs();
+  }
+
   public boolean emitAsMethodReference() {
     // As an optimization, if the method is static we can just assign the method reference EXCEPT
     // if it's a method on the Function prototype (e.g. `call`) or some other known exception.
@@ -189,6 +195,9 @@ abstract class JsMethodImport {
         && !isConstructor()
         && !isPropertyGetter()
         && !isPropertySetter()
+        // Varargs are passed from Wasm as a JS array that needs to be spread when calling the JS
+        // method, so a wrapper is needed.
+        && !isVarargs()
         // TODO(b/279080129) Figure out a more permanent solution for special cases here.
         && !getJsName().equals("call")
         && !getBaseImportKey().equals("performance.now");
