@@ -113,7 +113,6 @@ internal class TypeOperatorLowering(private val backendContext: JvmBackendContex
           //
           // Original code:
           // irLetS(argument, irType = context.irBuiltIns.anyNType) { tmp ->
-          //   // END OF MODIFICATIONS
           //   val message = irString("null cannot be cast to non-null type ${type.render()}")
           //   if (backendContext.config.unifiedNullChecks) {
           //     // Avoid branching to improve code coverage (KT-27427).
