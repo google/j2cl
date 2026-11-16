@@ -1654,9 +1654,19 @@ public class JsInteropRestrictionsChecker {
           "Custom '$isInstance' method '%s' cannot be native.",
           method.getReadableDescription());
     }
-    if (!checkWasmRestrictions || !methodDescriptor.getEnclosingTypeDescriptor().isNative()) {
-      // In Wasm, custom $isInstance methods are only used in native types.
-      // TODO(b/586532636): Decide whether to reject custom $isInstance methods in non-native types.
+    if (!checkWasmRestrictions) {
+      return;
+    }
+    DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
+    if (!enclosingTypeDescriptor.isNative()) {
+      // In Wasm, custom $isInstance methods are only supported in native types.
+      // TODO(b/586532636): Remove the exception for the JRE.
+      if (!enclosingTypeDescriptor.getTypeDeclaration().getPackageName().startsWith("java.")) {
+        problems.error(
+            method.getSourcePosition(),
+            "Custom '$isInstance' method '%s' is only supported in native JsTypes.",
+            method.getReadableDescription());
+      }
       return;
     }
     TypeDescriptor parameterTypeDescriptor =
