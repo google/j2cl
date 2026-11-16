@@ -124,7 +124,30 @@ class StatementAsExpressionsKt extends j_l_Object {
    tmp_1 = x;
   }
   tmp_1.m_m__int__int__int__void(3, 4, 5);
-  x.m_m__int__int__int__void(3, 4, 5);
+  let tmp_2 = StatementAsExpressionsKt.m_incrementCounter__int();
+  let /** number */ tmp_3;
+  if (StatementAsExpressionsKt.m_getTRUE__boolean()) {
+   tmp_3 = 4;
+  } else {
+   throw Exceptions.m_toJs__java_lang_Throwable__javaemul_internal_ThrowableUtils_JsObject(RuntimeException.$create__());
+  }
+  x.m_m__int__int__int__void(tmp_2, tmp_3, StatementAsExpressionsKt.m_incrementCounter__int());
+ }
+ /** @nodts @return {number} */
+ static m_getCounter__int() {
+  StatementAsExpressionsKt.$clinit();
+  return StatementAsExpressionsKt.f_counter__statementasexpressions_StatementAsExpressionsKt_;
+ }
+ /** @nodts */
+ static m_setCounter__int__void(/** number */ set__) {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.f_counter__statementasexpressions_StatementAsExpressionsKt_ = set__;
+ }
+ /** @nodts @return {number} */
+ static m_incrementCounter__int() {
+  StatementAsExpressionsKt.$clinit();
+  StatementAsExpressionsKt.m_setCounter__int__void(StatementAsExpressionsKt.m_getCounter__int() + 1 | 0);
+  return StatementAsExpressionsKt.m_getCounter__int();
  }
  /** @nodts */
  static m_testVariableDeclaration__void() {
@@ -300,6 +323,8 @@ class StatementAsExpressionsKt extends j_l_Object {
 }
 /**@type {boolean} @nodts*/
 StatementAsExpressionsKt.f_TRUE__statementasexpressions_StatementAsExpressionsKt_ = false;
+/**@type {number} @nodts*/
+StatementAsExpressionsKt.f_counter__statementasexpressions_StatementAsExpressionsKt_ = 0;
 /**@type {number} @nodts*/
 StatementAsExpressionsKt.f_fieldAssignedAStatement__statementasexpressions_StatementAsExpressionsKt_ = 0;
 $Util.$setClassMetadata(StatementAsExpressionsKt, 'statementasexpressions.StatementAsExpressionsKt');

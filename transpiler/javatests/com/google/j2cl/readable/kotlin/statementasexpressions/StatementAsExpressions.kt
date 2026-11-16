@@ -87,8 +87,8 @@ fun testMemberAccess() {
       }
       .field
 
-  // Call a method with a qualifier that is a statement. This forces the evaluation of the
-  // qualifier and all the arguments to be extracted. These could be optimized, see b/228703278.
+  // Call a method with a qualifier that is a statement. The qualifier is extracted, but the
+  // arguments are not since they are evaluated after it.
   if (TRUE) {
       X(0)
     } else {
@@ -96,10 +96,22 @@ fun testMemberAccess() {
     }
     .m(3, 4, 5)
 
-  // Call a method with a statement as one of its arguments. This forces the evaluation of the
-  // qualifier and all the arguments to be extracted. These could be optimized, see b/228703278.
-  x.m(3, if (true) 4 else 5, 5)
+  // Call a method with a statement as one of its arguments. Only the arguments that are evaluated
+  // before the statement need to be extracted; the ones after it stay in place.
+  x.m(
+    incrementCounter(),
+    if (TRUE) {
+      4
+    } else {
+      throw RuntimeException()
+    },
+    incrementCounter(),
+  )
 }
+
+var counter = 0
+
+fun incrementCounter(): Int = ++counter
 
 fun testVariableDeclaration() {
   val b =
