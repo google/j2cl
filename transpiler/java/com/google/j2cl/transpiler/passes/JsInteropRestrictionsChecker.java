@@ -1648,6 +1648,12 @@ public class JsInteropRestrictionsChecker {
           "Custom '$isInstance' method '%s' has to return 'boolean'.",
           method.getReadableDescription());
     }
+    if (methodDescriptor.isNative()) {
+      problems.error(
+          method.getSourcePosition(),
+          "Custom '$isInstance' method '%s' cannot be native.",
+          method.getReadableDescription());
+    }
   }
 
   private static boolean isJvmStaticCompanionMethod(MethodDescriptor methodDescriptor) {

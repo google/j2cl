@@ -5809,10 +5809,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
               @JsOverlay
               protected static boolean $isInstance(Object o) { return true; }
             }
-            @JsType(isNative = true)
-            class ClassWithNativeIsInstance {
-              static native boolean $isInstance(Object o);
-            }
             class Buggy {
               static void main() {
                 Object o = null;
@@ -5847,6 +5843,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         class BadIsInstanceOnNativeType {
           static boolean $isInstance(Object o) { return true; }
           > Error: Native JsType method 'boolean BadIsInstanceOnNativeType.$isInstance(Object o)' should be native, abstract or JsOverlay.
+        }
+        @JsType(isNative = true)
+        class BadNativeIsInstance {
+          static native boolean $isInstance(Object o);
+          > Error: Custom '$isInstance' method 'boolean BadNativeIsInstance.$isInstance(Object o)' cannot be native.
         }
         """);
   }
