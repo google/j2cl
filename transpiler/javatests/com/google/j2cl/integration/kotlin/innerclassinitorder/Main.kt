@@ -85,14 +85,10 @@ class Main {
     open inner class P2<T2>(i: Int) : P1<T1>(i) {
 
       inner class P3<T3>(i: Int) : P1<T1>.P2<T2>(i) {
-
-        // TODO(b/242791935): Enable after kotlin bug is fixed
-        // constructor(): this(1)
-
+        constructor() : this(1)
       }
 
-      // constructor(): this(1)
-
+      constructor() : this(1)
     }
 
     constructor() : this(1)
@@ -166,13 +162,11 @@ class Main {
     val p1: P1<*> = P1<Any>()
     assertTrue(1 == p1.value)
     assertTrue(2 == P1<Any>(2).value)
-    // TODO(b/242791935): Enable after kotlin bug is fixed
-    // assertTrue(P2<*> = p1.P2<Any>())
-    // assertTrue(1 == p2.value)
+    val p2: P1<*>.P2<*> = p1.P2<Any>()
+    assertTrue(1 == p2.value)
     assertTrue(2 == p1.P2<Any>(2).value)
-    // TODO(b/242791935): Enable after kotlin bug is fixed
-    // assertTrue(1 == p2.P3<Any>().value)
-    // assertTrue(2 == p2.P3<Any>(2).value)
+    assertTrue(1 == p2.P3<Any>().value)
+    assertTrue(2 == p2.P3<Any>(2).value)
   }
 
   fun testInnerClassInitialization() {

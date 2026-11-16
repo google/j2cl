@@ -81,14 +81,10 @@ class InnerClassInitOrder {
     open inner class P2<T2>(i: Int) : P1<T1>(i) {
 
       inner class P3<T3>(i: Int) : P1<T1>.P2<T2>(i) {
-
-        // TODO(b/242791935): Enable after kotlin bug is fixed
-        // constructor(): this(1)
-
+        constructor() : this(1)
       }
 
-      // constructor(): this(1)
-
+      constructor() : this(1)
     }
 
     constructor() : this(1)
