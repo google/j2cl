@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
+import static com.google.j2cl.integration.testing.Asserts.assertThrows;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
@@ -42,6 +43,7 @@ public class Main {
     testSpecialNativeInstanceOf();
     testVariableExternCollision();
     testAliasExternCollision();
+    testNotNullAssertion();
   }
 
   @JsType(isNative = true, namespace = "jstypenative")
@@ -409,4 +411,24 @@ public class Main {
     object = (MyNativeJsTypeWithInner.Inner) (Object) new MyNativeJsTypeInner(4);
     assertEquals(4, object.n);
   }
+
+  private static void testNotNullAssertion() {
+    switchOnNativeObject(new NativeObject());
+    // Use assertThrows rather than assertThrowsNullPointerException, which is a no-op in Wasm
+    // because dereferencing null traps there. The not-null assertion throws a catchable
+    // NullPointerException in all backends.
+    assertThrows(NullPointerException.class, () -> switchOnNativeObject(null));
+    assertThrows(
+        NullPointerException.class, () -> switchOnNativeObject(getUndefinedAsNativeObject()));
+  }
+
+  private static void switchOnNativeObject(NativeObject o) {
+    // Switches that don't handle null perform a not-null assertion on the selector.
+    switch (o) {
+      default:
+    }
+  }
+
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "undefined")
+  private static native NativeObject getUndefinedAsNativeObject();
 }
