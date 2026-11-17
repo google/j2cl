@@ -286,48 +286,26 @@ class AutoBoxing extends j_l_Object {
   let /** boolean */ boxr;
   boxr = $Equality.$same(boxB1, boxB2);
   br = $Equality.$same(boxB1, boxB2);
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = !$Equality.$same(boxB1, boxB2);
   br = !$Equality.$same(boxB1, boxB2);
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
   br = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
   br = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
   br = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
   br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) || Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
   br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) || Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = boxB2);
   br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = boxB2);
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2)));
   br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2)));
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2)));
   br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2)));
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2)));
   br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2)));
-  Asserts.$assert__boolean__void(boxr);
-  Asserts.$assert__boolean__void(br);
   let /** ?boolean */ boxB = null;
   boxB = !Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB);
   boxB = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB);
@@ -340,16 +318,16 @@ class AutoBoxing extends j_l_Object {
  m_testUnboxingEquality__void() {
   let boxB = Boolean.$create__boolean(true);
   let b = false;
-  Asserts.$assert__boolean__void($Equality.$same(boxB, boxB));
-  Asserts.$assert__boolean__void(Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB) == b);
-  Asserts.$assert__boolean__void(b != b);
-  Asserts.$assert__boolean__void(b != Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB));
+  let result = $Equality.$same(boxB, boxB);
+  result = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB) == b;
+  result = b != b;
+  result = b != Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB);
   let boxI = Integer.$create__int(1);
   let i = 1;
-  Asserts.$assert__boolean__void($Equality.$same(boxI, boxI));
-  Asserts.$assert__boolean__void(boxI.intValue() == i);
-  Asserts.$assert__boolean__void(i != i);
-  Asserts.$assert__boolean__void(i != boxI.intValue());
+  result = $Equality.$same(boxI, boxI);
+  result = boxI.intValue() == i;
+  result = i != i;
+  result = i != boxI.intValue();
  }
  /** @nodts */
  static m_acceptsObject__java_lang_Object__void(/** * */ x) {}
@@ -383,28 +361,24 @@ class AutoBoxing extends j_l_Object {
   AutoBoxing.$clinit();
   let n = /**@type {T}*/ (Long.fromInt(10));
   let l = j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n));
-  Asserts.$assert__boolean__void($LongUtils.equals(l, Long.fromInt(10)));
   n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1));
   n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1));
   let /** ?T */ $value;
   n = ($value = n, n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1)), $value);
   n = n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1));
   l = (/**@type {!$1Local<Long, T>}*/ ($1Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.fromInt(11));
-  Asserts.$assert__boolean__void($LongUtils.equals(l, Long.fromInt(11)));
  }
  /** @nodts @template T */
  static m_testUnboxingFromIntersectionType__void() {
   AutoBoxing.$clinit();
   let n = /**@type {T}*/ (Long.fromInt(10));
   let l = j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n));
-  Asserts.$assert__boolean__void($LongUtils.equals(l, Long.fromInt(10)));
   n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1));
   n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1));
   let /** ?T */ $value;
   n = ($value = n, n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1)), $value);
   n = n = $LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1));
   l = (/**@type {!$2Local<Long, T>}*/ ($2Local.$create__())).m_toLong__java_lang_Long__long_$pp_autoboxing(Long.fromInt(11));
-  Asserts.$assert__boolean__void($LongUtils.equals(l, Long.fromInt(11)));
   let i = Integer.valueOf(10).intValue();
  }
  /** @nodts */

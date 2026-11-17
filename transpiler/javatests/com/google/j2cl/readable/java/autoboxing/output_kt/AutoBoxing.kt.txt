@@ -319,44 +319,30 @@ open class AutoBoxing {
   var boxr: Boolean = false
   boxr = boxB1 === boxB2
   br = boxB1 === boxB2
-  assert(boxr)
-  assert(br)
   boxr = boxB1 !== boxB2
   br = boxB1 !== boxB2
-  assert(boxr)
-  assert(br)
   boxr = (boxB1 as Boolean).xor(
    boxB2 as Boolean,
   )
   br = (boxB1 as Boolean).xor(
    boxB2 as Boolean,
   )
-  assert(boxr)
-  assert(br)
   boxr = (boxB1 as Boolean).and(
    boxB2 as Boolean,
   )
   br = (boxB1 as Boolean).and(
    boxB2 as Boolean,
   )
-  assert(boxr)
-  assert(br)
   boxr = (boxB1 as Boolean).or(
    boxB2 as Boolean,
   )
   br = (boxB1 as Boolean).or(
    boxB2 as Boolean,
   )
-  assert(boxr)
-  assert(br)
   boxr = boxB1 as Boolean && boxB2 as Boolean
   br = boxB1 as Boolean && boxB2 as Boolean
-  assert(boxr)
-  assert(br)
   boxr = boxB1 as Boolean || boxB2 as Boolean
   br = boxB1 as Boolean || boxB2 as Boolean
-  assert(boxr)
-  assert(br)
   boxr = run {
    boxB1 = boxB2
    boxB1
@@ -365,8 +351,6 @@ open class AutoBoxing {
    boxB1 = boxB2
    boxB1
   } as Boolean
-  assert(boxr)
-  assert(br)
   boxr = run {
    boxB1 = (boxB1 as Boolean).and(
     boxB2 as Boolean,
@@ -379,8 +363,6 @@ open class AutoBoxing {
    )
    boxB1
   } as Boolean
-  assert(boxr)
-  assert(br)
   boxr = run {
    boxB1 = (boxB1 as Boolean).or(
     boxB2 as Boolean,
@@ -393,8 +375,6 @@ open class AutoBoxing {
    )
    boxB1
   } as Boolean
-  assert(boxr)
-  assert(br)
   boxr = run {
    boxB1 = (boxB1 as Boolean).xor(
     boxB2 as Boolean,
@@ -407,8 +387,6 @@ open class AutoBoxing {
    )
    boxB1
   } as Boolean
-  assert(boxr)
-  assert(br)
   var boxB: Boolean? = null
   boxB = !(boxB as Boolean)
   boxB = boxB as Boolean && boxB as Boolean
@@ -433,16 +411,16 @@ open class AutoBoxing {
  open fun testUnboxingEquality() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = false
-  assert(boxB === boxB)
-  assert(boxB as Boolean == b)
-  assert(b != b)
-  assert(b != boxB as Boolean)
+  var result: Boolean = boxB === boxB
+  result = boxB as Boolean == b
+  result = b != b
+  result = b != boxB as Boolean
   val boxI: Int? = Int(1)
   val i: Int = 1
-  assert(boxI === boxI)
-  assert(boxI!!.toInt() == i)
-  assert(i != i)
-  assert(i != boxI!!.toInt())
+  result = boxI === boxI
+  result = boxI!!.toInt() == i
+  result = i != i
+  result = i != boxI!!.toInt()
  }
  
  open fun testAssertStatement() {
@@ -520,7 +498,6 @@ open class AutoBoxing {
   fun <T: Long?> testUnboxingFromTypeVariable() {
    var n: T? = 10L as (T & Any)
    var l: Long = n!!.toLong()
-   assert(l == 10L)
    n = (n!!.toLong() + 1L) as T?
    n = (n!!.toLong() + 1L) as T?
    n = run {
@@ -533,20 +510,15 @@ open class AutoBoxing {
     n
    }
    open class Local<T: Long?> internal constructor() {
-    internal open fun toLong(l: T): Long {
-     assert(l!!.equals(11L))
-     return l!!.toLong()
-    }
+    internal open fun toLong(l: T): Long = l!!.toLong()
    }
    l = Local<Long?>().toLong(11L)
-   assert(l == 11L)
   }
   
   @JvmStatic
   fun <T> testUnboxingFromIntersectionType() where T: Long?, T: Comparable<Long>? {
    var n: T? = 10L as (T & Any)
    var l: Long = n!!.toLong()
-   assert(l == 10L)
    n = (n!!.toLong() + 1L) as T?
    n = (n!!.toLong() + 1L) as T?
    n = run {
@@ -559,13 +531,9 @@ open class AutoBoxing {
     n
    }
    open class Local<T> internal constructor() where T: Long?, T: Comparable<Long>? {
-    internal open fun toLong(l: T): Long {
-     assert(l!!.equals(11L))
-     return l!!.toLong()
-    }
+    internal open fun toLong(l: T): Long = l!!.toLong()
    }
    l = Local<Long?>().toLong(11L)
-   assert(l == 11L)
    val i: Int = 10.let { it as Int; it as Comparable<Int>; it }.toInt()
   }
  }

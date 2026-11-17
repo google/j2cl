@@ -298,58 +298,36 @@ public class AutoBoxing {
 
     boxr = boxB1 == boxB2;
     br = boxB1 == boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 != boxB2;
     br = boxB1 != boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 ^ boxB2;
     br = boxB1 ^ boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 & boxB2;
     br = boxB1 & boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 | boxB2;
     br = boxB1 | boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 && boxB2;
     br = boxB1 && boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 || boxB2;
     br = boxB1 || boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 = boxB2;
     br = boxB1 = boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 &= boxB2;
     br = boxB1 &= boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 |= boxB2;
     br = boxB1 |= boxB2;
-    assert boxr;
-    assert br;
 
     boxr = boxB1 ^= boxB2;
     br = boxB1 ^= boxB2;
-    assert boxr;
-    assert br;
 
     Boolean boxB = null;
     boxB = !boxB;
@@ -365,20 +343,20 @@ public class AutoBoxing {
     Boolean boxB = new Boolean(true);
     boolean b = false;
 
-    assert boxB == boxB;
-    assert boxB == b;
+    boolean result = boxB == boxB;
+    result = boxB == b;
 
-    assert b != b;
-    assert b != boxB;
+    result = b != b;
+    result = b != boxB;
 
     Integer boxI = new Integer(1);
     int i = 1;
 
-    assert boxI == boxI;
-    assert boxI == i;
+    result = boxI == boxI;
+    result = boxI == i;
 
-    assert i != i;
-    assert i != boxI;
+    result = i != i;
+    result = i != boxI;
   }
 
   private static void acceptsObject(Object x) {}
@@ -424,7 +402,6 @@ public class AutoBoxing {
     T n = (T) (Long) 10L;
     // auto-unboxing from variable n.
     long l = n;
-    assert l == 10L;
 
     n++;
     ++n;
@@ -434,19 +411,16 @@ public class AutoBoxing {
     class Local<T extends Long> {
       long toLong(T l) {
         // auto-unboxing from variable l.
-        assert l.equals(11L);
         return l;
       }
     }
     l = new Local<>().toLong(11L);
-    assert l == 11L;
   }
 
   public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
     T n = (T) (Long) 10L;
     // auto-unboxing from variable n.
     long l = n;
-    assert l == 10L;
 
     n++;
     ++n;
@@ -456,13 +430,11 @@ public class AutoBoxing {
     class Local<T extends Long & Comparable<Long>> {
       long toLong(T l) {
         // auto-unboxing from variable l.
-        assert l.equals(11L);
         return l;
       }
     }
     // auto-boxing parameter.
     l = new Local<>().toLong(11L);
-    assert l == 11L;
 
     int i = (Integer & Comparable<Integer>) 10;
   }

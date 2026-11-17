@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('goog.math.Long');
 let j_l_Long = goog.forwardDeclare('java.lang.Long$impl');
-let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
 
 /**
  * @template T, T_1
@@ -28,7 +27,6 @@ class $1Local extends j_l_Object {
  }
  /** @nodts @return {!Long} */
  m_toLong__java_lang_Long__long_$pp_autoboxing(/** T */ l) {
-  Asserts.$assert__boolean__void(j_l_Long.m_equals__java_lang_Long__java_lang_Object__boolean(/**@type {!Long}*/ (l), Long.fromInt(11)));
   return j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (l));
  }
  /** @nodts */
@@ -44,9 +42,7 @@ class $1Local extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  Long = goog.module.get('goog.math.Long');
   j_l_Long = goog.module.get('java.lang.Long$impl');
-  Asserts = goog.module.get('javaemul.internal.Asserts$impl');
  }
 }
 $Util.$setClassMetadata($1Local, 'autoboxing.AutoBoxing$1Local');
