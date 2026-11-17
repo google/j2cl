@@ -16,6 +16,7 @@
 package nativeinjection;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsMethod;
@@ -34,6 +35,8 @@ public class Main {
     testNativeCodeCallingMembers();
     testNativeMemberImplementedByExposedMember();
     testLongAlias();
+    testLoadTimeOnlyCode();
+    testLoadTimeOnlyCodeFromUnreferencedClass();
   }
 
   private static void testNativeMethods() {
@@ -80,6 +83,23 @@ public class Main {
     assertEquals(
         "nativeStaticMethodUsingLongAlias", NativeClass.nativeStaticMethodUsingLongAlias());
   }
+
+  private static void testLoadTimeOnlyCode() {
+    // Reference the type so that it is loaded along with its '.native.js' file.
+    new LoadTimeOnlyCode();
+    assertEquals("initialized", getLoadTimeOnlyCodeValue());
+  }
+
+  @JsMethod(namespace = "nativeinjection.helper")
+  private static native String getLoadTimeOnlyCodeValue();
+
+  private static void testLoadTimeOnlyCodeFromUnreferencedClass() {
+    // UnreferencedClass is never referenced, so its '.native.js' file is never executed.
+    assertNull(getLoadTimeOnlyCodeFromUnreferencedClassValue());
+  }
+
+  @JsMethod(namespace = "nativeinjection.helper")
+  private static native String getLoadTimeOnlyCodeFromUnreferencedClassValue();
 
   /**
    * Tests for not requiring .native.js for native JsMethod.
