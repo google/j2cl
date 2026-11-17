@@ -178,6 +178,7 @@ import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitConstructors;
 import com.google.j2cl.transpiler.passes.OptimizeImplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.OptimizeKotlinCompanions;
+import com.google.j2cl.transpiler.passes.OptimizeStandardDataClass;
 import com.google.j2cl.transpiler.passes.OptimizeXplatForEach;
 import com.google.j2cl.transpiler.passes.OptimizeXplatLogger;
 import com.google.j2cl.transpiler.passes.OverrideKotlinAdditionalAbstractMethods;
@@ -298,6 +299,7 @@ public enum Backend {
           AddBridgeMethods::new,
           OptimizeKotlinCompanions::new,
           () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
+          OptimizeStandardDataClass::new,
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,

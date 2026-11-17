@@ -1,19 +1,14 @@
 goog.module('dataclass.DataClass$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
  * @final
  */
-class DataClass extends j_l_Object {
+class DataClass extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
@@ -43,7 +38,7 @@ class DataClass extends j_l_Object {
  //Initialization from constructor 'DataClass(int, boolean, String, double, Double, int, int)'.
  /** @nodts */
  $ctor__dataclass_DataClass__int__boolean__java_lang_String__double__java_lang_Double__int__int__void(/** number */ intField, /** boolean */ booleanField, /** string */ stringField, /** number */ doubleField, /** ?number */ nullableField, /** number */ privateField, /** number */ defaultField) {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
   this.f_intField__dataclass_DataClass_ = intField;
   this.f_booleanField__dataclass_DataClass_ = booleanField;
   this.f_stringField__dataclass_DataClass_ = stringField;
@@ -51,6 +46,7 @@ class DataClass extends j_l_Object {
   this.f_nullableField__dataclass_DataClass_ = nullableField;
   this.f_privateField__dataclass_DataClass_ = privateField;
   this.f_defaultField__dataclass_DataClass_ = defaultField;
+  $J2CL_PRESERVE$(this.f_intField__dataclass_DataClass_, this.f_booleanField__dataclass_DataClass_, this.f_stringField__dataclass_DataClass_, this.f_doubleField__dataclass_DataClass_, this.f_nullableField__dataclass_DataClass_, this.f_privateField__dataclass_DataClass_, this.f_defaultField__dataclass_DataClass_);
  }
  //Factory method corresponding to constructor 'DataClass(int, boolean, String, double, Double, int, int, DefaultConstructorMarker)'.
  /** @nodts @return {!DataClass} */
@@ -150,58 +146,11 @@ class DataClass extends j_l_Object {
   let defaultField$defaulted = $Util.$isUndefined(defaultField) ? $this.f_defaultField__dataclass_DataClass_ : defaultField;
   return $this.m_copy__int__boolean__java_lang_String__double__java_lang_Double__int__int__dataclass_DataClass(intField$defaulted, booleanField$defaulted, stringField$defaulted, doubleField$defaulted, nullableField$defaulted, privateField$defaulted, defaultField$defaulted);
  }
- /** @override @return {string} */
- toString() {
-  return '' + 'DataClass(' + 'intField=' + this.f_intField__dataclass_DataClass_ + ', ' + 'booleanField=' + this.f_booleanField__dataclass_DataClass_ + ', ' + 'stringField=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_stringField__dataclass_DataClass_) + ', ' + 'doubleField=' + this.f_doubleField__dataclass_DataClass_ + ', ' + 'nullableField=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_nullableField__dataclass_DataClass_) + ', ' + 'privateField=' + this.f_privateField__dataclass_DataClass_ + ', ' + 'defaultField=' + this.f_defaultField__dataclass_DataClass_ + ')';
- }
- /** @override @return {number} */
- hashCode() {
-  let result = $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_intField__dataclass_DataClass_));
-  result = Math.imul(result, 31) + Boolean.m_hashCode__java_lang_Boolean__int(this.f_booleanField__dataclass_DataClass_) | 0;
-  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(this.f_stringField__dataclass_DataClass_) | 0;
-  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(this.f_doubleField__dataclass_DataClass_) | 0;
-  result = Math.imul(result, 31) + ($Equality.$same(this.f_nullableField__dataclass_DataClass_, null) ? 0 : $Objects.m_hashCode__java_lang_Object__int(this.f_nullableField__dataclass_DataClass_)) | 0;
-  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_privateField__dataclass_DataClass_)) | 0;
-  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_defaultField__dataclass_DataClass_)) | 0;
-  return result;
- }
- /** @override @return {boolean} */
- equals(/** * */ other) {
-  if ($Equality.$same(this, other)) {
-   return true;
-  }
-  if (!DataClass.$isInstance(other)) {
-   return false;
-  }
-  let tmp0_other_with_cast = /**@type {!DataClass}*/ (other);
-  if (this.f_intField__dataclass_DataClass_ != tmp0_other_with_cast.f_intField__dataclass_DataClass_) {
-   return false;
-  }
-  if (this.f_booleanField__dataclass_DataClass_ != tmp0_other_with_cast.f_booleanField__dataclass_DataClass_) {
-   return false;
-  }
-  if (!$Equality.$same(this.f_stringField__dataclass_DataClass_, tmp0_other_with_cast.f_stringField__dataclass_DataClass_)) {
-   return false;
-  }
-  if (!$Equality.$same(/**@type {number}*/ (this.f_doubleField__dataclass_DataClass_), /**@type {number}*/ (tmp0_other_with_cast.f_doubleField__dataclass_DataClass_))) {
-   return false;
-  }
-  if (!$Equality.$same(this.f_nullableField__dataclass_DataClass_, tmp0_other_with_cast.f_nullableField__dataclass_DataClass_)) {
-   return false;
-  }
-  if (this.f_privateField__dataclass_DataClass_ != tmp0_other_with_cast.f_privateField__dataclass_DataClass_) {
-   return false;
-  }
-  if (this.f_defaultField__dataclass_DataClass_ != tmp0_other_with_cast.f_defaultField__dataclass_DataClass_) {
-   return false;
-  }
-  return true;
- }
  /** @nodts */
  static $clinit() {
   DataClass.$clinit = () =>{};
   DataClass.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -209,13 +158,7 @@ class DataClass extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  Boolean = goog.module.get('java.lang.Boolean$impl');
-  Integer = goog.module.get('java.lang.Integer$impl');
-  j_l_String = goog.module.get('java.lang.String$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Objects = goog.module.get('vmbootstrap.Objects$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(DataClass, 'dataclass.DataClass');
 

@@ -1,17 +1,14 @@
 goog.module('dataclass.JsTypeDataClass$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let DefaultConstructorMarker = goog.forwardDeclare('kotlin.jvm.internal.DefaultConstructorMarker$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
  * @final
  */
-class JsTypeDataClass extends j_l_Object {
+class JsTypeDataClass extends ValueType {
  //JsConstructor 'JsTypeDataClass(int, int)'.
  
  constructor(/** number */ foo, /** number */ bar) {
@@ -26,9 +23,10 @@ class JsTypeDataClass extends j_l_Object {
  //Initialization from constructor 'JsTypeDataClass(int, int)'.
  /** @nodts */
  $ctor__dataclass_JsTypeDataClass__int__int__void(/** number */ foo, /** number */ bar) {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
   this.f_foo__dataclass_JsTypeDataClass_ = foo;
   this.f_bar__dataclass_JsTypeDataClass_ = bar;
+  $J2CL_PRESERVE$(this.f_foo__dataclass_JsTypeDataClass_, this.f_bar__dataclass_JsTypeDataClass_);
  }
  //Factory method corresponding to constructor 'JsTypeDataClass(int, int, DefaultConstructorMarker)'.
  /** @nodts @return {!JsTypeDataClass} */
@@ -68,38 +66,11 @@ class JsTypeDataClass extends j_l_Object {
   let bar$defaulted = $Util.$isUndefined(bar) ? $this.f_bar__dataclass_JsTypeDataClass_ : bar;
   return $this.m_copy__int__int__dataclass_JsTypeDataClass(foo$defaulted, bar$defaulted);
  }
- /** @override @return {string} */
- toString() {
-  return '' + 'JsTypeDataClass(' + 'foo=' + this.f_foo__dataclass_JsTypeDataClass_ + ', ' + 'bar=' + this.f_bar__dataclass_JsTypeDataClass_ + ')';
- }
- /** @override @return {number} */
- hashCode() {
-  let result = $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_foo__dataclass_JsTypeDataClass_));
-  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_bar__dataclass_JsTypeDataClass_)) | 0;
-  return result;
- }
- /** @override @return {boolean} */
- equals(/** * */ other) {
-  if ($Equality.$same(this, other)) {
-   return true;
-  }
-  if (!JsTypeDataClass.$isInstance(other)) {
-   return false;
-  }
-  let tmp0_other_with_cast = /**@type {!JsTypeDataClass}*/ (other);
-  if (this.f_foo__dataclass_JsTypeDataClass_ != tmp0_other_with_cast.f_foo__dataclass_JsTypeDataClass_) {
-   return false;
-  }
-  if (this.f_bar__dataclass_JsTypeDataClass_ != tmp0_other_with_cast.f_bar__dataclass_JsTypeDataClass_) {
-   return false;
-  }
-  return true;
- }
  /** @nodts */
  static $clinit() {
   JsTypeDataClass.$clinit = () =>{};
   JsTypeDataClass.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -107,11 +78,7 @@ class JsTypeDataClass extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  Integer = goog.module.get('java.lang.Integer$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Objects = goog.module.get('vmbootstrap.Objects$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(JsTypeDataClass, 'dataclass.JsTypeDataClass');
 

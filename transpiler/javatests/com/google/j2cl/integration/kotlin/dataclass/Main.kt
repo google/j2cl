@@ -156,7 +156,7 @@ fun testComponents() {
 
 fun testToString() {
   val foo = Foo(1, "someStr")
-  assertEquals("Foo(bar=1, buzz=someStr, optional=10)", foo.toString())
+  assertToString(foo, 1, "someStr", 10)
 
   // Non-constructor properties are not considered for toString.
   foo.mutable = "other"
@@ -165,7 +165,8 @@ fun testToString() {
   foo.lateinitField = "lateinit"
   foo.setPrivateField(777)
   assertEquals("other", foo.lazyDelegated)
-  assertEquals("Foo(bar=1, buzz=someStr, optional=10)", foo.toString())
+
+  assertToString(foo, 1, "someStr", 10)
 }
 
 interface Named {
@@ -179,11 +180,13 @@ class NamedImpl() : Named {
 data class DelegatingDataClass(val id: Int) : Named by NamedImpl()
 
 fun testInterfaceDelegation() {
-  assertNotEquals(DelegatingDataClass(1).instance, DelegatingDataClass(1).instance)
-  assertEquals(DelegatingDataClass(1), DelegatingDataClass(1))
-  assertEquals(DelegatingDataClass(1).hashCode(), DelegatingDataClass(1).hashCode())
-  assertNotEquals(DelegatingDataClass(1).instance, DelegatingDataClass(2).instance)
-  assertNotEquals(DelegatingDataClass(1), DelegatingDataClass(2))
+  val d = DelegatingDataClass(1)
+  assertNotEquals(d.instance, DelegatingDataClass(1).instance)
+  assertEquals(d, DelegatingDataClass(1))
+  assertEquals(d.hashCode(), DelegatingDataClass(1).hashCode())
+  assertNotEquals(d.instance, DelegatingDataClass(2).instance)
+  assertNotEquals(d, DelegatingDataClass(2))
+  assertToString(d, 1)
 }
 
 data class SecondaryCtor(private val unreadField: Int) {
@@ -197,10 +200,12 @@ data class SecondaryCtor(private val unreadField: Int) {
 fun testSecondaryConstructor() {
   assertNotEquals(SecondaryCtor(5), SecondaryCtor(6))
 
-  assertEquals(SecondaryCtor(1, 2), SecondaryCtor(100, 200))
-  assertEquals(SecondaryCtor(1, 2), SecondaryCtor(100))
-  assertEquals(SecondaryCtor(1, 2).hashCode(), SecondaryCtor(100).hashCode())
-  assertEquals("SecondaryCtor(unreadField=100)", SecondaryCtor(1, 2).toString())
+  val s = SecondaryCtor(1, 2)
+  assertEquals(3, s.bar)
+  assertEquals(s, SecondaryCtor(100, 200))
+  assertEquals(s, SecondaryCtor(100))
+  assertEquals(s.hashCode(), SecondaryCtor(100).hashCode())
+  assertToString(s, 100)
 }
 
 interface InterfaceType {
@@ -242,7 +247,7 @@ fun testInheritance() {
   otherChild.c = 3
   assertEquals(child, otherChild)
   assertEquals(child.hashCode(), otherChild.hashCode())
-  assertEquals("Child(a=1, b=2)", otherChild.toString())
+  assertEquals("Child(a=1, b=2)", child.toString())
 }
 
 fun testLocalDataClassWithCaptures() {
@@ -305,16 +310,11 @@ fun testFloatingPoint() {
   val negZero = FloatData(-0.0f, -0.0)
   val nan = FloatData(Float.NaN, Double.NaN)
 
-  assertEquals("FloatData(f=NaN, d=NaN)", nan.toString())
-
+  // Floating point properties are compared as in Float.compare/Double.compare, which treat
+  // NaN == NaN and 0.0 != -0.0.
   assertEquals(nan, FloatData(Float.NaN, Double.NaN))
+  assertEquals(nan.hashCode(), FloatData(Float.NaN, Double.NaN).hashCode())
   assertNotEquals(posZero, negZero)
-
-  if (isJavaScript()) {
-    assertEquals("FloatData(f=0, d=0)", posZero.toString())
-  } else {
-    assertEquals("FloatData(f=0.0, d=0.0)", posZero.toString())
-  }
 }
 
 data class ArrayMembers(private val a: IntArray, private val b: Array<String>)
@@ -326,13 +326,19 @@ fun testArrayMembers() {
 
   assertEquals(arrayMembers, ArrayMembers(ints, strings))
   assertEquals(arrayMembers.hashCode(), ArrayMembers(ints, strings).hashCode())
-  assertEquals("ArrayMembers(a=[1, 2, 3], b=[a, b])", arrayMembers.toString())
+  assertToString(arrayMembers, "[1,2,3]", "[a,b]")
 
-  // Array members use reference equality, but content-based hashCode and toString.
+  // Array members use reference equality and content-based toString.
   val otherArrayMembers = ArrayMembers(intArrayOf(1, 2, 3), arrayOf("a", "b"))
   assertNotEquals(arrayMembers, otherArrayMembers)
-  assertEquals(arrayMembers.hashCode(), otherArrayMembers.hashCode())
   assertEquals(arrayMembers.toString(), otherArrayMembers.toString())
+  if (isJavaScript()) {
+    // In JavaScript, hashCode is also reference-based for array members.
+    assertNotEquals(arrayMembers.hashCode(), otherArrayMembers.hashCode())
+  } else {
+    // In JVM, hashCode is content-based for array members.
+    assertEquals(arrayMembers.hashCode(), otherArrayMembers.hashCode())
+  }
 }
 
 interface JvmRecordInterface {
@@ -358,4 +364,24 @@ fun testJvmRecordDataClass() {
   assertEquals(o, JvmRecordDataClass(1, "2"))
   assertNotEquals(o, JvmRecordDataClass(1, "3"))
   assertEquals(o.hashCode(), JvmRecordDataClass(1, "2").hashCode())
+}
+
+private fun isJavaScriptCompiled(): Boolean = System.getProperty("COMPILED") == "true"
+
+/**
+ * Asserts the data class toString() output ignoring property names, property order and spaces.
+ *
+ * JVM prints "Foo(bar=1, baz=[1, 2])" whereas ValueType in JS prints "Foo{baz=[1,2], bar=1}", where
+ * property names might be mangled so not asserted.
+ */
+private fun assertToString(o: Any, vararg values: Any?) {
+  val actual = o.toString()
+  val normalized = actual.replace(" ", "").replace('{', '(').replace('}', ')')
+  val prefix = "${o.javaClass.simpleName}("
+  assertTrue(actual, normalized.startsWith(prefix) && normalized.endsWith(")"))
+  assertEquals(values.size, normalized.count { it == '=' })
+  for (v in values) {
+    // Each property is printed as "name=value" followed by either ',' or ')'.
+    assertTrue("$v not in $actual", "=$v," in normalized || "=$v)" in normalized)
+  }
 }

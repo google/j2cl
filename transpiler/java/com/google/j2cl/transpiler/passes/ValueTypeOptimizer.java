@@ -45,6 +45,8 @@ import java.util.List;
 
 /** Helper to optimize value-like classes using {@code ValueType} to reduce code size. */
 final class ValueTypeOptimizer {
+  static final int ALL_METHODS_MASK = 1 | 2 | 4;
+
   /**
    * Returns all instance fields declared on {@code type} and its supertypes up to {@code
    * java.lang.Object}.

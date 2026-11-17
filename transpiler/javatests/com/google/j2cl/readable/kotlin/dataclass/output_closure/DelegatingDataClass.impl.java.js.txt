@@ -1,20 +1,15 @@
 goog.module('dataclass.DelegatingDataClass$impl');
 
 const DelegatedInterface = goog.require('dataclass.DelegatedInterface$impl');
-const j_l_Object = goog.require('java.lang.Object$impl');
+const reflect = goog.require('goog.reflect');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let Objects = goog.forwardDeclare('java.util.Objects$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
  * @final
  * @implements {DelegatedInterface}
  */
-class DelegatingDataClass extends j_l_Object {
+class DelegatingDataClass extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
@@ -34,10 +29,11 @@ class DelegatingDataClass extends j_l_Object {
  }
  /** @nodts */
  $ctor__dataclass_DelegatingDataClass__int__dataclass_DelegatedInterface__void(/** number */ intField, /** !DelegatedInterface */ delegate) {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
   this.f_$$delegate_0__dataclass_DelegatingDataClass_ = delegate;
   this.f_intField__dataclass_DelegatingDataClass_ = intField;
   this.f_delegate__dataclass_DelegatingDataClass_ = delegate;
+  $J2CL_PRESERVE$(this.f_intField__dataclass_DelegatingDataClass_, this.f_delegate__dataclass_DelegatingDataClass_);
  }
  /** @final @nodts @return {number} */
  m_getIntField__int() {
@@ -69,33 +65,6 @@ class DelegatingDataClass extends j_l_Object {
   let delegate$defaulted = $Util.$isUndefined(delegate) ? $this.f_delegate__dataclass_DelegatingDataClass_ : delegate;
   return $this.m_copy__int__dataclass_DelegatedInterface__dataclass_DelegatingDataClass(intField$defaulted, delegate$defaulted);
  }
- /** @override @return {string} */
- toString() {
-  return '' + 'DelegatingDataClass(' + 'intField=' + this.f_intField__dataclass_DelegatingDataClass_ + ', ' + 'delegate=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(this.f_delegate__dataclass_DelegatingDataClass_) + ')';
- }
- /** @override @return {number} */
- hashCode() {
-  let result = $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_intField__dataclass_DelegatingDataClass_));
-  result = Math.imul(result, 31) + $Objects.m_hashCode__java_lang_Object__int(this.f_delegate__dataclass_DelegatingDataClass_) | 0;
-  return result;
- }
- /** @override @return {boolean} */
- equals(/** * */ other) {
-  if ($Equality.$same(this, other)) {
-   return true;
-  }
-  if (!DelegatingDataClass.$isInstance(other)) {
-   return false;
-  }
-  let tmp0_other_with_cast = /**@type {!DelegatingDataClass}*/ (other);
-  if (this.f_intField__dataclass_DelegatingDataClass_ != tmp0_other_with_cast.f_intField__dataclass_DelegatingDataClass_) {
-   return false;
-  }
-  if (!Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_delegate__dataclass_DelegatingDataClass_, tmp0_other_with_cast.f_delegate__dataclass_DelegatingDataClass_)) {
-   return false;
-  }
-  return true;
- }
  /** @override @nodts @return {string} */
  m_getDelegatedProp__java_lang_String() {
   return this.f_$$delegate_0__dataclass_DelegatingDataClass_.m_getDelegatedProp__java_lang_String();
@@ -104,7 +73,7 @@ class DelegatingDataClass extends j_l_Object {
  static $clinit() {
   DelegatingDataClass.$clinit = () =>{};
   DelegatingDataClass.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -112,14 +81,9 @@ class DelegatingDataClass extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  Integer = goog.module.get('java.lang.Integer$impl');
-  j_l_String = goog.module.get('java.lang.String$impl');
-  Objects = goog.module.get('java.util.Objects$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Objects = goog.module.get('vmbootstrap.Objects$impl');
- }
+ static $loadModules() {}
 }
+DelegatingDataClass.prototype.$excluded_fields = /**@pureOrBreakMyCode*/ [reflect.objectProperty('f_$$delegate_0__dataclass_DelegatingDataClass_', DelegatingDataClass)];
 DelegatedInterface.$markImplementor(DelegatingDataClass);
 $Util.$setClassMetadata(DelegatingDataClass, 'dataclass.DelegatingDataClass');
 

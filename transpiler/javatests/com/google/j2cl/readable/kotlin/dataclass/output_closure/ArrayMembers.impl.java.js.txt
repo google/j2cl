@@ -1,17 +1,12 @@
 goog.module('dataclass.ArrayMembers$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
-let Objects = goog.forwardDeclare('java.util.Objects$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 /**
  * @final
  */
-class ArrayMembers extends j_l_Object {
+class ArrayMembers extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
@@ -29,9 +24,10 @@ class ArrayMembers extends j_l_Object {
  }
  /** @nodts */
  $ctor__dataclass_ArrayMembers__arrayOf_int__arrayOf_java_lang_String__void(/** !Array<number> */ a, /** !Array<string> */ b) {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
   this.f_a__dataclass_ArrayMembers_ = a;
   this.f_b__dataclass_ArrayMembers_ = b;
+  $J2CL_PRESERVE$(this.f_a__dataclass_ArrayMembers_, this.f_b__dataclass_ArrayMembers_);
  }
  /** @final @nodts @return {!Array<number>} */
  m_component1__arrayOf_int_$p_dataclass_ArrayMembers() {
@@ -51,38 +47,11 @@ class ArrayMembers extends j_l_Object {
   let b$defaulted = $Util.$isUndefined(b) ? $this.f_b__dataclass_ArrayMembers_ : b;
   return $this.m_copy__arrayOf_int__arrayOf_java_lang_String__dataclass_ArrayMembers(a$defaulted, b$defaulted);
  }
- /** @override @return {string} */
- toString() {
-  return '' + 'ArrayMembers(' + 'a=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(Arrays.m_toString__arrayOf_int__java_lang_String(this.f_a__dataclass_ArrayMembers_)) + ', ' + 'b=' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(Arrays.m_toString__arrayOf_java_lang_Object__java_lang_String(this.f_b__dataclass_ArrayMembers_)) + ')';
- }
- /** @override @return {number} */
- hashCode() {
-  let result = Arrays.m_hashCode__arrayOf_int__int(this.f_a__dataclass_ArrayMembers_);
-  result = Math.imul(result, 31) + Arrays.m_hashCode__arrayOf_java_lang_Object__int(this.f_b__dataclass_ArrayMembers_) | 0;
-  return result;
- }
- /** @override @return {boolean} */
- equals(/** * */ other) {
-  if ($Equality.$same(this, other)) {
-   return true;
-  }
-  if (!ArrayMembers.$isInstance(other)) {
-   return false;
-  }
-  let tmp0_other_with_cast = /**@type {!ArrayMembers}*/ (other);
-  if (!Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_a__dataclass_ArrayMembers_, tmp0_other_with_cast.f_a__dataclass_ArrayMembers_)) {
-   return false;
-  }
-  if (!Objects.m_equals__java_lang_Object__java_lang_Object__boolean(this.f_b__dataclass_ArrayMembers_, tmp0_other_with_cast.f_b__dataclass_ArrayMembers_)) {
-   return false;
-  }
-  return true;
- }
  /** @nodts */
  static $clinit() {
   ArrayMembers.$clinit = () =>{};
   ArrayMembers.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -90,12 +59,7 @@ class ArrayMembers extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  j_l_String = goog.module.get('java.lang.String$impl');
-  Arrays = goog.module.get('java.util.Arrays$impl');
-  Objects = goog.module.get('java.util.Objects$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(ArrayMembers, 'dataclass.ArrayMembers');
 

@@ -118,8 +118,8 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::ObjectClassLowering)
   // Drops field initializers when they initialize the field to it's default value.
   perFileLowering(::RemoveFieldInitializerToDefault)
-  // Remove @JvmRecord synthetic object overloads.
-  perFileLowering(::RemoveJvmRecordSyntheticOverrides)
+  // Remove data class synthetic object overrides.
+  perFileLowering(::RemoveDataClassSyntheticOverrides)
   // Move code from object init blocks and static field initializers to a new <clinit> function.
   perFileLowering(staticInitializersLoweringFactory)
   // Lower field/block initializers into the primary kotlin constructor.

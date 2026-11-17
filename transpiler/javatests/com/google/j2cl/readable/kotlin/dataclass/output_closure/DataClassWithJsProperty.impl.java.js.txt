@@ -1,16 +1,12 @@
 goog.module('dataclass.DataClassWithJsProperty$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 /**
  * @final
  */
-class DataClassWithJsProperty extends j_l_Object {
+class DataClassWithJsProperty extends ValueType {
  /** @protected @nodts */
  constructor() {
   super();
@@ -26,8 +22,9 @@ class DataClassWithJsProperty extends j_l_Object {
  }
  /** @nodts */
  $ctor__dataclass_DataClassWithJsProperty__int__void(/** number */ foo) {
-  this.$ctor__java_lang_Object__void();
+  this.$ctor__javaemul_internal_ValueType__void();
   this.f_foo__dataclass_DataClassWithJsProperty_ = foo;
+  $J2CL_PRESERVE$(this.f_foo__dataclass_DataClassWithJsProperty_);
  }
  /** @return {number} */
  get renamedFoo() {
@@ -46,33 +43,11 @@ class DataClassWithJsProperty extends j_l_Object {
   let foo$defaulted = $Util.$isUndefined(foo) ? $this.f_foo__dataclass_DataClassWithJsProperty_ : foo;
   return $this.m_copy__int__dataclass_DataClassWithJsProperty(foo$defaulted);
  }
- /** @override @return {string} */
- toString() {
-  return '' + 'DataClassWithJsProperty(' + 'foo=' + this.f_foo__dataclass_DataClassWithJsProperty_ + ')';
- }
- /** @override @return {number} */
- hashCode() {
-  return $Objects.m_hashCode__java_lang_Object__int(Integer.valueOf(this.f_foo__dataclass_DataClassWithJsProperty_));
- }
- /** @override @return {boolean} */
- equals(/** * */ other) {
-  if ($Equality.$same(this, other)) {
-   return true;
-  }
-  if (!DataClassWithJsProperty.$isInstance(other)) {
-   return false;
-  }
-  let tmp0_other_with_cast = /**@type {!DataClassWithJsProperty}*/ (other);
-  if (this.f_foo__dataclass_DataClassWithJsProperty_ != tmp0_other_with_cast.f_foo__dataclass_DataClassWithJsProperty_) {
-   return false;
-  }
-  return true;
- }
  /** @nodts */
  static $clinit() {
   DataClassWithJsProperty.$clinit = () =>{};
   DataClassWithJsProperty.$loadModules();
-  j_l_Object.$clinit();
+  ValueType.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -80,11 +55,7 @@ class DataClassWithJsProperty extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  Integer = goog.module.get('java.lang.Integer$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  $Objects = goog.module.get('vmbootstrap.Objects$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(DataClassWithJsProperty, 'dataclass.DataClassWithJsProperty');
 
