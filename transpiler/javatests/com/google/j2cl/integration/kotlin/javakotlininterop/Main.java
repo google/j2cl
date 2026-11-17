@@ -44,6 +44,7 @@ public class Main {
     testJsTypeDataClass();
     testJvmRecordDataClass();
     testJsTypeJvmRecordDataClass();
+    testThrowsAnnotation();
   }
 
   private static void testTopLevelDeclarations() {
@@ -253,5 +254,24 @@ public class Main {
     // TODO(b/499370830): Uncomment when the bug is fixed.
     // assertEquals(1, record.x());
     // assertEquals("foo", record.y());
+  }
+
+  private static void testThrowsAnnotation() {
+    // These try/catch blocks only compile if the Kotlin functions declare the checked exception.
+    boolean caught = false;
+    try {
+      KotlinClassKt.topLevelFunctionThrowingCheckedException();
+    } catch (CheckedException e) {
+      caught = true;
+    }
+    assertTrue(caught);
+
+    caught = false;
+    try {
+      new KotlinClass().instanceFunctionThrowingCheckedException();
+    } catch (CheckedException e) {
+      caught = true;
+    }
+    assertTrue(caught);
   }
 }

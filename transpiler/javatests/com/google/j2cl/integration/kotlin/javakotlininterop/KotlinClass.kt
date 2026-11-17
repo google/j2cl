@@ -27,11 +27,27 @@ fun topLevelFunction(): Int {
   return 1
 }
 
+// A checked exception from the point of view of Java.
+class CheckedException : Exception()
+
+// Java sees these functions through class files compiled with the J2CL Kotlin stdlib. Check that
+// its `@Throws` and `@kotlin.jvm.Throws` still produce `throws` clauses, so that Java can catch
+// the exception.
+@Throws(CheckedException::class)
+fun topLevelFunctionThrowingCheckedException() {
+  throw CheckedException()
+}
+
 class KotlinClass {
   var instanceProperty = 2
 
   fun instanceFunction(): Int {
     return 3
+  }
+
+  @kotlin.jvm.Throws(CheckedException::class)
+  fun instanceFunctionThrowingCheckedException() {
+    throw CheckedException()
   }
 }
 
