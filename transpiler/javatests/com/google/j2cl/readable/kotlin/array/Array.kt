@@ -246,6 +246,9 @@ class Arrays {
 
     var longs = LongArray(10) { it.toLong() }
     longs = LongArray(10, Int::toLong)
+
+    var uints = UIntArray(10) { it.toUInt() }
+    var ulongs = ULongArray(10) { it.toULong() }
   }
 
   fun testArrayInitializerEscapesScope(): Int {

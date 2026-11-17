@@ -30,6 +30,7 @@ fun main(vararg unused: String) {
   testOneDimensionalLiteral_withInitializerThatEscapes()
   testOneDimensionalLiteral_withInitializerThatBreaksOrContinues()
   testOneDimensionalLiteral_withFunctionReferenceInitializer()
+  testOneDimensionalLiteral_unsignedWithInitializer()
   testTwoDimensionalLiteral()
   testTwoDimensionalLiteral_partial()
   testTwoDimensionalLiteral_unbalanced()
@@ -205,6 +206,26 @@ private fun testOneDimensionalLiteral_withFunctionReferenceInitializer() {
 
   val chars = Array(2, "ab"::get)
   assertTrue(chars.contentEquals(arrayOf('a', 'b')))
+}
+
+private fun testOneDimensionalLiteral_unsignedWithInitializer() {
+  val uints = UIntArray(3) { UInt.MAX_VALUE - it.toUInt() }
+  assertTrue(uints.size == 3)
+  assertTrue(uints[0] == UInt.MAX_VALUE)
+  assertTrue(uints[1] == UInt.MAX_VALUE - 1u)
+  assertTrue(uints[2] == UInt.MAX_VALUE - 2u)
+
+  val ulongs = ULongArray(2) { ULong.MAX_VALUE - it.toULong() }
+  assertTrue(ulongs[0] == ULong.MAX_VALUE)
+  assertTrue(ulongs[1] == ULong.MAX_VALUE - 1uL)
+
+  val ubytes = UByteArray(2) { (255 - it).toUByte() }
+  assertTrue(ubytes[0] == 255.toUByte())
+  assertTrue(ubytes[1] == 254.toUByte())
+
+  val ushorts = UShortArray(2) { (65535 - it).toUShort() }
+  assertTrue(ushorts[0] == 65535.toUShort())
+  assertTrue(ushorts[1] == 65534.toUShort())
 }
 
 private fun testTwoDimensionalLiteral() {

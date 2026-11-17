@@ -16,6 +16,10 @@ let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
 let $byte = goog.forwardDeclare('javaemul.internal.primitives.$byte$impl');
 let $int = goog.forwardDeclare('javaemul.internal.primitives.$int$impl');
 let $long = goog.forwardDeclare('javaemul.internal.primitives.$long$impl');
+let UInt = goog.forwardDeclare('kotlin.UInt$impl');
+let UIntArray = goog.forwardDeclare('kotlin.UIntArray$impl');
+let ULong = goog.forwardDeclare('kotlin.ULong$impl');
+let ULongArray = goog.forwardDeclare('kotlin.ULongArray$impl');
 let Function1 = goog.forwardDeclare('kotlin.jvm.functions.Function1$impl');
 let ArrayHelpersKt = goog.forwardDeclare('kotlin.jvm.internal.ArrayHelpersKt$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -284,6 +288,16 @@ class Arrays extends j_l_Object {
   longs = (/**@type {!Array<!Long>}*/ ($Arrays.$createWithInitializer(10, $long, /**  @return {!Long}*/ ((/** number */ p0_7) =>{
    return Primitives.m_widenIntToLong__int__long(p0_7);
   }))));
+  let uints = UIntArray.$create__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$createWithInitializer(10, $int, /**  @return {number}*/ ((/** number */ index) =>{
+   let tmp0 = UInt.$create__int(index);
+   let this_1 = tmp0;
+   return this_1.m_getData__int();
+  }))));
+  let ulongs = ULongArray.$create__arrayOf_long(/**@type {!Array<!Long>}*/ ($Arrays.$createWithInitializer(10, $long, /**  @return {!Long}*/ ((/** number */ index_1) =>{
+   let tmp0_1 = ULong.$create__long(Primitives.m_widenIntToLong__int__long(index_1));
+   let this_2 = tmp0_1;
+   return this_2.m_getData__long();
+  }))));
  }
  /** @final @nodts @return {number} */
  m_testArrayInitializerEscapesScope__int() {
@@ -329,6 +343,10 @@ class Arrays extends j_l_Object {
   $byte = goog.module.get('javaemul.internal.primitives.$byte$impl');
   $int = goog.module.get('javaemul.internal.primitives.$int$impl');
   $long = goog.module.get('javaemul.internal.primitives.$long$impl');
+  UInt = goog.module.get('kotlin.UInt$impl');
+  UIntArray = goog.module.get('kotlin.UIntArray$impl');
+  ULong = goog.module.get('kotlin.ULong$impl');
+  ULongArray = goog.module.get('kotlin.ULongArray$impl');
   Function1 = goog.module.get('kotlin.jvm.functions.Function1$impl');
   ArrayHelpersKt = goog.module.get('kotlin.jvm.internal.ArrayHelpersKt$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
