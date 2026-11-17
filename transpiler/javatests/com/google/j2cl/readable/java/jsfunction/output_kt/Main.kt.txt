@@ -30,6 +30,7 @@ import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 import kotlin.Any
 import kotlin.Array
+import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
 import kotlin.IntArray
@@ -281,6 +282,13 @@ open class Main {
    val anotherRawJsBiFunction: JsBiFunction<Any?, Number?>? = o as JsBiFunction<Any?, Number?>?
    val anotherParameterizedJsBiFunction: JsBiFunction<String?, Int?>? = o as JsBiFunction<String?, Int?>?
    val doubleDoubleJsBiFunction: DoubleDoubleJsBiFunction? = o as DoubleDoubleJsBiFunction?
+  }
+  
+  @JvmStatic
+  fun testInstanceOf() {
+   val o: Any? = null
+   var b: Boolean = o is JsBiFunction<*, *>
+   b = Any() is JsFunctionInterface
   }
   
   @JvmStatic

@@ -483,8 +483,6 @@ public class Main {
     assertEquals(10, crossCastFromJs(fromJs).bar(10));
   }
 
-  // TODO(b/548108681): Wasm does not support instanceof against JsFunction interfaces yet.
-  @Wasm("nop")
   private static void testInstanceOf_jsFunction() {
     Object object = createFunction();
     assertTrue(object instanceof MyJsFunctionInterface);
@@ -506,8 +504,6 @@ public class Main {
     assertFalse(nullObject instanceof MyJsFunctionInterface);
   }
 
-  // TODO(b/548108681): Wasm does not support instanceof against JsFunction interfaces yet.
-  @Wasm("nop")
   private static void testInstanceOf_javaInstance_jsFunction() {
     Object object = new MyJsFunctionInterfaceImpl();
     assertTrue(object instanceof MyJsFunctionIdentityInterface);

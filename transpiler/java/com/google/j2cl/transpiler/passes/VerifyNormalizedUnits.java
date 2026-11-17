@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JsConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.JsForInStatement;
@@ -251,6 +252,11 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitMultiExpression(MultiExpression multiExpression) {
             // No empty nor singleton multiexpressions should remain.
             checkState(multiExpression.getExpressions().size() > 1);
+          }
+
+          @Override
+          public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+            checkState(!instanceOfExpression.getTestTypeDescriptor().isJsFunctionInterface());
           }
 
           @Override

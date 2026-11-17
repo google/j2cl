@@ -409,6 +409,12 @@ public class Main {
     DoubleDoubleJsBiFunction doubleDoubleJsBiFunction = (DoubleDoubleJsBiFunction) o;
   }
 
+  public static void testInstanceOf() {
+    Object o = null;
+    boolean b = o instanceof JsBiFunction;
+    b = new Object() instanceof JsFunctionInterface;
+  }
+
   public static void testNewInstance() {
     TIntegerJsBiFunction rawTIntegerJsBiFunction = new TIntegerJsBiFunction();
     TIntegerJsBiFunction<String> parameterizedTIntegerJsBiFunction =

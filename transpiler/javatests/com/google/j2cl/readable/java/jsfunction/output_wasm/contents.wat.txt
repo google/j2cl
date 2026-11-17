@@ -3031,6 +3031,18 @@
  )
 )
 
+;;; void Main.testInstanceOf()
+(func $m_testInstanceOf__void@jsfunction.Main
+ (local $o (ref null $java.lang.Object))
+ (local $b i32)
+ (block
+  (call $$clinit__void_<once>_@jsfunction.Main )
+  (local.set $o (ref.null $java.lang.Object))
+  (local.set $b (ref.test (ref $javaemul.internal.JsFunctionAdaptor) (local.get $o)))
+  (local.set $b (ref.test (ref $javaemul.internal.JsFunctionAdaptor) (call $$create__@java.lang.Object )))
+ )
+)
+
 ;;; void Main.testNewInstance()
 (func $m_testNewInstance__void@jsfunction.Main
  (local $rawTIntegerJsBiFunction (ref null $jsfunction.Main.TIntegerJsBiFunction))

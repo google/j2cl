@@ -418,6 +418,12 @@ fun testCast() {
   val doubleDoubleJsBiFunction = o as DoubleDoubleJsBiFunction
 }
 
+fun testInstanceOf() {
+  val o: Any? = null
+  var b = o is JsBiFunction<*, *>
+  b = Any() is JsFunctionInterface
+}
+
 fun testNewInstance() {
   val rawTIntegerJsBiFunction: TIntegerJsBiFunction<*> = TIntegerJsBiFunction<Any?>()
   val parameterizedTIntegerJsBiFunction: TIntegerJsBiFunction<String> =

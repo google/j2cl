@@ -139,6 +139,7 @@ import com.google.j2cl.transpiler.passes.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnumsWasm;
+import com.google.j2cl.transpiler.passes.NormalizeJsFunctionInstanceOfs;
 import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
 import com.google.j2cl.transpiler.passes.NormalizeJsYieldMethodInvocations;
@@ -575,6 +576,7 @@ public enum Backend {
           InsertCastOnArrayAccess::new,
           () -> new ImplementAssertStatements(/* useWasmDebugFlag= */ true),
           ImplementJsFunctionInvocationsViaFunctionPointerCall::new,
+          NormalizeJsFunctionInstanceOfs::new,
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
