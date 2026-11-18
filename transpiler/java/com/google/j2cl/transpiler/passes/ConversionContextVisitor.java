@@ -206,9 +206,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
       return allowsNulls
           ? rewriteTypeConversionContext(
-              typeDescriptor, expression.getDeclaredTypeDescriptor(), expression)
+              typeDescriptor, expression.getRuntimeTypeDescriptor(), expression)
           : rewriteNonNullTypeConversionContext(
-              typeDescriptor, expression.getDeclaredTypeDescriptor(), expression);
+              typeDescriptor, expression.getRuntimeTypeDescriptor(), expression);
     }
 
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
@@ -303,7 +303,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     Expression arrayExpression =
         contextRewriter.rewriteNonNullTypeConversionContext(
-            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
+            expression.getTypeDescriptor(), expression.getRuntimeTypeDescriptor(), expression);
     // The index is always int so gets rewritten with unary numeric promotion context
     Expression indexExpression =
         contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression());
@@ -325,7 +325,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     Expression arrayExpression =
         contextRewriter.rewriteNonNullTypeConversionContext(
-            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
+            expression.getTypeDescriptor(), expression.getRuntimeTypeDescriptor(), expression);
 
     if (arrayExpression == arrayLength.getArrayExpression()) {
       return arrayLength;
@@ -396,7 +396,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       rightOperand =
           contextRewriter.rewriteAssignmentContext(
               leftOperand.getTypeDescriptor(),
-              leftOperand.getDeclaredTypeDescriptor(),
+              leftOperand.getRuntimeTypeDescriptor(),
               rightOperand);
     }
 
@@ -440,10 +440,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     // JsEnum boxing conversion context.
     if (AstUtils.matchesJsEnumBoxingConversionContext(binaryExpression)) {
-      if (isBoxableJsEnumType(leftOperand.getDeclaredTypeDescriptor())) {
+      if (isBoxableJsEnumType(leftOperand.getRuntimeTypeDescriptor())) {
         leftOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(leftOperand);
       }
-      if (isBoxableJsEnumType(rightOperand.getDeclaredTypeDescriptor())) {
+      if (isBoxableJsEnumType(rightOperand.getRuntimeTypeDescriptor())) {
         rightOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(rightOperand);
       }
     }
@@ -559,7 +559,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression = forEachStatement.getIterableExpression();
     Expression iterableExpression =
         contextRewriter.rewriteNonNullTypeConversionContext(
-            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
+            expression.getTypeDescriptor(), expression.getRuntimeTypeDescriptor(), expression);
 
     if (iterableExpression == forEachStatement.getIterableExpression()) {
       return forEachStatement;
@@ -573,7 +573,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression = forInStatement.getIterableExpression();
     Expression iterableExpression =
         contextRewriter.rewriteNonNullTypeConversionContext(
-            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression);
+            expression.getTypeDescriptor(), expression.getRuntimeTypeDescriptor(), expression);
 
     if (iterableExpression == forInStatement.getIterableExpression()) {
       return forInStatement;
@@ -718,7 +718,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     } else if (postfixExpression.getOperator() == PostfixOperator.NOT_NULL_ASSERTION) {
       operand =
           contextRewriter.rewriteTypeConversionContext(
-              operand.getTypeDescriptor(), operand.getDeclaredTypeDescriptor(), operand);
+              operand.getTypeDescriptor(), operand.getRuntimeTypeDescriptor(), operand);
     }
     if (operand == postfixExpression.getOperand()) {
       return postfixExpression;

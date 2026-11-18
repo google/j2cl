@@ -181,11 +181,11 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
       return expression;
     }
 
-    // Use the declared type descriptor as it reflects the underlying Wasm representation of the
+    // Use the runtime type descriptor as it reflects the underlying Wasm representation of the
     // expression (e.g., a method call or field access whose declared type is a type variable with
     // a non-native bound evaluates to a Java Object in Wasm even when specialized to a native
     // JsType).
-    TypeDescriptor fromTypeDescriptor = expression.getDeclaredTypeDescriptor();
+    TypeDescriptor fromTypeDescriptor = expression.getRuntimeTypeDescriptor();
 
     if (!toTypeDescriptor.isNative() && fromTypeDescriptor.isNative()) {
       // Assignment or cast from native JS to Java.

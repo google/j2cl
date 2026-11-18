@@ -84,11 +84,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
-  public TypeDescriptor getDeclaredTypeDescriptor() {
+  public TypeDescriptor getRuntimeTypeDescriptor() {
     // As opposed to getTypeDescriptor() which is precomputed when the expression is created and
-    // does not change even if the operands are rewritten, getDeclaredTypeDescriptor() returns the
-    // current declared type descriptor if the expression is an assignment or the precomputed
-    // type for the expression if it is not.
+    // does not change even if the operands are rewritten, getRuntimeTypeDescriptor() returns the
+    // current runtime type descriptor of the lhs if the expression is an assignment or the
+    // precomputed type for the expression if it is not.
 
     if (operator.isSimpleOrCompoundAssignment()) {
       // From the perspective of the type of binary expression as a value, which is used for
@@ -103,14 +103,14 @@ public class BinaryExpression extends Expression {
       //        String s = c.data = c.data // throws CCE on assignment to s, because the type of the
       //                                   // the assignment expression has been specialized to
       //                                   // String.
-      return leftOperand.getDeclaredTypeDescriptor();
+      return leftOperand.getRuntimeTypeDescriptor();
     }
 
     // Return the precomputed type for the expression, do not use
     // binaryOperationResult(
-    //     leftOperand.getDeclaredTypeDescriptor(), rightOperand.getTypeDescriptor())
+    //     leftOperand.getRuntimeTypeDescriptor(), rightOperand.getTypeDescriptor())
     // because binary expressions that are not assignments are not the point of inference for type
-    // specialization, hence their declared type has to be exactly the same as its inferred type.
+    // specialization, hence their runtime type has to be exactly the same as its inferred type.
     return getTypeDescriptor();
   }
 
@@ -276,14 +276,14 @@ public class BinaryExpression extends Expression {
      * operand promotion was already performed; so that fact is taken into account.
      */
     switch (operator) {
-        /*
-         * Conditional operators: JLS 15.23.
-         */
+      /*
+       * Conditional operators: JLS 15.23.
+       */
       case CONDITIONAL_AND:
       case CONDITIONAL_OR:
-        /*
-         * Bitwise and logical operators: JLS 15.22.
-         */
+      /*
+       * Bitwise and logical operators: JLS 15.22.
+       */
       case BIT_AND:
       case BIT_OR:
       case BIT_XOR:
@@ -291,15 +291,15 @@ public class BinaryExpression extends Expression {
           // Handle logical operations (on type boolean).
           return primitiveLeftOperandType;
         }
-        // fallthrough for bitwise operations on numbers.
-        /*
-         * Additive operators for numeric types: JLS 15.18.2.
-         */
+      // fallthrough for bitwise operations on numbers.
+      /*
+       * Additive operators for numeric types: JLS 15.18.2.
+       */
       case PLUS:
       case MINUS:
-        /*
-         * Multiplicative operators for numeric types: JLS 15.17.
-         */
+      /*
+       * Multiplicative operators for numeric types: JLS 15.17.
+       */
       case TIMES:
       case DIVIDE:
       case REMAINDER:

@@ -327,10 +327,10 @@ public final class AstUtils {
     BinaryOperator operator = binaryExpression.getOperator();
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
-    // Use the declaration descriptor to ignore the specialization of type variables to JsEnums
+    // Use the runtime type descriptor to ignore the specialization of type variables to JsEnums
     // to understand whether the (returned) enum was boxed or unboxed.
-    TypeDescriptor lhsTypeDescriptor = leftOperand.getDeclaredTypeDescriptor();
-    TypeDescriptor rhsTypeDescriptor = rightOperand.getDeclaredTypeDescriptor();
+    TypeDescriptor lhsTypeDescriptor = leftOperand.getRuntimeTypeDescriptor();
+    TypeDescriptor rhsTypeDescriptor = rightOperand.getRuntimeTypeDescriptor();
 
     return operator.isRelationalOperator()
         // Comparisons with null do not require boxing since null is the same boxed or unboxed.

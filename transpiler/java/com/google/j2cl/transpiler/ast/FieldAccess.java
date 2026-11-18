@@ -39,7 +39,7 @@ public class FieldAccess extends MemberReference {
   }
 
   @Override
-  public TypeDescriptor getDeclaredTypeDescriptor() {
+  public TypeDescriptor getRuntimeTypeDescriptor() {
     return getTarget().getDeclarationDescriptor().getTypeDescriptor();
   }
 

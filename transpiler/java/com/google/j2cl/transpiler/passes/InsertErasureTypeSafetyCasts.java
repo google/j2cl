@@ -140,7 +140,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
   private static Expression maybeInsertErasureTypeSafetyCast(
       TypeDescriptor toTypeDescriptor, Expression expression) {
     return maybeInsertErasureTypeSafetyCast(
-        expression.getDeclaredTypeDescriptor(), toTypeDescriptor, expression);
+        expression.getRuntimeTypeDescriptor(), toTypeDescriptor, expression);
   }
 
   private static Expression maybeInsertErasureTypeSafetyCast(

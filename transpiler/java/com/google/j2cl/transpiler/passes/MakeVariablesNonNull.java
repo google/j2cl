@@ -141,7 +141,7 @@ public class MakeVariablesNonNull extends NormalizationPass {
     // NPE should be thrown only when trying to deference the variable in non-null context:
     //
     // x.hashCode();
-    if (expression.getDeclaredTypeDescriptor() instanceof TypeVariable) {
+    if (expression.getRuntimeTypeDescriptor() instanceof TypeVariable) {
       return true;
     }
 

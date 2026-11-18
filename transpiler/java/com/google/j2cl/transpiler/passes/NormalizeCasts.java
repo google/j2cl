@@ -144,7 +144,7 @@ public class NormalizeCasts extends NormalizationPass {
       return true;
     }
     TypeDescriptor expressionTypeDescriptor =
-        expression.getDeclaredTypeDescriptor().toRawTypeDescriptor();
+        expression.getRuntimeTypeDescriptor().toRawTypeDescriptor();
     return expressionTypeDescriptor.isAssignableTo(castTypeDescriptor)
         || isUnnecessaryCast(castTypeDescriptor, expressionTypeDescriptor);
   }

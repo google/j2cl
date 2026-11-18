@@ -51,8 +51,8 @@ public class MultiExpression extends Expression {
   }
 
   @Override
-  public TypeDescriptor getDeclaredTypeDescriptor() {
-    return expressions.getLast().getDeclaredTypeDescriptor();
+  public TypeDescriptor getRuntimeTypeDescriptor() {
+    return expressions.getLast().getRuntimeTypeDescriptor();
   }
 
   @Override

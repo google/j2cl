@@ -77,10 +77,10 @@ public class WasmFuncrefCall extends Expression {
   }
 
   @Override
-  public TypeDescriptor getDeclaredTypeDescriptor() {
+  public TypeDescriptor getRuntimeTypeDescriptor() {
     return functionalInterface
         .getSingleAbstractMethodDescriptor()
-        .getDeclarationDescriptor()
+        .getAbiDescriptor()
         .getReturnTypeDescriptor();
   }
 

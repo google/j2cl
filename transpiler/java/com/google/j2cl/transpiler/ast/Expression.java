@@ -31,8 +31,16 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /** Returns the type descriptor of the value that is returned by this expression. */
   public abstract TypeDescriptor getTypeDescriptor();
 
-  /** Returns the declared type for the expression if it is different from the inferred type. */
-  public TypeDescriptor getDeclaredTypeDescriptor() {
+  /**
+   * Returns the type of the value produced by this expression at runtime, i.e. the type that
+   * determines its representation in the generated code.
+   *
+   * <p>This is usually the same as the inferred type, but might be more general, e.g. for field
+   * accesses and method calls whose declared type is a type variable that has been specialized, or
+   * for calls to generalizing bridges or abstract stubs, whose return type is given by the ABI of
+   * the method they override (see {@link MethodDescriptor#getAbiDescriptor}).
+   */
+  public TypeDescriptor getRuntimeTypeDescriptor() {
     return getTypeDescriptor();
   }
 
@@ -113,7 +121,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /** Returns whether value of this expression can be null. */
   public boolean canBeNull() {
-    return getTypeDescriptor().canBeNull() || getDeclaredTypeDescriptor().canBeNull();
+    return getTypeDescriptor().canBeNull() || getRuntimeTypeDescriptor().canBeNull();
   }
 
   /** Creates an ExpressionStatement with this expression as its code */

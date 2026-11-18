@@ -200,7 +200,7 @@ final class ExpressionTranspiler {
         // interfaces, which are represented as java.lang.Object, from java.lang.Object.
         if (wasmTypeName.equals(
             environment.getWasmTypeName(
-                expression.getDeclaredTypeDescriptor().toRawTypeDescriptor()))) {
+                expression.getRuntimeTypeDescriptor().toRawTypeDescriptor()))) {
           render(expression);
           return false;
         }
@@ -314,16 +314,15 @@ final class ExpressionTranspiler {
         Expression returnValue = Iterables.getLast(expressions);
         sourceBuilder.openParens("block ");
         sourceBuilder.append(
-            "(result " + environment.getWasmType(returnValue.getDeclaredTypeDescriptor()) + ")");
-        expressions.forEach(
-            expression -> {
-              sourceBuilder.newLine();
-              if (expression == returnValue) {
-                render(expression);
-              } else {
-                renderWithUnusedResult(expression, sourceBuilder, environment);
-              }
-            });
+            "(result " + environment.getWasmType(returnValue.getRuntimeTypeDescriptor()) + ")");
+        expressions.forEach(expression -> {
+          sourceBuilder.newLine();
+          if (expression == returnValue) {
+            render(expression);
+          } else {
+            renderWithUnusedResult(expression, sourceBuilder, environment);
+          }
+        });
         sourceBuilder.closeParens();
         return false;
       }
@@ -448,26 +447,25 @@ final class ExpressionTranspiler {
         environment
             .getWasmTypeLayout(newInstance.getTypeDescriptor().getTypeDeclaration())
             .getAllInstanceFields()
-            .forEach(
-                fieldDescriptor -> {
-                  sourceBuilder.append(" ");
-                  Expression initialValue =
-                      AstUtils.getInitialValue(fieldDescriptor.getTypeDescriptor());
-                  // TODO(b/296475021): Cleanup the handling of the elements field.
-                  if (environment.isWasmArrayElementsField(fieldDescriptor)) {
-                    // The initialization of the elements field in a wasm array is synthesized from
-                    // the parameter in the constructor. This is done  because the field needs to be
-                    // declared immutable to be able to override the field in the superclass.
-                    Expression argument = Iterables.getOnlyElement(newInstance.getArguments());
-                    checkState(
-                        argument
-                            .getTypeDescriptor()
-                            .isSameBaseType(fieldDescriptor.getTypeDescriptor()));
+            .forEach(fieldDescriptor -> {
+              sourceBuilder.append(" ");
+              Expression initialValue =
+                  AstUtils.getInitialValue(fieldDescriptor.getTypeDescriptor());
+              // TODO(b/296475021): Cleanup the handling of the elements field.
+              if (environment.isWasmArrayElementsField(fieldDescriptor)) {
+                // The initialization of the elements field in a wasm array is synthesized from
+                // the parameter in the constructor. This is done  because the field needs to be
+                // declared immutable to be able to override the field in the superclass.
+                Expression argument = Iterables.getOnlyElement(newInstance.getArguments());
+                checkState(
+                    argument
+                        .getTypeDescriptor()
+                        .isSameBaseType(fieldDescriptor.getTypeDescriptor()));
 
-                    initialValue = argument;
-                  }
-                  render(initialValue);
-                });
+                initialValue = argument;
+              }
+              render(initialValue);
+            });
 
         if (environment.isCustomDescriptorsEnabled()) {
           sourceBuilder.append(

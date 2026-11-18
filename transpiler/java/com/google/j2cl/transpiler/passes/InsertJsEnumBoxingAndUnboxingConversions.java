@@ -47,7 +47,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor declaredTypeDescriptor,
                   Expression expression) {
-                TypeDescriptor fromTypeDescriptor = expression.getDeclaredTypeDescriptor();
+                TypeDescriptor fromTypeDescriptor = expression.getRuntimeTypeDescriptor();
                 if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)
                     && !AstUtils.isNonNativeJsEnum(declaredTypeDescriptor)) {
                   return box(expression);
@@ -78,7 +78,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               public Expression rewriteCastContext(CastExpression castExpression) {
                 TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
                 Expression innerExpression = castExpression.getExpression();
-                TypeDescriptor fromTypeDescriptor = innerExpression.getDeclaredTypeDescriptor();
+                TypeDescriptor fromTypeDescriptor = innerExpression.getRuntimeTypeDescriptor();
 
                 if (toTypeDescriptor.isJsEnum() && fromTypeDescriptor.isJsEnum()) {
                   // Casts between different JsEnums are rejected by JsInteropRestrictionsChecker,
