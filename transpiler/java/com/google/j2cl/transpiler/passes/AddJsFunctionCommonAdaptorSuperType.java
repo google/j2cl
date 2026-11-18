@@ -15,6 +15,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -43,8 +44,10 @@ public class AddJsFunctionCommonAdaptorSuperType extends NormalizationPass {
     checkState(functionalInterfaceTypeDescriptor.isJsFunctionInterface());
 
     // Inject the JsFunctionAdaptor supertype for types who implement a JsFunction
-    // interface.
+    // interface, and remove the JsFunction interface as it is not represented as an
+    // interface in Wasm.
     type.setSuperTypeDescriptor(TypeDescriptors.get().javaemulInternalJsFunctionAdaptor);
+    type.setSuperInterfaceTypeDescriptors(ImmutableList.of());
 
     // Implement necessary JsFunction adapter members.
     implementMembers(type, functionalInterfaceTypeDescriptor);

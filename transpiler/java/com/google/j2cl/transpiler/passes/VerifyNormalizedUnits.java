@@ -55,6 +55,7 @@ import com.google.j2cl.transpiler.ast.SwitchCasePattern;
 import com.google.j2cl.transpiler.ast.SwitchExpression;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
@@ -90,12 +91,17 @@ public class VerifyNormalizedUnits extends NormalizationPass {
               // Native and JsFunction types should have been removed from the AST.
               checkState(!type.isNative());
               checkState(!type.isJsFunctionInterface());
-            } else if (type.isInterface()) {
-              // Interfaces do not have Wasm type layouts and their super interfaces are always
-              // taken from the type model, so passes must not customize them.
+            } else {
               checkState(
-                  type.getSuperInterfaceTypeDescriptors()
-                      .equals(type.getTypeDescriptor().getInterfaceTypeDescriptors()));
+                  type.getSuperInterfaceTypeDescriptors().stream()
+                      .noneMatch(TypeDescriptor::isJsFunctionInterface));
+              if (type.isInterface()) {
+                // Interfaces do not have Wasm type layouts and their super interfaces are always
+                // taken from the type model, so passes must not customize them.
+                checkState(
+                    type.getSuperInterfaceTypeDescriptors()
+                        .equals(type.getTypeDescriptor().getInterfaceTypeDescriptors()));
+              }
             }
           }
 

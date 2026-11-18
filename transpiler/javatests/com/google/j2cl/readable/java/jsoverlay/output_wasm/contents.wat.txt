@@ -73,11 +73,6 @@
   (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
  )
 )
-(global $jsoverlay.Main.Intf.vtable@$jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (ref $jsoverlay.Main.Intf.vtable)
- (struct.new $jsoverlay.Main.Intf.vtable
-  (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
- )
-)
 (global $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl.vtable (ref $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl.vtable)
  (struct.new $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsoverlay.NativeJsTypeInterfaceWithOverlayImpl)
@@ -552,7 +547,7 @@
  (local $$instance (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1))
  (block
   (call $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 )
-  (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable) (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.itable) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func)))
+  (local.set $$instance (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (global.get $jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1.vtable) (global.get $itable.empty) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func)))
   (call $$ctor__void_$p_jsoverlay_Main_NativeJsTypeWithOverlay_$LambdaImplementor$1@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   (return (local.get $$instance))
  )

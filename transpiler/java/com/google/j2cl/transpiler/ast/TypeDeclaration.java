@@ -403,10 +403,6 @@ public abstract class TypeDeclaration
     return !getTypeParameterDescriptors().isEmpty();
   }
 
-  public boolean implementsInterfaces() {
-    return !getAllSuperInterfaces().isEmpty();
-  }
-
   @Memoized
   public boolean extendsNativeClass() {
     TypeDeclaration superType = getSuperTypeDeclaration();

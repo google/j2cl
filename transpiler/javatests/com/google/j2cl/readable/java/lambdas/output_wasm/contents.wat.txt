@@ -1313,11 +1313,6 @@
   (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
  )
 )
-(global $lambdas.Lambdas.GenericJsFunction.vtable@$lambdas.Lambdas.IdentityFunction (ref $lambdas.Lambdas.GenericJsFunction.vtable)
- (struct.new $lambdas.Lambdas.GenericJsFunction.vtable
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
- )
-)
 (global $lambdas.Lambdas.Outer.$LambdaImplementor$40.vtable (ref $lambdas.Lambdas.Outer.$LambdaImplementor$40.vtable)
  (struct.new $lambdas.Lambdas.Outer.$LambdaImplementor$40.vtable
   (ref.func $$getClassImpl__java_lang_Class@lambdas.Lambdas.Runnable.$LambdaAdaptor)
@@ -6745,7 +6740,7 @@
  (local $$instance (ref null $lambdas.Lambdas.IdentityFunction))
  (block
   (call $$clinit__void_<once>_@lambdas.Lambdas.IdentityFunction )
-  (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $lambdas.Lambdas.IdentityFunction.itable) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func)))
+  (local.set $$instance (struct.new $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $itable.empty) (i32.const 0) (ref.null extern) (ref.null func) (ref.null func)))
   (call $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (ref.as_non_null (local.get $$instance)))
   (return (local.get $$instance))
  )

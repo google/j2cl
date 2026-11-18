@@ -207,7 +207,7 @@ public class WasmGenerationEnvironment {
   }
   /** Returns the name of the global that stores the itable for a Java type. */
   public String getWasmItableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
-    if (!typeDescriptor.getTypeDeclaration().implementsInterfaces()) {
+    if (!implementsInterfaces(typeDescriptor.getTypeDeclaration())) {
       return "$itable.empty";
     }
     return getTypeSignature(typeDescriptor) + ".itable";
@@ -225,11 +225,21 @@ public class WasmGenerationEnvironment {
 
   /** Returns the name of the wasm type of the itable for a Java type. */
   public String getWasmItableTypeName(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration == null || !typeDeclaration.implementsInterfaces()) {
+    if (typeDeclaration == null || !implementsInterfaces(typeDeclaration)) {
       return "$itable";
     }
 
     return getTypeSignature(typeDeclaration) + ".itable";
+  }
+
+  /**
+   * Returns true if the type implements interfaces in Wasm.
+   *
+   * <p>Uses the Wasm type layout, which accounts for the supertype and superinterface modifications
+   * in {@code Type}.
+   */
+  private boolean implementsInterfaces(TypeDeclaration typeDeclaration) {
+    return !getWasmTypeLayout(typeDeclaration).getAllSuperInterfaces().isEmpty();
   }
 
   /** Returns the name of the itable interface getter. */
