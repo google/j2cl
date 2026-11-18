@@ -1,8 +1,8 @@
 goog.module('jsconstructor.JsConstructorClass.JsConstructorSubclass');
 
-const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+const $j2wasm$JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
 
 /** @const {typeof $j2wasm$externs.jsconstructor_JsConstructorClass_JsConstructorSubclass} */
-const JsConstructorSubclass = constructorProxy('jsconstructor.JsConstructorClass.JsConstructorSubclass');
+const JsConstructorSubclass = $j2wasm$JsInteropRuntime.constructorProxy('jsconstructor.JsConstructorClass.JsConstructorSubclass');
 
 exports = JsConstructorSubclass;

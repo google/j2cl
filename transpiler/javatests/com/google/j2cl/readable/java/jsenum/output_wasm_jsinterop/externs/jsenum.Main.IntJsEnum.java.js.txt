@@ -1,8 +1,8 @@
 goog.module('jsenum.Main.IntJsEnum');
 
-const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+const $j2wasm$JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
 
 /** @const {typeof $j2wasm$externs.jsenum_Main_IntJsEnum} */
-const IntJsEnum = constructorProxy('jsenum.Main.IntJsEnum');
+const IntJsEnum = $j2wasm$JsInteropRuntime.constructorProxy('jsenum.Main.IntJsEnum');
 
 exports = IntJsEnum;

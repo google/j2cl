@@ -379,10 +379,10 @@ final class JsExternsGenerator {
     return """
     goog.module('%1$s');
 
-    const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+    const $j2wasm$JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
     %2$s
     /** @const {typeof %3$s} */
-    const %4$s = constructorProxy('%5$s');
+    const %4$s = $j2wasm$JsInteropRuntime.constructorProxy('%5$s');
 
     exports = %4$s;
     """
@@ -393,6 +393,8 @@ final class JsExternsGenerator {
       String moduleName, String requireTypes, String externName, String simpleJsName) {
     return """
     goog.module('%1$s');
+
+    const $j2wasm$JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
     %2$s
     /** @typedef {%3$s} */
     let %4$s;

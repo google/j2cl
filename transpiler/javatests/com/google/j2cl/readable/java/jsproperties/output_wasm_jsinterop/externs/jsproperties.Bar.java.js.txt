@@ -1,8 +1,8 @@
 goog.module('jsproperties.Bar');
 
-const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+const $j2wasm$JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
 
 /** @const {typeof $j2wasm$externs.jsproperties_Bar} */
-const Bar = constructorProxy('jsproperties.Bar');
+const Bar = $j2wasm$JsInteropRuntime.constructorProxy('jsproperties.Bar');
 
 exports = Bar;

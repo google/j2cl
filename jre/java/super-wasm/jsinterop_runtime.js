@@ -17,6 +17,15 @@ goog.module('j2wasm.JsInteropRuntime');
 const Long = goog.require('goog.math.Long');
 
 /**
+ * Functions to inject the code from `.native.js` files into the JavaScript
+ * constructor/prototype of the corresponding Wasm types, indexed by the
+ * ID of the constructor.
+ *
+ * @const {!Map<string, function((!Function|undefined))>}
+ */
+const nativeJsInjections = new Map();
+
+/**
  * @param {string} id
  * @return {!Function}
  */
@@ -139,5 +148,6 @@ exports = {
   setAdaptor,
   constructorProxy,
   invokeJsFunction,
+  nativeJsInjections,
   typeOf,
 };

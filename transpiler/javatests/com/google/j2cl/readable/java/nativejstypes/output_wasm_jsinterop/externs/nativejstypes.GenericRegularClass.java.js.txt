@@ -1,8 +1,8 @@
 goog.module('nativejstypes.GenericRegularClass');
 
-const {constructorProxy} = goog.require('j2wasm.JsInteropRuntime');
+const $j2wasm$JsInteropRuntime = goog.require('j2wasm.JsInteropRuntime');
 
 /** @const {typeof $j2wasm$externs.nativejstypes_GenericRegularClass} */
-const GenericRegularClass = constructorProxy('nativejstypes.GenericRegularClass');
+const GenericRegularClass = $j2wasm$JsInteropRuntime.constructorProxy('nativejstypes.GenericRegularClass');
 
 exports = GenericRegularClass;
