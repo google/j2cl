@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.kotlin.lower
 
 import org.jetbrains.kotlin.backend.common.FileLoweringPass
 import org.jetbrains.kotlin.ir.declarations.IrFile
+import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrContainerExpression
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrReturnableBlock
@@ -26,6 +27,7 @@ import org.jetbrains.kotlin.ir.expressions.IrWhen
 import org.jetbrains.kotlin.ir.types.isNothing
 import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.util.isElseBranch
+import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
 /**
@@ -33,10 +35,29 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
  *
  * These casts are being removed as they can cause bloat in the AST and output, or in the case of
  * primitives, cause extra boxing/unboxing operations to occur.
+ *
+ * Also removes not-null assertions (`!!`) on expressions that are smart cast to non-nullable types.
  */
-internal class SmartCastCleaner : FileLoweringPass, IrElementTransformerVoid() {
+internal class SmartCastCleaner(private val context: J2clBackendContext) :
+  FileLoweringPass, IrElementTransformerVoid() {
 
   override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
+
+  override fun visitCall(expression: IrCall): IrExpression {
+    if (context.intrinsics.isCheckNotNull(expression)) {
+      val argument = expression.arguments.single()
+      // A not-null assertion on a smart cast to a non-nullable type is redundant. Must be handled
+      // before the implicit cast, which carries that information, is removed.
+      if (
+        argument is IrTypeOperatorCall &&
+          argument.operator == IrTypeOperator.IMPLICIT_CAST &&
+          !argument.typeOperand.isNullable()
+      ) {
+        return argument.transform(this, null)
+      }
+    }
+    return super.visitCall(expression)
+  }
 
   override fun visitTypeOperator(expression: IrTypeOperatorCall): IrExpression {
     expression.transformChildrenVoid()

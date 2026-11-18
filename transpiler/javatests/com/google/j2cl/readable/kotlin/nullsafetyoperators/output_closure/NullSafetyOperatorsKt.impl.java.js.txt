@@ -58,7 +58,7 @@ class NullSafetyOperatorsKt extends j_l_Object {
  /** @nodts @return {string} */
  static m_foo__java_lang_String__java_lang_String(/** ?string */ a) {
   NullSafetyOperatorsKt.$clinit();
-  let b = !$Equality.$same(a, null) ? InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(a) : InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(a);
+  let b = !$Equality.$same(a, null) ? a : InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(a);
   return b;
  }
  /** @nodts */
