@@ -1,0 +1,53 @@
+goog.module('autoboxing.AutoBoxing.Companion.$1Local$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Long = goog.forwardDeclare('goog.math.Long');
+let j_l_Long = goog.forwardDeclare('java.lang.Long$impl');
+
+/**
+ * @final
+ * @template T, T_1
+ */
+class $1Local extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T, T_1 @return {!$1Local<T, T_1>} */
+ static $create__() {
+  $1Local.$clinit();
+  let $instance = new $1Local();
+  $instance.$ctor__autoboxing_AutoBoxing_Companion_1Local__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autoboxing_AutoBoxing_Companion_1Local__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {!Long} */
+ m_toLong__java_lang_Long__long(/** T */ l) {
+  return j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (l));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Local.$clinit = () =>{};
+  $1Local.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Local;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_Long = goog.module.get('java.lang.Long$impl');
+ }
+}
+$Util.$setClassMetadata($1Local, 'autoboxing.AutoBoxing$Companion$1Local');
+
+exports = $1Local;
+
+//# sourceMappingURL=AutoBoxing$Companion$1Local.js.map

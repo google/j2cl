@@ -1,0 +1,457 @@
+goog.module('autoboxing.AutoBoxing$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1Supplier = goog.forwardDeclare('autoboxing.AutoBoxing.$1Supplier$impl');
+let $1Local = goog.forwardDeclare('autoboxing.AutoBoxing.Companion.$1Local$impl');
+let $2Local = goog.forwardDeclare('autoboxing.AutoBoxing.Companion.$2Local$impl');
+let Ref = goog.forwardDeclare('autoboxing.AutoBoxing.Ref$impl');
+let Long = goog.forwardDeclare('goog.math.Long');
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let j_l_Long = goog.forwardDeclare('java.lang.Long$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
+let Asserts = goog.forwardDeclare('javaemul.internal.Asserts$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Primitives = goog.forwardDeclare('javaemul.internal.Primitives$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+
+/**
+ * @final
+ */
+class AutoBoxing extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AutoBoxing} */
+ static $create__() {
+  AutoBoxing.$clinit();
+  let $instance = new AutoBoxing();
+  $instance.$ctor__autoboxing_AutoBoxing__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autoboxing_AutoBoxing__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?boolean} */
+ m_box__boolean__java_lang_Boolean(/** boolean */ b) {
+  return b;
+ }
+ /** @final @nodts @return {?number} */
+ m_box__double__java_lang_Double(/** number */ d) {
+  return d;
+ }
+ /** @final @nodts @return {Byte} */
+ m_box__byte__java_lang_Byte(/** number */ b) {
+  return Byte.m_valueOf__byte__java_lang_Byte(b);
+ }
+ /** @final @nodts @return {Float} */
+ m_box__float__java_lang_Float(/** number */ f) {
+  return Float.m_valueOf__float__java_lang_Float(f);
+ }
+ /** @final @nodts @return {Integer} */
+ m_box__int__java_lang_Integer(/** number */ i) {
+  return Integer.valueOf(i);
+ }
+ /** @final @nodts @return {Long} */
+ m_box__long__java_lang_Long(/** !Long */ l) {
+  return l;
+ }
+ /** @final @nodts @return {Short} */
+ m_box__short__java_lang_Short(/** number */ s) {
+  return Short.m_valueOf__short__java_lang_Short(s);
+ }
+ /** @final @nodts @return {Character} */
+ m_box__char__java_lang_Character(/** number */ c) {
+  return Character.m_valueOf__char__java_lang_Character(c);
+ }
+ /** @final @nodts @return {boolean} */
+ m_unbox__java_lang_Boolean__boolean(/** ?boolean */ b) {
+  return Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(b));
+ }
+ /** @final @nodts @return {number} */
+ m_unbox__java_lang_Double__double(/** ?number */ d) {
+  return Double.m_doubleValue__java_lang_Double__double(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(d));
+ }
+ /** @final @nodts @return {number} */
+ m_unbox__java_lang_Byte__byte(/** Byte */ b) {
+  return b.m_byteValue__byte();
+ }
+ /** @final @nodts @return {number} */
+ m_unbox__java_lang_Float__float(/** Float */ f) {
+  return f.m_floatValue__float();
+ }
+ /** @final @nodts @return {number} */
+ m_unbox__java_lang_Integer__int(/** Integer */ i) {
+  return i.intValue();
+ }
+ /** @final @nodts @return {!Long} */
+ m_unbox__java_lang_Long__long(/** Long */ l) {
+  return j_l_Long.m_longValue__java_lang_Long__long(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(l));
+ }
+ /** @final @nodts @return {number} */
+ m_unbox__java_lang_Short__short(/** Short */ s) {
+  return s.m_shortValue__short();
+ }
+ /** @final @nodts @return {number} */
+ m_unbox__java_lang_Character__char(/** Character */ c) {
+  return c.m_charValue__char();
+ }
+ /** @final @nodts @return {number} */
+ m_takesAndReturnsPrimitiveDouble__double__double(/** number */ d) {
+  return d;
+ }
+ /** @final @nodts @return {?void} */
+ m_takesAndReturnsVoid__java_lang_Void__java_lang_Void(/** ?void */ v) {
+  return null;
+ }
+ /** @final @nodts */
+ m_takesFloatVarArgs__arrayOf_java_lang_Float__void(/** !Array<Float> */ elements) {}
+ /** @final @nodts @return {number} */
+ m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double(/** * */ o) {
+  return Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(o), Double)));
+ }
+ /** @final @nodts @return {number} */
+ m_sumWithoutBoxing__arrayOf_java_lang_Object__double(/** !Array<*> */ numbers) {
+  let sum = 0;
+  for (let indexedObject = numbers, inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+   let number_1 = indexedObject[inductionVariable];
+   sum += Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(number_1), Double)));
+  }
+  return sum;
+ }
+ /** @final @return {number} */
+ sumWithoutBoxingJsVarargs(.../** ...* */ numbers) {
+  let sum = 0;
+  for (let indexedObject = numbers, inductionVariable = 0, last = indexedObject.length; inductionVariable < last; inductionVariable = inductionVariable + 1 | 0) {
+   let number_1 = indexedObject[inductionVariable];
+   sum += Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(number_1), Double)));
+  }
+  return sum;
+ }
+ /** @final @nodts @return {number} */
+ m_sumWithUnboxing__java_lang_Iterable__double(/** !Iterable<?> */ boxedDoubles) {
+  let sum = 0;
+  for (let $iterator = boxedDoubles.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let d = Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Double)));
+   {
+    sum += d;
+   }
+  }
+  return sum;
+ }
+ /** @final @nodts */
+ m_testBoxing__void() {
+  let bool = true;
+  let d = 2.2;
+  let b = 1;
+  let f = 1.100000023841858;
+  let i = 1;
+  let l = Long.fromInt(2);
+  let s = 1;
+  let c = 97 /* 'a' */;
+  let boxBool = bool;
+  let boxD = d;
+  let boxB = Byte.m_valueOf__byte__java_lang_Byte(b);
+  let boxF = Float.m_valueOf__float__java_lang_Float(f);
+  let boxI = Integer.valueOf(i);
+  let boxL = l;
+  let boxS = Short.m_valueOf__short__java_lang_Short(s);
+  let boxC = Character.m_valueOf__char__java_lang_Character(c);
+  boxBool = true;
+  boxD = 2.2;
+  boxB = Byte.m_valueOf__byte__java_lang_Byte(1);
+  boxF = Float.m_valueOf__float__java_lang_Float(1.100000023841858);
+  boxI = Integer.valueOf(1);
+  boxL = Long.fromInt(2);
+  boxS = Short.m_valueOf__short__java_lang_Short(1);
+  boxC = Character.m_valueOf__char__java_lang_Character(97 /* 'a' */);
+  let localConstant = 66;
+  boxC = Character.m_valueOf__char__java_lang_Character(Primitives.m_narrowIntToChar__int__int(65 /* 'A' */ + 3 | 0));
+  bool = this.m_unbox__java_lang_Boolean__boolean(bool);
+  d = this.m_unbox__java_lang_Double__double(d);
+  b = this.m_unbox__java_lang_Byte__byte(Byte.m_valueOf__byte__java_lang_Byte(b));
+  f = this.m_unbox__java_lang_Float__float(Float.m_valueOf__float__java_lang_Float(f));
+  i = this.m_unbox__java_lang_Integer__int(Integer.valueOf(i));
+  l = this.m_unbox__java_lang_Long__long(l);
+  s = this.m_unbox__java_lang_Short__short(Short.m_valueOf__short__java_lang_Short(s));
+  c = this.m_unbox__java_lang_Character__char(Character.m_valueOf__char__java_lang_Character(c));
+  let unusedDouble = this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double(4);
+  unusedDouble = this.m_sumWithoutBoxing__arrayOf_java_lang_Object__double([1, 2.2, 1, 1, 2.2]);
+  unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1, 1, 2.2);
+  unusedDouble = this.m_sumWithoutBoxing__arrayOf_java_lang_Object__double([Integer.valueOf(1), 2.2, Byte.m_valueOf__byte__java_lang_Byte(1), Short.m_valueOf__short__java_lang_Short(1), Float.m_valueOf__float__java_lang_Float(2.2)]);
+  this.m_takesFloatVarArgs__arrayOf_java_lang_Float__void(/**@type {!Array<Float>}*/ ($Arrays.$stampType([Float.m_valueOf__float__java_lang_Float(1.100000023841858), Float.m_valueOf__float__java_lang_Float(97 /* 'a' */), Float.m_valueOf__float__java_lang_Float(2.2)], Float)));
+  let /** * */ o;
+  o = 2.2;
+  o = Float.m_valueOf__float__java_lang_Float(1.100000023841858);
+  o = Integer.valueOf(1);
+  o = Character.m_valueOf__char__java_lang_Character(97 /* 'a' */);
+  boxBool = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
+  boxD = Double.m_doubleValue__java_lang_Double__double(boxD) + Double.m_doubleValue__java_lang_Double__double(boxD);
+  boxI = Integer.valueOf(Primitives.m_coerceDivision__int__int(boxI.intValue() / boxI.intValue()));
+  boxL = $LongUtils.divide(j_l_Long.m_longValue__java_lang_Long__long(boxL), j_l_Long.m_longValue__java_lang_Long__long(boxL));
+  boxBool = !Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
+  boxI = Integer.valueOf(+ boxI.intValue());
+  boxI = Integer.valueOf(- boxI.intValue() | 0);
+  boxI = Integer.valueOf(boxI.intValue() << boxI.intValue());
+  boxI = Integer.valueOf(boxI.intValue() << Primitives.m_narrowLongToInt__long__int(j_l_Long.m_longValue__java_lang_Long__long(boxL)));
+  boxL = $LongUtils.leftShift(j_l_Long.m_longValue__java_lang_Long__long(boxL), boxI.intValue());
+  boxL = $LongUtils.leftShift(j_l_Long.m_longValue__java_lang_Long__long(boxL), Primitives.m_narrowLongToInt__long__int(j_l_Long.m_longValue__java_lang_Long__long(boxL)));
+ }
+ /** @final @nodts */
+ m_testUnboxing__void() {
+  let boxBool = /**@type {?boolean}*/ (Boolean.$create__boolean(true));
+  let boxD = /**@type {?number}*/ (Double.$create__double(2.2));
+  let boxB = /**@type {Byte}*/ (Byte.$create__byte(1));
+  let boxF = /**@type {Float}*/ (Float.$create__float(1.100000023841858));
+  let boxI = /**@type {Integer}*/ (Integer.$create__int(1));
+  let boxL = /**@type {Long}*/ (j_l_Long.$create__long(Long.fromInt(1)));
+  let boxS = /**@type {Short}*/ (Short.$create__short(1));
+  let boxC = /**@type {Character}*/ (Character.$create__char(97 /* 'a' */));
+  let bool = Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxBool));
+  let d = Double.m_doubleValue__java_lang_Double__double(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxD));
+  let b = boxB.m_byteValue__byte();
+  let f = boxF.m_floatValue__float();
+  let i = boxI.intValue();
+  let l = j_l_Long.m_longValue__java_lang_Long__long(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxL));
+  let s = boxS.m_shortValue__short();
+  let c = boxC.m_charValue__char();
+  boxBool = this.m_box__boolean__java_lang_Boolean(Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool));
+  boxD = this.m_box__double__java_lang_Double(Double.m_doubleValue__java_lang_Double__double(boxD));
+  boxB = this.m_box__byte__java_lang_Byte(boxB.m_byteValue__byte());
+  boxF = this.m_box__float__java_lang_Float(boxF.m_floatValue__float());
+  boxI = this.m_box__int__java_lang_Integer(boxI.intValue());
+  boxL = this.m_box__long__java_lang_Long(j_l_Long.m_longValue__java_lang_Long__long(boxL));
+  boxS = this.m_box__short__java_lang_Short(boxS.m_shortValue__short());
+  boxC = this.m_box__char__java_lang_Character(boxC.m_charValue__char());
+  d = boxB.m_byteValue__byte();
+  d = boxF.m_floatValue__float();
+  d = boxI.intValue();
+  d = Primitives.m_widenLongToDouble__long__double(j_l_Long.m_longValue__java_lang_Long__long(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxL)));
+  d = boxS.m_shortValue__short();
+  let tmp0 = boxC.m_charValue__char();
+  let this_1 = tmp0;
+  d = this_1;
+  this.m_takesAndReturnsPrimitiveDouble__double__double(boxB.m_byteValue__byte());
+  this.m_takesAndReturnsPrimitiveDouble__double__double(boxF.m_floatValue__float());
+  this.m_takesAndReturnsPrimitiveDouble__double__double(boxI.intValue());
+  this.m_takesAndReturnsPrimitiveDouble__double__double(Primitives.m_widenLongToDouble__long__double(j_l_Long.m_longValue__java_lang_Long__long(boxL)));
+  this.m_takesAndReturnsPrimitiveDouble__double__double(boxS.m_shortValue__short());
+  let tmp0_1 = boxC.m_charValue__char();
+  let this_2 = tmp0_1;
+  this.m_takesAndReturnsPrimitiveDouble__double__double(this_2);
+  let v = this.m_takesAndReturnsVoid__java_lang_Void__java_lang_Void(this.m_takesAndReturnsVoid__java_lang_Void__java_lang_Void(null));
+  bool = Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxBool)) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
+  d = Double.m_doubleValue__java_lang_Double__double(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxD)) + Double.m_doubleValue__java_lang_Double__double(boxD);
+  f = boxF.m_floatValue__float() - boxF.m_floatValue__float();
+  i = Math.imul(boxI.intValue(), boxI.intValue());
+  l = $LongUtils.divide(j_l_Long.m_longValue__java_lang_Long__long(boxL), j_l_Long.m_longValue__java_lang_Long__long(boxL));
+  bool = !Boolean.m_booleanValue__java_lang_Boolean__boolean(boxBool);
+  i = + boxI.intValue();
+  i = - boxI.intValue() | 0;
+  i = ~boxI.intValue();
+  boxD = - Double.m_doubleValue__java_lang_Double__double(boxD);
+  boxI = Integer.valueOf(- boxI.intValue() | 0);
+  let tmp0_subject = boxI.intValue();
+  switch (tmp0_subject) {
+   default:
+    {
+     break;
+    }
+  }
+  i = i + boxI.intValue() | 0;
+  boxI = Integer.valueOf(boxI.intValue() + i | 0);
+  i = i + boxI.intValue() | 0;
+  i = i << boxI.intValue();
+  i = i << Primitives.m_narrowLongToInt__long__int(j_l_Long.m_longValue__java_lang_Long__long(boxL));
+  l = $LongUtils.leftShift(l, boxI.intValue());
+  l = $LongUtils.leftShift(l, Primitives.m_narrowLongToInt__long__int(j_l_Long.m_longValue__java_lang_Long__long(boxL)));
+  let unusedInt = null.intValue();
+ }
+ /** @final @nodts */
+ m_testUnboxingBoolean__void() {
+  let boxB1 = /**@type {?boolean}*/ (Boolean.$create__boolean(true));
+  let boxB2 = /**@type {?boolean}*/ (Boolean.$create__boolean(false));
+  let /** boolean */ br;
+  let /** ?boolean */ boxr;
+  boxr = $Equality.$same(boxB1, boxB2);
+  br = $Equality.$same(boxB1, boxB2);
+  boxr = !$Equality.$same(boxB1, boxB2);
+  br = !$Equality.$same(boxB1, boxB2);
+  boxr = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxB1)) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxB2)));
+  br = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  boxr = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  br = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  boxr = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  br = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
+  br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
+  boxr = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) || Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
+  br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) || Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2);
+  boxB1 = boxB2;
+  boxr = boxB1;
+  boxB1 = boxB2;
+  br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1);
+  boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  boxr = boxB1;
+  boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) & + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1);
+  boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  boxr = boxB1;
+  boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1);
+  boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  boxr = boxB1;
+  boxB1 = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1) ^ + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB2));
+  br = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB1);
+  let /** ?boolean */ boxB = null;
+  boxB = !Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxB));
+  boxB = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB) && Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB);
+  boxB = Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB) ? boxB : boxB;
+  if (Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB)) {}
+  let b = false;
+  b = !!(+ b | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB));
+  boxB = !!(+ Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB) | + b);
+  b = !!(+ b | + Boolean.m_booleanValue__java_lang_Boolean__boolean(boxB));
+ }
+ /** @final @nodts */
+ m_testUnboxingEquality__void() {
+  let boxB = /**@type {?boolean}*/ (Boolean.$create__boolean(true));
+  let b = false;
+  let result = $Equality.$same(boxB, boxB);
+  result = $Equality.$same(boxB, /**@type {boolean}*/ (b));
+  result = b != b;
+  result = !$Equality.$same(/**@type {boolean}*/ (b), boxB);
+  let boxI = /**@type {Integer}*/ (Integer.$create__int(1));
+  let i = 1;
+  result = $Equality.$same(boxI, boxI);
+  result = Objects.m_equals__java_lang_Object__java_lang_Object__boolean(boxI, Integer.valueOf(i));
+  result = i != i;
+  result = !Objects.m_equals__java_lang_Object__java_lang_Object__boolean(Integer.valueOf(i), boxI);
+ }
+ /** @final @nodts */
+ m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(/** !* */ x) {}
+ /** @final @nodts */
+ m_acceptsInt__int__void_$p_autoboxing_AutoBoxing(/** number */ x) {}
+ /** @final @nodts */
+ m_acceptsString__java_lang_String__void_$p_autoboxing_AutoBoxing(/** string */ x) {}
+ /** @final @nodts */
+ m_testUnboxingGeneric__autoboxing_AutoBoxing_Ref__autoboxing_AutoBoxing_Ref__autoboxing_AutoBoxing_Ref__void_$p_autoboxing_AutoBoxing(/** !Ref<!Integer> */ integerRef, /** !Ref<boolean> */ booleanRef, /** !Ref<string> */ stringRef) {
+  integerRef.m_setField__java_lang_Object__void(/**@type {!Integer}*/ ($Casts.$to(integerRef.m_getField__java_lang_Object(), Integer)));
+  let receiver = integerRef;
+  let unary = (/**@type {!Integer}*/ ($Casts.$to(receiver.m_getField__java_lang_Object(), Integer))).intValue();
+  receiver.m_setField__java_lang_Object__void(Integer.valueOf(unary + 1 | 0));
+  let receiver_1 = integerRef;
+  receiver_1.m_setField__java_lang_Object__void(Integer.valueOf((/**@type {!Integer}*/ ($Casts.$to(receiver_1.m_getField__java_lang_Object(), Integer))).intValue() + 1 | 0));
+  this.m_acceptsInt__int__void_$p_autoboxing_AutoBoxing((/**@type {!Integer}*/ ($Casts.$to(integerRef.m_getField__java_lang_Object(), Integer))).intValue());
+  this.m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(Integer.valueOf(- (/**@type {!Integer}*/ ($Casts.$to(integerRef.m_getField__java_lang_Object(), Integer))).intValue() | 0));
+  this.m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(!Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Casts.$to(booleanRef.m_getField__java_lang_Object(), Boolean))));
+  this.m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(Integer.valueOf(1 + (/**@type {!Integer}*/ ($Casts.$to(integerRef.m_getField__java_lang_Object(), Integer))).intValue() | 0));
+  this.m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Casts.$to(booleanRef.m_getField__java_lang_Object(), Boolean))) || Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Casts.$to(booleanRef.m_getField__java_lang_Object(), Boolean))));
+  this.m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(j_l_String.m_valueOf__java_lang_Object__java_lang_String(/**@type {string}*/ ($Casts.$to(stringRef.m_getField__java_lang_Object(), j_l_String))) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(/**@type {string}*/ ($Casts.$to(stringRef.m_getField__java_lang_Object(), j_l_String))));
+  stringRef.m_setField__java_lang_Object__void(/**@type {string}*/ ($Casts.$to(stringRef.m_getField__java_lang_Object(), j_l_String)));
+  this.m_acceptsString__java_lang_String__void_$p_autoboxing_AutoBoxing('' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(integerRef.m_getField__java_lang_Object()));
+ }
+ /** @final @nodts */
+ m_testAssertStatement__void() {
+  let boxB = /**@type {?boolean}*/ (Boolean.$create__boolean(true));
+  let b = true;
+  let tmp0 = Boolean.m_booleanValue__java_lang_Boolean__boolean(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxB));
+  let value = tmp0;
+  Asserts.$assertWithMessage__boolean__java_lang_Object__void(value, 'Assertion failed');
+  Asserts.$assertWithMessage__boolean__java_lang_Object__void(b, 'Assertion failed');
+ }
+ /** @final @nodts */
+ m_testUnbox_withCast__void() {
+  let supplier = /**@type {!$1Supplier<!Integer>}*/ ($1Supplier.$create__autoboxing_AutoBoxing(this));
+  let i = (/**@type {Integer}*/ ($Casts.$to(supplier.m_get__java_lang_Object(), Integer))).intValue();
+ }
+ /** @final @nodts */
+ m_testBoxingUnboxedValues__java_lang_Integer__java_lang_Double__java_lang_Boolean__java_lang_Character__java_lang_Number__void(/** Integer */ boxedInteger, /** ?number */ boxedDouble, /** ?boolean */ boxedBoolean, /** Character */ boxedCharacter, /** !(Number|number|!Long) */ number_1) {
+  let i = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxedInteger);
+  let o = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxedInteger);
+  this.m_acceptsObject__java_lang_Object__void_$p_autoboxing_AutoBoxing(InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxedInteger));
+  let d = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxedDouble);
+  let b = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxedBoolean);
+  let c = InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(boxedCharacter);
+  let l = Primitives.m_widenIntToLong__int__long(boxedInteger.intValue());
+  let fromNumber = Integer.valueOf($Numbers.m_intValue__java_lang_Number__int(number_1));
+ }
+ /** @nodts @template T */
+ static m_testUnboxingFromTypeVariable__void() {
+  AutoBoxing.$clinit();
+  let n = /**@type {T}*/ (Long.fromInt(10));
+  let l = j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n));
+  n = (/**@type {T}*/ ($LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1))));
+  l = (/**@type {!$1Local<!Long, T>}*/ ($1Local.$create__())).m_toLong__java_lang_Long__long(Long.fromInt(11));
+ }
+ /** @nodts @template T */
+ static m_testUnboxingFromIntersectionType__void() {
+  AutoBoxing.$clinit();
+  let n = /**@type {T}*/ (Long.fromInt(10));
+  let l = j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n));
+  n = (/**@type {T}*/ ($LongUtils.plus(j_l_Long.m_longValue__java_lang_Long__long(/**@type {!Long}*/ (n)), Long.fromInt(1))));
+  l = (/**@type {!$2Local<!Long, T>}*/ ($2Local.$create__())).m_toLong__java_lang_Long__long(Long.fromInt(11));
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoBoxing.$clinit = () =>{};
+  AutoBoxing.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoBoxing;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1Supplier = goog.module.get('autoboxing.AutoBoxing.$1Supplier$impl');
+  $1Local = goog.module.get('autoboxing.AutoBoxing.Companion.$1Local$impl');
+  $2Local = goog.module.get('autoboxing.AutoBoxing.Companion.$2Local$impl');
+  Long = goog.module.get('goog.math.Long');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  j_l_Long = goog.module.get('java.lang.Long$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
+  Asserts = goog.module.get('javaemul.internal.Asserts$impl');
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Primitives = goog.module.get('javaemul.internal.Primitives$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+  $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+ }
+}
+/**@const {number} @nodts*/
+AutoBoxing.f_COMPILE_TIME_CONSTANT__autoboxing_AutoBoxing = 1.100000023841858;
+/**@const {number} @nodts*/
+AutoBoxing.f_INT_CONSTANT__autoboxing_AutoBoxing_ = 65;
+$Util.$setClassMetadata(AutoBoxing, 'autoboxing.AutoBoxing');
+
+exports = AutoBoxing;
+
+//# sourceMappingURL=AutoBoxing.js.map

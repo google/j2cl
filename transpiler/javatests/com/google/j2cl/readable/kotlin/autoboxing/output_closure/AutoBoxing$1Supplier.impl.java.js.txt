@@ -1,0 +1,53 @@
+goog.module('autoboxing.AutoBoxing.$1Supplier$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoBoxing = goog.forwardDeclare('autoboxing.AutoBoxing$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class $1Supplier extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!AutoBoxing} @nodts*/
+  this.$outer_this__autoboxing_AutoBoxing_1Supplier;
+ }
+ /** @nodts @template T @return {!$1Supplier<T>} */
+ static $create__autoboxing_AutoBoxing(/** !AutoBoxing */ $outer_this) {
+  $1Supplier.$clinit();
+  let $instance = new $1Supplier();
+  $instance.$ctor__autoboxing_AutoBoxing_1Supplier__autoboxing_AutoBoxing__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autoboxing_AutoBoxing_1Supplier__autoboxing_AutoBoxing__void(/** !AutoBoxing */ $outer_this) {
+  this.$outer_this__autoboxing_AutoBoxing_1Supplier = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {?T} */
+ m_get__java_lang_Object() {
+  return null;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1Supplier.$clinit = () =>{};
+  $1Supplier.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Supplier;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1Supplier, 'autoboxing.AutoBoxing$1Supplier');
+
+exports = $1Supplier;
+
+//# sourceMappingURL=AutoBoxing$1Supplier.js.map
