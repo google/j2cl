@@ -344,16 +344,21 @@ final class JsExternsGenerator {
 
   private String getExternsWiringContent() {
     TypeDeclaration typeDeclaration = type.getDeclaration();
+
+    // Name of the extern, e.g., '$j2wasm$externs.my_package_MyClass'.
     String externName = closureEnvironment.aliasForType(typeDeclaration);
-    String simpleJsName = typeDeclaration.getSimpleJsName();
+
+    // Unique name for the declaration, used for the local, e.g., 'my_package_MyClass'.
+    String longAliasName = closureEnvironment.longAliasForType(typeDeclaration);
+
     String qualifiedJsName = typeDeclaration.getQualifiedJsName();
     String moduleName = typeDeclaration.getModuleName();
     String requireTypes = getRequireTypes(moduleName);
     if (type.getMembers().stream().anyMatch(AstUtils::isExposedToJsViaConstructor)) {
       return generateConstructorProxy(
-          moduleName, requireTypes, externName, simpleJsName, qualifiedJsName);
+          moduleName, requireTypes, externName, longAliasName, qualifiedJsName);
     } else {
-      return generateTypeAlias(moduleName, requireTypes, externName, simpleJsName);
+      return generateTypeAlias(moduleName, requireTypes, externName, longAliasName);
     }
   }
 
@@ -374,7 +379,7 @@ final class JsExternsGenerator {
       String moduleName,
       String requireTypes,
       String externName,
-      String simpleJsName,
+      String localName,
       String qualifiedJsName) {
     return """
     goog.module('%1$s');
@@ -386,11 +391,11 @@ final class JsExternsGenerator {
 
     exports = %4$s;
     """
-        .formatted(moduleName, requireTypes, externName, simpleJsName, qualifiedJsName);
+        .formatted(moduleName, requireTypes, externName, localName, qualifiedJsName);
   }
 
   private static String generateTypeAlias(
-      String moduleName, String requireTypes, String externName, String simpleJsName) {
+      String moduleName, String requireTypes, String externName, String localName) {
     return """
     goog.module('%1$s');
 
@@ -401,6 +406,6 @@ final class JsExternsGenerator {
 
     exports = %4$s;
     """
-        .formatted(moduleName, requireTypes, externName, simpleJsName);
+        .formatted(moduleName, requireTypes, externName, localName);
   }
 }
