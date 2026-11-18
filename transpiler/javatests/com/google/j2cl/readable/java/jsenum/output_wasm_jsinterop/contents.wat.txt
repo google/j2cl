@@ -1349,10 +1349,10 @@
 
 ;;; void Main.acceptsJsFunctionSupplier(JsFunctionSuppiler<ComparableJsEnum> supplier)
 (func $m_acceptsJsFunctionSupplier__jsenum_Main_JsFunctionSuppiler__void@jsenum.Main
- (param $supplier (ref null $java.lang.Object))
+ (param $supplier (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $e (ref null $jsenum.Main.ComparableJsEnum))
  (block
-  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsenum.Main.JsFunctionSuppiler (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $supplier)))))
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsenum.Main.JsFunctionSuppiler (local.get $supplier))))
  )
 )
 
@@ -1371,10 +1371,10 @@
 
 ;;; void Main.acceptsJsFunctionParameterizedByJsEnum(SpecializedJsFunction<ComparableJsEnum> supplier)
 (func $m_acceptsJsFunctionParameterizedByJsEnum__jsenum_Main_SpecializedJsFunction__void@jsenum.Main
- (param $supplier (ref null $java.lang.Object))
+ (param $supplier (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $e (ref null $jsenum.Main.ComparableJsEnum))
  (block
-  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $supplier))(block (result (ref null $jsenum.Main.ComparableJsEnum))
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction (local.get $supplier)(block (result (ref null $jsenum.Main.ComparableJsEnum))
    (call $$clinit__void_<once>_@jsenum.Main.ComparableJsEnum )
    (global.get $ONE@jsenum.Main.ComparableJsEnum)
   ))))
@@ -2013,14 +2013,14 @@
  (local $supplier (ref null $java.lang.Object))
  (local $ordinal (ref null $java.lang.Object))
  (local $ordinalReference (ref null $java.lang.Object))
- (local $jsFunction (ref null $java.lang.Object))
+ (local $jsFunction (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $e (ref null $jsenum.Main.ComparableJsEnum))
  (block
   (local.set $supplier (call $$create__jsenum_Main_ComparableJsEnum@jsenum.Main.$LambdaImplementor$8 (local.get $t)))
   (local.set $ordinal (call $$create__@jsenum.Main.$LambdaImplementor$9 ))
   (local.set $ordinalReference (call $$create__@jsenum.Main.$LambdaImplementor$10 ))
   (local.set $jsFunction (call $$create__@jsenum.Main.$LambdaImplementor$11 ))
-  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $jsFunction))(local.get $t))))
+  (local.set $e (ref.cast (ref null $jsenum.Main.ComparableJsEnum) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsenum.Main.SpecializedJsFunction (local.get $jsFunction)(local.get $t))))
  )
 )
 

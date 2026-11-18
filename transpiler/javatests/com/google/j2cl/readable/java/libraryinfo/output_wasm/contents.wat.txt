@@ -536,13 +536,13 @@
 
 ;;; void Main.entryPoint()
 (func $m_entryPoint__void@libraryinfo.Main
- (local $jsFunction (ref null $java.lang.Object))
+ (local $jsFunction (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call $$clinit__void_<once>_@libraryinfo.Main )
   (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (call $$create_$private__@libraryinfo.Main )))
   (local.set $jsFunction (call $$create__@libraryinfo.Main.FunctionImpl ))
   (local.set $jsFunction (call $$create__@libraryinfo.Main.$LambdaImplementor$1 ))
-  (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_String__void@libraryinfo.Main.Function (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $jsFunction))(call $$getString_|foo|__java_lang_String_<once>_@libraryinfo.Main.$StringLiterals ))
+  (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_String__void@libraryinfo.Main.Function (local.get $jsFunction)(call $$getString_|foo|__java_lang_String_<once>_@libraryinfo.Main.$StringLiterals ))
   (drop (call $$create__@libraryinfo.Main.MyJsType ))
   (drop (call $$create__@libraryinfo.Main.1 ))
  )

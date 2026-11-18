@@ -280,7 +280,7 @@
  (local $$instance (ref null $jsoptional.Main))
  (block
   (call $$clinit__void_<once>_@jsoptional.Main )
-  (local.set $$instance (struct.new $jsoptional.Main (global.get $jsoptional.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $jsoptional.Main (global.get $jsoptional.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.JsFunctionAdaptor)))
   (call $$ctor__java_lang_String__void_$p_jsoptional_Main@jsoptional.Main (ref.as_non_null (local.get $$instance))(local.get $a))
   (return (local.get $$instance))
  )
@@ -300,7 +300,7 @@
 (func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main
  (type $function.m_testFunction__jsoptional_Main_Function__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block
@@ -312,7 +312,7 @@
 (func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main
  (type $function.m_testOptionalFunction__jsoptional_Main_Function__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (ref $jsoptional.Main) (local.get $this.untyped)))
  (block

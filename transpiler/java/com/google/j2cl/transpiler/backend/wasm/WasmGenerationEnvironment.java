@@ -159,6 +159,11 @@ public class WasmGenerationEnvironment {
       return getWasmTypeName(TypeDescriptors.getWasmArrayType(arrayTypeDescriptor));
     }
 
+    if (typeDescriptor.isJsFunctionInterface()) {
+      // JsFunction interfaces are always implemented by subclasses of JsFunctionAdaptor.
+      return getWasmTypeName(TypeDescriptors.get().javaemulInternalJsFunctionAdaptor);
+    }
+
     if (typeDescriptor.isInterface()) {
       // Interfaces are modeled as java.lang.Object at runtime.
       return getWasmTypeName(TypeDescriptors.get().javaLangObject);

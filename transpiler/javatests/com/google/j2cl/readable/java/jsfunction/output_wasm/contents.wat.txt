@@ -1890,12 +1890,12 @@
 
 ;;; T $Overlay.overlayMethod__$devirt(Function<T, U> $thisArg, U u)
 (func $m_overlayMethod__$devirt__jsfunction_Main_Function__java_lang_Object__java_lang_Object@jsfunction.Main.Function.$Overlay
- (param $$thisArg (ref null $java.lang.Object))
+ (param $$thisArg (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $u (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main.Function.$Overlay )
-  (return (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsfunction.Main.Function (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $$thisArg))(local.get $u)))
+  (return (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsfunction.Main.Function (local.get $$thisArg)(local.get $u)))
  )
 )
 
@@ -1936,11 +1936,11 @@
 
 ;;; int $Overlay.overlayMethod__$devirt(JsFunctionInterface $thisArg)
 (func $m_overlayMethod__$devirt__jsfunction_Main_JsFunctionInterface__int@jsfunction.Main.JsFunctionInterface.$Overlay
- (param $$thisArg (ref null $java.lang.Object))
+ (param $$thisArg (ref null $javaemul.internal.JsFunctionAdaptor))
  (result i32)
  (block
   (call $$clinit__void_<once>_@jsfunction.Main.JsFunctionInterface.$Overlay )
-  (return (call $m_foo$jsFunction__javaemul_internal_JsFunctionAdaptor__int__int@jsfunction.Main.JsFunctionInterface (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $$thisArg))(i32.const 42)))
+  (return (call $m_foo$jsFunction__javaemul_internal_JsFunctionAdaptor__int__int@jsfunction.Main.JsFunctionInterface (local.get $$thisArg)(i32.const 42)))
  )
 )
 
@@ -2019,7 +2019,7 @@
 ;;; void $Overlay.sort__$devirt(TestJsFunctionInJsOverlayCapturingOuter $thisArg, JsFunctionInterface func)
 (func $m_sort__$devirt__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_Main_JsFunctionInterface__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay
  (param $$thisArg (ref null extern))
- (param $func (ref null $java.lang.Object))
+ (param $func (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay )
   (call $m_sort__$devirt_$private__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_Main_JsFunctionInterface__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay (local.get $$thisArg)(local.get $func))
@@ -2029,7 +2029,7 @@
 ;;; void $Overlay.sort__$devirt_$private(TestJsFunctionInJsOverlayCapturingOuter $thisArg, JsFunctionInterface func)
 (func $m_sort__$devirt_$private__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter__jsfunction_Main_JsFunctionInterface__void@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay
  (param $$thisArg (ref null extern))
- (param $func (ref null $java.lang.Object))
+ (param $func (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
  )
 )
@@ -2137,10 +2137,10 @@
  (type $function.m_main__int__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $r i32)
- (local $f (ref null $java.lang.Object))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $array (ref null $javaemul.internal.WasmArray.OfObject))
- (local $byteSupplier (ref null $java.lang.Object))
- (local $integerSupplier (ref null $java.lang.Object))
+ (local $byteSupplier (ref null $javaemul.internal.JsFunctionAdaptor))
+ (local $integerSupplier (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $i i32)
  (local $this (ref null $jsfunction.JsFunctionOptimization))
  (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization) (local.get $this.untyped)))
@@ -2152,7 +2152,7 @@
   (drop (call $$create__jsfunction_JsFunctionOptimization__int__arrayOf_java_lang_Object@jsfunction.JsFunctionOptimization.Holder (local.get $this)(i32.const 1)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (call $$create__jsfunction_JsFunctionOptimization@jsfunction.JsFunctionOptimization.5 (local.get $this))))))
   (local.set $byteSupplier (call $$create__@jsfunction.JsFunctionOptimization.$LambdaImplementor$5 ))
   (local.set $integerSupplier (call $$create__@jsfunction.JsFunctionOptimization.$LambdaImplementor$6 ))
-  (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsfunction.JsFunctionOptimization.ObjectSupplier (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $integerSupplier)))))))
+  (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_get$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object@jsfunction.JsFunctionOptimization.ObjectSupplier (local.get $integerSupplier))))))
  )
 )
 (elem declare func $m_main__int__void@jsfunction.JsFunctionOptimization)
@@ -2307,8 +2307,8 @@
  (type $function.m_m__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
  (local $var i32)
- (local $f (ref null $java.lang.Object))
- (local $f2 (ref null $java.lang.Object))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
+ (local $f2 (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.JsFunctionOptimization.1.1))
  (local.set $this (ref.cast (ref $jsfunction.JsFunctionOptimization.1.1) (local.get $this.untyped)))
  (block
@@ -2537,7 +2537,7 @@
  (local $$instance (ref null $jsfunction.Main))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main )
-  (local.set $$instance (struct.new $jsfunction.Main (global.get $jsfunction.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $jsfunction.Main (global.get $jsfunction.Main.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.JsFunctionAdaptor) (ref.null $javaemul.internal.JsFunctionAdaptor)))
   (call $$ctor__void_$p_jsfunction_Main@jsfunction.Main (ref.as_non_null (local.get $$instance)))
   (return (local.get $$instance))
  )
@@ -2566,7 +2566,7 @@
 
 ;;; int Main.callFn(JsFunctionInterface fn, int a)
 (func $m_callFn__jsfunction_Main_JsFunctionInterface__int__int@jsfunction.Main
- (param $fn (ref null $java.lang.Object))
+ (param $fn (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $a i32)
  (result i32)
  (block
@@ -2577,11 +2577,11 @@
 
 ;;; int Main.callFn_$private(JsFunctionInterface fn, int a)
 (func $m_callFn_$private__jsfunction_Main_JsFunctionInterface__int__int@jsfunction.Main
- (param $fn (ref null $java.lang.Object))
+ (param $fn (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $a i32)
  (result i32)
  (block
-  (return (call $m_foo$jsFunction__javaemul_internal_JsFunctionAdaptor__int__int@jsfunction.Main.JsFunctionInterface (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $fn))(local.get $a)))
+  (return (call $m_foo$jsFunction__javaemul_internal_JsFunctionAdaptor__int__int@jsfunction.Main.JsFunctionInterface (local.get $fn)(local.get $a)))
  )
 )
 
@@ -2608,7 +2608,7 @@
  (type $function.m_testJsFunctionsCapturingLocal__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $n i32)
- (local $f (ref null $java.lang.Object))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2617,7 +2617,7 @@
   (drop (call $m_callFn_$private__jsfunction_Main_JsFunctionInterface__int__int@jsfunction.Main (call $$create__int@jsfunction.Main.$LambdaImplementor$2 (local.get $n))(local.get $n)))
   (drop (call $m_foo$jsFunction__javaemul_internal_JsFunctionAdaptor__int__int@jsfunction.Main.JsFunctionInterface (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call $$create__jsfunction_Main@jsfunction.Main.$LambdaImplementor$3 (local.get $this)))(i32.const 3)))
   (local.set $f (call $$create__int@jsfunction.Main.$LambdaImplementor$4 (local.get $n)))
-  (drop (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsfunction.Main.Function (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $f))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 10))))
+  (drop (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsfunction.Main.Function (local.get $f)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 10))))
  )
 )
 (elem declare func $m_testJsFunctionsCapturingLocal__void@jsfunction.Main)
@@ -2650,7 +2650,7 @@
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   (local.set $list (call $$create__@java.util.ArrayList ))
-  (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $list))))))
+  (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (ref $java.util.List.vtable) (call $get.itable.$java.util.List (local.get $list)))))))
  )
 )
 (elem declare func $m_testJsFunctionErasureCasts__void@jsfunction.Main)
@@ -2659,17 +2659,17 @@
 (func $m_testJsFunctionCalls_autoboxing__void@jsfunction.Main
  (type $function.m_testJsFunctionCalls_autoboxing__void)
  (param $this.untyped (ref $java.lang.Object))
- (local $fn (ref null $java.lang.Object))
+ (local $fn (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $result i32)
- (local $intFn (ref null $java.lang.Object))
+ (local $intFn (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $result2 i32)
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   (local.set $fn (call $$create__@jsfunction.Main.$LambdaImplementor$6 ))
-  (local.set $result (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsfunction.Main.Function (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $fn))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 100)))))))
+  (local.set $result (call $m_intValue__int@java.lang.Integer (ref.as_non_null (ref.cast (ref null $java.lang.Integer) (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Object@jsfunction.Main.Function (local.get $fn)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 100)))))))
   (local.set $intFn (call $$create__@jsfunction.Main.$LambdaImplementor$7 ))
-  (local.set $result2 (call $m_intValue__int@java.lang.Integer (ref.as_non_null (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Integer__java_lang_Integer@jsfunction.Main.IntegerJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $intFn))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 100))))))
+  (local.set $result2 (call $m_intValue__int@java.lang.Integer (ref.as_non_null (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Integer__java_lang_Integer@jsfunction.Main.IntegerJsFunction (local.get $intFn)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 100))))))
  )
 )
 (elem declare func $m_testJsFunctionCalls_autoboxing__void@jsfunction.Main)
@@ -2678,20 +2678,20 @@
 (func $m_testLongJsFunction__void@jsfunction.Main
  (type $function.m_testLongJsFunction__void)
  (param $this.untyped (ref $java.lang.Object))
- (local $longFn (ref null $java.lang.Object))
+ (local $longFn (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $result i64)
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   (local.set $longFn (call $$create__@jsfunction.Main.$LambdaImplementor$8 ))
-  (local.set $result (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__long__long@jsfunction.Main.LongJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $longFn))(i64.const 100)))
+  (local.set $result (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__long__long@jsfunction.Main.LongJsFunction (local.get $longFn)(i64.const 100)))
  )
 )
 (elem declare func $m_testLongJsFunction__void@jsfunction.Main)
 
 ;;; void Main.acceptsJsFunction(Function<String, String> f)
 (func $m_acceptsJsFunction__jsfunction_Main_Function__void@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main )
   (call $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main (local.get $f))
@@ -2700,7 +2700,7 @@
 
 ;;; void Main.acceptsJsFunction_$private(Function<String, String> f)
 (func $m_acceptsJsFunction_$private__jsfunction_Main_Function__void@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
  )
 )
@@ -2709,8 +2709,8 @@
 (func $m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction@jsfunction.Main
  (type $function.m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Object))
- (local $f (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2724,7 +2724,7 @@
 (func $m_testJsFunctionVarargsInnerClass__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction@jsfunction.Main
  (type $function.m_testJsFunctionVarargsInnerClass__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2737,7 +2737,7 @@
 (func $m_testVarArgsMethodReferenceToJsFuncion__void@jsfunction.Main
  (type $function.m_testVarArgsMethodReferenceToJsFuncion__void)
  (param $this.untyped (ref $java.lang.Object))
- (local $c (ref null $java.lang.Object))
+ (local $c (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2750,7 +2750,7 @@
 (func $m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction@jsfunction.Main
  (type $function.m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (param $x (ref null $java.lang.Object))
+ (param $x (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2762,7 +2762,7 @@
 (func $m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction@jsfunction.Main
  (type $function.m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (param $x (ref null $java.lang.Object))
+ (param $x (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2826,7 +2826,7 @@
 (func $m_testJsFunctionOptional__void_$pp_jsfunction@jsfunction.Main
  (type $function.m_testJsFunctionOptional__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (local $f (ref null $java.lang.Object))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2837,16 +2837,16 @@
 
 ;;; void Main.setParametricJsFunction(ParametricJsFunction<Object> fn)
 (func $m_setParametricJsFunction__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main
- (param $fn (ref null $java.lang.Object))
+ (param $fn (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
  )
 )
 
 ;;; ParametricJsFunction<Object> Main.getParametricJsFunction()
 (func $m_getParametricJsFunction__jsfunction_Main_ParametricJsFunction@jsfunction.Main
- (result (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
-  (return (ref.null $java.lang.Object))
+  (return (ref.null $javaemul.internal.JsFunctionAdaptor))
  )
 )
 
@@ -2854,7 +2854,7 @@
 (func $m_testFunctionExpressionTypeReplacement__void_$pp_jsfunction@jsfunction.Main
  (type $function.m_testFunctionExpressionTypeReplacement__void_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (local $f (ref null $java.lang.Object))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
@@ -2872,17 +2872,17 @@
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   (local.set $c (call $$create__@jsfunction.Main.ClassWithJsFunctionProperty ))
-  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c)))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
-  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (call_ref $function.m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref.as_non_null (local.get $c))(struct.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $vtable(local.get $c)))))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
-  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c)))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
-  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (if (result (ref null $java.lang.Object)) (i32.eqz (ref.is_null (local.get $c))) (then (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c))) (else (ref.null $java.lang.Object))))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
+  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
+  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (call_ref $function.m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref.as_non_null (local.get $c))(struct.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $vtable(local.get $c))))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
+  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
+  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (if (result (ref null $javaemul.internal.JsFunctionAdaptor)) (i32.eqz (ref.is_null (local.get $c))) (then (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c))) (else (ref.null $javaemul.internal.JsFunctionAdaptor)))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
  )
 )
 (elem declare func $m_testJsFunctionPropertyCall__void_$pp_jsfunction@jsfunction.Main)
 
 ;;; Object Main.callInterfaceRaw(JsBiFunction f, Object o, Number n)
 (func $m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $o (ref null $java.lang.Object))
  (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
@@ -2894,18 +2894,18 @@
 
 ;;; Object Main.callInterfaceRaw_$private(JsBiFunction f, Object o, Number n)
 (func $m_callInterfaceRaw_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $o (ref null $java.lang.Object))
  (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
  (block
-  (return (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $f))(local.get $o)(local.get $n)))
+  (return (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (local.get $f)(local.get $o)(local.get $n)))
  )
 )
 
 ;;; String Main.callInterfaceParameterized(JsBiFunction<String, Integer> f, String s)
 (func $m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  (block
@@ -2916,17 +2916,17 @@
 
 ;;; String Main.callInterfaceParameterized_$private(JsBiFunction<String, Integer> f, String s)
 (func $m_callInterfaceParameterized_$private__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  (block
-  (return (ref.cast (ref null $java.lang.String) (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $f))(local.get $s)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))))
+  (return (ref.cast (ref null $java.lang.String) (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (local.get $f)(local.get $s)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))))
  )
 )
 
 ;;; U Main.callInterfaceUnparameterized(JsBiFunction<U, V> f, U u, V v)
 (func $m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $u (ref null $java.lang.Object))
  (param $v (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
@@ -2938,12 +2938,12 @@
 
 ;;; U Main.callInterfaceUnparameterized_$private(JsBiFunction<U, V> f, U u, V v)
 (func $m_callInterfaceUnparameterized_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main
- (param $f (ref null $java.lang.Object))
+ (param $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $u (ref null $java.lang.Object))
  (param $v (ref null $java.lang.Number))
  (result (ref null $java.lang.Object))
  (block
-  (return (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $f))(local.get $u)(local.get $v)))
+  (return (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (local.get $f)(local.get $u)(local.get $v)))
  )
 )
 
@@ -2993,8 +2993,8 @@
 
 ;;; void Main.testParameterTypes()
 (func $m_testParameterTypes__void@jsfunction.Main
- (local $tIntegerJsBiFunction (ref null $java.lang.Object))
- (local $doubleDoubleJsBiFunction (ref null $java.lang.Object))
+ (local $tIntegerJsBiFunction (ref null $javaemul.internal.JsFunctionAdaptor))
+ (local $doubleDoubleJsBiFunction (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main )
   (local.set $tIntegerJsBiFunction (call $$create__@jsfunction.Main.TIntegerJsBiFunction ))
@@ -3006,8 +3006,8 @@
   (drop (call $m_callInterfaceUnparameterized_$private__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main (local.get $doubleDoubleJsBiFunction)(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))))
   (drop (call $m_callImplementorRaw_$private__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object@jsfunction.Main (call $$create__@jsfunction.Main.TIntegerJsBiFunction )(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))))
   (drop (call $m_callImplementorParameterized_$private__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String@jsfunction.Main (call $$create__@jsfunction.Main.TIntegerJsBiFunction )(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals )))
-  (drop (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $tIntegerJsBiFunction))(call $$getString_|a|__java_lang_String_<once>_@jsfunction.Main.$StringLiterals )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))))
-  (drop (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $doubleDoubleJsBiFunction))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))))
+  (drop (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (local.get $tIntegerJsBiFunction)(call $$getString_|a|__java_lang_String_<once>_@jsfunction.Main.$StringLiterals )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))))
+  (drop (call $m_apply$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__java_lang_Number__java_lang_Object@jsfunction.Main.JsBiFunction (local.get $doubleDoubleJsBiFunction)(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 1.1))))
   (drop (call $js_import_m_callOnFunction__java_lang_Object__double@jsfunction.Main (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (ref.cast (ref null $java.lang.Object) (call $$create__@jsfunction.Main.DoubleDoubleJsBiFunction )))))
  )
 )
@@ -3017,16 +3017,16 @@
  (local $o (ref null $java.lang.Object))
  (local $rawTIntegerJsBiFunction (ref null $jsfunction.Main.TIntegerJsBiFunction))
  (local $parameterizedTIntegerJsBiFunction (ref null $jsfunction.Main.TIntegerJsBiFunction))
- (local $anotherRawJsBiFunction (ref null $java.lang.Object))
- (local $anotherParameterizedJsBiFunction (ref null $java.lang.Object))
+ (local $anotherRawJsBiFunction (ref null $javaemul.internal.JsFunctionAdaptor))
+ (local $anotherParameterizedJsBiFunction (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $doubleDoubleJsBiFunction (ref null $jsfunction.Main.DoubleDoubleJsBiFunction))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main )
   (local.set $o (call $$create__@jsfunction.Main.TIntegerJsBiFunction ))
   (local.set $rawTIntegerJsBiFunction (ref.cast (ref null $jsfunction.Main.TIntegerJsBiFunction) (local.get $o)))
   (local.set $parameterizedTIntegerJsBiFunction (ref.cast (ref null $jsfunction.Main.TIntegerJsBiFunction) (local.get $o)))
-  (local.set $anotherRawJsBiFunction (local.get $o))
-  (local.set $anotherParameterizedJsBiFunction (local.get $o))
+  (local.set $anotherRawJsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $o)))
+  (local.set $anotherParameterizedJsBiFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $o)))
   (local.set $doubleDoubleJsBiFunction (ref.cast (ref null $jsfunction.Main.DoubleDoubleJsBiFunction) (local.get $o)))
  )
 )
@@ -3047,7 +3047,7 @@
 (func $m_testNewInstance__void@jsfunction.Main
  (local $rawTIntegerJsBiFunction (ref null $jsfunction.Main.TIntegerJsBiFunction))
  (local $parameterizedTIntegerJsBiFunction (ref null $jsfunction.Main.TIntegerJsBiFunction))
- (local $rawJsBiFunction (ref null $java.lang.Object))
+ (local $rawJsBiFunction (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main )
   (local.set $rawTIntegerJsBiFunction (call $$create__@jsfunction.Main.TIntegerJsBiFunction ))
@@ -3061,18 +3061,18 @@
  (type $function.m_testJsFunctionWithNativeType__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $nativeObj (ref null extern))
- (local $fn (ref null $java.lang.Object))
+ (local $fn (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $result (ref null extern))
- (local $jsFnFromJs (ref null $java.lang.Object))
+ (local $jsFnFromJs (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $nativeObjResult (ref null extern))
  (local $this (ref null $jsfunction.Main))
  (local.set $this (ref.cast (ref $jsfunction.Main) (local.get $this.untyped)))
  (block
   (local.set $nativeObj (call $js_import_m_<init>__@jsfunction.Main.NativeRegExp ))
   (local.set $fn (call $$create__@jsfunction.Main.$LambdaImplementor$16 ))
-  (local.set $result (call $js_import_m_callAsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main (call $m_toJs__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@javaemul.internal.JsFunctionAdaptor (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $fn)))(local.get $nativeObj)))
+  (local.set $result (call $js_import_m_callAsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main (call $m_toJs__javaemul_internal_JsFunctionAdaptor__javaemul_internal_WasmExtern@javaemul.internal.JsFunctionAdaptor (local.get $fn))(local.get $nativeObj)))
   (local.set $jsFnFromJs (call $m_fromJs__javaemul_internal_WasmExtern__javaemul_internal_JsFunctionAdaptor@javaemul.internal.JsFunctionAdaptor (call $js_import_m_createJsFunctionWithNativeType__jsfunction_Main_JsFunctionWithNativeType@jsfunction.Main )))
-  (local.set $nativeObjResult (call $m_f$jsFunction__javaemul_internal_JsFunctionAdaptor__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main.JsFunctionWithNativeType (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $jsFnFromJs))(local.get $nativeObj)))
+  (local.set $nativeObjResult (call $m_f$jsFunction__javaemul_internal_JsFunctionAdaptor__jsfunction_Main_NativeRegExp__jsfunction_Main_NativeRegExp@jsfunction.Main.JsFunctionWithNativeType (local.get $jsFnFromJs)(local.get $nativeObj)))
  )
 )
 (elem declare func $m_testJsFunctionWithNativeType__void@jsfunction.Main)
@@ -3198,7 +3198,7 @@
 (func $m_test__void@jsfunction.Main.TestCaptureOuterParametricClass
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
- (local $f (ref null $java.lang.Object))
+ (local $f (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main.TestCaptureOuterParametricClass))
  (local.set $this (ref.cast (ref $jsfunction.Main.TestCaptureOuterParametricClass) (local.get $this.untyped)))
  (block
@@ -3271,11 +3271,11 @@
 (func $m_anApi__jsfunction_Main_ParametricJsFunction@jsfunction.Main.Implementor
  (type $function.m_anApi__jsfunction_Main_ParametricJsFunction)
  (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main.Implementor))
  (local.set $this (ref.cast (ref $jsfunction.Main.Implementor) (local.get $this.untyped)))
  (block
-  (return (ref.null $java.lang.Object))
+  (return (ref.null $javaemul.internal.JsFunctionAdaptor))
  )
 )
 (elem declare func $m_anApi__jsfunction_Main_ParametricJsFunction@jsfunction.Main.Implementor)
@@ -3326,7 +3326,7 @@
  (local $$instance (ref null $jsfunction.Main.ClassWithJsFunctionProperty))
  (block
   (call $$clinit__void_<once>_@jsfunction.Main.ClassWithJsFunctionProperty )
-  (local.set $$instance (struct.new $jsfunction.Main.ClassWithJsFunctionProperty (global.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $jsfunction.Main.ClassWithJsFunctionProperty (global.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable) (global.get $itable.empty) (i32.const 0) (ref.null $javaemul.internal.JsFunctionAdaptor)))
   (call $$ctor__void_$p_jsfunction_Main_ClassWithJsFunctionProperty@jsfunction.Main.ClassWithJsFunctionProperty (ref.as_non_null (local.get $$instance)))
   (return (local.get $$instance))
  )
@@ -3344,11 +3344,11 @@
 (func $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty
  (type $function.m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction)
  (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main.ClassWithJsFunctionProperty))
  (local.set $this (ref.cast (ref $jsfunction.Main.ClassWithJsFunctionProperty) (local.get $this.untyped)))
  (block
-  (return (ref.null $java.lang.Object))
+  (return (ref.null $javaemul.internal.JsFunctionAdaptor))
  )
 )
 (elem declare func $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty)
@@ -4107,7 +4107,7 @@
 (func $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation
  (type $function.m_call__jsfunction_Main_ParametricJsFunction__void)
  (param $this.untyped (ref $java.lang.Object))
- (param $t (ref null $java.lang.Object))
+ (param $t (ref null $javaemul.internal.JsFunctionAdaptor))
  (local $this (ref null $jsfunction.Main.RecursiveParametricJsFunctionImplementation))
  (local.set $this (ref.cast (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation) (local.get $this.untyped)))
  (block
@@ -4123,7 +4123,7 @@
  (local $this (ref null $jsfunction.Main.RecursiveParametricJsFunctionImplementation))
  (local.set $this (ref.cast (ref $jsfunction.Main.RecursiveParametricJsFunctionImplementation) (local.get $this.untyped)))
  (block
-  (call $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation (ref.as_non_null (local.get $this))(local.get $event))
+  (call $m_call__jsfunction_Main_ParametricJsFunction__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $event)))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveParametricJsFunctionImplementation)
@@ -5445,14 +5445,14 @@
 (func $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$11
  (type $function.m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object)
  (param $this.untyped (ref $java.lang.Object))
- (param $p0 (ref null $java.lang.Object))
+ (param $p0 (ref null $javaemul.internal.JsFunctionAdaptor))
  (param $p1 i32)
  (param $p2 (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
  (local $this (ref null $jsfunction.Main.$LambdaImplementor$11))
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$11) (local.get $this.untyped)))
  (block
-  (return (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ElementalJsFunction (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $p0))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $p1))(local.get $p2)))))
+  (return (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.ElementalJsFunction (local.get $p0)(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 2 (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $p1))(local.get $p2)))))
  )
 )
 (elem declare func $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$11)
@@ -5468,7 +5468,7 @@
  (local $this (ref null $jsfunction.Main.$LambdaImplementor$11))
  (local.set $this (ref.cast (ref $jsfunction.Main.$LambdaImplementor$11) (local.get $this.untyped)))
  (block
-  (return (call $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $this))(local.get $p0)(local.get $p1)(local.get $p2)))
+  (return (call $m_onInvoke__jsfunction_Main_ElementalJsFunction__int__arrayOf_jsfunction_Main_ElementalJsFunction__java_lang_Object@jsfunction.Main.$LambdaImplementor$11 (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (local.get $p0))(local.get $p1)(local.get $p2)))
  )
 )
 (elem declare func $m_onInvoke__java_lang_Object__int__arrayOf_java_lang_Object__java_lang_Object@jsfunction.Main.$LambdaImplementor$11)

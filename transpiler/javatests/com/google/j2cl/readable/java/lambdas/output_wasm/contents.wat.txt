@@ -2426,7 +2426,7 @@
 
 ;;; GenericJsFunction<E, E> Lambdas.identity()
 (func $m_identity__lambdas_Lambdas_GenericJsFunction@lambdas.Lambdas
- (result (ref null $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
   (call $$clinit__void_<once>_@lambdas.Lambdas )
   (if (ref.is_null (global.get $identityFunction@lambdas.Lambdas))
@@ -2436,7 +2436,7 @@
     )
    )
   )
-  (return (ref.cast (ref null $java.lang.Object) (global.get $identityFunction@lambdas.Lambdas)))
+  (return (ref.cast (ref null $javaemul.internal.JsFunctionAdaptor) (global.get $identityFunction@lambdas.Lambdas)))
  )
 )
 
