@@ -25,16 +25,6 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
-(global $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.vtable (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.vtable)
- (struct.new $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay)
- )
-)
-(global $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.vtable (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.vtable)
- (struct.new $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay)
- )
-)
 
 
 ;;; void $Overlay.$clinit()
@@ -63,19 +53,6 @@
  )
 )
 
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay))
- (local.set $this (ref.cast (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay)
-
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay
  (block
@@ -101,19 +78,6 @@
   (return (global.get $$class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay))
- (local.set $this (ref.cast (ref $nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay)
 
 ;;; Main Main.$create()
 (func $$create__@nativejstypeobjectmethods.Main

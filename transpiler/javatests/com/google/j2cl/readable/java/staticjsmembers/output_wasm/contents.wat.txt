@@ -38,21 +38,6 @@
   (ref.func $m_test__void@staticjsmembers.StaticJsMembers)
  )
 )
-(global $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable (ref $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable)
- (struct.new $staticjsmembers.StaticJsMembers.Native.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Native.$Overlay)
- )
-)
-(global $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable (ref $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable)
- (struct.new $staticjsmembers.StaticJsMembers.Extern.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay)
- )
-)
-(global $staticjsmembers.StaticJsMembers.Window.$Overlay.vtable (ref $staticjsmembers.StaticJsMembers.Window.$Overlay.vtable)
- (struct.new $staticjsmembers.StaticJsMembers.Window.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Window.$Overlay)
- )
-)
 
 
 ;;; void $Overlay.$clinit()
@@ -81,19 +66,6 @@
  )
 )
 
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Native.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $staticjsmembers.StaticJsMembers.Native.$Overlay))
- (local.set $this (ref.cast (ref $staticjsmembers.StaticJsMembers.Native.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticjsmembers.StaticJsMembers.Native.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Native.$Overlay)
-
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@staticjsmembers.StaticJsMembers.Extern.$Overlay
  (block
@@ -120,19 +92,6 @@
  )
 )
 
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $staticjsmembers.StaticJsMembers.Extern.$Overlay))
- (local.set $this (ref.cast (ref $staticjsmembers.StaticJsMembers.Extern.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticjsmembers.StaticJsMembers.Extern.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Extern.$Overlay)
-
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@staticjsmembers.StaticJsMembers.Window.$Overlay
  (block
@@ -158,19 +117,6 @@
   (return (global.get $$class@staticjsmembers.StaticJsMembers.Window.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Window.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $staticjsmembers.StaticJsMembers.Window.$Overlay))
- (local.set $this (ref.cast (ref $staticjsmembers.StaticJsMembers.Window.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@staticjsmembers.StaticJsMembers.Window.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@staticjsmembers.StaticJsMembers.Window.$Overlay)
 
 ;;; StaticJsMembers StaticJsMembers.$create()
 (func $$create__@staticjsmembers.StaticJsMembers

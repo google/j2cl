@@ -229,11 +229,6 @@
   (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
  )
 )
-(global $jsvarargs.Main.NativeType.$Overlay.vtable (ref $jsvarargs.Main.NativeType.$Overlay.vtable)
- (struct.new $jsvarargs.Main.NativeType.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsvarargs.Main.NativeType.$Overlay)
- )
-)
 (global $jsvarargs.QualifiedSuperMethodCall.vtable (ref $jsvarargs.QualifiedSuperMethodCall.vtable)
  (struct.new $jsvarargs.QualifiedSuperMethodCall.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsvarargs.QualifiedSuperMethodCall)
@@ -435,19 +430,6 @@
   (return (global.get $$class@jsvarargs.Main.NativeType.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsvarargs.Main.NativeType.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsvarargs.Main.NativeType.$Overlay))
- (local.set $this (ref.cast (ref $jsvarargs.Main.NativeType.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsvarargs.Main.NativeType.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsvarargs.Main.NativeType.$Overlay)
 
 ;;; Main Main.$create(int f)
 (func $$create__int@jsvarargs.Main

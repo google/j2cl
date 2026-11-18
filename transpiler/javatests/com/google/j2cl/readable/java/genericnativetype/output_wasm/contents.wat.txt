@@ -11,11 +11,6 @@
 (global $$class@genericnativetype.BoundedJsArrays (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $genericnativetype.BoundedJsArray.$Overlay.vtable (ref $genericnativetype.BoundedJsArray.$Overlay.vtable)
- (struct.new $genericnativetype.BoundedJsArray.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
- )
-)
 (global $genericnativetype.BoundedJsArrays.vtable (ref $genericnativetype.BoundedJsArrays.vtable)
  (struct.new $genericnativetype.BoundedJsArrays.vtable
   (ref.func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArrays)
@@ -74,19 +69,6 @@
   (return (global.get $$class@genericnativetype.BoundedJsArray.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $genericnativetype.BoundedJsArray.$Overlay))
- (local.set $this (ref.cast (ref $genericnativetype.BoundedJsArray.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@genericnativetype.BoundedJsArray.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
 
 ;;; BoundedJsArrays BoundedJsArrays.$create()
 (func $$create__@genericnativetype.BoundedJsArrays

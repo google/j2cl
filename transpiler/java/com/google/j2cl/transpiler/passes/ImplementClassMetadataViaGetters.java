@@ -84,7 +84,7 @@ public class ImplementClassMetadataViaGetters extends NormalizationPass {
   }
 
   private static boolean needsGetClassImplementation(Type type) {
-    if (type.isInterface() || type.isNative()) {
+    if (type.isInterface() || type.isNative() || type.isOverlayImplementation()) {
       return false;
     }
     return type.getDeclaration().getOrigin() != Origin.LAMBDA_IMPLEMENTOR;

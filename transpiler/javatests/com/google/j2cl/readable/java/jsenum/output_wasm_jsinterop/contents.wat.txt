@@ -686,12 +686,6 @@
   (ref.func $m_toString__java_lang_String@jsenum.Main.JsEnumRecord)
  )
 )
-(global $jsenum.Main.NativeStringEnum.$Overlay.vtable (ref (exact $jsenum.Main.NativeStringEnum.$Overlay.vtable))
- (struct.new $jsenum.Main.NativeStringEnum.$Overlay.vtable
-  (ref.null extern)
-  (ref.func $$getClassImpl__java_lang_Class@jsenum.Main.NativeStringEnum.$Overlay)
- )
-)
 
 
 ;;; void Supplier.$clinit()
@@ -885,19 +879,6 @@
   (return (global.get $$class@jsenum.Main.NativeStringEnum.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsenum.Main.NativeStringEnum.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsenum.Main.NativeStringEnum.$Overlay))
- (local.set $this (ref.cast (ref $jsenum.Main.NativeStringEnum.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsenum.Main.NativeStringEnum.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsenum.Main.NativeStringEnum.$Overlay)
 
 ;;; Main Main.$create()
 (func $$create__@jsenum.Main

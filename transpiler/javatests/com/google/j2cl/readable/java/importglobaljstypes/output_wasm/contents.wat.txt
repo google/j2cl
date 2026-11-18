@@ -50,11 +50,6 @@
   (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date)
  )
 )
-(global $importglobaljstypes.Date.NativeDate.$Overlay.vtable (ref $importglobaljstypes.Date.NativeDate.$Overlay.vtable)
- (struct.new $importglobaljstypes.Date.NativeDate.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
- )
-)
 (global $importglobaljstypes.Number.vtable (ref $importglobaljstypes.Number.vtable)
  (struct.new $importglobaljstypes.Number.vtable
   (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.Number)
@@ -70,11 +65,6 @@
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
- )
-)
-(global $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable)
- (struct.new $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
  )
 )
 
@@ -104,19 +94,6 @@
   (return (global.get $$class@importglobaljstypes.Date.NativeDate.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $importglobaljstypes.Date.NativeDate.$Overlay))
- (local.set $this (ref.cast (ref $importglobaljstypes.Date.NativeDate.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.Date.NativeDate.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@importglobaljstypes.Number.NativeArray.$Overlay
@@ -195,19 +172,6 @@
   (return (global.get $$class@importglobaljstypes.RegExp.NativeRegExp.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $importglobaljstypes.RegExp.NativeRegExp.$Overlay))
- (local.set $this (ref.cast (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@importglobaljstypes.RegExp.NativeRegExp.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
 
 ;;; Date Date.$create()
 (func $$create__@importglobaljstypes.Date

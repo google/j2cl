@@ -984,16 +984,6 @@
   (ref.func $m_call__java_lang_Object__void@jsfunction.Main.RecursiveJsFunctionImplementation)
  )
 )
-(global $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay.vtable (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay.vtable)
- (struct.new $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay)
- )
-)
-(global $jsfunction.Main.NativeRegExp.$Overlay.vtable (ref $jsfunction.Main.NativeRegExp.$Overlay.vtable)
- (struct.new $jsfunction.Main.NativeRegExp.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsfunction.Main.NativeRegExp.$Overlay)
- )
-)
 
 
 ;;; NativeString F.m(JsFunctionAdaptor $instance, NativeString s)
@@ -2060,19 +2050,6 @@
  )
 )
 
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay))
- (local.set $this (ref.cast (ref $jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay)
-
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@jsfunction.Main.NativeRegExp.$Overlay
  (block
@@ -2098,19 +2075,6 @@
   (return (global.get $$class@jsfunction.Main.NativeRegExp.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsfunction.Main.NativeRegExp.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsfunction.Main.NativeRegExp.$Overlay))
- (local.set $this (ref.cast (ref $jsfunction.Main.NativeRegExp.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsfunction.Main.NativeRegExp.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsfunction.Main.NativeRegExp.$Overlay)
 
 ;;; JsFunctionOptimization JsFunctionOptimization.$create()
 (func $$create__@jsfunction.JsFunctionOptimization

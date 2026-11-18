@@ -19,6 +19,7 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.hasOwnWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
+import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.hasWasmTypeLayout;
 import static java.lang.String.format;
 
 import com.google.common.collect.ImmutableList;
@@ -182,7 +183,7 @@ public class WasmConstructsGenerator {
   }
 
   void renderTypeStructs(Type type) {
-    if (type.isNative() || getWasmInfo(type.getDeclaration()) != null) {
+    if (!hasWasmTypeLayout(type)) {
       return;
     }
 
@@ -543,11 +544,10 @@ public class WasmConstructsGenerator {
     // Populate all vtables.
     library
         .streamTypes()
+        .filter(WasmGenerationEnvironment::hasWasmTypeLayout)
         .filter(not(Type::isInterface))
-        .filter(not(Type::isNative))
         .map(Type::getDeclaration)
         .filter(not(TypeDeclaration::isAbstract))
-        .filter(type -> getWasmInfo(type) == null)
         .forEach(this::emitVtablesInitialization);
     builder.newLine();
   }

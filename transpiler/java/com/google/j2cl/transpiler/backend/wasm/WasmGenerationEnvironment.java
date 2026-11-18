@@ -179,6 +179,13 @@ public class WasmGenerationEnvironment {
     return wasm == null ? null : wasm.getStringValue("value");
   }
 
+  /** Returns true if the type has a Wasm layout (struct and/or vtable). */
+  static boolean hasWasmTypeLayout(Type type) {
+    return !type.isNative()
+        && !type.isOverlayImplementation()
+        && getWasmInfo(type.getDeclaration()) == null;
+  }
+
   public String getTypeSignature(TypeDeclaration typeDeclaration) {
     return getTypeSignature(typeDeclaration.toDescriptor());
   }
@@ -430,23 +437,23 @@ public class WasmGenerationEnvironment {
     wasmTypeLayoutByTypeDeclaration = new LinkedHashMap<>();
     library
         .streamTypes()
+        .filter(WasmGenerationEnvironment::hasWasmTypeLayout)
         // Traverse superclasses before subclasses to ensure that the layout for the superclass
         // is already available to build the layout for the subclass.
         .sorted(comparingInt(t -> t.getDeclaration().getTypeHierarchyDepth()))
-        .forEach(
-            t -> {
-              TypeDeclaration typeDeclaration = t.getDeclaration();
-              // Force creation of layouts for all superinterfaces.
-              typeDeclaration.getAllSuperInterfaces().forEach(this::getOrCreateWasmTypeLayout);
-              WasmTypeLayout superWasmLayout =
-                  getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(t));
-              var previous =
-                  wasmTypeLayoutByTypeDeclaration.put(
-                      typeDeclaration, WasmTypeLayout.createFromType(t, superWasmLayout));
-              // Since the layout is for a type in the AST, it is expected that the
-              // layout was not already created from the descriptor.
-              checkState(previous == null);
-            });
+        .forEach(t -> {
+          TypeDeclaration typeDeclaration = t.getDeclaration();
+          // Force creation of layouts for all superinterfaces.
+          typeDeclaration.getAllSuperInterfaces().forEach(this::getOrCreateWasmTypeLayout);
+          WasmTypeLayout superWasmLayout =
+              getOrCreateWasmTypeLayout(getTypeLayoutSuperTypeDeclaration(t));
+          var previous =
+              wasmTypeLayoutByTypeDeclaration.put(
+                  typeDeclaration, WasmTypeLayout.createFromType(t, superWasmLayout));
+          // Since the layout is for a type in the AST, it is expected that the
+          // layout was not already created from the descriptor.
+          checkState(previous == null);
+        });
 
     this.jsImports = jsImports;
   }

@@ -377,12 +377,6 @@
   (ref.func $m_test__int__int__void@jsmethod.JsMethodExample.JsKeywords)
  )
 )
-(global $jsmethod.JsMethodExample.NativeFoo.$Overlay.vtable (ref (exact $jsmethod.JsMethodExample.NativeFoo.$Overlay.vtable))
- (struct.new $jsmethod.JsMethodExample.NativeFoo.$Overlay.vtable
-  (ref.null extern)
-  (ref.func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.NativeFoo.$Overlay)
- )
-)
 
 
 ;;; void I.$clinit()
@@ -573,19 +567,6 @@
   (return (global.get $$class@jsmethod.JsMethodExample.NativeFoo.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.NativeFoo.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsmethod.JsMethodExample.NativeFoo.$Overlay))
- (local.set $this (ref.cast (ref $jsmethod.JsMethodExample.NativeFoo.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmethod.JsMethodExample.NativeFoo.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsmethod.JsMethodExample.NativeFoo.$Overlay)
 
 ;;; JsMethodExample JsMethodExample.$create()
 (func $$create__@jsmethod.JsMethodExample

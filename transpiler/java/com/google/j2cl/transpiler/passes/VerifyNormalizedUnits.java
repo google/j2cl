@@ -152,6 +152,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           public void checkMember(Member member) {
             verifyMemberUniqueness(member);
+            checkState(!getCurrentType().isOverlayImplementation() || member.isStatic());
             if (verifyForWasm && !enableCustomDescriptorsJsInterop) {
               checkState(member.isNative() || !member.getDescriptor().isJsMember());
             }

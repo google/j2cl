@@ -5,11 +5,6 @@
 (global $$class@jsmemberinnativetype.MyNativeType.$Overlay (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
-(global $jsmemberinnativetype.MyNativeType.$Overlay.vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable)
- (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
- )
-)
 
 
 ;;; void $Overlay.useFieldsAndMethods__$devirt(MyNativeType $thisArg)
@@ -55,16 +50,3 @@
   (return (global.get $$class@jsmemberinnativetype.MyNativeType.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsmemberinnativetype.MyNativeType.$Overlay))
- (local.set $this (ref.cast (ref $jsmemberinnativetype.MyNativeType.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsmemberinnativetype.MyNativeType.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)

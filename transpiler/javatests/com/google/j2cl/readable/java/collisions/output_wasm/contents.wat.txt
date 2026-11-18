@@ -167,11 +167,6 @@
   (ref.func $m_run__void@collisions.T.$LambdaImplementor$2)
  )
 )
-(global $collisions.Blah.$Overlay.vtable (ref $collisions.Blah.$Overlay.vtable)
- (struct.new $collisions.Blah.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
- )
-)
 
 
 ;;; void $Overlay.$clinit()
@@ -199,19 +194,6 @@
   (return (global.get $$class@collisions.Blah.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $collisions.Blah.$Overlay))
- (local.set $this (ref.cast (ref $collisions.Blah.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@collisions.Blah.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@collisions.Blah.$Overlay)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@collisions.ReservedPropertyNames.$Overlay

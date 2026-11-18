@@ -78,16 +78,6 @@
   (ref.func $m_run__void@jsoverlay.Main.NativeJsTypeWithOverlay.$LambdaImplementor$1)
  )
 )
-(global $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable)
- (struct.new $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
- )
-)
-(global $jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay.vtable (ref $jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay.vtable)
- (struct.new $jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay.vtable
-  (ref.func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay)
- )
-)
 (global $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl.vtable (ref $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl.vtable)
  (struct.new $jsoverlay.NativeJsTypeInterfaceWithOverlayImpl.vtable
   (ref.func $$getClassImpl__java_lang_Class@jsoverlay.NativeJsTypeInterfaceWithOverlayImpl)
@@ -365,19 +355,6 @@
  )
 )
 
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay))
- (local.set $this (ref.cast (ref $jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay)
-
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay
  (block
@@ -403,19 +380,6 @@
   (return (global.get $$class@jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay))
  )
 )
-
-;;; Class<?> $Overlay.$getClassImpl()
-(func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay
- (type $function.$getClassImpl__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay))
- (local.set $this (ref.cast (ref $jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay) (local.get $this.untyped)))
- (block
-  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay ))
- )
-)
-(elem declare func $$getClassImpl__java_lang_Class@jsoverlay.Main.NativeJsTypeWithOverlayConstant.$Overlay)
 
 ;;; Main Main.$create()
 (func $$create__@jsoverlay.Main
