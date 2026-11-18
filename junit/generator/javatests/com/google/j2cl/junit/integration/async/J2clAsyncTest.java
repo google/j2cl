@@ -155,7 +155,16 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .testClassName(testName)
             .addTestSuccess("testListenableFuture")
             .addTestFailure("testListenableFuture_fail")
+            .addTestFailure("testListenableFuture_returnsNull")
+            .addTestFailure("testListenableFuture_timeout")
+            .addTestFailure("testListenableFuture_timeoutBeforeReturningFuture")
             .addLogLineContains("java.lang.Exception: Should see this message")
+            .addLogLineContains(
+                "java.lang.IllegalStateException: Test returned null as its promise")
+            .addLogLineContains("TestTimedOutException: test timed out after 50 milliseconds")
+            .addLogLineContains(
+                "TestListenableFuture.testListenableFuture_timeoutBeforeReturningFuture")
+            .addBlackListedWord("should_not_be_in_log")
             .build();
 
     List<String> logLines = runTest(testName);

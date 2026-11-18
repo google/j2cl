@@ -315,7 +315,10 @@ public class J2clTestingProcessingStepTest {
         ErrorMessage.ASYNC_NOT_SUPPORTED_IN_WASM,
         TestListenableFuture.class,
         "testListenableFuture",
-        "testListenableFuture_fail");
+        "testListenableFuture_fail",
+        "testListenableFuture_returnsNull",
+        "testListenableFuture_timeout",
+        "testListenableFuture_timeoutBeforeReturningFuture");
     assertError(
         "WASM",
         ErrorMessage.NON_VOID_RETURN,

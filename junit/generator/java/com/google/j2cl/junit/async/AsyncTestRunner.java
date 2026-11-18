@@ -16,6 +16,7 @@
 package com.google.j2cl.junit.async;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.util.concurrent.MoreExecutors.directExecutor;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import com.google.common.reflect.Reflection;
@@ -27,8 +28,10 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Before;
@@ -82,68 +85,45 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     }
   }
 
-  private static class ListenableFutureStatement extends Statement {
+  /** Invokes an async method and waits for the ListenableFuture or promise-like it returns. */
+  private static class AsyncStatement extends Statement {
     private final FrameworkMethod method;
     private final Object test;
 
-    public ListenableFutureStatement(FrameworkMethod method, Object test) {
+    public AsyncStatement(FrameworkMethod method, Object test) {
       this.method = method;
       this.test = test;
     }
 
     @Override
     public void evaluate() throws Throwable {
-      long timeout = getTimeout(method);
-      ListenableFuture<?> future = (ListenableFuture) method.invokeExplosively(test);
+      Object result = method.invokeExplosively(test);
+      checkState(result != null, "Test returned null as its promise");
+      ListenableFuture<?> future =
+          method.getReturnType() == ListenableFuture.class
+              ? (ListenableFuture<?>) result
+              : toListenableFuture(result);
       try {
-        future.get(timeout, MILLISECONDS);
-      } catch (TimeoutException e) {
-        TestTimedOutException timedOutException = new TestTimedOutException(timeout, MILLISECONDS);
-        timedOutException.setStackTrace(e.getStackTrace());
-        throw timedOutException;
+        future.get();
       } catch (ExecutionException e) {
         throw e.getCause();
-      }
-    }
-  }
-
-  private static class PromiseStatement extends Statement {
-
-    private final SettableFuture<Void> future = SettableFuture.create();
-
-    private final FrameworkMethod method;
-    private final Object test;
-
-    public PromiseStatement(FrameworkMethod method, Object test) {
-      this.method = method;
-      this.test = test;
-    }
-
-    @Override
-    public void evaluate() throws Throwable {
-      long timeout = getTimeout(method);
-      Object promiseLike = method.invokeExplosively(test);
-      registerCallbacks(promiseLike);
-      try {
-        future.get(timeout, MILLISECONDS);
-      } catch (TimeoutException e) {
-        TestTimedOutException timedOutException = new TestTimedOutException(timeout, MILLISECONDS);
-        timedOutException.setStackTrace(e.getStackTrace());
-        throw timedOutException;
-      } catch (ExecutionException e) {
-        throw e.getCause();
+      } finally {
+        // Stops the pending work of a test that timed out; a no-op if the future is done.
+        future.cancel(true);
       }
     }
 
-    private void registerCallbacks(Object promiseLike) throws Exception {
-      checkState(promiseLike != null, "Test returned null as its promise");
+    private static ListenableFuture<?> toListenableFuture(Object promiseLike) throws Exception {
+      SettableFuture<Void> future = SettableFuture.create();
       PromiseType promiseType = getPromiseType(promiseLike.getClass());
-      Object successCallback = createSuccessCallback(promiseType);
-      Object errorCallback = createErrorCallback(promiseType);
+      Object successCallback = createSuccessCallback(promiseType, future);
+      Object errorCallback = createErrorCallback(promiseType, future);
       promiseType.thenMethod.invoke(promiseLike, successCallback, errorCallback);
+      return future;
     }
 
-    private Object createErrorCallback(PromiseType promiseType) {
+    private static Object createErrorCallback(
+        PromiseType promiseType, SettableFuture<Void> future) {
       return Reflection.newProxy(
           promiseType.errorCallbackType,
           (proxy, method, args) -> {
@@ -153,13 +133,58 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
           });
     }
 
-    private Object createSuccessCallback(PromiseType promiseType) {
+    private static Object createSuccessCallback(
+        PromiseType promiseType, SettableFuture<Void> future) {
       return Reflection.newProxy(
           promiseType.successCallbackType,
           (proxy, method, args) -> {
             future.set(null);
             return args[0];
           });
+    }
+  }
+
+  /**
+   * Like JUnit's FailOnTimeout, but evaluates the statement on the calling thread, which keeps its
+   * ThreadLocals intact, and interrupts it on timeout.
+   */
+  private static class TimeLimitedStatement extends Statement {
+    private final Statement statement;
+    private final long timeout;
+
+    public TimeLimitedStatement(Statement statement, long timeout) {
+      this.statement = statement;
+      this.timeout = timeout;
+    }
+
+    @Override
+    public void evaluate() throws Throwable {
+      // Cancelling a FutureTask interrupts the thread running it, but only while it is running, and
+      // run() does not return before such an interrupt is delivered. So none can leak past run().
+      // Capture any failure outside FutureTask since FutureTask drops it if cancelled on timeout.
+      AtomicReference<Throwable> failure = new AtomicReference<>();
+      FutureTask<Void> task =
+          new FutureTask<>(
+              () -> {
+                try {
+                  statement.evaluate();
+                } catch (Throwable t) {
+                  failure.set(t);
+                }
+              },
+              null);
+      // Cancels on the JDK's timer thread rather than the common pool, which the test may block.
+      // There is no need to unschedule it since cancelling a completed task is a no-op.
+      CompletableFuture.delayedExecutor(timeout, MILLISECONDS, directExecutor())
+          .execute(() -> task.cancel(true));
+      task.run();
+      if (task.isCancelled()) {
+        Thread.interrupted(); // Clear the interrupt from the cancellation.
+        throw new TestTimedOutException(timeout, MILLISECONDS).initCause(failure.get());
+      }
+      if (failure.get() != null) {
+        throw failure.get();
+      }
     }
   }
 
@@ -194,10 +219,7 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     if (method.getReturnType() == Void.TYPE) {
       return super.methodInvoker(method, test);
     }
-    if (method.getReturnType() == ListenableFuture.class) {
-      return new ListenableFutureStatement(method, test);
-    }
-    return new PromiseStatement(method, test);
+    return new AsyncStatement(method, test);
   }
 
   @Override
@@ -205,9 +227,7 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     if (method.getReturnType() == Void.TYPE) {
       return super.withPotentialTimeout(method, test, next);
     }
-    // Both ListenableFutureStatement and PromiseStatement wrap the future/promiselike test methods
-    // in a `Future.get(timeout)`, so we don't need to enforce the timeout here.
-    return next;
+    return new TimeLimitedStatement(next, getTimeout(method));
   }
 
   @Override
@@ -217,7 +237,7 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
       @Override
       public void evaluate() throws Throwable {
         for (FrameworkMethod m : befores) {
-          methodInvoker(m, target).evaluate();
+          withPotentialTimeout(m, target, methodInvoker(m, target)).evaluate();
         }
         next.evaluate();
       }
@@ -238,7 +258,7 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
         } finally {
           for (FrameworkMethod m : afters) {
             try {
-              methodInvoker(m, target).evaluate();
+              withPotentialTimeout(m, target, methodInvoker(m, target)).evaluate();
             } catch (Throwable e) {
               errors.add(e);
             }
