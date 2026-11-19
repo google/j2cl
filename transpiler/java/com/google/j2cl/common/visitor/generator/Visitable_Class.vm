@@ -4,22 +4,32 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.common.visitor.ListVisitor;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.ProcessorError;
+import com.google.j2cl.common.visitor.TraversalFlags;
 
 public class Visitor_${className} {
 
   public static ${visitableClass.TopClassName} visit(Processor processor, ${className} ${visitableClass.ParameterName}) {
-    ${visitableClass.TopClassName} result = ${visitableClass.ParameterName};
-
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
-    pushContext(processor, ${visitableClass.ParameterName});
+    int flags = processorImpl.traversalFlags[ProcessorPrivate.ID_${className}];
+    if ((flags & TraversalFlags.REACHES_OVERRIDE) == 0) {
+      return ${visitableClass.ParameterName};
+    }
+
+    ${visitableClass.TopClassName} result = ${visitableClass.ParameterName};
+    pushContext(processorImpl, ${visitableClass.ParameterName});
 
     try {
-      if (processorImpl.shouldProcess${className}(${visitableClass.ParameterName})) {
-        processorImpl.pushParent(${visitableClass.ParameterName});
-        visitMembers(processorImpl, ${visitableClass.ParameterName});
-        processorImpl.popParent();
+      if ((flags & TraversalFlags.PRE_OVERRIDDEN) == 0
+          || processorImpl.shouldProcess${className}(${visitableClass.ParameterName})) {
+        if ((flags & TraversalFlags.MEMBERS_REACH_OVERRIDE) != 0) {
+          processorImpl.pushParent(${visitableClass.ParameterName});
+          visitMembers(processorImpl, ${visitableClass.ParameterName});
+          processorImpl.popParent();
+        }
       }
-      result = processorImpl.postProcess${className}(${visitableClass.ParameterName});
+      if ((flags & TraversalFlags.POST_OVERRIDDEN) != 0) {
+        result = processorImpl.postProcess${className}(${visitableClass.ParameterName});
+      }
     } catch (RuntimeException|Error e) {
       if (e instanceof ProcessorError) {
         throw e;
@@ -27,7 +37,7 @@ public class Visitor_${className} {
       throw new ProcessorError(processorImpl.getCurrentContext(), ${visitableClass.ParameterName}, e);
     }
 
-    popContext(processor, ${visitableClass.ParameterName});
+    popContext(processorImpl, ${visitableClass.ParameterName});
     return result;
   }
 
@@ -60,23 +70,42 @@ public class Visitor_${className} {
     Visitor_${visitableClass.SuperclassName}.visitMembers(processorImpl, ${visitableClass.ParameterName});
 #end
 #foreach($field in $fields)
-#if(${field.isNullable()})
-    if (${visitableClass.ParameterName}.${field.Name} != null) {
-#end
+    if ((processorImpl.traversalFlags[ProcessorPrivate.ID_${field.ElementTypeName}]
+            & TraversalFlags.REACHES_OVERRIDE)
+        != 0) {
 #if(${field.isList()})
-      ListVisitor.visit(
-          ${visitableClass.ParameterName}.${field.Name},
-          n -> (${field.ComponentTypeName}) n.acceptInternal(processorImpl));
-#elseif (${field.isNullable()})
-      ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) ${visitableClass.ParameterName}.${field.Name}.acceptInternal(processorImpl);
-#else
-      ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
-      ${visitableClass.ParameterName}.${field.Name}.acceptInternal(processorImpl),
-          "Field \"${field.Name}\" in class \"${className}\" cannot be null");
-#end
 #if(${field.isNullable()})
-    }
+      if (${visitableClass.ParameterName}.${field.Name} != null) {
 #end
+        // The processor is passed as an argument so that the lambda does not capture it and is
+        // not allocated on every visit (see ListVisitor.visit).
+        ListVisitor.visit(
+            ${visitableClass.ParameterName}.${field.Name},
+            processorImpl,
+            (p, n) -> (${field.ComponentTypeName}) n.acceptInternal(p));
+#if(${field.isNullable()})
+      }
+#end
+#elseif (${field.isNullable()})
+      // Only write the field back if the node was replaced.
+      ${field.TypeName} oldNode = ${visitableClass.ParameterName}.${field.Name};
+      if (oldNode != null) {
+        ${field.TypeName} newNode = (${field.TypeName}) oldNode.acceptInternal(processorImpl);
+        if (newNode != oldNode) {
+          ${visitableClass.ParameterName}.${field.Name} = newNode;
+        }
+      }
+#else
+      // Only write the field back if the node was replaced.
+      ${field.TypeName} oldNode = ${visitableClass.ParameterName}.${field.Name};
+      ${field.TypeName} newNode = (${field.TypeName}) oldNode.acceptInternal(processorImpl);
+      if (newNode != oldNode) {
+        ${visitableClass.ParameterName}.${field.Name} =
+            Preconditions.checkNotNull(
+                newNode, "Field \"${field.Name}\" in class \"${className}\" cannot be null");
+      }
+#end
+    }
 #end
   }
 }

@@ -190,6 +190,10 @@ public class J2clAstProcessor extends AbstractProcessor {
       return componentTypeName;
     }
 
+    public String getElementTypeName() {
+      return isList() ? componentTypeName : typeName;
+    }
+
     public boolean isList() {
       return type == Type.LIST;
     }
@@ -244,6 +248,10 @@ public class J2clAstProcessor extends AbstractProcessor {
 
     public String getTopClassName() {
       return topClassName;
+    }
+
+    public List<Field> getFields() {
+      return fields;
     }
   }
 

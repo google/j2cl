@@ -1,6 +1,12 @@
 package ${packageName};
 
 public abstract class AbstractVisitor extends ProcessorPrivate {
+  private static final ClassValue<byte[]> TRAVERSAL_FLAGS =
+      createFlags(AbstractVisitor.class, "enter", "exit");
+
+  public AbstractVisitor() {
+    super(TRAVERSAL_FLAGS);
+  }
 #foreach($clazz in $classes)
 
   @Override

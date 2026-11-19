@@ -1,6 +1,12 @@
 package ${packageName};
 
 public abstract class AbstractRewriter extends ProcessorPrivate {
+  private static final ClassValue<byte[]> TRAVERSAL_FLAGS =
+      createFlags(AbstractRewriter.class, "shouldProcess", "rewrite");
+
+  public AbstractRewriter() {
+    super(TRAVERSAL_FLAGS);
+  }
 #foreach($clazz in $classes)
 
   public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {

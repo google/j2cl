@@ -1,6 +1,7 @@
 package ${packageName};
 
 import com.google.j2cl.common.visitor.Processor;
+import com.google.j2cl.common.visitor.TraversalFlags;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.HasSourcePosition;
 import java.util.ArrayDeque;
@@ -9,6 +10,46 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 abstract class ProcessorPrivate implements Processor {
+
+  // Index of each visitable class in the traversal flags, which is also its index in the arrays
+  // passed to TraversalFlags.createCache below (all generated from the same list of classes).
+#foreach($clazz in $classes)
+  static final int ID_${clazz.SimpleName} = ${foreach.index};
+#end
+
+  static ClassValue<byte[]> createFlags(
+      Class<? extends ProcessorPrivate> baseClass, String prePrefix, String postPrefix) {
+    return TraversalFlags.createCache(
+        baseClass,
+        prePrefix,
+        postPrefix,
+        new Class<?>[] {
+#foreach($clazz in $classes)
+          ${clazz.SimpleName}.class,
+#end
+        },
+        // The element types of the visitable fields declared by each class, i.e. the fields visited
+        // by its visitMembers in addition to the ones of its supertypes.
+        new int[][] {
+#foreach($clazz in $classes)
+          {
+#foreach($field in $clazz.Fields)
+            ID_${field.ElementTypeName},
+#end
+          },
+#end
+        });
+  }
+
+  /**
+   * Traversal flags of this processor class (see TraversalFlags) indexed by {@code ID_*};
+   * shared by all instances of the same processor class and never modified.
+   */
+  final byte[] traversalFlags;
+
+  ProcessorPrivate(ClassValue<byte[]> traversalFlagsCache) {
+    this.traversalFlags = traversalFlagsCache.get(getClass());
+  }
 
   private Deque<Object> stackOfContext = new ArrayDeque<Object>();
 
