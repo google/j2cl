@@ -56,7 +56,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
 
                 // Do not insert a null assertion if the return type of a call inferred to be
@@ -69,7 +69,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
                   return expression;
                 }
 
-                return !inferredTypeDescriptor.canBeNull() || !declaredTypeDescriptor.canBeNull()
+                return !inferredTypeDescriptor.canBeNull() || !runtimeTypeDescriptor.canBeNull()
                     ? insertNotNullAssertionIfNeeded(
                         getCurrentMember().getDescriptor(),
                         getSourcePosition(),
@@ -86,7 +86,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
               @Override
               public Expression rewriteNonNullTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 return insertNotNullAssertionIfNeeded(
                     getCurrentMember().getDescriptor(),

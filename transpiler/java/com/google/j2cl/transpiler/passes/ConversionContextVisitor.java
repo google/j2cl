@@ -141,7 +141,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     @SuppressWarnings("unused")
     protected Expression rewriteTypeConversionContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor declaredTypeDescriptor,
+        TypeDescriptor runtimeTypeDescriptor,
         Expression expression) {
       return expression;
     }
@@ -152,22 +152,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
      */
     protected Expression rewriteNonNullTypeConversionContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor declaredTypeDescriptor,
+        TypeDescriptor runtimeTypeDescriptor,
         Expression expression) {
       return rewriteTypeConversionContext(
           inferredTypeDescriptor.toNonNullable(),
-          declaredTypeDescriptor.toNonNullable(),
+          runtimeTypeDescriptor.toNonNullable(),
           expression);
     }
 
     /** An {@code expression} that has been assigned to a field or variable of a particular type. */
     protected Expression rewriteAssignmentContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor declaredTypeDescriptor,
+        TypeDescriptor runtimeTypeDescriptor,
         Expression expression) {
       // Handle generically as a type conversion context.
       return rewriteTypeConversionContext(
-          inferredTypeDescriptor, declaredTypeDescriptor, expression);
+          inferredTypeDescriptor, runtimeTypeDescriptor, expression);
     }
 
     /**
@@ -214,22 +214,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     /** An {@code expression} that is used as a qualifier of a member of a particular type. */
     protected Expression rewriteMemberQualifierContext(
         TypeDescriptor inferredTypeDescriptor,
-        TypeDescriptor declaredTypeDescriptor,
+        TypeDescriptor runtimeTypeDescriptor,
         Expression expression) {
       // Handle generically as a type conversion context.
       return rewriteNonNullTypeConversionContext(
-          inferredTypeDescriptor, declaredTypeDescriptor, expression);
+          inferredTypeDescriptor, runtimeTypeDescriptor, expression);
     }
 
     /** An {@code argument} that is passed to a method as a parameter. */
     protected Expression rewriteMethodInvocationContext(
         ParameterDescriptor inferredParameterDescriptor,
-        ParameterDescriptor declaredParameterDescriptor,
+        ParameterDescriptor runtimeParameterDescriptor,
         Expression argument) {
       // By default handle method invocation parameter passing like assignments.
       return rewriteTypeConversionContext(
           inferredParameterDescriptor.getTypeDescriptor(),
-          declaredParameterDescriptor.getTypeDescriptor(),
+          runtimeParameterDescriptor.getTypeDescriptor(),
           argument);
     }
 
@@ -238,17 +238,17 @@ public final class ConversionContextVisitor extends AbstractRewriter {
      */
     protected Expression rewriteVarargsParameterContext(
         ParameterDescriptor inferredParameterDescriptor,
-        ParameterDescriptor declaredParameterDescriptor,
+        ParameterDescriptor runtimeParameterDescriptor,
         Expression argument) {
       // The varargs argument has special handling to mimic directly passing the varargs arguments
       // as any other argument. The behavior can be overridden by overriding this method.
       return visitor.rewriteVarargsArgument(
-          inferredParameterDescriptor, declaredParameterDescriptor, argument);
+          inferredParameterDescriptor, runtimeParameterDescriptor, argument);
     }
 
     /**
      * A {@code spreadExpression}, e.g. {@code ...array}, that is an element of an array literal of
-     * type {@code inferredTypeDescriptor} (declared as {@code declaredTypeDescriptor}), e.g. of the
+     * type {@code inferredTypeDescriptor} (at runtime {@code runtimeTypeDescriptor}), e.g. of the
      * array literal holding the vararg arguments of an invocation.
      *
      * <p>Note that the spread expression stands for all the elements of the array it spreads, which
@@ -257,12 +257,11 @@ public final class ConversionContextVisitor extends AbstractRewriter {
      */
     protected Expression rewriteSpreadContext(
         ArrayTypeDescriptor inferredTypeDescriptor,
-        ArrayTypeDescriptor declaredTypeDescriptor,
+        ArrayTypeDescriptor runtimeTypeDescriptor,
         PrefixExpression spreadExpression) {
       Expression array = spreadExpression.getOperand();
       Expression rewrittenArray =
-          rewriteNonNullTypeConversionContext(
-              inferredTypeDescriptor, declaredTypeDescriptor, array);
+          rewriteNonNullTypeConversionContext(inferredTypeDescriptor, runtimeTypeDescriptor, array);
       return rewrittenArray == array
           ? spreadExpression
           : spreadExpression.toBuilder().setOperand(rewrittenArray).build();
@@ -525,7 +524,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
-    DeclaredTypeDescriptor declaredEnclosingTypeDescriptor =
+    DeclaredTypeDescriptor runtimeEnclosingTypeDescriptor =
         memberDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor();
     if (memberDescriptor.isConstructor()) {
       if (!enclosingTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
@@ -534,12 +533,11 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       // This is a constructor call of an inner class; hence the qualifier type is the enclosing
       // class of the class where the method is defined.
       enclosingTypeDescriptor = enclosingTypeDescriptor.getEnclosingTypeDescriptor();
-      declaredEnclosingTypeDescriptor =
-          declaredEnclosingTypeDescriptor.getEnclosingTypeDescriptor();
+      runtimeEnclosingTypeDescriptor = runtimeEnclosingTypeDescriptor.getEnclosingTypeDescriptor();
     }
 
     return contextRewriter.rewriteMemberQualifierContext(
-        enclosingTypeDescriptor, declaredEnclosingTypeDescriptor, qualifier);
+        enclosingTypeDescriptor, runtimeEnclosingTypeDescriptor, qualifier);
   }
 
   @Override
@@ -909,7 +907,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         invocation.getTarget().getParameterDescriptors();
     // The ABI parameter types are the actual parameter types of the method in the output. For
     // bridges they can be more general than the declared parameter types.
-    ImmutableList<ParameterDescriptor> declaredParameterDescriptors =
+    ImmutableList<ParameterDescriptor> runtimeParameterDescriptors =
         invocation.getTarget().getAbiDescriptor().getParameterDescriptors();
     List<Expression> argumentExpressions = invocation.getArguments();
 
@@ -917,17 +915,17 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     List<Expression> newArgumentExpressions = new ArrayList<>();
     for (int argIndex = 0; argIndex < inferredParameterDescriptors.size(); argIndex++) {
       ParameterDescriptor inferredParameterDescriptor = inferredParameterDescriptors.get(argIndex);
-      ParameterDescriptor declaredParameterDescriptor = declaredParameterDescriptors.get(argIndex);
+      ParameterDescriptor runtimeParameterDescriptor = runtimeParameterDescriptors.get(argIndex);
       Expression argumentExpression = argumentExpressions.get(argIndex);
 
       newArgumentExpressions.add(
-          declaredParameterDescriptor.isVarargs()
+          runtimeParameterDescriptor.isVarargs()
               // Handle vararg parameters that at this point are inside vararg literals by
               // delegating explicitly to an overrideable handler.
               ? contextRewriter.rewriteVarargsParameterContext(
-                  inferredParameterDescriptor, declaredParameterDescriptor, argumentExpression)
+                  inferredParameterDescriptor, runtimeParameterDescriptor, argumentExpression)
               : contextRewriter.rewriteMethodInvocationContext(
-                  inferredParameterDescriptor, declaredParameterDescriptor, argumentExpression));
+                  inferredParameterDescriptor, runtimeParameterDescriptor, argumentExpression));
     }
     return newArgumentExpressions;
   }
@@ -935,13 +933,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   /** Implements the rewriting of varargs arguments. */
   private Expression rewriteVarargsArgument(
       ParameterDescriptor inferredParameterDescriptor,
-      ParameterDescriptor declaredParameterDescriptor,
+      ParameterDescriptor runtimeParameterDescriptor,
       Expression expression) {
     if (!(expression instanceof ArrayLiteral arrayLiteral)) {
       // The vararg was passed directly as an array, not as separate arguments. Process it as one
       // argument.
       return contextRewriter.rewriteMethodInvocationContext(
-          inferredParameterDescriptor, declaredParameterDescriptor, expression);
+          inferredParameterDescriptor, runtimeParameterDescriptor, expression);
     }
 
     return arrayLiteral.toBuilder()
@@ -953,12 +951,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
                 e ->
                     contextRewriter.rewriteMethodInvocationContext(
                         toComponentParameterDescriptor(inferredParameterDescriptor),
-                        toComponentParameterDescriptor(declaredParameterDescriptor),
+                        toComponentParameterDescriptor(runtimeParameterDescriptor),
                         e),
                 spread ->
                     contextRewriter.rewriteSpreadContext(
                         (ArrayTypeDescriptor) inferredParameterDescriptor.getTypeDescriptor(),
-                        (ArrayTypeDescriptor) declaredParameterDescriptor.getTypeDescriptor(),
+                        (ArrayTypeDescriptor) runtimeParameterDescriptor.getTypeDescriptor(),
                         spread)))
         .build();
   }

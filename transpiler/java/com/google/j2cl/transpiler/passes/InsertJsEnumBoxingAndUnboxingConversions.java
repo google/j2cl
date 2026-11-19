@@ -45,17 +45,17 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor fromTypeDescriptor = expression.getRuntimeTypeDescriptor();
                 if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)
-                    && !AstUtils.isNonNativeJsEnum(declaredTypeDescriptor)) {
+                    && !AstUtils.isNonNativeJsEnum(runtimeTypeDescriptor)) {
                   return box(expression);
                 }
 
-                if (AstUtils.isNonNativeJsEnum(declaredTypeDescriptor)
+                if (AstUtils.isNonNativeJsEnum(runtimeTypeDescriptor)
                     && !AstUtils.isNonNativeJsEnum(fromTypeDescriptor)) {
-                  return unbox(declaredTypeDescriptor, expression);
+                  return unbox(runtimeTypeDescriptor, expression);
                 }
                 return expression;
               }
@@ -63,14 +63,14 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               @Override
               public Expression rewriteMethodInvocationContext(
                   ParameterDescriptor inferredParameterDescriptor,
-                  ParameterDescriptor declaredParameterDescriptor,
+                  ParameterDescriptor runtimeParameterDescriptor,
                   Expression argument) {
                 if (AstUtils.isAnnotatedWithDoNotAutobox(inferredParameterDescriptor)) {
                   return argument;
                 }
                 return rewriteTypeConversionContext(
                     inferredParameterDescriptor.getTypeDescriptor(),
-                    declaredParameterDescriptor.getTypeDescriptor(),
+                    runtimeParameterDescriptor.getTypeDescriptor(),
                     argument);
               }
 

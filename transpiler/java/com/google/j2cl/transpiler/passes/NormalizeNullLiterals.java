@@ -45,11 +45,11 @@ public class NormalizeNullLiterals extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 if (expression instanceof NullLiteral) {
                   if (isBoxableJsEnumType(inferredTypeDescriptor)
-                      && !isBoxableJsEnumType(declaredTypeDescriptor)) {
+                      && !isBoxableJsEnumType(runtimeTypeDescriptor)) {
                     // If the declared type is not a JsEnum but the inferred type is, as in
                     // listOfEnums.add(null), type it as j.l.Object (the direct superclass for a
                     // boxed enum) to avoid inserting a redundant boxing conversion.

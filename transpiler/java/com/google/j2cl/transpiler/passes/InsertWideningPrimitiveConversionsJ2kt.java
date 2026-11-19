@@ -43,7 +43,7 @@ public class InsertWideningPrimitiveConversionsJ2kt extends NormalizationPass {
       @Override
       public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
-          TypeDescriptor declaredTypeDescriptor,
+          TypeDescriptor runtimeTypeDescriptor,
           Expression expression) {
         return shouldWiden(toTypeDescriptor, expression)
             ? widenTo(toTypeDescriptor, expression)

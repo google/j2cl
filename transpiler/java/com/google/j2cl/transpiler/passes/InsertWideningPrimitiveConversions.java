@@ -52,7 +52,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
       @Override
       public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
-          TypeDescriptor declaredTypeDescriptor,
+          TypeDescriptor runtimeTypeDescriptor,
           Expression expression) {
         if (!shouldWiden(toTypeDescriptor, expression)) {
           return expression;

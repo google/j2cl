@@ -38,7 +38,7 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 return needsCast(inferredTypeDescriptor, expression.getTypeDescriptor())
                     ? CastExpression.builder()

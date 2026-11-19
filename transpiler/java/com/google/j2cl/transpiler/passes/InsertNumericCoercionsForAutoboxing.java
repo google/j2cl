@@ -32,7 +32,7 @@ public final class InsertNumericCoercionsForAutoboxing extends NormalizationPass
               @Override
               protected Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 // Kotlin requires the primitive conversion that may precede boxing a constant to be
                 // explicit, e.g. `Character c = 65;`.

@@ -70,7 +70,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       @Override
       public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
-          TypeDescriptor declaredTypeDescriptor,
+          TypeDescriptor runtimeTypeDescriptor,
           Expression expression) {
         // Per JLS 5.2, only insert the cast check if it is required to maintain consistency with
         // the LHS. If the LHS is a primitive type then the proper cast to the boxed type is

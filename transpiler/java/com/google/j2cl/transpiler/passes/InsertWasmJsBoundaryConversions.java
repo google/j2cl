@@ -131,12 +131,12 @@ public class InsertWasmJsBoundaryConversions extends NormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 // Use the declared type descriptor as it reflects the underlying Wasm
                 // representation of the target (e.g., a type variable with a non-native bound is
                 // represented as a Java Object in Wasm even when specialized to a native JsType).
-                return maybeInsertObjectBoundaryConversion(declaredTypeDescriptor, expression);
+                return maybeInsertObjectBoundaryConversion(runtimeTypeDescriptor, expression);
               }
 
               @Override

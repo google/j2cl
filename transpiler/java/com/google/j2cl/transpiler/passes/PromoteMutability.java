@@ -380,7 +380,7 @@ public class PromoteMutability extends AbstractJ2ktNormalizationPass {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
 
                 if (!isMutableDueToVariance(inferredTypeDescriptor)) {

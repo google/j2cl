@@ -46,7 +46,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
               @Override
               public Expression rewriteMemberQualifierContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 return expression;
               }
@@ -54,7 +54,7 @@ public final class InsertCastsOnNullabilityMismatch extends AbstractJ2ktNormaliz
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 

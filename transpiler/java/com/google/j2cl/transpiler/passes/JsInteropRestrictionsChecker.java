@@ -737,7 +737,7 @@ public class JsInteropRestrictionsChecker {
    *       about how the value is used, it is checked against the inferred (specialized) types.
    *   <li>Non-native JsEnum arrays hold unboxed values that cannot be converted, hence they can
    *       only be used where the erased type has the same representation. Since this is about the
-   *       runtime representation, it is checked against the declared types.
+   *       runtime representation, it is checked against the runtime types.
    * </ul>
    */
   private void checkJsEnumConversions(Type type) {
@@ -747,10 +747,10 @@ public class JsInteropRestrictionsChecker {
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 checkJsEnumConversion(
-                    inferredTypeDescriptor, declaredTypeDescriptor, expression, "assigned to");
+                    inferredTypeDescriptor, runtimeTypeDescriptor, expression, "assigned to");
                 return expression;
               }
 
@@ -782,16 +782,16 @@ public class JsInteropRestrictionsChecker {
               @Override
               public Expression rewriteMemberQualifierContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression qualifierExpression) {
                 // Members accessed on JsEnum values are checked in checkJsEnumMethodCalls.
                 if (!(qualifierExpression instanceof NullLiteral)
                     && isDisallowedJsEnumArrayConversion(
-                        declaredTypeDescriptor, qualifierExpression.getTypeDescriptor())) {
+                        runtimeTypeDescriptor, qualifierExpression.getTypeDescriptor())) {
                   problems.error(
                       getSourcePosition(),
                       "Cannot access member of %s with %s.",
-                      getReadableDescriptionWithPrefix(declaredTypeDescriptor),
+                      getReadableDescriptionWithPrefix(runtimeTypeDescriptor),
                       getReadableDescriptionWithPrefix(qualifierExpression.getTypeDescriptor()));
                 }
                 return qualifierExpression;
@@ -800,7 +800,7 @@ public class JsInteropRestrictionsChecker {
               @Override
               public Expression rewriteVarargsParameterContext(
                   ParameterDescriptor inferredParameterDescriptor,
-                  ParameterDescriptor declaredParameterDescriptor,
+                  ParameterDescriptor runtimeParameterDescriptor,
                   Expression argument) {
                 // TODO(b/582202056): Remove once varargs packaging is fixed.
                 // Varargs packaging is decided by runtime assignability, so an array passed as the
@@ -816,19 +816,19 @@ public class JsInteropRestrictionsChecker {
                           arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor())) {
                     checkJsEnumConversion(
                         inferredParameterDescriptor.getTypeDescriptor(),
-                        declaredParameterDescriptor.getTypeDescriptor(),
+                        runtimeParameterDescriptor.getTypeDescriptor(),
                         vararg,
                         "assigned to");
                     return argument;
                   }
                 }
                 return super.rewriteVarargsParameterContext(
-                    inferredParameterDescriptor, declaredParameterDescriptor, argument);
+                    inferredParameterDescriptor, runtimeParameterDescriptor, argument);
               }
 
               private void checkJsEnumConversion(
                   TypeDescriptor inferredToTypeDescriptor,
-                  TypeDescriptor declaredToTypeDescriptor,
+                  TypeDescriptor runtimeToTypeDescriptor,
                   Expression expression,
                   String conversion) {
                 if (expression instanceof NullLiteral) {
@@ -839,7 +839,7 @@ public class JsInteropRestrictionsChecker {
                 // the error reporting here should include source position.
                 checkJsEnumTypeConversion(
                     inferredToTypeDescriptor,
-                    declaredToTypeDescriptor,
+                    runtimeToTypeDescriptor,
                     expression.getTypeDescriptor(),
                     conversion,
                     getSourcePosition());
@@ -854,7 +854,7 @@ public class JsInteropRestrictionsChecker {
             // errors.
             return;
           }
-          // The type of the pattern is both the inferred and the declared target of the conversion.
+          // The type of the pattern is both the inferred and the runtime target of the conversion.
           checkJsEnumTypeConversion(
               toTypeDescriptor,
               toTypeDescriptor,
@@ -866,7 +866,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsEnumTypeConversion(
       TypeDescriptor inferredToTypeDescriptor,
-      TypeDescriptor declaredToTypeDescriptor,
+      TypeDescriptor runtimeToTypeDescriptor,
       TypeDescriptor fromTypeDescriptor,
       String conversion,
       SourcePosition sourcePosition) {
@@ -885,13 +885,13 @@ public class JsInteropRestrictionsChecker {
           fromTypeDescriptor.getReadableDescription(),
           conversion,
           inferredToTypeDescriptor.getReadableDescription());
-    } else if (isDisallowedJsEnumArrayConversion(declaredToTypeDescriptor, fromTypeDescriptor)) {
+    } else if (isDisallowedJsEnumArrayConversion(runtimeToTypeDescriptor, fromTypeDescriptor)) {
       problems.error(
           sourcePosition,
           "%s cannot be %s %s.",
           getReadableDescriptionWithPrefix(fromTypeDescriptor),
           conversion,
-          getReadableDescriptionWithPrefix(declaredToTypeDescriptor));
+          getReadableDescriptionWithPrefix(runtimeToTypeDescriptor));
     }
   }
 

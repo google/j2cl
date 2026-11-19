@@ -49,7 +49,7 @@ public class InsertBoxingConversions extends NormalizationPass {
       @Override
       public Expression rewriteTypeConversionContext(
           TypeDescriptor inferredTypeDescriptor,
-          TypeDescriptor declaredTypeDescriptor,
+          TypeDescriptor runtimeTypeDescriptor,
           Expression expression) {
         // Make the primitive conversion that may precede boxing a constant explicit, to box to the
         // right type. Casts of literals are folded by the primitive conversion passes.
@@ -85,9 +85,9 @@ public class InsertBoxingConversions extends NormalizationPass {
       @Override
       public Expression rewriteMethodInvocationContext(
           ParameterDescriptor inferredParameterDescriptor,
-          ParameterDescriptor declaredParameterDescriptor,
+          ParameterDescriptor runtimeParameterDescriptor,
           Expression argument) {
-        if (isAnnotatedWithDoNotAutobox(declaredParameterDescriptor)) {
+        if (isAnnotatedWithDoNotAutobox(runtimeParameterDescriptor)) {
           if (!areBooleanAndDoubleAndLongBoxed) {
             // In Closure all primitives are already represented as JS primitives.
             return argument;

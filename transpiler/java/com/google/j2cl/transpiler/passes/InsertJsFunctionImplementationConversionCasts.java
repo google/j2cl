@@ -37,7 +37,7 @@ public class InsertJsFunctionImplementationConversionCasts extends Normalization
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor declaredTypeDescriptor,
+                  TypeDescriptor runtimeTypeDescriptor,
                   Expression expression) {
                 if (expression instanceof NullLiteral) {
                   // No need to add extra casts to a null literal.
