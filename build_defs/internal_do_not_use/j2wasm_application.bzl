@@ -443,6 +443,16 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     transpiler_args = kwargs.pop("internal_transpiler_args", [])
 
+    # Global analyses run before each optimization round (-O3/-Os) of the last stage:
+    #  - mark functions that never return, so that the round's optimize-noreturn/DCE can
+    #    remove the code after calls to them.
+    #  - remove parameters that are unused or only forwarded to other unused parameters
+    #    (fixed-point dead argument elimination, also covering indirectly called functions).
+    round_prelude = [
+        "--mark-noreturn",
+        "--dae2",
+    ]
+
     _j2wasm_application(
         name = name,
         binaryen_args = [
@@ -504,25 +514,46 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--partial-inlining-ifs=4",
             # Specific list of passes:
             "--intrinsic-lowering",
-            "--gufa",
+        ] + round_prelude + [
+            # Type-SSA bracketed GUFA: give allocation sites their own types so that
+            # GUFA can be more precise, then merge back the types that did not diverge.
+            # Refine the field types only after merging; refining before merging makes
+            # the output significantly larger.
+            "--type-ssa",
+            "--gufa-optimizing",
+            "--type-merging",
+            "--type-refining-gufa",
             "--unsubtyping",
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
             "--cfp-reftest",
             "--optimize-j2cl",
+        ] + round_prelude + [
             "-O3",
             "--optimize-j2cl",
             "--cfp-reftest",
+            # Specialize functions for their call contexts, e.g. for constant
+            # arguments.
+            "--monomorphize",
             "--type-merging",
             "--generate-global-effects",
+        ] + round_prelude + [
             "-O3",
             "--cfp-reftest",
             "--optimize-j2cl",
 
-            # Final clean-ups.
+            # Final round: lower strings, clean up the types and finish with a size
+            # focused round (which includes remove-unused-module-elements and
+            # reorder-globals).
             "--string-lowering",
-            "--remove-unused-module-elements",
-            "--reorder-globals",
+            "--unsubtyping",
+            "--type-merging",
+        ] + round_prelude + [
+            "-Os",
+            # -Os also sets the default levels for the standalone passes of the stage;
+            # restore them.
+            "--optimize-level=3",
+            "--shrink-level=0",
             # Remove toolchain-specific annotations (e.g. `@binaryen.js.called`)
             # that are only needed by Binaryen optimization passes so that they
             # are not emitted in a custom section and don't contribute to the
