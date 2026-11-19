@@ -907,8 +907,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   private List<Expression> rewriteMethodInvocationContextArguments(Invocation invocation) {
     ImmutableList<ParameterDescriptor> inferredParameterDescriptors =
         invocation.getTarget().getParameterDescriptors();
+    // The ABI parameter types are the actual parameter types of the method in the output. For
+    // bridges they can be more general than the declared parameter types.
     ImmutableList<ParameterDescriptor> declaredParameterDescriptors =
-        invocation.getTarget().getDeclarationDescriptor().getParameterDescriptors();
+        invocation.getTarget().getAbiDescriptor().getParameterDescriptors();
     List<Expression> argumentExpressions = invocation.getArguments();
 
     // Look at each param/argument pair.
