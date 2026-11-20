@@ -174,7 +174,7 @@ final class SwiftInteropTest: XCTestCase {
       let _ = EnumNames.valueOf(name: "ONE")
       let _ = EnumNames.valueOf(name: "TWO")
 
-      let values = EnumNames.values()!
+      let values: IOSObjectArray = EnumNames.values()
       let _ = values[0]
       let _ = values[1]
     #endif
