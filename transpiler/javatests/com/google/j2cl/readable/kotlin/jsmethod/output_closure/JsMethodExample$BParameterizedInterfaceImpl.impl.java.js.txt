@@ -1,0 +1,58 @@
+goog.module('jsmethod.JsMethodExample.BParameterizedInterfaceImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ParameterizedInterface = goog.require('jsmethod.JsMethodExample.ParameterizedInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SubJsTypeWithRenamedJsMethod = goog.forwardDeclare('jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ * @implements {ParameterizedInterface<!SubJsTypeWithRenamedJsMethod>}
+ */
+class BParameterizedInterfaceImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!BParameterizedInterfaceImpl} */
+ static $create__() {
+  BParameterizedInterfaceImpl.$clinit();
+  let $instance = new BParameterizedInterfaceImpl();
+  $instance.$ctor__jsmethod_JsMethodExample_BParameterizedInterfaceImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_BParameterizedInterfaceImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Default method forwarding stub.
+ /** @override @suppress{visibility} @return {SubJsTypeWithRenamedJsMethod} */
+ m() {
+  return /**@type {SubJsTypeWithRenamedJsMethod}*/ ($Casts.$to(ParameterizedInterface.m_m__$default__jsmethod_JsMethodExample_ParameterizedInterface__java_lang_Object(this), SubJsTypeWithRenamedJsMethod));
+ }
+ /** @nodts */
+ static $clinit() {
+  BParameterizedInterfaceImpl.$clinit = () =>{};
+  BParameterizedInterfaceImpl.$loadModules();
+  j_l_Object.$clinit();
+  ParameterizedInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BParameterizedInterfaceImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SubJsTypeWithRenamedJsMethod = goog.module.get('jsmethod.JsMethodExample.SubJsTypeWithRenamedJsMethod$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+ParameterizedInterface.$markImplementor(BParameterizedInterfaceImpl);
+$Util.$setClassMetadata(BParameterizedInterfaceImpl, 'jsmethod.JsMethodExample$BParameterizedInterfaceImpl');
+
+exports = BParameterizedInterfaceImpl;
+
+//# sourceMappingURL=JsMethodExample$BParameterizedInterfaceImpl.js.map

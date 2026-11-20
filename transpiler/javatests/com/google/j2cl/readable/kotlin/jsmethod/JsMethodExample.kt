@@ -124,6 +124,11 @@ class JsMethodExample {
     @JsConstructor constructor() {}
   }
 
+  // Repro for b/587632968
+  class AParameterizedInterfaceImpl : ParameterizedInterface<SubJsType>
+
+  class BParameterizedInterfaceImpl : ParameterizedInterface<SubJsTypeWithRenamedJsMethod>
+
   @JsType(isNative = true, namespace = "jsmethod", name = "Foo")
   class NativeFoo {
     external fun takesAndReturnsPrimitiveLong(l: Long): Long

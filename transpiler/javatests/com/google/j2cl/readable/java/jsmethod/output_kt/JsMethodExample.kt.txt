@@ -131,6 +131,10 @@ open class JsMethodExample {
  
  internal open class ParameterizedInterfaceImpl internal constructor(): ParameterizedInterface<String?>
  
+ internal open class AParameterizedInterfaceImpl internal constructor(): ParameterizedInterface<SubJsType?>
+ 
+ internal open class BParameterizedInterfaceImpl internal constructor(): ParameterizedInterface<SubJsTypeWithRenamedJsMethod?>
+ 
  @JsType(name = "Foo", namespace = "jsmethod", isNative = true)
  internal open class NativeFoo internal constructor() {
   external open fun takesAndReturnsPrimitiveLong(l: Long): Long

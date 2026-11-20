@@ -50,7 +50,6 @@ public class WasmJsBoundaryUtils {
                 methodDescriptor,
                 sourcePosition,
                 parameters.stream().map(Variable::createReference).collect(toImmutableList()),
-                methodDescriptor.getReturnTypeDescriptor(),
                 origin))
         .setJsDocDescription(
             origin.isWasmEntryPoint() ? "Wasm entry point forwarding method." : null)
@@ -115,20 +114,26 @@ public class WasmJsBoundaryUtils {
   /**
    * Creates a call to the bridge target method, with necessary JS <-> Wasm conversions of the
    * arguments and return value.
+   *
+   * <p>The method itself is called; its ABI is only used to convert the arguments and the return
+   * value, since it defines the types of the values that flow in and out of the method, which for
+   * generalizing bridges are more general than its declared ones.
    */
   private static Statement createBridgeTargetInvocation(
       MethodDescriptor methodDescriptor,
       SourcePosition sourcePosition,
       List<Expression> arguments,
-      TypeDescriptor targetReturnTypeDescriptor,
       MethodDescriptor.MethodOrigin origin) {
+    MethodDescriptor abiDescriptor = methodDescriptor.getAbiDescriptor();
     List<Expression> convertedArguments =
         convertAllToInternal(
-            arguments.stream(), methodDescriptor.getParameterTypeDescriptors(), origin);
+            arguments.stream(), abiDescriptor.getParameterTypeDescriptors(), origin);
 
     if (methodDescriptor.isConstructor()) {
       checkState(
-          targetReturnTypeDescriptor.isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
+          abiDescriptor
+              .getReturnTypeDescriptor()
+              .isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
       return ReturnStatement.builder()
           .setExpression(
               NewInstance.builderFrom(methodDescriptor.getDeclarationDescriptor())
@@ -147,15 +152,26 @@ public class WasmJsBoundaryUtils {
             methodDescriptor,
             /* isStaticDispatch= */ methodDescriptor.isStatic(),
             convertedArguments,
-            targetReturnTypeDescriptor),
-        targetReturnTypeDescriptor,
+            abiDescriptor.getReturnTypeDescriptor()),
+        abiDescriptor.getReturnTypeDescriptor(),
         origin);
   }
 
+  /**
+   * Creates the descriptor of the boundary method for {@code descriptor}.
+   *
+   * <p>The boundary method is named after the method it bridges, but its signature is the external
+   * version of the ABI of that method. Everything other than the signature, e.g. the name, the
+   * JsInfo and the bridge target, comes from the method itself. Boundary methods for methods with
+   * the same name share their Wasm function type, which is consistent only if it is derived from
+   * the ABI, since the declared signature of a method might be specialized, e.g. for generalizing
+   * bridges or for methods inherited from a parameterized supertype.
+   */
   private static MethodDescriptor createBridgeDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       MethodDescriptor descriptor,
       MethodDescriptor.MethodOrigin origin) {
+    MethodDescriptor abiDescriptor = descriptor.getAbiDescriptor();
     MethodDescriptor.Builder builder =
         descriptor.toBuilder()
             .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -163,19 +179,17 @@ public class WasmJsBoundaryUtils {
             .makeWasmBoundaryMethod(origin, /* targetDescriptor= */ descriptor)
             .setReturnTypeDescriptor(
                 descriptor.isConstructor()
-                    ? descriptor.getReturnTypeDescriptor()
+                    ? abiDescriptor.getReturnTypeDescriptor()
                     : getExternalType(
-                        descriptor.getReturnTypeDescriptor(), origin.isWasmJsExport()))
+                        abiDescriptor.getReturnTypeDescriptor(), origin.isWasmJsExport()))
             .setParameterDescriptors(
-                descriptor.getParameterDescriptors().stream()
-                    .map(
-                        pd ->
-                            pd.toBuilder()
-                                .setTypeDescriptor(
-                                    getExternalType(
-                                        pd.getTypeDescriptor(), origin.isWasmJsExport()))
-                                .setVarargs(false)
-                                .build())
+                abiDescriptor.getParameterDescriptors().stream()
+                    .map(pd ->
+                        pd.toBuilder()
+                            .setTypeDescriptor(
+                                getExternalType(pd.getTypeDescriptor(), origin.isWasmJsExport()))
+                            .setVarargs(false)
+                            .build())
                     .collect(toImmutableList()));
     if (descriptor.isConstructor()) {
       // Change constructors to static factory methods.

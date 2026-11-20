@@ -1,0 +1,57 @@
+goog.module('jsmethod.JsMethodExample.AParameterizedInterfaceImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ParameterizedInterface = goog.require('jsmethod.JsMethodExample.ParameterizedInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SubJsType = goog.forwardDeclare('jsmethod.JsMethodExample.SubJsType$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {ParameterizedInterface<SubJsType>}
+ */
+class AParameterizedInterfaceImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AParameterizedInterfaceImpl} */
+ static $create__() {
+  AParameterizedInterfaceImpl.$clinit();
+  let $instance = new AParameterizedInterfaceImpl();
+  $instance.$ctor__jsmethod_JsMethodExample_AParameterizedInterfaceImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample_AParameterizedInterfaceImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ //Default method forwarding stub.
+ /** @override @return {SubJsType} */
+ m() {
+  return /**@type {SubJsType}*/ ($Casts.$to(ParameterizedInterface.m_m__$default__jsmethod_JsMethodExample_ParameterizedInterface__java_lang_Object(this), SubJsType));
+ }
+ /** @nodts */
+ static $clinit() {
+  AParameterizedInterfaceImpl.$clinit = () =>{};
+  AParameterizedInterfaceImpl.$loadModules();
+  j_l_Object.$clinit();
+  ParameterizedInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AParameterizedInterfaceImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  SubJsType = goog.module.get('jsmethod.JsMethodExample.SubJsType$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+ParameterizedInterface.$markImplementor(AParameterizedInterfaceImpl);
+$Util.$setClassMetadata(AParameterizedInterfaceImpl, 'jsmethod.JsMethodExample$AParameterizedInterfaceImpl');
+
+exports = AParameterizedInterfaceImpl;
+
+//# sourceMappingURL=JsMethodExample$AParameterizedInterfaceImpl.js.map

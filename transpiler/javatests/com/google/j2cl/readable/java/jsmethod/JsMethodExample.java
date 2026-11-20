@@ -124,6 +124,12 @@ public class JsMethodExample {
 
   static class ParameterizedInterfaceImpl implements ParameterizedInterface<String> {}
 
+  // Repro for b/587632968
+  static class AParameterizedInterfaceImpl implements ParameterizedInterface<SubJsType> {}
+
+  static class BParameterizedInterfaceImpl
+      implements ParameterizedInterface<SubJsTypeWithRenamedJsMethod> {}
+
   @JsType(isNative = true, namespace = "jsmethod", name = "Foo")
   static class NativeFoo {
     public native long takesAndReturnsPrimitiveLong(long l);
