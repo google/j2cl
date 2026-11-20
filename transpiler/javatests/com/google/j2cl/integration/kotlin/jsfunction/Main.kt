@@ -23,6 +23,8 @@ import com.google.j2cl.integration.testing.Asserts.assertSame
 import com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException
 import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isWasm
+import java.io.Serializable
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsOverlay
@@ -737,6 +739,21 @@ private fun testJsFunctionLambdaReferencingStaticField() {
   assertEquals(10006, callMyJsFunction(referencingStaticField, 5))
 }
 
+@JsFunction
+private fun interface SomeFunction {
+  fun m(i: Int): Int
+}
+
+@JsFunction
+private fun interface SomeOtherFunction {
+  fun n(o: Any?, j: Int): Int
+}
+
+private class SomeFunctionImplementation : SomeFunction {
+  override fun m(i: Int): Int = 0
+}
+
+@Suppress("UNCHECKED_CAST")
 private fun testJsFunctionArray() {
   val functionArray: Array<MyJsFunctionInterface?> = arrayOfNulls(1)
   functionArray[0] = MyJsFunctionInterface { a -> a + 2 }
@@ -760,6 +777,49 @@ private fun testJsFunctionArray() {
     val o: Any = arrayOfNulls<Int>(1)
     val temp = o as Array<JsFunctionInterface>
   }
+
+  val someFunctionArray: Array<Any?> = arrayOfNulls<SomeFunction>(10) as Array<Any?>
+
+  // @JsFunction arrays can contain any type of function.
+  someFunctionArray[0] = createFunction()
+
+  // @JsFunction arrays are interchangeable with each other.
+  assertTrue(someFunctionArray.isArrayOf<SomeFunction>())
+  assertTrue(someFunctionArray.isArrayOf<SomeOtherFunction>())
+  // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
+  if (!isWasm()) {
+    assertFalse(emptyArray<Any?>().isArrayOf<SomeOtherFunction>())
+  }
+
+  // @JsFunction arrays are subclasses of Object[] which are Serializable.
+  assertTrue(someFunctionArray is Serializable)
+
+  // @JsFunction arrays are interchangeable
+  val someOtherFunctionArray = someFunctionArray as Array<SomeOtherFunction>
+
+  someOtherFunctionArray[0] = { a, b -> 2 }
+  // @JsFunction arrays accept any @JsFunction implementation.
+  someFunctionArray[2] = SomeOtherFunction { a, b -> 2 }
+  (someOtherFunctionArray as Array<Any?>)[0] = SomeFunctionImplementation()
+
+  val someFunctionImplementationArray: Array<Any?> =
+    arrayOfNulls<SomeFunctionImplementation>(1) as Array<Any?>
+
+  // @JsFunction arrays variables can reference any function implementation implementation arrays,
+  // whether its the declared @JsFunction interface or not.
+  val aSomeFunctionArray = someFunctionImplementationArray as Array<SomeFunction>
+  val aSomeOtherFunctionArray = someFunctionImplementationArray as Array<SomeOtherFunction>
+
+  // @JsFunction implementation arrays can only contain particular functions.
+  someFunctionImplementationArray[0] = SomeFunctionImplementation()
+
+  // SomeFunctionImplementation[] arrays can only contain the specific JsFunction implementation.
+  assertThrowsArrayStoreException {
+    someFunctionImplementationArray[0] = SomeFunction { a -> a + 1 }
+  }
+
+  // @JsFunction arrays can only contain functions.
+  assertThrowsArrayStoreException { someFunctionArray[1] = Any() }
 }
 
 private fun testJsFunctionCalls_autoboxing() {

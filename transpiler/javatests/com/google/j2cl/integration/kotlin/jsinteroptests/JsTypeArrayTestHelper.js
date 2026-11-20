@@ -16,20 +16,6 @@ goog.module('jsinteroptests.JsTypeArrayTestHelper');
 
 
 /**
- * @return {Array<*>}
- */
-exports.returnJsTypeFromNative = function() {
-  return [{}, {}];
-};
-
-/**
- * @return {Array<*>}
- */
-exports.returnJsTypeWithIdsFromNative = function() {
-  return [{id: 1}, {id: 2}];
-};
-
-/**
  * @param {?} holder
  */
 exports.fillArrayField = function(holder) {
@@ -41,43 +27,4 @@ exports.fillArrayField = function(holder) {
  */
 exports.fillArrayParam = function(holder) {
   holder.setArrayParam([{}, {}]);
-};
-
-/**
- * @return {*}
- */
-exports.returnJsType3DimFromNative = function() {
-  return [[[{id: 1}, {id: 2}, {}], []]];
-};
-
-/**
- * @param {number} i
- * @return {*}
- */
-exports.getSimpleJsType = function(i) {
-  return {id: i};
-};
-
-/**
- * @return {*}
- */
-exports.returnObjectArrayFromNative = function() {
-  return ['1', '2', '3'];
-};
-
-/**
- * @return {*}
- */
-exports.returnSomeFunction = function() {
-  return function(a) { return a + 2; };
-};
-
-/**
- * @param {?} object
- * @return {!Array<?string>}
- */
-exports.nonNumericKeys = function(object) {
-  let array = Object.getOwnPropertyNames(object).filter(key => !isFinite(key));
-  array.sort();
-  return array;
 };

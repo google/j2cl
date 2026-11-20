@@ -23,7 +23,10 @@ import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJ2Kt;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
+import java.io.Serializable;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -853,6 +856,23 @@ public class Main {
     assertEquals(10006, callMyJsFunction(referencingStaticField, 5));
   }
 
+  @JsFunction
+  private interface SomeFunction {
+    int m(int i);
+  }
+
+  @JsFunction
+  private interface SomeOtherFunction {
+    int n(Object o, int j);
+  }
+
+  private static final class SomeFunctionImplementation implements SomeFunction {
+    @Override
+    public int m(int i) {
+      return 0;
+    }
+  }
+
   private static void testJsFunctionArray() {
     MyJsFunctionInterface[] functionArray = new MyJsFunctionInterface[1];
     functionArray[0] = a -> a + 2;
@@ -880,6 +900,50 @@ public class Main {
           Object o = new Integer[1];
           Object temp = (JsFunctionInterface[]) o;
         });
+
+    Object[] someFunctionArray = new SomeFunction[10];
+
+    // @JsFunction arrays can contain any type of function.
+    someFunctionArray[0] = createFunction();
+
+    // @JsFunction arrays are interchangeable with each other.
+    assertTrue(someFunctionArray instanceof SomeFunction[]);
+    assertTrue(someFunctionArray instanceof SomeOtherFunction[]);
+    // TODO(b/423010387): instanceof X[] always returns true in J2KT for any reference array
+    // regardless of its type.
+    // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
+    if (!isJ2Kt() && !isWasm()) {
+      assertFalse(new Object[0] instanceof SomeOtherFunction[]);
+    }
+
+    // @JsFunction arrays are subclasses of Object[] which are Serializable.
+    assertTrue(someFunctionArray instanceof Serializable);
+
+    // @JsFunction arrays are interchangeable
+    SomeOtherFunction[] someOtherFunctionArray = (SomeOtherFunction[]) someFunctionArray;
+
+    someOtherFunctionArray[0] = (a, b) -> 2;
+    // @JsFunction arrays accept any @JsFunction implementation.
+    someFunctionArray[2] = (SomeOtherFunction) (a, b) -> 2;
+    ((Object[]) someOtherFunctionArray)[0] = new SomeFunctionImplementation();
+
+    Object[] someFunctionImplementationArray = new SomeFunctionImplementation[1];
+
+    // @JsFunction arrays variables can reference any function implementation implementation arrays,
+    // whether its the declared @JsFunction interface or not.
+    SomeFunction[] aSomeFunctionArray = (SomeFunction[]) someFunctionImplementationArray;
+    SomeOtherFunction[] aSomeOtherFunctionArray =
+        (SomeOtherFunction[]) someFunctionImplementationArray;
+
+    // @JsFunction implementation arrays can only contain particular functions.
+    someFunctionImplementationArray[0] = new SomeFunctionImplementation();
+
+    // SomeFunctionImplementation[] arrays can only contain the specific JsFunction implementation.
+    assertThrowsArrayStoreException(
+        () -> someFunctionImplementationArray[0] = (SomeFunction) (a) -> a + 1);
+
+    // @JsFunction arrays can only contain functions.
+    assertThrowsArrayStoreException(() -> someFunctionArray[1] = new Object());
   }
 
   private static void assertJsTypeDoesntHaveFields(Object obj, String... fields) {

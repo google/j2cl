@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.module('jsinteroptests.JsTypeArrayTest.SimpleJsTypeReturnForMultiDimArray');
+goog.module('arrayofnativejstype.SimpleJsTypeWithProperty');
 
 // This should be an interface but can not be since there is no way
 // to define an interface contract with fields.
-class SimpleJsTypeReturnForMultiDimArray {
+class SimpleJsTypeWithProperty {
   constructor() {
     /** @public {number} */
     this.id = 0;
   }
 }
 
-exports = SimpleJsTypeReturnForMultiDimArray;
+exports = SimpleJsTypeWithProperty;

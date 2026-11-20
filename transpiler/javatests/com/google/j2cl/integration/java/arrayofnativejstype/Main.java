@@ -15,8 +15,14 @@
  */
 package arrayofnativejstype;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
+import java.io.Serializable;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -27,6 +33,9 @@ public class Main {
   static class MyNativeType {
     public MyNativeType() {}
   }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
+  private static class MyOtherNativeType {}
 
   private static void testSingleDimension() {
     MyNativeType[] arr = new MyNativeType[10];
@@ -110,11 +119,201 @@ public class Main {
     assertTrue(result2d[0][0] == element);
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private interface SimpleJsTypeReturnFromNative {}
+
+  private static void testJsTypeArray_returnFromNative() {
+    SimpleJsTypeReturnFromNative[] array = returnJsTypeFromNative();
+    assertEquals(2, array.length);
+    assertNotNull(array[0]);
+  }
+
+  @JsMethod(namespace = "arrayofnativejstype.helper")
+  private static native SimpleJsTypeReturnFromNative[] returnJsTypeFromNative();
+
+  @JsType(isNative = true, namespace = "arrayofnativejstype")
+  private static class SimpleJsTypeWithProperty {
+    @JsProperty
+    public native int getId();
+  }
+
+  private static void testJsTypeArray_returnFromNativeWithACall() {
+    SimpleJsTypeWithProperty[] array = returnJsTypeWithIdsFromNative();
+    assertEquals(2, array[1].getId());
+  }
+
+  @JsMethod(namespace = "arrayofnativejstype.helper")
+  private static native SimpleJsTypeWithProperty[] returnJsTypeWithIdsFromNative();
+
+  private static void testJsType3DimArray_castFromNativeWithACall() {
+    SimpleJsTypeWithProperty[][][] array =
+        (SimpleJsTypeWithProperty[][][]) returnJsType3DimFromNative();
+    assertEquals(1, array.length);
+    assertEquals(2, array[0].length);
+    assertEquals(3, array[0][0].length);
+    assertEquals(2, array[0][0][1].getId());
+  }
+
+  @JsMethod(namespace = "arrayofnativejstype.helper")
+  private static native Object returnJsType3DimFromNative();
+
+  @JsMethod(namespace = "arrayofnativejstype.helper")
+  private static native SimpleJsTypeWithProperty getSimpleJsType(int i);
+
+  // TODO(b/540455028): Native JsType arrays are not assignable to Java Object[] in Wasm.
+  @Wasm("nop")
+  private static void testObjectArrayAssignment() {
+    Object[] array = new MyNativeType[10];
+
+    array[0] = new MyNativeType();
+    array[0] = new MyOtherNativeType();
+    array[0] = new Object();
+
+    MyOtherNativeType[] other1 = (MyOtherNativeType[]) array;
+    MyOtherNativeType[] other2 = (MyOtherNativeType[]) new Object[0];
+  }
+
+  private static void testObjectArray_castFromNative() {
+    SimpleJsTypeWithProperty[] array = (SimpleJsTypeWithProperty[]) returnObjectArrayFromNative();
+    assertNotNull(array);
+    assertEquals(3, array.length);
+    assertEquals("1", array[0]);
+  }
+
+  private static void testJsTypeArray_objectArrayInterchangeability() {
+    // In Wasm, Java Object[] and native JsType arrays have different representations and are not
+    // interchangeable.
+    if (isWasm()) {
+      return;
+    }
+    Object[] objArray = new Object[1];
+
+    SimpleJsTypeWithProperty[][][] array = (SimpleJsTypeWithProperty[][][]) objArray;
+
+    objArray[0] = new Object[2];
+    ((Object[]) objArray[0])[0] = new Object[3];
+    array[0][0][1] = getSimpleJsType(2);
+    assertEquals(1, array.length);
+    assertEquals(2, array[0].length);
+    assertEquals(3, array[0][0].length);
+    assertEquals(2, array[0][0][1].getId());
+  }
+
+  // TODO(b/540455028): Cannot do instanceof against native JsType in Wasm.
+  @Wasm("nop")
+  private static void testInstanceOf() {
+    Object array = new MyNativeType[10];
+
+    assertTrue(array instanceof MyNativeType[]);
+    assertTrue(array instanceof MyOtherNativeType[]);
+    assertTrue(array instanceof Object[]);
+  }
+
+  private static void testObjectArray_instanceOf() {
+    Object array = new Object[0];
+    assertTrue(array instanceof Object[]);
+    // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
+    if (!isWasm()) {
+      assertFalse(array instanceof Double[]);
+    }
+    assertFalse(array instanceof int[]);
+    assertTrue(array instanceof Serializable);
+  }
+
+  // TODO(b/540455028): Cannot do instanceof against native JsType in Wasm.
+  @Wasm("nop")
+  private static void testObjectArray_instanceOf_nativeJsType() {
+    Object array = new Object[0];
+    assertFalse(array instanceof SimpleJsTypeWithProperty);
+    assertTrue(array instanceof SimpleJsTypeWithProperty[]);
+    assertTrue(array instanceof SimpleJsTypeWithProperty[][]);
+    assertTrue(array instanceof SimpleJsTypeWithProperty[][][]);
+  }
+
+  private static void testJsTypeArray_instanceOf() {
+    Object array = returnJsType3DimFromNative();
+    if (!isWasm()) {
+      // In Wasm, native JS arrays are not instances of Java Object[] or Serializable.
+      assertTrue(array instanceof Object[]);
+      assertTrue(array instanceof Serializable);
+    }
+    assertFalse(array instanceof Double[]);
+    assertFalse(array instanceof int[]);
+  }
+
+  // TODO(b/540455028): Cannot do instanceof against native JsType in Wasm.
+  @Wasm("nop")
+  private static void testJsTypeArray_instanceOf_nativeJsType() {
+    Object array = returnJsType3DimFromNative();
+    assertFalse(array instanceof SimpleJsTypeWithProperty);
+    assertTrue(array instanceof SimpleJsTypeWithProperty[]);
+    assertTrue(array instanceof SimpleJsTypeWithProperty[][]);
+    assertTrue(array instanceof SimpleJsTypeWithProperty[][][]);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  private interface NativeWildcardInterface {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
+  private interface NativeStringInterface {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private interface NativeObjectInterface {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "BufferSource")
+  private interface NativeTypedefInterface {}
+
+  private static void testNativeArrays() {
+    NativeStringInterface[][] nativeArray2d = new NativeStringInterface[10][];
+    nativeArray2d[1] = (NativeStringInterface[]) new NativeObjectInterface[0];
+
+    NativeTypedefInterface[][] nativeTypeDef2d = new NativeTypedefInterface[10][];
+    nativeTypeDef2d[1] = (NativeTypedefInterface[]) new NativeObjectInterface[0];
+
+    NativeWildcardInterface[][] nativeWildcard2d = new NativeWildcardInterface[10][];
+    nativeWildcard2d[1] = (NativeWildcardInterface[]) new NativeObjectInterface[0];
+  }
+
+  @Wasm("nop")
+  private static void testNativeArrays_noMetadata() {
+    assertHasNoMetadata(new NativeStringInterface[0]);
+    assertHasNoMetadata(new NativeStringInterface[0][]);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
+  private static class NativeArray {}
+
+  @Wasm("nop")
+  private static void assertHasNoMetadata(Object array) {
+    assertEquals(nonNumericKeys(new NativeArray()), nonNumericKeys(array));
+  }
+
+  @JsMethod(namespace = "arrayofnativejstype.helper")
+  private static native Object returnObjectArrayFromNative();
+
+  // Non-native array return type (String[]) on native JsMethod is not supported in Wasm.
+  @Wasm("nop")
+  @JsMethod(namespace = "arrayofnativejstype.helper")
+  private static native String[] nonNumericKeys(Object object);
+
   public static void main(String... args) {
     testSingleDimension();
     testMultiDimension();
     testArrayLiteral();
     testEquality();
     testJsBoundary();
+    testInstanceOf();
+    testJsType3DimArray_castFromNativeWithACall();
+    testJsTypeArray_instanceOf();
+    testJsTypeArray_instanceOf_nativeJsType();
+    testJsTypeArray_objectArrayInterchangeability();
+    testJsTypeArray_returnFromNative();
+    testJsTypeArray_returnFromNativeWithACall();
+    testObjectArrayAssignment();
+    testObjectArray_castFromNative();
+    testObjectArray_instanceOf();
+    testObjectArray_instanceOf_nativeJsType();
+    testNativeArrays();
+    testNativeArrays_noMetadata();
   }
 }
