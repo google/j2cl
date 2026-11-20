@@ -15,7 +15,9 @@
  */
 package jsvarargs;
 
+import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import java.util.List;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -284,5 +286,33 @@ public class Main {
     n1.acceptWithPrefix(1, n1, n2);
     NativeType[] items = new NativeType[] {n1, n2};
     NativeType unused = NativeType.of(items);
+  }
+
+  // Repro for b/587851444.
+  interface VarargsBridges<T, S> {
+    @JsMethod
+    void arrayOverriddenByVarargs(T[] values);
+
+    @JsMethod
+    void varargsOverriddenByArray(T... values);
+
+    @JsMethod
+    void genericOverriddenByVarargs(S values);
+  }
+
+  // Kotlin does not allow overriding an array parameter with varargs or vice versa.
+  @J2ktIncompatible
+  @Wasm("nop")
+  private static void testVarargsBridges() {
+    class VarargsBridgesImpl implements VarargsBridges<String, String[]> {
+      @Override
+      public void arrayOverriddenByVarargs(String... values) {}
+
+      @Override
+      public void varargsOverriddenByArray(String[] values) {}
+
+      @Override
+      public void genericOverriddenByVarargs(String... values) {}
+    }
   }
 }

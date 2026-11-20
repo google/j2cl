@@ -113,6 +113,12 @@
 (global $$class@jsvarargs.Main.GenericFunction (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsvarargs.Main.VarargsBridges (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsvarargs.Main.VarargsBridges (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsvarargs.Main.NativeType.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -420,6 +426,32 @@
     (return (call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (call $$invokeJsFunction__javaemul_internal_WasmExtern__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.GenericFunction (struct.get $javaemul.internal.JsFunctionAdaptor $jsFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))(call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (local.get $i))(extern.convert_any (local.get $args)))))
    )
   )
+ )
+)
+
+;;; void VarargsBridges.$clinit()
+(func $$clinit__void_<once>_@jsvarargs.Main.VarargsBridges
+ (block
+  (if (global.get $$class-initialized@jsvarargs.Main.VarargsBridges)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsvarargs.Main.VarargsBridges (i32.const 1))
+ )
+)
+
+;;; Class<T> VarargsBridges.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsvarargs.Main.VarargsBridges
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsvarargs.Main.VarargsBridges)))
+   (then
+    (return (global.get $$class@jsvarargs.Main.VarargsBridges))
+   )
+  )
+  (global.set $$class@jsvarargs.Main.VarargsBridges (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|jsvarargs.Ma...|__java_lang_String_<once>_@jsvarargs.Main.VarargsBridges.$StringLiterals )))
+  (return (global.get $$class@jsvarargs.Main.VarargsBridges))
  )
 )
 

@@ -1,0 +1,74 @@
+goog.module('jsvarargs.Main.$1VarargsBridgesImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const VarargsBridges = goog.require('jsvarargs.Main.VarargsBridges$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/**
+ * @implements {VarargsBridges<?string, Array<?string>>}
+ */
+class $1VarargsBridgesImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!$1VarargsBridgesImpl} */
+ static $create__() {
+  $1VarargsBridgesImpl.$clinit();
+  let $instance = new $1VarargsBridgesImpl();
+  $instance.$ctor__jsvarargs_Main_1VarargsBridgesImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsvarargs_Main_1VarargsBridgesImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void(/** Array<?string> */ values) {}
+ /** @nodts */
+ m_varargsOverriddenByArray__arrayOf_java_lang_String__void(/** Array<?string> */ values) {}
+ /** @nodts */
+ m_genericOverriddenByVarargs__arrayOf_java_lang_String__void(/** Array<?string> */ values) {}
+ //Bridge method.
+ /** @override */
+ arrayOverriddenByVarargs(.../** ...?string */ values) {
+  $Arrays.$stampType(values, j_l_String);
+  this.m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void(/**@type {Array<?string>}*/ ($Arrays.$castTo(values, j_l_String, 1)));
+ }
+ //Bridge method.
+ /** @override */
+ varargsOverriddenByArray(/** Array<?string> */ values) {
+  this.m_varargsOverriddenByArray__arrayOf_java_lang_String__void(/**@type {Array<?string>}*/ ($Arrays.$castTo(values, j_l_String, 1)));
+ }
+ //Bridge method.
+ /** @override */
+ genericOverriddenByVarargs(.../** ...?string */ values) {
+  $Arrays.$stampType(values, j_l_String);
+  this.m_genericOverriddenByVarargs__arrayOf_java_lang_String__void(/**@type {Array<?string>}*/ ($Arrays.$castTo(values, j_l_String, 1)));
+ }
+ /** @nodts */
+ static $clinit() {
+  $1VarargsBridgesImpl.$clinit = () =>{};
+  $1VarargsBridgesImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1VarargsBridgesImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+VarargsBridges.$markImplementor($1VarargsBridgesImpl);
+$Util.$setClassMetadata($1VarargsBridgesImpl, 'jsvarargs.Main$1VarargsBridgesImpl');
+
+exports = $1VarargsBridgesImpl;
+
+//# sourceMappingURL=Main$1VarargsBridgesImpl.js.map

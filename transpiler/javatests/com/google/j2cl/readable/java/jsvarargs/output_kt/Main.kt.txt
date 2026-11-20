@@ -358,4 +358,15 @@ open class Main {
    external fun of(vararg items: NativeType?): NativeType?
   }
  }
+ 
+ internal interface VarargsBridges<T, S> {
+  @JsMethod
+  fun arrayOverriddenByVarargs(values: Array<T>?)
+  
+  @JsMethod
+  fun varargsOverriddenByArray(vararg values: T)
+  
+  @JsMethod
+  fun genericOverriddenByVarargs(values: S)
+ }
 }

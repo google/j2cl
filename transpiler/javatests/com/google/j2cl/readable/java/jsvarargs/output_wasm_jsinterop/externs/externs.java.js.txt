@@ -108,6 +108,24 @@ $j2wasm$externs.jsvarargs_Main_SubMain = function() {};
 $j2wasm$externs.jsvarargs_Main_SubMain.prototype.f3 = function(/** number */ m, /** Array<number> */ numbers) {};
 
 /**
+ * @interface
+ * @template T, S
+ */
+$j2wasm$externs.jsvarargs_Main_VarargsBridges = function() {};
+
+/**
+ */
+$j2wasm$externs.jsvarargs_Main_VarargsBridges.prototype.arrayOverriddenByVarargs = function(/** Array<T> */ values) {};
+
+/**
+ */
+$j2wasm$externs.jsvarargs_Main_VarargsBridges.prototype.varargsOverriddenByArray = function(/** Array<T> */ values) {};
+
+/**
+ */
+$j2wasm$externs.jsvarargs_Main_VarargsBridges.prototype.genericOverriddenByVarargs = function(/** S */ values) {};
+
+/**
  * @abstract
  * @extends {$j2wasm$externs.jsvarargs_Main}
  * @constructor
