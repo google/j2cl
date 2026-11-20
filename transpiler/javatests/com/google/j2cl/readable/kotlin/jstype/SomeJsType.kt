@@ -52,6 +52,13 @@ open class SomeJsType<T>(
     val star = (3.0 as Any) as Star
     return star as Wildcard
   }
+
+  @JsType
+  private class PrivateJsType {
+    companion object {
+      @JvmStatic fun staticMethod() {}
+    }
+  }
 }
 
 @JsType

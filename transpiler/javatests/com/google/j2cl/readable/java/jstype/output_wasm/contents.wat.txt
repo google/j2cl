@@ -5,6 +5,12 @@
 (global $$class@jstype.SomeJsType (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jstype.SomeJsType.PrivateJsType (mut i32)
+ (i32.const 0)
+)
+(global $$class@jstype.SomeJsType.PrivateJsType (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jstype.SomeJsType.Star.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -27,6 +33,14 @@
   (ref.func $m_protectedMethod__void@jstype.SomeJsType)
   (ref.func $m_publicMethod__void@jstype.SomeJsType)
   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
+ )
+)
+(global $jstype.SomeJsType.PrivateJsType.vtable (ref $jstype.SomeJsType.PrivateJsType.vtable)
+ (struct.new $jstype.SomeJsType.PrivateJsType.vtable
+  (ref.func $$getClassImpl__java_lang_Class@jstype.SomeJsType.PrivateJsType)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
  )
 )
 
@@ -214,3 +228,68 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType)
+
+;;; PrivateJsType PrivateJsType.$create()
+(func $$create__@jstype.SomeJsType.PrivateJsType
+ (result (ref null $jstype.SomeJsType.PrivateJsType))
+ (local $$instance (ref null $jstype.SomeJsType.PrivateJsType))
+ (block
+  (local.set $$instance (struct.new $jstype.SomeJsType.PrivateJsType (global.get $jstype.SomeJsType.PrivateJsType.vtable) (global.get $itable.empty) (i32.const 0)))
+  (call $$ctor__void_$p_jstype_SomeJsType_PrivateJsType@jstype.SomeJsType.PrivateJsType (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PrivateJsType.$ctor()
+(func $$ctor__void_$p_jstype_SomeJsType_PrivateJsType@jstype.SomeJsType.PrivateJsType
+ (param $this (ref null $jstype.SomeJsType.PrivateJsType))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void PrivateJsType.staticMethod()
+(func $m_staticMethod__void@jstype.SomeJsType.PrivateJsType
+ (block
+ )
+)
+
+;;; void PrivateJsType.$clinit()
+(func $$clinit__void_<once>_@jstype.SomeJsType.PrivateJsType
+ (block
+  (if (global.get $$class-initialized@jstype.SomeJsType.PrivateJsType)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jstype.SomeJsType.PrivateJsType (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> PrivateJsType.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType.PrivateJsType
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jstype.SomeJsType.PrivateJsType)))
+   (then
+    (return (global.get $$class@jstype.SomeJsType.PrivateJsType))
+   )
+  )
+  (global.set $$class@jstype.SomeJsType.PrivateJsType (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jstype.SomeJ...|__java_lang_String_<once>_@jstype.SomeJsType.PrivateJsType.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jstype.SomeJsType.PrivateJsType))
+ )
+)
+
+;;; Class<?> PrivateJsType.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jstype.SomeJsType.PrivateJsType
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jstype.SomeJsType.PrivateJsType))
+ (local.set $this (ref.cast (ref $jstype.SomeJsType.PrivateJsType) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jstype.SomeJsType.PrivateJsType ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jstype.SomeJsType.PrivateJsType)

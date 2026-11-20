@@ -1,0 +1,43 @@
+goog.module('jstype.SomeJsType.PrivateJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class PrivateJsType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!PrivateJsType} */
+ static $create__() {
+  let $instance = new PrivateJsType();
+  $instance.$ctor__jstype_SomeJsType_PrivateJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jstype_SomeJsType_PrivateJsType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ 
+ static staticMethod() {
+  PrivateJsType.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  PrivateJsType.$clinit = () =>{};
+  PrivateJsType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PrivateJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PrivateJsType, 'jstype.SomeJsType$PrivateJsType');
+
+exports = PrivateJsType;
+
+//# sourceMappingURL=SomeJsType$PrivateJsType.js.map

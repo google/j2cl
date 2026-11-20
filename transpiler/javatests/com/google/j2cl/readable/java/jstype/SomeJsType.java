@@ -54,4 +54,9 @@ public class SomeJsType<T> {
     Star star = (Star) (Object) 3.0;
     return (Wildcard) star;
   }
+
+  @JsType
+  private static class PrivateJsType {
+    public static void staticMethod() {}
+  }
 }

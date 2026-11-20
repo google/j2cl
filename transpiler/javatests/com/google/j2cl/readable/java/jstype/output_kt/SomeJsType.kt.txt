@@ -25,6 +25,7 @@ import kotlin.Any
 import kotlin.Int
 import kotlin.Suppress
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 @JsType
 open class SomeJsType<T> {
@@ -66,4 +67,12 @@ open class SomeJsType<T> {
  
  @JsType(name = "?", namespace = JsPackage.GLOBAL, isNative = true)
  internal interface Wildcard
+ 
+ @JsType
+ private open class PrivateJsType private constructor() {
+  companion object {
+   @JvmStatic
+   fun staticMethod() {}
+  }
+ }
 }
