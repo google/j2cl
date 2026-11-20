@@ -165,7 +165,8 @@ public interface Map<K, V> {
 
   /** Map.ofEntries API that is friendly to use from JavaScript. */
   @JsMethod(name = "ofEntries")
-  static <K, V> Map<K, V> jsOfEntries(Entry<? extends K, ? extends V>... entries) {
+  // TODO(b/587964621): Change to ? extends K,V once we support bounds in TS/JS.
+  static <K, V> Map<K, V> jsOfEntries(Entry<K, V>... entries) {
     return Collections.internalMapFromEntries(Arrays.asList(entries));
   }
 
