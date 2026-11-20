@@ -18,12 +18,14 @@ package multipleconstructors
 class PrimaryWithParentPrimary(var id: Int = 1, var flag: Boolean = true) :
   ParentWithPrimary(flag) {
   constructor(id: Int) : this(id, id == 0)
+
   constructor(flag: Boolean) : this(-1, flag)
 }
 
 class PrimaryWithParentNoPrimary(var id: Int = 1, var flag: Boolean = true) :
   ParentWithoutPrimary(id, flag) {
   constructor(id: Int) : this(id, id == 0)
+
   constructor(flag: Boolean) : this(0, flag)
 }
 
@@ -46,6 +48,7 @@ class NoPrimaryWithParentNoPrimary : ParentWithoutPrimary {
 
 class NoPrimaryWithParentPrimary : ParentWithPrimary {
   constructor(id: Int) : super(id == 0)
+
   constructor(flag: Boolean) : super(flag, "secondary")
 }
 
@@ -54,7 +57,17 @@ open class ParentWithPrimary(f: Boolean) {
 }
 
 open class ParentWithoutPrimary {
+  var field = 1
+
+  init {
+    field++
+  }
+
+  var fieldAfterInit = field
+
   constructor(id: Int)
+
   constructor(flag: Boolean)
+
   constructor(id: Int, flag: Boolean)
 }
