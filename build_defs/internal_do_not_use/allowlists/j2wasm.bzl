@@ -28,7 +28,6 @@ J2WASM_ALLOWLIST = allowlists.of_packages([
     "//samples/...",
     "//third_party/...",
     "//transpiler/...",
-    "//third_party/java_src/jsr330_inject/...",
     "//third_party/java_src/qo_metafile/...",
     "//third_party/java_src/qo_ole/...",
     "//third_party/java_src/re2j/...",

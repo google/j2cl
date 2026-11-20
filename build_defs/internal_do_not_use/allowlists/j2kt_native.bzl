@@ -30,5 +30,4 @@ J2KT_NATIVE_ALLOWLIST = allowlists.of_packages([
     "//transpiler/javatests/com/google/j2cl/integration/testing/...",
     "//transpiler/javatests/com/google/j2cl/readable/java/...",
     "//third_party/java_src/j2objc/annotations/...",
-    "//third_party/java_src/jsr330_inject/...",
 ])
