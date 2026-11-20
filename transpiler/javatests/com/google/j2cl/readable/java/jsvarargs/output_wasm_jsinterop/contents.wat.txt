@@ -119,6 +119,12 @@
 (global $$class@jsvarargs.Main.VarargsBridges (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@jsvarargs.Main.1VarargsBridgesImpl (mut i32)
+ (i32.const 0)
+)
+(global $$class@jsvarargs.Main.1VarargsBridgesImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@jsvarargs.Main.NativeType.$Overlay (mut i32)
  (i32.const 0)
 )
@@ -231,6 +237,28 @@
   (ref.func $m_testSideEffect__void@jsvarargs.Main)
   (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
   (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
+ )
+)
+(global $jsvarargs.Main.1VarargsBridgesImpl.vtable (ref (exact $jsvarargs.Main.1VarargsBridgesImpl.vtable))
+ (struct.new $jsvarargs.Main.1VarargsBridgesImpl.vtable
+  (global.get $jsvarargs.Main.$1VarargsBridgesImpl.proto)
+  (ref.func $$getClassImpl__java_lang_Class@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_genericOverriddenByVarargs__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_varargsOverriddenByArray__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl)
+ )
+)
+(global $jsvarargs.Main.VarargsBridges.vtable@$jsvarargs.Main.1VarargsBridgesImpl (ref $jsvarargs.Main.VarargsBridges.vtable)
+ (struct.new $jsvarargs.Main.VarargsBridges.vtable
+  (ref.func $m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+  (ref.func $m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
  )
 )
 (global $jsvarargs.QualifiedSuperMethodCall.vtable (ref (exact $jsvarargs.QualifiedSuperMethodCall.vtable))
@@ -853,6 +881,12 @@
 )
 (elem declare func $m_testJsImportGenerationForNativeVarargs__void@jsvarargs.Main)
 
+;;; void Main.testVarargsBridges()
+(func $m_testVarargsBridges__void@jsvarargs.Main
+ (block
+ )
+)
+
 ;;; int Main.f1(int multiplier, WasmExtern numbers)
 (@binaryen.js.called)
 (func $js_export_m_f1__int__arrayOf_int__int@jsvarargs.Main
@@ -1103,6 +1137,183 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@jsvarargs.Main.AbstractMethodWithVarargs)
+
+;;; VarargsBridgesImpl VarargsBridgesImpl.$create()
+(func $$create__@jsvarargs.Main.1VarargsBridgesImpl
+ (result (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local $$instance (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (block
+  (call $$clinit__void_<once>_@jsvarargs.Main.1VarargsBridgesImpl )
+  (local.set $$instance (struct.new_desc $jsvarargs.Main.1VarargsBridgesImpl (global.get $jsvarargs.Main.1VarargsBridgesImpl.itable) (i32.const 0) (global.get $jsvarargs.Main.1VarargsBridgesImpl.vtable)))
+  (call $$ctor__void_$p_jsvarargs_Main_1VarargsBridgesImpl@jsvarargs.Main.1VarargsBridgesImpl (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void VarargsBridgesImpl.$ctor()
+(func $$ctor__void_$p_jsvarargs_Main_1VarargsBridgesImpl@jsvarargs.Main.1VarargsBridgesImpl
+ (param $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void VarargsBridgesImpl.arrayOverriddenByVarargs(String... values)
+(func $m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.varargsOverriddenByArray(String[] values)
+(func $m_varargsOverriddenByArray__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.m_varargsOverriddenByArray__arrayOf_java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_varargsOverriddenByArray__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.genericOverriddenByVarargs(String... values)
+(func $m_genericOverriddenByVarargs__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.m_genericOverriddenByVarargs__arrayOf_java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_genericOverriddenByVarargs__arrayOf_java_lang_String__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.arrayOverriddenByVarargs(T[] values)
+(func $m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void (ref.as_non_null (local.get $this))(local.get $values)(struct.get $jsvarargs.Main.1VarargsBridgesImpl.vtable $m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void (ref.get_desc $jsvarargs.Main.1VarargsBridgesImpl(local.get $this))))
+ )
+)
+(elem declare func $m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.varargsOverriddenByArray(T... values)
+(func $m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.m_varargsOverriddenByArray__arrayOf_java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_varargsOverriddenByArray__arrayOf_java_lang_String__void (ref.as_non_null (local.get $this))(local.get $values)(struct.get $jsvarargs.Main.1VarargsBridgesImpl.vtable $m_varargsOverriddenByArray__arrayOf_java_lang_String__void (ref.get_desc $jsvarargs.Main.1VarargsBridgesImpl(local.get $this))))
+ )
+)
+(elem declare func $m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.genericOverriddenByVarargs(S values)
+(func $m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.m_genericOverriddenByVarargs__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null $java.lang.Object))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_genericOverriddenByVarargs__arrayOf_java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (local.get $values))(struct.get $jsvarargs.Main.1VarargsBridgesImpl.vtable $m_genericOverriddenByVarargs__arrayOf_java_lang_String__void (ref.get_desc $jsvarargs.Main.1VarargsBridgesImpl(local.get $this))))
+ )
+)
+(elem declare func $m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.arrayOverriddenByVarargs(WasmExtern values)
+(@binaryen.js.called)
+(func $js_export_m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.js_export_m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null extern))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $values)))(struct.get $jsvarargs.Main.VarargsBridges.vtable $m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void (ref.cast (ref $jsvarargs.Main.VarargsBridges.vtable) (call $get.itable.$jsvarargs.Main.VarargsBridges (local.get $this)))))
+ )
+)
+(elem declare func $js_export_m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.varargsOverriddenByArray(WasmExtern values)
+(@binaryen.js.called)
+(func $js_export_m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.js_export_m_varargsOverriddenByArray__arrayOf_java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null extern))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_varargsOverriddenByArray__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $values)))))(struct.get $jsvarargs.Main.VarargsBridges.vtable $m_varargsOverriddenByArray__arrayOf_java_lang_Object__void (ref.cast (ref $jsvarargs.Main.VarargsBridges.vtable) (call $get.itable.$jsvarargs.Main.VarargsBridges (local.get $this)))))
+ )
+)
+(elem declare func $js_export_m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.genericOverriddenByVarargs(WasmExtern values)
+(@binaryen.js.called)
+(func $js_export_m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.js_export_m_genericOverriddenByVarargs__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $values (ref null extern))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (call_ref $function.m_genericOverriddenByVarargs__java_lang_Object__void (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $values))(struct.get $jsvarargs.Main.VarargsBridges.vtable $m_genericOverriddenByVarargs__java_lang_Object__void (ref.cast (ref $jsvarargs.Main.VarargsBridges.vtable) (call $get.itable.$jsvarargs.Main.VarargsBridges (local.get $this)))))
+ )
+)
+(elem declare func $js_export_m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
+
+;;; void VarargsBridgesImpl.$clinit()
+(func $$clinit__void_<once>_@jsvarargs.Main.1VarargsBridgesImpl
+ (block
+  (if (global.get $$class-initialized@jsvarargs.Main.1VarargsBridgesImpl)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@jsvarargs.Main.1VarargsBridgesImpl (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> VarargsBridgesImpl.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@jsvarargs.Main.1VarargsBridgesImpl
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@jsvarargs.Main.1VarargsBridgesImpl)))
+   (then
+    (return (global.get $$class@jsvarargs.Main.1VarargsBridgesImpl))
+   )
+  )
+  (global.set $$class@jsvarargs.Main.1VarargsBridgesImpl (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|jsvarargs.Ma...|__java_lang_String_<once>_@jsvarargs.Main.1VarargsBridgesImpl.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@jsvarargs.Main.1VarargsBridgesImpl))
+ )
+)
+
+;;; Class<?> VarargsBridgesImpl.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@jsvarargs.Main.1VarargsBridgesImpl
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
+ (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@jsvarargs.Main.1VarargsBridgesImpl ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@jsvarargs.Main.1VarargsBridgesImpl)
 
 ;;; InnerClass InnerClass.$create(QualifiedSuperMethodCall $outer_this)
 (func $$create__jsvarargs_QualifiedSuperMethodCall@jsvarargs.QualifiedSuperMethodCall.InnerClass

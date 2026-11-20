@@ -34,19 +34,18 @@ class $1VarargsBridgesImpl extends j_l_Object {
  m_genericOverriddenByVarargs__arrayOf_java_lang_String__void(/** Array<?string> */ values) {}
  //Bridge method.
  /** @override */
- arrayOverriddenByVarargs(.../** ...?string */ values) {
-  $Arrays.$stampType(values, j_l_String);
+ arrayOverriddenByVarargs(/** Array<?string> */ values) {
   this.m_arrayOverriddenByVarargs__arrayOf_java_lang_String__void(/**@type {Array<?string>}*/ ($Arrays.$castTo(values, j_l_String, 1)));
  }
  //Bridge method.
  /** @override */
- varargsOverriddenByArray(/** Array<?string> */ values) {
+ varargsOverriddenByArray(.../** ...?string */ values) {
+  $Arrays.$stampType(values, j_l_String);
   this.m_varargsOverriddenByArray__arrayOf_java_lang_String__void(/**@type {Array<?string>}*/ ($Arrays.$castTo(values, j_l_String, 1)));
  }
  //Bridge method.
  /** @override */
- genericOverriddenByVarargs(.../** ...?string */ values) {
-  $Arrays.$stampType(values, j_l_String);
+ genericOverriddenByVarargs(/** Array<?string> */ values) {
   this.m_genericOverriddenByVarargs__arrayOf_java_lang_String__void(/**@type {Array<?string>}*/ ($Arrays.$castTo(values, j_l_String, 1)));
  }
  /** @nodts */

@@ -1216,11 +1216,13 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
         parameterDescriptors.add(
             fromTarget.toBuilder()
                 .setTypeDescriptor(TypeDescriptors.getEnumBoxType(fromTarget.getTypeDescriptor()))
+                .setVarargs(fromBridge.isVarargs())
                 .build());
       } else {
         // If no conversion was necessary prefer the type from the target, for consistency,
-        // in case it refers to type parameters declared in the method.
-        parameterDescriptors.add(fromTarget);
+        // in case it refers to type parameters declared in the method, while preserving the
+        // varargs status of the bridged method that defines the calling convention.
+        parameterDescriptors.add(fromTarget.toBuilder().setVarargs(fromBridge.isVarargs()).build());
       }
     }
     return parameterDescriptors;

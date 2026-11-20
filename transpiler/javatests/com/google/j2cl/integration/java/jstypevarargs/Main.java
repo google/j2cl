@@ -32,6 +32,7 @@ public class Main {
     testSuperMethodCall();
     testCallVarargsWithNull();
     testUnboxedType();
+    testVarargsBridges();
     QualifiedSuperMethodCall.test();
   }
 
@@ -327,6 +328,42 @@ public class Main {
     Summarizer rawSummarizer = new SummarizerImplementor();
     // Simulate a call from JS with an untyped array.
     assertEquals(6, rawSummarizer.summarize(1, 2, 3));
+  }
+
+  // Repro for b/587851444.
+  interface VarargsBridges<T, S> {
+    @JsMethod
+    String arrayOverriddenByVarargs(T[] values);
+
+    @JsMethod
+    String varargsOverriddenByArray(T... values);
+
+    @JsMethod
+    String genericOverriddenByVarargs(S values);
+  }
+
+  private static class VarargsBridgesImpl implements VarargsBridges<String, String[]> {
+    @Override
+    public String arrayOverriddenByVarargs(String... values) {
+      return values[0] + ":" + values.length;
+    }
+
+    @Override
+    public String varargsOverriddenByArray(String[] values) {
+      return values[0] + ":" + values.length;
+    }
+
+    @Override
+    public String genericOverriddenByVarargs(String... values) {
+      return values[0] + ":" + values.length;
+    }
+  }
+
+  private static void testVarargsBridges() {
+    VarargsBridges<String, String[]> bridges = new VarargsBridgesImpl();
+    assertEquals("a:2", bridges.arrayOverriddenByVarargs(new String[] {"a", "b"}));
+    assertEquals("a:2", bridges.varargsOverriddenByArray("a", "b"));
+    assertEquals("a:2", bridges.genericOverriddenByVarargs(new String[] {"a", "b"}));
   }
 
   @JsMethod

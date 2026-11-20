@@ -17,7 +17,6 @@ package jsvarargs;
 
 import com.google.j2cl.readable.java.common.J2ktIncompatible;
 import java.util.List;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -302,7 +301,6 @@ public class Main {
 
   // Kotlin does not allow overriding an array parameter with varargs or vice versa.
   @J2ktIncompatible
-  @Wasm("nop")
   private static void testVarargsBridges() {
     class VarargsBridgesImpl implements VarargsBridges<String, String[]> {
       @Override
