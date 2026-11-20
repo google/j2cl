@@ -181,9 +181,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
       return false;
     }
 
-    if (isEffectivelyPrivate(memberDescriptor)
-        && !memberDescriptor.isJsMember()
-        && !isCalledFromOtherClasses(memberDescriptor)) {
+    if (isEffectivelyPrivate(memberDescriptor) && !isCalledFromOtherClasses(memberDescriptor)) {
       // This is an effectively private member, which means that when this member is accessed,
       //  clinit is already guaranteed to have been called.
       return false;
@@ -201,8 +199,14 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
             .isPrivate();
   }
 
+  /**
+   * Returns {@code true} if the member might be called from outside its class, either from other
+   * classes in the compilation unit or externally.
+   */
   private boolean isCalledFromOtherClasses(MemberDescriptor memberDescriptor) {
-    return privateMembersCalledFromOtherClasses.contains(getUniqueIdentifier(memberDescriptor));
+    // JsMembers can be called from JavaScript.
+    return memberDescriptor.isJsMember()
+        || privateMembersCalledFromOtherClasses.contains(getUniqueIdentifier(memberDescriptor));
   }
 
   /** Returns {@code true} if the type implements the class initialization method. */
