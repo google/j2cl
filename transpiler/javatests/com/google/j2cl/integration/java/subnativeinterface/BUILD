@@ -13,8 +13,10 @@ integration_test(
         "*.java",
         "*.js",
     ]),
-    # Contains JsInterop features which are only applicable for JS output.
+    # Contains JsInterop features which are only applicable for JS and Wasm output.
     enable_jvm_test = False,
     enable_kt = False,
+    # Implementing native interfaces is only supported with custom descriptors JsInterop.
     enable_wasm = False,
+    enable_wasm_custom_descriptors_jsinterop = True,
 )

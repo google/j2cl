@@ -1,0 +1,55 @@
+goog.module('subnativeinterface.AccidentalStringEcho$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NonJsStringEcho = goog.require('subnativeinterface.NonJsStringEcho$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let MyNativeGenericInterface = goog.forwardDeclare('test.foo.MyNativeGenericInterface');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {MyNativeGenericInterface<?string>}
+ */
+class AccidentalStringEcho extends NonJsStringEcho {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AccidentalStringEcho} */
+ static $create__() {
+  AccidentalStringEcho.$clinit();
+  let $instance = new AccidentalStringEcho();
+  $instance.$ctor__subnativeinterface_AccidentalStringEcho__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_AccidentalStringEcho__void() {
+  this.$ctor__subnativeinterface_NonJsStringEcho__void();
+ }
+ //Bridge method.
+ /** @override @return {?string} */
+ echo(/** ?string */ t) {
+  return this.m_echo__java_lang_String__java_lang_String(/**@type {?string}*/ ($Casts.$to(t, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  AccidentalStringEcho.$clinit = () =>{};
+  AccidentalStringEcho.$loadModules();
+  NonJsStringEcho.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AccidentalStringEcho;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(AccidentalStringEcho, 'subnativeinterface.AccidentalStringEcho');
+
+exports = AccidentalStringEcho;
+
+//# sourceMappingURL=AccidentalStringEcho.js.map

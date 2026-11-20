@@ -643,13 +643,42 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
    */
   @Memoized
   ImmutableMap<String, MethodDescriptor> getClosureMangledNameToInstanceJsMethodMap() {
-    return getAllSuperTypesIncludingSelf().stream()
-        .flatMap(t -> t.getDeclaredMethodDescriptors().stream())
-        .filter(MemberDescriptor::isInstanceMember)
+    Map<String, MethodDescriptor> instanceJsMethods = new LinkedHashMap<>();
+    // The instance JsMethods that might be referenced externally come from:
+    // - getPolymorphicMethods() (including bridges),
+    // - getAccidentalOverrides(), because when an accidental override only exposes a JsMethod it
+    //   shares the Wasm mangled name with the inherited method, so getPolymorphicMethods() returns
+    //   the inherited method which is not exposed to JS and does not fulfill the JS name, and
+    // - private instance JsMethods declared in this type.
+    Streams.concat(
+            getPolymorphicMethods().stream(),
+            getAccidentalOverrides().stream()
+                .map(DeclaredTypeDescriptor::withImplementedMethodSignature),
+            getDeclaredMethodDescriptors().stream()
+                .filter(m -> m.isInstanceMember() && m.getVisibility().isPrivate()))
         .filter(MemberDescriptor::canBeReferencedExternallyForWasm)
-        .collect(
-            toImmutableMap(
-                MethodDescriptor::getClosureMangledName, Function.identity(), (m1, m2) -> m1));
+        .forEach(m -> instanceJsMethods.putIfAbsent(m.getClosureMangledName(), m));
+    return ImmutableMap.copyOf(instanceJsMethods);
+  }
+
+  /**
+   * Returns the accidental override with the signature of the interface method it implements.
+   *
+   * <p>Accidental overrides are not generalizing bridges, so their ABI is their own signature,
+   * which might be specialized, e.g. {@code echo(String)} inherited from a superclass to implement
+   * {@code NativeInterface<String>.echo(T)}. Their JavaScript export needs the signature of the
+   * implemented method, which is shared by the exports of all its implementations, and that also
+   * lets them inherit its JsInfo.
+   */
+  private static MethodDescriptor withImplementedMethodSignature(
+      MethodDescriptor accidentalOverride) {
+    MethodDescriptor implementedMethod =
+        accidentalOverride.getBridgeOrigin().getDeclarationDescriptor();
+    return accidentalOverride.toBuilder()
+        .setTypeParameterTypeDescriptors(implementedMethod.getTypeParameterTypeDescriptors())
+        .setReturnTypeDescriptor(implementedMethod.getReturnTypeDescriptor())
+        .setParameterDescriptors(implementedMethod.getParameterDescriptors())
+        .build();
   }
 
   /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */

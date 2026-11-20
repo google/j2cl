@@ -37,12 +37,7 @@ public class AddFunctionalInterfaceAdaptors extends NormalizationPass {
           @Override
           public void exitType(Type type) {
             TypeDeclaration typeDeclaration = type.getDeclaration();
-            if (!typeDeclaration.isFunctionalInterface()
-                // JsFunction implementations extend the common JsFunctionAdaptor instead of having
-                // individual adapters generated.
-                || typeDeclaration.isJsFunctionInterface()
-                // Native interfaces cannot be implemented in Wasm.
-                || typeDeclaration.isNative()) {
+            if (!LambdaAdaptorTypeDescriptors.hasWasmFunctionalInterfaceAdaptor(typeDeclaration)) {
               return;
             }
 

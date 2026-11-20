@@ -1,0 +1,49 @@
+goog.module('subnativeinterface.SubNativeInterface.Companion.$LambdaAdaptor$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeGenericInterface = goog.forwardDeclare('test.foo.MyNativeGenericInterface');
+
+/**
+ * @template T
+ * @implements {MyNativeGenericInterface<T>}
+ */
+class $LambdaAdaptor$1 extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T):T */ fn) {
+  $LambdaAdaptor$1.$clinit();
+  super();
+  /**@type {?function(T):T} @nodts*/
+  this.f_fn__subnativeinterface_SubNativeInterface_Companion_$LambdaAdaptor$1;
+  this.$ctor__subnativeinterface_SubNativeInterface_Companion_$LambdaAdaptor$1__subnativeinterface_MyNativeGenericInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_SubNativeInterface_Companion_$LambdaAdaptor$1__subnativeinterface_MyNativeGenericInterface_$JsFunction__void(/** ?function(T):T */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__subnativeinterface_SubNativeInterface_Companion_$LambdaAdaptor$1 = fn;
+ }
+ /** @override @return {T} */
+ echo(/** T */ t) {
+  let /** ?function(T):T */ $function;
+  return ($function = this.f_fn__subnativeinterface_SubNativeInterface_Companion_$LambdaAdaptor$1, $function(t));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor$1.$clinit = () =>{};
+  $LambdaAdaptor$1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor$1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($LambdaAdaptor$1, 'subnativeinterface.SubNativeInterface$Companion$$LambdaAdaptor$1');
+
+exports = $LambdaAdaptor$1;
+
+//# sourceMappingURL=SubNativeInterface$Companion$$LambdaAdaptor$1.js.map

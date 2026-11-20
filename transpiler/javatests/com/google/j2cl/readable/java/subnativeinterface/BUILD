@@ -1,0 +1,32 @@
+load("//build_defs:rules.bzl", "j2kt_jvm_library")
+load(
+    "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
+    "readable_example",
+)
+
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["reciprocal"],
+)
+
+# Exclude native sources from j2kt_jvm_library.
+j2kt_jvm_library(
+    name = "readable-j2kt-jvm",
+    srcs = glob(["*.java"]),
+    j2kt_j2objc_interop_enabled = False,
+    deps = ["//third_party:jsinterop-annotations-j2kt-jvm"],
+)
+
+readable_example(
+    srcs = glob([
+        "*.java",
+        "native_sources/*.js",
+    ]),
+    # Native JsType does not make sense for j2kt-native.
+    build_kt_native_readables = False,
+    # Implementing native interfaces is only supported with custom descriptors JsInterop.
+    generate_wasm_custom_descriptors_jsinterop_readables = True,
+    generate_wasm_imports = True,
+    generate_wasm_readables = False,
+    deps = ["//third_party:jsinterop-annotations-j2cl"],
+)

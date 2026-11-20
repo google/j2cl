@@ -1,0 +1,65 @@
+goog.module('subnativeinterface.AccidentalSubNativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NonJsBase = goog.require('subnativeinterface.NonJsBase$impl');
+
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+
+/**
+ * @implements {MyNativeInterface}
+ */
+class AccidentalSubNativeInterface extends NonJsBase {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AccidentalSubNativeInterface} */
+ static $create__() {
+  AccidentalSubNativeInterface.$clinit();
+  let $instance = new AccidentalSubNativeInterface();
+  $instance.$ctor__subnativeinterface_AccidentalSubNativeInterface__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_AccidentalSubNativeInterface__void() {
+  this.$ctor__subnativeinterface_NonJsBase__void();
+ }
+ //Bridge method.
+ /** @override @return {number} */
+ getValue() {
+  return this.m_getValue__int();
+ }
+ //Bridge method.
+ /** @override @return {number} */
+ renamed() {
+  return this.m_mightBeRenamed__int();
+ }
+ //Bridge method.
+ /** @override @return {number} */
+ get prop() {
+  return this.m_getProp__int();
+ }
+ //Bridge method.
+ /** @override */
+ set prop(/** number */ value) {
+  this.m_setProp__int__void(value);
+ }
+ /** @nodts */
+ static $clinit() {
+  AccidentalSubNativeInterface.$clinit = () =>{};
+  AccidentalSubNativeInterface.$loadModules();
+  NonJsBase.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AccidentalSubNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AccidentalSubNativeInterface, 'subnativeinterface.AccidentalSubNativeInterface');
+
+exports = AccidentalSubNativeInterface;
+
+//# sourceMappingURL=AccidentalSubNativeInterface.js.map

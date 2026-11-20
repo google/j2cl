@@ -1,0 +1,41 @@
+goog.module('subnativeinterface.KotlinSubNativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+
+/**
+ * @interface
+ * @extends {MyNativeInterface}
+ */
+class KotlinSubNativeInterface {
+ /** @abstract @override @return {number} */
+ getValue() {}
+ /** @nodts @return {number} */
+ static m_getValue__$default__subnativeinterface_KotlinSubNativeInterface__int(/** !KotlinSubNativeInterface */ $thisArg) {
+  KotlinSubNativeInterface.$clinit();
+  return 8;
+ }
+ /** @nodts */
+ static $clinit() {
+  KotlinSubNativeInterface.$clinit = () =>{};
+  KotlinSubNativeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__subnativeinterface_KotlinSubNativeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__subnativeinterface_KotlinSubNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+KotlinSubNativeInterface.$markImplementor(/**@type {Function}*/ (KotlinSubNativeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (KotlinSubNativeInterface), 'subnativeinterface.KotlinSubNativeInterface');
+
+exports = KotlinSubNativeInterface;
+
+//# sourceMappingURL=KotlinSubNativeInterface.js.map

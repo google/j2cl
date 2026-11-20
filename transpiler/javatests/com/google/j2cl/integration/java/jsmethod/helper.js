@@ -101,3 +101,31 @@ exports.callChildIntfFoo = function(c, a) {
 exports.callJsKeywordsTest = function(k, a, b) {
   return k.test(a, b);
 };
+
+/**
+ * @param {?} o
+ * @param {number} a
+ * @return {number}
+ * @public
+ */
+exports.callPrivateMethod = function(o, a) {
+  return o.privateMethod(a);
+};
+
+/**
+ * @param {?} o
+ * @return {number}
+ * @public
+ */
+exports.getPrivateX = function(o) {
+  return o.x;
+};
+
+/**
+ * @param {?} o
+ * @param {number} x
+ * @public
+ */
+exports.setPrivateX = function(o, x) {
+  o.x = x;
+};

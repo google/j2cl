@@ -1,0 +1,58 @@
+goog.module('subnativeinterface.ConcreteStringEcho$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const AbstractStringEcho = goog.require('subnativeinterface.AbstractStringEcho$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @final
+ */
+class ConcreteStringEcho extends AbstractStringEcho {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ConcreteStringEcho} */
+ static $create__() {
+  ConcreteStringEcho.$clinit();
+  let $instance = new ConcreteStringEcho();
+  $instance.$ctor__subnativeinterface_ConcreteStringEcho__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_ConcreteStringEcho__void() {
+  this.$ctor__subnativeinterface_AbstractStringEcho__void();
+ }
+ /** @nodts @return {string} */
+ m_echo__java_lang_String__java_lang_String(/** string */ t) {
+  return t;
+ }
+ //Bridge method.
+ /** @final @override @suppress{visibility} @return {string} */
+ echo(/** string */ t) {
+  return this.m_echo__java_lang_String__java_lang_String(/**@type {string}*/ ($Casts.$to(t, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ConcreteStringEcho.$clinit = () =>{};
+  ConcreteStringEcho.$loadModules();
+  AbstractStringEcho.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ConcreteStringEcho;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ConcreteStringEcho, 'subnativeinterface.ConcreteStringEcho');
+
+exports = ConcreteStringEcho;
+
+//# sourceMappingURL=ConcreteStringEcho.js.map

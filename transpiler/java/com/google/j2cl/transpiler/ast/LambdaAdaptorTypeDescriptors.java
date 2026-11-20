@@ -39,6 +39,19 @@ public final class LambdaAdaptorTypeDescriptors {
     ABSTRACT,
   }
 
+  /**
+   * Returns whether lambda implementors of the functional interface extend a Wasm base lambda
+   * adaptor class specific to it (see {@link #createFunctionalInterfaceAdaptorTypeDescriptor}).
+   */
+  public static boolean hasWasmFunctionalInterfaceAdaptor(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.isFunctionalInterface()
+        // JsFunction implementations extend the common JsFunctionAdaptor instead.
+        && !typeDeclaration.isJsFunctionInterface()
+        // Native interfaces don't have adaptors; their lambda implementors extend java.lang.Object
+        // directly.
+        && !typeDeclaration.isNative();
+  }
+
   /** Returns the TypeDescriptor for a Wasm base lambda adaptor class. */
   public static DeclaredTypeDescriptor createFunctionalInterfaceAdaptorTypeDescriptor(
       TypeDescriptor typeDescriptor) {

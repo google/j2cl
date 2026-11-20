@@ -24,6 +24,7 @@ import java.io.Serializable
 import jsinterop.annotations.JsConstructor
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage
+import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
@@ -34,6 +35,7 @@ fun main(vararg args: String) {
   testBoxedTypeSupertypes()
   testOverloads()
   testJsKeywords()
+  testPrivateJsMembers()
 }
 
 fun testCallByConcreteType() {
@@ -198,3 +200,29 @@ private fun testJsKeywords() {
 
 @JsMethod(namespace = "jsmethod.helper")
 external fun callJsKeywordsTest(k: JsKeywords, a: Int, b: Int): Int
+
+private class PrivateJsMembers {
+  private var x: Int = 0
+
+  @JsMethod private fun privateMethod(a: Int): Int = a + x
+
+  @JsProperty private fun getX(): Int = x
+
+  @JsProperty
+  private fun setX(x: Int) {
+    this.x = x
+  }
+}
+
+private fun testPrivateJsMembers() {
+  val o = PrivateJsMembers()
+  setPrivateX(o, 10)
+  assertEquals(10, getPrivateX(o))
+  assertEquals(15, callPrivateMethod(o, 5))
+}
+
+@JsMethod(namespace = "jsmethod.helper") external fun callPrivateMethod(o: Any, a: Int): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun getPrivateX(o: Any): Int
+
+@JsMethod(namespace = "jsmethod.helper") external fun setPrivateX(o: Any, x: Int)

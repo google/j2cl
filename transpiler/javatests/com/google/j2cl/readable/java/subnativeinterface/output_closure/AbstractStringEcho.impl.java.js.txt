@@ -1,0 +1,41 @@
+goog.module('subnativeinterface.AbstractStringEcho$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeGenericInterface = goog.forwardDeclare('test.foo.MyNativeGenericInterface');
+
+/**
+ * @abstract
+ * @implements {MyNativeGenericInterface<?string>}
+ */
+class AbstractStringEcho extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_AbstractStringEcho__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractStringEcho.$clinit = () =>{};
+  AbstractStringEcho.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractStringEcho;
+ }
+ /** @abstract @override @return {?string} */
+ echo(/** ?string */ t) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractStringEcho, 'subnativeinterface.AbstractStringEcho');
+
+exports = AbstractStringEcho;
+
+//# sourceMappingURL=AbstractStringEcho.js.map

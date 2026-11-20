@@ -1,0 +1,141 @@
+/** @externs */
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @implements {test.foo.MyNativeInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_SubNativeInterface = function() {};
+
+/**
+ * @override @return {number}
+ */
+$j2wasm$externs.subnativeinterface_SubNativeInterface.prototype.getValue = function() {};
+
+/**
+ * @override @return {number}
+ */
+$j2wasm$externs.subnativeinterface_SubNativeInterface.prototype.renamed = function() {};
+
+/** @type {number} */
+$j2wasm$externs.subnativeinterface_SubNativeInterface.prototype.prop;
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.subnativeinterface_SubNativeInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_SubSubNativeInterface = function() {};
+
+/**
+ * @override @return {number}
+ */
+$j2wasm$externs.subnativeinterface_SubSubNativeInterface.prototype.getValue = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @implements {test.foo.MyNativeInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_AbstractSubNativeInterface = function() {};
+
+/**
+ * @override @return {number}
+ */
+$j2wasm$externs.subnativeinterface_AbstractSubNativeInterface.prototype.renamed = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @implements {test.foo.MyNativeGenericInterface<?string>}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_StringEcho = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @implements {test.foo.MyNativeGenericInterface<?string>}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_AbstractStringEcho = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.subnativeinterface_AbstractStringEcho}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_ConcreteStringEcho = function() {};
+
+/**
+ * @abstract
+ * @template T
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @implements {test.foo.MyNativeGenericInterface<T>}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_GenericEcho = function() {};
+
+/**
+ * @override @return {T}
+ */
+$j2wasm$externs.subnativeinterface_GenericEcho.prototype.echo = function(/** T */ t) {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_NonJsBase = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.subnativeinterface_NonJsBase}
+ * @implements {test.foo.MyNativeInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_AccidentalSubNativeInterface = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_NonJsStringEcho = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.subnativeinterface_NonJsStringEcho}
+ * @implements {test.foo.MyNativeGenericInterface<?string>}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_AccidentalStringEcho = function() {};
+
+/**
+ * @interface
+ * @extends {test.foo.MyNativeInterface}
+ */
+$j2wasm$externs.subnativeinterface_JavaSubNativeInterface = function() {};
+
+/**
+ * @override @return {number}
+ */
+$j2wasm$externs.subnativeinterface_JavaSubNativeInterface.prototype.getValue = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @implements {$j2wasm$externs.subnativeinterface_JavaSubNativeInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_JavaSubNativeInterfaceImpl = function() {};
+
+/**
+ * @override @return {number}
+ */
+$j2wasm$externs.subnativeinterface_JavaSubNativeInterfaceImpl.prototype.renamed = function() {};
+
+/** @type {number} */
+$j2wasm$externs.subnativeinterface_JavaSubNativeInterfaceImpl.prototype.prop;

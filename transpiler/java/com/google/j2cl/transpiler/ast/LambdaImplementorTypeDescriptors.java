@@ -148,6 +148,14 @@ public final class LambdaImplementorTypeDescriptors {
       return TypeDescriptors.get().javaemulInternalJsFunctionAdaptor;
     }
 
+    // Note that this check can't be combined with the `extendsCommonAdaptor` one above: JsFunction
+    // interfaces don't have an adaptor of their own, but their implementors still extend the common
+    // JsFunctionAdaptor.
+    if (!LambdaAdaptorTypeDescriptors.hasWasmFunctionalInterfaceAdaptor(
+        functionalInterface.getTypeDeclaration())) {
+      return TypeDescriptors.get().javaLangObject;
+    }
+
     return LambdaAdaptorTypeDescriptors.createFunctionalInterfaceAdaptorTypeDescriptor(
         functionalInterface);
   }

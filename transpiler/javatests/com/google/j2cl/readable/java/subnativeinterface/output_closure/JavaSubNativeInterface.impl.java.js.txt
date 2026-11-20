@@ -1,0 +1,41 @@
+goog.module('subnativeinterface.JavaSubNativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+
+/**
+ * @interface
+ * @extends {MyNativeInterface}
+ */
+class JavaSubNativeInterface {
+ /** @abstract @override @return {number} */
+ getValue() {}
+ /** @nodts @return {number} */
+ static m_getValue__$default__subnativeinterface_JavaSubNativeInterface__int(/** !JavaSubNativeInterface */ $thisArg) {
+  JavaSubNativeInterface.$clinit();
+  return 8;
+ }
+ /** @nodts */
+ static $clinit() {
+  JavaSubNativeInterface.$clinit = () =>{};
+  JavaSubNativeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__subnativeinterface_JavaSubNativeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__subnativeinterface_JavaSubNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+JavaSubNativeInterface.$markImplementor(/**@type {Function}*/ (JavaSubNativeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (JavaSubNativeInterface), 'subnativeinterface.JavaSubNativeInterface');
+
+exports = JavaSubNativeInterface;
+
+//# sourceMappingURL=JavaSubNativeInterface.js.map

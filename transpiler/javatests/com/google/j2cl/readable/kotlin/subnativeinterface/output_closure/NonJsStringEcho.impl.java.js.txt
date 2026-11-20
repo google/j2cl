@@ -1,0 +1,44 @@
+goog.module('subnativeinterface.NonJsStringEcho$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class NonJsStringEcho extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NonJsStringEcho} */
+ static $create__() {
+  NonJsStringEcho.$clinit();
+  let $instance = new NonJsStringEcho();
+  $instance.$ctor__subnativeinterface_NonJsStringEcho__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_NonJsStringEcho__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @final @nodts @return {string} */
+ m_echo__java_lang_String__java_lang_String(/** string */ t) {
+  return t;
+ }
+ /** @nodts */
+ static $clinit() {
+  NonJsStringEcho.$clinit = () =>{};
+  NonJsStringEcho.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonJsStringEcho;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonJsStringEcho, 'subnativeinterface.NonJsStringEcho');
+
+exports = NonJsStringEcho;
+
+//# sourceMappingURL=NonJsStringEcho.js.map

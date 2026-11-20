@@ -1,0 +1,49 @@
+goog.module('subnativeinterface.AbstractSubNativeInterface$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+
+/**
+ * @abstract
+ * @implements {MyNativeInterface}
+ */
+class AbstractSubNativeInterface extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_AbstractSubNativeInterface__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {number} */
+ renamed() {
+  return 4;
+ }
+ /** @nodts */
+ static $clinit() {
+  AbstractSubNativeInterface.$clinit = () =>{};
+  AbstractSubNativeInterface.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractSubNativeInterface;
+ }
+ /** @abstract @override @suppress{visibility} @return {number} */
+ getValue() {}
+ /** @abstract @override @suppress{visibility} @return {number} */
+ get prop() {}
+ /** @abstract @override @suppress{visibility} */
+ set prop(/** number */ value) {}
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AbstractSubNativeInterface, 'subnativeinterface.AbstractSubNativeInterface');
+
+exports = AbstractSubNativeInterface;
+
+//# sourceMappingURL=AbstractSubNativeInterface.js.map

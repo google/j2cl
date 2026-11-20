@@ -227,6 +227,9 @@ public class JsInteropRestrictionsChecker {
     checkTypeLiteralsAndInstanceOfs(type);
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
+    if (checkWasmRestrictions && !checkWasmCustomDescriptorsJsInterop) {
+      checkNativeInterfaceLambdas(type);
+    }
     checkLocalFunctions(type);
     checkSystemProperties(type);
   }
@@ -291,7 +294,9 @@ public class JsInteropRestrictionsChecker {
     }
 
     Optional<DeclaredTypeDescriptor> nativeSupertype =
-        type.getSuperTypesStream().filter(TypeDescriptor::isNative).findFirst();
+        type.getSuperTypesStream()
+            .filter(Predicates.not(this::isAllowedSupertypeOfNonNativeType))
+            .findFirst();
     if (nativeSupertype.isPresent()) {
       problems.error(
           type.getSourcePosition(),
@@ -303,6 +308,11 @@ public class JsInteropRestrictionsChecker {
     }
 
     return true;
+  }
+
+  private boolean isAllowedSupertypeOfNonNativeType(DeclaredTypeDescriptor supertype) {
+    return !supertype.isNative()
+        || (checkWasmCustomDescriptorsJsInterop && supertype.isInterface());
   }
 
   private void checkJsFunctionLambdas(Type type) {
@@ -318,6 +328,28 @@ public class JsInteropRestrictionsChecker {
                   functionExpression.getSourcePosition(),
                   "JsFunction lambda can only implement the JsFunction interface.");
             }
+          }
+        });
+  }
+
+  private void checkNativeInterfaceLambdas(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            TypeDescriptor typeDescriptor = functionExpression.getTypeDescriptor();
+            Stream<TypeDescriptor> functionalInterfaces =
+                typeDescriptor instanceof IntersectionTypeDescriptor intersectionTypeDescriptor
+                    ? intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+                    : Stream.of(typeDescriptor);
+            functionalInterfaces
+                .filter(TypeDescriptor::isNative)
+                .findFirst()
+                .ifPresent(nativeInterface ->
+                    problems.error(
+                        functionExpression.getSourcePosition(),
+                        "Lambda cannot implement native JsType interface '%s'.",
+                        nativeInterface.getReadableDescription()));
           }
         });
   }

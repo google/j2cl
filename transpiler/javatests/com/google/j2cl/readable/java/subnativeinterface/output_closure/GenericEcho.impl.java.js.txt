@@ -1,0 +1,50 @@
+goog.module('subnativeinterface.GenericEcho$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeGenericInterface = goog.forwardDeclare('test.foo.MyNativeGenericInterface');
+
+/**
+ * @template T
+ * @implements {MyNativeGenericInterface<T>}
+ */
+class GenericEcho extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!GenericEcho<T>} */
+ static $create__() {
+  GenericEcho.$clinit();
+  let $instance = new GenericEcho();
+  $instance.$ctor__subnativeinterface_GenericEcho__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_GenericEcho__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {T} */
+ echo(/** T */ t) {
+  return t;
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericEcho.$clinit = () =>{};
+  GenericEcho.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericEcho;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericEcho, 'subnativeinterface.GenericEcho');
+
+exports = GenericEcho;
+
+//# sourceMappingURL=GenericEcho.js.map

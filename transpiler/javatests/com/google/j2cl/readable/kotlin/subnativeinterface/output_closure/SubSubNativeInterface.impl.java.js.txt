@@ -1,0 +1,47 @@
+goog.module('subnativeinterface.SubSubNativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SubNativeInterface = goog.require('subnativeinterface.SubNativeInterface$impl');
+
+/**
+ * @final
+ */
+class SubSubNativeInterface extends SubNativeInterface {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubSubNativeInterface} */
+ static $create__() {
+  SubSubNativeInterface.$clinit();
+  let $instance = new SubSubNativeInterface();
+  $instance.$ctor__subnativeinterface_SubSubNativeInterface__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_SubSubNativeInterface__void() {
+  this.$ctor__subnativeinterface_SubNativeInterface__void();
+ }
+ /** @override @return {number} */
+ getValue() {
+  return 3;
+ }
+ /** @nodts */
+ static $clinit() {
+  SubSubNativeInterface.$clinit = () =>{};
+  SubSubNativeInterface.$loadModules();
+  SubNativeInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubSubNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubSubNativeInterface, 'subnativeinterface.SubSubNativeInterface');
+
+exports = SubSubNativeInterface;
+
+//# sourceMappingURL=SubSubNativeInterface.js.map

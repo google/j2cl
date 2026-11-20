@@ -1,0 +1,54 @@
+goog.module('subnativeinterface.NonJsBase$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class NonJsBase extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NonJsBase} */
+ static $create__() {
+  NonJsBase.$clinit();
+  let $instance = new NonJsBase();
+  $instance.$ctor__subnativeinterface_NonJsBase__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_NonJsBase__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_getValue__int() {
+  return 5;
+ }
+ /** @final @nodts @return {number} */
+ m_mightBeRenamed__int() {
+  return 6;
+ }
+ /** @nodts @return {number} */
+ m_getProp__int() {
+  return 7;
+ }
+ /** @nodts */
+ m_setProp__int__void(/** number */ value) {}
+ /** @nodts */
+ static $clinit() {
+  NonJsBase.$clinit = () =>{};
+  NonJsBase.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonJsBase;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonJsBase, 'subnativeinterface.NonJsBase');
+
+exports = NonJsBase;
+
+//# sourceMappingURL=NonJsBase.js.map

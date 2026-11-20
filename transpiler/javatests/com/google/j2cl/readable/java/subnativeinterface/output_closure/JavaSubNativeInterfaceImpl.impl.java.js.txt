@@ -1,0 +1,61 @@
+goog.module('subnativeinterface.JavaSubNativeInterfaceImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const JavaSubNativeInterface = goog.require('subnativeinterface.JavaSubNativeInterface$impl');
+
+/**
+ * @implements {JavaSubNativeInterface}
+ */
+class JavaSubNativeInterfaceImpl extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JavaSubNativeInterfaceImpl} */
+ static $create__() {
+  JavaSubNativeInterfaceImpl.$clinit();
+  let $instance = new JavaSubNativeInterfaceImpl();
+  $instance.$ctor__subnativeinterface_JavaSubNativeInterfaceImpl__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_JavaSubNativeInterfaceImpl__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {number} */
+ renamed() {
+  return 9;
+ }
+ /** @override @return {number} */
+ get prop() {
+  return 10;
+ }
+ /** @override */
+ set prop(/** number */ value) {}
+ //Default method forwarding stub.
+ /** @override @return {number} */
+ getValue() {
+  return JavaSubNativeInterface.m_getValue__$default__subnativeinterface_JavaSubNativeInterface__int(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  JavaSubNativeInterfaceImpl.$clinit = () =>{};
+  JavaSubNativeInterfaceImpl.$loadModules();
+  j_l_Object.$clinit();
+  JavaSubNativeInterface.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JavaSubNativeInterfaceImpl;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+JavaSubNativeInterface.$markImplementor(JavaSubNativeInterfaceImpl);
+$Util.$setClassMetadata(JavaSubNativeInterfaceImpl, 'subnativeinterface.JavaSubNativeInterfaceImpl');
+
+exports = JavaSubNativeInterfaceImpl;
+
+//# sourceMappingURL=JavaSubNativeInterfaceImpl.js.map

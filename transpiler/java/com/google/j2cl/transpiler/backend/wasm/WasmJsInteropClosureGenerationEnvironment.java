@@ -49,8 +49,16 @@ class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnviron
     return getJsTypeAlias(typeDeclaration);
   }
 
+  /** Returns whether the type can appear in the @extends/@implements clauses of the externs. */
   @Override
   protected boolean isJavaScriptClass(DeclaredTypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isNative()) {
+      // Delegate to the standard Closure environment to decide whether a native type exists as a
+      // JavaScript class/interface (it handles `*`, `?`, JsFunction, etc.).
+      return super.isJavaScriptClass(typeDescriptor);
+    }
+    // For non-native types, this environment decides whether the type is exported (has externs)
+    // or opaque.
     return JsExternsGenerator.shouldGenerateExtern(typeDescriptor);
   }
 

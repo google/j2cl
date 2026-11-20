@@ -1,0 +1,81 @@
+goog.module('subnativeinterface.SubNativeInterface$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $LambdaAdaptor$1 = goog.forwardDeclare('subnativeinterface.SubNativeInterface.$LambdaAdaptor$1$impl');
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {MyNativeInterface}
+ */
+class SubNativeInterface extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_prop__subnativeinterface_SubNativeInterface_ = 0;
+ }
+ /** @nodts @return {!SubNativeInterface} */
+ static $create__() {
+  SubNativeInterface.$clinit();
+  let $instance = new SubNativeInterface();
+  $instance.$ctor__subnativeinterface_SubNativeInterface__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_SubNativeInterface__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {number} */
+ getValue() {
+  return 1;
+ }
+ /** @override @return {number} */
+ renamed() {
+  return 2;
+ }
+ /** @override @return {number} */
+ get prop() {
+  return this.f_prop__subnativeinterface_SubNativeInterface_;
+ }
+ /** @override */
+ set prop(/** number */ value) {
+  this.f_prop__subnativeinterface_SubNativeInterface_ = value;
+ }
+ /** @nodts @return {?string} */
+ static m_test__java_lang_String() {
+  SubNativeInterface.$clinit();
+  let nativeInterface = SubNativeInterface.$create__();
+  nativeInterface.prop = nativeInterface.getValue() + nativeInterface.renamed() | 0;
+  let lambda = /**@type {!$LambdaAdaptor$1<?string>}*/ (new $LambdaAdaptor$1(/**  @return {?string}*/ ((/** ?string */ s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   return j_l_String.m_valueOf__java_lang_Object__java_lang_String(s_1) + nativeInterface.prop;
+  })));
+  return /**@type {?string}*/ ($Casts.$to(lambda.echo(''), j_l_String));
+ }
+ /** @nodts */
+ static $clinit() {
+  SubNativeInterface.$clinit = () =>{};
+  SubNativeInterface.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $LambdaAdaptor$1 = goog.module.get('subnativeinterface.SubNativeInterface.$LambdaAdaptor$1$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(SubNativeInterface, 'subnativeinterface.SubNativeInterface');
+
+exports = SubNativeInterface;
+
+//# sourceMappingURL=SubNativeInterface.js.map

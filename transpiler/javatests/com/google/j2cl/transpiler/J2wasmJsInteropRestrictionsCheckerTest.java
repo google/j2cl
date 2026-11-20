@@ -247,6 +247,91 @@ public final class J2wasmJsInteropRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testNonnativeTypeImplementNativeInterfaceFails() {
+    assertWithInlineMessages(
+        "test.Buggy",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        interface NativeInterface {}
+        class Buggy implements NativeInterface {}
+        > Error: Non-native type 'Buggy' cannot implement native JsType 'NativeInterface'.
+        interface BuggyInterface extends NativeInterface {}
+        > Error: Non-native type 'BuggyInterface' cannot extend native JsType 'NativeInterface'.
+        """);
+  }
+
+  public void testNonnativeTypeImplementNativeInterfaceWithCustomDescriptorsSucceeds() {
+    newTesterWithWasmCustomDescriptorsJsInteropEnabled()
+        .addCompilationUnit(
+            "test.Main",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative = true)
+            interface NativeInterface {
+              String getValue();
+            }
+            interface JavaInterface extends NativeInterface {}
+            @JsType
+            interface JsTypeInterface extends NativeInterface {}
+            class Impl implements NativeInterface {
+              public String getValue() { return "Impl"; }
+            }
+            class JavaInterfaceImpl implements JavaInterface {
+              public String getValue() { return "JavaInterfaceImpl"; }
+            }
+            enum EnumImpl implements NativeInterface {
+              A;
+              public String getValue() { return "EnumImpl"; }
+            }
+            class Main {
+              void test() {
+                NativeInterface anonymous =
+                    new NativeInterface() {
+                      public String getValue() { return "Anonymous"; }
+                    };
+                NativeInterface lambda = () -> "Lambda";
+                NativeInterface methodReference = String::new;
+                JavaInterface javaInterfaceLambda = () -> "JavaInterfaceLambda";
+              }
+            }
+            """)
+        .assertTranspileSucceeds();
+  }
+
+  public void testNativeInterfaceLambdaFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        import jsinterop.annotations.*;
+        @JsType(isNative = true)
+        interface NativeInterface {
+          String getValue();
+        }
+        class Main {
+          void test() {
+            NativeInterface lambda = () -> "Lambda";
+        > Error: Lambda cannot implement native JsType interface 'NativeInterface'.
+            NativeInterface methodReference = String::new;
+        > Error: Lambda cannot implement native JsType interface 'NativeInterface'.
+          }
+        }
+        """);
+  }
+
+  public void testNonnativeTypeExtendNativeJsTypeWithCustomDescriptorsFails() {
+    newTesterWithWasmCustomDescriptorsJsInteropEnabled()
+        .assertWithInlineMessages(
+            "test.Buggy",
+            """
+            import jsinterop.annotations.*;
+            @JsType(isNative = true)
+            class NativeClass {}
+            class Buggy extends NativeClass {}
+            > Error: Non-native type 'Buggy' cannot extend native JsType 'NativeClass'.
+            """);
+  }
+
   public void testInstanceOfNativeJsTypeFails() {
     assertWithInlineMessages(
         "test.Main",

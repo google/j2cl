@@ -513,8 +513,10 @@ public class WasmGenerationEnvironment {
       // For interfaces, choose a suitable "superinterface". Java interfaces can inherit multiple
       // parent interfaces, which cannot be fully expressed in Wasm.
       // Here, we choose the immediate superinterface with the most methods as a heuristic to
-      // minimize the number of conversions needed when calling superinterface methods.
+      // minimize the number of conversions needed when calling superinterface methods. Native
+      // interfaces are excluded since they don't have a Wasm representation.
       return typeDeclaration.getInterfaceTypeDescriptors().stream()
+          .filter(not(DeclaredTypeDescriptor::isNative))
           .max(Comparator.comparingInt(i -> i.getPolymorphicMethods().size()))
           .map(DeclaredTypeDescriptor::getTypeDeclaration)
           .orElse(null);

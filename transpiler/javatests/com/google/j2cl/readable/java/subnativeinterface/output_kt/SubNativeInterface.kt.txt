@@ -1,0 +1,127 @@
+// Generated from "subnativeinterface/SubNativeInterface.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package subnativeinterface
+
+import javaemul.lang.*
+import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsProperty
+import jsinterop.annotations.JsType
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.jvm.JvmStatic
+
+@JsType(namespace = "test.foo", isNative = true)
+internal interface MyNativeInterface {
+ fun getValue(): Int
+ 
+ @JsMethod(name = "renamed")
+ fun mightBeRenamed(): Int
+ 
+ @JsProperty
+ fun getProp(): Int
+ 
+ @JsProperty
+ fun setProp(value: Int)
+}
+
+@JsType(namespace = "test.foo", isNative = true)
+internal fun interface MyNativeGenericInterface<T> {
+ fun echo(t: T): T
+}
+
+open class SubNativeInterface: MyNativeInterface {
+ private var prop: Int = 0
+ 
+ override fun getValue(): Int = 1
+ 
+ override fun mightBeRenamed(): Int = 2
+ 
+ override fun getProp(): Int = this.prop
+ 
+ override fun setProp(value: Int) {
+  this.prop = value
+ }
+ 
+ companion object {
+  @JvmStatic
+  fun test(): String? {
+   val nativeInterface: MyNativeInterface = SubNativeInterface()
+   nativeInterface.setProp(
+    nativeInterface.getValue() + nativeInterface.mightBeRenamed(),
+   )
+   val lambda: MyNativeGenericInterface<String?> = MyNativeGenericInterface { s: String? -> "" + s + nativeInterface.getProp() }
+   return lambda.echo("")
+  }
+ }
+}
+
+internal open class SubSubNativeInterface internal constructor(): SubNativeInterface() {
+ override fun getValue(): Int = 3
+}
+
+internal abstract class AbstractSubNativeInterface internal constructor(): MyNativeInterface {
+ override fun mightBeRenamed(): Int = 4
+}
+
+internal open class StringEcho internal constructor(): MyNativeGenericInterface<String?> {
+ override fun echo(s: String?): String? = s
+}
+
+internal abstract class AbstractStringEcho internal constructor(): MyNativeGenericInterface<String?>
+
+internal open class ConcreteStringEcho internal constructor(): AbstractStringEcho() {
+ override fun echo(s: String?): String? = s
+}
+
+internal open class GenericEcho<T> internal constructor(): MyNativeGenericInterface<T> {
+ override fun echo(t: T): T = t
+}
+
+internal open class NonJsBase internal constructor() {
+ open fun getValue(): Int = 5
+ 
+ fun mightBeRenamed(): Int = 6
+ 
+ open fun getProp(): Int = 7
+ 
+ open fun setProp(value: Int) {}
+}
+
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+internal open class AccidentalSubNativeInterface internal constructor(): NonJsBase(), MyNativeInterface
+
+internal open class NonJsStringEcho internal constructor() {
+ open fun echo(s: String?): String? = s
+}
+
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+internal open class AccidentalStringEcho internal constructor(): NonJsStringEcho(), MyNativeGenericInterface<String?>
+
+internal interface JavaSubNativeInterface: MyNativeInterface {
+ override fun getValue(): Int = 8
+}
+
+internal open class JavaSubNativeInterfaceImpl internal constructor(): JavaSubNativeInterface {
+ override fun mightBeRenamed(): Int = 9
+ 
+ override fun getProp(): Int = 10
+ 
+ override fun setProp(value: Int) {}
+}

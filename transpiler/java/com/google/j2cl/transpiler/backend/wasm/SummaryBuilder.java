@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.j2cl.common.StringUtils.escapeAsWtf16;
 import static com.google.j2cl.transpiler.ast.AstUtils.hasOwnWasmJsPrototype;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.hasWasmTypeLayout;
-import static java.util.function.Predicate.not;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.Problems;
@@ -119,7 +118,6 @@ public final class SummaryBuilder {
       summary.addInterfaces(typeHierarchyInfoBuilder.build());
     } else {
       environment.getWasmTypeLayout(type.getDeclaration()).getAllSuperInterfaces().stream()
-          .filter(not(TypeDeclaration::isNative))
           .forEach(t -> typeHierarchyInfoBuilder.addImplementsTypes(getTypeId(t.toDescriptor())));
 
       summary.addTypes(typeHierarchyInfoBuilder.build());

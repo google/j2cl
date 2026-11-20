@@ -23,6 +23,7 @@ import java.io.Serializable;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 public class Main {
@@ -34,6 +35,7 @@ public class Main {
     testBoxedTypeSupertypes();
     testOverloads();
     testJsKeywords();
+    testPrivateJsMembers();
   }
 
   public static void testCallByConcreteType() {
@@ -224,4 +226,39 @@ public class Main {
 
   @JsMethod(namespace = "jsmethod.helper")
   public static native int callJsKeywordsTest(JsKeywords k, int a, int b);
+
+  static class PrivateJsMembers {
+    private int x;
+
+    @JsMethod
+    private int privateMethod(int a) {
+      return a + x;
+    }
+
+    @JsProperty
+    private int getX() {
+      return x;
+    }
+
+    @JsProperty
+    private void setX(int x) {
+      this.x = x;
+    }
+  }
+
+  private static void testPrivateJsMembers() {
+    PrivateJsMembers o = new PrivateJsMembers();
+    setPrivateX(o, 10);
+    assertEquals(10, getPrivateX(o));
+    assertEquals(15, callPrivateMethod(o, 5));
+  }
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int callPrivateMethod(Object o, int a);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native int getPrivateX(Object o);
+
+  @JsMethod(namespace = "jsmethod.helper")
+  public static native void setPrivateX(Object o, int x);
 }

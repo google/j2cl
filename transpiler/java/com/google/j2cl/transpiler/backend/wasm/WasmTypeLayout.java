@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
@@ -199,12 +200,16 @@ abstract class WasmTypeLayout {
    *
    * <p>Interfaces do not have their own layouts, so their super interfaces always come from the
    * type model; passes must not customize them in Wasm (see {@code VerifyNormalizedUnits}).
+   *
+   * <p>Native interfaces are excluded since they don't have a Wasm representation.
    */
   @Memoized
   Set<TypeDeclaration> getAllSuperInterfaces() {
     TypeDeclaration typeDeclaration = getTypeDeclaration();
     if (typeDeclaration.isInterface()) {
-      return typeDeclaration.getAllSuperInterfaces();
+      return typeDeclaration.getAllSuperInterfaces().stream()
+          .filter(not(TypeDeclaration::isNative))
+          .collect(toImmutableSet());
     }
     List<DeclaredTypeDescriptor> declaredInterfaces =
         getJavaType() != null
@@ -215,7 +220,8 @@ abstract class WasmTypeLayout {
     return Stream.concat(
             declaredInterfaces.stream()
                 .map(DeclaredTypeDescriptor::getTypeDeclaration)
-                .flatMap(i -> Stream.concat(Stream.of(i), i.getAllSuperInterfaces().stream())),
+                .flatMap(i -> Stream.concat(Stream.of(i), i.getAllSuperInterfaces().stream()))
+                .filter(not(TypeDeclaration::isNative)),
             wasmSupertypeLayout == null
                 ? Stream.empty()
                 : wasmSupertypeLayout.getAllSuperInterfaces().stream())
