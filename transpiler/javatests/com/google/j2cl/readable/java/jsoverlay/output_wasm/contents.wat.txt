@@ -88,6 +88,7 @@
 (func $js_export_m_run__void@jsoverlay.Main.Intf
  (param $$instance (ref null $javaemul.internal.JsFunctionAdaptor))
  (block
+  (call $$clinit__void_<once>_@jsoverlay.Main.Intf )
   (call_ref $function.void (ref.as_non_null (local.get $$instance)) (ref.cast (ref $function.void) (struct.get $javaemul.internal.JsFunctionAdaptor $wasmFuncref@javaemul.internal.JsFunctionAdaptor (local.get $$instance))))
  )
 )

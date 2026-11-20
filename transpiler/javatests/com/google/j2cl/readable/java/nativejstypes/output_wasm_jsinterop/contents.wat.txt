@@ -857,17 +857,13 @@
 ;;; Foo GenericRegularClass.apply(Foo t)
 (@binaryen.js.called)
 (func $js_export_m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass
- (type $function.js_export_m_apply__nativejstypes_Foo__nativejstypes_Foo)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $nativejstypes.GenericRegularClass))
  (param $t (ref null extern))
  (result (ref null extern))
- (local $this (ref null $nativejstypes.GenericRegularClass))
- (local.set $this (ref.cast (ref $nativejstypes.GenericRegularClass) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_apply__nativejstypes_Foo__nativejstypes_Foo (ref.as_non_null (local.get $this))(local.get $t)(struct.get $nativejstypes.GenericRegularClass.vtable $m_apply__nativejstypes_Foo__nativejstypes_Foo (ref.get_desc $nativejstypes.GenericRegularClass(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_apply__nativejstypes_Foo__nativejstypes_Foo@nativejstypes.GenericRegularClass)
 
 ;;; void GenericRegularClass.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.GenericRegularClass
@@ -1367,15 +1363,11 @@
 ;;; void NonNative.m()
 (@binaryen.js.called)
 (func $js_export_m_m__void@nativejstypes.NativeOverNonNative.NonNative
- (type $function.js_export_m_m__void)
- (param $this.untyped (ref $java.lang.Object))
- (local $this (ref null $nativejstypes.NativeOverNonNative.NonNative))
- (local.set $this (ref.cast (ref $nativejstypes.NativeOverNonNative.NonNative) (local.get $this.untyped)))
+ (param $this (ref $nativejstypes.NativeOverNonNative.NonNative))
  (block
   (call_ref $function.m_m__void (ref.as_non_null (local.get $this))(struct.get $nativejstypes.NativeOverNonNative.NonNative.vtable $m_m__void (ref.get_desc $nativejstypes.NativeOverNonNative.NonNative(local.get $this))))
  )
 )
-(elem declare func $js_export_m_m__void@nativejstypes.NativeOverNonNative.NonNative)
 
 ;;; void NonNative.$clinit()
 (func $$clinit__void_<once>_@nativejstypes.NativeOverNonNative.NonNative

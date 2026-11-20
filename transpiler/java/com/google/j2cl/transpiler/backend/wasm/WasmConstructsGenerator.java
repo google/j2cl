@@ -385,7 +385,14 @@ public class WasmConstructsGenerator {
       // Private methods and constructors receive the instance with the actual type.
       // Native constructors do not receive the instance.
       builder.newLine();
-      builder.append(format("(param $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
+      builder.append(
+          format(
+              "(param $this %s)",
+              methodDescriptor.getOrigin().isWasmJsExport()
+                  // Export bridges are called from JavaScript with a receiver that is checked at
+                  // the boundary, so the receiver can be non-nullable.
+                  ? format("(ref %s)", environment.getWasmTypeName(enclosingTypeDescriptor))
+                  : environment.getWasmType(enclosingTypeDescriptor)));
     }
 
     for (Variable parameter : method.getParameters()) {

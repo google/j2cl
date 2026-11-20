@@ -204,8 +204,7 @@ public class WasmJsBoundaryUtils {
     // The synthetic getter of the field is the bridge target, so that the bridge is named and
     // exported after the field, like other boundary methods are after the member they bridge.
     return getterDescriptor.toBuilder()
-        .setOrigin(origin)
-        .setBridgeTarget(getterDescriptor)
+        .makeWasmBoundaryMethod(origin, /* targetDescriptor= */ getterDescriptor)
         .setReturnTypeDescriptor(
             getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();
@@ -217,8 +216,7 @@ public class WasmJsBoundaryUtils {
     // The synthetic setter of the field is the bridge target, so that the bridge is named and
     // exported after the field, like other boundary methods are after the member they bridge.
     return setterDescriptor.toBuilder()
-        .setOrigin(origin)
-        .setBridgeTarget(setterDescriptor)
+        .makeWasmBoundaryMethod(origin, /* targetDescriptor= */ setterDescriptor)
         .updateParameterTypeDescriptors(
             getExternalType(fieldDescriptor.getTypeDescriptor(), origin.isWasmJsExport()))
         .build();

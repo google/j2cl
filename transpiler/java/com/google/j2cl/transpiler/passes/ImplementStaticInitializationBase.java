@@ -204,8 +204,9 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
    * classes in the compilation unit or externally.
    */
   private boolean isCalledFromOtherClasses(MemberDescriptor memberDescriptor) {
-    // JsMembers can be called from JavaScript.
+    // JsMembers and Wasm boundary methods can be called from JavaScript.
     return memberDescriptor.isJsMember()
+        || memberDescriptor.getOrigin().isWasmBoundaryMethod()
         || privateMembersCalledFromOtherClasses.contains(getUniqueIdentifier(memberDescriptor));
   }
 

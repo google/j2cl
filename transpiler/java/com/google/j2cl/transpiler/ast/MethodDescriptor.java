@@ -304,6 +304,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
      * could make the signatures of different boundary methods collide, so their names are derived
      * from the name of their bridge target instead.
      */
+    @Override
     public boolean isWasmBoundaryMethod() {
       return switch (this) {
         case WASM_ENTRY_POINT_BRIDGE,
@@ -1717,6 +1718,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setOrigin(methodOrigin)
           .setBridgeTarget(targetDescriptor)
           .makeDeclaration()
+          .setVisibility(Visibility.PRIVATE)
+          // Boundary methods are not JsMembers themselves; they are called from JavaScript on
+          // behalf
+          // of their bridge target.
+          .setOriginalJsInfo(JsInfo.NONE)
           // Clear properties that might have been carried over when creating this
           // descriptor from an existing one.
           .setDefaultMethod(false)

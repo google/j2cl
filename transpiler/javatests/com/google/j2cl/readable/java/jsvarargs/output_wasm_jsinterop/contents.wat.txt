@@ -946,33 +946,25 @@
 ;;; int Main.f3(int m, WasmExtern numbers)
 (@binaryen.js.called)
 (func $js_export_m_f3__int__arrayOf_int__int@jsvarargs.Main
- (type $function.js_export_m_f3__int__arrayOf_int__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $jsvarargs.Main))
  (param $m i32)
  (param $numbers (ref null extern))
  (result i32)
- (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast (ref $jsvarargs.Main) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $this))(local.get $m)(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (any.convert_extern (local.get $numbers)))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (ref.get_desc $jsvarargs.Main(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_f3__int__arrayOf_int__int@jsvarargs.Main)
 
 ;;; int Main.f4(WasmExtern numbers)
 (@binaryen.js.called)
 (func $js_export_m_f4__arrayOf_int__int@jsvarargs.Main
- (type $function.js_export_m_f4__arrayOf_int__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $jsvarargs.Main))
  (param $numbers (ref null extern))
  (result i32)
- (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast (ref $jsvarargs.Main) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_f4__arrayOf_int__int (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (any.convert_extern (local.get $numbers)))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (ref.get_desc $jsvarargs.Main(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_f4__arrayOf_int__int@jsvarargs.Main)
 
 ;;; void Main.$clinit()
 (func $$clinit__void_<once>_@jsvarargs.Main
@@ -1087,16 +1079,12 @@
 ;;; void AbstractMethodWithVarargs.abstractMethod(WasmExtern args)
 (@binaryen.js.called)
 (func $js_export_m_abstractMethod__arrayOf_int__void@jsvarargs.Main.AbstractMethodWithVarargs
- (type $function.js_export_m_abstractMethod__arrayOf_int__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $jsvarargs.Main.AbstractMethodWithVarargs))
  (param $args (ref null extern))
- (local $this (ref null $jsvarargs.Main.AbstractMethodWithVarargs))
- (local.set $this (ref.cast (ref $jsvarargs.Main.AbstractMethodWithVarargs) (local.get $this.untyped)))
  (block
   (call_ref $function.m_abstractMethod__arrayOf_int__void (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfInt) (any.convert_extern (local.get $args)))(struct.get $jsvarargs.Main.AbstractMethodWithVarargs.vtable $m_abstractMethod__arrayOf_int__void (ref.get_desc $jsvarargs.Main.AbstractMethodWithVarargs(local.get $this))))
  )
 )
-(elem declare func $js_export_m_abstractMethod__arrayOf_int__void@jsvarargs.Main.AbstractMethodWithVarargs)
 
 ;;; void AbstractMethodWithVarargs.$clinit()
 (func $$clinit__void_<once>_@jsvarargs.Main.AbstractMethodWithVarargs
@@ -1236,44 +1224,32 @@
 ;;; void VarargsBridgesImpl.arrayOverriddenByVarargs(WasmExtern values)
 (@binaryen.js.called)
 (func $js_export_m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
- (type $function.js_export_m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $jsvarargs.Main.1VarargsBridgesImpl))
  (param $values (ref null extern))
- (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
- (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
  (block
   (call_ref $function.m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $this))(ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $values)))(struct.get $jsvarargs.Main.1VarargsBridgesImpl.vtable $m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void (ref.get_desc $jsvarargs.Main.1VarargsBridgesImpl(local.get $this))))
  )
 )
-(elem declare func $js_export_m_arrayOverriddenByVarargs__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
 
 ;;; void VarargsBridgesImpl.varargsOverriddenByArray(WasmExtern values)
 (@binaryen.js.called)
 (func $js_export_m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
- (type $function.js_export_m_varargsOverriddenByArray__arrayOf_java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $jsvarargs.Main.1VarargsBridgesImpl))
  (param $values (ref null extern))
- (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
- (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
  (block
   (call_ref $function.m_varargsOverriddenByArray__arrayOf_java_lang_Object__void (ref.as_non_null (local.get $this))(call $m_newWithLiteral__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.new_fixed $java.lang.Object.array 1 (ref.cast (ref null $javaemul.internal.WasmArray.OfObject) (any.convert_extern (local.get $values)))))(struct.get $jsvarargs.Main.1VarargsBridgesImpl.vtable $m_varargsOverriddenByArray__arrayOf_java_lang_Object__void (ref.get_desc $jsvarargs.Main.1VarargsBridgesImpl(local.get $this))))
  )
 )
-(elem declare func $js_export_m_varargsOverriddenByArray__arrayOf_java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
 
 ;;; void VarargsBridgesImpl.genericOverriddenByVarargs(WasmExtern values)
 (@binaryen.js.called)
 (func $js_export_m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl
- (type $function.js_export_m_genericOverriddenByVarargs__java_lang_Object__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $jsvarargs.Main.1VarargsBridgesImpl))
  (param $values (ref null extern))
- (local $this (ref null $jsvarargs.Main.1VarargsBridgesImpl))
- (local.set $this (ref.cast (ref $jsvarargs.Main.1VarargsBridgesImpl) (local.get $this.untyped)))
  (block
   (call_ref $function.m_genericOverriddenByVarargs__java_lang_Object__void (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $values))(struct.get $jsvarargs.Main.1VarargsBridgesImpl.vtable $m_genericOverriddenByVarargs__java_lang_Object__void (ref.get_desc $jsvarargs.Main.1VarargsBridgesImpl(local.get $this))))
  )
 )
-(elem declare func $js_export_m_genericOverriddenByVarargs__java_lang_Object__void@jsvarargs.Main.1VarargsBridgesImpl)
 
 ;;; void VarargsBridgesImpl.$clinit()
 (func $$clinit__void_<once>_@jsvarargs.Main.1VarargsBridgesImpl

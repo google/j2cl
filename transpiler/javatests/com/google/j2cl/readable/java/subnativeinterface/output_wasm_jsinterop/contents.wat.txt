@@ -377,58 +377,42 @@
 ;;; int SubNativeInterface.getValue()
 (@binaryen.js.called)
 (func $js_export_m_getValue__int@subnativeinterface.SubNativeInterface
- (type $function.js_export_m_getValue__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.SubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.SubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.SubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_getValue__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.SubNativeInterface.vtable $m_getValue__int (ref.get_desc $subnativeinterface.SubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_getValue__int@subnativeinterface.SubNativeInterface)
 
 ;;; int SubNativeInterface.mightBeRenamed()
 (@binaryen.js.called)
 (func $js_export_m_mightBeRenamed__int@subnativeinterface.SubNativeInterface
- (type $function.js_export_m_mightBeRenamed__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.SubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.SubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.SubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_mightBeRenamed__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.SubNativeInterface.vtable $m_mightBeRenamed__int (ref.get_desc $subnativeinterface.SubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_mightBeRenamed__int@subnativeinterface.SubNativeInterface)
 
 ;;; int SubNativeInterface.getProp()
 (@binaryen.js.called)
 (func $js_export_get_m_getProp__int@subnativeinterface.SubNativeInterface
- (type $function.js_export_get_m_getProp__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.SubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.SubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.SubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_getProp__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.SubNativeInterface.vtable $m_getProp__int (ref.get_desc $subnativeinterface.SubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_get_m_getProp__int@subnativeinterface.SubNativeInterface)
 
 ;;; void SubNativeInterface.setProp(int value)
 (@binaryen.js.called)
 (func $js_export_set_m_setProp__int__void@subnativeinterface.SubNativeInterface
- (type $function.js_export_set_m_setProp__int__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.SubNativeInterface))
  (param $value i32)
- (local $this (ref null $subnativeinterface.SubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.SubNativeInterface) (local.get $this.untyped)))
  (block
   (call_ref $function.m_setProp__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $subnativeinterface.SubNativeInterface.vtable $m_setProp__int__void (ref.get_desc $subnativeinterface.SubNativeInterface(local.get $this))))
  )
 )
-(elem declare func $js_export_set_m_setProp__int__void@subnativeinterface.SubNativeInterface)
 
 ;;; void SubNativeInterface.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.SubNativeInterface
@@ -494,16 +478,12 @@
 ;;; int AbstractSubNativeInterface.mightBeRenamed()
 (@binaryen.js.called)
 (func $js_export_m_mightBeRenamed__int@subnativeinterface.AbstractSubNativeInterface
- (type $function.js_export_m_mightBeRenamed__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.AbstractSubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.AbstractSubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.AbstractSubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_mightBeRenamed__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AbstractSubNativeInterface.vtable $m_mightBeRenamed__int (ref.get_desc $subnativeinterface.AbstractSubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_mightBeRenamed__int@subnativeinterface.AbstractSubNativeInterface)
 
 ;;; void AbstractSubNativeInterface.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.AbstractSubNativeInterface
@@ -596,17 +576,13 @@
 ;;; WasmExtern StringEcho.echo(WasmExtern t)
 (@binaryen.js.called)
 (func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.StringEcho
- (type $function.js_export_m_echo__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.StringEcho))
  (param $t (ref null extern))
  (result (ref null extern))
- (local $this (ref null $subnativeinterface.StringEcho))
- (local.set $this (ref.cast (ref $subnativeinterface.StringEcho) (local.get $this.untyped)))
  (block
   (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.m_echo__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(struct.get $subnativeinterface.StringEcho.vtable $m_echo__java_lang_Object__java_lang_Object (ref.get_desc $subnativeinterface.StringEcho(local.get $this))))))
  )
 )
-(elem declare func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.StringEcho)
 
 ;;; void StringEcho.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.StringEcho
@@ -733,17 +709,13 @@
 ;;; WasmExtern GenericEcho.echo(WasmExtern t)
 (@binaryen.js.called)
 (func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.GenericEcho
- (type $function.js_export_m_echo__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.GenericEcho))
  (param $t (ref null extern))
  (result (ref null extern))
- (local $this (ref null $subnativeinterface.GenericEcho))
- (local.set $this (ref.cast (ref $subnativeinterface.GenericEcho) (local.get $this.untyped)))
  (block
   (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.m_echo__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(struct.get $subnativeinterface.GenericEcho.vtable $m_echo__java_lang_Object__java_lang_Object (ref.get_desc $subnativeinterface.GenericEcho(local.get $this))))))
  )
 )
-(elem declare func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.GenericEcho)
 
 ;;; void GenericEcho.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.GenericEcho
@@ -1060,17 +1032,13 @@
 ;;; WasmExtern <anonymous> implements MyNativeGenericInterface<String>.echo(WasmExtern t)
 (@binaryen.js.called)
 (func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.SubNativeInterface.$LambdaImplementor$1
- (type $function.js_export_m_echo__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.SubNativeInterface.$LambdaImplementor$1))
  (param $t (ref null extern))
  (result (ref null extern))
- (local $this (ref null $subnativeinterface.SubNativeInterface.$LambdaImplementor$1))
- (local.set $this (ref.cast (ref $subnativeinterface.SubNativeInterface.$LambdaImplementor$1) (local.get $this.untyped)))
  (block
   (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.SubNativeInterface.$LambdaImplementor$1 (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)))))
  )
 )
-(elem declare func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.SubNativeInterface.$LambdaImplementor$1)
 
 ;;; void <anonymous> implements MyNativeGenericInterface<String>.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.SubNativeInterface.$LambdaImplementor$1
@@ -1223,17 +1191,13 @@
 ;;; WasmExtern ConcreteStringEcho.echo(WasmExtern t)
 (@binaryen.js.called)
 (func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.ConcreteStringEcho
- (type $function.js_export_m_echo__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.ConcreteStringEcho))
  (param $t (ref null extern))
  (result (ref null extern))
- (local $this (ref null $subnativeinterface.ConcreteStringEcho))
- (local.set $this (ref.cast (ref $subnativeinterface.ConcreteStringEcho) (local.get $this.untyped)))
  (block
   (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.ConcreteStringEcho (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t)))))
  )
 )
-(elem declare func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.ConcreteStringEcho)
 
 ;;; void ConcreteStringEcho.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.ConcreteStringEcho
@@ -1298,58 +1262,42 @@
 ;;; int AccidentalSubNativeInterface.getValue()
 (@binaryen.js.called)
 (func $js_export_m_getValue__int@subnativeinterface.AccidentalSubNativeInterface
- (type $function.js_export_m_getValue__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.AccidentalSubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.AccidentalSubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_getValue__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_getValue__int (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_getValue__int@subnativeinterface.AccidentalSubNativeInterface)
 
 ;;; int AccidentalSubNativeInterface.mightBeRenamed()
 (@binaryen.js.called)
 (func $js_export_m_mightBeRenamed__int@subnativeinterface.AccidentalSubNativeInterface
- (type $function.js_export_m_mightBeRenamed__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.AccidentalSubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.AccidentalSubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_mightBeRenamed__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_mightBeRenamed__int (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_mightBeRenamed__int@subnativeinterface.AccidentalSubNativeInterface)
 
 ;;; int AccidentalSubNativeInterface.getProp()
 (@binaryen.js.called)
 (func $js_export_get_m_getProp__int@subnativeinterface.AccidentalSubNativeInterface
- (type $function.js_export_get_m_getProp__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (result i32)
- (local $this (ref null $subnativeinterface.AccidentalSubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.AccidentalSubNativeInterface) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_getProp__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_getProp__int (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this)))))
  )
 )
-(elem declare func $js_export_get_m_getProp__int@subnativeinterface.AccidentalSubNativeInterface)
 
 ;;; void AccidentalSubNativeInterface.setProp(int value)
 (@binaryen.js.called)
 (func $js_export_set_m_setProp__int__void@subnativeinterface.AccidentalSubNativeInterface
- (type $function.js_export_set_m_setProp__int__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (param $value i32)
- (local $this (ref null $subnativeinterface.AccidentalSubNativeInterface))
- (local.set $this (ref.cast (ref $subnativeinterface.AccidentalSubNativeInterface) (local.get $this.untyped)))
  (block
   (call_ref $function.m_setProp__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_setProp__int__void (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this))))
  )
 )
-(elem declare func $js_export_set_m_setProp__int__void@subnativeinterface.AccidentalSubNativeInterface)
 
 ;;; void AccidentalSubNativeInterface.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.AccidentalSubNativeInterface
@@ -1428,17 +1376,13 @@
 ;;; WasmExtern AccidentalStringEcho.echo(WasmExtern t)
 (@binaryen.js.called)
 (func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.AccidentalStringEcho
- (type $function.js_export_m_echo__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.AccidentalStringEcho))
  (param $t (ref null extern))
  (result (ref null extern))
- (local $this (ref null $subnativeinterface.AccidentalStringEcho))
- (local.set $this (ref.cast (ref $subnativeinterface.AccidentalStringEcho) (local.get $this.untyped)))
  (block
   (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.m_echo__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(struct.get $subnativeinterface.AccidentalStringEcho.vtable $m_echo__java_lang_Object__java_lang_Object (ref.get_desc $subnativeinterface.AccidentalStringEcho(local.get $this))))))
  )
 )
-(elem declare func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.AccidentalStringEcho)
 
 ;;; void AccidentalStringEcho.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.AccidentalStringEcho
@@ -1554,58 +1498,42 @@
 ;;; int JavaSubNativeInterfaceImpl.getValue()
 (@binaryen.js.called)
 (func $js_export_m_getValue__int@subnativeinterface.JavaSubNativeInterfaceImpl
- (type $function.js_export_m_getValue__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.JavaSubNativeInterfaceImpl))
  (result i32)
- (local $this (ref null $subnativeinterface.JavaSubNativeInterfaceImpl))
- (local.set $this (ref.cast (ref $subnativeinterface.JavaSubNativeInterfaceImpl) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_getValue__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.JavaSubNativeInterfaceImpl.vtable $m_getValue__int (ref.get_desc $subnativeinterface.JavaSubNativeInterfaceImpl(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_getValue__int@subnativeinterface.JavaSubNativeInterfaceImpl)
 
 ;;; int JavaSubNativeInterfaceImpl.mightBeRenamed()
 (@binaryen.js.called)
 (func $js_export_m_mightBeRenamed__int@subnativeinterface.JavaSubNativeInterfaceImpl
- (type $function.js_export_m_mightBeRenamed__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.JavaSubNativeInterfaceImpl))
  (result i32)
- (local $this (ref null $subnativeinterface.JavaSubNativeInterfaceImpl))
- (local.set $this (ref.cast (ref $subnativeinterface.JavaSubNativeInterfaceImpl) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_mightBeRenamed__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.JavaSubNativeInterfaceImpl.vtable $m_mightBeRenamed__int (ref.get_desc $subnativeinterface.JavaSubNativeInterfaceImpl(local.get $this)))))
  )
 )
-(elem declare func $js_export_m_mightBeRenamed__int@subnativeinterface.JavaSubNativeInterfaceImpl)
 
 ;;; int JavaSubNativeInterfaceImpl.getProp()
 (@binaryen.js.called)
 (func $js_export_get_m_getProp__int@subnativeinterface.JavaSubNativeInterfaceImpl
- (type $function.js_export_get_m_getProp__int)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.JavaSubNativeInterfaceImpl))
  (result i32)
- (local $this (ref null $subnativeinterface.JavaSubNativeInterfaceImpl))
- (local.set $this (ref.cast (ref $subnativeinterface.JavaSubNativeInterfaceImpl) (local.get $this.untyped)))
  (block
   (return (call_ref $function.m_getProp__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.JavaSubNativeInterfaceImpl.vtable $m_getProp__int (ref.get_desc $subnativeinterface.JavaSubNativeInterfaceImpl(local.get $this)))))
  )
 )
-(elem declare func $js_export_get_m_getProp__int@subnativeinterface.JavaSubNativeInterfaceImpl)
 
 ;;; void JavaSubNativeInterfaceImpl.setProp(int value)
 (@binaryen.js.called)
 (func $js_export_set_m_setProp__int__void@subnativeinterface.JavaSubNativeInterfaceImpl
- (type $function.js_export_set_m_setProp__int__void)
- (param $this.untyped (ref $java.lang.Object))
+ (param $this (ref $subnativeinterface.JavaSubNativeInterfaceImpl))
  (param $value i32)
- (local $this (ref null $subnativeinterface.JavaSubNativeInterfaceImpl))
- (local.set $this (ref.cast (ref $subnativeinterface.JavaSubNativeInterfaceImpl) (local.get $this.untyped)))
  (block
   (call_ref $function.m_setProp__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $subnativeinterface.JavaSubNativeInterfaceImpl.vtable $m_setProp__int__void (ref.get_desc $subnativeinterface.JavaSubNativeInterfaceImpl(local.get $this))))
  )
 )
-(elem declare func $js_export_set_m_setProp__int__void@subnativeinterface.JavaSubNativeInterfaceImpl)
 
 ;;; void JavaSubNativeInterfaceImpl.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.JavaSubNativeInterfaceImpl

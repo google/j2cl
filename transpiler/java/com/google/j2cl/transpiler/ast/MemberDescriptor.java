@@ -41,6 +41,11 @@ public abstract class MemberDescriptor
 
     /** Returns whether this origin represents a synthetic member. */
     boolean isSynthetic();
+
+    /** Returns whether this origin represents a Wasm JsInterop boundary method. */
+    default boolean isWasmBoundaryMethod() {
+      return false;
+    }
   }
 
   /** Return JsInfo from the member's annotation. */
