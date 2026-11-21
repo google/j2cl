@@ -19,9 +19,8 @@ package javaemul.internal;
 public final class StringUtil {
 
   private static final String whitespaceRegexStr =
-      "[\\u1680\\u180E\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000\\uFEFF]"
-          + "|[\\t-\\r ]"
-          + "|[\\x1C-\\x1F]";
+      "[\\u1680\\u180E\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000\\uFEFF"
+          + "\\t-\\r \\x1C-\\x1F]";
 
   private static NativeRegExp whitespaceRegex;
 
