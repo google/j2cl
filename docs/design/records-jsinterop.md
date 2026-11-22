@@ -66,7 +66,7 @@ When a Java Record is annotated with `@JsType`:
         `@JsMethod` (e.g., `instance.myCustomMethod()`).
     *   The compiler-generated `equals()`, `hashCode()`, and `toString()`
         methods will be exposed implicitly to JavaScript, consistent with
-        overriden methods from `java.lang.Object`.
+        overridden methods from `java.lang.Object`.
     *   Public static methods within the record body will be exposed.
 4.  **Fields:** Records can define static fields which will be exposed following
     regular JsType semantics.
