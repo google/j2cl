@@ -16,7 +16,12 @@
 package jstypevarargs;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
+import static jstypevarargs.Main.Varargs.f1;
+import static jstypevarargs.Main.Varargs.f2;
+import static jstypevarargs.Main.Varargs.sumAndMultiply;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -38,13 +43,13 @@ public class Main {
 
   @JsFunction
   interface Function {
-    int f1(int i, Main... args);
+    int f1(int i, Varargs... args);
   }
 
   static final class AFunction implements Function {
 
     @Override
-    public int f1(int i, Main... args) {
+    public int f1(int i, Varargs... args) {
       if (i >= args.length) {
         return -1;
       }
@@ -52,7 +57,78 @@ public class Main {
     }
   }
 
-  static class SubMain extends Main {
+  static class Varargs {
+    int field;
+
+    public Varargs(int f) {
+      this.field = f;
+    }
+
+    public Varargs sideEffect(int a) {
+      this.field += a;
+      return this;
+    }
+
+    // varargs of unboxed type.
+    @JsMethod
+    public static Double sumAndMultiply(Double multiplier, Double... numbers) {
+      double result = 0.0d;
+      for (double d : numbers) {
+        result += d;
+      }
+      result *= multiplier;
+      return result;
+    }
+
+    // static JsMethod, with varargs that is not the first parameter.
+    @JsMethod
+    public static int f1(int m, int... numbers) {
+      int result = 0;
+      for (int n : numbers) {
+        result += n;
+      }
+      return result *= m;
+    }
+
+    // static JsMethod, with varargs that is the first parameter.
+    @JsMethod
+    public static int f2(int... numbers) {
+      int result = 0;
+      for (int n : numbers) {
+        result += n;
+      }
+      return result *= 100;
+    }
+
+    // instance JsMethod, with varargs that is not the first parameter.
+    @JsMethod
+    public int f3(int m, int... numbers) {
+      int result = 0;
+      for (int n : numbers) {
+        result += n;
+      }
+      result += field;
+      return result *= m;
+    }
+
+    // instance JsMethod, with varargs that is the first parameter.
+    @JsMethod
+    public int f4(int... numbers) {
+      int result = 0;
+      for (int n : numbers) {
+        result += n;
+      }
+      result += field;
+      return result *= 100;
+    }
+
+    @JsMethod
+    public static <T> T generics(T... elements) {
+      return elements[0];
+    }
+  }
+
+  static class SubMain extends Varargs {
     public SubMain(int x, int y) {
       super(x + y);
     }
@@ -84,142 +160,79 @@ public class Main {
     }
   }
 
-  int field;
-
-  public Main(int f) {
-    this.field = f;
-  }
-
-  public Main sideEffect(int a) {
-    this.field += a;
-    return this;
-  }
-
-  // varargs of unboxed type.
-  @JsMethod
-  public static Double sumAndMultiply(Double multiplier, Double... numbers) {
-    double result = 0.0d;
-    for (double d : numbers) {
-      result += d;
-    }
-    result *= multiplier;
-    return result;
-  }
-
-  // static JsMethod, with varargs that is not the first parameter.
-  @JsMethod
-  public static int f1(int m, int... numbers) {
-    int result = 0;
-    for (int n : numbers) {
-      result += n;
-    }
-    return result *= m;
-  }
-
-  // static JsMethod, with varargs that is the first parameter.
-  @JsMethod
-  public static int f2(int... numbers) {
-    int result = 0;
-    for (int n : numbers) {
-      result += n;
-    }
-    return result *= 100;
-  }
-
-  // instance JsMethod, with varargs that is not the first parameter.
-  @JsMethod
-  public int f3(int m, int... numbers) {
-    int result = 0;
-    for (int n : numbers) {
-      result += n;
-    }
-    result += field;
-    return result *= m;
-  }
-
-  // instance JsMethod, with varargs that is the first parameter.
-  @JsMethod
-  public int f4(int... numbers) {
-    int result = 0;
-    for (int n : numbers) {
-      result += n;
-    }
-    result += field;
-    return result *= 100;
-  }
-
-  @JsMethod
-  public static <T> T generics(T... elements) {
-    return elements[0];
-  }
-
   private static void testUnboxedType() {
     // multiple arguments.
     assertTrue(sumAndMultiply(10.0, 1.0, 2.0) == 30.0);
-    assertTrue(Main.sumAndMultiply(10.0, 1.0, 2.0) == 30);
+    assertTrue(Varargs.sumAndMultiply(10.0, 1.0, 2.0) == 30);
     // no argument for varargs.
     assertTrue(sumAndMultiply(10.0) == 0);
-    assertTrue(Main.sumAndMultiply(10.0) == 0);
+    assertTrue(Varargs.sumAndMultiply(10.0) == 0);
     // array literal for varargs.
     assertTrue(sumAndMultiply(10.0, new Double[] {1.0, 2.0}) == 30);
-    assertTrue(Main.sumAndMultiply(10.0, new Double[] {1.0, 2.0}) == 30);
+    assertTrue(Varargs.sumAndMultiply(10.0, new Double[] {1.0, 2.0}) == 30);
     // empty array literal for varargs.
     assertTrue(sumAndMultiply(10.0, new Double[] {}) == 0);
-    assertTrue(Main.sumAndMultiply(10.0, new Double[] {}) == 0);
+    assertTrue(Varargs.sumAndMultiply(10.0, new Double[] {}) == 0);
     // array object for varargs.
     Double[] ds = new Double[] {1.0, 2.2};
     assertTrue(sumAndMultiply(10.0, ds) == 32.0);
-    assertTrue(Main.sumAndMultiply(10.0, ds) == 32.0);
+    assertTrue(Varargs.sumAndMultiply(10.0, ds) == 32.0);
     // call by JS.
-    assertTrue(callSumAndMultiply() == 30.0);
+    if (!isWasm()) {
+      assertTrue(callSumAndMultiply() == 30.0);
+    }
   }
 
   private static void testStaticMethodNotFirst() {
     // multiple arguments.
     assertTrue(f1(10, 1, 2) == 30);
-    assertTrue(Main.f1(10, 1, 2) == 30);
+    assertTrue(Varargs.f1(10, 1, 2) == 30);
     // no argument for varargs.
     assertTrue(f1(10) == 0);
-    assertTrue(Main.f1(10) == 0);
+    assertTrue(Varargs.f1(10) == 0);
     // array literal for varargs.
     assertTrue(f1(10, new int[] {1, 2}) == 30);
-    assertTrue(Main.f1(10, new int[] {1, 2}) == 30);
+    assertTrue(Varargs.f1(10, new int[] {1, 2}) == 30);
     // empty array literal for varargs.
     assertTrue(f1(10, new int[] {}) == 0);
-    assertTrue(Main.f1(10, new int[] {}) == 0);
+    assertTrue(Varargs.f1(10, new int[] {}) == 0);
     // array object for varargs.
     int[] ints = new int[] {1, 2};
     assertTrue(f1(10, ints) == 30);
-    assertTrue(Main.f1(10, ints) == 30);
+    assertTrue(Varargs.f1(10, ints) == 30);
     // call by JS.
-    assertTrue(callF1() == 30);
+    if (!isWasm()) {
+      assertTrue(callF1() == 30);
+    }
   }
 
   private static void testStaticMethodFirst() {
     // multiple arguments.
     assertTrue(f2(1, 2) == 300);
-    assertTrue(Main.f2(1, 2) == 300);
+    assertTrue(Varargs.f2(1, 2) == 300);
     // no argument for varargs.
     assertTrue(f2() == 0);
-    assertTrue(Main.f2() == 0);
+    assertTrue(Varargs.f2() == 0);
     // array literal for varargs.
     assertTrue(f2(new int[] {1, 2}) == 300);
-    assertTrue(Main.f2(new int[] {1, 2}) == 300);
+    assertTrue(Varargs.f2(new int[] {1, 2}) == 300);
     // empty array literal for varargs.
     assertTrue(f2(new int[] {}) == 0);
-    assertTrue(Main.f2(new int[] {}) == 0);
+    assertTrue(Varargs.f2(new int[] {}) == 0);
     // array object for varargs.
     int[] ints = new int[] {1, 2};
     assertTrue(f2(ints) == 300);
-    assertTrue(Main.f2(ints) == 300);
+    assertTrue(Varargs.f2(ints) == 300);
     // call by JS.
-    assertTrue(callF2() == 300);
-    assertTrue(1 == Main.generics(1, 2));
-    assertTrue("abc".equals(Main.generics("abc", "def")));
+    if (!isWasm()) {
+      assertTrue(callF2() == 300);
+    }
+    assertTrue(1 == Varargs.generics(1, 2));
+    assertTrue("abc".equals(Varargs.generics("abc", "def")));
   }
 
   private static void testInstanceMethodNotFirst() {
-    Main m = new Main(1);
+    Varargs m = new Varargs(1);
     // multiple arguments.
     assertTrue(m.f3(10, 1, 2) == 40);
     // no argument for varargs.
@@ -232,11 +245,13 @@ public class Main {
     int[] ints = new int[] {1, 2};
     assertTrue(m.f3(10, ints) == 40);
     // call by JS.
-    assertTrue(callF3(m) == 40);
+    if (!isWasm()) {
+      assertTrue(callF3(m) == 40);
+    }
   }
 
   private static void testInstanceMethodFirst() {
-    Main m = new Main(1);
+    Varargs m = new Varargs(1);
     // multiple arguments.
     assertTrue(m.f4(1, 2) == 400);
     // no argument for varargs.
@@ -249,30 +264,34 @@ public class Main {
     int[] ints = new int[] {1, 2};
     assertTrue(m.f4(ints) == 400);
     // call by JS.
-    assertTrue(callF4(m) == 400);
+    if (!isWasm()) {
+      assertTrue(callF4(m) == 400);
+    }
   }
 
   private static void testJsFunction() {
     AFunction a = new AFunction();
-    Main m1 = new Main(12);
-    Main m2 = new Main(34);
+    Varargs m1 = new Varargs(12);
+    Varargs m2 = new Varargs(34);
     // multiple arguments.
     assertTrue(a.f1(1, m1, m2) == 34);
     // no argument for varargs.
     assertTrue(a.f1(1) == -1);
     // array literal for varargs.
-    assertTrue(a.f1(0, new Main[] {m1, m2}) == 12);
+    assertTrue(a.f1(0, new Varargs[] {m1, m2}) == 12);
     // empty array literal for varargs.
-    assertTrue(a.f1(0, new Main[] {}) == -1);
+    assertTrue(a.f1(0, new Varargs[] {}) == -1);
     // array object for varargs.
-    Main[] os = new Main[] {m1, m2};
+    Varargs[] os = new Varargs[] {m1, m2};
     assertTrue(a.f1(1, os) == 34);
     // call by JS
-    assertTrue(callJsFunction(a) == -1);
+    if (!isWasm()) {
+      assertTrue(callJsFunction(a) == -1);
+    }
   }
 
   private static void testSideEffect() {
-    Main m = new Main(10);
+    Varargs m = new Varargs(10);
     assertTrue(m.field == 10);
     int[] ints = new int[] {1, 2};
     m.sideEffect(5).f3(10, ints);
@@ -287,7 +306,7 @@ public class Main {
     assertTrue(sm.test4() == 10);
     assertTrue(sm.test5() == 40);
   }
-  
+
   @JsMethod
   private static int count(String... strings) {
     return strings.length;
@@ -295,14 +314,8 @@ public class Main {
 
   private static void testCallVarargsWithNull() {
     assertTrue(count("Hello") == 1);
-    try {
-      String[] strings = null;
-      assertTrue(count(strings) == 0);
-      assertTrue(false);
-    } catch (Exception expected) {
-      return;
-    }
-    assertTrue(false);
+    String[] strings = null;
+    assertThrowsNullPointerException(() -> count(strings));
   }
 
   private static class IntegerSummarizer {
@@ -366,22 +379,21 @@ public class Main {
     assertEquals("a:2", bridges.genericOverriddenByVarargs(new String[] {"a", "b"}));
   }
 
-  @JsMethod
+  @JsMethod(namespace = "jstypevarargs.helper")
   private static native Double callSumAndMultiply();
 
-  @JsMethod
+  @JsMethod(namespace = "jstypevarargs.helper")
   private static native int callF1();
 
-  @JsMethod
+  @JsMethod(namespace = "jstypevarargs.helper")
   private static native int callF2();
 
-  @JsMethod
-  private static native int callF3(Main m);
+  @JsMethod(namespace = "jstypevarargs.helper")
+  private static native int callF3(Varargs m);
 
-  @JsMethod
-  private static native int callF4(Main m);
+  @JsMethod(namespace = "jstypevarargs.helper")
+  private static native int callF4(Varargs m);
 
-  @JsMethod
+  @JsMethod(namespace = "jstypevarargs.helper")
   private static native int callJsFunction(AFunction a);
-
 }

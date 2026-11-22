@@ -12,40 +12,44 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('jstypevarargs.helper');
+
+const Varargs = goog.require('jstypevarargs.Varargs');
+
 /**
  * @return {?number}
  */
-Main.callSumAndMultiply = function() {
-  return Main.sumAndMultiply(10, 1, 2);
+exports.callSumAndMultiply = function() {
+  return Varargs.sumAndMultiply(10, 1, 2);
 };
 
 /**
  * @return {number}
  */
-Main.callF1 = function() {
-  return Main.f1(10, 1, 2);
+exports.callF1 = function() {
+  return Varargs.f1(10, 1, 2);
 };
 
 /**
  * @return {number}
  */
-Main.callF2 = function() {
-  return Main.f2(1, 2);
+exports.callF2 = function() {
+  return Varargs.f2(1, 2);
 };
 
 /**
- * @param {Main} m
+ * @param {!Varargs} m
  * @return {number}
  */
-Main.callF3 = function(m) {
+exports.callF3 = function(m) {
   return m.f3(10, 1, 2);
 };
 
 /**
- * @param {Main} m
+ * @param {!Varargs} m
  * @return {number}
  */
-Main.callF4 = function(m) {
+exports.callF4 = function(m) {
   return m.f4(1, 2);
 };
 
@@ -53,6 +57,6 @@ Main.callF4 = function(m) {
  * @param {*} a
  * @return {number}
  */
-Main.callJsFunction = function(a) {
-  return (/**@type {Function}*/ (a))(0, null, null);
+exports.callJsFunction = function(a) {
+  return (/** @type {!Function} */ (a))(0, null, null);
 };

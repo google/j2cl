@@ -17,6 +17,7 @@ package jstypevarargs
 
 import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isWasm
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
 
@@ -35,49 +36,28 @@ fun main(vararg args: String) {
   QualifiedSuperMethodCall.test()
 }
 
-open class Main {
+@JsFunction
+fun interface Function {
+  fun f1(i: Int, vararg args: Varargs?): Int
+}
 
-  @JsFunction
-  fun interface Function {
-    fun f1(i: Int, vararg args: Main?): Int
-  }
-
-  class AFunction : Function {
-    override fun f1(i: Int, vararg args: Main?): Int {
-      if (i >= args.size) {
-        return -1
-      }
-      return args[i]?.field ?: -1
+class AFunction : Function {
+  override fun f1(i: Int, vararg args: Varargs?): Int {
+    if (i >= args.size) {
+      return -1
     }
+    return args[i]?.field ?: -1
   }
+}
 
-  class SubMain(x: Int, y: Int) : Main(x + y) {
-    // multiple arguments.
-    fun test1(): Int = super.f3(10, 1, 2)
-
-    // no argument for varargs.
-    fun test2(): Int = super.f3(10)
-
-    // array literal for varargs.
-    fun test3(): Int = super.f3(10, *intArrayOf(1, 2))
-
-    // empty array literal for varargs.
-    fun test4(): Int = super.f3(10, *intArrayOf())
-
-    // array object for varargs.
-    fun test5(): Int {
-      val ints = intArrayOf(1, 2)
-      return super.f3(10, *ints)
-    }
-  }
-
+open class Varargs {
   internal var field: Int
 
   constructor(f: Int) {
     this.field = f
   }
 
-  fun sideEffect(a: Int): Main {
+  fun sideEffect(a: Int): Varargs {
     this.field += a
     return this
   }
@@ -147,73 +127,99 @@ open class Main {
   }
 }
 
+class SubMain(x: Int, y: Int) : Varargs(x + y) {
+  // multiple arguments.
+  fun test1(): Int = super.f3(10, 1, 2)
+
+  // no argument for varargs.
+  fun test2(): Int = super.f3(10)
+
+  // array literal for varargs.
+  fun test3(): Int = super.f3(10, *intArrayOf(1, 2))
+
+  // empty array literal for varargs.
+  fun test4(): Int = super.f3(10, *intArrayOf())
+
+  // array object for varargs.
+  fun test5(): Int {
+    val ints = intArrayOf(1, 2)
+    return super.f3(10, *ints)
+  }
+}
+
 fun testUnboxedType() {
   // multiple arguments.
-  assertTrue(Main.sumAndMultiply(10.0, 1.0, 2.0) == 30.0)
-  assertTrue(Main.Companion.sumAndMultiply(10.0, 1.0, 2.0) == 30.0)
+  assertTrue(Varargs.sumAndMultiply(10.0, 1.0, 2.0) == 30.0)
+  assertTrue(Varargs.Companion.sumAndMultiply(10.0, 1.0, 2.0) == 30.0)
   // no argument for varargs.
-  assertTrue(Main.sumAndMultiply(10.0) == 0.0)
-  assertTrue(Main.Companion.sumAndMultiply(10.0) == 0.0)
+  assertTrue(Varargs.sumAndMultiply(10.0) == 0.0)
+  assertTrue(Varargs.Companion.sumAndMultiply(10.0) == 0.0)
   // array literal for varargs.
-  assertTrue(Main.sumAndMultiply(10.0, *doubleArrayOf(1.0, 2.0)) == 30.0)
-  assertTrue(Main.Companion.sumAndMultiply(10.0, *doubleArrayOf(1.0, 2.0)) == 30.0)
+  assertTrue(Varargs.sumAndMultiply(10.0, *doubleArrayOf(1.0, 2.0)) == 30.0)
+  assertTrue(Varargs.Companion.sumAndMultiply(10.0, *doubleArrayOf(1.0, 2.0)) == 30.0)
   // empty array literal for varargs.
-  assertTrue(Main.sumAndMultiply(10.0, *doubleArrayOf()) == 0.0)
-  assertTrue(Main.Companion.sumAndMultiply(10.0, *doubleArrayOf()) == 0.0)
+  assertTrue(Varargs.sumAndMultiply(10.0, *doubleArrayOf()) == 0.0)
+  assertTrue(Varargs.Companion.sumAndMultiply(10.0, *doubleArrayOf()) == 0.0)
   // array object for varargs.
   val ds = doubleArrayOf(1.0, 2.2)
-  assertTrue(Main.sumAndMultiply(10.0, *ds) == 32.0)
-  assertTrue(Main.Companion.sumAndMultiply(10.0, *ds) == 32.0)
+  assertTrue(Varargs.sumAndMultiply(10.0, *ds) == 32.0)
+  assertTrue(Varargs.Companion.sumAndMultiply(10.0, *ds) == 32.0)
   // call by JS.
-  assertTrue(callSumAndMultiply() == 30.0)
+  if (!isWasm()) {
+    assertTrue(callSumAndMultiply() == 30.0)
+  }
 }
 
 fun testStaticMethodNotFirst() {
   // multiple arguments.
-  assertTrue(Main.f1(10, 1, 2) == 30)
-  assertTrue(Main.Companion.f1(10, 1, 2) == 30)
+  assertTrue(Varargs.f1(10, 1, 2) == 30)
+  assertTrue(Varargs.Companion.f1(10, 1, 2) == 30)
   // no argument for varargs.
-  assertTrue(Main.f1(10) == 0)
-  assertTrue(Main.Companion.f1(10) == 0)
+  assertTrue(Varargs.f1(10) == 0)
+  assertTrue(Varargs.Companion.f1(10) == 0)
   // array literal for varargs.
-  assertTrue(Main.f1(10, *intArrayOf(1, 2)) == 30)
-  assertTrue(Main.Companion.f1(10, *intArrayOf(1, 2)) == 30)
+  assertTrue(Varargs.f1(10, *intArrayOf(1, 2)) == 30)
+  assertTrue(Varargs.Companion.f1(10, *intArrayOf(1, 2)) == 30)
   // empty array literal for varargs.
-  assertTrue(Main.f1(10, *intArrayOf()) == 0)
-  assertTrue(Main.Companion.f1(10, *intArrayOf()) == 0)
+  assertTrue(Varargs.f1(10, *intArrayOf()) == 0)
+  assertTrue(Varargs.Companion.f1(10, *intArrayOf()) == 0)
   // array object for varargs.
   val ints = intArrayOf(1, 2)
-  assertTrue(Main.f1(10, *ints) == 30)
-  assertTrue(Main.Companion.f1(10, *ints) == 30)
+  assertTrue(Varargs.f1(10, *ints) == 30)
+  assertTrue(Varargs.Companion.f1(10, *ints) == 30)
   // call by JS.
-  assertTrue(callF1() == 30)
+  if (!isWasm()) {
+    assertTrue(callF1() == 30)
+  }
 }
 
 fun testStaticMethodFirst() {
   // multiple arguments.
-  assertTrue(Main.f2(1, 2) == 300)
-  assertTrue(Main.Companion.f2(1, 2) == 300)
+  assertTrue(Varargs.f2(1, 2) == 300)
+  assertTrue(Varargs.Companion.f2(1, 2) == 300)
   // no argument for varargs.
-  assertTrue(Main.f2() == 0)
-  assertTrue(Main.Companion.f2() == 0)
+  assertTrue(Varargs.f2() == 0)
+  assertTrue(Varargs.Companion.f2() == 0)
   // array literal for varargs.
-  assertTrue(Main.f2(*intArrayOf(1, 2)) == 300)
-  assertTrue(Main.Companion.f2(*intArrayOf(1, 2)) == 300)
+  assertTrue(Varargs.f2(*intArrayOf(1, 2)) == 300)
+  assertTrue(Varargs.Companion.f2(*intArrayOf(1, 2)) == 300)
   // empty array literal for varargs.
-  assertTrue(Main.f2(*intArrayOf()) == 0)
-  assertTrue(Main.Companion.f2(*intArrayOf()) == 0)
+  assertTrue(Varargs.f2(*intArrayOf()) == 0)
+  assertTrue(Varargs.Companion.f2(*intArrayOf()) == 0)
   // array object for varargs.
   val ints = intArrayOf(1, 2)
-  assertTrue(Main.f2(*ints) == 300)
-  assertTrue(Main.Companion.f2(*ints) == 300)
+  assertTrue(Varargs.f2(*ints) == 300)
+  assertTrue(Varargs.Companion.f2(*ints) == 300)
   // call by JS.
-  assertTrue(callF2() == 300)
-  assertTrue(1 == Main.generics(1, 2))
-  assertTrue("abc".equals(Main.Companion.generics("abc", "def")))
+  if (!isWasm()) {
+    assertTrue(callF2() == 300)
+  }
+  assertTrue(1 == Varargs.generics(1, 2))
+  assertTrue("abc".equals(Varargs.Companion.generics("abc", "def")))
 }
 
 fun testInstanceMethodNotFirst() {
-  val m = Main(1)
+  val m = Varargs(1)
   // multiple arguments.
   assertTrue(m.f3(10, 1, 2) == 40)
   // no argument for varargs.
@@ -226,11 +232,13 @@ fun testInstanceMethodNotFirst() {
   val ints = intArrayOf(1, 2)
   assertTrue(m.f3(10, *ints) == 40)
   // call by JS.
-  assertTrue(callF3(m) == 40)
+  if (!isWasm()) {
+    assertTrue(callF3(m) == 40)
+  }
 }
 
 fun testInstanceMethodFirst() {
-  val m = Main(1)
+  val m = Varargs(1)
   // multiple arguments.
   assertTrue(m.f4(1, 2) == 400)
   // no argument for varargs.
@@ -243,13 +251,15 @@ fun testInstanceMethodFirst() {
   val ints = intArrayOf(1, 2)
   assertTrue(m.f4(*ints) == 400)
   // call by JS.
-  assertTrue(callF4(m) == 400)
+  if (!isWasm()) {
+    assertTrue(callF4(m) == 400)
+  }
 }
 
 fun testJsFunction() {
-  val a = Main.AFunction()
-  val m1 = Main(12)
-  val m2 = Main(34)
+  val a = AFunction()
+  val m1 = Varargs(12)
+  val m2 = Varargs(34)
   // multiple arguments.
   assertTrue(a.f1(1, m1, m2) == 34)
   // no argument for varargs.
@@ -257,16 +267,18 @@ fun testJsFunction() {
   // array literal for varargs.
   assertTrue(a.f1(0, *arrayOf(m1, m2)) == 12)
   // empty array literal for varargs.
-  assertTrue(a.f1(0, *emptyArray<Main>()) == -1)
+  assertTrue(a.f1(0, *emptyArray<Varargs>()) == -1)
   // array object for varargs.
   val os = arrayOf(m1, m2)
   assertTrue(a.f1(1, *os) == 34)
   // call by JS
-  assertTrue(callJsFunction(a) == -1)
+  if (!isWasm()) {
+    assertTrue(callJsFunction(a) == -1)
+  }
 }
 
 fun testSideEffect() {
-  val m = Main(10)
+  val m = Varargs(10)
   assertTrue(m.field == 10)
   val ints = intArrayOf(1, 2)
   m.sideEffect(5).f3(10, *ints)
@@ -274,7 +286,7 @@ fun testSideEffect() {
 }
 
 fun testSuperMethodCall() {
-  val sm = Main.SubMain(1, 0)
+  val sm = SubMain(1, 0)
   assertTrue(sm.test1() == 40)
   assertTrue(sm.test2() == 10)
   assertTrue(sm.test3() == 40)
@@ -321,14 +333,14 @@ fun testBridgeWithVarargs() {
   assertEquals(6, rawSummarizer.summarize(1, 2, 3))
 }
 
-@JsMethod private external fun callSumAndMultiply(): Double
+@JsMethod(namespace = "jstypevarargs.helper") private external fun callSumAndMultiply(): Double
 
-@JsMethod private external fun callF1(): Int
+@JsMethod(namespace = "jstypevarargs.helper") private external fun callF1(): Int
 
-@JsMethod private external fun callF2(): Int
+@JsMethod(namespace = "jstypevarargs.helper") private external fun callF2(): Int
 
-@JsMethod private external fun callF3(m: Main): Int
+@JsMethod(namespace = "jstypevarargs.helper") private external fun callF3(m: Varargs): Int
 
-@JsMethod private external fun callF4(m: Main): Int
+@JsMethod(namespace = "jstypevarargs.helper") private external fun callF4(m: Varargs): Int
 
-@JsMethod private external fun callJsFunction(a: Main.AFunction): Int
+@JsMethod(namespace = "jstypevarargs.helper") private external fun callJsFunction(a: AFunction): Int

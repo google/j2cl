@@ -17,7 +17,7 @@ package jstypevarargs
 
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 
-class QualifiedSuperMethodCall : Main(1) {
+class QualifiedSuperMethodCall : Varargs(1) {
 
   inner class InnerClass {
     fun test1(): Int {

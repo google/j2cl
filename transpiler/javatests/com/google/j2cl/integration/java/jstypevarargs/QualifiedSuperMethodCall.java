@@ -17,7 +17,7 @@ package jstypevarargs;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-public class QualifiedSuperMethodCall extends Main {
+public class QualifiedSuperMethodCall extends Main.Varargs {
   public QualifiedSuperMethodCall() {
     super(1);
   }

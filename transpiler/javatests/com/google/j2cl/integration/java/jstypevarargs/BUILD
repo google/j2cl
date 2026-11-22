@@ -13,8 +13,10 @@ integration_test(
         "*.java",
         "*.js",
     ]),
-    # Contains JsInterop features which are only applicable for JS output.
+    # Contains JsInterop features which are only applicable for JS and Wasm JsInterop output.
     enable_jvm_test = False,
     enable_kt = False,
+    # Calls exported non-native @JsMethod members from JS, which requires Wasm JsInterop.
     enable_wasm = False,
+    enable_wasm_custom_descriptors_jsinterop = True,
 )
