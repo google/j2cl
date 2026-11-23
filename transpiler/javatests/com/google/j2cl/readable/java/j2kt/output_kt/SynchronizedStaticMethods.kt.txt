@@ -29,7 +29,7 @@ import kotlin.run
 import kotlin.synchronized
 
 open class SynchronizedStaticMethods {
- open class StaticSynchronizedOnly: J2ktMonitor() {
+ open class StaticSynchronizedOnly {
   companion object {
    private var count: Int = 0
    
@@ -46,7 +46,7 @@ open class SynchronizedStaticMethods {
   }
  }
  
- class PrivateConstructorStaticSynchronized: J2ktMonitor {
+ class PrivateConstructorStaticSynchronized {
   private constructor()
   
   companion object {
@@ -88,6 +88,25 @@ open class SynchronizedStaticMethods {
      return run {
       val ___value: Int = InstanceAndStaticSynchronized.staticCount + 1
       InstanceAndStaticSynchronized.staticCount = ___value
+      ___value
+     }
+    }
+   }
+  }
+ }
+ 
+ open class Base
+ 
+ open class SubclassWithStaticSynchronized: Base() {
+  companion object {
+   private var count: Int = 0
+   
+   @JvmStatic
+   fun increment(): Int {
+    synchronized<Unit>(SubclassWithStaticSynchronized::class.javaObjectType) {
+     return run {
+      val ___value: Int = SubclassWithStaticSynchronized.count + 1
+      SubclassWithStaticSynchronized.count = ___value
       ___value
      }
     }

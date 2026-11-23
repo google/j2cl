@@ -51,14 +51,13 @@ public class SynchronizedStaticMethods {
     }
   }
 
-  // Currently fails J2ktRestrictionsChecker because Base does not extend J2ktMonitor.
-  // public static class Base {}
-  //
-  // public static class SubclassWithStaticSynchronized extends Base {
-  //   private static int count;
-  //
-  //   public static synchronized int increment() {
-  //     return ++count;
-  //   }
-  // }
+  public static class Base {}
+
+  public static class SubclassWithStaticSynchronized extends Base {
+    private static int count;
+
+    public static synchronized int increment() {
+      return ++count;
+    }
+  }
 }

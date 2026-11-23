@@ -203,12 +203,52 @@ public class J2ktRestrictionsCheckerTest extends TestCase {
         """);
   }
 
+  public void testStaticSynchronizedMethodInNonMonitorSubclassSucceeds() {
+    assertWithInlineMessages(
+        "test.Child",
+        """
+        class Parent {}
+        class Child extends Parent {
+          static synchronized void method() {}
+        }
+        """);
+  }
+
+  public void testSynchronizedMethodInSubclassOfStaticSynchronizedOnlyParentFails() {
+    assertWithInlineMessages(
+        "test.Child",
+        """
+        class Parent {
+          static synchronized void staticMethod() {}
+        }
+        class Child extends Parent {
+        > Error: Type 'Child' does not support synchronized methods as it does not extend 'J2ktMonitor' or is not a direct subclass of 'Object'.
+          synchronized void instanceMethod() {}
+        }
+        """);
+  }
+
   public void testUnsupportedSynchronizedStatementFails() {
     assertWithInlineMessages(
         "test.Main",
         """
         class Main {
           void method() {
+            synchronized (this) {}
+        > Error: Synchronized statement is valid only on instances of 'Class' or 'J2ktMonitor'.
+          }
+        }
+        """);
+  }
+
+  public void testSynchronizedStatementOnClassWithOnlyStaticSynchronizedMethodFails() {
+    assertWithInlineMessages(
+        "test.Main",
+        """
+        class Main {
+          static synchronized void staticMethod() {}
+
+          void instanceMethod() {
             synchronized (this) {}
         > Error: Synchronized statement is valid only on instances of 'Class' or 'J2ktMonitor'.
           }

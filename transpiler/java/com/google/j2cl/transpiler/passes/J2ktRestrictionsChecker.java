@@ -307,9 +307,11 @@ public final class J2ktRestrictionsChecker {
           }
 
           private void checkSynchronizedMethods(Type type) {
-            boolean hasSynchronizedMethods =
-                type.containsMethod(it -> it.isSynchronized() && !isWebAsync(it));
-            if (!hasSynchronizedMethods) {
+            // Static synchronized methods synchronize on the class literal and do not require
+            // J2ktMonitor.
+            boolean hasSynchronizedInstanceMethods =
+                type.containsMethod(it -> !it.isStatic() && it.isSynchronized() && !isWebAsync(it));
+            if (!hasSynchronizedInstanceMethods) {
               return;
             }
 

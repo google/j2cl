@@ -67,8 +67,10 @@ public class J2ktAstUtils {
       return false;
     }
 
+    // Only instance synchronized methods synchronize on `this` and require extending J2ktMonitor.
+    // Static synchronized methods synchronize on the class literal (Class object).
     return typeDeclaration.getDeclaredMethodDescriptors().stream()
-        .anyMatch(MethodDescriptor::isSynchronized);
+        .anyMatch(it -> !it.isStatic() && it.isSynchronized());
   }
 
   /** Returns whether given type descriptor is subtype of J2ktMonitor, explicitly or implicitly. */
