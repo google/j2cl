@@ -27,6 +27,8 @@ import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.lower.ExpectDeclarationsRemoveLowering
 import org.jetbrains.kotlin.backend.common.lower.ExpressionBodyTransformer
+import org.jetbrains.kotlin.backend.common.lower.InitializersCleanupLowering
+import org.jetbrains.kotlin.backend.common.lower.InitializersLowering
 import org.jetbrains.kotlin.backend.common.lower.StripTypeAliasDeclarationsLowering
 import org.jetbrains.kotlin.backend.common.lower.loops.ForLoopsLowering
 import org.jetbrains.kotlin.backend.common.runOnFilePostfix
@@ -120,13 +122,12 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::RemoveDataClassSyntheticOverrides)
   // Move code from object init blocks and static field initializers to a new <clinit> function.
   perFileLowering(staticInitializersLoweringFactory)
-  // Move the field initializers of classes without primary constructor into init blocks.
-  perFileLowering(::J2clFieldInitializersLowering)
-  // Lower field/block initializers into the primary kotlin constructor. Classes without primary
-  // constructor keep their init blocks, which J2CL implements like for Java.
-  perFileLowering(::J2clInitializersLowering)
+  // Lower field/block initializers into the primary kotlin constructor.
+  // TODO(b/233909092): Only lower classes that contain primary ctors to avoid duplicating
+  // code in secondary ctors.
+  perFileLowering(::InitializersLowering)
   perFileLowering { j2clBackendContext: J2clBackendContext ->
-    J2clInitializersCleanupLowering(j2clBackendContext.jvmBackendContext) {
+    InitializersCleanupLowering(j2clBackendContext.jvmBackendContext) {
       // Only remove initializers that are non-constants and non-static.
       // Modified from: org.jetbrains.kotlin.backend.jvm.JvmLower.kt
       it.constantValue() == null &&
