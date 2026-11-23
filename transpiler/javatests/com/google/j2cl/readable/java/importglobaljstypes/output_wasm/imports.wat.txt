@@ -1,20 +1,20 @@
 
 
 ;;; int NativeArray.getLength()
-(func $js_import_m_getLength__int@importglobaljstypes.Number.NativeArray (import "imports" "get Array.length")
+(func $js_import_m_getLength__int@importglobaljstypes.Number.NativeArray (import "imports" "get Array.length#i")
  (param $this (ref null extern))
  (result i32)
 )
 
 ;;; WasmExtern NativeArray.at(int index)
-(func $js_import_m_at__int__java_lang_Object@importglobaljstypes.Number.NativeArray (import "imports" "Array.at$1")
+(func $js_import_m_at__int__java_lang_Object@importglobaljstypes.Number.NativeArray (import "imports" "Array.at#1#i")
  (param $this (ref null extern))
  (param $index i32)
  (result (ref null extern))
 )
 
 ;;; NativeDate()
-(func $js_import_m_<init>__@importglobaljstypes.Date.NativeDate (import "imports" "Date.constructor")
+(func $js_import_m_<init>__@importglobaljstypes.Date.NativeDate (import "imports" "Date.<init>#0")
  (result (ref null extern))
 )
 
@@ -24,7 +24,7 @@
 )
 
 ;;; int NativeDate.getSeconds()
-(func $js_import_m_getSeconds__int@importglobaljstypes.Date.NativeDate (import "imports" "Date.getSeconds")
+(func $js_import_m_getSeconds__int@importglobaljstypes.Date.NativeDate (import "imports" "Date.getSeconds#0#i")
  (param $this (ref null extern))
  (result i32)
 )
@@ -41,20 +41,20 @@
 )
 
 ;;; NativeRegExp(NativeString pattern)
-(func $js_import_m_<init>__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.constructor$1")
+(func $js_import_m_<init>__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.<init>#1")
  (param $pattern (ref null string))
  (result (ref null extern))
 )
 
 ;;; boolean NativeRegExp.test(NativeString value)
-(func $js_import_m_test__java_lang_String__boolean@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.test$1")
+(func $js_import_m_test__java_lang_String__boolean@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.test#1#i")
  (param $this (ref null extern))
  (param $value (ref null string))
  (result i32)
 )
 
 ;;; NativeString NativeRegExp.toString()
-(func $js_import_m_toString__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.toString")
+(func $js_import_m_toString__java_lang_String@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.toString#0#i")
  (param $this (ref null extern))
  (result (ref null string))
 )

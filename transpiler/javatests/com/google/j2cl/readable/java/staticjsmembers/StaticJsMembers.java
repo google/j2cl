@@ -78,6 +78,12 @@ public class StaticJsMembers {
   @JsProperty(namespace = GLOBAL, name = "debugger")
   public static native void debugger();
 
+  @JsProperty(namespace = "foo.Bar", name = "poly")
+  public static native void setPoly(int value);
+
+  @JsProperty(namespace = "foo.Bar", name = "poly")
+  public static native void setPoly(String value);
+
   public void test() {
     StaticJsMembers.f1(1);
     f1(1);
@@ -96,6 +102,8 @@ public class StaticJsMembers {
     StaticJsMembers.max(1.0, 2.0);
     max(1.0, 2.0);
     debugger();
+    setPoly(1);
+    setPoly("a");
 
     int n = field1;
     n = field2;

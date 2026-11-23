@@ -65,3 +65,11 @@ exports.callF4 = function(m) {
 exports.callJsFunction = function(a) {
   return (/** @type {!Function} */ (a))(0, null, null);
 };
+
+/**
+ * @param {...*} values
+ * @return {number}
+ */
+exports.countArgs = function(...values) {
+  return values.length;
+};

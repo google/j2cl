@@ -23,4 +23,9 @@ class Bar {
  */
 Bar.field = 0;
 
+/**
+ * @public {number|string}
+ */
+Bar.poly = 0;
+
 exports = Bar;

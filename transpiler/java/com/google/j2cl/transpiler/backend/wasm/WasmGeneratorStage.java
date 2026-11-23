@@ -68,7 +68,7 @@ public class WasmGeneratorStage {
     this.environment =
         new WasmGenerationEnvironment(
             library,
-            JsImportsGenerator.collectImports(library, problems),
+            JsImportsGenerator.collectImports(library),
             sourceMappingPathPrefix,
             enableCustomDescriptors,
             enableCustomDescriptorsJsInterop);
@@ -116,7 +116,7 @@ public class WasmGeneratorStage {
       OutputUtils.writeToFile(libraryInfoOutputPath, new byte[0], problems);
     }
 
-    Imports jsImports = JsImportsGenerator.collectImports(library, problems);
+    Imports jsImports = JsImportsGenerator.collectImports(library);
     environment =
         new WasmGenerationEnvironment(
             library,
@@ -266,8 +266,7 @@ public class WasmGeneratorStage {
     typesByDeclaration.values().forEach(cu::addType);
     Library library = Library.builder().setCompilationUnits(ImmutableList.of(cu)).build();
     environment =
-        new WasmGenerationEnvironment(
-            library, JsImportsGenerator.collectImports(library, problems));
+        new WasmGenerationEnvironment(library, JsImportsGenerator.collectImports(library));
 
     SourceBuilder builder = new SourceBuilder();
     WasmConstructsGenerator generator =

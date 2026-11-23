@@ -22,3 +22,6 @@ goog.module('jsmethodnative.helper');
 exports.passThrough = function(o) {
   return o;
 };
+
+/** @type {*} */
+exports.value = null;

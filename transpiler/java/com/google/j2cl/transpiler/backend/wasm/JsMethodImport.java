@@ -16,20 +16,15 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
-import java.util.List;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import javax.annotation.Nullable;
 
 /**
  * Information about a JavaScript method imported into Wasm.
@@ -40,8 +35,7 @@ import java.util.List;
 @AutoValue
 abstract class JsMethodImport {
   /** Creates the import for the import redeclaration of a native method. */
-  static JsMethodImport create(
-      Method importRedeclaration, ClosureGenerationEnvironment closureEnvironment) {
+  static JsMethodImport create(Method importRedeclaration) {
     MethodDescriptor methodDescriptor = importRedeclaration.getDescriptor();
     checkArgument(
         methodDescriptor.getOrigin() == MethodOrigin.WASM_JS_NATIVE_IMPORT_REDECLARATION,
@@ -50,72 +44,43 @@ abstract class JsMethodImport {
     MethodDescriptor nativeMethodDescriptor = methodDescriptor.getBridgeTarget();
     return new AutoValue_JsMethodImport(
         nativeMethodDescriptor,
-        importRedeclaration.getSourcePosition(),
-        computeJsImportName(nativeMethodDescriptor),
-        // The parameters of the redeclaration have the types that cross the boundary.
-        computeSignature(methodDescriptor, closureEnvironment),
-        // Collect the modules from the redeclaration as well: non-native JsTypes cross the boundary
-        // as opaque references and their modules might not be available to the imports, e.g.
-        // without custom descriptors.
-        WasmJsInteropClosureGenerationEnvironment.getJsModuleDependencies(methodDescriptor));
-  }
-
-  /**
-   * Gets the name of the JS import for the specified JS method. This is suitable for referencing
-   * the function in Wasm.
-   */
-  private static String computeJsImportName(MethodDescriptor nativeMethodDescriptor) {
-    String qualifiedJsName = nativeMethodDescriptor.getQualifiedJsName();
-    if (nativeMethodDescriptor.isConstructor()) {
-      // TODO(b/235601426): This is required until all tests and client code are migrated to use
-      // the generated imports. Remove once complete.
-      qualifiedJsName = qualifiedJsName.replace("<init>", "constructor");
-    } else if (nativeMethodDescriptor.isPropertyGetter()) {
-      qualifiedJsName = "get " + qualifiedJsName;
-    } else if (nativeMethodDescriptor.isPropertySetter()) {
-      qualifiedJsName = "set " + qualifiedJsName;
-    }
-    return qualifiedJsName;
-  }
-
-  /** Gets a signature for the import using the types of the parameters that cross the boundary. */
-  private static String computeSignature(
-      MethodDescriptor methodDescriptor, ClosureGenerationEnvironment closureEnvironment) {
-    return methodDescriptor.getParameterTypeDescriptors().stream()
-        // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
-        .map(TypeDescriptor::toNonNullable)
-        .map(closureEnvironment::getClosureTypeString)
-        .collect(joining(","));
+        WasmJsInteropClosureGenerationEnvironment.getJsModuleDependency(nativeMethodDescriptor));
   }
 
   /** The native method that declares the JavaScript member being imported. */
   public abstract MethodDescriptor getMethodDescriptor();
 
-  /** The source position of the native method, for error reporting. */
-  public abstract SourcePosition getSourcePosition();
-
-  abstract String getBaseImportKey();
-
-  /**
-   * A parameter signature, used to check if parameters are compatible with other imports of the
-   * same method.
-   */
-  abstract String getSignature();
+  /** The JavaScript module that needs to be imported at runtime to reference the member, if any. */
+  @Nullable
+  public abstract String getModuleDependency();
 
   /**
-   * The JavaScript modules that need to be imported to reference the member and the types that
-   * cross the boundary.
+   * Gets the external Wasm/JS import name for this method.
+   *
+   * <p>There is a 1-to-1 relationship between the import key and the generated JS implementation
+   * snippet, so any two native methods that produce the same key are guaranteed to have identical
+   * snippets.
    */
-  public abstract ImmutableSet<String> getModuleDependencies();
-
   @Memoized
   public String getImportKey() {
-    int importNumber =
-        emitAsMethodReference() || isPropertyGetter() || isPropertySetter()
-            ? 0
-            : getParameters().size();
-    // TODO(b/371225463): Import number is based on parameter count, which may cause collisions.
-    return importNumber == 0 ? getBaseImportKey() : getBaseImportKey() + "$" + importNumber;
+    MethodDescriptor method = getMethodDescriptor();
+    String baseName = method.getQualifiedJsName();
+    String scopeSuffix = method.isInstanceMember() ? "#i" : "";
+    int fixedParameterCount =
+        method.getParameterDescriptors().size() - (method.isVarargs() ? 1 : 0);
+
+    if (emitAsMethodReference()) {
+      return baseName;
+    }
+    if (method.isPropertyGetter()) {
+      String prefix =
+          TypeDescriptors.isPrimitiveVoid(method.getReturnTypeDescriptor()) ? "exec " : "get ";
+      return prefix + baseName + scopeSuffix;
+    }
+    if (method.isPropertySetter()) {
+      return "set " + baseName + scopeSuffix;
+    }
+    return baseName + "#" + fixedParameterCount + (method.isVarargs() ? "+" : "") + scopeSuffix;
   }
 
   /**
@@ -163,50 +128,19 @@ abstract class JsMethodImport {
         : ImmutableList.of(value.substring(0, lastDot), value.substring(lastDot + 1));
   }
 
-  public boolean isConstructor() {
-    return getMethodDescriptor().isConstructor();
-  }
-
-  public boolean isInstance() {
-    return getMethodDescriptor().isInstanceMember();
-  }
-
-  public boolean isPropertyGetter() {
-    return getMethodDescriptor().isPropertyGetter();
-  }
-
-  public boolean isPropertySetter() {
-    return getMethodDescriptor().isPropertySetter();
-  }
-
-  public List<ParameterDescriptor> getParameters() {
-    return getMethodDescriptor().getParameterDescriptors();
-  }
-
-  /** Returns true if the method has a varargs parameter. */
-  public boolean isVarargs() {
-    return getMethodDescriptor().isVarargs();
-  }
-
   public boolean emitAsMethodReference() {
+    MethodDescriptor method = getMethodDescriptor();
     // As an optimization, if the method is static we can just assign the method reference EXCEPT
     // if it's a method on the Function prototype (e.g. `call`) or some other known exception.
-    return !isInstance()
-        && !isConstructor()
-        && !isPropertyGetter()
-        && !isPropertySetter()
+    return !method.isInstanceMember()
+        && !method.isConstructor()
+        && !method.isPropertyGetter()
+        && !method.isPropertySetter()
         // Varargs are passed from Wasm as a JS array that needs to be spread when calling the JS
         // method, so a wrapper is needed.
-        && !isVarargs()
+        && !method.isVarargs()
         // TODO(b/279080129) Figure out a more permanent solution for special cases here.
         && !getJsName().equals("call")
-        && !getBaseImportKey().equals("performance.now");
-  }
-
-  static boolean isCompatible(JsMethodImport existing, JsMethodImport other) {
-    return existing.isConstructor() == other.isConstructor()
-        && existing.isInstance() == other.isInstance()
-        && existing.isPropertyGetter() == other.isPropertyGetter()
-        && existing.isPropertySetter() == other.isPropertySetter();
+        && !method.getQualifiedJsName().equals("performance.now");
   }
 }

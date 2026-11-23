@@ -17,19 +17,15 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.HasName;
-import com.google.j2cl.transpiler.ast.Member;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.backend.closure.ClosureGenerationEnvironment;
 import com.google.j2cl.transpiler.backend.closure.JsKeywords;
+import javax.annotation.Nullable;
 
 /** A Closure environment for generating externs and resolving type names. */
 class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnvironment {
@@ -100,72 +96,26 @@ class WasmJsInteropClosureGenerationEnvironment extends ClosureGenerationEnviron
     return qualifiedName.replace('.', '_');
   }
 
-  /** Returns the set of Closure modules that are required to resolve the given type. */
-  public static ImmutableSet<String> getJsModuleDependencies(Type type) {
-    // TODO(b/450097012): Add modules for parent types and interfaces.
-    ImmutableSet.Builder<String> moduleDeps = ImmutableSet.builder();
-    type.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitMember(Member method) {
-            if (!method.getDescriptor().canBeReferencedExternally()) {
-              return;
-            }
-            collectModuleDependencies(moduleDeps, method.getDescriptor());
-          }
-        });
-    return moduleDeps.build();
-  }
-
   /**
-   * Returns the set of Closure modules that are required to resolve the given method's parameter
-   * and return types.
+   * Returns the Closure module required to reference {@code methodDescriptor} in the JS imports
+   * file, or {@code null} if none is required.
    */
-  public static ImmutableSet<String> getJsModuleDependencies(MethodDescriptor methodDescriptor) {
-    ImmutableSet.Builder<String> moduleDeps = ImmutableSet.builder();
-    collectModuleDependencies(moduleDeps, methodDescriptor);
-    return moduleDeps.build();
-  }
-
-  private static void collectModuleDependencies(
-      ImmutableSet.Builder<String> moduleDeps, MemberDescriptor memberDescriptor) {
-    switch (memberDescriptor) {
-      case MethodDescriptor methodDescriptor -> {
-        // Collect module dependencies for types appearing in the parameter list.
-        methodDescriptor
-            .getParameterTypeDescriptors()
-            .forEach(p -> collectModuleDependencies(moduleDeps, p));
-
-        if (methodDescriptor.isExtern()) {
-          // If the method is an extern there is nothing else to collect.
-          break;
-        }
-
-        if (methodDescriptor.hasJsNamespace()) {
-          moduleDeps.add(methodDescriptor.getJsNamespace());
-        } else {
-          collectModuleDependencies(moduleDeps, methodDescriptor.getEnclosingTypeDescriptor());
-        }
-      }
-      case FieldDescriptor fieldDescriptor ->
-          collectModuleDependencies(moduleDeps, fieldDescriptor.getTypeDescriptor());
-
-      default -> throw new AssertionError("Unexpected MemberDescriptor: " + memberDescriptor);
+  @Nullable
+  public static String getJsModuleDependency(MethodDescriptor methodDescriptor) {
+    if (methodDescriptor.isExtern()) {
+      return null;
     }
-  }
-
-  private static void collectModuleDependencies(
-      ImmutableSet.Builder<String> moduleDeps, TypeDescriptor typeDescriptor) {
-    if (!(typeDescriptor instanceof DeclaredTypeDescriptor declaredTypeDescriptor)) {
-      return;
+    if (methodDescriptor.hasJsNamespace()) {
+      // Static native methods whose JS target lives in a different module than their declaring
+      // Java class (e.g. `@JsMethod(namespace = "foo.Bar")`).
+      return methodDescriptor.getJsNamespace();
     }
-    TypeDeclaration typeDeclaration = declaredTypeDescriptor.getTypeDeclaration();
-    if (!(typeDeclaration.isNative() || typeDeclaration.isJsType()) || typeDeclaration.isExtern()) {
-      return;
-    }
-    moduleDeps.add(typeDeclaration.getEnclosingModule().getQualifiedJsName());
-    for (TypeDescriptor t : declaredTypeDescriptor.getTypeArgumentDescriptors()) {
-      collectModuleDependencies(moduleDeps, t);
-    }
+    // Otherwise the method belongs to its enclosing type; resolve to the Closure module root
+    // (which strips inner-type qualifiers for nested native types).
+    return methodDescriptor
+        .getEnclosingTypeDescriptor()
+        .getTypeDeclaration()
+        .getEnclosingModule()
+        .getQualifiedJsName();
   }
 }

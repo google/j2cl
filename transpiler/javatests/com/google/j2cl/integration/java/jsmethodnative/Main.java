@@ -25,6 +25,7 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 import java.io.Serializable;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 public class Main {
@@ -34,6 +35,7 @@ public class Main {
     testForwardingMethodsOnNativeClasses();
     testCallNamespaceAsFunction();
     testBoxedTypeSupertypes();
+    testOverloadedNativeJsPropertySetters();
   }
 
   static class NonNativeTypeWithNativeMethods {
@@ -137,5 +139,21 @@ public class Main {
     assertEquals(42L, passThroughSerializable(42L));
     Serializable customSerializable = new Serializable() {};
     assertSame(customSerializable, passThroughSerializable(customSerializable));
+  }
+
+  @JsProperty(namespace = "jsmethodnative.helper", name = "value")
+  private static native void setValue(String value);
+
+  @JsProperty(namespace = "jsmethodnative.helper", name = "value")
+  private static native void setValue(double value);
+
+  @JsProperty(namespace = "jsmethodnative.helper", name = "value")
+  private static native Object getValue();
+
+  private static void testOverloadedNativeJsPropertySetters() {
+    setValue("hello");
+    assertEquals("hello", getValue());
+    setValue(42.5);
+    assertEquals(42.5, getValue());
   }
 }

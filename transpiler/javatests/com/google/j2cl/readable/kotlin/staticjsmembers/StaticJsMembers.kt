@@ -77,6 +77,10 @@ class StaticJsMembers {
 
     // `debugger` is a statement in JavaScript, so it can only be accessed through a void getter.
     @JvmStatic @JsProperty(namespace = GLOBAL, name = "debugger") external fun debugger()
+
+    @JvmStatic @JsProperty(namespace = "foo.Bar", name = "poly") external fun setPoly(value: Int)
+
+    @JvmStatic @JsProperty(namespace = "foo.Bar", name = "poly") external fun setPoly(value: String)
   }
 
   fun test() {
@@ -97,6 +101,8 @@ class StaticJsMembers {
     StaticJsMembers.max(1.0, 2.0)
     max(1.0, 2.0)
     debugger()
+    setPoly(1)
+    setPoly("a")
 
     var n: Int = field1
     n = field2

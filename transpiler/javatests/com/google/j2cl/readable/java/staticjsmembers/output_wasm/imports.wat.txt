@@ -44,11 +44,21 @@
 )
 
 ;;; void StaticJsMembers.debugger()
-(func $js_import_m_debugger__void@staticjsmembers.StaticJsMembers (import "imports" "get debugger")
+(func $js_import_m_debugger__void@staticjsmembers.StaticJsMembers (import "imports" "exec debugger")
+)
+
+;;; void StaticJsMembers.setPoly(int value)
+(func $js_import_m_setPoly__int__void@staticjsmembers.StaticJsMembers (import "imports" "set foo.Bar.poly")
+ (param $value i32)
+)
+
+;;; void StaticJsMembers.setPoly(NativeString value)
+(func $js_import_m_setPoly__java_lang_String__void@staticjsmembers.StaticJsMembers (import "imports" "set foo.Bar.poly")
+ (param $value (ref null string))
 )
 
 ;;; Native()
-(func $js_import_m_<init>__@staticjsmembers.StaticJsMembers.Native (import "imports" "Object.constructor")
+(func $js_import_m_<init>__@staticjsmembers.StaticJsMembers.Native (import "imports" "Object.<init>#0")
  (result (ref null extern))
 )
 
@@ -83,11 +93,11 @@
 )
 
 ;;; Extern()
-(func $js_import_m_<init>__@staticjsmembers.StaticJsMembers.Extern (import "imports" "window.Object.constructor")
+(func $js_import_m_<init>__@staticjsmembers.StaticJsMembers.Extern (import "imports" "window.Object.<init>#0")
  (result (ref null extern))
 )
 
 ;;; Window()
-(func $js_import_m_<init>__@staticjsmembers.StaticJsMembers.Window (import "imports" "Window.constructor")
+(func $js_import_m_<init>__@staticjsmembers.StaticJsMembers.Window (import "imports" "Window.<init>#0")
  (result (ref null extern))
 )

@@ -19,12 +19,14 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
+import static jsinterop.annotations.JsPackage.GLOBAL;
 import static jstypevarargs.Main.Varargs.f1;
 import static jstypevarargs.Main.Varargs.f2;
 import static jstypevarargs.Main.Varargs.sumAndMultiply;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
@@ -38,6 +40,7 @@ public class Main {
     testCallVarargsWithNull();
     testUnboxedType();
     testVarargsBridges();
+    testOverloadedNativeVarargs();
     QualifiedSuperMethodCall.test();
   }
 
@@ -396,4 +399,23 @@ public class Main {
 
   @JsMethod(namespace = "jstypevarargs.helper")
   private static native int callJsFunction(AFunction a);
+
+  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
+  private static class NativeObj {}
+
+  @JsMethod(namespace = "jstypevarargs.helper", name = "countArgs")
+  private static native int countArgs(NativeObj a);
+
+  @JsMethod(namespace = "jstypevarargs.helper", name = "countArgs")
+  private static native int countArgs(NativeObj... values);
+
+  @JsMethod(namespace = "jstypevarargs.helper", name = "countArgs")
+  private static native int countArgs(int prefix, NativeObj... rest);
+
+  private static void testOverloadedNativeVarargs() {
+    NativeObj o = new NativeObj();
+    assertEquals(1, countArgs(o));
+    assertEquals(3, countArgs(o, o, o));
+    assertEquals(3, countArgs(42, o, o));
+  }
 }

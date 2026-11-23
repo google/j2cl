@@ -16,33 +16,26 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.j2cl.transpiler.backend.wasm.WasmGenerationEnvironment.getWasmInfo;
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.joining;
+import static java.lang.String.format;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils.Output;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 /** Generates a JavaScript imports mapping for the Wasm module. */
 public final class JsImportsGenerator {
@@ -50,7 +43,7 @@ public final class JsImportsGenerator {
   /** Top-level module name in the imports map containing all generated imports. */
   public static final String MODULE = "imports";
 
-  /** Represents the JavaScript imports for a the Wasm module. */
+  /** Represents the JavaScript imports for a Wasm module. */
   @AutoValue
   public abstract static class Imports {
     public abstract ImmutableMap<MethodDescriptor, JsMethodImport> getMethodImports();
@@ -65,27 +58,19 @@ public final class JsImportsGenerator {
   }
 
   /** Collects JavaScript imports that are referenced in the library. */
-  public static Imports collectImports(Library library, Problems problems) {
+  public static Imports collectImports(Library library) {
     ImmutableSet.Builder<String> moduleImports = ImmutableSet.builder();
     ImmutableMap.Builder<MethodDescriptor, JsMethodImport> methodImports = ImmutableMap.builder();
-    library.accept(new ImportCollector(problems, methodImports, moduleImports));
+    library.accept(new ImportCollector(methodImports, moduleImports));
     return Imports.create(methodImports.buildOrThrow(), moduleImports.build());
   }
 
   /** Generates the JavaScript code to support the imports. */
   public static void generateOutputs(Output output, Imports imports, boolean enableJsInterop) {
-    JsImportsGenerator importsGenerator = new JsImportsGenerator(imports);
     output.write(
         "imports.txt",
         generateOutputs(
-            importsGenerator.imports.getModuleImports(),
-            imports.getMethodImports().values().stream()
-                .collect(
-                    toImmutableMap(
-                        JsMethodImport::getImportKey,
-                        importsGenerator::createImportBody,
-                        (i1, i2) -> i1)),
-            enableJsInterop));
+            imports.getModuleImports(), collectImportSnippets(imports), enableJsInterop));
   }
 
   /** Generates the JavaScript code to support the imports. */
@@ -102,13 +87,17 @@ public final class JsImportsGenerator {
 
   /** Collects the import snippets indexed by their keys. */
   static Map<String, String> collectImportSnippets(Imports imports) {
-    JsImportsGenerator importsGenerator = new JsImportsGenerator(imports);
     return imports.getMethodImports().values().stream()
-        .distinct()
-        .sorted(comparing(JsMethodImport::getImportKey))
         .collect(
             toImmutableMap(
-                JsMethodImport::getImportKey, importsGenerator::createImportBody, (i1, i2) -> i1));
+                JsMethodImport::getImportKey,
+                JsImportsGenerator::createImportBody,
+                // Distinct native methods can produce the same import key and body (e.g.,
+                // overloads with different parameter types); ensure they produce same import body.
+                (b1, b2) -> {
+                  checkState(b1.equals(b2), "Conflicting import bodies: %s vs %s", b1, b2);
+                  return b1;
+                }));
   }
 
   private static void emitRequires(SourceBuilder builder, Collection<String> requiredModules) {
@@ -122,7 +111,7 @@ public final class JsImportsGenerator {
   }
 
   private static String createGoogRequire(String importedModule) {
-    return String.format(
+    return format(
         "const %s = goog.require('%s');",
         WasmJsInteropClosureGenerationEnvironment.computeJsAlias(importedModule), importedModule);
   }
@@ -164,20 +153,18 @@ public final class JsImportsGenerator {
     }
     builder.newLine();
     // Add WebAssembly module. This is needed because the import is hardcoded in
-    // `generateWasmModule` and there is no corresponding code in the stb lib.
+    // `generateWasmModule` and there is no corresponding code in the stdlib.
     // TODO(b/277970998): Consider how to handle this.
     builder.append("'WebAssembly': WebAssembly,");
     builder.newLine();
-    builder.append(String.format("'%s': ", MODULE));
+    builder.append(format("'%s': ", MODULE));
     builder.openBrace();
     methodImports.entrySet().stream()
         .sorted(Entry.comparingByKey())
-        .forEach(
-            i -> {
-              builder.newLine();
-              builder.append(String.format("'%s': %s", i.getKey(), i.getValue()));
-              builder.append(",");
-            });
+        .forEach(i -> {
+          builder.newLine();
+          builder.append(format("'%s': %s,", i.getKey(), i.getValue()));
+        });
     builder.closeBrace();
     builder.closeBrace();
     builder.append(";");
@@ -200,128 +187,82 @@ public final class JsImportsGenerator {
         "}),");
   }
 
-  private String createImportBody(JsMethodImport methodImport) {
+  private static String createImportBody(JsMethodImport methodImport) {
+    MethodDescriptor method = methodImport.getMethodDescriptor();
+    String target = getTarget(methodImport);
+
     if (methodImport.emitAsMethodReference()) {
-      return AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName());
+      return target;
     }
-
-    return createLambdaExpressionCode(methodImport);
+    if (method.isPropertyGetter()) {
+      if (TypeDescriptors.isPrimitiveVoid(method.getReturnTypeDescriptor())) {
+        // A void getter is only evaluated for its side effects, so emit it as a statement. This
+        // also supports getters that are statements in JavaScript, e.g. `debugger`.
+        return format("(%s) => { %s; }", formatInstanceParam(methodImport), target);
+      }
+      return format("(%s) => %s", formatInstanceParam(methodImport), target);
+    }
+    if (method.isPropertySetter()) {
+      String instanceParam = formatInstanceParam(methodImport);
+      String params = "/** ? */ $value";
+      if (!instanceParam.isEmpty()) {
+        params = instanceParam + ", " + params;
+      }
+      return format("(%s) => { %s = $value; }", params, target);
+    }
+    return synthesizeCallBody(target, formatInstanceParam(methodImport), method);
   }
 
-  private String createLambdaExpressionCode(JsMethodImport methodImport) {
-    StringBuilder sb = new StringBuilder();
-    MethodDescriptor methodDescriptor = methodImport.getMethodDescriptor();
-    List<TypeVariable> templateVariables = getTemplateVariables(methodImport);
-    if (!templateVariables.isEmpty()) {
-      sb.append(
-          String.format(
-              "/**%s */ ",
-              closureEnvironment.getJsDocDeclarationForTypeVariable(templateVariables)));
+  private static String getTarget(JsMethodImport methodImport) {
+    MethodDescriptor method = methodImport.getMethodDescriptor();
+    if (method.isConstructor()) {
+      return "new " + methodImport.getJsQualifier();
     }
-    // Emit parameters
-    sb.append("(");
-    if (methodImport.isInstance()) {
-      sb.append(
-          createParameterDefinition(
-              "$instance", methodDescriptor.getEnclosingTypeDescriptor().toNonNullable()));
-    }
-    methodImport
-        .getParameters()
-        .forEach(p -> sb.append(createParameterDefinition(p.getName(), p.getTypeDescriptor())));
-    sb.append(") => ");
-
-    // Emit body
-    String target = createTargetExpression(methodImport);
-    if (methodImport.isPropertyGetter()
-        && TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())) {
-      // A void getter is only evaluated for its side effects, so emit it as a statement. This also
-      // supports getters that are statements in JavaScript, e.g. `debugger`.
-      sb.append(String.format("{ %s; }", target));
-    } else if (methodImport.isPropertyGetter()) {
-      sb.append(target);
-    } else if (methodImport.isPropertySetter()) {
-      String value = methodImport.getParameters().getFirst().getName();
-      sb.append(String.format("%s = %s", target, value));
-    } else {
-      String arguments =
-          methodImport.getParameters().stream()
-              .map(p -> {
-                if (p.isVarargs()) {
-                  checkState(
-                      p.getTypeDescriptor().isNativeJsArray(),
-                      "Varargs parameter %s must be a native JS array to spread.",
-                      p.getName());
-                  // If the parameter is a varargs, emit spread operator as a prefix.
-                  return "..." + p.getName() + ", ";
-                }
-                return p.getName() + ", ";
-              })
-              .collect(joining());
-      sb.append(String.format("%s(%s)", target, arguments));
-    }
-    return sb.toString();
+    String qualifier = method.isInstanceMember() ? "$instance" : methodImport.getJsQualifier();
+    return AstUtils.buildQualifiedName(qualifier, methodImport.getJsName());
   }
 
-  /**
-   * Returns the JavaScript expression that the import accesses or calls, e.g. {@code Math.max},
-   * {@code $instance.length} or {@code new Foo}.
-   */
-  private static String createTargetExpression(JsMethodImport methodImport) {
-    if (methodImport.isConstructor()) {
-      return String.format("new %s", methodImport.getJsQualifier());
+  private static String synthesizeCallBody(
+      String target, String instanceParam, MethodDescriptor method) {
+    List<String> params = new ArrayList<>();
+    List<String> args = new ArrayList<>();
+    if (!instanceParam.isEmpty()) {
+      params.add(instanceParam);
     }
-    if (methodImport.isInstance()) {
-      return String.format("$instance.%s", methodImport.getJsName());
+    int fixedParameterCount =
+        method.getParameterDescriptors().size() - (method.isVarargs() ? 1 : 0);
+    for (int i = 0; i < fixedParameterCount; i++) {
+      String paramName = "$p" + i;
+      params.add("/** ? */ " + paramName);
+      args.add(paramName);
     }
-    return AstUtils.buildQualifiedName(methodImport.getJsQualifier(), methodImport.getJsName());
+    if (method.isVarargs()) {
+      params.add("/** !Array<?> */ $varargs");
+      args.add("...$varargs");
+    }
+    return format("(%s) => %s(%s)", String.join(", ", params), target, String.join(", ", args));
   }
 
-  /**
-   * Returns the type variables that need to be declared as {@code @template}s for the arrow
-   * function implementing {@code methodImport}.
-   *
-   * <p>The arrow function is a standalone top-level function in the imports object, so it must
-   * declare both the method's own type parameters and, for instance methods and constructors, the
-   * enclosing type's type parameters (which are referenced by the {@code $instance} parameter and
-   * any unspecialized parameter types).
-   */
-  private static ImmutableList<TypeVariable> getTemplateVariables(JsMethodImport methodImport) {
-    MethodDescriptor methodDescriptor = methodImport.getMethodDescriptor();
-    return Stream.concat(
-            methodImport.isInstance() || methodImport.isConstructor()
-                // For instance methods and constructors, we need to declare both the enclosing
-                // type's and the method's type parameters.
-                ? methodDescriptor
-                    .getEnclosingTypeDescriptor()
-                    .getTypeDeclaration()
-                    .getTypeParameterDescriptors()
-                    .stream()
-                : Stream.empty(),
-            methodDescriptor.getTypeParameterTypeDescriptors().stream())
-        .distinct()
-        .collect(toImmutableList());
-  }
-
-  private String createParameterDefinition(String name, TypeDescriptor typeDescriptor) {
-    return String.format(
-        "/** %s */ %s, ",
-        // TODO(b/285407647): Make nullability consistent for parameterized types, etc.
-        closureEnvironment.getClosureTypeString(typeDescriptor.toNonNullable()), name);
+  private static String formatInstanceParam(JsMethodImport methodImport) {
+    if (!methodImport.getMethodDescriptor().isInstanceMember()) {
+      return "";
+    }
+    String qualifier = methodImport.getJsQualifier();
+    String closureType =
+        switch (qualifier) {
+          case "?", "*", "string", "number", "boolean" -> qualifier;
+          default -> "!" + qualifier;
+        };
+    return format("/** %s */ $instance", closureType);
   }
 
   private static class ImportCollector extends AbstractVisitor {
-    private final Problems problems;
     private final ImmutableMap.Builder<MethodDescriptor, JsMethodImport> methodImports;
     private final ImmutableSet.Builder<String> moduleImports;
-    private final Map<String, JsMethodImport> methodImportsByName = new HashMap<>();
-    private final WasmJsInteropClosureGenerationEnvironment closureEnvironment =
-        new WasmJsInteropClosureGenerationEnvironment();
 
-    public ImportCollector(
-        Problems problems,
+    ImportCollector(
         ImmutableMap.Builder<MethodDescriptor, JsMethodImport> methodImports,
         ImmutableSet.Builder<String> moduleImports) {
-      this.problems = problems;
       this.methodImports = methodImports;
       this.moduleImports = moduleImports;
     }
@@ -333,56 +274,11 @@ public final class JsImportsGenerator {
         return;
       }
 
-      JsMethodImport methodImport = JsMethodImport.create(method, closureEnvironment);
-      addMethodImport(methodDescriptor, methodImport);
-
-      // Collect imports for JsDoc.
-      moduleImports.addAll(methodImport.getModuleDependencies());
-    }
-
-    private void addMethodImport(MethodDescriptor methodDescriptor, JsMethodImport newImport) {
-      JsMethodImport newOrExistingImport =
-          methodImportsByName.compute(
-              newImport.getImportKey(),
-              (keyUnused, existingImport) -> {
-                if (existingImport == null) {
-                  return newImport;
-                }
-
-                checkForConflicts(newImport, existingImport, problems);
-                return existingImport;
-              });
-      methodImports.put(methodDescriptor, newOrExistingImport);
-    }
-  }
-
-  private static void checkForConflicts(
-      JsMethodImport newImport, JsMethodImport existingImport, Problems problems) {
-    if (!JsMethodImport.isCompatible(existingImport, newImport)) {
-      problems.error(
-          newImport.getSourcePosition(),
-          "Native methods '%s' and '%s', importing JavaScript method '%s', do not"
-              + " match. Both or neither must be constructors, static, or JS"
-              + " properties (b/283986050).",
-          existingImport.getMethodDescriptor().getReadableDescription(),
-          newImport.getMethodDescriptor().getReadableDescription(),
-          existingImport.getImportKey());
-    }
-
-    if (!newImport.getSignature().equals(existingImport.getSignature())
-        // Signature doesn't matter if the method import is emitted as a method
-        // reference. Exclude these in this check.
-        && !(newImport.emitAsMethodReference() && existingImport.emitAsMethodReference())) {
-      problems.error(
-          newImport.getSourcePosition(),
-          "Native methods '%s' and '%s', importing JavaScript method '%s', have"
-              + " different parameter types ('%s' vs '%s'), currently disallowed"
-              + " due to performance concerns (b/371225463).",
-          existingImport.getMethodDescriptor().getReadableDescription(),
-          newImport.getMethodDescriptor().getReadableDescription(),
-          existingImport.getImportKey(),
-          existingImport.getSignature(),
-          newImport.getSignature());
+      JsMethodImport methodImport = JsMethodImport.create(method);
+      methodImports.put(methodDescriptor, methodImport);
+      if (methodImport.getModuleDependency() != null) {
+        moduleImports.add(methodImport.getModuleDependency());
+      }
     }
   }
 
@@ -396,12 +292,5 @@ public final class JsImportsGenerator {
     return methodDescriptor.isNative();
   }
 
-  private final Imports imports;
-
-  private final WasmJsInteropClosureGenerationEnvironment closureEnvironment =
-      new WasmJsInteropClosureGenerationEnvironment();
-
-  private JsImportsGenerator(Imports imports) {
-    this.imports = imports;
-  }
+  private JsImportsGenerator() {}
 }

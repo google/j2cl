@@ -26,6 +26,7 @@ import jsinterop.annotations.JsType
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Int
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
@@ -49,6 +50,8 @@ open class StaticJsMembers {
   StaticJsMembers.max(1.0, 2.0)
   StaticJsMembers.max(1.0, 2.0)
   StaticJsMembers.debugger()
+  StaticJsMembers.setPoly(1)
+  StaticJsMembers.setPoly("a")
   var n: Int = StaticJsMembers.field1
   n = StaticJsMembers.field2
   var w: Window? = Native.window
@@ -106,6 +109,14 @@ open class StaticJsMembers {
   @JvmStatic
   @JsProperty(name = "debugger", namespace = JsPackage.GLOBAL)
   external fun debugger()
+  
+  @JvmStatic
+  @JsProperty(name = "poly", namespace = "foo.Bar")
+  external fun setPoly(value: Int)
+  
+  @JvmStatic
+  @JsProperty(name = "poly", namespace = "foo.Bar")
+  external fun setPoly(value: String?)
  }
  
  @JsType(name = "Object", namespace = JsPackage.GLOBAL, isNative = true)

@@ -20,6 +20,8 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 import com.google.j2cl.integration.testing.TestUtils.isWasm
 import jsinterop.annotations.JsFunction
 import jsinterop.annotations.JsMethod
+import jsinterop.annotations.JsPackage.GLOBAL
+import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
   testInstanceMethodFirst()
@@ -33,6 +35,7 @@ fun main(vararg args: String) {
   // they need to be explicitly spread, which cannot be applied to nullable types.
   // testCallVarargsWithNull()
   testUnboxedType()
+  testOverloadedNativeVarargs()
   QualifiedSuperMethodCall.test()
 }
 
@@ -344,3 +347,21 @@ fun testBridgeWithVarargs() {
 @JsMethod(namespace = "jstypevarargs.helper") private external fun callF4(m: Varargs): Int
 
 @JsMethod(namespace = "jstypevarargs.helper") private external fun callJsFunction(a: AFunction): Int
+
+@JsType(isNative = true, namespace = GLOBAL, name = "Object") private class NativeObj
+
+@JsMethod(namespace = "jstypevarargs.helper", name = "countArgs")
+private external fun countArgs(a: NativeObj): Int
+
+@JsMethod(namespace = "jstypevarargs.helper", name = "countArgs")
+private external fun countArgs(vararg values: NativeObj): Int
+
+@JsMethod(namespace = "jstypevarargs.helper", name = "countArgs")
+private external fun countArgs(prefix: Int, vararg rest: NativeObj): Int
+
+private fun testOverloadedNativeVarargs() {
+  val o = NativeObj()
+  assertEquals(1, countArgs(o))
+  assertEquals(3, countArgs(o, o, o))
+  assertEquals(3, countArgs(42, o, o))
+}

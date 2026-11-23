@@ -23,6 +23,7 @@ import com.google.j2cl.integration.testing.Asserts.assertTrue
 import java.io.Serializable
 import jsinterop.annotations.JsMethod
 import jsinterop.annotations.JsPackage.GLOBAL
+import jsinterop.annotations.JsProperty
 import jsinterop.annotations.JsType
 
 fun main(vararg args: String) {
@@ -31,6 +32,7 @@ fun main(vararg args: String) {
   testForwardingMethodsOnNativeClasses()
   testCallNamespaceAsFunction()
   testBoxedTypeSupertypes()
+  testOverloadedNativeJsPropertySetters()
 }
 
 private class NonNativeTypeWithNativeMethods {
@@ -126,4 +128,20 @@ private fun testBoxedTypeSupertypes() {
   assertEquals(42L, passThroughSerializable(42L))
   val customSerializable = object : Serializable {}
   assertSame(customSerializable, passThroughSerializable(customSerializable))
+}
+
+@JsProperty(namespace = "jsmethodnative.helper", name = "value")
+private external fun setValue(value: String?)
+
+@JsProperty(namespace = "jsmethodnative.helper", name = "value")
+private external fun setValue(value: Double)
+
+@JsProperty(namespace = "jsmethodnative.helper", name = "value")
+private external fun getValue(): Any?
+
+private fun testOverloadedNativeJsPropertySetters() {
+  setValue("hello")
+  assertEquals("hello", getValue())
+  setValue(42.5)
+  assertEquals(42.5, getValue())
 }
