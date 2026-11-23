@@ -157,6 +157,59 @@ public final class Math {
   @JsMethod(namespace = GLOBAL, name = "Math.hypot")
   public static native double hypot(double x, double y);
 
+  public static double IEEEremainder(double f1, double f2) {
+    if (Double.isNaN(f1) || Double.isNaN(f2) || Double.isInfinite(f1) || f2 == 0.0) {
+      return Double.NaN;
+    }
+    if (Double.isInfinite(f2)) {
+      return f1;
+    }
+    if (f1 == 0.0) {
+      return f1;
+    }
+
+    double absF2 = Math.abs(f2);
+    double x;
+    if (absF2 <= Double.MAX_VALUE / 2.0) {
+      x = f1 % (absF2 + absF2);
+    } else {
+      x = f1 % absF2;
+    }
+
+    if (Double.isNaN(x)) {
+      return Double.NaN;
+    }
+
+    boolean negative = Math.copySign(1.0, f1) < 0;
+    x = Math.abs(x);
+
+    if (absF2 < Double.MIN_NORMAL) {
+      if (x + x > absF2) {
+        x -= absF2;
+        if (x + x >= absF2) {
+          x -= absF2;
+        }
+      }
+    } else {
+      double halfF2 = 0.5 * absF2;
+      if (x > halfF2) {
+        x -= absF2;
+        if (x >= halfF2) {
+          x -= absF2;
+        }
+      }
+    }
+
+    if (negative) {
+      x = -x;
+    }
+
+    if (x == 0.0) {
+      return Math.copySign(0.0, f1);
+    }
+    return x;
+  }
+
   public static int incrementExact(int x) {
     checkCriticalArithmetic(x != Integer.MAX_VALUE);
     return x + 1;
