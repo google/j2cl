@@ -69,10 +69,8 @@ public class FloatTest extends TestCase {
     assertTrue(Float.MIN_VALUE < Float.MAX_VALUE);
     assertFalse(Float.NaN == Float.NaN);
     assertEquals(Float.SIZE, 32);
-    // jdk1.6 assertEquals(Float.MIN_EXPONENT,
-    // Math.getExponent(Float.MIN_NORMAL));
-    // jdk1.6 assertEquals(Float.MAX_EXPONENT,
-    // Math.getExponent(Float.MAX_VALUE));
+    assertEquals(Float.MIN_EXPONENT, Math.getExponent(Float.MIN_NORMAL));
+    assertEquals(Float.MAX_EXPONENT, Math.getExponent(Float.MAX_VALUE));
     // issue 8073 - used to fail in prod mode
     assertFalse(Float.isInfinite(Float.NaN));
   }

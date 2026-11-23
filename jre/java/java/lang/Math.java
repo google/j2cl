@@ -25,10 +25,6 @@ import jsinterop.annotations.JsType;
 public final class Math {
   // The following methods are not implemented because JS doesn't provide the
   // necessary pieces:
-  //   public static double ulp (double x)
-  //   public static float ulp (float x)
-  //   public static int getExponent (double d)
-  //   public static int getExponent (float f)
   //   public static double IEEEremainder(double f1, double f2)
 
   public static final double E = 2.7182818284590452354;
@@ -163,6 +159,30 @@ public final class Math {
       return mod + divisor;
     }
     return mod;
+  }
+
+  public static int getExponent(double d) {
+    long bits = Double.doubleToRawLongBits(d);
+    long exp = (bits & 0x7FF0000000000000L) >>> 52;
+    if (exp == 0x7FFL) {
+      return Double.MAX_EXPONENT + 1;
+    }
+    if (exp == 0) {
+      return Double.MIN_EXPONENT - 1;
+    }
+    return (int) (exp - 1023);
+  }
+
+  public static int getExponent(float f) {
+    int bits = Float.floatToRawIntBits(f);
+    int exp = (bits & 0x7F800000) >>> 23;
+    if (exp == 0xFF) {
+      return Float.MAX_EXPONENT + 1;
+    }
+    if (exp == 0) {
+      return Float.MIN_EXPONENT - 1;
+    }
+    return exp - 127;
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.hypot")
@@ -333,6 +353,40 @@ public final class Math {
 
   public static double toRadians(double x) {
     return x * PI_OVER_180;
+  }
+
+  public static double ulp(double d) {
+    int exp = getExponent(d);
+    switch (exp) {
+      case Double.MAX_EXPONENT + 1:
+        return Math.abs(d);
+      case Double.MIN_EXPONENT - 1:
+        return Double.MIN_VALUE;
+      default:
+        exp -= 52;
+        if (exp >= Double.MIN_EXPONENT) {
+          return Double.longBitsToDouble(((long) (exp + 1023) << 52));
+        } else {
+          return Double.longBitsToDouble(1L << (exp - (Double.MIN_EXPONENT - 52)));
+        }
+    }
+  }
+
+  public static float ulp(float f) {
+    int exp = getExponent(f);
+    switch (exp) {
+      case Float.MAX_EXPONENT + 1:
+        return Math.abs(f);
+      case Float.MIN_EXPONENT - 1:
+        return Float.MIN_VALUE;
+      default:
+        exp -= 23;
+        if (exp >= Float.MIN_EXPONENT) {
+          return Float.intBitsToFloat((exp + 127) << 23);
+        } else {
+          return Float.intBitsToFloat(1 << (exp - (Float.MIN_EXPONENT - 23)));
+        }
+    }
   }
 
   public static double nextUp(double start) {
