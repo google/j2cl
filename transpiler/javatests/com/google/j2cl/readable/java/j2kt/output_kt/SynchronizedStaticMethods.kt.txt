@@ -1,0 +1,97 @@
+// Generated from "j2kt/SynchronizedStaticMethods.java"
+@file:Suppress(
+ "ALWAYS_NULL",
+ "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+ "SENSELESS_COMPARISON",
+ "UNCHECKED_CAST",
+ "UNNECESSARY_LATEINIT",
+ "UNNECESSARY_NOT_NULL_ASSERTION",
+ "UNREACHABLE_CODE",
+ "UNUSED_ANONYMOUS_PARAMETER",
+ "UNUSED_PARAMETER",
+ "UNUSED_VARIABLE",
+ "USELESS_CAST",
+ "VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL",
+ "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+ "REDUNDANT_ELSE_IN_WHEN",
+ "ACCIDENTAL_OVERRIDE")
+
+package j2kt
+
+import javaemul.lang.*
+import javaemul.lang.J2ktMonitor
+import kotlin.Int
+import kotlin.Suppress
+import kotlin.Unit
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.javaObjectType
+import kotlin.run
+import kotlin.synchronized
+
+open class SynchronizedStaticMethods {
+ open class StaticSynchronizedOnly: J2ktMonitor() {
+  companion object {
+   private var count: Int = 0
+   
+   @JvmStatic
+   fun increment(): Int {
+    synchronized<Unit>(StaticSynchronizedOnly::class.javaObjectType) {
+     return run {
+      val ___value: Int = StaticSynchronizedOnly.count + 1
+      StaticSynchronizedOnly.count = ___value
+      ___value
+     }
+    }
+   }
+  }
+ }
+ 
+ class PrivateConstructorStaticSynchronized: J2ktMonitor {
+  private constructor()
+  
+  companion object {
+   private var count: Int = 0
+   
+   @JvmStatic
+   fun increment(): Int {
+    synchronized<Unit>(PrivateConstructorStaticSynchronized::class.javaObjectType) {
+     return run {
+      val ___value: Int = PrivateConstructorStaticSynchronized.count + 1
+      PrivateConstructorStaticSynchronized.count = ___value
+      ___value
+     }
+    }
+   }
+  }
+ }
+ 
+ open class InstanceAndStaticSynchronized: J2ktMonitor() {
+  private var instanceCount: Int = 0
+  
+  open fun incrementInstance(): Int {
+   synchronized<Unit>(this) {
+    return run {
+     val ___qualifier: InstanceAndStaticSynchronized = this
+     val ___value: Int = this.instanceCount + 1
+     ___qualifier.instanceCount = ___value
+     ___value
+    }
+   }
+  }
+  
+  companion object {
+   private var staticCount: Int = 0
+   
+   @JvmStatic
+   fun incrementStatic(): Int {
+    synchronized<Unit>(InstanceAndStaticSynchronized::class.javaObjectType) {
+     return run {
+      val ___value: Int = InstanceAndStaticSynchronized.staticCount + 1
+      InstanceAndStaticSynchronized.staticCount = ___value
+      ___value
+     }
+    }
+   }
+  }
+ }
+}
