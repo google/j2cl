@@ -10,6 +10,8 @@ class Outer extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
+  /**@type {number} @nodts*/
+  this.f_outerField__jsconstructor_Outer_ = 0;
  }
  /** @nodts @return {!Outer} */
  static $create__() {
@@ -21,6 +23,15 @@ class Outer extends j_l_Object {
  /** @nodts */
  $ctor__jsconstructor_Outer__void() {
   this.$ctor__java_lang_Object__void();
+  this.f_outerField__jsconstructor_Outer_ = 1;
+ }
+ /** @final @nodts @return {number} */
+ m_getOuterField__int() {
+  return this.f_outerField__jsconstructor_Outer_;
+ }
+ /** @final @nodts */
+ m_setOuterField__int__void(/** number */ set__) {
+  this.f_outerField__jsconstructor_Outer_ = set__;
  }
  /** @nodts */
  static $clinit() {

@@ -15,11 +15,22 @@ class I extends G {
   super();
   /**@type {!Outer} @nodts*/
   this.$outer_this__jsconstructor_Outer_I;
+  /**@type {number} @nodts*/
+  this.f_innerField__jsconstructor_Outer_I_ = 0;
   this.$ctor__jsconstructor_Outer_I__jsconstructor_Outer__void($outer_this);
  }
  /** @nodts */
  $ctor__jsconstructor_Outer_I__jsconstructor_Outer__void(/** !Outer */ $outer_this) {
   this.$outer_this__jsconstructor_Outer_I = $outer_this;
+  this.f_innerField__jsconstructor_Outer_I_ = $outer_this.m_getOuterField__int();
+ }
+ /** @final @nodts @return {number} */
+ m_getInnerField__int() {
+  return this.f_innerField__jsconstructor_Outer_I_;
+ }
+ /** @final @nodts */
+ m_setInnerField__int__void(/** number */ set__) {
+  this.f_innerField__jsconstructor_Outer_I_ = set__;
  }
  /** @nodts */
  static $clinit() {

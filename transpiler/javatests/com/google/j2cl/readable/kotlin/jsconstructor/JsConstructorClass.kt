@@ -125,8 +125,12 @@ class F : C {
 class H @JsConstructor constructor() : G()
 
 class Outer {
+  var outerField = 1
+
   /** Subclass of a JsConstructor that captures an enclosing class. */
-  inner class I @JsConstructor constructor() : G()
+  inner class I @JsConstructor constructor() : G() {
+    var innerField = outerField
+  }
 }
 
 open class RegularType(b: Any)

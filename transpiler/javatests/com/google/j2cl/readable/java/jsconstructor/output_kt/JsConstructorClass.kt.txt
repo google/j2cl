@@ -123,9 +123,15 @@ open class JsConstructorClass {
  }
  
  open class Outer {
+  @JvmField
+  internal var outerField: Int = 1
+  
   open inner class I
   @JsConstructor
-  constructor(): G()
+  constructor(): G() {
+   @JvmField
+   internal var innerField: Int = this@Outer.outerField
+  }
  }
  
  open class RegularType {

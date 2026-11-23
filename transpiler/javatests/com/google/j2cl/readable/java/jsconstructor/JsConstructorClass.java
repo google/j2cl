@@ -150,8 +150,12 @@ public class JsConstructorClass {
   }
 
   public static class Outer {
+    int outerField = 1;
+
     /** Subclass of a JsConstructor that captures an enclosing class. */
     public class I extends G {
+      int innerField = outerField;
+
       @JsConstructor
       public I() {}
     }
