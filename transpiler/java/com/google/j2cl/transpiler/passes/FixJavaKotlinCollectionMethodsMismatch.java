@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.getTypeDescriptor;
 
@@ -261,27 +262,24 @@ public class FixJavaKotlinCollectionMethodsMismatch extends NormalizationPass {
           // Create a new parameter with the type expected by kotlin overrides and move the old
           // parameter variable to local declaration to avoid rewriting all uses.
           Variable parameter = method.getParameters().get(i);
-          TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
-
           Variable kotlinParameter =
               parameter.toBuilder().setTypeDescriptor(kotlinParameterTypeDescriptor).build();
           method.getParameters().set(i, kotlinParameter);
 
-          Expression initializer = kotlinParameter.createReference();
-
-          // Insert cast from read-only to mutable if necessary.
-          if (!kotlinParameterTypeDescriptor.isAssignableTo(parameterTypeDescriptor)) {
-            initializer =
-                CastExpression.builder()
-                    .setExpression(initializer)
-                    .setCastTypeDescriptor(parameterTypeDescriptor)
-                    .build();
-          }
+          // Previously, this did not hold when Kotlin's read-only collection parameters were
+          // converted to Java's mutable collections and required an explicit cast. Now that base
+          // collections are transpiled as read-only, this is expected to always be true.
+          checkState(
+              kotlinParameterTypeDescriptor.isAssignableTo(parameter.getTypeDescriptor()),
+              "Expected Kotlin parameter type %s to be assignable to Java parameter type %s in %s",
+              kotlinParameterTypeDescriptor,
+              parameter.getTypeDescriptor(),
+              methodDescriptor);
 
           Statement declarationStatement =
               VariableDeclarationExpression.builder()
                   .setVariable(parameter)
-                  .setInitializer(initializer)
+                  .setInitializer(kotlinParameter.createReference())
                   .build()
                   .makeStatement(parameter.getSourcePosition());
           body =
