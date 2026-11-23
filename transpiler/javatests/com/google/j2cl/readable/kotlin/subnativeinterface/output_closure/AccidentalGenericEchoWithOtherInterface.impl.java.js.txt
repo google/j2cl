@@ -1,0 +1,64 @@
+goog.module('subnativeinterface.AccidentalGenericEchoWithOtherInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NonJsGenericEcho = goog.require('subnativeinterface.NonJsGenericEcho$impl');
+const StringEchoInterface = goog.require('subnativeinterface.StringEchoInterface$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let MyNativeGenericInterface = goog.forwardDeclare('test.foo.MyNativeGenericInterface');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @extends {NonJsGenericEcho<string>}
+ * @implements {MyNativeGenericInterface<string>}
+ * @implements {StringEchoInterface}
+ */
+class AccidentalGenericEchoWithOtherInterface extends NonJsGenericEcho {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!AccidentalGenericEchoWithOtherInterface} */
+ static $create__() {
+  AccidentalGenericEchoWithOtherInterface.$clinit();
+  let $instance = new AccidentalGenericEchoWithOtherInterface();
+  $instance.$ctor__subnativeinterface_AccidentalGenericEchoWithOtherInterface__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_AccidentalGenericEchoWithOtherInterface__void() {
+  this.$ctor__subnativeinterface_NonJsGenericEcho__void();
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {string} */
+ echo(/** string */ t) {
+  return /**@type {string}*/ ($Casts.$to(this.m_echo__java_lang_Object__java_lang_Object(/**@type {string}*/ ($Casts.$to(t, j_l_String))), j_l_String));
+ }
+ //Specialized bridge method.
+ /** @override @nodts @suppress{visibility} @return {string} */
+ m_echo__java_lang_String__java_lang_String(/** string */ t) {
+  return /**@type {string}*/ ($Casts.$to(super.m_echo__java_lang_Object__java_lang_Object(t), j_l_String));
+ }
+ /** @nodts */
+ static $clinit() {
+  AccidentalGenericEchoWithOtherInterface.$clinit = () =>{};
+  AccidentalGenericEchoWithOtherInterface.$loadModules();
+  NonJsGenericEcho.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AccidentalGenericEchoWithOtherInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+StringEchoInterface.$markImplementor(AccidentalGenericEchoWithOtherInterface);
+$Util.$setClassMetadata(AccidentalGenericEchoWithOtherInterface, 'subnativeinterface.AccidentalGenericEchoWithOtherInterface');
+
+exports = AccidentalGenericEchoWithOtherInterface;
+
+//# sourceMappingURL=AccidentalGenericEchoWithOtherInterface.js.map

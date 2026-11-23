@@ -107,12 +107,26 @@ internal open class NonJsBase internal constructor() {
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 internal open class AccidentalSubNativeInterface internal constructor(): NonJsBase(), MyNativeInterface
 
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+internal class FinalAccidentalSubNativeInterface internal constructor(): NonJsBase(), MyNativeInterface
+
 internal open class NonJsStringEcho internal constructor() {
  open fun echo(s: String?): String? = s
 }
 
 @Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
 internal open class AccidentalStringEcho internal constructor(): NonJsStringEcho(), MyNativeGenericInterface<String?>
+
+internal open class NonJsGenericEcho<T> internal constructor() {
+ open fun echo(t: T): T = t
+}
+
+internal fun interface StringEchoInterface {
+ fun echo(s: String?): String?
+}
+
+@Suppress("INCOMPATIBLE_OBJC_NAME_OVERRIDE")
+internal open class AccidentalGenericEchoWithOtherInterface internal constructor(): NonJsGenericEcho<String?>(), MyNativeGenericInterface<String?>, StringEchoInterface
 
 internal interface JavaSubNativeInterface: MyNativeInterface {
  override fun getValue(): Int = 8

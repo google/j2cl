@@ -90,13 +90,28 @@ open class NonJsBase {
   open fun setProp(value: Int) {}
 }
 
-class AccidentalSubNativeInterface : NonJsBase(), MyNativeInterface
+open class AccidentalSubNativeInterface : NonJsBase(), MyNativeInterface
+
+// Repro b/588567907
+class FinalAccidentalSubNativeInterface : NonJsBase(), MyNativeInterface
 
 open class NonJsStringEcho {
   fun echo(t: String): String = t
 }
 
 class AccidentalStringEcho : NonJsStringEcho(), MyNativeGenericInterface<String>
+
+open class NonJsGenericEcho<T> {
+  fun echo(t: T): T = t
+}
+
+interface StringEchoInterface {
+  fun echo(t: String): String
+}
+
+// Repro b/588568727
+open class AccidentalGenericEchoWithOtherInterface :
+  NonJsGenericEcho<String>(), MyNativeGenericInterface<String>, StringEchoInterface
 
 interface KotlinSubNativeInterface : MyNativeInterface {
   override fun getValue(): Int = 8

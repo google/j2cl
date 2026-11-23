@@ -237,6 +237,10 @@ public class Main {
   static class MyNativeInterfaceAccidentalImpl extends NonJsBase
       implements MyNativeInterface, MyNativeInterfaceWithJsMembers {}
 
+  // Repro b/588567907
+  static final class MyNativeInterfaceFinalAccidentalImpl extends NonJsBase
+      implements MyNativeInterface, MyNativeInterfaceWithJsMembers {}
+
   static class MyNativeInterfaceAccidentalImplSubclass extends MyNativeInterfaceAccidentalImpl {
     @Override
     public String getName() {
@@ -261,6 +265,10 @@ public class Main {
     MyNativeInterfaceAccidentalImpl accidentalImpl = new MyNativeInterfaceAccidentalImpl();
     assertMyNativeInterface(accidentalImpl, "NonJsBase");
     assertMyNativeInterfaceWithJsMembers(accidentalImpl, "NonJsBase.mightBeRenamed");
+    MyNativeInterfaceFinalAccidentalImpl finalAccidentalImpl =
+        new MyNativeInterfaceFinalAccidentalImpl();
+    assertMyNativeInterface(finalAccidentalImpl, "NonJsBase");
+    assertMyNativeInterfaceWithJsMembers(finalAccidentalImpl, "NonJsBase.mightBeRenamed");
     assertMyNativeInterface(
         new MyNativeInterfaceAccidentalImplSubclass(), "MyNativeInterfaceAccidentalImplSubclass");
     assertMyNativeInterface(new MyNativeInterfaceAccidentalJsTypeImpl(), "JsTypeBase");
@@ -315,6 +323,14 @@ public class Main {
   static class AccidentalGenericEcho extends NonJsGenericEcho<String>
       implements MyNativeGenericInterface<String> {}
 
+  interface StringEchoInterface {
+    String echo(String s);
+  }
+
+  // Repro b/588568727
+  static class AccidentalGenericEchoWithOtherInterface extends NonJsGenericEcho<String>
+      implements MyNativeGenericInterface<String>, StringEchoInterface {}
+
   static class NativeEcho implements MyNativeGenericInterface<MyNativeInterface> {
     @Override
     public MyNativeInterface echo(MyNativeInterface o) {
@@ -330,6 +346,7 @@ public class Main {
     assertEcho(new NumberEcho<Integer>(), 42, 42);
     assertEcho(new AccidentalStringEcho(), "hello", "NonJsStringEcho: hello");
     assertEcho(new AccidentalGenericEcho(), "hello", "hello");
+    assertEcho(new AccidentalGenericEchoWithOtherInterface(), "hello", "hello");
     assertEcho(s -> "lambda: " + s, "hello", "lambda: hello");
     assertEcho(String::toUpperCase, "hello", "HELLO");
     assertEquals(

@@ -53,6 +53,12 @@
 (global $$class@subnativeinterface.AccidentalSubNativeInterface (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@subnativeinterface.FinalAccidentalSubNativeInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@subnativeinterface.FinalAccidentalSubNativeInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@subnativeinterface.NonJsStringEcho (mut i32)
  (i32.const 0)
 )
@@ -65,6 +71,24 @@
 (global $$class@subnativeinterface.AccidentalStringEcho (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
+(global $$class-initialized@subnativeinterface.NonJsGenericEcho (mut i32)
+ (i32.const 0)
+)
+(global $$class@subnativeinterface.NonJsGenericEcho (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@subnativeinterface.StringEchoInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@subnativeinterface.StringEchoInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@subnativeinterface.AccidentalGenericEchoWithOtherInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@subnativeinterface.AccidentalGenericEchoWithOtherInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
 (global $$class-initialized@subnativeinterface.JavaSubNativeInterface (mut i32)
  (i32.const 0)
 )
@@ -75,6 +99,12 @@
  (i32.const 0)
 )
 (global $$class@subnativeinterface.JavaSubNativeInterfaceImpl (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@subnativeinterface.StringEchoInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@subnativeinterface.StringEchoInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
  (ref.null $java.lang.Class)
 )
 (global $$class-initialized@subnativeinterface.SubNativeInterface.$LambdaImplementor$1 (mut i32)
@@ -177,6 +207,19 @@
   (ref.func $m_mightBeRenamed__int@subnativeinterface.NonJsBase)
  )
 )
+(global $subnativeinterface.FinalAccidentalSubNativeInterface.vtable (ref (exact $subnativeinterface.FinalAccidentalSubNativeInterface.vtable))
+ (struct.new $subnativeinterface.FinalAccidentalSubNativeInterface.vtable
+  (global.get $subnativeinterface.FinalAccidentalSubNativeInterface.proto)
+  (ref.func $$getClassImpl__java_lang_Class@subnativeinterface.FinalAccidentalSubNativeInterface)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getProp__int@subnativeinterface.NonJsBase)
+  (ref.func $m_getValue__int@subnativeinterface.NonJsBase)
+  (ref.func $m_setProp__int__void@subnativeinterface.NonJsBase)
+  (ref.func $m_mightBeRenamed__int@subnativeinterface.NonJsBase)
+ )
+)
 (global $subnativeinterface.NonJsStringEcho.vtable (ref (exact $subnativeinterface.NonJsStringEcho.vtable))
  (struct.new $subnativeinterface.NonJsStringEcho.vtable
   (ref.null extern)
@@ -196,6 +239,32 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_echo__java_lang_String__java_lang_String@subnativeinterface.NonJsStringEcho)
   (ref.func $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.AccidentalStringEcho)
+ )
+)
+(global $subnativeinterface.NonJsGenericEcho.vtable (ref (exact $subnativeinterface.NonJsGenericEcho.vtable))
+ (struct.new $subnativeinterface.NonJsGenericEcho.vtable
+  (ref.null extern)
+  (ref.func $$getClassImpl__java_lang_Class@subnativeinterface.NonJsGenericEcho)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.NonJsGenericEcho)
+ )
+)
+(global $subnativeinterface.AccidentalGenericEchoWithOtherInterface.vtable (ref (exact $subnativeinterface.AccidentalGenericEchoWithOtherInterface.vtable))
+ (struct.new $subnativeinterface.AccidentalGenericEchoWithOtherInterface.vtable
+  (global.get $subnativeinterface.AccidentalGenericEchoWithOtherInterface.proto)
+  (ref.func $$getClassImpl__java_lang_Class@subnativeinterface.AccidentalGenericEchoWithOtherInterface)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.NonJsGenericEcho)
+  (ref.func $m_echo__java_lang_String__java_lang_String@subnativeinterface.AccidentalGenericEchoWithOtherInterface)
+ )
+)
+(global $subnativeinterface.StringEchoInterface.vtable@$subnativeinterface.AccidentalGenericEchoWithOtherInterface (ref $subnativeinterface.StringEchoInterface.vtable)
+ (struct.new $subnativeinterface.StringEchoInterface.vtable
+  (ref.func $m_echo__java_lang_String__java_lang_String@subnativeinterface.AccidentalGenericEchoWithOtherInterface)
  )
 )
 (global $subnativeinterface.JavaSubNativeInterfaceImpl.vtable (ref (exact $subnativeinterface.JavaSubNativeInterfaceImpl.vtable))
@@ -227,6 +296,32 @@
  )
 )
 
+
+;;; void StringEchoInterface.$clinit()
+(func $$clinit__void_<once>_@subnativeinterface.StringEchoInterface
+ (block
+  (if (global.get $$class-initialized@subnativeinterface.StringEchoInterface)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@subnativeinterface.StringEchoInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> StringEchoInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.StringEchoInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subnativeinterface.StringEchoInterface)))
+   (then
+    (return (global.get $$class@subnativeinterface.StringEchoInterface))
+   )
+  )
+  (global.set $$class@subnativeinterface.StringEchoInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|subnativeint...|__java_lang_String_<once>_@subnativeinterface.StringEchoInterface.$StringLiterals )))
+  (return (global.get $$class@subnativeinterface.StringEchoInterface))
+ )
+)
 
 ;;; void $Overlay.$clinit()
 (func $$clinit__void_<once>_@subnativeinterface.MyNativeInterface.$Overlay
@@ -942,6 +1037,80 @@
 )
 (elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.NonJsStringEcho)
 
+;;; NonJsGenericEcho<T> NonJsGenericEcho.$create()
+(func $$create__@subnativeinterface.NonJsGenericEcho
+ (result (ref null $subnativeinterface.NonJsGenericEcho))
+ (local $$instance (ref null $subnativeinterface.NonJsGenericEcho))
+ (block
+  (call $$clinit__void_<once>_@subnativeinterface.NonJsGenericEcho )
+  (local.set $$instance (struct.new_desc $subnativeinterface.NonJsGenericEcho (global.get $itable.empty) (i32.const 0) (global.get $subnativeinterface.NonJsGenericEcho.vtable)))
+  (call $$ctor__void_$p_subnativeinterface_NonJsGenericEcho@subnativeinterface.NonJsGenericEcho (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NonJsGenericEcho.$ctor()
+(func $$ctor__void_$p_subnativeinterface_NonJsGenericEcho@subnativeinterface.NonJsGenericEcho
+ (param $this (ref null $subnativeinterface.NonJsGenericEcho))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; T NonJsGenericEcho.echo(T t)
+(func $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.NonJsGenericEcho
+ (type $function.m_echo__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $this (ref null $subnativeinterface.NonJsGenericEcho))
+ (local.set $this (ref.cast (ref $subnativeinterface.NonJsGenericEcho) (local.get $this.untyped)))
+ (block
+  (return (local.get $t))
+ )
+)
+(elem declare func $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.NonJsGenericEcho)
+
+;;; void NonJsGenericEcho.$clinit()
+(func $$clinit__void_<once>_@subnativeinterface.NonJsGenericEcho
+ (block
+  (if (global.get $$class-initialized@subnativeinterface.NonJsGenericEcho)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@subnativeinterface.NonJsGenericEcho (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> NonJsGenericEcho.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.NonJsGenericEcho
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subnativeinterface.NonJsGenericEcho)))
+   (then
+    (return (global.get $$class@subnativeinterface.NonJsGenericEcho))
+   )
+  )
+  (global.set $$class@subnativeinterface.NonJsGenericEcho (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subnativeint...|__java_lang_String_<once>_@subnativeinterface.NonJsGenericEcho.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@subnativeinterface.NonJsGenericEcho))
+ )
+)
+
+;;; Class<?> NonJsGenericEcho.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subnativeinterface.NonJsGenericEcho
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subnativeinterface.NonJsGenericEcho))
+ (local.set $this (ref.cast (ref $subnativeinterface.NonJsGenericEcho) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.NonJsGenericEcho ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.NonJsGenericEcho)
+
 ;;; int JavaSubNativeInterface.getValue()
 (func $m_getValue__int@subnativeinterface.JavaSubNativeInterface
  (param $this (ref null $java.lang.Object))
@@ -977,6 +1146,54 @@
   (return (global.get $$class@subnativeinterface.JavaSubNativeInterface))
  )
 )
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_subnativeinterface_StringEchoInterface_$LambdaAdaptor@subnativeinterface.StringEchoInterface.$LambdaAdaptor
+ (param $this (ref null $subnativeinterface.StringEchoInterface.$LambdaAdaptor))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@subnativeinterface.StringEchoInterface.$LambdaAdaptor
+ (block
+  (if (global.get $$class-initialized@subnativeinterface.StringEchoInterface.$LambdaAdaptor)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@subnativeinterface.StringEchoInterface.$LambdaAdaptor (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.StringEchoInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subnativeinterface.StringEchoInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@subnativeinterface.StringEchoInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@subnativeinterface.StringEchoInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subnativeint...|__java_lang_String_<once>_@subnativeinterface.StringEchoInterface.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@subnativeinterface.StringEchoInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subnativeinterface.StringEchoInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subnativeinterface.StringEchoInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $subnativeinterface.StringEchoInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.StringEchoInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.StringEchoInterface.$LambdaAdaptor)
 
 ;;; <anonymous> implements MyNativeGenericInterface<String> <anonymous> implements MyNativeGenericInterface<String>.$create(MyNativeInterface $captured_nativeInterface)
 (func $$create__subnativeinterface_MyNativeInterface@subnativeinterface.SubNativeInterface.$LambdaImplementor$1
@@ -1265,7 +1482,7 @@
  (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (result i32)
  (block
-  (return (call_ref $function.m_getValue__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_getValue__int (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this)))))
+  (return (call_ref $function.m_getValue__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.NonJsBase.vtable $m_getValue__int (ref.get_desc $subnativeinterface.NonJsBase(local.get $this)))))
  )
 )
 
@@ -1275,7 +1492,7 @@
  (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (result i32)
  (block
-  (return (call_ref $function.m_mightBeRenamed__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_mightBeRenamed__int (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this)))))
+  (return (call $m_mightBeRenamed__int@subnativeinterface.NonJsBase (ref.as_non_null (local.get $this))))
  )
 )
 
@@ -1285,7 +1502,7 @@
  (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (result i32)
  (block
-  (return (call_ref $function.m_getProp__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_getProp__int (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this)))))
+  (return (call_ref $function.m_getProp__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.NonJsBase.vtable $m_getProp__int (ref.get_desc $subnativeinterface.NonJsBase(local.get $this)))))
  )
 )
 
@@ -1295,7 +1512,7 @@
  (param $this (ref $subnativeinterface.AccidentalSubNativeInterface))
  (param $value i32)
  (block
-  (call_ref $function.m_setProp__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $subnativeinterface.AccidentalSubNativeInterface.vtable $m_setProp__int__void (ref.get_desc $subnativeinterface.AccidentalSubNativeInterface(local.get $this))))
+  (call_ref $function.m_setProp__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $subnativeinterface.NonJsBase.vtable $m_setProp__int__void (ref.get_desc $subnativeinterface.NonJsBase(local.get $this))))
  )
 )
 
@@ -1338,6 +1555,106 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.AccidentalSubNativeInterface)
+
+;;; FinalAccidentalSubNativeInterface FinalAccidentalSubNativeInterface.$create()
+(func $$create__@subnativeinterface.FinalAccidentalSubNativeInterface
+ (result (ref null $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (local $$instance (ref null $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (block
+  (call $$clinit__void_<once>_@subnativeinterface.FinalAccidentalSubNativeInterface )
+  (local.set $$instance (struct.new_desc $subnativeinterface.FinalAccidentalSubNativeInterface (global.get $itable.empty) (i32.const 0) (global.get $subnativeinterface.FinalAccidentalSubNativeInterface.vtable)))
+  (call $$ctor__void_$p_subnativeinterface_FinalAccidentalSubNativeInterface@subnativeinterface.FinalAccidentalSubNativeInterface (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FinalAccidentalSubNativeInterface.$ctor()
+(func $$ctor__void_$p_subnativeinterface_FinalAccidentalSubNativeInterface@subnativeinterface.FinalAccidentalSubNativeInterface
+ (param $this (ref null $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (block
+  (call $$ctor__void_$p_subnativeinterface_NonJsBase@subnativeinterface.NonJsBase (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int FinalAccidentalSubNativeInterface.getValue()
+(@binaryen.js.called)
+(func $js_export_m_getValue__int@subnativeinterface.FinalAccidentalSubNativeInterface
+ (param $this (ref $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (result i32)
+ (block
+  (return (call_ref $function.m_getValue__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.NonJsBase.vtable $m_getValue__int (ref.get_desc $subnativeinterface.NonJsBase(local.get $this)))))
+ )
+)
+
+;;; int FinalAccidentalSubNativeInterface.mightBeRenamed()
+(@binaryen.js.called)
+(func $js_export_m_mightBeRenamed__int@subnativeinterface.FinalAccidentalSubNativeInterface
+ (param $this (ref $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (result i32)
+ (block
+  (return (call $m_mightBeRenamed__int@subnativeinterface.NonJsBase (ref.as_non_null (local.get $this))))
+ )
+)
+
+;;; int FinalAccidentalSubNativeInterface.getProp()
+(@binaryen.js.called)
+(func $js_export_get_m_getProp__int@subnativeinterface.FinalAccidentalSubNativeInterface
+ (param $this (ref $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (result i32)
+ (block
+  (return (call_ref $function.m_getProp__int (ref.as_non_null (local.get $this))(struct.get $subnativeinterface.NonJsBase.vtable $m_getProp__int (ref.get_desc $subnativeinterface.NonJsBase(local.get $this)))))
+ )
+)
+
+;;; void FinalAccidentalSubNativeInterface.setProp(int value)
+(@binaryen.js.called)
+(func $js_export_set_m_setProp__int__void@subnativeinterface.FinalAccidentalSubNativeInterface
+ (param $this (ref $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (param $value i32)
+ (block
+  (call_ref $function.m_setProp__int__void (ref.as_non_null (local.get $this))(local.get $value)(struct.get $subnativeinterface.NonJsBase.vtable $m_setProp__int__void (ref.get_desc $subnativeinterface.NonJsBase(local.get $this))))
+ )
+)
+
+;;; void FinalAccidentalSubNativeInterface.$clinit()
+(func $$clinit__void_<once>_@subnativeinterface.FinalAccidentalSubNativeInterface
+ (block
+  (if (global.get $$class-initialized@subnativeinterface.FinalAccidentalSubNativeInterface)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@subnativeinterface.FinalAccidentalSubNativeInterface (i32.const 1))
+  (call $$clinit__void_<once>_@subnativeinterface.NonJsBase )
+ )
+)
+
+;;; Class<T> FinalAccidentalSubNativeInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.FinalAccidentalSubNativeInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subnativeinterface.FinalAccidentalSubNativeInterface)))
+   (then
+    (return (global.get $$class@subnativeinterface.FinalAccidentalSubNativeInterface))
+   )
+  )
+  (global.set $$class@subnativeinterface.FinalAccidentalSubNativeInterface (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subnativeint...|__java_lang_String_<once>_@subnativeinterface.FinalAccidentalSubNativeInterface.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.NonJsBase )))
+  (return (global.get $$class@subnativeinterface.FinalAccidentalSubNativeInterface))
+ )
+)
+
+;;; Class<?> FinalAccidentalSubNativeInterface.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subnativeinterface.FinalAccidentalSubNativeInterface
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subnativeinterface.FinalAccidentalSubNativeInterface))
+ (local.set $this (ref.cast (ref $subnativeinterface.FinalAccidentalSubNativeInterface) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.FinalAccidentalSubNativeInterface ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.FinalAccidentalSubNativeInterface)
 
 ;;; AccidentalStringEcho AccidentalStringEcho.$create()
 (func $$create__@subnativeinterface.AccidentalStringEcho
@@ -1423,6 +1740,91 @@
  )
 )
 (elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.AccidentalStringEcho)
+
+;;; AccidentalGenericEchoWithOtherInterface AccidentalGenericEchoWithOtherInterface.$create()
+(func $$create__@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (result (ref null $subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ (local $$instance (ref null $subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ (block
+  (call $$clinit__void_<once>_@subnativeinterface.AccidentalGenericEchoWithOtherInterface )
+  (local.set $$instance (struct.new_desc $subnativeinterface.AccidentalGenericEchoWithOtherInterface (global.get $subnativeinterface.AccidentalGenericEchoWithOtherInterface.itable) (i32.const 0) (global.get $subnativeinterface.AccidentalGenericEchoWithOtherInterface.vtable)))
+  (call $$ctor__void_$p_subnativeinterface_AccidentalGenericEchoWithOtherInterface@subnativeinterface.AccidentalGenericEchoWithOtherInterface (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AccidentalGenericEchoWithOtherInterface.$ctor()
+(func $$ctor__void_$p_subnativeinterface_AccidentalGenericEchoWithOtherInterface@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (param $this (ref null $subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ (block
+  (call $$ctor__void_$p_subnativeinterface_NonJsGenericEcho@subnativeinterface.NonJsGenericEcho (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String AccidentalGenericEchoWithOtherInterface.echo(String t)
+(func $m_echo__java_lang_String__java_lang_String@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (type $function.m_echo__java_lang_String__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $this (ref null $subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ (local.set $this (ref.cast (ref $subnativeinterface.AccidentalGenericEchoWithOtherInterface) (local.get $this.untyped)))
+ (block
+  (return (ref.cast (ref null $java.lang.String) (call $m_echo__java_lang_Object__java_lang_Object@subnativeinterface.NonJsGenericEcho (ref.as_non_null (local.get $this))(local.get $t))))
+ )
+)
+(elem declare func $m_echo__java_lang_String__java_lang_String@subnativeinterface.AccidentalGenericEchoWithOtherInterface)
+
+;;; WasmExtern AccidentalGenericEchoWithOtherInterface.echo(WasmExtern t)
+(@binaryen.js.called)
+(func $js_export_m_echo__java_lang_Object__java_lang_Object@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (param $this (ref $subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ (param $t (ref null extern))
+ (result (ref null extern))
+ (block
+  (return (call $m_toJs__java_lang_Object__javaemul_internal_WasmExtern@java.lang.Object (call_ref $function.m_echo__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(call $m_fromJs__javaemul_internal_WasmExtern__java_lang_Object@java.lang.Object (local.get $t))(struct.get $subnativeinterface.NonJsGenericEcho.vtable $m_echo__java_lang_Object__java_lang_Object (ref.get_desc $subnativeinterface.NonJsGenericEcho(local.get $this))))))
+ )
+)
+
+;;; void AccidentalGenericEchoWithOtherInterface.$clinit()
+(func $$clinit__void_<once>_@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (block
+  (if (global.get $$class-initialized@subnativeinterface.AccidentalGenericEchoWithOtherInterface)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@subnativeinterface.AccidentalGenericEchoWithOtherInterface (i32.const 1))
+  (call $$clinit__void_<once>_@subnativeinterface.NonJsGenericEcho )
+ )
+)
+
+;;; Class<T> AccidentalGenericEchoWithOtherInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@subnativeinterface.AccidentalGenericEchoWithOtherInterface)))
+   (then
+    (return (global.get $$class@subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+   )
+  )
+  (global.set $$class@subnativeinterface.AccidentalGenericEchoWithOtherInterface (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|subnativeint...|__java_lang_String_<once>_@subnativeinterface.AccidentalGenericEchoWithOtherInterface.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.NonJsGenericEcho )))
+  (return (global.get $$class@subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ )
+)
+
+;;; Class<?> AccidentalGenericEchoWithOtherInterface.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@subnativeinterface.AccidentalGenericEchoWithOtherInterface
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $subnativeinterface.AccidentalGenericEchoWithOtherInterface))
+ (local.set $this (ref.cast (ref $subnativeinterface.AccidentalGenericEchoWithOtherInterface) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@subnativeinterface.AccidentalGenericEchoWithOtherInterface ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@subnativeinterface.AccidentalGenericEchoWithOtherInterface)
 
 ;;; JavaSubNativeInterfaceImpl JavaSubNativeInterfaceImpl.$create()
 (func $$create__@subnativeinterface.JavaSubNativeInterfaceImpl

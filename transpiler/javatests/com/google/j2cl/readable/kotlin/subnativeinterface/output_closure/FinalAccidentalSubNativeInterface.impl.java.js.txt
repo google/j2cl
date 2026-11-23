@@ -1,0 +1,66 @@
+goog.module('subnativeinterface.FinalAccidentalSubNativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NonJsBase = goog.require('subnativeinterface.NonJsBase$impl');
+
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+
+/**
+ * @final
+ * @implements {MyNativeInterface}
+ */
+class FinalAccidentalSubNativeInterface extends NonJsBase {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FinalAccidentalSubNativeInterface} */
+ static $create__() {
+  FinalAccidentalSubNativeInterface.$clinit();
+  let $instance = new FinalAccidentalSubNativeInterface();
+  $instance.$ctor__subnativeinterface_FinalAccidentalSubNativeInterface__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_FinalAccidentalSubNativeInterface__void() {
+  this.$ctor__subnativeinterface_NonJsBase__void();
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {number} */
+ getValue() {
+  return this.m_getValue__int();
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {number} */
+ renamed() {
+  return this.m_mightBeRenamed__int();
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} @return {number} */
+ get prop() {
+  return this.m_getProp__int();
+ }
+ //Bridge method.
+ /** @override @suppress{visibility} */
+ set prop(/** number */ value) {
+  this.m_setProp__int__void(value);
+ }
+ /** @nodts */
+ static $clinit() {
+  FinalAccidentalSubNativeInterface.$clinit = () =>{};
+  FinalAccidentalSubNativeInterface.$loadModules();
+  NonJsBase.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FinalAccidentalSubNativeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(FinalAccidentalSubNativeInterface, 'subnativeinterface.FinalAccidentalSubNativeInterface');
+
+exports = FinalAccidentalSubNativeInterface;
+
+//# sourceMappingURL=FinalAccidentalSubNativeInterface.js.map

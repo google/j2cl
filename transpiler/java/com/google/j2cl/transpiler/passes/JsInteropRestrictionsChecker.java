@@ -1243,7 +1243,9 @@ public class JsInteropRestrictionsChecker {
   private void checkJsEnumOverrides(
       MethodDescriptor methodDescriptor, SourcePosition sourcePosition) {
     MethodDescriptor targetMethodDescriptor =
-        methodDescriptor.isBridge() ? methodDescriptor.getBridgeTarget() : methodDescriptor;
+        methodDescriptor.isAccidentalOverride()
+            ? methodDescriptor.getBridgeTarget()
+            : methodDescriptor;
     for (MethodDescriptor overriddenMethodDescriptor :
         methodDescriptor.getJavaOverriddenMethodDescriptors()) {
       checkJsEnumOverride(targetMethodDescriptor, overriddenMethodDescriptor, sourcePosition);
@@ -1737,12 +1739,11 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    // Accidental overrides are represented as a synthetic bridge method whose origin is the
-    // interface method, and target is the implementing method.
-    // If the target is not itself a js member, then use the bridge for the consistency check (to
-    // catch inconsistencies between interfaces).
+    // Accidental overrides are represented as a synthetic method whose target is the implementing
+    // method. If the target is not itself a js member, then use the accidental override descriptor
+    // for the consistency check (to catch inconsistencies between interfaces).
     MethodDescriptor targetMethodDescriptor =
-        methodDescriptor.isBridge() && methodDescriptor.getBridgeTarget().isJsMember()
+        methodDescriptor.isAccidentalOverride() && methodDescriptor.getBridgeTarget().isJsMember()
             ? methodDescriptor.getBridgeTarget()
             : methodDescriptor;
 
@@ -1794,7 +1795,7 @@ public class JsInteropRestrictionsChecker {
    */
   private static <T> String getAccidentalOverrideMessage(
       MethodDescriptor methodDescriptor, Function<MethodDescriptor, T> matchOverrideBy) {
-    if (!methodDescriptor.isBridge()) {
+    if (!methodDescriptor.isAccidentalOverride()) {
       // Not an accidental override.
       return "";
     }

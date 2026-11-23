@@ -157,6 +157,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
     ABSTRACT_STUB, // Abstract override stub of an abstract super type method.
+    ACCIDENTAL_OVERRIDE, // Synthetic descriptor for an accidental override of interface methods.
     // Wasm JsInterop bridges.
     WASM_ENTRY_POINT_BRIDGE,
     WASM_JS_METHOD_EXPORT_BRIDGE,
@@ -198,7 +199,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             GENERALIZING_BRIDGE,
             SPECIALIZING_BRIDGE,
             DEFAULT_METHOD_BRIDGE,
-            ABSTRACT_STUB ->
+            ABSTRACT_STUB,
+            ACCIDENTAL_OVERRIDE ->
             "m_";
 
         // Getters and setters need to be mangled as fields.
@@ -462,6 +464,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public boolean isDefaultMethodBridge() {
     return getOrigin() == MethodOrigin.DEFAULT_METHOD_BRIDGE;
+  }
+
+  public boolean isAccidentalOverride() {
+    return getOrigin() == MethodOrigin.ACCIDENTAL_OVERRIDE;
   }
 
   /** Returns {@code true} if the method has no side effects. */
@@ -844,6 +850,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Memoized
   String getJsMemberCompatibilitySignature() {
+    if (isAccidentalOverride()) {
+      return getBridgeTarget().getJsMemberCompatibilitySignature();
+    }
     if (getAbiDescriptor() != this) {
       return getAbiDescriptor().getJsMemberCompatibilitySignature();
     }
@@ -1701,6 +1710,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         MethodDescriptor targetDescriptor) {
       return setBridgeOrigin(originDescriptor)
           .setOrigin(methodOrigin)
+          .setBridgeTarget(targetDescriptor)
+          .makeDeclaration()
+          // Clear properties that might have been carried over when creating this
+          // descriptor from an existing one.
+          .setDefaultMethod(false)
+          .setAbstract(false)
+          .setNative(false);
+    }
+
+    public Builder makeAccidentalOverride(MethodDescriptor targetDescriptor) {
+      return setBridgeOrigin(null)
+          .setOrigin(MethodOrigin.ACCIDENTAL_OVERRIDE)
           .setBridgeTarget(targetDescriptor)
           .makeDeclaration()
           // Clear properties that might have been carried over when creating this

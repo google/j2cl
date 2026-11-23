@@ -124,6 +124,9 @@ class NonJsBase {
 
 class AccidentalSubNativeInterface extends NonJsBase implements MyNativeInterface {}
 
+// Repro b/588567907
+final class FinalAccidentalSubNativeInterface extends NonJsBase implements MyNativeInterface {}
+
 class NonJsStringEcho {
   public String echo(String s) {
     return s;
@@ -131,6 +134,20 @@ class NonJsStringEcho {
 }
 
 class AccidentalStringEcho extends NonJsStringEcho implements MyNativeGenericInterface<String> {}
+
+class NonJsGenericEcho<T> {
+  public T echo(T t) {
+    return t;
+  }
+}
+
+interface StringEchoInterface {
+  String echo(String s);
+}
+
+// Repro b/588568727
+class AccidentalGenericEchoWithOtherInterface extends NonJsGenericEcho<String>
+    implements MyNativeGenericInterface<String>, StringEchoInterface {}
 
 interface JavaSubNativeInterface extends MyNativeInterface {
   @Override

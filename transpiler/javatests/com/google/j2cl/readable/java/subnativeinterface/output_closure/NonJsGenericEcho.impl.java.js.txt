@@ -1,0 +1,47 @@
+goog.module('subnativeinterface.NonJsGenericEcho$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class NonJsGenericEcho extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!NonJsGenericEcho<T>} */
+ static $create__() {
+  NonJsGenericEcho.$clinit();
+  let $instance = new NonJsGenericEcho();
+  $instance.$ctor__subnativeinterface_NonJsGenericEcho__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__subnativeinterface_NonJsGenericEcho__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {T} */
+ m_echo__java_lang_Object__java_lang_Object(/** T */ t) {
+  return t;
+ }
+ /** @nodts */
+ static $clinit() {
+  NonJsGenericEcho.$clinit = () =>{};
+  NonJsGenericEcho.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonJsGenericEcho;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonJsGenericEcho, 'subnativeinterface.NonJsGenericEcho');
+
+exports = NonJsGenericEcho;
+
+//# sourceMappingURL=NonJsGenericEcho.js.map

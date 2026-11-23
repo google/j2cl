@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.common.collect.MoreCollectors.toOptional;
@@ -653,7 +652,8 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
     Streams.concat(
             getPolymorphicMethods().stream(),
             getAccidentalOverrides().stream()
-                .map(DeclaredTypeDescriptor::withImplementedMethodSignature),
+                .map(DeclaredTypeDescriptor::toMissingAccidentalBridge)
+                .filter(Objects::nonNull),
             getDeclaredMethodDescriptors().stream()
                 .filter(m -> m.isInstanceMember() && m.getVisibility().isPrivate()))
         .filter(MemberDescriptor::canBeReferencedExternallyForWasm)
@@ -662,22 +662,28 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
   }
 
   /**
-   * Returns the accidental override with the signature of the interface method it implements.
-   *
-   * <p>Accidental overrides are not generalizing bridges, so their ABI is their own signature,
-   * which might be specialized, e.g. {@code echo(String)} inherited from a superclass to implement
-   * {@code NativeInterface<String>.echo(T)}. Their JavaScript export needs the signature of the
-   * implemented method, which is shared by the exports of all its implementations, and that also
-   * lets them inherit its JsInfo.
+   * Returns a bridge descriptor exposing a non-JsMember superclass method when an accidental
+   * override makes it a JsMember, or {@code null} if no export bridge descriptor is needed.
    */
-  private static MethodDescriptor withImplementedMethodSignature(
-      MethodDescriptor accidentalOverride) {
-    MethodDescriptor implementedMethod =
-        accidentalOverride.getBridgeOrigin().getDeclarationDescriptor();
-    return accidentalOverride.toBuilder()
-        .setTypeParameterTypeDescriptors(implementedMethod.getTypeParameterTypeDescriptors())
-        .setReturnTypeDescriptor(implementedMethod.getReturnTypeDescriptor())
-        .setParameterDescriptors(implementedMethod.getParameterDescriptors())
+  @Nullable
+  private static MethodDescriptor toMissingAccidentalBridge(MethodDescriptor accidentalOverride) {
+    if (!accidentalOverride.isJsMember() || accidentalOverride.getBridgeTarget().isJsMember()) {
+      // No missing bridge exposing a non-JsMember superclass method to JS.
+      return null;
+    }
+
+    // Create a hacky synthetic bridge to preserve the information needed by the Wasm passes to
+    // correctly expose the existing supertype method to JS.
+    // TODO(b/271144313): Consider creating these in getPolymorphicMethods() to avoid this partial
+    // hacky logic.
+    var targetMethod = accidentalOverride.getBridgeTarget().getDeclarationDescriptor();
+    var implementedMethod =
+        accidentalOverride.getJsOverriddenMethodDescriptors().stream()
+            .findFirst()
+            .orElseThrow()
+            .getDeclarationDescriptor();
+    return targetMethod.toBuilder()
+        .makeBridge(MethodOrigin.GENERALIZING_BRIDGE, implementedMethod, targetMethod)
         .build();
   }
 
@@ -922,42 +928,30 @@ public abstract non-sealed class DeclaredTypeDescriptor extends TypeDescriptor {
             .map(m -> m.getOverrideKey(sourceLanguage))
             .collect(toImmutableSet());
 
-    // Interface methods that are not declared in this type. These are all interface methods that
-    // are accidentally overridden. We just need to find the corresponding implementation in a
-    // superclass.
-    ImmutableMap<String, MethodDescriptor> undeclaredInterfaceMethodsByOverrideKey =
+    // Override keys of interface methods that are not declared in this type or implemented by the
+    // supertype.
+    ImmutableSet<String> undeclaredInterfaceOverrideKeys =
         getInterfaceTypeDescriptors().stream()
             .flatMap(i -> i.getPolymorphicMethods().stream())
-            .filter(
-                m ->
-                    !TypeDescriptors.isJavaLangObject(m.getEnclosingTypeDescriptor())
-                        // Exclude interface methods that are implemented by the supertype.
-                        && !getSuperTypeDescriptor().isSubtypeOf(m.getEnclosingTypeDescriptor())
-                        && !declaredOverrideKeys.contains(m.getOverrideKey(sourceLanguage)))
-            .collect(
-                toImmutableMap(
-                    m -> m.getOverrideKey(sourceLanguage),
-                    Function.identity(),
-                    (existing, replacement) -> replacement));
+            .filter(m ->
+                !TypeDescriptors.isJavaLangObject(m.getEnclosingTypeDescriptor())
+                    // Exclude interface methods that are implemented by the supertype.
+                    && !getSuperTypeDescriptor().isSubtypeOf(m.getEnclosingTypeDescriptor()))
+            .map(m -> m.getOverrideKey(sourceLanguage))
+            .filter(k -> !declaredOverrideKeys.contains(k))
+            .collect(toImmutableSet());
 
+    // For each unsatisfied key, add a synthetic accidental override in this type, setting
+    // JsInfo.NONE so that getJsInfo() inherits from all overridden interface methods while pointing
+    // to the superclass implementation as its bridge target.
     return getSuperTypeDescriptor().getPolymorphicMethods().stream()
-        .map(
-            m -> {
-              var interfaceMethod =
-                  undeclaredInterfaceMethodsByOverrideKey.get(m.getOverrideKey(sourceLanguage));
-              if (interfaceMethod == null) {
-                // No corresponding interface method found, so no accidental override.
-                return null;
-              }
-
-              // Note: Create the accidental override bridge as a SPECIALIZING_BRIDGE for now which
-              // has the required behavior for `getJsInfo` and does not delegate it to the bridge
-              // origin.
-              // TODO(b/507538365): Consider its own method origin.
-              return createBridgeMethodDescriptor(
-                  MethodOrigin.SPECIALIZING_BRIDGE, interfaceMethod, m);
-            })
-        .filter(Objects::nonNull)
+        .filter(m -> undeclaredInterfaceOverrideKeys.contains(m.getOverrideKey(sourceLanguage)))
+        .map(m ->
+            m.toBuilder()
+                .setEnclosingTypeDescriptor(this)
+                .setOriginalJsInfo(JsInfo.NONE)
+                .makeAccidentalOverride(m)
+                .build())
         .collect(toImmutableList());
   }
 

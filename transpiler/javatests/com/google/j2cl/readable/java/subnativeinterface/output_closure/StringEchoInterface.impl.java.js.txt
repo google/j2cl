@@ -1,0 +1,42 @@
+goog.module('subnativeinterface.StringEchoInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('subnativeinterface.StringEchoInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class StringEchoInterface {
+ /** @abstract @nodts @return {?string} */
+ m_echo__java_lang_String__java_lang_String(/** ?string */ s) {}
+ /** @nodts @return {!StringEchoInterface} */
+ static $adapt(/** ?function(?string):?string */ fn) {
+  StringEchoInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  StringEchoInterface.$clinit = () =>{};
+  StringEchoInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__subnativeinterface_StringEchoInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__subnativeinterface_StringEchoInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('subnativeinterface.StringEchoInterface.$LambdaAdaptor$impl');
+ }
+}
+StringEchoInterface.$markImplementor(/**@type {Function}*/ (StringEchoInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (StringEchoInterface), 'subnativeinterface.StringEchoInterface');
+
+exports = StringEchoInterface;
+
+//# sourceMappingURL=StringEchoInterface.js.map

@@ -184,6 +184,10 @@ internal open class NonJsBase {
 internal open class MyNativeInterfaceAccidentalImpl :
   NonJsBase(), MyNativeInterface, MyNativeInterfaceWithJsMembers
 
+// Repro b/588567907
+internal class MyNativeInterfaceFinalAccidentalImpl :
+  NonJsBase(), MyNativeInterface, MyNativeInterfaceWithJsMembers
+
 internal class MyNativeInterfaceAccidentalImplSubclass : MyNativeInterfaceAccidentalImpl() {
   override fun getName(): String = "MyNativeInterfaceAccidentalImplSubclass"
 }
@@ -201,6 +205,9 @@ private fun testAccidentalImplementation() {
   val accidentalImpl = MyNativeInterfaceAccidentalImpl()
   assertMyNativeInterface(accidentalImpl, "NonJsBase")
   assertMyNativeInterfaceWithJsMembers(accidentalImpl, "NonJsBase.mightBeRenamed")
+  val finalAccidentalImpl = MyNativeInterfaceFinalAccidentalImpl()
+  assertMyNativeInterface(finalAccidentalImpl, "NonJsBase")
+  assertMyNativeInterfaceWithJsMembers(finalAccidentalImpl, "NonJsBase.mightBeRenamed")
   assertMyNativeInterface(
     MyNativeInterfaceAccidentalImplSubclass(),
     "MyNativeInterfaceAccidentalImplSubclass",
@@ -239,6 +246,14 @@ internal open class NonJsGenericEcho<T> {
 
 internal class AccidentalGenericEcho : NonJsGenericEcho<String>(), MyNativeGenericInterface<String>
 
+internal interface StringEchoInterface {
+  fun echo(t: String): String
+}
+
+// Repro b/588568727
+internal open class AccidentalGenericEchoWithOtherInterface :
+  NonJsGenericEcho<String>(), MyNativeGenericInterface<String>, StringEchoInterface
+
 internal class NativeEcho : MyNativeGenericInterface<MyNativeInterface> {
   override fun echo(t: MyNativeInterface): MyNativeInterface =
     createJsImpl("NativeEcho: " + t.getName())
@@ -252,6 +267,7 @@ private fun testGenericImplementation() {
   assertEcho(NumberEcho<Int>(), 42, 42)
   assertEcho(AccidentalStringEcho(), "hello", "NonJsStringEcho: hello")
   assertEcho(AccidentalGenericEcho(), "hello", "hello")
+  assertEcho(AccidentalGenericEchoWithOtherInterface(), "hello", "hello")
   assertEcho(MyNativeGenericInterface<String> { "lambda: $it" }, "hello", "lambda: hello")
   assertEcho(MyNativeGenericInterface(String::uppercase), "hello", "HELLO")
   assertEquals(

@@ -1350,7 +1350,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
           }
         }
         class ChildAccidentallyOverridingGetStringMultipleInterfaces extends ParentNotExposingGetString implements InterfaceExposingGetStringAsMethod, InterfaceExposingGetStringAsProperty {
-        > Error: JsProperty 'String ChildAccidentallyOverridingGetStringMultipleInterfaces.getString()' (inherited from test.InterfaceExposingGetStringAsProperty) cannot override JsMethod 'String InterfaceExposingGetStringAsMethod.getString()'.
+        > Error: JsMethod 'String ChildAccidentallyOverridingGetStringMultipleInterfaces.getString()' (inherited from test.InterfaceExposingGetStringAsMethod) cannot override JsProperty 'String InterfaceExposingGetStringAsProperty.getString()'.
         }
         """);
   }

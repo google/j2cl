@@ -100,6 +100,15 @@ $j2wasm$externs.subnativeinterface_AccidentalSubNativeInterface = function() {};
 
 /**
  * @abstract
+ * @final
+ * @extends {$j2wasm$externs.subnativeinterface_NonJsBase}
+ * @implements {test.foo.MyNativeInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_FinalAccidentalSubNativeInterface = function() {};
+
+/**
+ * @abstract
  * @extends {$j2wasm$externs.java_lang_Object}
  * @constructor
  */
@@ -112,6 +121,28 @@ $j2wasm$externs.subnativeinterface_NonJsStringEcho = function() {};
  * @constructor
  */
 $j2wasm$externs.subnativeinterface_AccidentalStringEcho = function() {};
+
+/**
+ * @abstract
+ * @template T
+ * @extends {$j2wasm$externs.java_lang_Object}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_NonJsGenericEcho = function() {};
+
+/**
+ * @interface
+ */
+$j2wasm$externs.subnativeinterface_StringEchoInterface = function() {};
+
+/**
+ * @abstract
+ * @extends {$j2wasm$externs.subnativeinterface_NonJsGenericEcho<?string>}
+ * @implements {test.foo.MyNativeGenericInterface<?string>}
+ * @implements {$j2wasm$externs.subnativeinterface_StringEchoInterface}
+ * @constructor
+ */
+$j2wasm$externs.subnativeinterface_AccidentalGenericEchoWithOtherInterface = function() {};
 
 /**
  * @interface

@@ -1,4 +1,8 @@
 
+(type $subnativeinterface.StringEchoInterface.vtable (sub (struct
+ (field $m_echo__java_lang_String__java_lang_String (ref $function.m_echo__java_lang_String__java_lang_String))
+ ))
+)
 (type $subnativeinterface.SubNativeInterface (sub $java.lang.Object (descriptor $subnativeinterface.SubNativeInterface.vtable) (struct
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
@@ -103,8 +107,36 @@
  (field $m_echo__java_lang_String__java_lang_String (ref $function.m_echo__java_lang_String__java_lang_String))
  ))
 )
+(type $subnativeinterface.NonJsGenericEcho (sub $java.lang.Object (descriptor $subnativeinterface.NonJsGenericEcho.vtable) (struct
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $subnativeinterface.NonJsGenericEcho.vtable (sub $java.lang.Object.vtable (describes $subnativeinterface.NonJsGenericEcho) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_echo__java_lang_Object__java_lang_Object (ref $function.m_echo__java_lang_Object__java_lang_Object))
+ ))
+)
 (type $subnativeinterface.JavaSubNativeInterface.vtable (sub (struct
  (field $m_getValue__int (ref $function.m_getValue__int))
+ ))
+)
+(type $subnativeinterface.StringEchoInterface.$LambdaAdaptor (sub $java.lang.Object (descriptor $subnativeinterface.StringEchoInterface.$LambdaAdaptor.vtable) (struct
+ (field $itable (ref $subnativeinterface.StringEchoInterface.$LambdaAdaptor.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $subnativeinterface.StringEchoInterface.$LambdaAdaptor.vtable (sub $java.lang.Object.vtable (describes $subnativeinterface.StringEchoInterface.$LambdaAdaptor) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_echo__java_lang_String__java_lang_String (ref $function.m_echo__java_lang_String__java_lang_String))
  ))
 )
 (type $subnativeinterface.SubNativeInterface.$LambdaImplementor$1 (sub $java.lang.Object (descriptor $subnativeinterface.SubNativeInterface.$LambdaImplementor$1.vtable) (struct
@@ -171,6 +203,23 @@
  (field $m_mightBeRenamed__int (ref $function.m_mightBeRenamed__int))
  ))
 )
+(type $subnativeinterface.FinalAccidentalSubNativeInterface (sub $subnativeinterface.NonJsBase (descriptor $subnativeinterface.FinalAccidentalSubNativeInterface.vtable) (struct
+ (field $itable (ref $itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $subnativeinterface.FinalAccidentalSubNativeInterface.vtable (sub $subnativeinterface.NonJsBase.vtable (describes $subnativeinterface.FinalAccidentalSubNativeInterface) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getProp__int (ref $function.m_getProp__int))
+ (field $m_getValue__int (ref $function.m_getValue__int))
+ (field $m_setProp__int__void (ref $function.m_setProp__int__void))
+ (field $m_mightBeRenamed__int (ref $function.m_mightBeRenamed__int))
+ ))
+)
 (type $subnativeinterface.AccidentalStringEcho (sub $subnativeinterface.NonJsStringEcho (descriptor $subnativeinterface.AccidentalStringEcho.vtable) (struct
  (field $itable (ref $itable))
  (field $$systemIdentityHashCode@java.lang.Object (mut i32))
@@ -184,6 +233,21 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_echo__java_lang_String__java_lang_String (ref $function.m_echo__java_lang_String__java_lang_String))
  (field $m_echo__java_lang_Object__java_lang_Object (ref $function.m_echo__java_lang_Object__java_lang_Object))
+ ))
+)
+(type $subnativeinterface.AccidentalGenericEchoWithOtherInterface (sub $subnativeinterface.NonJsGenericEcho (descriptor $subnativeinterface.AccidentalGenericEchoWithOtherInterface.vtable) (struct
+ (field $itable (ref $subnativeinterface.AccidentalGenericEchoWithOtherInterface.itable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ ))
+)
+(type $subnativeinterface.AccidentalGenericEchoWithOtherInterface.vtable (sub $subnativeinterface.NonJsGenericEcho.vtable (describes $subnativeinterface.AccidentalGenericEchoWithOtherInterface) (struct
+ (field $js_prototype (ref null extern))
+ (field $$getClassImpl__java_lang_Class (ref $function.$getClassImpl__java_lang_Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_echo__java_lang_Object__java_lang_Object (ref $function.m_echo__java_lang_Object__java_lang_Object))
+ (field $m_echo__java_lang_String__java_lang_String (ref $function.m_echo__java_lang_String__java_lang_String))
  ))
 )
 (type $subnativeinterface.JavaSubNativeInterfaceImpl (sub $java.lang.Object (descriptor $subnativeinterface.JavaSubNativeInterfaceImpl.vtable) (struct
