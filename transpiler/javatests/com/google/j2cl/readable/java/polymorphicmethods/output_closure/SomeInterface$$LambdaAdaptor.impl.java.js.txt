@@ -1,0 +1,50 @@
+goog.module('polymorphicmethods.SomeInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SomeInterface = goog.require('polymorphicmethods.SomeInterface$impl');
+
+/**
+ * @implements {SomeInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void} @nodts*/
+  this.f_fn__polymorphicmethods_SomeInterface_$LambdaAdaptor;
+  this.$ctor__polymorphicmethods_SomeInterface_$LambdaAdaptor__polymorphicmethods_SomeInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__polymorphicmethods_SomeInterface_$LambdaAdaptor__polymorphicmethods_SomeInterface_$JsFunction__void(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__polymorphicmethods_SomeInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts */
+ m_interfaceMethod__void() {
+  {
+   let $function = this.f_fn__polymorphicmethods_SomeInterface_$LambdaAdaptor;
+   $function();
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SomeInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'polymorphicmethods.SomeInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=SomeInterface$$LambdaAdaptor.js.map

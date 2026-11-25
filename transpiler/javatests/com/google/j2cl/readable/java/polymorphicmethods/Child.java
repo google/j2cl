@@ -1,0 +1,60 @@
+/*
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package polymorphicmethods;
+
+interface SomeInterface {
+  void interfaceMethod();
+}
+
+class Parent {
+  public void nonFinal() {}
+
+  public void nonFinal(Object arg) {}
+
+  public void finalInChild() {}
+
+  public final void finalInParent() {}
+
+  private void testMutatedQualifier(Parent p) {
+    // Repro for b/589851324
+    p.nonFinal(p = null);
+  }
+}
+
+class Child extends Parent implements SomeInterface {
+  @Override
+  public void nonFinal() {}
+
+  @Override
+  public void nonFinal(Object arg) {}
+
+  @Override
+  public final void finalInChild() {}
+
+  @Override
+  public void interfaceMethod() {}
+}
+
+final class FinalChild extends Parent implements SomeInterface {
+  @Override
+  public void nonFinal() {}
+
+  @Override
+  public void finalInChild() {}
+
+  @Override
+  public void interfaceMethod() {}
+}

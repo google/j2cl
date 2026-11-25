@@ -1,0 +1,42 @@
+goog.module('polymorphicmethods.SomeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('polymorphicmethods.SomeInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class SomeInterface {
+ /** @abstract @nodts */
+ m_interfaceMethod__void() {}
+ /** @nodts @return {!SomeInterface} */
+ static $adapt(/** ?function():void */ fn) {
+  SomeInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeInterface.$clinit = () =>{};
+  SomeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__polymorphicmethods_SomeInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__polymorphicmethods_SomeInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('polymorphicmethods.SomeInterface.$LambdaAdaptor$impl');
+ }
+}
+SomeInterface.$markImplementor(/**@type {Function}*/ (SomeInterface));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (SomeInterface), 'polymorphicmethods.SomeInterface');
+
+exports = SomeInterface;
+
+//# sourceMappingURL=SomeInterface.js.map

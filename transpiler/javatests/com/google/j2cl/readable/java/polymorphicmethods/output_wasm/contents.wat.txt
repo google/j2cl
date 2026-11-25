@@ -1,0 +1,466 @@
+
+(global $$class-initialized@polymorphicmethods.SomeInterface (mut i32)
+ (i32.const 0)
+)
+(global $$class@polymorphicmethods.SomeInterface (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@polymorphicmethods.Parent (mut i32)
+ (i32.const 0)
+)
+(global $$class@polymorphicmethods.Parent (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@polymorphicmethods.Child (mut i32)
+ (i32.const 0)
+)
+(global $$class@polymorphicmethods.Child (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@polymorphicmethods.FinalChild (mut i32)
+ (i32.const 0)
+)
+(global $$class@polymorphicmethods.FinalChild (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $$class-initialized@polymorphicmethods.SomeInterface.$LambdaAdaptor (mut i32)
+ (i32.const 0)
+)
+(global $$class@polymorphicmethods.SomeInterface.$LambdaAdaptor (mut (ref null $java.lang.Class))
+ (ref.null $java.lang.Class)
+)
+(global $polymorphicmethods.Parent.vtable (ref $polymorphicmethods.Parent.vtable)
+ (struct.new $polymorphicmethods.Parent.vtable
+  (ref.func $$getClassImpl__java_lang_Class@polymorphicmethods.Parent)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_finalInChild__void@polymorphicmethods.Parent)
+  (ref.func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Parent)
+  (ref.func $m_nonFinal__void@polymorphicmethods.Parent)
+ )
+)
+(global $polymorphicmethods.Child.vtable (ref $polymorphicmethods.Child.vtable)
+ (struct.new $polymorphicmethods.Child.vtable
+  (ref.func $$getClassImpl__java_lang_Class@polymorphicmethods.Child)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_finalInChild__void@polymorphicmethods.Child)
+  (ref.func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Child)
+  (ref.func $m_nonFinal__void@polymorphicmethods.Child)
+  (ref.func $m_interfaceMethod__void@polymorphicmethods.Child)
+ )
+)
+(global $polymorphicmethods.SomeInterface.vtable@$polymorphicmethods.Child (ref $polymorphicmethods.SomeInterface.vtable)
+ (struct.new $polymorphicmethods.SomeInterface.vtable
+  (ref.func $m_interfaceMethod__void@polymorphicmethods.Child)
+ )
+)
+(global $polymorphicmethods.FinalChild.vtable (ref $polymorphicmethods.FinalChild.vtable)
+ (struct.new $polymorphicmethods.FinalChild.vtable
+  (ref.func $$getClassImpl__java_lang_Class@polymorphicmethods.FinalChild)
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_finalInChild__void@polymorphicmethods.FinalChild)
+  (ref.func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Parent)
+  (ref.func $m_nonFinal__void@polymorphicmethods.FinalChild)
+  (ref.func $m_interfaceMethod__void@polymorphicmethods.FinalChild)
+ )
+)
+(global $polymorphicmethods.SomeInterface.vtable@$polymorphicmethods.FinalChild (ref $polymorphicmethods.SomeInterface.vtable)
+ (struct.new $polymorphicmethods.SomeInterface.vtable
+  (ref.func $m_interfaceMethod__void@polymorphicmethods.FinalChild)
+ )
+)
+
+
+;;; void SomeInterface.$clinit()
+(func $$clinit__void_<once>_@polymorphicmethods.SomeInterface
+ (block
+  (if (global.get $$class-initialized@polymorphicmethods.SomeInterface)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@polymorphicmethods.SomeInterface (i32.const 1))
+ )
+)
+
+;;; Class<T> SomeInterface.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.SomeInterface
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@polymorphicmethods.SomeInterface)))
+   (then
+    (return (global.get $$class@polymorphicmethods.SomeInterface))
+   )
+  )
+  (global.set $$class@polymorphicmethods.SomeInterface (call $m_createForInterface__java_lang_String__java_lang_Class@java.lang.Class (call $$getString_|polymorphicm...|__java_lang_String_<once>_@polymorphicmethods.SomeInterface.$StringLiterals )))
+  (return (global.get $$class@polymorphicmethods.SomeInterface))
+ )
+)
+
+;;; Parent Parent.$create()
+(func $$create__@polymorphicmethods.Parent
+ (result (ref null $polymorphicmethods.Parent))
+ (local $$instance (ref null $polymorphicmethods.Parent))
+ (block
+  (call $$clinit__void_<once>_@polymorphicmethods.Parent )
+  (local.set $$instance (struct.new $polymorphicmethods.Parent (global.get $polymorphicmethods.Parent.vtable) (global.get $itable.empty) (i32.const 0)))
+  (call $$ctor__void_$p_polymorphicmethods_Parent@polymorphicmethods.Parent (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_polymorphicmethods_Parent@polymorphicmethods.Parent
+ (param $this (ref null $polymorphicmethods.Parent))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Parent.nonFinal()
+(func $m_nonFinal__void@polymorphicmethods.Parent
+ (type $function.m_nonFinal__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Parent))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonFinal__void@polymorphicmethods.Parent)
+
+;;; void Parent.nonFinal(Object arg)
+(func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Parent
+ (type $function.m_nonFinal__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg (ref null $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Parent))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Parent)
+
+;;; void Parent.finalInChild()
+(func $m_finalInChild__void@polymorphicmethods.Parent
+ (type $function.m_finalInChild__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Parent))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInChild__void@polymorphicmethods.Parent)
+
+;;; void Parent.finalInParent()
+(func $m_finalInParent__void@polymorphicmethods.Parent
+ (type $function.m_finalInParent__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Parent))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Parent) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInParent__void@polymorphicmethods.Parent)
+
+;;; void Parent.testMutatedQualifier(Parent p)
+(func $m_testMutatedQualifier__polymorphicmethods_Parent__void_$p_polymorphicmethods_Parent@polymorphicmethods.Parent
+ (param $this (ref null $polymorphicmethods.Parent))
+ (param $p (ref null $polymorphicmethods.Parent))
+ (block
+  (call_ref $function.m_nonFinal__java_lang_Object__void (ref.as_non_null (local.get $p))(block (result (ref null $polymorphicmethods.Parent))
+   (local.set $p (ref.null $polymorphicmethods.Parent))
+   (local.get $p)
+  )(struct.get $polymorphicmethods.Parent.vtable $m_nonFinal__java_lang_Object__void (struct.get $polymorphicmethods.Parent $vtable(local.get $p))))
+ )
+)
+
+;;; void Parent.$clinit()
+(func $$clinit__void_<once>_@polymorphicmethods.Parent
+ (block
+  (if (global.get $$class-initialized@polymorphicmethods.Parent)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@polymorphicmethods.Parent (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> Parent.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.Parent
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@polymorphicmethods.Parent)))
+   (then
+    (return (global.get $$class@polymorphicmethods.Parent))
+   )
+  )
+  (global.set $$class@polymorphicmethods.Parent (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|polymorphicm...|__java_lang_String_<once>_@polymorphicmethods.Parent.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@polymorphicmethods.Parent))
+ )
+)
+
+;;; Class<?> Parent.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@polymorphicmethods.Parent
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $polymorphicmethods.Parent))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Parent) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.Parent ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@polymorphicmethods.Parent)
+
+;;; void $LambdaAdaptor.$ctor()
+(func $$ctor__void_$p_polymorphicmethods_SomeInterface_$LambdaAdaptor@polymorphicmethods.SomeInterface.$LambdaAdaptor
+ (param $this (ref null $polymorphicmethods.SomeInterface.$LambdaAdaptor))
+ (block
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaAdaptor.$clinit()
+(func $$clinit__void_<once>_@polymorphicmethods.SomeInterface.$LambdaAdaptor
+ (block
+  (if (global.get $$class-initialized@polymorphicmethods.SomeInterface.$LambdaAdaptor)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@polymorphicmethods.SomeInterface.$LambdaAdaptor (i32.const 1))
+  (call $$clinit__void_<once>_@java.lang.Object )
+ )
+)
+
+;;; Class<T> $LambdaAdaptor.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.SomeInterface.$LambdaAdaptor
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@polymorphicmethods.SomeInterface.$LambdaAdaptor)))
+   (then
+    (return (global.get $$class@polymorphicmethods.SomeInterface.$LambdaAdaptor))
+   )
+  )
+  (global.set $$class@polymorphicmethods.SomeInterface.$LambdaAdaptor (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|polymorphicm...|__java_lang_String_<once>_@polymorphicmethods.SomeInterface.$LambdaAdaptor.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@java.lang.Object )))
+  (return (global.get $$class@polymorphicmethods.SomeInterface.$LambdaAdaptor))
+ )
+)
+
+;;; Class<?> $LambdaAdaptor.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@polymorphicmethods.SomeInterface.$LambdaAdaptor
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $polymorphicmethods.SomeInterface.$LambdaAdaptor))
+ (local.set $this (ref.cast (ref $polymorphicmethods.SomeInterface.$LambdaAdaptor) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.SomeInterface.$LambdaAdaptor ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@polymorphicmethods.SomeInterface.$LambdaAdaptor)
+
+;;; Child Child.$create()
+(func $$create__@polymorphicmethods.Child
+ (result (ref null $polymorphicmethods.Child))
+ (local $$instance (ref null $polymorphicmethods.Child))
+ (block
+  (call $$clinit__void_<once>_@polymorphicmethods.Child )
+  (local.set $$instance (struct.new $polymorphicmethods.Child (global.get $polymorphicmethods.Child.vtable) (global.get $polymorphicmethods.Child.itable) (i32.const 0)))
+  (call $$ctor__void_$p_polymorphicmethods_Child@polymorphicmethods.Child (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_polymorphicmethods_Child@polymorphicmethods.Child
+ (param $this (ref null $polymorphicmethods.Child))
+ (block
+  (call $$ctor__void_$p_polymorphicmethods_Parent@polymorphicmethods.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Child.nonFinal()
+(func $m_nonFinal__void@polymorphicmethods.Child
+ (type $function.m_nonFinal__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Child))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Child) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonFinal__void@polymorphicmethods.Child)
+
+;;; void Child.nonFinal(Object arg)
+(func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Child
+ (type $function.m_nonFinal__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg (ref null $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Child))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Child) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonFinal__java_lang_Object__void@polymorphicmethods.Child)
+
+;;; void Child.finalInChild()
+(func $m_finalInChild__void@polymorphicmethods.Child
+ (type $function.m_finalInChild__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Child))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Child) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInChild__void@polymorphicmethods.Child)
+
+;;; void Child.interfaceMethod()
+(func $m_interfaceMethod__void@polymorphicmethods.Child
+ (type $function.m_interfaceMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.Child))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Child) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_interfaceMethod__void@polymorphicmethods.Child)
+
+;;; void Child.$clinit()
+(func $$clinit__void_<once>_@polymorphicmethods.Child
+ (block
+  (if (global.get $$class-initialized@polymorphicmethods.Child)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@polymorphicmethods.Child (i32.const 1))
+  (call $$clinit__void_<once>_@polymorphicmethods.Parent )
+ )
+)
+
+;;; Class<T> Child.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.Child
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@polymorphicmethods.Child)))
+   (then
+    (return (global.get $$class@polymorphicmethods.Child))
+   )
+  )
+  (global.set $$class@polymorphicmethods.Child (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|polymorphicm...|__java_lang_String_<once>_@polymorphicmethods.Child.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.Parent )))
+  (return (global.get $$class@polymorphicmethods.Child))
+ )
+)
+
+;;; Class<?> Child.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@polymorphicmethods.Child
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $polymorphicmethods.Child))
+ (local.set $this (ref.cast (ref $polymorphicmethods.Child) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.Child ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@polymorphicmethods.Child)
+
+;;; FinalChild FinalChild.$create()
+(func $$create__@polymorphicmethods.FinalChild
+ (result (ref null $polymorphicmethods.FinalChild))
+ (local $$instance (ref null $polymorphicmethods.FinalChild))
+ (block
+  (call $$clinit__void_<once>_@polymorphicmethods.FinalChild )
+  (local.set $$instance (struct.new $polymorphicmethods.FinalChild (global.get $polymorphicmethods.FinalChild.vtable) (global.get $polymorphicmethods.FinalChild.itable) (i32.const 0)))
+  (call $$ctor__void_$p_polymorphicmethods_FinalChild@polymorphicmethods.FinalChild (ref.as_non_null (local.get $$instance)))
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FinalChild.$ctor()
+(func $$ctor__void_$p_polymorphicmethods_FinalChild@polymorphicmethods.FinalChild
+ (param $this (ref null $polymorphicmethods.FinalChild))
+ (block
+  (call $$ctor__void_$p_polymorphicmethods_Parent@polymorphicmethods.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void FinalChild.nonFinal()
+(func $m_nonFinal__void@polymorphicmethods.FinalChild
+ (type $function.m_nonFinal__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.FinalChild))
+ (local.set $this (ref.cast (ref $polymorphicmethods.FinalChild) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonFinal__void@polymorphicmethods.FinalChild)
+
+;;; void FinalChild.finalInChild()
+(func $m_finalInChild__void@polymorphicmethods.FinalChild
+ (type $function.m_finalInChild__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.FinalChild))
+ (local.set $this (ref.cast (ref $polymorphicmethods.FinalChild) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_finalInChild__void@polymorphicmethods.FinalChild)
+
+;;; void FinalChild.interfaceMethod()
+(func $m_interfaceMethod__void@polymorphicmethods.FinalChild
+ (type $function.m_interfaceMethod__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (local $this (ref null $polymorphicmethods.FinalChild))
+ (local.set $this (ref.cast (ref $polymorphicmethods.FinalChild) (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_interfaceMethod__void@polymorphicmethods.FinalChild)
+
+;;; void FinalChild.$clinit()
+(func $$clinit__void_<once>_@polymorphicmethods.FinalChild
+ (block
+  (if (global.get $$class-initialized@polymorphicmethods.FinalChild)
+   (then
+    (return )
+   )
+  )
+  (global.set $$class-initialized@polymorphicmethods.FinalChild (i32.const 1))
+  (call $$clinit__void_<once>_@polymorphicmethods.Parent )
+ )
+)
+
+;;; Class<T> FinalChild.$getClassMetadata()
+(func $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.FinalChild
+ (result (ref null $java.lang.Class))
+ (block
+  (if (i32.eqz (ref.is_null (global.get $$class@polymorphicmethods.FinalChild)))
+   (then
+    (return (global.get $$class@polymorphicmethods.FinalChild))
+   )
+  )
+  (global.set $$class@polymorphicmethods.FinalChild (call $m_createForClass__java_lang_String__java_lang_Class__java_lang_Class@java.lang.Class (call $$getString_|polymorphicm...|__java_lang_String_<once>_@polymorphicmethods.FinalChild.$StringLiterals )(call $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.Parent )))
+  (return (global.get $$class@polymorphicmethods.FinalChild))
+ )
+)
+
+;;; Class<?> FinalChild.$getClassImpl()
+(func $$getClassImpl__java_lang_Class@polymorphicmethods.FinalChild
+ (type $function.$getClassImpl__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $polymorphicmethods.FinalChild))
+ (local.set $this (ref.cast (ref $polymorphicmethods.FinalChild) (local.get $this.untyped)))
+ (block
+  (return (call $$getClassMetadata__java_lang_Class_<once>_@polymorphicmethods.FinalChild ))
+ )
+)
+(elem declare func $$getClassImpl__java_lang_Class@polymorphicmethods.FinalChild)
