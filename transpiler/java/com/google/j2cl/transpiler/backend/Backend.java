@@ -725,7 +725,7 @@ public enum Backend {
           // that need rescoping.
           NormalizeSwitchPatternsJ2kt::new,
           NormalizeStaticMemberQualifiers::new,
-          () -> new VariableDeclarationHoister(/* allowDeclarationsInExpressions= */ true),
+          // Runs before ExpandCompoundAssignments to make sure it only sees valid l-values.
           NormalizeMultiExpressions::new,
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,
@@ -735,6 +735,10 @@ public enum Backend {
           InsertNarrowingPrimitiveConversionsJ2kt::new,
           NormalizeVarargParametersJ2kt::new,
           NormalizeFieldInitializationJ2kt::new,
+          // Needs to run after all passes that create variable declarations in multi-expressions,
+          // and before NormalizeVariableInitialization, which initializes the hoisted declarations.
+          () -> new VariableDeclarationHoister(/* allowDeclarationsInExpressions= */ true),
+          NormalizeMultiExpressions::new,
           NormalizeVariableInitialization::new,
           MakeVariablesFinal::new,
           // Needs to run after NormalizeVarargParametersJ2kt and MakeVariablesFinal.
