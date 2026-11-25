@@ -21,6 +21,7 @@ package autovalue
 import javaemul.lang.*
 import autovalue.AutoValueWithBuilder
 import java.lang.IllegalStateException
+import java.util.Optional
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
@@ -34,16 +35,26 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
  
  private val nullableField: Double?
  
- private constructor(booleanField: Boolean, nullableField: Double?) {
+ private val optionalField: Optional<String>?
+ 
+ private val otherOptionalField: Optional<String>?
+ 
+ private constructor(booleanField: Boolean, nullableField: Double?, optionalField: Optional<String>?, otherOptionalField: Optional<String>?) {
   this.booleanField = booleanField
   this.nullableField = nullableField
+  this.optionalField = optionalField
+  this.otherOptionalField = otherOptionalField
  }
  
  override fun getBooleanField(): Boolean = this.booleanField
  
  override fun getNullableField(): Double? = this.nullableField
  
- override fun toString(): String = "AutoValueWithBuilder{booleanField=" + this.booleanField + ", nullableField=" + this.nullableField + "}"
+ override fun getOptionalField(): Optional<String>? = this.optionalField
+ 
+ override fun getOtherOptionalField(): Optional<String>? = this.otherOptionalField
+ 
+ override fun toString(): String = "AutoValueWithBuilder{booleanField=" + this.booleanField + ", nullableField=" + this.nullableField + ", optionalField=" + this.optionalField + ", otherOptionalField=" + this.otherOptionalField + "}"
  
  override fun equals(o: Any?): Boolean {
   if (o === this) {
@@ -53,7 +64,11 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
    val that: AutoValueWithBuilder? = o as AutoValueWithBuilder?
    return this.booleanField == that!!.getBooleanField() && (if (this.nullableField == null) that!!.getNullableField() == null else this.nullableField!!.equals(
     that!!.getNullableField() as Any?,
-   ))
+   )) && this.optionalField!!.equals(
+    that!!.getOptionalField(),
+   ) && this.otherOptionalField!!.equals(
+    that!!.getOtherOptionalField(),
+   )
   }
   return false
  }
@@ -68,6 +83,14 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   h___ = h___.xor(
    if (this.nullableField == null) 0 else this.nullableField!!.hashCode(),
   )
+  h___ = h___ * 1000003
+  h___ = h___.xor(
+   this.optionalField!!.hashCode(),
+  )
+  h___ = h___ * 1000003
+  h___ = h___.xor(
+   this.otherOptionalField!!.hashCode(),
+  )
   return h___
  }
  
@@ -78,6 +101,10 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   
   private var nullableField: Double? = null
   
+  private var optionalField: Optional<String>? = Optional.empty<String>()
+  
+  private var otherOptionalField: Optional<String>? = Optional.empty<String>()
+  
   private var set___0: Byte = 0.toByte()
   
   internal constructor()
@@ -85,6 +112,8 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
   internal constructor(source: AutoValueWithBuilder?) {
    this.booleanField = source!!.getBooleanField()
    this.nullableField = source!!.getNullableField()
+   this.optionalField = source!!.getOptionalField()
+   this.otherOptionalField = source!!.getOtherOptionalField()
    this.set___0 = 1.toByte()
   }
   
@@ -99,6 +128,20 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
    return this
   }
   
+  override fun setOptionalField(optionalField: String?): autovalue.AutoValueWithBuilder.Builder? {
+   this.optionalField = Optional.of<String>(
+    optionalField!!,
+   )
+   return this
+  }
+  
+  override fun setOtherOptionalField(otherOptionalField: String?): autovalue.AutoValueWithBuilder.Builder? {
+   this.otherOptionalField = Optional.of<String>(
+    otherOptionalField!!,
+   )
+   return this
+  }
+  
   override fun build(): AutoValueWithBuilder? {
    if (this.set___0.toInt() != 1) {
     val missing: String = " booleanField"
@@ -109,6 +152,8 @@ class AutoValue_AutoValueWithBuilder: AutoValueWithBuilder {
    return AutoValue_AutoValueWithBuilder(
     this@Builder.booleanField,
     this@Builder.nullableField,
+    this@Builder.optionalField,
+    this@Builder.otherOptionalField,
    )
   }
  }

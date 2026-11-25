@@ -16,6 +16,7 @@
 package autovalue;
 
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
 import javax.annotation.Nullable;
 
 @AutoValue
@@ -25,6 +26,15 @@ public abstract class AutoValueWithBuilder {
   @Nullable
   public abstract Double getNullableField();
 
+  // Tests that OptimizeAutoValue supports several instance initializer blocks. In the
+  // Java -> Kotlin (J2KT) -> JS pipeline, the generated builder has no primary constructor, so each
+  // of its field initializers that is not a constant default value ends up in its own instance
+  // initializer block. Here the builder initializes the fields of these two `Optional` properties
+  // to `Optional.empty()`.
+  public abstract Optional<String> getOptionalField();
+
+  public abstract Optional<String> getOtherOptionalField();
+
   public abstract Builder toBuilder();
 
   @AutoValue.Builder
@@ -32,6 +42,10 @@ public abstract class AutoValueWithBuilder {
     public abstract Builder setBooleanField(boolean x);
 
     public abstract Builder setNullableField(Double x);
+
+    public abstract Builder setOptionalField(String x);
+
+    public abstract Builder setOtherOptionalField(String x);
 
     public abstract AutoValueWithBuilder build();
   }

@@ -212,10 +212,11 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           return false;
         });
 
-    // Note that the collection here will error out in duplicate keys so if any our
-    // assumptions incorrect (e.g. no multiple static initializer), we should fail-fast.
+    // Mangled names are unique, except for initializer blocks which are skipped. Fail fast if this
+    // assumption is not satisfied.
     ImmutableMap<String, Member> movedMembersByMangledName =
-        Maps.uniqueIndex(movedMembers, Member::getMangledName);
+        Maps.uniqueIndex(
+            Iterables.filter(movedMembers, m -> !m.isInitializerBlock()), Member::getMangledName);
 
     LinkedHashMap<Member, Member> oldMemberByNewMember = new LinkedHashMap<>();
 

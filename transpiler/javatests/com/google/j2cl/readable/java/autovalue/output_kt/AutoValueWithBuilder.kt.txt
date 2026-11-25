@@ -19,9 +19,11 @@
 package autovalue
 
 import javaemul.lang.*
+import java.util.Optional
 import javaemul.lang.annotations.WasAutoValue
 import kotlin.Boolean
 import kotlin.Double
+import kotlin.String
 import kotlin.Suppress
 import kotlin.jvm.JvmStatic
 
@@ -30,6 +32,10 @@ abstract class AutoValueWithBuilder {
  abstract fun getBooleanField(): Boolean
  
  abstract fun getNullableField(): Double?
+ 
+ abstract fun getOptionalField(): Optional<String>?
+ 
+ abstract fun getOtherOptionalField(): Optional<String>?
  
  abstract fun toBuilder(): Builder?
  
@@ -43,6 +49,10 @@ abstract class AutoValueWithBuilder {
   abstract fun setBooleanField(x: Boolean): Builder?
   
   abstract fun setNullableField(x: Double?): Builder?
+  
+  abstract fun setOptionalField(x: String?): Builder?
+  
+  abstract fun setOtherOptionalField(x: String?): Builder?
   
   abstract fun build(): AutoValueWithBuilder?
  }
