@@ -80,6 +80,7 @@
  (local $$expression (ref null $java.lang.String))
  (local $$expression_1 i32)
  (local $s i32)
+ (local $$expression_2 i32)
  (local $this (ref null $switchstatement.SwitchStatement))
  (local.set $this (ref.cast (ref $switchstatement.SwitchStatement) (local.get $this.untyped)))
  (block
@@ -168,22 +169,25 @@
   (local.set $s (i32.const 1))
   (block $SWITCH_4.BREAK
    (block
+    (local.set $$expression_2 (local.get $s))
     (block
      (block
-      (block ;; evaluate expression and jump
-       (br_table 0 3 1 3 3 3 3 3 3 3 3 2 3 (i32.sub (local.get $s) (i32.const 1)))
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 3 1 3 3 3 3 3 3 3 3 2 3 (i32.sub (local.get $$expression_2) (i32.const 1)))
+       )
+       ;; case 1:
+       (local.set $s (i32.extend16_s (i32.add (local.get $s) (i32.const 1))))
+       (br $SWITCH_4.BREAK)
       )
-      ;; case 1:
+      ;; case 3:
       (local.set $s (i32.extend16_s (i32.add (local.get $s) (i32.const 1))))
       (br $SWITCH_4.BREAK)
      )
-     ;; case 3:
+     ;; case 12:
      (local.set $s (i32.extend16_s (i32.add (local.get $s) (i32.const 1))))
      (br $SWITCH_4.BREAK)
     )
-    ;; case 12:
-    (local.set $s (i32.extend16_s (i32.add (local.get $s) (i32.const 1))))
-    (br $SWITCH_4.BREAK)
    )
   )
  )

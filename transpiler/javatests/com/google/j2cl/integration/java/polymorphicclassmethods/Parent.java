@@ -27,4 +27,8 @@ public class Parent {
   public Object paramChangeCantOverride(Object foo) {
     return new Parent();
   }
+
+  public String dispatch(Object unused) {
+    return "Parent";
+  }
 }

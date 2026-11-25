@@ -51,11 +51,6 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   }
 
   @Override
-  public boolean isIdempotent() {
-    return expression.isIdempotent();
-  }
-
-  @Override
   public Precedence getPrecedence() {
     // instanceof is treated like a relational infix operator.
     return Precedence.RELATIONAL;

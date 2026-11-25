@@ -71,9 +71,8 @@ open class SynchronizedStaticMethods {
   open fun incrementInstance(): Int {
    synchronized<Unit>(this) {
     return run {
-     val ___qualifier: InstanceAndStaticSynchronized = this
      val ___value: Int = this.instanceCount + 1
-     ___qualifier.instanceCount = ___value
+     this.instanceCount = ___value
      ___value
     }
    }

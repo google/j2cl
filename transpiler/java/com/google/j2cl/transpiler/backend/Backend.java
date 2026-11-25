@@ -45,7 +45,7 @@ import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImpl
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
 import com.google.j2cl.transpiler.passes.EvaluateCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
-import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
+import com.google.j2cl.transpiler.passes.ExtractNonInvariantExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
 import com.google.j2cl.transpiler.passes.FixAnonymousClassInstantiations;
 import com.google.j2cl.transpiler.passes.FixJavaKotlinCollectionMethodsMismatch;
@@ -596,7 +596,7 @@ public enum Backend {
           // NormalizeNativePropertyAccesses and InsertWasmJsBoundaryConversions creates method
           // calls whose qualifiers might need to be extracted. After extracting qualifiers,
           // we must again normalize multi-expressions.
-          ExtractNonIdempotentExpressions::new,
+          ExtractNonInvariantExpressions::new,
           NormalizeMultiExpressions::new,
           ImplementFinallyViaControlFlow::new,
 

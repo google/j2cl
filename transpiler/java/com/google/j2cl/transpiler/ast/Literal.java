@@ -42,11 +42,6 @@ public abstract sealed class Literal extends Expression implements AnnotationVal
   }
 
   @Override
-  public boolean isIdempotent() {
-    return true;
-  }
-
-  @Override
   public boolean isEffectivelyInvariant() {
     return true;
   }

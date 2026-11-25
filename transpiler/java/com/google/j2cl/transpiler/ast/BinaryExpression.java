@@ -125,11 +125,6 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
-  public boolean isIdempotent() {
-    return !operator.hasSideEffect() && leftOperand.isIdempotent() && rightOperand.isIdempotent();
-  }
-
-  @Override
   public boolean isCompileTimeConstant() {
     return !operator.hasSideEffect()
         && leftOperand.isCompileTimeConstant()

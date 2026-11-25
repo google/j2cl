@@ -29,4 +29,9 @@ public class Child extends Parent {
   public Object paramChangeCantOverride(Parent foo) {
     return new Child();
   }
+
+  @Override
+  public String dispatch(Object unused) {
+    return "Child";
+  }
 }

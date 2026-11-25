@@ -149,7 +149,11 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
     List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
 
     Variable newInstance =
-        Variable.builder().setName("$instance").setTypeDescriptor(enclosingType).build();
+        Variable.builder()
+            .setName("$instance")
+            .setTypeDescriptor(enclosingType)
+            .setFinal(true)
+            .build();
 
     SourcePosition constructorSourcePosition = constructor.getSourcePosition();
 

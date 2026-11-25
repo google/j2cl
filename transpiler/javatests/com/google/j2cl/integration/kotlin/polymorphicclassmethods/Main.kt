@@ -15,6 +15,7 @@
  */
 package polymorphicclassmethods
 
+import com.google.j2cl.integration.testing.Asserts.assertEquals
 import com.google.j2cl.integration.testing.Asserts.assertTrue
 
 /** Test overriding class methods. */
@@ -28,4 +29,36 @@ fun main(vararg unused: String) {
   assertTrue(childClass.overrideWithNoChange() is Child)
   assertTrue(childClass.overrideWithReturnChange() is Child)
   assertTrue(childClass.paramChangeCantOverride(null) is Parent)
+
+  // Repro for b/589851324
+  var p: Parent? = Parent()
+  assertEquals(
+    "Parent",
+    p!!.dispatch(
+      run {
+        p = null
+        p
+      }
+    ),
+  )
+  p = Parent()
+  assertEquals(
+    "Parent",
+    p!!.dispatch(
+      run {
+        p = Child()
+        p
+      }
+    ),
+  )
+  var nonNullP: Parent = Parent()
+  assertEquals(
+    "Parent",
+    nonNullP.dispatch(
+      run {
+        nonNullP = Child()
+        nonNullP
+      }
+    ),
+  )
 }

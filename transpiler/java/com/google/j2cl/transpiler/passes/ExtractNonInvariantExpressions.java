@@ -28,12 +28,12 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
 /**
- * Extracts non-idempotent expressions into local variables to avoid double evaluation.
+ * Extracts non-invariant expressions into local variables to avoid double evaluation.
  *
  * <p>Wasm does not provide a good alternative solution that could be used at generation time, e.g.
  * a 'dup' instruction which would allow duplicating a value in the stack.
  */
-public class ExtractNonIdempotentExpressions extends NormalizationPass {
+public class ExtractNonInvariantExpressions extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -44,7 +44,7 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
             Expression expression = instanceOfExpression.getExpression();
 
             // instanceof Interface evaluates the expression twice.
-            if (!expression.isIdempotent()
+            if (!expression.isEffectivelyInvariant()
                 && instanceOfExpression.getTestTypeDescriptor().isInterface()) {
               Variable qualifierVariable =
                   Variable.builder()
@@ -70,7 +70,7 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
           public Expression rewriteMethodCall(MethodCall methodCall) {
             Expression qualifier = methodCall.getQualifier();
 
-            if (methodCall.isPolymorphic() && !qualifier.isIdempotent()) {
+            if (methodCall.isPolymorphic() && !qualifier.isEffectivelyInvariant()) {
               Variable qualifierVariable =
                   Variable.builder()
                       .setName("$qualifier")
@@ -94,7 +94,7 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
           @Override
           public Statement rewriteSwitchStatement(SwitchStatement switchStatement) {
             Expression expression = switchStatement.getExpression();
-            if (!expression.isIdempotent()) {
+            if (!expression.isEffectivelyInvariant()) {
               Variable switchVariable =
                   Variable.builder()
                       .setName("$expression")

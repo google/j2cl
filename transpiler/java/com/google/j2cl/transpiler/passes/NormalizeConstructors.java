@@ -487,7 +487,11 @@ public class NormalizeConstructors extends NormalizationPass {
             constructor.getParameters(), factoryMethodParameters, javascriptConstructorArguments);
     // let $instance = new Class(<javascriptConstructorArguments>);
     Variable newInstance =
-        Variable.builder().setName("$instance").setTypeDescriptor(enclosingType).build();
+        Variable.builder()
+            .setName("$instance")
+            .setTypeDescriptor(enclosingType)
+            .setFinal(true)
+            .build();
 
     SourcePosition constructorSourcePosition = constructor.getSourcePosition();
     Statement newInstanceStatement =

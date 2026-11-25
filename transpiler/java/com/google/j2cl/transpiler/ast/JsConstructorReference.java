@@ -35,11 +35,6 @@ public class JsConstructorReference extends Expression {
   }
 
   @Override
-  public boolean isIdempotent() {
-    return true;
-  }
-
-  @Override
   public boolean isEffectivelyInvariant() {
     return true;
   }

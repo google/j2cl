@@ -170,7 +170,7 @@ public final class InsertNotNullAssertionsOnNullabilityMismatch extends Normaliz
     }
 
     MultiExpression.Builder elvisExpressionBuilder = MultiExpression.builder();
-    if (!expression.isIdempotent()) {
+    if (!expression.isEffectivelyInvariant()) {
       Variable elvisVariable =
           Variable.builder()
               .setName("tmp")

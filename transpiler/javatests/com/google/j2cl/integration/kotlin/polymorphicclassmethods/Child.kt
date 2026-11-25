@@ -27,4 +27,8 @@ class Child : Parent() {
   fun paramChangeCantOverride(foo: Parent?): Any {
     return Child()
   }
+
+  override fun dispatch(unused: Any?): String {
+    return "Child"
+  }
 }

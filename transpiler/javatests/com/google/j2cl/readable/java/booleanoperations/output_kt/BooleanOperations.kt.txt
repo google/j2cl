@@ -118,12 +118,14 @@ open class BooleanOperations {
   val finalOuter: Outer = Outer()
   finalOuter.b = finalOuter.b.or(true)
   var outer: Outer? = Outer()
-  outer!!.b = outer!!.b.or(
+  val ___qualifier: Outer? = outer
+  val ___value: Boolean = ___qualifier!!.b.or(
    run {
     outer = null
     outer
    } == null,
   )
+  ___qualifier!!.b = ___value
  }
  
  companion object {

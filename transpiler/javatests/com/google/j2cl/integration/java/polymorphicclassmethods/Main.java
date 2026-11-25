@@ -15,6 +15,7 @@
  */
 package polymorphicclassmethods;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 /**
@@ -31,5 +32,11 @@ public class Main {
     assertTrue(childClass.overrideWithNoChange() instanceof Child);
     assertTrue(childClass.overrideWithReturnChange() instanceof Child);
     assertTrue(childClass.paramChangeCantOverride(null) instanceof Parent);
+
+    // Repro for b/589851324
+    Parent p = new Parent();
+    assertEquals("Parent", p.dispatch(p = null));
+    p = new Parent();
+    assertEquals("Parent", p.dispatch(p = new Child()));
   }
 }

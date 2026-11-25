@@ -171,11 +171,15 @@
 (func $m_testMutatedQualifier__polymorphicmethods_Parent__void_$p_polymorphicmethods_Parent@polymorphicmethods.Parent
  (param $this (ref null $polymorphicmethods.Parent))
  (param $p (ref null $polymorphicmethods.Parent))
+ (local $$qualifier (ref null $polymorphicmethods.Parent))
  (block
-  (call_ref $function.m_nonFinal__java_lang_Object__void (ref.as_non_null (local.get $p))(block (result (ref null $polymorphicmethods.Parent))
-   (local.set $p (ref.null $polymorphicmethods.Parent))
-   (local.get $p)
-  )(struct.get $polymorphicmethods.Parent.vtable $m_nonFinal__java_lang_Object__void (struct.get $polymorphicmethods.Parent $vtable(local.get $p))))
+  (block
+   (local.set $$qualifier (local.get $p))
+   (call_ref $function.m_nonFinal__java_lang_Object__void (ref.as_non_null (local.get $$qualifier))(block (result (ref null $polymorphicmethods.Parent))
+    (local.set $p (ref.null $polymorphicmethods.Parent))
+    (local.get $p)
+   )(struct.get $polymorphicmethods.Parent.vtable $m_nonFinal__java_lang_Object__void (struct.get $polymorphicmethods.Parent $vtable(local.get $$qualifier))))
+  )
  )
 )
 

@@ -49,18 +49,6 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   }
 
   /**
-   * Returns true if the expression can be evaluated multiple times and always results in the same
-   * value.
-   *
-   * <p>Note: that the expression might have side effects (e.g. cause some class initializers to
-   * run). An expression is idempotent if when evaluated in the same state multiple times yields the
-   * same resulting state and value.
-   */
-  public boolean isIdempotent() {
-    return false;
-  }
-
-  /**
    * Returns true if the expression does not have side effects (including triggering class
    * initializers) and its evaluation results on the same value if it is moved forward in the same
    * or an enclosed scope.

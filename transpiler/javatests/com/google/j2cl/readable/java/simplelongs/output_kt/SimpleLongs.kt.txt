@@ -53,16 +53,14 @@ open class SimpleLongs {
    a
   }
   e = run {
-   val ___qualifier: SimpleLongs = this
    val ___value: Long = this.foo + 1L
-   ___qualifier.foo = ___value
+   this.foo = ___value
    ___value
   }
   e = run {
-   val ___qualifier_1: SimpleLongs? = this.getWithSideEffect()
-   val ___qualifier_2: SimpleLongs? = ___qualifier_1
-   val ___value_1: Long = ___qualifier_1!!.foo + 1L
-   ___qualifier_2!!.foo = ___value_1
+   val ___qualifier: SimpleLongs? = this.getWithSideEffect()
+   val ___value_1: Long = ___qualifier!!.foo + 1L
+   ___qualifier!!.foo = ___value_1
    ___value_1
   }
   var f: Long = run {
@@ -76,9 +74,9 @@ open class SimpleLongs {
    ___value_3
   }
   f = run {
-   val ___qualifier_3: SimpleLongs? = this.getWithSideEffect()
-   val ___value_4: Long = ___qualifier_3!!.foo
-   ___qualifier_3!!.foo = ___qualifier_3!!.foo + 1L
+   val ___qualifier_1: SimpleLongs? = this.getWithSideEffect()
+   val ___value_4: Long = ___qualifier_1!!.foo
+   ___qualifier_1!!.foo = ___qualifier_1!!.foo + 1L
    ___value_4
   }
   var g: Long = this.foo

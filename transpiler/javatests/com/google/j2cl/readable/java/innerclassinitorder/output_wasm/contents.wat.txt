@@ -730,17 +730,25 @@
 (func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder
  (type $function.m_testSuperDispatch__void)
  (param $this.untyped (ref $java.lang.Object))
+ (local $$qualifier (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (local $$qualifier_1 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder) (local.get $this.untyped)))
  (block
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (call_ref $function.m_checkDispatchFromSub1__int (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_checkDispatchFromSub1__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))))))
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (block (result i32)
+     (local.set $$qualifier (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))
+     (call_ref $function.m_checkDispatchFromSub1__int (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_checkDispatchFromSub1__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(local.get $$qualifier))))
+    )))
    )
   )
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
-    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (call_ref $function.m_checkDispatchFromSub2__int (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_checkDispatchFromSub2__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))))))
+    (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 1) (block (result i32)
+     (local.set $$qualifier_1 (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))
+     (call_ref $function.m_checkDispatchFromSub2__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_checkDispatchFromSub2__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(local.get $$qualifier_1))))
+    )))
    )
   )
  )
@@ -752,10 +760,14 @@
  (type $function.m_testUnqualifiedAlloc__void)
  (param $this.untyped (ref $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local $$qualifier (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (ref $innerclassinitorder.InnerClassInitOrder) (local.get $this.untyped)))
  (block
-  (local.set $x (call_ref $function.m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this))))))
+  (local.set $x (block (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+   (local.set $$qualifier (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder (local.get $this)))
+   (call_ref $function.m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(local.get $$qualifier))))
+  ))
   (if (call $m_areWasmAssertionsEnabled__boolean@javaemul.internal.Asserts )
    (then
     (call $$assert__boolean__void@javaemul.internal.Asserts (i32.eq (i32.const 2) (call_ref $function.m_getValue__int (ref.as_non_null (local.get $x))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable $m_getValue__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $vtable(local.get $x))))))

@@ -143,55 +143,41 @@ open class ArithmeticExpressions {
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] + 1
   var i: Int = 0
-  val ___array: IntArray? = ints
   val ___index: Int = run {
    val ___value: Int = i
    i = i + 1
    ___value
   }
-  val ___array_1: IntArray? = ___array
-  val ___index_1: Int = ___index
-  val ___value_1: Int = ___array!![___index] + 1
-  ___array_1!![___index_1] = ___value_1
-  val ___array_2: IntArray? = ints
-  val ___index_2: Int = run {
+  val ___value_1: Int = ints!![___index] + 1
+  ints!![___index] = ___value_1
+  val ___index_1: Int = run {
    i = i + 1
    i
   }
-  val ___array_3: IntArray? = ___array_2
-  val ___index_3: Int = ___index_2
-  val ___value_2: Int = ___array_2!![___index_2] + 1
-  ___array_3!![___index_3] = ___value_2
-  val ___array_4: IntArray? = ints
-  val ___index_4: Int = run {
+  val ___value_2: Int = ints!![___index_1] + 1
+  ints!![___index_1] = ___value_2
+  val ___index_2: Int = run {
    val ___value_3: Int = i
    i = i + 1
    ___value_3
   }
-  val ___array_5: IntArray? = ___array_4
-  val ___index_5: Int = ___index_4
-  val ___value_4: Int = ___array_4!![___index_4] / 1
-  ___array_5!![___index_5] = ___value_4
+  val ___value_4: Int = ints!![___index_2] / 1
+  ints!![___index_2] = ___value_4
   val longs: LongArray? = null
   longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
-  val ___array_6: LongArray? = ArithmeticExpressions.getLongArray()
-  val ___index_6: Int = 0
-  val ___array_7: LongArray? = ___array_6
-  val ___index_7: Int = ___index_6
-  val ___value_5: kotlin.Long = ___array_6!![___index_6] + 1L
-  ___array_7!![___index_7] = ___value_5
+  val ___array: LongArray? = ArithmeticExpressions.getLongArray()
+  val ___value_5: kotlin.Long = ___array!![0] + 1L
+  ___array!![0] = ___value_5
   val booleans: BooleanArray? = null
   booleans!![0] = booleans!![0].or(true)
   val strings: Array<String?>? = null
   strings!![0] = "" + strings!![0] + null
   val shorts: ShortArray? = null
   val b: Boolean = run {
-   val ___array_8: ShortArray? = shorts
-   val ___index_8: Int = 0
    val ___value_6: Short = (shorts!![0].toInt() + 1).toShort()
-   ___array_8!![___index_8] = ___value_6
+   shorts!![0] = ___value_6
    ___value_6
   }.toInt() == 10
  }
@@ -331,9 +317,8 @@ open class ArithmeticExpressions {
   @JvmStatic
   private fun testSideEffect() {
    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect()
-   val ___qualifier_1: ArithmeticExpressions? = ___qualifier
    val ___value: kotlin.Long = ___qualifier!!.intField + 5L
-   ___qualifier_1!!.intField = ___value
+   ___qualifier!!.intField = ___value
   }
   
   @JvmStatic

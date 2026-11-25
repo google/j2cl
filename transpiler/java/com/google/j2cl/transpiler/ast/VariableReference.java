@@ -42,11 +42,6 @@ public class VariableReference extends Expression implements Reference<Variable>
   }
 
   @Override
-  public boolean isIdempotent() {
-    return true;
-  }
-
-  @Override
   public boolean isEffectivelyInvariant() {
     return variable.isFinal();
   }

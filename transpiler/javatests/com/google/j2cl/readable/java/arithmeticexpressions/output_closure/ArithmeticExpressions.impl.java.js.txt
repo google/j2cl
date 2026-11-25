@@ -121,30 +121,26 @@ class ArithmeticExpressions extends j_l_Object {
   $Arrays.$set(ints, 0, ints[0] + 1 | 0);
   let i = 0;
   {
-   let $array = ints;
    let /** number */ $value;
    let $index = ($value = i, i = i + 1 | 0, $value);
-   $Arrays.$set($array, $index, $array[$index] + 1 | 0);
+   $Arrays.$set(ints, $index, ints[$index] + 1 | 0);
   }
   {
-   let $array_1 = ints;
    let $index_1 = i = i + 1 | 0;
-   $Arrays.$set($array_1, $index_1, $array_1[$index_1] + 1 | 0);
+   $Arrays.$set(ints, $index_1, ints[$index_1] + 1 | 0);
   }
   {
-   let $array_2 = ints;
    let /** number */ $value_1;
    let $index_2 = ($value_1 = i, i = i + 1 | 0, $value_1);
-   $Arrays.$set($array_2, $index_2, Primitives.m_coerceDivision__int__int($array_2[$index_2] / 1));
+   $Arrays.$set(ints, $index_2, Primitives.m_coerceDivision__int__int(ints[$index_2] / 1));
   }
   let /** Array<!Long> */ longs = null;
   $Arrays.$set(longs, 0, $LongUtils.plus(longs[0], Long.fromInt(1)));
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], Long.fromInt(1)));
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], Long.fromInt(1)));
   {
-   let $array_3 = ArithmeticExpressions.m_getLongArray__arrayOf_long();
-   let $index_3 = 0;
-   $Arrays.$set($array_3, $index_3, $LongUtils.plus($array_3[$index_3], Long.fromInt(1)));
+   let $array = ArithmeticExpressions.m_getLongArray__arrayOf_long();
+   $Arrays.$set($array, 0, $LongUtils.plus($array[0], Long.fromInt(1)));
   }
   let /** Array<boolean> */ booleans = null;
   $Arrays.$set(booleans, 0, !!(+ booleans[0] | + true));

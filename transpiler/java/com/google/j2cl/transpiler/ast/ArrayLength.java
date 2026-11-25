@@ -47,11 +47,6 @@ public class ArrayLength extends Expression {
   }
 
   @Override
-  public boolean isIdempotent() {
-    return arrayExpression.isIdempotent();
-  }
-
-  @Override
   public Precedence getPrecedence() {
     return Precedence.MEMBER_ACCESS;
   }

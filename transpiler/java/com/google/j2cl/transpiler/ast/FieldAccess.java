@@ -53,11 +53,6 @@ public class FieldAccess extends MemberReference {
   }
 
   @Override
-  public boolean isIdempotent() {
-    return getQualifier() == null || getQualifier().isIdempotent();
-  }
-
-  @Override
   public boolean isEffectivelyInvariant() {
     // Only captured fields are considered invariant.
 
