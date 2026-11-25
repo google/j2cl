@@ -13,9 +13,16 @@ bazel_dep(name = "rules_jvm_external", version = "6.6")
 
 # Maven dependencies.
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
-# TODO(b/532249785): we need to have an empty maven.install() here due to
+# TODO(b/532249785): we need to have a maven.install() here due to
 #   https://github.com/bazel-contrib/rules_jvm_external/issues/1438
-maven.install()
+maven.install(
+    # Prefer Google's Maven Central mirror to avoid Maven Central rate limiting
+    # (HTTP 429), falling back to Maven Central for artifacts not yet mirrored.
+    repositories = [
+        "https://maven-central.storage-download.googleapis.com/maven2",
+        "https://repo1.maven.org/maven2",
+    ],
+)
 
 j2cl_maven_import_external = use_repo_rule("@j2cl//build_defs:rules.bzl", "j2cl_maven_import_external")
 
