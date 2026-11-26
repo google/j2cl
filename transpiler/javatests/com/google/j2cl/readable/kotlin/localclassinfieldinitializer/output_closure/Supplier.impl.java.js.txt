@@ -1,0 +1,33 @@
+goog.module('localclassinfieldinitializer.Supplier$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Supplier {
+ /** @abstract @nodts @return {number} */
+ m_get__int() {}
+ /** @nodts */
+ static $clinit() {
+  Supplier.$clinit = () =>{};
+  Supplier.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__localclassinfieldinitializer_Supplier = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__localclassinfieldinitializer_Supplier;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Supplier.$markImplementor(/**@type {Function}*/ (Supplier));
+$Util.$setClassMetadataForInterface(/**@type {Function}*/ (Supplier), 'localclassinfieldinitializer.Supplier');
+
+exports = Supplier;
+
+//# sourceMappingURL=Supplier.js.map

@@ -41,6 +41,7 @@ fun main(vararg unused: String) {
   testCaptures_anonymous()
   testCaptures_uninitializedNotObservable()
   testCaptures_fieldReferences()
+  testCaptures_inInitializers()
 }
 
 private fun testVariableCapture() {
@@ -465,6 +466,63 @@ private open class FieldReferencesOuter(val text: String) {
 fun testCaptures_fieldReferences() {
   assertEquals("InnerSuper", FieldReferencesOuter().Inner().InnerInner().implicitText)
   assertEquals("Outer", FieldReferencesOuter().Inner().InnerInner().outerText)
+}
+
+private interface IntSupplier {
+  fun get(): Int
+}
+
+private class CapturesInInitializers(ctorParam: Int) {
+  val capturesCtorParam =
+    object : IntSupplier {
+      override fun get() = ctorParam
+    }
+
+  val modifiesInitLocal: IntSupplier
+  val readsInitLocal: IntSupplier
+
+  init {
+    var local = ctorParam + 1
+    modifiesInitLocal =
+      object : IntSupplier {
+        override fun get() = local++
+      }
+    readsInitLocal =
+      object : IntSupplier {
+        override fun get() = local + ctorParam
+      }
+  }
+}
+
+// The initializers are run by both constructors, from J2CL's `$init` method.
+private class NoPrimaryConstructorCapturesInInitializers {
+  val property = 1
+  val capturesInitLocal: IntSupplier
+
+  init {
+    val local = 42
+    capturesInitLocal =
+      object : IntSupplier {
+        override fun get() = local + property
+      }
+  }
+
+  constructor(i: Int)
+
+  constructor(s: String)
+}
+
+private fun testCaptures_inInitializers() {
+  val capturesInInitializers = CapturesInInitializers(10)
+  assertEquals(10, capturesInInitializers.capturesCtorParam.get())
+  assertEquals(11, capturesInInitializers.modifiesInitLocal.get())
+  assertEquals(22, capturesInInitializers.readsInitLocal.get())
+
+  val fromIntConstructor = NoPrimaryConstructorCapturesInInitializers(1).capturesInitLocal
+  val fromStringConstructor = NoPrimaryConstructorCapturesInInitializers("").capturesInitLocal
+  assertEquals(43, fromIntConstructor.get())
+  assertEquals(43, fromStringConstructor.get())
+  assertTrue(fromIntConstructor::class.java === fromStringConstructor::class.java)
 }
 
 internal interface InterfaceWithDefaultMethod {

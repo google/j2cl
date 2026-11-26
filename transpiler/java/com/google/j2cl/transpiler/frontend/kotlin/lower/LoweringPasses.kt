@@ -108,7 +108,6 @@ private val loweringPhase = loweringPhase {
   perFileLowering(::LocalDelegatedPropertiesLowering)
   // Make IrGetField/IrSetField to objects' fields point to the static versions
   perFileLowering(::RemapObjectFieldAccesses)
-  perFileLowering(::JvmLocalDeclarationPopupLowering)
   // Adds stub methods to the implementations of the read-only collection types to properly
   // implement the Java collection APIs.
   perFileLowering(::CollectionStubMethodLowering)
@@ -123,7 +122,8 @@ private val loweringPhase = loweringPhase {
   // Move the field initializers of classes without primary constructor into init blocks.
   perFileLowering(::J2clFieldInitializersLowering)
   // Lower field/block initializers into the primary kotlin constructor. Classes without primary
-  // constructor keep their init blocks, which J2CL implements like for Java.
+  // constructor keep their init blocks, which J2CL implements like for Java. The local classes they
+  // declare stay local to the constructor or init block.
   perFileLowering(::J2clInitializersLowering)
   perFileLowering { j2clBackendContext: J2clBackendContext ->
     J2clInitializersCleanupLowering(j2clBackendContext.jvmBackendContext) {

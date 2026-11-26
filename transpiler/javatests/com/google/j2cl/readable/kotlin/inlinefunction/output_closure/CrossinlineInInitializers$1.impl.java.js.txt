@@ -1,0 +1,61 @@
+goog.module('inlinefunction.CrossinlineInInitializers.$1$impl');
+
+const IterableInAnotherLibrary = goog.require('inlinefunction.IterableInAnotherLibrary$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CrossinlineInInitializers = goog.forwardDeclare('inlinefunction.CrossinlineInInitializers$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+
+/**
+ * @final
+ * @template T
+ * @implements {IterableInAnotherLibrary<*>}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!CrossinlineInInitializers<T>} @nodts*/
+  this.$outer_this__inlinefunction_CrossinlineInInitializers_1;
+  /**@type {!Iterable<?>} @nodts*/
+  this.$captured_foo__inlinefunction_CrossinlineInInitializers_1;
+ }
+ /** @nodts @template T @return {!$1<T>} */
+ static $create__inlinefunction_CrossinlineInInitializers__java_lang_Iterable(/** !CrossinlineInInitializers<T> */ $outer_this, /** !Iterable<?> */ $captured_foo) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__inlinefunction_CrossinlineInInitializers_1__inlinefunction_CrossinlineInInitializers__java_lang_Iterable__void($outer_this, $captured_foo);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_CrossinlineInInitializers_1__inlinefunction_CrossinlineInInitializers__java_lang_Iterable__void(/** !CrossinlineInInitializers<T> */ $outer_this, /** !Iterable<?> */ $captured_foo) {
+  this.$outer_this__inlinefunction_CrossinlineInInitializers_1 = $outer_this;
+  this.$captured_foo__inlinefunction_CrossinlineInInitializers_1 = $captured_foo;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {!Iterator<?>} */
+ m_iterator__java_util_Iterator() {
+  return /**@type {!Iterator<*>}*/ (this.$captured_foo__inlinefunction_CrossinlineInInitializers_1.m_iterator__java_util_Iterator());
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IterableInAnotherLibrary.$markImplementor($1);
+$Util.$setClassMetadata($1, 'inlinefunction.CrossinlineInInitializers$1');
+
+exports = $1;
+
+//# sourceMappingURL=CrossinlineInInitializers$1.js.map

@@ -410,3 +410,17 @@ fun testEquals(nullableFloat: Float?, nullableDouble: Double?) {
   b = areEqual(1.0, 1)
   b = areEqual(1, 1L)
 }
+
+// Inline functions with crossinline lambdas creating anonymous objects, called from field
+// initializers and init blocks (b/538225645).
+class CrossinlineInInitializers<T>(foo: Iterable<T>) {
+  // Captures a constructor parameter from a field initializer.
+  val iterableFromFieldInitializer = IterableInAnotherLibrary { foo.iterator() }
+  val iterableFromInit: IterableInAnotherLibrary<T>
+
+  init {
+    // Captures a local variable of the init block.
+    val local = foo
+    iterableFromInit = IterableInAnotherLibrary { local.iterator() }
+  }
+}

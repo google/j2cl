@@ -1,0 +1,69 @@
+goog.module('inlinefunction.CrossinlineInInitializers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('inlinefunction.CrossinlineInInitializers.$1$impl');
+let $2 = goog.forwardDeclare('inlinefunction.CrossinlineInInitializers.$2$impl');
+let IterableInAnotherLibrary = goog.forwardDeclare('inlinefunction.IterableInAnotherLibrary$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+
+/**
+ * @final
+ * @template T
+ */
+class CrossinlineInInitializers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!IterableInAnotherLibrary<T>} @nodts*/
+  this.f_iterableFromFieldInitializer__inlinefunction_CrossinlineInInitializers_;
+  /**@type {!IterableInAnotherLibrary<T>} @nodts*/
+  this.f_iterableFromInit__inlinefunction_CrossinlineInInitializers_;
+ }
+ /** @nodts @template T @return {!CrossinlineInInitializers<T>} */
+ static $create__java_lang_Iterable(/** !Iterable<?> */ foo) {
+  CrossinlineInInitializers.$clinit();
+  let $instance = new CrossinlineInInitializers();
+  $instance.$ctor__inlinefunction_CrossinlineInInitializers__java_lang_Iterable__void(foo);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__inlinefunction_CrossinlineInInitializers__java_lang_Iterable__void(/** !Iterable<?> */ foo) {
+  this.$ctor__java_lang_Object__void();
+  let tmp = this;
+  tmp.f_iterableFromFieldInitializer__inlinefunction_CrossinlineInInitializers_ = (/**@type {!IterableInAnotherLibrary<T>}*/ ($1.$create__inlinefunction_CrossinlineInInitializers__java_lang_Iterable(this, foo)));
+  let local = foo;
+  let tmp_1 = this;
+  tmp_1.f_iterableFromInit__inlinefunction_CrossinlineInInitializers_ = (/**@type {!IterableInAnotherLibrary<T>}*/ ($2.$create__inlinefunction_CrossinlineInInitializers__java_lang_Iterable(this, local)));
+ }
+ /** @final @nodts @return {!IterableInAnotherLibrary<T>} */
+ m_getIterableFromFieldInitializer__inlinefunction_IterableInAnotherLibrary() {
+  return this.f_iterableFromFieldInitializer__inlinefunction_CrossinlineInInitializers_;
+ }
+ /** @final @nodts @return {!IterableInAnotherLibrary<T>} */
+ m_getIterableFromInit__inlinefunction_IterableInAnotherLibrary() {
+  return this.f_iterableFromInit__inlinefunction_CrossinlineInInitializers_;
+ }
+ /** @nodts */
+ static $clinit() {
+  CrossinlineInInitializers.$clinit = () =>{};
+  CrossinlineInInitializers.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CrossinlineInInitializers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('inlinefunction.CrossinlineInInitializers.$1$impl');
+  $2 = goog.module.get('inlinefunction.CrossinlineInInitializers.$2$impl');
+ }
+}
+$Util.$setClassMetadata(CrossinlineInInitializers, 'inlinefunction.CrossinlineInInitializers');
+
+exports = CrossinlineInInitializers;
+
+//# sourceMappingURL=CrossinlineInInitializers.js.map

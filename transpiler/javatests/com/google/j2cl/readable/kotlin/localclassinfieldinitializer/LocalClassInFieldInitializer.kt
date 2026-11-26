@@ -17,11 +17,10 @@ package localclassinfieldinitializer
 
 class LocalClassInFieldInitializer {
   var r: (String) -> Unit = {
-    // TODO(b/487752492): Uncomment when bug is fixed.
-    // class Local {
-    //   var ss = it
-    // }
-    // Local()
+    class Local {
+      var ss = it
+    }
+    Local()
   }
 
   var s =
@@ -30,9 +29,47 @@ class LocalClassInFieldInitializer {
       Local()
       1
     } else {
-      // TODO(b/488364395): Uncomment when bug is fixed.
-      // class Local {}
-      // Local()
+      class Local {}
+      Local()
       2
     }
+
+  val t = run {
+    fun local() = 1
+    local()
+  }
+}
+
+interface Supplier {
+  fun get(): Int
+}
+
+class CapturesInInitializers(ctorParam: Int) {
+  val capturesCtorParam =
+    object : Supplier {
+      override fun get() = ctorParam
+    }
+
+  val capturesInitLocal: Supplier
+
+  init {
+    var local = ctorParam
+    capturesInitLocal =
+      object : Supplier {
+        override fun get() = local++
+      }
+  }
+}
+
+// The initializers, including the anonymous class, are kept in an init block that J2CL runs from
+// its `$init` method, called by both constructors.
+class NoPrimaryConstructor {
+  val supplier =
+    object : Supplier {
+      override fun get() = 1
+    }
+
+  constructor(i: Int)
+
+  constructor(s: String)
 }

@@ -1,0 +1,75 @@
+goog.module('localclassinfieldinitializer.NoPrimaryConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('localclassinfieldinitializer.NoPrimaryConstructor.$1$impl');
+let Supplier = goog.forwardDeclare('localclassinfieldinitializer.Supplier$impl');
+
+/**
+ * @final
+ */
+class NoPrimaryConstructor extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!Supplier} @nodts*/
+  this.f_supplier__localclassinfieldinitializer_NoPrimaryConstructor_;
+ }
+ /** @final @nodts @return {!Supplier} */
+ m_getSupplier__localclassinfieldinitializer_Supplier() {
+  return this.f_supplier__localclassinfieldinitializer_NoPrimaryConstructor_;
+ }
+ //Factory method corresponding to constructor 'NoPrimaryConstructor(int)'.
+ /** @nodts @return {!NoPrimaryConstructor} */
+ static $create__int(/** number */ i) {
+  NoPrimaryConstructor.$clinit();
+  let $instance = new NoPrimaryConstructor();
+  $instance.$ctor__localclassinfieldinitializer_NoPrimaryConstructor__int__void(i);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryConstructor(int)'.
+ /** @nodts */
+ $ctor__localclassinfieldinitializer_NoPrimaryConstructor__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_localclassinfieldinitializer_NoPrimaryConstructor();
+ }
+ //Factory method corresponding to constructor 'NoPrimaryConstructor(String)'.
+ /** @nodts @return {!NoPrimaryConstructor} */
+ static $create__java_lang_String(/** string */ s) {
+  NoPrimaryConstructor.$clinit();
+  let $instance = new NoPrimaryConstructor();
+  $instance.$ctor__localclassinfieldinitializer_NoPrimaryConstructor__java_lang_String__void(s);
+  return $instance;
+ }
+ //Initialization from constructor 'NoPrimaryConstructor(String)'.
+ /** @nodts */
+ $ctor__localclassinfieldinitializer_NoPrimaryConstructor__java_lang_String__void(/** string */ s) {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_localclassinfieldinitializer_NoPrimaryConstructor();
+ }
+ /** @private @nodts */
+ $init__void_$p_localclassinfieldinitializer_NoPrimaryConstructor() {
+  this.f_supplier__localclassinfieldinitializer_NoPrimaryConstructor_ = $1.$create__localclassinfieldinitializer_NoPrimaryConstructor(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  NoPrimaryConstructor.$clinit = () =>{};
+  NoPrimaryConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NoPrimaryConstructor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('localclassinfieldinitializer.NoPrimaryConstructor.$1$impl');
+ }
+}
+$Util.$setClassMetadata(NoPrimaryConstructor, 'localclassinfieldinitializer.NoPrimaryConstructor');
+
+exports = NoPrimaryConstructor;
+
+//# sourceMappingURL=NoPrimaryConstructor.js.map

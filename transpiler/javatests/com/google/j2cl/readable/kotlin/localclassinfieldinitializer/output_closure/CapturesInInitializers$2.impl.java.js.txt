@@ -1,0 +1,61 @@
+goog.module('localclassinfieldinitializer.CapturesInInitializers.$2$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Supplier = goog.require('localclassinfieldinitializer.Supplier$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Ref = goog.forwardDeclare('javaemul.internal.Ref$impl');
+let CapturesInInitializers = goog.forwardDeclare('localclassinfieldinitializer.CapturesInInitializers$impl');
+
+/**
+ * @final
+ * @implements {Supplier}
+ */
+class $2 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!CapturesInInitializers} @nodts*/
+  this.$outer_this__localclassinfieldinitializer_CapturesInInitializers_2;
+  /**@type {!Ref<number>} @nodts*/
+  this.$captured_local__localclassinfieldinitializer_CapturesInInitializers_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__localclassinfieldinitializer_CapturesInInitializers__javaemul_internal_Ref(/** !CapturesInInitializers */ $outer_this, /** !Ref<number> */ $captured_local) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__localclassinfieldinitializer_CapturesInInitializers_2__localclassinfieldinitializer_CapturesInInitializers__javaemul_internal_Ref__void($outer_this, $captured_local);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinfieldinitializer_CapturesInInitializers_2__localclassinfieldinitializer_CapturesInInitializers__javaemul_internal_Ref__void(/** !CapturesInInitializers */ $outer_this, /** !Ref<number> */ $captured_local) {
+  this.$outer_this__localclassinfieldinitializer_CapturesInInitializers_2 = $outer_this;
+  this.$captured_local__localclassinfieldinitializer_CapturesInInitializers_2 = $captured_local;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_get__int() {
+  let unary = this.$captured_local__localclassinfieldinitializer_CapturesInInitializers_2.f_element__javaemul_internal_Ref;
+  this.$captured_local__localclassinfieldinitializer_CapturesInInitializers_2.f_element__javaemul_internal_Ref = unary + 1 | 0;
+  return unary;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Supplier.$markImplementor($2);
+$Util.$setClassMetadata($2, 'localclassinfieldinitializer.CapturesInInitializers$2');
+
+exports = $2;
+
+//# sourceMappingURL=CapturesInInitializers$2.js.map

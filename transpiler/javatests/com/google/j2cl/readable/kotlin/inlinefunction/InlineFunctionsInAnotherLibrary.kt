@@ -130,3 +130,15 @@ class ChildOfJavaClass : java.util.Random()
 // Calls a method of a Java class through an instance of a Kotlin child class, which inherits it
 // without overriding it.
 inline fun inlineFunctionUsingJavaMethodInheritedByChild(child: ChildOfJavaClass) = child.nextInt()
+
+// Mimics J2KT's `MutableIterableJvm` (b/538225645).
+interface IterableInAnotherLibrary<T> {
+  fun iterator(): Iterator<T>
+}
+
+inline fun <T> IterableInAnotherLibrary(
+  crossinline iteratorFn: () -> Iterator<T>
+): IterableInAnotherLibrary<T> =
+  object : IterableInAnotherLibrary<T> {
+    override fun iterator(): Iterator<T> = iteratorFn()
+  }

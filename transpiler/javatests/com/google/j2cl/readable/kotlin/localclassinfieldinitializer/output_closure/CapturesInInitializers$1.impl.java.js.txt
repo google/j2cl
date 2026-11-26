@@ -1,0 +1,58 @@
+goog.module('localclassinfieldinitializer.CapturesInInitializers.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const Supplier = goog.require('localclassinfieldinitializer.Supplier$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let CapturesInInitializers = goog.forwardDeclare('localclassinfieldinitializer.CapturesInInitializers$impl');
+
+/**
+ * @final
+ * @implements {Supplier}
+ */
+class $1 extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!CapturesInInitializers} @nodts*/
+  this.$outer_this__localclassinfieldinitializer_CapturesInInitializers_1;
+  /**@type {number} @nodts*/
+  this.$captured_ctorParam__localclassinfieldinitializer_CapturesInInitializers_1 = 0;
+ }
+ /** @nodts @return {!$1} */
+ static $create__localclassinfieldinitializer_CapturesInInitializers__int(/** !CapturesInInitializers */ $outer_this, /** number */ $captured_ctorParam) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__localclassinfieldinitializer_CapturesInInitializers_1__localclassinfieldinitializer_CapturesInInitializers__int__void($outer_this, $captured_ctorParam);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localclassinfieldinitializer_CapturesInInitializers_1__localclassinfieldinitializer_CapturesInInitializers__int__void(/** !CapturesInInitializers */ $outer_this, /** number */ $captured_ctorParam) {
+  this.$outer_this__localclassinfieldinitializer_CapturesInInitializers_1 = $outer_this;
+  this.$captured_ctorParam__localclassinfieldinitializer_CapturesInInitializers_1 = $captured_ctorParam;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @nodts @return {number} */
+ m_get__int() {
+  return this.$captured_ctorParam__localclassinfieldinitializer_CapturesInInitializers_1;
+ }
+ /** @nodts */
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Supplier.$markImplementor($1);
+$Util.$setClassMetadata($1, 'localclassinfieldinitializer.CapturesInInitializers$1');
+
+exports = $1;
+
+//# sourceMappingURL=CapturesInInitializers$1.js.map
