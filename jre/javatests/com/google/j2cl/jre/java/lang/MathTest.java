@@ -543,6 +543,78 @@ public class MathTest extends TestCase {
     assertEquals(5, Math.hypot(3, 4));
   }
 
+  public void testGetExponent_double() {
+    assertEquals(Double.MAX_EXPONENT + 1, Math.getExponent(Double.NaN));
+    assertEquals(Double.MAX_EXPONENT + 1, Math.getExponent(Double.POSITIVE_INFINITY));
+    assertEquals(Double.MAX_EXPONENT + 1, Math.getExponent(Double.NEGATIVE_INFINITY));
+    assertEquals(Double.MIN_EXPONENT - 1, Math.getExponent(0.0));
+    assertEquals(Double.MIN_EXPONENT - 1, Math.getExponent(-0.0));
+    assertEquals(Double.MIN_EXPONENT - 1, Math.getExponent(Double.MIN_VALUE));
+    assertEquals(Double.MIN_EXPONENT - 1, Math.getExponent(-Double.MIN_VALUE));
+    assertEquals(Double.MIN_EXPONENT, Math.getExponent(Double.MIN_NORMAL));
+    assertEquals(Double.MIN_EXPONENT, Math.getExponent(-Double.MIN_NORMAL));
+    assertEquals(Double.MAX_EXPONENT, Math.getExponent(Double.MAX_VALUE));
+    assertEquals(Double.MAX_EXPONENT, Math.getExponent(-Double.MAX_VALUE));
+    assertEquals(0, Math.getExponent(1.0));
+    assertEquals(0, Math.getExponent(-1.0));
+    assertEquals(1, Math.getExponent(2.0));
+    assertEquals(1, Math.getExponent(3.0));
+    assertEquals(-1, Math.getExponent(0.5));
+    assertEquals(-2, Math.getExponent(0.25));
+  }
+
+  public void testGetExponent_float() {
+    assertEquals(Float.MAX_EXPONENT + 1, Math.getExponent(Float.NaN));
+    assertEquals(Float.MAX_EXPONENT + 1, Math.getExponent(Float.POSITIVE_INFINITY));
+    assertEquals(Float.MAX_EXPONENT + 1, Math.getExponent(Float.NEGATIVE_INFINITY));
+    assertEquals(Float.MIN_EXPONENT - 1, Math.getExponent(0.0f));
+    assertEquals(Float.MIN_EXPONENT - 1, Math.getExponent(-0.0f));
+    assertEquals(Float.MIN_EXPONENT - 1, Math.getExponent(Float.MIN_VALUE));
+    assertEquals(Float.MIN_EXPONENT - 1, Math.getExponent(-Float.MIN_VALUE));
+    assertEquals(Float.MIN_EXPONENT, Math.getExponent(Float.MIN_NORMAL));
+    assertEquals(Float.MIN_EXPONENT, Math.getExponent(-Float.MIN_NORMAL));
+    assertEquals(Float.MAX_EXPONENT, Math.getExponent(Float.MAX_VALUE));
+    assertEquals(Float.MAX_EXPONENT, Math.getExponent(-Float.MAX_VALUE));
+    assertEquals(0, Math.getExponent(1.0f));
+    assertEquals(0, Math.getExponent(-1.0f));
+    assertEquals(1, Math.getExponent(2.0f));
+    assertEquals(1, Math.getExponent(3.0f));
+    assertEquals(-1, Math.getExponent(0.5f));
+    assertEquals(-2, Math.getExponent(0.25f));
+  }
+
+  public void testUlp_double() {
+    assertNaN(Math.ulp(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.ulp(Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.ulp(Double.NEGATIVE_INFINITY));
+    assertEquals(Double.MIN_VALUE, Math.ulp(0.0));
+    assertEquals(Double.MIN_VALUE, Math.ulp(-0.0));
+    assertEquals(Double.MIN_VALUE, Math.ulp(Double.MIN_VALUE));
+    assertEquals(Double.MIN_VALUE, Math.ulp(-Double.MIN_VALUE));
+    assertEquals(Double.MIN_VALUE, Math.ulp(Double.MIN_NORMAL));
+    assertEquals(Math.pow(2.0, 971), Math.ulp(Double.MAX_VALUE));
+    assertEquals(Math.pow(2.0, 971), Math.ulp(-Double.MAX_VALUE));
+    assertEquals(Math.pow(2.0, -52), Math.ulp(1.0));
+    assertEquals(Math.pow(2.0, -52), Math.ulp(-1.0));
+    assertEquals(Math.pow(2.0, -51), Math.ulp(2.0));
+  }
+
+  public void testUlp_float() {
+    assertNaN(Math.ulp(Float.NaN));
+    assertEquals(Float.POSITIVE_INFINITY, Math.ulp(Float.POSITIVE_INFINITY));
+    assertEquals(Float.POSITIVE_INFINITY, Math.ulp(Float.NEGATIVE_INFINITY));
+    assertEquals(Float.MIN_VALUE, Math.ulp(0.0f));
+    assertEquals(Float.MIN_VALUE, Math.ulp(-0.0f));
+    assertEquals(Float.MIN_VALUE, Math.ulp(Float.MIN_VALUE));
+    assertEquals(Float.MIN_VALUE, Math.ulp(-Float.MIN_VALUE));
+    assertEquals(Float.MIN_VALUE, Math.ulp(Float.MIN_NORMAL));
+    assertEquals((float) Math.pow(2.0, 104), Math.ulp(Float.MAX_VALUE));
+    assertEquals((float) Math.pow(2.0, 104), Math.ulp(-Float.MAX_VALUE));
+    assertEquals((float) Math.pow(2.0, -23), Math.ulp(1.0f));
+    assertEquals((float) Math.pow(2.0, -23), Math.ulp(-1.0f));
+    assertEquals((float) Math.pow(2.0, -22), Math.ulp(2.0f));
+  }
+
   public void testIncrementExact_int() {
     assertEquals(1, Math.incrementExact(0));
     assertEquals(Integer.MAX_VALUE, Math.incrementExact(Integer.MAX_VALUE - 1));
