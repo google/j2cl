@@ -357,7 +357,6 @@ public enum Backend {
           NormalizeLongs::new,
           InsertIntegerCoercions::new,
           InsertBitwiseOperatorBooleanCoercions::new,
-          NormalizeJsFunctionPropertyInvocations::new,
 
           // Make null literals have the type required by their use before JsEnum conversions, so
           // that they do not trigger unnecessary conversions, e.g. JsEnum unboxing.
@@ -404,9 +403,6 @@ public enum Backend {
           ImplementInstanceOfs::new,
           ImplementJsFunctionCopyMethod::new,
           ImplementClassMetadataViaConstructors::new,
-          // Normalize multiexpressions again to remove unnecessary clutter, but run before
-          // variable motion.
-          NormalizeMultiExpressions::new,
           RemoveUnneededJsDocCasts::new,
           AddInterfaceConstructorCasts::new,
           NormalizeJsDocCastExpressions::new,
@@ -414,6 +410,13 @@ public enum Backend {
           NormalizeJsYieldMethodInvocations::new,
           RemoveUnneededNotNullChecks::new,
           ImplementNotNullOperator::new,
+
+          // Must run after cast/type-bound/not-null passes that may introduce or expose
+          // property accesses, and before NormalizeMultiExpressions and VariableDeclarationHoister.
+          NormalizeJsFunctionPropertyInvocations::new,
+          // Normalize multiexpressions again to remove unnecessary clutter, but run before
+          // variable motion.
+          NormalizeMultiExpressions::new,
 
           // Needs to run after all passes that create variable declarations in multi-expressions.
           () -> new VariableDeclarationHoister(/* allowDeclarationsInExpressions= */ false),

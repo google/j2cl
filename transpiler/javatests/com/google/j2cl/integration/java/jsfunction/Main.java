@@ -630,6 +630,10 @@ public class Main {
     // directly or from variable.
     funcInVar = (instance != null) ? instance.func : instance.func;
     assertSame(funcInVar.m(), ((instance != null) ? instance.func : instance.func).m());
+
+    // Cast expression (repro for b/590640740)
+    assertTrue(instance != ((JsFunctionInterface) instance.func).m());
+    assertSame(funcInVar.m(), ((JsFunctionInterface) instance.func).m());
   }
 
   @JsFunction

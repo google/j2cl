@@ -16,11 +16,9 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -28,6 +26,7 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.VariableReference;
 
 /**
  * Normalizes @JsFunction property invocations so that they don't capture the qualifier
@@ -73,7 +72,7 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
             MethodDescriptor targetMethod = methodCall.getTarget();
             Expression qualifier = methodCall.getQualifier();
             if (!targetMethod.getEnclosingTypeDescriptor().isJsFunctionInterface()
-                || !doesQualifierCaptureInstance(qualifier)) {
+                || !mightBindReceiver(qualifier)) {
               return methodCall;
             }
 
@@ -99,16 +98,21 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
   }
 
   /**
-   * Return true for qualifiers that will be emitted as field accesses and can accidentally be
-   * captured by the function property.
+   * Returns true if emitting {@code qualifier} directly as a call target might evaluate as a
+   * property or element access and bind its receiver as {@code this}.
+   *
+   * <p>Defaults to {@code true} (fail-safe) so newly added expression nodes cannot accidentally
+   * bind {@code this}.
    */
-  private static boolean doesQualifierCaptureInstance(Expression qualifier) {
-    return qualifier instanceof FieldAccess
-        || qualifier instanceof ArrayAccess
-        || qualifier instanceof MultiExpression
-        || qualifier instanceof ConditionalExpression
-        || qualifier instanceof JsDocCastExpression
-        || (qualifier instanceof MethodCall methodCall
-            && methodCall.getTarget().isJsPropertyGetter());
+  private static boolean mightBindReceiver(Expression qualifier) {
+    return switch (qualifier) {
+      case VariableReference ignored -> false;
+      case FunctionExpression ignored -> false;
+      // Only property getter method calls bind the receiver.
+      case MethodCall methodCall -> methodCall.getTarget().isJsPropertyGetter();
+      case JsDocCastExpression jsDocCast -> mightBindReceiver(jsDocCast.getExpression());
+      // Fail-safe for FieldAccess, ArrayAccess, and any other expression node.
+      default -> true;
+    };
   }
 }

@@ -588,6 +588,10 @@ private fun testJsFunctionProperty() {
   // directly or from variable.
   funcInVar = if (instance != null) instance.func else instance.func
   assertSame(funcInVar.m(), (if (instance != null) instance.func else instance.func).m())
+
+  // Cast expression (repro for b/590640740)
+  assertTrue(instance != (instance.func as JsFunctionInterface).m())
+  assertSame(funcInVar.m(), (instance.func as JsFunctionInterface).m())
 }
 
 @JsFunction
