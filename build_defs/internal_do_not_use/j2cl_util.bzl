@@ -40,28 +40,27 @@ def get_java_path(path):
 def _get_java_segments(path):
     segments = path.split("/")
 
-    # Find different root start indices based on potential java roots.
-    java_root_start_indices = [_find(segments, root) for root in ["java", "javatests"]]
+    # 1. Match standard Maven/Gradle source layout: src/(main|test)/(java|javatests|kotlin)
+    for i in range(len(segments) - 1, -1, -1):
+        s = segments[i]
+        if s == "java" or s == "javatests" or s == "kotlin":
+            if i >= 2 and segments[i - 2] == "src" and (segments[i - 1] == "main" or segments[i - 1] == "test"):
+                return segments[i + 1:]
+            if i >= 1 and (segments[i - 1] == "src" or segments[i - 1] == "testsrc"):
+                return segments[i + 1:]
 
-    # Choose the root that starts latest.
-    start_index = max(java_root_start_indices)
+    # 2. Check for 'javatests' (test source roots in Google/Bazel monorepos)
+    javatests_indices = [i for i in range(len(segments)) if segments[i] == "javatests"]
+    if javatests_indices:
+        return segments[javatests_indices[-1] + 1:]
 
-    kotlin_start_index = _find(segments, "kotlin")
+    # 3. Find the earliest 'java' or 'kotlin' root (e.g. java/com/... or kotlin/com/...)
+    for i in range(len(segments)):
+        if segments[i] == "java" or segments[i] == "kotlin":
+            return segments[i + 1:]
 
-    if start_index >= 0:
-        return segments[start_index + 1:]
-    elif kotlin_start_index >= 0:
-        return segments[kotlin_start_index + 1:]
-
-    # return segments as workspace-rooted if no matches are found from source root
+    # Return segments as workspace-rooted if no matches are found from source root
     return segments
-
-def _find(segments, s):
-    for i in reversed(range(len(segments))):
-        if segments[i] == s:
-            return i
-
-    return -1
 
 def to_parallel_targets(key, args, name_fun):
     labels = args.get(key)
