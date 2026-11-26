@@ -59,8 +59,8 @@ class ArithmeticExpressions extends j_l_Object {
  m_testPrimitives__void() {
   let a = 10;
   let /** number */ $value;
-  let /** number */ $value_1;
   let b = ($value = a, a = a + 1 | 0, $value);
+  let /** number */ $value_1;
   let c = ($value_1 = a, a = a - 1 | 0, $value_1);
   let d = a = a + 1 | 0;
   let e = a = a - 1 | 0;
@@ -167,15 +167,15 @@ class ArithmeticExpressions extends j_l_Object {
   let e2 = 100;
   e2 = Double.m_doubleValue__java_lang_Double__double(e2) + 1;
   let /** Integer */ $value;
-  let /** Integer */ $value_1;
-  let /** Integer */ $value_2;
   let f = ($value = c, c = Integer.valueOf(c.intValue() + 1 | 0), $value);
+  let /** Integer */ $value_1;
   f = ($value_1 = c, c = Integer.valueOf(c.intValue() + 1 | 0), $value_1);
   let b = Byte.m_valueOf__byte__java_lang_Byte(0);
   b = Byte.m_valueOf__byte__java_lang_Byte(Primitives.m_narrowIntToByte__int__int(b.m_byteValue__byte() + 1 | 0));
   let ch = Character.m_valueOf__char__java_lang_Character(99 /* 'c' */);
   ch = Character.m_valueOf__char__java_lang_Character(Primitives.m_narrowIntToChar__int__int(ch.m_charValue__char() + 1 /* '\u0001' */ | 0));
   (f = Integer.valueOf(f.intValue() + 1 | 0)).intValue();
+  let /** Integer */ $value_2;
   ($value_2 = f, f = Integer.valueOf(f.intValue() - 1 | 0), $value_2).intValue();
   let /** $1Ref<Byte> */ ref = null;
   ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte__java_lang_Byte(Primitives.m_narrowIntToByte__int__int((/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte))).m_byteValue__byte() + 1 | 0));

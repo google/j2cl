@@ -116,7 +116,6 @@ open class SwitchPatterns {
  internal open fun testReassignedBindings() {
   val o: Any = "Hello"
   var s: String? = null
-  var s_1: String? = null
   when (o) {
    is String if run {
     s = o as String
@@ -126,6 +125,7 @@ open class SwitchPatterns {
    }
    else -> {}
   }
+  var s_1: String? = null
   val result: String? = run {
    when (o) {
     is String if run {

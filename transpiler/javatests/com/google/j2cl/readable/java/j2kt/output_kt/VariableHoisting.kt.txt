@@ -1,4 +1,4 @@
-// Generated from "j2ktnotpassing/VariableHoisting.java"
+// Generated from "j2kt/VariableHoisting.java"
 @file:Suppress(
  "ALWAYS_NULL",
  "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
@@ -16,7 +16,7 @@
  "REDUNDANT_ELSE_IN_WHEN",
  "ACCIDENTAL_OVERRIDE")
 
-package j2ktnotpassing
+package j2kt
 
 import javaemul.lang.*
 import kotlin.Int
@@ -29,7 +29,6 @@ open class VariableHoisting {
   fun incorrectHoisting() {
    val i: Int = 0
    var j: Int = 0
-   var a: A? = null
    SWITCH@ do {
     CASE@ do {
      CASE_1@ do {
@@ -53,6 +52,7 @@ open class VariableHoisting {
     } while (false)
    } while (false)
    open class A internal constructor()
+   var a: A? = null
    SWITCH_1@ do {
     CASE_2@ do {
      CASE_3@ do {

@@ -16,13 +16,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.lang.Math.min;
 import static java.util.Collections.reverse;
 import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.SetMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -40,7 +39,9 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,10 +57,8 @@ public class VariableDeclarationHoister extends NormalizationPass {
   // references. If a variable is accessed out of the scope of its declaration, or declared in a
   // scope that is not supported by the target language, its declaration is moved to the innermost
   // enclosing scope that can hold declarations: a block or, if declarations are allowed in
-  // expressions, a multi-expression.
-  //
-  // To simplify the implementation declarations of multiple variables are moved all together to
-  // the right scope.
+  // expressions, a multi-expression. The declaration is inserted just before the element of that
+  // scope that contains the original declaration, i.e. as late as possible.
 
   // Whether to hoist variable declarations in expressions or not.
   private final boolean allowDeclarationsInExpressions;
@@ -120,10 +119,11 @@ public class VariableDeclarationHoister extends NormalizationPass {
           }
         });
 
-    // Keeps track of the scope (block or multi-expression) that will have the declarations for the
-    // variables that need to be hoisted.
-    SetMultimap<Scope<?>, Variable> variableByTargetScope = LinkedHashMultimap.create();
-    Map<Scope<?>, Integer> declarationPointByTargetScope = new HashMap<>();
+    // Keeps track of the scopes (blocks or multi-expressions) that will have the declarations for
+    // the variables that need to be hoisted, and of the variables to declare before each of their
+    // elements, with the last elements first.
+    Map<Scope<?>, ListMultimap<Integer, Variable>> variablesByInsertionPointByTargetScope =
+        new LinkedHashMap<>();
 
     // Transform declarations into assignments, so that the effects of the expressions are kept
     // in the original location.
@@ -147,21 +147,18 @@ public class VariableDeclarationHoister extends NormalizationPass {
             // Get the scope where the variable declarations will be moved to.
             Scope<?> scope = getTargetScope(enclosingScopes);
 
-            // The variable can be inserted before the element of the scope that contains the
+            // The variable will be declared just before the element of the scope that contains the
             // current declaration.
             int insertionPoint =
                 scope.indexOfElementContaining(getParents().collect(toImmutableList()));
-
-            // Since all the variables that are moved to a scope are declared together, the
-            // insertion point will be the closest to the top of the scope.
-            declarationPointByTargetScope.merge(
-                scope,
-                insertionPoint,
-                (Integer lastInsertionPoint, Integer newValue) ->
-                    min(newValue, lastInsertionPoint.intValue()));
-
-            // Collect the variables that need to be moved and the target scope.
-            variableByTargetScope.put(scope, variable);
+            variablesByInsertionPointByTargetScope
+                .computeIfAbsent(
+                    scope,
+                    s ->
+                        MultimapBuilder.treeKeys(Comparator.<Integer>reverseOrder())
+                            .arrayListValues()
+                            .<Integer, Variable>build())
+                .put(insertionPoint, variable);
 
             // Replace the declaration by assignment if initialized.
             if (variableDeclarationExpression.getInitializer() != null) {
@@ -171,20 +168,22 @@ public class VariableDeclarationHoister extends NormalizationPass {
           }
         });
 
-    // Insert declarations into corresponding scopes, just before where the first moved declaration
-    // was.
-    variableByTargetScope
-        .asMap()
-        .forEach((scope, variablesToRelocate) -> {
-          // Make the variables nullable since the declaration will assign the default value.
-          variablesToRelocate.forEach(v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
+    // Insert the declarations into the corresponding scopes, starting from the last elements so
+    // that the insertion points of the preceding elements remain valid.
+    variablesByInsertionPointByTargetScope.forEach((scope, variablesByInsertionPoint) ->
+        variablesByInsertionPoint
+            .asMap()
+            .forEach((insertionPoint, variablesToRelocate) -> {
+              // Make the variables nullable since the declaration will assign the default value.
+              variablesToRelocate.forEach(
+                  v -> v.setTypeDescriptor(v.getTypeDescriptor().toNullable()));
 
-          scope.insertDeclarations(
-              declarationPointByTargetScope.get(scope),
-              variablesToRelocate.stream()
-                  .map(v -> VariableDeclarationExpression.builder().setVariable(v).build())
-                  .collect(toImmutableList()));
-        });
+              scope.insertDeclarations(
+                  insertionPoint,
+                  variablesToRelocate.stream()
+                      .map(v -> VariableDeclarationExpression.builder().setVariable(v).build())
+                      .collect(toImmutableList()));
+            }));
   }
 
   /** A scope where hoisted variable declarations can be inserted. */

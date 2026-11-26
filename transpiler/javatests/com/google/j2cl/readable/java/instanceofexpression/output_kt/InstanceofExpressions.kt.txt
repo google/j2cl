@@ -114,8 +114,6 @@ open class InstanceofExpressions {
  
  private fun testPatternMatch() {
   var s: String? = null
-  var i: Int? = null
-  var n: Number? = null
   if (!run {
    val exp: Any = Any()
    exp is String && run {
@@ -125,6 +123,7 @@ open class InstanceofExpressions {
   } || s!!.length == 2) {
    return
   }
+  var i: Int? = null
   if (run {
    val exp_1: Any = Any()
    exp_1 is Int && run {
@@ -134,6 +133,7 @@ open class InstanceofExpressions {
   }) {
    val l: Int = i!!.toInt()
   }
+  var n: Number? = null
   if (!run {
    val exp_2: Any = Any()
    exp_2 is Number && run {
