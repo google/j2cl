@@ -187,6 +187,7 @@ open class Main {
   c.getFunction()!!.call("")
   c.function!!.call("")
   (if (c != null) c.function else null)!!.call("")
+  (c.getWildcardFunction() as ParametricJsFunction<String?>?)!!.call("")
  }
  
  open fun testJsFunctionWithNativeType() {
@@ -453,6 +454,9 @@ open class Main {
   
   @JsProperty
   internal open fun getFunction(): ParametricJsFunction<String?>? = null
+  
+  @JsProperty
+  internal open fun getWildcardFunction(): ParametricJsFunction<*>? = null
  }
  
  @JsFunction

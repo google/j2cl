@@ -327,6 +327,11 @@ private class ClassWithJsFunctionProperty {
   fun getFunction(): ParametricJsFunction<String>? {
     return null
   }
+
+  @JsProperty
+  fun getWildcardFunction(): ParametricJsFunction<*>? {
+    return null
+  }
 }
 
 fun testJsFunctionPropertyCall() {
@@ -335,6 +340,8 @@ fun testJsFunctionPropertyCall() {
   c.getFunction()!!.call("")
   c.fn!!.call("")
   (if (c != null) c.fn else null)!!.call("")
+  // Repro for b/590640740
+  (c.getWildcardFunction() as ParametricJsFunction<String>?)!!.call("")
 }
 
 @JsFunction

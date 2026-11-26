@@ -766,6 +766,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty)
+  (ref.func $m_getWildcardFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty)
  )
 )
 (global $jsfunction.Main.DoubleDoubleJsBiFunction.vtable (ref $jsfunction.Main.DoubleDoubleJsBiFunction.vtable)
@@ -2670,6 +2671,7 @@
   (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (call_ref $function.m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref.as_non_null (local.get $c))(struct.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $vtable(local.get $c))))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
   (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
   (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (if (result (ref null $javaemul.internal.JsFunctionAdaptor)) (i32.eqz (ref.is_null (local.get $c))) (then (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $function@jsfunction.Main.ClassWithJsFunctionProperty (local.get $c))) (else (ref.null $javaemul.internal.JsFunctionAdaptor)))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
+  (call $m_call$jsFunction__javaemul_internal_JsFunctionAdaptor__java_lang_Object__void@jsfunction.Main.ParametricJsFunction (call_ref $function.m_getWildcardFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (ref.as_non_null (local.get $c))(struct.get $jsfunction.Main.ClassWithJsFunctionProperty.vtable $m_getWildcardFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction (struct.get $jsfunction.Main.ClassWithJsFunctionProperty $vtable(local.get $c))))(call $$getString_||__java_lang_String_<once>_@jsfunction.JsFunctionOptimization.1.$StringLiterals ))
  )
 )
 (elem declare func $m_testJsFunctionPropertyCall__void_$pp_jsfunction@jsfunction.Main)
@@ -3146,6 +3148,19 @@
  )
 )
 (elem declare func $m_getFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty)
+
+;;; ParametricJsFunction<?> ClassWithJsFunctionProperty.getWildcardFunction()
+(func $m_getWildcardFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty
+ (type $function.m_getWildcardFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $javaemul.internal.JsFunctionAdaptor))
+ (local $this (ref null $jsfunction.Main.ClassWithJsFunctionProperty))
+ (local.set $this (ref.cast (ref $jsfunction.Main.ClassWithJsFunctionProperty) (local.get $this.untyped)))
+ (block
+  (return (ref.null $javaemul.internal.JsFunctionAdaptor))
+ )
+)
+(elem declare func $m_getWildcardFunction__jsfunction_Main_ParametricJsFunction_$pp_jsfunction@jsfunction.Main.ClassWithJsFunctionProperty)
 
 ;;; void ClassWithJsFunctionProperty.$clinit()
 (func $$clinit__void_<once>_@jsfunction.Main.ClassWithJsFunctionProperty
