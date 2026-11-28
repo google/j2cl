@@ -539,7 +539,6 @@ public enum Backend {
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
-          RewriteUnaryExpressions::new,
           AddSwitchExpressionsExhaustivenessCheck::new,
           () -> new NormalizeSwitchConstructs(/* convertNativeJsEnumSwitches= */ true),
           // Must run after NormalizeSwitchConstructs, which rewrites switch patterns using
@@ -566,6 +565,8 @@ public enum Backend {
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleAndLongBoxed= */ true),
           () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble= */ false),
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening= */ true),
+          // Must run after all conversion passes.
+          RewriteUnaryExpressions::new,
           ImplementDivisionOperations::new,
           ImplementFloatingPointRemainderOperation::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'

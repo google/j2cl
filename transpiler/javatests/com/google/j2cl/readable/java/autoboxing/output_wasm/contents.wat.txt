@@ -586,7 +586,7 @@
   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI)))(call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))))))
   (local.set $boxL (call $m_valueOf__long__java_lang_Long@java.lang.Long (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxL)))(call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxL))))))
   (local.set $boxBool (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eqz (call $m_booleanValue__boolean@java.lang.Boolean (ref.as_non_null (local.get $boxBool))))))
-  (local.set $boxI (local.get $boxI))
+  (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI)))))
   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.sub (i32.const 0) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))))))
   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))))))
   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))) (i32.wrap_i64 (call $m_longValue__long@java.lang.Long (ref.as_non_null (local.get $boxL)))))))
@@ -669,7 +669,7 @@
   (local.set $i (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))))
   (local.set $i (i32.sub (i32.const 0) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI)))))
   (local.set $i (i32.xor (i32.const -1) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI)))))
-  (local.set $boxD (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.sub (f64.const 0.0) (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (local.get $boxD))))))
+  (local.set $boxD (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.neg (call $m_doubleValue__double@java.lang.Double (ref.as_non_null (local.get $boxD))))))
   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.sub (i32.const 0) (call $m_intValue__int@java.lang.Integer (ref.as_non_null (local.get $boxI))))))
   (block $SWITCH.BREAK
    (block

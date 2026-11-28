@@ -15,13 +15,17 @@
  */
 package unaryexpressions
 
-import com.google.j2cl.integration.testing.Asserts.assertFalse
+import com.google.j2cl.integration.testing.Asserts.assertEquals
+import com.google.j2cl.integration.testing.Asserts.assertNotSame
+import com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException
 import com.google.j2cl.integration.testing.Asserts.assertTrue
+import com.google.j2cl.integration.testing.TestUtils.isJvm
 
 /** Test unary operations. */
 fun main(vararg unused: String) {
   testBasicUnaryExpressions()
   testMinusZero()
+  testUnaryNumericPromotion()
 }
 
 private fun testBasicUnaryExpressions() {
@@ -97,6 +101,48 @@ private fun testBasicUnaryExpressions() {
   assertTrue(+(+(1.0)) == 1.0)
 }
 
-fun testMinusZero() {
-  assertFalse(1 / -0.0 == 1 / 0.0)
+private fun testMinusZero() {
+  val zero = 0.0
+  val boxedZero: Double? = 0.0
+  val boxedFloatZero: Float? = 0.0f
+  assertEquals(Double.NEGATIVE_INFINITY, 1 / -zero)
+  assertEquals(Double.NEGATIVE_INFINITY, 1 / -boxedZero!!)
+  assertEquals(Float.NEGATIVE_INFINITY, 1 / -boxedFloatZero!!)
 }
+
+private fun testUnaryNumericPromotion() {
+  val b: Byte = 1
+  val s: Short = 2
+  // Char does not define unary +, -, or complement operators in Kotlin.
+  // val c: Char = 'a'
+  assertEquals(box(1), box(+b))
+  assertEquals(box(2), box(+s))
+  // assertEquals(box('a'.code), box(+c))
+  assertEquals("1", "" + +b)
+  assertEquals("-1", "" + -b)
+  // Kotlin has no unary complement operator (~).
+  // assertEquals("-2", "" + ~b)
+  // Kotlin does not have implicit widening primitive conversions.
+  // val l: Long = +b
+  // assertEquals(1L, l)
+
+  val nullableB: Byte? = 1
+  val nullableS: Short? = 2
+  // val nullableC: Char? = 'a'
+  assertEquals(box(1), box(+nullableB!!))
+  assertEquals(box(2), box(+nullableS!!))
+  // assertEquals(box('a'.code), box(+nullableC!!))
+  assertEquals("1", "" + +nullableB!!)
+
+  val uncachedInt: Int? = java.lang.Integer(1000) as Int?
+  assertNotSame(uncachedInt, +uncachedInt!!)
+  assertEquals(uncachedInt, box(+uncachedInt))
+
+  // TODO(b/421337782): Remove this workaround once the bug is fixed in Kotlin/JVM.
+  val expectedNumberClass = if (isJvm()) Number::class.java else Int::class.javaObjectType
+  assertThrowsClassCastException({ box("" + +uncheckedCast<Int>(true)) }, expectedNumberClass)
+}
+
+private fun box(o: Any): Any = o
+
+@Suppress("UNCHECKED_CAST") private fun <T> uncheckedCast(o: Any): T = o as T
