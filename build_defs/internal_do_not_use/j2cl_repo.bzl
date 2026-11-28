@@ -46,6 +46,15 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
         "",
     ]
 
+    auth = getattr(repository_ctx.attr, "auth", None)
+    netrc = getattr(repository_ctx.attr, "netrc", None)
+
+    download_kwargs = {}
+    if auth:
+        download_kwargs["auth"] = auth
+    if netrc:
+        download_kwargs["netrc"] = netrc
+
     if repository_ctx.attr.annotation_only:
         jar = repository_ctx.original_name + "-java"
         jar_name = jar + ".jar"
@@ -54,6 +63,7 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
             artifact_urls,
             output = jar_name,
             sha256 = repository_ctx.attr.artifact_sha256,
+            **download_kwargs
         )
 
         rule_lines = [
@@ -66,6 +76,7 @@ def _j2cl_import_external_common(repository_ctx, artifact_urls, additional_attrs
         repository_ctx.download_and_extract(
             artifact_urls,
             sha256 = repository_ctx.attr.artifact_sha256,
+            **download_kwargs
         )
 
         rule_lines = [
@@ -160,6 +171,8 @@ _COMMON_ATTRS = {
     "testonly_": attr.bool(),
     "exports": attr.string_list(),
     "default_visibility": attr.string_list(default = ["//visibility:public"]),
+    "auth": attr.string_dict(),
+    "netrc": attr.string(),
 }
 
 j2cl_import_external = repository_rule(
