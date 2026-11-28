@@ -543,6 +543,79 @@ public class MathTest extends TestCase {
     assertEquals(5, Math.hypot(3, 4));
   }
 
+  public void testIEEEremainder() {
+    // NaN cases
+    assertNaN(Math.IEEEremainder(Double.NaN, 2.0));
+    assertNaN(Math.IEEEremainder(2.0, Double.NaN));
+    assertNaN(Math.IEEEremainder(Double.NaN, Double.NaN));
+
+    // Infinite dividend
+    assertNaN(Math.IEEEremainder(Double.POSITIVE_INFINITY, 2.0));
+    assertNaN(Math.IEEEremainder(Double.NEGATIVE_INFINITY, 2.0));
+    assertNaN(Math.IEEEremainder(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY));
+
+    // Zero divisor
+    assertNaN(Math.IEEEremainder(5.0, 0.0));
+    assertNaN(Math.IEEEremainder(5.0, -0.0));
+    assertNaN(Math.IEEEremainder(0.0, 0.0));
+    assertNaN(Math.IEEEremainder(-0.0, 0.0));
+    assertNaN(Math.IEEEremainder(Double.MIN_VALUE, 0.0));
+
+    // Infinite divisor
+    assertEquals(5.0, Math.IEEEremainder(5.0, Double.POSITIVE_INFINITY));
+    assertEquals(-5.0, Math.IEEEremainder(-5.0, Double.POSITIVE_INFINITY));
+    assertEquals(5.0, Math.IEEEremainder(5.0, Double.NEGATIVE_INFINITY));
+    assertEquals(-5.0, Math.IEEEremainder(-5.0, Double.NEGATIVE_INFINITY));
+    assertPositiveZero(Math.IEEEremainder(0.0, Double.POSITIVE_INFINITY));
+    assertNegativeZero(Math.IEEEremainder(-0.0, Double.POSITIVE_INFINITY));
+    assertPositiveZero(Math.IEEEremainder(0.0, Double.NEGATIVE_INFINITY));
+    assertNegativeZero(Math.IEEEremainder(-0.0, Double.NEGATIVE_INFINITY));
+
+    // Zero remainder with sign matching dividend
+    assertPositiveZero(Math.IEEEremainder(0.0, 2.0));
+    assertNegativeZero(Math.IEEEremainder(-0.0, 2.0));
+    assertPositiveZero(Math.IEEEremainder(0.0, -2.0));
+    assertNegativeZero(Math.IEEEremainder(-0.0, -2.0));
+    assertPositiveZero(Math.IEEEremainder(4.0, 2.0));
+    assertNegativeZero(Math.IEEEremainder(-4.0, 2.0));
+    assertPositiveZero(Math.IEEEremainder(4.0, -2.0));
+    assertNegativeZero(Math.IEEEremainder(-4.0, -2.0));
+
+    // Normal cases
+    assertEquals(1.0, Math.IEEEremainder(7.0, 3.0));
+    assertEquals(-1.0, Math.IEEEremainder(-7.0, 3.0));
+    assertEquals(1.0, Math.IEEEremainder(7.0, -3.0));
+    assertEquals(-1.0, Math.IEEEremainder(-7.0, -3.0));
+    assertEquals(-1.0, Math.IEEEremainder(5.0, 3.0));
+    assertEquals(1.0, Math.IEEEremainder(-5.0, 3.0));
+    assertEquals(-1.0, Math.IEEEremainder(5.0, -3.0));
+    assertEquals(1.0, Math.IEEEremainder(-5.0, -3.0));
+
+    // Halfway / Tie-breaking to even quotient
+    assertEquals(2.0, Math.IEEEremainder(2.0, 4.0));
+    assertEquals(-2.0, Math.IEEEremainder(6.0, 4.0));
+    assertEquals(2.0, Math.IEEEremainder(10.0, 4.0));
+    assertEquals(-2.0, Math.IEEEremainder(14.0, 4.0));
+    assertEquals(-2.0, Math.IEEEremainder(-2.0, 4.0));
+    assertEquals(2.0, Math.IEEEremainder(-6.0, 4.0));
+    assertEquals(-2.0, Math.IEEEremainder(-10.0, 4.0));
+    assertEquals(2.0, Math.IEEEremainder(-14.0, 4.0));
+
+    // Fractional / Double operands
+    assertEquals(-0.5, Math.IEEEremainder(7.0, 2.5));
+    assertEquals(0.5, Math.IEEEremainder(-7.0, 2.5));
+    assertEquals(0.125, Math.IEEEremainder(5.125, 2.5));
+    assertEquals(-0.125, Math.IEEEremainder(-5.125, 2.5));
+
+    // Subnormal & Extreme values
+    assertPositiveZero(Math.IEEEremainder(Double.MIN_VALUE, Double.MIN_VALUE));
+    assertNegativeZero(Math.IEEEremainder(-Double.MIN_VALUE, Double.MIN_VALUE));
+    assertEquals(-Double.MIN_VALUE, Math.IEEEremainder(3 * Double.MIN_VALUE, 2 * Double.MIN_VALUE));
+    assertEquals(Double.MIN_VALUE, Math.IEEEremainder(Double.MIN_VALUE, 2 * Double.MIN_VALUE));
+    assertPositiveZero(Math.IEEEremainder(Double.MAX_VALUE, Double.MAX_VALUE));
+    assertNegativeZero(Math.IEEEremainder(-Double.MAX_VALUE, Double.MAX_VALUE));
+  }
+
   public void testIncrementExact_int() {
     assertEquals(1, Math.incrementExact(0));
     assertEquals(Integer.MAX_VALUE, Math.incrementExact(Integer.MAX_VALUE - 1));
